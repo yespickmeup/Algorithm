@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.synch_locations;
+package POS.branch_local_uploads;
 
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JTable;
@@ -25,7 +26,7 @@ import synsoftech.fields.Button;
  *
  * @author Guinness
  */
-public class Dlg_local_uploads extends javax.swing.JDialog {
+public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_local_uploads
@@ -51,33 +52,33 @@ public class Dlg_local_uploads extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_local_uploads(java.awt.Frame parent, boolean modal) {
+    private Dlg_branch_local_uploads(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_local_uploads(java.awt.Dialog parent, boolean modal) {
+    private Dlg_branch_local_uploads(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_local_uploads() {
+    public Dlg_branch_local_uploads() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_local_uploads myRef;
+    private Dlg_branch_local_uploads myRef;
 
-    private void setThisRef(Dlg_local_uploads myRef) {
+    private void setThisRef(Dlg_branch_local_uploads myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_local_uploads> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_branch_local_uploads> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -85,7 +86,7 @@ public class Dlg_local_uploads extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_local_uploads create(java.awt.Window parent, boolean modal) {
+    public static Dlg_branch_local_uploads create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -95,14 +96,14 @@ public class Dlg_local_uploads extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_local_uploads create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_branch_local_uploads create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_local_uploads dialog = dialogContainer.get(parent);
+            Dlg_branch_local_uploads dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_local_uploads((java.awt.Frame) parent, false);
+                dialog = new Dlg_branch_local_uploads((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -116,10 +117,10 @@ public class Dlg_local_uploads extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_local_uploads dialog = dialogContainer.get(parent);
+            Dlg_branch_local_uploads dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_local_uploads((java.awt.Dialog) parent, false);
+                dialog = new Dlg_branch_local_uploads((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -146,7 +147,7 @@ public class Dlg_local_uploads extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_local_uploads dialog = Dlg_local_uploads.create(new javax.swing.JFrame(), true);
+        Dlg_branch_local_uploads dialog = Dlg_branch_local_uploads.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -457,10 +458,9 @@ public class Dlg_local_uploads extends javax.swing.JDialog {
 
     }
 
-    
-    
-    private void upload() {
-
+    private void check_connection() {
+        List<String> days = new ArrayList();
+        
     }
 
 }
