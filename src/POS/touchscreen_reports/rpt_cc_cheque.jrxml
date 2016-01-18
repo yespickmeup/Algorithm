@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a0c99337-ce0c-4eaf-ae95-77d9d922fe1a">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="cheque_holder" class="java.lang.String"/>
+	<field name="bank" class="java.lang.String"/>
+	<field name="cheque_no" class="java.lang.String"/>
+	<field name="cheque_date" class="java.lang.String"/>
+	<field name="amount" class="java.lang.Double"/>
+	<variable name="amount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d9da6602-8979-4f28-9015-619922131f71" x="0" y="0" width="177" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CHEQUE PAYMENTS (SALES)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b07327b9-2a1e-4b22-bfeb-a24a58998819" x="0" y="0" width="201" height="15"/>
+				<box>
+					<bottomPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ef0d85f1-928d-4d8e-bccc-327c702d3348" x="365" y="0" width="100" height="15"/>
+				<box>
+					<bottomPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f32301a1-2153-4859-9d58-37b6fc77c922" x="464" y="0" width="77" height="15"/>
+				<box>
+					<bottomPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b07327b9-2a1e-4b22-bfeb-a24a58998819" x="200" y="0" width="166" height="15"/>
+				<box>
+					<bottomPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Bank]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement uuid="da6de0ce-07c5-42c5-a1a4-8b3e0466ffa1" x="0" y="0" width="201" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cheque_holder}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9ac9e37d-f6b3-494a-a8a4-7b5c827789d5" x="365" y="0" width="100" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cheque_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="1fafa6ef-62d9-4182-85c3-aa645f9029a3" x="464" y="0" width="77" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="da6de0ce-07c5-42c5-a1a4-8b3e0466ffa1" x="200" y="0" width="166" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bank}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="6ed3676a-ac4e-4390-8299-f1d4684bfd4d" mode="Transparent" x="464" y="0" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{amount_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

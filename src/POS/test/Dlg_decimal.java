@@ -1,0 +1,286 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package POS.test;
+
+import POS.util.Focus_Fire;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import javax.swing.JTextField;
+import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.KeyMapping;
+import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+
+/**
+ *
+ * @author Guinness
+ */
+public class Dlg_decimal extends javax.swing.JDialog {
+
+    /**
+     * Creates new form Dlg_decimal
+     */
+    //<editor-fold defaultstate="collapsed" desc=" callback ">
+    private Callback callback;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+
+    }
+
+    public static interface Callback {
+
+        void ok(CloseDialog closeDialog, OutputData data);
+    }
+
+    public static class InputData {
+    }
+
+    public static class OutputData {
+    }
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" Constructors ">
+    private Dlg_decimal(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    private Dlg_decimal(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    public Dlg_decimal() {
+        super();
+        setUndecorated(true);
+        initComponents();
+        myInit();
+
+    }
+    private Dlg_decimal myRef;
+
+    private void setThisRef(Dlg_decimal myRef) {
+        this.myRef = myRef;
+    }
+    private static java.util.Map<Object, Dlg_decimal> dialogContainer = new java.util.HashMap();
+
+    public static void clearUpFirst(java.awt.Window parent) {
+        if (dialogContainer.containsKey(parent)) {
+            dialogContainer.remove(parent);
+        }
+    }
+
+    public static Dlg_decimal create(java.awt.Window parent, boolean modal) {
+
+        if (modal) {
+            return create(parent, ModalityType.APPLICATION_MODAL);
+        }
+
+        return create(parent, ModalityType.MODELESS);
+
+    }
+
+    public static Dlg_decimal create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+
+        if (parent instanceof java.awt.Frame) {
+
+            Dlg_decimal dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_decimal((java.awt.Frame) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        if (parent instanceof java.awt.Dialog) {
+            Dlg_decimal dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_decimal((java.awt.Dialog) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        return null;
+
+    }
+    //</editor-fold>    
+
+    //<editor-fold defaultstate="collapsed" desc=" main ">
+    public static void main(String args[]) {
+
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Dlg_decimal dialog = Dlg_decimal.create(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" added ">
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible == true) {
+            getContentPane().removeAll();
+            initComponents();
+            myInit();
+            repaint();
+        }
+
+    }
+
+    public javax.swing.JPanel getSurface() {
+        return (javax.swing.JPanel) getContentPane();
+    }
+
+    public void nullify() {
+        myRef.setVisible(false);
+        myRef = null;
+    }
+    //</editor-fold>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Cost:");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTextField1;
+    // End of variables declaration//GEN-END:variables
+    private void myInit() {
+        init_key();
+        focus();
+        setDecimal();
+    }
+
+    private void focus() {
+        JTextField[] tf = {jTextField1};
+        Focus_Fire.onFocus_lostFocus(tf);
+        Focus_Fire.select_all(tf);
+    }
+
+    public void do_pass() {
+
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Key">
+    private void disposed() {
+        this.dispose();
+    }
+
+    private void init_key() {
+        KeyMapping.mapKeyWIFW(getSurface(),
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                btn_0.doClick();
+                disposed();
+            }
+        });
+    }
+    // </editor-fold>
+
+    private void setDecimal() {
+        jTextField1.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+                String text = jTextField1.getText();
+                if (text.contains(".")) {
+
+                } else {
+                    double cost = FitIn.toDouble(jTextField1.getText());
+                    jTextField1.setText(FitIn.fmt_wc(cost));
+                    String str = jTextField1.getText();
+                    jTextField1.setCaretPosition(str.length());
+                }
+
+            }
+
+        });
+
+    }
+}

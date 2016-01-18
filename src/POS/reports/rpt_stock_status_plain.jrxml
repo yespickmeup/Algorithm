@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f4aca0bb-c5be-4284-9ae4-33f8b29367b1">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="printed_by" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="item_code" class="java.lang.String"/>
+	<field name="barcode" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="unit" class="java.lang.String"/>
+	<field name="cost" class="java.lang.Double"/>
+	<field name="price" class="java.lang.Double"/>
+	<field name="branch" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<group name="location">
+		<groupExpression><![CDATA[$F{location}]]></groupExpression>
+		<groupHeader>
+			<band height="40"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="11"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

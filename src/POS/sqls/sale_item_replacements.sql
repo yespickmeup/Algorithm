@@ -1,0 +1,42 @@
+create table sale_item_replacements(
+id int auto_increment primary key
+,sales_no varchar(100)
+,item_code varchar(100)
+,barcode varchar(100)
+,description varchar(100)
+,generic_name varchar(100)
+,item_type varchar(100)
+,supplier_name varchar(100)
+,supplier_id varchar(100)
+,serial_no varchar(100)
+,product_qty double
+,unit varchar(100)
+,conversion double
+,selling_price double
+,date_added datetime
+,user_id varchar(100)
+,user_screen_name varchar(100)
+,status int
+,is_vatable int
+,selling_type int
+,discount_name varchar(100)
+,discount_rate double
+,discount_amount double
+,discount_customer_name varchar(100)
+,discount_customer_id varchar(100)
+,branch varchar(100)
+,branch_code varchar(100)
+,location varchar(100)
+,location_id varchar(100)
+,category varchar(100)
+,category_id varchar(100)
+,classification varchar(100)
+,classification_id varchar(100)
+,sub_classification varchar(100)
+,sub_classification_id varchar(100)
+,brand varchar(100)
+,brand_id varchar(100)
+,model varchar(100)
+,model_id varchar(100)
+,is_replacement int 
+);

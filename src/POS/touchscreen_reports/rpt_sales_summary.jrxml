@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e84831d-4e84-46c7-81bb-f06746d3c445">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="contact_no" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="branch" class="java.lang.String"/>
+	<parameter name="location" class="java.lang.String"/>
+	<field name="user_id" class="java.lang.String"/>
+	<field name="user_screen_name" class="java.lang.String"/>
+	<field name="gross_total" class="java.lang.Double"/>
+	<field name="line_discount" class="java.lang.Double"/>
+	<field name="sale_discount" class="java.lang.Double"/>
+	<field name="balance_due" class="java.lang.Double"/>
+	<field name="cash" class="java.lang.Double"/>
+	<field name="cash_no" class="java.lang.Double"/>
+	<field name="credit_card" class="java.lang.Double"/>
+	<field name="credit_card_no" class="java.lang.Double"/>
+	<field name="gift_certificate" class="java.lang.Double"/>
+	<field name="gift_certificate_no" class="java.lang.Double"/>
+	<field name="prepaid" class="java.lang.Double"/>
+	<field name="prepaid_no" class="java.lang.Double"/>
+	<field name="cheque" class="java.lang.Double"/>
+	<field name="cheque_no" class="java.lang.Double"/>
+	<field name="charge" class="java.lang.Double"/>
+	<field name="charge_no" class="java.lang.Double"/>
+	<field name="disbursement" class="java.lang.Double"/>
+	<field name="net_cash" class="java.lang.Double"/>
+	<field name="prepaid_cash" class="java.lang.Double"/>
+	<field name="prepaid_cheque" class="java.lang.Double"/>
+	<field name="ar_cash" class="java.lang.Double"/>
+	<field name="ar_cheque" class="java.lang.Double"/>
+	<field name="cashin" class="java.lang.Double"/>
+	<field name="remit_cash" class="java.lang.Double"/>
+	<field name="remit_cheque" class="java.lang.Double"/>
+	<group name="cahsier">
+		<groupExpression><![CDATA[$F{user_id}]]></groupExpression>
+		<groupHeader>
+			<band height="506">
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="5" width="54" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cashier:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="198" y="5" width="164" height="15"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{user_screen_name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="35" width="66" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Gross Total:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="50" width="91" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Line Discount:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="64" width="91" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sale Discount:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="78" width="66" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance Due:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="365" width="104" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cash:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="114" width="67" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Credit Card:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="128" width="131" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Gift Certificate:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="157" width="67" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Prepaid:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="143" width="131" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cheque Payments (Sales)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="227" width="131" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Accounts Receivable]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="393" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cash}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="114" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{credit_card}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="128" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{gift_certificate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="172" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{prepaid}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="143" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cheque}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="240" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{charge}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="49" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{line_discount}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="63" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sale_discount}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="35" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{gross_total}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="77" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{balance_due}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="3612fe59-6698-4457-af2d-768f3e80591b" x="161" y="26" width="182" height="8"/>
+					<box>
+						<topPen lineWidth="0.2" lineStyle="Solid"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="436" width="67" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Disbursement:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="435" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{disbursement}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="463" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{net_cash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="153" y="171" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Transactions:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="153" y="185" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Payments]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="161" y="199" width="49" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cash:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="161" y="213" width="49" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cheque:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="198" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{prepaid_cash}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="212" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{prepaid_cheque}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="153" y="241" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Transactions:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="153" y="255" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Payments]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="268" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ar_cash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="161" y="283" width="49" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cheque:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="161" y="269" width="49" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cash:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="282" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ar_cheque}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="152" y="393" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Sales]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="152" y="407" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Prepaid]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="407" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{prepaid_cash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="152" y="421" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[AR]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="421" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ar_cash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="152" y="379" width="57" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cashin]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="379" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cashin}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="298" width="131" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Remits]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="161" y="326" width="49" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cheque:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="161" y="312" width="49" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<text><![CDATA[Cash:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="450" width="67" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Remit]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="313" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remit_cash}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="328" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remit_cheque}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7aa6432b-764f-45c0-b97c-03c84b491c9e" mode="Transparent" x="284" y="449" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{remit_cash}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="143" y="56" width="219" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[End of Day Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e8b8918f-5ab8-4d45-825f-d3cb3668f8fd" x="143" y="0" width="218" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="144" y="19" width="218" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="144" y="75" width="218" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="94" width="54" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="144" y="108" width="54" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Location:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="198" y="94" width="164" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="198" y="108" width="164" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{location}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

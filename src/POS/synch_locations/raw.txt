@@ -1,0 +1,62 @@
+  
+
+
+
+"["sales_no":"14|000000012842"
+~"date_added":"2015-12-21 17:28:29"
+~"user_screen_name":"bernabe pinero"
+~"user_id":"33"
+~"session_no":"000000000000"
+~"remarks":""
+~"gross_amount":"730.5"
+~"amount_due":"720"
+~"status":"0"
+~"sales_type":"0"
+~"line_discount":"0"
+~"customer_id":"0"
+~"customer_name":"ANTON AGUILAR"
+~"discount_name":""
+~"discount_rate":"0"
+~"discount_amount":"10.5"
+~"discount_customer_name":""
+~"discount_customer_id":""
+~"charge_type":"TRUST RECEIPT AGREEMENT"
+~"charge_type_id":"2"
+~"charge_reference_no":"14050"
+~"charge_customer_name":"LUCKY TERMINAL / DONDON TIA"
+~"charge_customer_id":"0122"
+~"charge_amount":"350"
+~"check_bank":""
+~"check_no":""
+~"check_amount":"0"
+~"check_holder":""
+~"check_date":"2015-12-21"
+~"credit_card_type":""
+~"credit_card_rate":"0"
+~"credit_card_amount":"0"
+~"credit_card_no":""
+~"credit_card_holder":""
+~"credit_card_approval_code":""
+~"gift_cerftificate_from":""
+~"gift_certificate_description":""
+~"gift_certificate_no":""
+~"gift_certificate_amount":"0"
+~"prepaid_customer_name":""
+~"prepaid_customer_id":""
+~"prepaid_amount":"0"
+~"addtl_amount":"0"
+~"wtax":"0"
+~"branch":"Algorithm - Dgte"
+~"branch_id":"14"
+~"location":"Selling Area"
+~"location_id":"14"
+~"items":"
+    #{"item_code":"1288"%"barcode":"NX.MXQSP.011"%"qty":"1"%"selling_price":"23980"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0"%"discount_amount":"0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"14"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0"%"wtax":"0"}
+    #{"item_code":"1288"%"barcode":"NX.MXQSP.011"%"qty":"1"%"selling_price":"23980"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0"%"discount_amount":"0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"14"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0"%"wtax":"0"}
+    #{"item_code":"1288"%"barcode":"NX.MXQSP.011"%"qty":"1"%"selling_price":"23980"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0"%"discount_amount":"0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"14"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0"%"wtax":"0"}
+    "]"              
++
+
+
+"["sales_no":"14|000000012871"~"date_added":"2016-01-04 15:23:42.0"~"user_screen_name":"administrator"~"user_id":"1"~"session_no":"000000000000"~"remarks":""~"gross_amount":"3713.0"~"amount_due":"3413.0"~"status":"0"~"sales_type":"0"~"line_discount":"100.0"~"customer_id":"4781"~"customer_name":"AVELEX AMOR"~"discount_name":"<enter amount>"~"discount_rate":"0.0"~"discount_amount":"200.0"~"discount_customer_name":""~"discount_customer_id":""~"charge_type":""~"charge_type_id":""~"charge_reference_no":""~"charge_customer_name":""~"charge_customer_id":""~"charge_amount":"0.0"~"check_bank":""~"check_no":""~"check_amount":"0.0"~"check_holder":""~"check_date":"2016-01-04"~"credit_card_type":""~"credit_card_rate":"0.0"~"credit_card_amount":"0.0"~"credit_card_no":""~"credit_card_holder":""~"credit_card_approval_code":""~"gift_cerftificate_from":""~"gift_certificate_description":""~"gift_certificate_no":""~"gift_certificate_amount":"0.0"~"prepaid_customer_name":""~"prepaid_customer_id":""~"prepaid_amount":"0.0"~"addtl_amount":"0.0"~"wtax":"0.0"~"branch":"Algorithm - Dgte"~"branch_id":"9"~"location":"Selling Area"~"location_id":"14"~"items":"#{"item_code":"2914"%"barcode":"IAP1360EEU...B1E"%"qty":"1.0"%"selling_price":"2990.0"%"is_vatable":"0"%"discount_name":"<enter amount>"%"discount_rate":"0.0"%"discount_amount":"100.0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"9"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0.0"%"wtax":"0.0"}"]"#{"item_code":"8201"%"barcode":"761345103107"%"qty":"2.0"%"selling_price":"299.0"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0.0"%"discount_amount":"0.0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"9"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0.0"%"wtax":"0.0"}"]"#{"item_code":"622"%"barcode":"8804706991042"%"qty":"1.0"%"selling_price":"125.0"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0.0"%"discount_amount":"0.0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"9"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0.0"%"wtax":"0.0"}"]"+"["sales_no":"14|000000012872"~"date_added":"2016-01-04 15:24:21.0"~"user_screen_name":"administrator"~"user_id":"1"~"session_no":"000000000000"~"remarks":""~"gross_amount":"1230.0"~"amount_due":"1230.0"~"status":"0"~"sales_type":"0"~"line_discount":"0.0"~"customer_id":"3599"~"customer_name":"CHURCH OF CHRIST"~"discount_name":""~"discount_rate":"0.0"~"discount_amount":"0.0"~"discount_customer_name":""~"discount_customer_id":""~"charge_type":""~"charge_type_id":""~"charge_reference_no":""~"charge_customer_name":""~"charge_customer_id":""~"charge_amount":"0.0"~"check_bank":""~"check_no":""~"check_amount":"0.0"~"check_holder":""~"check_date":"2016-01-04"~"credit_card_type":""~"credit_card_rate":"0.0"~"credit_card_amount":"0.0"~"credit_card_no":""~"credit_card_holder":""~"credit_card_approval_code":""~"gift_cerftificate_from":""~"gift_certificate_description":""~"gift_certificate_no":""~"gift_certificate_amount":"0.0"~"prepaid_customer_name":""~"prepaid_customer_id":""~"prepaid_amount":"0.0"~"addtl_amount":"0.0"~"wtax":"0.0"~"branch":"Algorithm - Dgte"~"branch_id":"9"~"location":"Selling Area"~"location_id":"14"~"items":"#{"item_code":"7545"%"barcode":"7545"%"qty":"1.0"%"selling_price":"750.0"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0.0"%"discount_amount":"0.0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"9"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0.0"%"wtax":"0.0"}"]"#{"item_code":"7281"%"barcode":"9555440808859"%"qty":"1.0"%"selling_price":"90.0"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0.0"%"discount_amount":"0.0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"9"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0.0"%"wtax":"0.0"}"]"#{"item_code":"4503"%"barcode":"9555440810579"%"qty":"1.0"%"selling_price":"390.0"%"is_vatable":"0"%"discount_name":""%"discount_rate":"0.0"%"discount_amount":"0.0"%"discount_customer_name":""%"discount_customer_id":""%"branch":"Algorithm - Dgte"%"branch_id":"9"%"location":"Selling Area"%"location_id":"14"%"addtl_amount":"0.0"%"wtax":"0.0"}"]"
+Total Transactions: 1

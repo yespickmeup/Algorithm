@@ -1,0 +1,1399 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package POS.pnl;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import javax.swing.JButton;
+import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.KeyMapping;
+import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+
+/**
+ *
+ * @author i1
+ */
+public class Dlg_keyboard extends javax.swing.JDialog {
+
+    /**
+     * Creates new form Dlg_keyboard
+     */
+    //<editor-fold defaultstate="collapsed" desc=" callback ">
+    private Callback callback;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+
+
+    }
+
+    public static interface Callback {
+
+        void ok(CloseDialog closeDialog, OutputData data);
+    }
+
+    public static class InputData {
+    }
+
+    public static class OutputData {
+
+        public final String text;
+
+        public OutputData(String text) {
+            this.text = text;
+        }
+    }
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" Constructors ">
+    private Dlg_keyboard(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    private Dlg_keyboard(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    public Dlg_keyboard() {
+        super();
+        setUndecorated(true);
+        initComponents();
+        myInit();
+
+    }
+    private Dlg_keyboard myRef;
+
+    private void setThisRef(Dlg_keyboard myRef) {
+        this.myRef = myRef;
+    }
+    private static java.util.Map<Object, Dlg_keyboard> dialogContainer = new java.util.HashMap();
+
+    public static void clearUpFirst(java.awt.Window parent) {
+        if (dialogContainer.containsKey(parent)) {
+            dialogContainer.remove(parent);
+        }
+    }
+
+    public static Dlg_keyboard create(java.awt.Window parent, boolean modal) {
+
+        if (modal) {
+            return create(parent, ModalityType.APPLICATION_MODAL);
+        }
+
+        return create(parent, ModalityType.MODELESS);
+
+    }
+
+    public static Dlg_keyboard create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+
+        if (parent instanceof java.awt.Frame) {
+
+            Dlg_keyboard dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_keyboard((java.awt.Frame) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().
+                        log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        if (parent instanceof java.awt.Dialog) {
+            Dlg_keyboard dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_keyboard((java.awt.Dialog) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().
+                        log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        return null;
+
+    }
+    //</editor-fold>    
+
+    //<editor-fold defaultstate="collapsed" desc=" main ">
+    public static void main(String args[]) {
+
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.
+                    getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        Dlg_keyboard dialog = Dlg_keyboard.create(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" added ">
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible == true) {
+            getContentPane().
+                    removeAll();
+            initComponents();
+            myInit();
+            repaint();
+        }
+
+
+    }
+
+    public javax.swing.JPanel getSurface() {
+        return (javax.swing.JPanel) getContentPane();
+    }
+
+    public void nullify() {
+        myRef.setVisible(false);
+        myRef = null;
+    }
+    //</editor-fold>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        tf_message = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
+        jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
+        jButton29 = new javax.swing.JButton();
+        jButton30 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
+        jButton32 = new javax.swing.JButton();
+        jButton33 = new javax.swing.JButton();
+        jButton34 = new javax.swing.JButton();
+        jButton35 = new javax.swing.JButton();
+        jButton36 = new javax.swing.JButton();
+        jButton37 = new javax.swing.JButton();
+        jButton38 = new javax.swing.JButton();
+        jButton39 = new javax.swing.JButton();
+        jButton40 = new javax.swing.JButton();
+        jButton41 = new javax.swing.JButton();
+        jButton42 = new javax.swing.JButton();
+        jButton43 = new javax.swing.JButton();
+        jButton44 = new javax.swing.JButton();
+        jButton45 = new javax.swing.JButton();
+        jButton46 = new javax.swing.JButton();
+        jButton47 = new javax.swing.JButton();
+        jButton48 = new javax.swing.JButton();
+        jButton49 = new javax.swing.JButton();
+        jButton50 = new javax.swing.JButton();
+        jButton51 = new javax.swing.JButton();
+        jButton52 = new javax.swing.JButton();
+        jButton53 = new javax.swing.JButton();
+        jButton54 = new javax.swing.JButton();
+        jButton55 = new javax.swing.JButton();
+        jButton57 = new javax.swing.JButton();
+        jButton60 = new javax.swing.JButton();
+        jButton62 = new javax.swing.JButton();
+        jButton63 = new javax.swing.JButton();
+        jButton64 = new javax.swing.JButton();
+        jButton65 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tf_message.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_message.setFocusable(false);
+        jPanel2.add(tf_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 11, 710, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("TEXT:");
+        jLabel1.setFocusable(false);
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 20));
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("2");
+        jButton1.setFocusable(false);
+        jButton1.setOpaque(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 45, 35));
+
+        jButton2.setBackground(new java.awt.Color(0, 102, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setText("`");
+        jButton2.setFocusable(false);
+        jButton2.setOpaque(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 45, 35));
+
+        jButton3.setBackground(new java.awt.Color(0, 102, 255));
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("4");
+        jButton3.setFocusable(false);
+        jButton3.setOpaque(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 45, 35));
+
+        jButton4.setBackground(new java.awt.Color(0, 102, 255));
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton4.setText("3");
+        jButton4.setFocusable(false);
+        jButton4.setOpaque(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 45, 35));
+
+        jButton5.setBackground(new java.awt.Color(0, 102, 255));
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("6");
+        jButton5.setFocusable(false);
+        jButton5.setOpaque(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 45, 35));
+
+        jButton6.setBackground(new java.awt.Color(0, 102, 255));
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton6.setText("5");
+        jButton6.setFocusable(false);
+        jButton6.setOpaque(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 45, 35));
+
+        jButton7.setBackground(new java.awt.Color(0, 102, 255));
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton7.setText("8");
+        jButton7.setFocusable(false);
+        jButton7.setOpaque(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 45, 35));
+
+        jButton8.setBackground(new java.awt.Color(0, 102, 255));
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton8.setText("7");
+        jButton8.setFocusable(false);
+        jButton8.setOpaque(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 45, 35));
+
+        jButton9.setBackground(new java.awt.Color(0, 102, 255));
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jButton9.setText("Backspace");
+        jButton9.setFocusable(false);
+        jButton9.setOpaque(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, 100, 35));
+
+        jButton10.setBackground(new java.awt.Color(0, 102, 255));
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton10.setText("9");
+        jButton10.setFocusable(false);
+        jButton10.setOpaque(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 45, 35));
+
+        jButton11.setBackground(new java.awt.Color(0, 102, 255));
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton11.setText("1");
+        jButton11.setFocusable(false);
+        jButton11.setOpaque(false);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 45, 35));
+
+        jButton12.setBackground(new java.awt.Color(0, 102, 255));
+        jButton12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton12.setText("0");
+        jButton12.setFocusable(false);
+        jButton12.setOpaque(false);
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 45, 35));
+
+        jButton13.setBackground(new java.awt.Color(0, 102, 255));
+        jButton13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton13.setText("-");
+        jButton13.setFocusable(false);
+        jButton13.setOpaque(false);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 45, 35));
+
+        jButton14.setBackground(new java.awt.Color(0, 102, 255));
+        jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton14.setText("+");
+        jButton14.setFocusable(false);
+        jButton14.setOpaque(false);
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, 45, 35));
+
+        jButton15.setBackground(new java.awt.Color(0, 102, 255));
+        jButton15.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton15.setText("W");
+        jButton15.setFocusable(false);
+        jButton15.setOpaque(false);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 45, 35));
+
+        jButton16.setBackground(new java.awt.Color(0, 102, 255));
+        jButton16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jButton16.setText("Tab");
+        jButton16.setFocusable(false);
+        jButton16.setOpaque(false);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 80, 35));
+
+        jButton17.setBackground(new java.awt.Color(0, 102, 255));
+        jButton17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton17.setText("R");
+        jButton17.setFocusable(false);
+        jButton17.setOpaque(false);
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 45, 35));
+
+        jButton18.setBackground(new java.awt.Color(0, 102, 255));
+        jButton18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton18.setText("E");
+        jButton18.setFocusable(false);
+        jButton18.setOpaque(false);
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 45, 35));
+
+        jButton19.setBackground(new java.awt.Color(0, 102, 255));
+        jButton19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton19.setText("Y");
+        jButton19.setFocusable(false);
+        jButton19.setOpaque(false);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 45, 35));
+
+        jButton20.setBackground(new java.awt.Color(0, 102, 255));
+        jButton20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton20.setText("T");
+        jButton20.setFocusable(false);
+        jButton20.setOpaque(false);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 45, 35));
+
+        jButton21.setBackground(new java.awt.Color(0, 102, 255));
+        jButton21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton21.setText("I");
+        jButton21.setFocusable(false);
+        jButton21.setOpaque(false);
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 45, 35));
+
+        jButton22.setBackground(new java.awt.Color(0, 102, 255));
+        jButton22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton22.setText("U");
+        jButton22.setFocusable(false);
+        jButton22.setOpaque(false);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 45, 35));
+
+        jButton23.setBackground(new java.awt.Color(0, 102, 255));
+        jButton23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton23.setText("\\");
+            jButton23.setFocusable(false);
+            jButton23.setOpaque(false);
+            jButton23.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton23ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 70, 35));
+
+            jButton24.setBackground(new java.awt.Color(0, 102, 255));
+            jButton24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton24.setText("O");
+            jButton24.setFocusable(false);
+            jButton24.setOpaque(false);
+            jButton24.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton24ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 45, 35));
+
+            jButton25.setBackground(new java.awt.Color(0, 102, 255));
+            jButton25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton25.setText("Q");
+            jButton25.setFocusable(false);
+            jButton25.setOpaque(false);
+            jButton25.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton25ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 45, 35));
+
+            jButton26.setBackground(new java.awt.Color(0, 102, 255));
+            jButton26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton26.setText("P");
+            jButton26.setFocusable(false);
+            jButton26.setOpaque(false);
+            jButton26.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton26ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 45, 35));
+
+            jButton27.setBackground(new java.awt.Color(0, 102, 255));
+            jButton27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton27.setText("{");
+            jButton27.setFocusable(false);
+            jButton27.setOpaque(false);
+            jButton27.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton27ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 45, 35));
+
+            jButton28.setBackground(new java.awt.Color(0, 102, 255));
+            jButton28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton28.setText("}");
+            jButton28.setFocusable(false);
+            jButton28.setOpaque(false);
+            jButton28.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton28ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 45, 35));
+
+            jButton29.setBackground(new java.awt.Color(0, 102, 255));
+            jButton29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton29.setText("S");
+            jButton29.setFocusable(false);
+            jButton29.setOpaque(false);
+            jButton29.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton29ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton29, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 45, 35));
+
+            jButton30.setBackground(new java.awt.Color(0, 102, 255));
+            jButton30.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+            jButton30.setText("Caps Lock");
+            jButton30.setFocusable(false);
+            jButton30.setOpaque(false);
+            jButton30.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton30ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 80, 35));
+
+            jButton31.setBackground(new java.awt.Color(0, 102, 255));
+            jButton31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton31.setText("F");
+            jButton31.setFocusable(false);
+            jButton31.setOpaque(false);
+            jButton31.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton31ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 45, 35));
+
+            jButton32.setBackground(new java.awt.Color(0, 102, 255));
+            jButton32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton32.setText("D");
+            jButton32.setFocusable(false);
+            jButton32.setOpaque(false);
+            jButton32.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton32ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 45, 35));
+
+            jButton33.setBackground(new java.awt.Color(0, 102, 255));
+            jButton33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton33.setText("H");
+            jButton33.setFocusable(false);
+            jButton33.setOpaque(false);
+            jButton33.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton33ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 45, 35));
+
+            jButton34.setBackground(new java.awt.Color(0, 102, 255));
+            jButton34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton34.setText("G");
+            jButton34.setFocusable(false);
+            jButton34.setOpaque(false);
+            jButton34.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton34ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton34, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 45, 35));
+
+            jButton35.setBackground(new java.awt.Color(0, 102, 255));
+            jButton35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton35.setText("K");
+            jButton35.setFocusable(false);
+            jButton35.setOpaque(false);
+            jButton35.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton35ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton35, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 45, 35));
+
+            jButton36.setBackground(new java.awt.Color(0, 102, 255));
+            jButton36.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton36.setText("J");
+            jButton36.setFocusable(false);
+            jButton36.setOpaque(false);
+            jButton36.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton36ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton36, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 45, 35));
+
+            jButton37.setBackground(new java.awt.Color(0, 102, 255));
+            jButton37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+            jButton37.setText("ENTER");
+            jButton37.setFocusable(false);
+            jButton37.setOpaque(false);
+            jButton37.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton37ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton37, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 120, 35));
+
+            jButton38.setBackground(new java.awt.Color(0, 102, 255));
+            jButton38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton38.setText("L");
+            jButton38.setFocusable(false);
+            jButton38.setOpaque(false);
+            jButton38.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton38ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton38, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 45, 35));
+
+            jButton39.setBackground(new java.awt.Color(0, 102, 255));
+            jButton39.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton39.setText("A");
+            jButton39.setFocusable(false);
+            jButton39.setOpaque(false);
+            jButton39.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton39ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton39, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 45, 35));
+
+            jButton40.setBackground(new java.awt.Color(0, 102, 255));
+            jButton40.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton40.setText(":");
+            jButton40.setFocusable(false);
+            jButton40.setOpaque(false);
+            jButton40.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton40ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton40, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 45, 35));
+
+            jButton41.setBackground(new java.awt.Color(0, 102, 255));
+            jButton41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton41.setText("\"");
+            jButton41.setFocusable(false);
+            jButton41.setOpaque(false);
+            jButton41.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton41ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton41, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 45, 35));
+
+            jButton42.setBackground(new java.awt.Color(0, 102, 255));
+            jButton42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton42.setText("X");
+            jButton42.setFocusable(false);
+            jButton42.setOpaque(false);
+            jButton42.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton42ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton42, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 45, 35));
+
+            jButton43.setBackground(new java.awt.Color(0, 102, 255));
+            jButton43.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+            jButton43.setText("SHIFT");
+            jButton43.setFocusable(false);
+            jButton43.setOpaque(false);
+            jButton43.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton43ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 110, 35));
+
+            jButton44.setBackground(new java.awt.Color(0, 102, 255));
+            jButton44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton44.setText("V");
+            jButton44.setFocusable(false);
+            jButton44.setOpaque(false);
+            jButton44.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton44ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton44, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 45, 35));
+
+            jButton45.setBackground(new java.awt.Color(0, 102, 255));
+            jButton45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton45.setText("C");
+            jButton45.setFocusable(false);
+            jButton45.setOpaque(false);
+            jButton45.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton45ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton45, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 45, 35));
+
+            jButton46.setBackground(new java.awt.Color(0, 102, 255));
+            jButton46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton46.setText("N");
+            jButton46.setFocusable(false);
+            jButton46.setOpaque(false);
+            jButton46.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton46ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton46, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 45, 35));
+
+            jButton47.setBackground(new java.awt.Color(0, 102, 255));
+            jButton47.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton47.setText("B");
+            jButton47.setFocusable(false);
+            jButton47.setOpaque(false);
+            jButton47.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton47ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton47, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 45, 35));
+
+            jButton48.setBackground(new java.awt.Color(0, 102, 255));
+            jButton48.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton48.setText(",");
+            jButton48.setFocusable(false);
+            jButton48.setOpaque(false);
+            jButton48.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton48ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton48, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 45, 35));
+
+            jButton49.setBackground(new java.awt.Color(0, 102, 255));
+            jButton49.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton49.setText("M");
+            jButton49.setFocusable(false);
+            jButton49.setOpaque(false);
+            jButton49.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton49ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton49, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 45, 35));
+
+            jButton50.setBackground(new java.awt.Color(0, 102, 255));
+            jButton50.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+            jButton50.setText("SHIFT");
+            jButton50.setFocusable(false);
+            jButton50.setOpaque(false);
+            jButton50.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton50ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 120, 35));
+
+            jButton51.setBackground(new java.awt.Color(0, 102, 255));
+            jButton51.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton51.setText(".");
+            jButton51.setFocusable(false);
+            jButton51.setOpaque(false);
+            jButton51.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton51ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton51, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 45, 35));
+
+            jButton52.setBackground(new java.awt.Color(0, 102, 255));
+            jButton52.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton52.setText("Z");
+            jButton52.setFocusable(false);
+            jButton52.setOpaque(false);
+            jButton52.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton52ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton52, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 45, 35));
+
+            jButton53.setBackground(new java.awt.Color(0, 102, 255));
+            jButton53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton53.setText("?");
+            jButton53.setFocusable(false);
+            jButton53.setOpaque(false);
+            jButton53.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton53ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton53, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 45, 35));
+
+            jButton54.setBackground(new java.awt.Color(0, 102, 255));
+            jButton54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton54.setText("Alt");
+            jButton54.setFocusable(false);
+            jButton54.setOpaque(false);
+            jButton54.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton54ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton54, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 50, 35));
+
+            jButton55.setBackground(new java.awt.Color(0, 102, 255));
+            jButton55.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+            jButton55.setText("Ctlr");
+            jButton55.setFocusable(false);
+            jButton55.setOpaque(false);
+            jButton55.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton55ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton55, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 110, 35));
+
+            jButton57.setBackground(new java.awt.Color(0, 102, 255));
+            jButton57.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton57.setText(" ");
+            jButton57.setFocusable(false);
+            jButton57.setOpaque(false);
+            jButton57.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton57ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton57, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 270, 35));
+
+            jButton60.setBackground(new java.awt.Color(0, 102, 255));
+            jButton60.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton60.setText("Alt");
+            jButton60.setFocusable(false);
+            jButton60.setOpaque(false);
+            jButton60.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton60ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton60, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 50, 35));
+
+            jButton62.setBackground(new java.awt.Color(0, 102, 255));
+            jButton62.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+            jButton62.setText("Ctrl");
+            jButton62.setFocusable(false);
+            jButton62.setOpaque(false);
+            jButton62.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton62ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton62, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 120, 35));
+
+            jButton63.setBackground(new java.awt.Color(0, 102, 255));
+            jButton63.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton63.setFocusable(false);
+            jButton63.setOpaque(false);
+            jButton63.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton63ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton63, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 45, 35));
+
+            jButton64.setBackground(new java.awt.Color(0, 102, 255));
+            jButton64.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton64.setFocusable(false);
+            jButton64.setOpaque(false);
+            jButton64.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton64ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton64, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 45, 35));
+
+            jButton65.setBackground(new java.awt.Color(0, 102, 255));
+            jButton65.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton65.setFocusable(false);
+            jButton65.setOpaque(false);
+            jButton65.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton65ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton65, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 45, 35));
+
+            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+            jPanel1.setLayout(jPanel1Layout);
+            jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+            jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            );
+
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton29ActionPerformed
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton34ActionPerformed
+
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton35ActionPerformed
+
+    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton36ActionPerformed
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton37ActionPerformed
+
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton38ActionPerformed
+
+    private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton39ActionPerformed
+
+    private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton40ActionPerformed
+
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton41ActionPerformed
+
+    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton42ActionPerformed
+
+    private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton43ActionPerformed
+
+    private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton44ActionPerformed
+
+    private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton45ActionPerformed
+
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton47ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton47ActionPerformed
+
+    private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton48ActionPerformed
+
+    private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton49ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton49ActionPerformed
+
+    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton50ActionPerformed
+
+    private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton51ActionPerformed
+
+    private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton52ActionPerformed
+
+    private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton53ActionPerformed
+
+    private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton54ActionPerformed
+
+    private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton55ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton55ActionPerformed
+
+    private void jButton57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton57ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton57ActionPerformed
+
+    private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton60ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton60ActionPerformed
+
+    private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton62ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton62ActionPerformed
+
+    private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton63ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton63ActionPerformed
+
+    private void jButton64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton64ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton64ActionPerformed
+
+    private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton65ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton65ActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
+    private javax.swing.JButton jButton34;
+    private javax.swing.JButton jButton35;
+    private javax.swing.JButton jButton36;
+    private javax.swing.JButton jButton37;
+    private javax.swing.JButton jButton38;
+    private javax.swing.JButton jButton39;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton40;
+    private javax.swing.JButton jButton41;
+    private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButton43;
+    private javax.swing.JButton jButton44;
+    private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
+    private javax.swing.JButton jButton47;
+    private javax.swing.JButton jButton48;
+    private javax.swing.JButton jButton49;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton50;
+    private javax.swing.JButton jButton51;
+    private javax.swing.JButton jButton52;
+    private javax.swing.JButton jButton53;
+    private javax.swing.JButton jButton54;
+    private javax.swing.JButton jButton55;
+    private javax.swing.JButton jButton57;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton60;
+    private javax.swing.JButton jButton62;
+    private javax.swing.JButton jButton63;
+    private javax.swing.JButton jButton64;
+    private javax.swing.JButton jButton65;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField tf_message;
+    // End of variables declaration//GEN-END:variables
+
+    private void myInit() {
+        init_key();
+        set_keyboard();
+    }
+
+    public void do_pass() {
+    }
+    // <editor-fold defaultstate="collapsed" desc="Key">
+
+    private void disposed() {
+        this.dispose();
+    }
+
+    private void init_key() {
+        KeyMapping.mapKeyWIFW(getSurface(),
+                KeyEvent.VK_ESCAPE, new KeyAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                btn_0.doClick();
+                disposed();
+            }
+        });
+    }
+    // </editor-fold>
+
+    private void set_keyboard() {
+        JButton[] btn = {
+            jButton2, jButton11, jButton1, jButton4, jButton3, jButton6, jButton5, jButton8, jButton7, jButton10, jButton13, jButton14, jButton25, jButton15, jButton18, jButton17, jButton20, jButton19, jButton22, jButton21, jButton24, jButton26, jButton27, jButton28, jButton23, jButton39, jButton29, jButton32, jButton31, jButton34, jButton33, jButton36, jButton35, jButton38, jButton40, jButton41, jButton52, jButton42, jButton45, jButton44, jButton47, jButton46, jButton49, jButton48, jButton51, jButton53, jButton57
+        };
+
+        for (final JButton b : btn) {
+            b.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    String msg = tf_message.getText();
+                    msg = msg + b.getText();
+                    tf_message.setText(msg);
+                    ok1();
+                }
+            });
+        }
+    }
+
+    private void ok1() {
+         String msg = tf_message.getText();
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData(msg));
+        }
+    }
+}

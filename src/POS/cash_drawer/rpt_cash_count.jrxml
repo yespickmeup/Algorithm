@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="288" pageHeight="3600" columnWidth="274" leftMargin="7" rightMargin="7" topMargin="20" bottomMargin="20" uuid="faaf9ce2-bf42-47c0-83f2-1f165a18de19">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="operated_by" class="java.lang.String"/>
+	<parameter name="cash_in" class="java.lang.Double"/>
+	<parameter name="thousand" class="java.lang.Double"/>
+	<parameter name="five_hundred" class="java.lang.Double"/>
+	<parameter name="two_hundred" class="java.lang.Double"/>
+	<parameter name="one_hundred" class="java.lang.Double"/>
+	<parameter name="fifty" class="java.lang.Double"/>
+	<parameter name="twenty" class="java.lang.Double"/>
+	<parameter name="coins" class="java.lang.Double"/>
+	<parameter name="cash_total" class="java.lang.Double"/>
+	<parameter name="cashier_name" class="java.lang.String"/>
+	<parameter name="net_total" class="java.lang.Double"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="rpt_checks" class="java.util.List"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="rpt_expenses" class="java.util.List"/>
+	<parameter name="grand_sales" class="java.lang.Double"/>
+	<parameter name="grand_checks" class="java.lang.Double"/>
+	<parameter name="grand_expenses" class="java.lang.Double"/>
+	<group name="checks">
+		<groupExpression><![CDATA[$P{rpt_checks}]]></groupExpression>
+		<groupHeader>
+			<band height="5">
+				<subreport>
+					<reportElement uuid="b4f2628a-5ea7-4bdd-a1a9-7cd0417126c4" x="-1" y="0" width="193" height="5"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rpt_checks}, false);]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_checks.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="expenses">
+		<groupExpression><![CDATA[$P{rpt_expenses}]]></groupExpression>
+		<groupHeader>
+			<band height="5">
+				<subreport>
+					<reportElement uuid="b4f2628a-5ea7-4bdd-a1a9-7cd0417126c4" x="-1" y="0" width="193" height="5"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rpt_expenses}, false);]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_expenses.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="275" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cc825dce-4370-4ccc-aad6-0289e6911f90" mode="Transparent" x="0" y="11" width="193" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{operated_by}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="430762f8-cc7c-4b84-8a19-2fda0bd39d55" mode="Transparent" x="0" y="23" width="193" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2719abab-6d0f-4ea7-9b57-a56d6adbf18e" mode="Transparent" x="0" y="0" width="193" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="8" y="109" width="40" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CASH-IN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="8" y="124" width="40" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1,000.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="48" y="124" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="8" y="139" width="40" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[500.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="48" y="139" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="8" y="154" width="40" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[200.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="48" y="154" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="106" y="109" width="32" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[100.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="137" y="109" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="ab9a29b7-fda5-4d14-9c5d-b59801aacda6" mode="Transparent" x="63" y="124" width="37" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{thousand}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="315a0e0d-319e-420e-9bac-68703edcf706" mode="Transparent" x="63" y="139" width="37" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{five_hundred}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="14c91a37-c742-4876-bcae-3bdb03e7cfc2" mode="Transparent" x="63" y="154" width="37" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{two_hundred}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="f9158456-ca18-402a-9826-d0786f6b293d" mode="Transparent" x="152" y="109" width="42" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{one_hundred}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="106" y="124" width="32" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[50.00]]></text>
+			</staticText>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="8d95cc07-0f75-412e-a3d0-6ab9adb1df76" mode="Transparent" x="152" y="124" width="42" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fifty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="106" y="154" width="32" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COINS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="137" y="124" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="0bc810b6-3c91-4d20-8caf-b82eab10d5c9" mode="Transparent" x="152" y="139" width="42" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{twenty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="106" y="139" width="32" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[20.00]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="38070844-793f-4929-901d-1a5e294ba020" mode="Transparent" x="152" y="154" width="42" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{coins}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="137" y="139" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="ae210beb-cb1d-4b70-85c8-a033e5028933" mode="Transparent" x="48" y="109" width="52" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cash_in}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="305d13b0-8669-4082-98b0-c39df573b25e" mode="Transparent" x="131" y="179" width="61" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cash_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6cbf2374-9112-43fd-bb4b-101c1e4350b4" x="55" y="60" width="85" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cashier_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="8" y="60" width="47" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CASHIER:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="8" y="45" width="47" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c081d350-a144-4caa-98c4-71dd0d8afe75" x="55" y="45" width="85" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="68" y="179" width="63" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL CASH:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d901ba3-5270-4da9-b19d-8fb12f874767" mode="Opaque" x="7" y="94" width="189" height="15" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TENDERED]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="68" y="47" width="63" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUB-TOTAL:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="305d13b0-8669-4082-98b0-c39df573b25e" mode="Opaque" x="131" y="47" width="61" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{net_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="27" y="5" width="104" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL CASH & CHECKS:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="305d13b0-8669-4082-98b0-c39df573b25e" mode="Transparent" x="131" y="5" width="61" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{grand_sales}+$P{grand_checks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="27" y="25" width="104" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISBURSEMENTS:  + ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="305d13b0-8669-4082-98b0-c39df573b25e" mode="Transparent" x="131" y="25" width="61" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{grand_expenses}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="48" y="67" width="83" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[less BEG. BALANCE: - ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="ae210beb-cb1d-4b70-85c8-a033e5028933" mode="Transparent" x="131" y="67" width="61" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cash_in}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f01d6f9b-3e09-401a-9551-ba939ce27300" x="56" y="97" width="63" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="305d13b0-8669-4082-98b0-c39df573b25e" mode="Opaque" x="119" y="97" width="73" height="20" forecolor="#000000" backcolor="#999999"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{net_total}-$P{cash_in}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

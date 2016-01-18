@@ -1,0 +1,391 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package POS.backup;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.KeyMapping;
+import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import synsoftech.fields.Button;
+
+/**
+ *
+ * @author Guinness
+ */
+public class Dlg_backup extends javax.swing.JDialog {
+
+    /**
+     * Creates new form Dlg_backup
+     */
+    //<editor-fold defaultstate="collapsed" desc=" callback ">
+    private Callback callback;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+
+    }
+
+    public static interface Callback {
+
+        void ok(CloseDialog closeDialog, OutputData data);
+    }
+
+    public static class InputData {
+    }
+
+    public static class OutputData {
+    }
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" Constructors ">
+    private Dlg_backup(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    private Dlg_backup(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    public Dlg_backup() {
+        super();
+        setUndecorated(true);
+        initComponents();
+        myInit();
+
+    }
+    private Dlg_backup myRef;
+
+    private void setThisRef(Dlg_backup myRef) {
+        this.myRef = myRef;
+    }
+    private static java.util.Map<Object, Dlg_backup> dialogContainer = new java.util.HashMap();
+
+    public static void clearUpFirst(java.awt.Window parent) {
+        if (dialogContainer.containsKey(parent)) {
+            dialogContainer.remove(parent);
+        }
+    }
+
+    public static Dlg_backup create(java.awt.Window parent, boolean modal) {
+
+        if (modal) {
+            return create(parent, ModalityType.APPLICATION_MODAL);
+        }
+
+        return create(parent, ModalityType.MODELESS);
+
+    }
+
+    public static Dlg_backup create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+
+        if (parent instanceof java.awt.Frame) {
+
+            Dlg_backup dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_backup((java.awt.Frame) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        if (parent instanceof java.awt.Dialog) {
+            Dlg_backup dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_backup((java.awt.Dialog) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        return null;
+
+    }
+    //</editor-fold>    
+
+    //<editor-fold defaultstate="collapsed" desc=" main ">
+    public static void main(String args[]) {
+
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Dlg_backup dialog = Dlg_backup.create(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" added ">
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible == true) {
+            getContentPane().removeAll();
+            initComponents();
+            myInit();
+            repaint();
+        }
+
+    }
+
+    public javax.swing.JPanel getSurface() {
+        return (javax.swing.JPanel) getContentPane();
+    }
+
+    public void nullify() {
+        myRef.setVisible(false);
+        myRef = null;
+    }
+    //</editor-fold>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new Button.Primary();
+        jButton2 = new Button.Success();
+        jLabel1 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jButton3 = new Button.Default();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_reports/backup7.png"))); // NOI18N
+        jButton1.setText("Backup Database");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_reports/database16.png"))); // NOI18N
+        jButton2.setText("Restore Database");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Status:");
+
+        jProgressBar1.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jProgressBar1.setString("");
+        jProgressBar1.setStringPainted(true);
+
+        jButton3.setText("Close");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        disposed();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        upload();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        restore();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
+    // End of variables declaration//GEN-END:variables
+
+    private void myInit() {
+        init_key();
+    }
+
+    public void do_pass() {
+
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Key">
+    private void disposed() {
+        this.dispose();
+    }
+
+    private void init_key() {
+        KeyMapping.mapKeyWIFW(getSurface(),
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+    // </editor-fold>
+
+    private void upload() {
+        final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            jProgressBar1.setString("Backing up Database...Please be patient...");
+            jProgressBar1.setIndeterminate(true);
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            Thread t = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    File fileToSave = fileChooser.getSelectedFile();
+                    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+                    try {
+                        Backup.Backupdbtosql(fileToSave.getAbsolutePath());
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(Dlg_backup.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                    jButton3.setEnabled(true);
+                    jProgressBar1.setString("Finished...");
+                    jProgressBar1.setIndeterminate(false);
+                }
+            });
+            t.start();
+
+        }
+    }
+
+    private void restore() {
+        final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            jProgressBar1.setString("Restoring Database...Please be patient...");
+            jProgressBar1.setIndeterminate(true);
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    File selectedFile = fileChooser.getSelectedFile();
+                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                    try {
+                        Backup.Restoredbfromsql(selectedFile.getAbsolutePath());
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Dlg_backup.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(Dlg_backup.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                    jButton3.setEnabled(true);
+
+                    jProgressBar1.setString("Finished...");
+                    jProgressBar1.setIndeterminate(false);
+                }
+            });
+            t.start();
+
+        }
+    }
+}
