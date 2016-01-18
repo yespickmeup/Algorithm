@@ -280,6 +280,7 @@ public class Branch_local_uploads {
                 String location_id = rs.getString(20);
                 to_branch_local_uploads to = new to_branch_local_uploads(id, replenishments, inventory_counts, adjustments, stock_transfers, receipts, sales, returned_items, charged_items, rmas, item_maintenances, cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                 datas.add(to);
+                System.out.println("asdad");
             }
             return datas;
         } catch (SQLException e) {
