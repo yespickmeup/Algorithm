@@ -283,7 +283,7 @@ public class Charge_in_advance_items {
                         .setNumber("addtl_amount", to_charge_in_advance_items.addtl_amount)
                         .setNumber("wtax", to_charge_in_advance_items.wtax)
                         .ok();
-
+                
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
                 Lg.s(Charge_in_advance_items.class, "Successfully Added");

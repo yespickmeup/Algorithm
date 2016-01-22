@@ -2679,7 +2679,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_receipt_no.setText(to.receipt_no);
         tf_receipt_type.setText(to.receipt_type);
         tf_receipt_type_id.setText(to.receipt_type_id);
-
         tf_supplier.setText(to.supplier);
         tf_supplier_id.setText(to.supllier_id);
         tf_branch.setText(to.branch);
@@ -2687,9 +2686,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_remarks.setText(to.remarks);
         tf_disc.setText(FitIn.fmt_wc_0(to.discount));
         tf_discount.setText(FitIn.fmt_wc_0(to.discount));
-
-        data_cols_items();
-
+        
+        data_cols_items();  
+        
         try {
             Date delivered = DateType.sf.parse(to.date_delivered);
             String d_month = DateType.m.format(delivered);
