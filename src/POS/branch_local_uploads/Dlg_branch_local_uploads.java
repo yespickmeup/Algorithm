@@ -540,10 +540,9 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 jLabel2.setText("Connected to Cloud!");
                 jLabel2.setForeground(new java.awt.Color(0, 102, 255));
 
-                String where3 = " where branch_id='" + my_branch_id + "' order by id desc limit 1";
+                String where3 = "  order by id desc limit 1";
                 List<Branch_local_uploads.to_branch_local_uploads> last_upload = Branch_local_uploads.ret_data(where3);
                 String date_from = "";
-
                 List<Branch_local_uploads.to_branch_local_uploads> to_upload = new ArrayList();
                 for (Branch_local_uploads.to_branch_local_uploads to : last_upload) {
                     try {
@@ -554,6 +553,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         Logger.getLogger(Dlg_branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+
                 String now = DateType.sf.format(new Date());
                 System.out.println("Last Cloud upload date: " + date_from);
                 System.out.println("Todays date: " + now);
@@ -572,7 +572,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String replenishments = Parse_inventory_replenishments.compress(where);
                         String inventory_counts = Parse_inventory_counts.compress(where);
                         String adjustments = Parse_inventory_adjustments.compress(where);
-                        String stock_transfers = Parse_inventory_adjustments.compress(where);
+                        String stock_transfers = Parse_stock_transfers.compress(where);
                         String receipts = Parse_receipts.compress(where);
                         String sales = Parse_sales.compress(where);
                         String returned_items = Parse_sale_item_replacements.compress(where);
