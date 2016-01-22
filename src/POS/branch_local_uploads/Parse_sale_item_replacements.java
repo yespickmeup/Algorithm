@@ -76,6 +76,9 @@ public class Parse_sale_item_replacements {
         String where = " order by id desc limit 3";
         String stmts = compress(where);
         List<Parse_sale_item_replacements> datas = decompress(stmts);
+        for(Parse_sale_item_replacements to:datas){
+            System.out.println(to.sales_no);
+        }
         System.out.println(datas.size());
     }
 
@@ -114,7 +117,7 @@ public class Parse_sale_item_replacements {
                 int x = 0;
                 for (String c : cols) {
                     if (x == 0) {
-                        sales_no = c.substring(13, c.length() - 1);
+                        sales_no = c.substring(14, c.length() - 1);
                     }
                     if (x == 1) {
                         item_code = c.substring(13, c.length() - 1);

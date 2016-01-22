@@ -94,6 +94,10 @@ public class Parse_charged_items {
         String where = " order by id desc limit 3";
         String stmts = compress(where);
         List<Parse_charged_items> datas = decompress(stmts);
+        for(Parse_charged_items to:datas){
+            
+            System.out.println(to.customer_id);
+        }
         System.out.println(datas.size());
     }
 
@@ -142,7 +146,7 @@ public class Parse_charged_items {
                 for (String c : cols) {
 
                     if (x == 0) {
-                        customer_id = c.substring(16, c.length() - 1);
+                        customer_id = c.substring(17, c.length() - 1);
                     }
                     if (x == 1) {
                         customer_name = c.substring(17, c.length() - 1);

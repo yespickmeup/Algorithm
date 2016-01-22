@@ -59,10 +59,14 @@ public class Parse_inventory_adjustments {
     }
 
     public static void main(String[] args) {
-        String where = " where qty>0 limit 1";
+        String where = "  limit 5";
         String stmt = Parse_inventory_adjustments.compress(where);
+        System.out.println(stmt);
         List<Parse_inventory_adjustments.field> datas = Parse_inventory_adjustments.decompress(stmt);
-
+        for (Parse_inventory_adjustments.field to : datas) {
+            System.out.println(to.item_code);
+        }
+        System.out.println("Size: " + datas.size());
     }
 
     public static List<Parse_inventory_adjustments.field> decompress(String stmt) {
@@ -70,26 +74,28 @@ public class Parse_inventory_adjustments {
         String[] adjustments = stmt.split("℮");
 
         for (String adjustment : adjustments) {
+            String item_code = "";
+            String barcode = "";
+            double qty = 0;
+            double new_qty = 0;
+            int is_add = 0;
+            String date_added = "";
+            int status = 0;
+            String user_id = "";
+            String user_screen_name = "";
+            String branch = "";
+            String branch_id = "";
+            String location = "";
+            String location_id = "";
+            String remarks = "";
+            String transaction_no = "";
             String[] adj = adjustment.split("%");
             int i = 0;
             for (String ad : adj) {
-                String item_code = "";
-                String barcode = "";
-                double qty = 0;
-                double new_qty = 0;
-                int is_add = 0;
-                String date_added = "";
-                int status = 0;
-                String user_id = "";
-                String user_screen_name = "";
-                String branch = "";
-                String branch_id = "";
-                String location = "";
-                String location_id = "";
-                String remarks = "";
-                String transaction_no = "";
+
                 if (i == 1) {
                     item_code = ad.substring(13, ad.length() - 1);
+
                 }
                 if (i == 2) {
                     barcode = ad.substring(11, ad.length() - 1);
@@ -133,16 +139,20 @@ public class Parse_inventory_adjustments {
                 if (i == 15) {
                     transaction_no = ad.substring(18, ad.length() - 2);
                 }
-
                 i++;
+
             }
-            System.out.println("--------------");
+            if (!item_code.isEmpty()) {
+                Parse_inventory_adjustments.field f = new Parse_inventory_adjustments.field(item_code, barcode, qty, new_qty, is_add, date_added, status, user_id, user_screen_name, branch, branch_id, location, location_id, remarks, transaction_no);
+                datas.add(f);
+            }
+
         }
         return datas;
     }
 
     public static String compress(String where) {
-        String stmts = "";
+        String stmts = "\"items\":\"";
 
         try {
             Connection conn = MyConnection.connect();

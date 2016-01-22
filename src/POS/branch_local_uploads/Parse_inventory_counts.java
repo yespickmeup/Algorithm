@@ -6,6 +6,11 @@
 package POS.branch_local_uploads;
 
 import POS.encoding_inventory.Encoding_inventory;
+import POS.util.MyConnection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.FitIn;
@@ -65,7 +70,7 @@ public class Parse_inventory_counts {
     }
 
     public static void main(String[] args) {
-        String where = " where YEAR(date_added) = '" + "2016" + "' ";
+        String where = " order by id desc limit 2 ";
         String stmt = Parse_inventory_counts.compress(where);
         List<Parse_inventory_counts.field> datas = Parse_inventory_counts.decompress(stmt);
         System.out.println("Size: " + datas.size());
@@ -172,32 +177,89 @@ public class Parse_inventory_counts {
     }
 
     public static String compress(String where) {
-        List<Encoding_inventory.to_encoding_inventory> datas = Encoding_inventory.ret_data_encoding2(where);
+        List<Encoding_inventory.to_encoding_inventory> datas = new ArrayList();
+        String stmts = "\"items\":\"";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",qty"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",screen_name"
+                    + ",sheet_no"
+                    + ",status"
+                    + ",counted_by"
+                    + ",checked_by"
+                    + ",cost"
+                    + ",selling_price"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + " from encoding_inventory"
+                    + " " + where;
 
-        String stmt = "\"items\":\"";
-        for (Encoding_inventory.to_encoding_inventory to : datas) {
-            stmt = stmt + "℮{";
-            stmt = stmt + "\"item_code\":\"" + to.item_code + "\"";
-            stmt = stmt + "%\"barcode\":\"" + to.barcode + "\"";
-            stmt = stmt + "%\"branch\":\"" + to.branch + "\"";
-            stmt = stmt + "%\"branch_id\":\"" + to.branch_id + "\"";
-            stmt = stmt + "%\"location\":\"" + to.location + "\"";
-            stmt = stmt + "%\"location_id\":\"" + to.location_id + "\"";
-            stmt = stmt + "%\"qty\":\"" + to.qty + "\"";
-            stmt = stmt + "%\"date_added\":\"" + to.date_added + "\"";
-            stmt = stmt + "%\"user_name\":\"" + to.user_name + "\"";
-            stmt = stmt + "%\"screen_name\":\"" + to.screen_name + "\"";
-            stmt = stmt + "%\"sheet_no\":\"" + to.sheet_no + "\"";
-            stmt = stmt + "%\"status\":\"" + to.status + "\"";
-            stmt = stmt + "%\"counted_by\":\"" + to.counted_by + "\"";
-            stmt = stmt + "%\"checked_by\":\"" + to.checked_by + "\"";
-            stmt = stmt + "%\"cost\":\"" + to.cost + "\"";
-            stmt = stmt + "%\"selling_price\":\"" + to.selling_price + "\"";
-            stmt = stmt + "%\"user_id\":\"" + to.user_id + "\"";
-            stmt = stmt + "%\"user_screen_name\":\"" + to.user_screen_name + "\"";
-            stmt = stmt + "}";
+            int t = 0;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String item_code = rs.getString(2);
+                String barcode = rs.getString(3);
+                String description = rs.getString(4);
+                String branch = rs.getString(5);
+                String branch_id = rs.getString(6);
+                String location = rs.getString(7);
+                String location_id = rs.getString(8);
+                double qty = rs.getDouble(9);
+                String date_added = rs.getString(10);
+                String user_name = rs.getString(11);
+                String screen_name = rs.getString(12);
+                String sheet_no = rs.getString(13);
+                int status = rs.getInt(14);
+                String counted_by = rs.getString(15);
+                String checked_by = rs.getString(16);
+                double cost = rs.getDouble(17);
+                double selling_price = rs.getDouble(18);
+                String user_id = rs.getString(19);
+                String user_screen_name = rs.getString(20);
+
+
+                stmts = stmts + "℮{";
+                stmts = stmts + "\"item_code\":\"" + item_code + "\"";
+                stmts = stmts + "%\"barcode\":\"" + barcode + "\"";
+                stmts = stmts + "%\"branch\":\"" + branch + "\"";
+                stmts = stmts + "%\"branch_id\":\"" + branch_id + "\"";
+                stmts = stmts + "%\"location\":\"" + location + "\"";
+                stmts = stmts + "%\"location_id\":\"" + location_id + "\"";
+                stmts = stmts + "%\"qty\":\"" + qty + "\"";
+                stmts = stmts + "%\"date_added\":\"" + date_added + "\"";
+                stmts = stmts + "%\"user_name\":\"" + user_name + "\"";
+                stmts = stmts + "%\"screen_name\":\"" + screen_name + "\"";
+                stmts = stmts + "%\"sheet_no\":\"" + sheet_no + "\"";
+                stmts = stmts + "%\"status\":\"" + status + "\"";
+                stmts = stmts + "%\"counted_by\":\"" + counted_by + "\"";
+                stmts = stmts + "%\"checked_by\":\"" + checked_by + "\"";
+                stmts = stmts + "%\"cost\":\"" + cost + "\"";
+                stmts = stmts + "%\"selling_price\":\"" + selling_price + "\"";
+                stmts = stmts + "%\"user_id\":\"" + user_id + "\"";
+                stmts = stmts + "%\"user_screen_name\":\"" + user_screen_name + "\"";
+                stmts = stmts + "}";
+
+            }
+            return stmts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
         }
-        return stmt;
+
     }
 
 }

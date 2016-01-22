@@ -1478,7 +1478,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void cb_r_stock_transferredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_r_stock_transferredActionPerformed
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_cb_r_stock_transferredActionPerformed
 
     private void cb_r_stocks_left_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_r_stocks_left_categoryActionPerformed
@@ -2179,8 +2179,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(dtc.getSurface(), jPanel1, "Receipts");
     }
 
-
-
     private void rpt_stock_left_category() {
         Dlg_report_stock_left_category dtc = new Dlg_report_stock_left_category();
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status by Category");
@@ -2392,7 +2390,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             tf_username.grabFocus();
             Alert.set(0, "Wrong Username/Password!!");
         } else {
-
+            if (!to.branch_id.equalsIgnoreCase(my_branch_id)) {
+                Alert.set(0, "Account Cannot Log-in to this branch!");
+                return;
+            }
             tf_username.setText("");
             tf_password.setText("");
             Users.setUser_name(user_name);
@@ -2401,6 +2402,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             MyUser.user_id = "" + to.id;
             MyUser.user_name = to.user_name;
             MyUser.user_screen_name = to.screen_name;
+            MyUser.branch = to.branch;
+            MyUser.branch_id = to.branch_id;
+            MyUser.location = to.location;
+            MyUser.location_id = to.location_id;
             jPanel1.removeAll();
             jPanel1.updateUI();
             set_previleges();
