@@ -216,6 +216,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/synch_locations/servers1.png"))); // NOI18N
         jLabel23.setText("Upload Data to Cloud");
 
         tbl_local_uploads.setModel(new javax.swing.table.DefaultTableModel(
@@ -253,7 +254,6 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/synch_locations/servers1.png"))); // NOI18N
         jButton2.setText("Check Cloud Server Connection");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -539,7 +539,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 jLabel2.setText("Connected to Cloud!");
                 jLabel2.setForeground(new java.awt.Color(0, 102, 255));
 
-                String where3 = "  order by id desc limit 1";
+                String where3 = " where branch_id='"+my_branch_id+"' order by id desc limit 1";
                 List<Branch_local_uploads.to_branch_local_uploads> last_upload = Branch_local_uploads.ret_data(where3);
                 String date_from = "";
                 List<Branch_local_uploads.to_branch_local_uploads> to_upload = new ArrayList();
