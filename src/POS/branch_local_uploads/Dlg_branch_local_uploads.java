@@ -608,62 +608,72 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                             fw_replenishments = new FileWriter(file_replenishments.getAbsoluteFile());
                             BufferedWriter bw_replenishments = new BufferedWriter(fw_replenishments);
                             bw_replenishments.write(replenishments);
-                            fw_replenishments.close();
+
                             bw_replenishments.close();
+                            fw_replenishments.close();
 
                             fw_inventory_counts = new FileWriter(file_inventory_counts.getAbsoluteFile());
                             BufferedWriter bw_inventory_counts = new BufferedWriter(fw_inventory_counts);
                             bw_inventory_counts.write(inventory_counts);
-                            fw_inventory_counts.close();
+
                             bw_inventory_counts.close();
+                            fw_inventory_counts.close();
 
                             fw_adjustments = new FileWriter(file_adjustments.getAbsoluteFile());
                             BufferedWriter bw_adjustments = new BufferedWriter(fw_adjustments);
                             bw_adjustments.write(adjustments);
-                            fw_adjustments.close();
+
                             bw_adjustments.close();
+                            fw_adjustments.close();
 
                             fw_stock_transfers = new FileWriter(file_stock_transfers.getAbsoluteFile());
                             BufferedWriter bw_stock_transfers = new BufferedWriter(fw_stock_transfers);
                             bw_stock_transfers.write(stock_transfers);
-                            fw_stock_transfers.close();
+
                             bw_stock_transfers.close();
+                            fw_stock_transfers.close();
 
                             fw_receipts = new FileWriter(file_receipts.getAbsoluteFile());
                             BufferedWriter bw_receipts = new BufferedWriter(fw_receipts);
                             bw_receipts.write(receipts);
-                            fw_receipts.close();
+
                             bw_receipts.close();
+                            fw_receipts.close();
 
                             fw_sales = new FileWriter(file_sales.getAbsoluteFile());
                             BufferedWriter bw_sales = new BufferedWriter(fw_sales);
                             bw_sales.write(sales);
-                            fw_sales.close();
+
                             bw_sales.close();
+                            fw_sales.close();
 
                             fw_returned_items = new FileWriter(file_returned_items.getAbsoluteFile());
                             BufferedWriter bw_returned_items = new BufferedWriter(fw_returned_items);
                             bw_returned_items.write(returned_items);
-                            fw_returned_items.close();
+
                             bw_returned_items.close();
+                            fw_returned_items.close();
 
                             fw_rmas = new FileWriter(file_rmas.getAbsoluteFile());
                             BufferedWriter bw_rmas = new BufferedWriter(fw_rmas);
                             bw_rmas.write(rmas);
-                            fw_rmas.close();
+
                             bw_rmas.close();
+                            fw_rmas.close();
 
                             fw_item_maintenances = new FileWriter(file_item_maintenances.getAbsoluteFile());
                             BufferedWriter bw_item_maintenances = new BufferedWriter(fw_item_maintenances);
                             bw_item_maintenances.write(item_maintenances);
-                            fw_item_maintenances.close();
+
                             bw_item_maintenances.close();
+                            fw_item_maintenances.close();
 
                             fw_cash_drawers = new FileWriter(file_cash_drawers.getAbsoluteFile());
                             BufferedWriter bw_cash_drawers = new BufferedWriter(fw_cash_drawers);
                             bw_cash_drawers.write(cash_drawers);
-                            fw_cash_drawers.close();
+
                             bw_cash_drawers.close();
+                            fw_cash_drawers.close();
 
                         } catch (IOException ex) {
                             Logger.getLogger(Parse_sales.class.getName()).log(Level.SEVERE, null, ex);
