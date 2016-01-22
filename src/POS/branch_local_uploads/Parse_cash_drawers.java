@@ -339,6 +339,6 @@ public class Parse_cash_drawers {
         } finally {
             MyConnection.close();
         }
-
     }
+    
 }

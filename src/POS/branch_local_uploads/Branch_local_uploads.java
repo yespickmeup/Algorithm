@@ -6,13 +6,21 @@
 package POS.branch_local_uploads;
 
 import POS.synch_locations.Synch_locations;
+import POS.synch_locations.Synch_upload_locations;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.MyConnection;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -231,6 +239,12 @@ public class Branch_local_uploads {
         }
     }
 
+    public static void main(String[] args) {
+        String where = "";
+        List<to_branch_local_uploads> datas = ret_data(where);
+        System.out.println("Size: " + datas.size());
+    }
+
     public static List<to_branch_local_uploads> ret_data(String where) {
         List<to_branch_local_uploads> datas = new ArrayList();
         try {
@@ -261,21 +275,56 @@ public class Branch_local_uploads {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
+            String path = System.getProperty("user.home");
             while (rs.next()) {
-                int id = rs.getInt(1);
-                String replenishments = rs.getString(2);
-                String inventory_counts = rs.getString(3);
-                String adjustments = rs.getString(4);
-                String stock_transfers = rs.getString(5);
-                String receipts = rs.getString(6);
-                String sales = rs.getString(7);
-                String returned_items = rs.getString(8);
-                String charged_items = rs.getString(9);
-                String rmas = rs.getString(10);
-                String item_maintenances = rs.getString(11);
-                String cash_drawers = rs.getString(12);
-                int status = rs.getInt(13);
+
                 String date_added = rs.getString(14);
+                int id = rs.getInt(1);
+                Blob replenishments = rs.getBlob(2);
+                File f_replenishments = new File(path + "\\cloud_downloads\\replenishments" + id + ".txt");
+                Branch_local_uploads.blob_to_file(replenishments, f_replenishments);
+
+                Blob inventory_counts = rs.getBlob(3);
+                File f_inventory_counts = new File(path + "\\cloud_downloads\\inventory_counts" + id + ".txt");
+                Branch_local_uploads.blob_to_file(inventory_counts, f_inventory_counts);
+
+                Blob adjustments = rs.getBlob(4);
+                File f_adjustments = new File(path + "\\cloud_downloads\\adjustments" + id + ".txt");
+                Branch_local_uploads.blob_to_file(adjustments, f_adjustments);
+
+                Blob stock_transfers = rs.getBlob(5);
+                File f_stock_transfers = new File(path + "\\cloud_downloads\\stock_transfers" + id + ".txt");
+                Branch_local_uploads.blob_to_file(stock_transfers, f_stock_transfers);
+
+                Blob receipts = rs.getBlob(6);
+                File f_receipts = new File(path + "\\cloud_downloads\\receipts" + id + ".txt");
+                Branch_local_uploads.blob_to_file(receipts, f_receipts);
+
+                Blob sales = rs.getBlob(7);
+                File f_sales = new File(path + "\\cloud_downloads\\sales" + id + ".txt");
+                Branch_local_uploads.blob_to_file(sales, f_sales);
+
+                Blob returned_items = rs.getBlob(8);
+                File f_returned_items = new File(path + "\\cloud_downloads\\returned_items" + id + ".txt");
+                Branch_local_uploads.blob_to_file(returned_items, f_returned_items);
+
+                Blob charged_items = rs.getBlob(9);
+                File f_charged_items = new File(path + "\\cloud_downloads\\charged_items" + id + ".txt");
+                Branch_local_uploads.blob_to_file(charged_items, f_charged_items);
+
+                Blob rmas = rs.getBlob(10);
+                File f_rmas = new File(path + "\\cloud_downloads\\rmas.txt");
+                Branch_local_uploads.blob_to_file(rmas, f_rmas);
+
+                Blob item_maintenances = rs.getBlob(11);
+                File f_item_maintenances = new File(path + "\\cloud_downloads\\item_maintenances" + id + ".txt");
+                Branch_local_uploads.blob_to_file(item_maintenances, f_item_maintenances);
+
+                Blob cash_drawers = rs.getBlob(12);
+                File f_cash_drawers = new File(path + "\\cloud_downloads\\cash_drawers" + id + ".txt");
+                Branch_local_uploads.blob_to_file(cash_drawers, f_cash_drawers);
+
+                int status = rs.getInt(13);
                 String user_id = rs.getString(15);
                 String user_screen_name = rs.getString(16);
                 String branch = rs.getString(17);
@@ -283,7 +332,7 @@ public class Branch_local_uploads {
                 String location = rs.getString(19);
                 String location_id = rs.getString(20);
 
-                to_branch_local_uploads to = new to_branch_local_uploads(id, null, null, null, null, null, null, null, null, null, null, null, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
+                to_branch_local_uploads to = new to_branch_local_uploads(id, f_replenishments, f_inventory_counts, f_adjustments, f_stock_transfers, f_receipts, f_sales, f_returned_items, f_charged_items, f_rmas, f_item_maintenances, f_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -314,4 +363,45 @@ public class Branch_local_uploads {
 
     }
 
+    private static File blob_to_file(Blob blob, File file) {
+        String charsetName = "UTF-8";
+        char[] buffer = new char[0x1000];
+        StringBuilder s = new StringBuilder();
+
+        String str = null;
+        InputStream in = null;
+        try {
+            in = blob.getBinaryStream();
+        } catch (SQLException ex) {
+            Logger.getLogger(Branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Reader r;
+
+        try {
+            r = new InputStreamReader(in, charsetName);
+            try {
+                for (int len; (len = r.read(buffer, 0, buffer.length)) != -1;) {
+                    s.append(buffer, 0, len);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Synch_upload_locations.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            str = s.toString();
+
+            FileWriter fw;
+            FileWriter fw2;
+            try {
+                fw = new FileWriter(file.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(str);
+                bw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Parse_sales.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Synch_upload_locations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return file;
+    }
 }
