@@ -84,6 +84,7 @@ public class Branch_local_uploads {
     public static void add_data(List<Branch_local_uploads.to_branch_local_uploads> to_branch_local_uploads1) {
         try {
             Connection conn = MyConnection.cloud_connect();
+            conn.setAutoCommit(false);
 
             for (Branch_local_uploads.to_branch_local_uploads to_branch_local_uploads : to_branch_local_uploads1) {
                 String s0 = "insert into branch_local_uploads("
@@ -108,7 +109,6 @@ public class Branch_local_uploads {
                         + ",location_id"
                         + ")values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                         + "";
-
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 try {
                     InputStream replenishments = new FileInputStream(to_branch_local_uploads.replenishments);
@@ -142,13 +142,14 @@ public class Branch_local_uploads {
                     stmt.setString(18, to_branch_local_uploads.location);
                     stmt.setString(19, to_branch_local_uploads.location_id);
                     stmt.execute();
-                    Lg.s(Synch_locations.class, "Successfully Added");
+                    conn.commit();
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
 
+            Lg.s(Synch_locations.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

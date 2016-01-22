@@ -84,6 +84,9 @@ public class Parse_cash_drawers {
         String where = " order by id desc limit 3";
         String stmts = compress(where);
         List<Parse_cash_drawers> datas = decompress(stmts);
+        for(Parse_cash_drawers to: datas){
+            System.out.println(to.time_in);
+        }
         System.out.println(datas.size());
     }
 
@@ -129,7 +132,7 @@ public class Parse_cash_drawers {
                 for (String c : cols) {
 
                     if (x == 0) {
-                        session_no = c.substring(15, c.length() - 1);
+                        session_no = c.substring(16, c.length() - 1);
                     }
                     if (x == 1) {
                         user_name = c.substring(13, c.length() - 1);

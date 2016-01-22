@@ -59,7 +59,19 @@ id int auto_increment primary key
 ,location_id varchar(255)
 );
 
-
+drop table if exists maintenances;
+create table maintenances(
+id int auto_increment primary key
+,stmts text
+,status int
+,date_added datetime
+,user_id varchar(255)
+,user_screen_name varchar(255)
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
 
 
 
