@@ -562,7 +562,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 }
 
                 if (!date_from.isEmpty()) {
-
+                      String path = System.getProperty("user.home");
                     List<String> days = Branch_local_uploads.getDates(date_from);
                     int i = 1;
                     for (String s : days) {
@@ -581,17 +581,17 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String cash_drawers = Parse_cash_drawers.compress(where2);
 
                         String name = POS.util.DateType.y.format(new Date()) + "" + POS.util.DateType.d.format(new Date()) + "" + POS.util.DateType.m1.format(new Date());
-                        String path = System.getProperty("user.home");
-                        File file_replenishments = new File(path + "\\uploads\\" + "file_replenishments" + s + ".txt");
-                        File file_inventory_counts = new File(path + "\\uploads\\" + "inventory_counts" + s + ".txt");
-                        File file_adjustments = new File(path + "\\uploads\\" + "file_adjustments" + s + ".txt");
-                        File file_stock_transfers = new File(path + "\\uploads\\" + "file_stock_transfers" + s + ".txt");
-                        File file_receipts = new File(path + "\\uploads\\" + "file_receipts" + s + ".txt");
-                        File file_sales = new File(path + "\\uploads\\" + "file_sales" + s + ".txt");
-                        File file_returned_items = new File(path + "\\uploads\\" + "file_returned_items" + s + ".txt");
-                        File file_rmas = new File(path + "\\uploads\\" + "file_rmas" + s + ".txt");
-                        File file_item_maintenances = new File(path + "\\uploads\\" + "file_item_maintenances" + s + ".txt");
-                        File file_cash_drawers = new File(path + "\\uploads\\" + "file_cash_drawers" + s + ".txt");
+                      
+                        File file_replenishments = new File(path + "\\cloud_uploads\\" + "file_replenishments" + s + ".txt");
+                        File file_inventory_counts = new File(path + "\\cloud_uploads\\" + "inventory_counts" + s + ".txt");
+                        File file_adjustments = new File(path + "\\cloud_uploads\\" + "file_adjustments" + s + ".txt");
+                        File file_stock_transfers = new File(path + "\\cloud_uploads\\" + "file_stock_transfers" + s + ".txt");
+                        File file_receipts = new File(path + "\\cloud_uploads\\" + "file_receipts" + s + ".txt");
+                        File file_sales = new File(path + "\\cloud_uploads\\" + "file_sales" + s + ".txt");
+                        File file_returned_items = new File(path + "\\cloud_uploads\\" + "file_returned_items" + s + ".txt");
+                        File file_rmas = new File(path + "\\cloud_uploads\\" + "file_rmas" + s + ".txt");
+                        File file_item_maintenances = new File(path + "\\cloud_uploads\\" + "file_item_maintenances" + s + ".txt");
+                        File file_cash_drawers = new File(path + "\\cloud_uploads\\" + "file_cash_drawers" + s + ".txt");
 
                         FileWriter fw_replenishments;
                         FileWriter fw_inventory_counts;

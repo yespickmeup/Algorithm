@@ -375,7 +375,8 @@ public class Synch_upload_locations {
                 } catch (UnsupportedEncodingException ex) {
                     Logger.getLogger(Synch_upload_locations.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
+                
                 int status = rs.getInt(12);
                 String date_added = rs.getString(13);
                 String user_id = rs.getString(14);
