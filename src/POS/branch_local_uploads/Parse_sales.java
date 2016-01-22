@@ -3,15 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.synch_locations;
+package POS.branch_local_uploads;
 
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
+import POS.synch_locations.Synch_locations;
 import POS.util.DateType;
+import POS.util.MyConnection;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,55 +34,55 @@ public class Parse_sales {
 
     public static class field {
 
-        String sales_no;
-        String date_added;
-        String user_screen_name;
-        String user_id;
-        String session_no;
-        String remarks;
-        double gross_amount;
-        double amount_due;
-        int status;
-        int sales_type;
-        double line_discount;
-        String customer_id;
-        String customer_name;
-        String discount_name;
-        double discount_rate;
-        double discount_amount;
-        String discount_customer_name;
-        String discount_customer_id;
-        String charge_type;
-        String charge_type_id;
-        String charge_reference_no = "";
-        String charge_customer_name;
-        String charge_customer_id;
-        double charge_amount;
-        String check_bank;
-        String check_no;
-        double check_amount;
-        String check_holder;
-        String check_date;
-        String credit_card_type;
-        double credit_card_rate;
-        double credit_card_amount;
-        String credit_card_no;
-        String credit_card_holder;
-        String credit_card_approval_code;
-        String gift_cerftificate_from;
-        String gift_certificate_description;
-        String gift_certificate_no;
-        double gift_certificate_amount;
-        String prepaid_customer_name;
-        String prepaid_customer_id;
-        double prepaid_amount;
-        double addtl_amount;
-        double wtax;
-        String branch;
-        String branch_id;
-        String location;
-        String location_id;
-        List<items> items;
+        public String sales_no;
+        public String date_added;
+        public String user_screen_name;
+        public String user_id;
+        public String session_no;
+        public String remarks;
+        public double gross_amount;
+        public double amount_due;
+        public int status;
+        public int sales_type;
+        public double line_discount;
+        public String customer_id;
+        public String customer_name;
+        public String discount_name;
+        public double discount_rate;
+        public double discount_amount;
+        public String discount_customer_name;
+        public String discount_customer_id;
+        public String charge_type;
+        public String charge_type_id;
+        public String charge_reference_no = "";
+        public String charge_customer_name;
+        public String charge_customer_id;
+        public double charge_amount;
+        public String check_bank;
+        public String check_no;
+        public double check_amount;
+        public String check_holder;
+        public String check_date;
+        public String credit_card_type;
+        public double credit_card_rate;
+        public double credit_card_amount;
+        public String credit_card_no;
+        public String credit_card_holder;
+        public String credit_card_approval_code;
+        public String gift_cerftificate_from;
+        public String gift_certificate_description;
+        public String gift_certificate_no;
+        public double gift_certificate_amount;
+        public String prepaid_customer_name;
+        public String prepaid_customer_id;
+        public double prepaid_amount;
+        public double addtl_amount;
+        public double wtax;
+        public String branch;
+        public String branch_id;
+        public String location;
+        public String location_id;
+        public List<items> items;
 
         public field(String sales_no, String date_added, String user_screen_name, String user_id, String session_no, String remarks, double gross_amount, double amount_due, int status, int sales_type, double line_discount, String customer_id, String customer_name, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String charge_type, String charge_type_id, String charge_customer_name, String charge_customer_id, double charge_amount, String check_bank, String check_no, double check_amount, String check_holder, String check_date, String credit_card_type, double credit_card_rate, double credit_card_amount, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String gift_cerftificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, double addtl_amount, double wtax, String branch, String branch_id, String location, String location_id, List<items> items) {
             this.sales_no = sales_no;
@@ -131,25 +137,25 @@ public class Parse_sales {
 
         public static class items {
 
-            String item_code;
-            String barcode;
-            double qty;
-            double selling_price;
-            int is_vatable;
-            String discount_name;
-            double discount_rate;
-            double discount_amount;
-            String discount_customer_name;
-            String discount_customer_id;
-            String branch;
-            String branch_id;
-            String location;
-            String location_id;
-            double addtl_amount;
-            String serial_nos;
-            double wtax;
+            public String item_code;
+            public String barcode;
+            public double qty;
+            public double selling_price;
+            public int is_vatable;
+            public String discount_name;
+            public double discount_rate;
+            public double discount_amount;
+            public String discount_customer_name;
+            public String discount_customer_id;
+            public String branch;
+            public String branch_id;
+            public String location;
+            public String location_id;
+            public double addtl_amount;
+            public String serial_nos;
+            public double wtax;
 
-            public items(String item_code, String barcode, double qty, double selling_price, int is_vatable, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_id, String location, String location_id, double addtl_amount,String serial_nos, double wtax) {
+            public items(String item_code, String barcode, double qty, double selling_price, int is_vatable, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_id, String location, String location_id, double addtl_amount, String serial_nos, double wtax) {
                 this.item_code = item_code;
                 this.barcode = barcode;
                 this.qty = qty;
@@ -165,7 +171,7 @@ public class Parse_sales {
                 this.location = location;
                 this.location_id = location_id;
                 this.addtl_amount = addtl_amount;
-                this.serial_nos=serial_nos;
+                this.serial_nos = serial_nos;
                 this.wtax = wtax;
             }
 
@@ -178,13 +184,11 @@ public class Parse_sales {
     }
 
     public static void main(String[] args) {
-        String where = " where Date(date_added) = '" + "2016-01-04" + "' ";
+        String where = " where Date(date_added) = '" + "2016-01-04" + "' limit 5";
 
-        List<MySales.sales> my_sales = MySales.ret_data(where);
+        String stmt = Parse_sales.compress(where);
 
-        String stmt = Parse_sales.comprese(my_sales);
-
-        List<Parse_sales.field> fields = Parse_sales.decomprese(stmt);
+        List<Parse_sales.field> fields = Parse_sales.decompress(stmt);
 
         System.out.println("Total Transactions: " + fields.size());
 
@@ -230,11 +234,11 @@ public class Parse_sales {
         String location_id = "";
 
         Synch_locations.to_synch_locations sl = new Synch_locations.to_synch_locations(id, inventory_counts, receipts, sales, transfers, adjustments, returned_items, charges, rmas, item_maintenances, cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
-        Synch_locations.add_data(sl);
+//        Synch_locations.add_data(sl);
 
     }
 
-    public static List<Parse_sales.field> decomprese(String stmt) {
+    public static List<Parse_sales.field> decompress(String stmt) {
 
         List<Parse_sales.field> fields = new ArrayList();
         String[] transaction = stmt.split("Ω,");
@@ -522,7 +526,7 @@ public class Parse_sales {
                         String location = "";
                         String location_id = "";
                         double addtl_amount = 0;
-                        String serial_nos="";
+                        String serial_nos = "";
                         double wtax = 0;
                         if (x > 0) {
                             for (String item : item_list) {
@@ -588,7 +592,7 @@ public class Parse_sales {
                                     addtl_amount = FitIn.toDouble(item.substring(16, item.length() - 1));
 //                                    System.out.println("Addtl Amount = " + addtl_amount);
                                 }
-                                  if (i == 15) {
+                                if (i == 15) {
                                     serial_nos = (item.substring(11, item.length() - 1));
 //                                    System.out.println("WTax = " + wtax);
                                 }
@@ -598,9 +602,7 @@ public class Parse_sales {
                                 }
                                 i++;
                             }
-                            Parse_sales.field.items field = new Parse_sales.field.items(item_code, barcode, qty, selling_price, is_vatable, discount_name
-                                    , discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_id, location, location_id
-                                    , addtl_amount,serial_nos, wtax);
+                            Parse_sales.field.items field = new Parse_sales.field.items(item_code, barcode, qty, selling_price, is_vatable, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_id, location, location_id, addtl_amount, serial_nos, wtax);
                             my_items_list.add(field);
                         }
 
@@ -619,95 +621,238 @@ public class Parse_sales {
         return fields;
     }
 
-    public static String comprese(List<MySales.sales> my_sales) {
+    public static String compress(String where) {
 
-        String stmt = "";
-        int i = 0;
-        for (MySales.sales sale : my_sales) {
-            if (i > 0) {
-                stmt = stmt + "Ω,";
+        String stmts = "";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",sales_no"
+                    + ",date_added"
+                    + ",user_screen_name"
+                    + ",user_id"
+                    + ",session_no"
+                    + ",remarks"
+                    + ",gross_amount"
+                    + ",amount_due"
+                    + ",status"
+                    + ",sales_type"
+                    + ",line_discount"
+                    + ",customer_id"
+                    + ",customer_name"
+                    + ",discount_name"
+                    + ",discount_rate"
+                    + ",discount_amount"
+                    + ",discount_customer_name"
+                    + ",discount_customer_id"
+                    + ",charge_type"
+                    + ",charge_type_id"
+                    + ",charge_reference_no"
+                    + ",charge_customer_name"
+                    + ",charge_customer_id"
+                    + ",charge_amount"
+                    + ",check_bank"
+                    + ",check_no"
+                    + ",check_amount"
+                    + ",check_holder"
+                    + ",check_date"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_amount"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_approval_code"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",addtl_amount"
+                    + ",wtax"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from sales"
+                    + " " + where;
+
+            int i = 0;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String sales_no = rs.getString(2);
+                String date_added = rs.getString(3);
+                String user_screen_name = rs.getString(4);
+                String user_id = rs.getString(5);
+                String session_no = rs.getString(6);
+                String remarks = rs.getString(7);
+                double gross_amount = rs.getDouble(8);
+                double amount_due = rs.getDouble(9);
+                int status = rs.getInt(10);
+                int sales_type = rs.getInt(11);
+                double line_discount = rs.getDouble(12);
+                String customer_id = rs.getString(13);
+                String customer_name = rs.getString(14);
+                String discount_name = rs.getString(15);
+                double discount_rate = rs.getDouble(16);
+                double discount_amount = rs.getDouble(17);
+                String discount_customer_name = rs.getString(18);
+                String discount_customer_id = rs.getString(19);
+                String charge_type = rs.getString(20);
+                String charge_type_id = rs.getString(21);
+                String charge_reference_no = rs.getString(22);
+                String charge_customer_name = rs.getString(23);
+                String charge_customer_id = rs.getString(24);
+                double charge_amount = rs.getDouble(25);
+                String check_bank = rs.getString(26);
+                String check_no = rs.getString(27);
+                double check_amount = rs.getDouble(28);
+                String check_holder = rs.getString(29);
+                String check_date = rs.getString(30);
+                String credit_card_type = rs.getString(31);
+                double credit_card_rate = rs.getDouble(32);
+                double credit_card_amount = rs.getDouble(33);
+                String credit_card_no = rs.getString(34);
+                String credit_card_holder = rs.getString(35);
+                String credit_card_approval_code = rs.getString(36);
+                String gift_certificate_from = rs.getString(37);
+                String gift_certificate_description = rs.getString(38);
+                String gift_certificate_no = rs.getString(39);
+                double gift_certificate_amount = rs.getDouble(40);
+                String prepaid_customer_name = rs.getString(41);
+                String prepaid_customer_id = rs.getString(42);
+                double prepaid_amount = rs.getDouble(43);
+                double addtl_amount = rs.getDouble(44);
+                double wtax = rs.getDouble(45);
+                String branch = rs.getString(46);
+                String branch_id = rs.getString(47);
+                String location = rs.getString(48);
+                String location_id = rs.getString(49);
+
+                if (i > 0) {
+                    stmts = stmts + "Ω,";
+                }
+                stmts = stmts + "\"[\"sales_no\":\"" + sales_no + "\"";
+                stmts = stmts + "~\"date_added\":\"" + date_added + "\"";
+                stmts = stmts + "~\"user_screen_name\":\"" + user_screen_name + "\"";
+                stmts = stmts + "~\"user_id\":\"" + user_id + "\"";
+                stmts = stmts + "~\"session_no\":\"" + session_no + "\"";
+                stmts = stmts + "~\"remarks\":\"" + remarks + "\"";
+                stmts = stmts + "~\"gross_amount\":\"" + gross_amount + "\"";
+                stmts = stmts + "~\"amount_due\":\"" + amount_due + "\"";
+                stmts = stmts + "~\"status\":\"" + status + "\"";
+                stmts = stmts + "~\"sales_type\":\"" + sales_type + "\"";
+                stmts = stmts + "~\"line_discount\":\"" + line_discount + "\"";
+                stmts = stmts + "~\"customer_id\":\"" + customer_id + "\"";
+                stmts = stmts + "~\"customer_name\":\"" + customer_name + "\"";
+                stmts = stmts + "~\"discount_name\":\"" + discount_name + "\"";
+                stmts = stmts + "~\"discount_rate\":\"" + discount_rate + "\"";
+                stmts = stmts + "~\"discount_amount\":\"" + discount_amount + "\"";
+                stmts = stmts + "~\"discount_customer_name\":\"" + discount_customer_name + "\"";
+                stmts = stmts + "~\"discount_customer_id\":\"" + discount_customer_id + "\"";
+                stmts = stmts + "~\"charge_type\":\"" + charge_type + "\"";
+                stmts = stmts + "~\"charge_type_id\":\"" + charge_type_id + "\"";
+                stmts = stmts + "~\"charge_reference_no\":\"" + charge_reference_no + "\"";
+                stmts = stmts + "~\"charge_customer_name\":\"" + charge_customer_name + "\"";
+                stmts = stmts + "~\"charge_customer_id\":\"" + charge_customer_id + "\"";
+                stmts = stmts + "~\"charge_amount\":\"" + charge_amount + "\"";
+                stmts = stmts + "~\"check_bank\":\"" + check_bank + "\"";
+                stmts = stmts + "~\"check_no\":\"" + check_no + "\"";
+
+                stmts = stmts + "~\"check_amount\":\"" + check_amount + "\"";
+                stmts = stmts + "~\"check_holder\":\"" + check_holder + "\"";
+                stmts = stmts + "~\"check_date\":\"" + check_date + "\"";
+                stmts = stmts + "~\"credit_card_type\":\"" + credit_card_type + "\"";
+                stmts = stmts + "~\"credit_card_rate\":\"" + credit_card_rate + "\"";
+                stmts = stmts + "~\"credit_card_amount\":\"" + credit_card_amount + "\"";
+                stmts = stmts + "~\"credit_card_no\":\"" + credit_card_no + "\"";
+                stmts = stmts + "~\"credit_card_holder\":\"" + credit_card_holder + "\"";
+                stmts = stmts + "~\"credit_card_approval_code\":\"" + credit_card_approval_code + "\"";
+                stmts = stmts + "~\"gift_cerftificate_from\":\"" + gift_certificate_from + "\"";
+
+                stmts = stmts + "~\"gift_certificate_description\":\"" + gift_certificate_description + "\"";
+                stmts = stmts + "~\"gift_certificate_no\":\"" + gift_certificate_no + "\"";
+                stmts = stmts + "~\"gift_certificate_amount\":\"" + gift_certificate_amount + "\"";
+                stmts = stmts + "~\"prepaid_customer_name\":\"" + prepaid_customer_name + "\"";
+                stmts = stmts + "~\"prepaid_customer_id\":\"" + prepaid_customer_id + "\"";
+                stmts = stmts + "~\"prepaid_amount\":\"" + prepaid_amount + "\"";
+                stmts = stmts + "~\"addtl_amount\":\"" + addtl_amount + "\"";
+                stmts = stmts + "~\"wtax\":\"" + wtax + "\"";
+                stmts = stmts + "~\"branch\":\"" + branch + "\"";
+                stmts = stmts + "~\"branch_id\":\"" + branch_id + "\"";
+                stmts = stmts + "~\"location\":\"" + location + "\"";
+                stmts = stmts + "~\"location_id\":\"" + location_id + "\"";
+                stmts = stmts + "~\"items\":\"";
+
+                String where2 = " where sales_no='" + sales_no + "' ";
+                List<MySales_Items.items> items = MySales_Items.ret_data(where2);
+                String s2 = "select "
+                        + "item_code"
+                        + ",barcode"
+                        + ",item_type"
+                        + ",serial_no"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",selling_price"
+                        + ",is_vatable"
+                        + ",selling_type"
+                        + ",branch_code"
+                        + ",branch"
+                        + " from sale_items  "
+                        + " " + where2;
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                while (rs2.next()) {
+
+                    String item_code = rs2.getString(1);
+                    String barcode = rs2.getString(2);
+                    String item_type = rs2.getString(3);
+                    String serial_no = rs2.getString(4);
+                    double product_qty = rs2.getDouble(5);
+                    String unit = rs2.getString(6);
+                    double conversion = rs2.getDouble(7);
+                    double selling_price = rs2.getDouble(8);
+                    int is_vatable = rs2.getInt(9);
+                    int selling_type = rs2.getInt(10);
+
+                    String branch_code = rs2.getString(11);
+                    String branch1 = rs2.getString(11);
+
+                    stmts = stmts + "℮{\"item_code\":\"" + item_code + "\"";
+                    stmts = stmts + "%\"barcode\":\"" + barcode + "\"";
+                    stmts = stmts + "%\"qty\":\"" + product_qty + "\"";
+                    stmts = stmts + "%\"selling_price\":\"" + selling_price + "\"";
+                    stmts = stmts + "%\"is_vatable\":\"" + is_vatable + "\"";
+                    stmts = stmts + "%\"discount_name\":\"" + discount_name + "\"";
+                    stmts = stmts + "%\"discount_rate\":\"" + discount_rate + "\"";
+                    stmts = stmts + "%\"discount_amount\":\"" + discount_amount + "\"";
+                    stmts = stmts + "%\"discount_customer_name\":\"" + discount_customer_name + "\"";
+                    stmts = stmts + "%\"discount_customer_id\":\"" + discount_customer_id + "\"";
+                    stmts = stmts + "%\"branch\":\"" + branch1 + "\"";
+                    stmts = stmts + "%\"branch_id\":\"" + branch_code + "\"";
+                    stmts = stmts + "%\"location\":\"" + location + "\"";
+                    stmts = stmts + "%\"location_id\":\"" + location_id + "\"";
+                    stmts = stmts + "%\"addtl_amount\":\"" + addtl_amount + "\"";
+                    stmts = stmts + "%\"serial_nos\":\"" + serial_no + "\"";
+                    stmts = stmts + "%\"wtax\":\"" + wtax + "\"}\"Ω\"";
+                }
+
+                i++;
+
             }
-            stmt = stmt + "\"[\"sales_no\":\"" + sale.sales_no + "\"";
-            stmt = stmt + "~\"date_added\":\"" + sale.date_added + "\"";
-            stmt = stmt + "~\"user_screen_name\":\"" + sale.user_screen_name + "\"";
-            stmt = stmt + "~\"user_id\":\"" + sale.user_id + "\"";
-            stmt = stmt + "~\"session_no\":\"" + sale.session_no + "\"";
-            stmt = stmt + "~\"remarks\":\"" + sale.remarks + "\"";
-            stmt = stmt + "~\"gross_amount\":\"" + sale.gross_amount + "\"";
-            stmt = stmt + "~\"amount_due\":\"" + sale.amount_due + "\"";
-            stmt = stmt + "~\"status\":\"" + sale.status + "\"";
-            stmt = stmt + "~\"sales_type\":\"" + sale.sales_type + "\"";
-            stmt = stmt + "~\"line_discount\":\"" + sale.line_discount + "\"";
-            stmt = stmt + "~\"customer_id\":\"" + sale.customer_id + "\"";
-            stmt = stmt + "~\"customer_name\":\"" + sale.customer_name + "\"";
-            stmt = stmt + "~\"discount_name\":\"" + sale.discount_name + "\"";
-            stmt = stmt + "~\"discount_rate\":\"" + sale.discount_rate + "\"";
-            stmt = stmt + "~\"discount_amount\":\"" + sale.discount_amount + "\"";
-            stmt = stmt + "~\"discount_customer_name\":\"" + sale.discount_customer_name + "\"";
-            stmt = stmt + "~\"discount_customer_id\":\"" + sale.discount_customer_id + "\"";
-            stmt = stmt + "~\"charge_type\":\"" + sale.charge_type + "\"";
-            stmt = stmt + "~\"charge_type_id\":\"" + sale.charge_type_id + "\"";
-            stmt = stmt + "~\"charge_reference_no\":\"" + sale.charge_reference_no + "\"";
-            stmt = stmt + "~\"charge_customer_name\":\"" + sale.charge_customer_name + "\"";
-            stmt = stmt + "~\"charge_customer_id\":\"" + sale.charge_customer_id + "\"";
-            stmt = stmt + "~\"charge_amount\":\"" + sale.charge_amount + "\"";
-            stmt = stmt + "~\"check_bank\":\"" + sale.check_bank + "\"";
-            stmt = stmt + "~\"check_no\":\"" + sale.check_no + "\"";
-
-            stmt = stmt + "~\"check_amount\":\"" + sale.check_amount + "\"";
-            stmt = stmt + "~\"check_holder\":\"" + sale.check_holder + "\"";
-            stmt = stmt + "~\"check_date\":\"" + sale.check_date + "\"";
-            stmt = stmt + "~\"credit_card_type\":\"" + sale.credit_card_type + "\"";
-            stmt = stmt + "~\"credit_card_rate\":\"" + sale.credit_card_rate + "\"";
-            stmt = stmt + "~\"credit_card_amount\":\"" + sale.credit_card_amount + "\"";
-            stmt = stmt + "~\"credit_card_no\":\"" + sale.credit_card_no + "\"";
-            stmt = stmt + "~\"credit_card_holder\":\"" + sale.credit_card_holder + "\"";
-            stmt = stmt + "~\"credit_card_approval_code\":\"" + sale.credit_card_approval_code + "\"";
-            stmt = stmt + "~\"gift_cerftificate_from\":\"" + sale.gift_certificate_from + "\"";
-
-            stmt = stmt + "~\"gift_certificate_description\":\"" + sale.gift_certificate_description + "\"";
-            stmt = stmt + "~\"gift_certificate_no\":\"" + sale.gift_certificate_no + "\"";
-            stmt = stmt + "~\"gift_certificate_amount\":\"" + sale.gift_certificate_amount + "\"";
-            stmt = stmt + "~\"prepaid_customer_name\":\"" + sale.prepaid_customer_name + "\"";
-            stmt = stmt + "~\"prepaid_customer_id\":\"" + sale.prepaid_customer_id + "\"";
-            stmt = stmt + "~\"prepaid_amount\":\"" + sale.prepaid_amount + "\"";
-            stmt = stmt + "~\"addtl_amount\":\"" + sale.addtl_amount + "\"";
-            stmt = stmt + "~\"wtax\":\"" + sale.wtax + "\"";
-            stmt = stmt + "~\"branch\":\"" + sale.branch + "\"";
-            stmt = stmt + "~\"branch_id\":\"" + sale.branch_id + "\"";
-            stmt = stmt + "~\"location\":\"" + sale.location + "\"";
-            stmt = stmt + "~\"location_id\":\"" + sale.location_id + "\"";
-            stmt = stmt + "~\"items\":\"";
-
-            String where2 = " where sales_no='" + sale.sales_no + "' ";
-            List<MySales_Items.items> items = MySales_Items.ret_data(where2);
-            int t = 0;
-            for (MySales_Items.items item : items) {
-                stmt = stmt + "℮{\"item_code\":\"" + item.item_code + "\"";
-                stmt = stmt + "%\"barcode\":\"" + item.barcode + "\"";
-                stmt = stmt + "%\"qty\":\"" + item.product_qty + "\"";
-                stmt = stmt + "%\"selling_price\":\"" + item.selling_price + "\"";
-                stmt = stmt + "%\"is_vatable\":\"" + item.is_vatable + "\"";
-                stmt = stmt + "%\"discount_name\":\"" + item.discount_name + "\"";
-                stmt = stmt + "%\"discount_rate\":\"" + item.discount_rate + "\"";
-                stmt = stmt + "%\"discount_amount\":\"" + item.discount_amount + "\"";
-                stmt = stmt + "%\"discount_customer_name\":\"" + item.discount_customer_name + "\"";
-                stmt = stmt + "%\"discount_customer_id\":\"" + item.discount_customer_id + "\"";
-                stmt = stmt + "%\"branch\":\"" + item.branch + "\"";
-                stmt = stmt + "%\"branch_id\":\"" + item.branch_code + "\"";
-
-                stmt = stmt + "%\"location\":\"" + item.location + "\"";
-                stmt = stmt + "%\"location_id\":\"" + item.location_id + "\"";
-                stmt = stmt + "%\"addtl_amount\":\"" + item.addtl_amount + "\"";
-                stmt = stmt + "%\"serial_nos\":\"" + item.serial_no + "\"";
-                stmt = stmt + "%\"wtax\":\"" + item.wtax + "\"}\"Ω\"";
-                t++;
-            }
-
-            i++;
+            return stmts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
         }
-        return stmt;
+
     }
 
-  
 }

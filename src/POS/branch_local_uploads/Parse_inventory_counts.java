@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.synch_locations;
+package POS.branch_local_uploads;
 
 import POS.encoding_inventory.Encoding_inventory;
 import java.util.ArrayList;

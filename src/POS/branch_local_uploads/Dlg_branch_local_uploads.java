@@ -5,14 +5,26 @@
  */
 package POS.branch_local_uploads;
 
+import POS.branch_locations.S1_branch_locations;
+import POS.branch_locations.S4_branch_locations;
+import POS.users.MyUser;
+import POS.util.Alert;
+import POS.util.MyConnection;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -21,6 +33,7 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
+import synsoftech.util.DateType;
 
 /**
  *
@@ -238,14 +251,19 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
         jLabel22.setText("Status:");
 
         jProgressBar1.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jProgressBar1.setForeground(new java.awt.Color(51, 153, 0));
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
 
         jButton2.setText("Check Cloud Server Connection");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(204, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Connection Failed!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -319,8 +337,12 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        upload();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        check_connection();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,6 +366,19 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
         init_key();
 
         init_tbl_local_uploads(tbl_local_uploads);
+        set_default_branch();
+    }
+    String my_branch = "";
+    String my_branch_id = "";
+    String my_location = "";
+    String my_location_id = "";
+
+    private void set_default_branch() {
+        S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
+        my_branch = to.branch;
+        my_branch_id = to.branch_id;
+        my_location = to.location;
+        my_location_id = "" + to.id;
     }
 
     public void do_pass() {
@@ -459,8 +494,154 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
     }
 
     private void check_connection() {
-        List<String> days = new ArrayList();
-        
+
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+        jButton2.setEnabled(false);
+        jButton1.setEnabled(false);
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                int connected = MyConnection.check_cloud_connection();
+                if (connected == 0) {
+                    jLabel2.setText("Connection Failed!");
+                    jLabel2.setForeground(new java.awt.Color(204, 0, 51));
+                    return;
+                }
+                jLabel2.setText("Connected to Cloud!");
+                jLabel2.setForeground(new java.awt.Color(0, 102, 255));
+
+                jButton2.setEnabled(true);
+                jButton1.setEnabled(true);
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+            }
+        });
+        t.start();
+
     }
 
+    private void upload() {
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+        jButton2.setEnabled(false);
+        jButton1.setEnabled(false);
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                int connected = MyConnection.check_cloud_connection();
+                if (connected == 0) {
+                    jLabel2.setText("Connection Failed!");
+                    jLabel2.setForeground(new java.awt.Color(204, 0, 51));
+                    return;
+                }
+                jLabel2.setText("Connected to Cloud!");
+                jLabel2.setForeground(new java.awt.Color(0, 102, 255));
+
+                String where3 = " order by id desc limit 1";
+                List<Branch_local_uploads.to_branch_local_uploads> last_upload = Branch_local_uploads.ret_data(where3);
+                String date_from = "";
+
+                List<Branch_local_uploads.to_branch_local_uploads> to_upload = new ArrayList();
+                for (Branch_local_uploads.to_branch_local_uploads to : last_upload) {
+                    try {
+                        Date d = DateType.datetime.parse(to.date_added);
+                        date_from = DateType.sf.format(d);
+
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Dlg_branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                String now = DateType.sf.format(new Date());
+                System.out.println("Last Cloud upload date: " + date_from);
+                System.out.println("Todays date: " + now);
+                if (date_from.equals(now)) {
+                    Alert.set(0, "Nothing to Upload at the moment!");
+                    return;
+                }
+
+                if (!date_from.isEmpty()) {
+
+                    List<String> days = Branch_local_uploads.getDates(date_from);
+                    for (String s : days) {
+                        String where = " where Date(date_added)='" + s + "' ";
+                        String where2 = " where Date(time_in)='" + s + "' ";
+                        String replenishments = Parse_inventory_replenishments.compress(where);
+                        String inventory_counts = Parse_inventory_counts.compress(where);
+                        String adjustments = Parse_inventory_adjustments.compress(where);
+                        String stock_transfers = Parse_inventory_adjustments.compress(where);
+                        String receipts = Parse_receipts.compress(where);
+                        String sales = Parse_sales.compress(where);
+                        String returned_items = Parse_sale_item_replacements.compress(where);
+                        String charged_items = Parse_charged_items.compress(where);
+                        String rmas = "";
+                        String item_maintenances = "";
+                        String cash_drawers = Parse_cash_drawers.compress(where2);
+
+                        String name = POS.util.DateType.y.format(new Date()) + "" + POS.util.DateType.d.format(new Date()) + "" + POS.util.DateType.m1.format(new Date());
+                        String path = System.getProperty("user.home");
+                        File file_replenishments = new File(path + "\\uploads\\" + "file_replenishments" + ".txt");
+                        File file_inventory_counts = new File(path + "\\uploads\\" + "inventory_counts" + ".txt");
+                        File file_adjustments = new File(path + "\\uploads\\" + "file_adjustments" + ".txt");
+                        File file_stock_transfers = new File(path + "\\uploads\\" + "file_stock_transfers" + ".txt");
+                        File file_receipts = new File(path + "\\uploads\\" + "file_receipts" + ".txt");
+                        File file_sales = new File(path + "\\uploads\\" + "file_sales" + ".txt");
+                        File file_returned_items = new File(path + "\\uploads\\" + "file_returned_items" + ".txt");
+                        File file_rmas = new File(path + "\\uploads\\" + "file_rmas" + ".txt");
+                        File file_item_maintenances = new File(path + "\\uploads\\" + "file_item_maintenances" + ".txt");
+                        File file_cash_drawers = new File(path + "\\uploads\\" + "file_cash_drawers" + ".txt");
+
+                        fw(file_replenishments, replenishments);
+                        fw(file_inventory_counts, inventory_counts);
+                        fw(file_adjustments, adjustments);
+                        fw(file_stock_transfers, stock_transfers);
+                        fw(file_receipts, receipts);
+                        fw(file_sales, sales);
+                        fw(file_returned_items, returned_items);
+                        fw(file_rmas, rmas);
+                        fw(file_item_maintenances, item_maintenances);
+                        fw(file_cash_drawers, cash_drawers);
+
+                        int id = 0;
+                        int status = 0;
+                        String date_added = s + " 00:00:00";
+                        String user_id = MyUser.getUser_id();
+                        String user_screen_name = MyUser.getUser_id();
+                        String branch = my_branch;
+                        String branch_id = my_branch_id;
+                        String location = my_location;
+                        String location_id = my_location_id;
+                        
+                        Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments, file_inventory_counts, file_adjustments, file_stock_transfers, file_receipts, file_sales, file_returned_items, file_rmas, file_rmas, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
+                        to_upload.add(upload);
+                    }
+                    
+                    Branch_local_uploads.add_data(to_upload);
+                    Alert.set(0, "Upload Successful!");
+                }
+
+                jButton2.setEnabled(true);
+                jButton1.setEnabled(false);
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+            }
+        });
+        t.start();
+    }
+
+    private void fw(File file, String stmts) {
+        FileWriter fw_replenishments;
+        try {
+            fw_replenishments = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw_replenishments);
+            bw.write(stmts);
+            bw.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Parse_sales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

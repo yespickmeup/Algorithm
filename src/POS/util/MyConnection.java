@@ -119,7 +119,7 @@ public class MyConnection {
     public static Connection cloud_connect() {
         try {
             //        init();
-            String host = System.getProperty("pool_host1", "128.199.80.531:3306");
+            String host = System.getProperty("pool_host1", "128.199.80.53:3306");
             String user = System.getProperty("pool_user1", "root");
             String password = System.getProperty("pool_password1", "password");
             String db_name = System.getProperty("mydb1", "db_algorithm");

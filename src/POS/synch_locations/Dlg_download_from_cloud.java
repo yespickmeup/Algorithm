@@ -5,31 +5,22 @@
  */
 package POS.synch_locations;
 
+import POS.branch_local_uploads.Parse_sales;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.my_sales.MySales;
-import static POS.synch_locations.Parse_sales.comprese;
-import POS.users.MyUser;
 import POS.util.Alert;
-import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import static java.awt.image.ImageObserver.WIDTH;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
@@ -552,7 +543,7 @@ public class Dlg_download_from_cloud extends javax.swing.JDialog {
                     File sales = to.sales;
                     try {
                         String sale = new Scanner(sales).useDelimiter("\\Z").next();
-                        d_sales = Parse_sales.decomprese(sale);
+                        d_sales = Parse_sales.decompress(sale);
                         jLabel7.setText("" + d_sales.size());
 
                         if (d_sales.size() > 0) {

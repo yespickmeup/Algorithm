@@ -5,6 +5,7 @@
  */
 package POS.synch_locations;
 
+import POS.branch_local_uploads.Parse_sales;
 import POS.inventory.S1_inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.my_sales.MySales;

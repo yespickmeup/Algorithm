@@ -5,9 +5,14 @@
  */
 package POS.branch_local_uploads;
 
+import POS.synch_locations.Synch_locations;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.MyConnection;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,17 +36,17 @@ public class Branch_local_uploads {
     public static class to_branch_local_uploads {
 
         public final int id;
-        public final String replenishments;
-        public final String inventory_counts;
-        public final String adjustments;
-        public final String stock_transfers;
-        public final String receipts;
-        public final String sales;
-        public final String returned_items;
-        public final String charged_items;
-        public final String rmas;
-        public final String item_maintenances;
-        public final String cash_drawers;
+        public final File replenishments;
+        public final File inventory_counts;
+        public final File adjustments;
+        public final File stock_transfers;
+        public final File receipts;
+        public final File sales;
+        public final File returned_items;
+        public final File charged_items;
+        public final File rmas;
+        public final File item_maintenances;
+        public final File cash_drawers;
         public final int status;
         public final String date_added;
         public final String user_id;
@@ -51,7 +56,7 @@ public class Branch_local_uploads {
         public final String location;
         public final String location_id;
 
-        public to_branch_local_uploads(int id, String replenishments, String inventory_counts, String adjustments, String stock_transfers, String receipts, String sales, String returned_items, String charged_items, String rmas, String item_maintenances, String cash_drawers, int status, String date_added, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id) {
+        public to_branch_local_uploads(int id, File replenishments, File inventory_counts, File adjustments, File stock_transfers, File receipts, File sales, File returned_items, File charged_items, File rmas, File item_maintenances, File cash_drawers, int status, String date_added, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id) {
             this.id = id;
             this.replenishments = replenishments;
             this.inventory_counts = inventory_counts;
@@ -73,78 +78,77 @@ public class Branch_local_uploads {
             this.location = location;
             this.location_id = location_id;
         }
+
     }
 
-    public static void add_data(to_branch_local_uploads to_branch_local_uploads) {
+    public static void add_data(List<Branch_local_uploads.to_branch_local_uploads> to_branch_local_uploads1) {
         try {
-            Connection conn = MyConnection.connect();
-            String s0 = "insert into branch_local_uploads("
-                    + "replenishments"
-                    + ",inventory_counts"
-                    + ",adjustments"
-                    + ",stock_transfers"
-                    + ",receipts"
-                    + ",sales"
-                    + ",returned_items"
-                    + ",charged_items"
-                    + ",rmas"
-                    + ",item_maintenances"
-                    + ",cash_drawers"
-                    + ",status"
-                    + ",date_added"
-                    + ",user_id"
-                    + ",user_screen_name"
-                    + ",branch"
-                    + ",branch_id"
-                    + ",location"
-                    + ",location_id"
-                    + ")values("
-                    + ":replenishments"
-                    + ",:inventory_counts"
-                    + ",:adjustments"
-                    + ",:stock_transfers"
-                    + ",:receipts"
-                    + ",:sales"
-                    + ",:returned_items"
-                    + ",:charged_items"
-                    + ",:rmas"
-                    + ",:item_maintenances"
-                    + ",:cash_drawers"
-                    + ",:status"
-                    + ",:date_added"
-                    + ",:user_id"
-                    + ",:user_screen_name"
-                    + ",:branch"
-                    + ",:branch_id"
-                    + ",:location"
-                    + ",:location_id"
-                    + ")";
+            Connection conn = MyConnection.cloud_connect();
 
-            s0 = SqlStringUtil.parse(s0)
-                    .setString("replenishments", to_branch_local_uploads.replenishments)
-                    .setString("inventory_counts", to_branch_local_uploads.inventory_counts)
-                    .setString("adjustments", to_branch_local_uploads.adjustments)
-                    .setString("stock_transfers", to_branch_local_uploads.stock_transfers)
-                    .setString("receipts", to_branch_local_uploads.receipts)
-                    .setString("sales", to_branch_local_uploads.sales)
-                    .setString("returned_items", to_branch_local_uploads.returned_items)
-                    .setString("charged_items", to_branch_local_uploads.charged_items)
-                    .setString("rmas", to_branch_local_uploads.rmas)
-                    .setString("item_maintenances", to_branch_local_uploads.item_maintenances)
-                    .setString("cash_drawers", to_branch_local_uploads.cash_drawers)
-                    .setNumber("status", to_branch_local_uploads.status)
-                    .setString("date_added", to_branch_local_uploads.date_added)
-                    .setString("user_id", to_branch_local_uploads.user_id)
-                    .setString("user_screen_name", to_branch_local_uploads.user_screen_name)
-                    .setString("branch", to_branch_local_uploads.branch)
-                    .setString("branch_id", to_branch_local_uploads.branch_id)
-                    .setString("location", to_branch_local_uploads.location)
-                    .setString("location_id", to_branch_local_uploads.location_id)
-                    .ok();
+            for (Branch_local_uploads.to_branch_local_uploads to_branch_local_uploads : to_branch_local_uploads1) {
+                String s0 = "insert into branch_local_uploads("
+                        + "replenishments"
+                        + ",inventory_counts"
+                        + ",adjustments"
+                        + ",stock_transfers"
+                        + ",receipts"
+                        + ",sales"
+                        + ",returned_items"
+                        + ",charged_items"
+                        + ",rmas"
+                        + ",item_maintenances"
+                        + ",cash_drawers"
+                        + ",status"
+                        + ",date_added"
+                        + ",user_id"
+                        + ",user_screen_name"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ")values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                        + "";
 
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
-            Lg.s(Branch_local_uploads.class, "Successfully Added");
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                try {
+                    InputStream replenishments = new FileInputStream(to_branch_local_uploads.replenishments);
+                    InputStream inventory_counts = new FileInputStream(to_branch_local_uploads.inventory_counts);
+                    InputStream adjustments = new FileInputStream(to_branch_local_uploads.adjustments);
+                    InputStream stock_transfers = new FileInputStream(to_branch_local_uploads.stock_transfers);
+                    InputStream receipts = new FileInputStream(to_branch_local_uploads.receipts);
+                    InputStream sales = new FileInputStream(to_branch_local_uploads.sales);
+                    InputStream returned_items = new FileInputStream(to_branch_local_uploads.returned_items);
+                    InputStream charged_items = new FileInputStream(to_branch_local_uploads.charged_items);
+                    InputStream rmas = new FileInputStream(to_branch_local_uploads.rmas);
+                    InputStream item_maintenances = new FileInputStream(to_branch_local_uploads.item_maintenances);
+                    InputStream cash_drawers = new FileInputStream(to_branch_local_uploads.cash_drawers);
+                    stmt.setBinaryStream(1, replenishments, (int) to_branch_local_uploads.replenishments.length());
+                    stmt.setBinaryStream(2, inventory_counts, (int) to_branch_local_uploads.inventory_counts.length());
+                    stmt.setBinaryStream(3, adjustments, (int) to_branch_local_uploads.adjustments.length());
+                    stmt.setBinaryStream(4, stock_transfers, (int) to_branch_local_uploads.stock_transfers.length());
+                    stmt.setBinaryStream(5, receipts, (int) to_branch_local_uploads.receipts.length());
+                    stmt.setBinaryStream(6, sales, (int) to_branch_local_uploads.sales.length());
+                    stmt.setBinaryStream(7, returned_items, (int) to_branch_local_uploads.returned_items.length());
+                    stmt.setBinaryStream(8, charged_items, (int) to_branch_local_uploads.charged_items.length());
+                    stmt.setBinaryStream(9, rmas, (int) to_branch_local_uploads.rmas.length());
+                    stmt.setBinaryStream(10, item_maintenances, (int) to_branch_local_uploads.item_maintenances.length());
+                    stmt.setBinaryStream(11, cash_drawers, (int) to_branch_local_uploads.cash_drawers.length());
+                    stmt.setInt(12, to_branch_local_uploads.status);
+                    stmt.setString(13, to_branch_local_uploads.date_added);
+                    stmt.setString(14, to_branch_local_uploads.user_id);
+                    stmt.setString(15, to_branch_local_uploads.user_screen_name);
+                    stmt.setString(16, to_branch_local_uploads.branch);
+                    stmt.setString(17, to_branch_local_uploads.branch_id);
+                    stmt.setString(18, to_branch_local_uploads.location);
+                    stmt.setString(19, to_branch_local_uploads.location_id);
+                    stmt.execute();
+                    Lg.s(Synch_locations.class, "Successfully Added");
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -178,28 +182,27 @@ public class Branch_local_uploads {
                     + " where id='" + to_branch_local_uploads.id + "' "
                     + " ";
 
-            s0 = SqlStringUtil.parse(s0)
-                    .setString("replenishments", to_branch_local_uploads.replenishments)
-                    .setString("inventory_counts", to_branch_local_uploads.inventory_counts)
-                    .setString("adjustments", to_branch_local_uploads.adjustments)
-                    .setString("stock_transfers", to_branch_local_uploads.stock_transfers)
-                    .setString("receipts", to_branch_local_uploads.receipts)
-                    .setString("sales", to_branch_local_uploads.sales)
-                    .setString("returned_items", to_branch_local_uploads.returned_items)
-                    .setString("charged_items", to_branch_local_uploads.charged_items)
-                    .setString("rmas", to_branch_local_uploads.rmas)
-                    .setString("item_maintenances", to_branch_local_uploads.item_maintenances)
-                    .setString("cash_drawers", to_branch_local_uploads.cash_drawers)
-                    .setNumber("status", to_branch_local_uploads.status)
-                    .setString("date_added", to_branch_local_uploads.date_added)
-                    .setString("user_id", to_branch_local_uploads.user_id)
-                    .setString("user_screen_name", to_branch_local_uploads.user_screen_name)
-                    .setString("branch", to_branch_local_uploads.branch)
-                    .setString("branch_id", to_branch_local_uploads.branch_id)
-                    .setString("location", to_branch_local_uploads.location)
-                    .setString("location_id", to_branch_local_uploads.location_id)
-                    .ok();
-
+//            s0 = SqlStringUtil.parse(s0)
+//                    .setString("replenishments", to_branch_local_uploads.replenishments)
+//                    .setString("inventory_counts", to_branch_local_uploads.inventory_counts)
+//                    .setString("adjustments", to_branch_local_uploads.adjustments)
+//                    .setString("stock_transfers", to_branch_local_uploads.stock_transfers)
+//                    .setString("receipts", to_branch_local_uploads.receipts)
+//                    .setString("sales", to_branch_local_uploads.sales)
+//                    .setString("returned_items", to_branch_local_uploads.returned_items)
+//                    .setString("charged_items", to_branch_local_uploads.charged_items)
+//                    .setString("rmas", to_branch_local_uploads.rmas)
+//                    .setString("item_maintenances", to_branch_local_uploads.item_maintenances)
+//                    .setString("cash_drawers", to_branch_local_uploads.cash_drawers)
+//                    .setNumber("status", to_branch_local_uploads.status)
+//                    .setString("date_added", to_branch_local_uploads.date_added)
+//                    .setString("user_id", to_branch_local_uploads.user_id)
+//                    .setString("user_screen_name", to_branch_local_uploads.user_screen_name)
+//                    .setString("branch", to_branch_local_uploads.branch)
+//                    .setString("branch_id", to_branch_local_uploads.branch_id)
+//                    .setString("location", to_branch_local_uploads.location)
+//                    .setString("location_id", to_branch_local_uploads.location_id)
+//                    .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Branch_local_uploads.class, "Successfully Updated");
@@ -230,7 +233,7 @@ public class Branch_local_uploads {
     public static List<to_branch_local_uploads> ret_data(String where) {
         List<to_branch_local_uploads> datas = new ArrayList();
         try {
-            Connection conn = MyConnection.connect();
+            Connection conn = MyConnection.cloud_connect();
             String s0 = "select "
                     + "id"
                     + ",replenishments"
@@ -278,9 +281,9 @@ public class Branch_local_uploads {
                 String branch_id = rs.getString(18);
                 String location = rs.getString(19);
                 String location_id = rs.getString(20);
-                to_branch_local_uploads to = new to_branch_local_uploads(id, replenishments, inventory_counts, adjustments, stock_transfers, receipts, sales, returned_items, charged_items, rmas, item_maintenances, cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
+
+                to_branch_local_uploads to = new to_branch_local_uploads(id, null, null, null, null, null, null, null, null, null, null, null, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                 datas.add(to);
-                System.out.println("asdad");
             }
             return datas;
         } catch (SQLException e) {
@@ -289,14 +292,13 @@ public class Branch_local_uploads {
             MyConnection.close();
         }
     }
-    
+
     public static List<String> getDates(String from) {
         List<String> days = new ArrayList();
         try {
             Date from2 = DateType.sf.parse(from);
             Date to = new Date();
             int count = DateUtils1.count_days(from2, to);
-
             for (int i = 1; i < count + 1; i++) {
                 Date from1 = DateType.sf.parse(from);
                 Date inc = DateUtils1.add_day(from1, i);

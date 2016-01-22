@@ -207,6 +207,7 @@ public class Dlg_aw extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jXLabel1.setForeground(new java.awt.Color(204, 0, 51));
         jXLabel1.setText("asdasdasdasdasdasdadsasdasdasdasdasd");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.synch_locations;
+package POS.branch_local_uploads;
 
 import POS.util.MyConnection;
 import java.sql.Connection;
@@ -45,7 +45,7 @@ public class Parse_inventory_replenishments {
         this.location_id = location_id;
         this.items = items;
     }
-
+    
     public static class items {
 
         String item_code;
