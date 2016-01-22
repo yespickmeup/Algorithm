@@ -540,7 +540,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 jLabel2.setText("Connected to Cloud!");
                 jLabel2.setForeground(new java.awt.Color(0, 102, 255));
 
-                String where3 = " order by id desc limit 1";
+                String where3 = " where branch_id='" + my_branch_id + "' order by id desc limit 1";
                 List<Branch_local_uploads.to_branch_local_uploads> last_upload = Branch_local_uploads.ret_data(where3);
                 String date_from = "";
 
@@ -565,9 +565,10 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 if (!date_from.isEmpty()) {
 
                     List<String> days = Branch_local_uploads.getDates(date_from);
+                    int i = 1;
                     for (String s : days) {
-                        String where = " where Date(date_added)='" + s + "' ";
-                        String where2 = " where Date(time_in)='" + s + "' ";
+                        String where = " where Date(date_added)='" + s + "'  ";
+                        String where2 = " where Date(time_in)='" + s + "'  ";
                         String replenishments = Parse_inventory_replenishments.compress(where);
                         String inventory_counts = Parse_inventory_counts.compress(where);
                         String adjustments = Parse_inventory_adjustments.compress(where);
@@ -582,27 +583,91 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
                         String name = POS.util.DateType.y.format(new Date()) + "" + POS.util.DateType.d.format(new Date()) + "" + POS.util.DateType.m1.format(new Date());
                         String path = System.getProperty("user.home");
-                        File file_replenishments = new File(path + "\\uploads\\" + "file_replenishments" + ".txt");
-                        File file_inventory_counts = new File(path + "\\uploads\\" + "inventory_counts" + ".txt");
-                        File file_adjustments = new File(path + "\\uploads\\" + "file_adjustments" + ".txt");
-                        File file_stock_transfers = new File(path + "\\uploads\\" + "file_stock_transfers" + ".txt");
-                        File file_receipts = new File(path + "\\uploads\\" + "file_receipts" + ".txt");
-                        File file_sales = new File(path + "\\uploads\\" + "file_sales" + ".txt");
-                        File file_returned_items = new File(path + "\\uploads\\" + "file_returned_items" + ".txt");
-                        File file_rmas = new File(path + "\\uploads\\" + "file_rmas" + ".txt");
-                        File file_item_maintenances = new File(path + "\\uploads\\" + "file_item_maintenances" + ".txt");
-                        File file_cash_drawers = new File(path + "\\uploads\\" + "file_cash_drawers" + ".txt");
+                        File file_replenishments = new File(path + "\\uploads\\" + "file_replenishments" + s + ".txt");
+                        File file_inventory_counts = new File(path + "\\uploads\\" + "inventory_counts" + s + ".txt");
+                        File file_adjustments = new File(path + "\\uploads\\" + "file_adjustments" + s + ".txt");
+                        File file_stock_transfers = new File(path + "\\uploads\\" + "file_stock_transfers" + s + ".txt");
+                        File file_receipts = new File(path + "\\uploads\\" + "file_receipts" + s + ".txt");
+                        File file_sales = new File(path + "\\uploads\\" + "file_sales" + s + ".txt");
+                        File file_returned_items = new File(path + "\\uploads\\" + "file_returned_items" + s + ".txt");
+                        File file_rmas = new File(path + "\\uploads\\" + "file_rmas" + s + ".txt");
+                        File file_item_maintenances = new File(path + "\\uploads\\" + "file_item_maintenances" + s + ".txt");
+                        File file_cash_drawers = new File(path + "\\uploads\\" + "file_cash_drawers" + s + ".txt");
 
-                        fw(file_replenishments, replenishments);
-                        fw(file_inventory_counts, inventory_counts);
-                        fw(file_adjustments, adjustments);
-                        fw(file_stock_transfers, stock_transfers);
-                        fw(file_receipts, receipts);
-                        fw(file_sales, sales);
-                        fw(file_returned_items, returned_items);
-                        fw(file_rmas, rmas);
-                        fw(file_item_maintenances, item_maintenances);
-                        fw(file_cash_drawers, cash_drawers);
+                        FileWriter fw_replenishments;
+                        FileWriter fw_inventory_counts;
+                        FileWriter fw_adjustments;
+                        FileWriter fw_stock_transfers;
+                        FileWriter fw_receipts;
+                        FileWriter fw_sales;
+                        FileWriter fw_returned_items;
+                        FileWriter fw_rmas;
+                        FileWriter fw_item_maintenances;
+                        FileWriter fw_cash_drawers;
+                        try {
+                            fw_replenishments = new FileWriter(file_replenishments.getAbsoluteFile());
+                            BufferedWriter bw_replenishments = new BufferedWriter(fw_replenishments);
+                            bw_replenishments.write(replenishments);
+                            fw_replenishments.close();
+                            bw_replenishments.close();
+
+                            fw_inventory_counts = new FileWriter(file_inventory_counts.getAbsoluteFile());
+                            BufferedWriter bw_inventory_counts = new BufferedWriter(fw_inventory_counts);
+                            bw_inventory_counts.write(inventory_counts);
+                            fw_inventory_counts.close();
+                            bw_inventory_counts.close();
+
+                            fw_adjustments = new FileWriter(file_adjustments.getAbsoluteFile());
+                            BufferedWriter bw_adjustments = new BufferedWriter(fw_adjustments);
+                            bw_adjustments.write(adjustments);
+                            fw_adjustments.close();
+                            bw_adjustments.close();
+
+                            fw_stock_transfers = new FileWriter(file_stock_transfers.getAbsoluteFile());
+                            BufferedWriter bw_stock_transfers = new BufferedWriter(fw_stock_transfers);
+                            bw_stock_transfers.write(stock_transfers);
+                            fw_stock_transfers.close();
+                            bw_stock_transfers.close();
+
+                            fw_receipts = new FileWriter(file_receipts.getAbsoluteFile());
+                            BufferedWriter bw_receipts = new BufferedWriter(fw_receipts);
+                            bw_receipts.write(receipts);
+                            fw_receipts.close();
+                            bw_receipts.close();
+
+                            fw_sales = new FileWriter(file_sales.getAbsoluteFile());
+                            BufferedWriter bw_sales = new BufferedWriter(fw_sales);
+                            bw_sales.write(sales);
+                            fw_sales.close();
+                            bw_sales.close();
+
+                            fw_returned_items = new FileWriter(file_returned_items.getAbsoluteFile());
+                            BufferedWriter bw_returned_items = new BufferedWriter(fw_returned_items);
+                            bw_returned_items.write(returned_items);
+                            fw_returned_items.close();
+                            bw_returned_items.close();
+
+                            fw_rmas = new FileWriter(file_rmas.getAbsoluteFile());
+                            BufferedWriter bw_rmas = new BufferedWriter(fw_rmas);
+                            bw_rmas.write(rmas);
+                            fw_rmas.close();
+                            bw_rmas.close();
+
+                            fw_item_maintenances = new FileWriter(file_item_maintenances.getAbsoluteFile());
+                            BufferedWriter bw_item_maintenances = new BufferedWriter(fw_item_maintenances);
+                            bw_item_maintenances.write(item_maintenances);
+                            fw_item_maintenances.close();
+                            bw_item_maintenances.close();
+
+                            fw_cash_drawers = new FileWriter(file_cash_drawers.getAbsoluteFile());
+                            BufferedWriter bw_cash_drawers = new BufferedWriter(fw_cash_drawers);
+                            bw_cash_drawers.write(cash_drawers);
+                            fw_cash_drawers.close();
+                            bw_cash_drawers.close();
+
+                        } catch (IOException ex) {
+                            Logger.getLogger(Parse_sales.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                         int id = 0;
                         int status = 0;
@@ -613,12 +678,24 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String branch_id = my_branch_id;
                         String location = my_location;
                         String location_id = my_location_id;
-                        
+
                         Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments, file_inventory_counts, file_adjustments, file_stock_transfers, file_receipts, file_sales, file_returned_items, file_rmas, file_rmas, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                         to_upload.add(upload);
+
+                        i++;
                     }
-                    
+
                     Branch_local_uploads.add_data(to_upload);
+                    File file = new File(System.getProperty("user.home") + "\\uploads\\");
+                    String[] myFiles;
+                    if (file.isDirectory()) {
+                        myFiles = file.list();
+                        for (String myFile1 : myFiles) {
+                            File myFile = new File(file, myFile1);
+                            myFile.delete();
+                        }
+                    }
+
                     Alert.set(0, "Upload Successful!");
                 }
 
@@ -631,7 +708,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
         t.start();
     }
 
-    private void fw(File file, String stmts) {
+    private static void fw(File file, String stmts) {
         FileWriter fw_replenishments;
         try {
             fw_replenishments = new FileWriter(file.getAbsoluteFile());
