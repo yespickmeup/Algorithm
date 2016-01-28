@@ -460,7 +460,6 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                     l_rmas.addAll(new ArrayList());
                     l_item_maintenances.addAll(new ArrayList());
                     l_cash_drawers.addAll(Parse_cash_drawers.decompress(cash_drawers));
-
                 }
 
                 List<to_local_uploads> datas = new ArrayList();

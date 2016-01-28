@@ -85,7 +85,8 @@ public class Parse_inventory_counts {
             return new ArrayList();
         }
         List<Parse_inventory_counts.field> datas = new ArrayList();
-
+        int total_transactions = 0;
+        int total_items = 0;
         String[] list = stmts.split("℮");
         int i = 0;
         for (String s : list) {
@@ -113,6 +114,7 @@ public class Parse_inventory_counts {
                 int x = 0;
                 for (String c : cols) {
                     if (x == 0) {
+                        total_transactions++;
                         item_code = c.substring(14, c.length() - 1);
                     }
                     if (x == 1) {
@@ -176,6 +178,8 @@ public class Parse_inventory_counts {
             }
             i++;
         }
+
+        System.out.println("Inventory Count: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
 
     }
