@@ -80,6 +80,9 @@ public class Parse_inventory_counts {
     }
 
     public static List<Parse_inventory_counts.field> decompress(String stmts) {
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_inventory_counts.field> datas = new ArrayList();
 
         String[] list = stmts.split("℮");
@@ -229,7 +232,6 @@ public class Parse_inventory_counts {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-
 
                 stmts = stmts + "℮{";
                 stmts = stmts + "\"item_code\":\"" + item_code + "\"";

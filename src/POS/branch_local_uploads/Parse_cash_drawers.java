@@ -84,13 +84,16 @@ public class Parse_cash_drawers {
         String where = " order by id desc limit 3";
         String stmts = compress(where);
         List<Parse_cash_drawers> datas = decompress(stmts);
-        for(Parse_cash_drawers to: datas){
+        for (Parse_cash_drawers to : datas) {
             System.out.println(to.time_in);
         }
         System.out.println(datas.size());
     }
 
     public static List<Parse_cash_drawers> decompress(String stmts) {
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_cash_drawers> datas = new ArrayList();
         String[] list = stmts.split("℮");
         int i = 0;
@@ -340,5 +343,5 @@ public class Parse_cash_drawers {
             MyConnection.close();
         }
     }
-    
+
 }

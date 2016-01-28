@@ -94,14 +94,17 @@ public class Parse_charged_items {
         String where = " order by id desc limit 3";
         String stmts = compress(where);
         List<Parse_charged_items> datas = decompress(stmts);
-        for(Parse_charged_items to:datas){
-            
+        for (Parse_charged_items to : datas) {
+
             System.out.println(to.customer_id);
         }
         System.out.println(datas.size());
     }
 
     public static List<Parse_charged_items> decompress(String stmts) {
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_charged_items> datas = new ArrayList();
         String[] list = stmts.split("℮");
         int i = 0;

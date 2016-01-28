@@ -239,7 +239,9 @@ public class Parse_sales {
     }
 
     public static List<Parse_sales.field> decompress(String stmt) {
-
+        if (stmt.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_sales.field> fields = new ArrayList();
         String[] transaction = stmt.split("Ω,");
 

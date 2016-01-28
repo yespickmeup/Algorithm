@@ -84,12 +84,15 @@ public class Parse_stock_transfers {
     public static void main(String[] args) {
         String where = "  order by id desc limit 2 ";
         String stmts = compress(where);
-        
+
         List<Parse_stock_transfers> transactions = decompress(stmts);
-        
+
     }
 
     public static List<Parse_stock_transfers> decompress(String stmts) {
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_stock_transfers> datas = new ArrayList();
 
         String[] trans = stmts.split("Ω,");

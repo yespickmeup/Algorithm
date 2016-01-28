@@ -104,6 +104,9 @@ public class Parse_receipts {
     }
 
     public static List<Parse_receipts> decompress(String stmts) {
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_receipts> datas = new ArrayList();
 
         String[] trans = stmts.split("Ω,");
@@ -231,7 +234,7 @@ public class Parse_receipts {
                                     unit = itee.substring(9, itee.length() - 1);
                                 }
                                 if (ii == 6) {
-                                    serial_no = itee.substring(14, itee.length() - 1);
+                                    serial_no = itee.substring(13, itee.length() - 1);
                                 }
                                 if (ii == 7) {
                                     previous_cost = FitIn.toDouble(itee.substring(18, itee.length() - 1));

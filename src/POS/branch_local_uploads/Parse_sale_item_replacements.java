@@ -44,7 +44,6 @@ public class Parse_sale_item_replacements {
     public int is_replacement;
     public String reason;
 
-
     public Parse_sale_item_replacements(String sales_no, String item_code, String barcode, String serial_no, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_id, String user_screen_name, int status, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_code, String location, String location_id, int is_replacement, String reason) {
         this.sales_no = sales_no;
         this.item_code = item_code;
@@ -76,13 +75,16 @@ public class Parse_sale_item_replacements {
         String where = " order by id desc limit 3";
         String stmts = compress(where);
         List<Parse_sale_item_replacements> datas = decompress(stmts);
-        for(Parse_sale_item_replacements to:datas){
+        for (Parse_sale_item_replacements to : datas) {
             System.out.println(to.sales_no);
         }
         System.out.println(datas.size());
     }
 
     public static List<Parse_sale_item_replacements> decompress(String stmts) {
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_sale_item_replacements> datas = new ArrayList();
         String[] list = stmts.split("℮");
         int i = 0;

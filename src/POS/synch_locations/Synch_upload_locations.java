@@ -216,7 +216,7 @@ public class Synch_upload_locations {
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Synch_upload_locations.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
                 String s2 = "update synch_locations set "
                         + " status= 1 "
                         + " where id='" + to_synch_locations.id + "' "

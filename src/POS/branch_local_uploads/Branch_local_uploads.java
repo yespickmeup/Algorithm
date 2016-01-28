@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mijzcx.synapse.desk.utils.Lg;
-import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
  *
@@ -241,12 +240,13 @@ public class Branch_local_uploads {
 
     public static void main(String[] args) {
         String where = "";
-        List<to_branch_local_uploads> datas = ret_data(where);
+        List<to_branch_local_uploads> datas = Branch_local_uploads.ret_data(where);
         System.out.println("Size: " + datas.size());
     }
 
     public static List<to_branch_local_uploads> ret_data(String where) {
         List<to_branch_local_uploads> datas = new ArrayList();
+
         try {
             Connection conn = MyConnection.cloud_connect();
             String s0 = "select "
