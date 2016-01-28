@@ -5,6 +5,7 @@
  */
 package POS.branch_local_uploads;
 
+import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -154,9 +155,10 @@ public class Parse_inventory_adjustments {
         return datas;
     }
 
-    public static String compress(String where) {
+    public static to_upload_count compress(String where) {
         String stmts = "\"items\":\"";
-
+        int total_transactions=0;
+        int toal_items=0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -221,6 +223,7 @@ public class Parse_inventory_adjustments {
                 stmts = stmts + "%\"transaction_no\":\"" + transaction_no + "\"";
                 stmts = stmts + "}";
             }
+            
             return stmts;
         } catch (SQLException e) {
             throw new RuntimeException(e);
