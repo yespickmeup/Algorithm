@@ -548,8 +548,8 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String where2 = " where Date(time_in)='" + s + "'  ";
                         Branch_local_uploads.to_upload_count replenishments = Parse_inventory_replenishments.compress(where);
                         Branch_local_uploads.to_upload_count inventory_counts = Parse_inventory_counts.compress(where);
-                        String adjustments = Parse_inventory_adjustments.compress(where);
-                        String stock_transfers = Parse_stock_transfers.compress(where);
+                        Branch_local_uploads.to_upload_count adjustments = Parse_inventory_adjustments.compress(where);
+                        Branch_local_uploads.to_upload_count stock_transfers = Parse_stock_transfers.compress(where);
                         String receipts = Parse_receipts.compress(where);
                         String sales = Parse_sales.compress(where);
                         String returned_items = Parse_sale_item_replacements.compress(where);
@@ -598,14 +598,14 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
                             fw_adjustments = new FileWriter(file_adjustments.getAbsoluteFile());
                             BufferedWriter bw_adjustments = new BufferedWriter(fw_adjustments);
-                            bw_adjustments.write(adjustments);
+                            bw_adjustments.write(adjustments.stmt);
 
                             bw_adjustments.close();
                             fw_adjustments.close();
 
                             fw_stock_transfers = new FileWriter(file_stock_transfers.getAbsoluteFile());
                             BufferedWriter bw_stock_transfers = new BufferedWriter(fw_stock_transfers);
-                            bw_stock_transfers.write(stock_transfers);
+                            bw_stock_transfers.write(stock_transfers.stmt);
 
                             bw_stock_transfers.close();
                             fw_stock_transfers.close();

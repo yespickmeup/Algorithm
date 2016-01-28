@@ -61,9 +61,9 @@ public class Parse_inventory_adjustments {
 
     public static void main(String[] args) {
         String where = "  limit 5";
-        String stmt = Parse_inventory_adjustments.compress(where);
+        to_upload_count stmt = Parse_inventory_adjustments.compress(where);
         System.out.println(stmt);
-        List<Parse_inventory_adjustments.field> datas = Parse_inventory_adjustments.decompress(stmt);
+        List<Parse_inventory_adjustments.field> datas = Parse_inventory_adjustments.decompress(stmt.stmt);
         for (Parse_inventory_adjustments.field to : datas) {
             System.out.println(to.item_code);
         }
@@ -157,8 +157,8 @@ public class Parse_inventory_adjustments {
 
     public static to_upload_count compress(String where) {
         String stmts = "\"items\":\"";
-        int total_transactions=0;
-        int toal_items=0;
+        int total_transactions = 0;
+        int total_items = 0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -187,6 +187,7 @@ public class Parse_inventory_adjustments {
             int t = 0;
 
             while (rs.next()) {
+                total_transactions++;
                 int id = rs.getInt(1);
                 String item_code = rs.getString(2);
                 String barcode = rs.getString(3);
@@ -223,8 +224,10 @@ public class Parse_inventory_adjustments {
                 stmts = stmts + "%\"transaction_no\":\"" + transaction_no + "\"";
                 stmts = stmts + "}";
             }
-            
-            return stmts;
+
+            to_upload_count count = new to_upload_count(stmts, total_transactions, total_items);
+            System.out.println("Adjustments: " + " Transactions: " + total_transactions + " Items: " + total_items);
+            return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
