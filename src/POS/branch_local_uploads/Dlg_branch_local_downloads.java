@@ -448,7 +448,7 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                     String rmas = FileToString(to.rmas);
                     String item_maintenances = FileToString(to.item_maintenances);
                     String cash_drawers = FileToString(to.cash_drawers);
-                    System.out.println(replenishments);
+                    
                     l_replenishments.addAll(Parse_inventory_replenishments.decompress(replenishments));
                     l_inventory_counts.addAll(Parse_inventory_counts.decompress(inventory_counts));
                     l_adjustments.addAll(Parse_inventory_adjustments.decompress(adjustments));

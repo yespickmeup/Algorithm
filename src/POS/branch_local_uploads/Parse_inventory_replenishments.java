@@ -90,6 +90,8 @@ public class Parse_inventory_replenishments {
             return new ArrayList();
         }
         List<Parse_inventory_replenishments> datas = new ArrayList();
+        int total_transactions = 0;
+        int total_items = 0;
         String[] trans = stmts.split("Ω,");
         int ix = 0;
         for (String transactions : trans) {
@@ -112,7 +114,7 @@ public class Parse_inventory_replenishments {
             for (String column : columns) {
 
                 if (i == 0) {
-                    System.out.println(column.substring(0, column.length() - 1));
+                    total_transactions++;
                     inventory_replenishment_no = column.substring(14, column.length() - 1);
                 }
                 if (i == 1) {
@@ -159,10 +161,10 @@ public class Parse_inventory_replenishments {
 
                         for (String itee : ite) {
                             if (iii > 0) {
+
                                 if (ii == 0) {
-
+                                    total_items++;
                                     item_code = itee.substring(14, itee.length() - 1);
-
                                 }
                                 if (ii == 1) {
                                     barcode = itee.substring(11, itee.length() - 1);
@@ -181,7 +183,6 @@ public class Parse_inventory_replenishments {
                                 }
                                 ii++;
                             }
-
                         }
                         if (ii != 0) {
                             Parse_inventory_replenishments.items item1 = new items(item_code, barcode, location, product_qty, unit, conversion, selling_price);
@@ -199,7 +200,7 @@ public class Parse_inventory_replenishments {
             datas.add(pir);
 
         }
-
+        System.out.println("Replenishments: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
     }
 
