@@ -548,7 +548,6 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                     try {
                         Date d = DateType.datetime.parse(to.date_added);
                         date_from = DateType.sf.format(d);
-
                     } catch (ParseException ex) {
                         Logger.getLogger(Dlg_branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
                     }

@@ -70,6 +70,9 @@ public class Parse_inventory_adjustments {
     }
 
     public static List<Parse_inventory_adjustments.field> decompress(String stmt) {
+        if (stmt.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_inventory_adjustments.field> datas = new ArrayList();
         String[] adjustments = stmt.split("℮");
 

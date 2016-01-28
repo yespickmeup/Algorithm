@@ -45,7 +45,7 @@ public class Parse_inventory_replenishments {
         this.location_id = location_id;
         this.items = items;
     }
-    
+
     public static class items {
 
         String item_code;
@@ -85,7 +85,9 @@ public class Parse_inventory_replenishments {
     }
 
     public static List<Parse_inventory_replenishments> decompress(String stmts) {
-
+        if (stmts.isEmpty()) {
+            return new ArrayList();
+        }
         List<Parse_inventory_replenishments> datas = new ArrayList();
         String[] trans = stmts.split("Ω,");
         int ix = 0;
@@ -109,6 +111,7 @@ public class Parse_inventory_replenishments {
             for (String column : columns) {
 
                 if (i == 0) {
+                    System.out.println(column.substring(0, column.length() - 1));
                     inventory_replenishment_no = column.substring(14, column.length() - 1);
                 }
                 if (i == 1) {
@@ -190,7 +193,7 @@ public class Parse_inventory_replenishments {
                 }
                 i++;
             }
-
+            
             Parse_inventory_replenishments pir = new Parse_inventory_replenishments(inventory_replenishment_no, date_added, user_id, user_screen_name, remarks, status, branch, branch_id, location, location_id, items);
             datas.add(pir);
 
