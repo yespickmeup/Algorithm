@@ -361,7 +361,7 @@ public class Branch_local_uploads {
         List<String> days = new ArrayList();
         try {
             Date from2 = DateType.sf.parse(from);
-            Date to = DateType.sf.parse("2017-01-01");
+            Date to = DateType.sf.parse("2017-01-02");
             
             
             int count = DateUtils1.count_days(from2, to);
