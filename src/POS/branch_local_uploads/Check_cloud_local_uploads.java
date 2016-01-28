@@ -49,7 +49,6 @@ public class Check_cloud_local_uploads {
             String item_maintenances = FileToString(to.item_maintenances);
             String cash_drawers = FileToString(to.cash_drawers);
 
-            
             l_replenishments.addAll(Parse_inventory_replenishments.decompress(replenishments));
             l_inventory_counts.addAll(Parse_inventory_counts.decompress(inventory_counts));
             l_adjustments.addAll(Parse_inventory_adjustments.decompress(adjustments));
@@ -61,8 +60,7 @@ public class Check_cloud_local_uploads {
             l_rmas.addAll(new ArrayList());
             l_item_maintenances.addAll(new ArrayList());
             l_cash_drawers.addAll(Parse_cash_drawers.decompress(cash_drawers));
-                       
-            
+
             System.out.println("replenishments: " + replenishments);
             System.out.println("inventory_counts: " + inventory_counts);
             System.out.println("adjustments: " + adjustments);
@@ -77,9 +75,6 @@ public class Check_cloud_local_uploads {
             System.out.println("------------------------------------------------------------------------------------------");
         }
         
-        
-        
-
     }
 
     public static String FileToString(File file) {

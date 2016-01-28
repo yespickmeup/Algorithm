@@ -5,6 +5,7 @@
  */
 package POS.branch_local_uploads;
 
+import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -71,10 +72,10 @@ public class Parse_inventory_replenishments {
     public static void main(String[] args) {
 //        String where = " where inventory_replenishment_no=000000000006";
         String where = " limit 2";
-        String stmts = Parse_inventory_replenishments.compress(where);
+        to_upload_count stmts = Parse_inventory_replenishments.compress(where);
 //        System.out.println(stmts);
 
-        List<Parse_inventory_replenishments> datas = Parse_inventory_replenishments.decompress(stmts);
+        List<Parse_inventory_replenishments> datas = Parse_inventory_replenishments.decompress(stmts.stmt);
         for (Parse_inventory_replenishments to : datas) {
             System.out.println("Ref #: " + to.inventory_replenishment_no);
             List<Parse_inventory_replenishments.items> items = to.items;
@@ -193,7 +194,7 @@ public class Parse_inventory_replenishments {
                 }
                 i++;
             }
-            
+
             Parse_inventory_replenishments pir = new Parse_inventory_replenishments(inventory_replenishment_no, date_added, user_id, user_screen_name, remarks, status, branch, branch_id, location, location_id, items);
             datas.add(pir);
 
@@ -202,9 +203,10 @@ public class Parse_inventory_replenishments {
         return datas;
     }
 
-    public static String compress(String where) {
+    public static to_upload_count compress(String where) {
         String stmts = "";
-
+        int total_transactions = 0;
+        int total_items = 0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -226,6 +228,7 @@ public class Parse_inventory_replenishments {
             ResultSet rs = stmt.executeQuery(s0);
             int t = 0;
             while (rs.next()) {
+                total_transactions++;
                 int id = rs.getInt(1);
                 String inventory_replenishment_no = rs.getString(2);
                 String date_added = rs.getString(3);
@@ -278,6 +281,7 @@ public class Parse_inventory_replenishments {
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 while (rs2.next()) {
+                    total_items++;
                     String item_code = rs2.getString(3);
                     String barcode = rs2.getString(4);
                     String description = rs2.getString(5);
@@ -300,7 +304,9 @@ public class Parse_inventory_replenishments {
                 stmts = stmts + "\"Ω";
 
             }
-            return stmts;
+            System.out.println("Replenishments: " + "Transactions: " + total_transactions + " , Items: " + total_items);
+            to_upload_count count = new to_upload_count(stmts, total_transactions, total_items);
+            return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
