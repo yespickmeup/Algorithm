@@ -668,7 +668,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
                         Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments, file_inventory_counts, file_adjustments, file_stock_transfers, file_receipts, file_sales, file_returned_items, file_rmas, file_rmas, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                         to_upload.add(upload);
-
+                        System.out.println("************************************************");
                         i++;
                     }
 
