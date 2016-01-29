@@ -42,9 +42,9 @@ public class Branch_local_uploads {
 
     public static class to_upload_count {
 
-        String stmt;
-        int total_transactions;
-        int total_items;
+        public String stmt;
+        public int total_transactions;
+        public int total_items;
 
         public to_upload_count(String stmt, int total_transactions, int total_items) {
             this.stmt = stmt;
@@ -361,11 +361,11 @@ public class Branch_local_uploads {
         List<String> days = new ArrayList();
         try {
             Date from2 = DateType.sf.parse(from);
-            
+
             Date to = DateType.sf.parse("2017-01-05");
-            
-            System.out.println("Date: "+to);
-            
+
+            System.out.println("Date: " + to);
+
             int count = DateUtils1.count_days(from2, to);
             for (int i = 1; i < count + 1; i++) {
                 Date from1 = DateType.sf.parse(from);
