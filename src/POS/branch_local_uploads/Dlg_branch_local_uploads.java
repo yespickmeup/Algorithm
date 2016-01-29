@@ -528,7 +528,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         Logger.getLogger(Dlg_branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                date_from = "2017-01-04";
+                date_from = "2017-01-05";
                 String now = DateType.sf.format(new Date());
                 System.out.println("Last Cloud upload date: " + date_from);
                 System.out.println("Todays date: " + now);
@@ -552,7 +552,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         Branch_local_uploads.to_upload_count stock_transfers = Parse_stock_transfers.compress(where);
                         String receipts = Parse_receipts.compress(where);
                         Branch_local_uploads.to_upload_count sales = Parse_sales.compress(where);
-                        String returned_items = Parse_sale_item_replacements.compress(where);
+                        Branch_local_uploads.to_upload_count returned_items = Parse_sale_item_replacements.compress(where);
                         String charged_items = Parse_charged_items.compress(where);
                         String rmas = "";
                         String item_maintenances = "";
@@ -626,7 +626,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
                             fw_returned_items = new FileWriter(file_returned_items.getAbsoluteFile());
                             BufferedWriter bw_returned_items = new BufferedWriter(fw_returned_items);
-                            bw_returned_items.write(returned_items);
+                            bw_returned_items.write(returned_items.stmt);
 
                             bw_returned_items.close();
                             fw_returned_items.close();
