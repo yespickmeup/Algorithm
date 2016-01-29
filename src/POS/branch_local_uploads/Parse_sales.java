@@ -5,7 +5,7 @@
  */
 package POS.branch_local_uploads;
 
-import POS.my_sales.MySales;
+import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
 import POS.my_sales.MySales_Items;
 import POS.synch_locations.Synch_locations;
 import POS.util.DateType;
@@ -186,9 +186,9 @@ public class Parse_sales {
     public static void main(String[] args) {
         String where = " where Date(date_added) = '" + "2016-01-04" + "' limit 5";
 
-        String stmt = Parse_sales.compress(where);
+        to_upload_count stmt = Parse_sales.compress(where);
 
-        List<Parse_sales.field> fields = Parse_sales.decompress(stmt);
+        List<Parse_sales.field> fields = Parse_sales.decompress(stmt.stmt);
 
         System.out.println("Total Transactions: " + fields.size());
 
@@ -202,7 +202,7 @@ public class Parse_sales {
         try {
             fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(stmt);
+            bw.write(stmt.stmt);
             bw.close();
 
             fw2 = new FileWriter(file2.getAbsoluteFile());
@@ -623,9 +623,11 @@ public class Parse_sales {
         return fields;
     }
 
-    public static String compress(String where) {
+    public static to_upload_count compress(String where) {
 
         String stmts = "";
+        int total_transactions = 0;
+        int total_items = 0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -685,6 +687,7 @@ public class Parse_sales {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
+                total_transactions++;
                 int id = rs.getInt(1);
                 String sales_no = rs.getString(2);
                 String date_added = rs.getString(3);
@@ -811,7 +814,7 @@ public class Parse_sales {
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 while (rs2.next()) {
-
+                    total_items++;
                     String item_code = rs2.getString(1);
                     String barcode = rs2.getString(2);
                     String item_type = rs2.getString(3);
@@ -848,7 +851,9 @@ public class Parse_sales {
                 i++;
 
             }
-            return stmts;
+            to_upload_count count = new to_upload_count(stmts, total_transactions, total_items);
+            System.out.println("Sales: " + " Transactions: " + total_transactions + " Items: " + total_items);
+            return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
