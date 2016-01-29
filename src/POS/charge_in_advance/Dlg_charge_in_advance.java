@@ -902,9 +902,9 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
                     return FitIn.fmt_wc_0(ps) + " ";
                 case 5:
                     if(tt.status==1){
-                        return " Ok";                                
+                        return " Void";                                
                     }else{
-                        return " Void";
+                        return " Ok";
                     }
                 case 6:
                     return tt.reference_no;
