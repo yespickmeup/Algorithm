@@ -95,7 +95,8 @@ public class Parse_stock_transfers {
             return new ArrayList();
         }
         List<Parse_stock_transfers> datas = new ArrayList();
-
+        int total_transactions = 0;
+        int total_items = 0;
         String[] trans = stmts.split("Ω,");
 
         for (String transactions : trans) {
@@ -129,7 +130,7 @@ public class Parse_stock_transfers {
 
                 if (i == 0) {
                     transaction_no = column.substring(19, column.length() - 1);
-
+                    total_transactions++;
                 }
                 if (i == 1) {
                     user_name = column.substring(13, column.length() - 1);
@@ -207,6 +208,7 @@ public class Parse_stock_transfers {
                         for (String itee : ite) {
                             if (iii > 0) {
                                 if (ii == 0) {
+                                    total_items++;
                                     item_code = itee.substring(14, itee.length() - 1);
                                 }
                                 if (ii == 1) {
@@ -247,7 +249,7 @@ public class Parse_stock_transfers {
             datas.add(par);
 
         }
-
+        System.out.println("Stock Transfers: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
     }
 

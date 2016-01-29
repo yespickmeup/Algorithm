@@ -551,7 +551,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         Branch_local_uploads.to_upload_count adjustments = Parse_inventory_adjustments.compress(where);
                         Branch_local_uploads.to_upload_count stock_transfers = Parse_stock_transfers.compress(where);
                         String receipts = Parse_receipts.compress(where);
-                        String sales = Parse_sales.compress(where);
+                        Branch_local_uploads.to_upload_count sales = Parse_sales.compress(where);
                         String returned_items = Parse_sale_item_replacements.compress(where);
                         String charged_items = Parse_charged_items.compress(where);
                         String rmas = "";
@@ -619,7 +619,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
                             fw_sales = new FileWriter(file_sales.getAbsoluteFile());
                             BufferedWriter bw_sales = new BufferedWriter(fw_sales);
-                            bw_sales.write(sales);
+                            bw_sales.write(sales.stmt);
 
                             bw_sales.close();
                             fw_sales.close();

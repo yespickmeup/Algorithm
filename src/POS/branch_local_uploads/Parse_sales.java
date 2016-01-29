@@ -847,7 +847,6 @@ public class Parse_sales {
                     stmts = stmts + "%\"serial_nos\":\"" + serial_no + "\"";
                     stmts = stmts + "%\"wtax\":\"" + wtax + "\"}\"Ω\"";
                 }
-
                 i++;
 
             }

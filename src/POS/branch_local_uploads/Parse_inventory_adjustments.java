@@ -76,7 +76,8 @@ public class Parse_inventory_adjustments {
         }
         List<Parse_inventory_adjustments.field> datas = new ArrayList();
         String[] adjustments = stmt.split("℮");
-
+        int total_transactions = 0;
+        int total_items = 0;
         for (String adjustment : adjustments) {
             String item_code = "";
             String barcode = "";
@@ -98,6 +99,7 @@ public class Parse_inventory_adjustments {
             for (String ad : adj) {
 
                 if (i == 1) {
+                    total_transactions++;
                     item_code = ad.substring(13, ad.length() - 1);
 
                 }
@@ -152,6 +154,7 @@ public class Parse_inventory_adjustments {
             }
 
         }
+        System.out.println("Adjustments: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
     }
 
