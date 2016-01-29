@@ -540,7 +540,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 jLabel2.setForeground(new java.awt.Color(0, 102, 255));
                 if (!date_from.isEmpty()) {
                     String path = System.getProperty("user.home");
-
+                    
                     List<String> days = Branch_local_uploads.getDates(date_from);
                     int i = 1;
                     for (String s : days) {
@@ -553,7 +553,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String receipts = Parse_receipts.compress(where);
                         Branch_local_uploads.to_upload_count sales = Parse_sales.compress(where);
                         Branch_local_uploads.to_upload_count returned_items = Parse_sale_item_replacements.compress(where);
-                        String charged_items = Parse_charged_items.compress(where);
+                        Branch_local_uploads.to_upload_count charged_items = Parse_charged_items.compress(where);
                         String rmas = "";
                         String item_maintenances = "";
                         String cash_drawers = Parse_cash_drawers.compress(where2);
@@ -567,6 +567,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         File file_receipts = new File(path + "\\cloud_uploads\\" + "file_receipts" + s + ".txt");
                         File file_sales = new File(path + "\\cloud_uploads\\" + "file_sales" + s + ".txt");
                         File file_returned_items = new File(path + "\\cloud_uploads\\" + "file_returned_items" + s + ".txt");
+                        File file_charged_items = new File(path + "\\cloud_uploads\\" + "charged_items" + s + ".txt");
                         File file_rmas = new File(path + "\\cloud_uploads\\" + "file_rmas" + s + ".txt");
                         File file_item_maintenances = new File(path + "\\cloud_uploads\\" + "file_item_maintenances" + s + ".txt");
                         File file_cash_drawers = new File(path + "\\cloud_uploads\\" + "file_cash_drawers" + s + ".txt");
@@ -578,6 +579,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         FileWriter fw_receipts;
                         FileWriter fw_sales;
                         FileWriter fw_returned_items;
+                        FileWriter fw_charged_items;
                         FileWriter fw_rmas;
                         FileWriter fw_item_maintenances;
                         FileWriter fw_cash_drawers;
@@ -631,6 +633,13 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                             bw_returned_items.close();
                             fw_returned_items.close();
 
+                            fw_charged_items = new FileWriter(file_charged_items.getAbsoluteFile());
+                            BufferedWriter bw_charged_items = new BufferedWriter(fw_charged_items);
+                            bw_charged_items.write(charged_items.stmt);
+
+                            bw_charged_items.close();
+                            fw_charged_items.close();
+
                             fw_rmas = new FileWriter(file_rmas.getAbsoluteFile());
                             BufferedWriter bw_rmas = new BufferedWriter(fw_rmas);
                             bw_rmas.write(rmas);
@@ -666,7 +675,10 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String location = my_location;
                         String location_id = my_location_id;
 
-                        Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments, file_inventory_counts, file_adjustments, file_stock_transfers, file_receipts, file_sales, file_returned_items, file_rmas, file_rmas, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
+                        Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments
+                                , file_inventory_counts, file_adjustments
+                                , file_stock_transfers, file_receipts, file_sales, file_returned_items, file_rmas
+                                , file_charged_items, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                         to_upload.add(upload);
                         System.out.println("************************************************");
                         i++;

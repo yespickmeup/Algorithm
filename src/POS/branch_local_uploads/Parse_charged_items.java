@@ -5,6 +5,7 @@
  */
 package POS.branch_local_uploads;
 
+import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -92,8 +93,8 @@ public class Parse_charged_items {
 
     public static void main(String[] args) {
         String where = " order by id desc limit 3";
-        String stmts = compress(where);
-        List<Parse_charged_items> datas = decompress(stmts);
+        to_upload_count stmts = compress(where);
+        List<Parse_charged_items> datas = decompress(stmts.stmt);
         for (Parse_charged_items to : datas) {
 
             System.out.println(to.customer_id);
@@ -260,8 +261,10 @@ public class Parse_charged_items {
         return datas;
     }
 
-    public static String compress(String where) {
+    public static Branch_local_uploads.to_upload_count compress(String where) {
         String stmts = "\"items\":\"";
+        int total_transactions = 0;
+        int total_items = 0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -320,6 +323,7 @@ public class Parse_charged_items {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
+                total_transactions++;
                 int id = rs.getInt(1);
                 String customer_id = rs.getString(2);
                 String customer_name = rs.getString(3);
@@ -404,6 +408,8 @@ public class Parse_charged_items {
                 stmts = stmts + "%\"location_id\":\"" + location_id + "\"";
                 stmts = stmts + "%\"addtl_amount\":\"" + addtl_amount + "\"";
                 stmts = stmts + "%\"wtax\":\"" + wtax + "\"";
+                stmts = stmts + "%\"is_cancelled\":\"" + "0" + "\"";
+
                 stmts = stmts + "}";
 
             }
@@ -458,12 +464,13 @@ public class Parse_charged_items {
                     + ",model_id"
                     + ",addtl_amount"
                     + ",wtax"
-                    + " from charge_in_advance_items"
+                    + " from charge_in_advance_cancelled_items"
                     + " " + where;
 
             Statement stmt2 = conn.createStatement();
             ResultSet rs2 = stmt2.executeQuery(s2);
             while (rs2.next()) {
+                total_transactions++;
                 int id = rs2.getInt(1);
                 String customer_id = rs2.getString(2);
                 String customer_name = rs2.getString(3);
@@ -548,11 +555,13 @@ public class Parse_charged_items {
                 stmts = stmts + "%\"location_id\":\"" + location_id + "\"";
                 stmts = stmts + "%\"addtl_amount\":\"" + addtl_amount + "\"";
                 stmts = stmts + "%\"wtax\":\"" + wtax + "\"";
+                stmts = stmts + "%\"is_cancelled\":\"" + "1" + "\"";
                 stmts = stmts + "}";
 
             }
-
-            return stmts;
+            Branch_local_uploads.to_upload_count count = new Branch_local_uploads.to_upload_count(stmts, total_transactions, total_items);
+            System.out.println("Charged in Advanced: " + " Transactions: " + total_transactions + " Items: " + total_items);
+            return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
