@@ -833,7 +833,7 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
         tbl_charge_in_advance_items.setModel(tbl_charge_in_advance_items_M);
         tbl_charge_in_advance_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_charge_in_advance_items.setRowHeight(25);
-        int[] tbl_widths_charge_in_advance_items = {100, 40, 40, 50, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_charge_in_advance_items = {100, 40, 40, 50, 80, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_charge_in_advance_items.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -863,7 +863,7 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
     public static class Tblcharge_in_advance_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Description", "Qty", "Code", "Amount", "UNIT", "reference_no", "soa_type", "soa_type_id", "user_screen_name", "user_id", "remarks", "item_code", "barcode", "description", "generic_name", "item_type", "supplier_name", "supplier_id", "serial_no", "product_qty", "unit", "conversion", "selling_price", "date_added", "status", "is_vatable", "selling_type", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "branch", "branch_code", "location", "location_id", "category", "category_id", "classification", "classification_id", "sub_classification", "sub_classification_id", "brand", "brand_id", "model", "model_id", "addtl_amount", "wtax"
+            "Date", "Description", "Qty", "Code", "Amount", "UNIT", "Status", "soa_type", "soa_type_id", "user_screen_name", "user_id", "remarks", "item_code", "barcode", "description", "generic_name", "item_type", "supplier_name", "supplier_id", "serial_no", "product_qty", "unit", "conversion", "selling_price", "date_added", "status", "is_vatable", "selling_type", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "branch", "branch_code", "location", "location_id", "category", "category_id", "classification", "classification_id", "sub_classification", "sub_classification_id", "brand", "brand_id", "model", "model_id", "addtl_amount", "wtax"
         };
 
         public Tblcharge_in_advance_itemsModel(ListModel listmodel) {
@@ -901,7 +901,11 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
                     ps = (ps + tt.addtl_amount) - tt.discount_amount;
                     return FitIn.fmt_wc_0(ps) + " ";
                 case 5:
-                    return tt.date_applied;
+                    if(tt.status==1){
+                        return " Ok";                                
+                    }else{
+                        return " Void";
+                    }
                 case 6:
                     return tt.reference_no;
                 case 7:
