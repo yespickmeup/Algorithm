@@ -5,6 +5,7 @@
  */
 package POS.synch_locations;
 
+import POS.branch_local_uploads.Branch_local_uploads;
 import POS.branch_local_uploads.Parse_sales;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
@@ -606,8 +607,8 @@ public class Dlg_upload_to_cloud extends javax.swing.JDialog {
                     return;
                 }
 
-                String stmt = Parse_sales.compress(where);
-                List<Parse_sales.field> fields = Parse_sales.decompress(stmt);
+                Branch_local_uploads.to_upload_count stmt = Parse_sales.compress(where);
+                List<Parse_sales.field> fields = Parse_sales.decompress(stmt.stmt);
                 
                 String name = DateType.y.format(new Date()) + "" + DateType.d.format(new Date()) + "" + DateType.m1.format(new Date());
                 String path = System.getProperty("user.home");
@@ -618,7 +619,7 @@ public class Dlg_upload_to_cloud extends javax.swing.JDialog {
                 try {
                     fw = new FileWriter(file.getAbsoluteFile());
                     BufferedWriter bw = new BufferedWriter(fw);
-                    bw.write(stmt);
+                    bw.write(stmt.stmt);
                     bw.close();
 
                     fw2 = new FileWriter(file2.getAbsoluteFile());
