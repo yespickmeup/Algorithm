@@ -107,6 +107,8 @@ public class Parse_charged_items {
             return new ArrayList();
         }
         List<Parse_charged_items> datas = new ArrayList();
+        int total_transactions = 0;
+        int total_items = 0;
         String[] list = stmts.split("℮");
         int i = 0;
         for (String s : list) {
@@ -150,6 +152,7 @@ public class Parse_charged_items {
                 for (String c : cols) {
 
                     if (x == 0) {
+                        total_transactions = 0;
                         customer_id = c.substring(17, c.length() - 1);
                     }
                     if (x == 1) {
@@ -255,7 +258,7 @@ public class Parse_charged_items {
             }
             i++;
         }
-
+        System.out.println("Charged Items: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
     }
 
@@ -407,12 +410,10 @@ public class Parse_charged_items {
                 stmts = stmts + "%\"addtl_amount\":\"" + addtl_amount + "\"";
                 stmts = stmts + "%\"wtax\":\"" + wtax + "\"";
 
-
                 stmts = stmts + "}";
 
             }
 
-  
             Branch_local_uploads.to_upload_count count = new Branch_local_uploads.to_upload_count(stmts, total_transactions, total_items);
             System.out.println("Charged in Advanced: " + " Transactions: " + total_transactions + " Items: " + total_items);
             return count;

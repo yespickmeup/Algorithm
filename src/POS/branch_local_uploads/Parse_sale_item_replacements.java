@@ -88,6 +88,8 @@ public class Parse_sale_item_replacements {
         }
         List<Parse_sale_item_replacements> datas = new ArrayList();
         String[] list = stmts.split("℮");
+        int total_transactions = 0;
+        int total_items = 0;
         int i = 0;
         for (String s : list) {
             if (i > 0) {
@@ -120,6 +122,7 @@ public class Parse_sale_item_replacements {
                 int x = 0;
                 for (String c : cols) {
                     if (x == 0) {
+                        total_transactions++;
                         sales_no = c.substring(14, c.length() - 1);
                     }
                     if (x == 1) {
@@ -198,7 +201,7 @@ public class Parse_sale_item_replacements {
 
             i++;
         }
-
+        System.out.println("Returned Items: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
     }
 

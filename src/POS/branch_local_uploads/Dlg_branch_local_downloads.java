@@ -486,9 +486,7 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                 datas.add(to9);
                 datas.add(to10);
                 datas.add(to11);
-
-                loadData_local_uploads(datas);
-                
+                loadData_local_uploads(datas);                
                 jButton1.setEnabled(true);
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);

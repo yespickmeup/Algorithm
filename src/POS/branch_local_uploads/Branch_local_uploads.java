@@ -362,7 +362,7 @@ public class Branch_local_uploads {
         try {
             Date from2 = DateType.sf.parse(from);
 
-            Date to = DateType.sf.parse("2017-01-07");
+            Date to = DateType.sf.parse("2017-01-08");
 
             System.out.println("Date: " + to);
 

@@ -95,6 +95,8 @@ public class Parse_cash_drawers {
             return new ArrayList();
         }
         List<Parse_cash_drawers> datas = new ArrayList();
+        int total_transactions = 0;
+        int total_items = 0;
         String[] list = stmts.split("℮");
         int i = 0;
         for (String s : list) {
@@ -135,6 +137,7 @@ public class Parse_cash_drawers {
                 for (String c : cols) {
 
                     if (x == 0) {
+                        total_transactions++;
                         session_no = c.substring(16, c.length() - 1);
                     }
                     if (x == 1) {
@@ -229,13 +232,14 @@ public class Parse_cash_drawers {
             }
             i++;
         }
-
+        System.out.println("Cash Drawers: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         return datas;
     }
 
     public static String compress(String where) {
         String stmts = "\"items\":\"";
-
+        int total_transactions = 0;
+        int total_items = 0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -274,6 +278,7 @@ public class Parse_cash_drawers {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
+                total_transactions++;
                 int id = rs.getInt(1);
                 String session_no = rs.getString(2);
                 String user_name = rs.getString(3);
@@ -336,6 +341,7 @@ public class Parse_cash_drawers {
 
                 stmts = stmts + "}";
             }
+            System.out.println("Cash Drawers: " + " Transactions: " + total_transactions + " Items: " + total_items);
             return stmts;
         } catch (SQLException e) {
             throw new RuntimeException(e);

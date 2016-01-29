@@ -244,7 +244,8 @@ public class Parse_sales {
         }
         List<Parse_sales.field> fields = new ArrayList();
         String[] transaction = stmt.split("Ω,");
-
+        int total_transactions = 0;
+        int total_items = 0;
         for (String trans : transaction) {
 //            System.out.println(trans);
 
@@ -304,6 +305,7 @@ public class Parse_sales {
 //                System.out.println(tr);
                 //<editor-fold defaultstate="collapsed" desc=" Transactions ">
                 if (t == 0) {
+                    total_transactions++;
                     sales_no = tr.substring(14, tr.length() - 1);
 //                    System.out.println("Sales No = " + sales_no);
                 }
@@ -535,6 +537,7 @@ public class Parse_sales {
 //                            System.out.println(item);
 
                                 if (i == 0) {
+                                    total_items++;
                                     item_code = item.substring(14, item.length() - 1);
 //                                    System.out.println("Item Code = " + item_code);
                                 }
@@ -617,7 +620,7 @@ public class Parse_sales {
 
             Parse_sales.field f = new Parse_sales.field(sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name1, discount_rate1, discount_amount1, discount_customer_name1, discount_customer_id1, charge_type, charge_type_id, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_cerftificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount1, wtax1, branch1, branch_id1, location1, location_id1, my_items_list);
             fields.add(f);
-//            System.out.println("-------------------------------------------------------------------------");
+            System.out.println("Sales: " + " Transactions: " + total_transactions + " , Items: " + total_items);
         }
 
         return fields;
