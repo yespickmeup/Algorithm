@@ -134,7 +134,7 @@ public class Charge_in_advance_cancelled_items {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-            String s2 = "update  charge_in_advance_items  set status='" + "0" + "' "
+            String s2 = "update  charge_in_advance_items  set status='" + "1" + "' "
                     + " where id='" + to_charge_in_advance_items_cancelled_items.id + "' "
                     + " ";
 
