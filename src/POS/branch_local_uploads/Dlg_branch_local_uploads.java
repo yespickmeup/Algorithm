@@ -557,7 +557,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         Branch_local_uploads.to_upload_count charged_items = Parse_charged_items.compress(where);
                         String rmas = "";
                         String item_maintenances = "";
-                        String cash_drawers = Parse_cash_drawers.compress(where2);
+                        Branch_local_uploads.to_upload_count cash_drawers = Parse_cash_drawers.compress(where2);
 
                         String name = POS.util.DateType.y.format(new Date()) + "" + POS.util.DateType.d.format(new Date()) + "" + POS.util.DateType.m1.format(new Date());
 
@@ -657,7 +657,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
 
                             fw_cash_drawers = new FileWriter(file_cash_drawers.getAbsoluteFile());
                             BufferedWriter bw_cash_drawers = new BufferedWriter(fw_cash_drawers);
-                            bw_cash_drawers.write(cash_drawers);
+                            bw_cash_drawers.write(cash_drawers.stmt);
 
                             bw_cash_drawers.close();
                             fw_cash_drawers.close();

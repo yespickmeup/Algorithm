@@ -5,6 +5,7 @@
  */
 package POS.branch_local_uploads;
 
+import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -82,8 +83,8 @@ public class Parse_cash_drawers {
 
     public static void main(String[] args) {
         String where = " order by id desc limit 3";
-        String stmts = compress(where);
-        List<Parse_cash_drawers> datas = decompress(stmts);
+        to_upload_count stmts = compress(where);
+        List<Parse_cash_drawers> datas = decompress(stmts.stmt);
         for (Parse_cash_drawers to : datas) {
             System.out.println(to.time_in);
         }
@@ -236,7 +237,7 @@ public class Parse_cash_drawers {
         return datas;
     }
 
-    public static String compress(String where) {
+    public static to_upload_count compress(String where) {
         String stmts = "\"items\":\"";
         int total_transactions = 0;
         int total_items = 0;
@@ -341,8 +342,9 @@ public class Parse_cash_drawers {
 
                 stmts = stmts + "}";
             }
+            to_upload_count count=new to_upload_count(stmts, total_transactions, total_items);
             System.out.println("Cash Drawers: " + " Transactions: " + total_transactions + " Items: " + total_items);
-            return stmts;
+            return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
