@@ -246,9 +246,7 @@ public class Parse_charged_items {
                     if (x == 31) {
                         wtax = FitIn.toDouble(c.substring(8, c.length() - 1));
                     }
-                    if (x == 32) {
-                        is_cancelled = FitIn.toInt(c.substring(16, c.length() - 1));
-                    }
+
                     x++;
                 }
 
@@ -408,157 +406,13 @@ public class Parse_charged_items {
                 stmts = stmts + "%\"location_id\":\"" + location_id + "\"";
                 stmts = stmts + "%\"addtl_amount\":\"" + addtl_amount + "\"";
                 stmts = stmts + "%\"wtax\":\"" + wtax + "\"";
-                stmts = stmts + "%\"is_cancelled\":\"" + "0" + "\"";
+
 
                 stmts = stmts + "}";
 
             }
 
-            String s2 = "select "
-                    + "id"
-                    + ",customer_id"
-                    + ",customer_name"
-                    + ",ar_id"
-                    + ",ar_no"
-                    + ",date_applied"
-                    + ",reference_no"
-                    + ",soa_type"
-                    + ",soa_type_id"
-                    + ",user_screen_name"
-                    + ",user_id"
-                    + ",remarks"
-                    + ",item_code"
-                    + ",barcode"
-                    + ",description"
-                    + ",generic_name"
-                    + ",item_type"
-                    + ",supplier_name"
-                    + ",supplier_id"
-                    + ",serial_no"
-                    + ",product_qty"
-                    + ",unit"
-                    + ",conversion"
-                    + ",selling_price"
-                    + ",date_added"
-                    + ",status"
-                    + ",is_vatable"
-                    + ",selling_type"
-                    + ",discount_name"
-                    + ",discount_rate"
-                    + ",discount_amount"
-                    + ",discount_customer_name"
-                    + ",discount_customer_id"
-                    + ",branch"
-                    + ",branch_code"
-                    + ",location"
-                    + ",location_id"
-                    + ",category"
-                    + ",category_id"
-                    + ",classification"
-                    + ",classification_id"
-                    + ",sub_classification"
-                    + ",sub_classification_id"
-                    + ",brand"
-                    + ",brand_id"
-                    + ",model"
-                    + ",model_id"
-                    + ",addtl_amount"
-                    + ",wtax"
-                    + " from charge_in_advance_cancelled_items"
-                    + " " + where;
-
-            Statement stmt2 = conn.createStatement();
-            ResultSet rs2 = stmt2.executeQuery(s2);
-            while (rs2.next()) {
-                total_transactions++;
-                int id = rs2.getInt(1);
-                String customer_id = rs2.getString(2);
-                String customer_name = rs2.getString(3);
-                String ar_id = rs2.getString(4);
-                String ar_no = rs2.getString(5);
-                String date_applied = rs2.getString(6);
-                String reference_no = rs2.getString(7);
-                String soa_type = rs2.getString(8);
-                String soa_type_id = rs2.getString(9);
-                String user_screen_name = rs2.getString(10);
-                String user_id = rs2.getString(11);
-                String remarks = rs2.getString(12);
-                String item_code = rs2.getString(13);
-                String barcode = rs2.getString(14);
-                String description = rs2.getString(15);
-                String generic_name = rs2.getString(16);
-                String item_type = rs2.getString(17);
-                String supplier_name = rs2.getString(18);
-                String supplier_id = rs2.getString(19);
-                String serial_no = rs2.getString(20);
-                double product_qty = rs2.getDouble(21);
-                String unit = rs2.getString(22);
-                double conversion = rs2.getDouble(23);
-                double selling_price = rs2.getDouble(24);
-                String date_added = rs2.getString(25);
-                int status = rs2.getInt(26);
-                int is_vatable = rs2.getInt(27);
-                int selling_type = rs2.getInt(28);
-                String discount_name = rs2.getString(29);
-                double discount_rate = rs2.getDouble(30);
-                double discount_amount = rs2.getDouble(31);
-                String discount_customer_name = rs2.getString(32);
-                String discount_customer_id = rs2.getString(33);
-                String branch = rs2.getString(34);
-                String branch_code = rs2.getString(35);
-                String location = rs2.getString(36);
-                String location_id = rs2.getString(37);
-                String category = rs2.getString(38);
-                String category_id = rs2.getString(39);
-                String classification = rs2.getString(40);
-                String classification_id = rs2.getString(41);
-                String sub_classification = rs2.getString(42);
-                String sub_classification_id = rs2.getString(43);
-                String brand = rs2.getString(44);
-                String brand_id = rs2.getString(45);
-                String model = rs2.getString(46);
-                String model_id = rs2.getString(47);
-                double addtl_amount = rs2.getDouble(48);
-                double wtax = rs2.getDouble(49);
-
-                stmts = stmts + "℮{";
-                stmts = stmts + "\"customer_id;\":\"" + customer_id + "\"";
-                stmts = stmts + "%\"customer_name;\":\"" + customer_name + "\"";
-                stmts = stmts + "%\"ar_id\":\"" + ar_id + "\"";
-                stmts = stmts + "%\"ar_no\":\"" + ar_no + "\"";
-                stmts = stmts + "%\"date_applied\":\"" + date_applied + "\"";
-                stmts = stmts + "%\"reference_no\":\"" + reference_no + "\"";
-                stmts = stmts + "%\"soa_type\":\"" + soa_type + "\"";
-                stmts = stmts + "%\"soa_type_id\":\"" + soa_type_id + "\"";
-                stmts = stmts + "%\"user_screen_name\":\"" + user_screen_name + "\"";
-                stmts = stmts + "%\"user_id\":\"" + user_id + "\"";
-                stmts = stmts + "%\"remarks\":\"" + remarks + "\"";
-                stmts = stmts + "%\"item_code\":\"" + item_code + "\"";
-                stmts = stmts + "%\"barcode\":\"" + barcode + "\"";
-                stmts = stmts + "%\"item_type\":\"" + item_type + "\"";
-                stmts = stmts + "%\"serial_no\":\"" + serial_no + "\"";
-                stmts = stmts + "%\"product_qty\":\"" + product_qty + "\"";
-                stmts = stmts + "%\"unit\":\"" + unit + "\"";
-                stmts = stmts + "%\"conversion\":\"" + conversion + "\"";
-                stmts = stmts + "%\"selling_price\":\"" + selling_price + "\"";
-                stmts = stmts + "%\"date_added\":\"" + date_added + "\"";
-                stmts = stmts + "%\"status\":\"" + status + "\"";
-                stmts = stmts + "%\"discount_name\":\"" + discount_name + "\"";
-                stmts = stmts + "%\"discount_rate\":\"" + discount_rate + "\"";
-                stmts = stmts + "%\"discount_amount\":\"" + discount_amount + "\"";
-
-                stmts = stmts + "%\"discount_customer_name\":\"" + discount_customer_name + "\"";
-                stmts = stmts + "%\"discount_customer_id\":\"" + discount_customer_id + "\"";
-                stmts = stmts + "%\"branch\":\"" + branch + "\"";
-                stmts = stmts + "%\"branch_code\":\"" + branch_code + "\"";
-                stmts = stmts + "%\"location\":\"" + location + "\"";
-                stmts = stmts + "%\"location_id\":\"" + location_id + "\"";
-                stmts = stmts + "%\"addtl_amount\":\"" + addtl_amount + "\"";
-                stmts = stmts + "%\"wtax\":\"" + wtax + "\"";
-                stmts = stmts + "%\"is_cancelled\":\"" + "1" + "\"";
-                stmts = stmts + "}";
-
-            }
+  
             Branch_local_uploads.to_upload_count count = new Branch_local_uploads.to_upload_count(stmts, total_transactions, total_items);
             System.out.println("Charged in Advanced: " + " Transactions: " + total_transactions + " Items: " + total_items);
             return count;
