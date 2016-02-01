@@ -64,3 +64,9 @@ UPDATE stock_transfers_items SET stock_transfer_id = CONCAT(location_id,'|', sto
 
 UPDATE stock_transfers SET transaction_no = CONCAT('9|', transaction_no);
 UPDATE stock_transfers_items SET stock_transfer_id = CONCAT('9|', stock_transfer_id);
+
+UPDATE inventory_replenishments SET inventory_replenishment_no = CONCAT(location_id,'|', inventory_replenishment_no);
+UPDATE inventory_replenishment_items SET inventory_replenishment_no = CONCAT(location_id,'|', inventory_replenishment_no);
+
+UPDATE inventory_replenishments SET inventory_replenishment_no = CONCAT(location_id,'|', inventory_replenishment_no) where location_id='18' ;
+UPDATE inventory_replenishment_items SET inventory_replenishment_no = CONCAT(location_id,'|', inventory_replenishment_no) where location_id='18';

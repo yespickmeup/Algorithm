@@ -935,7 +935,7 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
                         + " where main_barcode like '%" + jTextField1.getText() + "%' and location_id='" + lo.getId() + "'  "
                         + " or barcode ='" + jTextField1.getText() + "' and location_id='" + lo.getId() + "'  "
                         + " ";
-                where=where+ " order by description asc ";
+                where = where + " order by description asc ";
                 System.out.println(where);
                 List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
                 List<Inventory_barcodes.to_inventory_barcodes> datas2 = new ArrayList();
@@ -1076,18 +1076,17 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
                 closeDialog.ok();
                 Field.Combo lo = (Field.Combo) jTextField3;
                 Field.Combo br = (Field.Combo) jTextField2;
-
+                String branch = br.getText();
+                String branch_id = br.getId();
+                String location = lo.getText();
+                String location_id = lo.getId();
                 int id = 0;
-                String inventory_replenishment_no = Inventory_replenishments.increment_id();
+                String inventory_replenishment_no = Inventory_replenishments.increment_id(location_id);
                 String date_added = DateType.now();
                 String user_id = MyUser.getUser_id();
                 String user_screen_name = MyUser.getUser_screen_name();
                 String remarks = jTextArea1.getText();
                 int status = 1;
-                String branch = br.getText();
-                String branch_id = br.getId();
-                String location = lo.getText();
-                String location_id = lo.getId();
                 if (jCheckBox2.isSelected()) {
                     location = "All";
                     location_id = "0";
@@ -1098,7 +1097,7 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
                     location = "All";
                     location_id = "0";
                 }
-
+                
                 final to_inventory_replenishments replenisment = new to_inventory_replenishments(id, inventory_replenishment_no, date_added, user_id, user_screen_name, remarks, status, branch, branch_id, location, location_id);
                 final List<Inventory_barcodes.to_inventory_barcodes> datas = tbl_inventory_barcodes_ALM;
                 final List<Inventory_barcodes.to_inventory_barcodes> datas2 = new ArrayList();

@@ -5,7 +5,7 @@
  */
 package POS.synch_locations;
 
-import POS.branch_local_uploads.Parse_sales;
+import POS.branches_sessions.Parse_sales;
 import POS.util.MyConnection;
 import java.io.BufferedWriter;
 import java.io.File;

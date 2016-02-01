@@ -5,7 +5,7 @@
  */
 package POS.synch_locations;
 
-import POS.branch_local_uploads.Parse_sales;
+import POS.branches_sessions.Parse_sales;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.util.Alert;

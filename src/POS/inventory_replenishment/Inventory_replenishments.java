@@ -284,11 +284,16 @@ public class Inventory_replenishments {
         }
     }
 
-    public static String increment_id() {
-        String id = "000000000000";
+    public static void main(String[] args) {
+        System.out.println(increment_id("9"));
+    }
+
+    public static String increment_id(String location_id) {
+
+        String id = "";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from inventory_replenishments";
+            String s0 = "select max(id) from inventory_replenishments where location_id='" + location_id + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
@@ -301,7 +306,7 @@ public class Inventory_replenishments {
                 }
             }
             if (id == null) {
-                id = "000000000000";
+                id = location_id + "|000000000000";
             }
             id = ReceiptIncrementor.increment(id);
             return id;
@@ -347,8 +352,6 @@ public class Inventory_replenishments {
                         + "";
                 stmt.addBatch(s4);
             }
-            
-          
 
             stmt.executeBatch();
             conn.commit();

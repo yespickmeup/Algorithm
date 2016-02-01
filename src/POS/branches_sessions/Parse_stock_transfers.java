@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.branch_local_uploads;
+package POS.branches_sessions;
 
-import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
+import POS.branches_sessions.Branch_local_uploads.to_upload_count;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,26 +21,26 @@ import mijzcx.synapse.desk.utils.FitIn;
  */
 public class Parse_stock_transfers {
 
-    String transaction_no;
-    String user_name;
-    String date_added;
-    String remarks;
-    String to_branch;
-    String to_branch_id;
-    String to_location;
-    String to_location_id;
-    String from_branch;
-    String from_branch_id;
-    String from_location;
-    String from_location_id;
-    int status;
-    String at_branch;
-    String at_branch_id;
-    String at_location;
-    String at_location_id;
-    List<items> items;
+    public String transaction_no;
+    public String user_name;
+    public String date_added;
+    public String remarks;
+    public String to_branch;
+    public String to_branch_id;
+    public String to_location;
+    public String to_location_id;
+    public String from_branch;
+    public String from_branch_id;
+    public String from_location;
+    public String from_location_id;
+    public int status;
+    public String at_branch;
+    public String at_branch_id;
+    public String at_location;
+    public String at_location_id;
+    public List<items> items1;
 
-    public Parse_stock_transfers(String transaction_no, String user_name, String date_added, String remarks, String to_branch, String to_branch_id, String to_location, String to_location_id, String from_branch, String from_branch_id, String from_location, String from_location_id, int status, String at_branch, String at_branch_id, String at_location, String at_location_id, List<items> items) {
+    public Parse_stock_transfers(String transaction_no, String user_name, String date_added, String remarks, String to_branch, String to_branch_id, String to_location, String to_location_id, String from_branch, String from_branch_id, String from_location, String from_location_id, int status, String at_branch, String at_branch_id, String at_location, String at_location_id, List<items> items1) {
         this.transaction_no = transaction_no;
         this.user_name = user_name;
         this.date_added = date_added;
@@ -58,7 +58,7 @@ public class Parse_stock_transfers {
         this.at_branch_id = at_branch_id;
         this.at_location = at_location;
         this.at_location_id = at_location_id;
-        this.items = items;
+        this.items1 = items1;
     }
 
     public static class items {
@@ -70,8 +70,9 @@ public class Parse_stock_transfers {
         double conversion;
         double selling_price;
         double cost;
+        String serial_nos;
 
-        public items(String item_code, String barcode, double product_qty, String unit, double conversion, double selling_price, double cost) {
+        public items(String item_code, String barcode, double product_qty, String unit, double conversion, double selling_price, double cost, String serial_nos) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.product_qty = product_qty;
@@ -79,6 +80,7 @@ public class Parse_stock_transfers {
             this.conversion = conversion;
             this.selling_price = selling_price;
             this.cost = cost;
+            this.serial_nos = serial_nos;
         }
     }
 
@@ -203,6 +205,7 @@ public class Parse_stock_transfers {
                         double conversion = 0;
                         double selling_price = 0;
                         double cost = 0;
+                        String serial_nos = "";
                         int ii = 0;
 
                         for (String itee : ite) {
@@ -229,12 +232,15 @@ public class Parse_stock_transfers {
                                 if (ii == 6) {
                                     cost = FitIn.toDouble(itee.substring(9, itee.length() - 1));
                                 }
+                                if (ii == 7) {
+                                    serial_nos = itee.substring(14, itee.length() - 1);
+                                }
                                 ii++;
                             }
 
                         }
                         if (ii != 0) {
-                            Parse_stock_transfers.items its = new items(item_code, barcode, product_qty, unit, conversion, selling_price, cost);
+                            Parse_stock_transfers.items its = new items(item_code, barcode, product_qty, unit, conversion, selling_price, cost, serial_nos);
                             items.add(its);
                         }
 
@@ -336,6 +342,7 @@ public class Parse_stock_transfers {
                         + ",selling_price"
                         + ",cost"
                         + ",barcodes"
+                        + ",serial_no"
                         + " from stock_transfers_items"
                         + " where stock_transfer_id='" + transaction_no + "' ";
 
@@ -350,7 +357,7 @@ public class Parse_stock_transfers {
                     double selling_price = rs2.getDouble(5);
                     double cost = rs2.getDouble(6);
                     String barcodes = rs2.getString(7);
-
+                    String serial_nos = rs2.getString(8);
                     stmts = stmts + "℮{";
                     stmts = stmts + "\"item_code\":\"" + barcode + "\"";
                     stmts = stmts + "%\"barcode\":\"" + barcode + "\"";
@@ -360,6 +367,8 @@ public class Parse_stock_transfers {
                     stmts = stmts + "%\"selling_price\":\"" + selling_price + "\"";
                     stmts = stmts + "%\"cost\":\"" + cost + "\"";
                     stmts = stmts + "%\"barcodes\":\"" + barcodes + "\"";
+                    stmts = stmts + "%\"serial_nos\":\"" + serial_nos + "\"";
+
                     stmts = stmts + "}";
                 }
 

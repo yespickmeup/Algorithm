@@ -5,8 +5,8 @@
  */
 package POS.synch_locations;
 
-import POS.branch_local_uploads.Branch_local_uploads;
-import POS.branch_local_uploads.Parse_sales;
+import POS.branches_sessions.Branch_local_uploads;
+import POS.branches_sessions.Parse_sales;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.my_sales.MySales;

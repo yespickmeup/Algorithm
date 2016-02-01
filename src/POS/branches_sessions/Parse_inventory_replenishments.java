@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.branch_local_uploads;
+package POS.branches_sessions;
 
-import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
+import POS.branches_sessions.Branch_local_uploads.to_upload_count;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -115,7 +115,7 @@ public class Parse_inventory_replenishments {
 
                 if (i == 0) {
                     total_transactions++;
-                    inventory_replenishment_no = column.substring(14, column.length() - 1);
+                    inventory_replenishment_no = column.substring(31, column.length() - 1);
                 }
                 if (i == 1) {
                     date_added = column.substring(14, column.length() - 1);

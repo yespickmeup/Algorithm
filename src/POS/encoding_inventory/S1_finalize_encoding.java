@@ -79,9 +79,7 @@ public class S1_finalize_encoding {
                 String user_id = rs.getString(20);
                 String user_screen_name = rs.getString(21);
 
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id
-                        , qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id
-                        , user_screen_name);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
 
                 datas.add(to);
             }
@@ -126,7 +124,7 @@ public class S1_finalize_encoding {
                             + " and location_id ='" + to_encoding_inventory.location_id + "' "
                             + " ";
                     Statement stmt3 = conn.createStatement();
-                    ResultSet rs3 = stmt.executeQuery(s3);
+                    ResultSet rs3 = stmt3.executeQuery(s3);
                     if (rs3.next()) {
                         my_qty = rs3.getDouble(1);
                         unit = rs3.getString(2);
@@ -137,31 +135,31 @@ public class S1_finalize_encoding {
                     String s2 = " update inventory_barcodes set "
                             + " product_qty= :product_qty"
                             + " where "
-                            + "  main_barcode ='" + to_encoding_inventory.item_code + "' and location_id='" + to_encoding_inventory.location_id + "'"
+                            + " main_barcode ='" + to_encoding_inventory.item_code + "' "
+                            + " and location_id='" + to_encoding_inventory.location_id + "'"
                             + " ";
                     s2 = SqlStringUtil.parse(s2)
                             .setNumber("product_qty", new_qty)
                             .ok();
                     if (update_pricing == 1) {
                         s2 = " update inventory_barcodes set "
-                                + " product_qty= :product_qty"
-                                + " ,unit= :unit"
+                                + " unit= :unit"
                                 + " ,conversion= :conversion"
                                 + " ,selling_price= :selling_price"
                                 + " ,cost= :cost"
                                 + " where "
-                                + "  main_barcode ='" + to_encoding_inventory.item_code + "' and branch_code='" + to_encoding_inventory.branch_id + "'"
+                                + "  main_barcode ='" + to_encoding_inventory.item_code + "' "
+                                + " and branch_code='" + to_encoding_inventory.branch_id + "'"
                                 + " ";
                         String units = "[" + "pc" + ":" + to_encoding_inventory.selling_price + "/" + conversion + "^1" + "]";
                         s2 = SqlStringUtil.parse(s2)
-                                .setNumber("product_qty", new_qty)
                                 .setString("unit", units)
                                 .setNumber("conversion", conversion)
                                 .setNumber("selling_price", to_encoding_inventory.selling_price)
                                 .setNumber("cost", to_encoding_inventory.cost)
                                 .ok();
                     }
-                    
+
                     System.out.println(s2);
                     PreparedStatement stmt2 = conn.prepareStatement(s2);
                     stmt2.execute();

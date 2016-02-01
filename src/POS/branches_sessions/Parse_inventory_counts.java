@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.branch_local_uploads;
+package POS.branches_sessions;
 
-import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
+import POS.branches_sessions.Branch_local_uploads.to_upload_count;
 import POS.encoding_inventory.Encoding_inventory;
 import POS.util.MyConnection;
 import java.sql.Connection;

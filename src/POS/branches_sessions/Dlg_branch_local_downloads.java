@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.branch_local_uploads;
+package POS.branches_sessions;
 
-import static POS.branch_local_uploads.Check_cloud_local_uploads.FileToString;
-import POS.branch_locations.S1_branch_locations;
-import POS.util.TableRenderer;
+import static POS.branches_sessions.Check_cloud_local_uploads.FileToString;
+import POS.util.Alert;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
@@ -16,7 +15,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -194,6 +192,7 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -225,6 +224,13 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
 
+        jButton2.setText("Install Updates ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -236,11 +242,12 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -249,12 +256,14 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                 .addGap(36, 36, 36)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,12 +284,17 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
         ret_data();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        install_updates();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
@@ -411,30 +425,31 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
     }
 //</editor-fold> 
 
+    List<Parse_inventory_replenishments> l_replenishments = new ArrayList();
+    List<Parse_inventory_counts.field> l_inventory_counts = new ArrayList();
+    List<Parse_inventory_adjustments.field> l_adjustments = new ArrayList();
+    List<Parse_stock_transfers> l_stock_transfers = new ArrayList();
+    List<Parse_receipts> l_receipts = new ArrayList();
+    List<Parse_sales.field> l_sales = new ArrayList();
+    List<Parse_sale_item_replacements> l_returned_items = new ArrayList();
+    List<Parse_charged_items> l_charged_items = new ArrayList();
+    List<String> l_rmas = new ArrayList();
+    List<String> l_item_maintenances = new ArrayList();
+    List<Parse_cash_drawers> l_cash_drawers = new ArrayList();
+
     private void ret_data() {
 
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
         jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
         Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
-                String where = " where status=0 ";
+                String where = " where status=0 and Date(date_added)='" + "2017-01-04" + "' ";
                 List<Branch_local_uploads.to_branch_local_uploads> datas2 = Branch_local_uploads.ret_data(where);
                 System.out.println(datas2.size());
-
-                List<Parse_inventory_replenishments> l_replenishments = new ArrayList();
-                List<Parse_inventory_counts.field> l_inventory_counts = new ArrayList();
-                List<Parse_inventory_adjustments.field> l_adjustments = new ArrayList();
-                List<Parse_stock_transfers> l_stock_transfers = new ArrayList();
-                List<Parse_receipts> l_receipts = new ArrayList();
-                List<Parse_sales.field> l_sales = new ArrayList();
-                List<Parse_sale_item_replacements> l_returned_items = new ArrayList();
-                List<Parse_charged_items> l_charged_items = new ArrayList();
-                List<String> l_rmas = new ArrayList();
-                List<String> l_item_maintenances = new ArrayList();
-                List<Parse_cash_drawers> l_cash_drawers = new ArrayList();
 
                 for (Branch_local_uploads.to_branch_local_uploads to : datas2) {
                     String replenishments = FileToString(to.replenishments);
@@ -448,7 +463,6 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                     String rmas = FileToString(to.rmas);
                     String item_maintenances = FileToString(to.item_maintenances);
                     String cash_drawers = FileToString(to.cash_drawers);
-                    
                     l_replenishments.addAll(Parse_inventory_replenishments.decompress(replenishments));
                     l_inventory_counts.addAll(Parse_inventory_counts.decompress(inventory_counts));
                     l_adjustments.addAll(Parse_inventory_adjustments.decompress(adjustments));
@@ -486,8 +500,10 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
                 datas.add(to9);
                 datas.add(to10);
                 datas.add(to11);
-                loadData_local_uploads(datas);                
+                loadData_local_uploads(datas);
+
                 jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
             }
@@ -496,4 +512,29 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
 
     }
 
+    private void install_updates() {
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                Grab_branches_updates.install_updates(l_replenishments, l_inventory_counts, l_adjustments, l_stock_transfers);
+                l_replenishments.clear();
+                l_inventory_counts.clear();
+                l_adjustments.clear();
+
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
+                Alert.set(2, "");
+            }
+        });
+        t.start();
+
+    }
 }

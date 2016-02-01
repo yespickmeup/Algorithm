@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.branch_local_uploads;
+package POS.branches_sessions;
 
 import POS.synch_locations.Synch_locations;
 import POS.synch_locations.Synch_upload_locations;
