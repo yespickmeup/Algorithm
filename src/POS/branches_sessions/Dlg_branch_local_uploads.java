@@ -529,7 +529,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                     }
                 }
                 
-                date_from = "2017-01-07";
+                date_from = "2017-01-03";
                 String now = DateType.sf.format(new Date());
                 System.out.println("Last Cloud upload date: " + date_from);
                 System.out.println("Todays date: " + now);
