@@ -252,12 +252,6 @@ public class Branch_local_uploads {
         }
     }
 
-    public static void main(String[] args) {
-        String where = "";
-        List<to_branch_local_uploads> datas = Branch_local_uploads.ret_data(where);
-        System.out.println("Size: " + datas.size());
-    }
-
     public static List<to_branch_local_uploads> ret_data(String where) {
         List<to_branch_local_uploads> datas = new ArrayList();
 
@@ -357,18 +351,26 @@ public class Branch_local_uploads {
         }
     }
 
+    public static void main(String[] args) {
+        getDates("2016-01-03");
+    }
+
     public static List<String> getDates(String from) {
         List<String> days = new ArrayList();
         try {
             Date from2 = DateType.sf.parse(from);
             Date to = new Date();
-            System.out.println("Date: " + to);
-
+            System.out.println("Date From: " + from2);
+            System.out.println("Date To: " + to);
             int count = DateUtils1.count_days(from2, to);
-            for (int i = 1; i < count + 1; i++) {
+            System.out.println("Count: " + count);
+
+            
+            for (int i = 1; i < count + 3; i++) {
                 Date from1 = DateType.sf.parse(from);
                 Date inc = DateUtils1.add_day(from1, i);
                 String date = DateType.sf.format(inc);
+                System.out.println(date);
                 days.add(date);
             }
 
