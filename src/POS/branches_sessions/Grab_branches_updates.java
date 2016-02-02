@@ -5,19 +5,32 @@
  */
 package POS.branches_sessions;
 
-import POS.adjuster.Adjuster;
-import POS.adjuster.S1_adjustments;
+import POS.accounts_receivable.S1_accounts_receivable;
+import static POS.accounts_receivable.S1_accounts_receivable.ret_customer_balance;
+import POS.accounts_receivable.S1_sales_on_account;
+import POS.cash_drawer.S1_cash_drawer;
+import POS.charge_in_advance.Charge_in_advance_items;
+import POS.customers.Customers;
 import POS.inventory.Inventory_barcodes;
-import POS.receipts.Stock_transfers_items;
 import POS.users.MyUser;
 import POS.util.DateType;
 import POS.util.MyConnection;
+import POS.util.Segregator;
+import POS.util.Users;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
@@ -27,13 +40,10 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Grab_branches_updates {
 
-    public static void install_updates(
-            List<Parse_inventory_replenishments> l_replenishments, List<Parse_inventory_counts.field> l_inventory_counts, List<Parse_inventory_adjustments.field> l_adjustments, List<Parse_stock_transfers> l_stock_transfers) {
-
+    public static void replenishments(List<Parse_inventory_replenishments> l_replenishments) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-
             //<editor-fold defaultstate="collapsed" desc=" Replenishments ">
             for (Parse_inventory_replenishments to_inventory_replenishments : l_replenishments) {
                 String s0 = "insert into inventory_replenishments("
@@ -150,9 +160,22 @@ public class Grab_branches_updates {
                     stmt.addBatch(s4);
                 }
                 stmt.executeBatch();
+                conn.commit();
                 System.out.println("Item Replenishments Updated!");
             }
             //</editor-fold>
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void inventory_count(List<Parse_inventory_counts.field> l_inventory_counts) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
             //<editor-fold defaultstate="collapsed" desc=" Inventory Count ">
             for (Parse_inventory_counts.field to_encoding_inventory : l_inventory_counts) {
 
@@ -282,6 +305,19 @@ public class Grab_branches_updates {
             }
 
             //</editor-fold>
+            conn.commit();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void adjustments(List<Parse_inventory_adjustments.field> l_adjustments) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Adjustments ">
             for (Parse_inventory_adjustments.field to_inventory_barcodes : l_adjustments) {
 
@@ -372,8 +408,7 @@ public class Grab_branches_updates {
                         .ok();
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
-                stmt2.execute();
-                Lg.s(S1_adjustments.class, "Successfully Added");
+                stmt2.addBatch(s2);
 
                 String s0 = "update inventory_barcodes set "
                         + " product_qty= :product_qty "
@@ -386,12 +421,26 @@ public class Grab_branches_updates {
                         .setNumber("product_qty", my_qty1)
                         .ok();
 
-                PreparedStatement stmt = conn.prepareStatement(s0);
-                stmt.execute();
+                stmt2.addBatch(s0);
+
+                stmt2.executeBatch();
                 System.out.println("Adjustments Updated!");
             }
             //</editor-fold>
 
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void stock_transfers(List<Parse_stock_transfers> l_stock_transfers) {
+        try {
+
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Stock Transfers ">
             for (Parse_stock_transfers to_stock_transfers : l_stock_transfers) {
                 String s0 = "insert into stock_transfers("
@@ -614,6 +663,1046 @@ public class Grab_branches_updates {
         } finally {
             MyConnection.close();
         }
+    }
+
+    public static void sales(List<Parse_sales.field> l_sales) {
+        try {
+
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            //<editor-fold defaultstate="collapsed" desc=" sales ">
+            for (Parse_sales.field to_sales : l_sales) {
+
+                String s0 = "insert into sales("
+                        + "sales_no"
+                        + ",date_added"
+                        + ",user_screen_name"
+                        + ",user_id"
+                        + ",session_no"
+                        + ",remarks"
+                        + ",gross_amount"
+                        + ",amount_due"
+                        + ",status"
+                        + ",sales_type"
+                        + ",line_discount"
+                        + ",customer_id"
+                        + ",customer_name"
+                        + ",discount_name"
+                        + ",discount_rate"
+                        + ",discount_amount"
+                        + ",discount_customer_name"
+                        + ",discount_customer_id"
+                        + ",charge_type"
+                        + ",charge_type_id"
+                        + ",charge_reference_no"
+                        + ",charge_customer_name"
+                        + ",charge_customer_id"
+                        + ",charge_amount"
+                        + ",check_bank"
+                        + ",check_no"
+                        + ",check_amount"
+                        + ",check_holder"
+                        + ",check_date"
+                        + ",credit_card_type"
+                        + ",credit_card_rate"
+                        + ",credit_card_amount"
+                        + ",credit_card_no"
+                        + ",credit_card_holder"
+                        + ",credit_card_approval_code"
+                        + ",gift_certificate_from"
+                        + ",gift_certificate_description"
+                        + ",gift_certificate_no"
+                        + ",gift_certificate_amount"
+                        + ",prepaid_customer_name"
+                        + ",prepaid_customer_id"
+                        + ",prepaid_amount"
+                        + ",addtl_amount"
+                        + ",wtax"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ")values("
+                        + ":sales_no"
+                        + ",:date_added"
+                        + ",:user_screen_name"
+                        + ",:user_id"
+                        + ",:session_no"
+                        + ",:remarks"
+                        + ",:gross_amount"
+                        + ",:amount_due"
+                        + ",:status"
+                        + ",:sales_type"
+                        + ",:line_discount"
+                        + ",:customer_id"
+                        + ",:customer_name"
+                        + ",:discount_name"
+                        + ",:discount_rate"
+                        + ",:discount_amount"
+                        + ",:discount_customer_name"
+                        + ",:discount_customer_id"
+                        + ",:charge_type"
+                        + ",:charge_type_id"
+                        + ",:charge_reference_no"
+                        + ",:charge_customer_name"
+                        + ",:charge_customer_id"
+                        + ",:charge_amount"
+                        + ",:check_bank"
+                        + ",:check_no"
+                        + ",:check_amount"
+                        + ",:check_holder"
+                        + ",:check_date"
+                        + ",:credit_card_type"
+                        + ",:credit_card_rate"
+                        + ",:credit_card_amount"
+                        + ",:credit_card_no"
+                        + ",:credit_card_holder"
+                        + ",:credit_card_approval_code"
+                        + ",:gift_certificate_from"
+                        + ",:gift_certificate_description"
+                        + ",:gift_certificate_no"
+                        + ",:gift_certificate_amount"
+                        + ",:prepaid_customer_name"
+                        + ",:prepaid_customer_id"
+                        + ",:prepaid_amount"
+                        + ",:addtl_amount"
+                        + ",:wtax"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setString("sales_no", to_sales.sales_no)
+                        .setString("date_added", to_sales.date_added)
+                        .setString("user_screen_name", to_sales.user_screen_name)
+                        .setString("user_id", to_sales.user_id)
+                        .setString("session_no", to_sales.session_no)
+                        .setString("remarks", to_sales.remarks)
+                        .setNumber("gross_amount", to_sales.gross_amount)
+                        .setNumber("amount_due", to_sales.amount_due)
+                        .setNumber("status", to_sales.status)
+                        .setNumber("sales_type", to_sales.sales_type)
+                        .setNumber("line_discount", to_sales.line_discount)
+                        .setString("customer_id", to_sales.customer_id)
+                        .setString("customer_name", to_sales.customer_name)
+                        .setString("discount_name", to_sales.discount_name)
+                        .setNumber("discount_rate", to_sales.discount_rate)
+                        .setNumber("discount_amount", to_sales.discount_amount)
+                        .setString("discount_customer_name", to_sales.discount_customer_name)
+                        .setString("discount_customer_id", to_sales.discount_customer_id)
+                        .setString("charge_type", to_sales.charge_type)
+                        .setString("charge_type_id", to_sales.charge_type_id)
+                        .setString("charge_reference_no", to_sales.charge_reference_no)
+                        .setString("charge_customer_name", to_sales.charge_customer_name)
+                        .setString("charge_customer_id", to_sales.charge_customer_id)
+                        .setNumber("charge_amount", to_sales.charge_amount)
+                        .setString("check_bank", to_sales.check_bank)
+                        .setString("check_no", to_sales.check_no)
+                        .setNumber("check_amount", to_sales.check_amount)
+                        .setString("check_holder", to_sales.check_holder)
+                        .setString("check_date", to_sales.check_date)
+                        .setString("credit_card_type", to_sales.credit_card_type)
+                        .setNumber("credit_card_rate", to_sales.credit_card_rate)
+                        .setNumber("credit_card_amount", to_sales.credit_card_amount)
+                        .setString("credit_card_no", to_sales.credit_card_no)
+                        .setString("credit_card_holder", to_sales.credit_card_holder)
+                        .setString("credit_card_approval_code", to_sales.credit_card_approval_code)
+                        .setString("gift_certificate_from", to_sales.gift_cerftificate_from)
+                        .setString("gift_certificate_description", to_sales.gift_certificate_description)
+                        .setString("gift_certificate_no", to_sales.gift_certificate_no)
+                        .setNumber("gift_certificate_amount", to_sales.gift_certificate_amount)
+                        .setString("prepaid_customer_name", to_sales.prepaid_customer_name)
+                        .setString("prepaid_customer_id", to_sales.prepaid_customer_id)
+                        .setNumber("prepaid_amount", to_sales.prepaid_amount)
+                        .setNumber("addtl_amount", to_sales.addtl_amount)
+                        .setNumber("wtax", to_sales.wtax)
+                        .setString("branch", to_sales.branch)
+                        .setString("branch_id", to_sales.branch_id)
+                        .setString("location", to_sales.location)
+                        .setString("location_id", to_sales.location_id)
+                        .ok();
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.addBatch(s0);
+
+                if (!to_sales.session_no.equalsIgnoreCase("000000000000")) {
+                    String s3 = " update orders set status='" + 1 + "' where sales_no='" + to_sales.session_no + "'";
+                    stmt.addBatch(s3);
+                    String s4 = " update order_items set status='" + 1 + "' where sales_no='" + to_sales.session_no + "'";
+                    stmt.addBatch(s4);
+                }
+
+                if (to_sales.prepaid_amount > 0) {
+                    String prep = "select "
+                            + "id"
+                            + ",customer_name"
+                            + ",customer_no"
+                            + ",contact_no"
+                            + ",credit_limit"
+                            + ",address"
+                            + ",term"
+                            + ",location"
+                            + ",balance"
+                            + ",discount"
+                            + ",prepaid"
+                            + " from customers "
+                            + " where id='" + to_sales.prepaid_customer_id + "' ";
+
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs = stmt2.executeQuery(prep);
+                    double prepaid = 0;
+                    if (rs.next()) {
+                        int id = rs.getInt(1);
+                        String customer_name = rs.getString(2);
+                        String customer_no = rs.getString(3);
+                        String contact_no = rs.getString(4);
+                        double credit_limit = rs.getDouble(5);
+                        String address = rs.getString(6);
+                        double term = rs.getDouble(7);
+                        String location = rs.getString(8);
+                        double balance = rs.getDouble(9);
+                        double discount = rs.getDouble(10);
+                        prepaid = rs.getDouble(11);
+
+                    }
+                    prepaid = prepaid - to_sales.prepaid_amount;
+                    String s3 = "update customers set prepaid='" + prepaid + "' "
+                            + " where id='" + to_sales.prepaid_customer_id + "' "
+                            + " ";
+
+                    s3 = SqlStringUtil.parse(s3)
+                            .ok();
+                    PreparedStatement stmt3 = conn.prepareStatement(s3);
+                    stmt.addBatch(s3);
+                }
+
+                if (to_sales.charge_amount > 0) {
+
+                    int id = -1;
+                    String soa_type = to_sales.charge_type;
+                    String soa_type_id = to_sales.charge_type_id;
+                    String soa_date = synsoftech.util.DateType.sf.format(new Date());
+
+                    String date_added = POS.util.DateType.now();
+                    String added_by = Users.user_name;
+                    String reference_no = to_sales.charge_reference_no;
+                    String client_name = to_sales.charge_customer_name;
+                    String client_id = to_sales.charge_customer_id;
+                    double amount = to_sales.charge_amount;
+                    S1_sales_on_account.to_sales_on_account to = new S1_sales_on_account.to_sales_on_account(id, soa_type, soa_type_id, soa_date, date_added, added_by, reference_no, client_name, client_id, amount);
+
+                    String s10 = "insert into sales_on_account("
+                            + "soa_type"
+                            + ",soa_type_id"
+                            + ",soa_date"
+                            + ",date_added"
+                            + ",added_by"
+                            + ",reference_no"
+                            + ",client_name"
+                            + ",client_id"
+                            + ",amount"
+                            + ")values("
+                            + ":soa_type"
+                            + ",:soa_type_id"
+                            + ",:soa_date"
+                            + ",:date_added"
+                            + ",:added_by"
+                            + ",:reference_no"
+                            + ",:client_name"
+                            + ",:client_id"
+                            + ",:amount"
+                            + ")";
+
+                    s10 = SqlStringUtil.parse(s10)
+                            .setString("soa_type", to.soa_type)
+                            .setString("soa_type_id", to.soa_type_id)
+                            .setString("soa_date", to.soa_date)
+                            .setString("date_added", to.date_added)
+                            .setString("added_by", to.added_by)
+                            .setString("reference_no", to.reference_no)
+                            .setString("client_name", to.client_name)
+                            .setString("client_id", to.client_id)
+                            .setNumber("amount", to.amount)
+                            .ok();
+                    stmt.addBatch(s10);
+
+                    //soa 
+                    String customer_id = to_sales.charge_customer_id;
+                    String customer_name = to_sales.charge_customer_name;
+                    String ar_no = S1_accounts_receivable.increment_id();
+                    String user_name = "";
+                    if (Users.user_name == null) {
+                        user_name = "";
+                    }
+                    double discount_amount = 0;
+                    double discount_rate = 0;
+                    String discount = "";
+                    int status = 0;
+                    double term = 30;
+                    String date_applied = synsoftech.util.DateType.sf.format(new Date());
+                    double paid = 0;
+                    String date_paid = date_applied;
+                    String remarks = "";
+                    String type = "AR";
+                    String or_no = "";
+                    String ci_no = to_sales.charge_reference_no;
+                    String trust_receipt = "";
+                    String soa_id = S1_sales_on_account.increment_id();
+                    String user_id = MyUser.getUser_id();
+                    String user_screen_name = MyUser.getUser_screen_name();
+                    String branch = to_sales.branch;
+                    String branch_id = to_sales.branch_id;
+                    String location = to_sales.location;
+                    String location_id = to_sales.location_id;
+                    S1_accounts_receivable.to_accounts_receivable to2 = new S1_accounts_receivable.to_accounts_receivable(true, -1, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
+
+                    String s11 = "insert into  accounts_receivable("
+                            + "customer_id"
+                            + ",customer_name"
+                            + ",ar_no"
+                            + ",date_added"
+                            + ",user_name"
+                            + ",amount"
+                            + ",discount_amount"
+                            + ",discount_rate"
+                            + ",discount"
+                            + ",status"
+                            + ",term"
+                            + ",date_applied"
+                            + ",paid"
+                            + ",date_paid"
+                            + ",remarks"
+                            + ",type"
+                            + ",or_no"
+                            + ",ci_no"
+                            + ",trust_receipt"
+                            + ",soa_id"
+                            + ",soa_type"
+                            + ",soa_type_id"
+                            + ",reference_no"
+                            + ",user_id"
+                            + ",user_screen_name"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + ")values("
+                            + ":customer_id"
+                            + ",:customer_name"
+                            + ",:ar_no"
+                            + ",:date_added"
+                            + ",:user_name"
+                            + ",:amount"
+                            + ",:discount_amount"
+                            + ",:discount_rate"
+                            + ",:discount"
+                            + ",:status"
+                            + ",:term"
+                            + ",:date_applied"
+                            + ",:paid"
+                            + ",:date_paid"
+                            + ",:remarks"
+                            + ",:type"
+                            + ",:or_no"
+                            + ",:ci_no"
+                            + ",:trust_receipt"
+                            + ",:soa_id"
+                            + ",:soa_type"
+                            + ",:soa_type_id"
+                            + ",:reference_no"
+                            + ",:user_id"
+                            + ",:user_screen_name"
+                            + ",:branch"
+                            + ",:branch_id"
+                            + ",:location"
+                            + ",:location_id"
+                            + ")";
+
+                    s11 = SqlStringUtil.parse(s11).
+                            setString("customer_id", to2.customer_id).
+                            setString("customer_name", to2.customer_name).
+                            setString("ar_no", to2.ar_no).
+                            setString("date_added", to2.date_added).
+                            setString("user_name", to2.user_name).
+                            setNumber("amount", to2.amount).
+                            setNumber("discount_amount", to2.discount_amount).
+                            setNumber("discount_rate", to2.discount_rate).
+                            setString("discount", to2.discount).
+                            setNumber("status", to2.status).
+                            setNumber("term", to2.term).
+                            setString("date_applied", to2.date_applied).
+                            setNumber("paid", to2.paid).
+                            setString("date_paid", to2.date_paid).
+                            setString("remarks", to2.remarks).
+                            setString("type", to2.type).
+                            setString("or_no", to2.or_no).
+                            setString("ci_no", to2.ci_no).
+                            setString("trust_receipt", to2.trust_receipt).
+                            setString("soa_id", to2.soa_id).
+                            setString("soa_type", to2.soa_type).
+                            setString("soa_type_id", to2.soa_type_id).
+                            setString("reference_no", to2.reference_no).
+                            setString("user_id", to2.user_id).
+                            setString("user_screen_name", to2.user_screen_name).
+                            setString("branch", to2.branch).
+                            setString("branch_id", to2.branch_id).
+                            setString("location", to2.location).
+                            setString("location_id", to2.location_id).
+                            ok();
+
+                    stmt.addBatch(s11);
+
+                    Customers.to_customers cus = ret_customer_balance(to2.customer_id);
+                    double new_balance = cus.balance + to2.amount;
+                    String s12 = "update  customers set "
+                            + " balance= :balance"
+                            + " where "
+                            + " customer_no ='" + to2.customer_id + "' "
+                            + " ";
+                    s12 = SqlStringUtil.parse(s12).
+                            setNumber("balance", new_balance).
+                            ok();
+                    stmt.addBatch(s12);
+
+                }
+                for (Parse_sales.field.items to_sale_items : to_sales.items) {
+
+                    Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id);
+
+                    String s2 = "insert into sale_items("
+                            + "sales_no"
+                            + ",item_code"
+                            + ",barcode"
+                            + ",description"
+                            + ",generic_name"
+                            + ",item_type"
+                            + ",supplier_name"
+                            + ",supplier_id"
+                            + ",serial_no"
+                            + ",product_qty"
+                            + ",unit"
+                            + ",conversion"
+                            + ",selling_price"
+                            + ",date_added"
+                            + ",user_id"
+                            + ",user_screen_name"
+                            + ",status"
+                            + ",is_vatable"
+                            + ",selling_type"
+                            + ",discount_name"
+                            + ",discount_rate"
+                            + ",discount_amount"
+                            + ",discount_customer_name"
+                            + ",discount_customer_id"
+                            + ",branch"
+                            + ",branch_code"
+                            + ",location"
+                            + ",location_id"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_classification"
+                            + ",sub_classification_id"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",addtl_amount"
+                            + ",wtax"
+                            + ")values("
+                            + ":sales_no"
+                            + ",:item_code"
+                            + ",:barcode"
+                            + ",:description"
+                            + ",:generic_name"
+                            + ",:item_type"
+                            + ",:supplier_name"
+                            + ",:supplier_id"
+                            + ",:serial_no"
+                            + ",:product_qty"
+                            + ",:unit"
+                            + ",:conversion"
+                            + ",:selling_price"
+                            + ",:date_added"
+                            + ",:user_id"
+                            + ",:user_screen_name"
+                            + ",:status"
+                            + ",:is_vatable"
+                            + ",:selling_type"
+                            + ",:discount_name"
+                            + ",:discount_rate"
+                            + ",:discount_amount"
+                            + ",:discount_customer_name"
+                            + ",:discount_customer_id"
+                            + ",:branch"
+                            + ",:branch_code"
+                            + ",:location"
+                            + ",:location_id"
+                            + ",:category"
+                            + ",:category_id"
+                            + ",:classification"
+                            + ",:classification_id"
+                            + ",:sub_classification"
+                            + ",:sub_classification_id"
+                            + ",:brand"
+                            + ",:brand_id"
+                            + ",:model"
+                            + ",:model_id"
+                            + ",:addtl_amount"
+                            + ",:wtax"
+                            + ")";
+
+                    s2 = SqlStringUtil.parse(s2)
+                            .setString("sales_no", to_sales.sales_no)
+                            .setString("item_code", to_sale_items.item_code)
+                            .setString("barcode", to_sale_items.barcode)
+                            .setString("description", tt.description)
+                            .setString("generic_name", tt.generic_name)
+                            .setString("item_type", tt.item_type)
+                            .setString("supplier_name", tt.supplier)
+                            .setString("supplier_id", tt.supplier_id)
+                            .setString("serial_no", tt.serial_no)
+                            .setNumber("product_qty", to_sale_items.qty)
+                            .setString("unit", tt.unit)
+                            .setNumber("conversion", tt.conversion)
+                            .setNumber("selling_price", to_sale_items.selling_price)
+                            .setString("date_added", to_sales.date_added)
+                            .setString("user_id", to_sales.user_id)
+                            .setString("user_screen_name", to_sales.user_screen_name)
+                            .setNumber("status", to_sales.status)
+                            .setNumber("is_vatable", to_sale_items.is_vatable)
+                            .setNumber("selling_type", tt.selling_type)
+                            .setString("discount_name", to_sale_items.discount_name)
+                            .setNumber("discount_rate", to_sale_items.discount_rate)
+                            .setNumber("discount_amount", to_sale_items.discount_amount)
+                            .setString("discount_customer_name", to_sale_items.discount_customer_name)
+                            .setString("discount_customer_id", to_sale_items.discount_customer_id)
+                            .setString("branch", to_sale_items.branch)
+                            .setString("branch_code", to_sale_items.branch_id)
+                            .setString("location", to_sale_items.location)
+                            .setString("location_id", to_sale_items.location_id)
+                            .setString("category", tt.category)
+                            .setString("category_id", tt.category_id)
+                            .setString("classification", tt.classification)
+                            .setString("classification_id", tt.classification_id)
+                            .setString("sub_classification", tt.sub_classification)
+                            .setString("sub_classification_id", tt.sub_classification_id)
+                            .setString("brand", tt.brand)
+                            .setString("brand_id", tt.brand_id)
+                            .setString("model", tt.model)
+                            .setString("model_id", tt.model_id)
+                            .setNumber("addtl_amount", to_sale_items.addtl_amount)
+                            .setNumber("wtax", to_sale_items.wtax)
+                            .ok();
+
+                    stmt.addBatch(s2);
+
+                    double new_qty = tt.product_qty - (tt.conversion * tt.product_qty);
+
+                    String serial_no = Segregator.this_shit(tt.serial_no, to_sale_items.serial_nos);
+                    String s4 = " update inventory_barcodes set "
+                            + " product_qty='" + new_qty + "'"
+                            + " where  main_barcode= '" + to_sale_items.item_code + "' and location_id='" + to_sale_items.location_id + "' "
+                            + "";
+                    PreparedStatement stmt4 = conn.prepareStatement(s4);
+                    stmt.addBatch(s4);
+
+                }
+
+                stmt.executeBatch();
+                System.out.println("Sales, Updated!");
+            }
+            //</editor-fold>
+            conn.commit();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void receipts() {
+        try {
+
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            //<editor-fold defaultstate="collapsed" desc=" Receipts ">
+            //</editor-fold>
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void returned_items(List<Parse_sale_item_replacements> l_item_replacements) {
+        try {
+
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            //<editor-fold defaultstate="collapsed" desc=" returned items ">
+            for (Parse_sale_item_replacements to_sale_items : l_item_replacements) {
+                System.out.println("Code: " + to_sale_items.item_code);
+
+                System.out.println("Qty: " + to_sale_items.product_qty);
+                Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id);
+
+                String s5 = "insert into sale_item_replacements("
+                        + "sales_no"
+                        + ",item_code"
+                        + ",barcode"
+                        + ",description"
+                        + ",generic_name"
+                        + ",item_type"
+                        + ",supplier_name"
+                        + ",supplier_id"
+                        + ",serial_no"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",selling_price"
+                        + ",date_added"
+                        + ",user_id"
+                        + ",user_screen_name"
+                        + ",status"
+                        + ",is_vatable"
+                        + ",selling_type"
+                        + ",discount_name"
+                        + ",discount_rate"
+                        + ",discount_amount"
+                        + ",discount_customer_name"
+                        + ",discount_customer_id"
+                        + ",branch"
+                        + ",branch_code"
+                        + ",location"
+                        + ",location_id"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",is_replacement"
+                        + ")values("
+                        + ":sales_no"
+                        + ",:item_code"
+                        + ",:barcode"
+                        + ",:description"
+                        + ",:generic_name"
+                        + ",:item_type"
+                        + ",:supplier_name"
+                        + ",:supplier_id"
+                        + ",:serial_no"
+                        + ",:product_qty"
+                        + ",:unit"
+                        + ",:conversion"
+                        + ",:selling_price"
+                        + ",:date_added"
+                        + ",:user_id"
+                        + ",:user_screen_name"
+                        + ",:status"
+                        + ",:is_vatable"
+                        + ",:selling_type"
+                        + ",:discount_name"
+                        + ",:discount_rate"
+                        + ",:discount_amount"
+                        + ",:discount_customer_name"
+                        + ",:discount_customer_id"
+                        + ",:branch"
+                        + ",:branch_code"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_classification"
+                        + ",:sub_classification_id"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:is_replacement"
+                        + ")";
+
+                double qty = 0;
+
+                if (to_sale_items.is_replacement == 1) {
+                    qty = tt.product_qty - to_sale_items.product_qty;
+                } else {
+                    qty = tt.product_qty + to_sale_items.product_qty;
+                }
+                s5 = SqlStringUtil.parse(s5)
+                        .setString("sales_no", to_sale_items.sales_no)
+                        .setString("item_code", to_sale_items.item_code)
+                        .setString("barcode", to_sale_items.barcode)
+                        .setString("description", tt.description)
+                        .setString("generic_name", tt.generic_name)
+                        .setString("item_type", tt.item_type)
+                        .setString("supplier_name", tt.supplier)
+                        .setString("supplier_id", tt.supplier_id)
+                        .setString("serial_no", to_sale_items.serial_no)
+                        .setNumber("product_qty", to_sale_items.product_qty)
+                        .setString("unit", to_sale_items.unit)
+                        .setNumber("conversion", to_sale_items.conversion)
+                        .setNumber("selling_price", to_sale_items.selling_price)
+                        .setString("date_added", DateType.now())
+                        .setString("user_id", to_sale_items.user_id)
+                        .setString("user_screen_name", to_sale_items.user_screen_name)
+                        .setNumber("status", to_sale_items.status)
+                        .setNumber("is_vatable", tt.vatable)
+                        .setNumber("selling_type", tt.selling_type)
+                        .setString("discount_name", to_sale_items.discount_name)
+                        .setNumber("discount_rate", to_sale_items.discount_rate)
+                        .setNumber("discount_amount", to_sale_items.discount_amount)
+                        .setString("discount_customer_name", to_sale_items.discount_customer_name)
+                        .setString("discount_customer_id", to_sale_items.discount_customer_id)
+                        .setString("branch", to_sale_items.branch)
+                        .setString("branch_code", to_sale_items.branch_code)
+                        .setString("location", to_sale_items.location)
+                        .setString("location_id", to_sale_items.location_id)
+                        .setString("category", tt.category)
+                        .setString("category_id", tt.category_id)
+                        .setString("classification", tt.classification)
+                        .setString("classification_id", tt.classification_id)
+                        .setString("sub_classification", tt.sub_classification)
+                        .setString("sub_classification_id", tt.sub_classification_id)
+                        .setString("brand", tt.brand)
+                        .setString("brand_id", tt.brand_id)
+                        .setString("model", tt.model)
+                        .setString("model_id", tt.model_id)
+                        .setNumber("is_replacement", to_sale_items.is_replacement)
+                        .ok();
+
+                PreparedStatement stmt2 = conn.prepareStatement(s5);
+                stmt2.addBatch(s5);
+
+                String s0 = "update inventory_barcodes set "
+                        + " product_qty= :product_qty "
+                        + " where "
+                        + " main_barcode ='" + to_sale_items.item_code + "' "
+                        + " and location_id ='" + to_sale_items.location_id + "' "
+                        + " ";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setNumber("product_qty", qty)
+                        .ok();
+
+                stmt2.addBatch(s0);
+
+                if (to_sale_items.is_replacement == 0) {
+                    String s2 = "delete from sale_items where sales_no='" + to_sale_items.sales_no + "' and item_code='" + to_sale_items.item_code + "' ";
+                    stmt2.addBatch(s2);
+                }
+
+                stmt2.executeBatch();
+                System.out.println("Adjustments Updated!");
+
+            }
+            //</editor-fold>
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void charge_in_advance(List<Parse_charged_items> l_charged_items) {
+        try {
+
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            //<editor-fold defaultstate="collapsed" desc=" charge in advance ">
+
+            for (Parse_charged_items to_charge_in_advance_items : l_charged_items) {
+
+                Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_charge_in_advance_items.item_code, to_charge_in_advance_items.barcode, to_charge_in_advance_items.location_id);
+
+                double new_qty = tt.product_qty - (to_charge_in_advance_items.conversion * to_charge_in_advance_items.product_qty);
+                if (to_charge_in_advance_items.status == 1) {
+                    new_qty = tt.product_qty + (to_charge_in_advance_items.conversion * to_charge_in_advance_items.product_qty);
+                }
+
+                String serial_no = Segregator.this_shit(tt.serial_no, to_charge_in_advance_items.serial_no);
+
+                String s0 = "insert into charge_in_advance_items("
+                        + "customer_id"
+                        + ",customer_name"
+                        + ",ar_id"
+                        + ",ar_no"
+                        + ",date_applied"
+                        + ",reference_no"
+                        + ",soa_type"
+                        + ",soa_type_id"
+                        + ",user_screen_name"
+                        + ",user_id"
+                        + ",remarks"
+                        + ",item_code"
+                        + ",barcode"
+                        + ",description"
+                        + ",generic_name"
+                        + ",item_type"
+                        + ",supplier_name"
+                        + ",supplier_id"
+                        + ",serial_no"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",selling_price"
+                        + ",date_added"
+                        + ",status"
+                        + ",is_vatable"
+                        + ",selling_type"
+                        + ",discount_name"
+                        + ",discount_rate"
+                        + ",discount_amount"
+                        + ",discount_customer_name"
+                        + ",discount_customer_id"
+                        + ",branch"
+                        + ",branch_code"
+                        + ",location"
+                        + ",location_id"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",addtl_amount"
+                        + ",wtax"
+                        + ")values("
+                        + ":customer_id"
+                        + ",:customer_name"
+                        + ",:ar_id"
+                        + ",:ar_no"
+                        + ",:date_applied"
+                        + ",:reference_no"
+                        + ",:soa_type"
+                        + ",:soa_type_id"
+                        + ",:user_screen_name"
+                        + ",:user_id"
+                        + ",:remarks"
+                        + ",:item_code"
+                        + ",:barcode"
+                        + ",:description"
+                        + ",:generic_name"
+                        + ",:item_type"
+                        + ",:supplier_name"
+                        + ",:supplier_id"
+                        + ",:serial_no"
+                        + ",:product_qty"
+                        + ",:unit"
+                        + ",:conversion"
+                        + ",:selling_price"
+                        + ",:date_added"
+                        + ",:status"
+                        + ",:is_vatable"
+                        + ",:selling_type"
+                        + ",:discount_name"
+                        + ",:discount_rate"
+                        + ",:discount_amount"
+                        + ",:discount_customer_name"
+                        + ",:discount_customer_id"
+                        + ",:branch"
+                        + ",:branch_code"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_classification"
+                        + ",:sub_classification_id"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:addtl_amount"
+                        + ",:wtax"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setString("customer_id", to_charge_in_advance_items.customer_id)
+                        .setString("customer_name", to_charge_in_advance_items.customer_name)
+                        .setString("ar_id", to_charge_in_advance_items.ar_id)
+                        .setString("ar_no", to_charge_in_advance_items.ar_no)
+                        .setString("date_applied", to_charge_in_advance_items.date_applied)
+                        .setString("reference_no", to_charge_in_advance_items.reference_no)
+                        .setString("soa_type", to_charge_in_advance_items.soa_type)
+                        .setString("soa_type_id", to_charge_in_advance_items.soa_type_id)
+                        .setString("user_screen_name", to_charge_in_advance_items.user_screen_name)
+                        .setString("user_id", to_charge_in_advance_items.user_id)
+                        .setString("remarks", to_charge_in_advance_items.remarks)
+                        .setString("item_code", to_charge_in_advance_items.item_code)
+                        .setString("barcode", to_charge_in_advance_items.barcode)
+                        .setString("description", tt.description)
+                        .setString("generic_name", tt.generic_name)
+                        .setString("item_type", to_charge_in_advance_items.item_type)
+                        .setString("supplier_name", tt.supplier)
+                        .setString("supplier_id", tt.supplier_id)
+                        .setString("serial_no", to_charge_in_advance_items.serial_no)
+                        .setNumber("product_qty", to_charge_in_advance_items.product_qty)
+                        .setString("unit", to_charge_in_advance_items.unit)
+                        .setNumber("conversion", to_charge_in_advance_items.conversion)
+                        .setNumber("selling_price", to_charge_in_advance_items.selling_price)
+                        .setString("date_added", to_charge_in_advance_items.date_added)
+                        .setNumber("status", to_charge_in_advance_items.status)
+                        .setNumber("is_vatable", tt.vatable)
+                        .setNumber("selling_type", tt.selling_type)
+                        .setString("discount_name", to_charge_in_advance_items.discount_name)
+                        .setNumber("discount_rate", to_charge_in_advance_items.discount_rate)
+                        .setNumber("discount_amount", to_charge_in_advance_items.discount_amount)
+                        .setString("discount_customer_name", to_charge_in_advance_items.discount_customer_name)
+                        .setString("discount_customer_id", to_charge_in_advance_items.discount_customer_id)
+                        .setString("branch", to_charge_in_advance_items.branch)
+                        .setString("branch_code", to_charge_in_advance_items.branch_code)
+                        .setString("location", to_charge_in_advance_items.location)
+                        .setString("location_id", to_charge_in_advance_items.location_id)
+                        .setString("category", tt.category)
+                        .setString("category_id", tt.category_id)
+                        .setString("classification", tt.classification)
+                        .setString("classification_id", tt.classification_id)
+                        .setString("sub_classification", tt.sub_classification)
+                        .setString("sub_classification_id", tt.sub_classification_id)
+                        .setString("brand", tt.brand)
+                        .setString("brand_id", tt.brand_id)
+                        .setString("model", tt.model)
+                        .setString("model_id", tt.model_id)
+                        .setNumber("addtl_amount", to_charge_in_advance_items.addtl_amount)
+                        .setNumber("wtax", to_charge_in_advance_items.wtax)
+                        .ok();
+
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+                Lg.s(Charge_in_advance_items.class, "Successfully Added");
+
+                String s4 = "update inventory_barcodes set "
+                        + " product_qty='" + new_qty + "'"
+                        + " where  main_barcode= '" + to_charge_in_advance_items.item_code + "' "
+                        + " and location_id='" + to_charge_in_advance_items.location_id + "' "
+                        + "";
+                PreparedStatement stmt4 = conn.prepareStatement(s4);
+                stmt4.execute();
+
+            }
+            //</editor-fold>
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void cash_drawers(List<Parse_cash_drawers> l_cash_drawers) {
+        try {
+
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            //<editor-fold defaultstate="collapsed" desc=" Cash Drawers ">
+            for (Parse_cash_drawers to_cash_drawer : l_cash_drawers) {
+                String s0 = "insert into  cash_drawer("
+                        + "session_no"
+                        + ",user_name"
+                        + ",screen_name"
+                        + ",time_in"
+                        + ",time_out"
+                        + ",amount"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ",user_id"
+                        + ",user_screen_name"
+                        + ")values("
+                        + ":session_no"
+                        + ",:user_name"
+                        + ",:screen_name"
+                        + ",:time_in"
+                        + ",:time_out"
+                        + ",:amount"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:user_id"
+                        + ",:user_screen_name"
+                        + ")";
+
+                String out = to_cash_drawer.time_out;
+                if (to_cash_drawer.time_out == null) {
+                    out = to_cash_drawer.time_in;
+                }
+
+                s0 = SqlStringUtil.parse(s0).
+                        setString("session_no", to_cash_drawer.session_no).
+                        setString("user_name", to_cash_drawer.user_name).
+                        setString("screen_name", to_cash_drawer.screen_name).
+                        setString("time_in", to_cash_drawer.time_in).
+                        setString("time_out", to_cash_drawer.time_in).
+                        setNumber("amount", to_cash_drawer.amount).
+                        setString("branch", to_cash_drawer.branch).
+                        setString("branch_id", to_cash_drawer.branch_id).
+                        setString("location", to_cash_drawer.location).
+                        setString("location_id", to_cash_drawer.location_id).
+                        setString("user_id", to_cash_drawer.user_id).
+                        setString("user_screen_name", to_cash_drawer.user_screen_name).
+                        ok();
+
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+                Lg.s(S1_cash_drawer.class, "Cash Drawer: Successfully Added!");
+            }
+
+            //</editor-fold>
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void main(String[] args) {
+        Grab_branches_updates gbu = new Grab_branches_updates();
+        gbu.countdown();
+    }
+
+    int hours = 12;
+    Timer timer = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Timer: " + hours);
+            hours--;
+        }
+    });
+    private void countdown() {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    timer.start();
+                }
+            });
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Grab_branches_updates.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Grab_branches_updates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

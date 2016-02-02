@@ -447,7 +447,7 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                String where = " where status=0 and Date(date_added)='" + "2017-01-04" + "' ";
+                String where = " where status=0 and Date(date_added)='" + "2017-01-08" + "' ";
                 List<Branch_local_uploads.to_branch_local_uploads> datas2 = Branch_local_uploads.ret_data(where);
                 System.out.println(datas2.size());
 
@@ -522,10 +522,23 @@ public class Dlg_branch_local_downloads extends javax.swing.JDialog {
             @Override
             public void run() {
 
-                Grab_branches_updates.install_updates(l_replenishments, l_inventory_counts, l_adjustments, l_stock_transfers);
+                Grab_branches_updates.replenishments(l_replenishments);
+                Grab_branches_updates.inventory_count(l_inventory_counts);
+                Grab_branches_updates.adjustments(l_adjustments);
+                Grab_branches_updates.stock_transfers(l_stock_transfers);
+                Grab_branches_updates.receipts();
+                Grab_branches_updates.sales(l_sales);
+                Grab_branches_updates.returned_items(l_returned_items);
+                Grab_branches_updates.charge_in_advance(l_charged_items);
+                Grab_branches_updates.cash_drawers(l_cash_drawers);
                 l_replenishments.clear();
                 l_inventory_counts.clear();
                 l_adjustments.clear();
+                l_stock_transfers.clear();
+                l_sales.clear();
+                l_returned_items.clear();
+                l_charged_items.clear();
+                l_cash_drawers.clear();
 
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);

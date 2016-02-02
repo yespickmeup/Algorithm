@@ -126,7 +126,7 @@ public class Parse_sale_item_replacements {
                         sales_no = c.substring(14, c.length() - 1);
                     }
                     if (x == 1) {
-                        item_code = c.substring(13, c.length() - 1);
+                        item_code = c.substring(14, c.length() - 1);
                     }
                     if (x == 2) {
                         barcode = c.substring(11, c.length() - 1);

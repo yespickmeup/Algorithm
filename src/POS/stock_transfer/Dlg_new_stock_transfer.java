@@ -1573,17 +1573,27 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                 + " and"
                 + " transaction_no like '%" + jTextField1.getText() + "%'   ";
+        String where2 = " or Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                + " and"
+                + " transaction_no like '%" + jTextField1.getText() + "%'   ";
         if (!jCheckBox1.isSelected()) {
             where = " where transaction_no like '%" + jTextField1.getText() + "%'  ";
+            where2 = " or transaction_no like '%" + jTextField1.getText() + "%'  ";
         }
         if (jCheckBox3.isSelected()) {
             where = where + " and status=0 ";
+            where2 = where2 + " and status=0 ";
         }
         if (jCheckBox4.isSelected()) {
             where = where + " and status=1 ";
+            where2 = where2 + " and status=1 ";
         }
+
         where = where + " and at_branch_id='" + tf_from_branch_id1.getText() + "' ";
+        where2 = where2 + " and to_branch_id='" + tf_from_branch_id1.getText() + "' ";
+        where = where + where2;
         where = where + " order by id desc ";
+        System.out.println(where);
         loadData_stock_transfers(Stock_transfers.ret_data(where));
         jLabel13.setText("" + tbl_stock_transfers_ALM.size());
     }
@@ -2246,7 +2256,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         if (col == 6) {
             delete_transfer();
         }
-        if (col == 7) {         
+        if (col == 7) {
             get_customers_aging();
         }
     }

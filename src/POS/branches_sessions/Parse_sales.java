@@ -547,7 +547,7 @@ public class Parse_sales {
                                 }
                                 if (i == 2) {
                                     qty = FitIn.toDouble(item.substring(7, item.length() - 1));
-//                                    System.out.println("Qty = " + qty);
+//                                    System.out.println("Qty = " + item.substring(0, item.length() - 1)+ " = "+qty);
                                 }
                                 if (i == 3) {
                                     selling_price = FitIn.toDouble(item.substring(17, item.length() - 1));

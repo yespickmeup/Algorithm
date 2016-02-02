@@ -285,11 +285,12 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                                 .addComponent(jLabel22)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 57, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -300,10 +301,10 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -506,7 +507,6 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
         jButton2.setEnabled(false);
         jButton1.setEnabled(false);
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 int connected = MyConnection.check_cloud_connection();
@@ -528,7 +528,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         Logger.getLogger(Dlg_branch_local_uploads.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
                 date_from = "2017-01-03";
                 String now = DateType.sf.format(new Date());
                 System.out.println("Last Cloud upload date: " + date_from);
@@ -541,7 +541,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 jLabel2.setForeground(new java.awt.Color(0, 102, 255));
                 if (!date_from.isEmpty()) {
                     String path = System.getProperty("user.home");
-                    
+
                     List<String> days = Branch_local_uploads.getDates(date_from);
                     int i = 1;
                     for (String s : days) {
@@ -676,11 +676,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                         String location = my_location;
                         String location_id = my_location_id;
 
-                        Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments
-                                , file_inventory_counts, file_adjustments
-                                , file_stock_transfers, file_receipts, file_sales, file_returned_items, file_charged_items
-                                , file_rmas, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name
-                                , branch, branch_id, location, location_id);
+                        Branch_local_uploads.to_branch_local_uploads upload = new Branch_local_uploads.to_branch_local_uploads(id, file_replenishments, file_inventory_counts, file_adjustments, file_stock_transfers, file_receipts, file_sales, file_returned_items, file_charged_items, file_rmas, file_item_maintenances, file_cash_drawers, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
                         to_upload.add(upload);
                         System.out.println("************************************************");
                         i++;

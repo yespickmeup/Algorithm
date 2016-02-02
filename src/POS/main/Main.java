@@ -26,7 +26,6 @@ public class Main {
 
     private void start() {
 
-
         String license = System.getProperty("license", "full");
 
         if (!license.equalsIgnoreCase("full")) {
@@ -91,7 +90,7 @@ public class Main {
     public static void main(final String[] args) {
 
         try {
-            String conf = (args.length > 0? args[0]
+            String conf = (args.length > 0 ? args[0]
                     : null);
             Properties prop = new Properties();
 
@@ -147,8 +146,8 @@ public class Main {
             System.setProperty("branch", prop.getProperty("branch", "Dumaguete"));
             System.setProperty("license", prop.getProperty("license", "full"));
             System.setProperty("acct_no", prop.getProperty("acct_no", "Accreditation No. 000-0000000000-000000 "));
-            
-            
+            System.setProperty("is_main_server", prop.getProperty("is_main_server", "false"));
+
         } catch (IOException ex) {
 
             throw new RuntimeException(ex);

@@ -1506,7 +1506,7 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                         double addtl_amount = rs7.getDouble(48);
                         double wtax = rs7.getDouble(49);
 
-                        String transaction_type = "Charge in Advance";
+                        String transaction_type = "Charge in Advance[-]";
                         String date = POS.util.DateType.convert_slash_datetime3(date_added);
                         String in = "";
                         String out = FitIn.fmt_woc(product_qty);
@@ -1530,146 +1530,18 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                         String cost1 = "";
                         String price1 = FitIn.fmt_wc_0(selling_price);
                         String months = DateType.convert_datetime_to_month(date_added);
-                        Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                        charge_in_advance.add(field);
-                    }
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Charge in advance[-] ">
-                    String s8 = "select "
-                            + "id"
-                            + ",customer_id"
-                            + ",customer_name"
-                            + ",ar_id"
-                            + ",ar_no"
-                            + ",date_applied"
-                            + ",reference_no"
-                            + ",soa_type"
-                            + ",soa_type_id"
-                            + ",user_screen_name"
-                            + ",user_id"
-                            + ",remarks"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",generic_name"
-                            + ",item_type"
-                            + ",supplier_name"
-                            + ",supplier_id"
-                            + ",serial_no"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",conversion"
-                            + ",selling_price"
-                            + ",date_added"
-                            + ",status"
-                            + ",is_vatable"
-                            + ",selling_type"
-                            + ",discount_name"
-                            + ",discount_rate"
-                            + ",discount_amount"
-                            + ",discount_customer_name"
-                            + ",discount_customer_id"
-                            + ",branch"
-                            + ",branch_code"
-                            + ",location"
-                            + ",location_id"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_classification"
-                            + ",sub_classification_id"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",addtl_amount"
-                            + ",wtax"
-                            + " from charge_in_advance_cancelled_items"
-                            + " " + where;
 
-                    Statement stmt8 = conn.createStatement();
-                    ResultSet rs8 = stmt8.executeQuery(s8);
-                    while (rs8.next()) {
-                        int id = rs8.getInt(1);
-                        String customer_id = rs8.getString(2);
-                        String customer_name = rs8.getString(3);
-                        String ar_id = rs8.getString(4);
-                        String ar_no = rs8.getString(5);
-                        String date_applied = rs8.getString(6);
-                        String reference_no = rs8.getString(7);
-                        String soa_type = rs8.getString(8);
-                        String soa_type_id = rs8.getString(9);
-                        String user_screen_name = rs8.getString(10);
-                        String user_id = rs8.getString(11);
-                        String remarks = rs8.getString(12);
-                        String item_code = rs8.getString(13);
-                        String barcode = rs8.getString(14);
-                        String description = rs8.getString(15);
-                        String generic_name = rs8.getString(16);
-                        String item_type = rs8.getString(17);
-                        String supplier_name = rs8.getString(18);
-                        String supplier_id = rs8.getString(19);
-                        String serial_no = rs8.getString(20);
-                        double product_qty = rs8.getDouble(21);
-                        String unit = rs8.getString(22);
-                        double conversion = rs8.getDouble(23);
-                        double selling_price = rs8.getDouble(24);
-                        String date_added = rs8.getString(25);
-                        int status = rs8.getInt(26);
-                        int is_vatable = rs8.getInt(27);
-                        int selling_type = rs8.getInt(28);
-                        String discount_name = rs8.getString(29);
-                        double discount_rate = rs8.getDouble(30);
-                        double discount_amount = rs8.getDouble(31);
-                        String discount_customer_name = rs8.getString(32);
-                        String discount_customer_id = rs8.getString(33);
-                        String branch = rs8.getString(34);
-                        String branch_code = rs8.getString(35);
-                        String location = rs8.getString(36);
-                        String location_id = rs8.getString(37);
-                        String category = rs8.getString(38);
-                        String category_id = rs8.getString(39);
-                        String classification = rs8.getString(40);
-                        String classification_id = rs8.getString(41);
-                        String sub_classification = rs8.getString(42);
-                        String sub_classification_id = rs8.getString(43);
-                        String brand = rs8.getString(44);
-                        String brand_id = rs8.getString(45);
-                        String model = rs8.getString(46);
-                        String model_id = rs8.getString(47);
-                        double addtl_amount = rs8.getDouble(48);
-                        double wtax = rs8.getDouble(49);
-
-                        String transaction_type = "Charge in Adv. [X]";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = FitIn.fmt_woc(product_qty);
-                        String out = "";
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_code;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_screen_name;
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                        if (status == 0) {
+                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            charge_in_advance.add(field);
+                        } else {
+                            Srpt_item_ledger.field field = new Srpt_item_ledger.field("Charge in Advance[+]", date, out, "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            charge_in_advance.add(field);
                         }
-                        String transaction_no = "" + ar_no;
-                        String cost1 = "";
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        String months = DateType.convert_datetime_to_month(date_added);
-                        Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                        charge_in_advance_cancelled.add(field);
-                    }
 
+                    }
                     //</editor-fold>
+
                     //<editor-fold defaultstate="collapsed" desc=" Replenishment ">
                     String s9 = "select "
                             + "id"
@@ -1742,7 +1614,7 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                         replenishments.add(field);
                     }
                     //</editor-fold>
-                    
+
                     fields.addAll(inventory_count);
                     fields.addAll(sales);
                     fields.addAll(receipts);
@@ -1808,7 +1680,7 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                         }
                     }
                 }
-                
+
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String contact_no = System.getProperty("telephone_number", "");
                 String address = System.getProperty("address", "Dumaguete City");

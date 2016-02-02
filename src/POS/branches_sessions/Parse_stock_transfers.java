@@ -151,7 +151,7 @@ public class Parse_stock_transfers {
                 }
 
                 if (i == 5) {
-                    to_branch_id = column.substring(17, column.length() - 1);
+                    to_branch_id = column.substring(16, column.length() - 1);
                 }
                 if (i == 6) {
                     to_location = column.substring(15, column.length() - 1);
@@ -205,6 +205,7 @@ public class Parse_stock_transfers {
                         double conversion = 0;
                         double selling_price = 0;
                         double cost = 0;
+                        String barcodes = "";
                         String serial_nos = "";
                         int ii = 0;
 
@@ -233,6 +234,9 @@ public class Parse_stock_transfers {
                                     cost = FitIn.toDouble(itee.substring(9, itee.length() - 1));
                                 }
                                 if (ii == 7) {
+                                    barcodes = itee.substring(12, itee.length() - 1);
+                                }
+                                if (ii == 8) {
                                     serial_nos = itee.substring(14, itee.length() - 1);
                                 }
                                 ii++;

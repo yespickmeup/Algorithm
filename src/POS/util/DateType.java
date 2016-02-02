@@ -37,8 +37,13 @@ public class DateType {
     public static SimpleDateFormat day_and_time = new SimpleDateFormat("MMMMMMMMMM dd, yyyy HH:mm aa");
     public static SimpleDateFormat slash = new SimpleDateFormat("MM/dd/yyyy");
     public static SimpleDateFormat slash_w_time = new SimpleDateFormat("MM/dd/yyyy HH:mm aa");
-    public static SimpleDateFormat time3 = new SimpleDateFormat("hh:mm:ss aa");
+    public static SimpleDateFormat time3 = new SimpleDateFormat("HH:mm:ss aa");
     public static SimpleDateFormat backup = new SimpleDateFormat("MM_dd_yyyy_HH_mm_ss");
+
+    public static SimpleDateFormat hour = new SimpleDateFormat("HH");
+    public static SimpleDateFormat minute = new SimpleDateFormat("mm");
+    public static SimpleDateFormat seconds = new SimpleDateFormat("ss");
+
     public static void main(String[] args) {
         System.out.println(sf1.format(new Date()));
     }
@@ -203,9 +208,9 @@ public class DateType {
         return date;
     }
 
-      public static String convert_datetime_to_month(String datetime) {
+    public static String convert_datetime_to_month(String datetime) {
         String date = "";
-        
+
         Date d = new Date();
         if (datetime.isEmpty()) {
             datetime = DateType.datetime.format(new Date());
@@ -219,7 +224,7 @@ public class DateType {
         date = DateType.m.format(d);
         return date;
     }
-      
+
     public static List<String> listMonths() {
         List<String> datas = new ArrayList();
         datas.add("January");
