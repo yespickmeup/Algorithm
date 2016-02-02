@@ -427,6 +427,8 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
     List<Branch_local_uploads.to_branch_local_uploads> to_upload = new ArrayList();
 
     private void start_synching() {
+        
+        
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
         jButton2.setEnabled(false);

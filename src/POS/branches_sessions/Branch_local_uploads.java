@@ -370,7 +370,6 @@ public class Branch_local_uploads {
                 Date from1 = DateType.sf.parse(from);
                 Date inc = DateUtils1.add_day(from1, i);
                 String date = DateType.sf.format(inc);
-                System.out.println(date);
                 days.add(date);
             }
 
