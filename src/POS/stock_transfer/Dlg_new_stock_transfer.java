@@ -1297,11 +1297,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jTextField2.setEnabled(true);
         jButton5.setEnabled(false);
         jButton1.setEnabled(true);
-
     }
 
     private void init_no() {
-        jTextField2.setText(Stock_transfers.increment_id());
+        jTextField2.setText(Stock_transfers.increment_id(my_branch_id));
     }
 
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
@@ -1604,7 +1603,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             return;
         }
         int id = 0;
-        String transaction_no = Stock_transfers.increment_id();
+        String transaction_no = Stock_transfers.increment_id(my_branch_id);
         String user_name = Users.user_name;
         String date_added = DateType.now();
         String remarks = tf_remarks.getText();

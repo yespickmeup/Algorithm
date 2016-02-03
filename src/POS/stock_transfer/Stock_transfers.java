@@ -461,11 +461,15 @@ public class Stock_transfers {
         }
     }
 
-    public static String increment_id() {
-        String id = "0000";
+    public static void main(String[] args) {
+        System.out.println(increment_id("18"));
+    }
+
+    public static String increment_id(String branch_id) {
+        String id = "";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from stock_transfers";
+            String s0 = "select max(id) from stock_transfers where at_branch_id='" + branch_id + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
@@ -478,7 +482,7 @@ public class Stock_transfers {
                 }
             }
             if (id == null) {
-                id = "0000";
+                id = branch_id + "|0000";
             }
             id = ReceiptIncrementor.increment(id);
             return id;
@@ -489,9 +493,6 @@ public class Stock_transfers {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(increment_id());
-    }
 
     public static void finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas) {
         try {
