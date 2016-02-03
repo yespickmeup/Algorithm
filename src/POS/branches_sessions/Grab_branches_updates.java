@@ -1751,7 +1751,7 @@ public class Grab_branches_updates {
             conn.setAutoCommit(false);
 
             for (Branch_server_uploads.to_branch_local_uploads to_branch_local_uploads : datas2) {
-                String s0 = "update branch_local_uploads set "
+                String s0 = "update branch_server_uploads set "
                         + "status= :status "
                         + " where id='" + to_branch_local_uploads.id + "' "
                         + " ";
