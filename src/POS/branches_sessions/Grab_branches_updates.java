@@ -508,9 +508,7 @@ public class Grab_branches_updates {
 
                 for (Parse_stock_transfers.items to_stock_transfers_items : to_stock_transfers.items1) {
 
-                    System.out.println("item Code: " + to_stock_transfers_items.item_code);
-                    System.out.println("BarCode: " + to_stock_transfers_items.barcode);
-                    System.out.println("Location: " + to_stock_transfers.at_location_id);
+
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_stock_transfers_items.item_code, to_stock_transfers_items.barcode, to_stock_transfers.at_location_id);
 
                     String s2 = "insert into stock_transfers_items("
