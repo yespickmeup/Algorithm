@@ -208,6 +208,7 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jXLabel1 = new org.jdesktop.swingx.JXLabel();
         jLabel2 = new javax.swing.JLabel();
+        jCheckBox3 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -246,6 +247,9 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
         jXLabel1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac est enim. Phasellus sit amet mattis enim. Suspendisse eu hendrerit sem. Praesent molestie quam id eros feugiat facilisis. Nam tempus lacinia lorem. Pellentesque vitae nunc ac lacus volutpat bibendum et ac ligula. Phasellus sit amet sodales lorem, a lacinia nunc");
         jXLabel1.setLineWrap(true);
 
+        jCheckBox3.setSelected(true);
+        jCheckBox3.setText("Include Todays Transactions");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -253,7 +257,10 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                     .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -274,7 +281,9 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -340,6 +349,7 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -524,7 +534,11 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
         System.out.println("Connected to Cloud!");
         if (!date_from.isEmpty()) {
             String path = System.getProperty("user.home");
-            List<String> days = Branch_local_uploads.getDates(date_from);
+            int include_today = 0;
+            if (jCheckBox3.isSelected()) {
+                include_today = 1;
+            }
+            List<String> days = Branch_local_uploads.getDates(date_from, include_today);
             int i = 1;
             for (String s : days) {
                 String where = " where Date(date_added)='" + s + "' and branch_id='" + my_branch_id + "' ";
@@ -924,7 +938,11 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
         System.out.println("Connected to Cloud!");
         if (!date_from.isEmpty()) {
             String path = System.getProperty("user.home");
-            List<String> days = Branch_local_uploads.getDates(date_from);
+            int include_today = 0;
+            if (jCheckBox3.isSelected()) {
+                include_today = 1;
+            }
+            List<String> days = Branch_local_uploads.getDates(date_from, include_today);
             int i = 1;
             for (String s : days) {
 

@@ -352,10 +352,10 @@ public class Branch_local_uploads {
     }
 
     public static void main(String[] args) {
-        getDates("2016-01-03");
+        getDates("2016-01-01", 0);
     }
 
-    public static List<String> getDates(String from) {
+    public static List<String> getDates(String from, int include_today) {
         List<String> days = new ArrayList();
         try {
             Date from2 = DateType.sf.parse(from);
@@ -365,12 +365,22 @@ public class Branch_local_uploads {
             int count = DateUtils1.count_days(from2, to);
             System.out.println("Count: " + count);
 
-            
-            for (int i = 1; i < count + 3; i++) {
-                Date from1 = DateType.sf.parse(from);
-                Date inc = DateUtils1.add_day(from1, i);
-                String date = DateType.sf.format(inc);
-                days.add(date);
+            if (include_today == 1) {
+                for (int i = 1; i < count + 3; i++) {
+                    Date from1 = DateType.sf.parse(from);
+                    Date inc = DateUtils1.add_day(from1, i);
+                    String date = DateType.sf.format(inc);
+
+                    days.add(date);
+                }
+            } else {
+                for (int i = 1; i < count + 2; i++) {
+                    Date from1 = DateType.sf.parse(from);
+                    Date inc = DateUtils1.add_day(from1, i);
+                    String date = DateType.sf.format(inc);
+
+                    days.add(date);
+                }
             }
 
         } catch (ParseException ex) {

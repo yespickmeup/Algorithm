@@ -542,7 +542,7 @@ public class Dlg_branch_local_uploads extends javax.swing.JDialog {
                 if (!date_from.isEmpty()) {
                     String path = System.getProperty("user.home");
 
-                    List<String> days = Branch_local_uploads.getDates(date_from);
+                    List<String> days = Branch_local_uploads.getDates(date_from,1);
                     int i = 1;
                     for (String s : days) {
                         String where = " where Date(date_added)='" + s + "'  ";
