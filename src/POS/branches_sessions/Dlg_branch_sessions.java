@@ -695,7 +695,7 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
 
     private void start_synching_local_branch_server_download() {
         //<editor-fold defaultstate="collapsed" desc=" Download ">
-        String where = " where status=0  and branch_id='" + my_branch_id + "' ";
+        String where = " where status=0   ";
         List<Branch_server_uploads.to_branch_local_uploads> datas2 = Branch_server_uploads.ret_data(where);
         System.out.println(datas2.size());
 

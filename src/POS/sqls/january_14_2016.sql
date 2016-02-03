@@ -60,7 +60,7 @@ id int auto_increment primary key
 );
 
 drop table if exists branch_server_uploads;
-create table branch_local_uploads(
+create table branch_server_uploads(
 id int auto_increment primary key
 ,replenishments longblob
 ,inventory_counts longblob
