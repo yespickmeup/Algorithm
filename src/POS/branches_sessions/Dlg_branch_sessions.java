@@ -527,10 +527,10 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
             List<String> days = Branch_local_uploads.getDates(date_from);
             int i = 1;
             for (String s : days) {
-                String where = " where Date(date_added)='" + s + "' and branch_id='" + my_location_id + "' ";
-                String where2 = " where Date(time_in)='" + s + "'  and branch_id='" + my_location_id + "' ";
-                String where4 = " where Date(date_added)='" + s + "' and from_branch_id='" + my_location_id + "' ";
-                String where5 = " where Date(date_added)='" + s + "' and branch_code='" + my_location_id + "' ";
+                String where = " where Date(date_added)='" + s + "' and branch_id='" + my_branch_id + "' ";
+                String where2 = " where Date(time_in)='" + s + "'  and branch_id='" + my_branch_id + "' ";
+                String where4 = " where Date(date_added)='" + s + "' and from_branch_id='" + my_branch_id + "' ";
+                String where5 = " where Date(date_added)='" + s + "' and branch_code='" + my_branch_id + "' ";
 
                 Branch_local_uploads.to_upload_count replenishments = Parse_inventory_replenishments.compress(where);
                 Branch_local_uploads.to_upload_count inventory_counts = Parse_inventory_counts.compress(where);
