@@ -508,9 +508,10 @@ public class Grab_branches_updates {
 
                 for (Parse_stock_transfers.items to_stock_transfers_items : to_stock_transfers.items1) {
 
-
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_stock_transfers_items.item_code, to_stock_transfers_items.barcode, to_stock_transfers.at_location_id);
-
+                    if (tt == null) {
+                        return;
+                    }
                     String s2 = "insert into stock_transfers_items("
                             + "barcode"
                             + ",description"
@@ -1689,8 +1690,7 @@ public class Grab_branches_updates {
         Grab_branches_updates gbu = new Grab_branches_updates();
         gbu.countdown();
     }
-    
-    
+
     int hours = 12;
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
@@ -1742,6 +1742,7 @@ public class Grab_branches_updates {
             MyConnection.close();
         }
     }
+
     public static void update_status2(List<Branch_server_uploads.to_branch_local_uploads> datas2) {
         try {
 
