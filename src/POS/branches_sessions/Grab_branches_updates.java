@@ -5,16 +5,10 @@
  */
 package POS.branches_sessions;
 
-import POS.accounts_receivable.S1_accounts_receivable;
-import static POS.accounts_receivable.S1_accounts_receivable.ret_customer_balance;
-import POS.accounts_receivable.S1_sales_on_account;
-import POS.customers.Customers;
-import POS.inventory.Inventory_barcodes;
 import POS.users.MyUser;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import POS.util.Segregator;
-import POS.util.Users;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -536,10 +529,9 @@ public class Grab_branches_updates {
                     int selling_type = 0;
 
                     String s3 = "select"
-                            + "product_qty"
+                            + " product_qty"
                             + ",unit"
                             + ",conversion"
-                            + ",description"
                             + ",description"
                             + ",generic_name"
                             + ",category"
@@ -919,248 +911,6 @@ public class Grab_branches_updates {
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.addBatch(s0);
 
-                if (!to_sales.session_no.equalsIgnoreCase("000000000000")) {
-                    String s3 = " update orders set status='" + 1 + "' where sales_no='" + to_sales.session_no + "'";
-                    stmt.addBatch(s3);
-                    String s4 = " update order_items set status='" + 1 + "' where sales_no='" + to_sales.session_no + "'";
-                    stmt.addBatch(s4);
-                }
-
-                if (to_sales.prepaid_amount > 0) {
-                    String prep = "select "
-                            + "id"
-                            + ",customer_name"
-                            + ",customer_no"
-                            + ",contact_no"
-                            + ",credit_limit"
-                            + ",address"
-                            + ",term"
-                            + ",location"
-                            + ",balance"
-                            + ",discount"
-                            + ",prepaid"
-                            + " from customers "
-                            + " where id='" + to_sales.prepaid_customer_id + "' ";
-
-                    Statement stmt2 = conn.createStatement();
-                    ResultSet rs = stmt2.executeQuery(prep);
-                    double prepaid = 0;
-                    if (rs.next()) {
-                        int id = rs.getInt(1);
-                        String customer_name = rs.getString(2);
-                        String customer_no = rs.getString(3);
-                        String contact_no = rs.getString(4);
-                        double credit_limit = rs.getDouble(5);
-                        String address = rs.getString(6);
-                        double term = rs.getDouble(7);
-                        String location = rs.getString(8);
-                        double balance = rs.getDouble(9);
-                        double discount = rs.getDouble(10);
-                        prepaid = rs.getDouble(11);
-
-                    }
-                    prepaid = prepaid - to_sales.prepaid_amount;
-                    String s3 = "update customers set prepaid='" + prepaid + "' "
-                            + " where id='" + to_sales.prepaid_customer_id + "' "
-                            + " ";
-
-                    s3 = SqlStringUtil.parse(s3)
-                            .ok();
-                    PreparedStatement stmt3 = conn.prepareStatement(s3);
-                    stmt.addBatch(s3);
-                }
-
-                if (to_sales.charge_amount > 0) {
-
-                    int id = -1;
-                    String soa_type = to_sales.charge_type;
-                    String soa_type_id = to_sales.charge_type_id;
-                    String soa_date = synsoftech.util.DateType.sf.format(new Date());
-
-                    String date_added = POS.util.DateType.now();
-                    String added_by = Users.user_name;
-                    String reference_no = to_sales.charge_reference_no;
-                    String client_name = to_sales.charge_customer_name;
-                    String client_id = to_sales.charge_customer_id;
-                    double amount = to_sales.charge_amount;
-                    S1_sales_on_account.to_sales_on_account to = new S1_sales_on_account.to_sales_on_account(id, soa_type, soa_type_id, soa_date, date_added, added_by, reference_no, client_name, client_id, amount);
-
-                    String s10 = "insert into sales_on_account("
-                            + "soa_type"
-                            + ",soa_type_id"
-                            + ",soa_date"
-                            + ",date_added"
-                            + ",added_by"
-                            + ",reference_no"
-                            + ",client_name"
-                            + ",client_id"
-                            + ",amount"
-                            + ")values("
-                            + ":soa_type"
-                            + ",:soa_type_id"
-                            + ",:soa_date"
-                            + ",:date_added"
-                            + ",:added_by"
-                            + ",:reference_no"
-                            + ",:client_name"
-                            + ",:client_id"
-                            + ",:amount"
-                            + ")";
-
-                    s10 = SqlStringUtil.parse(s10)
-                            .setString("soa_type", to.soa_type)
-                            .setString("soa_type_id", to.soa_type_id)
-                            .setString("soa_date", to.soa_date)
-                            .setString("date_added", to.date_added)
-                            .setString("added_by", to.added_by)
-                            .setString("reference_no", to.reference_no)
-                            .setString("client_name", to.client_name)
-                            .setString("client_id", to.client_id)
-                            .setNumber("amount", to.amount)
-                            .ok();
-                    stmt.addBatch(s10);
-
-                    //<editor-fold defaultstate="collapsed" desc=" Accounts Receivable ">
-                    //soa 
-//                    String customer_id = to_sales.charge_customer_id;
-//                    String customer_name = to_sales.charge_customer_name;
-//                    String ar_no = S1_accounts_receivable.increment_id();
-//                    String user_name = "";
-//                    if (Users.user_name == null) {
-//                        user_name = "";
-//                    }
-//                    double discount_amount = 0;
-//                    double discount_rate = 0;
-//                    String discount = "";
-//                    int status = 0;
-//                    double term = 30;
-//                    String date_applied = synsoftech.util.DateType.sf.format(new Date());
-//                    double paid = 0;
-//                    String date_paid = date_applied;
-//                    String remarks = "";
-//                    String type = "AR";
-//                    String or_no = "";
-//                    String ci_no = to_sales.charge_reference_no;
-//                    String trust_receipt = "";
-//                    String soa_id = S1_sales_on_account.increment_id();
-//                    String user_id = MyUser.getUser_id();
-//                    String user_screen_name = MyUser.getUser_screen_name();
-//                    String branch = to_sales.branch;
-//                    String branch_id = to_sales.branch_id;
-//                    String location = to_sales.location;
-//                    String location_id = to_sales.location_id;
-//                    S1_accounts_receivable.to_accounts_receivable to2 = new S1_accounts_receivable.to_accounts_receivable(true, -1, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
-//
-//                    String s11 = "insert into  accounts_receivable("
-//                            + "customer_id"
-//                            + ",customer_name"
-//                            + ",ar_no"
-//                            + ",date_added"
-//                            + ",user_name"
-//                            + ",amount"
-//                            + ",discount_amount"
-//                            + ",discount_rate"
-//                            + ",discount"
-//                            + ",status"
-//                            + ",term"
-//                            + ",date_applied"
-//                            + ",paid"
-//                            + ",date_paid"
-//                            + ",remarks"
-//                            + ",type"
-//                            + ",or_no"
-//                            + ",ci_no"
-//                            + ",trust_receipt"
-//                            + ",soa_id"
-//                            + ",soa_type"
-//                            + ",soa_type_id"
-//                            + ",reference_no"
-//                            + ",user_id"
-//                            + ",user_screen_name"
-//                            + ",branch"
-//                            + ",branch_id"
-//                            + ",location"
-//                            + ",location_id"
-//                            + ")values("
-//                            + ":customer_id"
-//                            + ",:customer_name"
-//                            + ",:ar_no"
-//                            + ",:date_added"
-//                            + ",:user_name"
-//                            + ",:amount"
-//                            + ",:discount_amount"
-//                            + ",:discount_rate"
-//                            + ",:discount"
-//                            + ",:status"
-//                            + ",:term"
-//                            + ",:date_applied"
-//                            + ",:paid"
-//                            + ",:date_paid"
-//                            + ",:remarks"
-//                            + ",:type"
-//                            + ",:or_no"
-//                            + ",:ci_no"
-//                            + ",:trust_receipt"
-//                            + ",:soa_id"
-//                            + ",:soa_type"
-//                            + ",:soa_type_id"
-//                            + ",:reference_no"
-//                            + ",:user_id"
-//                            + ",:user_screen_name"
-//                            + ",:branch"
-//                            + ",:branch_id"
-//                            + ",:location"
-//                            + ",:location_id"
-//                            + ")";
-//
-//                    s11 = SqlStringUtil.parse(s11).
-//                            setString("customer_id", to2.customer_id).
-//                            setString("customer_name", to2.customer_name).
-//                            setString("ar_no", to2.ar_no).
-//                            setString("date_added", to2.date_added).
-//                            setString("user_name", to2.user_name).
-//                            setNumber("amount", to2.amount).
-//                            setNumber("discount_amount", to2.discount_amount).
-//                            setNumber("discount_rate", to2.discount_rate).
-//                            setString("discount", to2.discount).
-//                            setNumber("status", to2.status).
-//                            setNumber("term", to2.term).
-//                            setString("date_applied", to2.date_applied).
-//                            setNumber("paid", to2.paid).
-//                            setString("date_paid", to2.date_paid).
-//                            setString("remarks", to2.remarks).
-//                            setString("type", to2.type).
-//                            setString("or_no", to2.or_no).
-//                            setString("ci_no", to2.ci_no).
-//                            setString("trust_receipt", to2.trust_receipt).
-//                            setString("soa_id", to2.soa_id).
-//                            setString("soa_type", to2.soa_type).
-//                            setString("soa_type_id", to2.soa_type_id).
-//                            setString("reference_no", to2.reference_no).
-//                            setString("user_id", to2.user_id).
-//                            setString("user_screen_name", to2.user_screen_name).
-//                            setString("branch", to2.branch).
-//                            setString("branch_id", to2.branch_id).
-//                            setString("location", to2.location).
-//                            setString("location_id", to2.location_id).
-//                            ok();
-//
-//                    stmt.addBatch(s11);
-//                                        Customers.to_customers cus = ret_customer_balance(to2.customer_id);
-//                    if (cus != null) {
-//                        double new_balance = cus.balance + to2.amount;
-//                        String s12 = " update  customers set "
-//                                + " balance= :balance"
-//                                + " where "
-//                                + " customer_no ='" + to2.customer_id + "' "
-//                                + " ";
-//                        s12 = SqlStringUtil.parse(s12).
-//                                setNumber("balance", new_balance).
-//                                ok();
-//                        stmt.addBatch(s12);
-//                    }
-                    //</editor-fold>
-                }
                 for (Parse_sales.field.items to_sale_items : to_sales.items) {
 
                     //<editor-fold defaultstate="collapsed" desc=" select item ">
@@ -1191,10 +941,9 @@ public class Grab_branches_updates {
                     int selling_type = 0;
                     String serial_no = "";
                     String s3 = "select"
-                            + "product_qty"
+                            + " product_qty"
                             + ",unit"
                             + ",conversion"
-                            + ",description"
                             + ",description"
                             + ",generic_name"
                             + ",category"
@@ -1253,8 +1002,8 @@ public class Grab_branches_updates {
                         selling_type = rs3.getInt(25);
                         serial_no = rs3.getString(26);
                     }
-                    //</editor-fold>
 
+                    //</editor-fold>
                     String s2 = "insert into sale_items("
                             + "sales_no"
                             + ",item_code"
@@ -1460,10 +1209,9 @@ public class Grab_branches_updates {
                 int selling_type = 0;
                 String serial_no = "";
                 String s3 = "select"
-                        + "product_qty"
+                        + " product_qty"
                         + ",unit"
                         + ",conversion"
-                        + ",description"
                         + ",description"
                         + ",generic_name"
                         + ",category"
@@ -1725,10 +1473,9 @@ public class Grab_branches_updates {
                 int selling_type = 0;
                 String serial_no = "";
                 String s3 = "select"
-                        + "product_qty"
+                        + " product_qty"
                         + ",unit"
                         + ",conversion"
-                        + ",description"
                         + ",description"
                         + ",generic_name"
                         + ",category"
@@ -1971,7 +1718,7 @@ public class Grab_branches_updates {
 
     public static void cash_drawers(List<Parse_cash_drawers> l_cash_drawers) {
         try {
-            
+
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Cash Drawers ">
