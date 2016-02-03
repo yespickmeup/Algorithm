@@ -18,6 +18,7 @@ import POS.branch_locations.Dlg_branch_locations;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Dlg_branches;
+import POS.branches_sessions.Dlg_branch_sessions;
 import POS.cash_drawer.*;
 import POS.category.Dlg_categories;
 import POS.category.Dlg_category;
@@ -81,6 +82,8 @@ import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -1924,7 +1927,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void myInit() {
 
         jButton1.setVisible(false);
-//        jPanel6.setVisible(false);
+        key();
         Main.MyDB.setNames("db_algorithm");
         String business_name = System.getProperty("business_name", "SYNAPSE SOFTWARE TECHNOLOGY");
         jLabel7.setText(business_name);
@@ -1934,6 +1937,42 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         set_card_items();
         set_default_branch();
         hover();
+    }
+
+    private void key() {
+        final String is_main_server = System.getProperty("is_main_server", "false");
+
+        tf_username.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    if (is_main_server.equals("true")) {
+                        asynch();
+                    }
+
+                }
+
+            }
+        });
+
+    }
+
+    private void asynch() {
+        Window p = (Window) this;
+        Dlg_branch_sessions nd = Dlg_branch_sessions.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_branch_sessions.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_branch_sessions.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
     String my_branch = "";
     String my_branch_id = "";

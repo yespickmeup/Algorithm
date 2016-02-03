@@ -8,8 +8,6 @@ package POS.branches_sessions;
 import POS.accounts_receivable.S1_accounts_receivable;
 import static POS.accounts_receivable.S1_accounts_receivable.ret_customer_balance;
 import POS.accounts_receivable.S1_sales_on_account;
-import POS.cash_drawer.S1_cash_drawer;
-import POS.charge_in_advance.Charge_in_advance_items;
 import POS.customers.Customers;
 import POS.inventory.Inventory_barcodes;
 import POS.users.MyUser;
@@ -45,6 +43,7 @@ public class Grab_branches_updates {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Replenishments ">
+            System.out.println("Item Replacement in progress.......... " + l_replenishments.size());
             for (Parse_inventory_replenishments to_inventory_replenishments : l_replenishments) {
                 String s0 = "insert into inventory_replenishments("
                         + "inventory_replenishment_no"
@@ -177,6 +176,7 @@ public class Grab_branches_updates {
             conn.setAutoCommit(false);
 
             //<editor-fold defaultstate="collapsed" desc=" Inventory Count ">
+            System.out.println("Inventory Count in progress.......... " + l_inventory_counts.size());
             for (Parse_inventory_counts.field to_encoding_inventory : l_inventory_counts) {
 
                 double my_qty = 0;
@@ -301,9 +301,9 @@ public class Grab_branches_updates {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-                System.out.println("Inventory Encoding Updated!");
-            }
 
+            }
+            System.out.println("Inventory Encoding Updated!");
             //</editor-fold>
             conn.commit();
 
@@ -319,6 +319,7 @@ public class Grab_branches_updates {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Adjustments ">
+            System.out.println("Adjustments in progress.......... " + l_adjustments.size());
             for (Parse_inventory_adjustments.field to_inventory_barcodes : l_adjustments) {
 
                 double my_qty = 0;
@@ -424,10 +425,10 @@ public class Grab_branches_updates {
                 stmt2.addBatch(s0);
 
                 stmt2.executeBatch();
-                System.out.println("Adjustments Updated!");
+
             }
             //</editor-fold>
-
+            System.out.println("Adjustments Updated!");
             conn.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -442,6 +443,7 @@ public class Grab_branches_updates {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Stock Transfers ">
+            System.out.println("Stock transfer in progress.......... " + l_stock_transfers.size());
             for (Parse_stock_transfers to_stock_transfers : l_stock_transfers) {
                 String s0 = "insert into stock_transfers("
                         + "transaction_no"
@@ -506,6 +508,9 @@ public class Grab_branches_updates {
 
                 for (Parse_stock_transfers.items to_stock_transfers_items : to_stock_transfers.items1) {
 
+                    System.out.println("item Code: " + to_stock_transfers_items.item_code);
+                    System.out.println("BarCode: " + to_stock_transfers_items.barcode);
+                    System.out.println("Location: " + to_stock_transfers.at_location_id);
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_stock_transfers_items.item_code, to_stock_transfers_items.barcode, to_stock_transfers.at_location_id);
 
                     String s2 = "insert into stock_transfers_items("
@@ -653,10 +658,11 @@ public class Grab_branches_updates {
                 }
 
                 stmt.executeBatch();
-                System.out.println("Stock Transfer");
+
             }
 
             //</editor-fold>
+            System.out.println("Stock Transfer Updated!");
             conn.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -670,6 +676,7 @@ public class Grab_branches_updates {
 
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
+            System.out.println("Sales in progress.......... " + l_sales.size());
             //<editor-fold defaultstate="collapsed" desc=" sales ">
             for (Parse_sales.field to_sales : l_sales) {
 
@@ -1212,9 +1219,10 @@ public class Grab_branches_updates {
                 }
 
                 stmt.executeBatch();
-                System.out.println("Sales, Updated!");
+
             }
             //</editor-fold>
+            System.out.println("Sales, Updated!");
             conn.commit();
 
         } catch (SQLException e) {
@@ -1245,6 +1253,7 @@ public class Grab_branches_updates {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" returned items ">
+            System.out.println("Item Replacements in progress.......... " + l_item_replacements.size());
             for (Parse_sale_item_replacements to_sale_items : l_item_replacements) {
                 System.out.println("Code: " + to_sale_items.item_code);
 
@@ -1404,10 +1413,10 @@ public class Grab_branches_updates {
                 }
 
                 stmt2.executeBatch();
-                System.out.println("Adjustments Updated!");
 
             }
             //</editor-fold>
+            System.out.println("Adjustments Updated!");
             conn.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -1422,7 +1431,7 @@ public class Grab_branches_updates {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" charge in advance ">
-
+            System.out.println("Charge in Advance in progress.......... " + l_charged_items.size());
             for (Parse_charged_items to_charge_in_advance_items : l_charged_items) {
 
                 Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_charge_in_advance_items.item_code, to_charge_in_advance_items.barcode, to_charge_in_advance_items.location_id);
@@ -1587,7 +1596,6 @@ public class Grab_branches_updates {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(Charge_in_advance_items.class, "Successfully Added");
 
                 String s4 = "update inventory_barcodes set "
                         + " product_qty='" + new_qty + "'"
@@ -1599,6 +1607,7 @@ public class Grab_branches_updates {
 
             }
             //</editor-fold>
+            System.out.println("Charge in Advance, Updated!");
             conn.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -1613,6 +1622,7 @@ public class Grab_branches_updates {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Cash Drawers ">
+            System.out.println("Cash Drawer in progress.......... " + l_cash_drawers.size());
             for (Parse_cash_drawers to_cash_drawer : l_cash_drawers) {
                 String s0 = "insert into  cash_drawer("
                         + "session_no"
@@ -1664,10 +1674,11 @@ public class Grab_branches_updates {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(S1_cash_drawer.class, "Cash Drawer: Successfully Added!");
+
             }
 
             //</editor-fold>
+            System.out.println("Cash Drawer, Added!");
             conn.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -1680,7 +1691,8 @@ public class Grab_branches_updates {
         Grab_branches_updates gbu = new Grab_branches_updates();
         gbu.countdown();
     }
-
+    
+    
     int hours = 12;
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
@@ -1689,6 +1701,7 @@ public class Grab_branches_updates {
             hours--;
         }
     });
+
     private void countdown() {
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
@@ -1705,4 +1718,56 @@ public class Grab_branches_updates {
 
     }
 
+    public static void update_status(List<Branch_local_uploads.to_branch_local_uploads> datas2) {
+        try {
+
+            Connection conn = MyConnection.cloud_connect();
+            conn.setAutoCommit(false);
+
+            for (Branch_local_uploads.to_branch_local_uploads to_branch_local_uploads : datas2) {
+                String s0 = "update branch_local_uploads set "
+                        + "status= :status "
+                        + " where id='" + to_branch_local_uploads.id + "' "
+                        + " ";
+                s0 = SqlStringUtil.parse(s0)
+                        .setNumber("status", 1)
+                        .ok();
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+
+            }
+            Lg.s(Branch_local_uploads.class, "Successfully Updated");
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+    public static void update_status2(List<Branch_server_uploads.to_branch_local_uploads> datas2) {
+        try {
+
+            Connection conn = MyConnection.cloud_connect();
+            conn.setAutoCommit(false);
+
+            for (Branch_server_uploads.to_branch_local_uploads to_branch_local_uploads : datas2) {
+                String s0 = "update branch_local_uploads set "
+                        + "status= :status "
+                        + " where id='" + to_branch_local_uploads.id + "' "
+                        + " ";
+                s0 = SqlStringUtil.parse(s0)
+                        .setNumber("status", 1)
+                        .ok();
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+
+            }
+            Lg.s(Branch_local_uploads.class, "Successfully Updated");
+            conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

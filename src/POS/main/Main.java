@@ -147,6 +147,9 @@ public class Main {
             System.setProperty("license", prop.getProperty("license", "full"));
             System.setProperty("acct_no", prop.getProperty("acct_no", "Accreditation No. 000-0000000000-000000 "));
             System.setProperty("is_main_server", prop.getProperty("is_main_server", "false"));
+            System.setProperty("unit_type", prop.getProperty("unit_type", "workstation"));
+            
+            
 
         } catch (IOException ex) {
 

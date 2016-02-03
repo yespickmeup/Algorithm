@@ -59,6 +59,32 @@ id int auto_increment primary key
 ,location_id varchar(255)
 );
 
+drop table if exists branch_server_uploads;
+create table branch_local_uploads(
+id int auto_increment primary key
+,replenishments longblob
+,inventory_counts longblob
+,adjustments longblob
+,stock_transfers longblob
+,receipts longblob
+,sales longblob
+,returned_items longblob
+,charged_items longblob
+,rmas longblob
+,item_maintenances longblob
+,cash_drawers longblob
+,status int
+,date_added datetime
+,user_id varchar(255)
+,user_screen_name varchar(255)
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
+
+
+
 drop table if exists maintenances;
 create table maintenances(
 id int auto_increment primary key

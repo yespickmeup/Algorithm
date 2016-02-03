@@ -319,10 +319,6 @@ public class Stock_transfers {
                     + ",from_location= :from_location "
                     + ",from_location_id= :from_location_id "
                     + ",status= :status "
-                    + ",at_branch= :at_branch "
-                    + ",at_branch_id= :at_branch_id "
-                    + ",at_location= :at_location "
-                    + ",at_location_id= :at_location_id "
                     + " where id='" + to_stock_transfers.id + "' "
                     + " ";
 
@@ -340,10 +336,6 @@ public class Stock_transfers {
                     .setString("from_location", to_stock_transfers.from_location)
                     .setString("from_location_id", to_stock_transfers.from_location_id)
                     .setNumber("status", to_stock_transfers.status)
-                    .setString("at_branch", to_stock_transfers.at_branch)
-                    .setString("at_branch_id", to_stock_transfers.at_branch_id)
-                    .setString("at_location", to_stock_transfers.at_location)
-                    .setString("at_location_id", to_stock_transfers.at_location_id)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
