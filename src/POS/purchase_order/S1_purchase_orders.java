@@ -110,7 +110,7 @@ public class S1_purchase_orders {
 
             String customer_id = to_purchase_orders.account_id;
             String customer_name = to_purchase_orders.account_name;
-            String ar_no = S1_accounts_receivable.increment_id();
+            String ar_no = S1_accounts_receivable.increment_id("");
             String date_added = DateType.datetime.format(new Date());
             String user_name = Users.user_name;
             double amount = to_purchase_orders.amount;

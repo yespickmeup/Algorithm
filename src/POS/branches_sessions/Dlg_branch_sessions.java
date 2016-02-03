@@ -543,6 +543,9 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
             List<String> days = Branch_local_uploads.getDates(date_from, include_today);
             int i = 1;
             for (String s : days) {
+
+                System.out.println("Date to Synch: " + s);
+                System.out.println("************************************************");
                 String where = " where Date(date_added)='" + s + "' and branch_id='" + my_branch_id + "' ";
                 String where2 = " where Date(time_in)='" + s + "'  and branch_id='" + my_branch_id + "' ";
                 String where4 = " where Date(date_added)='" + s + "' and from_branch_id='" + my_branch_id + "' ";

@@ -508,10 +508,97 @@ public class Grab_branches_updates {
 
                 for (Parse_stock_transfers.items to_stock_transfers_items : to_stock_transfers.items1) {
 
-                    Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_stock_transfers_items.item_code, to_stock_transfers_items.barcode, to_stock_transfers.at_location_id);
-                    if (tt == null) {
-                        return;
+                    //<editor-fold defaultstate="collapsed" desc=" select item ">
+                    double my_qty = 0;
+                    String unit = "";
+                    double conversion = 0;
+                    String description = "";
+                    String generic_name = "";
+                    String category = "";
+                    String category_id = "";
+                    String classification = "";
+                    String classification_id = "";
+                    String sub_classification = "";
+                    String sub_classification_id = "";
+                    String item_type = "";
+                    String supplier = "";
+                    int fixed_price = 0;
+                    String supplier_id = "";
+                    int multi_level_pricing = 0;
+                    int vatable = 0;
+                    double reorder_level = 0;
+                    double markup = 0;
+                    String barcode = "";
+                    String brand = "";
+                    String brand_id = "";
+                    String model = "";
+                    String model_id = "";
+                    int selling_type = 0;
+
+                    String s3 = "select"
+                            + "product_qty"
+                            + ",unit"
+                            + ",conversion"
+                            + ",description"
+                            + ",description"
+                            + ",generic_name"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_classification"
+                            + ",sub_classification_id"
+                            + ",item_type"
+                            + ",supplier"
+                            + ",fixed_price"
+                            + ",supplier_id"
+                            + ",multi_level_pricing"
+                            + ",vatable"
+                            + ",reorder_level"
+                            + ",markup"
+                            + ",barcode"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",selling_type"
+                            + " from inventory_barcodes "
+                            + " where "
+                            + " main_barcode ='" + to_stock_transfers_items.item_code + "' "
+                            + " and location_id ='" + to_stock_transfers.at_location_id + "' "
+                            + " ";
+                    Statement stmt3 = conn.createStatement();
+                    ResultSet rs3 = stmt3.executeQuery(s3);
+                    if (rs3.next()) {
+                        my_qty = rs3.getDouble(1);
+                        unit = rs3.getString(2);
+                        conversion = rs3.getDouble(3);
+                        description = rs3.getString(4);
+                        generic_name = rs3.getString(5);
+                        category = rs3.getString(6);
+                        category_id = rs3.getString(7);
+                        classification = rs3.getString(8);
+                        classification_id = rs3.getString(9);
+                        sub_classification = rs3.getString(10);
+                        sub_classification_id = rs3.getString(11);
+                        item_type = rs3.getString(12);
+                        supplier = rs3.getString(13);
+                        fixed_price = rs3.getInt(14);
+                        supplier_id = rs3.getString(15);
+                        multi_level_pricing = rs3.getInt(16);
+                        vatable = rs3.getInt(17);
+                        reorder_level = rs3.getInt(18);
+                        markup = rs3.getInt(19);
+                        barcode = rs3.getString(20);
+                        brand = rs3.getString(21);
+                        brand_id = rs3.getString(22);
+                        model = rs3.getString(23);
+                        model_id = rs3.getString(24);
+                        selling_type = rs3.getInt(25);
+
                     }
+                    //</editor-fold>
+
                     String s2 = "insert into stock_transfers_items("
                             + "barcode"
                             + ",description"
@@ -608,36 +695,36 @@ public class Grab_branches_updates {
 
                     s2 = SqlStringUtil.parse(s2)
                             .setString("barcode", to_stock_transfers_items.item_code)
-                            .setString("description", tt.description)
-                            .setString("generic_name", tt.generic_name)
-                            .setString("category", tt.category)
-                            .setString("category_id", tt.category_id)
-                            .setString("classification", tt.classification)
-                            .setString("classification_id", tt.classification_id)
-                            .setString("sub_classification", tt.sub_classification)
-                            .setString("sub_classification_id", tt.sub_classification_id)
+                            .setString("description", description)
+                            .setString("generic_name", generic_name)
+                            .setString("category", category)
+                            .setString("category_id", category_id)
+                            .setString("classification", classification)
+                            .setString("classification_id", classification_id)
+                            .setString("sub_classification", sub_classification)
+                            .setString("sub_classification_id", sub_classification_id)
                             .setNumber("product_qty", to_stock_transfers_items.product_qty)
                             .setString("unit", to_stock_transfers_items.unit)
                             .setNumber("conversion", to_stock_transfers_items.conversion)
                             .setNumber("selling_price", to_stock_transfers_items.selling_price)
-                            .setString("date_added", tt.date_added)
-                            .setString("user_name", tt.user_name)
-                            .setString("item_type", tt.item_type)
+                            .setString("date_added", to_stock_transfers.date_added)
+                            .setString("user_name", to_stock_transfers.user_name)
+                            .setString("item_type", item_type)
                             .setNumber("status", 0)
-                            .setString("supplier", tt.supplier)
-                            .setNumber("fixed_price", tt.fixed_price)
+                            .setString("supplier", supplier)
+                            .setNumber("fixed_price", fixed_price)
                             .setNumber("cost", to_stock_transfers_items.cost)
-                            .setString("supplier_id", tt.supplier_id)
-                            .setNumber("multi_level_pricing", tt.multi_level_pricing)
-                            .setNumber("vatable", tt.vatable)
-                            .setNumber("reorder_level", tt.reorder_level)
-                            .setNumber("markup", tt.markup)
-                            .setString("barcodes", tt.barcode)
-                            .setString("brand", tt.brand)
-                            .setString("brand_id", tt.brand_id)
-                            .setString("model", tt.model)
-                            .setString("model_id", tt.model_id)
-                            .setNumber("selling_type", tt.selling_type)
+                            .setString("supplier_id", supplier_id)
+                            .setNumber("multi_level_pricing", multi_level_pricing)
+                            .setNumber("vatable", vatable)
+                            .setNumber("reorder_level", reorder_level)
+                            .setNumber("markup", markup)
+                            .setString("barcodes", barcode)
+                            .setString("brand", brand)
+                            .setString("brand_id", brand_id)
+                            .setString("model", model)
+                            .setString("model_id", model_id)
+                            .setNumber("selling_type", selling_type)
                             .setString("branch", to_stock_transfers.from_branch)
                             .setString("branch_code", to_stock_transfers.from_branch_id)
                             .setString("location", to_stock_transfers.from_location)
@@ -933,148 +1020,240 @@ public class Grab_branches_updates {
                             .ok();
                     stmt.addBatch(s10);
 
+                    //<editor-fold defaultstate="collapsed" desc=" Accounts Receivable ">
                     //soa 
-                    String customer_id = to_sales.charge_customer_id;
-                    String customer_name = to_sales.charge_customer_name;
-                    String ar_no = S1_accounts_receivable.increment_id();
-                    String user_name = "";
-                    if (Users.user_name == null) {
-                        user_name = "";
-                    }
-                    double discount_amount = 0;
-                    double discount_rate = 0;
-                    String discount = "";
-                    int status = 0;
-                    double term = 30;
-                    String date_applied = synsoftech.util.DateType.sf.format(new Date());
-                    double paid = 0;
-                    String date_paid = date_applied;
-                    String remarks = "";
-                    String type = "AR";
-                    String or_no = "";
-                    String ci_no = to_sales.charge_reference_no;
-                    String trust_receipt = "";
-                    String soa_id = S1_sales_on_account.increment_id();
-                    String user_id = MyUser.getUser_id();
-                    String user_screen_name = MyUser.getUser_screen_name();
-                    String branch = to_sales.branch;
-                    String branch_id = to_sales.branch_id;
-                    String location = to_sales.location;
-                    String location_id = to_sales.location_id;
-                    S1_accounts_receivable.to_accounts_receivable to2 = new S1_accounts_receivable.to_accounts_receivable(true, -1, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
-
-                    String s11 = "insert into  accounts_receivable("
-                            + "customer_id"
-                            + ",customer_name"
-                            + ",ar_no"
-                            + ",date_added"
-                            + ",user_name"
-                            + ",amount"
-                            + ",discount_amount"
-                            + ",discount_rate"
-                            + ",discount"
-                            + ",status"
-                            + ",term"
-                            + ",date_applied"
-                            + ",paid"
-                            + ",date_paid"
-                            + ",remarks"
-                            + ",type"
-                            + ",or_no"
-                            + ",ci_no"
-                            + ",trust_receipt"
-                            + ",soa_id"
-                            + ",soa_type"
-                            + ",soa_type_id"
-                            + ",reference_no"
-                            + ",user_id"
-                            + ",user_screen_name"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + ")values("
-                            + ":customer_id"
-                            + ",:customer_name"
-                            + ",:ar_no"
-                            + ",:date_added"
-                            + ",:user_name"
-                            + ",:amount"
-                            + ",:discount_amount"
-                            + ",:discount_rate"
-                            + ",:discount"
-                            + ",:status"
-                            + ",:term"
-                            + ",:date_applied"
-                            + ",:paid"
-                            + ",:date_paid"
-                            + ",:remarks"
-                            + ",:type"
-                            + ",:or_no"
-                            + ",:ci_no"
-                            + ",:trust_receipt"
-                            + ",:soa_id"
-                            + ",:soa_type"
-                            + ",:soa_type_id"
-                            + ",:reference_no"
-                            + ",:user_id"
-                            + ",:user_screen_name"
-                            + ",:branch"
-                            + ",:branch_id"
-                            + ",:location"
-                            + ",:location_id"
-                            + ")";
-
-                    s11 = SqlStringUtil.parse(s11).
-                            setString("customer_id", to2.customer_id).
-                            setString("customer_name", to2.customer_name).
-                            setString("ar_no", to2.ar_no).
-                            setString("date_added", to2.date_added).
-                            setString("user_name", to2.user_name).
-                            setNumber("amount", to2.amount).
-                            setNumber("discount_amount", to2.discount_amount).
-                            setNumber("discount_rate", to2.discount_rate).
-                            setString("discount", to2.discount).
-                            setNumber("status", to2.status).
-                            setNumber("term", to2.term).
-                            setString("date_applied", to2.date_applied).
-                            setNumber("paid", to2.paid).
-                            setString("date_paid", to2.date_paid).
-                            setString("remarks", to2.remarks).
-                            setString("type", to2.type).
-                            setString("or_no", to2.or_no).
-                            setString("ci_no", to2.ci_no).
-                            setString("trust_receipt", to2.trust_receipt).
-                            setString("soa_id", to2.soa_id).
-                            setString("soa_type", to2.soa_type).
-                            setString("soa_type_id", to2.soa_type_id).
-                            setString("reference_no", to2.reference_no).
-                            setString("user_id", to2.user_id).
-                            setString("user_screen_name", to2.user_screen_name).
-                            setString("branch", to2.branch).
-                            setString("branch_id", to2.branch_id).
-                            setString("location", to2.location).
-                            setString("location_id", to2.location_id).
-                            ok();
-
-                    stmt.addBatch(s11);
-
-                    Customers.to_customers cus = ret_customer_balance(to2.customer_id);
-                    double new_balance = cus.balance + to2.amount;
-                    String s12 = "update  customers set "
-                            + " balance= :balance"
-                            + " where "
-                            + " customer_no ='" + to2.customer_id + "' "
-                            + " ";
-                    s12 = SqlStringUtil.parse(s12).
-                            setNumber("balance", new_balance).
-                            ok();
-                    stmt.addBatch(s12);
-
+//                    String customer_id = to_sales.charge_customer_id;
+//                    String customer_name = to_sales.charge_customer_name;
+//                    String ar_no = S1_accounts_receivable.increment_id();
+//                    String user_name = "";
+//                    if (Users.user_name == null) {
+//                        user_name = "";
+//                    }
+//                    double discount_amount = 0;
+//                    double discount_rate = 0;
+//                    String discount = "";
+//                    int status = 0;
+//                    double term = 30;
+//                    String date_applied = synsoftech.util.DateType.sf.format(new Date());
+//                    double paid = 0;
+//                    String date_paid = date_applied;
+//                    String remarks = "";
+//                    String type = "AR";
+//                    String or_no = "";
+//                    String ci_no = to_sales.charge_reference_no;
+//                    String trust_receipt = "";
+//                    String soa_id = S1_sales_on_account.increment_id();
+//                    String user_id = MyUser.getUser_id();
+//                    String user_screen_name = MyUser.getUser_screen_name();
+//                    String branch = to_sales.branch;
+//                    String branch_id = to_sales.branch_id;
+//                    String location = to_sales.location;
+//                    String location_id = to_sales.location_id;
+//                    S1_accounts_receivable.to_accounts_receivable to2 = new S1_accounts_receivable.to_accounts_receivable(true, -1, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
+//
+//                    String s11 = "insert into  accounts_receivable("
+//                            + "customer_id"
+//                            + ",customer_name"
+//                            + ",ar_no"
+//                            + ",date_added"
+//                            + ",user_name"
+//                            + ",amount"
+//                            + ",discount_amount"
+//                            + ",discount_rate"
+//                            + ",discount"
+//                            + ",status"
+//                            + ",term"
+//                            + ",date_applied"
+//                            + ",paid"
+//                            + ",date_paid"
+//                            + ",remarks"
+//                            + ",type"
+//                            + ",or_no"
+//                            + ",ci_no"
+//                            + ",trust_receipt"
+//                            + ",soa_id"
+//                            + ",soa_type"
+//                            + ",soa_type_id"
+//                            + ",reference_no"
+//                            + ",user_id"
+//                            + ",user_screen_name"
+//                            + ",branch"
+//                            + ",branch_id"
+//                            + ",location"
+//                            + ",location_id"
+//                            + ")values("
+//                            + ":customer_id"
+//                            + ",:customer_name"
+//                            + ",:ar_no"
+//                            + ",:date_added"
+//                            + ",:user_name"
+//                            + ",:amount"
+//                            + ",:discount_amount"
+//                            + ",:discount_rate"
+//                            + ",:discount"
+//                            + ",:status"
+//                            + ",:term"
+//                            + ",:date_applied"
+//                            + ",:paid"
+//                            + ",:date_paid"
+//                            + ",:remarks"
+//                            + ",:type"
+//                            + ",:or_no"
+//                            + ",:ci_no"
+//                            + ",:trust_receipt"
+//                            + ",:soa_id"
+//                            + ",:soa_type"
+//                            + ",:soa_type_id"
+//                            + ",:reference_no"
+//                            + ",:user_id"
+//                            + ",:user_screen_name"
+//                            + ",:branch"
+//                            + ",:branch_id"
+//                            + ",:location"
+//                            + ",:location_id"
+//                            + ")";
+//
+//                    s11 = SqlStringUtil.parse(s11).
+//                            setString("customer_id", to2.customer_id).
+//                            setString("customer_name", to2.customer_name).
+//                            setString("ar_no", to2.ar_no).
+//                            setString("date_added", to2.date_added).
+//                            setString("user_name", to2.user_name).
+//                            setNumber("amount", to2.amount).
+//                            setNumber("discount_amount", to2.discount_amount).
+//                            setNumber("discount_rate", to2.discount_rate).
+//                            setString("discount", to2.discount).
+//                            setNumber("status", to2.status).
+//                            setNumber("term", to2.term).
+//                            setString("date_applied", to2.date_applied).
+//                            setNumber("paid", to2.paid).
+//                            setString("date_paid", to2.date_paid).
+//                            setString("remarks", to2.remarks).
+//                            setString("type", to2.type).
+//                            setString("or_no", to2.or_no).
+//                            setString("ci_no", to2.ci_no).
+//                            setString("trust_receipt", to2.trust_receipt).
+//                            setString("soa_id", to2.soa_id).
+//                            setString("soa_type", to2.soa_type).
+//                            setString("soa_type_id", to2.soa_type_id).
+//                            setString("reference_no", to2.reference_no).
+//                            setString("user_id", to2.user_id).
+//                            setString("user_screen_name", to2.user_screen_name).
+//                            setString("branch", to2.branch).
+//                            setString("branch_id", to2.branch_id).
+//                            setString("location", to2.location).
+//                            setString("location_id", to2.location_id).
+//                            ok();
+//
+//                    stmt.addBatch(s11);
+//                                        Customers.to_customers cus = ret_customer_balance(to2.customer_id);
+//                    if (cus != null) {
+//                        double new_balance = cus.balance + to2.amount;
+//                        String s12 = " update  customers set "
+//                                + " balance= :balance"
+//                                + " where "
+//                                + " customer_no ='" + to2.customer_id + "' "
+//                                + " ";
+//                        s12 = SqlStringUtil.parse(s12).
+//                                setNumber("balance", new_balance).
+//                                ok();
+//                        stmt.addBatch(s12);
+//                    }
+                    //</editor-fold>
                 }
                 for (Parse_sales.field.items to_sale_items : to_sales.items) {
 
-                    Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id);
+                    //<editor-fold defaultstate="collapsed" desc=" select item ">
+                    double my_qty = 0;
+                    String unit = "";
+                    double conversion = 0;
+                    String description = "";
+                    String generic_name = "";
+                    String category = "";
+                    String category_id = "";
+                    String classification = "";
+                    String classification_id = "";
+                    String sub_classification = "";
+                    String sub_classification_id = "";
+                    String item_type = "";
+                    String supplier = "";
+                    int fixed_price = 0;
+                    String supplier_id = "";
+                    int multi_level_pricing = 0;
+                    int vatable = 0;
+                    double reorder_level = 0;
+                    double markup = 0;
+                    String barcode = "";
+                    String brand = "";
+                    String brand_id = "";
+                    String model = "";
+                    String model_id = "";
+                    int selling_type = 0;
+                    String serial_no = "";
+                    String s3 = "select"
+                            + "product_qty"
+                            + ",unit"
+                            + ",conversion"
+                            + ",description"
+                            + ",description"
+                            + ",generic_name"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_classification"
+                            + ",sub_classification_id"
+                            + ",item_type"
+                            + ",supplier"
+                            + ",fixed_price"
+                            + ",supplier_id"
+                            + ",multi_level_pricing"
+                            + ",vatable"
+                            + ",reorder_level"
+                            + ",markup"
+                            + ",barcode"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",selling_type"
+                            + ",serial_no"
+                            + " from inventory_barcodes "
+                            + " where "
+                            + " main_barcode ='" + to_sale_items.item_code + "' "
+                            + " and location_id ='" + to_sale_items.location_id + "' "
+                            + " ";
+                    Statement stmt3 = conn.createStatement();
+                    ResultSet rs3 = stmt3.executeQuery(s3);
+                    if (rs3.next()) {
+                        my_qty = rs3.getDouble(1);
+                        unit = rs3.getString(2);
+                        conversion = rs3.getDouble(3);
+                        description = rs3.getString(4);
+                        generic_name = rs3.getString(5);
+                        category = rs3.getString(6);
+                        category_id = rs3.getString(7);
+                        classification = rs3.getString(8);
+                        classification_id = rs3.getString(9);
+                        sub_classification = rs3.getString(10);
+                        sub_classification_id = rs3.getString(11);
+                        item_type = rs3.getString(12);
+                        supplier = rs3.getString(13);
+                        fixed_price = rs3.getInt(14);
+                        supplier_id = rs3.getString(15);
+                        multi_level_pricing = rs3.getInt(16);
+                        vatable = rs3.getInt(17);
+                        reorder_level = rs3.getInt(18);
+                        markup = rs3.getInt(19);
+                        barcode = rs3.getString(20);
+                        brand = rs3.getString(21);
+                        brand_id = rs3.getString(22);
+                        model = rs3.getString(23);
+                        model_id = rs3.getString(24);
+                        selling_type = rs3.getInt(25);
+                        serial_no = rs3.getString(26);
+                    }
+                    //</editor-fold>
 
                     String s2 = "insert into sale_items("
                             + "sales_no"
@@ -1164,22 +1343,22 @@ public class Grab_branches_updates {
                             .setString("sales_no", to_sales.sales_no)
                             .setString("item_code", to_sale_items.item_code)
                             .setString("barcode", to_sale_items.barcode)
-                            .setString("description", tt.description)
-                            .setString("generic_name", tt.generic_name)
-                            .setString("item_type", tt.item_type)
-                            .setString("supplier_name", tt.supplier)
-                            .setString("supplier_id", tt.supplier_id)
-                            .setString("serial_no", tt.serial_no)
+                            .setString("description", description)
+                            .setString("generic_name", generic_name)
+                            .setString("item_type", item_type)
+                            .setString("supplier_name", supplier)
+                            .setString("supplier_id", supplier_id)
+                            .setString("serial_no", to_sale_items.serial_nos)
                             .setNumber("product_qty", to_sale_items.qty)
-                            .setString("unit", tt.unit)
-                            .setNumber("conversion", tt.conversion)
+                            .setString("unit", unit)
+                            .setNumber("conversion", conversion)
                             .setNumber("selling_price", to_sale_items.selling_price)
                             .setString("date_added", to_sales.date_added)
                             .setString("user_id", to_sales.user_id)
                             .setString("user_screen_name", to_sales.user_screen_name)
                             .setNumber("status", to_sales.status)
                             .setNumber("is_vatable", to_sale_items.is_vatable)
-                            .setNumber("selling_type", tt.selling_type)
+                            .setNumber("selling_type", selling_type)
                             .setString("discount_name", to_sale_items.discount_name)
                             .setNumber("discount_rate", to_sale_items.discount_rate)
                             .setNumber("discount_amount", to_sale_items.discount_amount)
@@ -1189,25 +1368,24 @@ public class Grab_branches_updates {
                             .setString("branch_code", to_sale_items.branch_id)
                             .setString("location", to_sale_items.location)
                             .setString("location_id", to_sale_items.location_id)
-                            .setString("category", tt.category)
-                            .setString("category_id", tt.category_id)
-                            .setString("classification", tt.classification)
-                            .setString("classification_id", tt.classification_id)
-                            .setString("sub_classification", tt.sub_classification)
-                            .setString("sub_classification_id", tt.sub_classification_id)
-                            .setString("brand", tt.brand)
-                            .setString("brand_id", tt.brand_id)
-                            .setString("model", tt.model)
-                            .setString("model_id", tt.model_id)
+                            .setString("category", category)
+                            .setString("category_id", category_id)
+                            .setString("classification", classification)
+                            .setString("classification_id", classification_id)
+                            .setString("sub_classification", sub_classification)
+                            .setString("sub_classification_id", sub_classification_id)
+                            .setString("brand", brand)
+                            .setString("brand_id", brand_id)
+                            .setString("model", model)
+                            .setString("model_id", model_id)
                             .setNumber("addtl_amount", to_sale_items.addtl_amount)
                             .setNumber("wtax", to_sale_items.wtax)
                             .ok();
 
                     stmt.addBatch(s2);
 
-                    double new_qty = tt.product_qty - (tt.conversion * tt.product_qty);
+                    double new_qty = my_qty - (conversion * to_sale_items.qty);
 
-                    String serial_no = Segregator.this_shit(tt.serial_no, to_sale_items.serial_nos);
                     String s4 = " update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
                             + " where  main_barcode= '" + to_sale_items.item_code + "' and location_id='" + to_sale_items.location_id + "' "
@@ -1216,8 +1394,7 @@ public class Grab_branches_updates {
                     stmt.addBatch(s4);
 
                 }
-                
-                
+
                 stmt.executeBatch();
 
             }
@@ -1255,11 +1432,97 @@ public class Grab_branches_updates {
             //<editor-fold defaultstate="collapsed" desc=" returned items ">
             System.out.println("Item Replacements in progress.......... " + l_item_replacements.size());
             for (Parse_sale_item_replacements to_sale_items : l_item_replacements) {
-                System.out.println("Code: " + to_sale_items.item_code);
-
-                System.out.println("Qty: " + to_sale_items.product_qty);
-                Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id);
-
+                //<editor-fold defaultstate="collapsed" desc=" select item ">
+                double my_qty = 0;
+                String unit = "";
+                double conversion = 0;
+                String description = "";
+                String generic_name = "";
+                String category = "";
+                String category_id = "";
+                String classification = "";
+                String classification_id = "";
+                String sub_classification = "";
+                String sub_classification_id = "";
+                String item_type = "";
+                String supplier = "";
+                int fixed_price = 0;
+                String supplier_id = "";
+                int multi_level_pricing = 0;
+                int vatable = 0;
+                double reorder_level = 0;
+                double markup = 0;
+                String barcode = "";
+                String brand = "";
+                String brand_id = "";
+                String model = "";
+                String model_id = "";
+                int selling_type = 0;
+                String serial_no = "";
+                String s3 = "select"
+                        + "product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",description"
+                        + ",description"
+                        + ",generic_name"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",item_type"
+                        + ",supplier"
+                        + ",fixed_price"
+                        + ",supplier_id"
+                        + ",multi_level_pricing"
+                        + ",vatable"
+                        + ",reorder_level"
+                        + ",markup"
+                        + ",barcode"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",selling_type"
+                        + ",serial_no"
+                        + " from inventory_barcodes "
+                        + " where "
+                        + " main_barcode ='" + to_sale_items.item_code + "' "
+                        + " and location_id ='" + to_sale_items.location_id + "' "
+                        + " ";
+                Statement stmt3 = conn.createStatement();
+                ResultSet rs3 = stmt3.executeQuery(s3);
+                if (rs3.next()) {
+                    my_qty = rs3.getDouble(1);
+                    unit = rs3.getString(2);
+                    conversion = rs3.getDouble(3);
+                    description = rs3.getString(4);
+                    generic_name = rs3.getString(5);
+                    category = rs3.getString(6);
+                    category_id = rs3.getString(7);
+                    classification = rs3.getString(8);
+                    classification_id = rs3.getString(9);
+                    sub_classification = rs3.getString(10);
+                    sub_classification_id = rs3.getString(11);
+                    item_type = rs3.getString(12);
+                    supplier = rs3.getString(13);
+                    fixed_price = rs3.getInt(14);
+                    supplier_id = rs3.getString(15);
+                    multi_level_pricing = rs3.getInt(16);
+                    vatable = rs3.getInt(17);
+                    reorder_level = rs3.getInt(18);
+                    markup = rs3.getInt(19);
+                    barcode = rs3.getString(20);
+                    brand = rs3.getString(21);
+                    brand_id = rs3.getString(22);
+                    model = rs3.getString(23);
+                    model_id = rs3.getString(24);
+                    selling_type = rs3.getInt(25);
+                    serial_no = rs3.getString(26);
+                }
+                //</editor-fold>
                 String s5 = "insert into sale_item_replacements("
                         + "sales_no"
                         + ",item_code"
@@ -1345,19 +1608,19 @@ public class Grab_branches_updates {
                 double qty = 0;
 
                 if (to_sale_items.is_replacement == 1) {
-                    qty = tt.product_qty - to_sale_items.product_qty;
+                    qty = my_qty - to_sale_items.product_qty;
                 } else {
-                    qty = tt.product_qty + to_sale_items.product_qty;
+                    qty = my_qty + to_sale_items.product_qty;
                 }
                 s5 = SqlStringUtil.parse(s5)
                         .setString("sales_no", to_sale_items.sales_no)
                         .setString("item_code", to_sale_items.item_code)
                         .setString("barcode", to_sale_items.barcode)
-                        .setString("description", tt.description)
-                        .setString("generic_name", tt.generic_name)
-                        .setString("item_type", tt.item_type)
-                        .setString("supplier_name", tt.supplier)
-                        .setString("supplier_id", tt.supplier_id)
+                        .setString("description", description)
+                        .setString("generic_name", generic_name)
+                        .setString("item_type", item_type)
+                        .setString("supplier_name", supplier)
+                        .setString("supplier_id", supplier_id)
                         .setString("serial_no", to_sale_items.serial_no)
                         .setNumber("product_qty", to_sale_items.product_qty)
                         .setString("unit", to_sale_items.unit)
@@ -1367,8 +1630,8 @@ public class Grab_branches_updates {
                         .setString("user_id", to_sale_items.user_id)
                         .setString("user_screen_name", to_sale_items.user_screen_name)
                         .setNumber("status", to_sale_items.status)
-                        .setNumber("is_vatable", tt.vatable)
-                        .setNumber("selling_type", tt.selling_type)
+                        .setNumber("is_vatable", vatable)
+                        .setNumber("selling_type", selling_type)
                         .setString("discount_name", to_sale_items.discount_name)
                         .setNumber("discount_rate", to_sale_items.discount_rate)
                         .setNumber("discount_amount", to_sale_items.discount_amount)
@@ -1378,16 +1641,16 @@ public class Grab_branches_updates {
                         .setString("branch_code", to_sale_items.branch_code)
                         .setString("location", to_sale_items.location)
                         .setString("location_id", to_sale_items.location_id)
-                        .setString("category", tt.category)
-                        .setString("category_id", tt.category_id)
-                        .setString("classification", tt.classification)
-                        .setString("classification_id", tt.classification_id)
-                        .setString("sub_classification", tt.sub_classification)
-                        .setString("sub_classification_id", tt.sub_classification_id)
-                        .setString("brand", tt.brand)
-                        .setString("brand_id", tt.brand_id)
-                        .setString("model", tt.model)
-                        .setString("model_id", tt.model_id)
+                        .setString("category", category)
+                        .setString("category_id", category_id)
+                        .setString("classification", classification)
+                        .setString("classification_id", classification_id)
+                        .setString("sub_classification", sub_classification)
+                        .setString("sub_classification_id", sub_classification_id)
+                        .setString("brand", brand)
+                        .setString("brand_id", brand_id)
+                        .setString("model", model)
+                        .setString("model_id", model_id)
                         .setNumber("is_replacement", to_sale_items.is_replacement)
                         .ok();
 
@@ -1434,14 +1697,104 @@ public class Grab_branches_updates {
             System.out.println("Charge in Advance in progress.......... " + l_charged_items.size());
             for (Parse_charged_items to_charge_in_advance_items : l_charged_items) {
 
-                Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_charge_in_advance_items.item_code, to_charge_in_advance_items.barcode, to_charge_in_advance_items.location_id);
+                //<editor-fold defaultstate="collapsed" desc=" select item ">
+                double my_qty = 0;
+                String unit = "";
+                double conversion = 0;
+                String description = "";
+                String generic_name = "";
+                String category = "";
+                String category_id = "";
+                String classification = "";
+                String classification_id = "";
+                String sub_classification = "";
+                String sub_classification_id = "";
+                String item_type = "";
+                String supplier = "";
+                int fixed_price = 0;
+                String supplier_id = "";
+                int multi_level_pricing = 0;
+                int vatable = 0;
+                double reorder_level = 0;
+                double markup = 0;
+                String barcode = "";
+                String brand = "";
+                String brand_id = "";
+                String model = "";
+                String model_id = "";
+                int selling_type = 0;
+                String serial_no = "";
+                String s3 = "select"
+                        + "product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",description"
+                        + ",description"
+                        + ",generic_name"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",item_type"
+                        + ",supplier"
+                        + ",fixed_price"
+                        + ",supplier_id"
+                        + ",multi_level_pricing"
+                        + ",vatable"
+                        + ",reorder_level"
+                        + ",markup"
+                        + ",barcode"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",selling_type"
+                        + ",serial_no"
+                        + " from inventory_barcodes "
+                        + " where "
+                        + " main_barcode ='" + to_charge_in_advance_items.item_code + "' "
+                        + " and location_id ='" + to_charge_in_advance_items.location_id + "' "
+                        + " ";
+                Statement stmt3 = conn.createStatement();
+                ResultSet rs3 = stmt3.executeQuery(s3);
+                if (rs3.next()) {
+                    my_qty = rs3.getDouble(1);
+                    unit = rs3.getString(2);
+                    conversion = rs3.getDouble(3);
+                    description = rs3.getString(4);
+                    generic_name = rs3.getString(5);
+                    category = rs3.getString(6);
+                    category_id = rs3.getString(7);
+                    classification = rs3.getString(8);
+                    classification_id = rs3.getString(9);
+                    sub_classification = rs3.getString(10);
+                    sub_classification_id = rs3.getString(11);
+                    item_type = rs3.getString(12);
+                    supplier = rs3.getString(13);
+                    fixed_price = rs3.getInt(14);
+                    supplier_id = rs3.getString(15);
+                    multi_level_pricing = rs3.getInt(16);
+                    vatable = rs3.getInt(17);
+                    reorder_level = rs3.getInt(18);
+                    markup = rs3.getInt(19);
+                    barcode = rs3.getString(20);
+                    brand = rs3.getString(21);
+                    brand_id = rs3.getString(22);
+                    model = rs3.getString(23);
+                    model_id = rs3.getString(24);
+                    selling_type = rs3.getInt(25);
+                    serial_no = rs3.getString(26);
+                }
+                //</editor-fold>
 
-                double new_qty = tt.product_qty - (to_charge_in_advance_items.conversion * to_charge_in_advance_items.product_qty);
+                double new_qty = my_qty - (to_charge_in_advance_items.conversion * to_charge_in_advance_items.product_qty);
                 if (to_charge_in_advance_items.status == 1) {
-                    new_qty = tt.product_qty + (to_charge_in_advance_items.conversion * to_charge_in_advance_items.product_qty);
+                    new_qty = my_qty + (to_charge_in_advance_items.conversion * to_charge_in_advance_items.product_qty);
                 }
 
-                String serial_no = Segregator.this_shit(tt.serial_no, to_charge_in_advance_items.serial_no);
+                String serial_no1 = Segregator.this_shit(serial_no, to_charge_in_advance_items.serial_no);
 
                 String s0 = "insert into charge_in_advance_items("
                         + "customer_id"
@@ -1557,11 +1910,11 @@ public class Grab_branches_updates {
                         .setString("remarks", to_charge_in_advance_items.remarks)
                         .setString("item_code", to_charge_in_advance_items.item_code)
                         .setString("barcode", to_charge_in_advance_items.barcode)
-                        .setString("description", tt.description)
-                        .setString("generic_name", tt.generic_name)
+                        .setString("description", description)
+                        .setString("generic_name", generic_name)
                         .setString("item_type", to_charge_in_advance_items.item_type)
-                        .setString("supplier_name", tt.supplier)
-                        .setString("supplier_id", tt.supplier_id)
+                        .setString("supplier_name", supplier)
+                        .setString("supplier_id", supplier_id)
                         .setString("serial_no", to_charge_in_advance_items.serial_no)
                         .setNumber("product_qty", to_charge_in_advance_items.product_qty)
                         .setString("unit", to_charge_in_advance_items.unit)
@@ -1569,8 +1922,8 @@ public class Grab_branches_updates {
                         .setNumber("selling_price", to_charge_in_advance_items.selling_price)
                         .setString("date_added", to_charge_in_advance_items.date_added)
                         .setNumber("status", to_charge_in_advance_items.status)
-                        .setNumber("is_vatable", tt.vatable)
-                        .setNumber("selling_type", tt.selling_type)
+                        .setNumber("is_vatable", vatable)
+                        .setNumber("selling_type", selling_type)
                         .setString("discount_name", to_charge_in_advance_items.discount_name)
                         .setNumber("discount_rate", to_charge_in_advance_items.discount_rate)
                         .setNumber("discount_amount", to_charge_in_advance_items.discount_amount)
@@ -1580,16 +1933,16 @@ public class Grab_branches_updates {
                         .setString("branch_code", to_charge_in_advance_items.branch_code)
                         .setString("location", to_charge_in_advance_items.location)
                         .setString("location_id", to_charge_in_advance_items.location_id)
-                        .setString("category", tt.category)
-                        .setString("category_id", tt.category_id)
-                        .setString("classification", tt.classification)
-                        .setString("classification_id", tt.classification_id)
-                        .setString("sub_classification", tt.sub_classification)
-                        .setString("sub_classification_id", tt.sub_classification_id)
-                        .setString("brand", tt.brand)
-                        .setString("brand_id", tt.brand_id)
-                        .setString("model", tt.model)
-                        .setString("model_id", tt.model_id)
+                        .setString("category", category)
+                        .setString("category_id", category_id)
+                        .setString("classification", classification)
+                        .setString("classification_id", classification_id)
+                        .setString("sub_classification", sub_classification)
+                        .setString("sub_classification_id", sub_classification_id)
+                        .setString("brand", brand)
+                        .setString("brand_id", brand_id)
+                        .setString("model", model)
+                        .setString("model_id", model_id)
                         .setNumber("addtl_amount", to_charge_in_advance_items.addtl_amount)
                         .setNumber("wtax", to_charge_in_advance_items.wtax)
                         .ok();
@@ -1618,7 +1971,7 @@ public class Grab_branches_updates {
 
     public static void cash_drawers(List<Parse_cash_drawers> l_cash_drawers) {
         try {
-
+            
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Cash Drawers ">

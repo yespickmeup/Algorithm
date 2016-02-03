@@ -1224,7 +1224,7 @@ public class Dlg_sales_on_account extends javax.swing.JDialog {
         //------------------- ar
         String customer_id = tf_client_id.getText();
         String customer_name = tf_client_name.getText();
-        String ar_no = S1_accounts_receivable.increment_id();
+        String ar_no = S1_accounts_receivable.increment_id(my_branch_id);
         String user_name = "";
         if (Users.user_name == null) {
             user_name = "";

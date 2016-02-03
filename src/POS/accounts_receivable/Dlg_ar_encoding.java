@@ -1431,7 +1431,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void init_ar_no() {
-        tf_ar_no.setText(S1_accounts_receivable.increment_id());
+        tf_ar_no.setText(S1_accounts_receivable.increment_id(my_branch_id));
     }
 
     private void enable_ar(boolean stmt) {
@@ -1730,7 +1730,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         int id = -1;
         String customer_id = tf_customer_id.getText();
         String customer_name = tf_customer_name.getText();
-        String ar_no = S1_accounts_receivable.increment_id();
+        String ar_no = S1_accounts_receivable.increment_id(my_branch_id);
         String date_added = DateType.now();
         String user_name = Users.user_name;
         double amount = FitIn.toDouble(tf_amount.getText());

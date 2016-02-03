@@ -471,7 +471,7 @@ public class MySales {
                 //soa 
                 String customer_id = to_sales.charge_customer_id;
                 String customer_name = to_sales.charge_customer_name;
-                String ar_no = S1_accounts_receivable.increment_id();
+                String ar_no = S1_accounts_receivable.increment_id(to_sales.branch_id);
                 String user_name = "";
                 if (Users.user_name == null) {
                     user_name = "";

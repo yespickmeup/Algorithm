@@ -20,6 +20,15 @@ import mijzcx.synapse.desk.utils.FitIn;
 public class Asynch {
 
     public static void main(String[] args) {
+        for (int i = 1; i < 15; i++) {
+            if (i == 5) {
+                continue;
+            }
+            System.out.println(i);
+        }
+    }
+
+    public static void main2(String[] args) {
         Runtime r = Runtime.getRuntime();
         r.gc();
         Asynch s = new Asynch();

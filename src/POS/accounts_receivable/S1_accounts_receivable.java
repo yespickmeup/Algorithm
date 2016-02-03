@@ -1076,18 +1076,22 @@ public class S1_accounts_receivable {
         }
     }
 
-    public static String increment_id() {
-        String ids = "AR-00000000";
+    public static void main(String[] args) {
+        System.out.println(increment_id("10"));
+    }
+
+    public static String increment_id(String branch_id) {
+        String ids = "";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from accounts_receivable";
+            String s0 = "select max(id) from accounts_receivable where branch_id='" + branch_id + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
                 ids = rs.getString(1);
             }
             if (ids == null) {
-                ids = "AR-00000001";
+                ids = branch_id + "|AR-00000001";
             } else {
                 String s2 = "select ar_no from accounts_receivable where id='" + ids + "'";
                 Statement stmt2 = conn.createStatement();
