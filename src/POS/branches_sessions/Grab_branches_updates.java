@@ -1216,7 +1216,8 @@ public class Grab_branches_updates {
                     stmt.addBatch(s4);
 
                 }
-
+                
+                
                 stmt.executeBatch();
 
             }

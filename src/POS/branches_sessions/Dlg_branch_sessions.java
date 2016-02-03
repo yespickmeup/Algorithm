@@ -527,16 +527,19 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
             List<String> days = Branch_local_uploads.getDates(date_from);
             int i = 1;
             for (String s : days) {
-                String where = " where Date(date_added)='" + s + "'  ";
-                String where2 = " where Date(time_in)='" + s + "'  ";
+                String where = " where Date(date_added)='" + s + "' and branch_id='" + my_location_id + "' ";
+                String where2 = " where Date(time_in)='" + s + "'  and branch_id='" + my_location_id + "' ";
+                String where4 = " where Date(date_added)='" + s + "' and from_branch_id='" + my_location_id + "' ";
+                String where5 = " where Date(date_added)='" + s + "' and branch_code='" + my_location_id + "' ";
+
                 Branch_local_uploads.to_upload_count replenishments = Parse_inventory_replenishments.compress(where);
                 Branch_local_uploads.to_upload_count inventory_counts = Parse_inventory_counts.compress(where);
                 Branch_local_uploads.to_upload_count adjustments = Parse_inventory_adjustments.compress(where);
-                Branch_local_uploads.to_upload_count stock_transfers = Parse_stock_transfers.compress(where);
-                String receipts = Parse_receipts.compress(where);
+                Branch_local_uploads.to_upload_count stock_transfers = Parse_stock_transfers.compress(where4);
+                String receipts = "";// Parse_receipts.compress(where);
                 Branch_local_uploads.to_upload_count sales = Parse_sales.compress(where);
-                Branch_local_uploads.to_upload_count returned_items = Parse_sale_item_replacements.compress(where);
-                Branch_local_uploads.to_upload_count charged_items = Parse_charged_items.compress(where);
+                Branch_local_uploads.to_upload_count returned_items = Parse_sale_item_replacements.compress(where5);
+                Branch_local_uploads.to_upload_count charged_items = Parse_charged_items.compress(where5);
                 String rmas = "";
                 String item_maintenances = "";
                 Branch_local_uploads.to_upload_count cash_drawers = Parse_cash_drawers.compress(where2);
