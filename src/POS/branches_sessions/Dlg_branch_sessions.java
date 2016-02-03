@@ -451,7 +451,7 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
 
                         jButton1.setEnabled(true);
                         jButton2.setEnabled(true);
-                        Thread.sleep(5000);
+                        Thread.sleep(120000);
 
                         start();
                     } catch (InterruptedException ex) {
