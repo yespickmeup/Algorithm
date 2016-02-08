@@ -1989,6 +1989,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         if (col == 9) {
             get_customers_aging();
         }
+
         if (col == 7) {
             select_transfer();
             jTabbedPane1.setSelectedIndex(0);
@@ -2000,7 +2001,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
 
         if (col == 10) {
-
             if (to.isSelected()) {
                 to.setSelected(false);
                 tbl_stock_transfers_M.fireTableDataChanged();
@@ -2008,7 +2008,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 to.setSelected(true);
                 tbl_stock_transfers_M.fireTableDataChanged();
             }
-
         }
 
     }
@@ -2176,10 +2175,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
                 nd.setLocationRelativeTo(this);
                 nd.setVisible(true);
-
             }
-            if (col == 7) {
 
+            if (col == 7) {
+                if (!jButton7.isEnabled()) {
+                    return;
+                }
                 Stock_transfers_items.delete_stock_transfers_items2("" + to.id);
                 data_cols_items();
                 Alert.set(3, "");
@@ -2250,8 +2251,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 jButton7.setEnabled(false);
                 jButton1.setEnabled(false);
             }
-
         }
+
         if (col == 6) {
             delete_transfer();
         }
@@ -2274,14 +2275,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_confirm_action.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-
                 Stock_transfers.delete_stock_transfers(to);
                 data_cols();
-
                 tbl_stock_transfers_items_ALM.clear();
                 tbl_stock_transfers_items_M.fireTableDataChanged();
                 tf_remarks.setText("");
@@ -2292,12 +2290,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 tf_to_branch_id.setText("");
                 tf_to_location.setText("");
                 tf_to_location_id.setText("");
-
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
-
     }
 
     private void finalize_transfer() {
@@ -2310,12 +2306,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             Alert.set(0, "Stock Transfer-Status [Finalized]");
             return;
         }
-
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_confirm_action.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
@@ -2324,7 +2318,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 data_cols();
                 tbl_stock_transfers.setRowSelectionInterval(row, row);
                 data_cols_items();
-
                 init_no();
                 tf_remarks.setText("");
                 jButton5.setEnabled(true);
@@ -2337,7 +2330,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 tbl_stock_transfers_items_ALM.clear();
                 tbl_stock_transfers_items_M.fireTableDataChanged();
                 Alert.set(0, "Stock Transfer Finalized");
-
             }
         });
         nd.setLocationRelativeTo(this);

@@ -8,10 +8,7 @@ package POS.branches_sessions;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import static POS.branches_sessions.Check_cloud_local_uploads.FileToString;
-import static POS.branches_sessions.Dlg_branch_local_downloads.loadData_local_uploads;
-import static POS.branches_sessions.Dlg_branch_local_uploads.loadData_local_uploads;
 import POS.users.MyUser;
-import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import java.awt.EventQueue;
@@ -501,6 +498,7 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
                     jXLabel1.setText("Not Connected to cloud!");
                     return;
                 }
+
                 start_synching_local_branch_server_upload();
                 start_synching_local_branch_server_download();
             }
@@ -836,11 +834,11 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
 
     private void start_synching_main_branch_server_download() {
         //<editor-fold defaultstate="collapsed" desc=" Download ">
-        String where = " where status=0  ";
-        List<Branch_local_uploads.to_branch_local_uploads> datas2 = Branch_local_uploads.ret_data(where);
+        String where = " where status=0 ";
+        List<Branch_server_uploads.to_branch_local_uploads> datas2 = Branch_server_uploads.ret_data(where);
         System.out.println(datas2.size());
 
-        for (Branch_local_uploads.to_branch_local_uploads to : datas2) {
+        for (Branch_server_uploads.to_branch_local_uploads to : datas2) {
             System.out.println("Date of Update: " + to.date_added);
             System.out.println("***************************************************");
             String replenishments = FileToString(to.replenishments);
@@ -891,7 +889,7 @@ public class Dlg_branch_sessions extends javax.swing.JDialog {
         Grab_branches_updates.charge_in_advance(l_charged_items);
         Grab_branches_updates.cash_drawers(l_cash_drawers);
 
-        Grab_branches_updates.update_status(datas2);
+        Grab_branches_updates.update_status2(datas2);
 
         l_replenishments.clear();
         l_inventory_counts.clear();

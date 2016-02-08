@@ -294,8 +294,8 @@ public class Grab_branches_updates {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-
             }
+
             System.out.println("Inventory Encoding Updated!");
             //</editor-fold>
             conn.commit();
@@ -475,7 +475,6 @@ public class Grab_branches_updates {
                         + ",:at_location"
                         + ",:at_location_id"
                         + ")";
-
                 s0 = SqlStringUtil.parse(s0)
                         .setString("transaction_no", to_stock_transfers.transaction_no)
                         .setString("user_name", to_stock_transfers.user_name)
@@ -1130,22 +1129,16 @@ public class Grab_branches_updates {
                             .setNumber("addtl_amount", to_sale_items.addtl_amount)
                             .setNumber("wtax", to_sale_items.wtax)
                             .ok();
-
                     stmt.addBatch(s2);
-
                     double new_qty = my_qty - (conversion * to_sale_items.qty);
-
                     String s4 = " update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
                             + " where  main_barcode= '" + to_sale_items.item_code + "' and location_id='" + to_sale_items.location_id + "' "
                             + "";
                     PreparedStatement stmt4 = conn.prepareStatement(s4);
                     stmt.addBatch(s4);
-
                 }
-
                 stmt.executeBatch();
-
             }
             //</editor-fold>
             System.out.println("Sales, Updated!");
@@ -1438,7 +1431,6 @@ public class Grab_branches_updates {
 
     public static void charge_in_advance(List<Parse_charged_items> l_charged_items) {
         try {
-
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" charge in advance ">
@@ -1718,7 +1710,6 @@ public class Grab_branches_updates {
 
     public static void cash_drawers(List<Parse_cash_drawers> l_cash_drawers) {
         try {
-
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             //<editor-fold defaultstate="collapsed" desc=" Cash Drawers ">
@@ -1819,7 +1810,6 @@ public class Grab_branches_updates {
 
     public static void update_status(List<Branch_local_uploads.to_branch_local_uploads> datas2) {
         try {
-
             Connection conn = MyConnection.cloud_connect();
             conn.setAutoCommit(false);
 
@@ -1833,7 +1823,6 @@ public class Grab_branches_updates {
                         .ok();
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-
             }
             Lg.s(Branch_local_uploads.class, "Successfully Updated");
             conn.commit();
@@ -1846,10 +1835,8 @@ public class Grab_branches_updates {
 
     public static void update_status2(List<Branch_server_uploads.to_branch_local_uploads> datas2) {
         try {
-
             Connection conn = MyConnection.cloud_connect();
             conn.setAutoCommit(false);
-
             for (Branch_server_uploads.to_branch_local_uploads to_branch_local_uploads : datas2) {
                 String s0 = "update branch_server_uploads set "
                         + "status= :status "
@@ -1860,7 +1847,6 @@ public class Grab_branches_updates {
                         .ok();
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-
             }
             Lg.s(Branch_local_uploads.class, "Successfully Updated");
             conn.commit();

@@ -254,6 +254,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         tf_branch_id = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_inventory = new javax.swing.JTable();
@@ -508,6 +509,10 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox6.setSelected(true);
         jCheckBox6.setText("All/with quantity");
 
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setSelected(true);
+        jCheckBox7.setText("All/Search Query");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -556,7 +561,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jCheckBox6)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox6)
+                            .addComponent(jCheckBox7))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -604,6 +611,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox7)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -711,7 +720,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_reports/copy23.png"))); // NOI18N
-        jButton3.setText("Preview All Stocks");
+        jButton3.setText("Print Preview");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -965,6 +974,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1620,9 +1630,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
                 } else {
                     where = where + " and description like '%" + jTextField1.getText() + "%' and product_qty>0";
                 }
-                
+
                 where = where + " " + where2;
-                
+
                 System.out.println(where);
                 List<to_inventory> datas = S1_inventory.ret_data5(where);
                 loadData_inventory_barcodes(datas);
@@ -1928,7 +1938,25 @@ public class Dlg_report_item extends javax.swing.JDialog {
             where = where + " and model_id='" + jTextField11.getText() + "'";
         }
         where = where + " group by main_barcode order by description asc ";
-        List<Srpt_stock_take.field> datas = Srpt_stock_take.ret_data(where);
+
+        List<Srpt_stock_take.field> datas = new ArrayList();
+        if (jCheckBox7.isSelected()) {
+            datas = Srpt_stock_take.ret_data(where);
+        } else {
+            List<to_inventory> datas2 = tbl_inventory_barcodes_ALM;
+            for (to_inventory to : datas2) {
+                String item_code = to.barcode;
+                String barcode = to.barcode;
+                String description = to.description;
+                double qty = to.product_qty;
+                double selling_price = to.selling_price;
+                double cost = to.cost;
+                String uom = to.unit;
+                String code = to.barcode;
+                Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code);
+                datas.add(field);
+            }
+        }
 
         String category1 = tf_category.getText();
         String classification = jTextField3.getText();
