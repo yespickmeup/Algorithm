@@ -6,7 +6,7 @@
 select transaction_no,count(*) from stock_transfers group by transaction_no having count(*) > 1;
 
 
-select stock_transfer_id,count(*) from stock_transfers_items group by stock_transfer_id limit 100;
+select stock_transfer_id,count(*) from stock_transfers_items group by stock_transfer_id limit 1,100;
 
 
 
