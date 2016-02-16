@@ -239,7 +239,7 @@ public class Dlg_match_ledger extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         run();
+        run();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -279,20 +279,21 @@ public class Dlg_match_ledger extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
-
+    
     private void run() {
         jButton1.setEnabled(false);
         jTextField1.setEnabled(false);
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
-
+                System.out.println("Calculating.....");
                 Match_ledger.match_ledger(jTextField1.getText(), jTextArea1);
+                System.out.println("Done Matching...");
                 jButton1.setEnabled(true);
                 jTextField1.setEnabled(true);
             }
         });
         t.start();
     }
+
 }

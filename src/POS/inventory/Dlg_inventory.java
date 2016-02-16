@@ -2029,7 +2029,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
                 String where = " where main_barcode='" + barcode + "'  ";
                 if (!data.branch_id.equalsIgnoreCase("All")) {
-                    where = " where main_barcode='" + barcode + "' and branch_code='" + branch_code + "' ";
+                    where = " where main_barcode='" + barcode + "' and branch_code='" + data.branch_id + "' ";
                 }
                 S1_inventory.edit_inventory(to, my_item, where);
                 my_item = to;

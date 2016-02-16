@@ -1185,7 +1185,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         init_key();
         focus();
         init_tbl_stock_transfers();
-        init_no();
+
         jTextField2.grabFocus();
         set_default_branch();
 
@@ -1203,6 +1203,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
         branch_location_list3 = branch_location_list2;
 
+        init_no();
     }
 
     String my_branch = "";

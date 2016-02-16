@@ -373,7 +373,7 @@ public class MySales {
                 String s4 = " update order_items set status='" + 1 + "' where sales_no='" + to_sales.session_no + "'";
                 stmt.addBatch(s4);
             }
-            
+
             if (to_sales.prepaid_amount > 0) {
                 String prep = "select "
                         + "id"
@@ -1066,20 +1066,13 @@ public class MySales {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 
-            int st = status;
-            if (st == 0) {
-                st = 1;
-            } else {
-                st = 0;
-            }
-
             String s2 = "update sale_items set "
                     + " status= :status"
                     + " where "
                     + " sales_no ='" + sales_no + "' "
                     + " ";
             s2 = SqlStringUtil.parse(s2)
-                    .setNumber("status", st)
+                    .setNumber("status", status)
                     .ok();
 
             stmt.addBatch(s2);

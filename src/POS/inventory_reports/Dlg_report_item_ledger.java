@@ -732,7 +732,7 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                 List<Srpt_item_ledger.field> charge_in_advance = new ArrayList(); //Srpt_item_ledger.charge_items(where);
                 List<Srpt_item_ledger.field> charge_in_advance_cancelled = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
                 List<Srpt_item_ledger.field> replenishments = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
-
+                System.out.println(where);
                 try {
                     Connection conn = MyConnection.connect();
 
@@ -855,10 +855,12 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
 
                         Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
                         sales.add(field);
+
                         if (status == 1) {
                             Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
                             sales.add(field2);
                         }
+
                     }
 
                     //</editor-fold>                    
@@ -1541,7 +1543,6 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
 
                     }
                     //</editor-fold>
-
                     //<editor-fold defaultstate="collapsed" desc=" Replenishment ">
                     String s9 = "select "
                             + "id"

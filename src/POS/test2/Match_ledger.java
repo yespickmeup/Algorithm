@@ -39,12 +39,13 @@ public class Match_ledger {
             for (to_inventory_barcodes t : datas2) {
                 qty += t.product_qty;
             }
+
             if (qty != to.product_qty) {
                 System.out.println(to.main_barcode + " : " + FitIn.fmt_woc(to.product_qty) + " <> " + qty);
-                update_qty(to.main_barcode,qty,location_id);
+                update_qty(to.main_barcode, qty, location_id);
                 diff++;
-                
             } else {
+                System.out.println(to.main_barcode + " = " + qty + " | " + to.product_qty + " ok!");
                 match++;
             }
         }
@@ -61,11 +62,11 @@ public class Match_ledger {
 //        update_qty("5942", 16);
     }
 
-    public static void update_qty(String item_code, double qty,String location_id) {
+    public static void update_qty(String item_code, double qty, String location_id) {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update  inventory_barcodes set "
-                    + "product_qty= :product_qty"
+                    + " product_qty= :product_qty"
                     + " where "
                     + " main_barcode ='" + item_code + "' "
                     + " and location_id='" + location_id + "' ";
