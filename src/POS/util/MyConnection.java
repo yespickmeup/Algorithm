@@ -33,7 +33,7 @@ public class MyConnection {
     public static Connection connect() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "192.168.1.51:3306");
+            String host = System.getProperty("pool_host", "localhost:3306");
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
             String db_name = System.getProperty("mydb", "db_algorithm");

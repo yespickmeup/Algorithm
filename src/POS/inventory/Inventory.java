@@ -21,7 +21,6 @@ public class Inventory {
     public static void update_item(S1_inventory.to_inventory to_inventory, String unit, double conversion, double selling_price, int update_all_branches, String where) {
         try {
             Connection conn = MyConnection.connect();
-
             if (update_all_branches == 1) {
                 String s0 = "update inventory set "
                         + " unit= :unit"
@@ -36,7 +35,6 @@ public class Inventory {
                         setNumber("conversion", conversion).
                         setNumber("selling_price", selling_price).
                         ok();
-
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
             }

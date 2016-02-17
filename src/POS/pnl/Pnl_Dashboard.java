@@ -36,7 +36,7 @@ import POS.inventory.Dlg_inventory;
 import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Dlg_price_inquire;
 import POS.inventory.Dlg_print_barcode;
-import POS.inventory.Dlg_update_pricing;
+import POS.inventory.Dlg_inventory_price_updates;
 import POS.inventory_replenishment.Dlg_inventory_replenishment;
 import POS.inventory_reports.Dlg_report_item_ledger;
 import POS.main.Main;
@@ -2658,12 +2658,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void m_update_pricing_per_branch() {
-        Dlg_update_pricing dtc = new Dlg_update_pricing();
+        Dlg_inventory_price_updates dtc = new Dlg_inventory_price_updates();
         MyFrame.set(dtc.getSurface(), jPanel1, "Update Item Pricing per Branch");
     }
 
     private void m_update_pricing_any_branches() {
-        Dlg_update_pricing dtc = new Dlg_update_pricing();
+        Dlg_inventory_price_updates dtc = new Dlg_inventory_price_updates();
         dtc.do_pass();
         MyFrame.set(dtc.getSurface(), jPanel1, "Update Item Pricing any Branches");
     }
