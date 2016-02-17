@@ -1144,7 +1144,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="V3.1.0"/>
+            <Property name="text" type="java.lang.String" value="V3.2.0"/>
           </Properties>
         </Component>
       </SubComponents>
