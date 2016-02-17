@@ -42,7 +42,6 @@ public class MyConnection {
 
             try {
                 conn = DriverManager.getConnection(url, user, password);
-                //DriverManager.getConnection("proxool.pool_connection");
             } catch (SQLException ex) {
                 Logger.getLogger(MyConnection.class.getName()).
                         log(Level.SEVERE, null, ex);
@@ -180,7 +179,7 @@ public class MyConnection {
     public static Connection development() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "192.168.1.49:3306");
+            String host = System.getProperty("pool_host", "localhost:3306");
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
             String db_name = System.getProperty("mydb", "db_algorithm");

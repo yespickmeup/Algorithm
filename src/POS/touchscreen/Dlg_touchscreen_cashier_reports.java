@@ -341,6 +341,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton3.setBackground(new java.awt.Color(244, 244, 244));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/summary.png"))); // NOI18N
+        jButton3.setToolTipText("Sales Summary");
         jButton3.setContentAreaFilled(false);
         jButton3.setFocusable(false);
         jButton3.setOpaque(true);
@@ -357,6 +358,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton4.setBackground(new java.awt.Color(244, 244, 244));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/abacus7.png"))); // NOI18N
+        jButton4.setToolTipText("Cash Count");
         jButton4.setContentAreaFilled(false);
         jButton4.setFocusable(false);
         jButton4.setOpaque(true);
@@ -373,6 +375,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton5.setBackground(new java.awt.Color(244, 244, 244));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/seo2 (1).png"))); // NOI18N
+        jButton5.setToolTipText("Sales Transactions");
         jButton5.setContentAreaFilled(false);
         jButton5.setFocusable(false);
         jButton5.setOpaque(true);
@@ -384,6 +387,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton6.setBackground(new java.awt.Color(244, 244, 244));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/item.png"))); // NOI18N
+        jButton6.setToolTipText("Sales by Item");
         jButton6.setContentAreaFilled(false);
         jButton6.setFocusable(false);
         jButton6.setOpaque(true);
@@ -406,6 +410,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton8.setBackground(new java.awt.Color(244, 244, 244));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/strategical.png"))); // NOI18N
+        jButton8.setToolTipText("Void/Item Replacements/Print");
         jButton8.setContentAreaFilled(false);
         jButton8.setFocusable(false);
         jButton8.setOpaque(true);
@@ -417,6 +422,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton9.setBackground(new java.awt.Color(244, 244, 244));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/moneybox (1).png"))); // NOI18N
+        jButton9.setToolTipText("Remitances");
         jButton9.setContentAreaFilled(false);
         jButton9.setFocusable(false);
         jButton9.setOpaque(true);
@@ -433,6 +439,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton10.setBackground(new java.awt.Color(244, 244, 244));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/Currencies_symbols_on_a_hand_32.png"))); // NOI18N
+        jButton10.setToolTipText("AR Payments");
         jButton10.setContentAreaFilled(false);
         jButton10.setFocusable(false);
         jButton10.setOpaque(true);
@@ -444,6 +451,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jButton11.setBackground(new java.awt.Color(244, 244, 244));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/Prepaid_card_in_a_hand_32.png"))); // NOI18N
+        jButton11.setToolTipText("Prepaid Payments");
         jButton11.setContentAreaFilled(false);
         jButton11.setFocusable(false);
         jButton11.setOpaque(true);

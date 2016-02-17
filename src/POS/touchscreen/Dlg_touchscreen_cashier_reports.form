@@ -341,6 +341,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/touchscreen_icons/summary.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Sales Summary"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -358,6 +359,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/icons3/abacus7.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cash Count"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -375,6 +377,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/touchscreen_icons/seo2 (1).png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Sales Transactions"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -391,6 +394,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/touchscreen_icons/item.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Sales by Item"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -423,6 +427,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/touchscreen_icons/strategical.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Void/Item Replacements/Print"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -439,6 +444,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/icons3/moneybox (1).png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Remitances"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -456,6 +462,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/touchscreen_icons/Currencies_symbols_on_a_hand_32.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="AR Payments"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
@@ -472,6 +479,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/POS/touchscreen_icons/Prepaid_card_in_a_hand_32.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Prepaid Payments"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>

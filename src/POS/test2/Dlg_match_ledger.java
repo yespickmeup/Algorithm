@@ -280,6 +280,9 @@ public class Dlg_match_ledger extends javax.swing.JDialog {
     }
     // </editor-fold>
     
+    
+    
+    
     private void run() {
         jButton1.setEnabled(false);
         jTextField1.setEnabled(false);
