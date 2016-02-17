@@ -621,7 +621,7 @@ public class Dlg_sale_item_replacements extends javax.swing.JDialog {
                 String item_type = item.item_type;
                 String supplier_name = item.supplier;
                 String supplier_id = item.supplier_id;
-                String serial_no = "";
+                String serial_no = data.serial_no;
                 double product_qty = data.qty;
 
                 String unit = "[" + data.item.unit + ":" + data.item.price + "/" + data.item.conversion + "^" + "1" + "]";

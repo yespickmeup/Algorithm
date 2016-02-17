@@ -25,7 +25,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
 public class Match_ledger {
 
     public static void match_ledger(String location_id, JTextArea tx) {
-        String where = " where  location_id='" + location_id + "' order by main_barcode asc ";
+        String where = " where location_id='" + location_id + "'  order by main_barcode asc ";
         List<to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
         System.out.println("Location: " + location_id);
         System.out.println("Total Items: " + datas.size());

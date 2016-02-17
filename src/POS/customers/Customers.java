@@ -127,7 +127,6 @@ public class Customers {
                     + ",credit_limit= :credit_limit "
                     + ",address= :address "
                     + ",term= :term "
-                    + ",balance= :balance "
                     + ",discount= :discount "
                     + " where id='" + to_customers.id + "' "
                     + " ";
@@ -139,7 +138,6 @@ public class Customers {
                     .setNumber("credit_limit", to_customers.credit_limit)
                     .setString("address", to_customers.address)
                     .setNumber("term", to_customers.term)
-                    .setNumber("balance", to_customers.balance)
                     .setNumber("discount", to_customers.discount)
                     .ok();
             System.out.println("" + to_customers.location);

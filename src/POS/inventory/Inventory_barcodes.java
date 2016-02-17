@@ -1236,14 +1236,13 @@ public class Inventory_barcodes {
                 List<Srpt_item_ledger.field> field3 = new ArrayList();
                 List<Srpt_item_ledger.field> fields = new ArrayList();
 
-                  String where = " where item_code ='" + to.main_barcode + "'    "
+                 String where = " where item_code ='" + main_barcode2 + "'    "
                         + "   ";
-                String where2 = " where main_barcode ='" + to.main_barcode + "'   "
+                String where2 = " where main_barcode ='" + main_barcode2 + "'   "
                         + "  ";
-                String where3 = " where barcode ='" + to.main_barcode + "'    "
+                String where3 = " where barcode ='" + main_barcode2 + "'    "
                         + "  ";
-                String wheree = " where item_code ='" + to.main_barcode + "'   and status=1 "
-                        + "   ";
+                String wheree = " where item_code ='" + main_barcode2 + "'   and status=1 ";
                       
 
                 List<Srpt_item_ledger.field> sales = new ArrayList();//Srpt_item_ledger.sales(where);
@@ -1375,10 +1374,12 @@ public class Inventory_barcodes {
 
                         Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
                         sales.add(field);
+
                         if (status == 1) {
                             Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
                             sales.add(field2);
                         }
+
                     }
 
                     //</editor-fold>                    
