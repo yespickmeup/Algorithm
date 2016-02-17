@@ -168,7 +168,7 @@ public class Inventory_price_updates {
                         stmt.execute();
                     }
 
-                    Lg.s(S1_inventory.class, "Successfully Updated");
+                    Lg.s(Inventory.class, "Successfully Updated");
                     
                     String s2 = "update inventory_barcodes set "
                             + " unit= :unit"

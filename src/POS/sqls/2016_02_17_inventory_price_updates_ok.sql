@@ -1,5 +1,7 @@
 
 
+
+/* uploaded to local/algo mainserver/kabankalan server */
 drop table if exists inventory_price_updates;
 create table inventory_price_updates(
 id int auto_increment primary key

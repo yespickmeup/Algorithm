@@ -7,7 +7,7 @@ package POS.barcodes;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
@@ -506,7 +506,7 @@ public class Dlg_barcodes extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
 
     private void init_inventory() {
         TableRenderer tr = new TableRenderer();
@@ -517,10 +517,10 @@ public class Dlg_barcodes extends javax.swing.JDialog {
             public void run() {
                 String search = tf_item_code.getText();
                 inventory_list.clear();
-                inventory_list = S1_inventory.ret_data(search);
+                inventory_list = Inventory.ret_data(search);
                 Object[][] obj = new Object[inventory_list.size()][2];
                 int i = 0;
-                for (S1_inventory.to_inventory to : inventory_list) {
+                for (Inventory.to_inventory to : inventory_list) {
                     obj[i][0] = to.barcode;
                     obj[i][1] = to.description;
                     i++;
@@ -542,7 +542,7 @@ public class Dlg_barcodes extends javax.swing.JDialog {
             @Override
             public void ok(TableRenderer.OutputData data) {
                 selected = data.selected_row;
-                S1_inventory.to_inventory to = inventory_list.get(data.selected_row);
+                Inventory.to_inventory to = inventory_list.get(data.selected_row);
                 jTextField2.setText(to.barcode);
                 jTextField1.setText(to.description);
                 jTextField3.grabFocus();
@@ -694,7 +694,7 @@ public class Dlg_barcodes extends javax.swing.JDialog {
     int selected = 0;
 
     private void add_barcode() {
-        final S1_inventory.to_inventory to_inventory = inventory_list.get(selected);
+        final Inventory.to_inventory to_inventory = inventory_list.get(selected);
         jProgressBar1.setString("Adding Record...");
         jProgressBar1.setIndeterminate(true);
         Thread t = new Thread(new Runnable() {

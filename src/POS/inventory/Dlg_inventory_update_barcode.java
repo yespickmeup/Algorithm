@@ -5,7 +5,7 @@
  */
 package POS.inventory;
 
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.util.Focus_Fire;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -603,7 +603,7 @@ public class Dlg_inventory_update_barcode extends javax.swing.JDialog {
             @Override
             public void run() {
                 String where = " where description like '%" + jTextField1.getText() + "%' or barcode='" + jTextField1.getText() + "' or barcodes='" + jTextField1.getText() + "' order by description asc";
-                loadData_inventory(S1_inventory.ret_data6(where));
+                loadData_inventory(Inventory.ret_data6(where));
                 jTextField1.setEnabled(true);
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
@@ -637,7 +637,7 @@ public class Dlg_inventory_update_barcode extends javax.swing.JDialog {
         to_inventory to = (to_inventory) tbl_inventory_ALM.get(tbl_inventory.convertRowIndexToModel(row));
         String item_code = jTextField2.getText();
         String barcode = jTextField3.getText();
-        S1_inventory.update_barcode(item_code, barcode);
+        Inventory.update_barcode(item_code, barcode);
         data_cols();
         jTextField2.setText("");
         jTextField3.setText("");

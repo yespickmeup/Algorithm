@@ -4,7 +4,7 @@
  */
 package POS.receipts;
 
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.inventory.S1_items2;
@@ -870,7 +870,7 @@ public class S1_receipt_items {
 
                     PreparedStatement stmt3 = conn.prepareStatement(s3);
                     stmt3.execute();
-                    Lg.s(S1_inventory.class, "Successfully Updated");
+                    Lg.s(Inventory.class, "Successfully Updated");
                 }
 
             }

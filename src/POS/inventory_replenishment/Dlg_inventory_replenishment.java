@@ -8,7 +8,7 @@ package POS.inventory_replenishment;
 import static POS.adjuster.Dlg_adjuster_inventory.loadData_inventory_barcodes;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory_replenishment.Inventory_replenishments.to_inventory_replenishments;
 import POS.users.MyUser;
@@ -696,16 +696,16 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
         lo.setId("" + to.id);
 
     }
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         final Field.Combo br = (Field.Combo) jTextField2;
 
         branches_list.clear();
-        branches_list = S1_branches.ret_where("");
+        branches_list = Branches.ret_where("");
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;
             obj[i][1] = to.branch;
             i++;
@@ -720,7 +720,7 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.
+                Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 br.setText(to.branch);
                 br.setId("" + to.id);

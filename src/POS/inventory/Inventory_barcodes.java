@@ -5,9 +5,9 @@
  */
 package POS.inventory;
 
+import POS.branch_locations.Branch_locations;
 import POS.branch_locations.S1_branch_locations;
-import static POS.branch_locations.S2_branch_locations.ret_all_locations;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.inventory_reports.Srpt_item_ledger;
 import POS.util.DateType;
 import POS.util.MyConnection;
@@ -216,7 +216,7 @@ public class Inventory_barcodes {
         try {
 
             Connection conn = MyConnection.connect();
-            List<S1_branch_locations.to_branch_locations> datas = ret_all_locations();
+            List<S1_branch_locations.to_branch_locations> datas = Branch_locations.ret_all_locations();
             for (S1_branch_locations.to_branch_locations to : datas) {
                 String s0 = "insert into inventory_barcodes("
                         + "barcode"

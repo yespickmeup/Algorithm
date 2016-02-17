@@ -4,13 +4,14 @@
  */
 package POS.banks;
 
-import POS.banks.S1_banks.to_banks;
+import POS.banks.Banks.to_banks;
 import POS.main.Main;
+import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
-import com.lowagie.text.Font;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.*;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import synsoftech.fields.Button;
 
 /**
  *
@@ -192,45 +194,56 @@ public class Dlg_banks extends javax.swing.JDialog {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jXPanel3 = new org.jdesktop.swingx.JXPanel();
+        tf_search = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_banks = new org.jdesktop.swingx.JXTable();
-        jXPanel1 = new org.jdesktop.swingx.JXPanel();
-        tf_search = new javax.swing.JTextField();
-        btn_new = new org.jdesktop.swingx.JXLabel();
-        btn_edit = new org.jdesktop.swingx.JXLabel();
-        btn_delete = new org.jdesktop.swingx.JXLabel();
-        btn_add = new org.jdesktop.swingx.JXLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jXPanel2 = new org.jdesktop.swingx.JXPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel5 = new javax.swing.JLabel();
+        jButton8 = new Button.Default();
         jLabel2 = new javax.swing.JLabel();
         tf_bank_name = new javax.swing.JTextField();
+        jButton5 = new Button.Primary();
+        jButton6 = new Button.Info();
+        jButton7 = new Button.Warning();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(104, 95, 84));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jPanel1.setOpaque(false);
 
-        jXPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        tf_search.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_search.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tf_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_searchKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Search:");
 
         jScrollPane2.setOpaque(false);
 
         tbl_banks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbl_banks.setOpaque(false);
@@ -241,150 +254,112 @@ public class Dlg_banks extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tbl_banks);
 
-        javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
-        jXPanel3.setLayout(jXPanel3Layout);
-        jXPanel3Layout.setHorizontalGroup(
-            jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jXPanel3Layout.setVerticalGroup(
-            jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel1.setText("No. of rows:");
 
-        jXPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("0");
 
-        tf_search.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        tf_search.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_searchKeyReleased(evt);
+        jProgressBar1.setString("");
+        jProgressBar1.setStringPainted(true);
+
+        jLabel5.setText("Status:");
+
+        jButton8.setText("New");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
             }
         });
 
-        btn_new.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/bd_reload.png"))); // NOI18N
-        btn_new.setText("NEW");
-        btn_new.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_newMouseClicked(evt);
-            }
-        });
-
-        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/bd_edit.png"))); // NOI18N
-        btn_edit.setText("EDIT");
-        btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_editMouseClicked(evt);
-            }
-        });
-
-        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/bd_drop.png"))); // NOI18N
-        btn_delete.setText("DELETE");
-        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_deleteMouseClicked(evt);
-            }
-        });
-
-        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/bd_new.png"))); // NOI18N
-        btn_add.setText("ADD");
-        btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_addMouseClicked(evt);
-            }
-        });
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Search:");
-
-        javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
-        jXPanel1.setLayout(jXPanel1Layout);
-        jXPanel1Layout.setHorizontalGroup(
-            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_search)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_new, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jXPanel1Layout.setVerticalGroup(
-            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tf_search)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btn_new, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jXPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Name:");
 
+        tf_bank_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_bank_name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
-        jXPanel2.setLayout(jXPanel2Layout);
-        jXPanel2Layout.setHorizontalGroup(
-            jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_bank_name)
-                .addContainerGap())
-        );
-        jXPanel2Layout.setVerticalGroup(
-            jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jXPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_bank_name)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton5.setText("Add");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Update");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("Delete");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jXPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(5, 5, 5))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 57, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_search))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_bank_name)))
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jXPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_bank_name)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(tf_search, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel5)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -395,9 +370,7 @@ public class Dlg_banks extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -419,46 +392,43 @@ public class Dlg_banks extends javax.swing.JDialog {
         data_cols();
     }//GEN-LAST:event_tf_searchKeyReleased
 
-    private void btn_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseClicked
-        // TODO add your handling code here:
-        add_banks();
-    }//GEN-LAST:event_btn_addMouseClicked
-
     private void tbl_banksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banksMouseClicked
         // TODO add your handling code here:
         select_banks();
     }//GEN-LAST:event_tbl_banksMouseClicked
 
-    private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
-        // TODO add your handling code here:
-        edit_banks();
-    }//GEN-LAST:event_btn_editMouseClicked
-
-    private void btn_newMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_newMouseClicked
-        // TODO add your handling code here:
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         clear_banks();
-    }//GEN-LAST:event_btn_newMouseClicked
+    }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
-        // TODO add your handling code here:
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        add_banks();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        edit_banks();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         delete_banks();
-    }//GEN-LAST:event_btn_deleteMouseClicked
+    }//GEN-LAST:event_jButton7ActionPerformed
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.jdesktop.swingx.JXLabel btn_add;
-    private org.jdesktop.swingx.JXLabel btn_delete;
-    private org.jdesktop.swingx.JXLabel btn_edit;
-    private org.jdesktop.swingx.JXLabel btn_new;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
-    private org.jdesktop.swingx.JXPanel jXPanel1;
-    private org.jdesktop.swingx.JXPanel jXPanel2;
-    private org.jdesktop.swingx.JXPanel jXPanel3;
     private org.jdesktop.swingx.JXTable tbl_banks;
     private javax.swing.JTextField tf_bank_name;
     private javax.swing.JTextField tf_search;
@@ -485,63 +455,6 @@ public class Dlg_banks extends javax.swing.JDialog {
 
     // <editor-fold defaultstate="collapsed" desc="settings">
     private void hover() {
-        btn_edit.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                btn_edit.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/b_edit.png")));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                btn_edit.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/bd_edit.png")));
-            }
-        });
-
-        btn_delete.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                btn_delete.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/b_drop.png")));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                btn_delete.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/bd_drop.png")));
-            }
-        });
-        btn_add.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                btn_add.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/b_snewtbl.png")));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                btn_add.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/bd_new.png")));
-            }
-        });
-        btn_new.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                btn_new.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/s_reload.png")));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                btn_new.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/POS/img/bd_reload.png")));
-            }
-        });
 
     }
     int posX = 0, posY = 0;
@@ -683,14 +596,15 @@ public class Dlg_banks extends javax.swing.JDialog {
 
     private void data_cols() {
         String search = tf_search.getText();
-        loadData_banks(S1_banks.ret_data(search));
+        loadData_banks(Banks.ret_data(search));
+        jLabel4.setText("" + tbl_banks_ALM.size());
     }
 
     private void add_banks() {
         int id = -1;
         String bank_name = tf_bank_name.getText();
         to_banks to = new to_banks(id, bank_name);
-        S1_banks.add_banks(to);
+        Banks.add_banks(to);
         data_cols();
         clear_banks();
     }
@@ -715,7 +629,7 @@ public class Dlg_banks extends javax.swing.JDialog {
         int id = to.id;
         String bank_name = tf_bank_name.getText();
         to_banks to1 = new to_banks(id, bank_name);
-        S1_banks.edit_banks(to1);
+        Banks.edit_banks(to1);
         data_cols();
         clear_banks();
     }
@@ -725,14 +639,27 @@ public class Dlg_banks extends javax.swing.JDialog {
     }
 
     private void delete_banks() {
-        int row = tbl_banks.getSelectedRow();
-        if (row < 0) {
-            return;
-        }
-        to_banks to = (to_banks) tbl_banks_ALM.get(tbl_banks.
-                convertRowIndexToModel(row));
-        S1_banks.delete_banks(to);
-        data_cols();
-        clear_banks();
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                int row = tbl_banks.getSelectedRow();
+                if (row < 0) {
+                    return;
+                }
+                to_banks to = (to_banks) tbl_banks_ALM.get(tbl_banks.
+                        convertRowIndexToModel(row));
+                Banks.delete_banks(to);
+                data_cols();
+                clear_banks();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 }

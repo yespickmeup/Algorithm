@@ -5,7 +5,7 @@
  */
 package POS.sales;
 
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.util.MyConnection;
 import POS.util.Segregator;
@@ -439,7 +439,7 @@ public class Sales_item {
                         + "";
                 PreparedStatement stmt4 = conn.prepareStatement(s4);
                 stmt4.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated");
+                Lg.s(Inventory.class, "Successfully Updated");
             }
 
         } catch (SQLException e) {

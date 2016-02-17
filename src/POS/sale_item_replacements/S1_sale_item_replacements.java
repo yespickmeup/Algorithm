@@ -5,7 +5,7 @@
  */
 package POS.sale_item_replacements;
 
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
@@ -780,7 +780,7 @@ public class S1_sale_item_replacements {
                         + "";
 
                 stmt.addBatch(s4);
-                Lg.s(S1_inventory.class, "Successfully Updated");
+                Lg.s(Inventory.class, "Successfully Updated");
 
                 String s5 = "insert into sale_item_replacements("
                         + "sales_no"

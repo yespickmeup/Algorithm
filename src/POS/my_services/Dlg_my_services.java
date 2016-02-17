@@ -7,7 +7,7 @@ package POS.my_services;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.my_services.My_services.to_my_services;
 import POS.my_services.S1_my_services_description.to_my_services_description;
 import POS.my_services.S1_my_services_item_replacements.to_my_services_item_replacements;
@@ -3895,7 +3895,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
         compute_all();
     }
 
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
     int item_selected = -1;
 
     private void init_inventory() {
@@ -3905,11 +3905,11 @@ public class Dlg_my_services extends javax.swing.JDialog {
                 + " or main_barcode like '" + search + "'"
                 + " group by main_barcode,barcode order by description asc";
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data4(where);
+        inventory_list = Inventory.ret_data4(where);
 
         Object[][] obj = new Object[inventory_list.size()][2];
         int i = 0;
-        for (S1_inventory.to_inventory to : inventory_list) {
+        for (Inventory.to_inventory to : inventory_list) {
             obj[i][0] = to.barcodes;
             obj[i][1] = to.description;
             i++;
@@ -3928,7 +3928,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_inventory.to_inventory to = inventory_list.get(data.selected_row);
+                Inventory.to_inventory to = inventory_list.get(data.selected_row);
                 item_selected = data.selected_row;
                 tf_service_item_code.setText(to.barcodes);
                 tf_service_description.setText(to.description);
@@ -4021,7 +4021,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
         if (item_selected == -1) {
             return;
         }
-        S1_inventory.to_inventory to = (S1_inventory.to_inventory) inventory_list.get(item_selected);
+        Inventory.to_inventory to = (Inventory.to_inventory) inventory_list.get(item_selected);
 
         if (jButton5.isEnabled()) {
             String barcode = tf_service_barcode.getText();

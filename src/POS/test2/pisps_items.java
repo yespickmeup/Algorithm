@@ -6,7 +6,7 @@
 package POS.test2;
 
 import POS.adjuster.Srpt_inventory_matching;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -123,13 +123,13 @@ public class pisps_items {
             to_items.add(my_item);
         }
 
-        List<S1_inventory.to_inventory> inventory_list = S1_inventory.ret_data("");
+        List<Inventory.to_inventory> inventory_list = Inventory.ret_data("");
         List<Srpt_inventory_matching.field> compare = new ArrayList();
 
         System.out.println("My Item Count: " + to_items.size());
         System.out.println("Inventory Count: " + inventory_list.size());
         int no = 0;
-        for (S1_inventory.to_inventory inv : inventory_list) {
+        for (Inventory.to_inventory inv : inventory_list) {
 
             for (my_items to : to_items) {
                 if (inv.barcode.equalsIgnoreCase(to.item_code)) {

@@ -6,7 +6,7 @@
 package POS.synch_locations;
 
 import POS.branches_sessions.Parse_sales;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.my_sales.MySales;
 import POS.util.MyConnection;
@@ -766,7 +766,7 @@ public class Synch_locations {
                             + "";
                     PreparedStatement stmt4 = conn.prepareStatement(s4);
                     stmt.addBatch(s4);
-                    Lg.s(S1_inventory.class, "Successfully Updated");
+                    Lg.s(Inventory.class, "Successfully Updated");
 
                 }
                 stmt.executeBatch();

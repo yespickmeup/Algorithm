@@ -7,8 +7,8 @@ package POS.reports;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
-import POS.inventory.S1_inventory;
+import POS.branches.Branches;
+import POS.inventory.Inventory;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Focus_Fire;
@@ -1217,14 +1217,14 @@ public class Dlg_report_encoding_inventory extends javax.swing.JDialog {
         }
     }
 
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
     private void init_branches(final JTextField tf1, final JLabel tf2) {
         String search = tf1.getText();
         branches_list.clear();
-        branches_list = S1_branches.ret_data(search);
+        branches_list = Branches.ret_data(search);
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;
             obj[i][1] = to.branch;
             i++;
@@ -1240,7 +1240,7 @@ public class Dlg_report_encoding_inventory extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.get(data.selected_row);
+                Branches.to_branches to = branches_list.get(data.selected_row);
                 tf1.setText("" + to.branch);
                 tf2.setText("" + to.id);
             }
@@ -1510,14 +1510,14 @@ public class Dlg_report_encoding_inventory extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
     }
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
 
     private void init_inventory(JTextField tf1, JLabel tf2) {
         String search = tf1.getText();
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data3(search);
+        inventory_list = Inventory.ret_data3(search);
         if (inventory_list.size() == 1) {
-            S1_inventory.to_inventory to = inventory_list.get(0);
+            Inventory.to_inventory to = inventory_list.get(0);
             tf1.setText(to.description);
             tf2.setText(to.barcode);
             get_stock_take_status();
@@ -1530,9 +1530,9 @@ public class Dlg_report_encoding_inventory extends javax.swing.JDialog {
     private void init_inventory2(JTextField tf1, JLabel tf2) {
         String search = tf1.getText();
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data3(search);
+        inventory_list = Inventory.ret_data3(search);
         if (inventory_list.size() == 1) {
-            S1_inventory.to_inventory to = inventory_list.get(0);
+            Inventory.to_inventory to = inventory_list.get(0);
             tf1.setText(to.description);
             tf2.setText(to.barcode);
             get_stock_take_ledger();

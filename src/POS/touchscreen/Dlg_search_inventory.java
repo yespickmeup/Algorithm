@@ -5,8 +5,8 @@
  */
 package POS.touchscreen;
 
-import POS.inventory.S1_inventory;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory;
+import POS.inventory.Inventory.to_inventory;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
@@ -502,7 +502,7 @@ public class Dlg_search_inventory extends javax.swing.JDialog {
                         + " or barcode like '" + search + "' "
                         + " or description like '%" + search + "%' "
                         + " order by description asc ";
-                List<to_inventory> datas = S1_inventory.ret_data6(where);
+                List<to_inventory> datas = Inventory.ret_data6(where);
                 loadData_inventory(datas);
 
                 jTextField1.setEnabled(true);

@@ -9,7 +9,7 @@ import POS.cash_drawer.CashDrawer;
 import POS.cash_drawer.CashDrawer_remittances;
 import POS.customers.Customers;
 import POS.disbursements.S1_disbursements.to_disbursements;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.prepaid_payments.Prepaid_payments.to_prepaid_payments;
 import POS.sales.Sales;
@@ -748,7 +748,7 @@ public class MySales {
                         + "";
                 PreparedStatement stmt4 = conn.prepareStatement(s4);
                 stmt.addBatch(s4);
-                Lg.s(S1_inventory.class, "Successfully Updated");
+                Lg.s(Inventory.class, "Successfully Updated");
 
             }
 
@@ -1138,7 +1138,7 @@ public class MySales {
             }
             stmt.executeBatch();
             conn.commit();
-            Lg.s(S1_inventory.class, "Successfully Updated");
+            Lg.s(Inventory.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

@@ -5,7 +5,7 @@
  */
 package POS.accounts_receivable;
 
-import POS.banks.S1_banks;
+import POS.banks.Banks;
 import POS.util.DateType;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
@@ -643,16 +643,16 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    List<S1_banks.to_banks> bank_list = new ArrayList();
+    List<Banks.to_banks> bank_list = new ArrayList();
 
     private void init_banks() {
         String search = tf_check_bank.getText();
         bank_list.clear();
         String where = " where bank_name like '%" + search + "%' order by bank_name asc";
-        bank_list = S1_banks.ret_data2(where);
+        bank_list = Banks.ret_data2(where);
         Object[][] obj = new Object[bank_list.size()][1];
         int i = 0;
-        for (S1_banks.to_banks to : bank_list) {
+        for (Banks.to_banks to : bank_list) {
 
             obj[i][0] = " " + to.bank_name;
             i++;
@@ -667,7 +667,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_banks.to_banks to = bank_list.get(data.selected_row);
+                Banks.to_banks to = bank_list.get(data.selected_row);
                 tf_check_bank.setText(to.bank_name);
                 tf_ap_check_holder.grabFocus();
             }

@@ -7,8 +7,8 @@ package POS.reports;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
-import POS.inventory.S1_inventory;
+import POS.branches.Branches;
+import POS.inventory.Inventory;
 import POS.inventory.S1_inventory_brand;
 import POS.inventory.S1_inventory_categories;
 import POS.inventory.S1_inventory_classification;
@@ -913,15 +913,15 @@ public class Dlg_stock_status extends javax.swing.JDialog {
         }
     }
 
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         String search = tf_branch.getText();
         branches_list.clear();
-        branches_list = S1_branches.ret_data(search);
+        branches_list = Branches.ret_data(search);
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;//TextHighlighter1.highlight2(to.barcode, to.barcode, "");
             obj[i][1] = to.branch;//TextHighlighter1.highlight2(to.description, to.description, "");
             i++;
@@ -937,7 +937,7 @@ public class Dlg_stock_status extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.
+                Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 tf_branch.setText("" + to.branch);
                 tf_branch_id.setText("" + to.id);
@@ -1135,14 +1135,14 @@ public class Dlg_stock_status extends javax.swing.JDialog {
         });
     }
 
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
 
     private void init_inventory() {
         String search = tf_item.getText();
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data3(search);
+        inventory_list = Inventory.ret_data3(search);
         if (inventory_list.size() == 1) {
-            S1_inventory.to_inventory to = inventory_list.get(0);
+            Inventory.to_inventory to = inventory_list.get(0);
             tf_item.setText(to.description);
             lbl_item_code.setText(to.barcode);
             get_stocks();

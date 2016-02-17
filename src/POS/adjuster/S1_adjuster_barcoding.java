@@ -5,7 +5,7 @@
  */
 package POS.adjuster;
 
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.util.DateType;
 import POS.util.MyConnection;
@@ -198,7 +198,7 @@ public class S1_adjuster_barcoding {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_inventory.class, "Successfully Deleted");
+            Lg.s(Inventory.class, "Successfully Deleted");
             System.out.println("Deleting inventory_barcodes....");
         } catch (SQLException e) {
             throw new RuntimeException(e);

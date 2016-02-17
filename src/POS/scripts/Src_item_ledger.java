@@ -6,7 +6,7 @@
 package POS.scripts;
 
 import POS.branch_locations.S1_branch_locations;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory_reports.Srpt_item_ledger;
 import POS.my_sales.MySales;

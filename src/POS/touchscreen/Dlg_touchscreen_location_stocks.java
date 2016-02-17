@@ -5,7 +5,7 @@
  */
 package POS.touchscreen;
 
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.inventory.Inventory_barcodes;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -343,10 +343,10 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
 
         String where2 = "";
 
-        List<S1_branches.to_branches> branches = S1_branches.ret_data(where2);
-        List<S1_branches.to_branches> new_branches = new ArrayList();
+        List<Branches.to_branches> branches = Branches.ret_data(where2);
+        List<Branches.to_branches> new_branches = new ArrayList();
         double total_qty = 0;
-        for (S1_branches.to_branches branch : branches) {
+        for (Branches.to_branches branch : branches) {
             int id = branch.id;
             String code = branch.code;
             String branch1 = branch.branch;
@@ -362,11 +362,11 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
 
             address = FitIn.fmt_woc(qty);
             total_qty += qty;
-            S1_branches.to_branches b = new S1_branches.to_branches(id, code, branch1, address, status);
+            Branches.to_branches b = new Branches.to_branches(id, code, branch1, address, status);
             new_branches.add(b);
         }
 
-        S1_branches.to_branches b = new S1_branches.to_branches(0, "", "ALL", FitIn.fmt_woc(total_qty), 0);
+        Branches.to_branches b = new Branches.to_branches(0, "", "ALL", FitIn.fmt_woc(total_qty), 0);
         new_branches.add(b);
         
         loadData_branches(new_branches);
@@ -558,7 +558,7 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
         tbl_branches.setFont(new java.awt.Font("Arial", 0, 14));
     }
 
-    private void loadData_branches(List<S1_branches.to_branches> acc) {
+    private void loadData_branches(List<Branches.to_branches> acc) {
         tbl_branches_ALM.clear();
         tbl_branches_ALM.addAll(acc);
     }
@@ -588,7 +588,7 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            S1_branches.to_branches tt = (S1_branches.to_branches) getRow(row);
+            Branches.to_branches tt = (Branches.to_branches) getRow(row);
             switch (col) {
                 case 0:
                     return tt.id;

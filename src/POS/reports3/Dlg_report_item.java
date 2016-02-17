@@ -7,7 +7,7 @@ package POS.reports3;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.category.Dlg_update_brand;
 import POS.category.S1_inventory_brand;
 import POS.category.S1_inventory_category;
@@ -18,8 +18,8 @@ import POS.category.Dlg_update_category;
 import POS.category.Dlg_update_classification;
 import POS.category.Dlg_update_model;
 import POS.category.Dlg_update_sub_classification;
-import POS.inventory.S1_inventory;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -1239,16 +1239,16 @@ public class Dlg_report_item extends javax.swing.JDialog {
             }
         });
     }
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         String search = tf_branch.getText();
         String where = " where branch like '%" + search + "%' order by branch asc";
         branches_list.clear();
-        branches_list = S1_branches.ret_where2(where);
+        branches_list = Branches.ret_where2(where);
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;
             obj[i][1] = to.branch;
             i++;
@@ -1264,7 +1264,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.
+                Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 tf_branch.setText("" + to.branch);
                 tf_branch_id.setText("" + to.id);
@@ -1634,7 +1634,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
                 where = where + " " + where2;
 
                 System.out.println(where);
-                List<to_inventory> datas = S1_inventory.ret_data5(where);
+                List<to_inventory> datas = Inventory.ret_data5(where);
                 loadData_inventory_barcodes(datas);
                 jLabel9.setText("" + tbl_inventory_barcodes_ALM.size());
                 jProgressBar1.setString("Finished...");

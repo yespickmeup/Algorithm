@@ -4,7 +4,7 @@
  */
 package POS.cash_drawer;
 
-import POS.banks.S1_banks;
+import POS.banks.Banks;
 import POS.bir_session.Srpt_checks;
 import POS.cash_drawer.S1_cash_drawer.to_cash_drawer;
 import POS.cash_drawer.S1_cash_drawer_checks.to_cash_drawer_checks;
@@ -1152,16 +1152,16 @@ public class Dlg_cash_out extends javax.swing.JDialog {
         Focus_Fire.select_all(tf);
     }
 
-    List<S1_banks.to_banks> discount_list = new ArrayList();
+    List<Banks.to_banks> discount_list = new ArrayList();
 
     private void init_bank() {
         String search = tf_bank.getText();
         discount_list.clear();
         String where = " where bank_name like '%" + search + "%' ";
-        discount_list = S1_banks.ret_data2(where);
+        discount_list = Banks.ret_data2(where);
         Object[][] obj = new Object[discount_list.size()][1];
         int i = 0;
-        for (S1_banks.to_banks to : discount_list) {
+        for (Banks.to_banks to : discount_list) {
             obj[i][0] = " " + to.bank_name;
             i++;
         }
@@ -1174,7 +1174,7 @@ public class Dlg_cash_out extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_banks.to_banks to = discount_list.get(data.selected_row);
+                Banks.to_banks to = discount_list.get(data.selected_row);
                 tf_bank.setText(to.bank_name);
                 tf_check_paid.grabFocus();
             }

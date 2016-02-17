@@ -8,7 +8,7 @@ package POS.touchscreen_reports;
 import POS.accounts_receivable.S1_accounts_receivable_payments;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.cash_drawer.CashDrawer;
 import POS.cash_drawer.CashDrawer_remittances;
 import POS.last_remittance.Dlg_last_remittance;
@@ -561,16 +561,16 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     }
 
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         final Field.Combo br = (Field.Combo) jTextField2;
 
         branches_list.clear();
-        branches_list = S1_branches.ret_where("");
+        branches_list = Branches.ret_where("");
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;
             obj[i][1] = to.branch;
             i++;
@@ -585,7 +585,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.
+                Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 br.setText(to.branch);
                 br.setId("" + to.id);

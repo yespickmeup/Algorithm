@@ -5,9 +5,9 @@
 package POS.inventory;
 
 import POS.branch_locations.S1_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.inventory.Dlg_inventory_uom.to_uom;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.inventory.S1_inventory_assembly.to_inventory_assembly;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.inventory.S1_inventory_multi_level_pricing.to_inventory_multi_level_pricing;
@@ -1740,7 +1740,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     // </editor-fold>
 
     private void init_item_code() {
-        tf_item_code.setText(S1_inventory.increment_id());
+        tf_item_code.setText(Inventory.increment_id());
     }
 
     private void disabled() {
@@ -1796,9 +1796,9 @@ public class Dlg_inventory extends javax.swing.JDialog {
         });
     }
 
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
 
-    S1_inventory.to_inventory my_item = null;
+    Inventory.to_inventory my_item = null;
 
     private void init_inventory() {
         String search = tf_item_code.getText();
@@ -1807,10 +1807,10 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 + " or description like '%" + search + "%' "
                 + " order by description asc ";
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data22(where);
+        inventory_list = Inventory.ret_data22(where);
         Object[][] obj = new Object[inventory_list.size()][2];
         int i = 0;
-        for (S1_inventory.to_inventory to : inventory_list) {
+        for (Inventory.to_inventory to : inventory_list) {
             obj[i][0] = " " + to.barcode;
             obj[i][1] = " " + to.description;
             i++;
@@ -1829,7 +1829,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_inventory.to_inventory to = inventory_list.get(data.selected_row);
+                Inventory.to_inventory to = inventory_list.get(data.selected_row);
                 my_item = to;
                 Field.Combo cat = (Field.Combo) tf_category;
                 Field.Combo classi = (Field.Combo) tf_classification;
@@ -1884,7 +1884,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Field.Combo models = (Field.Combo) tf_model;
         Field.Combo units = (Field.Combo) tf_unit;
         int id = -1;
-        String barcode = S1_inventory.increment_id();
+        String barcode = Inventory.increment_id();
         String description = tf_description.getText();
         String generic_name = "";
         String category = tf_category.getText();
@@ -1935,7 +1935,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
         to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
 
-        S1_inventory.add_inventory(to);
+        Inventory.add_inventory(to);
         clear_inventory();
         init_item_code();
         Alert.set(1, "");
@@ -1947,7 +1947,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         if (selected_row == -1) {
             return;
         }
-        S1_inventory.to_inventory to = inventory_list.get(selected_row);
+        Inventory.to_inventory to = inventory_list.get(selected_row);
 
     }
     String my_old_barcode = "";
@@ -1971,7 +1971,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 Field.Combo models = (Field.Combo) tf_model;
                 Field.Combo units = (Field.Combo) tf_unit;
 
-                S1_inventory.to_inventory to1 = inventory_list.get(selected_row);
+                Inventory.to_inventory to1 = inventory_list.get(selected_row);
                 int id = to1.id;
                 String barcode = tf_item_code.getText();
                 String description = tf_description.getText();
@@ -2031,7 +2031,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 if (!data.branch_id.equalsIgnoreCase("All")) {
                     where = " where main_barcode='" + barcode + "' and branch_code='" + data.branch_id + "' ";
                 }
-                S1_inventory.edit_inventory(to, my_item, where);
+                Inventory.edit_inventory(to, my_item, where);
                 my_item = to;
                 Alert.set(2, "");
                 data_cols_inventory_barcodes();
@@ -2088,15 +2088,15 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //        tf_item_code.grabFocus();
     }
 
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         String search = tf_qty_branch.getText();
         branches_list.clear();
-        branches_list = S1_branches.ret_data3(search);
+        branches_list = Branches.ret_data3(search);
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;//TextHighlighter1.highlight2(to.barcode, to.barcode, "");
             obj[i][1] = to.branch;//TextHighlighter1.highlight2(to.description, to.description, "");
             i++;
@@ -2111,7 +2111,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.
+                Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 tf_qty_branch.setText(to.branch);
                 tf_search_branch_code.setText("" + to.id);

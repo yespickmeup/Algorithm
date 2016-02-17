@@ -5,7 +5,7 @@
  */
 package POS.test;
 
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.my_services.S1_my_services_item_replacements;
 import POS.my_services.S1_my_services_item_replacements.to_my_services_item_replacements;
 import POS.util.TableRenderer;
@@ -381,7 +381,7 @@ public class Dlg_rep extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
     private void init_inventory() {
         String search = jTextField1.getText();
         String where = " where  barcode like '" + search + "' "
@@ -389,11 +389,11 @@ public class Dlg_rep extends javax.swing.JDialog {
                 + " or main_barcode like '" + search + "'"
                 + " group by main_barcode,barcode order by description asc";
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data4(where);
+        inventory_list = Inventory.ret_data4(where);
 
         Object[][] obj = new Object[inventory_list.size()][2];
         int i = 0;
-        for (S1_inventory.to_inventory to : inventory_list) {
+        for (Inventory.to_inventory to : inventory_list) {
             obj[i][0] = to.barcodes;
             obj[i][1] = to.description;
             i++;
@@ -412,7 +412,7 @@ public class Dlg_rep extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_inventory.to_inventory to = inventory_list.get(data.selected_row);
+                Inventory.to_inventory to = inventory_list.get(data.selected_row);
                 jTextField1.setText(to.barcodes);
                 tf_description.setText(to.description);
                 jTextField3.setText(to.barcode);

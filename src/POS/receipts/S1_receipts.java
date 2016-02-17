@@ -5,7 +5,7 @@
 package POS.receipts;
 
 import POS.branch_locations.S1_branch_locations;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.util.MyConnection;
 import java.sql.Connection;
@@ -872,7 +872,7 @@ public class S1_receipts {
 
             stmt.executeBatch();
             conn.commit();
-            Lg.s(S1_inventory.class, "Successfully Updated");
+            Lg.s(Inventory.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

@@ -4,13 +4,18 @@
  */
 package POS.branches;
 
+import POS.scripts.Main_branch_query_uploads;
+import POS.users.MyUser;
+import POS.util.DateType;
 import POS.util.MyConnection;
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
@@ -19,7 +24,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  *
  * @author i1
  */
-public class S1_branches {
+public class Branches {
 
     public static class to_branches {
 
@@ -41,6 +46,10 @@ public class S1_branches {
     public static void add_branches(to_branches to_branches) {
         try {
             Connection conn = MyConnection.connect();
+            List<String> query = new ArrayList();
+            Gson gson = new Gson();
+            System.out.println("adding record....");
+
             String s0 = "insert into branches("
                     + "code"
                     + ",branch"
@@ -59,11 +68,16 @@ public class S1_branches {
                     setString("address", to_branches.address).
                     setNumber("status", to_branches.status).
                     ok();
-
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_branches.class, "Successfully Added");
-        } catch (Exception e) {
+            Lg.s(Branches.class, "Successfully Added");
+            query.add(s0);
+
+            String json = gson.toJson(query);
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            System.out.println("Record added....");
+
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -73,6 +87,11 @@ public class S1_branches {
     public static void edit_branches(to_branches to_branches) {
         try {
             Connection conn = MyConnection.connect();
+
+            List<String> query = new ArrayList();
+            Gson gson = new Gson();
+            System.out.println("updating record....");
+
             String s0 = "update branches set "
                     + "code= :code"
                     + ",branch= :branch"
@@ -91,8 +110,13 @@ public class S1_branches {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_branches.class, "Successfully Updated");
-        } catch (Exception e) {
+            Lg.s(Branches.class, "Successfully Updated");
+            query.add(s0);
+            String json = gson.toJson(query);
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            System.out.println("Record updated....");
+
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -102,14 +126,25 @@ public class S1_branches {
     public static void delete_branches(to_branches to_branches) {
         try {
             Connection conn = MyConnection.connect();
+
+            List<String> query = new ArrayList();
+            Gson gson = new Gson();
+            System.out.println("deleting record....");
+
             String s0 = "delete from  branches where "
                     + " id ='" + to_branches.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_branches.class, "Successfully Deleted");
-        } catch (Exception e) {
+            Lg.s(Branches.class, "Successfully Deleted");
+            query.add(s0);
+
+            String json = gson.toJson(query);
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            System.out.println("Record deleted....");
+
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();

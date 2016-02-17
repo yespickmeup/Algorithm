@@ -5,8 +5,8 @@
  */
 package POS.reports3;
 
-import POS.inventory.S1_inventory;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +39,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
 
                 String s2 = "update inventory_barcodes set "
                         + "model= :model"
@@ -55,7 +55,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
             }
 
         } catch (SQLException e) {
@@ -83,7 +83,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
 
                 String s2 = "update inventory_barcodes set "
                         + "brand= :brand"
@@ -99,7 +99,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
             }
 
         } catch (SQLException e) {
@@ -127,7 +127,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
 
                 String s2 = "update inventory_barcodes set "
                         + "sub_classification= :sub_classification"
@@ -143,7 +143,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
             }
 
         } catch (SQLException e) {
@@ -171,7 +171,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
 
                 String s2 = "update inventory_barcodes set "
                         + "classification= :classification"
@@ -187,7 +187,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
             }
 
         } catch (SQLException e) {
@@ -215,7 +215,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
 
                 String s2 = "update inventory_barcodes set "
                         + "category= :category"
@@ -231,7 +231,7 @@ public class Srpt_report_item {
 
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated: " + to_inventory.barcodes);
+                Lg.s(Inventory.class, "Successfully Updated: " + to_inventory.barcodes);
             }
 
         } catch (SQLException e) {

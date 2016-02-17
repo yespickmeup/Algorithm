@@ -5,7 +5,7 @@
  */
 package POS.inventory;
 
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory.to_inventory;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

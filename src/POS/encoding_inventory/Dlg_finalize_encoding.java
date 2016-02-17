@@ -7,9 +7,9 @@ package POS.encoding_inventory;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.encoding_inventory.Encoding_inventory.to_encoding_inventory;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
 import POS.unit_of_measure.S1_unit_of_measure;
@@ -1077,14 +1077,14 @@ public class Dlg_finalize_encoding extends javax.swing.JDialog {
         });
     }
 
-    List<S1_inventory.to_inventory> inventory_list = new ArrayList();
+    List<Inventory.to_inventory> inventory_list = new ArrayList();
 
     private void init_inventory() {
         String search = tf_description.getText();
         inventory_list.clear();
-        inventory_list = S1_inventory.ret_data3(search);
+        inventory_list = Inventory.ret_data3(search);
         if (inventory_list.size() == 1) {
-            S1_inventory.to_inventory to = inventory_list.get(0);
+            Inventory.to_inventory to = inventory_list.get(0);
             tf_item_code.setText(to.description);
             tf_description.setText(to.barcode);
             tf_qty.grabFocus();

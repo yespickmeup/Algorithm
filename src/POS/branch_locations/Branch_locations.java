@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Ronald
  */
-public class S2_branch_locations {
+public class Branch_locations {
 
     public static List<to_branch_locations> ret_all_locations() {
         List<to_branch_locations> datas = new ArrayList();

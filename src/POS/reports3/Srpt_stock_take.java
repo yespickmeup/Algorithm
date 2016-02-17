@@ -5,7 +5,7 @@
  */
 package POS.reports3;
 
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.util.DateType;
 import POS.util.MyConnection;
@@ -201,7 +201,7 @@ public class Srpt_stock_take {
                 JasperUtil.makeDatasource(to.fields));
     }
 
-    public static List<Srpt_stock_take.field> set(List<S1_inventory.to_inventory> datas) {
+    public static List<Srpt_stock_take.field> set(List<Inventory.to_inventory> datas) {
 
         List<Srpt_stock_take.field> fields = new ArrayList();
 

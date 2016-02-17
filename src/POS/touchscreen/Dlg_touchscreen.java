@@ -9,10 +9,10 @@ package POS.touchscreen;
 import POS.my_sales.MySales;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Dlg_inventory_update_barcode;
-import POS.inventory.S1_inventory;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_assembly.Dlg_inventory_assembly;
@@ -3645,16 +3645,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         br.setId("" + to.branch_id);
     }
 
-    List<S1_branches.to_branches> branches_list = new ArrayList();
+    List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         final Field.Combo br = (Field.Combo) jTextField2;
 
         branches_list.clear();
-        branches_list = S1_branches.ret_where("");
+        branches_list = Branches.ret_where("");
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
-        for (S1_branches.to_branches to : branches_list) {
+        for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;
             obj[i][1] = to.branch;
             i++;
@@ -3669,7 +3669,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branches_list.
+                Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 br.setText(to.branch);
                 br.setId("" + to.id);
@@ -3786,7 +3786,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                                 index++;
                             }
 
-                            S1_inventory.update_price(to.main_barcode, data.selling_price, uoms);
+                            Inventory.update_price(to.main_barcode, data.selling_price, uoms);
                             data_cols();
                             tbl_items.setRowSelectionInterval(row, row);
 
@@ -3896,7 +3896,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                                 index++;
                             }
 
-                            S1_inventory.update_price(to.main_barcode, data.selling_price, uoms);
+                            Inventory.update_price(to.main_barcode, data.selling_price, uoms);
                             data_cols();
                             tbl_items.setRowSelectionInterval(row, row);
 

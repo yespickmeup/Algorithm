@@ -6,13 +6,18 @@
 package POS.branch_locations;
 
 import POS.inventory.Inventory_barcodes;
+import POS.scripts.Main_branch_query_uploads;
+import POS.users.MyUser;
+import POS.util.DateType;
 import POS.util.MyConnection;
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
@@ -47,6 +52,10 @@ public class S1_branch_locations {
     public static void add_branch_locations(to_branch_locations to_branch_locations) {
         try {
             Connection conn = MyConnection.connect();
+            List<String> query = new ArrayList();
+            Gson gson = new Gson();
+            System.out.println("adding record....");
+
             String s0 = "insert into branch_locations("
                     + "branch"
                     + ",branch_id"
@@ -75,9 +84,10 @@ public class S1_branch_locations {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_branch_locations.class, "Successfully Added");
+            query.add(s0);
 
             String s4 = "select "
-                    + "id"
+                    + " id"
                     + ",branch"
                     + ",branch_id"
                     + ",code"
@@ -301,7 +311,12 @@ public class S1_branch_locations {
                 PreparedStatement stmt5 = conn.prepareStatement(s5);
                 stmt5.execute();
                 Lg.s(Inventory_barcodes.class, "Successfully Added" + " Barcode:" + to_inventory_barcodes.main_barcode + " = " + to_inventory_barcodes.location);
+
             }
+
+            String json = gson.toJson(query);
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            System.out.println("Record added....");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -313,6 +328,10 @@ public class S1_branch_locations {
     public static void edit_branch_locations(to_branch_locations to_branch_locations) {
         try {
             Connection conn = MyConnection.connect();
+            List<String> query = new ArrayList();
+            Gson gson = new Gson();
+            System.out.println("updating record....");
+
             String s0 = "update branch_locations set "
                     + "branch= :branch"
                     + ",branch_id= :branch_id"
@@ -336,6 +355,7 @@ public class S1_branch_locations {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_branch_locations.class, "Successfully Updated");
+            query.add(s0);
 
             String s2 = "update inventory_barcodes set location='" + to_branch_locations.location + "' "
                     + " where location_id='" + to_branch_locations.id + "' "
@@ -346,6 +366,11 @@ public class S1_branch_locations {
             PreparedStatement stmt2 = conn.prepareStatement(s2);
             stmt2.execute();
             Lg.s(S1_branch_locations.class, "Successfully Updated");
+            query.add(s2);
+
+            String json = gson.toJson(query);
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            System.out.println("Record updated....");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -627,7 +652,7 @@ public class S1_branch_locations {
                 to_branch_locations to = new to_branch_locations(id, branch, branch_id, code, location, type, status);
                 datas.add(to);
             }
-             MyConnection.close();
+            MyConnection.close();
             return datas;
 
         } catch (SQLException e) {

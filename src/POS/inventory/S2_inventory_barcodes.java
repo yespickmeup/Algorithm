@@ -6,7 +6,7 @@
 package POS.inventory;
 
 import POS.branch_locations.S1_branch_locations;
-import POS.branch_locations.S2_branch_locations;
+import POS.branch_locations.Branch_locations;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.util.MyConnection;
 import java.sql.Connection;
@@ -28,7 +28,7 @@ public class S2_inventory_barcodes {
     public static void add_inventory_barcodes(to_inventory_barcodes to_inventory_barcodes) {
         try {
             Connection conn = MyConnection.connect();
-            List<S1_branch_locations.to_branch_locations> datas = S2_branch_locations.ret_all_locations();
+            List<S1_branch_locations.to_branch_locations> datas = Branch_locations.ret_all_locations();
             for (S1_branch_locations.to_branch_locations to : datas) {
                 String s0 = "insert into inventory_barcodes("
                         + "barcode"

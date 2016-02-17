@@ -81,7 +81,7 @@ public class S3_inventory_update_cost {
 
                 PreparedStatement stmt2 = conn3.prepareStatement(s2);
                 stmt2.execute();
-                Lg.s(S1_inventory.class, "Successfully Updated");
+                Lg.s(Inventory.class, "Successfully Updated");
             }
             return datas;
         } catch (SQLException e) {

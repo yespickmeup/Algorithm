@@ -7,7 +7,7 @@ package POS.purchase_order;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.S1_branches;
+import POS.branches.Branches;
 import POS.inventory.Inventory_barcodes;
 import POS.suppliers.S1_suppliers;
 import POS.util.Focus_Fire;
@@ -651,16 +651,16 @@ public class Dlg_po extends javax.swing.JDialog {
         });
     }
 
-    List<S1_branches.to_branches> branch_list = new ArrayList();
+    List<Branches.to_branches> branch_list = new ArrayList();
 
     private void init_branches() {
         String search = jTextField4.getText();
         branch_list.clear();
         String where = " where branch like '%" + search + "%'";
-        branch_list = S1_branches.ret_where(where);
+        branch_list = Branches.ret_where(where);
         Object[][] obj = new Object[branch_list.size()][1];
         int i = 0;
-        for (S1_branches.to_branches to : branch_list) {
+        for (Branches.to_branches to : branch_list) {
             obj[i][0] = to.branch;
             i++;
         }
@@ -673,7 +673,7 @@ public class Dlg_po extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_branches.to_branches to = branch_list.get(data.selected_row);
+                Branches.to_branches to = branch_list.get(data.selected_row);
                 jTextField4.setText(to.branch);
                 jTextField5.setText("" + to.id);
             }

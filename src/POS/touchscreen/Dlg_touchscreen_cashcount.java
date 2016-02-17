@@ -6,7 +6,7 @@
 package POS.touchscreen;
 
 import POS.accounts_receivable.S1_account_receivable_types;
-import POS.banks.S1_banks;
+import POS.banks.Banks;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.cash_drawer.CashDrawer;
@@ -4586,16 +4586,16 @@ public class Dlg_touchscreen_cashcount extends javax.swing.JDialog {
         });
     }
 
-    List<S1_banks.to_banks> bank_list = new ArrayList();
+    List<Banks.to_banks> bank_list = new ArrayList();
 
     private void init_banks(final JTextField tf) {
         String search = tf.getText();
         bank_list.clear();
         String where = " where bank_name like '%" + search + "%' order by bank_name asc";
-        bank_list = S1_banks.ret_data2(where);
+        bank_list = Banks.ret_data2(where);
         Object[][] obj = new Object[bank_list.size()][1];
         int i = 0;
-        for (S1_banks.to_banks to : bank_list) {
+        for (Banks.to_banks to : bank_list) {
             obj[i][0] = " " + to.bank_name;
             i++;
         }
@@ -4608,7 +4608,7 @@ public class Dlg_touchscreen_cashcount extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_banks.to_banks to = bank_list.get(data.selected_row);
+                Banks.to_banks to = bank_list.get(data.selected_row);
                 tf.setText(to.bank_name);
             }
         });

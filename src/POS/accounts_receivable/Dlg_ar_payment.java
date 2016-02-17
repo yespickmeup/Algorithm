@@ -4,7 +4,7 @@
  */
 package POS.accounts_receivable;
 
-import POS.banks.S1_banks;
+import POS.banks.Banks;
 import POS.check_holders.S1_check_holders;
 import POS.discount_customers.S1_discount_customers;
 import POS.discounts.S1_discounts;
@@ -1040,7 +1040,7 @@ public class Dlg_ar_payment extends javax.swing.JDialog {
 
             @Override
             public List get_entered(String starts_with) {
-                return S1_banks.ret_cb_data();
+                return Banks.ret_cb_data();
             }
         });
         sf2.addActionListener(new ActionListener() {

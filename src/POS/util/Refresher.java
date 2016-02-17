@@ -6,8 +6,8 @@
 package POS.util;
 
 import POS.branch_locations.S1_branch_locations.to_branch_locations;
-import POS.inventory.S1_inventory;
-import POS.inventory.S1_inventory.to_inventory;
+import POS.inventory.Inventory;
+import POS.inventory.Inventory.to_inventory;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class Refresher {
 
             List<to_inventory> datas = ret_data();
             for (to_inventory inv : datas) {
-                S1_inventory.add_inventory(inv);
+                Inventory.add_inventory(inv);
             }
             
             while (rs.next()) {
