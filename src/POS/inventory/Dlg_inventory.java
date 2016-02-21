@@ -1973,7 +1973,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
                 Inventory.to_inventory to1 = inventory_list.get(selected_row);
                 int id = to1.id;
-                String barcode = tf_item_code.getText();
+                String barcode = to1.barcode;
                 String description = tf_description.getText();
                 String generic_name = "";
                 String category = tf_category.getText();

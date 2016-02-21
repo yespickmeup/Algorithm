@@ -410,7 +410,7 @@ public class Inventory {
                     + ",location=:location"
                     + ",location_id=:location_id"
                     + " where "
-                    + " id ='" + to_inventory.id + "' "
+                    + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
 
             s0 = SqlStringUtil.parse(s0).
