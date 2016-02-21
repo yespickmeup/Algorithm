@@ -1056,7 +1056,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Posted", jPanel2);
+        jTabbedPane1.addTab("Reports", jPanel2);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 

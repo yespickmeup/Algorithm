@@ -28,6 +28,7 @@ public class MyConnection {
         }
     }
     private static Connection conn;
+    private static Connection conn2;
     static String hosts = "localhost:3306";
 
     public static Connection connect() {
@@ -126,7 +127,7 @@ public class MyConnection {
             String url = "jdbc:mysql://" + host + "/" + db_name;
 
             try {
-                conn = DriverManager.getConnection(url, user, password);
+                conn2 = DriverManager.getConnection(url, user, password);
                 //DriverManager.getConnection("proxool.pool_connection");
             } catch (SQLException ex) {
                 Logger.getLogger(MyConnection.class.getName()).
@@ -137,7 +138,7 @@ public class MyConnection {
             Logger.getLogger(MyConnection.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        return conn;
+        return conn2;
     }
 
     public static void main(String[] args) {

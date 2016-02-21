@@ -60,7 +60,8 @@ public class Banks {
             query.add(s0);
             
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Banks", MyUser.getBranch(), MyUser.getBranch_id()
+                    , MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record added....");
             
         } catch (SQLException e) {
@@ -88,7 +89,7 @@ public class Banks {
             query.add(s0);
             
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record updated....");
             
         } catch (SQLException e) {
@@ -116,7 +117,7 @@ public class Banks {
             
             
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record deleted....");
             
         } catch (SQLException e) {

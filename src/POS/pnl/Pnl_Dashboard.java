@@ -18,7 +18,6 @@ import POS.branch_locations.Dlg_branch_locations;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Dlg_branches;
-import POS.branches_sessions.Dlg_branch_sessions;
 import POS.cash_drawer.*;
 import POS.category.Dlg_categories;
 import POS.category.Dlg_category;
@@ -55,7 +54,9 @@ import POS.reports2.Dlg_report_customers;
 import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
 import POS.rma.Dlg_rma;
+import POS.scripts.Download_main_branch_query_updates;
 import POS.scripts.Src_item_ledger;
+import POS.scripts.Upload_main_branch_query_updates;
 import POS.services.Dlg_services;
 import POS.stock_transfer.Dlg_new_stock_transfer;
 
@@ -1959,20 +1960,40 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void asynch() {
-        Window p = (Window) this;
-        Dlg_branch_sessions nd = Dlg_branch_sessions.create(p, true);
-        nd.setTitle("");
+        String is_main_server = System.getProperty("is_main_server", "false");
+        String unit_type = System.getProperty("unit_type", "local_branch_server");
+        if (is_main_server.equalsIgnoreCase("true")) {
+            if (unit_type.equalsIgnoreCase("main_branch_server")) {
+                Window p = (Window) this;
+                Upload_main_branch_query_updates nd = Upload_main_branch_query_updates.create(p, true);
+                nd.setTitle("");
+                nd.setCallback(new Upload_main_branch_query_updates.Callback() {
 
-        nd.setCallback(new Dlg_branch_sessions.Callback() {
+                    @Override
+                    public void ok(CloseDialog closeDialog, Upload_main_branch_query_updates.OutputData data) {
+                        closeDialog.ok();
 
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_branch_sessions.OutputData data) {
-                closeDialog.ok();
-
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
             }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+            if (unit_type.equalsIgnoreCase("local_branch_server")) {
+                Window p = (Window) this;
+                Download_main_branch_query_updates nd = Download_main_branch_query_updates.create(p, true);
+                nd.setTitle("");
+                nd.setCallback(new Download_main_branch_query_updates.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Download_main_branch_query_updates.OutputData data) {
+                        closeDialog.ok();
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
+        }
+
     }
     String my_branch = "";
     String my_branch_id = "";

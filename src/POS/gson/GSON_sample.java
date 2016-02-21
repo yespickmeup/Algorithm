@@ -91,9 +91,11 @@ public class GSON_sample {
             System.out.println("Population: " + countryObj.getPopulation());
             System.out.println("States are :");
             List<String> listOfStates = countryObj.getListOfStates();
+            
             for (int i = 0; i < listOfStates.size(); i++) {
                 System.out.println(listOfStates.get(i));
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

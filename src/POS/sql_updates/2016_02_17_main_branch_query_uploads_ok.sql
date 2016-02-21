@@ -6,6 +6,8 @@ create table main_branch_query_uploads(
 id int auto_increment primary key
 ,branch_query longtext
 ,query_module varchar(255)
+,to_branch varchar(255)
+,to_branch_id varchar(255)
 ,branch varchar(255)
 ,branch_id varchar(255)
 ,location varchar(255)
@@ -13,5 +15,7 @@ id int auto_increment primary key
 ,date_added datetime
 ,status int
 );
+
+
 
 

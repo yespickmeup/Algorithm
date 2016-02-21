@@ -74,7 +74,7 @@ public class Branches {
             query.add(s0);
 
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record added....");
 
         } catch (SQLException e) {
@@ -113,7 +113,7 @@ public class Branches {
             Lg.s(Branches.class, "Successfully Updated");
             query.add(s0);
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record updated....");
 
         } catch (SQLException e) {
@@ -141,7 +141,7 @@ public class Branches {
             query.add(s0);
 
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branches", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record deleted....");
 
         } catch (SQLException e) {
@@ -178,7 +178,7 @@ public class Branches {
                 datas.add(to);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -281,7 +281,7 @@ public class Branches {
                 datas.add(to);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -317,7 +317,7 @@ public class Branches {
                 datas.add(to);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -375,7 +375,7 @@ public class Branches {
                 datas.add(to);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();

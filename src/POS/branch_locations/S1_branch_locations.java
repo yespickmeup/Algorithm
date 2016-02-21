@@ -315,7 +315,7 @@ public class S1_branch_locations {
             }
 
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record added....");
 
         } catch (SQLException e) {
@@ -369,7 +369,7 @@ public class S1_branch_locations {
             query.add(s2);
 
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record updated....");
 
         } catch (SQLException e) {
