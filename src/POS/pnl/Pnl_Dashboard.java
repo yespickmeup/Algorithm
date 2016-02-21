@@ -1993,7 +1993,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             }
         }
     }
-    
+
     String my_branch = "";
     String my_branch_id = "";
     String my_location = "";
@@ -2028,7 +2028,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         my_branch_id = to.branch_id;
         my_location = to.location;
         my_location_id = "" + to.id;
-
+        MyUser.setBranch(my_branch);
+        MyUser.setBranch_id(my_branch_id);
+        MyUser.setLocation(my_location);
+        MyUser.setLocation_id(my_location_id);
+      
     }
 
     private void focus() {
@@ -2461,11 +2465,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             MyUser.user_id = "" + to.id;
             MyUser.user_name = to.user_name;
             MyUser.user_screen_name = to.screen_name;
-            MyUser.setBranch(my_branch);
-            MyUser.setBranch_id(my_branch_id);
-            MyUser.setLocation(my_location);
-            MyUser.setLocation_id(my_location_id); 
-            System.out.println("My Branch = "+MyUser.getBranch_id());
+
             jPanel1.removeAll();
             jPanel1.updateUI();
             set_previleges();
