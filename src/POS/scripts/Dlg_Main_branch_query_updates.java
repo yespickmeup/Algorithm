@@ -242,7 +242,7 @@ public class Dlg_Main_branch_query_updates extends javax.swing.JDialog {
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
 
-        jButton2.setText("Start Manual Upload");
+        jButton2.setText("Manual Start");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -259,7 +259,7 @@ public class Dlg_Main_branch_query_updates extends javax.swing.JDialog {
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField1.setText("1");
 
-        jButton3.setText("Start Automatic Upload");
+        jButton3.setText("Automatic Up/Download");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -515,7 +515,7 @@ public class Dlg_Main_branch_query_updates extends javax.swing.JDialog {
     private void start() {
         if (jButton3.getText().equalsIgnoreCase("Stop Counter!")) {
             timer.cancel();
-            jButton3.setText("Start Automatic Upload");
+            jButton3.setText("Automatic Up/Download");
             jLabel8.setText("");
             jButton2.setEnabled(true);
             stop = 1;
@@ -543,7 +543,7 @@ public class Dlg_Main_branch_query_updates extends javax.swing.JDialog {
                 if (minutes == 0 && seconds == 0) {
                     System.out.println("Time's up........");
                     timer.cancel();
-                    jButton3.setText("Start Automatic Upload");
+                    jButton3.setText("Automatic Up/Download");
                     jLabel8.setText("");
                     jButton2.setEnabled(true);
                     stop = 1;
