@@ -1039,8 +1039,8 @@ public class S1_receipts {
                             setString("sub_class_id", to_receipt_items.sub_class_id).
                             setNumber("conversion", to_receipt_items.conversion).
                             setString("unit", to_receipt_items.unit).
-                            setString("date_delivered", to_receipt_items.date_delivered).
-                            setString("date_received", to_receipt_items.date_received).
+                            setString("date_delivered", to_receipts.date_delivered).
+                            setString("date_received", to_receipts.date_received).
                             setString("barcodes", to_receipt_items.barcodes).
                             setString("serial_no", to_receipt_items.serial_no).
                             setString("batch_no", to_receipt_items.batch_no).
