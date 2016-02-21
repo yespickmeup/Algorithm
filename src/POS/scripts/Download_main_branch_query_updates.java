@@ -369,8 +369,9 @@ public class Download_main_branch_query_updates extends javax.swing.JDialog {
                 }
                 tf_cloud_status.setText("Online");
                 String my_branch_id = MyUser.getBranch_id();
-                
+
                 String where = " where status=0 and to_branch_id='" + my_branch_id + "' ";
+                System.out.println(where);
                 List<Main_branch_query_uploads.to_main_branch_query_uploads> datas = Main_branch_query_uploads.ret_data_cloud(where);
                 jLabel4.setText("" + datas.size());
 
