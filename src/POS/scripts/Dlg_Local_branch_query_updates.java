@@ -496,7 +496,7 @@ public class Dlg_Local_branch_query_updates extends javax.swing.JDialog {
                 } else {
                     jLabel12.setText("Nothing to upload");
                 }
-
+                
                 jButton1.setEnabled(true);
                 jButton2.setEnabled(true);
                 jProgressBar1.setString("Finished...");
