@@ -2465,7 +2465,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             MyUser.setBranch_id(my_branch_id);
             MyUser.setLocation(my_location);
             MyUser.setLocation_id(my_location_id); 
-          
+            System.out.println("My Branch = "+MyUser.getBranch_id());
             jPanel1.removeAll();
             jPanel1.updateUI();
             set_previleges();
