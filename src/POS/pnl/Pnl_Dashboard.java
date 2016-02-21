@@ -2461,8 +2461,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             MyUser.user_id = "" + to.id;
             MyUser.user_name = to.user_name;
             MyUser.user_screen_name = to.screen_name;
-            MyUser.branch = to.branch;
-            MyUser.branch_id = to.branch_id;
+            MyUser.branch = my_branch;
+            MyUser.branch_id = my_branch_id;
             MyUser.location = to.location;
             MyUser.location_id = to.location_id;
             jPanel1.removeAll();
