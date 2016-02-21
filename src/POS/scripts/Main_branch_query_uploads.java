@@ -373,7 +373,7 @@ public class Main_branch_query_uploads {
         List<to_main_branch_query_uploads> datas = new ArrayList();
 
         try {
-            Connection conn = MyConnection.cloud_connect();
+            Connection conn = MyConnection.connect();
             String s0 = "select "
                     + "id"
                     + ",branch_query"
