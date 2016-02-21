@@ -23,7 +23,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  *
  * @author Guinness
  */
-public class Main_branch_query_uploads {
+public class Local_branch_query_uploads {
 
     public static class to_main_branch_query_uploads {
 
@@ -58,10 +58,11 @@ public class Main_branch_query_uploads {
         try {
             Connection conn = MyConnection.connect();
             String my_branch = MyUser.getBranch_id();
+
             String where = " where id<>'" + my_branch + "'";
             List<Branches.to_branches> branches = Branches.ret_where(where);
             for (Branches.to_branches branch : branches) {
-                String s0 = "insert into main_branch_query_uploads("
+                String s0 = "insert into local_branch_query_uploads("
                         + "branch_query"
                         + ",query_module"
                         + ",to_branch"
@@ -99,7 +100,7 @@ public class Main_branch_query_uploads {
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
-                Lg.s(Main_branch_query_uploads.class, "Successfully Added");
+                Lg.s(Local_branch_query_uploads.class, "Successfully Added");
             }
 
         } catch (SQLException e) {
@@ -117,7 +118,7 @@ public class Main_branch_query_uploads {
             String where = " where id<>'" + my_branch + "'";
             List<Branches.to_branches> branches = Branches.ret_where(where);
 
-            String s0 = "insert into main_branch_query_uploads("
+            String s0 = "insert into local_branch_query_uploads("
                     + "branch_query"
                     + ",query_module"
                     + ",to_branch"
@@ -155,7 +156,7 @@ public class Main_branch_query_uploads {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(Main_branch_query_uploads.class, "Successfully Added");
+            Lg.s(Local_branch_query_uploads.class, "Successfully Added");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -170,7 +171,7 @@ public class Main_branch_query_uploads {
             Connection local = MyConnection.connect();
 
             for (to_main_branch_query_uploads to_main_branch_query_uploads : to_main_branch_query_uploads1) {
-                String s0 = "insert into main_branch_query_uploads("
+                String s0 = "insert into local_branch_query_uploads("
                         + "branch_query"
                         + ",query_module"
                         + ",to_branch"
@@ -208,7 +209,7 @@ public class Main_branch_query_uploads {
                 PreparedStatement stmt = cloud.prepareStatement(s0);
                 stmt.execute();
 
-                String s2 = "update main_branch_query_uploads set "
+                String s2 = "update local_branch_query_uploads set "
                         + " status= :status "
                         + " where id='" + to_main_branch_query_uploads.id + "' "
                         + " ";
@@ -221,7 +222,7 @@ public class Main_branch_query_uploads {
                 stmt2.execute();
 
             }
-            Lg.s(Main_branch_query_uploads.class, "Successfully Added");
+            Lg.s(Local_branch_query_uploads.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -235,7 +236,7 @@ public class Main_branch_query_uploads {
             Connection local = MyConnection.connect();
             Gson gson = new Gson();
             for (to_main_branch_query_uploads to_main_branch_query_uploads : to_main_branch_query_uploads1) {
-                String s0 = "insert into main_branch_query_uploads("
+                String s0 = "insert into local_branch_query_uploads("
                         + "branch_query"
                         + ",query_module"
                         + ",to_branch"
@@ -279,7 +280,7 @@ public class Main_branch_query_uploads {
                     stmt3.execute();
                 }
 
-                String s2 = "update main_branch_query_uploads set "
+                String s2 = "update local_branch_query_uploads set "
                         + " status= :status "
                         + " where id='" + to_main_branch_query_uploads.id + "' "
                         + " ";
@@ -292,7 +293,7 @@ public class Main_branch_query_uploads {
                 stmt2.execute();
 
             }
-            Lg.s(Main_branch_query_uploads.class, "Successfully Added");
+            Lg.s(Local_branch_query_uploads.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -303,7 +304,7 @@ public class Main_branch_query_uploads {
     public static void update_data(to_main_branch_query_uploads to_main_branch_query_uploads) {
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "update main_branch_query_uploads set "
+            String s0 = "update local_branch_query_uploads set "
                     + "branch_query= :branch_query "
                     + ",query_module= :query_module "
                     + ",to_branch= :to_branch "
@@ -332,7 +333,7 @@ public class Main_branch_query_uploads {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(Main_branch_query_uploads.class, "Successfully Updated");
+            Lg.s(Local_branch_query_uploads.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -343,13 +344,13 @@ public class Main_branch_query_uploads {
     public static void delete_data(to_main_branch_query_uploads to_main_branch_query_uploads) {
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "delete from main_branch_query_uploads  "
+            String s0 = "delete from local_branch_query_uploads  "
                     + " where id='" + to_main_branch_query_uploads.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(Main_branch_query_uploads.class, "Successfully Deleted");
+            Lg.s(Local_branch_query_uploads.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -386,7 +387,7 @@ public class Main_branch_query_uploads {
                     + ",location_id"
                     + ",date_added"
                     + ",status"
-                    + " from main_branch_query_uploads"
+                    + " from local_branch_query_uploads"
                     + " " + where;
 
             Statement stmt = conn.createStatement();
@@ -432,7 +433,7 @@ public class Main_branch_query_uploads {
                     + ",location_id"
                     + ",date_added"
                     + ",status"
-                    + " from main_branch_query_uploads"
+                    + " from local_branch_query_uploads"
                     + " " + where;
 
             Statement stmt = conn.createStatement();

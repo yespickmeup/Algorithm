@@ -8,6 +8,7 @@ package POS.stock_transfer;
 import POS.inventory.Inventory_barcodes;
 import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
+import POS.scripts.Local_branch_query_uploads;
 import POS.scripts.Main_branch_query_uploads;
 import POS.users.MyUser;
 import POS.util.DateType;
@@ -769,14 +770,22 @@ public class Stock_transfers {
                 //</editor-fold>
 
             }
-
+            String json = gson.toJson(query);
             String my_branch_id = MyUser.getBranch_id();
             if (!my_branch_id.equalsIgnoreCase(to_stock_transfers.to_branch_id)) {
-                String json = gson.toJson(query);
-                Main_branch_query_uploads.add_data2(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Stock Transfer", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), to_stock_transfers.to_branch, to_stock_transfers.to_branch_id);
-                System.out.println("Record added....");
+                String is_main_server = System.getProperty("is_main_server", "false");
+                String unit_type = System.getProperty("unit_type", "local_branch_server");
+                if (is_main_server.equalsIgnoreCase("true")) {
+                    if (unit_type.equalsIgnoreCase("main_branch_server")) {
+                        Main_branch_query_uploads.add_data2(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Stock Transfer", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), to_stock_transfers.to_branch, to_stock_transfers.to_branch_id);
+                        System.out.println("Record added....");
+                    } else {
+                        Local_branch_query_uploads.add_data2(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Stock Transfer", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), to_stock_transfers.to_branch, to_stock_transfers.to_branch_id);
+                        System.out.println("Record added....");
+                    }
+                }
             }
-            
+
             stmt.executeBatch();
             conn.commit();
 
