@@ -1983,7 +1983,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 Download_main_branch_query_updates nd = Download_main_branch_query_updates.create(p, true);
                 nd.setTitle("");
                 nd.setCallback(new Download_main_branch_query_updates.Callback() {
-
                     @Override
                     public void ok(CloseDialog closeDialog, Download_main_branch_query_updates.OutputData data) {
                         closeDialog.ok();
@@ -1993,8 +1992,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 nd.setVisible(true);
             }
         }
-
     }
+    
     String my_branch = "";
     String my_branch_id = "";
     String my_location = "";
