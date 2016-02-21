@@ -79,7 +79,7 @@ public class Banks {
             MyConnection.close();
         }
     }
-
+    
     public static void edit_banks(to_banks to_banks) {
         try {
             Connection conn = MyConnection.connect();

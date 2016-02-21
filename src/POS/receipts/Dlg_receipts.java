@@ -7,6 +7,7 @@ package POS.receipts;
 import POS.barcodes.Dlg_barcodes;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.branches.Branches;
 import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory_reports.Dlg_report_item_ledger;
@@ -1487,8 +1488,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     }
     String location_ids = "";
+    List<S1_branch_locations.to_branch_locations> branch_locations = new ArrayList();
 
     private void set_default_branch() {
+        branch_locations = S1_branch_locations.ret_where("");
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         location_ids = "" + to.id;
         tf_receipt_no1.setText(to.branch);
@@ -2686,9 +2689,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_remarks.setText(to.remarks);
         tf_disc.setText(FitIn.fmt_wc_0(to.discount));
         tf_discount.setText(FitIn.fmt_wc_0(to.discount));
-        
-        data_cols_items();  
-        
+
+        data_cols_items();
+
         try {
             Date delivered = DateType.sf.parse(to.date_delivered);
             String d_month = DateType.m.format(delivered);
@@ -3030,8 +3033,16 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(to3.id, to3.receipt_no, to3.user_name, to3.session_no, to3.date_added, sup, sup_id, to3.remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, "", "", barcodes, serial_no, to3.batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, to3.branch, to3.branch_id, to3.branch, to3.branch_id);
                     acc.add(to4);
                 }
-
-                S1_receipts.finalize(to, acc);
+                String branch = "";
+                String branch_id = "";
+                for (S1_branch_locations.to_branch_locations t : branch_locations) {
+                    if (to.branch_id.equalsIgnoreCase("" + t.id)) {
+                        branch = t.branch;
+                        branch_id = t.branch_id;
+                        break;
+                    }
+                }
+                S1_receipts.finalize(to, acc, branch, branch_id);
                 data_cols();
                 Alert.set(2, "");
                 jButton6.setEnabled(false);

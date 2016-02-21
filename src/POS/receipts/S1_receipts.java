@@ -7,13 +7,19 @@ package POS.receipts;
 import POS.branch_locations.S1_branch_locations;
 import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
+import POS.scripts.Local_branch_query_uploads;
+import POS.scripts.Main_branch_query_uploads;
+import POS.users.MyUser;
+import POS.util.DateType;
 import POS.util.MyConnection;
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.ReceiptIncrementor;
@@ -811,11 +817,14 @@ public class S1_receipts {
         }
     }
 
-    public static void finalize(to_receipts to_receipts, List<S1_receipt_items.to_receipt_items> to_receipt_items1) {
+    public static void finalize(to_receipts to_receipts, List<S1_receipt_items.to_receipt_items> to_receipt_items1, String branch, String branch_id) {
         try {
             Connection conn = MyConnection.connect();
 
             conn.setAutoCommit(false);
+            List<String> query = new ArrayList();
+            Gson gson = new Gson();
+            System.out.println("adding record....");
 
             String s0 = "update receipts set "
                     + " status= :status"
@@ -825,6 +834,73 @@ public class S1_receipts {
             s0 = SqlStringUtil.parse(s0)
                     .setNumber("status", 1)
                     .ok();
+
+            //<editor-fold defaultstate="collapsed" desc=" insert query1 ">
+            String query1 = "insert into receipts("
+                    + "receipt_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supllier_id"
+                    + ",remarks"
+                    + ",date_delivered"
+                    + ",date_received"
+                    + ",receipt_type"
+                    + ",reference_no"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",gross_total"
+                    + ",net_total"
+                    + ",batch_no"
+                    + ",discount"
+                    + ",receipt_type_id"
+                    + ",status"
+                    + ")values("
+                    + ":receipt_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supllier_id"
+                    + ",:remarks"
+                    + ",:date_delivered"
+                    + ",:date_received"
+                    + ",:receipt_type"
+                    + ",:reference_no"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:gross_total"
+                    + ",:net_total"
+                    + ",:batch_no"
+                    + ",:discount"
+                    + ",:receipt_type_id"
+                    + ",:status"
+                    + ")";
+
+            query1 = SqlStringUtil.parse(query1).
+                    setString("receipt_no", to_receipts.receipt_no).
+                    setString("user_name", to_receipts.user_name).
+                    setString("session_no", to_receipts.session_no).
+                    setString("date_added", to_receipts.date_added).
+                    setString("supplier", to_receipts.supplier).
+                    setString("supllier_id", to_receipts.supllier_id).
+                    setString("remarks", to_receipts.remarks).
+                    setString("date_delivered", to_receipts.date_delivered).
+                    setString("date_received", to_receipts.date_received).
+                    setString("receipt_type", to_receipts.receipt_type).
+                    setString("reference_no", to_receipts.reference_no).
+                    setString("branch", to_receipts.branch).
+                    setString("branch_id", to_receipts.branch_id).
+                    setNumber("gross_total", to_receipts.gross_total).
+                    setNumber("net_total", to_receipts.net_total).
+                    setString("batch_no", to_receipts.batch_no).
+                    setNumber("discount", to_receipts.discount).
+                    setString("receipt_type_id", to_receipts.receipt_type_id).
+                    setNumber("status", to_receipts.status).
+                    ok();
+            query.add(query1);
+            //</editor-fold>
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
@@ -866,12 +942,147 @@ public class S1_receipts {
 
                     stmt.addBatch(s5);
 
-                }
+                    //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">
+                    String query2 = "insert into  receipt_items("
+                            + "receipt_no"
+                            + ",user_name"
+                            + ",session_no"
+                            + ",date_added"
+                            + ",supplier"
+                            + ",supllier_id"
+                            + ",remarks"
+                            + ",barcode"
+                            + ",description"
+                            + ",qty"
+                            + ",cost"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_class"
+                            + ",sub_class_id"
+                            + ",conversion"
+                            + ",unit"
+                            + ",date_delivered"
+                            + ",date_received"
+                            + ",barcodes"
+                            + ",serial_no"
+                            + ",batch_no"
+                            + ",main_barcode"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",status"
+                            + ",previous_cost"
+                            + ",receipt_type_id"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + ")values("
+                            + ":receipt_no"
+                            + ",:user_name"
+                            + ",:session_no"
+                            + ",:date_added"
+                            + ",:supplier"
+                            + ",:supllier_id"
+                            + ",:remarks"
+                            + ",:barcode"
+                            + ",:description"
+                            + ",:qty"
+                            + ",:cost"
+                            + ",:category"
+                            + ",:category_id"
+                            + ",:classification"
+                            + ",:classification_id"
+                            + ",:sub_class"
+                            + ",:sub_class_id"
+                            + ",:conversion"
+                            + ",:unit"
+                            + ",:date_delivered"
+                            + ",:date_received"
+                            + ",:barcodes"
+                            + ",:serial_no"
+                            + ",:batch_no"
+                            + ",:main_barcode"
+                            + ",:brand"
+                            + ",:brand_id"
+                            + ",:model"
+                            + ",:model_id"
+                            + ",:status"
+                            + ",:previous_cost"
+                            + ",:receipt_type_id"
+                            + ",:branch"
+                            + ",:branch_id"
+                            + ",:location"
+                            + ",:location_id"
+                            + ")";
 
+                    query2 = SqlStringUtil.parse(query2).
+                            setString("receipt_no", to_receipts.receipt_no).
+                            setString("user_name", to_receipt_items.user_name).
+                            setString("session_no", to_receipt_items.session_no).
+                            setString("date_added", to_receipt_items.date_added).
+                            setString("supplier", to_receipt_items.supplier).
+                            setString("supllier_id", to_receipt_items.supllier_id).
+                            setString("remarks", to_receipt_items.remarks).
+                            setString("barcode", to_receipt_items.barcode).
+                            setString("description", to_receipt_items.description).
+                            setNumber("qty", to_receipt_items.qty).
+                            setNumber("cost", to_receipt_items.cost).
+                            setString("category", to_receipt_items.category).
+                            setString("category_id", to_receipt_items.category_id).
+                            setString("classification", to_receipt_items.classification).
+                            setString("classification_id", to_receipt_items.classification_id).
+                            setString("sub_class", to_receipt_items.sub_class).
+                            setString("sub_class_id", to_receipt_items.sub_class_id).
+                            setNumber("conversion", to_receipt_items.conversion).
+                            setString("unit", to_receipt_items.unit).
+                            setString("date_delivered", to_receipt_items.date_delivered).
+                            setString("date_received", to_receipt_items.date_received).
+                            setString("barcodes", to_receipt_items.barcodes).
+                            setString("serial_no", to_receipt_items.serial_no).
+                            setString("batch_no", to_receipt_items.batch_no).
+                            setString("main_barcode", to_receipt_items.main_barcode).
+                            setString("brand", to_receipt_items.brand).
+                            setString("brand_id", to_receipt_items.brand_id).
+                            setString("model", to_receipt_items.model).
+                            setString("model_id", to_receipt_items.model_id).
+                            setNumber("status", to_receipt_items.status).
+                            setNumber("previous_cost", to_receipt_items.previous_cost).
+                            setString("receipt_type_id", to_receipt_items.receipt_type_id).
+                            setString("branch", to_receipt_items.branch).
+                            setString("branch_id", to_receipt_items.branch_id).
+                            setString("location", to_receipt_items.location).
+                            setString("location_id", to_receipt_items.location_id).
+                            ok();
+                    query.add(query2);
+                    //</editor-fold>
+
+                }
+            }
+            
+            
+            String json = gson.toJson(query);
+            String my_branch_id = MyUser.getBranch_id();
+            if (!my_branch_id.equalsIgnoreCase(branch_id)) {
+                String is_main_server = System.getProperty("is_main_server", "false");
+                String unit_type = System.getProperty("unit_type", "local_branch_server");
+                if (is_main_server.equalsIgnoreCase("true")) {
+                    if (unit_type.equalsIgnoreCase("main_branch_server")) {
+                        Main_branch_query_uploads.add_data2(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
+                        System.out.println("Record added....");
+                    } else {
+                        Local_branch_query_uploads.add_data2(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
+                        System.out.println("Record added....");
+                    }
+                }
             }
 
             stmt.executeBatch();
             conn.commit();
+
             Lg.s(Inventory.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
