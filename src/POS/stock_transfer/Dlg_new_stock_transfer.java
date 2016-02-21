@@ -2318,6 +2318,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Stock_transfers.finalize(to, datas);
                 data_cols();
                 tbl_stock_transfers.setRowSelectionInterval(row, row);
+                Alert.set(0, "Stock Transfer Finalized");
                 data_cols_items();
                 init_no();
                 tf_remarks.setText("");
@@ -2330,7 +2331,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 tf_to_location_id.setText("");
                 tbl_stock_transfers_items_ALM.clear();
                 tbl_stock_transfers_items_M.fireTableDataChanged();
-                Alert.set(0, "Stock Transfer Finalized");
             }
         });
         nd.setLocationRelativeTo(this);

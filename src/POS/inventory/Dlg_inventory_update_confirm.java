@@ -341,7 +341,7 @@ public class Dlg_inventory_update_confirm extends javax.swing.JDialog {
         set_default_branch();
         tf_search_branch_code.setVisible(false);
 
-        String where = " order by branch,location asc ";
+        String where = " group by branch order by branch asc ";
         branch_location_list = S1_branch_locations.ret_where(where);
     }
 

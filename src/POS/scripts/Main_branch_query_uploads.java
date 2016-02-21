@@ -110,6 +110,61 @@ public class Main_branch_query_uploads {
         }
     }
 
+    public static void add_data2(to_main_branch_query_uploads to_main_branch_query_uploads, String to_branch, String to_branch_id) {
+        try {
+            Connection conn = MyConnection.connect();
+            String my_branch = MyUser.getBranch_id();
+
+            String where = " where id<>'" + my_branch + "'";
+            List<Branches.to_branches> branches = Branches.ret_where(where);
+
+            String s0 = "insert into main_branch_query_uploads("
+                    + "branch_query"
+                    + ",query_module"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",date_added"
+                    + ",status"
+                    + ")values("
+                    + ":branch_query"
+                    + ",:query_module"
+                    + ",:to_branch"
+                    + ",:to_branch_id"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:date_added"
+                    + ",:status"
+                    + ")";
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("branch_query", to_main_branch_query_uploads.branch_query)
+                    .setString("query_module", to_main_branch_query_uploads.query_module)
+                    .setString("to_branch", to_branch)
+                    .setString("to_branch_id", to_branch_id)
+                    .setString("branch", to_main_branch_query_uploads.branch)
+                    .setString("branch_id", to_main_branch_query_uploads.branch_id)
+                    .setString("location", to_main_branch_query_uploads.location)
+                    .setString("location_id", to_main_branch_query_uploads.location_id)
+                    .setString("date_added", to_main_branch_query_uploads.date_added)
+                    .setNumber("status", to_main_branch_query_uploads.status)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Main_branch_query_uploads.class, "Successfully Added");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void upload_data_to_cloud(List<to_main_branch_query_uploads> to_main_branch_query_uploads1) {
         try {
             Connection cloud = MyConnection.cloud_connect();
@@ -224,7 +279,7 @@ public class Main_branch_query_uploads {
                     PreparedStatement stmt3 = local.prepareStatement(q);
                     stmt3.execute();
                 }
-                
+
                 String s2 = "update main_branch_query_uploads set "
                         + " status= :status "
                         + " where id='" + to_main_branch_query_uploads.id + "' "
