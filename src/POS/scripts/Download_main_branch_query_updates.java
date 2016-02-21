@@ -379,7 +379,7 @@ public class Download_main_branch_query_updates extends javax.swing.JDialog {
                     Main_branch_query_uploads.download_data_to_cloud(datas);
                     jLabel6.setText("Download Complete");
                 } else {
-                    jLabel6.setText("Nothing to upload");
+                    jLabel6.setText("Nothing to download");
                 }
 
                 jButton1.setEnabled(true);
