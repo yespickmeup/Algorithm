@@ -768,7 +768,7 @@ public class Stock_transfers {
                         .ok();
                 query.add(query2);
                 //</editor-fold>
-
+                
             }
             String json = gson.toJson(query);
             String my_branch_id = MyUser.getBranch_id();
