@@ -68,7 +68,7 @@ public class Banks {
                     Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
                     System.out.println("Record added....");
                 } else {
-                    Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+                    Local_branch_query_uploads.add_data(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
                     System.out.println("Record added....");
                 }
             }
