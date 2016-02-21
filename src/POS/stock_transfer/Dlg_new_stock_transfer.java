@@ -2317,9 +2317,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
                 Stock_transfers.finalize(to, datas);
                 data_cols();
-                tbl_stock_transfers.setRowSelectionInterval(row, row);
-                Alert.set(0, "Stock Transfer Finalized");
-                data_cols_items();
+                Alert.set(0, "Stock Transfer Finalized");            
                 init_no();
                 tf_remarks.setText("");
                 jButton5.setEnabled(true);
