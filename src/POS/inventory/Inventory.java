@@ -359,10 +359,19 @@ public class Inventory {
             }
 
             Gson gson = new Gson();
+            String is_main_server = System.getProperty("is_main_server", "false");
+            String unit_type = System.getProperty("unit_type", "local_branch_server");
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
 
-            System.out.println("Item Added...");
+            if (is_main_server.equalsIgnoreCase("true")) {
+                if (unit_type.equalsIgnoreCase("main_branch_server")) {
+                    Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+                    System.out.println("Item Added...");
+                } else {
+
+                }
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -511,10 +520,9 @@ public class Inventory {
             stmt2.execute();
             Lg.s(Inventory_barcodes.class, "Successfully Updated");
             query.add(s2);
-            
-            
+
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
