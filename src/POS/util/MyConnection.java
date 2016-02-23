@@ -40,7 +40,7 @@ public class MyConnection {
             String db_name = System.getProperty("mydb", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
-
+            
             try {
                 conn = DriverManager.getConnection(url, user, password);
             } catch (SQLException ex) {
@@ -140,7 +140,7 @@ public class MyConnection {
         }
         return conn2;
     }
-
+    
     public static void main(String[] args) {
         int connected = check_cloud_connection();
         System.out.println("Is Connected: " + connected);

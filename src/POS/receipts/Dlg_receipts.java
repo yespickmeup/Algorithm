@@ -2241,7 +2241,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list = new ArrayList();
-
+    
     private void init_inventory_barcodes() {
         jProgressBar1.setString("Searching...");
         jProgressBar1.setIndeterminate(true);
@@ -2842,6 +2842,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                             return;
                         }
                         data_cols();
+                        compute();
                         tbl_receipts.setRowSelectionInterval(row, row);
 
                     }
