@@ -6,8 +6,8 @@
 package POS.rma;
 
 import POS.receipts.S1_receipt_items;
-import POS.receipts.S1_receipts;
-import POS.receipts.S1_receipts.to_receipts;
+import POS.receipts.Receipts;
+import POS.receipts.Receipts.to_receipts;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
@@ -620,7 +620,7 @@ public class Dlg_rma extends javax.swing.JDialog {
             }
         }
 
-        List<S1_receipts.to_receipts> datas = S1_receipts.ret_data3(where);
+        List<Receipts.to_receipts> datas = Receipts.ret_data3(where);
         loadData_receipts(datas);
         jLabel2.setText("" + datas.size());
         if (datas.size() == 1 && !item_code.equals("n/a")) {

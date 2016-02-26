@@ -15,7 +15,7 @@ import POS.my_services.Dlg_my_service_confirm;
 import POS.purchase_order.S1_purchase_order_items;
 import POS.purchase_order.S1_purchase_orders;
 import POS.receipts.S1_receipt_orders.to_receipt_items;
-import POS.receipts.S1_receipts.to_receipts;
+import POS.receipts.Receipts.to_receipts;
 import POS.suppliers.S1_suppliers;
 import POS.users.S1_user_previleges;
 import POS.util.*;
@@ -1438,12 +1438,13 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
         tf_search.grabFocus();
+        set_default_branch();
         focus();
         init_key();
         hover();
         search();
         init();
-        set_default_branch();
+
         init_tbl_receipt_items();
         select_type();
         init_receipt_no();
@@ -1494,6 +1495,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         branch_locations = S1_branch_locations.ret_where("");
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         location_ids = "" + to.id;
+        my_location_id = "" + to.id;
         tf_receipt_no1.setText(to.branch);
         tf_receipt_no2.setText(to.branch_id);
         tf_receipt_no3.setText(to.location);
@@ -1539,9 +1541,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void init_po_number() {
-        String[] aw = S1_receipts.increment_id();
-        tf_receipt_no.setText(aw[0]);
-        lbl_batch_no.setText(aw[1]);
+        String aw = Receipts.increment_id(my_location_id);
+        tf_receipt_no.setText(aw);
+
     }
 
     private void select_type() {
@@ -2087,8 +2089,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             return;
         }
         int id = -1;
-        String[] aw = S1_receipts.increment_id();
-        String receipt_no = aw[0];
+        String aw = Receipts.increment_id(location_ids);
+        String receipt_no = aw;
         String user_name = Users.user_name;
         String session_no = Users.session_no;
         String date_added = DateType.datetime.format(new Date());
@@ -2110,7 +2112,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String batch_no = lbl_batch_no.getText();
         double discount = FitIn.toDouble(tf_disc.getText());
         String receipt_type_id = tf_receipt_type_id.getText();
-        S1_receipts.to_receipts to1 = new S1_receipts.to_receipts(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, 0);
+        Receipts.to_receipts to1 = new Receipts.to_receipts(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, 0);
 
         List<S1_receipt_orders.to_receipt_items> datas = tbl_receipt_items_ALM;
         List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
@@ -2144,7 +2146,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             acc.add(to4);
         }
 
-        S1_receipts.add_receipts(to1, acc);
+        Receipts.add_receipts(to1, acc);
 
         tbl_receipt_items_ALM.clear();
         tbl_receipt_items_M.fireTableDataChanged();
@@ -2159,9 +2161,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void init_receipt_no() {
-        String[] aw = S1_receipts.increment_id();
-        String receipt_no = aw[0];
+        String aw = Receipts.increment_id(location_ids);
+        String receipt_no = aw;
         tf_receipt_no.setText(receipt_no);
+
     }
     List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
 
@@ -2241,7 +2244,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list = new ArrayList();
-    
+
     private void init_inventory_barcodes() {
         jProgressBar1.setString("Searching...");
         jProgressBar1.setIndeterminate(true);
@@ -2338,18 +2341,18 @@ public class Dlg_receipts extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
-    List<S1_receipts.to_receipts> receipt_list = new ArrayList();
+    List<Receipts.to_receipts> receipt_list = new ArrayList();
 
     private void init_receipts() {
         String search = tf_receipt_no.getText();
         receipt_list.clear();
-        receipt_list = S1_receipts.ret_data(search);
+        receipt_list = Receipts.ret_data(search);
         if (receipt_list.isEmpty()) {
             tf_receipt_type.grabFocus();
         } else {
             Object[][] obj = new Object[receipt_list.size()][1];
             int i = 0;
-            for (S1_receipts.to_receipts to : receipt_list) {
+            for (Receipts.to_receipts to : receipt_list) {
                 obj[i][0] = " " + to.receipt_no;
                 i++;
             }
@@ -2363,9 +2366,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
             tr.setCallback(new TableRenderer.Callback() {
                 @Override
                 public void ok(TableRenderer.OutputData data) {
-                    S1_receipts.to_receipts to = receipt_list.
+                    Receipts.to_receipts to = receipt_list.
                             get(data.selected_row);
-                    S1_receipts.to_receipts t = receipt_list.get(data.selected_row);
+                    Receipts.to_receipts t = receipt_list.get(data.selected_row);
                     tf_receipt_no.setText(t.receipt_no);
                     tf_receipt_no.setEnabled(false);
                     select_transaction();
@@ -2378,7 +2381,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private void select_transaction() {
 
         String where2 = " where receipt_no = '" + tf_receipt_no.getText() + "' ";
-        to_receipts to = S1_receipts.to(where2);
+        to_receipts to = Receipts.to(where2);
         tf_receipt_no.setText(to.receipt_no);
         tf_receipt_type.setText(to.receipt_type);
         tf_receipt_type_id.setText(to.receipt_type_id);
@@ -2629,7 +2632,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         }
 
         where = where + " order by id desc ";
-        loadData_receipts(S1_receipts.ret_data4(where));
+        loadData_receipts(Receipts.ret_data4(where));
         jLabel7.setText("" + tbl_receipts_ALM.size());
     }
 
@@ -2665,8 +2668,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String batch_no = lbl_batch_no.getText();
         double discount = FitIn.toDouble(tf_disc.getText());
         String receipt_type_id = tf_receipt_type_id.getText();
-        S1_receipts.to_receipts to1 = new S1_receipts.to_receipts(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, to.status);
-        S1_receipts.edit_receipts2(to1);
+        Receipts.to_receipts to1 = new Receipts.to_receipts(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, to.status);
+        Receipts.edit_receipts2(to1);
         Alert.set(2, remarks);
         data_cols();
         tbl_receipts.setRowSelectionInterval(row, row);
@@ -2763,7 +2766,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     Alert.set(0, "Receipt-Status [Finalized]!");
                     return;
                 }
-                S1_receipts.delete_receipts(to);
+                Receipts.delete_receipts(to);
                 data_cols();
                 tbl_receipt_items_ALM.clear();
                 tbl_receipt_items_M.fireTableDataChanged();
@@ -2836,7 +2839,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         data_cols_items();
                         compute();
                         double gross_amount = FitIn.toDouble(lbl_gross.getText());
-                        S1_receipts.update_gross(to.receipt_no, gross_amount);
+                        Receipts.update_gross(to.receipt_no, gross_amount);
                         int row = tbl_receipts.getSelectedRow();
                         if (row < 0) {
                             return;
@@ -3043,7 +3046,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         break;
                     }
                 }
-                S1_receipts.finalize(to, acc, branch, branch_id);
+                Receipts.finalize(to, acc, branch, branch_id);
                 data_cols();
                 Alert.set(2, "");
                 jButton6.setEnabled(false);

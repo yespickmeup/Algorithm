@@ -6,7 +6,7 @@
 package POS.test2;
 
 import POS.receipts.S1_receipt_items;
-import POS.receipts.S1_receipts;
+import POS.receipts.Receipts;
 import java.util.List;
 
 /**
@@ -16,9 +16,9 @@ import java.util.List;
 public class Match_receipts {
 
     public static void main(String[] args) {
-        List<S1_receipts.to_receipts> receipts = S1_receipts.ret_data3(" order by id desc limit 50");
+        List<Receipts.to_receipts> receipts = Receipts.ret_data3(" order by id desc limit 50");
         int total = 0;
-        for (S1_receipts.to_receipts to : receipts) {
+        for (Receipts.to_receipts to : receipts) {
             String where = " where receipt_no='" + to.receipt_no + "'";
             List<S1_receipt_items.to_receipt_items> items = S1_receipt_items.ret_data5(where);
             int diff = 0;

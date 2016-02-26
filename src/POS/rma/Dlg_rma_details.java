@@ -7,7 +7,7 @@ package POS.rma;
 
 import POS.receipts.S1_receipt_items;
 import POS.receipts.S1_receipt_items.to_receipt_items;
-import POS.receipts.S1_receipts;
+import POS.receipts.Receipts;
 import POS.util.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -475,7 +475,7 @@ public class Dlg_rma_details extends javax.swing.JDialog {
         init_tbl_uom(tbl_uom);
     }
 
-    public void do_pass(S1_receipts.to_receipts to) {
+    public void do_pass(Receipts.to_receipts to) {
         jTextField1.setText(to.receipt_no);
         jTextField2.setText(DateType.convert_slash_datetime(to.date_added));
         jTextField4.setText(DateType.convert_slash_datetime2(to.date_delivered));
@@ -488,7 +488,7 @@ public class Dlg_rma_details extends javax.swing.JDialog {
         jLabel8.setText("" + datas.size());
     }
 
-    public void do_pass2(S1_receipts.to_receipts to, String item_code, String serial_no) {
+    public void do_pass2(Receipts.to_receipts to, String item_code, String serial_no) {
         jTextField1.setText(to.receipt_no);
         jTextField2.setText(DateType.convert_slash_datetime(to.date_added));
         jTextField4.setText(DateType.convert_slash_datetime2(to.date_delivered));

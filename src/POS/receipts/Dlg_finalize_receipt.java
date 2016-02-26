@@ -585,15 +585,15 @@ public class Dlg_finalize_receipt extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    List<S1_receipts.to_receipts> receipt_list = new ArrayList();
+    List<Receipts.to_receipts> receipt_list = new ArrayList();
 
     private void init_branches() {
         String search = tf_receipt_no.getText();
         receipt_list.clear();
-        receipt_list = S1_receipts.ret_data(search);
+        receipt_list = Receipts.ret_data(search);
         Object[][] obj = new Object[receipt_list.size()][1];
         int i = 0;
-        for (S1_receipts.to_receipts to : receipt_list) {
+        for (Receipts.to_receipts to : receipt_list) {
             obj[i][0] = to.receipt_no;//TextHighlighter1.highlight2(to.barcode, to.barcode, "");
 //            obj[i][1] = to.branch;//TextHighlighter1.highlight2(to.description, to.description, "");
             i++;
@@ -608,9 +608,9 @@ public class Dlg_finalize_receipt extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_receipts.to_receipts to = receipt_list.
+                Receipts.to_receipts to = receipt_list.
                         get(data.selected_row);
-                S1_receipts.to_receipts t = receipt_list.get(data.selected_row);
+                Receipts.to_receipts t = receipt_list.get(data.selected_row);
                 tf_receipt_no.setText(t.receipt_no);
 
                 tf_batch_no.setText(t.batch_no);

@@ -481,7 +481,7 @@ public class S1_receipt_items {
         try {
             Connection conn = MyConnection.connect();
 
-            Lg.s(S1_receipts.class, "Successfully Deleted");
+            Lg.s(Receipts.class, "Successfully Deleted");
 
             String s2 = "delete from  receipt_items where "
                     + " id ='" + receipt_no + "' "

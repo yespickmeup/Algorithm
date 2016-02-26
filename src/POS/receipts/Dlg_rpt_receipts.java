@@ -6,7 +6,7 @@ package POS.receipts;
 
 import POS.main.Main;
 import POS.receipts.S1_receipt_items.to_receipt_items;
-import POS.receipts.S1_receipts.to_receipts;
+import POS.receipts.Receipts.to_receipts;
 import POS.suppliers.S1_suppliers;
 import POS.util.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -583,7 +583,7 @@ public class Dlg_rpt_receipts extends javax.swing.JDialog {
         tbl_receipts.setFont(new java.awt.Font("Arial", 1, 12));
     }
 
-    private void loadData_receipts(List<S1_receipts.to_receipts> acc) {
+    private void loadData_receipts(List<Receipts.to_receipts> acc) {
         tbl_receipts_ALM.clear();
         tbl_receipts_ALM.addAll(acc);
     }
@@ -616,7 +616,7 @@ public class Dlg_rpt_receipts extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            S1_receipts.to_receipts tt = (S1_receipts.to_receipts) getRow(row);
+            Receipts.to_receipts tt = (Receipts.to_receipts) getRow(row);
             switch (col) {
                 case 0:
                     return tt.id;
@@ -651,7 +651,7 @@ public class Dlg_rpt_receipts extends javax.swing.JDialog {
         }
         String date_from = DateType.sf.format(dp_from.getDate());
         String date_to = DateType.sf.format(dp_to.getDate());
-        loadData_receipts(S1_receipts.ret_data2(search, date_from, date_to));
+        loadData_receipts(Receipts.ret_data2(search, date_from, date_to));
     }
     private ArrayListModel tbl_receipt_items_ALM;
     private Tblreceipt_itemsModel tbl_receipt_items_M;

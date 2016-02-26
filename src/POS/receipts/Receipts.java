@@ -29,7 +29,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  *
  * @author Maytopacka
  */
-public class S1_receipts {
+public class Receipts {
 
     public static class to_receipts {
 
@@ -272,7 +272,7 @@ public class S1_receipts {
             stmt.executeBatch();
             conn.commit();
 
-            Lg.s(S1_receipts.class, "Successfully Added");
+            Lg.s(Receipts.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -330,7 +330,7 @@ public class S1_receipts {
                     ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_receipts.class, "Successfully Updated");
+            Lg.s(Receipts.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -380,7 +380,7 @@ public class S1_receipts {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_receipts.class, "Successfully Updated");
+            Lg.s(Receipts.class, "Successfully Updated");
 
             String s2 = "update receipt_items set "
                     + "supplier= :supplier"
@@ -458,7 +458,7 @@ public class S1_receipts {
                     ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_receipts.class, "Successfully Updated");
+            Lg.s(Receipts.class, "Successfully Updated");
 
             String s2 = "update receipt_items set "
                     + "supplier= :supplier"
@@ -504,7 +504,7 @@ public class S1_receipts {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_receipts.class, "Successfully Deleted");
+            Lg.s(Receipts.class, "Successfully Deleted");
 
             String s2 = "delete from receipt_items where "
                     + " receipt_no='" + to_receipts.receipt_no + "'";
@@ -782,34 +782,37 @@ public class S1_receipts {
         }
     }
 
-    public static String[] increment_id() {
-        String[] aw = new String[2];
-        String ids = "00000000000";
-        String id = "00000000000";
+    public static void main(String[] args) {
+        System.out.println(increment_id("25"));
+    }
+    
+    public static String increment_id(String location_id) {
+
+        String id = "";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from receipts";
+            String s0 = "select max(id) from receipts where branch_id='" + location_id + "' ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
-                ids = rs.getString(1);
-            }
-            if (ids == null) {
-                ids = "0000000000";
-            } else {
-                String s2 = "select receipt_no,id from receipts where id='" + ids + "'";
+                id = rs.getString(1);
+
+                String s2 = "select receipt_no,id from receipts where id='" + id + "'";
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 if (rs2.next()) {
-                    ids = rs2.getString(1);
-                    id = rs2.getString(2);
+                    id = rs2.getString(1);
                 }
+
             }
 
-            ids = ReceiptIncrementor.increment(ids);
-            aw[0] = ids;
-            aw[1] = id;
-            return aw;
+            if (id == null) {
+                id = location_id + "|0000000000";
+            }
+
+            id = ReceiptIncrementor.increment(id);
+
+            return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -1062,8 +1065,7 @@ public class S1_receipts {
 
                 }
             }
-            
-            
+
             String json = gson.toJson(query);
             String my_branch_id = MyUser.getBranch_id();
             if (!my_branch_id.equalsIgnoreCase(branch_id)) {
@@ -1105,7 +1107,7 @@ public class S1_receipts {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_receipts.class, "Successfully Updated");
+            Lg.s(Receipts.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

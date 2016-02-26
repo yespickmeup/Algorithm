@@ -362,7 +362,7 @@ public class Inventory {
             String is_main_server = System.getProperty("is_main_server", "false");
             String unit_type = System.getProperty("unit_type", "local_branch_server");
             String json = gson.toJson(query);
-
+            
             if (is_main_server.equalsIgnoreCase("true")) {
                 if (unit_type.equalsIgnoreCase("main_branch_server")) {
                     Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));

@@ -34,6 +34,7 @@ public class Requisition_slip_items {
         public final String item_code;
         public final String barcode;
         public final String description;
+        public double product_qty;
         public final String unit;
         public final double cost;
         public final double selling_price;
@@ -44,7 +45,7 @@ public class Requisition_slip_items {
         public final String date_added;
         public final int status;
 
-        public to_requisition_slip_items(int id, String requisition_slip_no, String requisition_date, String requisition_type, String requisition_department, String requisition_department_id, String requested_by, String item_code, String barcode, String description, String unit, double cost, double selling_price, String branch, String branch_id, String location, String location_id, String date_added, int status) {
+        public to_requisition_slip_items(int id, String requisition_slip_no, String requisition_date, String requisition_type, String requisition_department, String requisition_department_id, String requested_by, String item_code, String barcode, String description, double product_qty, String unit, double cost, double selling_price, String branch, String branch_id, String location, String location_id, String date_added, int status) {
             this.id = id;
             this.requisition_slip_no = requisition_slip_no;
             this.requisition_date = requisition_date;
@@ -55,6 +56,7 @@ public class Requisition_slip_items {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
+            this.product_qty = product_qty;
             this.unit = unit;
             this.cost = cost;
             this.selling_price = selling_price;
@@ -65,6 +67,15 @@ public class Requisition_slip_items {
             this.date_added = date_added;
             this.status = status;
         }
+
+        public double getProduct_qty() {
+            return product_qty;
+        }
+
+        public void setProduct_qty(double product_qty) {
+            this.product_qty = product_qty;
+        }
+        
     }
 
     public static void add_data(to_requisition_slip_items to_requisition_slip_items) {
@@ -80,6 +91,7 @@ public class Requisition_slip_items {
                     + ",item_code"
                     + ",barcode"
                     + ",description"
+                    + ",product_qty"
                     + ",unit"
                     + ",cost"
                     + ",selling_price"
@@ -99,6 +111,7 @@ public class Requisition_slip_items {
                     + ",:item_code"
                     + ",:barcode"
                     + ",:description"
+                    + ",:product_qty"
                     + ",:unit"
                     + ",:cost"
                     + ",:selling_price"
@@ -120,6 +133,7 @@ public class Requisition_slip_items {
                     .setString("item_code", to_requisition_slip_items.item_code)
                     .setString("barcode", to_requisition_slip_items.barcode)
                     .setString("description", to_requisition_slip_items.description)
+                    .setNumber("product_qty", to_requisition_slip_items.product_qty)
                     .setString("unit", to_requisition_slip_items.unit)
                     .setNumber("cost", to_requisition_slip_items.cost)
                     .setNumber("selling_price", to_requisition_slip_items.selling_price)
@@ -154,6 +168,7 @@ public class Requisition_slip_items {
                     + ",item_code= :item_code "
                     + ",barcode= :barcode "
                     + ",description= :description "
+                    + ",product_qty= :product_qty "
                     + ",unit= :unit "
                     + ",cost= :cost "
                     + ",selling_price= :selling_price "
@@ -176,6 +191,7 @@ public class Requisition_slip_items {
                     .setString("item_code", to_requisition_slip_items.item_code)
                     .setString("barcode", to_requisition_slip_items.barcode)
                     .setString("description", to_requisition_slip_items.description)
+                    .setNumber("product_qty", to_requisition_slip_items.product_qty)
                     .setString("unit", to_requisition_slip_items.unit)
                     .setNumber("cost", to_requisition_slip_items.cost)
                     .setNumber("selling_price", to_requisition_slip_items.selling_price)
@@ -206,7 +222,8 @@ public class Requisition_slip_items {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(Requisition_slip_items.class, "Successfully Deleted");
+            Lg
+                    .s(Requisition_slip_items.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -230,6 +247,7 @@ public class Requisition_slip_items {
                     + ",item_code"
                     + ",barcode"
                     + ",description"
+                    + ",product_qty"
                     + ",unit"
                     + ",cost"
                     + ",selling_price"
@@ -255,17 +273,18 @@ public class Requisition_slip_items {
                 String item_code = rs.getString(8);
                 String barcode = rs.getString(9);
                 String description = rs.getString(10);
-                String unit = rs.getString(11);
-                double cost = rs.getDouble(12);
-                double selling_price = rs.getDouble(13);
-                String branch = rs.getString(14);
-                String branch_id = rs.getString(15);
-                String location = rs.getString(16);
-                String location_id = rs.getString(17);
-                String date_added = rs.getString(18);
-                int status = rs.getInt(19);
+                double product_qty = rs.getDouble(11);
+                String unit = rs.getString(12);
+                double cost = rs.getDouble(13);
+                double selling_price = rs.getDouble(14);
+                String branch = rs.getString(15);
+                String branch_id = rs.getString(16);
+                String location = rs.getString(17);
+                String location_id = rs.getString(18);
+                String date_added = rs.getString(19);
+                int status = rs.getInt(20);
 
-                to_requisition_slip_items to = new to_requisition_slip_items(id, requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, item_code, barcode, description, unit, cost, selling_price, branch, branch_id, location, location_id, date_added, status);
+                to_requisition_slip_items to = new to_requisition_slip_items(id, requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, item_code, barcode, description, product_qty, unit, cost, selling_price, branch, branch_id, location, location_id, date_added, status);
                 datas.add(to);
             }
             return datas;

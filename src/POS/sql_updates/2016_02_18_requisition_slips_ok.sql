@@ -31,6 +31,7 @@ id int auto_increment primary key
 ,item_code varchar(255)
 ,barcode varchar(255)
 ,description varchar(255)
+,product_qty double
 ,unit text
 ,cost double
 ,selling_price double
