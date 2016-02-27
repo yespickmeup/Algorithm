@@ -120,7 +120,8 @@ public class Main {
             System.setProperty("HOST_CONN_PYOP_SEND", prop.getProperty("server_conn", "localhost"));
             System.setProperty("HOST_PARAM_PYOP_SEND", prop.getProperty("server_param", "?user=root&password=password"));
             System.setProperty("pool_host", prop.getProperty("pool_host", "localhost:3306"));
-
+            
+            
             System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
             System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
             System.out.println(prop.getProperty("pool_host", "localhost"));
@@ -150,9 +151,8 @@ public class Main {
             System.setProperty("unit_type", prop.getProperty("unit_type", "workstation"));
             
             
-
+            
         } catch (IOException ex) {
-
             throw new RuntimeException(ex);
         }
 

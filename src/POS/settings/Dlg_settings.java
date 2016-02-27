@@ -5,12 +5,12 @@
  */
 package POS.settings;
 
+import POS.util.Alert;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -187,6 +187,8 @@ public class Dlg_settings extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -252,8 +254,6 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel27 = new javax.swing.JLabel();
         jCheckBox3 = new javax.swing.JCheckBox();
         jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jTextField21 = new Field.Input();
         jTextField22 = new Field.Combo();
         jLabel30 = new javax.swing.JLabel();
         jCheckBox4 = new javax.swing.JCheckBox();
@@ -262,6 +262,9 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel32 = new Label.Separator2();
         jLabel33 = new javax.swing.JLabel();
         jCheckBox5 = new javax.swing.JCheckBox();
+        jLabel46 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -305,7 +308,6 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel1.setText("Company Name:");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setText("X&Y Marketing");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Address:");
@@ -314,17 +316,14 @@ public class Dlg_settings extends javax.swing.JDialog {
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Dumaguete City");
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Contact Number:");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setText("(000) 000-0000");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setText("(000) 000-0000");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Fax Number:");
@@ -333,13 +332,11 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel5.setText("Email Address:");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setText("xandy_marketing@gmail.com");
 
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("Not to be issued for Non-Vat/Exempt Sales of goods, properties, services. If issued, sales shall be subjected to VAT.\n----\nSynapse Software Technologies\nDaro, Dumaguete City, Philippines");
         jScrollPane2.setViewportView(jTextArea2);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -352,20 +349,17 @@ public class Dlg_settings extends javax.swing.JDialog {
         jTextArea3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextArea3.setLineWrap(true);
         jTextArea3.setRows(5);
-        jTextArea3.setText("Not to be issued for Non-Vat/Exempt Sales of goods, properties, services. If issued, sales shall be subjected to VAT.\n----\nSynapse Software Technologies\nDaro, Dumaguete City, Philippines");
         jScrollPane3.setViewportView(jTextArea3);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Operated by:");
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setText("Juan Dela Cruz");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Slogan:");
 
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setText("Eat, Sleep and Live");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -460,22 +454,18 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel8.setText("Serial Number:");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setText("0000000000000");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Permit Number:");
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField8.setText("0000000000000");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Accreditation Number:");
 
         jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField9.setText("0000000000000");
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField10.setText("0000000000000");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("TIN:");
@@ -484,25 +474,21 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel14.setText("Machine Number:");
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField11.setText("0000000000000");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("MIN Number:");
 
         jTextField12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField12.setText("0000000000000");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Business Type:");
 
         jTextField13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField13.setText("VAT");
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel35.setText("Vat Percent:");
 
         jTextField24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField24.setText("12");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -521,15 +507,12 @@ public class Dlg_settings extends javax.swing.JDialog {
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField11)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-                                    .addComponent(jTextField10)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(6, 6, 6))
-                            .addComponent(jTextField8)
-                            .addComponent(jTextField5)))
+                            .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                            .addComponent(jTextField5)
+                            .addComponent(jTextField9)
+                            .addComponent(jTextField10)
+                            .addComponent(jTextField11)
+                            .addComponent(jTextField12)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,25 +569,21 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel17.setText("License Code:");
 
         jTextField14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField14.setText("F59ED2B0F6906AC3B5375E9C2E3AF072");
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Version:");
 
         jTextField15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField15.setText("V.1.20160225");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Developer:");
 
         jTextField16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField16.setText("Synapse Software Technologies");
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("Support:");
 
         jTextField17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField17.setText("Call Support: (32) 000-0000");
         jTextField17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField17ActionPerformed(evt);
@@ -615,58 +594,44 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel21.setText("DB Host:");
 
         jTextField18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField18.setText("localhost");
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Port:");
 
         jTextField19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField19.setText("3306");
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("DB User:");
 
         jTextField20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField20.setText("root");
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("Password:");
 
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPasswordField1.setText("password");
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setText("Receipt Printing Enable:");
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Yes/No");
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setText("Receipt Printer Show Dialog:");
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox2.setSelected(true);
         jCheckBox2.setText("Yes/No");
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel27.setText("Is in Main Branch:");
+        jLabel27.setText("Is Server:");
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox3.setSelected(true);
         jCheckBox3.setText("Yes/No");
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel28.setText("Terminal Type:");
-
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel29.setText("Terminal Number:");
-
-        jTextField21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField21.setText("1");
+        jLabel28.setText("Terminal Number:");
 
         jTextField22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField22.setText("Server/Workstation");
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setText("Allow Negative Inventory:");
@@ -684,11 +649,22 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel33.setText("Autoprint Kitchen Report:");
+        jLabel33.setText("Kitchen Order Printing Enable: ");
 
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox5.setSelected(true);
         jCheckBox5.setText("Yes/No");
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel46.setText("Location:");
+
+        buttonGroup2.add(jCheckBox6);
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("Main Branch");
+
+        buttonGroup2.add(jCheckBox7);
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("Other Branch");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -702,23 +678,30 @@ public class Dlg_settings extends javax.swing.JDialog {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(101, 518, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCheckBox2)
                                     .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jCheckBox5)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jCheckBox6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox7))
+                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -744,14 +727,12 @@ public class Dlg_settings extends javax.swing.JDialog {
                                     .addComponent(jTextField18))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField19)
-                                    .addComponent(jPasswordField1)
-                                    .addComponent(jTextField21))))))
+                                    .addComponent(jPasswordField1))))))
                 .addGap(19, 19, 19))
         );
         jPanel4Layout.setVerticalGroup(
@@ -789,9 +770,7 @@ public class Dlg_settings extends javax.swing.JDialog {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -807,20 +786,25 @@ public class Dlg_settings extends javax.swing.JDialog {
                         .addGap(1, 1, 1)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Software", jPanel4);
@@ -1002,6 +986,11 @@ public class Dlg_settings extends javax.swing.JDialog {
         jTabbedPane1.addTab("Tenants", jPanel7);
 
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
 
@@ -1050,11 +1039,21 @@ public class Dlg_settings extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        try {
+//            set_property();
+//        } catch (IOException ex) {
+//            Logger.getLogger(Dlg_settings.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1066,6 +1065,8 @@ public class Dlg_settings extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1087,7 +1088,6 @@ public class Dlg_settings extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -1106,6 +1106,7 @@ public class Dlg_settings extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1139,7 +1140,6 @@ public class Dlg_settings extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField24;
@@ -1193,27 +1193,7 @@ public class Dlg_settings extends javax.swing.JDialog {
     InputStream inputStream;
 
     private void ret_config() {
-
         String home = System.getProperty("user.home") + "\\my_config.conf";
-//        BufferedReader br = null;
-//        try {
-//            String sCurrentLine;
-//            br = new BufferedReader(new FileReader(home));
-//            while ((sCurrentLine = br.readLine()) != null) {
-//                System.out.println(sCurrentLine);
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            try {
-//                if (br != null) {
-//                    br.close();
-//                }
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        }
-
         try {
             Properties prop = new Properties();
             inputStream = new FileInputStream(home);
@@ -1226,14 +1206,99 @@ public class Dlg_settings extends javax.swing.JDialog {
             Date time = new Date(System.currentTimeMillis());
 
             // get the property value and print it out
-            String host = prop.getProperty("pool_host", "localhost:3306");
-            String print_to_receipts = prop.getProperty("print_to_receipts", "false");
-            String print_to_receipts2 = prop.getProperty("print_to_receipts2", "false");
-            String is_main_server = prop.getProperty("print_to_receipts", "false");
-            String unit_type = prop.getProperty("unit_type", "main_branch_server");
-            
-            
-            System.out.println("Host: " + host);
+            String business_name = prop.getProperty("business_name", "");
+            String address = prop.getProperty("address", "");
+            String operated_by = prop.getProperty("operated_by", "");
+            String slogan = prop.getProperty("slogan", "");
+            String contact_number = prop.getProperty("contact_number", "");
+            String fax_number = prop.getProperty("fax_number", "");
+            String email_address = prop.getProperty("email_address", "");
+            String receipt_footer = prop.getProperty("receipt_footer", "");
+            String invoice_footer = prop.getProperty("invoice_footer", "");
+            jTextField1.setText(business_name);
+            jTextArea1.setText(address);
+            jTextField6.setText(operated_by);
+            jTextField7.setText(slogan);
+            jTextField2.setText(contact_number);
+            jTextField3.setText(fax_number);
+            jTextField4.setText(email_address);
+            jTextArea2.setText(receipt_footer);
+            jTextArea3.setText(invoice_footer);
+
+            String serial_no = prop.getProperty("serial_no", "");
+            String permit_no = prop.getProperty("permit_no", "");
+            String accreditation_no = prop.getProperty("accreditation_no", "");
+            String tin_no = prop.getProperty("tin_no", "");
+            String machine_no = prop.getProperty("machine_no", "");
+            String min_no = prop.getProperty("min_no", "");
+            String business_type = prop.getProperty("business_type", "");
+            String vat_percent = prop.getProperty("vat_percent", "");
+
+            jTextField5.setText(serial_no);
+            jTextField8.setText(permit_no);
+            jTextField9.setText(accreditation_no);
+            jTextField10.setText(tin_no);
+            jTextField11.setText(machine_no);
+            jTextField12.setText(min_no);
+            jTextField13.setText(business_type);
+            jTextField24.setText(vat_percent);
+
+            String license_code = prop.getProperty("license_code", "");
+            String version = prop.getProperty("version", "");
+            String developer = prop.getProperty("developer", "");
+            String support = prop.getProperty("support", "");
+            String pool_host = prop.getProperty("pool_host", "localhost");
+            String pool_port = prop.getProperty("pool_port", "3306");
+            String pool_user = prop.getProperty("pool_user", "root");
+            String pool_password = prop.getProperty("pool_password", "password");
+            String pool_db = prop.getProperty("pool_db", "db_algorithm");
+            String cloud_host = prop.getProperty("cloud_host", "128.199.80.53");
+            String cloud_port = prop.getProperty("cloud_port", "3306");
+            String cloud_user = prop.getProperty("cloud_user", "root");
+            String cloud_password = prop.getProperty("cloud_password", "password");
+            String cloud_db = prop.getProperty("cloud_db", "db_algorithm");
+
+            String terminal_number = prop.getProperty("terminal_number", "");
+
+            String receipt_printing_enabled = prop.getProperty("receipt_printing_enabled", "");
+            String receipt_printer_show_dialog = prop.getProperty("receipt_printer_show_dialog", "");
+            String kitchen_order_printing_enabled = prop.getProperty("kitchen_order_printing_enabled", "");
+            String allow_negative_inventory = prop.getProperty("allow_negative_inventory", "");
+            String is_server = prop.getProperty("is_server", "");
+            String location = prop.getProperty("location", "");
+
+            jTextField14.setText(license_code);
+            jTextField15.setText(version);
+            jTextField16.setText(developer);
+            jTextField17.setText(support);
+            jTextField18.setText(pool_host);
+            jTextField19.setText(pool_port);
+            jTextField20.setText(pool_user);
+            jPasswordField1.setText(pool_password);
+            jTextField22.setText(terminal_number);
+
+            if (receipt_printing_enabled.equalsIgnoreCase("true")) {
+                jCheckBox1.setSelected(true);
+            }
+            if (receipt_printer_show_dialog.equalsIgnoreCase("true")) {
+                jCheckBox2.setSelected(true);
+            }
+            if (kitchen_order_printing_enabled.equalsIgnoreCase("true")) {
+                jCheckBox5.setSelected(true);
+            }
+            if (allow_negative_inventory.equalsIgnoreCase("true")) {
+                jCheckBox4.setSelected(true);
+            }
+
+            if (is_server.equalsIgnoreCase("true")) {
+                jCheckBox3.setSelected(true);
+            }
+
+            if (location.equalsIgnoreCase("main_branch")) {
+                jCheckBox6.setSelected(true);
+            } else {
+                jCheckBox7.setSelected(false);
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -1244,7 +1309,35 @@ public class Dlg_settings extends javax.swing.JDialog {
                 Logger.getLogger(Dlg_settings.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
+    private void set_property() throws IOException {
+
+        String home = System.getProperty("user.home") + "\\my_config.conf";
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(home);
+            Properties props = new Properties();
+            props.load(in);
+            in.close();
+
+            props.setProperty("is_main_server", "aasd");
+
+            FileOutputStream out = new FileOutputStream(home);
+          
+            props.save(out, home);
+            out.close();
+
+            Alert.set(2, "");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Dlg_settings.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Dlg_settings.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
 }

@@ -785,7 +785,7 @@ public class Receipts {
     public static void main(String[] args) {
         System.out.println(increment_id("25"));
     }
-    
+
     public static String increment_id(String location_id) {
 
         String id = "";
@@ -942,7 +942,7 @@ public class Receipts {
                     s5 = SqlStringUtil.parse(s5).
                             setNumber("cost", to_receipt_items.cost).
                             ok();
-
+                    
                     stmt.addBatch(s5);
 
                     //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">
@@ -1069,17 +1069,17 @@ public class Receipts {
             String json = gson.toJson(query);
             String my_branch_id = MyUser.getBranch_id();
             if (!my_branch_id.equalsIgnoreCase(branch_id)) {
-                String is_main_server = System.getProperty("is_main_server", "false");
-                String unit_type = System.getProperty("unit_type", "local_branch_server");
-                if (is_main_server.equalsIgnoreCase("true")) {
-                    if (unit_type.equalsIgnoreCase("main_branch_server")) {
-                        Main_branch_query_uploads.add_data2(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
-                        System.out.println("Record added....");
-                    } else {
-                        Local_branch_query_uploads.add_data2(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
-                        System.out.println("Record added....");
-                    }
+                String is_server = System.getProperty("is_server", "false");
+                String location = System.getProperty("location", "main_branch");
+                if (location.equalsIgnoreCase("main_branch")) {
+                    Main_branch_query_uploads.add_data2(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
+                    System.out.println("Record added....");
                 }
+                if (location.equalsIgnoreCase("local_branch")) {
+                    Local_branch_query_uploads.add_data2(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
+                    System.out.println("Record added....");
+                }
+
             }
 
             stmt.executeBatch();

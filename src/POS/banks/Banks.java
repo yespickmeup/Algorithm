@@ -60,17 +60,13 @@ public class Banks {
             Lg.s(Banks.class, "Successfully Added");
             query.add(s0);
 
-            String is_main_server = System.getProperty("is_main_server", "false");
-            String unit_type = System.getProperty("unit_type", "local_branch_server");
+            String is_server = System.getProperty("is_server", "false");
+            String location = System.getProperty("location", "main_branch");
             String json = gson.toJson(query);
-            if (is_main_server.equalsIgnoreCase("true")) {
-                if (unit_type.equalsIgnoreCase("main_branch_server")) {
-                    Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-                    System.out.println("Record added....");
-                } else {
-                    Local_branch_query_uploads.add_data(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-                    System.out.println("Record added....");
-                }
+
+            if (location.equalsIgnoreCase("main_branch")) {
+                Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+                System.out.println("Record added....");
             }
 
         } catch (SQLException e) {
@@ -79,7 +75,7 @@ public class Banks {
             MyConnection.close();
         }
     }
-    
+
     public static void edit_banks(to_banks to_banks) {
         try {
             Connection conn = MyConnection.connect();
@@ -96,18 +92,14 @@ public class Banks {
             stmt.execute();
             Lg.s(Banks.class, "Successfully Updated");
             query.add(s0);
-            
-            String is_main_server = System.getProperty("is_main_server", "false");
-            String unit_type = System.getProperty("unit_type", "local_branch_server");
+
+            String is_server = System.getProperty("is_server", "false");
+            String location = System.getProperty("location", "main_branch");
             String json = gson.toJson(query);
-            if (is_main_server.equalsIgnoreCase("true")) {
-                if (unit_type.equalsIgnoreCase("main_branch_server")) {
-                    Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-                    System.out.println("Record updated....");
-                } else {
-                    Local_branch_query_uploads.add_data(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-                    System.out.println("Record updated....");
-                }
+
+            if (location.equalsIgnoreCase("main_branch")) {
+                Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+                System.out.println("Record updated....");
             }
 
         } catch (SQLException e) {
@@ -133,9 +125,14 @@ public class Banks {
             Lg.s(Banks.class, "Successfully Deleted");
             query.add(s0);
 
+            String is_server = System.getProperty("is_server", "false");
+            String location = System.getProperty("location", "main_branch");
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-            System.out.println("Record deleted....");
+
+            if (location.equalsIgnoreCase("main_branch")) {
+                Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Banks", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+                System.out.println("Record deleted....");
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

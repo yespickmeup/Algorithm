@@ -39,6 +39,7 @@ import POS.inventory.Dlg_inventory_price_updates;
 import POS.inventory_replenishment.Dlg_inventory_replenishment;
 import POS.inventory_reports.Dlg_report_item_ledger;
 import POS.main.Main;
+import static POS.main.MyMain.getSerialNumber;
 import POS.my_services.Dlg_my_service_type;
 import POS.my_services.Dlg_my_services;
 import POS.my_services.Dlg_my_services_crews;
@@ -74,6 +75,8 @@ import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.DeEncrypter;
+import POS.util.Dlg_get_hdd_serial;
 import POS.util.Focus_Fire;
 import POS.util.MyFrame;
 import POS.util.Users;
@@ -854,7 +857,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("V4.0.0");
+        jLabel1.setText("V1.20160227");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1939,6 +1942,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         set_default_branch();
         hover();
     }
+    int count = 0;
 
     private void key() {
         final String is_main_server = System.getProperty("is_main_server", "false");
@@ -1951,12 +1955,32 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                     if (is_main_server.equals("true")) {
                         asynch();
                     }
-
                 }
+                if (e.getKeyCode() == KeyEvent.VK_F10) {
+                    if (count == 2) {
+                        license_code();
+                        count = 0;
+                    }
+                    count++;
+                }
+            }
+        });
+    }
+
+    private void license_code() {
+        Window p = (Window) this;
+        Dlg_get_hdd_serial nd = Dlg_get_hdd_serial.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_get_hdd_serial.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_get_hdd_serial.OutputData data) {
+                closeDialog.ok();
 
             }
         });
-
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private void asynch() {
@@ -2032,7 +2056,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyUser.setBranch_id(my_branch_id);
         MyUser.setLocation(my_location);
         MyUser.setLocation_id(my_location_id);
-      
+
     }
 
     private void focus() {
@@ -2443,10 +2467,18 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void check_credentials() {
+        String license_code = System.getProperty("license_code", "");
+        String hdd_license = DeEncrypter.encrypt(getSerialNumber());
+        if (!license_code.equals(hdd_license)) {
+            Alert.set(0, "Invalid license key, please register!");
+            return;
+        }
+        
         String user_name = tf_username.getText();
         String date = DateType.sf.format(new Date());
         String password = tf_password.getText();
         final S1_users.to_users to = S1_users.ret_data_autho(user_name, password);
+
         if (to == null) {
             tf_username.setText("");
             tf_password.setText("");

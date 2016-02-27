@@ -34,13 +34,15 @@ public class MyConnection {
     public static Connection connect() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "localhost:3306");
+            String host = System.getProperty("pool_host", "localhost");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
-            String db_name = System.getProperty("mydb", "db_algorithm");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
-            
+
             try {
                 conn = DriverManager.getConnection(url, user, password);
             } catch (SQLException ex) {
@@ -58,10 +60,12 @@ public class MyConnection {
     public static Connection connect3() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "localhost:3306");
+            String host = System.getProperty("pool_host", "localhost");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
-            String db_name = System.getProperty("mydb", "db_algorithm");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
 
@@ -83,10 +87,12 @@ public class MyConnection {
     public static Connection connect2() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "localhost:3306");
+            String host = System.getProperty("pool_host", "localhost");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
-            String db_name = System.getProperty("mydb", "db_algorithm");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/";
 
@@ -119,10 +125,12 @@ public class MyConnection {
     public static Connection cloud_connect() {
         try {
             //        init();
-            String host = System.getProperty("pool_host1", "128.199.80.53:3306");
-            String user = System.getProperty("pool_user1", "root");
-            String password = System.getProperty("pool_password1", "password");
-            String db_name = System.getProperty("mydb1", "db_algorithm");
+            String host = System.getProperty("pool_host", "128.199.80.53");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
+            String user = System.getProperty("pool_user", "root");
+            String password = System.getProperty("pool_password", "password");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
 
@@ -140,7 +148,7 @@ public class MyConnection {
         }
         return conn2;
     }
-    
+
     public static void main(String[] args) {
         int connected = check_cloud_connection();
         System.out.println("Is Connected: " + connected);
@@ -149,10 +157,12 @@ public class MyConnection {
     public static int check_cloud_connection() {
         int connected = 0;
 
-        String host = System.getProperty("pool_host1", "128.199.80.53:3306");
-        String user = System.getProperty("pool_user1", "root");
-        String password = System.getProperty("pool_password1", "password");
-        String db_name = System.getProperty("mydb1", "db_algorithm");
+        String host = System.getProperty("cloud_host", "128.199.80.53");
+        String port = System.getProperty("cloud_port", "3306");
+        host = host + ":" + port;
+        String user = System.getProperty("cloud_user", "root");
+        String password = System.getProperty("cloud_password", "password");
+        String db_name = System.getProperty("cloud_db", "db_algorithm");
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
@@ -180,10 +190,12 @@ public class MyConnection {
     public static Connection development() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "localhost:3306");
+            String host = System.getProperty("pool_host", "localhost");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
-            String db_name = System.getProperty("mydb", "db_algorithm");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
 
@@ -205,10 +217,12 @@ public class MyConnection {
     public static Connection production() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "192.168.1.51:3306");
+            String host = System.getProperty("pool_host", "192.168.1.51");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
             String password = System.getProperty("pool_password", "password");
-            String db_name = System.getProperty("mydb", "db_algorithm");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
 
