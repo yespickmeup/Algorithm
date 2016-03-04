@@ -547,7 +547,7 @@ public class Dlg_Local_branch_query_updates extends javax.swing.JDialog {
                     jLabel8.setText("");
                     jButton2.setEnabled(true);
                     stop = 1;
-
+                    
                     //<editor-fold defaultstate="collapsed" desc=" Upload Starts ">
                     int check_connection = MyConnection.check_cloud_connection();
                     if (check_connection == 0) {
@@ -590,6 +590,7 @@ public class Dlg_Local_branch_query_updates extends javax.swing.JDialog {
                     jButton2.setEnabled(true);
 
                     //</editor-fold>
+                    
                     start();
                 }
 

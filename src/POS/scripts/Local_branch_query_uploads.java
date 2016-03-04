@@ -102,7 +102,7 @@ public class Local_branch_query_uploads {
                 stmt.execute();
                 Lg.s(Local_branch_query_uploads.class, "Successfully Added");
             }
-
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

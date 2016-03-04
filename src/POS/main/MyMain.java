@@ -9,6 +9,7 @@ import POS.pnl.Pnl_Dashboard;
 import POS.settings.Dlg_settings;
 import POS.util.Center;
 import POS.util.DeEncrypter;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.BufferedReader;
@@ -70,10 +71,16 @@ public class MyMain {
             System.setProperty("min_no", prop.getProperty("min_no", ""));
             System.setProperty("business_type", prop.getProperty("business_type", ""));
             System.setProperty("vat_percent", prop.getProperty("vat_percent", ""));
+            System.setProperty("permit_to_use_no", prop.getProperty("permit_to_use_no", ""));
 
             System.setProperty("license_code", prop.getProperty("license_code", ""));
             System.setProperty("version", prop.getProperty("version", ""));
             System.setProperty("developer", prop.getProperty("developer", ""));
+            System.setProperty("developer_address", prop.getProperty("developer_address", ""));
+            System.setProperty("developer_tin_no", prop.getProperty("developer_tin_no", ""));
+            System.setProperty("developer_accreditation_no", prop.getProperty("developer_accreditation_no", ""));
+            System.setProperty("developer_accreditation_date", prop.getProperty("developer_accreditation_date", ""));
+
             System.setProperty("support", prop.getProperty("support", ""));
             System.setProperty("pool_host", prop.getProperty("pool_host", "localhost"));
             System.setProperty("pool_port", prop.getProperty("pool_port", "3306"));
@@ -94,10 +101,10 @@ public class MyMain {
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
             System.setProperty("hdd_drive", prop.getProperty("hdd_drive", ""));
+            System.setProperty("img_path", prop.getProperty("img_path", System.getProperty("user.home", "C:\\Users\\User") + "\\"));
+            System.setProperty("prepaid_payment", prop.getProperty("prepaid_payment", ""));
+            System.setProperty("charge_payment", prop.getProperty("charge_payment", ""));
 
-           
-            
-            
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -125,7 +132,8 @@ public class MyMain {
     private void start() {
         Application.setSystemLookAndFeel();
         Pnl_Dashboard pnl = new Pnl_Dashboard();
-
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/POS/img_menu/synapse.png"));
+        pnl.setIconImage(image);
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().
                 getWidth());

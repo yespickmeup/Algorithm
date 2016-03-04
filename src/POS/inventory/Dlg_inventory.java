@@ -2055,12 +2055,6 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Field.Combo units = (Field.Combo) tf_unit;
         tf_item_code.setText("");
         tf_description.setText("");
-        tf_category.setText("");
-        cat.setId("");
-        tf_sub_classification.setText("");
-        classi.setId("");
-        sub_class.setId("");
-//        tf_unit.setText("");
         tf_uom_conversion.setText("1");
         units.setId("");
         tf_selling_price.setText("");
@@ -2148,7 +2142,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tbl_inventory_barcodes.setRowHeight(25);
         tbl_inventory_barcodes.setFont(new java.awt.Font("Arial", 0, 11));
     }
-    
+
     private void loadData_inventory_barcodes(List<to_inventory_barcodes> acc) {
         tbl_inventory_barcodes_ALM.clear();
         tbl_inventory_barcodes_ALM.addAll(acc);
@@ -2840,8 +2834,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_category_list.size()][2];
         int i = 0;
         for (S1_inventory_categories.to_inventory_category to : inventory_category_list) {
-            obj[i][0] = to.id;
-            obj[i][1] = to.name;
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2882,8 +2876,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_classification_list.size()][2];
         int i = 0;
         for (S1_inventory_classification.to_inventory_classification to : inventory_classification_list) {
-            obj[i][0] = to.id;
-            obj[i][1] = to.name;
+            obj[i][0] = " " +to.id;
+            obj[i][1] = " " +to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2917,8 +2911,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_sub_classification_list.size()][2];
         int i = 0;
         for (S1_inventory_sub_classification.to_inventory_sub_classification to : inventory_sub_classification_list) {
-            obj[i][0] = to.id;
-            obj[i][1] = to.name;
+            obj[i][0] = " " +to.id;
+            obj[i][1] = " " +to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2947,8 +2941,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_brand_list.size()][2];
         int i = 0;
         for (S1_inventory_brand.to_inventory_brand to : inventory_brand_list) {
-            obj[i][0] = to.id;
-            obj[i][1] = to.name;
+            obj[i][0] = " " +to.id;
+            obj[i][1] = " " +to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2982,8 +2976,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_model_list.size()][2];
         int i = 0;
         for (S1_inventory_model.to_inventory_model to : inventory_model_list) {
-            obj[i][0] = to.id;
-            obj[i][1] = to.name;
+            obj[i][0] = " " +to.id;
+            obj[i][1] = " " +to.name;
             i++;
         }
         JLabel[] labels = {};

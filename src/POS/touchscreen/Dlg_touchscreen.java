@@ -531,7 +531,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -539,7 +539,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
+                .addGap(25, 25, 25))
         );
 
         jPanel13.add(jPanel14, "card2");
@@ -1523,7 +1523,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel6)))
-                .addContainerGap())
+                .addGap(25, 25, 25))
         );
 
         jPanel7.setOpaque(false);
@@ -2393,7 +2393,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -4375,10 +4375,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String item_code = to.main_barcode;
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
-                        S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description
-                                , generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion
-                                , selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1
-                                , discount_rate, discount_amount1, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                        S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                         orders.add(ord);
                     }
                     System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
@@ -4735,23 +4732,27 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     private void payment_prepaid() {
-        Window p = (Window) this;
-        Dlg_touchscreen_prepaid nd = Dlg_touchscreen_prepaid.create(p, true);
-        nd.setTitle("");
-        nd.do_pass();
-        nd.setCallback(new Dlg_touchscreen_prepaid.Callback() {
+        String prepaid_payment = System.getProperty("prepaid_payment", "false");
+        if (prepaid_payment.equalsIgnoreCase("true")) {
+            Window p = (Window) this;
+            Dlg_touchscreen_prepaid nd = Dlg_touchscreen_prepaid.create(p, true);
+            nd.setTitle("");
+            nd.do_pass();
+            nd.setCallback(new Dlg_touchscreen_prepaid.Callback() {
 
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_touchscreen_prepaid.OutputData data) {
-                closeDialog.ok();
-                Payments.prepaid card = Payments.prepaid;
-                lbl_prepaid.setText(FitIn.fmt_wc_0(card.amount));
-                lbl_p_change.setText(FitIn.fmt_wc_0(Payments.countChange2()));
-            }
-        });
-        Point loc = btn_charge2.getLocationOnScreen();
-        nd.setLocation(loc.x + 46, loc.y - 137);
-        nd.setVisible(true);
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_prepaid.OutputData data) {
+                    closeDialog.ok();
+                    Payments.prepaid card = Payments.prepaid;
+                    lbl_prepaid.setText(FitIn.fmt_wc_0(card.amount));
+                    lbl_p_change.setText(FitIn.fmt_wc_0(Payments.countChange2()));
+                }
+            });
+            Point loc = btn_charge2.getLocationOnScreen();
+            nd.setLocation(loc.x + 46, loc.y - 137);
+            nd.setVisible(true);
+        }
+
     }
 
     private void payment_cheque() {
@@ -4775,23 +4776,27 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     private void payment_charge() {
-        Window p = (Window) this;
-        Dlg_touchscreen_charge nd = Dlg_touchscreen_charge.create(p, true);
-        nd.setTitle("");
-        nd.do_pass();
-        nd.setCallback(new Dlg_touchscreen_charge.Callback() {
+        String charge_payment = System.getProperty("charge_payment", "false");
+        if (charge_payment.equalsIgnoreCase("true")) {
+            Window p = (Window) this;
+            Dlg_touchscreen_charge nd = Dlg_touchscreen_charge.create(p, true);
+            nd.setTitle("");
+            nd.do_pass();
+            nd.setCallback(new Dlg_touchscreen_charge.Callback() {
 
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_touchscreen_charge.OutputData data) {
-                closeDialog.ok();
-                Payments.charge card = Payments.charge;
-                lbl_charge.setText(FitIn.fmt_wc_0(card.amount));
-                lbl_p_change.setText(FitIn.fmt_wc_0(Payments.countChange2()));
-            }
-        });
-        Point loc = btn_charge2.getLocationOnScreen();
-        nd.setLocation(loc.x + 46, loc.y - 137);
-        nd.setVisible(true);
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_charge.OutputData data) {
+                    closeDialog.ok();
+                    Payments.charge card = Payments.charge;
+                    lbl_charge.setText(FitIn.fmt_wc_0(card.amount));
+                    lbl_p_change.setText(FitIn.fmt_wc_0(Payments.countChange2()));
+                }
+            });
+            Point loc = btn_charge2.getLocationOnScreen();
+            nd.setLocation(loc.x + 46, loc.y - 137);
+            nd.setVisible(true);
+        }
+
     }
 
     private void type_cash() {
@@ -4997,7 +5002,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         try {
             sales_no = MySales.add_sales(sales, items, location_id);
             sales.setSales_no(sales_no);
-           
+
             my_sales = sales;
             if (my_sales == null) {
                 System.out.println("NULL");
@@ -5008,8 +5013,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(Dlg_touchscreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
     MySales.sales my_sales = null;
 
