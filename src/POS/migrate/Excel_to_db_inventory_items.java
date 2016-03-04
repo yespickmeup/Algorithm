@@ -5,6 +5,14 @@
  */
 package POS.migrate;
 
+import POS.encoding_inventory.Encoding_inventory;
+import POS.inventory.Dlg_inventory_uom;
+import POS.inventory.Inventory;
+import POS.inventory.uom;
+import POS.users.MyUser;
+import POS.util.Alert;
+import POS.util.DateType;
+import POS.util.Users;
 import java.awt.FileDialog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import mijzcx.synapse.desk.utils.FitIn;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -97,9 +106,95 @@ public class Excel_to_db_inventory_items {
         }
 
         List<Excel_to_db_inventory_items> datas = Excel_to_db_inventory_items.showExcelData(sheetData, file);
-        
+        int with_qty = 0;
+        for (Excel_to_db_inventory_items encoded : datas) {
+            if (FitIn.toDouble(encoded.qty) > 0) {
+                with_qty++;
+            }
+            int id = -1;
+            String barcode = "" + FitIn.toInt(encoded.item_code);
+            if (barcode.equalsIgnoreCase("n/a")) {
+                barcode = "";
+            }
+            String description = encoded.description;
+            String generic_name = "";
+            String category = encoded.category;
+            if (category.equalsIgnoreCase("n/a")) {
+                category = "";
+            }
+            String category_id = "";
+            String classification = encoded.classification;
+            if (classification.equalsIgnoreCase("n/a")) {
+                classification = "";
+            }
+            String classification_id = "";
+            String sub_classification = encoded.sub_classification;
+            if (sub_classification.equalsIgnoreCase("n/a")) {
+                sub_classification = "";
+            }
+            String sub_classification_id = "";
+            double product_qty = 0;
+            double conversion = 1;
+            double selling_price = FitIn.toDouble(encoded.selling_price);
+            String date_added = DateType.now();
+            String user_name = "";
+            String item_type = "";
+            int status = 1;
+
+            String supplier = "";
+            int fixed_price = 0;
+            double cost = FitIn.toDouble(encoded.cost);
+            String supplier_id = "";
+            int multi_level_pricing = 0;
+            int vatable = 0;
+            double reorder_level = 0;
+            double markup = 0;
+            String barcodes = encoded.barcode;
+            if (barcodes.equalsIgnoreCase("n/a")) {
+                barcodes = "";
+            }
+            String brand = encoded.brand;
+            if (brand.equalsIgnoreCase("n/a")) {
+                brand = "";
+            }
+            String brand_id = "";
+            String model = encoded.model;
+            if (brand.equalsIgnoreCase("n/a")) {
+                model = "";
+            }
+            String model_id = "";
+            int selling_type = 1;
+
+            String branch = "Zamboanguita";
+            String branch_code = "1";
+            String location = "Selling Area";
+            String location_id = "1";
+            String unit = "[pc:" + encoded.selling_price + "/1.0^1]";
+            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+            Inventory.add_inventory(to);
+
+            //encoding
+            String item_code = "" + FitIn.toInt(encoded.item_code);
+
+            String branch_id = "1";
+
+            double qty = FitIn.toDouble(encoded.qty);
+
+            String screen_name = "administrator";
+            String sheet_no = "1";
+            String counted_by = "admin";
+            String checked_by = "admin";
+
+            String user_id = MyUser.getUser_id();
+            String user_screen_name = MyUser.getUser_screen_name();
+            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+            Encoding_inventory.add_encoding_inventory(en);
+
+        }
+        System.out.println("Count: " + with_qty);
+        Alert.set(1, "");
     }
-    
+
     public static List<Excel_to_db_inventory_items> showExcelData(List sheetData, String path) {
 
         FileInputStream fis;

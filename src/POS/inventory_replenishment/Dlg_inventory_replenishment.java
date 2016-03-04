@@ -1097,15 +1097,10 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
                     location = "All";
                     location_id = "0";
                 }
-                
+
                 final to_inventory_replenishments replenisment = new to_inventory_replenishments(id, inventory_replenishment_no, date_added, user_id, user_screen_name, remarks, status, branch, branch_id, location, location_id);
                 final List<Inventory_barcodes.to_inventory_barcodes> datas = tbl_inventory_barcodes_ALM;
-                final List<Inventory_barcodes.to_inventory_barcodes> datas2 = new ArrayList();
-                for (Inventory_barcodes.to_inventory_barcodes to : datas) {
-                    if (to.product_qty != 0) {
-                        datas2.add(to);
-                    }
-                }
+
                 if (datas.isEmpty()) {
                     Alert.set(0, "Please select item/s");
                     return;
@@ -1119,7 +1114,7 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
                     @Override
                     public void run() {
 
-                        Inventory_replenishments.add_data(replenisment, datas2);
+                        Inventory_replenishments.add_data(replenisment, datas);
                         data_cols_replenishment();
                         Alert.set(1, "Please select item/s");
                         jProgressBar1.setString("Finished...");
