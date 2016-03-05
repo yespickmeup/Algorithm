@@ -1346,6 +1346,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         @Override
         public Object getValueAt(int row, int col) {
             MySales_Items.items tt = (MySales_Items.items) getRow(row);
+            Dlg_inventory_uom.to_uom uoms = uom.default_uom(tt.unit);
             switch (col) {
                 case 0:
                     String html = "<html><body>"
@@ -1355,14 +1356,16 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                             + "</html>";
                     return html;
                 case 1:
-                    return "  " + FitIn.fmt_woc(tt.product_qty);
+
+                    return "  " + FitIn.fmt_woc(tt.product_qty / uoms.conversion);
                 case 2:
-                    Dlg_inventory_uom.to_uom uoms = uom.default_uom(tt.unit);
-                    return " " + uoms.uom;
+                    Dlg_inventory_uom.to_uom uomss = uom.default_uom(tt.unit);
+                    return " " + uomss.uom;
                 case 3:
                     return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 4:
-                    return FitIn.fmt_wc_0((tt.product_qty * tt.selling_price) - tt.discount_amount) + " ";
+
+                    return FitIn.fmt_wc_0(((tt.product_qty / uoms.conversion) * tt.selling_price) - tt.discount_amount) + " ";
                 case 5:
                     return tt.selected;
                 case 6:
@@ -1506,14 +1509,10 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     if (exist == 1) {
                         Label.Status or = (Label.Status) lbl_sales_no;
                         int status = or.getStatus();
-                        if (status == 0) {
-                            status = 1;
-                        } else {
-                            status = 0;
-                        }
+
                         List<MySales_Items.items> orders = tbl_sale_items_ALM;
                         MySales.void_sale(or.getId(), status, orders, my_sale);
-                        if (status == 1) {
+                        if (status == 0) {
                             Show.notification(1, "Transaction Cancelled");
                         } else {
                             Show.notification(1, "Transaction Reverted");
@@ -1610,10 +1609,13 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         List<MySales_Items.items> items = tbl_sale_items_ALM;
         for (MySales_Items.items item : items) {
             if (item.selected == true) {
-                total_qty += item.product_qty;
-                gross += item.product_qty * item.selling_price;
+                Dlg_inventory_uom.to_uom uoms = uom.default_uom(item.unit);
+                total_qty += (item.product_qty / uoms.conversion);
+                gross += (item.product_qty / uoms.conversion) * item.selling_price;
             }
+
         }
+
         if (total_qty <= 0) {
             Alert.set(0, "Please select item/s to be replaced!");
             return;
@@ -1655,6 +1657,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 sale.gross_amount = gross_amount;
                 sale.amount_due = amount_due;
                 sale.line_discount = line_discount;
+
                 S1_sale_item_replacements.item_replacement(sale, items, replacements);
                 lbl_line_discount.setText(FitIn.fmt_wc_0(line_discount));
                 lbl_gross_amount.setText(FitIn.fmt_wc_0(gross_amount));
@@ -1685,6 +1688,13 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_touchscreen_transactions_search.OutputData data) {
                 closeDialog.ok();
                 MySales.sales sale = data.sales;
+                if (sale.status == 1) {
+                    jButton3.setEnabled(false);
+                    jButton4.setEnabled(false);
+                } else {
+                    jButton3.setEnabled(true);
+                    jButton4.setEnabled(true);
+                }
                 my_sale = sale;
                 if (sale.status == 0) {
                     jLabel49.setText("Counted");
@@ -1726,6 +1736,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 lbl_cash.setText(FitIn.fmt_wc_0(cash));
                 String where = "where sales_no='" + sale.sales_no + "' and location_id ='" + sale.location_id + "' ";
                 List<MySales_Items.items> datas = MySales_Items.ret_data(where);
+
                 loadData_sale_items(datas);
 
                 double line_discount = 0;

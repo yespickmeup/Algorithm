@@ -372,7 +372,6 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBox4">
                   <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Search for Non-zero Items"/>
                   </Properties>
                 </Component>

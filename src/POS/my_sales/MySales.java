@@ -9,8 +9,10 @@ import POS.cash_drawer.CashDrawer;
 import POS.cash_drawer.CashDrawer_remittances;
 import POS.customers.Customers;
 import POS.disbursements.S1_disbursements.to_disbursements;
+import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
+import POS.inventory.uom;
 import POS.prepaid_payments.Prepaid_payments.to_prepaid_payments;
 import POS.sales.Sales;
 
@@ -702,7 +704,7 @@ public class MySales {
                         .setString("supplier_name", to_sale_items.supplier_name)
                         .setString("supplier_id", to_sale_items.supplier_id)
                         .setString("serial_no", to_sale_items.serial_no)
-                        .setNumber("product_qty", to_sale_items.product_qty)
+                        .setNumber("product_qty", to_sale_items.product_qty * to_sale_items.conversion)
                         .setString("unit", to_sale_items.unit)
                         .setNumber("conversion", to_sale_items.conversion)
                         .setNumber("selling_price", to_sale_items.selling_price)
@@ -1055,24 +1057,25 @@ public class MySales {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
+
             String s0 = "update sales set "
                     + " status= :status"
                     + " where "
                     + " sales_no ='" + sales_no + "' "
                     + " ";
             s0 = SqlStringUtil.parse(s0)
-                    .setNumber("status", status)
+                    .setNumber("status", 1)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
-
+            
             String s2 = "update sale_items set "
                     + " status= :status"
                     + " where "
                     + " sales_no ='" + sales_no + "' "
                     + " ";
             s2 = SqlStringUtil.parse(s2)
-                    .setNumber("status", status)
+                    .setNumber("status", 1)
                     .ok();
 
             stmt.addBatch(s2);
@@ -1118,18 +1121,22 @@ public class MySales {
             for (MySales_Items.items to_receipt_items : to_receipt_items1) {
                 Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_receipt_items.item_code, to_receipt_items.barcode, to_receipt_items.location_id);
                 double new_qty = 0;
-                if (status == 1) {
-                    new_qty = tt.product_qty + (to_receipt_items.conversion * to_receipt_items.product_qty);
-                }
+
+                Dlg_inventory_uom.to_uom uomss = uom.default_uom(to_receipt_items.unit);
+
                 if (status == 0) {
-                    new_qty = tt.product_qty - (to_receipt_items.conversion * to_receipt_items.product_qty);
+                    new_qty = (tt.product_qty + (to_receipt_items.conversion * (to_receipt_items.product_qty / uomss.conversion)));
+                }
+
+                if (status == 1) {
+                    new_qty = (tt.product_qty - (to_receipt_items.conversion * (to_receipt_items.product_qty / uomss.conversion)));
                 }
                 String new_serial = tt.serial_no + "\n" + to_receipt_items.serial_no;
                 if (tt.serial_no.isEmpty()) {
                     new_serial = to_receipt_items.serial_no;
                 }
                 String s4 = "update inventory_barcodes set "
-                        + "product_qty='" + new_qty + "'"
+                        + " product_qty='" + new_qty + "'"
                         + " where main_barcode= '" + to_receipt_items.item_code + "' and location_id='" + to_receipt_items.location_id + "' "
                         + "";
 

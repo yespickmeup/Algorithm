@@ -338,7 +338,6 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
             }
         });
 
-        jCheckBox4.setSelected(true);
         jCheckBox4.setText("Search for Non-zero Items");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

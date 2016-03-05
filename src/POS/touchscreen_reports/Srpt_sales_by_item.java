@@ -329,7 +329,6 @@ public class Srpt_sales_by_item {
                 String supplier = supplier_name;
                 double price = selling_price;
                 double discount = discount_amount;
-                double amount = (price * product_qty) - discount;
 
                 String uom = unit;
                 String[] list = uom.split(",");
@@ -341,11 +340,15 @@ public class Srpt_sales_by_item {
                     int iii = s.indexOf("^");
                     String uom1 = s.substring(1, i);
                     double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                    product_qty = product_qty / conversion1;
                     double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
                     int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
                     unit = uom1;
                     o++;
                 }
+
+                double amount = (price * product_qty) - discount;
+
                 Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount);
                 fields.add(field);
             }

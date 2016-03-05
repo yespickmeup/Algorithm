@@ -5,8 +5,10 @@
  */
 package POS.sale_item_replacements;
 
+import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
+import POS.inventory.uom;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
 import POS.receipts.S1_receipt_items;
@@ -502,16 +504,21 @@ public class S1_sale_item_replacements {
 
             for (MySales_Items.items to_receipt_items : datas) {
                 if (to_receipt_items.selected == true) {
+
                     Lg.s(S1_receipt_items.class, "Successfully Updated");
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_receipt_items.item_code, to_receipt_items.barcode, to_receipt_items.location_id);
-                    double new_qty = tt.product_qty + (to_receipt_items.conversion * to_receipt_items.product_qty);
+
+                    Dlg_inventory_uom.to_uom uomss = uom.default_uom(to_receipt_items.unit);
+                    System.out.println("Qty: " + tt.product_qty);
+                    System.out.println("Sale Qty: " + to_receipt_items.product_qty);
+                    System.out.println("Sale Conversion: " + uomss.conversion);
+                    double new_qty = tt.product_qty + (to_receipt_items.product_qty);
+
                     String s1 = "update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
                             + " where  main_barcode= '" + to_receipt_items.item_code + "' and location_id='" + to_receipt_items.location_id + "' "
                             + "";
-
                     stmt.addBatch(s1);
-
                     String s2 = "delete from sale_items where id='" + to_receipt_items.id + "' ";
                     stmt.addBatch(s2);
 

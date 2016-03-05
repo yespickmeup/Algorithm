@@ -3959,16 +3959,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             String sub_classification = to.sub_classification;
             String sub_classification_id = to.sub_classification_id;
             double product_qty = FitIn.toDouble(lbl_qty.getText());
-            if (product_qty <= 0) {
-                product_qty = 1;
-            }
             int row2 = tbl_uom.getSelectedRow();
             if (row2 < 0) {
                 return;
             }
             to_uom uom = (to_uom) tbl_uom_ALM.get(row2);
+            double conversion = uom.conversion;
             String unit = "[" + uom.unit + ":" + uom.price + "/" + uom.conversion + "^" + "1" + "]";
-            double conversion = to.conversion;
+            if (product_qty <= 0) {
+                product_qty = 1;
+            }
             double selling_price = uom.price;
             String date_added = DateType.now();
             String user_name = "";
@@ -4025,9 +4025,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             double addtl_cash = FitIn.toDouble(tf_addtl_cash.getText());
             double wtax = FitIn.toDouble(tf_wtax.getText());
             double product_qty = FitIn.toDouble(lbl_qty.getText());
+
+            product_qty = FitIn.toDouble(lbl_qty.getText());
             if (product_qty <= 0) {
                 product_qty = 1;
             }
+
             to.setProduct_qty(product_qty);
             double discount = lbl.getDiscount_rate();
             to.setDiscount(discount);

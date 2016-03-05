@@ -626,7 +626,7 @@ public class Dlg_sale_item_replacements extends javax.swing.JDialog {
 
                 String unit = "[" + data.item.unit + ":" + data.item.price + "/" + data.item.conversion + "^" + "1" + "]";
                 double conversion = data.item.conversion;
-                double selling_price = item.selling_price;
+                double selling_price = data.item.price;
                 String date_added = "";
                 String user_id = MyUser.getUser_id();
                 String user_screen_name = MyUser.getUser_screen_name();
