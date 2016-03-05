@@ -1357,15 +1357,15 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     return html;
                 case 1:
 
-                    return "  " + FitIn.fmt_woc(tt.product_qty / uoms.conversion);
+                    return "  " + FitIn.fmt_woc((tt.product_qty / tt.conversion) );
                 case 2:
                     Dlg_inventory_uom.to_uom uomss = uom.default_uom(tt.unit);
                     return " " + uomss.uom;
                 case 3:
-                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                    return " " + FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 4:
 
-                    return FitIn.fmt_wc_0(((tt.product_qty / uoms.conversion) * tt.selling_price) - tt.discount_amount) + " ";
+                    return " " + FitIn.fmt_woc(((tt.product_qty / tt.conversion) * uoms.selling_price) - tt.discount_amount) + " ";
                 case 5:
                     return tt.selected;
                 case 6:
@@ -1641,7 +1641,6 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     line_discount += rep.discount_amount;
                     qty += rep.product_qty;
                 }
-
                 for (MySales_Items.items item : items) {
                     if (item.selected == false) {
                         gross_amount += item.product_qty * item.selling_price;
@@ -1649,11 +1648,9 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                         qty += item.product_qty;
                     }
                 }
-
                 amount_due = gross_amount - line_discount;
                 double sale_discount = FitIn.toDouble(lbl_sale_discount.getText());
                 amount_due = amount_due - sale_discount;
-
                 sale.gross_amount = gross_amount;
                 sale.amount_due = amount_due;
                 sale.line_discount = line_discount;
