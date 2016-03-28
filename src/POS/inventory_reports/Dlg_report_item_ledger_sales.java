@@ -5,7 +5,7 @@
  */
 package POS.inventory_reports;
 
-import POS.delivery.Srpt_delivery;
+import POS.bir.Delivery_receipt;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
@@ -575,7 +575,7 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
                         List<MySales_Items.items> datas = MySales_Items.ret_data(where);
                         loadData_sale_items(datas);
 
-                        List<Srpt_delivery.field> fields = new ArrayList();
+                        List<Delivery_receipt.field> fields = new ArrayList();
                         for (MySales_Items.items to : datas) {
                             double qty = to.product_qty;
                             String item_code = to.item_code;
@@ -597,7 +597,7 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
                             double wtax = my_wtax;
                             double gross_total = to.product_qty * to.selling_price;
                             double net_total = tots + wtax;
-                            Srpt_delivery.field field = new Srpt_delivery.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax
+                            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax
                                     , gross_total, net_total,to.serial_no);
                             fields.add(field);
                         }
@@ -762,7 +762,7 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
     }
 //</editor-fold> 
 
-    private void init_report(final List<Srpt_delivery.field> fields, final double sale_discount, final double net_total, final MySales.sales sales) {
+    private void init_report(final List<Delivery_receipt.field> fields, final double sale_discount, final double net_total, final MySales.sales sales) {
 
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
         String address = System.getProperty("address", "Daro, national Highway, Dumaguete City");
@@ -776,11 +776,11 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
         String approved_by = "";
         String customer_name = sales.customer_name;
         String customer_address = "";
-        Srpt_delivery rpt = new Srpt_delivery(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
+        Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_delivery_receipt.jrxml";
 
-        InputStream is = Srpt_delivery.class.getResourceAsStream(jrxml);
+        InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
         try {
             JasperReport jasperReport = JasperCompileManager.compileReport(is);
             jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.

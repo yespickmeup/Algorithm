@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.delivery;
+package POS.bir;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author Guinness
  */
-public class Srpt_delivery {
+public class Delivery_receipt {
 
-    public final List<Srpt_delivery.field> fields;
+    public final List<Delivery_receipt.field> fields;
     public final String business_name;
     public final String address;
     public final String contact_no;
@@ -36,7 +36,7 @@ public class Srpt_delivery {
     public final String customer_name;
     public final String customer_address;
 
-    public Srpt_delivery(String business_name, String address, String contact_no, String transaction_no, String date, String remarks, String prepared_by, String approved_by, double sale_discount, double net_total, String customer_name, String customer_address) {
+    public Delivery_receipt(String business_name, String address, String contact_no, String transaction_no, String date, String remarks, String prepared_by, String approved_by, double sale_discount, double net_total, String customer_name, String customer_address) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -85,6 +85,7 @@ public class Srpt_delivery {
             this.serial_nos=serial_nos;
         }
 
+        
         public String getSerial_nos() {
             return serial_nos;
         }
@@ -185,7 +186,7 @@ public class Srpt_delivery {
 
     public static void main(String[] args) {
 
-        List<Srpt_delivery.field> fields = new ArrayList();
+        List<Delivery_receipt.field> fields = new ArrayList();
         for (int i = 0; i < 10; i++) {
             double qty = i;
             String item_code = "11111" + i;
@@ -199,7 +200,7 @@ public class Srpt_delivery {
             double gross_total = 1000;
             double net_total = 301000;
             String serial_nos="";
-            Srpt_delivery.field field = new field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total,serial_nos);
+            Delivery_receipt.field field = new field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total,serial_nos);
             fields.add(field);
         }
 
@@ -217,7 +218,7 @@ public class Srpt_delivery {
         double net_total = 1000;
         String customer_name = "";
         String customer_address = "";
-        Srpt_delivery rpt = new Srpt_delivery(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
+        Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_delivery_receipt.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -229,7 +230,7 @@ public class Srpt_delivery {
     public static JasperReport compileJasper(String jrxml) {
         try {
 
-            InputStream is = Srpt_delivery.class.getResourceAsStream(jrxml);
+            InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
 
             return jasper;
@@ -238,7 +239,7 @@ public class Srpt_delivery {
         }
     }
 
-    public static JRViewer get_viewer(Srpt_delivery to, String jrxml) {
+    public static JRViewer get_viewer(Delivery_receipt to, String jrxml) {
 
         return JasperUtil.getJasperViewer(
                 compileJasper(jrxml),

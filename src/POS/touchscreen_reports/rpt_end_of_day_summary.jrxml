@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="518" leftMargin="57" rightMargin="20" topMargin="36" bottomMargin="20" uuid="8a962fc5-b306-4eea-9b5c-42152c576d68">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="314"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="business_name" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="contact_no" class="java.lang.String"/>
@@ -76,23 +76,10 @@
 	<title>
 		<band height="450" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="0" width="518" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[ALGORITHM COMPUTER SERVICES]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="19" width="518" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[260 North Natianal Highway]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="33" width="518" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Daro, Dumaguete City]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="62" width="518" height="15"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="55" width="518" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[End of Day Summary]]></text>
 			</staticText>
 			<staticText>
@@ -608,9 +595,23 @@
 				<textFieldExpression><![CDATA[$P{total_cc_payments}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="48" width="518" height="14"/>
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="41" width="518" height="14"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="0" width="518" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="16" width="518" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

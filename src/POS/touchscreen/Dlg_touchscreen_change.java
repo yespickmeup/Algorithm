@@ -5,6 +5,7 @@
  */
 package POS.touchscreen;
 
+import POS.bir.Official_receipt;
 import POS.delivery.Dlg_delivery_print_preview;
 import POS.inventory.Inventory_barcodes;
 import POS.my_sales.MySales;
@@ -214,10 +215,9 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new Label.Separator2();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_change = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbl_gross_amount = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -297,7 +297,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/printer67.png"))); // NOI18N
-        jButton2.setText("OR");
+        jButton2.setText("Print");
         jButton2.setContentAreaFilled(false);
         jButton2.setFocusable(false);
         jButton2.setOpaque(true);
@@ -314,18 +314,6 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jButton3.setFocusable(false);
         jButton3.setOpaque(true);
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/delivery23 (1).png"))); // NOI18N
-        jButton4.setText("DR");
-        jButton4.setContentAreaFilled(false);
-        jButton4.setFocusable(false);
-        jButton4.setOpaque(true);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -333,15 +321,12 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,11 +336,11 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(246, 246, 246));
 
-        jLabel3.setBackground(new java.awt.Color(4, 176, 217));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("P 1,000.00 ");
-        jLabel3.setOpaque(true);
+        lbl_change.setBackground(new java.awt.Color(4, 176, 217));
+        lbl_change.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lbl_change.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_change.setText("P 1,000.00 ");
+        lbl_change.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Gross Total:");
@@ -551,7 +536,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbl_change, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -786,7 +771,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                     .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(lbl_tendered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbl_change, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -858,24 +843,8 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         ok();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        preview_dr();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String print = System.getProperty("print_to_receipts", "false");
-        System.out.println("Print to Receipts: " + print);
-        if (print.equalsIgnoreCase("true")) {
-            try {
-                if (jasperPrint != null) {
-                    JasperPrintManager.printReport(jasperPrint, false);
-                }
-
-            } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
-                throw new RuntimeException(e);
-            }
-        }
+        receipt_type();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -886,7 +855,6 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -899,7 +867,6 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -925,6 +892,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_balance_due;
     private javax.swing.JLabel lbl_cash;
     private javax.swing.JLabel lbl_chage_reference;
+    private javax.swing.JLabel lbl_change;
     private javax.swing.JLabel lbl_charge_amount;
     private javax.swing.JLabel lbl_charge_amount1;
     private javax.swing.JLabel lbl_charge_amount2;
@@ -977,7 +945,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                
+
                 lbl_gross_amount1.setText(sales.sales_no);
                 lbl_gross_amount.setText(FitIn.fmt_wc_0(gross_amount));
                 lbl_line_discount.setText(FitIn.fmt_wc_0(line_discount));
@@ -1008,7 +976,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
                 double tendered = Payments.cash.cash + Payments.credit_card.amount + Payments.gift_certificate.amount + Payments.prepaid.amount + Payments.cheque.amount + Payments.charge.amount;
                 lbl_tendered.setText(FitIn.fmt_wc_0(tendered));
-                jLabel3.setText("P " + FitIn.fmt_wc_0(Payments.countChange2()) + " ");
+                lbl_change.setText("P " + FitIn.fmt_wc_0(Payments.countChange2()) + " ");
 
                 double am = FitIn.toDouble(lbl_balance_due.getText());
                 double t_vat_sales = (am / 1.12) * .12;
@@ -1018,103 +986,214 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
                 lbl_charge_amount3.setText(FitIn.fmt_wc_0(sales.addtl_amount));
                 lbl_charge_amount4.setText(FitIn.fmt_wc_0(sales.wtax));
-
-                List<Srpt_receipt.field> fields = new ArrayList();
-                int total_qty = 0;
-                double vatable_sale = 0;
-                double zero_rate_sale = 0;
-                double vat_exempt_sale = 0;
-                double vat_percent = 0;
-                for (Inventory_barcodes.to_inventory_barcodes to : orders) {
-                    String desc = to.description;
-                    Date date_added = new Date();
-                    double total = (to.product_qty * to.selling_price) - to.discount_amount;
-                    double qty = to.product_qty;
-                    double selling_price = to.selling_price;
-                    double discount = to.discount_amount;
-                    Srpt_receipt.field tbar = new Srpt_receipt.field(desc, date_added, total, qty, selling_price, discount);
-                    fields.add(tbar);
-
-                    total_qty += to.product_qty;
+                String print = System.getProperty("print_to_receipts", "false");
+                System.out.println("Print to Receipts: " + print);
+                if (print.equalsIgnoreCase("true")) {
+                    print_or();
                 }
-                vatable_sale = sales.amount_due / 1.12;
-                vat_percent = vatable_sale * .12;
-
-                String business_name = System.getProperty("business_name", "Fortune Tree Enterprises");
-                String operated_by = System.getProperty("operated_by", "Ernesto C.QUiamco");
-                String address = System.getProperty("address", "Door 2, H & J Ong bldg, Corner Colon & Sta Catalina Street Dumaguete City");
-                String tin_no = System.getProperty("tin_no", "TIN No.: 000000");
-                String serial_no = System.getProperty("serial_no", "Serial No.: 000000");
-                String permit_no = System.getProperty("permit_no", "Permit No.: 000000");
-                String datetime = DateType.slash_w_time.format(new Date());
-                String or_no = lbl_gross_amount1.getText();
-                String items = System.getProperty("items", "");
-
-                double total_due = sales.amount_due;
-                double cash = FitIn.toDouble(lbl_cash.getText());
-                double change_due = Payments.countChange2();
-                String receipt_infos = System.getProperty("receipt_infos", "");
-                String receipt_footer = System.getProperty("receipt_footer", "This is an Official receipt");
-                double discount = FitIn.toDouble(lbl_sale_discount.getText());
-                String customer_name = sales.customer_name;
-                String cashier_name = MyUser.getUser_screen_name();
-                String discount_name = sales.discount_customer_name;
-                String pos_no = "";
-
-                String accreditation_no = System.getProperty("acct_no", "Accreditation No.: 000000");
-                String trans_no = lbl_gross_amount1.getText();
-                String check_bank = sales.check_bank;
-                double check_amount = sales.check_amount;
-                String telephone_number = "please call:" + System.getProperty("telephone_number", "0000-000-0000");
-                String discount_customer_name = sales.discount_customer_name;
-                String discount_customer_id = sales.discount_customer_id;
-                String min_no = System.getProperty("min_no", "MIN No.: 000000");
-                double addtl_service = 0;
-                String customer_address = "";
-                double amount_due = sales.gross_amount;
-                double line_discount = sales.line_discount;
-                double credit_card = sales.credit_card_amount;
-                double gift_certificate = sales.gift_certificate_amount;
-                double prepaid = sales.prepaid_amount;
-                double charge_amount = sales.charge_amount;
-                Srpt_receipt rpt = new Srpt_receipt(business_name, operated_by, address, tin_no, serial_no, permit_no, datetime, or_no, items, total_due, cash
-                        , change_due, receipt_infos, receipt_footer, discount, customer_name, cashier_name, discount_name, pos_no, total_qty, vatable_sale
-                        , zero_rate_sale, vat_exempt_sale, vat_percent, accreditation_no, trans_no, check_bank, check_amount, telephone_number, discount_customer_name
-                        , discount_customer_id, min_no, addtl_service, customer_address, "", amount_due, "", line_discount, credit_card, gift_certificate, prepaid, charge_amount);
-                rpt.fields.addAll(fields);
-                String jrxml = "rpt_receipt.jrxml";
-                InputStream is = Srpt_receipt.class.getResourceAsStream(jrxml);
-                try {
-                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
-                    jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
-
-                    String print = System.getProperty("print_to_receipts", "false");
-                    System.out.println("Print to Receipts: " + print);
-                    if (print.equalsIgnoreCase("true")) {
-                        try {
-                            if (jasperPrint != null) {
-                                JasperPrintManager.printReport(jasperPrint, false);
-                            }
-
-                        } catch (JRException e) {
-                            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
-                            throw new RuntimeException(e);
-                        }
-                    }
-
-                } catch (JRException ex) {
-                    Logger.getLogger(Dlg_report_items.class.getName()).
-                            log(Level.SEVERE, null, ex);
-                }
-
+//                List<Srpt_receipt.field> fields = new ArrayList();
+//                int total_qty = 0;
+//                double vatable_sale = 0;
+//                double zero_rate_sale = 0;
+//                double vat_exempt_sale = 0;
+//                double vat_percent = 0;
+//                for (Inventory_barcodes.to_inventory_barcodes to : orders) {
+//                    String desc = to.description;
+//                    Date date_added = new Date();
+//                    double total = (to.product_qty * to.selling_price) - to.discount_amount;
+//                    double qty = to.product_qty;
+//                    double selling_price = to.selling_price;
+//                    double discount = to.discount_amount;
+//                    Srpt_receipt.field tbar = new Srpt_receipt.field(desc, date_added, total, qty, selling_price, discount);
+//                    fields.add(tbar);
+//
+//                    total_qty += to.product_qty;
+//                }
+//                vatable_sale = sales.amount_due / 1.12;
+//                vat_percent = vatable_sale * .12;
+//                String business_name = System.getProperty("business_name", "Fortune Tree Enterprises");
+//                String operated_by = System.getProperty("operated_by", "Ernesto C.QUiamco");
+//                String address = System.getProperty("address", "Door 2, H & J Ong bldg, Corner Colon & Sta Catalina Street Dumaguete City");
+//                String tin_no = System.getProperty("tin_no", "TIN No.: 000000");
+//                String serial_no = System.getProperty("serial_no", "Serial No.: 000000");
+//                String permit_no = System.getProperty("permit_no", "Permit No.: 000000");
+//                String datetime = DateType.slash_w_time.format(new Date());
+//                String or_no = lbl_gross_amount1.getText();
+//                String items = System.getProperty("items", "");
+//                double total_due = sales.amount_due;
+//                double cash = FitIn.toDouble(lbl_cash.getText());
+//                double change_due = Payments.countChange2();
+//                String receipt_infos = System.getProperty("receipt_infos", "");
+//                String receipt_footer = System.getProperty("receipt_footer", "This is an Official receipt");
+//                double discount = FitIn.toDouble(lbl_sale_discount.getText());
+//                String customer_name = sales.customer_name;
+//                String cashier_name = MyUser.getUser_screen_name();
+//                String discount_name = sales.discount_customer_name;
+//                String pos_no = "";
+//                String accreditation_no = System.getProperty("acct_no", "Accreditation No.: 000000");
+//                String trans_no = lbl_gross_amount1.getText();
+//                String check_bank = sales.check_bank;
+//                double check_amount = sales.check_amount;
+//                String telephone_number = "please call:" + System.getProperty("telephone_number", "0000-000-0000");
+//                String discount_customer_name = sales.discount_customer_name;
+//                String discount_customer_id = sales.discount_customer_id;
+//                String min_no = System.getProperty("min_no", "MIN No.: 000000");
+//                double addtl_service = 0;
+//                String customer_address = "";
+//                double amount_due = sales.gross_amount;
+//                double line_discount = sales.line_discount;
+//                double credit_card = sales.credit_card_amount;
+//                double gift_certificate = sales.gift_certificate_amount;
+//                double prepaid = sales.prepaid_amount;
+//                double charge_amount = sales.charge_amount;
+//
+//                Srpt_receipt rpt = new Srpt_receipt(business_name, operated_by, address, tin_no, serial_no, permit_no, datetime, or_no, items, total_due, cash, change_due, receipt_infos, receipt_footer, discount, customer_name, cashier_name, discount_name, pos_no, total_qty, vatable_sale, zero_rate_sale, vat_exempt_sale, vat_percent, accreditation_no, trans_no, check_bank, check_amount, telephone_number, discount_customer_name, discount_customer_id, min_no, addtl_service, customer_address, "", amount_due, "", line_discount, credit_card, gift_certificate, prepaid, charge_amount);
+//                rpt.fields.addAll(fields);
+//                String jrxml = "rpt_receipt.jrxml";
+//                InputStream is = Srpt_receipt.class.getResourceAsStream(jrxml);
+//                try {
+//                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
+//                    jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+//                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+//
+//                    String print = System.getProperty("print_to_receipts", "false");
+//                    System.out.println("Print to Receipts: " + print);
+//                    if (print.equalsIgnoreCase("true")) {
+//                        try {
+//                            if (jasperPrint != null) {
+//                                JasperPrintManager.printReport(jasperPrint, false);
+//                            }
+//                        } catch (JRException e) {
+//                            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+//                            throw new RuntimeException(e);
+//                        }
+//                    }
+//                } catch (JRException ex) {
+//                    Logger.getLogger(Dlg_report_items.class.getName()).
+//                            log(Level.SEVERE, null, ex);
+//                }
             }
         });
 
     }
 
     private void print_or() {
+        List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
+        double sale_discount1 = FitIn.toDouble(lbl_sale_discount.getText());
+        double net_total = FitIn.toDouble(lbl_balance_due.getText());
+        double cash_amount = FitIn.toDouble(lbl_cash.getText());
+        double change_amount = FitIn.toDouble(lbl_change.getText());
 
+        String business_name = System.getProperty("business_name", "XYZ Marketing");
+        String operated_by = "Operated by: " + System.getProperty("operated_by", "Juan dela Cruz");
+        String address = System.getProperty("address", "Canlas Subdivision, Lower Bagacay, Dumaguete City, Negros Oriental");
+        String tin_no = "TIN NO: " + System.getProperty("tin_no", "0000000000");
+        String machine_no = System.getProperty("machine_no", "0000000000");
+        String min_no = "MIN NO: " + System.getProperty("min_no", "0000000000");
+        String serial_no = "Serial No.: " + System.getProperty("serial_no", "0000000000");
+        String permit_no = "Permit No.: " + System.getProperty("permit_no", "0000000000");
+        String pos_no = System.getProperty("pos_no", "0000000000");
+        String accreditation_no = System.getProperty("accreditation_no", "0000000000");
+        String business_type = System.getProperty("business_type", "VAT REG");
+        String vat_percent = System.getProperty("vat_percent", "12");
+        String sales_date = "Date: " + DateType.day_and_time.format(new Date());//+ System.getProperty("sales_date", "mm/dd/yy HH:MM:ss aa");
+        String terminal_no = "Terminal No.: " + System.getProperty("terminal_no", "0001");
+        String cashier = "Cashier: " + MyUser.getUser_screen_name();
+        String customer_name = "Customer: " + my_sales.customer_name;
+        String customer_address = "Address: ";
+        String customer_id_no = "ID/TIN No.: ";
+
+        double sub_total = net_total;
+        double line_discount = my_sales.line_discount;
+        double sale_discount = sale_discount1;
+        double amount_due = my_sales.amount_due;
+        double cash = cash_amount;
+        String credit_card_type = my_sales.credit_card_type;
+        double credit_card_rate = my_sales.credit_card_rate;
+        double credit_card_amount = my_sales.credit_card_amount;
+        String credit_card_no = my_sales.credit_card_no;
+        String credit_card_holder = my_sales.credit_card_holder;
+        String credit_card_approval_code = my_sales.credit_card_approval_code;
+        String gift_certificate_from = my_sales.gift_certificate_from;
+        String gift_certificate_description = my_sales.gift_certificate_description;
+        String gift_certificate_no = my_sales.gift_certificate_no;
+        double gift_certificate_amount = my_sales.gift_certificate_amount;
+        String prepaid_customer_name = my_sales.prepaid_customer_name;
+        String prepaid_customer_id = my_sales.prepaid_customer_id;
+        double prepaid_amount = my_sales.prepaid_amount;
+        String cheque_holder = my_sales.check_holder;
+        String cheque_bank = my_sales.check_bank;
+        String cheque_no = my_sales.check_no;
+        String cheque_date = my_sales.check_date;
+        double cheque_amount = my_sales.check_amount;
+        String charge_type = my_sales.charge_type;
+        String charge_reference_no = my_sales.charge_reference_no;
+        String charge_customer_name = my_sales.charge_customer_name;
+        String charge_customer_no = my_sales.charge_customer_id;
+        double charge_amount = my_sales.charge_amount;
+
+        double total_items = 0;
+        double vatable_sales = 0;
+        double vatable_exempt_sales = 0;
+        double zero_rated_sales = 0;
+        double vat = 0;
+        double vat_percent1 = 0;
+        double change = change_amount;
+
+        String or_no = "OR No.: " + my_sales.sales_no;
+        String receipt_footer = System.getProperty("receipt_footer", "THIS INVOICE/RECEIPT SHALL BE VALID FOR FIVE(5) YEARS FROM THE DATE OF THE PERMIT TO USE\nTHIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAX");
+        String supplier_name = "Supplier: " + System.getProperty("developer", "Synapse Software Technologies");
+        String supplier_address = System.getProperty("developer_address", "Daro, Dumaguete City, Negros Oriental");
+        String supplier_tin_no = "TIN No.: " + System.getProperty("developer_tin_no", "0000000000");
+        String supplier_accreditation_no = "Accreditation No.: " + System.getProperty("developer_accreditation_no", "0000000000");
+        String supplier_accreditation_date = "Accreditation Date: " + System.getProperty("developer_accreditation_date", "mm/dd/yyyy");
+        String bir_permit_to_use_no = "PTU No.: " + System.getProperty("bir_permit_to_use_no", "0000000000");
+        List<Official_receipt.field> fields = new ArrayList();
+
+        for (Inventory_barcodes.to_inventory_barcodes field : orders) {
+            String item_code = field.main_barcode;
+            String barcode = field.barcode;
+            String description = field.description;
+            String unit = field.unit;
+            double qty = field.product_qty;
+            double selling_price = field.selling_price;
+            double line_discount1 = field.discount_amount;
+            double amount = ((qty * selling_price));
+            String vatable = "V";
+            double addt_amount = field.addtl_amount;
+            double wtax = field.wtax;
+            String serial_nos = field.selected_serials;
+            double net_total2 = amount - line_discount1;
+            Official_receipt.field f = new Official_receipt.field(item_code, barcode, description, unit, qty, selling_price, line_discount, amount, vatable, addt_amount, wtax, serial_nos, net_total2);
+            fields.add(f);
+
+            total_items += field.product_qty;
+        }
+        vatable_sales = my_sales.amount_due / 1.12;
+        vat_percent1 = vatable_sales * .12;
+        vat = vat_percent1;
+        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
+        rpt.fields.addAll(fields);
+        String jrxml = "rpt_official_receipt.jrxml";
+        InputStream is = Official_receipt.class.getResourceAsStream(jrxml);
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(is);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                    setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+            try {
+                if (jasperPrint != null) {
+                    JasperPrintManager.printReport(jasperPrint, false);
+                }
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+                throw new RuntimeException(e);
+            }
+
+        } catch (JRException ex) {
+            Logger.getLogger(Dlg_report_items.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
     }
     JasperPrint jasperPrint = null;
 
@@ -1154,21 +1233,19 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     // </editor-fold>
 
     private void hover() {
-        JButton[] btns = {jButton1, jButton2, jButton3, jButton4};
-        final String[] txts = {"Next Customer!", "Print Receipt", "Keep the Change", "Print DR"};
+        JButton[] btns = {jButton1, jButton2, jButton3};
+        final String[] txts = {"Next Customer!", "Print Receipt", "Keep the Change"};
         int i = 0;
         for (final JButton btn : btns) {
             final int ii = i;
             btn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     btn.setBackground(new java.awt.Color(4, 176, 217));
-
                 }
 
                 @Override
@@ -1315,6 +1392,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         List<Inventory_barcodes.to_inventory_barcodes> datas = tbl_orders_ALM;
         double sale_discount = FitIn.toDouble(lbl_sale_discount.getText());
         double net_total = FitIn.toDouble(lbl_balance_due.getText());
+        double cash = FitIn.toDouble(lbl_cash.getText());
         Window p = (Window) this;
         Dlg_delivery_print_preview nd = Dlg_delivery_print_preview.create(p, true);
         nd.setTitle("");
@@ -1323,6 +1401,28 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_delivery_print_preview.OutputData data) {
                 closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void receipt_type() {
+        List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
+        double sale_discount = FitIn.toDouble(lbl_sale_discount.getText());
+        double net_total = FitIn.toDouble(lbl_balance_due.getText());
+        double cash_amount = FitIn.toDouble(lbl_cash.getText());
+        double change_amount = FitIn.toDouble(lbl_change.getText());
+        Window p = (Window) this;
+        Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(orders, sale_discount, net_total, my_sales, cash_amount, change_amount);
+        nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_choose_receipt_type.OutputData data) {
+                closeDialog.ok();
+
             }
         });
         nd.setLocationRelativeTo(this);

@@ -13,6 +13,7 @@ import POS.adjuster.Dlg_adjuster_inventory;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
+import POS.bir.Dlg_reading;
 import POS.borrower_slip.Dlg_borrower_slip;
 import POS.branch_locations.Dlg_branch_locations;
 import POS.branch_locations.S1_branch_locations;
@@ -1874,7 +1875,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
                 Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/POS/img_menu/synapse.png"));
                 aw.setIconImage(image);
-                
+
                 String url = "/POS/img/5.png";
                 Toolkit tk = Toolkit.getDefaultToolkit();
                 int xSize = ((int) tk.getScreenSize().
@@ -1990,9 +1991,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         Main.MyDB.setNames("db_algorithm");
         String business_name = System.getProperty("business_name", "Synapse Software Technologies");
         jLabel7.setText(business_name);
-       
+
         Border empty = new EmptyBorder(0, 5, 0, 0);
-        CompoundBorder border = javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(16,88,197), 1, false), empty);
+        CompoundBorder border = javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(16, 88, 197), 1, false), empty);
         jLabel7.setBorder(border);
 
         time();
@@ -2052,11 +2053,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 Dlg_Main_branch_query_updates nd = Dlg_Main_branch_query_updates.create(p, true);
                 nd.setTitle("");
                 nd.setCallback(new Dlg_Main_branch_query_updates.Callback() {
-
                     @Override
                     public void ok(CloseDialog closeDialog, Dlg_Main_branch_query_updates.OutputData data) {
                         closeDialog.ok();
-
                     }
                 });
                 nd.setLocationRelativeTo(this);
@@ -2885,15 +2884,17 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     }
 
-    private void exit() {
-
+    private void r_bir() {
+        Dlg_reading dtc = new Dlg_reading();
+        MyFrame.set(dtc.getSurface(), jPanel1, "BIR X&Y Reading");
     }
 
+    private void exit() {
+    }
     private void run_script() {
         jButton1.setEnabled(false);
         jButton1.setText("Script is running....");
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 Src_item_ledger.run();
@@ -3102,14 +3103,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 if (data.stmt.equals("Inventory Count Sheet")) {
                     r_print_inventory_count();
-
                 }
 
                 if (data.stmt.equals("AR Items")) {
                     r_ar_items();
                 }
-                if (data.stmt.equals("")) {
-
+                if (data.stmt.equals("BIR")) {
+                    r_bir();
                 }
 
                 if (data.stmt.equals("")) {

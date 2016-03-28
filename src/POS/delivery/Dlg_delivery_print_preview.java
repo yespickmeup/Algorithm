@@ -5,6 +5,7 @@
  */
 package POS.delivery;
 
+import POS.bir.Delivery_receipt;
 import POS.charge_in_advance.Charge_in_advance_items;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
@@ -362,7 +363,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
 
     public void do_pass(List<Inventory_barcodes.to_inventory_barcodes> datas, double sale_discount, double net_totals, MySales.sales sales) {
 
-        List<Srpt_delivery.field> fields = new ArrayList();
+        List<Delivery_receipt.field> fields = new ArrayList();
         for (Inventory_barcodes.to_inventory_barcodes to : datas) {
             double qty = to.product_qty;
             String item_code = to.main_barcode;
@@ -385,7 +386,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
             double gross_total = to.product_qty * to.selling_price;
             double net_total = tots + wtax;
              String serial_no=to.serial_no.replaceAll("\n", ", ");
-            Srpt_delivery.field field = new Srpt_delivery.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total
+            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total
                     ,serial_no);
             fields.add(field);
         }
@@ -395,7 +396,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
 
     public void do_pass2(List<MySales_Items.items> datas, double sale_discount, double net_totals, MySales.sales sales) {
 
-        List<Srpt_delivery.field> fields = new ArrayList();
+        List<Delivery_receipt.field> fields = new ArrayList();
         for (MySales_Items.items to : datas) {
             double qty = to.product_qty;
             String item_code = to.item_code;
@@ -419,7 +420,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
             double gross_total = to.product_qty * to.selling_price;
             double net_total = tots + wtax;
             String serial_no=to.serial_no.replaceAll("\n", ", ");
-            Srpt_delivery.field field = new Srpt_delivery.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total
+            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total
                     , net_total,serial_no);
             fields.add(field);
         }
@@ -429,7 +430,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
 
     public void do_pass3(List<Charge_in_advance_items.to_charge_in_advance_items> datas, double sale_discount
         ,double net_totals, String sales_no,String date_added,String remarkss,String customer_names) {
-        List<Srpt_delivery.field> fields = new ArrayList();      
+        List<Delivery_receipt.field> fields = new ArrayList();      
         for (Charge_in_advance_items.to_charge_in_advance_items to : datas) {
             double qty = to.product_qty;
             String item_code = to.item_code;
@@ -452,7 +453,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
             double net_total = tots + wtax;
             net_totals+=net_total;
              String serial_no=to.serial_no.replaceAll("\n", ", ");
-            Srpt_delivery.field field = new Srpt_delivery.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total
+            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total
                     , net_total,serial_no);
             fields.add(field);
         }
@@ -478,7 +479,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    private void init_report(final List<Srpt_delivery.field> fields, final double sale_discount, final double net_total, final MySales.sales sales) {
+    private void init_report(final List<Delivery_receipt.field> fields, final double sale_discount, final double net_total, final MySales.sales sales) {
 
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
@@ -500,12 +501,12 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
                 String approved_by = "";
                 String customer_name = sales.customer_name;
                 String customer_address = "";
-                Srpt_delivery rpt = new Srpt_delivery(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total
+                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total
                         , customer_name, customer_address);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
                 report_sales_items(rpt, jrxml);
-                InputStream is = Srpt_delivery.class.getResourceAsStream(jrxml);
+                InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
@@ -523,7 +524,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
 
     }
 
-    private void init_report2(final List<Srpt_delivery.field> fields, final double sale_discount, final double net_total, final String sales_no, final String date_added, final String remarkss, final String customer_names) {
+    private void init_report2(final List<Delivery_receipt.field> fields, final double sale_discount, final double net_total, final String sales_no, final String date_added, final String remarkss, final String customer_names) {
 
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
@@ -545,12 +546,12 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
                 String approved_by = "";
                 String customer_name = customer_names;
                 String customer_address = "";
-                Srpt_delivery rpt = new Srpt_delivery(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total
+                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total
                         , customer_name, customer_address);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
                 report_sales_items(rpt, jrxml);
-                InputStream is = Srpt_delivery.class.getResourceAsStream(jrxml);
+                InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
@@ -568,7 +569,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
 
     }
 
-    private void report_sales_items(final Srpt_delivery to, String jrxml_name) {
+    private void report_sales_items(final Delivery_receipt to, String jrxml_name) {
         pnl_report.removeAll();
         pnl_report.setLayout(new BorderLayout());
         try {
@@ -585,7 +586,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
         }
     }
 
-    public static JRViewer get_viewer_expenses(Srpt_delivery to, String rpt_name) {
+    public static JRViewer get_viewer_expenses(Delivery_receipt to, String rpt_name) {
         try {
             return JasperUtil.getJasperViewer(
                     compileJasper(rpt_name),
@@ -600,7 +601,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
     public static JasperReport compileJasper(String rpt_name) {
         try {
             String jrxml = rpt_name;
-            InputStream is = Srpt_delivery.class.getResourceAsStream(jrxml);
+            InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
             return jasper;
         } catch (JRException e) {

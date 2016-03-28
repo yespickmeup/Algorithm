@@ -890,7 +890,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 total_check_payments = check_cash_sales + check_collections + check_prepayments;
                 total_cc_payments = cc_cash_sales + cc_collections + cc_prepayments;
                 String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "retail_res\\rpt2\\";
-                
+                String business_name=System.getProperty("business_name", "");
+                String address=System.getProperty("address","");
+                        
               
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount
                         , receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred
@@ -900,7 +902,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         , count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five
                         , count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR
                         , my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments
-                        , total_check_payments, total_cc_payments,date2);
+                        , total_check_payments, total_cc_payments,date,business_name,address);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_sales_summary.jrxml");

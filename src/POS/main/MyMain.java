@@ -8,7 +8,6 @@ package POS.main;
 import POS.pnl.Pnl_Dashboard;
 import POS.settings.Dlg_settings;
 import POS.util.Center;
-import POS.util.DeEncrypter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -52,6 +51,13 @@ public class MyMain {
             }
 
             Date time = new Date(System.currentTimeMillis());
+
+            System.setProperty("print_to_receipts", prop.getProperty("print_to_receipts", "false"));
+            System.setProperty("print_to_receipts2", prop.getProperty("print_to_receipts2", "false"));
+            System.setProperty("receipt_printer_show_dialog", prop.getProperty("receipt_printer_show_dialog", "false"));
+
+            System.setProperty("is_main_server", prop.getProperty("is_main_server", "true"));
+            System.setProperty("unit_type", prop.getProperty("unit_type", "main_branch_server"));
 
             System.setProperty("business_name", prop.getProperty("business_name", ""));
             System.setProperty("address", prop.getProperty("address", ""));
@@ -104,7 +110,7 @@ public class MyMain {
             System.setProperty("img_path", prop.getProperty("img_path", System.getProperty("user.home", "C:\\Users\\User") + "\\"));
             System.setProperty("prepaid_payment", prop.getProperty("prepaid_payment", ""));
             System.setProperty("charge_payment", prop.getProperty("charge_payment", ""));
-
+            System.out.println("IP Address: " + System.getProperty("pool_host"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {

@@ -782,7 +782,8 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                 fields.add(remit1);
                 fields.add(remit2);
                 fields.add(remit3);
-
+                   String business_name=System.getProperty("business_name", "");
+                String address=System.getProperty("address","");
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales
                         , collections, prepayments, receipts_total, receipts_line_discount
                         , receipts_sale_discount, receipts_sub_total, receipt_net_total
@@ -795,7 +796,7 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                         , count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five
                         , cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR
                         , fields,check_cash_sales,check_collections,check_prepayments
-                        ,cc_cash_sales,cc_collections,cc_prepayments,total_check_payments,total_cc_payments,"");
+                        ,cc_cash_sales,cc_collections,cc_prepayments,total_check_payments,total_cc_payments,"",business_name,address);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
 

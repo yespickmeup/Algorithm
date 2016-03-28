@@ -71,6 +71,8 @@ public class Srpt_end_of_day_summary {
     public final double total_check_payments;
     public final double total_cc_payments;
     public final String date;
+    public final String business_name;
+    public final String address;
     public Srpt_end_of_day_summary(double cashin_beg, double cash_sales, double collections
             , double prepayments, double receipts_total, double receipts_line_discount
             , double receipts_sale_discount, double receipts_sub_total, double receipt_net_total
@@ -88,7 +90,7 @@ public class Srpt_end_of_day_summary {
             ,double check_cash_sales,double check_collections,double check_prepayments
             ,double cc_cash_sales,double cc_collections,double cc_prepayments
             ,double total_check_payments,double total_cc_payments
-            ,String date
+            ,String date,String business_name,String address
     ) {
         this.cashin_beg = cashin_beg;
         this.cash_sales = cash_sales;
@@ -139,7 +141,8 @@ public class Srpt_end_of_day_summary {
         this.total_check_payments=total_check_payments;
         this.total_cc_payments=total_cc_payments;
         this.date=date;
-        
+        this.business_name=business_name;
+        this.address=address;
     }
 
     public static void main(String[] args) {
@@ -218,7 +221,7 @@ public class Srpt_end_of_day_summary {
                 , count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five
                 , cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR, fields
                 ,check_cash_sales,check_collections,check_prepayments,cc_cash_sales,cc_collections,cc_prepayments
-                ,total_check_payments,total_cc_payments,"");
+                ,total_check_payments,total_cc_payments,"","","");
         
         
         
