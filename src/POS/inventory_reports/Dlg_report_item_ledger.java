@@ -1696,7 +1696,6 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                 String[] mm = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
                 Srpt_item_ledger rpt = new Srpt_item_ledger(business_name, address, contact_no, date, item_code, barcode, description, branch, location, mm[m]);
                 rpt.fields.addAll(fields2);
-
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_item_ledger.class.getResourceAsStream(jrxml);
                 try {

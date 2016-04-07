@@ -46,7 +46,6 @@ import POS.my_services.Dlg_my_services;
 import POS.my_services.Dlg_my_services_crews;
 import POS.my_services.Dlg_my_services_departments;
 import POS.my_services.Dlg_my_services_view;
-import POS.preferences.Dlg_preferences;
 import POS.prepaid_payments.Dlg_prepaid_payments;
 import POS.purchase_order.Dlg_purchase_order;
 import POS.receipts.Dlg_finalize_receipt;
@@ -60,11 +59,13 @@ import POS.scripts.Dlg_Local_branch_query_updates;
 import POS.scripts.Src_item_ledger;
 import POS.scripts.Dlg_Main_branch_query_updates;
 import POS.services.Dlg_services;
+import POS.settings.Dlg_settings;
 import POS.stock_transfer.Dlg_new_stock_transfer;
 
 import POS.suppliers.Dlg_suppliers;
 import POS.synch_locations.Dlg_download_from_cloud;
 import POS.synch_locations.Dlg_upload_to_cloud;
+import POS.terminals.Dlg_terminal;
 import POS.touchscreen.Dlg_touchscreen;
 import POS.touchscreen.Dlg_touchscreen_cashcount;
 import POS.touchscreen.Dlg_touchscreen_cashier_reports;
@@ -2700,7 +2701,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void m_preferences() {
-        Dlg_preferences rpt = new Dlg_preferences();
+        Dlg_settings rpt = new Dlg_settings();
         MyFrame.set2(rpt.getSurface(), jPanel1, "Prefences", rpt.getWidth(), rpt.getHeight());
     }
 
@@ -2778,6 +2779,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         Dlg_inventory_price_updates dtc = new Dlg_inventory_price_updates();
         dtc.do_pass();
         MyFrame.set(dtc.getSurface(), jPanel1, "Update Item Pricing any Branches");
+    }
+
+    private void m_terminals() {
+        Dlg_terminal dtc = new Dlg_terminal();
+        dtc.do_pass();
+        MyFrame.set2(dtc.getSurface(), jPanel1, "terminals", dtc.getWidth(), dtc.getHeight());
     }
 
     private void m_backup() {
@@ -2891,6 +2898,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void exit() {
     }
+
     private void run_script() {
         jButton1.setEnabled(false);
         jButton1.setText("Script is running....");
@@ -3077,6 +3085,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 if (data.stmt.equals("Update Item Pricing any Branches")) {
                     m_update_pricing_any_branches();
+                }
+                if (data.stmt.equals("Terminals")) {
+                    m_terminals();
                 }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" Reports ">

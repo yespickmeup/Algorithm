@@ -212,6 +212,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -540,6 +541,20 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             }
         });
 
+        jLabel30.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/computer.png"))); // NOI18N
+        jLabel30.setOpaque(true);
+        jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel30MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel30MouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -592,7 +607,9 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -630,8 +647,9 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -830,6 +848,14 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         label("Update Item Pricing any Branches", jLabel29);
     }//GEN-LAST:event_jLabel29MouseEntered
 
+    private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
+        ok("Terminals", jLabel30);
+    }//GEN-LAST:event_jLabel30MouseClicked
+
+    private void jLabel30MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseEntered
+        label("Terminals", jLabel30);
+    }//GEN-LAST:event_jLabel30MouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -854,6 +880,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -870,7 +897,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }
 
     private void hover() {
-        JLabel[] lbl = {jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel28, jLabel29};
+        JLabel[] lbl = {jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel28, jLabel29};
         for (final JLabel l : lbl) {
             l.addMouseListener(new MouseAdapter() {
                 @Override
@@ -894,7 +921,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }
 
     private void hide2() {
-        JLabel[] lbl = {jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel27, jLabel26, jLabel28, jLabel29};
+        JLabel[] lbl = {jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel27, jLabel26, jLabel28, jLabel29};
         for (JLabel l : lbl) {
             l.setEnabled(false);
         }
@@ -1016,6 +1043,10 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             if (to.previledge.equalsIgnoreCase("Update Item Pricing any Branches")) {
                 jLabel29.setEnabled(true);
                 jLabel29.setBackground(new java.awt.Color(96, 188, 219));
+            }
+            if (to.previledge.equalsIgnoreCase("Terminals")) {
+                jLabel30.setEnabled(true);
+                jLabel30.setBackground(new java.awt.Color(96, 188, 219));
             }
 
         }

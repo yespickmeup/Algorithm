@@ -9,6 +9,7 @@ import POS.branches.Branches;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
 import POS.reports.Dlg_report_items;
+import POS.terminals.Terminal;
 import POS.touchscreen_reports.Srpt_sales_ledger;
 import POS.users.MyUser;
 import POS.users.S1_users;
@@ -273,6 +274,16 @@ public class Dlg_reading extends javax.swing.JDialog {
         jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         tf_cashier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_cashier.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -474,6 +485,16 @@ public class Dlg_reading extends javax.swing.JDialog {
         });
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jDateChooser4.setDate(new Date());
         jDateChooser4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -707,6 +728,22 @@ public class Dlg_reading extends javax.swing.JDialog {
         init_branches(jTextField3);
     }//GEN-LAST:event_jTextField3MouseClicked
 
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        init_terminals(jTextField1);
+    }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        init_terminals(jTextField1);
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        init_terminals(jTextField2);
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        init_terminals(jTextField2);
+    }//GEN-LAST:event_jTextField2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -758,6 +795,7 @@ public class Dlg_reading extends javax.swing.JDialog {
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data2(where);
         branches_list = Branches.ret_where("");
+        terminal_list = Terminal.ret_data("");
 
         Field.Combo user = (Field.Combo) tf_cashier;
         user.setText(MyUser.getUser_screen_name());
@@ -792,6 +830,7 @@ public class Dlg_reading extends javax.swing.JDialog {
         });
     }
     List<Branches.to_branches> branches_list = new ArrayList();
+
     private void init_branches(final JTextField tf) {
         final Field.Combo br = (Field.Combo) tf;
         branches_list.clear();
@@ -804,7 +843,7 @@ public class Dlg_reading extends javax.swing.JDialog {
             i++;
         }
         JLabel[] labels = {};
-        int[] tbl_widths_customers = {0, 200};
+        int[] tbl_widths_customers = {0, tf.getWidth()};
         int width = 0;
         String[] col_names = {"Code", "Branch"};
         TableRenderer tr = new TableRenderer();
@@ -816,6 +855,35 @@ public class Dlg_reading extends javax.swing.JDialog {
                 Branches.to_branches to = branches_list.
                         get(data.selected_row);
                 br.setText(to.branch);
+                br.setId("" + to.id);
+            }
+        });
+    }
+
+    List<Terminal.to_terminals> terminal_list = new ArrayList();
+
+    private void init_terminals(final JTextField tf) {
+        final Field.Combo br = (Field.Combo) tf;
+
+        Object[][] obj = new Object[terminal_list.size()][2];
+        int i = 0;
+        for (Terminal.to_terminals to : terminal_list) {
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.terminal;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {0, tf.getWidth()};
+        int width = 0;
+        String[] col_names = {"Code", "Terminal"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Terminal.to_terminals to = terminal_list.get(data.selected_row);
+                br.setText(to.terminal);
                 br.setId("" + to.id);
             }
         });
