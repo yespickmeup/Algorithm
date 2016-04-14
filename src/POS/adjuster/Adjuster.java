@@ -5,15 +5,17 @@
  */
 package POS.adjuster;
 
-import POS.adjuster.S1_adjustments.to_adjustments;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.users.MyUser;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
@@ -22,10 +24,10 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Adjuster {
 
-    public static void update_data(to_inventory_barcodes to_inventory_barcodes, double new_qty, int is_add,String remarks) {
+    public static void update_data(to_inventory_barcodes to_inventory_barcodes, double new_qty, int is_add, String remarks) {
         try {
             Connection conn = MyConnection.connect();
-            String transaction_no="";
+            String transaction_no = "";
             double my_qty = 0;
             if (is_add == 1) {
                 my_qty = to_inventory_barcodes.product_qty + new_qty;
@@ -105,6 +107,31 @@ public class Adjuster {
             stmt.execute();
             Lg.s(Adjuster.class, "Successfully Updated");
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(increment_id());
+    }
+    public static String increment_id() {
+        String id = "000000000000";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from adjustments";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+            }
+            if (id == null) {
+                id = "0";
+            }
+            id = ReceiptIncrementor.increment(id);
+            return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

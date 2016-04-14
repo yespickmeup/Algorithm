@@ -34,7 +34,7 @@ public class MyConnection {
     public static Connection connect() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "192.168.1.51");
+            String host = System.getProperty("pool_host", "localhost");
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");

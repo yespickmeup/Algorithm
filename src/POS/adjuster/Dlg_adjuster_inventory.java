@@ -690,7 +690,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -853,7 +853,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                         + " or barcode='" + jTextField1.getText() + "' and location_id='" + lo.getId() + "' "
                         + " or description like '%" + jTextField1.getText() + "%' and location_id='" + lo.getId() + "' "
                         + " ";
-                where=where+  " order by description asc ";
+                where = where + " order by description asc ";
                 List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
                 loadData_inventory_barcodes(datas);
                 jLabel4.setText("" + datas.size());
@@ -872,10 +872,11 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         int col = tbl_inventory_barcodes.getSelectedColumn();
         final Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_inventory_barcodes_ALM.get(row);
         if (col == 0) {
+            String reference_no = Adjuster.increment_id();
             Window p = (Window) this;
             Dlg_adjuster_qty nd = Dlg_adjuster_qty.create(p, true);
             nd.setTitle("");
-//            nd.do_pass(to.product_qty);
+            nd.do_pass2(reference_no);
             nd.setCallback(new Dlg_adjuster_qty.Callback() {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_adjuster_qty.OutputData data) {
@@ -888,7 +889,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         }
-
+        
         if (col == 6) {
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
