@@ -28,6 +28,7 @@ import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Drawer;
 import POS.util.KeyCodes;
 import POS.util.LostHeaderRenderer;
 import POS.util.TableRenderer;
@@ -5070,6 +5071,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 lbl_charge.setText("");
                 my_sales = null;
                 tf_amount_tendered.setEnabled(true);
+                String file = System.getProperty("drawer", "");
+                if (!file.isEmpty()) {
+                    Drawer.open(file);
+                }
+
                 compute_total();
                 data_cols();
                 SwingUtilities.invokeLater(new Runnable() {

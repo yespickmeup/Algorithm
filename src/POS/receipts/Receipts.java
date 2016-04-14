@@ -783,7 +783,7 @@ public class Receipts {
     }
 
     public static void main(String[] args) {
-        System.out.println(increment_id("25"));
+        System.out.println(increment_id("16"));
     }
 
     public static String increment_id(String location_id) {
@@ -791,9 +791,10 @@ public class Receipts {
         String id = "";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from receipts where branch_id='" + location_id + "' ";
+            String s0 = "select max(id) from receipts where branch_id='" + location_id + "'  ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
+            System.out.println(s0);
             if (rs.next()) {
                 id = rs.getString(1);
 
@@ -803,11 +804,10 @@ public class Receipts {
                 if (rs2.next()) {
                     id = rs2.getString(1);
                 }
-
             }
 
             if (id == null) {
-                id = location_id + "|0000000000";
+                id = location_id + "|" + "0000000000";
             }
 
             id = ReceiptIncrementor.increment(id);
@@ -942,7 +942,7 @@ public class Receipts {
                     s5 = SqlStringUtil.parse(s5).
                             setNumber("cost", to_receipt_items.cost).
                             ok();
-                    
+
                     stmt.addBatch(s5);
 
                     //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">

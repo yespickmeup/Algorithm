@@ -1709,7 +1709,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1717,7 +1717,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_CONTROL, new KeyAction() {
+                KeyEvent.VK_CONTROL, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1725,7 +1725,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_F5, new KeyAction() {
+                KeyEvent.VK_F5, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1733,7 +1733,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_F1, new KeyAction() {
+                KeyEvent.VK_F1, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1743,7 +1743,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_F2, new KeyAction() {
+                KeyEvent.VK_F2, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -2163,6 +2163,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String aw = Receipts.increment_id(location_ids);
         String receipt_no = aw;
         tf_receipt_no.setText(receipt_no);
+        System.out.println("Location Id: " + location_ids);
+        System.out.println("Transaction No.: " + receipt_no);
 
     }
     List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
@@ -2229,7 +2231,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             public void ok(TableRenderer.OutputData data) {
                 S1_branch_locations.to_branch_locations to = branch_location_list.
                         get(data.selected_row);
-
+                
                 tf_branch.setText(to.location + " - [" + to.branch + "]");
                 tf_branch_id.setText("" + to.id);
                 my_branch = to.branch;
@@ -2238,6 +2240,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 my_location_id = "" + to.id;
                 tf_remarks.grabFocus();
                 location_ids = "" + to.id;
+                init_receipt_no();
             }
         });
     }
