@@ -57,16 +57,5 @@ id int auto_increment primary key
 
 
 /* 
-pool_host=192.168.1.51
-pool_port=3306
-pool_user=root
-pool_password=password
-pool_db=db_algorithm
-cloud_host=128.199.80.53
-cloud_port=3306
-cloud_user=root
-cloud_password=password
-cloud_db=db_algorithm
-
 
 */

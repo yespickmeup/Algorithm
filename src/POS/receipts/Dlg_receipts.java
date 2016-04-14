@@ -7,10 +7,9 @@ package POS.receipts;
 import POS.barcodes.Dlg_barcodes;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.branches.Branches;
 import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Inventory_barcodes;
-import POS.inventory_reports.Dlg_report_item_ledger;
+import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.my_services.Dlg_my_service_confirm;
 import POS.purchase_order.S1_purchase_order_items;
 import POS.purchase_order.S1_purchase_orders;
@@ -1482,7 +1481,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             @Override
             public void run() {
                 jPanel12.setLayout(new BorderLayout());
-                Dlg_report_item_ledger dlg = new Dlg_report_item_ledger();
+                Dlg_report_inventory_ledger dlg = new Dlg_report_inventory_ledger();
                 jPanel12.add(dlg.getSurface());
             }
         });

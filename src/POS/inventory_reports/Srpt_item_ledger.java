@@ -52,8 +52,9 @@ public class Srpt_item_ledger {
     public final String branch;
     public final String location;
     public final String month;
+    public final double running_balance;
 
-    public Srpt_item_ledger(String business_name, String address, String contact_no, String date, String item_code, String barcode, String description, String branch, String location, String month) {
+    public Srpt_item_ledger(String business_name, String address, String contact_no, String date, String item_code, String barcode, String description, String branch, String location, String month, double running_balance) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -65,6 +66,7 @@ public class Srpt_item_ledger {
         this.branch = branch;
         this.location = location;
         this.month = month;
+        this.running_balance = running_balance;
     }
 
     public static class field implements Comparable<field> {
@@ -314,7 +316,8 @@ public class Srpt_item_ledger {
         String branch = "Dumaguete";
         String location = "Selling Area";
         String month = "";
-        Srpt_item_ledger rpt = new Srpt_item_ledger(business_name, address, contact_no, date, item_code, barcode, description, branch, location, month);
+        double running_balance = 0;
+        Srpt_item_ledger rpt = new Srpt_item_ledger(business_name, address, contact_no, date, item_code, barcode, description, branch, location, month, running_balance);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_item_ledger.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -1626,16 +1629,12 @@ public class Srpt_item_ledger {
                 String to_branch_id = rs.getString(40);
                 String to_location = rs.getString(41);
                 String to_location_id = rs.getString(42);
-                String at_branch=rs.getString(43);
-String at_branch_id=rs.getString(44);
-String at_location=rs.getString(45);
-String at_location_id=rs.getString(46);
+                String at_branch = rs.getString(43);
+                String at_branch_id = rs.getString(44);
+                String at_location = rs.getString(45);
+                String at_location_id = rs.getString(46);
 
-                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification
-                        , classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added
-                        , user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level
-                        , markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id
-                        , serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
                 datas.add(to);
             }
             return datas;

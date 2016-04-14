@@ -43,6 +43,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
@@ -1055,10 +1056,17 @@ public class Dlg_report_item extends javax.swing.JDialog {
     }
 
     public void do_pass() {
+        jButton3.setVisible(false);
         view_only = 0;
         init_tbl_inventory_barcodes();
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                jTextField1.grabFocus();
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -1068,7 +1076,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -13,12 +13,14 @@ import POS.users.S1_users.to_users;
 import POS.util.Alert;
 import POS.util.Courier;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -208,6 +210,14 @@ public class Dlg_users extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        pm_cashier1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        pm_cashier = new javax.swing.JMenuItem();
+        pm_inventory = new javax.swing.JMenuItem();
+        pm_accounting = new javax.swing.JMenuItem();
+        pm_services = new javax.swing.JMenuItem();
+        pm_administrator = new javax.swing.JMenuItem();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
@@ -276,7 +286,62 @@ public class Dlg_users extends javax.swing.JDialog {
         jCheckBox2 = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new Button.Default();
-        jButton7 = new Button.Orange();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+
+        pm_cashier1.setText("Select Previleges to Copy");
+        jPopupMenu1.add(pm_cashier1);
+        jPopupMenu1.add(jSeparator1);
+
+        pm_cashier.setText("Sales");
+        pm_cashier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pm_cashierMouseClicked(evt);
+            }
+        });
+        pm_cashier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pm_cashierActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(pm_cashier);
+
+        pm_inventory.setText("Inventory");
+        pm_inventory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pm_inventoryMouseClicked(evt);
+            }
+        });
+        pm_inventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pm_inventoryActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(pm_inventory);
+
+        pm_accounting.setText("Accounting");
+        pm_accounting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pm_accountingActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(pm_accounting);
+
+        pm_services.setText("Services");
+        pm_services.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pm_servicesActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(pm_services);
+
+        pm_administrator.setText("Administrator");
+        pm_administrator.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pm_administratorActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(pm_administrator);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -310,6 +375,12 @@ public class Dlg_users extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_usersMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_usersMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbl_usersMouseReleased(evt);
+            }
         });
         jScrollPane2.setViewportView(tbl_users);
 
@@ -325,7 +396,7 @@ public class Dlg_users extends javax.swing.JDialog {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Search:");
 
-        jLabel10.setText("Total No. of users:");
+        jLabel10.setText("No. of rows:");
 
         jLabel11.setText("0");
 
@@ -834,6 +905,12 @@ public class Dlg_users extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_user_previlegesMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_user_previlegesMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbl_user_previlegesMouseReleased(evt);
+            }
         });
         jScrollPane3.setViewportView(tbl_user_previleges);
 
@@ -896,7 +973,10 @@ public class Dlg_users extends javax.swing.JDialog {
             }
         });
 
-        jButton7.setText("Copy");
+        jLabel12.setText("No. of rows:");
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("0");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -904,33 +984,38 @@ public class Dlg_users extends javax.swing.JDialog {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jTextField2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(jTextField2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(jCheckBox1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -938,32 +1023,32 @@ public class Dlg_users extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1101,6 +1186,54 @@ public class Dlg_users extends javax.swing.JDialog {
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         init_inventory_category(jTextField1);
     }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void tbl_user_previlegesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_user_previlegesMousePressed
+
+    }//GEN-LAST:event_tbl_user_previlegesMousePressed
+
+    private void tbl_user_previlegesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_user_previlegesMouseReleased
+
+    }//GEN-LAST:event_tbl_user_previlegesMouseReleased
+
+    private void tbl_usersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_usersMousePressed
+        if (evt.isPopupTrigger()) {
+            jPopupMenu1.show(tbl_users, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tbl_usersMousePressed
+
+    private void tbl_usersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_usersMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenu1.show(tbl_users, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tbl_usersMouseReleased
+
+    private void pm_cashierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pm_cashierMouseClicked
+        add_cashier_previlege();
+    }//GEN-LAST:event_pm_cashierMouseClicked
+
+    private void pm_cashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pm_cashierActionPerformed
+        add_cashier_previlege();
+    }//GEN-LAST:event_pm_cashierActionPerformed
+
+    private void pm_inventoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pm_inventoryMouseClicked
+        add_inventory_previlege();
+    }//GEN-LAST:event_pm_inventoryMouseClicked
+
+    private void pm_inventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pm_inventoryActionPerformed
+        add_inventory_previlege();
+    }//GEN-LAST:event_pm_inventoryActionPerformed
+
+    private void pm_accountingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pm_accountingActionPerformed
+        add_accounting_previlege();
+    }//GEN-LAST:event_pm_accountingActionPerformed
+
+    private void pm_servicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pm_servicesActionPerformed
+        add_services_previlege();
+    }//GEN-LAST:event_pm_servicesActionPerformed
+
+    private void pm_administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pm_administratorActionPerformed
+        add_administrator_previlege();
+    }//GEN-LAST:event_pm_administratorActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1132,12 +1265,13 @@ public class Dlg_users extends javax.swing.JDialog {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1155,14 +1289,22 @@ public class Dlg_users extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private org.jdesktop.swingx.JXPanel jXPanel2;
     private org.jdesktop.swingx.JXPanel jXPanel3;
+    private javax.swing.JMenuItem pm_accounting;
+    private javax.swing.JMenuItem pm_administrator;
+    private javax.swing.JMenuItem pm_cashier;
+    private javax.swing.JMenuItem pm_cashier1;
+    private javax.swing.JMenuItem pm_inventory;
+    private javax.swing.JMenuItem pm_services;
     private javax.swing.JTable tbl_user_default_previleges;
     private javax.swing.JTable tbl_user_previleges;
     private org.jdesktop.swingx.JXTable tbl_users;
@@ -1340,7 +1482,7 @@ public class Dlg_users extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1838,7 +1980,7 @@ public class Dlg_users extends javax.swing.JDialog {
         int i = 0;
         for (Courier.status to : accounts_list) {
             obj[i][0] = " " + to.id;
-            obj[i][1] = " " +to.status;
+            obj[i][1] = " " + to.status;
             i++;
         }
         JLabel[] labels = {};
@@ -1972,6 +2114,7 @@ public class Dlg_users extends javax.swing.JDialog {
                     + " order by previledge asc ";
         }
         loadData_user_previleges(S1_user_previleges.ret_data(where));
+        jLabel13.setText("" + tbl_user_previleges_ALM.size());
     }
 
     private void add_user_previleges() {
@@ -2017,9 +2160,6 @@ public class Dlg_users extends javax.swing.JDialog {
 
     private void add_all_previleges() {
         int row2 = tbl_users.getSelectedRow();
-        if (row2 < 0) {
-            return;
-        }
 
         if (row2 < 0) {
             Alert.set(0, "Please Select User!");
@@ -2066,4 +2206,294 @@ public class Dlg_users extends javax.swing.JDialog {
 
     }
 
+    private void add_cashier_previlege() {
+        final int row2 = tbl_users.getSelectedRow();
+
+        if (row2 < 0) {
+            Alert.set(0, "Please Select User!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                to_users to = (to_users) tbl_users_ALM.get(row2);
+                List<to_user_previleges> list = new ArrayList();
+                String[] previleges = {"Banks",
+                    "Disbursements",
+                    "Disbursements Report",
+                    "Accounts Receivable Payment",
+                    "Customers",
+                    "Disbursement Categories",
+                    "Prepaid Payment",
+                    "Credit Card",
+                    "Sales",
+                    "Cashier Report",
+                    "Stock Ledger Report"
+                };
+                for (String prev : previleges) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                S1_user_previleges.add_user_previleges(list);
+                Alert.set(1, "");
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+    }
+
+    private void add_inventory_previlege() {
+        final int row2 = tbl_users.getSelectedRow();
+
+        if (row2 < 0) {
+            Alert.set(0, "Please Select User!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                to_users to = (to_users) tbl_users_ALM.get(row2);
+                List<to_user_previleges> list = new ArrayList();
+                String[] previleges = {
+                    "Banks",
+                    "Purchase Order",
+                    "Purchase Order Report",
+                    "Receipts",
+                    "Receipts Report",
+                    "Stock Ledger Report",
+                    "Stock Transfer",
+                    "Stock Transfer Report",
+                    "Unit of Measure",
+                    "Item Maintenance",
+                    "Stocks Status Report",
+                    "Stock Take Report",
+                    "Stock Take",
+                    "Item Barcodes",
+                    "Category",
+                    "Branches",
+                    "Branch Locations",
+                    "Suppliers",
+                    "Update Barcodes",
+                    "Price Inquiry",
+                    "Inventory Count",
+                    "Print Barcodes",
+                    "Finalize Stock Transfer",
+                    "RMA",
+                    "Print Inventory Count",
+                    "Finalize Receipt",
+                    "Borrower Slip (Finalize)",
+                    "Requistion Slip"
+                };
+                for (String prev : previleges) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                S1_user_previleges.add_user_previleges(list);
+                Alert.set(1, "");
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+    }
+
+    private void add_accounting_previlege() {
+        final int row2 = tbl_users.getSelectedRow();
+        if (row2 < 0) {
+            Alert.set(0, "Please Select User!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                to_users to = (to_users) tbl_users_ALM.get(row2);
+                List<to_user_previleges> list = new ArrayList();
+                String[] previleges = {
+                    "Accounts Receivable",
+                    "Accounts Receivable Payment",
+                    "AR Aging Report",
+                    "Customer's Balances Report",
+                    "Customer's Ledger Report",
+                    "Customers",
+                    "Finalize Account Receivable Payments",
+                    "Services Report",
+                    "Cashier Report",
+                    "Prepaid Payment Finalize",
+                    "Prepaid Payment",
+                    "AR Items"
+                };
+                for (String prev : previleges) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                S1_user_previleges.add_user_previleges(list);
+                Alert.set(1, "");
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void add_services_previlege() {
+        final int row2 = tbl_users.getSelectedRow();
+        if (row2 < 0) {
+            Alert.set(0, "Please Select User!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                to_users to = (to_users) tbl_users_ALM.get(row2);
+                List<to_user_previleges> list = new ArrayList();
+                String[] previleges = {
+                    "Service Department Members",
+                    "Service Departments",
+                    "Service Transaction Type",
+                    "Services Item Replacement Report",
+                    "Services Report",
+                    "Services-Transaction"
+                };
+                for (String prev : previleges) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                S1_user_previleges.add_user_previleges(list);
+                Alert.set(1, "");
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void add_administrator_previlege() {
+        final int row2 = tbl_users.getSelectedRow();
+        if (row2 < 0) {
+            Alert.set(0, "Please Select User!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                to_users to = (to_users) tbl_users_ALM.get(row2);
+                List<to_user_previleges> list = new ArrayList();
+                String[] previleges = {
+                    "Backup",
+                    "Branch Locations",
+                    "Branches",
+                    "Cash Count Report",
+                    "Discounts",
+                    "Preferences",
+                    "Themes",
+                    "Users",
+                    "Banks",
+                    "Daily Sales Summary Report",
+                    "Disbursements",
+                    "Disbursements Report",
+                    "Service Transaction Releasing",
+                    "Void Items Report",
+                    "Voider",
+                    "Accounts Payable",
+                    "Accounts Receivable",
+                    "AR Aging Report",
+                    "Category",
+                    "Customer's Balances Report",
+                    "Customer's Ledger Report",
+                    "Customers",
+                    "Item Barcodes",
+                    "Item Maintenance",
+                    "Purchase Order",
+                    "Purchase Order Report",
+                    "Receipts",
+                    "Receipts Report",
+                    "Service Department Members",
+                    "Service Departments",
+                    "Service Transaction Type",
+                    "Services Item Replacement Report",
+                    "Services Report",
+                    "Services-Transaction",
+                    "Services-View/Encode",
+                    "Stock Ledger Report",
+                    "Stock Take",
+                    "Stock Take Report",
+                    "Stock Transfer",
+                    "Stock Transfer Report",
+                    "Stocks Status Report",
+                    "Unit of Measure",
+                    "Finalize Stock Transfer",
+                    "Finalize Receipt",
+                    "Accounts Receivable Payment",
+                    "Finalize Account Receivable Payments",
+                    "Sales Report",
+                    "Update Barcodes",
+                    "Inventory Count Report",
+                    "Inventory Count",
+                    "Inventory Count (Finalize)",
+                    "Borrower Slip",
+                    "Borrower Slip (Finalize)",
+                    "Cashier CashCount",
+                    "Cashier Report",
+                    "Credit Card",
+                    "Disbursement (View All)",
+                    "Disbursement Categories",
+                    "Inventory Update Item Pricing",
+                    "Prepaid Payment",
+                    "Prepaid Payment Finalize",
+                    "Sales",
+                    "Services-View",
+                    "Suppliers",
+                    "Void Sales",
+                    "Adjuster",
+                    "Sales (Choose Location)",
+                    "Update CashDrawer",
+                    "Charge in Advance",
+                    "Inventory Replenishment",
+                    "Print Inventory Count",
+                    "Print Barcodes",
+                    "AR Items",
+                    "Update Item Pricing any Branches",
+                    "Update Item Pricing per Branch",
+                    "Finalize Price Updates"
+
+                };
+                for (String prev : previleges) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                S1_user_previleges.add_user_previleges(list);
+                Alert.set(1, "");
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 }

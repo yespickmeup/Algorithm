@@ -9,7 +9,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.inventory.Inventory_barcodes;
-import POS.inventory_reports.Dlg_report_item_ledger;
+import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
@@ -1217,7 +1217,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             @Override
             public void run() {
                 jPanel11.setLayout(new BorderLayout());
-                Dlg_report_item_ledger dlg = new Dlg_report_item_ledger();
+                Dlg_report_inventory_ledger dlg = new Dlg_report_inventory_ledger();
                 jPanel11.add(dlg.getSurface());
             }
         });

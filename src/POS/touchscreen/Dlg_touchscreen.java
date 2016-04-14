@@ -2927,18 +2927,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     public void do_pass(int is_salesman, int is_cashier, int can_choose_location) {
         if (is_salesman == 1) {
-
             jButton40.setVisible(false);
-
         } else {
-
             jButton40.setVisible(true);
-
         }
         if (is_cashier == 1) {
             jButton40.setEnabled(true);
             jButton40.setVisible(true);
-
         }
 
         if (can_choose_location == 1) {
@@ -2952,6 +2947,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jLabel12.setVisible(false);
             jTextField2.setVisible(false);
         }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                tf_search.grabFocus();
+            }
+        });
     }
 
     private void init_payment_types() {
@@ -3366,7 +3367,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 where = where + " order by description asc";
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
-                if (tbl_items_ALM.size() == 0) {
+                if (tbl_items_ALM.isEmpty()) {
                     update_barcode();
                 }
                 if (tbl_items_ALM.size() == 1) {
@@ -4061,10 +4062,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         double qty = FitIn.toDouble(lbl_qty.getText());
         if (increase) {
             qty++;
-        } else {
-            if (qty != 1) {
-                qty--;
-            }
+        } else if (qty != 1) {
+            qty--;
         }
         lbl_qty.setText(FitIn.fmt_woc(qty));
     }
@@ -4998,8 +4997,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         String branch_id = br.getId();
         String location = lo.getText();
         String location_id = my_location_id;
-        System.out.println("My Location: " + location_id);
-        System.out.println("My Sales: " + gross_amount);
 
         final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1);
         try {
@@ -5075,6 +5072,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 tf_amount_tendered.setEnabled(true);
                 compute_total();
                 data_cols();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        tf_search.grabFocus();
+                        tf_search.selectAll();
+                    }
+                });
             }
         });
         nd.setLocationRelativeTo(null);
@@ -5225,7 +5229,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         nd.setTitle("");
         nd.do_pass();
         nd.setCallback(new Dlg_report_item.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item.OutputData data) {
                 closeDialog.ok();

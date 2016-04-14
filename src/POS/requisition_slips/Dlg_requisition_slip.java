@@ -1323,7 +1323,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         }
         int col = tbl_requisition_slips.getSelectedColumn();
         final to_requisition_slips to = (to_requisition_slips) tbl_requisition_slips_ALM.get(row);
-
+        
         if (to.status == 1) {
             Alert.set(0, "Transaction finalized, cannot proceed!");
             return;
@@ -1338,7 +1338,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-
+                
                 Requisition_slips.finalize_data(to, datas);
                 Alert.set(0, "Transaction Finalized!");
                 data_cols_slips();

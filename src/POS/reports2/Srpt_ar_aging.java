@@ -42,8 +42,10 @@ public class Srpt_ar_aging {
     public final double four;
     public final double five;
     public final double six;
+    public final String address;
+    public final String telephone_number;
 
-    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six) {
+    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
@@ -54,6 +56,8 @@ public class Srpt_ar_aging {
         this.four = four;
         this.five = five;
         this.six = six;
+        this.address = address;
+        this.telephone_number = telephone_number;
     }
 
     public static class field {
@@ -208,7 +212,9 @@ public class Srpt_ar_aging {
             five += FitIn.toDouble(to.above);
         }
         six = one + two + three + four + five;
-        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six);
+        String address = "";
+        String telephone_number = "";
+        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number);
         rpt.fields.addAll(fields);
 
         JRViewer viewer = get_viewer(rpt);

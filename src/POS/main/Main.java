@@ -142,7 +142,9 @@ public class Main {
             System.setProperty("permit_no", prop.getProperty("permit_no", "Permit No: PR-0760032961"));
             System.setProperty("pos_no", prop.getProperty("pos_no", "POS No:000001 "));
             System.setProperty("print_to_receipts", prop.getProperty("print_to_receipts", "false"));
-
+            System.setProperty("drawer", prop.getProperty("drawer", "\\drawer\\serial1.bat"));
+             
+            
             System.setProperty("branch_id", prop.getProperty("branch_id", "1"));
             System.setProperty("branch", prop.getProperty("branch", "Dumaguete"));
             System.setProperty("license", prop.getProperty("license", "full"));
@@ -150,7 +152,7 @@ public class Main {
             System.setProperty("is_main_server", prop.getProperty("is_main_server", "false"));
             System.setProperty("unit_type", prop.getProperty("unit_type", "workstation"));
             
-            
+            System.out.println(System.getProperty("drawer", ""));
             
         } catch (IOException ex) {
             throw new RuntimeException(ex);

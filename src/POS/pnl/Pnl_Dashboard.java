@@ -38,7 +38,7 @@ import POS.inventory.Dlg_price_inquire;
 import POS.inventory.Dlg_print_barcode;
 import POS.inventory.Dlg_inventory_price_updates;
 import POS.inventory_replenishment.Dlg_inventory_replenishment;
-import POS.inventory_reports.Dlg_report_item_ledger;
+import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.main.Main;
 import static POS.main.MyMain.getSerialNumber;
 import POS.my_services.Dlg_my_service_type;
@@ -54,6 +54,7 @@ import POS.reports.*;
 import POS.reports2.Dlg_report_customers;
 import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
+import POS.requisition_slips.Dlg_requisition_slip;
 import POS.rma.Dlg_rma;
 import POS.scripts.Dlg_Local_branch_query_updates;
 import POS.scripts.Src_item_ledger;
@@ -2342,7 +2343,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void rpt_stock_ledger() {
-        Dlg_report_item_ledger dtc = new Dlg_report_item_ledger();
+        Dlg_report_inventory_ledger dtc = new Dlg_report_inventory_ledger();
         MyFrame.set(dtc.getSurface(), jPanel1, "Item Ledger");
     }
 
@@ -2465,6 +2466,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void t_finalize_receipt() {
         Dlg_finalize_receipt dtc = new Dlg_finalize_receipt();
         MyFrame.set(dtc.getSurface(), jPanel1, "Finalize Receipt");
+    }
+
+    private void t_requisition_slip() {
+        Dlg_requisition_slip dtc = new Dlg_requisition_slip();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Requisition Slip");
     }
 
     private void r_stock_status() {
@@ -2946,7 +2952,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("minimize")) {
                     Pnl_Dashboard.this.setState(Frame.ICONIFIED);
                 }
-
                 //<editor-fold defaultstate="collapsed" desc=" transactions ">
                 if (data.stmt.equals("Accounts Payable")) {
                     t_ap();
@@ -3016,6 +3021,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                     t_services_view2();
                 }
 
+                if (data.stmt.equals("Requistion Slip")) {
+
+                    t_requisition_slip();
+
+                }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" maintenance ">
                 if (data.stmt.equals("Branches")) {

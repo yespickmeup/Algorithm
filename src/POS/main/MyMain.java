@@ -55,10 +55,12 @@ public class MyMain {
             System.setProperty("print_to_receipts", prop.getProperty("print_to_receipts", "false"));
             System.setProperty("print_to_receipts2", prop.getProperty("print_to_receipts2", "false"));
             System.setProperty("receipt_printer_show_dialog", prop.getProperty("receipt_printer_show_dialog", "false"));
-
+            System.setProperty("drawer", prop.getProperty("drawer", "\\drawer\\serial1.bat"));
+            System.out.println(System.getProperty("drawer", ""));
+            
             System.setProperty("is_main_server", prop.getProperty("is_main_server", "true"));
             System.setProperty("unit_type", prop.getProperty("unit_type", "main_branch_server"));
-
+            
             System.setProperty("business_name", prop.getProperty("business_name", ""));
             System.setProperty("address", prop.getProperty("address", ""));
             System.setProperty("operated_by", prop.getProperty("operated_by", ""));
