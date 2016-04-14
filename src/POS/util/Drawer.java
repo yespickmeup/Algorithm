@@ -15,17 +15,22 @@ import java.util.logging.Logger;
  * @author Guinness
  */
 public class Drawer {
-    
+
     public static void open(String file) {
         try {
             String home = System.getProperty("user.home", "");
             String path = "cmd /c start " + home + file;
-            System.out.println(path);
+
             Runtime rn = Runtime.getRuntime();
+            path = "cmd /c start C:\\Users\\Personal\\drawer\\serial1.bat";
             Process pr = rn.exec(path);
-            pr.destroy();
+           
         } catch (IOException ex) {
             Logger.getLogger(test_drawer.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void main(String[] args) {
+        open("");
     }
 }

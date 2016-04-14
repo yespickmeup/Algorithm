@@ -5031,6 +5031,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         System.out.println("Gross: " + my_sales.gross_amount);
         System.out.println("Line Discount: " + my_sales.line_discount);
         System.out.println("Sales: " + my_sales);
+       
         nd.do_pass(orders, f_customer, f_discount, my_sales.gross_amount, my_sales.line_discount, my_sales);
         nd.setCallback(new Dlg_touchscreen_change.Callback() {
             @Override
@@ -5071,10 +5072,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 lbl_charge.setText("");
                 my_sales = null;
                 tf_amount_tendered.setEnabled(true);
-                String file = System.getProperty("drawer", "");
-                if (!file.isEmpty()) {
-                    Drawer.open(file);
-                }
 
                 compute_total();
                 data_cols();

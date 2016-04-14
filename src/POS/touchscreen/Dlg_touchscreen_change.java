@@ -12,6 +12,7 @@ import POS.my_sales.MySales;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.util.DateType;
+import POS.util.Drawer;
 import POS.util.LostHeaderRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -991,6 +992,17 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                 if (print.equalsIgnoreCase("true")) {
                     print_or();
                 }
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        String file = System.getProperty("drawer", "");
+                        System.out.println("Drawer: " + file);
+                        if (!file.isEmpty()) {
+                            Drawer.open(file);
+                        }
+                    }
+                });
+
 //                List<Srpt_receipt.field> fields = new ArrayList();
 //                int total_qty = 0;
 //                double vatable_sale = 0;
@@ -1204,7 +1216,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1212,7 +1224,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ENTER, new KeyAction() {
+                KeyEvent.VK_ENTER, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
