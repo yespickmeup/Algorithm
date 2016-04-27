@@ -12,7 +12,7 @@ import POS.my_sales.MySales;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.util.DateType;
-import POS.util.Drawer;
+import POS.batch_file.Drawer;
 import POS.util.LostHeaderRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -998,7 +998,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                         String file = System.getProperty("drawer", "");
                         System.out.println("Drawer: " + file);
                         if (!file.isEmpty()) {
-                            Drawer.open(file);
+                            Drawer.open2(file);
                         }
                     }
                 });

@@ -8,6 +8,9 @@ package POS.requisition_slips;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Inventory_barcodes;
+import POS.receipts.Receipts;
+import POS.receipts.S1_receipt_orders;
+import POS.receipts.Srpt_receipts;
 import POS.requisition_slips.Requisition_slip_items.to_requisition_slip_items;
 import POS.requisition_slips.Requisition_slips.to_requisition_slips;
 import POS.util.Alert;
@@ -15,10 +18,12 @@ import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,15 +31,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.DateType;
@@ -225,8 +236,10 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         jButton2 = new Button.Default();
         jButton1 = new Button.Primary();
         jButton3 = new Button.Info();
-        jButton6 = new Button.Success();
         tf_search = new Field.Input();
+        jLabel13 = new javax.swing.JLabel();
+        tf_branch = new Field.Combo();
+        tf_branch_id = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -324,7 +337,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Post");
+        jButton1.setText("Post and Finalize");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,14 +353,6 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             }
         });
 
-        jButton6.setText("Finalize");
-        jButton6.setEnabled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         tf_search.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         tf_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,6 +365,25 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Location:");
+
+        tf_branch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_branch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_branchMouseClicked(evt);
+            }
+        });
+        tf_branch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_branchActionPerformed(evt);
+            }
+        });
+
+        tf_branch_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_branch_id.setFocusable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -370,29 +394,38 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                    .addComponent(jTextField2))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                            .addComponent(jTextField4))
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                            .addComponent(jTextField1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(16, 16, 16)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 61, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(tf_branch)
+                                        .addGap(1, 1, 1)
+                                        .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField4)))))
                     .addComponent(tf_search)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -411,7 +444,10 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -419,24 +455,27 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -477,11 +516,11 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
 
         buttonGroup1.add(jCheckBox3);
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox3.setSelected(true);
         jCheckBox3.setText("Posted");
 
         buttonGroup1.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setSelected(true);
         jCheckBox4.setText("Finalized");
 
         buttonGroup1.add(jCheckBox2);
@@ -717,7 +756,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         tbl_requisition_slip_items_M.fireTableDataChanged();
         jLabel3.setText("0");
         jButton3.setEnabled(false);
-        jButton6.setEnabled(false);
+
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -728,10 +767,6 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         update_post();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        finalize_slip();
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         data_cols_slips();
@@ -765,6 +800,15 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         select_item();
     }//GEN-LAST:event_tbl_requisition_slip_itemsMouseClicked
 
+    private void tf_branchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_branchMouseClicked
+        init_branch_locations();
+    }//GEN-LAST:event_tf_branchMouseClicked
+
+    private void tf_branchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_branchActionPerformed
+        //        init_branch();
+        init_branch_locations();
+    }//GEN-LAST:event_tf_branchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -775,7 +819,6 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -787,6 +830,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -818,6 +862,8 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tbl_requisition_slip_items;
     private javax.swing.JTable tbl_requisition_slips;
+    private javax.swing.JTextField tf_branch;
+    private javax.swing.JTextField tf_branch_id;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 
@@ -827,7 +873,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         init_no();
         init_tbl_requisition_slips(tbl_requisition_slips);
         init_tbl_requisition_slip_items(tbl_requisition_slip_items);
-
+        tf_branch_id.setVisible(false);
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -848,7 +894,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -858,6 +904,48 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
+    List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
+
+    private void init_branch_locations() {
+
+        String search = tf_branch.getText();
+        String branch_id = tf_branch.getText();
+        branch_location_list.clear();
+        String where = " order by branch,location asc  ";
+        branch_location_list = S1_branch_locations.ret_location_where(where);
+        Object[][] obj = new Object[branch_location_list.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list) {
+            obj[i][0] = " " + to.branch;//TextHighlighter1.highlight2(to.barcode, to.barcode, "");
+            obj[i][1] = " " + to.location;//TextHighlighter1.highlight2(to.description, to.description, "");
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {120, 100};
+        int width = 0;
+        String[] col_names = {"Code", "Location"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf_branch, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list.
+                        get(data.selected_row);
+
+                tf_branch.setText(to.location + " - [" + to.branch + "]");
+                tf_branch_id.setText("" + to.id);
+                my_branch = to.branch;
+                my_branch_id = to.branch_id;
+                my_location = to.location;
+                my_location_id = "" + to.id;
+
+                location_ids = "" + to.id;
+                init_no();
+            }
+        });
+    }
 
     private void init_no() {
         String slip_no = Requisition_slips.increment_id(location_ids);
@@ -880,6 +968,8 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         my_branch_id = to.branch_id;
         my_location = to.location;
         my_location_id = "" + to.id;
+        tf_branch.setText(to.location + " - [" + to.branch + "]");
+        tf_branch_id.setText("" + to.id);
     }
 
     List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list = new ArrayList();
@@ -1305,7 +1395,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             return;
         }
         List<to_requisition_slip_items> datas = tbl_requisition_slip_items_ALM;
-        Requisition_slips.add_data(slip, datas);
+        Requisition_slips.post_and_finalize(slip, datas);
         Alert.set(1, branch);
 
         init_no();
@@ -1323,7 +1413,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         }
         int col = tbl_requisition_slips.getSelectedColumn();
         final to_requisition_slips to = (to_requisition_slips) tbl_requisition_slips_ALM.get(row);
-        
+
         if (to.status == 1) {
             Alert.set(0, "Transaction finalized, cannot proceed!");
             return;
@@ -1338,7 +1428,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                
+
                 Requisition_slips.finalize_data(to, datas);
                 Alert.set(0, "Transaction Finalized!");
                 data_cols_slips();
@@ -1428,11 +1518,11 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             dep.setText(to.requisition_department);
             dep.setId(to.requisition_department_id);
             if (to.status == 1) {
-                jButton6.setEnabled(false);
+
                 jButton3.setEnabled(false);
             } else {
                 jButton1.setEnabled(false);
-                jButton6.setEnabled(true);
+
                 jButton3.setEnabled(true);
             }
 
@@ -1467,7 +1557,101 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             nd.setVisible(true);
         }
         if (col == 7) {
-            //print
+            set_report();
+            jTabbedPane1.setSelectedIndex(2);
+        }
+    }
+
+    private void set_report() {
+
+        int row = tbl_requisition_slips.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final to_requisition_slips to = (to_requisition_slips) tbl_requisition_slips_ALM.get(row);
+
+        jProgressBar2.setString("Loading... Please wait...");
+        jProgressBar2.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String where = " where requisition_slip_no='" + to.requisition_slip_no + "' ";
+                final List<to_requisition_slip_items> datas = Requisition_slip_items.ret_data(where);
+                List<Srpt_requisition_slip.field> fields = new ArrayList();
+
+                for (to_requisition_slip_items item : datas) {
+                    String item_code = item.item_code;
+                    String barcode = item.barcode;
+                    String description = item.description;
+                    double product_qty = item.product_qty;
+                    String unit = item.unit;
+                    double cost = item.cost;
+                    double selling_price = item.selling_price;
+                    Srpt_requisition_slip.field field = new Srpt_requisition_slip.field(item_code, barcode, description, product_qty, unit, cost, selling_price);
+                    fields.add(field);
+
+                }
+                String requisition_slip_no = to.requisition_slip_no;
+                String requisition_date = DateType.convert_slash_datetime2(to.requisition_date);
+                String requisition_type = to.requisition_type;
+                String requisition_department = to.requisition_department;
+                String requisition_department_id = to.requisition_department_id;
+                String requested_by = to.requested_by;
+                String branch = to.branch;
+                String branch_id = to.branch_id;
+                String location = to.location;
+                String location_id = to.location_id;
+                String date_added = to.date_added;
+
+                Srpt_requisition_slip rpt = new Srpt_requisition_slip(requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, branch, branch_id, location, location_id, date_added);
+                rpt.fields.addAll(fields);
+                String jrxml = "rpt_requisition_slip.jrxml";
+                report_customers_aging(rpt, jrxml);
+                jProgressBar2.setString("Finished...");
+                jProgressBar2.setIndeterminate(false);
+            }
+        });
+
+        t.start();
+    }
+
+    private void report_customers_aging(final Srpt_requisition_slip to, String jrxml_name) {
+        jPanel10.removeAll();
+        jPanel10.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_customers_aging(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            jPanel10.add(viewer);
+            jPanel10.updateUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_customers_aging(Srpt_requisition_slip to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_aging(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_aging(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_requisition_slip.class.
+                    getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
         }
     }
 }

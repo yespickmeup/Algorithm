@@ -101,7 +101,7 @@ public class Requisition_slips {
                     .setString("location", to_requisition_slips.location)
                     .setString("location_id", to_requisition_slips.location_id)
                     .setString("date_added", to_requisition_slips.date_added)
-                    .setNumber("status", to_requisition_slips.status)
+                    .setNumber("status", 1)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -170,9 +170,242 @@ public class Requisition_slips {
                         .setString("location", to_requisition_slip_items.location)
                         .setString("location_id", to_requisition_slip_items.location_id)
                         .setString("date_added", to_requisition_slip_items.date_added)
-                        .setNumber("status", to_requisition_slip_items.status)
+                        .setNumber("status", 1)
                         .ok();
                 stmt.addBatch(s2);
+            }
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Requisition_slips.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void post_and_finalize(to_requisition_slips to_requisition_slips, List<Requisition_slip_items.to_requisition_slip_items> to_requisition_slip_items1) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
+            String s0 = "insert into requisition_slips("
+                    + "requisition_slip_no"
+                    + ",requisition_date"
+                    + ",requisition_type"
+                    + ",requisition_department"
+                    + ",requisition_department_id"
+                    + ",requested_by"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",date_added"
+                    + ",status"
+                    + ")values("
+                    + ":requisition_slip_no"
+                    + ",:requisition_date"
+                    + ",:requisition_type"
+                    + ",:requisition_department"
+                    + ",:requisition_department_id"
+                    + ",:requested_by"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:date_added"
+                    + ",:status"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("requisition_slip_no", to_requisition_slips.requisition_slip_no)
+                    .setString("requisition_date", to_requisition_slips.requisition_date)
+                    .setString("requisition_type", to_requisition_slips.requisition_type)
+                    .setString("requisition_department", to_requisition_slips.requisition_department)
+                    .setString("requisition_department_id", to_requisition_slips.requisition_department_id)
+                    .setString("requested_by", to_requisition_slips.requested_by)
+                    .setString("branch", to_requisition_slips.branch)
+                    .setString("branch_id", to_requisition_slips.branch_id)
+                    .setString("location", to_requisition_slips.location)
+                    .setString("location_id", to_requisition_slips.location_id)
+                    .setString("date_added", to_requisition_slips.date_added)
+                    .setNumber("status", 1)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+
+            stmt.addBatch(s0);
+
+            for (Requisition_slip_items.to_requisition_slip_items to_requisition_slip_items : to_requisition_slip_items1) {
+                String s2 = "insert into requisition_slip_items("
+                        + "requisition_slip_no"
+                        + ",requisition_date"
+                        + ",requisition_type"
+                        + ",requisition_department"
+                        + ",requisition_department_id"
+                        + ",requested_by"
+                        + ",item_code"
+                        + ",barcode"
+                        + ",description"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",cost"
+                        + ",selling_price"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ",date_added"
+                        + ",status"
+                        + ")values("
+                        + ":requisition_slip_no"
+                        + ",:requisition_date"
+                        + ",:requisition_type"
+                        + ",:requisition_department"
+                        + ",:requisition_department_id"
+                        + ",:requested_by"
+                        + ",:item_code"
+                        + ",:barcode"
+                        + ",:description"
+                        + ",:product_qty"
+                        + ",:unit"
+                        + ",:cost"
+                        + ",:selling_price"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:date_added"
+                        + ",:status"
+                        + ")";
+
+                s2 = SqlStringUtil.parse(s2)
+                        .setString("requisition_slip_no", to_requisition_slips.requisition_slip_no)
+                        .setString("requisition_date", to_requisition_slip_items.requisition_date)
+                        .setString("requisition_type", to_requisition_slip_items.requisition_type)
+                        .setString("requisition_department", to_requisition_slip_items.requisition_department)
+                        .setString("requisition_department_id", to_requisition_slip_items.requisition_department_id)
+                        .setString("requested_by", to_requisition_slip_items.requested_by)
+                        .setString("item_code", to_requisition_slip_items.item_code)
+                        .setString("barcode", to_requisition_slip_items.barcode)
+                        .setString("description", to_requisition_slip_items.description)
+                        .setNumber("product_qty", to_requisition_slip_items.product_qty)
+                        .setString("unit", to_requisition_slip_items.unit)
+                        .setNumber("cost", to_requisition_slip_items.cost)
+                        .setNumber("selling_price", to_requisition_slip_items.selling_price)
+                        .setString("branch", to_requisition_slip_items.branch)
+                        .setString("branch_id", to_requisition_slip_items.branch_id)
+                        .setString("location", to_requisition_slip_items.location)
+                        .setString("location_id", to_requisition_slip_items.location_id)
+                        .setString("date_added", to_requisition_slip_items.date_added)
+                        .setNumber("status", 1)
+                        .ok();
+                stmt.addBatch(s2);
+
+                //<editor-fold defaultstate="collapsed" desc=" select item ">
+                double my_qty = 0;
+                String unit = "";
+                double conversion = 0;
+                String description = "";
+                String generic_name = "";
+                String category = "";
+                String category_id = "";
+                String classification = "";
+                String classification_id = "";
+                String sub_classification = "";
+                String sub_classification_id = "";
+                String item_type = "";
+                String supplier = "";
+                int fixed_price = 0;
+                String supplier_id = "";
+                int multi_level_pricing = 0;
+                int vatable = 0;
+                double reorder_level = 0;
+                double markup = 0;
+                String barcode = "";
+                String brand = "";
+                String brand_id = "";
+                String model = "";
+                String model_id = "";
+                int selling_type = 0;
+
+                String s3 = "select"
+                        + " product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",description"
+                        + ",generic_name"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",item_type"
+                        + ",supplier"
+                        + ",fixed_price"
+                        + ",supplier_id"
+                        + ",multi_level_pricing"
+                        + ",vatable"
+                        + ",reorder_level"
+                        + ",markup"
+                        + ",barcode"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",selling_type"
+                        + " from inventory_barcodes "
+                        + " where "
+                        + " main_barcode ='" + to_requisition_slip_items.item_code + "' "
+                        + " and location_id ='" + to_requisition_slip_items.location_id + "' "
+                        + " ";
+                Statement stmt3 = conn.createStatement();
+                ResultSet rs3 = stmt3.executeQuery(s3);
+                if (rs3.next()) {
+                    my_qty = rs3.getDouble(1);
+                    unit = rs3.getString(2);
+                    conversion = rs3.getDouble(3);
+                    description = rs3.getString(4);
+                    generic_name = rs3.getString(5);
+                    category = rs3.getString(6);
+                    category_id = rs3.getString(7);
+                    classification = rs3.getString(8);
+                    classification_id = rs3.getString(9);
+                    sub_classification = rs3.getString(10);
+                    sub_classification_id = rs3.getString(11);
+                    item_type = rs3.getString(12);
+                    supplier = rs3.getString(13);
+                    fixed_price = rs3.getInt(14);
+                    supplier_id = rs3.getString(15);
+                    multi_level_pricing = rs3.getInt(16);
+                    vatable = rs3.getInt(17);
+                    reorder_level = rs3.getInt(18);
+                    markup = rs3.getInt(19);
+                    barcode = rs3.getString(20);
+                    brand = rs3.getString(21);
+                    brand_id = rs3.getString(22);
+                    model = rs3.getString(23);
+                    model_id = rs3.getString(24);
+                    selling_type = rs3.getInt(25);
+
+                }
+
+                //</editor-fold>
+                my_qty = my_qty - to_requisition_slip_items.product_qty;
+                String s4 = "update inventory_barcodes set "
+                        + " product_qty= :product_qty "
+                        + " where "
+                        + " main_barcode ='" + to_requisition_slip_items.item_code + "' "
+                        + " and location_id ='" + to_requisition_slip_items.location_id + "' "
+                        + " ";
+
+                s4 = SqlStringUtil.parse(s4)
+                        .setNumber("product_qty", my_qty)
+                        .ok();
+
+                stmt.addBatch(s4);
+
             }
             stmt.executeBatch();
             conn.commit();
@@ -354,7 +587,6 @@ public class Requisition_slips {
                 }
 
                 //</editor-fold>
-                
                 my_qty = my_qty - to_requisition_slip_items.product_qty;
                 String s4 = "update inventory_barcodes set "
                         + " product_qty= :product_qty "

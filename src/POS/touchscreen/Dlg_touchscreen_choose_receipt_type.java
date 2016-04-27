@@ -918,7 +918,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
                 Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
-
+                
                 report_dr(rpt, jrxml);
                 InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
                 try {

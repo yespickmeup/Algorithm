@@ -28,7 +28,7 @@ import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.DateType;
-import POS.util.Drawer;
+import POS.batch_file.Drawer;
 import POS.util.KeyCodes;
 import POS.util.LostHeaderRenderer;
 import POS.util.TableRenderer;

@@ -457,7 +457,6 @@ public class Dlg_Main_branch_query_updates extends javax.swing.JDialog {
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 int check_connection = MyConnection.check_cloud_connection();
@@ -467,20 +466,17 @@ public class Dlg_Main_branch_query_updates extends javax.swing.JDialog {
                     return;
                 }
                 tf_cloud_status.setText("Online");
-
                 //upload
                 String where = " where status=0 ";
                 List<Main_branch_query_uploads.to_main_branch_query_uploads> datas_to_upload = Main_branch_query_uploads.ret_data(where);
-                jLabel4.setText("" + datas_to_upload.size());
-                
+                jLabel4.setText("" + datas_to_upload.size());               
                 if (!datas_to_upload.isEmpty()) {
                     jLabel6.setText("Uploading...");
                     Main_branch_query_uploads.upload_data_to_cloud(datas_to_upload);
                     jLabel6.setText("Upload Complete");
                 } else {
                     jLabel6.setText("Nothing to upload");
-                }
-                
+                }                
                 //download
                 String my_branch_id = MyUser.getBranch_id();
                 String where2 = " where status=0 and to_branch_id='" + my_branch_id + "' ";

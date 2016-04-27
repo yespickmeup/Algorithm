@@ -2473,7 +2473,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -2688,110 +2688,103 @@ public class Dlg_my_services extends javax.swing.JDialog {
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
         enables(false);
-        Thread t = new Thread(new Runnable() {
+        String where = "";
+        String search = jTextField12.getText();
+        if (jCheckBox3.isSelected()) {
+            where = " where customer_name like '%" + search + "%' ";
+        }
+        if (jCheckBox4.isSelected()) {
+            where = " where description like '%" + search + "%' ";
+        }
+        if (jCheckBox5.isSelected()) {
+            where = " where problem like '%" + search + "%' ";
+        }
+        if (jCheckBox13.isSelected()) {
+            where = " where transaction_no like '%" + search + "%' ";
+        }
+        if (jCheckBox14.isSelected()) {
+            where = " where service_slip_no like '%" + search + "%' ";
+        }
 
-            @Override
-            public void run() {
-                String where = "";
-                String search = jTextField12.getText();
-                if (jCheckBox3.isSelected()) {
-                    where = " where customer_name like '%" + search + "%' ";
-                }
-                if (jCheckBox4.isSelected()) {
-                    where = " where description like '%" + search + "%' ";
-                }
-                if (jCheckBox5.isSelected()) {
-                    where = " where problem like '%" + search + "%' ";
-                }
-                if (jCheckBox13.isSelected()) {
-                    where = " where transaction_no like '%" + search + "%' ";
-                }
-                if (jCheckBox14.isSelected()) {
-                    where = " where service_slip_no like '%" + search + "%' ";
-                }
+        String trans_no = "";
+        if (jCheckBox19.isSelected()) {
+            String w = " where barcode ='" + jTextField12.getText() + "' ";
 
-                String trans_no = "";
-                if (jCheckBox19.isSelected()) {
-                    String w = " where barcode ='" + jTextField12.getText() + "' ";
-
-                    List<My_services_description_customers.to_my_services_description_customers> aw = My_services_description_customers.ret_data3(w);
-                    for (My_services_description_customers.to_my_services_description_customers aww : aw) {
-                        trans_no = aww.transaction_no;
-                    }
-                    if (!trans_no.isEmpty()) {
-                        where = " where transaction_no like '%" + trans_no + "%' ";
-                    } else {
-                        where = " where transaction_no like '%" + "" + "%' ";
-                    }
-                }
-
-                if (jCheckBox6.isSelected()) {
-                    where = where + " ";
-                }
-                if (jCheckBox7.isSelected()) {
-                    where = where + " and status='" + "0" + "' ";
-                }
-                if (jCheckBox8.isSelected()) {
-                    where = where + " and status='" + "1" + "' ";
-                }
-                if (jCheckBox9.isSelected()) {
-                    where = where + " and status='" + "2" + "' ";
-                }
-                if (jCheckBox15.isSelected()) {
-                    where = where + " and status='" + "3" + "' ";
-                }
-                if (!jCheckBox11.isSelected()) {
-                    where = where + " and department_id='" + tf_department_id1.getText() + "' ";
-                }
-
-                if (!jCheckBox12.isSelected()) {
-                    where = where + " and service_type_id='" + tf_service_type_id1.getText() + "' ";
-                }
-                String from = DateType.sf.format(dp_from.getDate());
-                String to = DateType.sf.format(dp_to.getDate());
-                if (!jCheckBox17.isSelected()) {
-                    where = where + " and Date(date_assigned) between '" + from + "' and '" + to + "' ";
-                }
-                if (!jCheckBox18.isSelected()) {
-                    where = where + " and service_by_id = '" + tf_department_id2.getText() + "'  ";
-                }
-
-                where = where + " and location_id ='" + tf_from_location_id.getText() + "' order by transaction_no asc";
-                System.out.println(where);
-                List<to_my_services> datas = My_services.ret_data(where);
-
-                loadData_my_services(datas);
-                int on_going = 0;
-                int finished = 0;
-                int released = 0;
-                int total = 0;
-                int on_hold = 0;
-                for (to_my_services to1 : datas) {
-                    if (to1.status == 0) {
-                        on_going++;
-                    }
-                    if (to1.status == 1) {
-                        finished++;
-                    }
-                    if (to1.status == 2) {
-                        released++;
-                    }
-                    if (to1.status == 3) {
-                        on_hold++;
-                    }
-                    total++;
-                }
-                jLabel19.setText(FitIn.fmt_woc(on_going));
-                jLabel20.setText(FitIn.fmt_woc(finished));
-                jLabel23.setText(FitIn.fmt_woc(released));
-                jLabel39.setText(FitIn.fmt_woc(on_hold));
-                jLabel41.setText(FitIn.fmt_woc(total));
-                jProgressBar1.setString("Finished...");
-                jProgressBar1.setIndeterminate(false);
-                enables(true);
+            List<My_services_description_customers.to_my_services_description_customers> aw = My_services_description_customers.ret_data3(w);
+            for (My_services_description_customers.to_my_services_description_customers aww : aw) {
+                trans_no = aww.transaction_no;
             }
-        });
-        t.start();
+            if (!trans_no.isEmpty()) {
+                where = " where transaction_no like '%" + trans_no + "%' ";
+            } else {
+                where = " where transaction_no like '%" + "" + "%' ";
+            }
+        }
+
+        if (jCheckBox6.isSelected()) {
+            where = where + " ";
+        }
+        if (jCheckBox7.isSelected()) {
+            where = where + " and status='" + "0" + "' ";
+        }
+        if (jCheckBox8.isSelected()) {
+            where = where + " and status='" + "1" + "' ";
+        }
+        if (jCheckBox9.isSelected()) {
+            where = where + " and status='" + "2" + "' ";
+        }
+        if (jCheckBox15.isSelected()) {
+            where = where + " and status='" + "3" + "' ";
+        }
+        if (!jCheckBox11.isSelected()) {
+            where = where + " and department_id='" + tf_department_id1.getText() + "' ";
+        }
+
+        if (!jCheckBox12.isSelected()) {
+            where = where + " and service_type_id='" + tf_service_type_id1.getText() + "' ";
+        }
+        String from = DateType.sf.format(dp_from.getDate());
+        String to = DateType.sf.format(dp_to.getDate());
+        if (!jCheckBox17.isSelected()) {
+            where = where + " and Date(date_assigned) between '" + from + "' and '" + to + "' ";
+        }
+        if (!jCheckBox18.isSelected()) {
+            where = where + " and service_by_id = '" + tf_department_id2.getText() + "'  ";
+        }
+
+        where = where + " and location_id ='" + tf_from_location_id.getText() + "' order by transaction_no asc";
+//                System.out.println(where);
+        List<to_my_services> datas = My_services.ret_data(where);
+
+        loadData_my_services(datas);
+        int on_going = 0;
+        int finished = 0;
+        int released = 0;
+        int total = 0;
+        int on_hold = 0;
+        for (to_my_services to1 : datas) {
+            if (to1.status == 0) {
+                on_going++;
+            }
+            if (to1.status == 1) {
+                finished++;
+            }
+            if (to1.status == 2) {
+                released++;
+            }
+            if (to1.status == 3) {
+                on_hold++;
+            }
+            total++;
+        }
+        jLabel19.setText(FitIn.fmt_woc(on_going));
+        jLabel20.setText(FitIn.fmt_woc(finished));
+        jLabel23.setText(FitIn.fmt_woc(released));
+        jLabel39.setText(FitIn.fmt_woc(on_hold));
+        jLabel41.setText(FitIn.fmt_woc(total));
+        jProgressBar1.setString("Finished...");
+        jProgressBar1.setIndeterminate(false);
+        enables(true);
 
     }
 
@@ -2802,7 +2795,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
 
     private void add_my_services() {
         int id = -1;
-        String where=" where location_id='"+my_location_id+"' ";
+        String where = " where location_id='" + my_location_id + "' ";
         String transaction_no = My_services.increment_id(where);
         String service_slip_no = tf_service_slip_no.getText();
         String serviced_by = tf_serviced_by.getText();
@@ -2859,6 +2852,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
         tbl_my_services_problems_M.fireTableDataChanged();
         compute_all();
         Alert.set(1, "");
+        
     }
 
     private void add_all_services(String transaction_no) {
@@ -3464,7 +3458,14 @@ public class Dlg_my_services extends javax.swing.JDialog {
     }
 
     private void data_cols_description() {
-        String where = "where transaction_no='" + tf_transaction_no.getText() + "' order by description asc";
+        int row = tbl_my_services.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_my_services to = (to_my_services) tbl_my_services_ALM.get(tbl_my_services.convertRowIndexToModel(row));
+
+        String where = "where transaction_no='" + to.transaction_no + "' order by description asc";
+        System.out.println(where);
         loadData_my_services_description(My_services_description_customers.ret_data(where));
     }
 
@@ -3553,12 +3554,9 @@ public class Dlg_my_services extends javax.swing.JDialog {
             if (jButton5.isEnabled()) {
                 tbl_my_services_description_ALM.remove(row);
                 tbl_my_services_description_M.fireTableDataChanged();
-            } else {
-                if (view_only == 0) {
-                    My_services_description_customers.delete_my_services_description_customers(to);
-                    data_cols_description();
-                }
-
+            } else if (view_only == 0) {
+                My_services_description_customers.delete_my_services_description_customers(to);
+                data_cols_description();
             }
         } else {
             jTextField1.setText(to.description);
@@ -3796,7 +3794,13 @@ public class Dlg_my_services extends javax.swing.JDialog {
     }
 
     private void data_probs() {
-        String where = " where transaction_no='" + tf_transaction_no.getText() + "' order by problem asc";
+        int row = tbl_my_services.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_my_services to = (to_my_services) tbl_my_services_ALM.get(tbl_my_services.convertRowIndexToModel(row));
+        String where = " where transaction_no='" + to.transaction_no + "' order by problem asc";
+
         List<S1_my_services_problems.to_my_services_problems> datas = S1_my_services_problems_customers.ret_data(where);
 
         loadData_my_services_problems(datas);
@@ -3874,13 +3878,10 @@ public class Dlg_my_services extends javax.swing.JDialog {
             if (jButton5.isEnabled()) {
                 tbl_my_services_problems_ALM.remove(row);
                 tbl_my_services_problems_M.fireTableDataChanged();
-            } else {
-                if (view_only == 0) {
-                    S1_my_services_problems.to_my_services_problems to = (S1_my_services_problems.to_my_services_problems) tbl_my_services_problems_ALM.get(tbl_my_services_problems.convertRowIndexToModel(row));
-                    S1_my_services_problems_customers.delete_my_services_problems_customers("" + to.id);
-                    data_probs();
-                }
-
+            } else if (view_only == 0) {
+                S1_my_services_problems.to_my_services_problems to = (S1_my_services_problems.to_my_services_problems) tbl_my_services_problems_ALM.get(tbl_my_services_problems.convertRowIndexToModel(row));
+                S1_my_services_problems_customers.delete_my_services_problems_customers("" + to.id);
+                data_probs();
             }
         } else {
             S1_my_services_problems.to_my_services_problems to = (S1_my_services_problems.to_my_services_problems) tbl_my_services_problems_ALM.get(tbl_my_services_problems.convertRowIndexToModel(row));
@@ -4011,7 +4012,12 @@ public class Dlg_my_services extends javax.swing.JDialog {
     }
 
     private void data_cols_item_replacements() {
-        String where = " where transaction_no='" + tf_transaction_no.getText() + "' order by description asc";
+        int row = tbl_my_services.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_my_services to = (to_my_services) tbl_my_services_ALM.get(tbl_my_services.convertRowIndexToModel(row));
+        String where = " where transaction_no='" + to.transaction_no + "' order by description asc";
         List<S1_my_services_item_replacements.to_my_services_item_replacements> datas = S1_my_services_item_replacements_customers.ret_data2(S1_my_services_item_replacements_customers.ret_data(where));
         loadData_my_services_item_replacements(datas);
     }
@@ -4135,12 +4141,9 @@ public class Dlg_my_services extends javax.swing.JDialog {
                 tbl_my_services_item_replacements_ALM.remove(row);
                 tbl_my_services_item_replacements_M.fireTableDataChanged();
                 tf_service_item_code.grabFocus();
-            } else {
-                if (view_only == 0) {
-                    S1_my_services_item_replacements_customers.delete_my_services_item_replacements_customers("" + to.id);
-                    data_cols_item_replacements();
-                }
-
+            } else if (view_only == 0) {
+                S1_my_services_item_replacements_customers.delete_my_services_item_replacements_customers("" + to.id);
+                data_cols_item_replacements();
             }
         } else {
 
@@ -4299,7 +4302,12 @@ public class Dlg_my_services extends javax.swing.JDialog {
     }
 
     private void data_cols_others() {
-        String where = " where transaction_no='" + tf_transaction_no.getText() + "' ";
+        int row = tbl_my_services.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_my_services to = (to_my_services) tbl_my_services_ALM.get(tbl_my_services.convertRowIndexToModel(row));
+        String where = " where transaction_no='" + to.transaction_no + "' ";
         loadData_my_services_others(My_services_others_customers.ret_data(where));
     }
 
@@ -4397,26 +4405,23 @@ public class Dlg_my_services extends javax.swing.JDialog {
                 tf_service_price1.setText(FitIn.fmt_wc_0(to.amount));
                 btn_edit3.setVisible(true);
             }
-        } else {
-            if (col == 3) {
-                if (view_only == 0) {
-                    My_services_others_customers.delete_my_services_others_customers("" + to.id);
-                    data_cols_others();
-                    tf_service_description1.setText("");
-                    tf_service_qty1.setText("");
-                    tf_service_price1.setText("");
-                    tf_service_description1.grabFocus();
-                }
-
-            } else {
-                tf_service_description1.setText(to.name);
-                tf_service_qty1.setText(FitIn.fmt_woc(to.qty));
-                tf_service_price1.setText(FitIn.fmt_wc_0(to.amount));
-                if (view_only == 0) {
-                    btn_edit3.setVisible(true);
-                }
+        } else if (col == 3) {
+            if (view_only == 0) {
+                My_services_others_customers.delete_my_services_others_customers("" + to.id);
+                data_cols_others();
+                tf_service_description1.setText("");
+                tf_service_qty1.setText("");
+                tf_service_price1.setText("");
+                tf_service_description1.grabFocus();
             }
 
+        } else {
+            tf_service_description1.setText(to.name);
+            tf_service_qty1.setText(FitIn.fmt_woc(to.qty));
+            tf_service_price1.setText(FitIn.fmt_wc_0(to.amount));
+            if (view_only == 0) {
+                btn_edit3.setVisible(true);
+            }
         }
         compute_all();
     }

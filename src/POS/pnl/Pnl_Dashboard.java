@@ -76,6 +76,7 @@ import POS.users.Dlg_users;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
+import POS.users.User_logs;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.DeEncrypter;
@@ -870,7 +871,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("V1.20160305");
+        jLabel1.setText("V1.20160416");
 
         jLabel7.setBackground(new java.awt.Color(16, 88, 197));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -2563,7 +2564,16 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             MyUser.user_id = "" + to.id;
             MyUser.user_name = to.user_name;
             MyUser.user_screen_name = to.screen_name;
-
+            int id=0;
+            String user_id=MyUser.getUser_id();
+            String user_screen_name=MyUser.getUser_screen_name();
+            String ip_address=System.getProperty("local_ip");
+            String created_at=DateType.now();
+            String updated_at=DateType.now();
+            String created_by="";
+            String updated_by="";
+            User_logs.to_user_logs logs=new User_logs.to_user_logs(id, user_id, user_screen_name, ip_address, created_at, updated_at, created_by, updated_by);
+            User_logs.add_data(logs);
             jPanel1.removeAll();
             jPanel1.updateUI();
             set_previleges();
