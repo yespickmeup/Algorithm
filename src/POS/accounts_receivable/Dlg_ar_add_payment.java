@@ -28,6 +28,7 @@ import synsoftech.fields.Field;
 /**
  *
  * @author Guinness
+ * 
  */
 public class Dlg_ar_add_payment extends javax.swing.JDialog {
 

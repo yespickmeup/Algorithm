@@ -90,15 +90,13 @@ public class Main {
     public static void main(final String[] args) {
 
         try {
-            String conf = (args.length > 0 ? args[0]
-                    : null);
+            String conf = (args.length > 0 ? args[0]: null);
+           
             Properties prop = new Properties();
 
             String userHome = System.getProperty("user.home");
             System.out.println(userHome);
-            conf = (conf == null
-                    ? "pos_algorithm.conf"
-                    : conf);
+            conf = (conf == null? "pos_algorithm.conf": conf);
             System.out.println(conf);
             File file = new File(userHome + "/" + conf);
             if (file.exists()) {

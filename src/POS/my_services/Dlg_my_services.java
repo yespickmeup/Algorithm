@@ -225,6 +225,9 @@ public class Dlg_my_services extends javax.swing.JDialog {
         buttonGroup3 = new javax.swing.ButtonGroup();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        pp_barcode = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -387,6 +390,27 @@ public class Dlg_my_services extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Print Barcode");
+        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem2MouseClicked(evt);
+            }
+        });
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem2);
+
+        pp_barcode.setText("Print Barcode");
+        pp_barcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pp_barcodeActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(pp_barcode);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -2129,6 +2153,19 @@ public class Dlg_my_services extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tf_from_locationActionPerformed
 
+    private void pp_barcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pp_barcodeActionPerformed
+        // TODO add your handling code here:z
+
+    }//GEN-LAST:event_pp_barcodeActionPerformed
+
+    private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
+        print_barcode();
+    }//GEN-LAST:event_jMenuItem2MouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        print_barcode();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2225,6 +2262,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -2236,6 +2274,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2254,6 +2293,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JMenuItem pp_barcode;
     private javax.swing.JTable tbl_my_services;
     private javax.swing.JTable tbl_my_services_description;
     private javax.swing.JTable tbl_my_services_item_replacements;
@@ -2753,7 +2793,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
         }
 
         where = where + " and location_id ='" + tf_from_location_id.getText() + "' order by transaction_no asc";
-//                System.out.println(where);
+                System.out.println(where);
         List<to_my_services> datas = My_services.ret_data(where);
 
         loadData_my_services(datas);
@@ -2852,7 +2892,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
         tbl_my_services_problems_M.fireTableDataChanged();
         compute_all();
         Alert.set(1, "");
-        
+
     }
 
     private void add_all_services(String transaction_no) {
@@ -4542,4 +4582,25 @@ public class Dlg_my_services extends javax.swing.JDialog {
             }
         });
     }
+
+    private void print_barcode() {
+        int row = tbl_my_services.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_my_services to = (to_my_services) tbl_my_services_ALM.get(tbl_my_services.convertRowIndexToModel(row));
+        Window p = (Window) this;
+        Dlg_my_services_print_barcodes nd = Dlg_my_services_print_barcodes.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to.transaction_no);
+        nd.setCallback(new Dlg_my_services_print_barcodes.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_my_services_print_barcodes.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
 }

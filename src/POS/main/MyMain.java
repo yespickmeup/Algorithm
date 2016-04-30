@@ -21,7 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -40,18 +39,31 @@ public class MyMain {
         ret_config();
     }
 
-    static InputStream inputStream;
-
     private static void ret_config() {
         String home = System.getProperty("user.home") + "\\my_config.conf";
+
         try {
+
             Properties prop = new Properties();
-            inputStream = new FileInputStream(home);
-            if (inputStream != null) {
-                prop.load(inputStream);
+            String conf = "my_config.conf";
+            String userHome = System.getProperty("user.home");
+            System.out.println(conf);
+            File file = new File(userHome + "/" + conf);
+            if (file.exists()) {
+                InputStream is = new FileInputStream(file);
+                prop.load(is);
             } else {
-                throw new FileNotFoundException("property file '" + home + "' not found!");
+                file = new File(conf);
+                if (file.exists()) {
+                    InputStream is = new FileInputStream(file);
+                    prop.load(is);
+                }
             }
+
+            System.out.println(home);
+            System.setProperty("pool_host", prop.getProperty("pool_host", "localhost"));
+            System.out.println("local_ip: " + System.getProperty("local_ip"));
+            System.out.println("pool_host: " + System.getProperty("pool_host"));
 
             String where = "";
             List<Settings.to_settings> datas = Settings.ret_data(where);
@@ -83,7 +95,6 @@ public class MyMain {
             }
 
             if (setting.receipt_printer_show_dialog == 1) {
-
                 System.setProperty("receipt_printer_show_dialog", "true");
             } else {
                 System.setProperty("receipt_printer_show_dialog", "false");
@@ -123,7 +134,7 @@ public class MyMain {
             //
             System.setProperty("license_code", prop.getProperty("license_code", ""));
             System.setProperty("version", prop.getProperty("version", ""));
-            System.setProperty("pool_host", prop.getProperty("pool_host", "localhost"));
+
             System.setProperty("pool_port", prop.getProperty("pool_port", "3306"));
             System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
             System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
@@ -147,34 +158,25 @@ public class MyMain {
             System.setProperty("module_charge_in_advance", prop.getProperty("module_charge_in_advance", ""));
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
+            System.setProperty("prepaid_payment", prop.getProperty("prepaid_payment", "false"));
+            System.setProperty("charge_payment", prop.getProperty("charge_payment", "false"));
+
             //
-
-            String local_ip = User_logs.getIpAddress();
-            System.setProperty("local_ip", local_ip);
-            System.out.println("LAddress: " + System.getProperty("local_ip"));
-            System.out.println("SAddress: " + System.getProperty("pool_host"));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                inputStream.close();
-                Window p = (Window) new JFrame();
-                loading nd = loading.create(p, true);
-                nd.setTitle("");
-                nd.setCallback(new loading.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, loading.OutputData data) {
-                        new MyMain().start();
-                        closeDialog.ok();
-                    }
-                });
-                Center.setCenter(nd);
-                nd.setVisible(true);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Dlg_settings.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Window p = (Window) new JFrame();
+            loading nd = loading.create(p, true);
+            nd.setTitle("");
+            nd.setCallback(new loading.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, loading.OutputData data) {
+                    new MyMain().start();
+                    closeDialog.ok();
+                }
+            });
+            Center.setCenter(nd);
+            nd.setVisible(true);
         }
     }
 

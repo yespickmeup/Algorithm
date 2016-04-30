@@ -42,6 +42,7 @@ import synsoftech.fields.Field;
 /**
  *
  * @author Maytopacka
+ * 
  */
 public class Dlg_ar_encoding extends javax.swing.JDialog {
 
@@ -2233,19 +2234,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void ar_aging() {
-        Window p = (Window) this;
-        Dlg_ar_aging nd = Dlg_ar_aging.create(p, true);
-        nd.setTitle("");
-//        nd.do_pass("");
-        nd.setCallback(new Dlg_ar_aging.Callback() {
-
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_ar_aging.OutputData data) {
-                closeDialog.ok();
-            }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+       
     }
 
     private void customer_balances() {

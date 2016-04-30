@@ -5,7 +5,6 @@
 package POS.pnl;
 
 import POS.zbak_accounts_payable.Dlg_accounts_payable;
-import POS.accounts_receivable.Dlg_accounts_receivable;
 import POS.accounts_receivable.Dlg_ar_encoding;
 import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
@@ -2439,8 +2438,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void t_ar() {
-        Dlg_accounts_receivable dtc = new Dlg_accounts_receivable();
-        MyFrame.set(dtc.getSurface(), jPanel1, "AR");
+//        Dlg_accounts_receivable dtc = new Dlg_accounts_receivable();
+//        MyFrame.set(dtc.getSurface(), jPanel1, "AR");
     }
 
     private void t_ar_encoding() {
@@ -2578,7 +2577,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             jPanel1.updateUI();
             set_previleges();
             cardLayout.show(pnl_main_holder, "2");
-        }
+        }    
     }
 
     //<editor-fold defaultstate="collapsed" desc=" privileges ">
