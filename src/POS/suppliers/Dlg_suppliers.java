@@ -27,6 +27,7 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 /**
  *
  * @author Maytopacka
+ * 
  */
 public class Dlg_suppliers extends javax.swing.JDialog {
 
@@ -245,7 +246,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(104, 95, 84));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jPanel1.setOpaque(false);
@@ -256,18 +257,18 @@ public class Dlg_suppliers extends javax.swing.JDialog {
 
         tbl_customers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbl_customers.setOpaque(false);

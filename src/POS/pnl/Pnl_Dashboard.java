@@ -2563,21 +2563,21 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             MyUser.user_id = "" + to.id;
             MyUser.user_name = to.user_name;
             MyUser.user_screen_name = to.screen_name;
-            int id=0;
-            String user_id=MyUser.getUser_id();
-            String user_screen_name=MyUser.getUser_screen_name();
-            String ip_address=System.getProperty("local_ip");
-            String created_at=DateType.now();
-            String updated_at=DateType.now();
-            String created_by="";
-            String updated_by="";
-            User_logs.to_user_logs logs=new User_logs.to_user_logs(id, user_id, user_screen_name, ip_address, created_at, updated_at, created_by, updated_by);
+            int id = 0;
+            String user_id = MyUser.getUser_id();
+            String user_screen_name = MyUser.getUser_screen_name();
+            String ip_address = System.getProperty("local_ip");
+            String created_at = DateType.now();
+            String updated_at = DateType.now();
+            String created_by = "";
+            String updated_by = "";
+            User_logs.to_user_logs logs = new User_logs.to_user_logs(id, user_id, user_screen_name, ip_address, created_at, updated_at, created_by, updated_by);
             User_logs.add_data(logs);
             jPanel1.removeAll();
             jPanel1.updateUI();
             set_previleges();
             cardLayout.show(pnl_main_holder, "2");
-        }    
+        }
     }
 
     //<editor-fold defaultstate="collapsed" desc=" privileges ">

@@ -6,9 +6,7 @@
 package POS.main;
 
 import POS.pnl.Pnl_Dashboard;
-import POS.settings.Dlg_settings;
 import POS.settings.Settings;
-import POS.users.User_logs;
 import POS.util.Center;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -16,15 +14,12 @@ import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.CloseDialog;
