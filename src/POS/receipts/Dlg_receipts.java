@@ -1543,6 +1543,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     List<S1_branch_locations.to_branch_locations> branch_locations = new ArrayList();
 
     private void set_default_branch() {
+        Field.Combo combo = (Field.Combo) tf_branch;
         Field.Combo tf_rp_location = (Field.Combo) tf_branch1;
         branch_locations = S1_branch_locations.ret_where("");
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
@@ -1552,7 +1553,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_receipt_no2.setText(to.branch_id);
         tf_receipt_no3.setText(to.location);
         tf_receipt_no4.setText("" + to.id);
-        tf_branch.setText(to.location + " - [" + to.branch + "]");
+        combo.setText(to.location + " - [" + to.branch + "]");
+        combo.setId("" + to.id);
         tf_branch_id.setText("" + to.id);
         tf_rp_location.setText(to.location + " - [" + to.branch + "]");
         tf_rp_location.setId("" + to.id);
@@ -2080,7 +2082,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         String sup = supplier;
                         String sup_id = supllier_id;
                         int status = 0;
-                        S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to.conversion, to.unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
+                        S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to.conversion, to.unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, location, location_id, location, location_id);
                         d.add(to4);
                         S1_receipt_items.add_receipt_items(d, too.receipt_no);
                         data_cols_items();
@@ -2142,9 +2144,16 @@ public class Dlg_receipts extends javax.swing.JDialog {
             Alert.set(0, "NO RECORD");
             return;
         }
+        Field.Combo combo = (Field.Combo) tf_branch;
         int id = -1;
-        String aw = Receipts.increment_id(location_ids);
+        String aw = Receipts.increment_id(combo.getId());
         String receipt_no = aw;
+        String where = " where receipt_no='" + receipt_no + "' ";
+        List<Receipts.to_receipts> datas2 = Receipts.ret_data3(where);
+        if (!datas2.isEmpty()) {
+            Alert.set(0, "Transaction No. Already Exist,");
+            return;
+        }
         String user_name = Users.user_name;
         String session_no = Users.session_no;
         String date_added = DateType.datetime.format(new Date());
@@ -2159,8 +2168,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         date_received = DateType.convert_monthDate_sf(date_received);
         String receipt_type = tf_receipt_type.getText();
         String reference_no = tf_reference_no.getText();
-        String branch = tf_branch.getText();
-        String branch_id = tf_branch_id.getText();
+        String branch = combo.getText();
+        String branch_id = combo.getId();
         double gross_total = FitIn.toDouble(lbl_gross.getText());
         double net_total = FitIn.toDouble(lbl_net.getText());
         String batch_no = lbl_batch_no.getText();
@@ -2192,20 +2201,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String model_id = to3.model_id;
             int status = 0;
             double previous_cost = to3.previous_cost;
-
-            String location = tf_branch.getText();
-            String location_id = tf_branch_id.getText();
-
+            String location = combo.getText();
+            String location_id = combo.getId();
             S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
             acc.add(to4);
         }
-
         Receipts.add_receipts(to1, acc);
-
         tbl_receipt_items_ALM.clear();
         tbl_receipt_items_M.fireTableDataChanged();
         Alert.set(1, remarks);
-
         tf_search.grabFocus();
         tf_search.selectAll();
         init_receipt_no();
@@ -2215,10 +2219,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void init_receipt_no() {
-        String aw = Receipts.increment_id(location_ids);
+        Field.Combo combo = (Field.Combo) tf_branch;
+        String aw = Receipts.increment_id(combo.getId());
         String receipt_no = aw;
         tf_receipt_no.setText(receipt_no);
-        System.out.println("Location Id: " + location_ids);
+        System.out.println("Location Id: " + combo.getId());
         System.out.println("Transaction No.: " + receipt_no);
 
     }
@@ -2261,7 +2266,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
     String my_location_id = "";
 
     private void init_branch_locations() {
-
+        if(!jButton1.isEnabled()){
+            return;
+        }
         String search = tf_branch.getText();
         String branch_id = tf_receipt_no2.getText();
 
@@ -2283,10 +2290,14 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
+                Field.Combo combo = (Field.Combo) tf_branch;
+
                 S1_branch_locations.to_branch_locations to = branch_location_list.
                         get(data.selected_row);
 
-                tf_branch.setText(to.location + " - [" + to.branch + "]");
+                combo.setText(to.location + " - [" + to.branch + "]");
+                combo.setId("" + to.id);
+                System.out.println("Location Id: " + combo.getId());
                 tf_branch_id.setText("" + to.id);
                 my_branch = to.branch;
                 my_branch_id = to.branch_id;
@@ -2331,6 +2342,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list = new ArrayList();
 
     private void init_inventory_barcodes() {
+        final Field.Combo br = (Field.Combo) tf_branch;
         jProgressBar1.setString("Searching...");
         jProgressBar1.setIndeterminate(true);
         Thread t = new Thread(new Runnable() {
@@ -2338,9 +2350,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
             public void run() {
                 String search = tf_search.getText();
                 String where = " where "
-                        + " main_barcode like '" + search + "' and location_id='" + location_ids + "' "
-                        + " or barcode like '" + search + "' and location_id='" + location_ids + "' "
-                        + " or description like '%" + search + "%' and location_id='" + location_ids + "' ";
+                        + " main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                        + " or barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                        + " or description like '%" + search + "%' and location_id='" + br.getId() + "' ";
                 where = where + " order by description asc ";
                 System.out.println(where);
                 inventory_barcoders_list.clear();
@@ -2774,7 +2786,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_receipt_type_id.setText(to.receipt_type_id);
         tf_supplier.setText(to.supplier);
         tf_supplier_id.setText(to.supllier_id);
-        tf_branch.setText(to.branch);
+        Field.Combo br = (Field.Combo) tf_branch;
+        br.setText(to.branch);
+        br.setId("" + to.branch_id);
+
         tf_branch_id.setText(to.branch_id);
         tf_remarks.setText(to.remarks);
         tf_disc.setText(FitIn.fmt_wc_0(to.discount));
@@ -2813,7 +2828,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             jTabbedPane1.setSelectedIndex(0);
             jButton1.setEnabled(false);
             jButton3.setEnabled(true);
-
+            
             if (to.status == 0) {
                 jButton6.setEnabled(true);
             } else {
@@ -3121,7 +3136,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     String receipt_type_id = "";
                     String location = tf_branch.getText();
                     String location_id = tf_branch_id.getText();
-                    S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(to3.id, to3.receipt_no, to3.user_name, to3.session_no, to3.date_added, sup, sup_id, to3.remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, "", "", barcodes, serial_no, to3.batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, to3.branch, to3.branch_id, to3.branch, to3.branch_id);
+                    S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(to3.id, to3.receipt_no, to3.user_name, to3.session_no, to3.date_added, sup, sup_id, to3.remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, "", "", barcodes, serial_no, to3.batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, to3.branch, to3.branch_id, to3.location, to3.location_id);
                     acc.add(to4);
                 }
                 String branch = "";

@@ -1393,9 +1393,9 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
                             String months = DateType.convert_datetime_to_month(date_added);
                             Srpt_item_ledger.field field1 = new Srpt_item_ledger.field("Sales", date, "", in, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
                             return_exchange.add(field1);
-
+                            
                             String months1 = DateType.convert_datetime_to_month(date_added);
-                            Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, ""+id, cost1, price1, months);
                             return_exchange.add(field11);
                         }
 

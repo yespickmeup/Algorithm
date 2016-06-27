@@ -2352,6 +2352,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status Report");
     }
 
+    private void rpt_stock_status2() {
+        Dlg_report_item dtc = new Dlg_report_item();
+        dtc.do_pass();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Stock Take (No Cost)");
+    }
+
     private void rpt_inventory_count() {
         Dlg_rpt_encoding_inventory dtc = new Dlg_rpt_encoding_inventory();
         MyFrame.set(dtc.getSurface(), jPanel1, "Inventory Count Report");
@@ -3124,6 +3130,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 if (data.stmt.equals("Stock Take")) {
                     rpt_stock_status();
+                }
+                if (data.stmt.equals("Stock Take (No Cost)")) {
+                    rpt_stock_status2();
                 }
                 if (data.stmt.equals("Inventory Count")) {
                     rpt_inventory_count();

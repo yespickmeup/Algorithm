@@ -224,6 +224,7 @@ public class Dlg_report_item_ledger_replacements extends javax.swing.JDialog {
         jLabel2.setText("Transaction No:");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setFocusable(false);
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -552,7 +553,7 @@ public class Dlg_report_item_ledger_replacements extends javax.swing.JDialog {
     private void init_sales() {
         String search = jTextField10.getText();
 
-        String where = " where sales_no like '%" + search + "%' ";
+        String where = " where id like '%" + search + "%' ";
         sales_list = S1_sale_item_replacements.ret_data(where);
         Object[][] obj = new Object[sales_list.size()][2];
         int i = 0;

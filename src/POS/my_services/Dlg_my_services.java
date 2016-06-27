@@ -979,7 +979,7 @@ public class Dlg_my_services extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                                 .addGap(134, 134, 134)
                                 .addComponent(btn_edit2))
                             .addComponent(jTextField4)))
@@ -3510,7 +3510,6 @@ public class Dlg_my_services extends javax.swing.JDialog {
     }
 
     List<S1_my_services_description.to_my_services_description> description_list = new ArrayList();
-
     private void init_description() {
         String search = jTextField1.getText();
         description_list.clear();
