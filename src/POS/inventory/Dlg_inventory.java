@@ -22,6 +22,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -320,6 +322,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         tf_barcode = new Field.Input();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -504,7 +508,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_inventory_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,7 +662,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tf_conversion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
 
@@ -823,7 +827,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_assembly_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -879,7 +883,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(dp_from, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
 
@@ -1144,6 +1148,20 @@ public class Dlg_inventory extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/file.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/rotate.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1202,7 +1220,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(161, 161, 161)
@@ -1307,12 +1330,14 @@ public class Dlg_inventory extends javax.swing.JDialog {
                     .addComponent(tf_reorder_level, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_status, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1565,6 +1590,14 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private void tf_barcodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_barcodeKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_barcodeKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        get_console_statements();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        set_console_statements();
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1577,11 +1610,13 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JCheckBox cb_location;
     private com.toedter.calendar.JDateChooser dp_from;
     private com.toedter.calendar.JDateChooser dp_to;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1728,7 +1763,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1942,6 +1977,69 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tf_item_code.grabFocus();
     }
 
+    private List<String> add_inventory_console() {
+        Field.Combo cat = (Field.Combo) tf_category;
+        Field.Combo classi = (Field.Combo) tf_classification;
+        Field.Combo sub_class = (Field.Combo) tf_sub_classification;
+        Field.Combo brands = (Field.Combo) tf_brand;
+        Field.Combo models = (Field.Combo) tf_model;
+        Field.Combo units = (Field.Combo) tf_unit;
+        int id = -1;
+        String barcode = Inventory.increment_id();
+        String description = tf_description.getText();
+        String generic_name = "";
+        String category = tf_category.getText();
+        String category_id = cat.getId();
+        String classification = tf_classification.getText();
+        String classification_id = classi.getId();
+        String sub_classification = tf_sub_classification.getText();
+        String sub_classification_id = sub_class.getId();
+
+        double product_qty = 0;
+        double conversion = 1;
+        double selling_price = FitIn.toDouble(tf_selling_price.getText());
+        String date_added = DateType.now();
+        String user_name = "";
+        String item_type = "";
+        int status = 0;
+        if (tf_status.getText().equalsIgnoreCase("Active")) {
+            status = 1;
+        }
+        String supplier = "";
+        int fixed_price = 0;
+        double cost = FitIn.toDouble(tf_cost.getText());
+        String supplier_id = "";
+        int multi_level_pricing = 0;
+        int vatable = 0;
+        double reorder_level = FitIn.toDouble(tf_reorder_level.getText());
+        double markup = 0;
+        String barcodes = tf_barcode.getText();
+        String brand = tf_brand.getText();
+        String brand_id = brands.getId();
+        String model = tf_model.getText();
+        String model_id = models.getId();
+        int selling_type = 0;
+        if (!tf_selling_type.getText().equalsIgnoreCase("Regular")) {
+            selling_type = 1;
+        }
+        String branch = "";
+        String branch_code = "";
+        String location = "";
+        String location_id = "";
+        String unit = "";
+        if (units.getId() == null || units.getId().isEmpty()) {
+            unit = uom.convert_to_string(tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
+        } else {
+            to_uom to2 = new to_uom(0, tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
+            unit = uom.convert_to_string2(units.getId(), to2);
+        }
+
+        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+
+        List<String> query = Inventory.add_inventory_to_console(to);
+        return query;
+    }
+
     private void select_inventory() {
 
         if (selected_row == -1) {
@@ -2043,6 +2141,79 @@ public class Dlg_inventory extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
 
+    }
+
+    private List<String> edit_inventory_to_console() {
+        if (selected_row == -1) {
+            return new ArrayList();
+        }
+        Field.Combo cat = (Field.Combo) tf_category;
+        Field.Combo classi = (Field.Combo) tf_classification;
+        Field.Combo sub_class = (Field.Combo) tf_sub_classification;
+        Field.Combo brands = (Field.Combo) tf_brand;
+        Field.Combo models = (Field.Combo) tf_model;
+        Field.Combo units = (Field.Combo) tf_unit;
+
+        Inventory.to_inventory to1 = inventory_list.get(selected_row);
+        int id = to1.id;
+        String barcode = to1.barcode;
+        String description = tf_description.getText();
+        String generic_name = "";
+        String category = tf_category.getText();
+        String category_id = cat.getId();
+
+        String classification = tf_classification.getText();
+        String classification_id = classi.getId();
+
+        String sub_classification = tf_sub_classification.getText();
+        String sub_classification_id = sub_class.getId();
+
+        double product_qty = 0;
+        double conversion = 1;
+        double selling_price = FitIn.toDouble(tf_selling_price.getText());
+        String date_added = DateType.now();
+        String user_name = "";
+
+        String item_type = tf_selling_type.getText();
+        int status = 0;
+        if (tf_status.getText().equalsIgnoreCase("Active")) {
+            status = 1;
+        }
+        String supplier = "";
+        int fixed_price = 0;
+        double cost = FitIn.toDouble(tf_cost.getText());
+        String supplier_id = "";
+        int multi_level_pricing = 0;
+        int vatable = 0;
+        double reorder_level = FitIn.toDouble(tf_reorder_level.getText());
+        double markup = 0;
+        String barcodes = tf_barcode.getText();
+
+        String brand = tf_brand.getText();
+        String brand_id = brands.getId();
+        String model = tf_model.getText();
+        String model_id = models.getId();
+        int selling_type = 0;
+        if (!tf_selling_type.getText().equalsIgnoreCase("Regular")) {
+            selling_type = 1;
+        }
+
+        String branch = "";
+        String branch_code = "";
+        String location = "";
+        String location_id = "";
+        String unit = "";
+        if (units.getId() == null || units.getId().isEmpty()) {
+            unit = uom.convert_to_string(tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
+        } else {
+            to_uom to2 = new to_uom(0, tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
+            unit = uom.convert_to_string2(units.getId(), to2);
+        }
+        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+        String where = " where main_barcode='" + barcode + "'  ";
+
+        List<String> query = Inventory.edit_inventory_to_console(to, my_item, where);
+        return query;
     }
 
     private void clear_inventory() {
@@ -2876,8 +3047,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_classification_list.size()][2];
         int i = 0;
         for (S1_inventory_classification.to_inventory_classification to : inventory_classification_list) {
-            obj[i][0] = " " +to.id;
-            obj[i][1] = " " +to.name;
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2911,8 +3082,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_sub_classification_list.size()][2];
         int i = 0;
         for (S1_inventory_sub_classification.to_inventory_sub_classification to : inventory_sub_classification_list) {
-            obj[i][0] = " " +to.id;
-            obj[i][1] = " " +to.name;
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2941,8 +3112,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_brand_list.size()][2];
         int i = 0;
         for (S1_inventory_brand.to_inventory_brand to : inventory_brand_list) {
-            obj[i][0] = " " +to.id;
-            obj[i][1] = " " +to.name;
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -2976,8 +3147,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         Object[][] obj = new Object[inventory_model_list.size()][2];
         int i = 0;
         for (S1_inventory_model.to_inventory_model to : inventory_model_list) {
-            obj[i][0] = " " +to.id;
-            obj[i][1] = " " +to.name;
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.name;
             i++;
         }
         JLabel[] labels = {};
@@ -3303,4 +3474,56 @@ public class Dlg_inventory extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
+    private void get_console_statements() {
+        Window p = (Window) this;
+        Dlg_inventory_get_console nd = Dlg_inventory_get_console.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_inventory_get_console.Callback() {
+            @Override
+            public void insert(CloseDialog closeDialog, Dlg_inventory_get_console.OutputData data) {
+                closeDialog.ok();
+                String myString = "";
+
+                List<String> query = add_inventory_console();
+                for (String s : query) {
+                    myString = myString + "" + s + "\n";
+
+                }
+                StringSelection stringSelection = new StringSelection(myString);
+                Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clpbrd.setContents(stringSelection, null);
+            }
+
+            @Override
+            public void update(CloseDialog closeDialog, Dlg_inventory_get_console.OutputData data) {
+                closeDialog.ok();
+                List<String> query = edit_inventory_to_console();
+                for (String s : query) {
+                    System.out.println(s);
+                }
+            }
+        });
+        Point point = jButton1.getLocationOnScreen();
+        nd.setLocation(point.x + 35, point.y);
+        nd.setVisible(true);
+    }
+
+    private void set_console_statements() {
+        Window p = (Window) this;
+        Dlg_inventory_set_console nd = Dlg_inventory_set_console.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_inventory_set_console.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_inventory_set_console.OutputData data) {
+
+                List<String> query = data.quer;
+                Inventory.set_console(query);
+                Alert.set(0, "Success!");
+
+            }
+        });
+        Point point = jButton2.getLocationOnScreen();
+        nd.setLocation(point.x + 35, point.y);
+        nd.setVisible(true);
+    }
 }

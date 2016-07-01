@@ -3787,11 +3787,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                                 }
                                 index++;
                             }
-
                             Inventory.update_price(to.main_barcode, data.selling_price, uoms);
                             data_cols();
                             tbl_items.setRowSelectionInterval(row, row);
-
                         }
                     });
                     nd.setLocationRelativeTo(jScrollPane3);
