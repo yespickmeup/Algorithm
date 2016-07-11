@@ -604,7 +604,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
             String vatable = "V";
             double addt_amount = field.addtl_amount;
             double wtax = field.wtax;
-            String serial_nos = field.selected_serials;
+            String serial_nos = field.serial_no;
             double net_total = amount - line_discount1;
             Official_receipt.field f = new Official_receipt.field(item_code, barcode, description, unit, qty, selling_price, line_discount, amount, vatable, addt_amount, wtax, serial_nos, net_total);
             fields.add(f);
@@ -616,7 +616,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         vat = vat_percent1;
         Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
         rpt.fields.addAll(fields);
-
+        
         init_report_or(rpt);
         init_report_ar(rpt);
         init_report_dr(rpt);
