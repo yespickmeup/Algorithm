@@ -1834,6 +1834,7 @@ public class Inventory {
                 PreparedStatement stmt = conn.prepareStatement(s);
                 stmt.execute();
             }
+            conn.commit();
             Lg.s(Inventory.class, "Successfully Executed!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
