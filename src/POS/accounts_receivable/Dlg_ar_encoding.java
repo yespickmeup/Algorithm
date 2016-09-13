@@ -11,11 +11,14 @@ import POS.branch_locations.S4_branch_locations;
 import POS.customers.Dlg_customers;
 import POS.customers.Dlg_customers_ar;
 import POS.customers.Customers;
+import POS.discounts.S1_discounts;
 import POS.main.Main;
 import POS.terms.S1_terms;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import POS.util.Users;
@@ -42,7 +45,7 @@ import synsoftech.fields.Field;
 /**
  *
  * @author Maytopacka
- * 
+ *
  */
 public class Dlg_ar_encoding extends javax.swing.JDialog {
 
@@ -298,6 +301,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tf_ap_day1 = new SearchField();
         tf_ap_year1 = new SearchField();
         jLabel28 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        tf_discount_name = new Field.Combo();
+        jLabel29 = new javax.swing.JLabel();
+        tf_discount_rate = new Field.Input();
+        jLabel30 = new javax.swing.JLabel();
+        tf_discount_amount = new Field.Input();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -640,7 +649,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_ar_no, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tf_ar_no, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                                 .addGap(219, 219, 219)
                                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -738,7 +747,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                     .addComponent(jCheckBox3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                 .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_balance, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -964,6 +973,31 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel28.setText("Cheque Date:");
 
+        jLabel11.setText("Discount:");
+
+        tf_discount_name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_discount_nameMouseClicked(evt);
+            }
+        });
+        tf_discount_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_discount_nameActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setText("Rate:");
+
+        tf_discount_rate.setFocusable(false);
+
+        jLabel30.setText("Disc Amount:");
+
+        tf_discount_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_discount_amountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -972,18 +1006,28 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_new1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_add1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_edit1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_delete1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_remarks2)
@@ -998,19 +1042,20 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                             .addComponent(tf_ap_check_holder)
                             .addComponent(tf_ap_check_bank)
                             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tf_or_payment_no)
+                            .addComponent(tf_discount_name)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(tf_ap_check_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tf_or_payment_no)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 103, Short.MAX_VALUE)
-                        .addComponent(btn_new1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_add1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_edit1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_delete1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(tf_discount_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_discount_amount))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1052,14 +1097,24 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(tf_remarks2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_discount_name, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_discount_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_discount_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_edit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_add1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_new1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_delete1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1293,6 +1348,18 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         my_customers();
     }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void tf_discount_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_discount_nameMouseClicked
+        init_discount();
+    }//GEN-LAST:event_tf_discount_nameMouseClicked
+
+    private void tf_discount_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_discount_nameActionPerformed
+        init_discount();
+    }//GEN-LAST:event_tf_discount_nameActionPerformed
+
+    private void tf_discount_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_discount_amountActionPerformed
+
+    }//GEN-LAST:event_tf_discount_amountActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1312,6 +1379,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1330,7 +1398,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1372,6 +1442,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JTextField tf_ar_year;
     private javax.swing.JTextField tf_customer_id;
     private javax.swing.JTextField tf_customer_name;
+    private javax.swing.JTextField tf_discount_amount;
+    private javax.swing.JTextField tf_discount_name;
+    private javax.swing.JTextField tf_discount_rate;
     private javax.swing.JTextField tf_or_payment_no;
     private javax.swing.JTextField tf_paid;
     private javax.swing.JTextField tf_reference_no;
@@ -1486,7 +1559,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private void init_key() {
 
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1495,7 +1568,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_F1, new KeyAction() {
+                KeyEvent.VK_F1, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1503,7 +1576,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         });
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_F2, new KeyAction() {
+                KeyEvent.VK_F2, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1567,10 +1640,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list.size()][4];
         int i = 0;
         for (Customers.to_customers to : customer_list) {
-            obj[i][0] = to.customer_no;
-            obj[i][1] = to.customer_name;
-            obj[i][2] = FitIn.fmt_wc_0(to.credit_limit);
-            obj[i][3] = FitIn.fmt_wc_0(to.balance);
+            obj[i][0] = " " + to.customer_no;
+            obj[i][1] = " " + to.customer_name;
+            obj[i][2] = " " + FitIn.fmt_wc_0(to.credit_limit);
+            obj[i][3] = " " + FitIn.fmt_wc_0(to.balance);
             i++;
         }
         JLabel[] labels = {};
@@ -1582,10 +1655,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             @Override
             public void ok(TableRenderer.OutputData data) {
                 Customers.to_customers to = customer_list.get(data.selected_row);
-                tf_customer_id.setText(data.output[0]);
-                tf_customer_name.setText(data.output[1]);
-                lbl_credit_limit.setText(data.output[2]);
-                lbl_balance.setText(data.output[3]);
+                tf_customer_id.setText(to.customer_no);
+                tf_customer_name.setText(to.customer_name);
+                lbl_credit_limit.setText(FitIn.fmt_wc_0(to.credit_limit));
+                lbl_balance.setText(FitIn.fmt_wc_0(to.balance));
                 tf_term.setText(FitIn.fmt_woc(to.term));
                 tbl_accounts_receivable_payments_ALM.clear();
                 tbl_accounts_receivable_payments_M.fireTableDataChanged();
@@ -1878,20 +1951,49 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable() {
-        int row = tbl_accounts_receivable.getSelectedRow();
-        if (row < 0) {
-            return;
+        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
+        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+        int exists = 0;
+        for (S1_user_previleges.to_user_previleges to : datas) {
+            if (to.previledge.equalsIgnoreCase("Delete AR Transaction")) {
+                exists = 1;
+                break;
+            }
         }
-        to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
-                get(tbl_accounts_receivable.convertRowIndexToModel(row));
-        S1_accounts_receivable.delete_accounts_receivable(to);
+        if (exists == 1) {
 
-        data_cols();
-        tbl_accounts_receivable_payments_ALM.clear();
-        tbl_accounts_receivable_payments_M.fireTableDataChanged();
-        setEmployeeTableModel();
-        clear_accounts_receivable();
-        Alert.set(3, "");
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    int row = tbl_accounts_receivable.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
+                            get(tbl_accounts_receivable.convertRowIndexToModel(row));
+                    S1_accounts_receivable.delete_accounts_receivable(to);
+
+                    data_cols();
+                    tbl_accounts_receivable_payments_ALM.clear();
+                    tbl_accounts_receivable_payments_M.fireTableDataChanged();
+                    setEmployeeTableModel();
+                    clear_accounts_receivable();
+                    Alert.set(3, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+
+        } else {
+            Alert.set(0, "No privilege to delete transaction!");
+        }
+
     }
     private ArrayListModel tbl_accounts_receivable_payments_ALM;
     private Tblaccounts_receivable_paymentsModel tbl_accounts_receivable_payments_M;
@@ -1904,7 +2006,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setModel(tbl_accounts_receivable_payments_M);
         tbl_accounts_receivable_payments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable_payments.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable_payments = {100, 100, 80, 80, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable_payments = {100, 100, 80, 80, 80, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable_payments.length; i < n; i++) {
             if (i == 0 || i == 1) {
                 continue;
@@ -1922,6 +2024,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setFont(new java.awt.Font("Arial", 0, 11));
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 2);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 3);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 4);
     }
 
     private void loadData_accounts_receivable_payments(List<to_accounts_receivable_payments> acc) {
@@ -1932,7 +2035,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     public static class Tblaccounts_receivable_paymentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "OR #", "Check", "Cash", "", "user_name", "amount", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance"
+            "Date", "OR #", "Check", "Cash", "Discount", "", "amount", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance"
         };
 
         public Tblaccounts_receivable_paymentsModel(ListModel listmodel) {
@@ -1966,13 +2069,13 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 case 3:
                     return FitIn.fmt_wc_0(tt.amount) + " ";
                 case 4:
+                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                case 5:
                     if (tt.status == 0) {
                         return " Finalized";
                     } else {
                         return " ---";
                     }
-                case 5:
-                    return tt.user_name;
                 case 6:
                     return tt.amount;
                 case 7:
@@ -2020,17 +2123,16 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
-                get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
         String customer_id = to.customer_id;
         String customer_name = to.customer_name;
         String ar_no = to.ar_no;
         String date_added = DateType.datetime.format(new Date());
         String user_name = Users.user_name;
         double amount = FitIn.toDouble(tf_ap_cash.getText());
-        double discount_amount = 0;
-        double discount_rate = 0;
-        String discount = "";
+        double discount_amount = FitIn.toDouble(tf_discount_amount.getText());
+        double discount_rate = FitIn.toDouble(tf_discount_rate.getText());
+        String discount = tf_discount_name.getText();
         int status = 0;
         double term = 0;
         String date_applied = tf_ap_month.getText() + " " + tf_ap_day.getText() + ", " + tf_ap_year.
@@ -2138,9 +2240,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String date_added = DateType.datetime.format(new Date());
         String user_name = Users.user_name;
         double amount = FitIn.toDouble(tf_ap_cash.getText());
-        double discount_amount = 0;
-        double discount_rate = 0;
-        String discount = "";
+        double discount_amount = FitIn.toDouble(tf_discount_amount.getText());
+        double discount_rate = FitIn.toDouble(tf_discount_rate.getText());
+        String discount = tf_discount_name.getText();
         int status = 0;
         double term = 0;
         String date_applied = tf_ap_month.getText() + " " + tf_ap_day.getText() + ", " + tf_ap_year.
@@ -2200,19 +2302,46 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable_payments() {
-        int row = tbl_accounts_receivable_payments.getSelectedRow();
-        if (row < 0) {
-            return;
+        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
+        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+        int exists = 0;
+        for (S1_user_previleges.to_user_previleges to : datas) {
+            if (to.previledge.equalsIgnoreCase("Delete AR Payment")) {
+                exists = 1;
+                break;
+            }
         }
-        to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
-                get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
-        S1_accounts_receivable_payments.delete_accounts_receivable_payments(to);
-        int i = tbl_accounts_receivable.getSelectedRow();
-        data_cols();
-        tbl_accounts_receivable.setRowSelectionInterval(i, i);
-        data_cols_ar_payments();
-        clear_accounts_receivable_payments();
-        Alert.set(3, "");
+        if (exists == 1) {
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    int row = tbl_accounts_receivable_payments.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
+                            get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
+                    S1_accounts_receivable_payments.delete_accounts_receivable_payments(to);
+                    int i = tbl_accounts_receivable.getSelectedRow();
+                    data_cols();
+                    tbl_accounts_receivable.setRowSelectionInterval(i, i);
+                    data_cols_ar_payments();
+                    clear_accounts_receivable_payments();
+                    Alert.set(3, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+
+        } else {
+            Alert.set(0, "No privelege to delete transaction");
+        }
 
     }
 
@@ -2234,7 +2363,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void ar_aging() {
-       
+
     }
 
     private void customer_balances() {
@@ -2376,5 +2505,55 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
+    }
+
+    List<S1_discounts.to_discounts> discount_list = new ArrayList();
+
+    private void init_discount() {
+        String search = tf_discount_name.getText();
+        discount_list.clear();
+        String where = " where discount_name like '%" + search + "%' ";
+        discount_list = S1_discounts.ret_data3(search);
+        Object[][] obj = new Object[discount_list.size()][2];
+        int i = 0;
+        for (S1_discounts.to_discounts to : discount_list) {
+            obj[i][1] = " " + to.discount_name;
+            obj[i][0] = " " + FitIn.fmt_wc_0(to.discount_rate);
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {50, 150};
+        int width = 0;
+        String[] col_names = {"", ""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf_discount_name, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(final TableRenderer.OutputData data) {
+                SwingUtilities.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        int row = tbl_accounts_receivable.getSelectedRow();
+                        if (row < 0) {
+                            return;
+                        }
+                        to_accounts_receivable to1 = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
+                        S1_discounts.to_discounts to = discount_list.get(data.selected_row);
+                        tf_discount_amount.setText(FitIn.fmt_wc_0(0));
+                        tf_discount_rate.setText(FitIn.fmt_wc_0(to.discount_rate));
+                        tf_discount_name.setText(to.discount_name);
+                        double rate = to.discount_rate;
+                        rate = rate / 100;
+                        rate = rate * to1.remaining_balance;
+                        tf_discount_amount.setText(FitIn.fmt_wc_0(rate));
+                        tf_discount_amount.grabFocus();
+
+                    }
+                });
+
+            }
+        });
     }
 }

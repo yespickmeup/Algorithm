@@ -979,6 +979,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         });
 
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setSelected(true);
         jCheckBox5.setText("All");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1522,7 +1523,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                data_cols();
                 tf_receipt_no.grabFocus();
+
             }
         });
     }
@@ -2266,9 +2269,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
     String my_location_id = "";
 
     private void init_branch_locations() {
-        if(!jButton1.isEnabled()){
-            return;
-        }
+//        if(!jButton1.isEnabled()){
+//            return;
+//        }
         String search = tf_branch.getText();
         String branch_id = tf_receipt_no2.getText();
 
@@ -2828,7 +2831,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             jTabbedPane1.setSelectedIndex(0);
             jButton1.setEnabled(false);
             jButton3.setEnabled(true);
-            
+
             if (to.status == 0) {
                 jButton6.setEnabled(true);
             } else {
@@ -3008,6 +3011,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 List<to_receipt_items> datas = tbl_receipt_items_ALM;
                 for (to_receipt_items to : datas) {
                     String serial = to.serial_nos.replaceAll("\n", "        ");
+                    serial = serial.replaceAll("o", "Φ");
                     Srpt_receipts.field f = new Srpt_receipts.field(to.qty, to.main_barcode, to.barcode, to.description, serial, to.cost, to.qty * to.cost);
                     fields.add(f);
                 }

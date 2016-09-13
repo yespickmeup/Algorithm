@@ -6,6 +6,7 @@
 package POS.accounts_receivable;
 
 import POS.banks.Banks;
+import POS.discounts.S1_discounts;
 import POS.util.DateType;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
@@ -19,16 +20,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 
 /**
  *
  * @author Guinness
- * 
+ *
  */
 public class Dlg_ar_add_payment extends javax.swing.JDialog {
 
@@ -37,22 +40,22 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
      */
     //<editor-fold defaultstate="collapsed" desc=" callback ">
     private Callback callback;
-
+    
     public void setCallback(Callback callback) {
         this.callback = callback;
-
+        
     }
-
+    
     public static interface Callback {
-
+        
         void ok(CloseDialog closeDialog, OutputData data);
     }
-
+    
     public static class InputData {
     }
-
+    
     public static class OutputData {
-
+        
         public final String date_applied;
         public final double cash;
         public final String or_no;
@@ -63,8 +66,11 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         public final String check_date;
         public final double tax_rate;
         public final double tax_amount;
+        public final String discount;
+        public final double discount_rate;
+        public final double discount_amount;
 
-        public OutputData(String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amount, String check_no, String check_date, double tax_rate, double tax_amount) {
+        public OutputData(String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amount, String check_no, String check_date, double tax_rate, double tax_amount, String discount, double discount_rate, double discount_amount) {
             this.date_applied = date_applied;
             this.cash = cash;
             this.or_no = or_no;
@@ -75,8 +81,11 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             this.check_date = check_date;
             this.tax_rate = tax_rate;
             this.tax_amount = tax_amount;
+            this.discount = discount;
+            this.discount_rate = discount_rate;
+            this.discount_amount = discount_amount;
         }
-
+        
     }
 //</editor-fold>
 
@@ -87,50 +96,50 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         initComponents();
         myInit();
     }
-
+    
     private Dlg_ar_add_payment(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
-
+    
     public Dlg_ar_add_payment() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
-
+        
     }
     private Dlg_ar_add_payment myRef;
-
+    
     private void setThisRef(Dlg_ar_add_payment myRef) {
         this.myRef = myRef;
     }
     private static java.util.Map<Object, Dlg_ar_add_payment> dialogContainer = new java.util.HashMap();
-
+    
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
             dialogContainer.remove(parent);
         }
     }
-
+    
     public static Dlg_ar_add_payment create(java.awt.Window parent, boolean modal) {
-
+        
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
         }
-
+        
         return create(parent, ModalityType.MODELESS);
-
+        
     }
-
+    
     public static Dlg_ar_add_payment create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
-
+        
         if (parent instanceof java.awt.Frame) {
-
+            
             Dlg_ar_add_payment dialog = dialogContainer.get(parent);
-
+            
             if (dialog == null) {
                 dialog = new Dlg_ar_add_payment((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
@@ -142,12 +151,12 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                 dialog.setModalityType(modalType);
                 return dialog;
             }
-
+            
         }
-
+        
         if (parent instanceof java.awt.Dialog) {
             Dlg_ar_add_payment dialog = dialogContainer.get(parent);
-
+            
             if (dialog == null) {
                 dialog = new Dlg_ar_add_payment((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
@@ -159,26 +168,26 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                 dialog.setModalityType(modalType);
                 return dialog;
             }
-
+            
         }
-
+        
         return null;
-
+        
     }
     //</editor-fold>    
 
     //<editor-fold defaultstate="collapsed" desc=" main ">
     public static void main(String args[]) {
-
+        
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        
         Dlg_ar_add_payment dialog = Dlg_ar_add_payment.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
-
+        
     }
     //</editor-fold>
 
@@ -192,13 +201,13 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
+        
     }
-
+    
     public javax.swing.JPanel getSurface() {
         return (javax.swing.JPanel) getContentPane();
     }
-
+    
     public void nullify() {
         myRef.setVisible(false);
         myRef = null;
@@ -229,8 +238,8 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         tf_ap_check_no = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         tf_ap_check_holder = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new Button.Success();
+        jButton2 = new Button.Default();
         jLabel17 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -240,18 +249,27 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         tf_ap_cash1 = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         tf_ap_cash2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        tf_discount_name = new Field.Combo();
+        tf_discount_rate = new Field.Input();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tf_discount_amount = new Field.Input();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(104, 95, 84));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("Date Applied:");
 
         jDateChooser3.setDate(new Date());
 
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel26.setText("Reference No:");
 
@@ -267,14 +285,17 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel20.setText("Cheque Bank:");
 
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("Cheque Holder:");
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel22.setText("Amount:");
+        jLabel22.setText("Tender:");
 
         tf_ap_cash.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -289,6 +310,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         });
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel23.setText("Cheque No:");
 
@@ -308,10 +330,12 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("Trans Type:");
 
         buttonGroup1.add(jCheckBox1);
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cash");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -321,6 +345,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         });
 
         buttonGroup1.add(jCheckBox2);
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setText("Cheque");
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,9 +356,11 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         jDateChooser4.setDate(new Date());
         jDateChooser4.setEnabled(false);
 
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setText("Cheque Date:");
 
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel27.setText("Tax (%):");
 
@@ -343,6 +370,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         });
 
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel28.setText("Taxable:");
 
@@ -353,13 +381,49 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Discount:");
+
+        tf_discount_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_discount_name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_discount_nameMouseClicked(evt);
+            }
+        });
+        tf_discount_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_discount_nameActionPerformed(evt);
+            }
+        });
+
+        tf_discount_rate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_discount_rate.setFocusable(false);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Rate:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Disc Amount:");
+
+        tf_discount_amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_discount_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_discount_amountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -375,90 +439,105 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jCheckBox2)
-                        .addGap(257, 257, 257))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_ap_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jDateChooser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                                .addGap(4, 4, 4)
-                                .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_ap_cash1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_ap_cash2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(tf_ap_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(24, 24, 24)
+                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox2))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tf_ap_cash1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tf_ap_cash2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(9, 9, 9))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tf_discount_name, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(tf_discount_rate)
+                            .addComponent(tf_discount_amount))))
+                .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_or_payment_no, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_check_bank, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_ap_check_holder, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_ap_check_no, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_ap_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_discount_name, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_ap_cash1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_discount_rate)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_ap_cash2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_discount_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_or_payment_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_check_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_ap_check_holder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_ap_check_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_ap_cash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_ap_cash1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_ap_cash2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(63, 63, 63))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -533,6 +612,18 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         compute_tax();
     }//GEN-LAST:event_tf_ap_cash2KeyReleased
 
+    private void tf_discount_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_discount_nameMouseClicked
+        init_discount();
+    }//GEN-LAST:event_tf_discount_nameMouseClicked
+
+    private void tf_discount_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_discount_nameActionPerformed
+        init_discount();
+    }//GEN-LAST:event_tf_discount_nameActionPerformed
+
+    private void tf_discount_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_discount_amountActionPerformed
+        
+    }//GEN-LAST:event_tf_discount_amountActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -545,7 +636,9 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -555,6 +648,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField tf_ap_cash;
@@ -563,6 +657,9 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     private javax.swing.JTextField tf_ap_check_holder;
     private javax.swing.JTextField tf_ap_check_no;
     private javax.swing.JTextField tf_check_bank;
+    private javax.swing.JTextField tf_discount_amount;
+    private javax.swing.JTextField tf_discount_name;
+    private javax.swing.JTextField tf_discount_rate;
     private javax.swing.JTextField tf_or_payment_no;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
@@ -570,29 +667,29 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         focus();
         tf_ap_cash.grabFocus();
     }
-
+    
     private void focus() {
         JTextField[] tf = {tf_ap_cash, tf_or_payment_no, tf_check_bank, tf_ap_check_holder, tf_ap_cash, tf_ap_check_no};
         Focus_Fire.onFocus_lostFocus(tf);
         Focus_Fire.select_all(tf);
     }
-
+    
     double amount = 1000;
-
+    
     public void do_pass(double balance) {
         tf_ap_cash.setText(FitIn.fmt_wc_0(balance));
         amount = balance;
         compute_tax();
     }
     int update = 0;
-
+    
     public void do_pass2(double balance, String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amoumt, String check_no, String check_date, double tax_rate, double tax_amount) {
         try {
             jDateChooser3.setDate(DateType.sf.parse(date_applied));
         } catch (ParseException ex) {
             Logger.getLogger(Dlg_ar_add_payment.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         tf_ap_check_holder.setText(check_holder);
         tf_ap_check_no.setText(check_no);
         tf_check_bank.setText(check_bank);
@@ -621,7 +718,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             jDateChooser4.setEnabled(false);
             tf_ap_cash.setText(FitIn.fmt_wc_0(cash));
         }
-
+        
         amount = balance;
         update = 1;
     }
@@ -630,11 +727,11 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     private void disposed() {
         this.dispose();
     }
-
+    
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
-
+                KeyEvent.VK_ESCAPE, new KeyAction() {
+            
             @Override
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
@@ -645,7 +742,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     // </editor-fold>
 
     List<Banks.to_banks> bank_list = new ArrayList();
-
+    
     private void init_banks() {
         String search = tf_check_bank.getText();
         bank_list.clear();
@@ -654,7 +751,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         Object[][] obj = new Object[bank_list.size()][1];
         int i = 0;
         for (Banks.to_banks to : bank_list) {
-
+            
             obj[i][0] = " " + to.bank_name;
             i++;
         }
@@ -674,21 +771,21 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         });
     }
-
+    
     private void compute_cash() {
         if (update == 0) {
             double cash = FitIn.toDouble(tf_ap_cash.getText());
             double check = FitIn.toDouble(tf_ap_cash.getText());
-
+            
             double total = cash + check;
             if (total > amount) {
                 total = amount - check;
                 tf_ap_cash.setText(FitIn.fmt_wc_0(total));
             }
         }
-
+        
     }
-
+    
     private void compute_check() {
         if (update == 0) {
             double cash = FitIn.toDouble(tf_ap_cash.getText());
@@ -697,20 +794,20 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                 tf_ap_cash.setText(FitIn.fmt_wc_0(amount));
             }
         }
-
+        
     }
-
+    
     private void select_type() {
         if (jCheckBox1.isSelected()) {
             tf_check_bank.setEnabled(false);
             tf_ap_check_holder.setEnabled(false);
             tf_ap_check_no.setEnabled(false);
             jDateChooser4.setEnabled(false);
-
+            
             tf_check_bank.setText("");
             tf_ap_check_holder.setText("");
             tf_ap_check_no.setText("");
-
+            
         } else {
             tf_check_bank.setEnabled(true);
             tf_ap_check_holder.setEnabled(true);
@@ -718,7 +815,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             jDateChooser4.setEnabled(true);
         }
     }
-
+    
     private void compute_tax() {
         double tendered = FitIn.toDouble(tf_ap_cash.getText());
         double tax_rate = FitIn.toDouble(tf_ap_cash1.getText()) / 100;
@@ -726,7 +823,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         tax_amount = tendered - ((tendered / 1.12) * tax_rate);
         tf_ap_cash2.setText(FitIn.fmt_wc_0(tax_amount));
     }
-
+    
     private void ok() {
         String date_applied = DateType.sf.format(jDateChooser3.getDate());
         double cash = FitIn.toDouble(tf_ap_cash.getText());
@@ -738,16 +835,63 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         String check_date = DateType.sf.format(jDateChooser3.getDate());
         double tax_rate = FitIn.toDouble(tf_ap_cash1.getText());
         double tax_amount = FitIn.toDouble(tf_ap_cash2.getText());
-
+        
         if (jCheckBox1.isSelected()) {
             check_amount = 0;
         } else {
             cash = 0;
         }
-
+        String discount = tf_discount_name.getText();
+        double discount_rate = FitIn.toDouble(tf_discount_rate.getText());
+        double discount_amount = FitIn.toDouble(tf_discount_amount.getText());
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(date_applied, cash, or_no, check_bank, check_holder, check_amount, check_no, check_date, tax_rate, tax_amount));
+            callback.ok(new CloseDialog(this), new OutputData(date_applied, cash, or_no, check_bank, check_holder, check_amount, check_no, check_date, tax_rate, tax_amount,discount,discount_rate,discount_amount));
         }
     }
-
+    
+    List<S1_discounts.to_discounts> discount_list = new ArrayList();
+    
+    private void init_discount() {
+        String search = tf_discount_name.getText();
+        discount_list.clear();
+        String where = " where discount_name like '%" + search + "%' ";
+        discount_list = S1_discounts.ret_data3(search);
+        Object[][] obj = new Object[discount_list.size()][2];
+        int i = 0;
+        for (S1_discounts.to_discounts to : discount_list) {
+            obj[i][1] = " " + to.discount_name;
+            obj[i][0] = " " + FitIn.fmt_wc_0(to.discount_rate);
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {50, 150};
+        int width = 0;
+        String[] col_names = {"", ""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf_discount_name, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(final TableRenderer.OutputData data) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        S1_discounts.to_discounts to = discount_list.get(data.selected_row);
+                        tf_discount_amount.setText(FitIn.fmt_wc_0(0));
+                        tf_discount_rate.setText(FitIn.fmt_wc_0(to.discount_rate));
+                        tf_discount_name.setText(to.discount_name);
+                        double rate = to.discount_rate;
+                        rate = rate / 100;
+                        rate = rate * amount;
+                        tf_discount_amount.setText(FitIn.fmt_wc_0(rate));
+                        tf_discount_amount.grabFocus();
+                        
+                    }
+                });
+                
+            }
+        });
+    }
+    
 }

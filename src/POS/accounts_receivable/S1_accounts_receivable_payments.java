@@ -249,7 +249,7 @@ public class S1_accounts_receivable_payments {
             //update customers balance
             Lg.s(S1_accounts_receivable_payments.class, "Successfully Added");
             Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
-            double new_balance = cus.balance - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+            double new_balance = cus.balance - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+to_accounts_receivable_payments.discount_amount);
             String s2 = "update  customers set "
                     + "balance= :balance"
                     + " where "
@@ -263,7 +263,7 @@ public class S1_accounts_receivable_payments {
 
             //update customers paid
             to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-            double new_paid = tar.paid + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+            double new_paid = tar.paid + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+to_accounts_receivable_payments.discount_amount);
             String s3 = "update  accounts_receivable set "
                     + "paid= :paid"
                     + " where "
@@ -772,7 +772,7 @@ public class S1_accounts_receivable_payments {
 
             Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
 
-            double new_balance = (cus.balance + previous_cash + previous_check) - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+            double new_balance = (cus.balance + previous_cash + previous_check) - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+to_accounts_receivable_payments.discount_amount);
 
             String s2 = "update  customers set "
                     + "balance= :balance"
@@ -786,7 +786,7 @@ public class S1_accounts_receivable_payments {
             stmt2.execute();
 
             to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-            double new_paid = (tar.paid + to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount)
+            double new_paid = (tar.paid + to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+to_accounts_receivable_payments.discount_amount)
                     - (previous_cash + previous_check);
 
             String s3 = "update  accounts_receivable set "
@@ -819,7 +819,7 @@ public class S1_accounts_receivable_payments {
             Lg.s(S1_accounts_receivable_payments.class, "Successfully Deleted");
 
             Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
-            double new_balance = cus.balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+            double new_balance = cus.balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+ to_accounts_receivable_payments.discount_amount);
             String s2 = "update  customers set "
                     + "balance= :balance"
                     + " where "
@@ -832,7 +832,7 @@ public class S1_accounts_receivable_payments {
             stmt2.execute();
 
             to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-            double new_paid = tar.paid - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+            double new_paid = tar.paid - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+ to_accounts_receivable_payments.discount_amount);
             String s3 = "update  accounts_receivable set "
                     + "paid= :paid"
                     + " where "
@@ -1083,7 +1083,7 @@ public class S1_accounts_receivable_payments {
             Connection conn = MyConnection.connect();
             for (to_accounts_receivable_payments to_accounts_receivable_payments : to_accounts_receivable_payments1) {
                 String s0 = "update accounts_receivable_payments set "
-                        + "status= :status"
+                        + " status= :status"
                         + " where "
                         + " id ='" + to_accounts_receivable_payments.id + "' "
                         + " ";
@@ -1098,7 +1098,7 @@ public class S1_accounts_receivable_payments {
                 //update customers balance
                 Lg.s(S1_accounts_receivable_payments.class, "Successfully Added");
                 Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
-                double new_balance = cus.balance - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+                double new_balance = cus.balance - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
                 String s2 = "update  customers set "
                         + "balance= :balance"
                         + " where "
@@ -1112,7 +1112,7 @@ public class S1_accounts_receivable_payments {
 
                 //update customers paid
                 to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-                double new_paid = tar.paid + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount);
+                double new_paid = tar.paid + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount+ to_accounts_receivable_payments.discount_amount);
                 String s3 = "update  accounts_receivable set "
                         + "paid= :paid"
                         + " where "

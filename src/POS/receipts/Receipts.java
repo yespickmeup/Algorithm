@@ -420,7 +420,7 @@ public class Receipts {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update receipts set "
-                    + "supplier= :supplier"
+                    + " supplier= :supplier"
                     + ",supllier_id= :supllier_id"
                     + ",remarks= :remarks"
                     + ",date_delivered= :date_delivered"

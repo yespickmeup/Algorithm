@@ -427,7 +427,7 @@ public class S1_accounts_receivable {
             Lg.s(S1_accounts_receivable.class, "Successfully Deleted");
 
             Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
-            double total = cus.balance - to_accounts_receivable.amount + to_accounts_receivable.paid;
+            double total = cus.balance - to_accounts_receivable.amount + to_accounts_receivable.paid + to_accounts_receivable.discount_amount;
             String s2 = "update  customers set "
                     + "balance= :balance"
                     + " where "
