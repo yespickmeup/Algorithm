@@ -40,6 +40,20 @@ import mijzcx.synapse.desk.utils.Lg;
  */
 public class Branch_local_uploads {
 
+    public static class to_upload_count {
+
+        String stmt;
+        int total_transactions;
+        int total_items;
+
+        public to_upload_count(String stmt, int total_transactions, int total_items) {
+            this.stmt = stmt;
+            this.total_transactions = total_transactions;
+            this.total_items = total_items;
+        }
+
+    }
+
     public static class to_branch_local_uploads {
 
         public final int id;

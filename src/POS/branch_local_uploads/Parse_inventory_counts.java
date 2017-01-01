@@ -5,6 +5,7 @@
  */
 package POS.branch_local_uploads;
 
+import POS.branch_local_uploads.Branch_local_uploads.to_upload_count;
 import POS.encoding_inventory.Encoding_inventory;
 import POS.util.MyConnection;
 import java.sql.Connection;
@@ -71,8 +72,8 @@ public class Parse_inventory_counts {
 
     public static void main(String[] args) {
         String where = " order by id desc limit 2 ";
-        String stmt = Parse_inventory_counts.compress(where);
-        List<Parse_inventory_counts.field> datas = Parse_inventory_counts.decompress(stmt);
+        to_upload_count stmt = Parse_inventory_counts.compress(where);
+        List<Parse_inventory_counts.field> datas = Parse_inventory_counts.decompress(stmt.stmt);
         System.out.println("Size: " + datas.size());
         for (Parse_inventory_counts.field field : datas) {
             System.out.println(field.item_code + " = " + field.qty);
@@ -179,9 +180,11 @@ public class Parse_inventory_counts {
 
     }
 
-    public static String compress(String where) {
+    public static to_upload_count compress(String where) {
         List<Encoding_inventory.to_encoding_inventory> datas = new ArrayList();
         String stmts = "\"items\":\"";
+        int total_transactions = 0;
+        int total_items = 0;
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -212,6 +215,7 @@ public class Parse_inventory_counts {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
+                total_transactions++;
                 int id = rs.getInt(1);
                 String item_code = rs.getString(2);
                 String barcode = rs.getString(3);
@@ -255,7 +259,10 @@ public class Parse_inventory_counts {
                 stmts = stmts + "}";
 
             }
-            return stmts;
+
+            to_upload_count count = new to_upload_count(stmts, total_transactions, total_items);
+            System.out.println("Inventory Count: " + " Transactions: " + total_transactions + " Items: " + total_items);
+            return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
