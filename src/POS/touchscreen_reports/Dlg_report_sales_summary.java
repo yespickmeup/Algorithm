@@ -636,7 +636,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -697,7 +697,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
                 String where_sales = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                         + " and location_id='" + lo.getId() + "' ";
-                
+
                 String where_sales2 = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                         + " and location_id='" + lo.getId() + "' and status='" + "0" + "' ";
                 if (!jCheckBox1.isSelected()) {
@@ -810,7 +810,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     if (collection.check_amount > 0) {
                         Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", collection.check_bank, "", FitIn.fmt_wc_0(collection.check_amount));
                         my_checks.add(check);
-                       
+
                         check_collections += collection.check_amount;
                     } else {
                         cc_total += collection.amount;
@@ -821,7 +821,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     if (prepayment.check_amount > 0) {
                         Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
                         my_checks.add(check);
-                        
+
                         check_prepayments += prepayment.check_amount;
                     } else {
                         cc_total += prepayment.cash;
@@ -878,31 +878,37 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     cc_last_remittance += remit.amount;
                 }
                 String date2 = "Date as of " + DateType.convert_slash_datetime2(date_from) + " - " + DateType.convert_slash_datetime2(date_to);
-                double ccs = bills_thousand + bills_five_hundred + bills_two_hundred + bills_one_hundred + bills_fifty 
-                        + bills_twenty + coins_ten + coins_five + coins_one + coins_point_fifty + coins_point_twenty_five 
+                double ccs = bills_thousand + bills_five_hundred + bills_two_hundred + bills_one_hundred + bills_fifty
+                        + bills_twenty + coins_ten + coins_five + coins_one + coins_point_fifty + coins_point_twenty_five
                         + coins_point_ten + coins_point_zero_five;
 
                 cc_total = (ccs + total_remittance);
-                System.out.println("CCS: "+ccs);
-                System.out.println("Remit: "+total_remittance);
-                System.out.println("CC: "+cc_total);
+                System.out.println("CCS: " + ccs);
+                System.out.println("Remit: " + total_remittance);
+                System.out.println("CC: " + cc_total);
                 double cc_cashin_end = cc_total - cc_last_remittance;
                 total_check_payments = check_cash_sales + check_collections + check_prepayments;
                 total_cc_payments = cc_cash_sales + cc_collections + cc_prepayments;
                 String SUBREPORT_DIR = System.getProperty("img_path", "C:\\Users\\Guinness\\") + "retail_res\\rpt2\\";
-                String business_name=System.getProperty("business_name", "");
-                String address=System.getProperty("address","");
-                        
-              
-                Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount
-                        , receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred
-                        , bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five
-                        , coins_point_ten, coins_point_zero_five, count_bills_thousand, count_bills_five_hundred
-                        , count_bills_two_hundred, count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten
-                        , count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five
-                        , count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR
-                        , my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments
-                        , total_check_payments, total_cc_payments,date,business_name,address);
+                String business_name = System.getProperty("business_name", "");
+                String address = System.getProperty("address", "");
+                String os_name = System.getProperty("os.name");
+                if(os_name.equalsIgnoreCase("Linux")){
+                    String home=System.getProperty("user.home");
+                    
+                    SUBREPORT_DIR = home + "/retail_res/rpt2/";
+                   
+                }
+                
+                Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
+                         receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
+                         bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
+                         coins_point_ten, coins_point_zero_five, count_bills_thousand, count_bills_five_hundred,
+                         count_bills_two_hundred, count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
+                         count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
+                         count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
+                         my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
+                         total_check_payments, total_cc_payments, date, business_name, address);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_sales_summary.jrxml");
@@ -1029,4 +1035,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
+    
+    
 }
