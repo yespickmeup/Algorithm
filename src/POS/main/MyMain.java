@@ -36,7 +36,11 @@ public class MyMain {
 
     private static void ret_config() {
         String home = System.getProperty("user.home") + "\\my_config.conf";
-
+        String os = System.getProperty("os.name", "");
+        System.out.println("os: " + os);
+        if (!os.equalsIgnoreCase("Linux")) {
+            home = System.getProperty("user.home") + "/my_config.conf";
+        }
         try {
 
             Properties prop = new Properties();

@@ -28,7 +28,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transactionsActionPerformed"/>
@@ -49,7 +48,6 @@
                   <Image iconType="3" name="/POS/img_menu/branch.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ENCODING"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_encode_inventoryActionPerformed"/>
@@ -70,7 +68,6 @@
                   <Image iconType="3" name="/POS/img_menu/item.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="FINALIZE ENCODING"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_finalize_inventoryActionPerformed"/>
@@ -91,7 +88,6 @@
                   <Image iconType="3" name="/POS/img/b_supplier.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SALESMAN"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_salesmanActionPerformed"/>
@@ -112,7 +108,6 @@
                   <Image iconType="3" name="/POS/img/sales.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CASHIER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_salesActionPerformed"/>
@@ -133,7 +128,6 @@
                   <Image iconType="3" name="/POS/img/receipts.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="RECEIPTS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_receiptsActionPerformed"/>
@@ -154,7 +148,6 @@
                   <Image iconType="3" name="/POS/img/receipts.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="FINALIZE RECEIPTS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_finalize_receiptsActionPerformed"/>
@@ -175,7 +168,6 @@
                   <Image iconType="3" name="/POS/img/stock_transfer.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="STOCK TRANSFER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_stock_tranferActionPerformed"/>
@@ -196,7 +188,6 @@
                   <Image iconType="3" name="/POS/img/items.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="INVENTORY ADJUSTER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_inventory_adjusterActionPerformed"/>
@@ -217,7 +208,6 @@
                   <Image iconType="3" name="/POS/img_menu/item_references.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="PURCHASE ORDER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_purchase_orderActionPerformed"/>
@@ -238,7 +228,6 @@
                   <Image iconType="3" name="/POS/img/b_drop.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="VOIDER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_voiderActionPerformed"/>
@@ -259,7 +248,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales_registry.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ACCOUNTS RECEIVABLE"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_arActionPerformed"/>
@@ -280,7 +268,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales_registry.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ACCOUNTS RECEIVABLE ENCODING"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_ar_encodingActionPerformed"/>
@@ -301,7 +288,6 @@
                   <Image iconType="3" name="/POS/img_menu/branch.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ACCOUNTS PAYABLE"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_apActionPerformed"/>
@@ -322,7 +308,6 @@
                   <Image iconType="3" name="/POS/img_menu/branch.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Services"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_t_servicesActionPerformed"/>
@@ -345,7 +330,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="cb_m_items">
@@ -363,7 +347,6 @@
                   <Image iconType="3" name="/POS/img/items.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ITEM"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_itemsActionPerformed"/>
@@ -384,7 +367,6 @@
                   <Image iconType="3" name="/POS/img/category.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CATEGORY"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_categoryActionPerformed"/>
@@ -405,7 +387,6 @@
                   <Image iconType="3" name="/POS/img/users.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="USERS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_usersActionPerformed"/>
@@ -426,7 +407,6 @@
                   <Image iconType="3" name="/POS/img/uom.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="UNIT OF MEASURE"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_uomActionPerformed"/>
@@ -447,7 +427,6 @@
                   <Image iconType="3" name="/POS/img/suppliers.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SUPPLIER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_supplierActionPerformed"/>
@@ -468,7 +447,6 @@
                   <Image iconType="3" name="/POS/img/customer.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CUSTOMERS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_customersActionPerformed"/>
@@ -489,7 +467,6 @@
                   <Image iconType="3" name="/POS/img/customer_item_pricing.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="DISCOUNTS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_discountsActionPerformed"/>
@@ -510,7 +487,6 @@
                   <Image iconType="3" name="/POS/img_menu/item_b.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="BANKS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_banksActionPerformed"/>
@@ -531,7 +507,6 @@
                   <Image iconType="3" name="/POS/img_menu/master_file.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SERVICES"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_servicesActionPerformed"/>
@@ -552,7 +527,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales_registry.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="EXPENSES"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_m_expensesActionPerformed"/>
@@ -575,7 +549,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="cb_r_encoding_inventory">
@@ -593,7 +566,6 @@
                   <Image iconType="3" name="/POS/img_menu/reference_code.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ENCODING INVENTORY"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_encoding_inventoryActionPerformed"/>
@@ -614,7 +586,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SALES REPORT"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_salesActionPerformed"/>
@@ -635,7 +606,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales_ledger.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SALES ITEMS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_sales_itemsActionPerformed"/>
@@ -656,7 +626,6 @@
                   <Image iconType="3" name="/POS/img_menu/item_b.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CASH COUNT"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_cash_countActionPerformed"/>
@@ -677,7 +646,6 @@
                   <Image iconType="3" name="/POS/img_menu/receipts.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="RECEIPTS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_receiptsActionPerformed"/>
@@ -698,7 +666,6 @@
                   <Image iconType="3" name="/POS/img_menu/orders_and_deliveries.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="STOCK TRANSFER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_stock_transferredActionPerformed"/>
@@ -719,7 +686,6 @@
                   <Image iconType="3" name="/POS/img_menu/reference_code.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="STOCKS LEFT by Category"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_stocks_left_categoryActionPerformed"/>
@@ -740,7 +706,6 @@
                   <Image iconType="3" name="/POS/img_menu/reference_code.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="STOCKS LEFT by Supplier"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_stocks_left_supplierActionPerformed"/>
@@ -761,7 +726,6 @@
                   <Image iconType="3" name="/POS/img_menu/reference_code.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ITEMS by Category"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_itemsActionPerformed"/>
@@ -782,7 +746,6 @@
                   <Image iconType="3" name="/POS/img_menu/item_references.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="PURCHASE ORDER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_purchase_orderActionPerformed"/>
@@ -803,7 +766,6 @@
                   <Image iconType="3" name="/POS/img/b_drop.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="VOIDER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_voiderActionPerformed"/>
@@ -824,7 +786,6 @@
                   <Image iconType="3" name="/POS/img_menu/reference_code.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="STOCK STATUS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_stock_statusActionPerformed"/>
@@ -845,7 +806,6 @@
                   <Image iconType="3" name="/POS/img_menu/reference_code.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="STOCK LEDGER"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_stock_ledgerActionPerformed"/>
@@ -866,7 +826,6 @@
                   <Image iconType="3" name="/POS/img_menu/customer2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CUSTOMERS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_r_customersActionPerformed"/>
@@ -889,7 +848,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="cb_b_x_reading">
@@ -907,7 +865,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales_registry.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="X Reading"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_b_x_readingActionPerformed"/>
@@ -928,7 +885,6 @@
                   <Image iconType="3" name="/POS/img_menu/sales_ledger.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Z Reading"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_b_z_readingActionPerformed"/>
@@ -950,7 +906,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="X Reading"/>
                 <Property name="actionCommand" type="java.lang.String" value="READING TRAILS"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_b_reading_trailsActionPerformed"/>
@@ -973,7 +928,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="16" style="0"/>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Menu>
         <MenuItem class="javax.swing.JMenuItem" name="stand_by">
@@ -991,7 +945,6 @@
               <Image iconType="3" name="/POS/img/maintenance.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="STAND BY"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stand_byActionPerformed"/>
@@ -1012,7 +965,6 @@
               <Image iconType="3" name="/POS/img/s_reload.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="LOGOUT"/>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LOGOUTActionPerformed"/>

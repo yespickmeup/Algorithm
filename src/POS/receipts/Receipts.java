@@ -828,7 +828,6 @@ public class Receipts {
             List<String> query = new ArrayList();
             Gson gson = new Gson();
             System.out.println("adding record....");
-
             String s0 = "update receipts set "
                     + " status= :status"
                     + " where "
@@ -837,7 +836,6 @@ public class Receipts {
             s0 = SqlStringUtil.parse(s0)
                     .setNumber("status", 1)
                     .ok();
-
             //<editor-fold defaultstate="collapsed" desc=" insert query1 ">
             String query1 = "insert into receipts("
                     + "receipt_no"
@@ -917,7 +915,6 @@ public class Receipts {
                     .ok();
 
             stmt.addBatch(s2);
-
             for (S1_receipt_items.to_receipt_items to_receipt_items : to_receipt_items1) {
                 if (to_receipt_items.status == 0) {
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_receipt_items.main_barcode, to_receipt_items.barcode, to_receipt_items.branch_id);
@@ -932,7 +929,6 @@ public class Receipts {
                             + ",serial_no='" + new_serial + "' "
                             + " where  main_barcode= '" + to_receipt_items.main_barcode + "' and location_id='" + to_receipt_items.branch_id + "' "
                             + "";
-
                     stmt.addBatch(s4);
                     String s5 = "update inventory set "
                             + " cost= :cost"
@@ -1065,7 +1061,6 @@ public class Receipts {
 
                 }
             }
-
             String json = gson.toJson(query);
             String my_branch_id = MyUser.getBranch_id();
             if (!my_branch_id.equalsIgnoreCase(branch_id)) {
@@ -1079,9 +1074,7 @@ public class Receipts {
                     Local_branch_query_uploads.add_data2(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Receipts", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), branch, branch_id);
                     System.out.println("Record added....");
                 }
-
             }
-
             stmt.executeBatch();
             conn.commit();
 

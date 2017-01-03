@@ -28,9 +28,9 @@ public class Srpt_purchase_order {
     public final String printed_by;
     public final String po_no;
     public final List<field> fields;
-
+    public final String supplier;
     public Srpt_purchase_order(String business_name, String business_owner, String business_address, String date_printed, String sales_date
-            , String printed_by, String po_no) {
+            , String printed_by, String po_no,String supplier) {
         this.business_name = business_name;
         this.business_owner = business_owner;
         this.business_address = business_address;
@@ -39,9 +39,10 @@ public class Srpt_purchase_order {
         this.printed_by = printed_by;
         this.po_no = po_no;
         this.fields = new ArrayList();
+        this.supplier=supplier;
 
     }
-
+    
     public static class field {
 
         String date_added;
@@ -71,7 +72,7 @@ public class Srpt_purchase_order {
             this.unit = unit;
             this.total=total;
         }
-
+        
         public String getBarcode() {
             return barcode;
         }
@@ -194,7 +195,8 @@ public class Srpt_purchase_order {
         String sales_date = "JUNE 24,2013";
         String printed_by = "USER NAME";
         String po_no = "po-1";
-        Srpt_purchase_order rpt = new Srpt_purchase_order(business_name, business_owner, business_address, date_printed, sales_date, printed_by, po_no);
+        String supplier="";
+        Srpt_purchase_order rpt = new Srpt_purchase_order(business_name, business_owner, business_address, date_printed, sales_date, printed_by, po_no,supplier);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_purchase_order.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

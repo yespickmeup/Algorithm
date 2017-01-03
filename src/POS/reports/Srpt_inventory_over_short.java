@@ -5,6 +5,7 @@
  */
 package POS.reports;
 
+import POS.inventory_replenishment.Inventory_replenishment_items;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import java.io.InputStream;
@@ -27,23 +28,24 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author Ronald
  */
-public class Srpt_encoding_inventory {
+public class Srpt_inventory_over_short {
 
-    public final List<field> fields;
+    public final List<Srpt_inventory_over_short.field> fields;
     public final String business_name;
     public final String date;
     public final String printed_by;
     public final String branch;
     public final String location;
     public final String counted_by;
-    public Srpt_encoding_inventory(String business_name, String date, String printed_by, String branch, String location,String counted_by) {
+
+    public Srpt_inventory_over_short(String business_name, String date, String printed_by, String branch, String location, String counted_by) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
         this.printed_by = printed_by;
         this.branch = branch;
         this.location = location;
-        this.counted_by=counted_by;
+        this.counted_by = counted_by;
     }
 
     public static class field {
@@ -55,17 +57,38 @@ public class Srpt_encoding_inventory {
         String description;
         String sheet_no;
         String counted_by;
+        double system_qty;
+        double over_short;
+
         public field() {
         }
 
-        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no,String counted_by) {
+        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no, String counted_by, double system_qty, double over_short) {
             this.date_added = date_added;
             this.qty = qty;
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
             this.sheet_no = sheet_no;
-            this.counted_by=counted_by;
+            this.counted_by = counted_by;
+            this.system_qty = system_qty;
+            this.over_short = over_short;
+        }
+
+        public double getSystem_qty() {
+            return system_qty;
+        }
+
+        public void setSystem_qty(double system_qty) {
+            this.system_qty = system_qty;
+        }
+
+        public double getOver_short() {
+            return over_short;
+        }
+
+        public void setOver_short(double over_short) {
+            this.over_short = over_short;
         }
 
         public String getCounted_by() {
@@ -76,7 +99,6 @@ public class Srpt_encoding_inventory {
             this.counted_by = counted_by;
         }
 
-        
         public String getDate_added() {
             return date_added;
         }
@@ -128,18 +150,18 @@ public class Srpt_encoding_inventory {
     }
 
     public static void main(String[] args) {
-        String where = "";
-        List<Srpt_encoding_inventory.field> datas = ret_data(where);
+        String where = " ";
+        List<Srpt_inventory_over_short.field> datas = new ArrayList();// ret_data(where);
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
         String date = DateType.month_date.format(new Date());
         String printed_by = "Administrator";
         String sheet_no = "";
-        String branch="";
-        String location="";
-        String counted_by="";
-        Srpt_encoding_inventory rpt = new Srpt_encoding_inventory(business_name, date, printed_by,branch,location,counted_by);
+        String branch = "";
+        String location = "";
+        String counted_by = "";
+        Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);
         rpt.fields.addAll(datas);
-        String jrxml = "rpt_encoding_inventory.jrxml";
+        String jrxml = "rpt_inventory_over_or_short.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
         JFrame f = Application.launchMainFrame3(viewer, "Sample", true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -148,7 +170,7 @@ public class Srpt_encoding_inventory {
     public static JasperReport compileJasper(String jrxml) {
         try {
 
-            InputStream is = Srpt_encoding_inventory.class.
+            InputStream is = Srpt_inventory_over_short.class.
                     getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
 
@@ -158,7 +180,7 @@ public class Srpt_encoding_inventory {
         }
     }
 
-    public static JRViewer get_viewer(Srpt_encoding_inventory to, String jrxml) {
+    public static JRViewer get_viewer(Srpt_inventory_over_short to, String jrxml) {
 
         return JasperUtil.getJasperViewer(
                 compileJasper(jrxml),
@@ -166,54 +188,31 @@ public class Srpt_encoding_inventory {
                 JasperUtil.makeDatasource(to.fields));
     }
 
-    public static List<Srpt_encoding_inventory.field> ret_data(String where) {
-        List<Srpt_encoding_inventory.field> datas = new ArrayList();
-        
+    public static List<Srpt_inventory_over_short.field> ret_data(String where, List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments) {
+        List<Srpt_inventory_over_short.field> datas = new ArrayList();
+       
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select "
-                    + "id"
-                    + ",item_code"
-                    + ",barcode"
-                    + ",description"
-                    + ",branch"
-                    + ",branch_id"
-                    + ",location"
-                    + ",location_id"
-                    + ",qty"
-                    + ",date_added"
-                    + ",user_name"
-                    + ",screen_name"
-                    + ",sheet_no"
-                    + ",status"
-                    + ",counted_by"
-                    + ",checked_by"
-                    + " from encoding_inventory "
-                    + " " + where
-                    + " ";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(s0);
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String item_code = rs.getString(2);
-                String barcode = rs.getString(3);
-                String description = rs.getString(4);
-                String branch = rs.getString(5);
-                String branch_id = rs.getString(6);
-                String location = rs.getString(7);
-                String location_id = rs.getString(8);
-                double qty = rs.getDouble(9);
-                String date_added = rs.getString(10);
-                String user_name = rs.getString(11);
-                String screen_name = rs.getString(12);
-                String sheet_no = rs.getString(13);
-                int status = rs.getInt(14);
-                String counted_by = rs.getString(15);
-                String checked_by = rs.getString(16);
 
-                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no,counted_by);
+            for (Inventory_replenishment_items.to_inventory_replenishment_items rep : replenishments) {
+
+                String s0 = "select "
+                        + "sum(qty)"
+                        + " from encoding_inventory "
+                        + " " + where + " and item_code='" + rep.item_code + "'"
+                        + " ";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(s0);
+                double qty = 0;
+                if (rs.next()) {
+                    qty = rs.getDouble(1);
+                }
+                double system_qty = rep.product_qty;
+                double over_short = qty - system_qty;
+                Srpt_inventory_over_short.field field = new field(rep.date_added, qty, rep.item_code, rep.barcode, rep.description, "", "", system_qty, over_short);
                 datas.add(field);
             }
+
             return datas;
         } catch (SQLException e) {
             throw new RuntimeException(e);

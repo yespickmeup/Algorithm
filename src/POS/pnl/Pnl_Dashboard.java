@@ -2539,11 +2539,15 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void check_credentials() {
-        String license_code = System.getProperty("license_code", "");
-        String hdd_license = DeEncrypter.encrypt(getSerialNumber());
-        if (!license_code.equals(hdd_license)) {
-            Alert.set(0, "Invalid license key, please register!");
-            return;
+        String os = System.getProperty("os.name");
+        System.out.println(os);
+        if (!os.equalsIgnoreCase("Linux")) {
+            String license_code = System.getProperty("license_code", "");
+            String hdd_license = DeEncrypter.encrypt(getSerialNumber());
+            if (!license_code.equals(hdd_license)) {
+                Alert.set(0, "Invalid license key, please register!");
+                return;
+            }
         }
 
         String user_name = tf_username.getText();

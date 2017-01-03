@@ -93,11 +93,11 @@ public class S1_purchase_orders {
             stmt.execute();
             Lg.s(S1_purchase_orders.class, "Successfully Added");
 
-
+            System.out.println("Account Id: "+to_purchase_orders.account_id);
             S1_suppliers.to_suppliers cus = ret_customer_balance(to_purchase_orders.account_id);
             double new_balance = cus.balance + to_purchase_orders.amount;
             String s2 = "update  suppliers set "
-                    + "balance= :balance"
+                    + " balance= :balance"
                     + " where "
                     + " customer_no ='" + to_purchase_orders.account_id + "' "
                     + " ";
@@ -126,7 +126,7 @@ public class S1_purchase_orders {
             String type = "RECEIPTS";
             String or_no = to_purchase_orders.po_no;
 //            S1_accounts_payable.to_accounts_payable to = new S1_accounts_payable.to_accounts_payable(false,status, customer_id, customer_name, ar_no, date_added, user_name
-//                    , amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no,0,0);
+//                    , amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no,0,0,0);
 //            S1_accounts_payable.add_accounts_receivable(to);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -154,7 +154,7 @@ public class S1_purchase_orders {
                     + " from  suppliers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
-
+            System.out.println("S0: "+s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
@@ -172,7 +172,7 @@ public class S1_purchase_orders {
                 to1 = new S1_suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
             }
             return to1;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
