@@ -39,17 +39,26 @@ public class Srpt_print_barcodes {
         String description;
         double price;
         boolean selected;
-
+        int count;
         public field() {
         }
 
-        public field(String barcode, String description, double price, boolean selected) {
+        public field(String barcode, String description, double price, boolean selected,int count) {
             this.barcode = barcode;
             this.description = description;
             this.price = price;
             this.selected = selected;
+            this.count=count;
         }
 
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+        
         public boolean isSelected() {
             return selected;
         }
@@ -91,7 +100,7 @@ public class Srpt_print_barcodes {
             String barcode = "0000000" + i;
             String description = "Description";
             double price = 100;
-            Srpt_print_barcodes.field field = new field(barcode, description, price, true);
+            Srpt_print_barcodes.field field = new field(barcode, description, price, true,1);
             fields.add(field);
         }
         Srpt_print_barcodes rpt = new Srpt_print_barcodes();
@@ -214,7 +223,7 @@ public class Srpt_print_barcodes {
                 if (is_item_code == 0) {
                     code = barcode;
                 }
-                Srpt_print_barcodes.field field = new field(code, description, selling_price, false);
+                Srpt_print_barcodes.field field = new field(code, description, selling_price, false,1);
                 datas.add(field);
             }
             return datas;

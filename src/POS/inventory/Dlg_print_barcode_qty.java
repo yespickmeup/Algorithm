@@ -1,33 +1,35 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.main;
+package POS.inventory;
 
+import POS.util.Alert;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
-import javax.swing.Timer;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import synsoftech.fields.Button;
+import synsoftech.fields.Field;
 
 /**
  *
- * @author Dummy
+ * @author Guinness
  */
-public class loading extends javax.swing.JDialog {
+public class Dlg_print_barcode_qty extends javax.swing.JDialog {
 
     /**
-     * Creates new form loading
+     * Creates new form Dlg_print_barcode_qty
      */
     //<editor-fold defaultstate="collapsed" desc=" callback ">
     private Callback callback;
 
     public void setCallback(Callback callback) {
         this.callback = callback;
-
 
     }
 
@@ -40,34 +42,44 @@ public class loading extends javax.swing.JDialog {
     }
 
     public static class OutputData {
+
+        public final int qty;
+
+        public OutputData(int qty) {
+            this.qty = qty;
+        }
+
     }
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private loading(java.awt.Frame parent, boolean modal) {
+    private Dlg_print_barcode_qty(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private loading(java.awt.Dialog parent, boolean modal) {
+    private Dlg_print_barcode_qty(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
+        setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public loading() {
+    public Dlg_print_barcode_qty() {
         super();
+        setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private loading myRef;
+    private Dlg_print_barcode_qty myRef;
 
-    private void setThisRef(loading myRef) {
+    private void setThisRef(Dlg_print_barcode_qty myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, loading> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_print_barcode_qty> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -75,7 +87,7 @@ public class loading extends javax.swing.JDialog {
         }
     }
 
-    public static loading create(java.awt.Window parent, boolean modal) {
+    public static Dlg_print_barcode_qty create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -85,14 +97,14 @@ public class loading extends javax.swing.JDialog {
 
     }
 
-    public static loading create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_print_barcode_qty create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            loading dialog = dialogContainer.get(parent);
+            Dlg_print_barcode_qty dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new loading((java.awt.Frame) parent, false);
+                dialog = new Dlg_print_barcode_qty((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -106,10 +118,10 @@ public class loading extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            loading dialog = dialogContainer.get(parent);
+            Dlg_print_barcode_qty dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new loading((java.awt.Dialog) parent, false);
+                dialog = new Dlg_print_barcode_qty((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -136,8 +148,7 @@ public class loading extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-
-        loading dialog = loading.create(new javax.swing.JFrame(), true);
+        Dlg_print_barcode_qty dialog = Dlg_print_barcode_qty.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -153,7 +164,6 @@ public class loading extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
 
     }
 
@@ -177,64 +187,71 @@ public class loading extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new Field.Input();
+        jButton2 = new Button.Success();
+        jButton3 = new Button.Default();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/496.gif"))); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Count:");
 
-        jLabel5.setBackground(new java.awt.Color(16, 88, 197));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("Stock Monitoring, Inventory System");
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setText("1");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setBackground(new java.awt.Color(16, 88, 197));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("SMIS");
+        jButton2.setText("Ok");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jLabel9.setBackground(new java.awt.Color(16, 88, 197));
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("Version 1.20170109");
+        jButton3.setText("Cancel");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField2)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel9)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,26 +267,40 @@ public class loading extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        ok();
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ok();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        disposed();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField2;
+    // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-        init_timer();
     }
 
-    public void do_pass() {
+    public void do_pass(int qty) {
+        jTextField2.setText("" + qty);
+        jTextField2.grabFocus();
     }
+
     // <editor-fold defaultstate="collapsed" desc="Key">
-
     private void disposed() {
         this.dispose();
     }
@@ -285,42 +316,17 @@ public class loading extends javax.swing.JDialog {
             }
         });
     }
+
     // </editor-fold>
-//     private void myInit() {
-//       
-//    }
-    int i = 0;
-    Timer t = new Timer(1000, new ActionListener() {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            if (i == 3) {
-               ok1();
-            }
-
-            if (i == 1) {
-//                System_start.do_announcements();
-            }
-            i++;
+    private void ok() {
+        int qty = FitIn.toInt(jTextField2.getText());
+        if (qty < 1) {
+            Alert.set(0, "Input count!");
+            jTextField2.grabFocus();
+            return;
         }
-    });
-
-    private void init_timer() {
-        t.start();
-    }
-
-    private void close() {
-        this.dispose();
-        Main aw = new Main();
-
-//         Center.setCenter(d);
-//         d.setVisible(true);
-    }
-    private void ok1() {
-        this.dispose();
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData());
+            callback.ok(new CloseDialog(this), new OutputData(qty));
         }
     }
 }

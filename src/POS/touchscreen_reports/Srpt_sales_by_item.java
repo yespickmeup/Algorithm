@@ -63,11 +63,11 @@ public class Srpt_sales_by_item {
         double price;
         double discount;
         double amount;
-
+        String sales_no;
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount,String sales_no) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -82,8 +82,17 @@ public class Srpt_sales_by_item {
             this.price = price;
             this.discount = discount;
             this.amount = amount;
+            this.sales_no=sales_no;
         }
 
+        public String getSales_no() {
+            return sales_no;
+        }
+
+        public void setSales_no(String sales_no) {
+            this.sales_no = sales_no;
+        }
+        
         public String getItem_code() {
             return item_code;
         }
@@ -282,7 +291,7 @@ public class Srpt_sales_by_item {
                     + ",model_id"
                     + " from sale_items  "
                     + " " + where
-                    + " group by item_code,barcode,unit,selling_price,discount_amount order by description asc";
+                    + " group by item_code,barcode,unit,selling_price,discount_amount order by sales_no,id asc";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -349,7 +358,7 @@ public class Srpt_sales_by_item {
 
                 double amount = (price * product_qty) - discount;
 
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount,sales_no);
                 fields.add(field);
             }
 

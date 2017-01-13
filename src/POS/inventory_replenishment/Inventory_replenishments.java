@@ -165,7 +165,7 @@ public class Inventory_replenishments {
                 stmt.addBatch(s2);
 
                 String s4 = "update inventory_barcodes set "
-                        + "product_qty='" + 0 + "'"
+                        + " product_qty='" + 0 + "'"
                         + " where  main_barcode= '" + to_inventory_replenishment_items.main_barcode + "' and location_id='" + to_inventory_replenishment_items.location_id + "' "
                         + "";
 

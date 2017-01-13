@@ -883,9 +883,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         + coins_point_ten + coins_point_zero_five;
 
                 cc_total = (ccs + total_remittance);
-                System.out.println("CCS: " + ccs);
-                System.out.println("Remit: " + total_remittance);
-                System.out.println("CC: " + cc_total);
+               
                 double cc_cashin_end = cc_total - cc_last_remittance;
                 total_check_payments = check_cash_sales + check_collections + check_prepayments;
                 total_cc_payments = cc_cash_sales + cc_collections + cc_prepayments;
@@ -895,11 +893,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String os_name = System.getProperty("os.name");
                 if(os_name.equalsIgnoreCase("Linux")){
                     String home=System.getProperty("user.home");
-                    
                     SUBREPORT_DIR = home + "/retail_res/rpt2/";
-                   
                 }
-                
+                date=DateType.slash.format(jDateChooser1.getDate())+ " - "+DateType.slash.format(jDateChooser2.getDate());
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
                          receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
                          bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,

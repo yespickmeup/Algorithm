@@ -1873,6 +1873,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.setFont(new java.awt.Font("Arial", 0, 11));
         TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 3);
         TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 4);
+       
     }
 
     private void loadData_receipt_items(List<to_receipt_items> acc) {

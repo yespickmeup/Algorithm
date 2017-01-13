@@ -7,11 +7,14 @@ package POS.inventory;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.util.Alert;
+import POS.util.Dlg_confirm_action;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -215,15 +218,18 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_inventory_barcodes = new javax.swing.JTable();
-        jButton1 = new Button.Success();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tf_search = new Field.Search();
         jTextField2 = new Field.Input();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new Button.Success();
+        jButton2 = new Button.Warning();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -256,13 +262,6 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbl_inventory_barcodes);
 
-        jButton1.setText("Preview");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("No. of Items :");
 
         jLabel3.setText("0");
@@ -282,9 +281,6 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 jTextField2ActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Count:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("What to Print?");
@@ -314,24 +310,22 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                    .addComponent(tf_search)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(tf_search))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox2)
+                                .addGap(71, 71, 71)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -339,9 +333,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBox1)
@@ -349,16 +341,78 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Print Barcode", jPanel2);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jButton1.setText("Preview");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Delete All");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Queue", jPanel6);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -473,6 +527,14 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       delete_all();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       select_item2() ;
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -480,31 +542,37 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tbl_inventory_barcodes;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+        jTextField2.setVisible(false);
         init_key();
         set_default_branch();
         init_tbl_inventory_barcodes(tbl_inventory_barcodes);
+        init_tbl_inventory_barcodes2(jTable1);
         data_cols();
+
     }
 
     public void do_pass() {
@@ -524,7 +592,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -544,10 +612,11 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
             @Override
             public void run() {
                 List<Srpt_print_barcodes.field> fields = new ArrayList();
-                List<Srpt_print_barcodes.field> datas = tbl_inventory_barcodes_ALM;
+                List<Srpt_print_barcodes.field> datas = tbl_inventory_barcodes_ALM2;
+
                 for (Srpt_print_barcodes.field to : datas) {
                     if (to.selected == true) {
-                        int count = FitIn.toInt(jTextField2.getText());
+                        int count = FitIn.toInt("" + to.count);
                         for (int i = 0; i < count; i++) {
                             String barcode = to.barcode;
                             if (barcode.equals("")) {
@@ -555,7 +624,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                             }
                             String description = to.description;
                             double price = to.price;
-                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false);
+                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false, to.count);
                             fields.add(field);
                         }
                     }
@@ -564,6 +633,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_print_barcodes.jrxml";
                 report_customers_aging(rpt, jrxml);
+                jTabbedPane1.setSelectedIndex(2);
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
 
@@ -812,17 +882,35 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        int col = tbl_inventory_barcodes.getSelectedColumn();
-        if (col == 3) {
-            Srpt_print_barcodes.field to = (Srpt_print_barcodes.field) tbl_inventory_barcodes_ALM.get(row);
-            if (to.selected == false) {
-                to.setSelected(true);
-            } else {
-                to.setSelected(false);
-            }
+        final Srpt_print_barcodes.field to = (Srpt_print_barcodes.field) tbl_inventory_barcodes_ALM.get(row);
+//        int col = tbl_inventory_barcodes.getSelectedColumn();
+//        if (col == 3) {
+//            Srpt_print_barcodes.field to = (Srpt_print_barcodes.field) tbl_inventory_barcodes_ALM.get(row);
+//            if (to.selected == false) {
+//                to.setSelected(true);
+//            } else {
+//                to.setSelected(false);
+//            }
+//
+//        }
+//        tbl_inventory_barcodes_M.fireTableDataChanged();
+        Window p = (Window) this;
+        Dlg_print_barcode_qty nd = Dlg_print_barcode_qty.create(p, true);
+        nd.setTitle("");
 
-        }
-        tbl_inventory_barcodes_M.fireTableDataChanged();
+        nd.setCallback(new Dlg_print_barcode_qty.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_print_barcode_qty.OutputData data) {
+                closeDialog.ok();
+
+                Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.description, to.price, true, data.qty);
+                tbl_inventory_barcodes_ALM2.add(field);
+                Alert.set(1, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private void count() {
@@ -835,4 +923,224 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         }
         jLabel3.setText("" + count);
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" inventory_barcodes "> 
+    public static ArrayListModel tbl_inventory_barcodes_ALM2;
+    public static Tblinventory_barcodesModel2 tbl_inventory_barcodes_M2;
+
+    public static void init_tbl_inventory_barcodes2(JTable jTable1) {
+        tbl_inventory_barcodes_ALM2 = new ArrayListModel();
+        tbl_inventory_barcodes_M2 = new Tblinventory_barcodesModel2(tbl_inventory_barcodes_ALM2);
+        jTable1.setModel(tbl_inventory_barcodes_M2);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable1.setRowHeight(25);
+        int[] tbl_widths_inventory_barcodes = {100, 100, 100, 100, 40};
+        for (int i = 0, n = tbl_widths_inventory_barcodes.length; i < n; i++) {
+            if (i == 1) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(jTable1, i, tbl_widths_inventory_barcodes[i]);
+        }
+        Dimension d = jTable1.getTableHeader().getPreferredSize();
+        d.height = 25;
+        jTable1.getTableHeader().setPreferredSize(d);
+        jTable1.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        jTable1.setRowHeight(25);
+        jTable1.setFont(new java.awt.Font("Arial", 0, 12));
+        TableColumn tc = jTable1.getColumnModel().getColumn(4);
+        tc.setCellEditor(jTable1.getDefaultEditor(Boolean.class));
+        tc.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
+
+//        tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
+        tc.setHeaderRenderer(new Dlg_print_barcode.CheckBoxHeader(new Dlg_print_barcode.MyItemListener()));
+    }
+
+    public static class MyItemListener2 implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            Object source = e.getSource();
+//            if (source instanceof AbstractButton == false) {
+//                return;
+//            }
+//            boolean checked = e.getStateChange() == ItemEvent.SELECTED;
+//            for (int x = 0, y = new Dlg_print_barcode().tbl_inventory_barcodes.getRowCount(); x < y; x++) {
+//                new Dlg_print_barcode().tbl_inventory_barcodes.setValueAt(checked, x, 0);
+//            }
+        }
+    }
+
+    public static class CheckBoxHeader2 extends JCheckBox
+            implements TableCellRenderer, MouseListener {
+
+        protected CheckBoxHeader2 rendererComponent;
+        protected int column;
+        protected boolean mousePressed = false;
+
+        public CheckBoxHeader2(ItemListener itemListener) {
+            rendererComponent = this;
+            rendererComponent.addItemListener(itemListener);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            if (table != null) {
+                JTableHeader header = table.getTableHeader();
+                if (header != null) {
+                    rendererComponent.setForeground(header.getForeground());
+                    rendererComponent.setOpaque(true);
+                    rendererComponent.setBackground(new java.awt.Color(255, 255, 255));
+                    rendererComponent.setHorizontalAlignment(Align.CENTER);
+                    header.addMouseListener(rendererComponent);
+                }
+            }
+            setColumn(column);
+            rendererComponent.setText("");
+            setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+            return rendererComponent;
+        }
+
+        protected void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        protected void handleClickEvent(MouseEvent e) {
+            if (mousePressed) {
+                mousePressed = false;
+                JTableHeader header = (JTableHeader) (e.getSource());
+                JTable tableView = header.getTable();
+                TableColumnModel columnModel = tableView.getColumnModel();
+                int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+                int column1 = tableView.convertColumnIndexToModel(viewColumn);
+                if (viewColumn == this.column && e.getClickCount() == 1 && column1 != -1) {
+                    doClick();
+                }
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            handleClickEvent(e);
+            ((JTableHeader) e.getSource()).repaint();
+            List<Srpt_print_barcodes.field> datas = tbl_inventory_barcodes_ALM2;
+            boolean selected = false;
+            if (this.isSelected()) {
+                selected = true;
+            }
+            for (Srpt_print_barcodes.field to : datas) {
+                to.setSelected(selected);
+            }
+            e.consume();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            mousePressed = true;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+    }
+
+    public static void loadData_inventory_barcodes2(List<Srpt_print_barcodes.field> acc) {
+        tbl_inventory_barcodes_ALM2.clear();
+        tbl_inventory_barcodes_ALM2.addAll(acc);
+    }
+
+    public static class Tblinventory_barcodesModel2 extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Code", "Description", "Price", "Count", ""
+        };
+
+        public Tblinventory_barcodesModel2(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 4) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            Srpt_print_barcodes.field tt = (Srpt_print_barcodes.field) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.barcode;
+                case 1:
+                    return " " + tt.description;
+                case 2:
+                    return " " + FitIn.fmt_wc_0(tt.price);
+                case 3:
+                    return " " + FitIn.fmt_woc(tt.count);
+                default:
+                    return tt.selected;
+            }
+        }
+    }
+
+    private void select_item2() {
+        int row = jTable1.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+
+        int col = jTable1.getSelectedColumn();
+        if (col == 4) {
+            Srpt_print_barcodes.field to = (Srpt_print_barcodes.field) tbl_inventory_barcodes_ALM2.get(row);
+            if (to.selected == false) {
+                to.setSelected(true);
+            } else {
+                to.setSelected(false);
+            }
+
+        }
+        tbl_inventory_barcodes_M2.fireTableDataChanged();
+
+    }
+    private void delete_all(){
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+            
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                 tbl_inventory_barcodes_ALM2.clear();
+        tbl_inventory_barcodes_M2.fireTableDataChanged();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+       
+    }
+//</editor-fold> 
+
 }

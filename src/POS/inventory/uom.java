@@ -47,7 +47,6 @@ public class uom {
         return uoms;
     }
 
-    
     public static String convert_to_string2(String uoms, Dlg_inventory_uom.to_uom default_uom) {
         List<Dlg_inventory_uom.to_uom> datas = new ArrayList();
         String[] list = uoms.split(",");
@@ -81,26 +80,30 @@ public class uom {
     }
 
     public static Dlg_inventory_uom.to_uom default_uom(String uoms) {
-        String[] list = uoms.split(",");
-        Dlg_inventory_uom.to_uom to = new Dlg_inventory_uom.to_uom(0, "", 0, 0, 0);
-       
-        for (String s : list) {
-            int i = s.indexOf(":");
-            int ii = s.indexOf("/");
-            int iii = s.indexOf("^");
-           
-            String uom = s.substring(1, i);
-            double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-            double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
-            int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-            if (is_default == 1) {
-                to = new Dlg_inventory_uom.to_uom(0, uom, conversion, selling_price, is_default);
-                break;
-            }
-        }
-        
 
-        return to;
+        try {
+            String[] list = uoms.split(",");
+            Dlg_inventory_uom.to_uom to = new Dlg_inventory_uom.to_uom(0, "", 0, 0, 0);
+
+            for (String s : list) {
+                int i = s.indexOf(":");
+                int ii = s.indexOf("/");
+                int iii = s.indexOf("^");
+
+                String uom = s.substring(1, i);
+                double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+                int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+                if (is_default == 1) {
+                    to = new Dlg_inventory_uom.to_uom(0, uom, conversion, selling_price, is_default);
+                    break;
+                }
+            }
+            return to;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public static void main(String[] args) {

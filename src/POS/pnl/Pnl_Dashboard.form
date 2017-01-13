@@ -1097,7 +1097,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="V1.20160416"/>
+            <Property name="text" type="java.lang.String" value="V1.20170109"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">

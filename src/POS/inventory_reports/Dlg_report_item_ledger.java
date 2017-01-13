@@ -702,7 +702,6 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
         search.load();
         Thread t;
         t = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 String month = "" + (jMonthChooser1.getMonth() + 1);
@@ -1714,7 +1713,8 @@ public class Dlg_report_item_ledger extends javax.swing.JDialog {
         });
         t.start();
     }
-
+    
+    
     private void report_sales_items(final Srpt_item_ledger to, String jrxml_name) {
         pnl_report.removeAll();
         pnl_report.setLayout(new BorderLayout());

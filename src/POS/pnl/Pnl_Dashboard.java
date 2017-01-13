@@ -37,6 +37,7 @@ import POS.inventory.Dlg_price_inquire;
 import POS.inventory.Dlg_print_barcode;
 import POS.inventory.Dlg_inventory_price_updates;
 import POS.inventory_replenishment.Dlg_inventory_replenishment;
+import POS.inventory_reports.Dlg_reorder_level;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.main.Main;
 import static POS.main.MyMain.getSerialNumber;
@@ -230,7 +231,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         transactions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/master_file.png"))); // NOI18N
         transactions.setText("TRANSACTIONS");
         transactions.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        transactions.setOpaque(true);
         transactions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transactionsActionPerformed(evt);
@@ -242,7 +242,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_encode_inventory.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_encode_inventory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/branch.png"))); // NOI18N
         cb_t_encode_inventory.setText("ENCODING");
-        cb_t_encode_inventory.setOpaque(true);
         cb_t_encode_inventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_encode_inventoryActionPerformed(evt);
@@ -255,7 +254,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_finalize_inventory.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_finalize_inventory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/item.png"))); // NOI18N
         cb_t_finalize_inventory.setText("FINALIZE ENCODING");
-        cb_t_finalize_inventory.setOpaque(true);
         cb_t_finalize_inventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_finalize_inventoryActionPerformed(evt);
@@ -268,7 +266,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_salesman.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_salesman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/b_supplier.png"))); // NOI18N
         cb_t_salesman.setText("SALESMAN");
-        cb_t_salesman.setOpaque(true);
         cb_t_salesman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_salesmanActionPerformed(evt);
@@ -281,7 +278,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_sales.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_sales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/sales.png"))); // NOI18N
         cb_t_sales.setText("CASHIER");
-        cb_t_sales.setOpaque(true);
         cb_t_sales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_salesActionPerformed(evt);
@@ -294,7 +290,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_receipts.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_receipts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/receipts.png"))); // NOI18N
         cb_t_receipts.setText("RECEIPTS");
-        cb_t_receipts.setOpaque(true);
         cb_t_receipts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_receiptsActionPerformed(evt);
@@ -307,7 +302,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_finalize_receipts.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_finalize_receipts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/receipts.png"))); // NOI18N
         cb_t_finalize_receipts.setText("FINALIZE RECEIPTS");
-        cb_t_finalize_receipts.setOpaque(true);
         cb_t_finalize_receipts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_finalize_receiptsActionPerformed(evt);
@@ -320,7 +314,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_stock_tranfer.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_stock_tranfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/stock_transfer.png"))); // NOI18N
         cb_t_stock_tranfer.setText("STOCK TRANSFER");
-        cb_t_stock_tranfer.setOpaque(true);
         cb_t_stock_tranfer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_stock_tranferActionPerformed(evt);
@@ -333,7 +326,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_inventory_adjuster.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_inventory_adjuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/items.png"))); // NOI18N
         cb_t_inventory_adjuster.setText("INVENTORY ADJUSTER");
-        cb_t_inventory_adjuster.setOpaque(true);
         cb_t_inventory_adjuster.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_inventory_adjusterActionPerformed(evt);
@@ -346,7 +338,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_purchase_order.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_purchase_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/item_references.png"))); // NOI18N
         cb_t_purchase_order.setText("PURCHASE ORDER");
-        cb_t_purchase_order.setOpaque(true);
         cb_t_purchase_order.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_purchase_orderActionPerformed(evt);
@@ -359,7 +350,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_voider.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_voider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/b_drop.png"))); // NOI18N
         cb_t_voider.setText("VOIDER");
-        cb_t_voider.setOpaque(true);
         cb_t_voider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_voiderActionPerformed(evt);
@@ -372,7 +362,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_ar.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_ar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales_registry.png"))); // NOI18N
         cb_t_ar.setText("ACCOUNTS RECEIVABLE");
-        cb_t_ar.setOpaque(true);
         cb_t_ar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_arActionPerformed(evt);
@@ -385,7 +374,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_ar_encoding.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_ar_encoding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales_registry.png"))); // NOI18N
         cb_t_ar_encoding.setText("ACCOUNTS RECEIVABLE ENCODING");
-        cb_t_ar_encoding.setOpaque(true);
         cb_t_ar_encoding.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_ar_encodingActionPerformed(evt);
@@ -398,7 +386,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_ap.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_ap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/branch.png"))); // NOI18N
         cb_t_ap.setText("ACCOUNTS PAYABLE");
-        cb_t_ap.setOpaque(true);
         cb_t_ap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_apActionPerformed(evt);
@@ -411,7 +398,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_t_services.setForeground(new java.awt.Color(255, 255, 255));
         cb_t_services.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/branch.png"))); // NOI18N
         cb_t_services.setText("Services");
-        cb_t_services.setOpaque(true);
         cb_t_services.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_t_servicesActionPerformed(evt);
@@ -426,14 +412,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         maintenance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/security_manager.png"))); // NOI18N
         maintenance.setText("MAINTENANCE");
         maintenance.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        maintenance.setOpaque(true);
 
         cb_m_items.setBackground(new java.awt.Color(51, 153, 255));
         cb_m_items.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_m_items.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/items.png"))); // NOI18N
         cb_m_items.setText("ITEM");
-        cb_m_items.setOpaque(true);
         cb_m_items.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_itemsActionPerformed(evt);
@@ -446,7 +430,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_category.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_category.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/category.png"))); // NOI18N
         cb_m_category.setText("CATEGORY");
-        cb_m_category.setOpaque(true);
         cb_m_category.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_categoryActionPerformed(evt);
@@ -459,7 +442,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_users.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_users.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/users.png"))); // NOI18N
         cb_m_users.setText("USERS");
-        cb_m_users.setOpaque(true);
         cb_m_users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_usersActionPerformed(evt);
@@ -472,7 +454,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_uom.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_uom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/uom.png"))); // NOI18N
         cb_m_uom.setText("UNIT OF MEASURE");
-        cb_m_uom.setOpaque(true);
         cb_m_uom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_uomActionPerformed(evt);
@@ -485,7 +466,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_supplier.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_supplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/suppliers.png"))); // NOI18N
         cb_m_supplier.setText("SUPPLIER");
-        cb_m_supplier.setOpaque(true);
         cb_m_supplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_supplierActionPerformed(evt);
@@ -498,7 +478,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_customers.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_customers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/customer.png"))); // NOI18N
         cb_m_customers.setText("CUSTOMERS");
-        cb_m_customers.setOpaque(true);
         cb_m_customers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_customersActionPerformed(evt);
@@ -511,7 +490,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_discounts.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_discounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/customer_item_pricing.png"))); // NOI18N
         cb_m_discounts.setText("DISCOUNTS");
-        cb_m_discounts.setOpaque(true);
         cb_m_discounts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_discountsActionPerformed(evt);
@@ -524,7 +502,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_banks.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_banks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/item_b.png"))); // NOI18N
         cb_m_banks.setText("BANKS");
-        cb_m_banks.setOpaque(true);
         cb_m_banks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_banksActionPerformed(evt);
@@ -537,7 +514,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_services.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_services.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/master_file.png"))); // NOI18N
         cb_m_services.setText("SERVICES");
-        cb_m_services.setOpaque(true);
         cb_m_services.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_servicesActionPerformed(evt);
@@ -550,7 +526,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_m_expenses.setForeground(new java.awt.Color(255, 255, 255));
         cb_m_expenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales_registry.png"))); // NOI18N
         cb_m_expenses.setText("EXPENSES");
-        cb_m_expenses.setOpaque(true);
         cb_m_expenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_m_expensesActionPerformed(evt);
@@ -565,14 +540,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/item_references.png"))); // NOI18N
         reports.setText("REPORTS");
         reports.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        reports.setOpaque(true);
 
         cb_r_encoding_inventory.setBackground(new java.awt.Color(51, 153, 255));
         cb_r_encoding_inventory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_r_encoding_inventory.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_encoding_inventory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/reference_code.png"))); // NOI18N
         cb_r_encoding_inventory.setText("ENCODING INVENTORY");
-        cb_r_encoding_inventory.setOpaque(true);
         cb_r_encoding_inventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_encoding_inventoryActionPerformed(evt);
@@ -585,7 +558,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_sales.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_sales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales.png"))); // NOI18N
         cb_r_sales.setText("SALES REPORT");
-        cb_r_sales.setOpaque(true);
         cb_r_sales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_salesActionPerformed(evt);
@@ -598,7 +570,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_sales_items.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_sales_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales_ledger.png"))); // NOI18N
         cb_r_sales_items.setText("SALES ITEMS");
-        cb_r_sales_items.setOpaque(true);
         cb_r_sales_items.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_sales_itemsActionPerformed(evt);
@@ -611,7 +582,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_cash_count.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_cash_count.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/item_b.png"))); // NOI18N
         cb_r_cash_count.setText("CASH COUNT");
-        cb_r_cash_count.setOpaque(true);
         cb_r_cash_count.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_cash_countActionPerformed(evt);
@@ -624,7 +594,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_receipts.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_receipts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/receipts.png"))); // NOI18N
         cb_r_receipts.setText("RECEIPTS");
-        cb_r_receipts.setOpaque(true);
         cb_r_receipts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_receiptsActionPerformed(evt);
@@ -637,7 +606,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_stock_transferred.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_stock_transferred.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/orders_and_deliveries.png"))); // NOI18N
         cb_r_stock_transferred.setText("STOCK TRANSFER");
-        cb_r_stock_transferred.setOpaque(true);
         cb_r_stock_transferred.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_stock_transferredActionPerformed(evt);
@@ -650,7 +618,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_stocks_left_category.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_stocks_left_category.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/reference_code.png"))); // NOI18N
         cb_r_stocks_left_category.setText("STOCKS LEFT by Category");
-        cb_r_stocks_left_category.setOpaque(true);
         cb_r_stocks_left_category.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_stocks_left_categoryActionPerformed(evt);
@@ -663,7 +630,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_stocks_left_supplier.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_stocks_left_supplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/reference_code.png"))); // NOI18N
         cb_r_stocks_left_supplier.setText("STOCKS LEFT by Supplier");
-        cb_r_stocks_left_supplier.setOpaque(true);
         cb_r_stocks_left_supplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_stocks_left_supplierActionPerformed(evt);
@@ -676,7 +642,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_items.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/reference_code.png"))); // NOI18N
         cb_r_items.setText("ITEMS by Category");
-        cb_r_items.setOpaque(true);
         cb_r_items.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_itemsActionPerformed(evt);
@@ -689,7 +654,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_purchase_order.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_purchase_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/item_references.png"))); // NOI18N
         cb_r_purchase_order.setText("PURCHASE ORDER");
-        cb_r_purchase_order.setOpaque(true);
         cb_r_purchase_order.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_purchase_orderActionPerformed(evt);
@@ -702,7 +666,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_voider.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_voider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/b_drop.png"))); // NOI18N
         cb_r_voider.setText("VOIDER");
-        cb_r_voider.setOpaque(true);
         cb_r_voider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_voiderActionPerformed(evt);
@@ -715,7 +678,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_stock_status.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_stock_status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/reference_code.png"))); // NOI18N
         cb_r_stock_status.setText("STOCK STATUS");
-        cb_r_stock_status.setOpaque(true);
         cb_r_stock_status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_stock_statusActionPerformed(evt);
@@ -728,7 +690,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_stock_ledger.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_stock_ledger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/reference_code.png"))); // NOI18N
         cb_r_stock_ledger.setText("STOCK LEDGER");
-        cb_r_stock_ledger.setOpaque(true);
         cb_r_stock_ledger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_stock_ledgerActionPerformed(evt);
@@ -741,7 +702,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_r_customers.setForeground(new java.awt.Color(255, 255, 255));
         cb_r_customers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/customer2.png"))); // NOI18N
         cb_r_customers.setText("CUSTOMERS");
-        cb_r_customers.setOpaque(true);
         cb_r_customers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_r_customersActionPerformed(evt);
@@ -756,14 +716,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         bir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/reports.PNG"))); // NOI18N
         bir.setText("BIR");
         bir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        bir.setOpaque(true);
 
         cb_b_x_reading.setBackground(new java.awt.Color(51, 153, 255));
         cb_b_x_reading.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_b_x_reading.setForeground(new java.awt.Color(255, 255, 255));
         cb_b_x_reading.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales_registry.png"))); // NOI18N
         cb_b_x_reading.setText("X Reading");
-        cb_b_x_reading.setOpaque(true);
         cb_b_x_reading.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_b_x_readingActionPerformed(evt);
@@ -776,7 +734,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_b_z_reading.setForeground(new java.awt.Color(255, 255, 255));
         cb_b_z_reading.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/sales_ledger.png"))); // NOI18N
         cb_b_z_reading.setText("Z Reading");
-        cb_b_z_reading.setOpaque(true);
         cb_b_z_reading.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_b_z_readingActionPerformed(evt);
@@ -790,7 +747,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cb_b_reading_trails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/stock_status.png"))); // NOI18N
         cb_b_reading_trails.setText("X Reading");
         cb_b_reading_trails.setActionCommand("READING TRAILS");
-        cb_b_reading_trails.setOpaque(true);
         cb_b_reading_trails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_b_reading_trailsActionPerformed(evt);
@@ -805,7 +761,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         help.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/help.png"))); // NOI18N
         help.setText("HELP");
         help.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        help.setOpaque(true);
         jPopupMenu1.add(help);
 
         stand_by.setBackground(new java.awt.Color(51, 153, 255));
@@ -813,7 +768,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         stand_by.setForeground(new java.awt.Color(255, 255, 255));
         stand_by.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/maintenance.png"))); // NOI18N
         stand_by.setText("STAND BY");
-        stand_by.setOpaque(true);
         stand_by.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stand_byActionPerformed(evt);
@@ -826,7 +780,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         LOGOUT.setForeground(new java.awt.Color(255, 255, 255));
         LOGOUT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/s_reload.png"))); // NOI18N
         LOGOUT.setText("LOGOUT");
-        LOGOUT.setOpaque(true);
         LOGOUT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LOGOUTActionPerformed(evt);
@@ -870,7 +823,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("V1.20160416");
+        jLabel1.setText("V1.20170109");
 
         jLabel7.setBackground(new java.awt.Color(16, 88, 197));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -2510,6 +2463,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     }
 
+    private void r_reorder_level() {
+        Dlg_reorder_level rpt = new Dlg_reorder_level();
+        MyFrame.set(rpt.getSurface(), jPanel1, "Re-Order Level");
+
+    }
+
     private void t_services() {
 
         Dlg_my_services rpt = new Dlg_my_services();
@@ -3122,6 +3081,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 //<editor-fold defaultstate="collapsed" desc=" Reports ">
                 if (data.stmt.equals("Customers Report")) {
                     r_customers();
+                }
+                if (data.stmt.equals("Re-Order Level Report")) {
+                   r_reorder_level();
                 }
                 if (data.stmt.equals("Services Report")) {
                     r_services();

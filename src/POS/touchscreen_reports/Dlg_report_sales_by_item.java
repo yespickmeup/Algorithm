@@ -644,6 +644,7 @@ public class Dlg_report_sales_by_item extends javax.swing.JDialog {
                             + " and status='" + "0" + "' "
                             + " and location_id='" + lo.getId() + "'";
                 }
+                System.out.println(where);
                 final List<Srpt_sales_by_item.field> fields = Srpt_sales_by_item.ret_data(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String contact_no = System.getProperty("telephone_number", "");
