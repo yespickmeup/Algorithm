@@ -18,8 +18,8 @@
 -- Create schema db_smis_siaton
 --
 
-CREATE DATABASE IF NOT EXISTS db_smis_siaton;
-USE db_smis_siaton;
+CREATE DATABASE IF NOT EXISTS db_smis_guihulngan;
+USE db_smis_guihulngan;
 
 --
 -- Definition of table `accounts_payable`
