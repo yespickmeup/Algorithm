@@ -1357,7 +1357,7 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
     }
 
     private void get_data(String po_no) {
-        List<Srpt_purchase_order.field> fields = new ArrayList();
+        List<Srpt_purchase_order1.field> fields = new ArrayList();
         List<to_purchase_order_orders> datas = tbl_purchase_order_items_ALM;
         for (to_purchase_order_orders t : datas) {
             String date_added = DateType.month_date.format(new Date());
@@ -1371,7 +1371,7 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
             double conversion = t.conversion;
             String unit = t.unit;
             double total = t.total;
-            Srpt_purchase_order.field to = new Srpt_purchase_order.field(date_added, supplier, barcode, description, qty, cost, category, conversion, unit, total);
+            Srpt_purchase_order1.field to = new Srpt_purchase_order1.field(date_added, supplier, barcode, description, qty, cost, category, conversion, unit, total);
             fields.add(to);
         }
         String business_name = System.getProperty("business_name", "Fortune Tree Enterprises");
@@ -1382,19 +1382,19 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
         String printed_by = lbl_customer_name.getText();
         String supplier=lbl_customer_name.getText();
        
-        Srpt_purchase_order rpt = new Srpt_purchase_order(business_name, business_owner, business_address, date_printed, sales_date, printed_by, po_no,supplier);
+        Srpt_purchase_order1 rpt = new Srpt_purchase_order1(business_name, business_owner, business_address, date_printed, sales_date, printed_by, po_no,supplier);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_purchase_order.jrxml";
 
         report_sales_items(rpt, jrxml);
         JasperReport jasperReport = null;
-        InputStream is = Srpt_purchase_order.class.getResourceAsStream(jrxml);
+        InputStream is = Srpt_purchase_order1.class.getResourceAsStream(jrxml);
         try {
             jasperReport = JasperCompileManager.compileReport(is);
             jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
                     setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
         } catch (JRException ex) {
-            Logger.getLogger(Srpt_purchase_order.class.getName()).
+            Logger.getLogger(Srpt_purchase_order1.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
     }
@@ -1402,7 +1402,7 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
     public static JasperReport compileJasper(String jrxml) {
         try {
 
-            InputStream is = Srpt_purchase_order.class.getResourceAsStream(jrxml);
+            InputStream is = Srpt_purchase_order1.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
 
             return jasper;
@@ -1411,7 +1411,7 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
         }
     }
 
-    public static JRViewer get_viewer(Srpt_purchase_order to, String jrxml) {
+    public static JRViewer get_viewer(Srpt_purchase_order1 to, String jrxml) {
 
         return JasperUtil.getJasperViewer(
                 compileJasper(jrxml),
@@ -1419,7 +1419,7 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
                 JasperUtil.makeDatasource(to.fields));
     }
 
-    private void report_sales_items(final Srpt_purchase_order to, String jrxml_name) {
+    private void report_sales_items(final Srpt_purchase_order1 to, String jrxml_name) {
         pnl_sales_items.removeAll();
         pnl_sales_items.setLayout(new BorderLayout());
         try {
@@ -1435,7 +1435,7 @@ public class Dlg_purchase_order extends javax.swing.JDialog {
         }
     }
 
-    public static JRViewer get_viewer_all_sales(Srpt_purchase_order to, String rpt_name) {
+    public static JRViewer get_viewer_all_sales(Srpt_purchase_order1 to, String rpt_name) {
 //        Connection con11 = null;
         try {
             return JasperUtil.getJasperViewer(

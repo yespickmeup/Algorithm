@@ -4733,8 +4733,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     private void payment_prepaid() {
-        String prepaid_payment = System.getProperty("prepaid_payment", "false");
-        if (prepaid_payment.equalsIgnoreCase("true")) {
+        String prepaid_payment = System.getProperty("module_prepayments", "0");
+        if (prepaid_payment.equalsIgnoreCase("1")) {
             Window p = (Window) this;
             Dlg_touchscreen_prepaid nd = Dlg_touchscreen_prepaid.create(p, true);
             nd.setTitle("");
@@ -4777,14 +4777,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     private void payment_charge() {
-        String charge_payment = System.getProperty("charge_payment", "false");
-        if (charge_payment.equalsIgnoreCase("true")) {
+        String charge_payment = System.getProperty("module_accounts_receivable", "0");
+        if (charge_payment.equalsIgnoreCase("1")) {
             Window p = (Window) this;
             Dlg_touchscreen_charge nd = Dlg_touchscreen_charge.create(p, true);
             nd.setTitle("");
             nd.do_pass();
             nd.setCallback(new Dlg_touchscreen_charge.Callback() {
-
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_touchscreen_charge.OutputData data) {
                     closeDialog.ok();
@@ -4952,7 +4951,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         final double line_discount = FitIn.toDouble(lbl_line_discount.getText());
         String customer_id = f_customer.getCustomer_id();
         String customer_name = f_customer.getCustomer_name();
-
+     
         String discount_name = f_discount.getDiscount_name();
         double discount_rate = f_discount.getDiscount_rate();
         double discount_amount = f_discount.getDiscount_amount();

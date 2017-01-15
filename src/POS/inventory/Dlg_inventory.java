@@ -1713,6 +1713,15 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
+
+        String environment = System.getProperty("environment", "development");
+        if (environment.equalsIgnoreCase("development")) {
+            jButton1.setVisible(true);
+            jButton2.setVisible(true);
+        } else {
+            jButton1.setVisible(false);
+            jButton2.setVisible(false);
+        }
 //        focus();
         disabled();
         init_item_code();
@@ -1727,6 +1736,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         add_comma();
         jTabbedPane1.remove(1);
         jTabbedPane1.remove(2);
+        jTabbedPane1.remove(1);
 
     }
 
@@ -3498,7 +3508,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
             @Override
             public void update(CloseDialog closeDialog, Dlg_inventory_get_console.OutputData data) {
                 closeDialog.ok();
-                 String myString = "";
+                String myString = "";
                 List<String> query = edit_inventory_to_console();
                 for (String s : query) {
                     myString = myString + "" + s + "\n";

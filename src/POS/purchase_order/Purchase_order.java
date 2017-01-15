@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
@@ -79,9 +80,10 @@ public class Purchase_order {
         }
     }
 
-    public static void add_data(to_purchase_orders to_purchase_orders) {
+    public static void add_data(to_purchase_orders to_purchase_orders, List<Purchase_order_item.to_purchase_order_items> orders) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "insert into purchase_orders("
                     + "puchase_order_no"
                     + ",user_name"
@@ -162,7 +164,136 @@ public class Purchase_order {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            for (Purchase_order_item.to_purchase_order_items to_purchase_order_items : orders) {
+                String s2 = "insert into purchase_order_items("
+                        + "po_no"
+                        + ",user_name"
+                        + ",session_no"
+                        + ",date_added"
+                        + ",supplier"
+                        + ",supplier_id"
+                        + ",remarks"
+                        + ",barcode"
+                        + ",description"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_class"
+                        + ",sub_class_id"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",conversion"
+                        + ",unit"
+                        + ",barcodes"
+                        + ",batch_no"
+                        + ",serial_no"
+                        + ",main_barcode"
+                        + ",qty_ordered"
+                        + ",qty_received"
+                        + ",previous_cost"
+                        + ",new_cost"
+                        + ",status"
+                        + ",date_delivered"
+                        + ",date_received"
+                        + ",reference_no"
+                        + ",receipt_type"
+                        + ",receipt_type_id"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ")values("
+                        + ":po_no"
+                        + ",:user_name"
+                        + ",:session_no"
+                        + ",:date_added"
+                        + ",:supplier"
+                        + ",:supplier_id"
+                        + ",:remarks"
+                        + ",:barcode"
+                        + ",:description"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_class"
+                        + ",:sub_class_id"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:conversion"
+                        + ",:unit"
+                        + ",:barcodes"
+                        + ",:batch_no"
+                        + ",:serial_no"
+                        + ",:main_barcode"
+                        + ",:qty_ordered"
+                        + ",:qty_received"
+                        + ",:previous_cost"
+                        + ",:new_cost"
+                        + ",:status"
+                        + ",:date_delivered"
+                        + ",:date_received"
+                        + ",:reference_no"
+                        + ",:receipt_type"
+                        + ",:receipt_type_id"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ")";
+
+                s2 = SqlStringUtil.parse(s2)
+                        .setString("po_no", to_purchase_orders.puchase_order_no)
+                        .setString("user_name", to_purchase_orders.user_name)
+                        .setString("session_no", to_purchase_orders.session_no)
+                        .setString("date_added", to_purchase_orders.date_added)
+                        .setString("supplier", to_purchase_orders.supplier)
+                        .setString("supplier_id", to_purchase_orders.supplier_id)
+                        .setString("remarks", to_purchase_orders.remarks)
+                        .setString("barcode", to_purchase_order_items.barcode)
+                        .setString("description", to_purchase_order_items.description)
+                        .setString("category", to_purchase_order_items.category)
+                        .setString("category_id", to_purchase_order_items.category_id)
+                        .setString("classification", to_purchase_order_items.classification)
+                        .setString("classification_id", to_purchase_order_items.classification_id)
+                        .setString("sub_class", to_purchase_order_items.sub_class)
+                        .setString("sub_class_id", to_purchase_order_items.sub_class_id)
+                        .setString("brand", to_purchase_order_items.brand)
+                        .setString("brand_id", to_purchase_order_items.brand_id)
+                        .setString("model", to_purchase_order_items.model)
+                        .setString("model_id", to_purchase_order_items.model_id)
+                        .setNumber("conversion", to_purchase_order_items.conversion)
+                        .setString("unit", to_purchase_order_items.unit)
+                        .setString("barcodes", to_purchase_order_items.barcodes)
+                        .setString("batch_no", to_purchase_order_items.batch_no)
+                        .setString("serial_no", to_purchase_order_items.serial_no)
+                        .setString("main_barcode", to_purchase_order_items.main_barcode)
+                        .setNumber("qty_ordered", to_purchase_order_items.qty_ordered)
+                        .setNumber("qty_received", to_purchase_order_items.qty_received)
+                        .setNumber("previous_cost", to_purchase_order_items.previous_cost)
+                        .setNumber("new_cost", to_purchase_order_items.new_cost)
+                        .setNumber("status", to_purchase_orders.status)
+                        .setString("date_delivered", to_purchase_orders.date_delivered)
+                        .setString("date_received", to_purchase_orders.date_received)
+                        .setString("reference_no", to_purchase_orders.reference_no)
+                        .setString("receipt_type", to_purchase_orders.receipt_type)
+                        .setString("receipt_type_id", to_purchase_orders.receipt_type_id)
+                        .setString("branch", to_purchase_orders.branch)
+                        .setString("branch_id", to_purchase_orders.branch_id)
+                        .setString("location", to_purchase_orders.location)
+                        .setString("location_id", to_purchase_orders.location_id)
+                        .ok();
+                stmt.addBatch(s2);
+            }
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Purchase_order.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -231,6 +362,164 @@ public class Purchase_order {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
+            Lg.s(Purchase_order.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_po(to_purchase_orders to_purchase_orders) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_orders set "
+                    + "supplier= :supplier "
+                    + ",supplier_id= :supplier_id "
+                    + ",remarks= :remarks "
+                    + ",date_delivered= :date_delivered "
+                    + ",date_received= :date_received "
+                    + ",reference_no= :reference_no "
+                    + ",discount= :discount "
+                    + ",discount_amount= :discount_amount "
+                    + ",discount_rate= :discount_rate "
+                    + " where id='" + to_purchase_orders.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("supplier", to_purchase_orders.supplier)
+                    .setString("supplier_id", to_purchase_orders.supplier_id)
+                    .setString("remarks", to_purchase_orders.remarks)
+                    .setNumber("status", to_purchase_orders.status)
+                    .setString("date_delivered", to_purchase_orders.date_delivered)
+                    .setString("date_received", to_purchase_orders.date_received)
+                    .setString("reference_no", to_purchase_orders.reference_no)
+                    .setString("discount", to_purchase_orders.discount)
+                    .setNumber("discount_amount", to_purchase_orders.discount_amount)
+                    .setNumber("discount_rate", to_purchase_orders.discount_rate)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+
+            String s2 = "update purchase_order_items set "
+                    + " supplier= :supplier "
+                    + ",supplier_id= :supplier_id "
+                    + ",remarks= :remarks "
+                    + ",date_delivered= :date_delivered "
+                    + ",date_received= :date_received "
+                    + ",reference_no= :reference_no "
+                    + " where id='" + to_purchase_orders.id + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setString("supplier", to_purchase_orders.supplier)
+                    .setString("supplier_id", to_purchase_orders.supplier_id)
+                    .setString("remarks", to_purchase_orders.remarks)
+                    .setNumber("status", to_purchase_orders.status)
+                    .setString("date_delivered", to_purchase_orders.date_delivered)
+                    .setString("date_received", to_purchase_orders.date_received)
+                    .setString("reference_no", to_purchase_orders.reference_no)
+                    .ok();
+
+            PreparedStatement stmt2 = conn.prepareStatement(s2);
+            stmt2.execute();
+
+            Lg.s(Purchase_order.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void finalize_order(to_purchase_orders to_purchase_orders) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_orders set "
+                    + " status= :status "
+                    + " where id='" + to_purchase_orders.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("status", 1)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+
+            String s2 = "update purchase_order_items set "
+                    + " status= :status "
+                    + " where po_no='" + to_purchase_orders.puchase_order_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("status", 1)
+                    .ok();
+
+            PreparedStatement stmt2 = conn.prepareStatement(s2);
+            stmt2.execute();
+
+            Lg.s(Purchase_order.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void returnorder(to_purchase_orders to_purchase_orders) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_orders set "
+                    + " status= :status "
+                    + " where id='" + to_purchase_orders.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("status", 2)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+
+            String s2 = "update purchase_order_items set "
+                    + " status= :status "
+                    + " where po_no='" + to_purchase_orders.puchase_order_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("status", 2)
+                    .ok();
+
+            PreparedStatement stmt2 = conn.prepareStatement(s2);
+            stmt2.execute();
+
+            Lg.s(Purchase_order.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void delete_order(to_purchase_orders to_purchase_orders) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "delete from purchase_orders  "
+                    + " where id='" + to_purchase_orders.id + "' "
+                    + " ";
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+
+            String s2 = "delete from purchase_order_items  "
+                    + " where po_no='" + to_purchase_orders.puchase_order_no + "' "
+                    + " ";
+
+            PreparedStatement stmt2 = conn.prepareStatement(s2);
+            stmt2.execute();
+
             Lg.s(Purchase_order.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -330,4 +619,41 @@ public class Purchase_order {
         }
     }
 
+    public static void main(String[] args) {
+
+    }
+
+    public static String increment_id(String location_id) {
+
+        String id = "";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from purchase_orders where location_id='" + location_id + "'  ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+
+            if (rs.next()) {
+                id = rs.getString(1);
+
+                String s2 = "select puchase_order_no,id from purchase_orders where id='" + id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+
+            if (id == null) {
+                id = location_id + "|" + "0000000000";
+            }
+
+            id = ReceiptIncrementor.increment(id);
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

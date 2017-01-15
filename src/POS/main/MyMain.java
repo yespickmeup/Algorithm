@@ -37,8 +37,8 @@ public class MyMain {
     private static void ret_config() {
         String home = System.getProperty("user.home") + "\\my_config.conf";
         String os = System.getProperty("os.name", "");
-        System.out.println("os: " + os);
-        if (!os.equalsIgnoreCase("Linux")) {
+
+        if (os.equalsIgnoreCase("Linux")) {
             home = System.getProperty("user.home") + "/my_config.conf";
         }
         try {
@@ -46,8 +46,8 @@ public class MyMain {
             Properties prop = new Properties();
             String conf = "my_config.conf";
             String userHome = System.getProperty("user.home");
-            System.out.println(conf);
-            File file = new File(userHome + "/" + conf);
+
+            File file = new File(home);
             if (file.exists()) {
                 InputStream is = new FileInputStream(file);
                 prop.load(is);
@@ -59,10 +59,18 @@ public class MyMain {
                 }
             }
 
-            System.out.println(home);
             System.setProperty("pool_host", prop.getProperty("pool_host", "localhost"));
-            System.out.println("local_ip: " + System.getProperty("local_ip"));
-            System.out.println("pool_host: " + System.getProperty("pool_host"));
+            System.setProperty("pool_port", prop.getProperty("pool_port", "3306"));
+            System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
+            System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
+            System.setProperty("pool_db", prop.getProperty("pool_db", "db_algorithm"));
+            System.setProperty("environment", prop.getProperty("environment", "development"));
+
+            System.out.println("OS: " + os);
+            System.out.println("Home: " + home);
+            System.out.println("Local Ip: " + System.getProperty("local_ip"));
+            System.out.println("Host: " + System.getProperty("pool_host"));
+            System.out.println("Environment: " + System.getProperty("environment"));
 
             String where = "";
             List<Settings.to_settings> datas = Settings.ret_data(where);
@@ -134,10 +142,6 @@ public class MyMain {
             System.setProperty("license_code", prop.getProperty("license_code", ""));
             System.setProperty("version", prop.getProperty("version", ""));
 
-            System.setProperty("pool_port", prop.getProperty("pool_port", "3306"));
-            System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
-            System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
-            System.setProperty("pool_db", prop.getProperty("pool_db", "db_algorithm"));
             System.setProperty("cloud_host", prop.getProperty("cloud_host", "128.199.80.53"));
             System.setProperty("cloud_port", prop.getProperty("cloud_port", "3306"));
             System.setProperty("cloud_user", prop.getProperty("cloud_user", "root"));
@@ -149,16 +153,23 @@ public class MyMain {
 
             //
             System.setProperty("module_software_type", prop.getProperty("module_software_type", ""));
-            System.setProperty("module_accounts_payable", prop.getProperty("module_accounts_payable", ""));
-            System.setProperty("module_accounts_receivable", prop.getProperty("module_accounts_receivable", ""));
-            System.setProperty("module_services", prop.getProperty("module_services", ""));
-            System.setProperty("module_prepayments", prop.getProperty("module_prepayments", ""));
-            System.setProperty("module_requisition_slip", prop.getProperty("module_requisition_slip", ""));
-            System.setProperty("module_charge_in_advance", prop.getProperty("module_charge_in_advance", ""));
+            System.setProperty("module_accounts_payable", prop.getProperty("module_accounts_payable", "0"));
+            System.setProperty("module_accounts_receivable", prop.getProperty("module_accounts_receivable", "0"));
+            System.setProperty("module_services", prop.getProperty("module_services", "0"));
+            System.setProperty("module_prepayments", prop.getProperty("module_prepayments", "0"));
+            System.setProperty("module_requisition_slip", prop.getProperty("module_requisition_slip", "0"));
+            System.setProperty("module_charge_in_advance", prop.getProperty("module_charge_in_advance", "0"));
+
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
-            System.setProperty("prepaid_payment", prop.getProperty("prepaid_payment", "false"));
-            System.setProperty("charge_payment", prop.getProperty("charge_payment", "false"));
+
+            if (setting.module_prepayments == 1) {
+                System.setProperty("module_prepayments", prop.getProperty("module_prepayments", "1"));
+            }
+
+            if (setting.module_accounts_receivable == 1) {
+                System.setProperty("module_accounts_receivable", prop.getProperty("module_accounts_receivable", "1"));
+            }
 
             //
         } catch (IOException e) {

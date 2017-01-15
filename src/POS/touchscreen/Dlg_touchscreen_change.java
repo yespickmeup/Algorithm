@@ -1112,6 +1112,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         String terminal_no = "Terminal No.: " + System.getProperty("terminal_no", "0001");
         String cashier = "Cashier: " + MyUser.getUser_screen_name();
         String customer_name = "Customer: " + my_sales.customer_name;
+        
         String customer_address = "Address: ";
         String customer_id_no = "ID/TIN No.: ";
 

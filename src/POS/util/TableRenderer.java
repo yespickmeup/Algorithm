@@ -358,5 +358,116 @@ public class TableRenderer {
         }
     }
 
-    
+    public static void setPopup2(final JTextField tf, Object[][] obj, final JLabel[] labels, final int[] tbl_widths_customers, String[] col_names) {
+
+        final JPopupMenu popup = new JPopupMenu();
+        Dimension d = tf.getSize();
+        popup.setLayout(new BorderLayout());
+
+        JPanel p = new JPanel();
+        p.setLayout(new BorderLayout());
+        p.setBackground(Color.white);
+        JScrollPane pl = new JScrollPane();
+        final JTable tbl = new JTable();
+        pl.setBorder(null);
+        TableRenderer.setModel(tbl, obj, col_names, tbl_widths_customers);
+        tbl.setDefaultRenderer(Object.class, new MyCellRenderer());
+
+        tbl.getTableHeader().setPreferredSize(new Dimension(0, 0));
+        tbl.setBorder(null);
+        tbl.setGridColor(new java.awt.Color(204, 204, 204));
+        pl.setViewportView(tbl);
+        p.add(pl);
+        popup.add(p);
+        popup.setPopupSize(d.width, 150);
+        popup.show(tf, 0, tf.getHeight());
+        tf.grabFocus();
+        tf.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    if (tbl.getRowCount() != 0) {
+                        tbl.setRowSelectionInterval(0, 0);
+                        tbl.grabFocus();
+                    }
+                }
+            }
+        });
+        tbl.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    int row = tbl.getSelectedRow();
+                    tbl.removeRowSelectionInterval(row, row);
+                    tf.grabFocus();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    int row = tbl.getSelectedRow();
+                    int i = 0;
+                    for (JLabel lbl : labels) {
+                        lbl.setText(tbl.getModel().
+                                getValueAt(row, i).
+                                toString());
+                        i++;
+                    }
+                    String[] output = new String[tbl_widths_customers.length];
+                    int u = 0;
+                    for (int y : tbl_widths_customers) {
+                        output[u] = tbl.getModel().
+                                getValueAt(row, u).
+                                toString();
+                        u++;
+                    }
+                    tf.grabFocus();
+                    popup.setVisible(false);
+                    ok1(output, row);
+                }
+            }
+        });
+        tbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = tbl.getSelectedRow();
+                String[] output = new String[tbl_widths_customers.length];
+                int u = 0;
+                for (int y : tbl_widths_customers) {
+                    output[u] = tbl.getModel().
+                            getValueAt(row, u).
+                            toString();
+                    u++;
+                }
+                tf.grabFocus();
+                popup.setVisible(false);
+                ok1(output, row);
+            }
+        });
+
+    }
+
+    public static class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+
+        public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            final java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            Object val = table.getValueAt(row, 5);
+          
+//            String sval = val.toString();
+//            sval = sval.replaceAll(":", "");
+//            int ival = Integer.parseInt(sval);
+            if (val.toString().equalsIgnoreCase(" Re-order")) {
+                cellComponent.setForeground(Color.black);
+                cellComponent.setBackground(new Color(255, 204, 204));
+            } else {
+                cellComponent.setForeground(Color.black);
+                cellComponent.setBackground(Color.white);
+            }
+
+            return cellComponent;
+
+        }
+
+    }
+
 }

@@ -427,8 +427,8 @@ public class Receipts {
                     + ",date_received= :date_received"
                     + ",receipt_type= :receipt_type"
                     + ",reference_no= :reference_no"
-                    + ",branch= :branch"
-                    + ",branch_id= :branch_id"
+//                    + ",branch= :branch"
+//                    + ",branch_id= :branch_id"
                     + ",gross_total= :gross_total"
                     + ",net_total= :net_total"
                     + ",batch_no= :batch_no"
@@ -447,8 +447,8 @@ public class Receipts {
                     setString("date_received", to_receipts.date_received).
                     setString("receipt_type", to_receipts.receipt_type).
                     setString("reference_no", to_receipts.reference_no).
-                    setString("branch", to_receipts.branch).
-                    setString("branch_id", to_receipts.branch_id).
+//                    setString("branch", to_receipts.branch).
+//                    setString("branch_id", to_receipts.branch_id).
                     setNumber("gross_total", to_receipts.gross_total).
                     setNumber("net_total", to_receipts.net_total).
                     setString("batch_no", to_receipts.batch_no).
@@ -467,8 +467,8 @@ public class Receipts {
                     + ",date_delivered= :date_delivered"
                     + ",date_received= :date_received"
                     + ",batch_no= :batch_no"
-                    + ",branch= :branch"
-                    + ",branch_id= :branch_id"
+//                    + ",branch= :branch"
+//                    + ",branch_id= :branch_id"
                     + " where "
                     + " receipt_no ='" + to_receipts.receipt_no + "' "
                     + " ";
@@ -480,8 +480,8 @@ public class Receipts {
                     .setString("date_delivered", to_receipts.date_delivered)
                     .setString("date_received", to_receipts.date_received)
                     .setString("batch_no", to_receipts.batch_no)
-                    .setString("branch", to_receipts.branch)
-                    .setString("branch_id", to_receipts.branch_id)
+//                    .setString("branch", to_receipts.branch)
+//                    .setString("branch_id", to_receipts.branch_id)
                     .ok();
 
             PreparedStatement stmt2 = conn.prepareStatement(s2);

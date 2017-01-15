@@ -101,7 +101,6 @@ public class S1_suppliers {
             Connection conn = MyConnection.connect();
             String s0 = "update  suppliers set "
                     + "customer_name= :customer_name"
-                    + ",customer_no= :customer_no"
                     + ",contact_no= :contact_no"
                     + ",credit_limit= :credit_limit"
                     + ",address= :address"
@@ -114,7 +113,6 @@ public class S1_suppliers {
 
             s0 = SqlStringUtil.parse(s0).
                     setString("customer_name", to_customers.customer_name).
-                    setString("customer_no", to_customers.customer_no).
                     setString("contact_no", to_customers.contact_no).
                     setNumber("credit_limit", to_customers.credit_limit).
                     setString("address", to_customers.address).

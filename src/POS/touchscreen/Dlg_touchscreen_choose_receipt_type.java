@@ -541,7 +541,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         String sales_date = "Date: " + POS.util.DateType.day_and_time.format(new Date());
         String terminal_no = "Terminal No.: " + System.getProperty("terminal_no", "0001");
         String cashier = "Cashier: " + MyUser.getUser_screen_name();
-        String customer_name = "Customer: " + sale.customer_name;
+        String customer_name = "" + sale.customer_name;
         String customer_address = "Address: ";
         String customer_id_no = "ID/TIN No.: ";
 
@@ -616,9 +616,12 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         vat = vat_percent1;
         Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
         rpt.fields.addAll(fields);
-        
+
+       
         init_report_or(rpt);
+       
         init_report_ar(rpt);
+        
         init_report_dr(rpt);
     }
 
@@ -629,7 +632,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -742,7 +745,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
                 String sales_date = or.sales_date;
                 String terminal_no = or.terminal_no;
                 String cashier = or.cashier;
-                String customer_name = or.customer_name;
+                String customer_name = "" + or.customer_name;
                 String customer_address = or.customer_address;
                 String customer_id_no = or.customer_id_no;
                 double sub_total = or.sub_total;
@@ -893,7 +896,8 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
                 String remarks = "";
                 String prepared_by = "";
                 String approved_by = "";
-                String customer_name = or.customer_name;
+                String customer_name = "" + or.customer_name;
+
                 String customer_address = "";
                 double sale_discount = or.sale_discount;
                 double net_total = or.sub_total;
@@ -918,7 +922,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
                 Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
-                
+
                 report_dr(rpt, jrxml);
                 InputStream is = Delivery_receipt.class.getResourceAsStream(jrxml);
                 try {

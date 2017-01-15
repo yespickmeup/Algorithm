@@ -47,11 +47,12 @@ import POS.my_services.Dlg_my_services_crews;
 import POS.my_services.Dlg_my_services_departments;
 import POS.my_services.Dlg_my_services_view;
 import POS.prepaid_payments.Dlg_prepaid_payments;
-import POS.purchase_order.Dlg_purchase_order;
+import POS.purchase_order.Dlg_po2;
 import POS.receipts.Dlg_finalize_receipt;
 import POS.receipts.Dlg_receipts;
 import POS.reports.*;
 import POS.reports2.Dlg_report_customers;
+import POS.reports2.Dlg_suppliers_report;
 import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
 import POS.requisition_slips.Dlg_requisition_slip;
@@ -2358,7 +2359,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void t_purchase_order() {
-        Dlg_purchase_order dtc = new Dlg_purchase_order();
+        Dlg_po2 dtc = new Dlg_po2();
         MyFrame.set(dtc.getSurface(), jPanel1, "Purchase Order");
     }
 
@@ -2460,6 +2461,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void r_customers() {
         Dlg_report_customers rpt = new Dlg_report_customers();
         MyFrame.set(rpt.getSurface(), jPanel1, "Customers");
+
+    }
+
+    private void r_suppliers() {
+        Dlg_suppliers_report rpt = new Dlg_suppliers_report();
+        MyFrame.set(rpt.getSurface(), jPanel1, "Suppliers - Report");
 
     }
 
@@ -3079,11 +3086,15 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" Reports ">
+
+                if (data.stmt.equals("Suppliers - Report")) {
+                    r_suppliers();
+                }
                 if (data.stmt.equals("Customers Report")) {
                     r_customers();
                 }
                 if (data.stmt.equals("Re-Order Level Report")) {
-                   r_reorder_level();
+                    r_reorder_level();
                 }
                 if (data.stmt.equals("Services Report")) {
                     r_services();

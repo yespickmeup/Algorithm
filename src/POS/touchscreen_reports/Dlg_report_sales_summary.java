@@ -784,9 +784,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 }
                 for (MySales.sales sale : my_sale) {
 
-                    cash_sales += sale.amount_due;
+                    cash_sales += sale.gross_amount;
                     receipts_line_discount += sale.line_discount;
-                    receipts_sale_discount = sale.discount_amount;
+                   
+                    receipts_sale_discount += sale.discount_amount;
                     if (sale.check_amount > 0) {
                         Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", sale.check_bank, "", FitIn.fmt_wc_0(sale.check_amount));
                         my_checks.add(check);
@@ -841,11 +842,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 if (remittances.size() == 1) {
                     Srpt_end_of_day_summary_details.field remittance = (Srpt_end_of_day_summary_details.field) my_remittances.get(0);
                     remittance.setDebit(FitIn.fmt_wc_0(total_remittance));
-                } else {
-                    if (remittances.size() > 1) {
-                        Srpt_end_of_day_summary_details.field remittance = (Srpt_end_of_day_summary_details.field) my_remittances.get(remittances.size() - 1);
-                        remittance.setDebit(FitIn.fmt_wc_0(total_remittance));
-                    }
+                } else if (remittances.size() > 1) {
+                    Srpt_end_of_day_summary_details.field remittance = (Srpt_end_of_day_summary_details.field) my_remittances.get(remittances.size() - 1);
+                    remittance.setDebit(FitIn.fmt_wc_0(total_remittance));
                 }
                 my_details.addAll(my_checks);
                 my_details.addAll(my_credit_cards);
@@ -883,7 +882,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         + coins_point_ten + coins_point_zero_five;
 
                 cc_total = (ccs + total_remittance);
-               
+
                 double cc_cashin_end = cc_total - cc_last_remittance;
                 total_check_payments = check_cash_sales + check_collections + check_prepayments;
                 total_cc_payments = cc_cash_sales + cc_collections + cc_prepayments;
@@ -891,20 +890,21 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String business_name = System.getProperty("business_name", "");
                 String address = System.getProperty("address", "");
                 String os_name = System.getProperty("os.name");
-                if(os_name.equalsIgnoreCase("Linux")){
-                    String home=System.getProperty("user.home");
+                if (os_name.equalsIgnoreCase("Linux")) {
+                    String home = System.getProperty("user.home");
                     SUBREPORT_DIR = home + "/retail_res/rpt2/";
                 }
-                date=DateType.slash.format(jDateChooser1.getDate())+ " - "+DateType.slash.format(jDateChooser2.getDate());
+
+                date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
-                         receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
-                         bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
-                         coins_point_ten, coins_point_zero_five, count_bills_thousand, count_bills_five_hundred,
-                         count_bills_two_hundred, count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
-                         count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
-                         count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
-                         my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
-                         total_check_payments, total_cc_payments, date, business_name, address);
+                        receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
+                        bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
+                        coins_point_ten, coins_point_zero_five, count_bills_thousand, count_bills_five_hundred,
+                        count_bills_two_hundred, count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
+                        count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
+                        count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
+                        my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
+                        total_check_payments, total_cc_payments, date, business_name, address);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_sales_summary.jrxml");
@@ -1031,6 +1031,5 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-    
-    
+
 }

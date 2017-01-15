@@ -7,8 +7,10 @@ package POS.receipts;
 import POS.barcodes.Dlg_barcodes;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Inventory_barcodes;
+import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.my_services.Dlg_my_service_confirm;
 import POS.purchase_order.S1_purchase_order_items;
@@ -400,6 +402,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         });
 
         tf_receipt_no.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_receipt_no.setFocusable(false);
         tf_receipt_no.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_receipt_noActionPerformed(evt);
@@ -815,15 +818,14 @@ public class Dlg_receipts extends javax.swing.JDialog {
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel3Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tf_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_search, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -875,17 +877,17 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         ));
         tbl_receipts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbl_receiptsMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tbl_receiptsMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_receiptsMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 tbl_receiptsMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_receiptsMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbl_receiptsMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_receipts);
@@ -924,6 +926,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1341,6 +1344,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jButton1.setEnabled(true);
         jButton3.setEnabled(false);
         jButton6.setEnabled(false);
+        tf_branch.setEnabled(true);
         compute();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1526,6 +1530,14 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
             }
         });
+        String environment = System.getProperty("environment", "production");
+        if (environment.equalsIgnoreCase("production")) {
+            jButton7.setVisible(false);
+            jButton8.setVisible(false);
+        } else {
+            jButton7.setVisible(true);
+            jButton8.setVisible(true);
+        }
     }
 
     private void item_ledger() {
@@ -1873,7 +1885,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.setFont(new java.awt.Font("Arial", 0, 11));
         TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 3);
         TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 4);
-       
+
     }
 
     private void loadData_receipt_items(List<to_receipt_items> acc) {
@@ -2161,7 +2173,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String date_added = DateType.datetime.format(new Date());
         String supplier = tf_supplier.getText();
         String supllier_id = tf_supplier_id.getText();
-        String remarks = tf_remarks.getText();
+        final String remarks = tf_remarks.getText();
         String date_delivered = tf_dd_month.getText() + " " + tf_dd_day.
                 getText() + ", " + tf_dd_year.getText();
         date_delivered = DateType.convert_monthDate_sf(date_delivered);
@@ -2177,10 +2189,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String batch_no = lbl_batch_no.getText();
         double discount = FitIn.toDouble(tf_disc.getText());
         String receipt_type_id = tf_receipt_type_id.getText();
-        Receipts.to_receipts to1 = new Receipts.to_receipts(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, 0);
+        final Receipts.to_receipts to1 = new Receipts.to_receipts(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, 0);
 
         List<S1_receipt_orders.to_receipt_items> datas = tbl_receipt_items_ALM;
-        List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
+        final List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
         for (S1_receipt_orders.to_receipt_items to3 : datas) {
             String barcode = to3.barcode;
             String description = to3.description;
@@ -2208,15 +2220,28 @@ public class Dlg_receipts extends javax.swing.JDialog {
             S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
             acc.add(to4);
         }
-        Receipts.add_receipts(to1, acc);
-        tbl_receipt_items_ALM.clear();
-        tbl_receipt_items_M.fireTableDataChanged();
-        Alert.set(1, remarks);
-        tf_search.grabFocus();
-        tf_search.selectAll();
-        init_receipt_no();
-        compute();
-        data_cols();
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Receipts.add_receipts(to1, acc);
+                tbl_receipt_items_ALM.clear();
+                tbl_receipt_items_M.fireTableDataChanged();
+                Alert.set(1, remarks);
+                tf_search.grabFocus();
+                tf_search.selectAll();
+                init_receipt_no();
+                compute();
+                data_cols();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
@@ -2271,6 +2296,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
 //        if(!jButton1.isEnabled()){
 //            return;
 //        }
+        if (!tf_branch.isEnabled()) {
+            return;
+        }
         String search = tf_branch.getText();
         String branch_id = tf_receipt_no2.getText();
 
@@ -2370,7 +2398,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         obj[i][0] = " " + FitIn.fmt_woc(to.product_qty);
                         obj[i][1] = " " + to.main_barcode;
                         obj[i][2] = " " + to.description;
-                        obj[i][3] = " " + to.unit;
+                        String unit = "";
+                        Dlg_inventory_uom.to_uom uoms = uom.default_uom(to.unit);
+                        if (uoms != null) {
+                            unit = uoms.uom;
+                        }
+                        obj[i][3] = " " + unit;
                         obj[i][4] = " " + FitIn.fmt_wc_0(to.cost);
                         obj[i][5] = " " + FitIn.fmt_wc_0(to.selling_price);
                         i++;
@@ -2617,7 +2650,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipts.setModel(tbl_receipts_M);
         tbl_receipts.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_receipts.setRowHeight(25);
-        int[] tbl_widths_receipts = {100, 80, 100, 170, 70, 50, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_receipts = {120, 80, 100, 170, 70, 50, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_receipts.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -2720,7 +2753,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String where = " where date(date_added) between '" + date_from + "' and '" + date_to + "' "
                 + " and receipt_no like '%" + jTextField1.getText() + "%'  ";
 
-        if (!jCheckBox1.isSelected()) {
+        if (jCheckBox1.isSelected()) {
             where = " where receipt_no like '%" + jTextField1.getText() + "%'  ";
         }
         if (jCheckBox3.isSelected()) {
@@ -2764,6 +2797,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String reference_no = tf_reference_no.getText();
         String branch = tf_branch.getText();
         String branch_id = tf_branch_id.getText();
+
         double gross_total = FitIn.toDouble(lbl_gross.getText());
         double net_total = FitIn.toDouble(lbl_net.getText());
         String batch_no = lbl_batch_no.getText();
@@ -2830,6 +2864,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             jTabbedPane1.setSelectedIndex(0);
             jButton1.setEnabled(false);
             jButton3.setEnabled(true);
+            tf_branch.setEnabled(false);
 
             if (to.status == 0) {
                 jButton6.setEnabled(true);

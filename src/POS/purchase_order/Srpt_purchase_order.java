@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package POS.purchase_order;
@@ -16,101 +17,73 @@ import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
- * @author Maytopacka
+ * @author Guinness
  */
 public class Srpt_purchase_order {
 
     public final String business_name;
-    public final String business_owner;
-    public final String business_address;
-    public final String date_printed;
-    public final String sales_date;
+    public final String address;
+    public final String contact_no;
     public final String printed_by;
-    public final String po_no;
-    public final List<field> fields;
+    public final String date;
+    public final String purchase_order_no;
     public final String supplier;
-    public Srpt_purchase_order(String business_name, String business_owner, String business_address, String date_printed, String sales_date
-            , String printed_by, String po_no,String supplier) {
-        this.business_name = business_name;
-        this.business_owner = business_owner;
-        this.business_address = business_address;
-        this.date_printed = date_printed;
-        this.sales_date = sales_date;
-        this.printed_by = printed_by;
-        this.po_no = po_no;
-        this.fields = new ArrayList();
-        this.supplier=supplier;
+    public final String remarks;
+    public final String location;
+    public final double gross_amount;
+    public final double discount;
+    public final List<Srpt_purchase_order.field> fields;
 
+    public Srpt_purchase_order(String business_name, String address, String contact_no, String printed_by, String date, String purchase_order_no, String supplier, String remarks, String location, double gross_amount, double discount) {
+        this.business_name = business_name;
+        this.address = address;
+        this.contact_no = contact_no;
+        this.printed_by = printed_by;
+        this.date = date;
+        this.purchase_order_no = purchase_order_no;
+        this.supplier = supplier;
+        this.remarks = remarks;
+        this.location = location;
+        this.gross_amount = gross_amount;
+        this.discount = discount;
+        this.fields = new ArrayList();
     }
-    
+
     public static class field {
 
-        String date_added;
-        String supplier;
+        String item_code;
         String barcode;
         String description;
-        double qty;
-        double cost;
-        String category;
-        double conversion;
         String unit;
-        double total;
+        double cost;
+        double qty_ordered;
 
         public field() {
         }
 
-        public field(String date_added, String supplier, String barcode, String description, double qty, double cost, String category
-                , double conversion, String unit,double total) {
-            this.date_added = date_added;
-            this.supplier = supplier;
+        public field(String item_code, String barcode, String description, String unit, double cost, double qty_ordered) {
+            this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
-            this.qty = qty;
-            this.cost = cost;
-            this.category = category;
-            this.conversion = conversion;
             this.unit = unit;
-            this.total=total;
+            this.cost = cost;
+            this.qty_ordered = qty_ordered;
         }
-        
+
+        public String getItem_code() {
+            return item_code;
+        }
+
+        public void setItem_code(String item_code) {
+            this.item_code = item_code;
+        }
+
         public String getBarcode() {
             return barcode;
         }
 
         public void setBarcode(String barcode) {
             this.barcode = barcode;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-
-        public void setCategory(String category) {
-            this.category = category;
-        }
-
-        public double getConversion() {
-            return conversion;
-        }
-
-        public void setConversion(double conversion) {
-            this.conversion = conversion;
-        }
-
-        public double getCost() {
-            return cost;
-        }
-
-        public void setCost(double cost) {
-            this.cost = cost;
-        }
-
-        public String getDate_added() {
-            return date_added;
-        }
-
-        public void setDate_added(String date_added) {
-            this.date_added = date_added;
         }
 
         public String getDescription() {
@@ -121,22 +94,6 @@ public class Srpt_purchase_order {
             this.description = description;
         }
 
-        public double getQty() {
-            return qty;
-        }
-
-        public void setQty(double qty) {
-            this.qty = qty;
-        }
-
-        public String getSupplier() {
-            return supplier;
-        }
-
-        public void setSupplier(String supplier) {
-            this.supplier = supplier;
-        }
-
         public String getUnit() {
             return unit;
         }
@@ -145,58 +102,50 @@ public class Srpt_purchase_order {
             this.unit = unit;
         }
 
-        public double getTotal() {
-            return total;
+        public double getCost() {
+            return cost;
         }
 
-        public void setTotal(double total) {
-            this.total = total;
+        public void setCost(double cost) {
+            this.cost = cost;
         }
-        
+
+        public double getQty_ordered() {
+            return qty_ordered;
+        }
+
+        public void setQty_ordered(double qty_ordered) {
+            this.qty_ordered = qty_ordered;
+        }
+
     }
 
     public static void main(String[] args) {
 
-        List<field> fields = new ArrayList();
+        List<Srpt_purchase_order.field> fields = new ArrayList();
         for (int i = 0; i < 30; i++) {
-            String date_added = "date";
-            String supplier = "";
-            if (i >= 0 && i <= 10) {
-                supplier = "Supplier 1";
-            }
-            if (i >=11 && i <= 20) {
-                supplier = "Supplier 2";
-            }
-            if (i >=21 && i <= 30) {
-                supplier = "Supplier 3";
-            }
-            if (i > 31 && i == 40) {
-                supplier = "Supplier 4";
-            }
-            if (i > 41 && i == 50) {
-                supplier = "Supplier 5";
-            }
-            String barcode = "barcode" + i;
-            String description = "description " + i;
-            double qty = i + 1;
-            double cost = 50 + i;
-            String category = "category " + i;
-            double conversion = 1;
-            String unit = "asd";
-            double total=qty*cost;
-            field to = new field(date_added, supplier, barcode, description, qty, cost, category, conversion, unit,total);
+            String item_code = "0000" + i;
+            String barcode = "Code" + i;
+            String description = "Item Number " + i;
+            String unit = "pc";
+            double cost = 100 * i;
+            double qty_ordered = 1000 * i;
+            Srpt_purchase_order.field to = new Srpt_purchase_order.field(item_code, barcode, description, unit, cost, qty_ordered);
             fields.add(to);
         }
 
-        String business_name = "Fortune Three Enterprises";
-        String business_owner = "Ernesto C.Quiamco";
-        String business_address = "Door 2, H & J Ong bldg, Corner Colon & Sta Catalina Street Dumaguete City";
-        String date_printed = "JUNE 24,2013";
-        String sales_date = "JUNE 24,2013";
-        String printed_by = "USER NAME";
-        String po_no = "po-1";
-        String supplier="";
-        Srpt_purchase_order rpt = new Srpt_purchase_order(business_name, business_owner, business_address, date_printed, sales_date, printed_by, po_no,supplier);
+        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+        String address = "Daro, Dumaguete City, Negros Oriental";
+        String contact_no = "422-12345/422-5678";
+        String printed_by = "Administrator";
+        String date = "January 13, 2016";
+        String purchase_order_no = "1|0000000001";
+        String supplier = "Supplier";
+        String remarks = "";
+        String location = "Dumaguete City";
+        double gross_amount = 100;
+        double discount = 50;
+        Srpt_purchase_order rpt = new Srpt_purchase_order(business_name, address, contact_no, printed_by, date, purchase_order_no, supplier, remarks, location, gross_amount, discount);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_purchase_order.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

@@ -50,10 +50,10 @@ public class Purchase_order_item {
         public final String batch_no;
         public final String serial_no;
         public final String main_barcode;
-        public final double qty_ordered;
-        public final double qty_received;
+        public double qty_ordered;
+        public double qty_received;
         public final double previous_cost;
-        public final double new_cost;
+        public double new_cost;
         public final int status;
         public final String date_delivered;
         public final String date_received;
@@ -107,6 +107,31 @@ public class Purchase_order_item {
             this.location = location;
             this.location_id = location_id;
         }
+
+        public double getQty_received() {
+            return qty_received;
+        }
+
+        public void setQty_received(double qty_received) {
+            this.qty_received = qty_received;
+        }
+
+        public double getQty_ordered() {
+            return qty_ordered;
+        }
+
+        public void setQty_ordered(double qty_ordered) {
+            this.qty_ordered = qty_ordered;
+        }
+
+        public double getNew_cost() {
+            return new_cost;
+        }
+
+        public void setNew_cost(double new_cost) {
+            this.new_cost = new_cost;
+        }
+
     }
 
     public static void add_data(to_purchase_order_items to_purchase_order_items) {
@@ -332,6 +357,102 @@ public class Purchase_order_item {
                     .setString("branch_id", to_purchase_order_items.branch_id)
                     .setString("location", to_purchase_order_items.location)
                     .setString("location_id", to_purchase_order_items.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Purchase_order_item.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_qty(to_purchase_order_items to_purchase_order_items) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_order_items set "
+                    + " qty_ordered= :qty_ordered "
+                    + ",qty_received= :qty_received "
+                    + ",previous_cost= :previous_cost "
+                    + ",new_cost= :new_cost "
+                    + " where id='" + to_purchase_order_items.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("qty_ordered", to_purchase_order_items.qty_ordered)
+                    .setNumber("qty_received", to_purchase_order_items.qty_received)
+                    .setNumber("previous_cost", to_purchase_order_items.previous_cost)
+                    .setNumber("new_cost", to_purchase_order_items.new_cost)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Purchase_order_item.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_received(to_purchase_order_items to_purchase_order_items) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_order_items set "
+                    + " qty_received= :qty_received "
+                    + " where id='" + to_purchase_order_items.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("qty_received", to_purchase_order_items.qty_received)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Purchase_order_item.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_total_qty(int id, double total_qty_ordered, double total_qty_received) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_orders set "
+                    + " total_qty_ordered= :total_qty_ordered "
+                    + ",total_qty_received= :total_qty_received "
+                    + " where id='" + id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("total_qty_ordered", total_qty_ordered)
+                    .setNumber("total_qty_received", total_qty_received)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Purchase_order_item.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_total_qty_received(int id, double total_qty_ordered, double total_qty_received) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update purchase_orders set "
+                    + "total_qty_received= :total_qty_received "
+                    + " where id='" + id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("total_qty_received", total_qty_received)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
