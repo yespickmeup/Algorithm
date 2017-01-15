@@ -7,17 +7,27 @@ package POS.reports2;
 
 import POS.customers.Customers;
 import POS.suppliers.S1_suppliers;
+import POS.util.DateType;
 import POS.util.TableRenderer;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -193,6 +203,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         jProgressBar3 = new javax.swing.JProgressBar();
         jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
         pnl_sales_items = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -241,22 +252,30 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
 
         jLabel6.setText("Status:");
 
+        jCheckBox2.setSelected(true);
+        jCheckBox2.setText("Include Zero Balance");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jCheckBox2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,16 +284,22 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(9, 9, 9))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pnl_sales_items.setBackground(new java.awt.Color(255, 255, 255));
@@ -300,7 +325,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(pnl_sales_items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -315,7 +340,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ledger", jPanel3);
@@ -328,7 +353,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Aging", jPanel4);
@@ -341,7 +366,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Balance per Transaction", jPanel5);
@@ -386,7 +411,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        get_customers();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -397,6 +422,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -439,6 +465,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
     List<S1_suppliers.to_suppliers> suppliers = new ArrayList();
 
     private void init_customers(final JTextField tf1, final JTextField tf2) {
+
         String search = tf1.getText();
         suppliers.clear();
         suppliers = S1_suppliers.ret_data2(search);
@@ -467,4 +494,76 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
             }
         });
     }
+
+    private void get_customers() {
+        jProgressBar3.setString("Loading... Please wait...");
+        jProgressBar3.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String where = "";
+                String jrxml = "rpt_suppliers.jrxml";
+                if (!jCheckBox1.isSelected()) {
+                    where = " where customer_no='" + jTextField2.getText() + "' ";
+                } else if (!jCheckBox2.isSelected()) {
+                    where = " where balance>0 ";
+                }
+                where = where + " order by customer_name asc";
+                List<Srpt_suppliers.field> datas = Srpt_suppliers.ret_data(where);
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String date = "Date: [" + DateType.month_date.format(new Date()) + "]";
+                String printed_by = "";// Users.screen_name.toUpperCase();
+                String sheet_no = "";
+                Srpt_suppliers rpt = new Srpt_suppliers(business_name, date, printed_by);
+                rpt.fields.addAll(datas);
+
+                report_customers(rpt, jrxml);
+                jProgressBar3.setString("Finished...");
+                jProgressBar3.setIndeterminate(false);
+            }
+        });
+
+        t.start();
+    }
+
+    private void report_customers(final Srpt_suppliers to, String jrxml_name) {
+        pnl_sales_items.removeAll();
+        pnl_sales_items.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_customers(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            pnl_sales_items.add(viewer);
+            pnl_sales_items.updateUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_customers(Srpt_suppliers to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_suppliers.class.
+                    getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

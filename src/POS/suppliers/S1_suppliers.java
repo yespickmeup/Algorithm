@@ -164,7 +164,8 @@ public class S1_suppliers {
                     + ",location"
                     + ",balance"
                     + ",discount"
-                    + " from  suppliers where "
+                    + " from  suppliers "
+                    + " where "
                     + " customer_name like'%" + search + "%' "
                     + " ";
 
