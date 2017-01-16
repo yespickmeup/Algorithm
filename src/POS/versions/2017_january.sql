@@ -9,3 +9,16 @@
  */
 
 insert into user_default_previleges(account,name)values('Inventory','Suppliers - Report');
+
+alter table accounts_payable add branch varchar(255);
+alter table accounts_payable add branch_id varchar(255);
+alter table accounts_payable add location varchar(255);
+alter table accounts_payable add location_id varchar(255);
+
+
+
+
+alter table accounts_payable add branch varchar(255);
+alter table accounts_payable add branch_id varchar(255);
+alter table accounts_payable add location varchar(255);
+alter table accounts_payable add location_id varchar(255);

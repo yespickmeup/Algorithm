@@ -4,7 +4,7 @@
  */
 package POS.purchase_order;
 
-import POS.zbak_accounts_payable.S1_accounts_payable;
+import POS.zbak_accounts_payable.Accounts_payable;
 import POS.accounts_receivable.S1_accounts_receivable;
 import POS.main.Main;
 import POS.main.Main.MyDB;

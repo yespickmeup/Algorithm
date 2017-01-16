@@ -13,8 +13,9 @@ import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.my_services.Dlg_my_service_confirm;
+import POS.purchase_order.Purchase_order;
+import POS.purchase_order.Purchase_order_item;
 import POS.purchase_order.S1_purchase_order_items;
-import POS.purchase_order.S1_purchase_orders;
 import POS.receipts.S1_receipt_orders.to_receipt_items;
 import POS.receipts.Receipts.to_receipts;
 import POS.suppliers.S1_suppliers;
@@ -1632,11 +1633,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void init_po_no() {
         String search = tf_reference_no.getText();
-        List<S1_purchase_orders.to_purchase_orders> datas = S1_purchase_orders.ret_po_no(search);
+        String where = " where puchase_order_no like '%" + search + "%' and status=2";
+        List<Purchase_order.to_purchase_orders> datas = Purchase_order.ret_data(where);
         Object[][] obj = new Object[datas.size()][6];
         int i = 0;
-        for (S1_purchase_orders.to_purchase_orders to : datas) {
-            obj[i][0] = to.po_no;
+        for (Purchase_order.to_purchase_orders to : datas) {
+            obj[i][0] = to.puchase_order_no;
             i++;
         }
         JLabel[] labels = {};
@@ -1657,9 +1659,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void select_po(String po_no) {
         List<to_receipt_items> acc = new ArrayList();
-        List<S1_purchase_order_items.to_purchase_order_items> datas = S1_purchase_order_items.
-                ret_data(po_no);
-        for (S1_purchase_order_items.to_purchase_order_items to : datas) {
+        String where = " where po_no='" + po_no + "'";
+        List<Purchase_order_item.to_purchase_order_items> datas = Purchase_order_item.ret_data(where);
+        for (Purchase_order_item.to_purchase_order_items to : datas) {
             int id = to.id;
             String receipt_no = tf_receipt_no.getText();
             String user_name = Users.user_name;
@@ -1670,8 +1672,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String remarks = tf_remarks.getText();
             String barcode = to.barcode;
             String description = to.description;
-            double qty = to.qty;
-            double cost = to.cost;
+            double qty = to.qty_received;
+            double cost = to.new_cost;
             String category = to.category;
             String category_id = to.category_id;
             String classification = to.classification;
@@ -1689,7 +1691,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String brand_id = to.brand_id;
             String model = to.model;
             String model_id = to.model_id;
-            double previous_cost = to.cost;
+            double previous_cost = to.previous_cost;
             String branch = to.branch;
             String branch_id = to.branch_id;
             String location = to.location;

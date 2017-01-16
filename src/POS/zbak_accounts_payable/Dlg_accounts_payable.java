@@ -4,7 +4,7 @@
  */
 package POS.zbak_accounts_payable;
 
-import POS.zbak_accounts_payable.S1_accounts_payable.to_accounts_payable;
+import POS.zbak_accounts_payable.Accounts_payable.to_accounts_payable;
 import POS.main.Main;
 import POS.suppliers.S1_suppliers;
 import POS.util.Alert;
@@ -50,7 +50,6 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
     public void setCallback(Callback callback) {
         this.callback = callback;
-
 
     }
 
@@ -165,7 +164,6 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-
         Dlg_accounts_payable dialog = Dlg_accounts_payable.create(new javax.swing.JFrame(), true);
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().
@@ -188,7 +186,6 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
 
     }
 
@@ -247,8 +244,10 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbl_customers);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("SEARCH:");
 
+        tf_search.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_searchActionPerformed(evt);
@@ -261,7 +260,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         lbl_total.setBackground(new java.awt.Color(255, 255, 255));
         lbl_total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_total.setText("0.00");
         lbl_total.setOpaque(true);
 
@@ -272,13 +271,16 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tf_search)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_search)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -289,10 +291,10 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,7 +410,6 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         init_tbl_customers();
         init_tbl_accounts_receivable();
 
-
     }
 
     public class CustomRenderer extends DefaultTableCellRenderer {
@@ -511,16 +512,16 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         List<to_accounts_payable> datas = tbl_accounts_receivable_ALM;
         final List<to_accounts_payable> selected_ap = new ArrayList();
         for (to_accounts_payable t : datas) {
-            if (t.selected == true) {
-                selected_ap.add(t);
-            }
+//            if (t.selected == true) {
+//                selected_ap.add(t);
+//            }
 
         }
 
         double total = 0;
         int i = 0;
         for (to_accounts_payable t1 : selected_ap) {
-            total += t1.remaining_balance;
+//            total += t1.remaining_balance;
             i++;
         }
         if (i == 1) {
@@ -557,16 +558,13 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                         String customer_name = ap.customer_name;
                         String ar_no = ap.ar_no;
                         String or_no = ap.or_no;
-                        double amount = ap.remaining_balance;
+                        double amount = 0;// ap.remaining_balance;
                         S1_accounts_payable_payments.to_accounts_receivable_payments to = new S1_accounts_payable_payments.to_accounts_receivable_payments(
-                                status, customer_id, customer_name, ar_no, date_added
-                                , user_name, amount, discount_amount, discount_rate
-                                , discount, status, term, date_applied, paid, date_paid
-                                , remarks, type, or_no, prev_balance);
+                                status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance);
 //                        JOptionPane.showMessageDialog(null, amount);
 //                        if (to.amount != 0) {
-                            S1_accounts_payable_payments.
-                                    add_accounts_receivable_payments(to);
+                        S1_accounts_payable_payments.
+                                add_accounts_receivable_payments(to);
 //                        }
                     }
                     data_cols_ar();
@@ -590,7 +588,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_ap_payment nd = Dlg_ap_payment.create(p, true);
         nd.setTitle("");
-        nd.do_pass(to.remaining_balance);
+//        nd.do_pass(to.remaining_balance);
         nd.setCallback(new Dlg_ap_payment.Callback() {
 
             @Override
@@ -615,9 +613,8 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                 String or_no = to.or_no;
                 double prev_balance = 0;
                 S1_accounts_payable_payments.to_accounts_receivable_payments to = new S1_accounts_payable_payments.to_accounts_receivable_payments(
-                        status, customer_id, customer_name, ar_no, date_added, user_name, amount
-                        , discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance);
-                S1_accounts_payable_payments.add_accounts_receivable_payments(to);               
+                        status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance);
+                S1_accounts_payable_payments.add_accounts_receivable_payments(to);
                 data_cols_ar();
                 data_cols();
                 tbl_customers.setRowSelectionInterval(row, row);
@@ -666,7 +663,6 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         tbl_customers_ALM.clear();
         tbl_customers_ALM.addAll(acc);
 
-
     }
 
     public static class TblcustomersModel extends AbstractTableAdapter {
@@ -700,9 +696,9 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                 case 0:
                     return tt.id;
                 case 1:
-                    return " "+tt.customer_name;
+                    return " " + tt.customer_name;
                 case 2:
-                    return FitIn.fmt_wc_0(tt.balance)+" ";
+                    return FitIn.fmt_wc_0(tt.balance) + " ";
                 case 3:
                     return tt.contact_no;
                 case 4:
@@ -743,7 +739,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         tbl_accounts_receivable.setModel(tbl_accounts_receivable_M);
         tbl_accounts_receivable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable = {50, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable = {0, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -756,7 +752,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         tbl_accounts_receivable.getTableHeader().
                 setPreferredSize(d);
         tbl_accounts_receivable.getTableHeader().
-                setFont(new java.awt.Font("Arial", 0, 11));
+                setFont(new java.awt.Font("Arial", 0, 14));
         tbl_accounts_receivable.setRowHeight(25);
         tbl_accounts_receivable.setFont(new java.awt.Font("Arial", 0, 11));
         tbl_accounts_receivable.getColumnModel().
@@ -805,7 +801,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 0) {
+            if (col == 110) {
                 return Boolean.class;
             }
             return Object.class;
@@ -816,7 +812,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             to_accounts_payable tt = (to_accounts_payable) getRow(row);
             switch (col) {
                 case 0:
-                    return tt.selected;
+                    return "";
                 case 1:
                     if (tt.type.equals("PURCHASE ORDER")) {
                         return tt.date_applied;
@@ -876,6 +872,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             }
         }
     }
+
     private void data_cols_ar() {
         int row = tbl_customers.getSelectedRow();
         if (row < 0) {
@@ -884,25 +881,25 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         S1_suppliers.to_suppliers to = (S1_suppliers.to_suppliers) tbl_customers_ALM.
                 get(tbl_customers.convertRowIndexToModel(row));
-        loadData_accounts_receivable(S1_accounts_payable.ret_data(to.customer_no));
+        loadData_accounts_receivable(Accounts_payable.ret_data(to.customer_no));
 
     }
 
     private void select_accounts_payable() {
-        int row = tbl_accounts_receivable.getSelectedRow();
-        if (row < 0) {
-            return;
-        }
-        to_accounts_payable to = (to_accounts_payable) tbl_accounts_receivable_ALM.
-                get(tbl_accounts_receivable.convertRowIndexToModel(row));
-        if (to.ap_main == 1) {
-            if (to.selected == true) {
-                to.setSelected(false);
-            } else {
-                to.setSelected(true);
-            }
-        }
-
-        tbl_accounts_receivable_M.fireTableDataChanged();
+//        int row = tbl_accounts_receivable.getSelectedRow();
+//        if (row < 0) {
+//            return;
+//        }
+//        to_accounts_payable to = (to_accounts_payable) tbl_accounts_receivable_ALM.
+//                get(tbl_accounts_receivable.convertRowIndexToModel(row));
+//        if (to.ap_main == 1) {
+//            if (to.selected == true) {
+//                to.setSelected(false);
+//            } else {
+//                to.setSelected(true);
+//            }
+//        }
+//
+//        tbl_accounts_receivable_M.fireTableDataChanged();
     }
 }
