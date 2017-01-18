@@ -738,7 +738,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel12MouseEntered
 
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
-        label("Receipts", jLabel16);
+        label("Receiving", jLabel16);
     }//GEN-LAST:event_jLabel16MouseEntered
 
     private void jLabel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseEntered

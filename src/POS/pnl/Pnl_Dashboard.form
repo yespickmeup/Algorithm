@@ -1603,7 +1603,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/POS/icons_menu_transactions/purchase1.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Receipts"/>
+            <Property name="toolTipText" type="java.lang.String" value="Receiving"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
