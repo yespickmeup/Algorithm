@@ -1103,7 +1103,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_transactions/purchase1.png"))); // NOI18N
-        jLabel16.setToolTipText("Receipts");
+        jLabel16.setToolTipText("Receiving");
         jLabel16.setOpaque(true);
         jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
