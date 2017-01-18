@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -35,6 +34,7 @@ import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import synsoftech.fields.Button;
 
 /**
  *
@@ -219,6 +219,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_accounts_receivable = new javax.swing.JTable();
+        jButton1 = new Button.Primary();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -293,8 +294,8 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,19 +323,28 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tbl_accounts_receivable);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_inventory/crop13 (1).png"))); // NOI18N
+        jButton1.setText("Add New");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2)
                 .addContainerGap())
         );
@@ -391,6 +401,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -408,7 +419,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         Main.MyDB.setNames("db_algorithm");
         init_key();
         init_tbl_customers();
-        init_tbl_accounts_receivable();
+        init_tbl_accounts_payable(tbl_accounts_receivable);
 
     }
 
@@ -668,7 +679,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     public static class TblcustomersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "id", "NAME", "BALANCE", "RECEIVABLE", "credit_limit", "address", "term", "location", "balance", "discount"
+            "id", "Name", "Balance", "Payable", "credit_limit", "address", "term", "location", "balance", "discount"
         };
 
         public TblcustomersModel(ListModel listmodel) {
@@ -902,4 +913,117 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 //
 //        tbl_accounts_receivable_M.fireTableDataChanged();
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" accounts_payable "> 
+    public static ArrayListModel tbl_accounts_payable_ALM;
+    public static Tblaccounts_payableModel tbl_accounts_payable_M;
+
+    public static void init_tbl_accounts_payable(JTable tbl_accounts_payable) {
+        tbl_accounts_payable_ALM = new ArrayListModel();
+        tbl_accounts_payable_M = new Tblaccounts_payableModel(tbl_accounts_payable_ALM);
+        tbl_accounts_payable.setModel(tbl_accounts_payable_M);
+        tbl_accounts_payable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_accounts_payable.setRowHeight(25);
+        int[] tbl_widths_accounts_payable = {80, 80, 100, 80, 80, 80, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_accounts_payable.length; i < n; i++) {
+            if (i == 2) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_accounts_payable, i, tbl_widths_accounts_payable[i]);
+        }
+        Dimension d = tbl_accounts_payable.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_accounts_payable.getTableHeader().setPreferredSize(d);
+        tbl_accounts_payable.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_accounts_payable.setRowHeight(25);
+        tbl_accounts_payable.setFont(new java.awt.Font("Arial", 0, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_payable, 3);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_payable, 4);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_payable, 5);
+    }
+
+    public static void loadData_accounts_payable(List<to_accounts_payable> acc) {
+        tbl_accounts_payable_ALM.clear();
+        tbl_accounts_payable_ALM.addAll(acc);
+    }
+
+    public static class Tblaccounts_payableModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "AP No", "Date", "Supplier", "Amount", "Paid", "Balance", "", "", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "branch", "branch_id", "location", "location_id"
+        };
+
+        public Tblaccounts_payableModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_accounts_payable tt = (to_accounts_payable) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.ar_no;
+                case 1:
+                    return " " + DateType.convert_slash_datetime2(tt.date_applied);
+                case 2:
+                    return " " + tt.customer_name;
+                case 3:
+                    return " " + FitIn.fmt_wc_0(tt.amount) + " ";
+                case 4:
+                    return " " + FitIn.fmt_wc_0(tt.paid) + " ";
+                case 5:
+                    return " " + FitIn.fmt_wc_0(tt.amount - tt.paid) + " ";
+                case 6:
+                    return " Edit";
+                case 7:
+                    return " Delete";
+                case 8:
+                    return tt.discount_rate;
+                case 9:
+                    return tt.discount;
+                case 10:
+                    return tt.status;
+                case 11:
+                    return tt.term;
+                case 12:
+                    return tt.date_applied;
+                case 13:
+                    return tt.paid;
+                case 14:
+                    return tt.date_paid;
+                case 15:
+                    return tt.remarks;
+                case 16:
+                    return tt.type;
+                case 17:
+                    return tt.or_no;
+                case 18:
+                    return tt.branch;
+                case 19:
+                    return tt.branch_id;
+                case 20:
+                    return tt.location;
+                default:
+                    return tt.location_id;
+            }
+        }
+    }
+//</editor-fold> 
+
 }
