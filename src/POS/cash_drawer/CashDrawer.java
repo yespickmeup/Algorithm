@@ -169,7 +169,7 @@ public class CashDrawer {
         }
     }
 
-    public static void update_data(to_cash_drawer to_cash_drawer, String user_id, String date) {
+    public static void update_data(to_cash_drawer to_cash_drawer, String user_id, String date, double cashin) {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update cash_drawer set "
@@ -189,6 +189,7 @@ public class CashDrawer {
                     + ",point_two_five= :point_two_five "
                     + ",point_ten= :point_ten "
                     + ",point_zero_five= :point_zero_five "
+                    + ",amount = :amount"
                     + " where session_no='" + user_id + "' and Date(time_in)= '" + date + "' "
                     + " ";
 
@@ -209,6 +210,7 @@ public class CashDrawer {
                     .setNumber("point_two_five", to_cash_drawer.point_two_five)
                     .setNumber("point_ten", to_cash_drawer.point_ten)
                     .setNumber("point_zero_five", to_cash_drawer.point_zero_five)
+                    .setNumber("amount", cashin)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);

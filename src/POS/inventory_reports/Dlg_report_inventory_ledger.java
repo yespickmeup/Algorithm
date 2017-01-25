@@ -1994,9 +1994,9 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     month = "0" + month;
                 }
 
-                String locatio_id = "15";
+                String locatio_id = "20";
                 List<Inventory_barcodes.to_inventory_barcodes> inventory = Inventory_barcodes.ret_where(" where location_id='" + locatio_id + "' "
-                        + "  ");
+                        + "  and main_barcode='"+tf_search.getText()+"'");
 
                 System.out.println("location_id: " + locatio_id + " | Size:  " + inventory.size());
 
@@ -2006,7 +2006,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     List<Srpt_item_ledger.field> field3 = new ArrayList();
                     List<Srpt_item_ledger.field> fields = new ArrayList();
                     Field.Combo lo = (Field.Combo) tf_branch_location;
-
+                    
                     my_item_code = inv.main_barcode;
                     lo.setId(inv.location_id);
 

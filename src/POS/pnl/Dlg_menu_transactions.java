@@ -738,7 +738,14 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel12MouseEntered
 
     private void jLabel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseEntered
-        label("Receiving", jLabel16);
+
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
+            label("Receiving", jLabel16);
+        } else {
+            label("Receipts", jLabel16);
+        }
+
     }//GEN-LAST:event_jLabel16MouseEntered
 
     private void jLabel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseEntered
@@ -862,6 +869,13 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
         set_previledge();
         hover();
 
+    }
+
+    private void client_label_request() {
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
+            jLabel16.setToolTipText("Receiving");
+        }
     }
 
     private void hover() {

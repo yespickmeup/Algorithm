@@ -26,6 +26,7 @@ import POS.credit_cards.Dlg_credit_cards;
 import POS.customers.Dlg_customers_ar;
 import POS.disbursements.Dlg_disbursement_categories;
 import POS.disbursements.Dlg_disbursements;
+import POS.disbursements.Dlg_rpt_disbursement;
 import POS.discounts.Dlg_discounts;
 import POS.encoding_inventory.Dlg_encode_inventory;
 import POS.encoding_inventory.Dlg_finalize_encoding;
@@ -1103,7 +1104,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_transactions/purchase1.png"))); // NOI18N
-        jLabel16.setToolTipText("Receiving");
+        jLabel16.setToolTipText("Receipts");
         jLabel16.setOpaque(true);
         jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1958,6 +1959,15 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         set_default_branch();
         hover();
         tf_username.grabFocus();
+
+        client_label_request();
+    }
+
+    private void client_label_request() {
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
+            jLabel16.setToolTipText("Receiving");
+        }
     }
     int count = 0;
 
@@ -2467,6 +2477,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void r_suppliers() {
         Dlg_suppliers_report rpt = new Dlg_suppliers_report();
         MyFrame.set(rpt.getSurface(), jPanel1, "Suppliers - Report");
+
+    }
+
+    private void r_disbursement() {
+        Dlg_rpt_disbursement rpt = new Dlg_rpt_disbursement();
+        MyFrame.set(rpt.getSurface(), jPanel1, "Disbursements Report");
 
     }
 
@@ -3086,7 +3102,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" Reports ">
-
+                if (data.stmt.equals("Disbursements Report")) {
+                    r_disbursement();
+                }
                 if (data.stmt.equals("Suppliers - Report")) {
                     r_suppliers();
                 }

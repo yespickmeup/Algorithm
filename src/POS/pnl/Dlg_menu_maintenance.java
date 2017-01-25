@@ -706,10 +706,18 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         ok("Item Maintenance", jLabel11);
+
+
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseEntered
-        label("Item Maintenance", jLabel11);
+
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
+            label("Add Item", jLabel11);
+        } else {
+            label("Item Maintenance", jLabel11);
+        }
     }//GEN-LAST:event_jLabel11MouseEntered
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
@@ -1063,7 +1071,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {

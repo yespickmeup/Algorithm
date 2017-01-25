@@ -875,7 +875,6 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
         jTextField18.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextField18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField18.setText("0.00");
-        jTextField18.setFocusable(false);
 
         jLabel57.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1386,7 +1385,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
 
     private void save_cc() {
 
-        double cashin = FitIn.toDouble(jTextField14.getText());
+        double cashin = FitIn.toDouble(jTextField18.getText());
         double thousand = FitIn.toDouble(jTextField4.getText());
         double five_hundred = FitIn.toDouble(jTextField1.getText());
         double two_hundred = FitIn.toDouble(jTextField6.getText());
@@ -1424,7 +1423,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 , one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
 
         String date = DateType.sf.format(new Date());
-        CashDrawer.update_data(to, user_id, date);
+        CashDrawer.update_data(to, user_id, date,cashin);
         Alert.set(2, "");
     }
 }

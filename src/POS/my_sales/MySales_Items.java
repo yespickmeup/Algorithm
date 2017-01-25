@@ -64,7 +64,8 @@ public class MySales_Items {
         public boolean selected;
         public double addtl_amount;
         public double wtax;
-        public items(int id, String sales_no, String item_code, String barcode, String description, String generic_name, String item_type, String supplier_name, String supplier_id, String serial_no, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_id, String user_screen_name, int status, int is_vatable, int selling_type, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_code, String location, String location_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id,boolean selected,double addtl_amount,double wtax) {
+
+        public items(int id, String sales_no, String item_code, String barcode, String description, String generic_name, String item_type, String supplier_name, String supplier_id, String serial_no, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_id, String user_screen_name, int status, int is_vatable, int selling_type, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_code, String location, String location_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, boolean selected, double addtl_amount, double wtax) {
             this.id = id;
             this.sales_no = sales_no;
             this.item_code = item_code;
@@ -104,9 +105,9 @@ public class MySales_Items {
             this.brand_id = brand_id;
             this.model = model;
             this.model_id = model_id;
-            this.selected=selected;
-            this.addtl_amount=addtl_amount;
-            this.wtax=wtax;
+            this.selected = selected;
+            this.addtl_amount = addtl_amount;
+            this.wtax = wtax;
         }
 
         public boolean isSelected() {
@@ -116,7 +117,7 @@ public class MySales_Items {
         public void setSelected(boolean selected) {
             this.selected = selected;
         }
-        
+
     }
 
     public static List<MySales_Items.items> convert_order(List<Inventory_barcodes.to_inventory_barcodes> orders) {
@@ -161,9 +162,9 @@ public class MySales_Items {
             String brand_id = to.brand_id;
             String model = to.model;
             String model_id = to.model_id;
-            double addtl_amount=to.addtl_amount;
-            double wtax=to.wtax;
-            MySales_Items.items order = new items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id,false,addtl_amount,wtax);
+            double addtl_amount = to.addtl_amount;
+            double wtax = to.wtax;
+            MySales_Items.items order = new items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax);
             datas.add(order);
         }
 
@@ -262,9 +263,9 @@ public class MySales_Items {
                 String brand_id = rs.getString(37);
                 String model = rs.getString(38);
                 String model_id = rs.getString(39);
-                double addtl_amount=rs.getDouble(40);
-                double wtax=rs.getDouble(41);
-                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id,true,addtl_amount,wtax);
+                double addtl_amount = rs.getDouble(40);
+                double wtax = rs.getDouble(41);
+                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax);
                 datas.add(to);
             }
             return datas;
@@ -275,4 +276,108 @@ public class MySales_Items {
         }
     }
 
+    public static List<MySales_Items.items> ret_data2(String where) {
+        List<MySales_Items.items> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",sales_no"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",generic_name"
+                    + ",item_type"
+                    + ",supplier_name"
+                    + ",supplier_id"
+                    + ",serial_no"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",status"
+                    + ",is_vatable"
+                    + ",selling_type"
+                    + ",discount_name"
+                    + ",discount_rate"
+                    + ",discount_amount"
+                    + ",discount_customer_name"
+                    + ",discount_customer_id"
+                    + ",branch"
+                    + ",branch_code"
+                    + ",location"
+                    + ",location_id"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",addtl_amount"
+                    + ",wtax"
+                    + " from sale_items  "
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String sales_no = rs.getString(2);
+                String item_code = rs.getString(3);
+                String barcode = rs.getString(4);
+                String description = rs.getString(5);
+                String generic_name = rs.getString(6);
+                String item_type = rs.getString(7);
+                String supplier_name = rs.getString(8);
+                String supplier_id = rs.getString(9);
+                String serial_no = rs.getString(10);
+                double product_qty = rs.getDouble(11);
+                String unit = rs.getString(12);
+                double conversion = rs.getDouble(13);
+                double selling_price = rs.getDouble(14);
+                String date_added = rs.getString(15);
+                String user_id = rs.getString(16);
+                String user_screen_name = rs.getString(17);
+                int status = rs.getInt(18);
+                int is_vatable = rs.getInt(19);
+                int selling_type = rs.getInt(20);
+                String discount_name = rs.getString(21);
+                double discount_rate = rs.getDouble(22);
+                double discount_amount = rs.getDouble(23);
+                String discount_customer_name = rs.getString(24);
+                String discount_customer_id = rs.getString(25);
+                String branch = rs.getString(26);
+                String branch_code = rs.getString(27);
+                String location = rs.getString(28);
+                String location_id = rs.getString(29);
+                String category = rs.getString(30);
+                String category_id = rs.getString(31);
+                String classification = rs.getString(32);
+                String classification_id = rs.getString(33);
+                String sub_classification = rs.getString(34);
+                String sub_classification_id = rs.getString(35);
+                String brand = rs.getString(36);
+                String brand_id = rs.getString(37);
+                String model = rs.getString(38);
+                String model_id = rs.getString(39);
+                double addtl_amount = rs.getDouble(40);
+                double wtax = rs.getDouble(41);
+                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

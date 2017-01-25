@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.touchscreen_reports;
+package POS.disbursements;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.reports.Dlg_report_items;
+import POS.touchscreen_reports.Srpt_sales_ledger;
+import POS.touchscreen_reports.Srpt_sales_summary;
 import POS.users.MyUser;
 import POS.users.S1_users;
 import POS.util.TableRenderer;
@@ -21,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,10 +47,10 @@ import synsoftech.util.DateType;
  *
  * @author Guinness
  */
-public class Dlg_report_ledger extends javax.swing.JDialog {
+public class Dlg_rpt_disbursement extends javax.swing.JDialog {
 
     /**
-     * Creates new form Dlg_report_sales_summary
+     * Creates new form Dlg_rpt_disbursement
      */
     //<editor-fold defaultstate="collapsed" desc=" callback ">
     private Callback callback;
@@ -70,33 +73,33 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_report_ledger(java.awt.Frame parent, boolean modal) {
+    private Dlg_rpt_disbursement(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_report_ledger(java.awt.Dialog parent, boolean modal) {
+    private Dlg_rpt_disbursement(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_report_ledger() {
+    public Dlg_rpt_disbursement() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_report_ledger myRef;
+    private Dlg_rpt_disbursement myRef;
 
-    private void setThisRef(Dlg_report_ledger myRef) {
+    private void setThisRef(Dlg_rpt_disbursement myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_report_ledger> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_rpt_disbursement> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -104,7 +107,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_report_ledger create(java.awt.Window parent, boolean modal) {
+    public static Dlg_rpt_disbursement create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -114,14 +117,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_report_ledger create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_rpt_disbursement create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_report_ledger dialog = dialogContainer.get(parent);
+            Dlg_rpt_disbursement dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_report_ledger((java.awt.Frame) parent, false);
+                dialog = new Dlg_rpt_disbursement((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -135,10 +138,10 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_report_ledger dialog = dialogContainer.get(parent);
+            Dlg_rpt_disbursement dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_report_ledger((java.awt.Dialog) parent, false);
+                dialog = new Dlg_rpt_disbursement((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -165,7 +168,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_report_ledger dialog = Dlg_report_ledger.create(new javax.swing.JFrame(), true);
+        Dlg_rpt_disbursement dialog = Dlg_rpt_disbursement.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -227,6 +230,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel2.setOpaque(false);
 
@@ -279,7 +283,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
 
         jPanel5.setOpaque(false);
@@ -458,22 +462,17 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        init_report();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         print();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void tf_cashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashierActionPerformed
-        init_cashier();
-    }//GEN-LAST:event_tf_cashierActionPerformed
-
     private void tf_cashierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashierMouseClicked
         init_cashier();
     }//GEN-LAST:event_tf_cashierMouseClicked
+
+    private void tf_cashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashierActionPerformed
+        init_cashier();
+    }//GEN-LAST:event_tf_cashierActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         init_branches();
@@ -490,6 +489,11 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         init_branch_locations();
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        init_report();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -517,19 +521,18 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JPanel pnl_report;
     private javax.swing.JTextField tf_cashier;
     // End of variables declaration//GEN-END:variables
-
     private void myInit() {
         init_key();
+
         set_default_branch();
 
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data2(where);
         branches_list = Branches.ret_where("");
-        
+
         Field.Combo user = (Field.Combo) tf_cashier;
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
-
     }
 
     private void set_default_branch() {
@@ -543,6 +546,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         br.setText(to.branch);
         br.setId("" + to.branch_id);
     }
+
     List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
@@ -616,13 +620,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
                 disposed();
             }
+
         });
     }
     // </editor-fold>
@@ -640,29 +645,41 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String date_from = DateType.sf.format(jDateChooser3.getDate());
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
 
-                String where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                String where = " where Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' "
                         + " and user_id='" + f.getId() + "' "
-                        + " and status='" + "0" + "' "
                         + " and location_id='" + lo.getId() + "' ";
                 if (jCheckBox1.isSelected()) {
-                    where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                            + " and status='" + "0" + "' "
+                    where = " where Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' "
                             + " and location_id='" + lo.getId() + "' ";
                 }
-                List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
+                List<S1_disbursements.to_disbursements> datas = S1_disbursements.ret_data(where);
+                List<Srpt_disbursements.field> list = new ArrayList();
+                for (S1_disbursements.to_disbursements dis : datas) {
+                    String screen_name = dis.user_screen_name;
+                    String date_added = POS.util.DateType.convert_slash_datetime2(dis.disbursement_date);
+                    String purpose = dis.purpose;
+                    String category = dis.category_name;
+                    double amount = dis.amount;
+                    String vat = "Yes";
+                    if (dis.is_vat == 0) {
+                        vat = "No";
+                    }
+                    Srpt_disbursements.field field = new Srpt_disbursements.field(screen_name, date_added, purpose, category, amount, vat);
+                    list.add(field);
+                }
+
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-                String contact_no = System.getProperty("telephone_number", "");
-                String address = System.getProperty("address", "Dumaguete");
-                address = address + "\n" + contact_no;
-                String date = "Date as of " + DateType.convert_slash_datetime2(date_from) + " - " + DateType.convert_slash_datetime2(date_to);
-                String branch = br.getText();
-                String location = lo.getText();
-                Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location);
-                rpt.fields.addAll(fields);
-                String jrxml = "rpt_sales_ledger.jrxml";
+                String address = System.getProperty("address", "Daro Highway, Dumaguete City");
+                String contact_no = System.getProperty("contact_number", "225-1235");
+                String date = "January 24, 2016";
+                String printed_by = "Administrator";
+
+                Srpt_disbursements rpt = new Srpt_disbursements(business_name, address, contact_no, date, printed_by);
+                rpt.fields.addAll(list);
+                String jrxml = "rpt_disbursement.jrxml";
                 report_sales_items(rpt, jrxml);
 
-                InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);
+                InputStream is = Srpt_disbursements.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
@@ -680,7 +697,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     }
 
-    private void report_sales_items(final Srpt_sales_ledger to, String jrxml_name) {
+    private void report_sales_items(final Srpt_disbursements to, String jrxml_name) {
         pnl_report.removeAll();
         pnl_report.setLayout(new BorderLayout());
         try {
@@ -697,7 +714,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         }
     }
 
-    public static JRViewer get_viewer_expenses(Srpt_sales_ledger to, String rpt_name) {
+    public static JRViewer get_viewer_expenses(Srpt_disbursements to, String rpt_name) {
         try {
             return JasperUtil.getJasperViewer(
                     compileJasper(rpt_name),
@@ -712,7 +729,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     public static JasperReport compileJasper(String rpt_name) {
         try {
             String jrxml = rpt_name;
-            InputStream is = Srpt_sales_ledger.class.getResourceAsStream(jrxml);
+            InputStream is = Srpt_disbursements.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
             return jasper;
         } catch (JRException e) {
@@ -760,5 +777,4 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             }
         });
     }
-
 }

@@ -11,6 +11,7 @@ import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.cash_drawer.CashDrawer;
 import POS.cash_drawer.CashDrawer_remittances;
+import POS.disbursements.S1_disbursements;
 import POS.last_remittance.Dlg_last_remittance;
 import POS.last_remittance.S1_cash_drawer_last_remittances;
 import POS.my_sales.MySales;
@@ -718,7 +719,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<Srpt_end_of_day_summary_details.field> my_gcs = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_remittances = new ArrayList();
                 List<CashDrawer_remittances.to_cash_drawer_remittances> remittances = CashDrawer_remittances.ret_data(where_sales);
-
+                List<S1_disbursements.to_disbursements> disbursements = S1_disbursements.ret_data(where_sales);
                 double cashin_beg = 0;
                 double cash_sales = 0;
                 double collections = 0;
@@ -786,7 +787,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
                     cash_sales += sale.gross_amount;
                     receipts_line_discount += sale.line_discount;
-                   
+
                     receipts_sale_discount += sale.discount_amount;
                     if (sale.check_amount > 0) {
                         Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", sale.check_bank, "", FitIn.fmt_wc_0(sale.check_amount));
@@ -896,6 +897,12 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 }
 
                 date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+
+                double disburs = 0;
+                for (S1_disbursements.to_disbursements disburse : disbursements) {
+                    disburs += disburse.amount;
+                }
+                receipt_net_total = receipt_net_total - disburs;
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
                         receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
                         bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
@@ -904,10 +911,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
                         count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                         my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
-                        total_check_payments, total_cc_payments, date, business_name, address);
+                        total_check_payments, total_cc_payments, date, business_name, address, disburs);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
-                InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_sales_summary.jrxml");
+                InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_end_of_day_summary.jrxml");
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.

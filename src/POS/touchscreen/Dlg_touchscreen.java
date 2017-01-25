@@ -3110,7 +3110,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     select_customer();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
-                    view_services();
+                    advance_search2();
                 }
             }
         });
@@ -3141,7 +3141,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     view_orders();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
-                    view_services();
+                    advance_search2();
                 }
             }
         });
@@ -3186,7 +3186,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     payment_charge();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
-                    view_services();
+                    advance_search2();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     pnl_orders.setVisible(true);
@@ -4951,7 +4951,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         final double line_discount = FitIn.toDouble(lbl_line_discount.getText());
         String customer_id = f_customer.getCustomer_id();
         String customer_name = f_customer.getCustomer_name();
-     
+
         String discount_name = f_discount.getDiscount_name();
         double discount_rate = f_discount.getDiscount_rate();
         double discount_amount = f_discount.getDiscount_amount();
@@ -5028,7 +5028,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         System.out.println("Gross: " + my_sales.gross_amount);
         System.out.println("Line Discount: " + my_sales.line_discount);
         System.out.println("Sales: " + my_sales);
-       
+
         nd.do_pass(orders, f_customer, f_discount, my_sales.gross_amount, my_sales.line_discount, my_sales);
         nd.setCallback(new Dlg_touchscreen_change.Callback() {
             @Override

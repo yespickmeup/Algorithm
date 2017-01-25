@@ -1489,6 +1489,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
+
         tf_search.grabFocus();
         set_default_branch();
         focus();
@@ -2256,8 +2260,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         System.out.println("Transaction No.: " + receipt_no);
 
     }
+    
     List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
-
     private void init_suppliers() {
         String search = tf_supplier.getText();
         supplier_list.clear();

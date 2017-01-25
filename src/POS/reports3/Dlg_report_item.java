@@ -1032,8 +1032,20 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel11.setVisible(false);
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
+        client_label_request();
     }
 
+     private void client_label_request() {
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
+
+            jLabel3.setText("Department:");
+            jLabel4.setText("Sub-Department:");
+            jLabel5.setText("Section:");
+
+        }
+    }
+     
     private void focus() {
         JTextField[] tf = {tf_category, jTextField3, jTextField4, jTextField5, jTextField6, tf_branch, tf_location, jTextField1};
         Focus_Fire.onFocus_lostFocus(tf);

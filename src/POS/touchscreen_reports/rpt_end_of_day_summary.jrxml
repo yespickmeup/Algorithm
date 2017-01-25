@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="518" leftMargin="57" rightMargin="20" topMargin="36" bottomMargin="20" uuid="8a962fc5-b306-4eea-9b5c-42152c576d68">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="162"/>
 	<parameter name="business_name" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="contact_no" class="java.lang.String"/>
@@ -58,6 +58,7 @@
 	<parameter name="cc_prepayments" class="java.lang.Double"/>
 	<parameter name="total_check_payments" class="java.lang.Double"/>
 	<parameter name="total_cc_payments" class="java.lang.Double"/>
+	<parameter name="disbursement" class="java.lang.Double"/>
 	<group name="rpt_details">
 		<groupExpression><![CDATA[$P{rpt_details}]]></groupExpression>
 		<groupHeader>
@@ -123,7 +124,7 @@
 				<text><![CDATA[        discount sale]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="216" width="188" height="15"/>
+				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="229" width="188" height="15"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Total]]></text>
 			</staticText>
@@ -304,7 +305,7 @@
 				<textFieldExpression><![CDATA[$P{receipts_sub_total}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="b9527531-87c7-4e10-9185-b397e6500cb5" mode="Transparent" x="407" y="217" width="90" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="b9527531-87c7-4e10-9185-b397e6500cb5" mode="Transparent" x="407" y="231" width="90" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="1.5" lineStyle="Double"/>
 				</box>
@@ -612,6 +613,22 @@
 					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bc656d6d-7420-4211-9d96-ddd2e3b9d7f8" x="0" y="215" width="188" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Disbursement]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="b9527531-87c7-4e10-9185-b397e6500cb5" mode="Transparent" x="407" y="216" width="90" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{disbursement}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
