@@ -5,6 +5,7 @@
  */
 package POS.returns;
 
+import POS.inventory.Inventory_barcodes;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
-
-
 
 /**
  *
@@ -297,6 +296,42 @@ public class Return_from_customer_items {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Return_from_customer_items.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void finalize(to_return_from_customer_items to_return_from_customer_items) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "update return_from_customer_items set "
+                    + "status= :status "
+                    + " where id='" + to_return_from_customer_items.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("status", 1)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_return_from_customer_items.main_barcode, to_return_from_customer_items.barcode, to_return_from_customer_items.location_id);
+            double new_qty = tt.product_qty + (to_return_from_customer_items.conversion * to_return_from_customer_items.qty);
+
+            String s4 = "update inventory_barcodes set "
+                    + " product_qty='" + new_qty + "'"
+                    + " where  main_barcode= '" + to_return_from_customer_items.main_barcode + "' and location_id='" + to_return_from_customer_items.location_id + "' "
+                    + "";
+            stmt.addBatch(s4);
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Return_from_customer_items.class, "Successfully Updated");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

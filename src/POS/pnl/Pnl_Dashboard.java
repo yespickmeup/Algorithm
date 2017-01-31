@@ -57,6 +57,7 @@ import POS.reports2.Dlg_suppliers_report;
 import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
 import POS.requisition_slips.Dlg_requisition_slip;
+import POS.returns.Dlg_return_from_customer;
 import POS.rma.Dlg_rma;
 import POS.scripts.Dlg_Local_branch_query_updates;
 import POS.scripts.Src_item_ledger;
@@ -2428,6 +2429,12 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
     }
 
+    private void t_returns_from_customer() {
+        Dlg_return_from_customer dtc = new Dlg_return_from_customer();
+
+        MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
+    }
+
     private void t_rma() {
         Dlg_rma dtc = new Dlg_rma();
         MyFrame.set(dtc.getSurface(), jPanel1, "RMA");
@@ -2954,6 +2961,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                     Pnl_Dashboard.this.setState(Frame.ICONIFIED);
                 }
                 //<editor-fold defaultstate="collapsed" desc=" transactions ">
+                if (data.stmt.equals("Return/s from Customer")) {
+                    t_returns_from_customer();
+
+                }
                 if (data.stmt.equals("Accounts Payable")) {
                     t_ap();
                 }

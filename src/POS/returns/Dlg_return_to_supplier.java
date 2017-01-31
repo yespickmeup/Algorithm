@@ -716,7 +716,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     // </editor-fold>
 
     List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
-
+    
     private void init_suppliers() {
         String search = tf_supplier.getText();
         supplier_list.clear();
@@ -877,6 +877,8 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         String location;
         String location_id;
     }
+    
+    
     //<editor-fold defaultstate="collapsed" desc=" return_to_supplier_items "> 
     public static ArrayListModel tbl_return_to_supplier_items_ALM;
     public static Tblreturn_to_supplier_itemsModel tbl_return_to_supplier_items_M;
@@ -1011,5 +1013,6 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         }
     }
 //</editor-fold> 
-
+    
+    
 }

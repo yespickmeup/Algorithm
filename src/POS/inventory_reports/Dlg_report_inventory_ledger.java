@@ -11,6 +11,7 @@ import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
 import POS.reports.Dlg_report_items;
+import POS.returns.Return_from_customer_items;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.MyConnection;
@@ -875,7 +876,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
                 String where = " where item_code ='" + my_item_code + "'  and location_id = '" + lo.getId() + "' "
                         + "   ";
-                String where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + lo.getId() + "' "
+                String where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + lo.getId() + "' and status=1 "
                         + "  ";
                 String where4 = " where main_barcode ='" + my_item_code + "'  and branch_id = '" + lo.getId() + "' "
                         + "  ";
@@ -894,6 +895,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 List<Srpt_item_ledger.field> charge_in_advance_cancelled = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
                 List<Srpt_item_ledger.field> replenishments = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
                 List<Srpt_item_ledger.field> requistion_slips = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
+                List<Srpt_item_ledger.field> return_from_customer = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
 //                    System.out.println(where);
                 try {
                     Connection conn = MyConnection.connect();
@@ -1878,7 +1880,70 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         }
                     }
                     //</editor-fold>
+                    //<editor-fold defaultstate="collapsed" desc=" Return from Customer ">
+                    String s12 = "select "
+                            + "id"
+                            + ",return_to_supplier_no"
+                            + ",user_name"
+                            + ",session_no"
+                            + ",date_added"
+                            + ",supplier"
+                            + ",supplier_id"
+                            + ",reference_no"
+                            + ",remarks"
+                            + ",barcode"
+                            + ",description"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_class"
+                            + ",sub_class_id"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",conversion"
+                            + ",unit"
+                            + ",barcodes"
+                            + ",batch_no"
+                            + ",serial_no"
+                            + ",main_barcode"
+                            + ",qty"
+                            + ",cost"
+                            + ",status"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + " from return_from_customer_items"
+                            + " " + where2;
 
+                    Statement stmt12 = conn.createStatement();
+                    ResultSet rs12 = stmt12.executeQuery(s12);
+                    while (rs12.next()) {
+                        int id = rs12.getInt(1);
+                        String user_name = rs12.getString(3);
+                        String date_added = rs12.getString(5);
+                        String reference_no = rs12.getString(8);
+                        double qty = rs12.getDouble(28);
+                        double cost = rs12.getDouble(29);
+
+                        String branch = rs12.getString(31);
+                        String branch_id = rs12.getString(32);
+                        String location = rs12.getString(33);
+                        String location_id = rs12.getString(34);
+                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                        Date created = new Date();
+                        try {
+                            created = POS.util.DateType.datetime.parse(date_added);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, ""+id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                        return_from_customer.add(field2);
+                    }
+                    //</editor-fold>
                     fields.addAll(inventory_count);
                     fields.addAll(sales);
                     fields.addAll(receipts);
@@ -1889,6 +1954,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     fields.addAll(charge_in_advance_cancelled);
                     fields.addAll(replenishments);
                     fields.addAll(requistion_slips);
+                    fields.addAll(return_from_customer);
 
                     List<Srpt_item_ledger.field> f_field = new ArrayList();
 
@@ -1996,7 +2062,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
                 String locatio_id = "20";
                 List<Inventory_barcodes.to_inventory_barcodes> inventory = Inventory_barcodes.ret_where(" where location_id='" + locatio_id + "' "
-                        + "  and main_barcode='"+tf_search.getText()+"'");
+                        + "  and main_barcode='" + tf_search.getText() + "'");
 
                 System.out.println("location_id: " + locatio_id + " | Size:  " + inventory.size());
 
@@ -2006,7 +2072,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     List<Srpt_item_ledger.field> field3 = new ArrayList();
                     List<Srpt_item_ledger.field> fields = new ArrayList();
                     Field.Combo lo = (Field.Combo) tf_branch_location;
-                    
+
                     my_item_code = inv.main_barcode;
                     lo.setId(inv.location_id);
 

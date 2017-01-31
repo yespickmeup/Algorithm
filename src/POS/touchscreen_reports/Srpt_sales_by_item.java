@@ -291,7 +291,7 @@ public class Srpt_sales_by_item {
                     + ",model_id"
                     + " from sale_items  "
                     + " " + where
-                    + " group by item_code,barcode,unit,selling_price,discount_amount order by sales_no,id asc";
+                    + " group by sales_no,item_code,barcode,unit,selling_price,discount_amount order by sales_no,id asc";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
