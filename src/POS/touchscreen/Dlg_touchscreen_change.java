@@ -990,18 +990,26 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                 String print = System.getProperty("print_to_receipts", "false");
                 System.out.println("Print to Receipts: " + print);
                 if (print.equalsIgnoreCase("true")) {
-                    print_or();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            print_or();
+                        }
+                    });
+
                 }
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        String file = System.getProperty("drawer", "");
-                        System.out.println("Drawer: " + file);
-                        if (!file.isEmpty()) {
+
+                final String file = System.getProperty("drawer", "");
+                System.out.println("Drawer: " + file);
+                if (!file.isEmpty()) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
                             Drawer.open2(file);
                         }
-                    }
-                });
+                    });
+
+                }
 
 //                List<Srpt_receipt.field> fields = new ArrayList();
 //                int total_qty = 0;
@@ -1111,8 +1119,8 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         String sales_date = "Date: " + DateType.day_and_time.format(new Date());//+ System.getProperty("sales_date", "mm/dd/yy HH:MM:ss aa");
         String terminal_no = "Terminal No.: " + System.getProperty("terminal_no", "0001");
         String cashier = "Cashier: " + MyUser.getUser_screen_name();
-        String customer_name = "Customer: " + my_sales.customer_name;
-        
+        String customer_name = "" + my_sales.customer_name;
+
         String customer_address = "Address: ";
         String customer_id_no = "ID/TIN No.: ";
 
@@ -1151,9 +1159,12 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         double zero_rated_sales = 0;
         double vat = 0;
         double vat_percent1 = 0;
-        double change = change_amount;
+        double change = Payments.countChange2();
 
-        String or_no = "OR No.: " + my_sales.sales_no;
+        String or_no = my_sales.sales_no;//"OR No.: " + sale.sales_no;
+        int index = or_no.indexOf("|");
+        or_no = or_no.substring(index + 1, or_no.length());
+        or_no = "OR No.: " + or_no;
         String receipt_footer = System.getProperty("receipt_footer", "THIS INVOICE/RECEIPT SHALL BE VALID FOR FIVE(5) YEARS FROM THE DATE OF THE PERMIT TO USE\nTHIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAX");
         String supplier_name = "Supplier: " + System.getProperty("developer", "Synapse Software Technologies");
         String supplier_address = System.getProperty("developer_address", "Daro, Dumaguete City, Negros Oriental");
@@ -1425,7 +1436,8 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         double sale_discount = FitIn.toDouble(lbl_sale_discount.getText());
         double net_total = FitIn.toDouble(lbl_balance_due.getText());
         double cash_amount = FitIn.toDouble(lbl_cash.getText());
-        double change_amount = FitIn.toDouble(lbl_change.getText());
+        double change_amount = Payments.countChange2();
+        System.out.println("change: " + change_amount);
         Window p = (Window) this;
         Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
         nd.setTitle("");
@@ -1440,5 +1452,10 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
+
+    }
+
+    private void view_or() {
+
     }
 }

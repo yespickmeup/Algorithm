@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -534,6 +535,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         String min_no = "MIN NO: " + System.getProperty("min_no", "0000000000");
         String serial_no = "Serial No.: " + System.getProperty("serial_no", "0000000000");
         String permit_no = "Permit No.: " + System.getProperty("permit_no", "0000000000");
+
         String pos_no = System.getProperty("pos_no", "0000000000");
         String accreditation_no = System.getProperty("accreditation_no", "0000000000");
         String business_type = System.getProperty("business_type", "VAT REG");
@@ -581,8 +583,11 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         double vat = 0;
         double vat_percent1 = 0;
         double change = change_amount;
-
-        String or_no = "OR No.: " + sale.sales_no;
+        System.out.println("change: " + change);
+        String or_no = sale.sales_no;//"OR No.: " + sale.sales_no;
+        int index = or_no.indexOf("|");
+        or_no = or_no.substring(index + 1, or_no.length());
+        or_no = "OR No.: " + or_no;
         String receipt_footer = System.getProperty("receipt_footer", "THIS INVOICE/RECEIPT SHALL BE VALID FOR FIVE(5) YEARS FROM THE DATE OF THE PERMIT TO USE\nTHIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAX");
         String supplier_name = "Supplier: " + System.getProperty("developer", "Synapse Software Technologies");
         String supplier_address = System.getProperty("developer_address", "Daro, Dumaguete City, Negros Oriental");
@@ -614,15 +619,16 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         vatable_sales = sale.amount_due / 1.12;
         vat_percent1 = vatable_sales * .12;
         vat = vat_percent1;
-        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
+        final Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
+
         rpt.fields.addAll(fields);
 
-       
         init_report_or(rpt);
-       
+
         init_report_ar(rpt);
-        
+
         init_report_dr(rpt);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">

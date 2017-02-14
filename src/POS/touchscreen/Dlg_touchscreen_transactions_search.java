@@ -563,7 +563,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
         tbl_sales.setModel(tbl_sales_M);
         tbl_sales.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_sales.setRowHeight(25);
-        int[] tbl_widths_sales = {150, 80, 100, 100, 30, 30, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_sales = {150, 80, 100, 100, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_sales.length; i < n; i++) {
             if (i == 2) {
                 continue;

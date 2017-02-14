@@ -684,7 +684,11 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
 
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-
+        String module_prepayments = System.getProperty("module_prepayments", "0");
+        String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+        String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+        String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+        String module_services = System.getProperty("module_services", "0");
         for (S1_user_previleges.to_user_previleges to : datas) {
 
             if (to.previledge.equalsIgnoreCase("AR Aging Report")) {
@@ -706,8 +710,11 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
                 jLabel21.setBackground(new java.awt.Color(96, 188, 219));
             }
             if (to.previledge.equalsIgnoreCase("Customer's Balances Report")) {
-                jLabel7.setEnabled(true);
-                jLabel7.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_accounts_receivable.equals("1")) {
+                    jLabel7.setEnabled(true);
+                    jLabel7.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
             if (to.previledge.equalsIgnoreCase("Customer's Ledger Report")) {
 
@@ -746,8 +753,11 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
 
             }
             if (to.previledge.equalsIgnoreCase("Services Report")) {
-                jLabel8.setEnabled(true);
-                jLabel8.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel8.setEnabled(true);
+                    jLabel8.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Void Items Report")) {
@@ -779,8 +789,11 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("AR Items")) {
-                jLabel17.setEnabled(true);
-                jLabel17.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_accounts_receivable.equals("1")) {
+                    jLabel17.setEnabled(true);
+                    jLabel17.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
             if (to.previledge.equalsIgnoreCase("BIR")) {
                 jLabel18.setEnabled(true);

@@ -170,6 +170,56 @@ public class MySales_Items {
 
         return datas;
     }
+    public static List<Inventory_barcodes.to_inventory_barcodes> convert_order2(List<MySales_Items.items> orders) {
+        List<Inventory_barcodes.to_inventory_barcodes> datas = new ArrayList();
+        for (MySales_Items.items to : orders) {
+            int id = to.id;
+            String sales_no = to.sales_no;
+            String item_code = to.item_code;
+            String barcode = to.barcode;
+            String description = to.description;
+            String generic_name = to.generic_name;
+            String item_type = to.item_type;
+            String supplier_name = to.supplier_name;
+            String supplier_id = to.supplier_id;
+            String serial_no = to.serial_no;
+            double product_qty = to.product_qty;
+            String unit = to.unit;
+            double conversion = to.conversion;
+            double selling_price = to.selling_price;
+            String date_added = to.date_added;
+            String user_id = "";
+            String user_screen_name = "";
+            int status = to.status;
+            int is_vatable = to.is_vatable;
+            int selling_type = to.selling_type;
+            String discount_name = to.discount_name;
+            double discount_rate = to.discount_rate;
+            double discount_amount = to.discount_amount;
+            String discount_customer_name = to.discount_customer_name;
+            String discount_customer_id = to.discount_customer_id;
+            String branch = to.branch;
+            String branch_code = to.branch_code;
+            String location = to.location;
+            String location_id = to.location_id;
+            String category = to.category;
+            String category_id = to.category_id;
+            String classification = to.classification;
+            String classification_id = to.classification_id;
+            String sub_classification = to.sub_classification;
+            String sub_classification_id = to.sub_classification_id;
+            String brand = to.brand;
+            String brand_id = to.brand_id;
+            String model = to.model;
+            String model_id = to.model_id;
+            double addtl_amount = to.addtl_amount;
+            double wtax = to.wtax;
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_id, item_type, status, supplier_id, is_vatable, wtax, supplier_id, selling_type, is_vatable, conversion, wtax, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, serial_no, discount_rate, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax);
+            datas.add(order);
+        }
+
+        return datas;
+    }
 
     public static List<MySales_Items.items> ret_data(String where) {
         List<MySales_Items.items> datas = new ArrayList();

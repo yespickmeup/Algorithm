@@ -93,7 +93,7 @@ public class S1_purchase_orders {
             stmt.execute();
             Lg.s(S1_purchase_orders.class, "Successfully Added");
 
-            System.out.println("Account Id: "+to_purchase_orders.account_id);
+            System.out.println("Account Id: " + to_purchase_orders.account_id);
             S1_suppliers.to_suppliers cus = ret_customer_balance(to_purchase_orders.account_id);
             double new_balance = cus.balance + to_purchase_orders.amount;
             String s2 = "update  suppliers set "
@@ -154,7 +154,7 @@ public class S1_purchase_orders {
                     + " from  suppliers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
-            System.out.println("S0: "+s0);
+            System.out.println("S0: " + s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {

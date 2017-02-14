@@ -63,7 +63,7 @@ public class MyMain {
             System.setProperty("pool_port", prop.getProperty("pool_port", "3306"));
             System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
             System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
-            System.setProperty("pool_db", prop.getProperty("pool_db", "db_algorithm"));
+            System.setProperty("pool_db", prop.getProperty("pool_db", "db_smis"));
             System.setProperty("environment", prop.getProperty("environment", "development"));
 
             System.out.println("OS: " + os);
@@ -118,16 +118,16 @@ public class MyMain {
             System.setProperty("receipt_footer", setting.bir_receipt_footer);
             System.setProperty("invoice_footer", setting.bir_invoice_footer);
             System.setProperty("serial_no", setting.bir_serial_no);
-            System.setProperty("permit_no", setting.bir_permit_no);
+
             System.setProperty("accreditation_no", setting.bir_accreditation_no);
             System.setProperty("tin_no", setting.bir_tin);
             System.setProperty("machine_no", setting.bir_machine_no);
             System.setProperty("min_no", setting.bir_min_no);
-            System.setProperty("business_type", setting.bir_min_no);
+            System.setProperty("business_type", setting.bir_business_type);
             System.setProperty("vat_percent", setting.bir_vat_percent);
-            System.setProperty("permit_to_use_no", setting.bir_permit_no);
-            //
+            System.setProperty("permit_no", setting.bir_permit_no);
 
+            //
             //
             System.setProperty("developer", setting.developer);
             System.setProperty("developer_address", setting.developer_address);
@@ -146,7 +146,7 @@ public class MyMain {
             System.setProperty("cloud_port", prop.getProperty("cloud_port", "3306"));
             System.setProperty("cloud_user", prop.getProperty("cloud_user", "root"));
             System.setProperty("cloud_password", prop.getProperty("cloud_password", "password"));
-            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_algorithm"));
+            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_smis"));
             System.setProperty("terminal_number", prop.getProperty("terminal_number", "0"));
             System.setProperty("hdd_drive", prop.getProperty("hdd_drive", ""));
             System.setProperty("img_path", prop.getProperty("img_path", System.getProperty("user.home", "C:\\Users\\User") + "\\"));
@@ -170,7 +170,18 @@ public class MyMain {
             if (setting.module_accounts_receivable == 1) {
                 System.setProperty("module_accounts_receivable", prop.getProperty("module_accounts_receivable", "1"));
             }
+            if (setting.module_accounts_payable == 1) {
+                System.setProperty("module_accounts_payable", prop.getProperty("module_accounts_payable", "1"));
+            }
+            if (setting.module_charge_in_advance == 1) {
+                System.setProperty("module_charge_in_advance", prop.getProperty("module_charge_in_advance", "1"));
+            }
+            if (setting.module_services == 1) {
+                System.setProperty("module_services", prop.getProperty("module_services", "1"));
+            }
 
+            String version = System.getProperty("version", "");
+            System.setProperty("version", version);
             //
         } catch (IOException e) {
             throw new RuntimeException(e);

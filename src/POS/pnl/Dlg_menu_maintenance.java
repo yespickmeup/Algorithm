@@ -940,6 +940,12 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
 
+        String module_prepayments = System.getProperty("module_prepayments", "0");
+        String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+        String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+        String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+        String module_services = System.getProperty("module_services", "0");
+
         for (S1_user_previleges.to_user_previleges to : datas) {
 
             if (to.previledge.equalsIgnoreCase("Suppliers")) {
@@ -971,8 +977,11 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Customers")) {
-                jLabel13.setEnabled(true);
-                jLabel13.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_prepayments.equals("1") || module_accounts_receivable.equals("1")) {
+                    jLabel13.setEnabled(true);
+                    jLabel13.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Discounts")) {
@@ -994,17 +1003,26 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Service Department Members")) {
-                jLabel15.setEnabled(true);
-                jLabel15.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel15.setEnabled(true);
+                    jLabel15.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
             if (to.previledge.equalsIgnoreCase("Service Department")) {
-                jLabel16.setEnabled(true);
-                jLabel16.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel16.setEnabled(true);
+                    jLabel16.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Service Transaction Type")) {
-                jLabel22.setEnabled(true);
-                jLabel22.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel22.setEnabled(true);
+                    jLabel22.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Unit of Measure")) {
@@ -1017,8 +1035,11 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Service Departments")) {
-                jLabel16.setEnabled(true);
-                jLabel16.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel16.setEnabled(true);
+                    jLabel16.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Update Barcodes")) {

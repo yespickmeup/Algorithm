@@ -144,7 +144,7 @@ id int auto_increment primary key
 ,serial_no varchar(255)
 ,main_barcode varchar(255)
 ,qty double
-,cost double
+,cost double    
 ,status int
 ,branch varchar(255)
 ,branch_id varchar(255)

@@ -965,11 +965,20 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
 
+        String module_prepayments = System.getProperty("module_prepayments", "0");
+        String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+        String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+        String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+        String module_services = System.getProperty("module_services", "0");
+
         for (S1_user_previleges.to_user_previleges to : datas) {
 
             if (to.previledge.equalsIgnoreCase("Accounts Payable")) {
-                jLabel7.setEnabled(true);
-                jLabel7.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_accounts_payable.equals("1")) {
+                    jLabel7.setEnabled(true);
+                    jLabel7.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
             if (to.previledge.equalsIgnoreCase("Return/s from Customer")) {
                 jLabel29.setEnabled(true);
@@ -977,8 +986,11 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Accounts Receivable")) {
-                jLabel8.setEnabled(true);
-                jLabel8.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_accounts_receivable.equals("1")) {
+                    jLabel8.setEnabled(true);
+                    jLabel8.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Disbursements")) {
@@ -1001,13 +1013,18 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Services-Transaction")) {
-                jLabel18.setEnabled(true);
-                jLabel18.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel18.setEnabled(true);
+                    jLabel18.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
             if (to.previledge.equalsIgnoreCase("Services-View/Encode")) {
+                if (module_services.equals("1")) {
+                    jLabel26.setEnabled(true);
+                    jLabel26.setBackground(new java.awt.Color(96, 188, 219));
+                }
 
-                jLabel26.setEnabled(true);
-                jLabel26.setBackground(new java.awt.Color(96, 188, 219));
             }
 
             if (to.previledge.equalsIgnoreCase("Stock Transfer")) {
@@ -1021,13 +1038,19 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Accounts Receivable Payment")) {
-                jLabel9.setEnabled(true);
-                jLabel9.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_accounts_receivable.equals("1")) {
+                    jLabel9.setEnabled(true);
+                    jLabel9.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Services-View")) {
-                jLabel27.setEnabled(true);
-                jLabel27.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_services.equals("1")) {
+                    jLabel27.setEnabled(true);
+                    jLabel27.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Price Inquiry")) {
@@ -1040,8 +1063,11 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Prepaid Payment")) {
-                jLabel20.setEnabled(true);
-                jLabel20.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_prepayments.equals("1")) {
+                    jLabel20.setEnabled(true);
+                    jLabel20.setBackground(new java.awt.Color(96, 188, 219));
+                }
+
             }
 
             if (to.previledge.equalsIgnoreCase("Borrower Slip")) {
@@ -1066,8 +1092,10 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             }
 
             if (to.previledge.equalsIgnoreCase("Charge in Advance")) {
-                jLabel19.setEnabled(true);
-                jLabel19.setBackground(new java.awt.Color(96, 188, 219));
+                if (module_charge_in_advance.equals("1")) {
+                    jLabel19.setEnabled(true);
+                    jLabel19.setBackground(new java.awt.Color(96, 188, 219));
+                }
             }
 
             if (to.previledge.equalsIgnoreCase("RMA")) {

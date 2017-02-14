@@ -172,7 +172,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
         return null;
 
     }
-    //</editor-fold>    
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" main ">
     public static void main(String args[]) {
@@ -1320,7 +1320,6 @@ public class Dlg_po2 extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -1796,7 +1795,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
 
     }
 
-    //<editor-fold defaultstate="collapsed" desc=" purchase_order_items "> 
+    //<editor-fold defaultstate="collapsed" desc=" purchase_order_items ">
     public static ArrayListModel tbl_purchase_order_items_ALM;
     public static Tblpurchase_order_itemsModel tbl_purchase_order_items_M;
 
@@ -2234,9 +2233,9 @@ public class Dlg_po2 extends javax.swing.JDialog {
         nd.setVisible(true);
 
     }
-//</editor-fold> 
+//</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc=" purchase_orders "> 
+    //<editor-fold defaultstate="collapsed" desc=" purchase_orders ">
     public static ArrayListModel tbl_purchase_orders_ALM;
     public static Tblpurchase_ordersModel tbl_purchase_orders_M;
 
@@ -2731,5 +2730,5 @@ public class Dlg_po2 extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-//</editor-fold> 
+//</editor-fold>
 }

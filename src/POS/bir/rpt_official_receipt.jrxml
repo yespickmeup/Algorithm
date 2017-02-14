@@ -76,7 +76,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="158" splitType="Stretch">
+		<band height="168" splitType="Stretch">
 			<textField>
 				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="24" width="180" height="10"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -94,7 +94,7 @@
 				<textFieldExpression><![CDATA[$P{operated_by}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="13" y="70" width="180" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="78" width="180" height="10"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
@@ -115,10 +115,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{min_no}+ " "+$P{permit_no}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{min_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="93" width="105" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="92" width="179" height="10"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
@@ -126,15 +126,15 @@
 				<textFieldExpression><![CDATA[$P{sales_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="119" y="93" width="74" height="10"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="101" width="179" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{terminal_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="103" width="179" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="110" width="179" height="10"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
@@ -142,7 +142,7 @@
 				<textFieldExpression><![CDATA[$P{or_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="112" width="180" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="119" width="180" height="10"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
@@ -150,7 +150,7 @@
 				<textFieldExpression><![CDATA[$P{cashier}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="57" y="121" width="136" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="57" y="128" width="136" height="10"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
@@ -158,7 +158,7 @@
 				<textFieldExpression><![CDATA[$P{customer_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="24" y="130" width="169" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="24" y="137" width="169" height="10"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
@@ -169,7 +169,7 @@
 				<textFieldExpression><![CDATA[$P{customer_address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="24" y="139" width="169" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="24" y="146" width="169" height="10"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
@@ -180,15 +180,16 @@
 				<textFieldExpression><![CDATA[$P{customer_id_no}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="04ac2d74-7538-4d81-8dc0-be45d3a5acb9" x="13" y="151" width="181" height="7"/>
+				<reportElement uuid="04ac2d74-7538-4d81-8dc0-be45d3a5acb9" x="14" y="161" width="181" height="7"/>
 				<box>
-					<bottomPen lineWidth="0.2"/>
+					<topPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.0"/>
 				</box>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="13" y="61" width="180" height="10"/>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="69" width="180" height="10"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
@@ -196,13 +197,21 @@
 				<textFieldExpression><![CDATA[$P{serial_no}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="14" y="121" width="44" height="10"/>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="14" y="128" width="44" height="10"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<text><![CDATA[Customer:]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="14" y="60" width="180" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{permit_no}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -221,7 +230,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.000">
+			<textField pattern="#,##0.00">
 				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="25" y="9" width="34" height="10"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
@@ -245,7 +254,7 @@
 				</textElement>
 				<text><![CDATA[x]]></text>
 			</staticText>
-			<textField pattern="#,##0.000">
+			<textField pattern="#,##0.00">
 				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="68" y="9" width="51" height="10"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
@@ -253,7 +262,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{selling_price}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.000">
+			<textField pattern="#,##0.00">
 				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="133" y="9" width="62" height="10"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
@@ -607,6 +616,14 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_items}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="04ac2d74-7538-4d81-8dc0-be45d3a5acb9" x="14" y="344" width="181" height="7"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

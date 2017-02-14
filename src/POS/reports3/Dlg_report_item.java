@@ -1065,6 +1065,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox4.setVisible(false);
         jCheckBox5.setVisible(false);
 
+        
     }
 
     public void do_pass() {

@@ -6,6 +6,7 @@
 package POS.touchscreen;
 
 import POS.inventory.Dlg_inventory_uom;
+import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
@@ -944,7 +945,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        reprint_or();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tbl_sale_itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sale_itemsMouseClicked
@@ -1755,6 +1756,29 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 am = am - t_vat_sales;
                 lbl_charge_amount1.setText(FitIn.fmt_wc_0(am));
                 lbl_charge_amount2.setText(FitIn.fmt_wc_0(t_vat_sales));
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    
+     private void reprint_or() {
+         
+        List<Inventory_barcodes.to_inventory_barcodes> orders = MySales_Items.convert_order2(tbl_sale_items_ALM);
+        double sale_discount = FitIn.toDouble(lbl_sale_discount.getText());
+        double net_total = FitIn.toDouble(lbl_balance_due.getText());
+        double cash_amount = FitIn.toDouble(lbl_cash.getText());
+        double change_amount = 0;
+        Window p = (Window) this;
+        Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(orders, sale_discount, net_total, my_sale, cash_amount, change_amount);
+        nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_choose_receipt_type.OutputData data) {
+                closeDialog.ok();
+
             }
         });
         nd.setLocationRelativeTo(this);

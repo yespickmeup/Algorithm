@@ -40,7 +40,6 @@ import POS.inventory.Dlg_inventory_price_updates;
 import POS.inventory_replenishment.Dlg_inventory_replenishment;
 import POS.inventory_reports.Dlg_reorder_level;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
-import POS.main.Main;
 import static POS.main.MyMain.getSerialNumber;
 import POS.my_services.Dlg_my_service_type;
 import POS.my_services.Dlg_my_services;
@@ -82,6 +81,7 @@ import POS.users.S1_users;
 import POS.users.User_logs;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.DateUtils1;
 import POS.util.DeEncrypter;
 import POS.util.Dlg_get_hdd_serial;
 import POS.util.Focus_Fire;
@@ -98,9 +98,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -826,7 +829,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("V1.20170109");
+        jLabel1.setText("V1.20170109 (Full Version)");
 
         jLabel7.setBackground(new java.awt.Color(16, 88, 197));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -852,21 +855,21 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10))
-            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel51, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         pnl_main_holder.setBackground(new java.awt.Color(204, 204, 204));
@@ -1946,9 +1949,57 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         jButton1.setVisible(false);
         key();
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         String business_name = System.getProperty("business_name", "Synapse Software Technologies");
         jLabel7.setText(business_name);
+        String version = System.getProperty("version", "");
+        String license_code = System.getProperty("license_code", "");
+        license_code = DeEncrypter.decrypt(license_code);
+
+        jLabel1.setText("" + version + "( Full Version )");
+
+        if (license_code.equalsIgnoreCase("trial version")) {
+            jLabel1.setText("" + version + "( Trial Version )");
+            String where1 = "order by id asc limit 1";
+            String where2 = "order by id desc limit 1";
+
+            List<User_logs.to_user_logs> first = User_logs.ret_data(where1);
+            List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
+            if (!first.isEmpty()) {
+                User_logs.to_user_logs f = (User_logs.to_user_logs) first.get(0);
+                User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
+                Date date_from = new Date();
+                Date date_to = new Date();
+                try {
+                    date_from = DateType.datetime.parse(f.created_at);
+                    date_to = DateType.datetime.parse(l.created_at);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                int count = DateUtils1.count_days(date_from, date_to);
+                int expiry = 30 - count;
+                if (expiry <= 0) {
+                    Window p = (Window) this;
+                    Dlg_expiry nd = Dlg_expiry.create(p, true);
+                    nd.setTitle("");
+                    nd.setCallback(new Dlg_expiry.Callback() {
+                        
+                        @Override
+                        public void ok(CloseDialog closeDialog, Dlg_expiry.OutputData data) {
+                            closeDialog.ok();
+                            
+                        }
+                    });
+                    nd.setLocationRelativeTo(this);
+                    nd.setVisible(true);
+                }
+                jLabel1.setText("" + version + " ( Trial Version ) - Expires in " + expiry + " day/s");
+            } else {
+                System.out.println("User Log is empty!");
+            }
+
+        }
 
         Border empty = new EmptyBorder(0, 5, 0, 0);
         CompoundBorder border = javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(16, 88, 197), 1, false), empty);
@@ -2907,7 +2958,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void r_bir() {
         Dlg_reading dtc = new Dlg_reading();
-        MyFrame.set(dtc.getSurface(), jPanel1, "BIR X&Y Reading");
+        MyFrame.set(dtc.getSurface(), jPanel1, "BIR X&Z Reading");
     }
 
     private void exit() {
