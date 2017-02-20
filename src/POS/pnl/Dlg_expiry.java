@@ -5,6 +5,8 @@
  */
 package POS.pnl;
 
+import POS.util.Dlg_get_hdd_serial;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
@@ -278,6 +280,36 @@ public class Dlg_expiry extends javax.swing.JDialog {
                 System.exit(0);
             }
         });
+        KeyMapping.mapKeyWIFW(getSurface(),
+                KeyEvent.VK_F10, new KeyAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (count == 2) {
+                    license_code();
+                    count = 0;
+                }
+                count++;
+            }
+        });
+
+    }
+    int count = 0;
+
+    private void license_code() {
+        Window p = (Window) this;
+        Dlg_get_hdd_serial nd = Dlg_get_hdd_serial.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_get_hdd_serial.Callback() {
+            
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_get_hdd_serial.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
     // </editor-fold>
 }

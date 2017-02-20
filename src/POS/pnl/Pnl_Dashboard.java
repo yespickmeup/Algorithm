@@ -83,6 +83,7 @@ import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.DeEncrypter;
+import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_get_hdd_serial;
 import POS.util.Focus_Fire;
 import POS.util.MyFrame;
@@ -1984,16 +1985,17 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                     Dlg_expiry nd = Dlg_expiry.create(p, true);
                     nd.setTitle("");
                     nd.setCallback(new Dlg_expiry.Callback() {
-                        
+
                         @Override
                         public void ok(CloseDialog closeDialog, Dlg_expiry.OutputData data) {
                             closeDialog.ok();
-                            
+
                         }
                     });
                     nd.setLocationRelativeTo(this);
                     nd.setVisible(true);
                 }
+                is_trial_version = 1;
                 jLabel1.setText("" + version + " ( Trial Version ) - Expires in " + expiry + " day/s");
             } else {
                 System.out.println("User Log is empty!");
@@ -2014,6 +2016,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         client_label_request();
     }
+    int is_trial_version = 0;
 
     private void client_label_request() {
         String pool_db = System.getProperty("pool_db", "db_algorithm");
@@ -2584,7 +2587,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         if (!os.equalsIgnoreCase("Linux")) {
             String license_code = System.getProperty("license_code", "");
             String hdd_license = DeEncrypter.encrypt(getSerialNumber());
-            if (!license_code.equals(hdd_license)) {
+            if (!license_code.equals(hdd_license) && is_trial_version == 0) {
                 Alert.set(0, "Invalid license key, please register!");
                 return;
             }
@@ -3006,7 +3009,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
 
                 if (data.stmt.equals("logout")) {
-                    System.exit(1);
+                    logout1();
+                    
                 }
                 if (data.stmt.equals("minimize")) {
                     Pnl_Dashboard.this.setState(Frame.ICONIFIED);
@@ -3227,6 +3231,22 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         });
         Point point = jLabel51.getLocationOnScreen();
         nd.setLocation(point.x - 125, point.y + 37);
+        nd.setVisible(true);
+    }
+
+    private void logout1() {
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                System.exit(0);
+            }
+        });
+        nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
 }
