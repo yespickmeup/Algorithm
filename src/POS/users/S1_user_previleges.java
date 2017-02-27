@@ -186,7 +186,6 @@ public class S1_user_previleges {
                 int status = rs.getInt(4);
                 String user_id = rs.getString(5);
                 String user_name = rs.getString(6);
-
                 to_user_previleges to = new to_user_previleges(id, account, previledge, status, user_id, user_name);
                 datas.add(to);
             }

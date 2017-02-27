@@ -11,6 +11,8 @@ import POS.touchscreen_reports.Dlg_report_ledger;
 import POS.touchscreen_reports.Dlg_report_prepaid_payments;
 import POS.touchscreen_reports.Dlg_report_sales_by_item;
 import POS.touchscreen_reports.Dlg_report_sales_summary;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Point;
@@ -18,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -624,12 +627,15 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         init_key();
         hover();
         init_panel_layout();
+        get_privelege();
 
-        init_sales_summary();
+        if (jButton3.isEnabled()) {
+            init_sales_summary();
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-
                 init_cash_count();
                 SwingUtilities.invokeLater(new Runnable() {
 
@@ -674,11 +680,52 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
                         });
                     }
                 });
-
             }
         });
+
     }
 
+    private void get_privelege() {
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton9.setEnabled(false);
+        jButton5.setEnabled(false);
+        jButton6.setEnabled(false);
+        jButton8.setEnabled(false);
+        jButton10.setEnabled(false);
+        jButton11.setEnabled(false);
+
+        String where = " where user_id='" + MyUser.getUser_id() + "' and account like 'Sales' ";
+        List<S1_user_previleges.to_user_previleges> list = S1_user_previleges.ret_data(where);
+        for (S1_user_previleges.to_user_previleges li : list) {
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Sales Summary")) {
+                jButton3.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Cash Count")) {
+                jButton4.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Remittance")) {
+                jButton9.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Sales Ledger")) {
+                jButton5.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Sales by Item")) {
+                jButton6.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Void/Replacement")) {
+                jButton8.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - AR Payments")) {
+//                jButton10.setEnabled(true);
+            }
+            if (li.previledge.equalsIgnoreCase("Cashier Report - Prepaid Payments")) {
+//                jButton11.setEnabled(true);
+            }
+
+        }
+
+    }
     int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0, x7 = 0, x8 = 0;
 
     CardLayout cardLayout = new CardLayout();
@@ -779,7 +826,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -845,4 +892,3 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     }
 
 }
-
