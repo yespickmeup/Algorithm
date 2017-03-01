@@ -869,14 +869,15 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         }
         String where = " where main_barcode like '%" + search + "%' and location_id='" + location_ids + "' "
                 + " or barcode like '%" + search + "%' and location_id='" + location_ids + "'"
-                + " order by id asc";
+                + " order by description asc";
 
         List<Srpt_print_barcodes.field> datas = Srpt_print_barcodes.ret_data(where, is_item_code);
         loadData_inventory_barcodes(datas);
         count();
     }
 //</editor-fold> 
-
+    
+    
     private void select_item() {
         int row = tbl_inventory_barcodes.getSelectedRow();
         if (row < 0) {

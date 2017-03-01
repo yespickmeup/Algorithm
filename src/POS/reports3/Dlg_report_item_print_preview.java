@@ -6,7 +6,6 @@
 package POS.reports3;
 
 import POS.util.DateType;
-import POS.util.Users;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;

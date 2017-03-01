@@ -22,6 +22,7 @@ import POS.cash_drawer.*;
 import POS.category.Dlg_categories;
 import POS.category.Dlg_category;
 import POS.charge_in_advance.Dlg_charge_in_advance;
+import POS.conversion.Dlg_conversion;
 import POS.credit_cards.Dlg_credit_cards;
 import POS.customers.Dlg_customers_ar;
 import POS.disbursements.Dlg_disbursement_categories;
@@ -2488,7 +2489,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
     }
+    private void t_conversions() {
+        Dlg_conversion dtc = new Dlg_conversion();
 
+        MyFrame.set(dtc.getSurface(), jPanel1, "Conversions");
+    }
     private void t_rma() {
         Dlg_rma dtc = new Dlg_rma();
         MyFrame.set(dtc.getSurface(), jPanel1, "RMA");
@@ -3016,6 +3021,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                     Pnl_Dashboard.this.setState(Frame.ICONIFIED);
                 }
                 //<editor-fold defaultstate="collapsed" desc=" transactions ">
+                if (data.stmt.equals("Conversion")) {
+                    t_conversions();
+                }
                 if (data.stmt.equals("Return/s from Customer")) {
                     t_returns_from_customer();
 

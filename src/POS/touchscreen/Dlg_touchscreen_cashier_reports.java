@@ -633,38 +633,33 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
             init_sales_summary();
         }
 
+        
         SwingUtilities.invokeLater(new Runnable() {
+            
             @Override
             public void run() {
                 init_cash_count();
                 SwingUtilities.invokeLater(new Runnable() {
-
                     @Override
                     public void run() {
-
                         init_ar_payments();
                         SwingUtilities.invokeLater(new Runnable() {
-
                             @Override
                             public void run() {
                                 init_ledger();
                                 SwingUtilities.invokeLater(new Runnable() {
-
                                     @Override
                                     public void run() {
                                         init_prepaid_payments();
                                         SwingUtilities.invokeLater(new Runnable() {
-
                                             @Override
                                             public void run() {
                                                 init_remitance();
                                                 SwingUtilities.invokeLater(new Runnable() {
-
                                                     @Override
                                                     public void run() {
                                                         init_sales_by_item();
                                                         SwingUtilities.invokeLater(new Runnable() {
-
                                                             @Override
                                                             public void run() {
                                                                 init_transaction();
@@ -682,7 +677,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
                 });
             }
         });
-
+        
+        
     }
 
     private void get_privelege() {

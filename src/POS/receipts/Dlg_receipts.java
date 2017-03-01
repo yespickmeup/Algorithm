@@ -15,7 +15,6 @@ import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.my_services.Dlg_my_service_confirm;
 import POS.purchase_order.Purchase_order;
 import POS.purchase_order.Purchase_order_item;
-import POS.purchase_order.S1_purchase_order_items;
 import POS.receipts.S1_receipt_orders.to_receipt_items;
 import POS.receipts.Receipts.to_receipts;
 import POS.suppliers.S1_suppliers;

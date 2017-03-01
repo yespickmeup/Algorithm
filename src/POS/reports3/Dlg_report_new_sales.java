@@ -5,7 +5,6 @@
  */
 package POS.reports3;
 
-import POS.customers.Customers;
 import POS.sales.Srpt_sales_by_item;
 import POS.sales.Srpt_sales_ledger;
 import POS.users.S1_users;
@@ -32,6 +31,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+
 
 /**
  *
