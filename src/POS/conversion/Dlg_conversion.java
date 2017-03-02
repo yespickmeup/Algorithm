@@ -7,20 +7,28 @@ package POS.conversion;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.conversion.Conversion_items.to_conversion_items;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.util.TableRenderer;
+import com.jgoodies.binding.adapter.AbstractTableAdapter;
+import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 
@@ -209,7 +217,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jCheckBox3 = new javax.swing.JCheckBox();
         tf_search = new Field.Input();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_conversion_items = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new Button.Primary();
@@ -343,7 +351,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_conversion_items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -354,7 +362,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tbl_conversion_items);
 
         jLabel4.setText("Total Items:");
 
@@ -482,6 +490,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jCheckBox6.setText("Description");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -996,6 +1009,10 @@ public class Dlg_conversion extends javax.swing.JDialog {
         init_inventory_barcodes();
     }//GEN-LAST:event_tf_searchActionPerformed
 
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        init_inventory_barcodes2();
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1056,12 +1073,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbl_conversion_items;
     private javax.swing.JTextField tf_from_branch;
     private javax.swing.JTextField tf_from_branch1;
     private javax.swing.JTextField tf_from_branch2;
@@ -1079,6 +1096,8 @@ public class Dlg_conversion extends javax.swing.JDialog {
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
         branch_location_list2 = branch_location_list;
+
+        init_tbl_conversion_items(tbl_conversion_items);
     }
 
     private void set_default_branch() {
@@ -1205,6 +1224,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }
 
     List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list = new ArrayList();
+    List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list2 = new ArrayList();
 
     private void init_inventory_barcodes() {
         final Field.Combo br = (Field.Combo) tf_from_location;
@@ -1233,7 +1253,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
 
                 }
                 if (inventory_barcoders_list.size() >= 1) {
-                    Object[][] obj = new Object[inventory_barcoders_list.size()][6];
+                    Object[][] obj = new Object[inventory_barcoders_list.size()][5];
                     int i = 0;
                     for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list) {
                         obj[i][0] = " " + FitIn.fmt_woc(to.product_qty);
@@ -1245,18 +1265,18 @@ public class Dlg_conversion extends javax.swing.JDialog {
                             unit = uoms.uom;
                         }
                         obj[i][3] = " " + unit;
-                        obj[i][4] = " " + FitIn.fmt_wc_0(to.cost);
-                        obj[i][5] = " " + FitIn.fmt_wc_0(to.selling_price);
+
+                        obj[i][4] = " " + FitIn.fmt_wc_0(to.selling_price);
                         i++;
                     }
                     JLabel[] labels = {};
-                    double width = tf_search.getWidth();
+                    double width = 700;
                     width = width * .60;
                     int w = FitIn.toInt("" + width);
-                    int[] tbl_widths_customers = {50, 100, w, 30, 50, 50};
-                    String[] col_names = {"Qty", "ItemCode", "Description", "Unit", "Cost", "Price"};
+                    int[] tbl_widths_customers = {50, 100, w, 30, 50};
+                    String[] col_names = {"Qty", "ItemCode", "Description", "Unit", "Price"};
                     TableRenderer tr = new TableRenderer();
-                    TableRenderer.setPopup(tf_search, obj, labels, tbl_widths_customers, col_names);
+                    TableRenderer.setPopup2(tf_search, obj, labels, tbl_widths_customers, col_names, 700);
 
                     tr.setCallback(new TableRenderer.Callback() {
                         @Override
@@ -1269,5 +1289,206 @@ public class Dlg_conversion extends javax.swing.JDialog {
         });
         t.start();
     }
+
+    private void init_inventory_barcodes2() {
+        final Field.Combo br = (Field.Combo) tf_to_location;
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String search = tf_search.getText();
+                String where = " where ";
+
+                if (jCheckBox4.isSelected()) {
+                    where = where + " main_barcode like '" + search + "' and location_id='" + br.getId() + "' ";
+                }
+                if (jCheckBox5.isSelected()) {
+                    where = where + "  barcode like '" + search + "' and location_id='" + br.getId() + "' ";
+                }
+                if (jCheckBox6.isSelected()) {
+                    where = where + "  description like '%" + search + "%' and location_id='" + br.getId() + "' ";;
+                }
+                where = where + " order by description asc ";
+
+                inventory_barcoders_list2.clear();
+                inventory_barcoders_list2 = Inventory_barcodes.ret_where(where);
+
+                if (inventory_barcoders_list2.isEmpty()) {
+
+                }
+                if (inventory_barcoders_list2.size() >= 1) {
+                    Object[][] obj = new Object[inventory_barcoders_list2.size()][5];
+                    int i = 0;
+                    for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list2) {
+                        obj[i][0] = " " + FitIn.fmt_woc(to.product_qty);
+                        obj[i][1] = " " + to.main_barcode;
+                        obj[i][2] = " " + to.description;
+                        String unit = "";
+                        Dlg_inventory_uom.to_uom uoms = uom.default_uom(to.unit);
+                        if (uoms != null) {
+                            unit = uoms.uom;
+                        }
+                        obj[i][3] = " " + unit;
+
+                        obj[i][4] = " " + FitIn.fmt_wc_0(to.selling_price);
+                        i++;
+                    }
+                    JLabel[] labels = {};
+                    double width = 700;
+                    width = width * .60;
+                    int w = FitIn.toInt("" + width);
+                    int[] tbl_widths_customers = {50, 100, w, 30, 50};
+                    String[] col_names = {"Qty", "ItemCode", "Description", "Unit", "Price"};
+                    TableRenderer tr = new TableRenderer();
+                    TableRenderer.setPopup2(jTextField3, obj, labels, tbl_widths_customers, col_names, 700);
+
+                    tr.setCallback(new TableRenderer.Callback() {
+                        @Override
+                        public void ok(TableRenderer.OutputData data) {
+
+                        }
+                    });
+                }
+            }
+        });
+        t.start();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" conversion_items "> 
+    public static ArrayListModel tbl_conversion_items_ALM;
+    public static Tblconversion_itemsModel tbl_conversion_items_M;
+
+    public static void init_tbl_conversion_items(JTable tbl_conversion_items) {
+        tbl_conversion_items_ALM = new ArrayListModel();
+        tbl_conversion_items_M = new Tblconversion_itemsModel(tbl_conversion_items_ALM);
+        tbl_conversion_items.setModel(tbl_conversion_items_M);
+        tbl_conversion_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_conversion_items.setRowHeight(25);
+        int[] tbl_widths_conversion_items = {80, 80, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_conversion_items.length; i < n; i++) {
+            if (i == 100) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_conversion_items, i, tbl_widths_conversion_items[i]);
+        }
+        Dimension d = tbl_conversion_items.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_conversion_items.getTableHeader().setPreferredSize(d);
+        tbl_conversion_items.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_conversion_items.setRowHeight(25);
+        tbl_conversion_items.setFont(new java.awt.Font("Arial", 0, 12));
+    }
+
+    public static void loadData_conversion_items(List<to_conversion_items> acc) {
+        tbl_conversion_items_ALM.clear();
+        tbl_conversion_items_ALM.addAll(acc);
+    }
+
+    public static class Tblconversion_itemsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "id", "conversion_no", "user_name", "session_no", "date_added", "reference_no", "remarks", "barcode", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "from_branch", "from_branch_id", "from_location", "from_location_id", "to_branch", "to_branch_id", "to_location", "to_location_id"
+        };
+
+        public Tblconversion_itemsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_conversion_items tt = (to_conversion_items) getRow(row);
+            switch (col) {
+                case 0:
+                    return tt.id;
+                case 1:
+                    return tt.conversion_no;
+                case 2:
+                    return tt.user_name;
+                case 3:
+                    return tt.session_no;
+                case 4:
+                    return tt.date_added;
+                case 5:
+                    return tt.reference_no;
+                case 6:
+                    return tt.remarks;
+                case 7:
+                    return tt.barcode;
+                case 8:
+                    return tt.description;
+                case 9:
+                    return tt.category;
+                case 10:
+                    return tt.category_id;
+                case 11:
+                    return tt.classification;
+                case 12:
+                    return tt.classification_id;
+                case 13:
+                    return tt.sub_class;
+                case 14:
+                    return tt.sub_class_id;
+                case 15:
+                    return tt.brand;
+                case 16:
+                    return tt.brand_id;
+                case 17:
+                    return tt.model;
+                case 18:
+                    return tt.model_id;
+                case 19:
+                    return tt.conversion;
+                case 20:
+                    return tt.unit;
+                case 21:
+                    return tt.barcodes;
+                case 22:
+                    return tt.batch_no;
+                case 23:
+                    return tt.serial_no;
+                case 24:
+                    return tt.main_barcode;
+                case 25:
+                    return tt.qty;
+                case 26:
+                    return tt.cost;
+                case 27:
+                    return tt.status;
+                case 28:
+                    return tt.from_branch;
+                case 29:
+                    return tt.from_branch_id;
+                case 30:
+                    return tt.from_location;
+                case 31:
+                    return tt.from_location_id;
+                case 32:
+                    return tt.to_branch;
+                case 33:
+                    return tt.to_branch_id;
+                case 34:
+                    return tt.to_location;
+                default:
+                    return tt.to_location_id;
+            }
+        }
+    }
+//</editor-fold> 
 
 }
