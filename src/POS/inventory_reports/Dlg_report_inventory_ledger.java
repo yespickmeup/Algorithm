@@ -1189,6 +1189,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
                         String transaction_type = "Receipts";
                         String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                         qty=qty*conversion;
                         String in = FitIn.fmt_woc(qty);
                         String out = "";
                         String balance = "";
@@ -1203,6 +1204,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         String created_by = user_name;
                         String customer_name = "";
                         Date created = new Date();
+                       
                         try {
                             created = POS.util.DateType.datetime.parse(date_added);
                         } catch (ParseException ex) {

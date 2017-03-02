@@ -221,6 +221,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -278,6 +279,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jButton6 = new Button.Success();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel30 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -562,7 +567,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                                 .addGap(1, 1, 1)
                                 .addComponent(tf_dr_day, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
-                                .addComponent(tf_dr_year))
+                                .addComponent(tf_dr_year, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                             .addComponent(tf_remarks)))
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,7 +589,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_batch_no, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -776,6 +781,26 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
 
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel30.setText("Search by:");
+
+        buttonGroup2.add(jCheckBox6);
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("Item Code");
+        jCheckBox6.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox7);
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("Barcode");
+        jCheckBox7.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox8);
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setText("Description");
+        jCheckBox8.setFocusable(false);
+
         javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
         jXPanel3.setLayout(jXPanel3Layout);
         jXPanel3Layout.setHorizontalGroup(
@@ -811,23 +836,38 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jXPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox8)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jXPanel3Layout.setVerticalGroup(
             jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBox8))
                 .addGap(5, 5, 5)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_search, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(tf_search)
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -849,9 +889,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jXPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(8, 8, 8))
+            .addComponent(jXPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1392,6 +1430,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1404,6 +1443,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -1429,6 +1471,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1871,7 +1914,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.
                 setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_receipt_items.setRowHeight(25);
-        int[] tbl_widths_receipt_items = {70, 70, 100, 100, 100, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_receipt_items = {70, 70, 100, 70, 80, 100, 100, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_receipt_items.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -1888,8 +1931,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 setFont(new java.awt.Font("Arial", 0, 11));
         tbl_receipt_items.setRowHeight(25);
         tbl_receipt_items.setFont(new java.awt.Font("Arial", 0, 11));
-        TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 3);
-        TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 4);
+        TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 5);
+        TableWidthUtilities.setColumnRightRenderer(tbl_receipt_items, 6);
 
     }
 
@@ -1901,7 +1944,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     public static class Tblreceipt_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Qty", "Item Code", "Description", "Cost", "Total", "", "", "remarks", "Item Code", "Description", "id", "Cost", "category", "category_id", "classification", "classification_id", "sub_class", "Total"
+            "Qty", "Item Code", "Description", "Unit", "Conversion", "Cost", "Total", "", "", "Description", "id", "Cost", "category", "category_id", "classification", "classification_id", "sub_class", "Total"
         };
 
         public Tblreceipt_itemsModel(ListModel listmodel) {
@@ -1933,17 +1976,26 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 case 2:
                     return " " + tt.description;
                 case 3:
-                    return FitIn.fmt_wc_0(tt.cost) + " ";
+                    String uom = tt.unit;
+                    String[] list = uom.split(",");
+                    String unit = "";
+                    int o = 0;
+                    for (String s : list) {
+                        int i = s.indexOf(":");
+                        unit = s.substring(1, i);
+                        o++;
+                    }
+                    return " " + unit;
                 case 4:
-                    return FitIn.fmt_wc_0(tt.cost * tt.qty) + " ";
+                    return " " + FitIn.fmt_wc_0(tt.conversion);
                 case 5:
-                    return " Update";
+                    return FitIn.fmt_wc_0(tt.cost) + " ";
                 case 6:
-                    return " Delete";
+                    return FitIn.fmt_wc_0(tt.cost * tt.qty) + " ";
                 case 7:
-                    return tt.remarks;
+                    return " Update";
                 case 8:
-                    return tt.main_barcode;
+                    return " Delete";
                 case 9:
                     return tt.description;
                 case 10:
@@ -2071,7 +2123,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 String date_received = tf_dr_month.getText() + " " + tf_dr_day.getText() + ", " + tf_dr_year.
                         getText();
                 date_received = DateType.convert_monthDate_sf(date_received);
-                to_receipt_items to2 = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, to.conversion, to.unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id);
+
+                double conversion = data.conversion;
+                String unit = data.unit;
+                System.out.println("unit: " + unit);
+                to_receipt_items to2 = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id);
                 int naa = 0;
                 for (to_receipt_items to3 : datas) {
                     if (to3.barcode.equals(to2.barcode) && to3.unit.
@@ -2259,8 +2315,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
         System.out.println("Transaction No.: " + receipt_no);
 
     }
-    
+
     List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
+
     private void init_suppliers() {
         String search = tf_supplier.getText();
         supplier_list.clear();
@@ -2384,19 +2441,30 @@ public class Dlg_receipts extends javax.swing.JDialog {
             @Override
             public void run() {
                 String search = tf_search.getText();
-                String where = " where "
-                        + " main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
-                        + " or barcode like '" + search + "' and location_id='" + br.getId() + "' "
-                        + " or description like '%" + search + "%' and location_id='" + br.getId() + "' ";
+                String where = " where ";
+                if (jCheckBox6.isSelected()) {
+                    where = where + " main_barcode like '" + search + "' and location_id='" + br.getId() + "' ";
+                }
+                if (jCheckBox7.isSelected()) {
+                    where = where + "  barcode like '" + search + "' and location_id='" + br.getId() + "' ";
+                }
+                if (jCheckBox8.isSelected()) {
+                    where = where + "  description like '%" + search + "%' and location_id='" + br.getId() + "' ";
+                }
                 where = where + " order by description asc ";
-                System.out.println(where);
                 inventory_barcoders_list.clear();
                 inventory_barcoders_list = Inventory_barcodes.ret_where(where);
 
                 if (inventory_barcoders_list.isEmpty()) {
-                    update_barcode();
+                    Alert.set(0, "Item not found!");
+                    tf_search.grabFocus();
+                    return;
                 }
-                if (inventory_barcoders_list.size() >= 1) {
+                if (inventory_barcoders_list.size() == 1) {
+                    selected_row = 0;
+                    add_items();
+                }
+                if (inventory_barcoders_list.size() > 1) {
                     Object[][] obj = new Object[inventory_barcoders_list.size()][6];
                     int i = 0;
                     for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list) {
@@ -2940,7 +3008,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         int col = tbl_receipt_items.getSelectedColumn();
         final to_receipt_items to = (to_receipt_items) tbl_receipt_items_ALM.get(tbl_receipt_items.convertRowIndexToModel(row));
 
-        if (col == 5) {
+        if (col == 7) {
             if (jButton1.isEnabled()) {
                 Window p = (Window) this;
                 Dlg_qty_cost nd = Dlg_qty_cost.create(p, true);
@@ -2952,6 +3020,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         closeDialog.ok();
                         double n_qty = data.amount;
                         to.setQty(n_qty);
+                        to.setCost(data.cost);
                         to.setSerial_nos(data.serial_nos);
                         tbl_receipt_items_M.fireTableDataChanged();
                         tf_search.grabFocus();
@@ -2998,7 +3067,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 nd.setVisible(true);
             }
         }
-        if (col == 6) {
+        if (col == 8) {
             if (jButton1.isEnabled()) {
                 tbl_receipt_items_ALM.remove(row);
                 tbl_receipt_items_M.fireTableDataChanged();
@@ -3028,7 +3097,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 });
                 nd.setLocationRelativeTo(this);
                 nd.setVisible(true);
-
             }
         }
     }

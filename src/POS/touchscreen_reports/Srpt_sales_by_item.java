@@ -5,7 +5,6 @@
  */
 package POS.touchscreen_reports;
 
-import POS.unit_of_measure.S1_unit_of_measure;
 import POS.util.MyConnection;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -341,7 +340,7 @@ public class Srpt_sales_by_item {
 
                 String uom = unit;
                 String[] list = uom.split(",");
-                int def = 0;
+              
                 int o = 0;
                 for (String s : list) {
                     int i = s.indexOf(":");

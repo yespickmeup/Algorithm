@@ -218,6 +218,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -325,6 +326,10 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tf_barcode = new Field.Input();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -527,7 +532,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cb_location)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,7 +686,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tf_conversion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
 
@@ -846,7 +851,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_assembly_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -902,7 +907,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(dp_from, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
 
@@ -1181,6 +1186,26 @@ public class Dlg_inventory extends javax.swing.JDialog {
             }
         });
 
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel36.setText("Search by:");
+
+        buttonGroup1.add(jCheckBox6);
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("Item Code");
+        jCheckBox6.setFocusable(false);
+
+        buttonGroup1.add(jCheckBox7);
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox7.setText("Barcode");
+        jCheckBox7.setFocusable(false);
+
+        buttonGroup1.add(jCheckBox8);
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox8.setText("Description");
+        jCheckBox8.setFocusable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1196,7 +1221,16 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_description)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel36)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCheckBox6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1288,7 +1322,13 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBox8))
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1626,6 +1666,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JButton btn_delete1;
     private javax.swing.JButton btn_update;
     private javax.swing.JButton btn_update1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cb_branch;
     private javax.swing.JCheckBox cb_location;
     private com.toedter.calendar.JDateChooser dp_from;
@@ -1644,6 +1685,9 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1673,6 +1717,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1733,7 +1778,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-
+//        System.setProperty("pool_db", "db_algorithm");
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -1881,77 +1926,107 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void init_inventory() {
         String search = tf_item_code.getText();
-        String where = " where barcode like '%" + search + "%' "
-                + " or barcodes like '%" + search + "%' "
-                + " or description like '%" + search + "%' "
-                + " order by description asc ";
+        String where = " where ";
+
+        if (jCheckBox6.isSelected()) {
+            where = where + " barcode like '" + search + "' ";
+        }
+        if (jCheckBox7.isSelected()) {
+            where = where + "  barcodes like '" + search + "' ";
+        }
+        if (jCheckBox8.isSelected()) {
+            where = where + "  description like '%" + search + "%' ";
+        }
+        where = where + " order by description asc ";
+
         inventory_list.clear();
         inventory_list = Inventory.ret_data22(where);
-        Object[][] obj = new Object[inventory_list.size()][2];
-        int i = 0;
-        for (Inventory.to_inventory to : inventory_list) {
-            obj[i][0] = " " + to.barcode;
-            obj[i][1] = " " + to.description;
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {100, 600};
-        int width = 0;
-        for (int w : tbl_widths_customers) {
-            width += w;
-        }
-        String[] col_names = {"Item Code", "Description"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup2(tf_item_code, obj, labels, tbl_widths_customers, col_names, width);
-        tr.setCallback(new TableRenderer.Callback() {
 
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                Inventory.to_inventory to = inventory_list.get(data.selected_row);
-                my_item = to;
-                Field.Combo cat = (Field.Combo) tf_category;
-                Field.Combo classi = (Field.Combo) tf_classification;
-                Field.Combo sub_class = (Field.Combo) tf_sub_classification;
-                Field.Combo brand = (Field.Combo) tf_brand;
-                Field.Combo model = (Field.Combo) tf_model;
-                Field.Combo units = (Field.Combo) tf_unit;
-                selected_row = data.selected_row;
-                tf_item_code.setText(to.barcode);
-                tf_barcode.setText(to.barcodes);
-                my_old_barcode = to.barcodes;
-                tf_description.setText(to.description);
-                tf_category.setText(to.category);
-                cat.setId(to.category_id);
-                tf_sub_classification.setText(to.sub_classification);
-                tf_classification.setText(to.classification);
-                classi.setId(to.classification_id);
-                sub_class.setId(to.sub_classification_id);
-                tf_brand.setText(to.brand);
-                brand.setId(to.brand_id);
-                tf_model.setText(to.model);
-                model.setId(to.model_id);
-                units.setId(to.unit);
-                Dlg_inventory_uom.to_uom to_unit = uom.default_uom(to.unit);
-                tf_unit.setText(to_unit.uom);
-                tf_uom_conversion.setText(FitIn.fmt_wc_0(to_unit.conversion));
-                tf_selling_price.setText(FitIn.fmt_wc_0(to.selling_price));
-                tf_cost.setText(FitIn.fmt_wc_0(to.cost));
-                tf_reorder_level.setText(FitIn.fmt_wc_0(to.reorder_level));
-                btn_update.setEnabled(true);
-//                btn_delete.setEnabled(true);
-                if (to.selling_type == 0) {
-                    tf_selling_type.setText("Regular");
-                } else {
-                    tf_selling_type.setText("Assemble");
-                }
-                tf_model.setText(to.model);
-
-                data_cols_inventory_barcodes();
-//                data_cols_assembly();
-                data_cols();
+        if (inventory_list.isEmpty()) {
+            Alert.set(0, "Item not found!");
+            tf_item_code.grabFocus();
+            return;
+        }
+        if (inventory_list.size() == 1) {
+            Inventory.to_inventory to = inventory_list.get(0);
+            my_item = to;
+            selected_row = 0;
+            select_item(to);
+        } else {
+            Object[][] obj = new Object[inventory_list.size()][2];
+            int i = 0;
+            for (Inventory.to_inventory to : inventory_list) {
+                obj[i][0] = " " + to.barcode;
+                obj[i][1] = " " + to.description;
+                i++;
             }
-        });
+            JLabel[] labels = {};
+            int[] tbl_widths_customers = {100, 600};
+            int width = 0;
+            for (int w : tbl_widths_customers) {
+                width += w;
+            }
+            String[] col_names = {"Item Code", "Description"};
+            TableRenderer tr = new TableRenderer();
+            TableRenderer.
+                    setPopup2(tf_item_code, obj, labels, tbl_widths_customers, col_names, width);
+            tr.setCallback(new TableRenderer.Callback() {
+
+                @Override
+                public void ok(TableRenderer.OutputData data) {
+                    Inventory.to_inventory to = inventory_list.get(data.selected_row);
+                    my_item = to;
+                    selected_row = data.selected_row;
+                    select_item(to);
+
+                }
+            });
+        }
+
+    }
+
+    private void select_item(Inventory.to_inventory to) {
+
+        Field.Combo cat = (Field.Combo) tf_category;
+        Field.Combo classi = (Field.Combo) tf_classification;
+        Field.Combo sub_class = (Field.Combo) tf_sub_classification;
+        Field.Combo brand = (Field.Combo) tf_brand;
+        Field.Combo model = (Field.Combo) tf_model;
+        Field.Combo units = (Field.Combo) tf_unit;
+
+        tf_item_code.setText(to.barcode);
+        tf_barcode.setText(to.barcodes);
+        my_old_barcode = to.barcodes;
+        tf_description.setText(to.description);
+        tf_category.setText(to.category);
+        cat.setId(to.category_id);
+        tf_sub_classification.setText(to.sub_classification);
+        tf_classification.setText(to.classification);
+        classi.setId(to.classification_id);
+        sub_class.setId(to.sub_classification_id);
+        tf_brand.setText(to.brand);
+        brand.setId(to.brand_id);
+        tf_model.setText(to.model);
+        model.setId(to.model_id);
+        units.setId(to.unit);
+        Dlg_inventory_uom.to_uom to_unit = uom.default_uom(to.unit);
+        tf_unit.setText(to_unit.uom);
+        tf_uom_conversion.setText(FitIn.fmt_wc_0(to_unit.conversion));
+        tf_selling_price.setText(FitIn.fmt_wc_0(to.selling_price));
+        tf_cost.setText(FitIn.fmt_wc_0(to.cost));
+        tf_reorder_level.setText(FitIn.fmt_wc_0(to.reorder_level));
+        btn_update.setEnabled(true);
+//                btn_delete.setEnabled(true);
+        if (to.selling_type == 0) {
+            tf_selling_type.setText("Regular");
+        } else {
+            tf_selling_type.setText("Assemble");
+        }
+        tf_model.setText(to.model);
+
+        data_cols_inventory_barcodes();
+//                data_cols_assembly();
+        data_cols();
     }
     int selected_row = -1;
 
