@@ -312,20 +312,18 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
                     .addComponent(tf_search)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2)
-                                .addGap(71, 71, 71)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 754, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -528,11 +526,11 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       delete_all();
+        delete_all();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       select_item2() ;
+        select_item2();
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -869,6 +867,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         }
         String where = " where main_barcode like '%" + search + "%' and location_id='" + location_ids + "' "
                 + " or barcode like '%" + search + "%' and location_id='" + location_ids + "'"
+                + " or description like '%" + search + "%' and location_id='" + location_ids + "'"
                 + " order by description asc";
 
         List<Srpt_print_barcodes.field> datas = Srpt_print_barcodes.ret_data(where, is_item_code);
@@ -876,8 +875,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         count();
     }
 //</editor-fold> 
-    
-    
+
     private void select_item() {
         int row = tbl_inventory_barcodes.getSelectedRow();
         if (row < 0) {
@@ -1124,23 +1122,24 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         tbl_inventory_barcodes_M2.fireTableDataChanged();
 
     }
-    private void delete_all(){
+
+    private void delete_all() {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-        
+
         nd.setCallback(new Dlg_confirm_action.Callback() {
-            
+
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                 tbl_inventory_barcodes_ALM2.clear();
-        tbl_inventory_barcodes_M2.fireTableDataChanged();
+                tbl_inventory_barcodes_ALM2.clear();
+                tbl_inventory_barcodes_M2.fireTableDataChanged();
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
-       
+
     }
 //</editor-fold> 
 
