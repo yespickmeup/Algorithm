@@ -251,6 +251,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
@@ -493,15 +494,18 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel30.setText("Search by:");
 
+        buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
         jCheckBox6.setText("Item Code");
         jCheckBox6.setFocusable(false);
 
+        buttonGroup1.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox7.setText("Barcode");
         jCheckBox7.setFocusable(false);
 
+        buttonGroup1.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox8.setText("Description");
         jCheckBox8.setFocusable(false);
@@ -1964,7 +1968,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2819,6 +2823,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton btn_credit;
     private javax.swing.JButton btn_gift;
     private javax.swing.JButton btn_prepaid;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
