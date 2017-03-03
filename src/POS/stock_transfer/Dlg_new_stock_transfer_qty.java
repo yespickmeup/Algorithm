@@ -5,6 +5,7 @@
  */
 package POS.stock_transfer;
 
+import POS.inventory.Inventory_barcodes;
 import POS.unit_of_measure.S1_unit_of_measure;
 import POS.util.Alert;
 import POS.util.Focus_Fire;
@@ -13,12 +14,15 @@ import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -56,10 +60,15 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
 
         public final double qty;
         public final String serial_no;
-
-        public OutputData(double qty, String serial_no) {
+        public final double conversion;
+        public final String unit;
+        public final double selling_price;
+        public OutputData(double qty, String serial_no,double conversion,String unit,double selling_price) {
             this.qty = qty;
             this.serial_no = serial_no;
+            this.conversion=conversion;
+            this.unit=unit;
+            this.selling_price=selling_price;
         }
 
     }
@@ -474,6 +483,8 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
     private void myInit() {
         init_key();
         focus();
+        set_border();
+        init_tbl_uom();
     }
 
     private void focus() {
@@ -493,7 +504,20 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
         }
     }
 
-    public void do_pass(double qty, String serial) {
+     private void set_border() {
+
+        Border border = BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204));
+        lbl_desc.setBorder(BorderFactory.createCompoundBorder(border,
+                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+    }
+     
+    public void do_pass(double qty, String serial,String item_code,String barcode,String description,double qty_on_hand,String unit) {
+        lbl_item_code.setText(item_code);
+        lbl_item_code1.setText(barcode);
+       
+        lbl_desc.setText(description);
+         lbl_qty.setText(FitIn.fmt_woc(qty_on_hand));
+        
         
         serial = serial.replaceAll(",", "\n");
         jTextField1.setText(FitIn.fmt_woc(qty));
@@ -501,6 +525,32 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
         String serials = jTextArea1.getText();
         String[] datas = serials.split("\n");
         jLabel4.setText("" + datas.length);
+        
+        List<S1_unit_of_measure.to_uom> uoms = new ArrayList();
+        String uom = unit;
+        String[] list = uom.split(",");
+        int def = 0;
+        int o = 0;
+        for (String s : list) {
+            int i = s.indexOf(":");
+            int ii = s.indexOf("/");
+            int iii = s.indexOf("^");
+            String uom1 = s.substring(1, i);
+            double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+            double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+            int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+            S1_unit_of_measure.to_uom to1 = new S1_unit_of_measure.to_uom(uom1, selling_price, conversion, is_default);
+            uoms.add(to1);
+            if (to1.is_default == 1) {
+                def = o;
+            }
+            o++;
+        }
+
+        loadData_uom(uoms);
+        if (!uoms.isEmpty()) {
+            tbl_uom.setRowSelectionInterval(def, def);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -528,8 +578,16 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
             Alert.set(0, "Enter Quantity");
             return;
         }
+         int row = tbl_uom.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        S1_unit_of_measure.to_uom uom = (S1_unit_of_measure.to_uom) tbl_uom_ALM.get(row);
+         double conversion = uom.conversion;
+        String unit = "[" + uom.unit + ":" + uom.price + "/" + uom.conversion + "^" + "1" + "]";
+        double selling_price=uom.price;
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(qty, serial_no));
+            callback.ok(new CloseDialog(this), new OutputData(qty, serial_no,conversion,unit,selling_price));
         }
     }
  //<editor-fold defaultstate="collapsed" desc=" init table unit of measure ">

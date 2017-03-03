@@ -2935,6 +2935,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         jPanel2.setVisible(false);
         init_key();
         set_cardlayout();
@@ -3149,6 +3150,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
                     advance_search2();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    if (!tbl_orders_ALM.isEmpty()) {
+                        tbl_orders.setRowSelectionInterval(0, 0);
+                        tbl_orders.grabFocus();
+                    }
+                }
             }
         });
         tbl_items.addKeyListener(new KeyAdapter() {
@@ -3238,7 +3245,31 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 }
             }
         });
+        tbl_orders.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
 
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    int row = tbl_orders.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    tbl_orders.setColumnSelectionInterval(3, 3);
+                    update_item();
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    int row = tbl_orders.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    tbl_orders.setColumnSelectionInterval(row, 4);
+                    update_item();
+                    e.consume();
+
+                }
+            }
+        });
         KeyCodes.numpad(tbl_uom, lbl_qty);
 
     }
@@ -3410,7 +3441,15 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 where = where + " order by description asc";
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
-                
+                if (tbl_items_ALM.isEmpty()) {
+                    Alert.set(0, "Item not found!");
+                    tf_search.setEnabled(true);
+                    jProgressBar1.setString("Finished...");
+                    jProgressBar1.setIndeterminate(false);
+                    tf_search.grabFocus();
+
+                    return;
+                }
                 if (tbl_items_ALM.size() == 1) {
                     tbl_items.setRowSelectionInterval(0, 0);
                     select_item();
@@ -3423,6 +3462,34 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         t_items.start();
     }
 
+    private void data_cols2() {
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+        tf_search.setEnabled(false);
+        Thread t_items = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String search = tf_search.getText();
+                String where = " where ";
+                if (jCheckBox6.isSelected()) {
+                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' ";
+                }
+                if (jCheckBox7.isSelected()) {
+                    where = where + "  barcode='" + search + "' and location_id='" + my_location_id + "' ";
+                }
+                if (jCheckBox8.isSelected()) {
+                    where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
+                }
+                where = where + " order by description asc";
+                loadData_items(Inventory_barcodes.ret_where(where));
+                jLabel8.setText("" + tbl_items_ALM.size());
+               
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+            }
+        });
+        t_items.start();
+    }
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" init table unit of measure ">
     private ArrayListModel tbl_uom_ALM;
@@ -3701,6 +3768,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             obj[i][1] = to.branch;
             i++;
         }
+
         JLabel[] labels = {};
         int[] tbl_widths_customers = {0, 200};
         int width = 0;
@@ -4874,9 +4942,19 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         }
         int col = tbl_orders.getSelectedColumn();
         if (col == 3) {
+            Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
+            Label.Item_discount serial = (Label.Item_discount) jLabel47;
             tbl_orders_ALM.remove(row);
             tbl_orders_M.fireTableDataChanged();
             compute_total();
+            lbl_qty.setText("1");
+            cardLayout.show(jPanel13, "2");
+            lbl.clearAll();
+            lbl_item_discount.setText("");
+            tf_addtl_cash.setText("");
+            tf_wtax.setText("");
+            serial.setDiscount_customer_id("");
+            tf_search.grabFocus();
         } else {
             Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(row);
             Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
@@ -5111,14 +5189,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 tf_amount_tendered.setEnabled(true);
 
                 compute_total();
-                data_cols();
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        tf_search.grabFocus();
-                        tf_search.selectAll();
-                    }
-                });
+                data_cols2();
+                cardLayout.show(jPanel13, "2");
+                tf_search.selectAll();
+                tf_search.grabFocus();
+                tf_search.setEnabled(true);
             }
         });
         nd.setLocationRelativeTo(null);

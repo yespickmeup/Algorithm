@@ -1189,7 +1189,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
                         String transaction_type = "Receipts";
                         String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                         qty=qty*conversion;
+                        qty = qty * conversion;
                         String in = FitIn.fmt_woc(qty);
                         String out = "";
                         String balance = "";
@@ -1204,7 +1204,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         String created_by = user_name;
                         String customer_name = "";
                         Date created = new Date();
-                       
+
                         try {
                             created = POS.util.DateType.datetime.parse(date_added);
                         } catch (ParseException ex) {
@@ -1286,8 +1286,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         String sub_classification = rs4.getString(9);
                         String sub_classification_id = rs4.getString(10);
                         double product_qty = rs4.getDouble(11);
+
                         String unit = rs4.getString(12);
                         double conversion = rs4.getDouble(13);
+                        product_qty = product_qty * conversion;
+                        
                         double selling_price = rs4.getDouble(14);
                         String date_added = rs4.getString(15);
                         String user_name = rs4.getString(16);

@@ -8,7 +8,9 @@ package POS.stock_transfer;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
+import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
+import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
@@ -1223,6 +1225,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         focus();
         init_tbl_stock_transfers();
@@ -1778,14 +1781,23 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     jProgressBar1.setString("Finished...");
                     jProgressBar1.setIndeterminate(false);
                 }
-                if (inventory_barcoders_list.size() > 0) {
+                if (inventory_barcoders_list.size() == 1) {
+                    Inventory_barcodes.to_inventory_barcodes t = inventory_barcoders_list.get(0);
+                    add_item(t);
+                }
+                if (inventory_barcoders_list.size() > 1) {
                     Object[][] obj = new Object[inventory_barcoders_list.size()][5];
                     int i = 0;
                     for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list) {
                         obj[i][0] = " " + FitIn.fmt_woc(to.product_qty);
                         obj[i][1] = " " + to.main_barcode;
                         obj[i][2] = " " + to.description;
-                        obj[i][3] = " " + to.unit;
+                        String unit = "";
+                        Dlg_inventory_uom.to_uom uoms = uom.default_uom(to.unit);
+                        if (uoms != null) {
+                            unit = uoms.uom;
+                        }
+                        obj[i][3] = " " + unit;
                         obj[i][4] = " " + FitIn.fmt_wc_0(to.selling_price);
                         i++;
                     }
@@ -1817,6 +1829,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
         nd.setTitle("");
+        nd.do_pass(1,"",t.main_barcode,t.barcode,t.description,t.product_qty,t.unit);
         nd.setCallback(new Dlg_new_stock_transfer_qty.Callback() {
 
             @Override
@@ -1833,9 +1846,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 String sub_classification = t.sub_classification;
                 String sub_classification_id = t.sub_classification_id;
                 double product_qty = data.qty;
-                String unit = t.unit;
-                double conversion = t.conversion;
-                double selling_price = t.selling_price;
+                String unit = data.unit;
+                double conversion = data.conversion;
+                double selling_price = data.selling_price;
                 String date_added = DateType.now();
                 String user_name = Users.user_name;
                 String item_type = t.item_type;
@@ -1899,7 +1912,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tbl_stock_transfers_items.setModel(tbl_stock_transfers_items_M);
         tbl_stock_transfers_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_stock_transfers_items.setRowHeight(25);
-        int[] tbl_widths_stock_transfers_items = {100, 100, 80, 50, 50, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_stock_transfers_items = {100, 100, 50, 50, 80, 80, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_stock_transfers_items.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -1953,11 +1966,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 case 2:
                     return " " + FitIn.fmt_woc(tt.product_qty);
                 case 3:
-                    return " " + tt.unit;
+                    String uom = tt.unit;
+                    String[] list = uom.split(",");
+                    String unit = "";
+                    int o = 0;
+                    for (String s : list) {
+                        int i = s.indexOf(":");
+                        unit = s.substring(1, i);
+                        o++;
+                    }
+                    return " " + unit;
                 case 4:
-                    return " " + FitIn.fmt_woc(tt.cost);
+                    return " " + FitIn.fmt_wc_0(tt.cost);
                 case 5:
-                    return " " + FitIn.fmt_woc(tt.selling_price);
+                    return " " + FitIn.fmt_wc_0(tt.selling_price);
                 case 6:
                     return " Update";
                 case 7:
@@ -2186,7 +2208,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Window p = (Window) this;
                 Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
                 nd.setTitle("");
-                nd.do_pass(to.product_qty, to.serial_no);
+                nd.do_pass(to.product_qty, to.serial_no,to.barcode,to.barcodes,to.description,0,to.unit);
                 nd.setCallback(new Dlg_new_stock_transfer_qty.Callback() {
                     @Override
                     public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_qty.OutputData data) {
@@ -2209,7 +2231,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Window p = (Window) this;
                 Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
                 nd.setTitle("");
-                nd.do_pass(to.product_qty, to.serial_no);
+                nd.do_pass(to.product_qty, to.serial_no,to.barcode,to.barcodes,to.description,0,to.unit);
                 nd.setCallback(new Dlg_new_stock_transfer_qty.Callback() {
                     @Override
                     public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_qty.OutputData data) {
