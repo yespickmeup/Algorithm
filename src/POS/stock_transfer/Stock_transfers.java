@@ -603,7 +603,7 @@ public class Stock_transfers {
                 stmt.addBatch(s4);
 
                 String s5 = "update inventory set "
-                        + "cost= :cost"
+                        + " cost= :cost"
                         + " where "
                         + " barcode ='" + to.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "' "
                         + " ";

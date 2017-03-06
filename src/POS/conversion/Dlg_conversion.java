@@ -8,15 +8,19 @@ package POS.conversion;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.conversion.Conversion_items.to_conversion_items;
+import POS.conversion.Conversions.to_conversions;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
+import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -26,8 +30,10 @@ import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -265,7 +271,10 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox12 = new javax.swing.JCheckBox();
         jButton9 = new Button.Default();
+        jTextField2 = new Field.Search();
+        jLabel22 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -678,6 +687,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
 
             }
         ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable3);
 
         jLabel13.setText("Total Transactions:");
@@ -688,6 +702,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jLabel15.setText("Converted from:");
 
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setSelected(true);
         jCheckBox8.setText("All");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -722,6 +737,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jLabel18.setText("Converted to:");
 
         jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setSelected(true);
         jCheckBox9.setText("All");
 
         tf_from_branch2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -769,6 +785,16 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jCheckBox12.setText("Finalized");
 
         jButton9.setText("Search");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel22.setText("Search:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -779,54 +805,59 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel15)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox8))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel15)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jCheckBox8))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                                        .addGap(30, 30, 30)
+                                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, 0)
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                                        .addComponent(jCheckBox10)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jCheckBox11)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jCheckBox12))
+                                                    .addComponent(tf_from_location1)
+                                                    .addComponent(tf_from_branch1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))))
+                                        .addGap(8, 8, 8)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel18)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jCheckBox9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addGap(30, 30, 30)
                                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, 0)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jCheckBox10)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jCheckBox11)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jCheckBox12))
-                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(tf_from_location1)
-                                                .addComponent(tf_from_branch1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel18)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBox9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tf_from_location2)
-                                            .addComponent(tf_from_branch2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(tf_from_location2)
+                                                    .addComponent(tf_from_branch2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -858,21 +889,26 @@ public class Dlg_conversion extends javax.swing.JDialog {
                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
                                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(tf_from_branch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(1, 1, 1)
-                                    .addComponent(tf_from_location2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(tf_from_branch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(tf_from_location2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(5, 5, 5)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCheckBox10)
-                        .addComponent(jCheckBox11)
-                        .addComponent(jCheckBox12)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jCheckBox10)
+                                .addComponent(jCheckBox11)
+                                .addComponent(jCheckBox12)))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -896,6 +932,21 @@ public class Dlg_conversion extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Print Preview", jPanel4);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 961, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 586, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Item Ledger", jPanel7);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -929,19 +980,19 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        clear_conversion();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        post_conversion();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        update_conversion();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
+        finalize_conversion();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tf_from_branchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_from_branchMouseClicked
@@ -969,11 +1020,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_to_locationActionPerformed
 
     private void tf_from_branch1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_from_branch1MouseClicked
-        // TODO add your handling code here:
+        init_branch_locations3(tf_from_branch1, tf_from_location1);
     }//GEN-LAST:event_tf_from_branch1MouseClicked
 
     private void tf_from_branch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_branch1ActionPerformed
-        // TODO add your handling code here:
+        init_branch_locations3(tf_from_branch1, tf_from_location1);
     }//GEN-LAST:event_tf_from_branch1ActionPerformed
 
     private void tf_from_location1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_location1ActionPerformed
@@ -981,11 +1032,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_from_location1ActionPerformed
 
     private void tf_from_branch2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_from_branch2MouseClicked
-        // TODO add your handling code here:
+        init_branch_locations3(tf_from_branch2, tf_from_location2);
     }//GEN-LAST:event_tf_from_branch2MouseClicked
 
     private void tf_from_branch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_branch2ActionPerformed
-        // TODO add your handling code here:
+        init_branch_locations3(tf_from_branch2, tf_from_location2);
     }//GEN-LAST:event_tf_from_branch2ActionPerformed
 
     private void tf_from_location2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_location2ActionPerformed
@@ -1007,6 +1058,14 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private void tbl_conversion_items22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_conversion_items22MouseClicked
         delete_qty_converted_to();
     }//GEN-LAST:event_tbl_conversion_items22MouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        ret_conversions();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        select_conversion();
+    }//GEN-LAST:event_jTable3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1046,6 +1105,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1059,6 +1119,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1067,6 +1128,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tbl_conversion_items;
     private javax.swing.JTable tbl_conversion_items22;
@@ -1081,15 +1143,34 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
         branch_location_list2 = branch_location_list;
-
+        branch_location_list3 = branch_location_list;
+        init_tbl_conversions(jTable3);
         init_tbl_conversion_items(tbl_conversion_items);
         init_tbl_conversion_items2(tbl_conversion_items22);
+
+        String conversion_no = Conversions.increment_id();
+        jTextField1.setText(conversion_no);
+
+        item_ledger();
+    }
+
+    private void item_ledger() {
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                jPanel7.setLayout(new BorderLayout());
+                Dlg_report_inventory_ledger dlg = new Dlg_report_inventory_ledger();
+                jPanel7.add(dlg.getSurface());
+            }
+        });
+
     }
 
     private void set_default_branch() {
@@ -1110,6 +1191,23 @@ public class Dlg_conversion extends javax.swing.JDialog {
         Field.Combo location2 = (Field.Combo) tf_to_location;
         location2.setText("" + to.location);
         location2.setId("" + to.id);
+
+        Field.Combo branch3 = (Field.Combo) tf_from_branch1;
+        branch3.setText(to.branch);
+        branch3.setId("" + to.branch_id);
+
+        Field.Combo branch4 = (Field.Combo) tf_from_branch2;
+        branch4.setText(to.branch);
+        branch4.setId("" + to.branch_id);
+
+        Field.Combo location3 = (Field.Combo) tf_from_location1;
+        location3.setText("" + to.location);
+        location3.setId("" + to.id);
+
+        Field.Combo location4 = (Field.Combo) tf_from_location2;
+        location4.setText("" + to.location);
+        location4.setId("" + to.id);
+
     }
 
     public void do_pass() {
@@ -1138,7 +1236,9 @@ public class Dlg_conversion extends javax.swing.JDialog {
     List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
 
     private void init_branch_locations() {
-
+        if (!tf_from_location.isEnabled()) {
+            return;
+        }
         Field.Combo prev_location = (Field.Combo) tf_from_location;
         final String prev = prev_location.getId();
         if (!tf_from_branch.isEnabled()) {
@@ -1185,7 +1285,9 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }
 
     private void init_branch_locations2() {
-
+        if (!tf_to_branch.isEnabled()) {
+            return;
+        }
         Field.Combo prev_location = (Field.Combo) tf_to_location;
         final String prev = prev_location.getId();
         if (!tf_to_branch.isEnabled()) {
@@ -1321,46 +1423,103 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 Field.Combo t_branch = (Field.Combo) tf_to_branch;
                 Field.Combo t_location = (Field.Combo) tf_to_location;
 
-                int id = 0;
-                String conversion_no = "";
-                String user_name = MyUser.getUser_id();
-                String session_no = "";
-                String date_added = DateType.now();
-                String reference_no = "";
-                String remarks = "";
-                String barcode = to.barcode;
-                String description = to.description;
-                String category = to.category;
-                String category_id = to.category_id;
-                String classification = to.classification;
-                String classification_id = to.classification_id;
-                String sub_class = to.sub_classification;
-                String sub_class_id = to.sub_classification_id;
-                String brand = to.brand;
-                String brand_id = to.brand_id;
-                String model = to.model;
-                String model_id = to.model_id;
-                double conversion = data.conversion;
-                String unit = data.unit;
-                String barcodes = "";
-                String batch_no = "";
-                String serial_no = data.serial_nos;
-                String main_barcode = to.main_barcode;
-                double qty = data.amount;
-                double cost = data.cost;
-                int status = 0;
-                String from_branch = f_branch.getText();
-                String from_branch_id = f_branch.getId();
-                String from_location = f_location.getText();
-                String from_location_id = f_location.getId();
-                String to_branch = t_branch.getText();
-                String to_branch_id = t_branch.getId();
-                String to_location = t_location.getText();
-                String to_location_id = t_location.getId();
-                to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id);
-                tbl_conversion_items_ALM.add(item);
+                if (jButton1.isEnabled()) {
+                    int id = 0;
+                    String conversion_no = "";
+                    String user_name = MyUser.getUser_id();
+                    String session_no = "";
+                    String date_added = DateType.now();
+                    String reference_no = "";
+                    String remarks = "";
+                    String barcode = to.barcode;
+                    String description = to.description;
+                    String category = to.category;
+                    String category_id = to.category_id;
+                    String classification = to.classification;
+                    String classification_id = to.classification_id;
+                    String sub_class = to.sub_classification;
+                    String sub_class_id = to.sub_classification_id;
+                    String brand = to.brand;
+                    String brand_id = to.brand_id;
+                    String model = to.model;
+                    String model_id = to.model_id;
+                    double conversion = data.conversion;
+                    String unit = data.unit;
+                    String barcodes = "";
+                    String batch_no = "";
+                    String serial_no = data.serial_nos;
+                    String main_barcode = to.main_barcode;
+                    double qty = data.amount;
+                    double cost = data.cost;
+                    int status = 0;
+                    String from_branch = f_branch.getText();
+                    String from_branch_id = f_branch.getId();
+                    String from_location = f_location.getText();
+                    String from_location_id = f_location.getId();
+                    String to_branch = t_branch.getText();
+                    String to_branch_id = t_branch.getId();
+                    String to_location = t_location.getText();
+                    String to_location_id = t_location.getId();
+                    int is_converted_from = 1;
+                    to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, is_converted_from);
 
-                tf_search.grabFocus();
+                    tbl_conversion_items_ALM.add(item);
+                    tf_search.grabFocus();
+                } else {
+                    int row = jTable3.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    final Conversions.to_conversions conv = (Conversions.to_conversions) tbl_conversions_ALM.get(row);
+                    if (conv.status == 1) {
+                        Alert.set(0, "Cannot proceed, transaction already finalized!");
+                        return;
+                    }
+                    int id = 0;
+                    String conversion_no = conv.conversion_no;
+                    String user_name = MyUser.getUser_id();
+                    String session_no = "";
+                    String date_added = DateType.now();
+                    String reference_no = "";
+                    String remarks = jTextArea1.getText();
+                    String barcode = to.barcode;
+                    String description = to.description;
+                    String category = to.category;
+                    String category_id = to.category_id;
+                    String classification = to.classification;
+                    String classification_id = to.classification_id;
+                    String sub_class = to.sub_classification;
+                    String sub_class_id = to.sub_classification_id;
+                    String brand = to.brand;
+                    String brand_id = to.brand_id;
+                    String model = to.model;
+                    String model_id = to.model_id;
+                    double conversion = data.conversion;
+                    String unit = data.unit;
+                    String barcodes = "";
+                    String batch_no = "";
+                    String serial_no = data.serial_nos;
+                    String main_barcode = to.main_barcode;
+                    double qty = data.amount;
+                    double cost = data.cost;
+                    int status = 0;
+                    String from_branch = f_branch.getText();
+                    String from_branch_id = f_branch.getId();
+                    String from_location = f_location.getText();
+                    String from_location_id = f_location.getId();
+                    String to_branch = t_branch.getText();
+                    String to_branch_id = t_branch.getId();
+                    String to_location = t_location.getText();
+                    String to_location_id = t_location.getId();
+                    int is_converted_from = 1;
+                    to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, is_converted_from);
+                    Conversion_items.add_data(item);
+                    String where = " where conversion_no='" + jTextField1.getText() + "' and is_converted_from=1 ";
+                    List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+                    loadData_conversion_items(from_items);
+                    jLabel5.setText("" + from_items.size());
+                    Alert.set(1, "");
+                }
 
             }
         });
@@ -1373,33 +1532,88 @@ public class Dlg_conversion extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
+        final to_conversion_items to = (to_conversion_items) tbl_conversion_items_ALM.get(row);
         int col = tbl_conversion_items.getSelectedColumn();
         if (col == 6) {
-            tbl_conversion_items_ALM.remove(row);
-            tbl_conversion_items_M.fireTableDataChanged();
-            tf_search.grabFocus();
-            jLabel5.setText("" + tbl_conversion_items_ALM.size());
+
+            if (to.id == 0) {
+                tbl_conversion_items_ALM.remove(row);
+                tbl_conversion_items_M.fireTableDataChanged();
+                tf_search.grabFocus();
+                jLabel5.setText("" + tbl_conversion_items_ALM.size());
+            } else {
+                if (to.status == 1) {
+                    Alert.set(0, "Cannot proceed, transaction already finalized!");
+                    return;
+                }
+                Window p = (Window) this;
+                Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+                nd.setTitle("");
+
+                nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                        closeDialog.ok();
+                        Conversion_items.delete_data(to);
+                        String where = " where conversion_no='" + to.conversion_no + "' and is_converted_from=1 ";
+                        List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+                        loadData_conversion_items(from_items);
+                        jLabel5.setText("" + from_items.size());
+                        Alert.set(3, "");
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
         }
         if (col == 5) {
-            final to_conversion_items to = (to_conversion_items) tbl_conversion_items_ALM.get(row);
-            Window p = (Window) this;
-            Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
-            nd.setTitle("");
-            nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
-            nd.setCallback(new Dlg_conversion_qty.Callback() {
+            if (to.id == 0) {
+                Window p = (Window) this;
+                Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
+                nd.setCallback(new Dlg_conversion_qty.Callback() {
 
-                @Override
-                public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
-                    closeDialog.ok();
-                    to.setConversion(data.conversion);
-                    to.setCost(data.cost);
-                    to.setQty(data.amount);
-                    to.setUnit(data.unit);
-                    tbl_conversion_items_M.fireTableDataChanged();
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                        closeDialog.ok();
+                        to.setConversion(data.conversion);
+                        to.setCost(data.cost);
+                        to.setQty(data.amount);
+                        to.setUnit(data.unit);
+                        tbl_conversion_items_M.fireTableDataChanged();
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+
+            } else {
+                if (to.status == 1) {
+                    Alert.set(0, "Cannot proceed, transaction already finalized!");
+                    return;
                 }
-            });
-            nd.setLocationRelativeTo(this);
-            nd.setVisible(true);
+                Window p = (Window) this;
+                Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
+                nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                        closeDialog.ok();
+                        Conversion_items.update_unit(to, data.conversion, data.unit, data.amount, data.cost);
+                        String where = " where conversion_no='" + to.conversion_no + "' and is_converted_from=1 ";
+                        List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+                        loadData_conversion_items(from_items);
+                        jLabel5.setText("" + from_items.size());
+                        Alert.set(2, "");
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
+
         }
     }
 
@@ -1489,45 +1703,103 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 Field.Combo t_branch = (Field.Combo) tf_to_branch;
                 Field.Combo t_location = (Field.Combo) tf_to_location;
 
-                int id = 0;
-                String conversion_no = "";
-                String user_name = MyUser.getUser_id();
-                String session_no = "";
-                String date_added = DateType.now();
-                String reference_no = "";
-                String remarks = "";
-                String barcode = to.barcode;
-                String description = to.description;
-                String category = to.category;
-                String category_id = to.category_id;
-                String classification = to.classification;
-                String classification_id = to.classification_id;
-                String sub_class = to.sub_classification;
-                String sub_class_id = to.sub_classification_id;
-                String brand = to.brand;
-                String brand_id = to.brand_id;
-                String model = to.model;
-                String model_id = to.model_id;
-                double conversion = data.conversion;
-                String unit = data.unit;
-                String barcodes = "";
-                String batch_no = "";
-                String serial_no = data.serial_nos;
-                String main_barcode = to.main_barcode;
-                double qty = data.amount;
-                double cost = data.cost;
-                int status = 0;
-                String from_branch = f_branch.getText();
-                String from_branch_id = f_branch.getId();
-                String from_location = f_location.getText();
-                String from_location_id = f_location.getId();
-                String to_branch = t_branch.getText();
-                String to_branch_id = t_branch.getId();
-                String to_location = t_location.getText();
-                String to_location_id = t_location.getId();
-                to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id);
-                tbl_conversion_items_ALM2.add(item);
-                jTextField3.grabFocus();
+                if (jButton1.isEnabled()) {
+                    int id = 0;
+                    String conversion_no = "";
+                    String user_name = MyUser.getUser_id();
+                    String session_no = "";
+                    String date_added = DateType.now();
+                    String reference_no = "";
+                    String remarks = "";
+                    String barcode = to.barcode;
+                    String description = to.description;
+                    String category = to.category;
+                    String category_id = to.category_id;
+                    String classification = to.classification;
+                    String classification_id = to.classification_id;
+                    String sub_class = to.sub_classification;
+                    String sub_class_id = to.sub_classification_id;
+                    String brand = to.brand;
+                    String brand_id = to.brand_id;
+                    String model = to.model;
+                    String model_id = to.model_id;
+                    double conversion = data.conversion;
+                    String unit = data.unit;
+                    String barcodes = "";
+                    String batch_no = "";
+                    String serial_no = data.serial_nos;
+                    String main_barcode = to.main_barcode;
+                    double qty = data.amount;
+                    double cost = data.cost;
+                    int status = 0;
+                    String from_branch = f_branch.getText();
+                    String from_branch_id = f_branch.getId();
+                    String from_location = f_location.getText();
+                    String from_location_id = f_location.getId();
+                    String to_branch = t_branch.getText();
+                    String to_branch_id = t_branch.getId();
+                    String to_location = t_location.getText();
+                    String to_location_id = t_location.getId();
+                    int is_converted_from = 0;
+                    to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, is_converted_from);
+
+                    tbl_conversion_items_ALM2.add(item);
+                    jTextField3.grabFocus();
+                } else {
+                    int row = jTable3.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    final Conversions.to_conversions conv = (Conversions.to_conversions) tbl_conversions_ALM.get(row);
+                    if (conv.status == 1) {
+                        Alert.set(0, "Cannot proceed, transaction already finalized!");
+                        return;
+                    }
+                    int id = 0;
+                    String conversion_no = conv.conversion_no;
+                    String user_name = MyUser.getUser_id();
+                    String session_no = "";
+                    String date_added = DateType.now();
+                    String reference_no = "";
+                    String remarks = jTextArea1.getText();
+                    String barcode = to.barcode;
+                    String description = to.description;
+                    String category = to.category;
+                    String category_id = to.category_id;
+                    String classification = to.classification;
+                    String classification_id = to.classification_id;
+                    String sub_class = to.sub_classification;
+                    String sub_class_id = to.sub_classification_id;
+                    String brand = to.brand;
+                    String brand_id = to.brand_id;
+                    String model = to.model;
+                    String model_id = to.model_id;
+                    double conversion = data.conversion;
+                    String unit = data.unit;
+                    String barcodes = "";
+                    String batch_no = "";
+                    String serial_no = data.serial_nos;
+                    String main_barcode = to.main_barcode;
+                    double qty = data.amount;
+                    double cost = data.cost;
+                    int status = 0;
+                    String from_branch = f_branch.getText();
+                    String from_branch_id = f_branch.getId();
+                    String from_location = f_location.getText();
+                    String from_location_id = f_location.getId();
+                    String to_branch = t_branch.getText();
+                    String to_branch_id = t_branch.getId();
+                    String to_location = t_location.getText();
+                    String to_location_id = t_location.getId();
+                    int is_converted_from = 0;
+                    to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, is_converted_from);
+                    Conversion_items.add_data(item);
+                    String where = " where conversion_no='" + jTextField1.getText() + "' and is_converted_from=0 ";
+                    List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+                    loadData_conversion_items2(from_items);
+                    jLabel10.setText("" + from_items.size());
+                    Alert.set(1, "");
+                }
 
             }
         });
@@ -1541,33 +1813,90 @@ public class Dlg_conversion extends javax.swing.JDialog {
             return;
         }
         int col = tbl_conversion_items22.getSelectedColumn();
+        final to_conversion_items to = (to_conversion_items) tbl_conversion_items_ALM2.get(row);
         if (col == 6) {
-            tbl_conversion_items_ALM2.remove(row);
-            tbl_conversion_items_M2.fireTableDataChanged();
-            jTextField3.grabFocus();
-            jLabel10.setText("" + tbl_conversion_items_ALM.size());
+
+            if (to.id == 0) {
+                tbl_conversion_items_ALM2.remove(row);
+                tbl_conversion_items_M2.fireTableDataChanged();
+                jTextField3.grabFocus();
+                jLabel10.setText("" + tbl_conversion_items_ALM.size());
+            } else {
+                if (to.status == 1) {
+                    Alert.set(0, "Cannot proceed, transaction already finalized!");
+                    return;
+                }
+                Window p = (Window) this;
+                Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+                nd.setTitle("");
+
+                nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                        closeDialog.ok();
+                        Conversion_items.delete_data(to);
+                        String where = " where conversion_no='" + to.conversion_no + "' and is_converted_from=0 ";
+                        List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+                        loadData_conversion_items2(from_items);
+                        jLabel10.setText("" + from_items.size());
+                        Alert.set(3, "");
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
+
         }
         if (col == 5) {
-            final to_conversion_items to = (to_conversion_items) tbl_conversion_items_ALM2.get(row);
-            Window p = (Window) this;
-            Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
-            nd.setTitle("");
-            nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
-            nd.setCallback(new Dlg_conversion_qty.Callback() {
 
-                @Override
-                public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
-                    closeDialog.ok();
-                    to.setConversion(data.conversion);
-                    to.setCost(data.cost);
-                    to.setQty(data.amount);
-                    to.setUnit(data.unit);
-                    tbl_conversion_items_M2.fireTableDataChanged();
+            if (to.id == 0) {
+                Window p = (Window) this;
+                Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
+                nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                        closeDialog.ok();
+                        to.setConversion(data.conversion);
+                        to.setCost(data.cost);
+                        to.setQty(data.amount);
+                        to.setUnit(data.unit);
+                        tbl_conversion_items_M2.fireTableDataChanged();
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+
+            } else {
+                if (to.status == 1) {
+                    Alert.set(0, "Cannot proceed, transaction already finalized!");
+                    return;
                 }
-            });
-            nd.setLocationRelativeTo(this);
-            nd.setVisible(true);
+                Window p = (Window) this;
+                Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
+                nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                        closeDialog.ok();
+                        Conversion_items.update_unit(to, data.conversion, data.unit, data.amount, data.cost);
+                        String where = " where conversion_no='" + to.conversion_no + "' and is_converted_from=0 ";
+                        List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+                        loadData_conversion_items2(from_items);
+                        jLabel10.setText("" + from_items.size());
+                        Alert.set(2, "");
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
         }
+
     }
 
     //<editor-fold defaultstate="collapsed" desc=" conversion_items "> 
@@ -1857,4 +2186,376 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }
 //</editor-fold> 
 
+    private void post_conversion() {
+
+        String conversion_no = Conversions.increment_id();
+        String where = " where conversion_no='" + conversion_no + "' ";
+        List<Conversions.to_conversions> conversion_list = Conversions.ret_data(where);
+        if (!conversion_list.isEmpty()) {
+            Alert.set(0, "Transaction no. already exists");
+            jTextArea1.grabFocus();
+            return;
+
+        }
+        Field.Combo f_branch = (Field.Combo) tf_from_branch;
+        Field.Combo f_location = (Field.Combo) tf_from_location;
+        Field.Combo t_branch = (Field.Combo) tf_to_branch;
+        Field.Combo t_location = (Field.Combo) tf_to_location;
+
+        int id = 0;
+
+        String user_name = MyUser.getUser_id();
+        String session_no = "";
+        String date_added = DateType.now();
+        String reference_no = "";
+        String remarks = jTextArea1.getText();
+        int status = 0;
+        String from_branch = f_branch.getText();
+        String from_branch_id = f_branch.getId();
+        String from_location = f_location.getText();
+        String from_location_id = f_location.getId();
+        String to_branch = t_branch.getText();
+        String to_branch_id = t_branch.getId();
+        String to_location = t_location.getText();
+        String to_location_id = t_location.getId();
+        final Conversions.to_conversions conversions = new Conversions.to_conversions(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id);
+
+        final List<to_conversion_items> all_items = new ArrayList();
+        List<to_conversion_items> from_items = tbl_conversion_items_ALM;
+        List<to_conversion_items> to_items = tbl_conversion_items_ALM2;
+
+        all_items.addAll(from_items);
+        all_items.addAll(to_items);
+        if (from_items.isEmpty()) {
+            Alert.set(0, "Select item/s to be converted");
+            tf_search.grabFocus();
+            return;
+        }
+        if (to_items.isEmpty()) {
+            Alert.set(0, "Select item/s to be converted");
+            jTextField3.grabFocus();
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Conversions.add_data(conversions, all_items);
+                ret_conversions();
+                Alert.set(1, "");
+                clear_conversion();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+    }
+
+    private void clear_conversion() {
+        tbl_conversion_items_ALM.clear();
+        tbl_conversion_items_ALM2.clear();
+        jLabel5.setText("0");
+        jLabel10.setText("0");
+        jTextArea1.setText("");
+        String conversion_no = Conversions.increment_id();
+        jTextField1.setText(conversion_no);
+        jTextArea1.grabFocus();
+        jButton1.setEnabled(true);
+        jButton3.setEnabled(false);
+        jButton6.setEnabled(false);
+
+        tf_from_branch.setEnabled(true);
+        tf_to_branch.setEnabled(true);
+        tf_from_location.setEnabled(true);
+        tf_to_location.setEnabled(true);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" conversions "> 
+    public static ArrayListModel tbl_conversions_ALM;
+    public static TblconversionsModel tbl_conversions_M;
+
+    public static void init_tbl_conversions(JTable tbl_conversions) {
+        tbl_conversions_ALM = new ArrayListModel();
+        tbl_conversions_M = new TblconversionsModel(tbl_conversions_ALM);
+        tbl_conversions.setModel(tbl_conversions_M);
+        tbl_conversions.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_conversions.setRowHeight(25);
+        int[] tbl_widths_conversions = {120, 80, 150, 150, 60, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_conversions.length; i < n; i++) {
+            if (i == 2 || i == 3) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_conversions, i, tbl_widths_conversions[i]);
+        }
+        Dimension d = tbl_conversions.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_conversions.getTableHeader().setPreferredSize(d);
+        tbl_conversions.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_conversions.setRowHeight(25);
+        tbl_conversions.setFont(new java.awt.Font("Arial", 0, 12));
+    }
+
+    public static void loadData_conversions(List<to_conversions> acc) {
+        tbl_conversions_ALM.clear();
+        tbl_conversions_ALM.addAll(acc);
+    }
+
+    public static class TblconversionsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Transaction No", "Date", "From", "To", "Status", "", "", "status", "from_branch", "from_branch_id", "from_location", "from_location_id", "to_branch", "to_branch_id", "to_location", "to_location_id"
+        };
+
+        public TblconversionsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_conversions tt = (to_conversions) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.conversion_no;
+                case 1:
+                    return " " + DateType.convert_slash_datetime(tt.date_added);
+                case 2:
+                    return " " + tt.from_branch + " - " + tt.from_location;
+                case 3:
+                    return " " + tt.to_branch + " - " + tt.to_location;
+                case 4:
+                    if (tt.status == 0) {
+                        return " Posted";
+                    } else {
+                        return " Finalized";
+                    }
+
+                case 5:
+                    return " Update";
+                case 6:
+                    return " Delete";
+                case 7:
+                    return tt.status;
+                case 8:
+                    return tt.from_branch;
+                case 9:
+                    return tt.from_branch_id;
+                case 10:
+                    return tt.from_location;
+                case 11:
+                    return tt.from_location_id;
+                case 12:
+                    return tt.to_branch;
+                case 13:
+                    return tt.to_branch_id;
+                case 14:
+                    return tt.to_location;
+                default:
+                    return tt.to_location_id;
+            }
+        }
+    }
+//</editor-fold> 
+
+    private void ret_conversions() {
+        String where = " where reference_no like '%" + "" + "%' ";
+
+        Field.Combo location1 = (Field.Combo) tf_from_location1;
+        Field.Combo location2 = (Field.Combo) tf_from_location2;
+        if (!jCheckBox8.isSelected()) {
+            where = where + " and from_location_id='" + location1.getId() + "' ";
+        }
+        if (!jCheckBox9.isSelected()) {
+            where = where + " and to_location_id='" + location2.getId() + "' ";
+        }
+        if (jCheckBox11.isSelected()) {
+            where = where + " and status=0 ";
+        }
+        if (jCheckBox12.isSelected()) {
+            where = where + " and status=1 ";
+        }
+        where = where + " and conversion_no like '%" + jTextField2.getText() + "%' ";
+        where = where + " order by id desc ";
+
+        List<to_conversions> conversions = Conversions.ret_data(where);
+        loadData_conversions(conversions);
+        jLabel14.setText("" + conversions.size());
+    }
+
+    List<S1_branch_locations.to_branch_locations> branch_location_list3 = new ArrayList();
+
+    private void init_branch_locations3(final JTextField branch, final JTextField location) {
+
+        Object[][] obj = new Object[branch_location_list3.size()][1];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list3) {
+            obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";//TextHighlighter1.highlight2(to.barcode, to.barcode, "");
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {branch.getWidth()};
+
+        String[] col_names = {"Code"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(branch, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list3.get(data.selected_row);
+                Field.Combo branch1 = (Field.Combo) branch;
+                branch1.setText(to.branch);
+                branch1.setId("" + to.branch_id);
+                Field.Combo location1 = (Field.Combo) location;
+                location1.setText("" + to.location);
+                location1.setId("" + to.id);
+            }
+        });
+    }
+
+    private void select_conversion() {
+        int row = jTable3.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final to_conversions conversion = (to_conversions) tbl_conversions_ALM.get(row);
+
+        int col = jTable3.getSelectedColumn();
+        if (col == 5) {
+            //edit
+
+            Field.Combo f_branch = (Field.Combo) tf_from_branch;
+            Field.Combo f_location = (Field.Combo) tf_from_location;
+            Field.Combo t_branch = (Field.Combo) tf_to_branch;
+            Field.Combo t_location = (Field.Combo) tf_to_location;
+
+            jTextField1.setText(conversion.conversion_no);
+            jTextArea1.setText(conversion.remarks);
+
+            f_branch.setText(conversion.from_branch);
+            f_branch.setId(conversion.from_branch_id);
+            f_location.setText(conversion.from_location);
+            f_location.setId(conversion.from_location_id);
+
+            t_branch.setText(conversion.to_branch);
+            t_branch.setId(conversion.to_branch_id);
+            t_location.setText(conversion.to_location);
+            t_location.setId(conversion.to_location_id);
+
+            String where = " where conversion_no='" + conversion.conversion_no + "' and is_converted_from=1 ";
+            String where2 = " where conversion_no='" + conversion.conversion_no + "' and is_converted_from=0 ";
+            List<to_conversion_items> from_items = Conversion_items.ret_data(where);
+            List<to_conversion_items> to_items = Conversion_items.ret_data(where2);
+
+            loadData_conversion_items(from_items);
+            jLabel5.setText("" + from_items.size());
+            loadData_conversion_items2(to_items);
+            jLabel10.setText("" + to_items.size());
+
+            jTabbedPane1.setSelectedIndex(0);
+            jButton1.setEnabled(false);
+            jButton3.setEnabled(true);
+            jButton6.setEnabled(true);
+
+            tf_from_branch.setEnabled(false);
+            tf_to_branch.setEnabled(false);
+            tf_from_location.setEnabled(false);
+            tf_to_location.setEnabled(false);
+        }
+        if (col == 6) {
+            if (conversion.status == 1) {
+                Alert.set(0, "Cannot proceed, transaction already finalized!");
+                return;
+            }
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    Conversions.delete_data(conversion);
+                    ret_conversions();
+                    clear_conversion();
+                    Alert.set(3, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+    }
+
+    private void update_conversion() {
+        int row = jTable3.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+
+        final to_conversions conversion = (to_conversions) tbl_conversions_ALM.get(row);
+        if (conversion.status == 1) {
+            Alert.set(0, "Cannot proceed, transaction already finalized!");
+            return;
+        }
+
+        Conversions.update_conversion(conversion, jTextArea1.getText());
+        ret_conversions();
+        Alert.set(2, "");
+        jTable3.setRowSelectionInterval(row, row);
+    }
+
+    private void finalize_conversion() {
+        final int row = jTable3.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+
+        final to_conversions conversion = (to_conversions) tbl_conversions_ALM.get(row);
+        if (conversion.status == 1) {
+            Alert.set(0, "Cannot proceed, transaction already finalized!");
+            return;
+        }
+
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+
+                List<to_conversion_items> from_items = tbl_conversion_items_ALM;
+                List<to_conversion_items> to_items = tbl_conversion_items_ALM2;
+                Conversions.finalize(conversion, from_items, to_items);
+                ret_conversions();
+                Alert.set(0, "Transaction successfully finalized!");
+                clear_conversion();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 }

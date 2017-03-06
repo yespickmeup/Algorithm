@@ -84,3 +84,4 @@ id int auto_increment primary key
 ,to_location_id varchar(255)
 );
 
+alter table conversion_items add is_converted_from int default 0;
