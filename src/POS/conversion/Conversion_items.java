@@ -43,14 +43,14 @@ public class Conversion_items {
         public final String brand_id;
         public final String model;
         public final String model_id;
-        public final double conversion;
-        public final String unit;
+        public double conversion;
+        public String unit;
         public final String barcodes;
         public final String batch_no;
         public final String serial_no;
         public final String main_barcode;
-        public final double qty;
-        public final double cost;
+        public double qty;
+        public double cost;
         public final int status;
         public final String from_branch;
         public final String from_branch_id;
@@ -99,6 +99,39 @@ public class Conversion_items {
             this.to_location = to_location;
             this.to_location_id = to_location_id;
         }
+
+        public double getConversion() {
+            return conversion;
+        }
+
+        public void setConversion(double conversion) {
+            this.conversion = conversion;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
+        }
+
+        public double getQty() {
+            return qty;
+        }
+
+        public void setQty(double qty) {
+            this.qty = qty;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public void setCost(double cost) {
+            this.cost = cost;
+        }
+        
     }
 
     public static void add_data(to_conversion_items to_conversion_items) {

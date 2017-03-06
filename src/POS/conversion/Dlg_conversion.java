@@ -11,10 +11,14 @@ import POS.conversion.Conversion_items.to_conversion_items;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
+import POS.users.MyUser;
+import POS.util.Alert;
+import POS.util.DateType;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -215,13 +220,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
-        tf_search = new Field.Input();
+        tf_search = new Field.Search();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_conversion_items = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton4 = new Button.Primary();
-        jButton5 = new Button.Default();
         jLabel6 = new javax.swing.JLabel();
         tf_from_branch = new Field.Combo();
         jLabel7 = new javax.swing.JLabel();
@@ -231,13 +234,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
         jCheckBox6 = new javax.swing.JCheckBox();
-        jTextField3 = new Field.Input();
+        jTextField3 = new Field.Search();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_conversion_items22 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton7 = new Button.Primary();
-        jButton8 = new Button.Default();
         jLabel11 = new javax.swing.JLabel();
         tf_to_branch = new Field.Combo();
         jLabel12 = new javax.swing.JLabel();
@@ -362,15 +363,16 @@ public class Dlg_conversion extends javax.swing.JDialog {
 
             }
         ));
+        tbl_conversion_items.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_conversion_itemsMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_conversion_items);
 
         jLabel4.setText("Total Items:");
 
         jLabel5.setText("0");
-
-        jButton4.setText("Save");
-
-        jButton5.setText("New");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -407,36 +409,32 @@ public class Dlg_conversion extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addGap(11, 11, 11)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)
+                        .addGap(102, 102, 102))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(11, 11, 11)
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox3))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(tf_search)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_from_location, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                            .addComponent(tf_from_branch))))
-                .addContainerGap())
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_from_location)
+                                    .addComponent(tf_from_branch)))
+                            .addComponent(tf_search))
+                        .addContainerGap())))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,13 +454,9 @@ public class Dlg_conversion extends javax.swing.JDialog {
                     .addComponent(jCheckBox2)
                     .addComponent(jCheckBox3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -496,7 +490,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_conversion_items22.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -507,15 +501,16 @@ public class Dlg_conversion extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        tbl_conversion_items22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_conversion_items22MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbl_conversion_items22);
 
         jLabel9.setText("Total Items:");
 
         jLabel10.setText("0");
-
-        jButton7.setText("Save");
-
-        jButton8.setText("New");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -552,36 +547,32 @@ public class Dlg_conversion extends javax.swing.JDialog {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel8)
+                        .addGap(11, 11, 11)
+                        .addComponent(jCheckBox4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox6)
+                        .addGap(111, 111, 111))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(11, 11, 11)
-                                .addComponent(jCheckBox4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox6))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextField3)
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_to_location)
-                            .addComponent(tf_to_branch))))
-                .addContainerGap())
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_to_location)
+                                    .addComponent(tf_to_branch)))
+                            .addComponent(jTextField3))
+                        .addContainerGap())))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,13 +592,9 @@ public class Dlg_conversion extends javax.swing.JDialog {
                     .addComponent(jCheckBox5)
                     .addComponent(jCheckBox6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -1013,6 +1000,14 @@ public class Dlg_conversion extends javax.swing.JDialog {
         init_inventory_barcodes2();
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void tbl_conversion_itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_conversion_itemsMouseClicked
+        delete_qty_converted_from();
+    }//GEN-LAST:event_tbl_conversion_itemsMouseClicked
+
+    private void tbl_conversion_items22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_conversion_items22MouseClicked
+        delete_qty_converted_to();
+    }//GEN-LAST:event_tbl_conversion_items22MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1024,11 +1019,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
@@ -1073,12 +1064,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tbl_conversion_items;
+    private javax.swing.JTable tbl_conversion_items22;
     private javax.swing.JTextField tf_from_branch;
     private javax.swing.JTextField tf_from_branch1;
     private javax.swing.JTextField tf_from_branch2;
@@ -1098,6 +1089,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
         branch_location_list2 = branch_location_list;
 
         init_tbl_conversion_items(tbl_conversion_items);
+        init_tbl_conversion_items2(tbl_conversion_items22);
     }
 
     private void set_default_branch() {
@@ -1146,6 +1138,9 @@ public class Dlg_conversion extends javax.swing.JDialog {
     List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
 
     private void init_branch_locations() {
+
+        Field.Combo prev_location = (Field.Combo) tf_from_location;
+        final String prev = prev_location.getId();
         if (!tf_from_branch.isEnabled()) {
             return;
         }
@@ -1180,11 +1175,19 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 location.setText("" + to.location);
                 location.setId("" + to.id);
 
+                if (!prev.equals(location.getId())) {
+                    tbl_conversion_items_ALM.clear();
+                    tbl_conversion_items_M.fireTableDataChanged();
+                    jLabel5.setText("0");
+                }
             }
         });
     }
 
     private void init_branch_locations2() {
+
+        Field.Combo prev_location = (Field.Combo) tf_to_location;
+        final String prev = prev_location.getId();
         if (!tf_to_branch.isEnabled()) {
             return;
         }
@@ -1219,6 +1222,11 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 location.setText("" + to.location);
                 location.setId("" + to.id);
 
+                if (!prev.equals(location.getId())) {
+                    tbl_conversion_items_ALM2.clear();
+                    tbl_conversion_items_M2.fireTableDataChanged();
+                    jLabel10.setText("0");
+                }
             }
         });
     }
@@ -1250,9 +1258,15 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 inventory_barcoders_list = Inventory_barcodes.ret_where(where);
 
                 if (inventory_barcoders_list.isEmpty()) {
-
+                    Alert.set(0, "Item not found!");
+                    tf_search.grabFocus();
+                    return;
                 }
-                if (inventory_barcoders_list.size() >= 1) {
+                if (inventory_barcoders_list.size() == 1) {
+                    Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) inventory_barcoders_list.get(0);
+                    add_qty_converted_from(to);
+                }
+                if (inventory_barcoders_list.size() > 1) {
                     Object[][] obj = new Object[inventory_barcoders_list.size()][5];
                     int i = 0;
                     for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list) {
@@ -1281,7 +1295,8 @@ public class Dlg_conversion extends javax.swing.JDialog {
                     tr.setCallback(new TableRenderer.Callback() {
                         @Override
                         public void ok(TableRenderer.OutputData data) {
-
+                            Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) inventory_barcoders_list.get(data.selected_row);
+                            add_qty_converted_from(to);
                         }
                     });
                 }
@@ -1290,13 +1305,111 @@ public class Dlg_conversion extends javax.swing.JDialog {
         t.start();
     }
 
+    private void add_qty_converted_from(final Inventory_barcodes.to_inventory_barcodes to) {
+        Window p = (Window) this;
+        Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to.main_barcode, to.barcode, to.description, to.product_qty, 1, to.unit);
+        nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                closeDialog.ok();
+
+                Field.Combo f_branch = (Field.Combo) tf_from_branch;
+                Field.Combo f_location = (Field.Combo) tf_from_location;
+                Field.Combo t_branch = (Field.Combo) tf_to_branch;
+                Field.Combo t_location = (Field.Combo) tf_to_location;
+
+                int id = 0;
+                String conversion_no = "";
+                String user_name = MyUser.getUser_id();
+                String session_no = "";
+                String date_added = DateType.now();
+                String reference_no = "";
+                String remarks = "";
+                String barcode = to.barcode;
+                String description = to.description;
+                String category = to.category;
+                String category_id = to.category_id;
+                String classification = to.classification;
+                String classification_id = to.classification_id;
+                String sub_class = to.sub_classification;
+                String sub_class_id = to.sub_classification_id;
+                String brand = to.brand;
+                String brand_id = to.brand_id;
+                String model = to.model;
+                String model_id = to.model_id;
+                double conversion = data.conversion;
+                String unit = data.unit;
+                String barcodes = "";
+                String batch_no = "";
+                String serial_no = data.serial_nos;
+                String main_barcode = to.main_barcode;
+                double qty = data.amount;
+                double cost = data.cost;
+                int status = 0;
+                String from_branch = f_branch.getText();
+                String from_branch_id = f_branch.getId();
+                String from_location = f_location.getText();
+                String from_location_id = f_location.getId();
+                String to_branch = t_branch.getText();
+                String to_branch_id = t_branch.getId();
+                String to_location = t_location.getText();
+                String to_location_id = t_location.getId();
+                to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id);
+                tbl_conversion_items_ALM.add(item);
+
+                tf_search.grabFocus();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void delete_qty_converted_from() {
+        int row = tbl_conversion_items.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        int col = tbl_conversion_items.getSelectedColumn();
+        if (col == 6) {
+            tbl_conversion_items_ALM.remove(row);
+            tbl_conversion_items_M.fireTableDataChanged();
+            tf_search.grabFocus();
+            jLabel5.setText("" + tbl_conversion_items_ALM.size());
+        }
+        if (col == 5) {
+            final to_conversion_items to = (to_conversion_items) tbl_conversion_items_ALM.get(row);
+            Window p = (Window) this;
+            Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
+            nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                    closeDialog.ok();
+                    to.setConversion(data.conversion);
+                    to.setCost(data.cost);
+                    to.setQty(data.amount);
+                    to.setUnit(data.unit);
+                    tbl_conversion_items_M.fireTableDataChanged();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+    }
+
     private void init_inventory_barcodes2() {
         final Field.Combo br = (Field.Combo) tf_to_location;
 
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                String search = tf_search.getText();
+                String search = jTextField3.getText();
                 String where = " where ";
 
                 if (jCheckBox4.isSelected()) {
@@ -1314,9 +1427,14 @@ public class Dlg_conversion extends javax.swing.JDialog {
                 inventory_barcoders_list2 = Inventory_barcodes.ret_where(where);
 
                 if (inventory_barcoders_list2.isEmpty()) {
-
+                    Alert.set(0, "Item not found!");
+                    return;
                 }
-                if (inventory_barcoders_list2.size() >= 1) {
+                if (inventory_barcoders_list2.size() == 1) {
+                    Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) inventory_barcoders_list2.get(0);
+                    add_qty_converted_to(to);
+                }
+                if (inventory_barcoders_list2.size() > 1) {
                     Object[][] obj = new Object[inventory_barcoders_list2.size()][5];
                     int i = 0;
                     for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list2) {
@@ -1345,13 +1463,111 @@ public class Dlg_conversion extends javax.swing.JDialog {
                     tr.setCallback(new TableRenderer.Callback() {
                         @Override
                         public void ok(TableRenderer.OutputData data) {
-
+                            Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) inventory_barcoders_list2.get(data.selected_row);
+                            add_qty_converted_to(to);
                         }
                     });
                 }
             }
         });
         t.start();
+    }
+
+    private void add_qty_converted_to(final Inventory_barcodes.to_inventory_barcodes to) {
+        Window p = (Window) this;
+        Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to.main_barcode, to.barcode, to.description, to.product_qty, 1, to.unit);
+        nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                closeDialog.ok();
+
+                Field.Combo f_branch = (Field.Combo) tf_from_branch;
+                Field.Combo f_location = (Field.Combo) tf_from_location;
+                Field.Combo t_branch = (Field.Combo) tf_to_branch;
+                Field.Combo t_location = (Field.Combo) tf_to_location;
+
+                int id = 0;
+                String conversion_no = "";
+                String user_name = MyUser.getUser_id();
+                String session_no = "";
+                String date_added = DateType.now();
+                String reference_no = "";
+                String remarks = "";
+                String barcode = to.barcode;
+                String description = to.description;
+                String category = to.category;
+                String category_id = to.category_id;
+                String classification = to.classification;
+                String classification_id = to.classification_id;
+                String sub_class = to.sub_classification;
+                String sub_class_id = to.sub_classification_id;
+                String brand = to.brand;
+                String brand_id = to.brand_id;
+                String model = to.model;
+                String model_id = to.model_id;
+                double conversion = data.conversion;
+                String unit = data.unit;
+                String barcodes = "";
+                String batch_no = "";
+                String serial_no = data.serial_nos;
+                String main_barcode = to.main_barcode;
+                double qty = data.amount;
+                double cost = data.cost;
+                int status = 0;
+                String from_branch = f_branch.getText();
+                String from_branch_id = f_branch.getId();
+                String from_location = f_location.getText();
+                String from_location_id = f_location.getId();
+                String to_branch = t_branch.getText();
+                String to_branch_id = t_branch.getId();
+                String to_location = t_location.getText();
+                String to_location_id = t_location.getId();
+                to_conversion_items item = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id);
+                tbl_conversion_items_ALM2.add(item);
+                jTextField3.grabFocus();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void delete_qty_converted_to() {
+        int row = tbl_conversion_items22.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        int col = tbl_conversion_items22.getSelectedColumn();
+        if (col == 6) {
+            tbl_conversion_items_ALM2.remove(row);
+            tbl_conversion_items_M2.fireTableDataChanged();
+            jTextField3.grabFocus();
+            jLabel10.setText("" + tbl_conversion_items_ALM.size());
+        }
+        if (col == 5) {
+            final to_conversion_items to = (to_conversion_items) tbl_conversion_items_ALM2.get(row);
+            Window p = (Window) this;
+            Dlg_conversion_qty nd = Dlg_conversion_qty.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.main_barcode, to.barcode, to.description, 0, to.qty, to.unit);
+            nd.setCallback(new Dlg_conversion_qty.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_conversion_qty.OutputData data) {
+                    closeDialog.ok();
+                    to.setConversion(data.conversion);
+                    to.setCost(data.cost);
+                    to.setQty(data.amount);
+                    to.setUnit(data.unit);
+                    tbl_conversion_items_M2.fireTableDataChanged();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
     }
 
     //<editor-fold defaultstate="collapsed" desc=" conversion_items "> 
@@ -1364,9 +1580,9 @@ public class Dlg_conversion extends javax.swing.JDialog {
         tbl_conversion_items.setModel(tbl_conversion_items_M);
         tbl_conversion_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_conversion_items.setRowHeight(25);
-        int[] tbl_widths_conversion_items = {80, 80, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_conversion_items = {40, 40, 100, 60, 80, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_conversion_items.length; i < n; i++) {
-            if (i == 100) {
+            if (i == 2) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_conversion_items, i, tbl_widths_conversion_items[i]);
@@ -1377,6 +1593,8 @@ public class Dlg_conversion extends javax.swing.JDialog {
         tbl_conversion_items.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_conversion_items.setRowHeight(25);
         tbl_conversion_items.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_conversion_items.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());
+        tbl_conversion_items.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_conversion_items(List<to_conversion_items> acc) {
@@ -1387,7 +1605,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     public static class Tblconversion_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "id", "conversion_no", "user_name", "session_no", "date_added", "reference_no", "remarks", "barcode", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "from_branch", "from_branch_id", "from_location", "from_location_id", "to_branch", "to_branch_id", "to_location", "to_location_id"
+            "Qty", "Code", "Description", "Unit", "Conversion", "", "", "barcode", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "from_branch", "from_branch_id", "from_location", "from_location_id", "to_branch", "to_branch_id", "to_location", "to_location_id"
         };
 
         public Tblconversion_itemsModel(ListModel listmodel) {
@@ -1415,19 +1633,167 @@ public class Dlg_conversion extends javax.swing.JDialog {
             to_conversion_items tt = (to_conversion_items) getRow(row);
             switch (col) {
                 case 0:
-                    return tt.id;
+                    return " " + FitIn.fmt_woc(tt.qty);
                 case 1:
-                    return tt.conversion_no;
+                    return " " + tt.main_barcode;
                 case 2:
-                    return tt.user_name;
+                    return " " + tt.description;
                 case 3:
-                    return tt.session_no;
+                    String unit = "";
+                    Dlg_inventory_uom.to_uom uoms = uom.default_uom(tt.unit);
+                    if (uoms != null) {
+                        unit = uoms.uom;
+                    }
+                    return " " + unit;
                 case 4:
-                    return tt.date_added;
+                    return " " + FitIn.fmt_wc_0(tt.conversion);
                 case 5:
-                    return tt.reference_no;
+                    return "/POS/icon_payment/edit (1).png";
                 case 6:
-                    return tt.remarks;
+                    return "/POS/icon_payment/remove11.png";
+                case 7:
+                    return tt.barcode;
+                case 8:
+                    return tt.description;
+                case 9:
+                    return tt.category;
+                case 10:
+                    return tt.category_id;
+                case 11:
+                    return tt.classification;
+                case 12:
+                    return tt.classification_id;
+                case 13:
+                    return tt.sub_class;
+                case 14:
+                    return tt.sub_class_id;
+                case 15:
+                    return tt.brand;
+                case 16:
+                    return tt.brand_id;
+                case 17:
+                    return tt.model;
+                case 18:
+                    return tt.model_id;
+                case 19:
+                    return tt.conversion;
+                case 20:
+                    return tt.unit;
+                case 21:
+                    return tt.barcodes;
+                case 22:
+                    return tt.batch_no;
+                case 23:
+                    return tt.serial_no;
+                case 24:
+                    return tt.main_barcode;
+                case 25:
+                    return tt.qty;
+                case 26:
+                    return tt.cost;
+                case 27:
+                    return tt.status;
+                case 28:
+                    return tt.from_branch;
+                case 29:
+                    return tt.from_branch_id;
+                case 30:
+                    return tt.from_location;
+                case 31:
+                    return tt.from_location_id;
+                case 32:
+                    return tt.to_branch;
+                case 33:
+                    return tt.to_branch_id;
+                case 34:
+                    return tt.to_location;
+                default:
+                    return tt.to_location_id;
+            }
+        }
+    }
+//</editor-fold> 
+    //<editor-fold defaultstate="collapsed" desc=" conversion_items2 "> 
+    public static ArrayListModel tbl_conversion_items_ALM2;
+    public static Tblconversion_itemsModel2 tbl_conversion_items_M2;
+
+    public static void init_tbl_conversion_items2(JTable tbl_conversion_items2) {
+        tbl_conversion_items_ALM2 = new ArrayListModel();
+        tbl_conversion_items_M2 = new Tblconversion_itemsModel2(tbl_conversion_items_ALM2);
+        tbl_conversion_items2.setModel(tbl_conversion_items_M2);
+        tbl_conversion_items2.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_conversion_items2.setRowHeight(25);
+        int[] tbl_widths_conversion_items = {40, 40, 100, 60, 80, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_conversion_items.length; i < n; i++) {
+            if (i == 2) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_conversion_items2, i, tbl_widths_conversion_items[i]);
+        }
+        Dimension d = tbl_conversion_items2.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_conversion_items2.getTableHeader().setPreferredSize(d);
+        tbl_conversion_items2.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_conversion_items2.setRowHeight(25);
+        tbl_conversion_items2.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_conversion_items2.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());
+        tbl_conversion_items2.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
+    }
+
+    public static void loadData_conversion_items2(List<to_conversion_items> acc) {
+        tbl_conversion_items_ALM2.clear();
+        tbl_conversion_items_ALM2.addAll(acc);
+    }
+
+    public static class Tblconversion_itemsModel2 extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Qty", "Code", "Description", "Unit", "Conversion", "", "", "barcode", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "from_branch", "from_branch_id", "from_location", "from_location_id", "to_branch", "to_branch_id", "to_location", "to_location_id"
+        };
+
+        public Tblconversion_itemsModel2(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_conversion_items tt = (to_conversion_items) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + FitIn.fmt_woc(tt.qty);
+                case 1:
+                    return " " + tt.main_barcode;
+                case 2:
+                    return " " + tt.description;
+                case 3:
+                    String unit = "";
+                    Dlg_inventory_uom.to_uom uoms = uom.default_uom(tt.unit);
+                    if (uoms != null) {
+                        unit = uoms.uom;
+                    }
+                    return " " + unit;
+                case 4:
+                    return " " + FitIn.fmt_wc_0(tt.conversion);
+                case 5:
+                    return "/POS/icon_payment/edit (1).png";
+                case 6:
+                    return "/POS/icon_payment/remove11.png";
                 case 7:
                     return tt.barcode;
                 case 8:
