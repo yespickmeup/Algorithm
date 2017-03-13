@@ -8,9 +8,7 @@ package POS.requisition_slips;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Inventory_barcodes;
-import POS.receipts.Receipts;
-import POS.receipts.S1_receipt_orders;
-import POS.receipts.Srpt_receipts;
+import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.requisition_slips.Requisition_slip_items.to_requisition_slip_items;
 import POS.requisition_slips.Requisition_slips.to_requisition_slips;
 import POS.util.Alert;
@@ -214,6 +212,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -240,6 +239,11 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         tf_branch = new Field.Combo();
         tf_branch_id = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -264,6 +268,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -384,6 +389,30 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         tf_branch_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_branch_id.setFocusable(false);
 
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel30.setText("Search by:");
+
+        buttonGroup2.add(jCheckBox6);
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("Item Code");
+        jCheckBox6.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox7);
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("Barcode");
+        jCheckBox7.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox8);
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setText("Description");
+        jCheckBox8.setFocusable(false);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("Search:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -426,7 +455,6 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                                         .addGap(1, 1, 1)
                                         .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jTextField4)))))
-                    .addComponent(tf_search)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -435,7 +463,20 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox8)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_search)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -472,10 +513,18 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBox8))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -643,7 +692,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                                 .addComponent(jCheckBox3)
                                 .addComponent(jCheckBox4)))))
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -668,7 +717,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -716,6 +765,21 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Print Preview", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 973, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 714, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Item Ledger", jPanel5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -815,6 +879,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -823,6 +888,9 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -831,6 +899,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -838,6 +907,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -849,6 +919,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
@@ -868,6 +939,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         init_no();
@@ -878,9 +950,23 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
 
             @Override
             public void run() {
+                item_ledger();
                 tf_search.grabFocus();
             }
         });
+    }
+
+    private void item_ledger() {
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                jPanel5.setLayout(new BorderLayout());
+                Dlg_report_inventory_ledger dlg = new Dlg_report_inventory_ledger();
+                jPanel5.add(dlg.getSurface());
+            }
+        });
+
     }
 
     public void do_pass() {
@@ -940,7 +1026,6 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                 my_branch_id = to.branch_id;
                 my_location = to.location;
                 my_location_id = "" + to.id;
-
                 location_ids = "" + to.id;
                 init_no();
             }
@@ -982,11 +1067,19 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             @Override
             public void run() {
                 String search = tf_search.getText();
-                String where = " where "
-                        + " main_barcode like '" + search + "' and location_id='" + location_ids + "' "
-                        + " or barcode like '" + search + "' and location_id='" + location_ids + "' "
-                        + " or description like '%" + search + "%' and location_id='" + location_ids + "' ";
+                String where = " where ";
+
+                if (jCheckBox6.isSelected()) {
+                    where = where + "  main_barcode like '" + search + "' and location_id='" + tf_branch_id.getText() + "' ";
+                }
+                if (jCheckBox7.isSelected()) {
+                    where = where + "  barcode='" + search + "' and location_id='" + tf_branch_id.getText() + "' ";
+                }
+                if (jCheckBox8.isSelected()) {
+                    where = where + "  description like '%" + search + "%' and location_id='" + tf_branch_id.getText() + "' ";
+                }
                 where = where + " order by description asc ";
+
                 tf_search.setEnabled(true);
                 inventory_barcoders_list.clear();
                 inventory_barcoders_list = Inventory_barcodes.ret_where(where);
@@ -1155,9 +1248,9 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         tbl_requisition_slip_items.setModel(tbl_requisition_slip_items_M);
         tbl_requisition_slip_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_requisition_slip_items.setRowHeight(25);
-        int[] tbl_widths_requisition_slip_items = {70, 70, 100, 100, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_requisition_slip_items = {100, 100, 50, 50, 0, 80, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_requisition_slip_items.length; i < n; i++) {
-            if (i == 2) {
+            if (i == 1) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_requisition_slip_items, i, tbl_widths_requisition_slip_items[i]);
@@ -1168,7 +1261,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         tbl_requisition_slip_items.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_requisition_slip_items.setRowHeight(25);
         tbl_requisition_slip_items.setFont(new java.awt.Font("Arial", 0, 12));
-        TableWidthUtilities.setColumnRightRenderer(tbl_requisition_slip_items, 3);
+        TableWidthUtilities.setColumnRightRenderer(tbl_requisition_slip_items, 5);
     }
 
     public static void loadData_requisition_slip_items(List<to_requisition_slip_items> acc) {
@@ -1179,7 +1272,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     public static class Tblrequisition_slip_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Qty", "Item Code", "Description", "Cost", "", "", "requested_by", "item_code", "barcode", "description", "unit", "cost", "selling_price", "branch", "branch_id", "location", "location_id", "date_added", "status"
+            "Code", "Description", "Qty", "Unit", "Cost", "Price", "", "", "barcode", "description", "unit", "cost", "selling_price", "branch", "branch_id", "location", "location_id", "date_added", "status"
         };
 
         public Tblrequisition_slip_itemsModel(ListModel listmodel) {
@@ -1207,21 +1300,30 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             to_requisition_slip_items tt = (to_requisition_slip_items) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + FitIn.fmt_woc(tt.product_qty);
-                case 1:
                     return " " + tt.item_code;
-                case 2:
+                case 1:
                     return " " + tt.description;
+                case 2:
+                    return " " + FitIn.fmt_woc(tt.product_qty);
                 case 3:
-                    return FitIn.fmt_wc_0(tt.cost) + " ";
+                    String uom = tt.unit;
+                    String[] list = uom.split(",");
+                    String unit = "";
+                    int o = 0;
+                    for (String s : list) {
+                        int i = s.indexOf(":");
+                        unit = s.substring(1, i);
+                        o++;
+                    }
+                    return " " + unit;
                 case 4:
-                    return " Update";
+                    return " " + FitIn.fmt_wc_0(tt.cost);
                 case 5:
-                    return " Delete";
+                    return " " + FitIn.fmt_wc_0(tt.selling_price) + " ";
                 case 6:
-                    return tt.requested_by;
+                    return " Update";
                 case 7:
-                    return tt.item_code;
+                    return " Delete";
                 case 8:
                     return tt.barcode;
                 case 9:
@@ -1268,7 +1370,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_rs_qty nd = Dlg_rs_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass(to);
+        nd.do_pass(0, "", to.main_barcode, to.barcode, to.description, to.product_qty, to.unit);
         nd.setCallback(new Dlg_rs_qty.Callback() {
 
             @Override
@@ -1286,8 +1388,8 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                 String barcode = to.barcode;
                 String description = to.description;
                 double product_qty = data.qty;
-                String unit = to.unit;
-                double cost = data.cost;
+                String unit = data.unit;
+                double cost = to.cost;
                 double selling_price = to.selling_price;
                 String branch = to.branch;
                 String branch_id = to.branch_code;
@@ -1315,7 +1417,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         }
         final to_requisition_slip_items slip = (to_requisition_slip_items) tbl_requisition_slip_items_ALM.get(row);
         int col = tbl_requisition_slip_items.getSelectedColumn();
-        if (col == 4) {
+        if (col == 6) {
             if (slip.status == 1) {
                 Alert.set(0, "Transaction finalized, cannot proceed!");
                 return;
@@ -1323,7 +1425,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_rs_qty nd = Dlg_rs_qty.create(p, true);
             nd.setTitle("");
-            nd.do_pass2(slip);
+            nd.do_pass(slip.product_qty, "", slip.item_code, slip.barcode, slip.description, 0, slip.unit);
             nd.setCallback(new Dlg_rs_qty.Callback() {
 
                 @Override
@@ -1342,7 +1444,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         }
-        if (col == 5) {
+        if (col == 7) {
             if (slip.status == 1) {
                 Alert.set(0, "Transaction finalized, cannot proceed!");
                 return;
@@ -1382,28 +1484,43 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         String requisition_department = dep.getText();
         String requisition_department_id = dep.getId();
         String requested_by = jTextField4.getText();
-        String branch = my_branch;
+        final String branch = my_branch;
         String branch_id = my_branch_id;
         String location = my_location;
         String location_id = my_location_id;
         String date_added = DateType.now();
         int status = 0;
 
-        Requisition_slips.to_requisition_slips slip = new Requisition_slips.to_requisition_slips(id, requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, branch, branch_id, location, location_id, date_added, status);
+        final Requisition_slips.to_requisition_slips slip = new Requisition_slips.to_requisition_slips(id, requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, branch, branch_id, location, location_id, date_added, status);
+
         if (tbl_requisition_slip_items_ALM.size() <= 0) {
             Alert.set(0, "No Item/s Added!");
             return;
         }
-        List<to_requisition_slip_items> datas = tbl_requisition_slip_items_ALM;
-        Requisition_slips.post_and_finalize(slip, datas);
-        Alert.set(1, branch);
+        final List<to_requisition_slip_items> datas = tbl_requisition_slip_items_ALM;
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
 
-        init_no();
-        tbl_requisition_slip_items_ALM.clear();
-        tbl_requisition_slip_items_M.fireTableDataChanged();
-        jLabel3.setText("" + tbl_requisition_slip_items_ALM.size());
-        tf_search.grabFocus();
-        data_cols_slips();
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Requisition_slips.post_and_finalize(slip, datas);
+                Alert.set(1, "");
+
+                init_no();
+                tbl_requisition_slip_items_ALM.clear();
+                tbl_requisition_slip_items_M.fireTableDataChanged();
+                jLabel3.setText("" + tbl_requisition_slip_items_ALM.size());
+                tf_search.grabFocus();
+                data_cols_slips();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void finalize_slip() {
@@ -1518,14 +1635,13 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             dep.setText(to.requisition_department);
             dep.setId(to.requisition_department_id);
             if (to.status == 1) {
-
                 jButton3.setEnabled(false);
-            } else {
                 jButton1.setEnabled(false);
-
+            } else {
+                jButton1.setEnabled(true);
                 jButton3.setEnabled(true);
             }
-
+            System.out.println(to.status);
             try {
                 jDateChooser1.setDate(DateType.sf.parse(to.requisition_date));
             } catch (ParseException ex) {

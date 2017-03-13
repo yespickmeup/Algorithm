@@ -5,16 +5,26 @@
  */
 package POS.requisition_slips;
 
-import POS.inventory.Inventory_barcodes;
+import POS.unit_of_measure.S1_unit_of_measure;
 import POS.util.Alert;
+import com.jgoodies.binding.adapter.AbstractTableAdapter;
+import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
+import javax.swing.BorderFactory;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 
@@ -46,13 +56,17 @@ public class Dlg_rs_qty extends javax.swing.JDialog {
     public static class OutputData {
 
         public final double qty;
-        public final double cost;
         public final String serial_no;
+        public final double conversion;
+        public final String unit;
+        public final double selling_price;
 
-        public OutputData(double qty, double cost, String serial_no) {
+        public OutputData(double qty, String serial_no, double conversion, String unit, double selling_price) {
             this.qty = qty;
-            this.cost = cost;
             this.serial_no = serial_no;
+            this.conversion = conversion;
+            this.unit = unit;
+            this.selling_price = selling_price;
         }
 
     }
@@ -446,13 +460,56 @@ public class Dlg_rs_qty extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
+        set_border();
+        init_tbl_uom();
     }
 
-    public void do_pass(Inventory_barcodes.to_inventory_barcodes to) {
-        lbl_item_code.setText(to.main_barcode);
-        lbl_qty.setText(FitIn.fmt_woc(to.product_qty));
-        lbl_desc.setText(to.description);
-//        tf_cost.setText(FitIn.fmt_wc_0(to.cost));
+    private void set_border() {
+
+        Border border = BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204));
+        lbl_desc.setBorder(BorderFactory.createCompoundBorder(border,
+                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+    }
+
+    public void do_pass(double qty, String serial, String item_code, String barcode, String description, double qty_on_hand, String unit) {
+        lbl_item_code.setText(item_code);
+        lbl_item_code1.setText(barcode);
+
+        lbl_desc.setText(description);
+        lbl_qty.setText(FitIn.fmt_woc(qty_on_hand));
+
+        serial = serial.replaceAll(",", "\n");
+        tf_amount.setText(FitIn.fmt_woc(qty));
+        jTextArea1.setText(serial);
+        String serials = jTextArea1.getText();
+        String[] datas = serials.split("\n");
+        jLabel2.setText("" + datas.length);
+
+        List<S1_unit_of_measure.to_uom> uoms = new ArrayList();
+        String uom = unit;
+        String[] list = uom.split(",");
+        int def = 0;
+        int o = 0;
+        for (String s : list) {
+            int i = s.indexOf(":");
+            int ii = s.indexOf("/");
+            int iii = s.indexOf("^");
+            String uom1 = s.substring(1, i);
+            double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+            double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+            int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+            S1_unit_of_measure.to_uom to1 = new S1_unit_of_measure.to_uom(uom1, selling_price, conversion, is_default);
+            uoms.add(to1);
+            if (to1.is_default == 1) {
+                def = o;
+            }
+            o++;
+        }
+
+        loadData_uom(uoms);
+        if (!uoms.isEmpty()) {
+            tbl_uom.setRowSelectionInterval(def, def);
+        }
     }
 
     public void do_pass2(final Requisition_slip_items.to_requisition_slip_items to) {
@@ -515,16 +572,91 @@ public class Dlg_rs_qty extends javax.swing.JDialog {
     }
 
     private void ok() {
-
         double qty = FitIn.toDouble(tf_amount.getText());
+        String serial_no = jTextArea1.getText();
         if (qty <= 0) {
-            Alert.set(0, "Input Qty!");
+            Alert.set(0, "Enter Quantity");
             return;
         }
-        double cost = 0;
-        String serial_no = jTextArea1.getText();
+        int row = tbl_uom.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        S1_unit_of_measure.to_uom uom = (S1_unit_of_measure.to_uom) tbl_uom_ALM.get(row);
+        double conversion = uom.conversion;
+        String unit = "[" + uom.unit + ":" + uom.price + "/" + uom.conversion + "^" + "1" + "]";
+        double selling_price = uom.price;
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(qty, cost, serial_no));
+            callback.ok(new CloseDialog(this), new Dlg_rs_qty.OutputData(qty, serial_no, conversion, unit, selling_price));
         }
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" init table unit of measure ">
+    private ArrayListModel tbl_uom_ALM;
+    private TbluomModel tbl_uom_M;
+
+    private void init_tbl_uom() {
+        tbl_uom_ALM = new ArrayListModel();
+        tbl_uom_M = new TbluomModel(tbl_uom_ALM);
+        tbl_uom.getTableHeader().setPreferredSize(new Dimension(80, 30));
+        tbl_uom.setModel(tbl_uom_M);
+        tbl_uom.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tbl_uom.setRowHeight(25);
+        int[] tbl_widths_uom = {70, 80, 0};
+        for (int i = 0, n = tbl_widths_uom.length; i < n; i++) {
+            if (i == 0) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_uom, i, tbl_widths_uom[i]);
+        }
+        tbl_uom.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_uom.setRowHeight(30);
+        tbl_uom.setFont(new java.awt.Font("Arial", 0, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_uom, 2);
+    }
+
+    private void loadData_uom(List<S1_unit_of_measure.to_uom> acc) {
+        tbl_uom_ALM.clear();
+        tbl_uom_ALM.addAll(acc);
+
+    }
+
+    public static class TbluomModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Unit", "Conversion", "Cost"
+        };
+
+        public TbluomModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            S1_unit_of_measure.to_uom tt = (S1_unit_of_measure.to_uom) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.unit;
+                case 1:
+                    return " " + FitIn.fmt_wc_0(tt.conversion);
+                default:
+                    return FitIn.fmt_wc_0(tt.price) + " ";
+            }
+        }
+    }
+    //</editor-fold>
 }

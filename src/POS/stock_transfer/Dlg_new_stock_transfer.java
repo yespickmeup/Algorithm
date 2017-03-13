@@ -517,7 +517,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     .addComponent(tf_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -658,7 +658,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5)
+                .addGap(1, 1, 1)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1779,6 +1779,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + tf_from_location_id.getText() + "' ";
                 }
+                where = where + " order by description asc ";
                 inventory_barcoders_list.clear();
                 inventory_barcoders_list = Inventory_barcodes.ret_where(where);
                 if (inventory_barcoders_list.isEmpty()) {
@@ -1834,7 +1835,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass(1,"",t.main_barcode,t.barcode,t.description,t.product_qty,t.unit);
+        nd.do_pass(1, "", t.main_barcode, t.barcode, t.description, t.product_qty, t.unit);
         nd.setCallback(new Dlg_new_stock_transfer_qty.Callback() {
 
             @Override
@@ -2213,7 +2214,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Window p = (Window) this;
                 Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
                 nd.setTitle("");
-                nd.do_pass(to.product_qty, to.serial_no,to.barcode,to.barcodes,to.description,0,to.unit);
+                nd.do_pass(to.product_qty, to.serial_no, to.barcode, to.barcodes, to.description, 0, to.unit);
                 nd.setCallback(new Dlg_new_stock_transfer_qty.Callback() {
                     @Override
                     public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_qty.OutputData data) {
@@ -2236,7 +2237,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Window p = (Window) this;
                 Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
                 nd.setTitle("");
-                nd.do_pass(to.product_qty, to.serial_no,to.barcode,to.barcodes,to.description,0,to.unit);
+                nd.do_pass(to.product_qty, to.serial_no, to.barcode, to.barcodes, to.description, 0, to.unit);
                 nd.setCallback(new Dlg_new_stock_transfer_qty.Callback() {
                     @Override
                     public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_qty.OutputData data) {

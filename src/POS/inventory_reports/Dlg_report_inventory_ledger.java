@@ -1291,7 +1291,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         String unit = rs4.getString(12);
                         double conversion = rs4.getDouble(13);
                         product_qty = product_qty * conversion;
-                        
+
                         double selling_price = rs4.getDouble(14);
                         String date_added = rs4.getString(15);
                         String user_name = rs4.getString(16);
@@ -1842,7 +1842,21 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         String barcode = rs10.getString(9);
                         String description = rs10.getString(10);
                         double product_qty = rs10.getDouble(11);
+
                         String unit = rs10.getString(12);
+                        String uom = unit;
+                        String[] list = uom.split(",");
+                        String unit1 = "";
+                        double conversion = 1;
+                        int o = 0;
+                        for (String s : list) {
+                            int i = s.indexOf(":");
+                            int ii = s.indexOf("/");
+                            conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                            unit1 = s.substring(1, i);
+                            o++;
+                        }
+                        product_qty=product_qty*conversion;
                         double cost = rs10.getDouble(13);
                         double selling_price = rs10.getDouble(14);
                         String branch = rs10.getString(15);
@@ -2018,7 +2032,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         String serial_no = rs13.getString(24);
                         String main_barcode = rs13.getString(25);
                         double qty = rs13.getDouble(26);
-                        qty=qty*conversion;
+                        qty = qty * conversion;
                         double cost = rs13.getDouble(27);
                         int status = rs13.getInt(28);
                         String from_branch = rs13.getString(29);

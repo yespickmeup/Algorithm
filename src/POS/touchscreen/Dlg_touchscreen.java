@@ -3124,7 +3124,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     }
 
                 }
-
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    if (!tbl_orders_ALM.isEmpty()) {
+                        tbl_orders.setRowSelectionInterval(0, 0);
+                        tbl_orders.grabFocus();
+                    }
+                }
                 if (e.getKeyCode() == KeyEvent.VK_F1) {
                     remove_items();
                 }
@@ -3490,14 +3495,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' "
                             + " or barcode='" + search + "' and location_id='" + my_location_id + "' ";
                 }
-               
+
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 }
                 where = where + " order by description asc";
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
-               
+
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
             }
