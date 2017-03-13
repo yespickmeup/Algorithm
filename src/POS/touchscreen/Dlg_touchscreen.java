@@ -270,7 +270,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jTextField2 = new Field.Combo();
         jLabel30 = new javax.swing.JLabel();
         jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -497,17 +496,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("Item Code");
+        jCheckBox6.setText("F8 - Barcode");
         jCheckBox6.setFocusable(false);
-
-        buttonGroup1.add(jCheckBox7);
-        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("Barcode");
-        jCheckBox7.setFocusable(false);
 
         buttonGroup1.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("Description");
+        jCheckBox8.setText("F9 - Description");
         jCheckBox8.setFocusable(false);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -529,7 +523,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         .addComponent(tf_search)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -538,11 +532,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox7)
-                                .addGap(2, 2, 2)
-                                .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(77, 77, 77))
                             .addComponent(jTextField2)
                             .addComponent(jTextField1))))
                 .addGap(5, 5, 5))
@@ -561,7 +554,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox7)
                     .addComponent(jCheckBox8)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
@@ -2842,7 +2834,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -3155,14 +3146,17 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
                     advance_search2();
                 }
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    if (!tbl_orders_ALM.isEmpty()) {
-                        tbl_orders.setRowSelectionInterval(0, 0);
-                        tbl_orders.grabFocus();
-                    }
+                if (e.getKeyCode() == KeyEvent.VK_F8) {
+                    jCheckBox6.setSelected(true);
+                    tf_search.grabFocus();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F9) {
+                    jCheckBox8.setSelected(true);
+                    tf_search.grabFocus();
                 }
             }
         });
+
         tbl_items.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -3191,6 +3185,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
                     advance_search2();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F8) {
+                    jCheckBox6.setSelected(true);
+                    tf_search.grabFocus();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F9) {
+                    jCheckBox8.setSelected(true);
+                    tf_search.grabFocus();
                 }
             }
         });
@@ -3435,11 +3437,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 String search = tf_search.getText();
                 String where = " where ";
                 if (jCheckBox6.isSelected()) {
-                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' ";
+                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' "
+                            + " or barcode='" + search + "' and location_id='" + my_location_id + "' ";
                 }
-                if (jCheckBox7.isSelected()) {
-                    where = where + "  barcode='" + search + "' and location_id='" + my_location_id + "' ";
-                }
+
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 }
@@ -3459,7 +3460,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     tbl_items.setRowSelectionInterval(0, 0);
                     select_item();
                 }
+                if (tbl_items_ALM.isEmpty()) {
+                    Alert.set(0, "Item not Found!");
+                    tf_search.setEnabled(true);
+                    tf_search.grabFocus();
+                    tf_search.selectAll();
+                    return;
+                }
                 tf_search.setEnabled(true);
+                tf_search.grabFocus();
+                tf_search.selectAll();
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
             }
@@ -3477,11 +3487,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 String search = tf_search.getText();
                 String where = " where ";
                 if (jCheckBox6.isSelected()) {
-                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' ";
+                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' "
+                            + " or barcode='" + search + "' and location_id='" + my_location_id + "' ";
                 }
-                if (jCheckBox7.isSelected()) {
-                    where = where + "  barcode='" + search + "' and location_id='" + my_location_id + "' ";
-                }
+               
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 }

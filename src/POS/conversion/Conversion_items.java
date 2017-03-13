@@ -43,14 +43,14 @@ public class Conversion_items {
         public final String brand_id;
         public final String model;
         public final String model_id;
-        public final double conversion;
-        public final String unit;
+        public double conversion;
+        public String unit;
         public final String barcodes;
         public final String batch_no;
         public final String serial_no;
         public final String main_barcode;
-        public final double qty;
-        public final double cost;
+        public double qty;
+        public double cost;
         public final int status;
         public final String from_branch;
         public final String from_branch_id;
@@ -60,8 +60,9 @@ public class Conversion_items {
         public final String to_branch_id;
         public final String to_location;
         public final String to_location_id;
+        public int is_converted_from;
 
-        public to_conversion_items(int id, String conversion_no, String user_name, String session_no, String date_added, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String from_branch, String from_branch_id, String from_location, String from_location_id, String to_branch, String to_branch_id, String to_location, String to_location_id) {
+        public to_conversion_items(int id, String conversion_no, String user_name, String session_no, String date_added, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String from_branch, String from_branch_id, String from_location, String from_location_id, String to_branch, String to_branch_id, String to_location, String to_location_id, int is_converted_from) {
             this.id = id;
             this.conversion_no = conversion_no;
             this.user_name = user_name;
@@ -98,7 +99,49 @@ public class Conversion_items {
             this.to_branch_id = to_branch_id;
             this.to_location = to_location;
             this.to_location_id = to_location_id;
+            this.is_converted_from = is_converted_from;
         }
+
+        public int getIs_converted_from() {
+            return is_converted_from;
+        }
+
+        public void setIs_converted_from(int is_converted_from) {
+            this.is_converted_from = is_converted_from;
+        }
+
+        public double getConversion() {
+            return conversion;
+        }
+
+        public void setConversion(double conversion) {
+            this.conversion = conversion;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
+        }
+
+        public double getQty() {
+            return qty;
+        }
+
+        public void setQty(double qty) {
+            this.qty = qty;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public void setCost(double cost) {
+            this.cost = cost;
+        }
+
     }
 
     public static void add_data(to_conversion_items to_conversion_items) {
@@ -140,6 +183,7 @@ public class Conversion_items {
                     + ",to_branch_id"
                     + ",to_location"
                     + ",to_location_id"
+                    + ",is_converted_from"
                     + ")values("
                     + ":conversion_no"
                     + ",:user_name"
@@ -176,6 +220,7 @@ public class Conversion_items {
                     + ",:to_branch_id"
                     + ",:to_location"
                     + ",:to_location_id"
+                    + ",:is_converted_from"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -214,6 +259,7 @@ public class Conversion_items {
                     .setString("to_branch_id", to_conversion_items.to_branch_id)
                     .setString("to_location", to_conversion_items.to_location)
                     .setString("to_location_id", to_conversion_items.to_location_id)
+                    .setNumber("is_converted_from", to_conversion_items.is_converted_from)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -265,6 +311,7 @@ public class Conversion_items {
                     + ",to_branch_id= :to_branch_id "
                     + ",to_location= :to_location "
                     + ",to_location_id= :to_location_id "
+                    + ",is_converted_from= :is_converted_from"
                     + " where id='" + to_conversion_items.id + "' "
                     + " ";
 
@@ -304,8 +351,37 @@ public class Conversion_items {
                     .setString("to_branch_id", to_conversion_items.to_branch_id)
                     .setString("to_location", to_conversion_items.to_location)
                     .setString("to_location_id", to_conversion_items.to_location_id)
+                    .setNumber("is_converted_from", to_conversion_items.is_converted_from)
                     .ok();
 
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Conversion_items.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_unit(to_conversion_items to_conversion_items,double conversion, String unit,double qty,double cost) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update conversion_items set "
+                    + " conversion= :conversion "
+                    + ",unit= :unit "
+                    + ",qty= :qty "
+                    + ",cost= :cost "
+                    + " where id='" + to_conversion_items.id + "' "
+                    + " ";
+            
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("conversion", conversion)
+                    .setString("unit", unit)
+                    .setNumber("qty", qty)
+                    .setNumber("cost", cost)
+                    .ok();
+           
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Conversion_items.class, "Successfully Updated");
@@ -375,6 +451,7 @@ public class Conversion_items {
                     + ",to_branch_id"
                     + ",to_location"
                     + ",to_location_id"
+                    + ",is_converted_from"
                     + " from conversion_items"
                     + " " + where;
 
@@ -417,8 +494,8 @@ public class Conversion_items {
                 String to_branch_id = rs.getString(34);
                 String to_location = rs.getString(35);
                 String to_location_id = rs.getString(36);
-
-                to_conversion_items to = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id);
+                int is_converted_from = rs.getInt(37);
+                to_conversion_items to = new to_conversion_items(id, conversion_no, user_name, session_no, date_added, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, is_converted_from);
                 datas.add(to);
             }
             return datas;
