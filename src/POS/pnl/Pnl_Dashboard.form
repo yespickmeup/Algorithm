@@ -1097,7 +1097,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="V1.20170109 (Full Version)"/>
+            <Property name="text" type="java.lang.String" value="V1.20170313 ( Full Version )"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -1113,7 +1113,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/POS/img_menu/puzzle-pieces-in-black-and-white-variant.png"/>
+              <Image iconType="3" name="/POS/icons3/earth-globe.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Algorithm"/>
             <Property name="focusable" type="boolean" value="false"/>

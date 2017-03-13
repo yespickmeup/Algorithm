@@ -360,7 +360,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel33 = new javax.swing.JLabel();
         lbl_screen_name = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -534,8 +533,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addComponent(jCheckBox6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(77, 77, 77))
+                                .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                             .addComponent(jTextField2)
                             .addComponent(jTextField1))))
                 .addGap(5, 5, 5))
@@ -1960,21 +1958,18 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(4, 176, 217));
-
-        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("Welcome,");
+        jPanel2.setBackground(new java.awt.Color(240, 239, 239));
 
         lbl_screen_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbl_screen_name.setForeground(new java.awt.Color(238, 251, 254));
+        lbl_screen_name.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_screen_name.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_screen_name.setText("Ronald Pascua!");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/down14 (2).png"))); // NOI18N
@@ -1987,10 +1982,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/seo1.png"))); // NOI18N
-        jLabel1.setText(" Algorithm Computer Services");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/shopping-cart.png"))); // NOI18N
+        jLabel1.setText("Point of Sale");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1999,11 +1994,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
-                .addComponent(jLabel33)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_screen_name, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(344, 344, 344)
+                .addComponent(lbl_screen_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -2011,13 +2004,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_screen_name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lbl_screen_name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
         );
 
@@ -2850,7 +2840,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -2932,7 +2921,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
-        jPanel2.setVisible(false);
+//        jPanel2.setVisible(false);
         init_key();
         set_cardlayout();
         init_invisible();
@@ -2949,9 +2938,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             @Override
             public void run() {
 
-                String businessname = System.getProperty("business_name", "Algorithm Computer Services");
-                jLabel1.setText(businessname);
-                lbl_screen_name.setText(Users.get_ScreenName());
+//                String businessname = System.getProperty("business_name", "Algorithm Computer Services");
+                jLabel1.setText("Point of Sale");
+                lbl_screen_name.setText("Welcome, " + Users.get_ScreenName());
                 tf_search.grabFocus();
             }
         });
@@ -4691,50 +4680,50 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void menu() {
 
-        Window p = (Window) this;
-        Dlg_touchscreen_logout nd = Dlg_touchscreen_logout.create(p, true);
-        nd.setTitle("");
-        nd.setCallback(new Dlg_touchscreen_logout.Callback() {
-            @Override
-            public void cashcount(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
-                closeDialog.ok();
-                if (jButton40.isVisible()) {
-                    log_out();
-                }
-
-            }
-
-            @Override
-            public void logout(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
-                closeDialog.ok();
-                exit();
-
-            }
-
-            @Override
-            public void maintenance(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
-                closeDialog.ok();
-            }
-
-            @Override
-            public void standby(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
-                closeDialog.ok();
-                stand_by();
-            }
-
-            @Override
-            public void reports(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
-                closeDialog.ok();
-                if (jButton40.isVisible()) {
-                    menu_reports();
-                }
-
-            }
-
-        });
-        Point loc = jButton1.getLocationOnScreen();
-        nd.setLocation(loc.x - 130, loc.y + 68);
-        nd.setVisible(true);
+//        Window p = (Window) this;
+//        Dlg_touchscreen_logout nd = Dlg_touchscreen_logout.create(p, true);
+//        nd.setTitle("");
+//        nd.setCallback(new Dlg_touchscreen_logout.Callback() {
+//            @Override
+//            public void cashcount(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
+//                closeDialog.ok();
+//                if (jButton40.isVisible()) {
+//                    log_out();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void logout(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
+//                closeDialog.ok();
+//                exit();
+//
+//            }
+//
+//            @Override
+//            public void maintenance(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
+//                closeDialog.ok();
+//            }
+//
+//            @Override
+//            public void standby(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
+//                closeDialog.ok();
+//                stand_by();
+//            }
+//
+//            @Override
+//            public void reports(CloseDialog closeDialog, Dlg_touchscreen_logout.OutputData data) {
+//                closeDialog.ok();
+//                if (jButton40.isVisible()) {
+//                    menu_reports();
+//                }
+//
+//            }
+//
+//        });
+//        Point loc = jButton1.getLocationOnScreen();
+//        nd.setLocation(loc.x - 130, loc.y + 68);
+//        nd.setVisible(true);
     }
 
     private void remove_items() {

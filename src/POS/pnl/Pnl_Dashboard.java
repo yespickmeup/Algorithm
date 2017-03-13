@@ -831,13 +831,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("V1.20170109 (Full Version)");
+        jLabel1.setText("V1.20170313 ( Full Version )");
 
         jLabel7.setBackground(new java.awt.Color(16, 88, 197));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/puzzle-pieces-in-black-and-white-variant.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/earth-globe.png"))); // NOI18N
         jLabel7.setText("Algorithm");
         jLabel7.setFocusable(false);
         jLabel7.setOpaque(true);
@@ -1958,10 +1958,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         String license_code = System.getProperty("license_code", "");
         license_code = DeEncrypter.decrypt(license_code);
 
-        jLabel1.setText("" + version + "( Full Version )");
+//        jLabel1.setText("" + version + "( Full Version )");
 
         if (license_code.equalsIgnoreCase("trial version")) {
-            jLabel1.setText("" + version + "( Trial Version )");
+            jLabel1.setText("Trial Version");
             String where1 = "order by id asc limit 1";
             String where2 = "order by id desc limit 1";
 
@@ -2646,6 +2646,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
             if (to.previledge.equalsIgnoreCase("Sales")) {
                 cashin();
+                jPanel6.setVisible(false);
             }
             if (to.previledge.equalsIgnoreCase("Salesman")) {
                 t_tavern();
