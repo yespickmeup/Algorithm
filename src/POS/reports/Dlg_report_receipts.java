@@ -8,7 +8,7 @@ import POS.main.Main;
 import POS.receipts.Dlg_receipts_edit;
 import POS.receipts.S1_receipt_items;
 import POS.receipts.S1_receipt_items.to_receipt_items;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Users;
@@ -502,7 +502,7 @@ public class Dlg_report_receipts extends javax.swing.JDialog {
     }
 
     private void init_supplier() {
-        cb_supplier.setModel(new ListComboBoxModel(S1_suppliers.
+        cb_supplier.setModel(new ListComboBoxModel(Suppliers.
                ret_cb_data()));
     }
 

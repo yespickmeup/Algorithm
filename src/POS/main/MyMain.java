@@ -65,6 +65,7 @@ public class MyMain {
             System.setProperty("pool_password", prop.getProperty("pool_password", "password"));
             System.setProperty("pool_db", prop.getProperty("pool_db", "db_smis"));
             System.setProperty("environment", prop.getProperty("environment", "development"));
+            System.setProperty("auto_order", prop.getProperty("auto_order", "false"));
 
             System.out.println("OS: " + os);
             System.out.println("Home: " + home);

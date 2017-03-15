@@ -6,7 +6,7 @@
 package POS.reports2;
 
 import POS.customers.Customers;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.DateType;
 import POS.util.TableRenderer;
 import java.awt.BorderLayout;
@@ -462,16 +462,16 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
-    List<S1_suppliers.to_suppliers> suppliers = new ArrayList();
+    List<Suppliers.to_suppliers> suppliers = new ArrayList();
 
     private void init_customers(final JTextField tf1, final JTextField tf2) {
 
         String search = tf1.getText();
         suppliers.clear();
-        suppliers = S1_suppliers.ret_data2(search);
+        suppliers = Suppliers.ret_data2(search);
         Object[][] obj = new Object[suppliers.size()][2];
         int i = 0;
-        for (S1_suppliers.to_suppliers to : suppliers) {
+        for (Suppliers.to_suppliers to : suppliers) {
             obj[i][0] = " " + to.customer_no;
             obj[i][1] = " " + to.customer_name;
             i++;
@@ -487,7 +487,7 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_suppliers.to_suppliers to = suppliers.get(data.selected_row);
+                Suppliers.to_suppliers to = suppliers.get(data.selected_row);
                 tf1.setText("" + to.customer_name);
                 tf2.setText("" + to.customer_no);
 

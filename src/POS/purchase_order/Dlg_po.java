@@ -9,7 +9,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.inventory.Inventory_barcodes;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import java.awt.event.ActionEvent;
@@ -594,17 +594,17 @@ public class Dlg_po extends javax.swing.JDialog {
         jTextField7.setText("" + to.id);
 
     }
-    List<S1_suppliers.to_suppliers> manager_list = new ArrayList();
+    List<Suppliers.to_suppliers> manager_list = new ArrayList();
 
     private void init_supplier() {
         String search = tf_search_customer.getText();
         manager_list.clear();
         String where = " where customer_name like '%" + search + "%' "
                 + "order by customer_name asc";
-        manager_list = S1_suppliers.ret_data2(where);
+        manager_list = Suppliers.ret_data2(where);
         Object[][] obj = new Object[manager_list.size()][1];
         int i = 0;
-        for (S1_suppliers.to_suppliers to : manager_list) {
+        for (Suppliers.to_suppliers to : manager_list) {
             obj[i][0] = to.customer_name;
             i++;
         }
@@ -617,7 +617,7 @@ public class Dlg_po extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_suppliers.to_suppliers to = manager_list.get(data.selected_row);
+                Suppliers.to_suppliers to = manager_list.get(data.selected_row);
                 tf_search_customer.setText(to.customer_name);
                 jTextField1.setText("" + to.id);
             }

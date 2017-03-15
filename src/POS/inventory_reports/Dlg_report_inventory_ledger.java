@@ -722,7 +722,6 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
 
     private void init_branch_locations() {
-
         final Field.Combo lo = (Field.Combo) tf_branch_location;
         Object[][] obj = new Object[branch_location_list.size()][2];
         int i = 0;
@@ -842,7 +841,6 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         }
                     });
                 }
-
             }
         });
         t.start();
@@ -1856,7 +1854,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             unit1 = s.substring(1, i);
                             o++;
                         }
-                        product_qty=product_qty*conversion;
+                        product_qty = product_qty * conversion;
                         double cost = rs10.getDouble(13);
                         double selling_price = rs10.getDouble(14);
                         String branch = rs10.getString(15);
@@ -1900,7 +1898,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     //<editor-fold defaultstate="collapsed" desc=" Return from Customer ">
                     String s12 = "select "
                             + "id"
-                            + ",return_to_supplier_no"
+                            + ",return_from_customer_no"
                             + ",user_name"
                             + ",session_no"
                             + ",date_added"
@@ -2177,8 +2175,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 if (month.length() == 1) {
                     month = "0" + month;
                 }
-
-                String locatio_id = "14";
+                Field.Combo loc = (Field.Combo) tf_branch_location;
+                String locatio_id = loc.getId();
                 List<Inventory_barcodes.to_inventory_barcodes> inventory = Inventory_barcodes.ret_where(" where location_id='" + locatio_id + "' "
                         + "  and main_barcode='" + tf_search.getText() + "'");
 
@@ -2204,7 +2202,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             + "  ";
                     String wheree = " where item_code ='" + my_item_code + "'  and location_id = '" + locatio_id + "' and status=1 "
                             + "   ";
-
+                    String where5 = " where main_barcode ='" + my_item_code + "'  and from_location_id = '" + lo.getId() + "' and status=1 "
+                            + "  or main_barcode ='" + my_item_code + "'  and to_location_id = '" + lo.getId() + "' and status=1";
                     List<Srpt_item_ledger.field> sales = new ArrayList();//Srpt_item_ledger.sales(where);
                     List<Srpt_item_ledger.field> inventory_count = new ArrayList();// Srpt_item_ledger.inventory_encoding(where);
                     List<Srpt_item_ledger.field> receipts = new ArrayList(); //Srpt_item_ledger.receipts(where2);
@@ -2216,6 +2215,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     List<Srpt_item_ledger.field> replenishments = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
                     List<Srpt_item_ledger.field> requistion_slips = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
                     List<Srpt_item_ledger.field> return_from_customer = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
+                    List<Srpt_item_ledger.field> conversions = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
 //                    System.out.println(where);
                     try {
                         Connection conn = MyConnection.connect();
@@ -2512,6 +2512,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
                             String transaction_type = "Receipts";
                             String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                            qty = qty * conversion;
                             String in = FitIn.fmt_woc(qty);
                             String out = "";
                             String balance = "";
@@ -2526,6 +2527,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String created_by = user_name;
                             String customer_name = "";
                             Date created = new Date();
+
                             try {
                                 created = POS.util.DateType.datetime.parse(date_added);
                             } catch (ParseException ex) {
@@ -2607,8 +2609,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String sub_classification = rs4.getString(9);
                             String sub_classification_id = rs4.getString(10);
                             double product_qty = rs4.getDouble(11);
+
                             String unit = rs4.getString(12);
                             double conversion = rs4.getDouble(13);
+                            product_qty = product_qty * conversion;
+
                             double selling_price = rs4.getDouble(14);
                             String date_added = rs4.getString(15);
                             String user_name = rs4.getString(16);
@@ -3159,7 +3164,21 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String barcode = rs10.getString(9);
                             String description = rs10.getString(10);
                             double product_qty = rs10.getDouble(11);
+
                             String unit = rs10.getString(12);
+                            String uom = unit;
+                            String[] list = uom.split(",");
+                            String unit1 = "";
+                            double conversion = 1;
+                            int o = 0;
+                            for (String s : list) {
+                                int i = s.indexOf(":");
+                                int ii = s.indexOf("/");
+                                conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                                unit1 = s.substring(1, i);
+                                o++;
+                            }
+                            product_qty = product_qty * conversion;
                             double cost = rs10.getDouble(13);
                             double selling_price = rs10.getDouble(14);
                             String branch = rs10.getString(15);
@@ -3264,6 +3283,107 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             return_from_customer.add(field2);
                         }
                         //</editor-fold>
+                        //<editor-fold defaultstate="collapsed" desc=" conversions ">
+                        String s13 = "select "
+                                + "id"
+                                + ",conversion_no"
+                                + ",user_name"
+                                + ",session_no"
+                                + ",date_added"
+                                + ",reference_no"
+                                + ",remarks"
+                                + ",barcode"
+                                + ",description"
+                                + ",category"
+                                + ",category_id"
+                                + ",classification"
+                                + ",classification_id"
+                                + ",sub_class"
+                                + ",sub_class_id"
+                                + ",brand"
+                                + ",brand_id"
+                                + ",model"
+                                + ",model_id"
+                                + ",conversion"
+                                + ",unit"
+                                + ",barcodes"
+                                + ",batch_no"
+                                + ",serial_no"
+                                + ",main_barcode"
+                                + ",qty"
+                                + ",cost"
+                                + ",status"
+                                + ",from_branch"
+                                + ",from_branch_id"
+                                + ",from_location"
+                                + ",from_location_id"
+                                + ",to_branch"
+                                + ",to_branch_id"
+                                + ",to_location"
+                                + ",to_location_id"
+                                + ",is_converted_from"
+                                + " from conversion_items"
+                                + " " + where5;
+
+                        Statement stmt13 = conn.createStatement();
+                        ResultSet rs13 = stmt13.executeQuery(s13);
+                        while (rs13.next()) {
+                            int id = rs13.getInt(1);
+                            String conversion_no = rs13.getString(2);
+                            String user_name = rs13.getString(3);
+                            String session_no = rs13.getString(4);
+                            String date_added = rs13.getString(5);
+                            String reference_no = rs13.getString(6);
+                            String remarks = rs13.getString(7);
+                            String barcode = rs13.getString(8);
+                            String description = rs13.getString(9);
+                            String category = rs13.getString(10);
+                            String category_id = rs13.getString(11);
+                            String classification = rs13.getString(12);
+                            String classification_id = rs13.getString(13);
+                            String sub_class = rs13.getString(14);
+                            String sub_class_id = rs13.getString(15);
+                            String brand = rs13.getString(16);
+                            String brand_id = rs13.getString(17);
+                            String model = rs13.getString(18);
+                            String model_id = rs13.getString(19);
+                            double conversion = rs13.getDouble(20);
+                            String unit = rs13.getString(21);
+                            String barcodes = rs13.getString(22);
+                            String batch_no = rs13.getString(23);
+                            String serial_no = rs13.getString(24);
+                            String main_barcode = rs13.getString(25);
+                            double qty = rs13.getDouble(26);
+                            qty = qty * conversion;
+                            double cost = rs13.getDouble(27);
+                            int status = rs13.getInt(28);
+                            String from_branch = rs13.getString(29);
+                            String from_branch_id = rs13.getString(30);
+                            String from_location = rs13.getString(31);
+                            String from_location_id = rs13.getString(32);
+                            String to_branch = rs13.getString(33);
+                            String to_branch_id = rs13.getString(34);
+                            String to_location = rs13.getString(35);
+                            String to_location_id = rs13.getString(36);
+                            int is_converted_from = rs13.getInt(37);
+
+                            String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                            Date created = new Date();
+                            try {
+                                created = POS.util.DateType.datetime.parse(date_added);
+                            } catch (ParseException ex) {
+                                Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            if (is_converted_from == 1) {
+                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                                conversions.add(field2);
+                            } else {
+                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                                conversions.add(field2);
+                            }
+
+                        }
+                        //</editor-fold>
                         fields.addAll(inventory_count);
                         fields.addAll(sales);
                         fields.addAll(receipts);
@@ -3275,6 +3395,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         fields.addAll(replenishments);
                         fields.addAll(requistion_slips);
                         fields.addAll(return_from_customer);
+                        fields.addAll(conversions);
                         List<Srpt_item_ledger.field> f_field = new ArrayList();
 
                         Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {

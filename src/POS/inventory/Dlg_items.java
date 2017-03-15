@@ -11,7 +11,7 @@ import POS.inventory.S1_item_multi_level_pricing.to_item_multi_level_pricing;
 import POS.inventory.S1_items2.to_items;
 import POS.main.Main;
 import POS.receipts.Dlg_item_receipts;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.uom.S1_uom;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -1305,8 +1305,8 @@ public class Dlg_items extends javax.swing.JDialog {
     }
 
     private void init_supplier() {
-        cb_supplier.setModel(new ListComboBoxModel(S1_suppliers.ret_cb_data()));
-        cb_supplier2.setModel(new ListComboBoxModel(S1_suppliers.ret_cb_data()));
+        cb_supplier.setModel(new ListComboBoxModel(Suppliers.ret_cb_data()));
+        cb_supplier2.setModel(new ListComboBoxModel(Suppliers.ret_cb_data()));
     }
 
     private void set_barcode() {

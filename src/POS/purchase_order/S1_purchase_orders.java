@@ -9,7 +9,7 @@ import POS.accounts_receivable.S1_accounts_receivable;
 import POS.main.Main;
 import POS.main.Main.MyDB;
 import POS.sales.Sales;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import POS.util.Users;
@@ -94,7 +94,7 @@ public class S1_purchase_orders {
             Lg.s(S1_purchase_orders.class, "Successfully Added");
 
             System.out.println("Account Id: " + to_purchase_orders.account_id);
-            S1_suppliers.to_suppliers cus = ret_customer_balance(to_purchase_orders.account_id);
+            Suppliers.to_suppliers cus = ret_customer_balance(to_purchase_orders.account_id);
             double new_balance = cus.balance + to_purchase_orders.amount;
             String s2 = "update  suppliers set "
                     + " balance= :balance"
@@ -135,8 +135,8 @@ public class S1_purchase_orders {
         }
     }
 
-    public static S1_suppliers.to_suppliers ret_customer_balance(String account_id) {
-        S1_suppliers.to_suppliers to1 = null;
+    public static Suppliers.to_suppliers ret_customer_balance(String account_id) {
+        Suppliers.to_suppliers to1 = null;
 
         try {
             Connection conn = MyConnection.connect();
@@ -169,7 +169,7 @@ public class S1_purchase_orders {
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
 
-                to1 = new S1_suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
             }
             return to1;
         } catch (SQLException e) {

@@ -21,7 +21,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  *
  * @author Maytopacka
  */
-public class S1_suppliers {
+public class Suppliers {
 
     public static class to_suppliers {
 
@@ -88,7 +88,7 @@ public class S1_suppliers {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_suppliers.class, "Successfully Added");
+            Lg.s(Suppliers.class, "Successfully Added");
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -123,7 +123,7 @@ public class S1_suppliers {
             System.out.println("" + to_customers.location);
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_suppliers.class, "Successfully Updated");
+            Lg.s(Suppliers.class, "Successfully Updated");
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -140,7 +140,7 @@ public class S1_suppliers {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_suppliers.class, "Successfully Deleted");
+            Lg.s(Suppliers.class, "Successfully Deleted");
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

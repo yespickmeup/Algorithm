@@ -11,7 +11,7 @@ import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.returns.Return_to_supplier_items.to_return_to_supplier_items;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -715,15 +715,15 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
+    List<Suppliers.to_suppliers> supplier_list = new ArrayList();
     
     private void init_suppliers() {
         String search = tf_supplier.getText();
         supplier_list.clear();
-        supplier_list = S1_suppliers.ret_data(search);
+        supplier_list = Suppliers.ret_data(search);
         Object[][] obj = new Object[supplier_list.size()][2];
         int i = 0;
-        for (S1_suppliers.to_suppliers to : supplier_list) {
+        for (Suppliers.to_suppliers to : supplier_list) {
             obj[i][0] = " " + to.customer_no;
             obj[i][1] = " " + to.customer_name;
             i++;
@@ -737,7 +737,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_suppliers.to_suppliers to = supplier_list.get(data.selected_row);
+                Suppliers.to_suppliers to = supplier_list.get(data.selected_row);
                 Field.Combo supp = (Field.Combo) tf_supplier;
                 supp.setText(to.customer_name);
                 supp.setId(to.customer_no);

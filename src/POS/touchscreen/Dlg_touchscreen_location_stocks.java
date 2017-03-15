@@ -309,7 +309,7 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        disposed();
+        ok();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -335,10 +335,16 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
         init_tbl_branches();
     }
 
+    private void ok() {
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData());
+        }
+    }
+
     public void do_pass(String barcode) {
 
         String where = " where main_barcode= '" + barcode + "' order by branch,location,barcode asc";
-        List<Inventory_barcodes.to_inventory_barcodes> locations = Inventory_barcodes.ret_where_list(where,"");
+        List<Inventory_barcodes.to_inventory_barcodes> locations = Inventory_barcodes.ret_where_list(where, "");
         loadData_inventory_barcodes(locations);
 
         String where2 = "";
@@ -368,7 +374,7 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
 
         Branches.to_branches b = new Branches.to_branches(0, "", "ALL", FitIn.fmt_woc(total_qty), 0);
         new_branches.add(b);
-        
+
         loadData_branches(new_branches);
         jLabel3.setText(FitIn.fmt_woc(total_qty));
     }
@@ -380,12 +386,11 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                btn_0.doClick();
-                disposed();
+                ok();
             }
         });
     }

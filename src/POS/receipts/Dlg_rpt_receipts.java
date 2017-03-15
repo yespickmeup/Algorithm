@@ -7,7 +7,7 @@ package POS.receipts;
 import POS.main.Main;
 import POS.receipts.S1_receipt_items.to_receipt_items;
 import POS.receipts.Receipts.to_receipts;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -530,7 +530,7 @@ public class Dlg_rpt_receipts extends javax.swing.JDialog {
     }
 
     private void init_cb() {
-        cb_cashier.setModel(new ListComboBoxModel(S1_suppliers.ret_cb_data()));
+        cb_cashier.setModel(new ListComboBoxModel(Suppliers.ret_cb_data()));
     }
 
     public void do_pass() {

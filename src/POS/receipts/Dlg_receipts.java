@@ -17,7 +17,7 @@ import POS.purchase_order.Purchase_order;
 import POS.purchase_order.Purchase_order_item;
 import POS.receipts.S1_receipt_orders.to_receipt_items;
 import POS.receipts.Receipts.to_receipts;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.users.S1_user_previleges;
 import POS.util.*;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -2316,15 +2316,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     }
 
-    List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
+    List<Suppliers.to_suppliers> supplier_list = new ArrayList();
 
     private void init_suppliers() {
         String search = tf_supplier.getText();
         supplier_list.clear();
-        supplier_list = S1_suppliers.ret_data(search);
+        supplier_list = Suppliers.ret_data(search);
         Object[][] obj = new Object[supplier_list.size()][2];
         int i = 0;
-        for (S1_suppliers.to_suppliers to : supplier_list) {
+        for (Suppliers.to_suppliers to : supplier_list) {
             obj[i][0] = to.customer_no;
             obj[i][1] = to.customer_name;
             i++;
@@ -2338,7 +2338,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_suppliers.to_suppliers to = supplier_list.
+                Suppliers.to_suppliers to = supplier_list.
                         get(data.selected_row);
                 tf_supplier.setText(to.customer_name);
                 tf_supplier_id.setText(to.customer_no);

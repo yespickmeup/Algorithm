@@ -5,7 +5,7 @@
 package POS.zbak_accounts_payable;
 
 import POS.main.Main.MyDB;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -136,7 +136,7 @@ public class S1_accounts_payable_payments {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_accounts_payable_payments.class, "Successfully Added");
-            S1_suppliers.to_suppliers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
+            Suppliers.to_suppliers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
             double new_balance = cus.balance - to_accounts_receivable_payments.amount;
 //            JOptionPane.showMessageDialog(null, cus.balance + " "+to_accounts_receivable_payments.amount);
             
@@ -157,8 +157,8 @@ public class S1_accounts_payable_payments {
         }
     }
 
-    public static S1_suppliers.to_suppliers ret_customer_balance(String account_id) {
-        S1_suppliers.to_suppliers to1 = null;
+    public static Suppliers.to_suppliers ret_customer_balance(String account_id) {
+        Suppliers.to_suppliers to1 = null;
 
         try {
             Connection conn = MyConnection.connect();
@@ -191,7 +191,7 @@ public class S1_accounts_payable_payments {
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
 
-                to1 = new S1_suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
             }
             return to1;
         } catch (Exception e) {

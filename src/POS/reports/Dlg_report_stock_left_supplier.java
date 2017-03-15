@@ -6,7 +6,7 @@ package POS.reports;
 
 import POS.category.S1_inv_categories;
 import POS.main.Main;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.users.S1_users;
 import POS.util.DateType;
 import POS.util.Users;
@@ -359,7 +359,7 @@ public class Dlg_report_stock_left_supplier extends javax.swing.JDialog {
     }
 
     private void init_category() {
-        cb_supplier.setModel(new ListComboBoxModel(S1_suppliers.
+        cb_supplier.setModel(new ListComboBoxModel(Suppliers.
                 ret_cb_data()));
 
     }

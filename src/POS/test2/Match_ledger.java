@@ -7,7 +7,7 @@ package POS.test2;
 
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,7 +77,7 @@ public class Match_ledger {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(S1_suppliers.class, "Successfully Updated");
+            Lg.s(Suppliers.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

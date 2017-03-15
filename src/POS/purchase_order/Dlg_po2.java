@@ -17,7 +17,7 @@ import POS.receipts.Receipts;
 import POS.receipts.S1_receipt_orders;
 import POS.receipts.Srpt_receipts;
 
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -1500,16 +1500,16 @@ public class Dlg_po2 extends javax.swing.JDialog {
     }
     // </editor-fold>
 
-    List<S1_suppliers.to_suppliers> supplier_list = new ArrayList();
+    List<Suppliers.to_suppliers> supplier_list = new ArrayList();
 
     private void init_suppliers() {
         final Field.Combo supp = (Field.Combo) tf_supplier;
         String search = tf_supplier.getText();
         supplier_list.clear();
-        supplier_list = S1_suppliers.ret_data(search);
+        supplier_list = Suppliers.ret_data(search);
         Object[][] obj = new Object[supplier_list.size()][3];
         int i = 0;
-        for (S1_suppliers.to_suppliers to : supplier_list) {
+        for (Suppliers.to_suppliers to : supplier_list) {
             obj[i][0] = " " + to.customer_no;
             obj[i][1] = " " + to.customer_name;
             obj[i][2] = " " + FitIn.fmt_woc_0(to.balance);
@@ -1524,7 +1524,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
-                S1_suppliers.to_suppliers to = supplier_list.get(data.selected_row);
+                Suppliers.to_suppliers to = supplier_list.get(data.selected_row);
                 supp.setText(to.customer_name);
                 supp.setId(to.customer_no);
                 tf_remarks3.setText(FitIn.fmt_wc_0(to.balance));
@@ -2412,9 +2412,9 @@ public class Dlg_po2 extends javax.swing.JDialog {
             sup.setId(order.supplier_id);
 
             String where2 = " where customer_no='" + order.supplier_id + "' ";
-            List<S1_suppliers.to_suppliers> suppliers = S1_suppliers.ret_data2(where2);
+            List<Suppliers.to_suppliers> suppliers = Suppliers.ret_data2(where2);
             if (!suppliers.isEmpty()) {
-                S1_suppliers.to_suppliers su = (S1_suppliers.to_suppliers) suppliers.get(0);
+                Suppliers.to_suppliers su = (Suppliers.to_suppliers) suppliers.get(0);
                 tf_remarks3.setText(FitIn.fmt_wc_0(su.balance));
                 tf_remarks1.setText(su.address);
                 tf_remarks2.setText(su.contact_no);

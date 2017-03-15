@@ -3255,19 +3255,19 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     if (row < 0) {
                         return;
                     }
-                    tbl_orders.setColumnSelectionInterval(3, 3);
-                    update_item();
-
+                    delete_item();
+                    e.consume();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    int row = tbl_orders.getSelectedRow();
-                    if (row < 0) {
-                        return;
-                    }
-                    tbl_orders.setColumnSelectionInterval(row, 4);
+
                     update_item();
                     e.consume();
 
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    tbl_orders.clearSelection();
+                    tf_search.grabFocus();
+                    tf_search.selectAll();
                 }
             }
         });
@@ -3447,20 +3447,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     jProgressBar1.setString("Finished...");
                     jProgressBar1.setIndeterminate(false);
                     tf_search.grabFocus();
-
-                    return;
-                }
-                if (tbl_items_ALM.size() == 1) {
-                    tbl_items.setRowSelectionInterval(0, 0);
-                    select_item();
-                }
-                if (tbl_items_ALM.isEmpty()) {
-                    Alert.set(0, "Item not Found!");
-                    tf_search.setEnabled(true);
-                    tf_search.grabFocus();
                     tf_search.selectAll();
                     return;
                 }
+                if (tbl_items_ALM.size() == 1) {
+
+                    tbl_items.setRowSelectionInterval(0, 0);
+                    select_item();
+
+                }
+
                 tf_search.setEnabled(true);
                 tf_search.grabFocus();
                 tf_search.selectAll();
@@ -3856,76 +3852,45 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //        } else {
 //
 //        }
-        if (to.selling_type == 0) {
-            int col = tbl_items.getSelectedColumn();
-            if (col == 4) {
-                String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-                List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-                int exists = 0;
-                for (S1_user_previleges.to_user_previleges to1 : datas) {
-                    if (to1.previledge.equalsIgnoreCase("Inventory Update Item Pricing")) {
-                        exists = 1;
-                        break;
-                    }
+        int col = tbl_items.getSelectedColumn();
+
+        if (col == 4) {
+            String where = " where user_name='" + Users.user_name + "' order by previledge asc";
+            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+            int exists = 0;
+            for (S1_user_previleges.to_user_previleges to1 : datas) {
+                if (to1.previledge.equalsIgnoreCase("Inventory Update Item Pricing")) {
+                    exists = 1;
+                    break;
                 }
+            }
 
-                if (exists == 1) {
-                    Window p = (Window) this;
-                    Dlg_touchscreen_update_price nd = Dlg_touchscreen_update_price.create(p, true);
-                    nd.setTitle("");
-                    nd.do_pass(to.selling_price);
-                    nd.setCallback(new Dlg_touchscreen_update_price.Callback() {
-
-                        @Override
-                        public void ok(CloseDialog closeDialog, Dlg_touchscreen_update_price.OutputData data) {
-                            closeDialog.ok();
-                            String uoms = "";
-                            double new_price = data.selling_price;
-                            String unit = to.unit;
-                            String[] list = unit.split(",");
-                            int index = 0;
-                            for (String s : list) {
-                                int i = s.indexOf(":");
-                                int ii = s.indexOf("/");
-                                int iii = s.indexOf("^");
-                                String uom = s.substring(1, i);
-                                double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                                double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
-                                int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-
-                                if (is_default == 1) {
-                                    selling_price = data.selling_price;
-                                }
-                                if (index == 0) {
-                                    uoms = "[" + uom + ":" + new_price + "/" + conversion + "^" + is_default + "]";
-                                } else {
-                                    uoms = uoms + ",[" + uom + ":" + selling_price + "/" + conversion + "^" + is_default + "]";
-                                }
-                                index++;
-                            }
-                            Inventory.update_price(to.main_barcode, data.selling_price, uoms);
-                            data_cols();
-                            tbl_items.setRowSelectionInterval(row, row);
-                        }
-                    });
-                    nd.setLocationRelativeTo(jScrollPane3);
-                    nd.setVisible(true);
-                }
-
-            } else if (col == 5) {
-                Window p = (Window) this;
-                Dlg_touchscreen_location_stocks nd = Dlg_touchscreen_location_stocks.create(p, true);
-                nd.setTitle("");
-                nd.do_pass(to.main_barcode);
-                nd.setCallback(new Dlg_touchscreen_location_stocks.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_touchscreen_location_stocks.OutputData data) {
-                        closeDialog.ok();
-                    }
-                });
-                nd.setLocationRelativeTo(jScrollPane3);
-                nd.setVisible(true);
+            if (exists == 1) {
+                update_pricing(to, row);
             } else {
+                tbl_items.clearSelection();
+                tf_search.selectAll();
+                tf_search.grabFocus();
+            }
+
+        } else if (col == 5) {
+            Window p = (Window) this;
+            Dlg_touchscreen_location_stocks nd = Dlg_touchscreen_location_stocks.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.main_barcode);
+            nd.setCallback(new Dlg_touchscreen_location_stocks.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_location_stocks.OutputData data) {
+                    closeDialog.ok();
+                    tbl_items.clearSelection();
+                    tf_search.selectAll();
+                    tf_search.grabFocus();
+                }
+            });
+            nd.setLocationRelativeTo(jScrollPane3);
+            nd.setVisible(true);
+        } else {
+            if (to.selling_type == 0) {
                 String detail = "Description: " + to.description + "\n";
                 detail = detail + "Category: " + to.category + "\n";
                 detail = detail + "Classification: " + to.classification + "\n";
@@ -3963,78 +3928,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 cardLayout.show(jPanel13, "1");
                 tbl_uom.grabFocus();
                 jButton43.setText("Add Order");
-            }
-        } else {
-            int col = tbl_items.getSelectedColumn();
-            if (col == 4) {
-                String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-                List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-                int exists = 0;
-                for (S1_user_previleges.to_user_previleges to1 : datas) {
-                    if (to1.previledge.equalsIgnoreCase("Inventory Update Item Pricing")) {
-                        exists = 1;
-                        break;
-                    }
+
+                String auto_order = System.getProperty("auto_order", "false");
+                if (auto_order.equals("true")) {
+                    add_order();
                 }
-
-                if (exists == 1) {
-                    Window p = (Window) this;
-                    Dlg_touchscreen_update_price nd = Dlg_touchscreen_update_price.create(p, true);
-                    nd.setTitle("");
-                    nd.do_pass(to.selling_price);
-                    nd.setCallback(new Dlg_touchscreen_update_price.Callback() {
-
-                        @Override
-                        public void ok(CloseDialog closeDialog, Dlg_touchscreen_update_price.OutputData data) {
-                            closeDialog.ok();
-                            String uoms = "";
-                            double new_price = data.selling_price;
-                            String unit = to.unit;
-                            String[] list = unit.split(",");
-                            int index = 0;
-                            for (String s : list) {
-                                int i = s.indexOf(":");
-                                int ii = s.indexOf("/");
-                                int iii = s.indexOf("^");
-                                String uom = s.substring(1, i);
-                                double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                                double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
-                                int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-
-                                if (is_default == 1) {
-                                    selling_price = data.selling_price;
-                                }
-                                if (index == 0) {
-                                    uoms = "[" + uom + ":" + new_price + "/" + conversion + "^" + is_default + "]";
-                                } else {
-                                    uoms = uoms + ",[" + uom + ":" + selling_price + "/" + conversion + "^" + is_default + "]";
-                                }
-                                index++;
-                            }
-
-                            Inventory.update_price(to.main_barcode, data.selling_price, uoms);
-                            data_cols();
-                            tbl_items.setRowSelectionInterval(row, row);
-
-                        }
-                    });
-                    nd.setLocationRelativeTo(jScrollPane3);
-                    nd.setVisible(true);
-                }
-
-            } else if (col == 5) {
-                Window p = (Window) this;
-                Dlg_touchscreen_location_stocks nd = Dlg_touchscreen_location_stocks.create(p, true);
-                nd.setTitle("");
-                nd.do_pass(to.main_barcode);
-                nd.setCallback(new Dlg_touchscreen_location_stocks.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_touchscreen_location_stocks.OutputData data) {
-                        closeDialog.ok();
-                    }
-                });
-                nd.setLocationRelativeTo(jScrollPane3);
-                nd.setVisible(true);
             } else {
                 Window p = (Window) this;
                 Dlg_inventory_assembly nd = Dlg_inventory_assembly.create(p, true);
@@ -4052,7 +3950,55 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 nd.setLocationRelativeTo(this);
                 nd.setVisible(true);
             }
+
         }
+
+    }
+
+    private void update_pricing(final Inventory_barcodes.to_inventory_barcodes to, final int row) {
+        Window p = (Window) this;
+        Dlg_touchscreen_update_price nd = Dlg_touchscreen_update_price.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to.selling_price);
+        nd.setCallback(new Dlg_touchscreen_update_price.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_update_price.OutputData data) {
+                closeDialog.ok();
+                String uoms = "";
+                double new_price = data.selling_price;
+                String unit = to.unit;
+                String[] list = unit.split(",");
+                int index = 0;
+                for (String s : list) {
+                    int i = s.indexOf(":");
+                    int ii = s.indexOf("/");
+                    int iii = s.indexOf("^");
+                    String uom = s.substring(1, i);
+                    double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                    double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+                    int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+
+                    if (is_default == 1) {
+                        selling_price = data.selling_price;
+                    }
+                    if (index == 0) {
+                        uoms = "[" + uom + ":" + new_price + "/" + conversion + "^" + is_default + "]";
+                    } else {
+                        uoms = uoms + ",[" + uom + ":" + selling_price + "/" + conversion + "^" + is_default + "]";
+                    }
+                    index++;
+                }
+
+                Inventory.update_price(to.main_barcode, data.selling_price, uoms);
+                data_cols();
+                tbl_items.clearSelection();
+                tf_search.selectAll();
+                tf_search.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(jScrollPane3);
+        nd.setVisible(true);
     }
 
     private void add_order() {
@@ -4118,7 +4064,27 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             double addtl_cash = FitIn.toDouble(tf_addtl_cash.getText());
             double wtax = FitIn.toDouble(tf_wtax.getText());
             Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax);
-            tbl_orders_ALM.add(order);
+            List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
+            int order_exists = 0;
+            int order_row = 0;
+
+            for (Inventory_barcodes.to_inventory_barcodes my_order : orders) {
+                if (my_order.main_barcode.equals(main_barcode) && my_order.selling_price == selling_price) {
+
+                    order_exists = 1;
+                    break;
+                }
+                order_row++;
+            }
+            if (order_exists == 1) {
+
+                Inventory_barcodes.to_inventory_barcodes oorder = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(order_row);
+                double new_qty = product_qty + oorder.product_qty;
+                oorder.setProduct_qty(new_qty);
+            } else {
+                tbl_orders_ALM.add(order);
+            }
+
             tbl_orders_M.fireTableDataChanged();
             compute_total();
             lbl_qty.setText("1");
@@ -4943,59 +4909,59 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         lbl_p_change.setText(FitIn.fmt_wc_0(change));
     }
 
+    private void delete_item() {
+        int row = tbl_orders.getSelectedRow();
+        Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
+        Label.Item_discount serial = (Label.Item_discount) jLabel47;
+        tbl_orders_ALM.remove(row);
+        tbl_orders_M.fireTableDataChanged();
+        compute_total();
+        lbl_qty.setText("1");
+        cardLayout.show(jPanel13, "2");
+        lbl.clearAll();
+        lbl_item_discount.setText("");
+        tf_addtl_cash.setText("");
+        tf_wtax.setText("");
+        serial.setDiscount_customer_id("");
+        tf_search.grabFocus();
+    }
+
     private void update_item() {
         int row = tbl_orders.getSelectedRow();
         if (row < 0) {
             return;
         }
-        int col = tbl_orders.getSelectedColumn();
-        if (col == 3) {
-            Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
-            Label.Item_discount serial = (Label.Item_discount) jLabel47;
-            tbl_orders_ALM.remove(row);
-            tbl_orders_M.fireTableDataChanged();
-            compute_total();
-            lbl_qty.setText("1");
-            cardLayout.show(jPanel13, "2");
-            lbl.clearAll();
-            lbl_item_discount.setText("");
-            tf_addtl_cash.setText("");
-            tf_wtax.setText("");
-            serial.setDiscount_customer_id("");
-            tf_search.grabFocus();
-        } else {
-            Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(row);
-            Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
-            Label.Item_discount serial = (Label.Item_discount) jLabel47;
-
-            String detail = "Description: " + to.description + "\n";
-            detail = detail + "Category: " + to.category + "\n";
-            detail = detail + "Classification: " + to.classification + "\n";
-            detail = detail + "Sub-Classification: " + to.sub_classification + "\n";
-            detail = detail + "Brand: " + to.brand + "\n";
-            detail = detail + "Model: " + to.model + "\n";
-            detail = detail + "Supplier: " + to.supplier + "\n";
-            jXLabel1.setText(detail);
-            jButton43.setText("Update Order");
-            lbl_qty.setText(FitIn.fmt_woc(to.product_qty));
-            lbl.setDiscount_amount(to.discount_amount);
-            lbl.setDiscount_name(to.discount_name);
-            lbl.setDiscount_rate(to.discount);
-            lbl.setDiscount_customer_name(to.discount_customer_name);
-            lbl.setDiscount_customer_id(to.discount_customer_id);
-            serial.setDiscount_customer_id(to.serial_no);
-            lbl_item_discount.setText(FitIn.fmt_wc_0(to.discount_amount));
-            tf_addtl_cash.setText(FitIn.fmt_wc_0(to.addtl_amount));
-            tf_wtax.setText(FitIn.fmt_wc_0(to.wtax));
-            Dlg_inventory_uom.to_uom um1 = uom.default_uom(to.unit);
-            S1_unit_of_measure.to_uom um2 = new to_uom(um1.uom, um1.selling_price, um1.conversion, um1.is_default);
-            tbl_uom_ALM.clear();
-            tbl_uom_ALM.add(um2);
-            tbl_uom_M.fireTableDataChanged();
-            tbl_uom.setRowSelectionInterval(0, 0);
-            cardLayout.show(jPanel13, "1");
-            tbl_uom.grabFocus();
-        }
+        Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(row);
+        Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
+        Label.Item_discount serial = (Label.Item_discount) jLabel47;
+        
+        String detail = "Description: " + to.description + "\n";
+        detail = detail + "Category: " + to.category + "\n";
+        detail = detail + "Classification: " + to.classification + "\n";
+        detail = detail + "Sub-Classification: " + to.sub_classification + "\n";
+        detail = detail + "Brand: " + to.brand + "\n";
+        detail = detail + "Model: " + to.model + "\n";
+        detail = detail + "Supplier: " + to.supplier + "\n";
+        jXLabel1.setText(detail);
+        jButton43.setText("Update Order");
+        lbl_qty.setText(FitIn.fmt_woc(to.product_qty));
+        lbl.setDiscount_amount(to.discount_amount);
+        lbl.setDiscount_name(to.discount_name);
+        lbl.setDiscount_rate(to.discount);
+        lbl.setDiscount_customer_name(to.discount_customer_name);
+        lbl.setDiscount_customer_id(to.discount_customer_id);
+        serial.setDiscount_customer_id(to.serial_no);
+        lbl_item_discount.setText(FitIn.fmt_wc_0(to.discount_amount));
+        tf_addtl_cash.setText(FitIn.fmt_wc_0(to.addtl_amount));
+        tf_wtax.setText(FitIn.fmt_wc_0(to.wtax));
+        Dlg_inventory_uom.to_uom um1 = uom.default_uom(to.unit);
+        S1_unit_of_measure.to_uom um2 = new to_uom(um1.uom, um1.selling_price, um1.conversion, um1.is_default);
+        tbl_uom_ALM.clear();
+        tbl_uom_ALM.add(um2);
+        tbl_uom_M.fireTableDataChanged();
+        tbl_uom.setRowSelectionInterval(0, 0);
+        cardLayout.show(jPanel13, "1");
+        tbl_uom.grabFocus();
     }
 
     private void warning() {

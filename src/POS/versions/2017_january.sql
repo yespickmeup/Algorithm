@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,12 +18,6 @@ alter table accounts_payable add location varchar(255);
 alter table accounts_payable add location_id varchar(255);
 
 
-
-
-alter table accounts_payable add branch varchar(255);
-alter table accounts_payable add branch_id varchar(255);
-alter table accounts_payable add location varchar(255);
-alter table accounts_payable add location_id varchar(255);
 
 
 drop table if exists return_to_suppliers;
@@ -144,7 +138,7 @@ id int auto_increment primary key
 ,serial_no varchar(255)
 ,main_barcode varchar(255)
 ,qty double
-,cost double    
+,cost double
 ,status int
 ,branch varchar(255)
 ,branch_id varchar(255)

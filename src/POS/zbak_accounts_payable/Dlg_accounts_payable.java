@@ -6,7 +6,7 @@ package POS.zbak_accounts_payable;
 
 import POS.zbak_accounts_payable.Accounts_payable.to_accounts_payable;
 import POS.main.Main;
-import POS.suppliers.S1_suppliers;
+import POS.suppliers.Suppliers;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.TextHighlighter1;
@@ -670,7 +670,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
     }
 
-    private void loadData_customers(List<S1_suppliers.to_suppliers> acc) {
+    private void loadData_customers(List<Suppliers.to_suppliers> acc) {
         tbl_customers_ALM.clear();
         tbl_customers_ALM.addAll(acc);
 
@@ -702,7 +702,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            S1_suppliers.to_suppliers tt = (S1_suppliers.to_suppliers) getRow(row);
+            Suppliers.to_suppliers tt = (Suppliers.to_suppliers) getRow(row);
             switch (col) {
                 case 0:
                     return tt.id;
@@ -730,11 +730,11 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
     private void data_cols() {
         String search = tf_search.getText();
-        loadData_customers(S1_suppliers.ret_data(search));
+        loadData_customers(Suppliers.ret_data(search));
 
-        List<S1_suppliers.to_suppliers> datas = tbl_customers_ALM;
+        List<Suppliers.to_suppliers> datas = tbl_customers_ALM;
         double total = 0;
-        for (S1_suppliers.to_suppliers t : datas) {
+        for (Suppliers.to_suppliers t : datas) {
             total += t.balance;
         }
         lbl_total.setText(FitIn.fmt_wc_0(total));
@@ -890,7 +890,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             return;
         }
 
-        S1_suppliers.to_suppliers to = (S1_suppliers.to_suppliers) tbl_customers_ALM.
+        Suppliers.to_suppliers to = (Suppliers.to_suppliers) tbl_customers_ALM.
                 get(tbl_customers.convertRowIndexToModel(row));
         loadData_accounts_receivable(Accounts_payable.ret_data(to.customer_no));
 

@@ -832,7 +832,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
     // </editor-fold>
 
     private void init_no() {
-        tf_customer_no.setText(S1_suppliers.increment_id());
+        tf_customer_no.setText(Suppliers.increment_id());
     }
 
     public void do_pass() {
@@ -905,7 +905,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_customers, 5);
     }
 
-    private void loadData_customers(List<S1_suppliers.to_suppliers> acc) {
+    private void loadData_customers(List<Suppliers.to_suppliers> acc) {
         tbl_customers_ALM.clear();
         tbl_customers_ALM.addAll(acc);
     }
@@ -936,7 +936,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            S1_suppliers.to_suppliers tt = (S1_suppliers.to_suppliers) getRow(row);
+            Suppliers.to_suppliers tt = (Suppliers.to_suppliers) getRow(row);
             switch (col) {
                 case 0:
                     return " " + tt.customer_no;
@@ -958,14 +958,14 @@ public class Dlg_suppliers extends javax.swing.JDialog {
 
     private void data_cols() {
         String search = tf_search.getText();
-        loadData_customers(S1_suppliers.ret_data(search));
+        loadData_customers(Suppliers.ret_data(search));
         jLabel12.setText("" + tbl_customers_ALM.size());
     }
 
     private void add_customers() {
         int id = -1;
         String customer_name = tf_customer_name.getText();
-        String customer_no = S1_suppliers.increment_id();
+        String customer_no = Suppliers.increment_id();
         String contact_no = tf_contact_no.getText();
         double credit_limit = FitIn.toDouble(tf_credit_limit.getText());
         String address = tf_address.getText();
@@ -973,8 +973,8 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         String location = tf_location.getText();
         double balance = 0;
         double discount = FitIn.toDouble(tf_discount.getText());
-        S1_suppliers.to_suppliers to = new S1_suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
-        S1_suppliers.add_customers(to);
+        Suppliers.to_suppliers to = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+        Suppliers.add_customers(to);
         data_cols();
         clear_customers();
         init_no();
@@ -985,7 +985,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        S1_suppliers.to_suppliers to = (S1_suppliers.to_suppliers) tbl_customers_ALM.get(tbl_customers.
+        Suppliers.to_suppliers to = (Suppliers.to_suppliers) tbl_customers_ALM.get(tbl_customers.
                 convertRowIndexToModel(row));
         tf_customer_name.setText(to.customer_name);
         tf_customer_no.setText(to.customer_no);
@@ -1002,7 +1002,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        S1_suppliers.to_suppliers to = (S1_suppliers.to_suppliers) tbl_customers_ALM.get(tbl_customers.
+        Suppliers.to_suppliers to = (Suppliers.to_suppliers) tbl_customers_ALM.get(tbl_customers.
                 convertRowIndexToModel(row));
         int id = to.id;
         String customer_name = tf_customer_name.getText();
@@ -1014,8 +1014,8 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         String location = tf_location.getText();
         double balance = 0;
         double discount = FitIn.toDouble(tf_discount.getText());
-        S1_suppliers.to_suppliers to1 = new S1_suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
-        S1_suppliers.edit_customers(to1);
+        Suppliers.to_suppliers to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+        Suppliers.edit_customers(to1);
         data_cols();
         clear_customers();
     }
@@ -1035,9 +1035,9 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        S1_suppliers.to_suppliers to = (S1_suppliers.to_suppliers) tbl_customers_ALM.
+        Suppliers.to_suppliers to = (Suppliers.to_suppliers) tbl_customers_ALM.
                 get(tbl_customers.convertRowIndexToModel(row));
-        S1_suppliers.delete_customers(to);
+        Suppliers.delete_customers(to);
         data_cols();
         clear_customers();
         init_no();
@@ -1054,7 +1054,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        S1_suppliers.to_suppliers to = (S1_suppliers.to_suppliers) tbl_customers_ALM.get(tbl_customers.convertRowIndexToModel(row));
+        Suppliers.to_suppliers to = (Suppliers.to_suppliers) tbl_customers_ALM.get(tbl_customers.convertRowIndexToModel(row));
         Window p = (Window) this;
         Dlg_report_item_receipts nd = Dlg_report_item_receipts.create(p, true);
         nd.setTitle("");

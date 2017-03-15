@@ -1102,16 +1102,28 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
     private void data_cols_adjustments() {
 
-        String date_from = synsoftech.util.DateType.sf.format(jDateChooser1.getDate());
-        String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
-        String where = " ";
-        if (!jCheckBox3.isSelected()) {
-            where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-        }
-        where = where + " order by id desc ";
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
 
-        List<to_adjustments> datas = S1_adjustments.ret_data(where);
-        loadData_adjustments(datas);
+            @Override
+            public void run() {
+                String date_from = synsoftech.util.DateType.sf.format(jDateChooser1.getDate());
+                String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
+                String where = " ";
+                if (!jCheckBox3.isSelected()) {
+                    where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                }
+                where = where + " order by id desc ";
+
+                List<to_adjustments> datas = S1_adjustments.ret_data(where);
+                loadData_adjustments(datas);
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+            }
+        });
+        t.start();
+
     }
 //</editor-fold> 
 
