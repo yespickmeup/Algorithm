@@ -8,6 +8,27 @@
  * Created: Mar 13, 2017
  */
 
+drop table if exists loading_list;
+create table loading_list(
+id int auto_increment primary key
+,loading_list_no varchar(255)
+,user_id varchar(255)
+,user_screen_name varchar(255)
+,date_added datetime
+,stock_transfer_nos text
+,remarks varchar(255)
+,status int
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+,vehicle varchar(255)
+,driver varchar(255)
+);
+
+
+
+
 alter table accounts_payable  change ar_no ap_no varchar(255);
 alter table accounts_payable  change or_no reference_no varchar(255);
 alter table accounts_payable add user_id varchar(255) after or_no;
@@ -30,6 +51,7 @@ alter table accounts_payable_payments add branch varchar(255);
 alter table accounts_payable_payments add branch_id varchar(255);
 alter table accounts_payable_payments add location varchar(255);
 alter table accounts_payable_payments add location_id varchar(255);
+
 
 
 

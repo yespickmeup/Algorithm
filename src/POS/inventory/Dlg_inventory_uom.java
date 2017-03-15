@@ -391,7 +391,7 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_unitMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       ok();
+        ok();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -471,7 +471,7 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
 
         }
         loadData_uom(datas);
-        jLabel5.setText(""+tbl_uom_ALM.size());
+        jLabel5.setText("" + tbl_uom_ALM.size());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -481,7 +481,7 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -650,7 +650,8 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
 
     private void add_uom() {
         int id = 0;
-        String uom = tf_unit.getText();      
+        String uom = tf_unit.getText();
+        uom = uom.replaceAll("/", "̸");
         double conversion = FitIn.toDouble(tf_conversion.getText());
         double selling_price = FitIn.toDouble(tf_selling_price.getText());
         to_uom to = new to_uom(id, uom, conversion, selling_price, 0);
@@ -670,6 +671,7 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
         to_uom to = (to_uom) tbl_uom_ALM.get(row);
         int id = 0;
         String uom = tf_unit.getText();
+        uom = uom.replaceAll("/", "̸");
         double conversion = FitIn.toDouble(tf_conversion.getText());
         double selling_price = FitIn.toDouble(tf_selling_price.getText());
         to.setUom(uom);
