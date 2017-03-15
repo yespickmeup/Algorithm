@@ -385,9 +385,9 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
             double wtax = my_wtax;
             double gross_total = to.product_qty * to.selling_price;
             double net_total = tots + wtax;
-             String serial_no=to.serial_no.replaceAll("\n", ", ");
-            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total
-                    ,serial_no);
+            String serial_no = to.serial_no.replaceAll("\n", ", ");
+            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total,
+                     serial_no);
             fields.add(field);
         }
         init_report(fields, sale_discount, net_totals, sales);
@@ -419,18 +419,18 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
             double wtax = my_wtax;
             double gross_total = to.product_qty * to.selling_price;
             double net_total = tots + wtax;
-            String serial_no=to.serial_no.replaceAll("\n", ", ");
-            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total
-                    , net_total,serial_no);
+            String serial_no = to.serial_no.replaceAll("\n", ", ");
+            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total,
+                     net_total, serial_no);
             fields.add(field);
         }
         init_report(fields, sale_discount, net_totals, sales);
 
     }
 
-    public void do_pass3(List<Charge_in_advance_items.to_charge_in_advance_items> datas, double sale_discount
-        ,double net_totals, String sales_no,String date_added,String remarkss,String customer_names) {
-        List<Delivery_receipt.field> fields = new ArrayList();      
+    public void do_pass3(List<Charge_in_advance_items.to_charge_in_advance_items> datas, double sale_discount,
+             double net_totals, String sales_no, String date_added, String remarkss, String customer_names) {
+        List<Delivery_receipt.field> fields = new ArrayList();
         for (Charge_in_advance_items.to_charge_in_advance_items to : datas) {
             double qty = to.product_qty;
             String item_code = to.item_code;
@@ -451,14 +451,14 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
             double wtax = my_wtax;
             double gross_total = to.product_qty * to.selling_price;
             double net_total = tots + wtax;
-            net_totals+=net_total;
-             String serial_no=to.serial_no.replaceAll("\n", ", ");
-            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total
-                    , net_total,serial_no);
+            net_totals += net_total;
+            String serial_no = to.serial_no.replaceAll("\n", ", ");
+            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total,
+                     net_total, serial_no);
             fields.add(field);
         }
-        init_report2(fields, sale_discount, net_totals, sales_no,date_added,remarkss,customer_names);
-        
+        init_report2(fields, sale_discount, net_totals, sales_no, date_added, remarkss, customer_names);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -468,7 +468,7 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -501,8 +501,13 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
                 String approved_by = "";
                 String customer_name = sales.customer_name;
                 String customer_address = "";
-                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total
-                        , customer_name, customer_address);
+                String pool_db = System.getProperty("pool_db", "db_smis");
+                String title = "Delivery Receipt";
+                if (pool_db.equalsIgnoreCase("db_smis_siaton")) {
+                    title = "Authority to Withdraw";
+                }
+                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total,
+                         customer_name, customer_address, title);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
                 report_sales_items(rpt, jrxml);
@@ -546,8 +551,13 @@ public class Dlg_delivery_print_preview extends javax.swing.JDialog {
                 String approved_by = "";
                 String customer_name = customer_names;
                 String customer_address = "";
-                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total
-                        , customer_name, customer_address);
+                String pool_db = System.getProperty("pool_db", "db_smis");
+                String title = "Delivery Receipt";
+                if (pool_db.equalsIgnoreCase("db_smis_siaton")) {
+                    title = "Authority to Withdraw";
+                }
+                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total,
+                         customer_name, customer_address, title);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
                 report_sales_items(rpt, jrxml);

@@ -23,7 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -925,7 +924,12 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
                     Delivery_receipt.field f = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax, gross_total, net_total1, serial_nos);
                     fields.add(f);
                 }
-                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
+                String pool_db = System.getProperty("pool_db", "db_smis");
+                String title = "Delivery Receipt";
+                if (pool_db.equalsIgnoreCase("db_smis_siaton")) {
+                    title = "Authority to Withdraw";
+                }
+                Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address, title);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_delivery_receipt.jrxml";
 

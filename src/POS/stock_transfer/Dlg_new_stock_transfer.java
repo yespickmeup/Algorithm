@@ -292,6 +292,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jPanel12 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
+        jPanel13 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
 
@@ -517,7 +518,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     .addComponent(tf_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -753,7 +754,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -934,7 +935,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGap(0, 654, Short.MAX_VALUE)
         );
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
@@ -983,6 +984,21 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Print Preview", jPanel8);
 
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 962, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 677, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Loading List", jPanel13);
+
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -993,7 +1009,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 728, Short.MAX_VALUE)
+            .addGap(0, 677, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -1197,6 +1213,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1230,7 +1247,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
         init_key();
         focus();
         init_tbl_stock_transfers();

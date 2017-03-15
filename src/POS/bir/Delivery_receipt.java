@@ -35,8 +35,8 @@ public class Delivery_receipt {
     public final double net_total;
     public final String customer_name;
     public final String customer_address;
-
-    public Delivery_receipt(String business_name, String address, String contact_no, String transaction_no, String date, String remarks, String prepared_by, String approved_by, double sale_discount, double net_total, String customer_name, String customer_address) {
+    public final String title;
+    public Delivery_receipt(String business_name, String address, String contact_no, String transaction_no, String date, String remarks, String prepared_by, String approved_by, double sale_discount, double net_total, String customer_name, String customer_address,String title) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -50,6 +50,7 @@ public class Delivery_receipt {
         this.net_total = net_total;
         this.customer_name = customer_name;
         this.customer_address = customer_address;
+        this.title=title;
     }
 
     public static class field {
@@ -218,7 +219,8 @@ public class Delivery_receipt {
         double net_total = 1000;
         String customer_name = "";
         String customer_address = "";
-        Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
+        String title="Delivery Receipt";
+        Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address,title);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_delivery_receipt.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

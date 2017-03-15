@@ -7,7 +7,6 @@ package POS.inventory_reports;
 
 import POS.bir.Delivery_receipt;
 import POS.inventory.Dlg_inventory_uom;
-import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
@@ -511,7 +510,7 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -597,8 +596,8 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
                             double wtax = my_wtax;
                             double gross_total = to.product_qty * to.selling_price;
                             double net_total = tots + wtax;
-                            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax
-                                    , gross_total, net_total,to.serial_no);
+                            Delivery_receipt.field field = new Delivery_receipt.field(qty, item_code, barcode, description, unit, price, line_discount, addtl_amount, wtax,
+                                     gross_total, net_total, to.serial_no);
                             fields.add(field);
                         }
                         double net_totals = to1.amount_due;
@@ -776,7 +775,12 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
         String approved_by = "";
         String customer_name = sales.customer_name;
         String customer_address = "";
-        Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address);
+        String pool_db = System.getProperty("pool_db", "db_smis");
+        String title = "Delivery Receipt";
+        if (pool_db.equalsIgnoreCase("db_smis_siaton")) {
+            title = "Authority to Withdraw";
+        }
+        Delivery_receipt rpt = new Delivery_receipt(business_name, address, contact_no, transaction_no, date, remarks, prepared_by, approved_by, sale_discount, net_total, customer_name, customer_address, title);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_delivery_receipt.jrxml";
 
@@ -797,7 +801,7 @@ public class Dlg_report_item_ledger_sales extends javax.swing.JDialog {
         try {
             if (jasperPrint != null) {
                 JasperPrintManager.printReport(jasperPrint, false);
-                
+
             }
         } catch (JRException e) {
             JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
