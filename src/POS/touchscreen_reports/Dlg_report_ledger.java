@@ -334,6 +334,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         });
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setFocusable(false);
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField1MouseClicked(evt);
@@ -476,19 +477,19 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_cashierMouseClicked
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        init_branches();
+        init_branch_locations();
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        init_branches();
+        init_branch_locations();
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        init_branch_locations();
+
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        init_branch_locations();
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
@@ -525,7 +526,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data2(where);
         branches_list = Branches.ret_where("");
-        
+
         Field.Combo user = (Field.Combo) tf_cashier;
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
@@ -542,6 +543,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         br.setText(to.branch);
         br.setId("" + to.branch_id);
+
+        String where = " order by branch,location asc  ";
+        branch_location_list = S1_branch_locations.ret_location_where(where);
     }
     List<Branches.to_branches> branches_list = new ArrayList();
 
@@ -578,20 +582,18 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private void init_branch_locations() {
         final Field.Combo br = (Field.Combo) jTextField2;
         final Field.Combo lo = (Field.Combo) jTextField1;
-        branch_location_list.clear();
-        String where = " where branch_id='" + br.getId() + "' ";
-        branch_location_list = S1_branch_locations.ret_location_where(where);
-        Object[][] obj = new Object[branch_location_list.size()][2];
+
+        Object[][] obj = new Object[branch_location_list.size()][1];
         int i = 0;
         for (S1_branch_locations.to_branch_locations to : branch_location_list) {
-            obj[i][0] = to.id;
-            obj[i][1] = to.location;
+            obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";
+
             i++;
         }
         JLabel[] labels = {};
-        int[] tbl_widths_customers = {0, 200};
+        int[] tbl_widths_customers = {lo.getWidth()};
         int width = 0;
-        String[] col_names = {"Code", "Location"};
+        String[] col_names = {"Code"};
         TableRenderer tr = new TableRenderer();
         TableRenderer.setPopup(lo, obj, labels, tbl_widths_customers, col_names);
         tr.setCallback(new TableRenderer.Callback() {
@@ -601,6 +603,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 lo.setText("" + to.location);
                 lo.setId("" + to.id);
 
+                Field.Combo branch = (Field.Combo) jTextField2;
+                branch.setText(to.branch);
+                branch.setId("" + to.branch_id);
             }
         });
     }
@@ -616,7 +621,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {

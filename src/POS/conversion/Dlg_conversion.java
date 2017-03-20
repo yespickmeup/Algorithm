@@ -1249,7 +1249,6 @@ public class Dlg_conversion extends javax.swing.JDialog {
         int i = 0;
         for (S1_branch_locations.to_branch_locations to : branch_location_list) {
             obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";//TextHighlighter1.highlight2(to.barcode, to.barcode, "");
-
             i++;
         }
 
