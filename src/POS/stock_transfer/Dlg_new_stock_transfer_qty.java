@@ -5,7 +5,6 @@
  */
 package POS.stock_transfer;
 
-import POS.inventory.Inventory_barcodes;
 import POS.unit_of_measure.S1_unit_of_measure;
 import POS.util.Alert;
 import POS.util.Focus_Fire;
@@ -566,6 +565,15 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
                 disposed();
+            }
+        });
+         KeyMapping.mapKeyWIFW(getSurface(),
+                              KeyEvent.VK_CONTROL, new KeyAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                btn_0.doClick();
+                ok();
             }
         });
     }

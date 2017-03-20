@@ -1396,12 +1396,14 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_return_from_customer_items_ALM2.addAll(acc);
     }
 
+    
+    
     public static class Tblreturn_from_customer_itemsModel2 extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
             "Qty", "Item Code", "Description", "Reason", "Unit", "Price", "Amount", "", "", "", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "branch", "branch_id", "location", "location_id"
         };
-
+        
         public Tblreturn_from_customer_itemsModel2(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
@@ -1505,7 +1507,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         }
     }
-
+    
     private void ret_sale_returned_items() {
         String where2 = " where supplier like '%" + "" + "%' ";
         if (!jCheckBox7.isSelected()) {
