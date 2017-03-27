@@ -960,19 +960,19 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="tf_description" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                               <Component id="jCheckBox6" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jCheckBox7" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jCheckBox8" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="tf_item_code" min="-2" pref="322" max="-2" attributes="0"/>
+                                          <Component id="tf_item_code" min="-2" pref="319" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel34" min="-2" pref="90" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tf_barcode" max="32767" attributes="0"/>
@@ -1502,6 +1502,7 @@
             <Component class="javax.swing.JButton" name="btn_update">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -1667,7 +1668,7 @@
             <Component class="javax.swing.JLabel" name="jLabel36">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
+                  <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="text" type="java.lang.String" value="Search by:"/>
@@ -1679,10 +1680,10 @@
                   <ComponentRef name="buttonGroup1"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
+                  <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Item Code"/>
+                <Property name="text" type="java.lang.String" value="(F1)-All"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -1692,9 +1693,9 @@
                   <ComponentRef name="buttonGroup1"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
+                  <Font name="Tahoma" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Barcode"/>
+                <Property name="text" type="java.lang.String" value="(F2)-Code"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -1704,7 +1705,7 @@
                   <ComponentRef name="buttonGroup1"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
+                  <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Description"/>
                 <Property name="focusable" type="boolean" value="false"/>

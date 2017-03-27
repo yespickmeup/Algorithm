@@ -66,12 +66,14 @@ public class MyMain {
             System.setProperty("pool_db", prop.getProperty("pool_db", "db_smis"));
             System.setProperty("environment", prop.getProperty("environment", "development"));
             System.setProperty("auto_order", prop.getProperty("auto_order", "false"));
+            System.setProperty("inventory_item_delete", prop.getProperty("inventory_item_delete", "false"));
 
             System.out.println("OS: " + os);
             System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
             System.out.println("Host: " + System.getProperty("pool_host"));
             System.out.println("Environment: " + System.getProperty("environment"));
+            System.out.println("inventory_item_delete: " + System.getProperty("inventory_item_delete"));
 
             String where = "";
             List<Settings.to_settings> datas = Settings.ret_data(where);

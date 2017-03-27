@@ -313,11 +313,11 @@ public class Dlg_add_category extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-       
+
     }
 
-    public void do_pass() {
-
+    public void do_pass(String category) {
+        jTextField1.setText(category);
     }
 
     private void focus() {
@@ -333,7 +333,7 @@ public class Dlg_add_category extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {

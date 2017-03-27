@@ -6,6 +6,7 @@ package POS.inventory;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branches.Branches;
+import POS.category.Dlg_inventory_categories;
 import POS.inventory.Dlg_inventory_uom.to_uom;
 import POS.inventory.Inventory.to_inventory;
 import POS.inventory.S1_inventory_assembly.to_inventory_assembly;
@@ -15,6 +16,7 @@ import POS.receipts.S1_receipt_items;
 import POS.selling_type.S1_selling_type;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -1101,6 +1103,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         });
 
         btn_update.setText("Update");
+        btn_update.setEnabled(false);
         btn_update.setFocusable(false);
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1186,23 +1189,23 @@ public class Dlg_inventory extends javax.swing.JDialog {
             }
         });
 
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel36.setText("Search by:");
 
         buttonGroup1.add(jCheckBox6);
-        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("Item Code");
+        jCheckBox6.setText("(F1)-All");
         jCheckBox6.setFocusable(false);
 
         buttonGroup1.add(jCheckBox7);
-        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox7.setText("Barcode");
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("(F2)-Code");
         jCheckBox7.setFocusable(false);
 
         buttonGroup1.add(jCheckBox8);
-        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox8.setText("Description");
         jCheckBox8.setFocusable(false);
 
@@ -1221,17 +1224,17 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_description)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel36)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(1, 1, 1)
                                         .addComponent(jCheckBox6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jCheckBox7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tf_barcode)
@@ -1778,7 +1781,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -1860,8 +1863,36 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 disposed();
             }
         });
+        tf_category.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    inventory_category();
+                }
+            }
+        });
     }
+
     // </editor-fold>
+    private void inventory_category() {
+        Window p = (Window) this;
+        Dlg_inventory_categories nd = Dlg_inventory_categories.create(p, true);
+        nd.setTitle("");
+        nd.do_pass();
+        nd.setCallback(new Dlg_inventory_categories.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_inventory_categories.OutputData data) {
+                closeDialog.ok();
+                Field.Combo cat = (Field.Combo) tf_category;
+                cat.setText(data.category.name);
+                cat.setId("" + data.category.id);
+                tf_classification.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 
     private void init_item_code() {
         tf_item_code.setText(Inventory.increment_id());
@@ -1929,10 +1960,13 @@ public class Dlg_inventory extends javax.swing.JDialog {
         String where = " where ";
 
         if (jCheckBox6.isSelected()) {
-            where = where + " barcode like '" + search + "' ";
+            where = where + " barcode like '" + search + "' "
+                    + " or barcodes like '" + search + "' "
+                    + " or description like '%" + search + "%' ";
         }
         if (jCheckBox7.isSelected()) {
-            where = where + "  barcodes like '" + search + "' ";
+            where = where + " barcode like '" + search + "' "
+                    + " or barcodes like '" + search + "' ";
         }
         if (jCheckBox8.isSelected()) {
             where = where + "  description like '%" + search + "%' ";
@@ -2016,7 +2050,11 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tf_cost.setText(FitIn.fmt_wc_0(to.cost));
         tf_reorder_level.setText(FitIn.fmt_wc_0(to.reorder_level));
         btn_update.setEnabled(true);
-//                btn_delete.setEnabled(true);
+        String inventory_item_delete = System.getProperty("inventory_item_delete", "false");
+        if (inventory_item_delete.equalsIgnoreCase("true")) {
+            btn_delete.setEnabled(true);
+        }
+
         if (to.selling_type == 0) {
             tf_selling_type.setText("Regular");
         } else {
@@ -2353,23 +2391,39 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tf_barcode.setText("");
         tf_item_code.grabFocus();
         disabled();
-
+        selected_row = -1;
     }
 
     private void delete_inventory() {
-//        if (selected_row == -1) {
-//            return;
-//        }
-//        S1_inventory.to_inventory to1 = inventory_list.get(selected_row);
-//        S1_inventory.delete_inventory(to1);
-//        clear_inventory();
-//        init_item_code();
-//        Alert.set(3, "");
+        if (selected_row == -1) {
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+//        nd.do_pass(services);
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Inventory.to_inventory to1 = inventory_list.get(selected_row);
+                Inventory.delete_inventory(to1);
+                clear_inventory();
+                init_item_code();
+                Alert.set(3, "");
+                tbl_inventory_barcodes_ALM.clear();
+                tbl_inventory_barcodes_M.fireTableDataChanged();
 //        data_cols_inventory_barcodes();
 //        data_cols_multi_level_pricing();
-////        data_cols_assembly();
+//        data_cols_assembly();
 //        data_cols();
-//        tf_item_code.grabFocus();
+                tf_item_code.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     List<Branches.to_branches> branches_list = new ArrayList();

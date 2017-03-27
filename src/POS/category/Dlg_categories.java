@@ -703,7 +703,7 @@ public class Dlg_categories extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField6MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        edit_category();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -750,7 +750,7 @@ public class Dlg_categories extends javax.swing.JDialog {
     private void myInit() {
         init_key();
         init();
-
+//        System.setProperty("pool_db", "db_algorithm");
         tf_category_code.setVisible(false);
         jTextField8.setVisible(false);
         jTextField9.setVisible(false);
@@ -995,12 +995,36 @@ public class Dlg_categories extends javax.swing.JDialog {
         Dlg_add_category nd = Dlg_add_category.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_add_category.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_add_category.OutputData data) {
                 closeDialog.ok();
                 S1_inventory_category.to_inventory_category to = new S1_inventory_category.to_inventory_category(-1, data.name, "");
                 S1_inventory_category.add_inventory_category(to);
+                tf_category.setText("");
+                tf_category_code.setText("");
+                tf_category.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void edit_category() {
+
+        if (tf_category_code.getText().isEmpty()) {
+            tf_category.grabFocus();
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_add_category nd = Dlg_add_category.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(tf_category.getText());
+        nd.setCallback(new Dlg_add_category.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_add_category.OutputData data) {
+                closeDialog.ok();
+                String id = tf_category_code.getText();
+                S1_inventory_category.edit_inventory_category(id, data.name);
                 tf_category.setText("");
                 tf_category_code.setText("");
                 tf_category.grabFocus();

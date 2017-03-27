@@ -459,22 +459,25 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setText("Search by:");
+        jLabel30.setText("Filter by:");
 
+        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("Item Code");
+        jCheckBox6.setText("(F1)-All");
         jCheckBox6.setFocusable(false);
 
+        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("Barcode");
+        jCheckBox7.setText("(F2)-Code");
         jCheckBox7.setFocusable(false);
 
+        jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("Description");
+        jCheckBox8.setText("(F3)-Description");
         jCheckBox8.setFocusable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -498,10 +501,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox8)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -515,12 +518,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     .addComponent(jCheckBox6)
                     .addComponent(jCheckBox7)
                     .addComponent(jCheckBox8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -1535,8 +1538,14 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_search.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
-                    add_stock_transfer();
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox6.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox7.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox8.setSelected(true);
                 }
             }
         });
@@ -1783,18 +1792,21 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private void init_inventory_barcodes() {
         jProgressBar1.setString("Searching...");
         jProgressBar1.setIndeterminate(true);
+        tf_search.setEnabled(false);
         Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
                 String search = tf_search.getText();
                 String where = " where ";
-
                 if (jCheckBox6.isSelected()) {
-                    where = where + "  main_barcode like '" + search + "' and location_id='" + tf_from_location_id.getText() + "' ";
+                    where = where + "  main_barcode like '" + search + "' and location_id='" + tf_from_location_id.getText() + "' "
+                            + " or barcode='" + search + "' and location_id='" + tf_from_location_id.getText() + "' "
+                            + " or description like '%" + search + "%' and location_id='" + tf_from_location_id.getText() + "' ";
                 }
                 if (jCheckBox7.isSelected()) {
-                    where = where + "  barcode='" + search + "' and location_id='" + tf_from_location_id.getText() + "' ";
+                    where = where + " main_barcode like '" + search + "' and location_id='" + tf_from_location_id.getText() + "' "
+                            + " or barcode='" + search + "' and location_id='" + tf_from_location_id.getText() + "' ";
                 }
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + tf_from_location_id.getText() + "' ";
@@ -1806,10 +1818,13 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     Alert.set(0, "Item Not Found");
                     jProgressBar1.setString("Finished...");
                     jProgressBar1.setIndeterminate(false);
+                    tf_search.setEnabled(true);
                 }
                 if (inventory_barcoders_list.size() == 1) {
                     Inventory_barcodes.to_inventory_barcodes t = inventory_barcoders_list.get(0);
                     add_item(t);
+                    tf_search.setEnabled(true);
+                    tf_search.grabFocus();
                 }
                 if (inventory_barcoders_list.size() > 1) {
                     Object[][] obj = new Object[inventory_barcoders_list.size()][5];
@@ -1842,6 +1857,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         public void ok(TableRenderer.OutputData data) {
                             Inventory_barcodes.to_inventory_barcodes t = inventory_barcoders_list.get(data.selected_row);
                             add_item(t);
+                            tf_search.setEnabled(true);
+                            tf_search.grabFocus();
                         }
                     });
                 }
@@ -1923,6 +1940,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     Stock_transfers_items.add_stock_transfers_items(datas, to.transaction_no, to);
                     data_cols_items();
                 }
+
             }
         });
         nd.setLocationRelativeTo(this);

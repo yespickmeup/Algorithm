@@ -783,22 +783,25 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setText("Search by:");
+        jLabel30.setText("Filter by:");
 
+        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("Item Code");
+        jCheckBox6.setText("(F1) - All");
         jCheckBox6.setFocusable(false);
 
+        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("Barcode");
+        jCheckBox7.setText("(F2) - Code");
         jCheckBox7.setFocusable(false);
 
+        jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("Description");
+        jCheckBox8.setText("(F3) - Description");
         jCheckBox8.setFocusable(false);
 
         javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
@@ -1534,7 +1537,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-
         tf_search.grabFocus();
         set_default_branch();
         focus();
@@ -1850,27 +1852,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 jButton2.doClick();
             }
         });
-        KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_F1, new KeyAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                btn_0.doClick();
-                tf_search.grabFocus();
-                tf_search.selectAll();
-            }
-        });
-        KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_F2, new KeyAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!tbl_receipt_items_ALM.isEmpty()) {
-                    tbl_receipt_items.setRowSelectionInterval(0, 0);
-                    tbl_receipt_items.grabFocus();
-                }
-            }
-        });
 
         tbl_receipt_items.addKeyListener(new KeyAdapter() {
 
@@ -1893,10 +1874,16 @@ public class Dlg_receipts extends javax.swing.JDialog {
             @Override
             public void keyPressed(KeyEvent e) {
 
-                if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
-                    add_receipt();
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox6.setSelected(true);
                 }
 
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox7.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox8.setSelected(true);
+                }
             }
         });
     }
@@ -2437,16 +2424,20 @@ public class Dlg_receipts extends javax.swing.JDialog {
         final Field.Combo br = (Field.Combo) tf_branch;
         jProgressBar1.setString("Searching...");
         jProgressBar1.setIndeterminate(true);
+        tf_search.setEnabled(false);
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 String search = tf_search.getText();
                 String where = " where ";
                 if (jCheckBox6.isSelected()) {
-                    where = where + " main_barcode like '" + search + "' and location_id='" + br.getId() + "' ";
+                    where = where + "  main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                            + " or barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                            + " or description like '%" + search + "%' and location_id='" + br.getId() + "'";
                 }
                 if (jCheckBox7.isSelected()) {
-                    where = where + "  barcode like '" + search + "' and location_id='" + br.getId() + "' ";
+                    where = where + "  main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                            + " or barcode like '" + search + "' and location_id='" + br.getId() + "'";
                 }
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + br.getId() + "' ";
@@ -2457,12 +2448,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
                 if (inventory_barcoders_list.isEmpty()) {
                     Alert.set(0, "Item not found!");
+                    tf_search.setEnabled(true);
                     tf_search.grabFocus();
                     return;
                 }
                 if (inventory_barcoders_list.size() == 1) {
                     selected_row = 0;
                     add_items();
+                    tf_search.setEnabled(true);
+                    tf_search.grabFocus();
                 }
                 if (inventory_barcoders_list.size() > 1) {
                     Object[][] obj = new Object[inventory_barcoders_list.size()][6];
@@ -2496,6 +2490,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         public void ok(TableRenderer.OutputData data) {
                             selected_row = data.selected_row;
                             add_items();
+                            tf_search.setEnabled(true);
+                            tf_search.grabFocus();
                         }
                     });
                 }

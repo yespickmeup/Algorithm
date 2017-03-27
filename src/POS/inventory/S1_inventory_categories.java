@@ -146,7 +146,7 @@ public class S1_inventory_categories {
                     + ",code"
                     + " from inventory_category where "
                     + " name like'%" + search + "%' "
-                    + " ";
+                    + " order by name asc ";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);

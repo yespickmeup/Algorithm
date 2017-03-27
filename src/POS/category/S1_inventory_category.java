@@ -121,6 +121,54 @@ public class S1_inventory_category {
         }
     }
 
+    public static void edit_inventory_category(String id, String new_category) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = " update inventory_category set "
+                    + " name= :name"
+                    + ",code= :code"
+                    + " where id='" + id + "'";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("name", new_category)
+                    .setString("code", "")
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+            
+            String s2 = " update inventory set "
+                    + " category= :category "
+                    + " where category_id='" + id + "'";
+            
+            
+            s2 = SqlStringUtil.parse(s2)
+                    .setString("category", new_category)
+                    .ok();
+
+            stmt.addBatch(s2);
+
+            String s3 = " update inventory_barcodes set "
+                    + " category= :category "
+                    + " where category_id='" + id + "'";
+
+            s3 = SqlStringUtil.parse(s3)
+                    .setString("category", new_category)
+                    .ok();
+
+            stmt.addBatch(s3);
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(S1_inventory_category.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_inventory_category(String id) {
         try {
             Connection conn = MyConnection.connect();
