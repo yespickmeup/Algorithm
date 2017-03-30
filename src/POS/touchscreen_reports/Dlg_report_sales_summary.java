@@ -231,6 +231,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new Field.Combo();
         jButton1 = new Button.Search();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -289,11 +292,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         pnl_report.setLayout(pnl_reportLayout);
         pnl_reportLayout.setHorizontalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 796, Short.MAX_VALUE)
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
         );
 
         jPanel3.setOpaque(false);
@@ -370,6 +373,15 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
             }
         });
 
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setText("All");
+
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox3.setText("All");
+
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setText("All");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -381,50 +393,58 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_cashier, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_cashier, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                     .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox2))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox3)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCheckBox4)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -513,6 +533,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -698,22 +721,34 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 Field.Combo f = (Field.Combo) tf_cashier;
                 String date_from = DateType.sf.format(jDateChooser1.getDate());
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
-                String where_drawer = " where Date(time_in) between '" + date_from + "' and '" + date_to + "' "
-                        + " and location_id='" + lo.getId() + "' ";
-
-                String where_sales = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                        + " and location_id='" + lo.getId() + "' ";
-
-                String where_sales2 = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                        + " and location_id='" + lo.getId() + "' and status='" + "0" + "' ";
+                String where_drawer = " where id<>0 ";
+                String where_sales = " where id<>0 ";
+                String where_sales2 = " where id<>0 "
+                        + "  and status='" + "0" + "' ";
                 if (!jCheckBox1.isSelected()) {
-                    where_drawer = " where Date(time_in) between '" + date_from + "' and '" + date_to + "' "
-                            + " and location_id='" + lo.getId() + "' and user_id='" + f.getId() + "'";
-                    where_sales = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                            + " and location_id='" + lo.getId() + "' and user_id='" + f.getId() + "'";
-                    where_sales2 = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                            + " and location_id='" + lo.getId() + "' and user_id='" + f.getId() + "' and status='" + "0" + "' ";
+                    where_drawer = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "'";
+                    where_sales = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "'";
+                    where_sales2 = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
                 }
+                if (!jCheckBox4.isSelected()) {
+                    where_drawer = where_drawer + "  and Date(time_in) between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                }
+                if (!jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
+                    where_drawer = where_drawer + " and location_id='" + lo.getId() + "' ";
+                    where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
+                    where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
+                }
+                if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
+                    where_drawer = where_drawer + " and branch_id='" + br.getId() + "' ";
+                    where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+                    where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
+                }
+
                 List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales2);
@@ -725,6 +760,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<Srpt_end_of_day_summary_details.field> my_remittances = new ArrayList();
                 List<CashDrawer_remittances.to_cash_drawer_remittances> remittances = CashDrawer_remittances.ret_data(where_sales);
                 List<S1_disbursements.to_disbursements> disbursements = S1_disbursements.ret_data(where_sales);
+                List<Srpt_end_of_day_summary_details.field> my_disbursements = new ArrayList();
                 double cashin_beg = 0;
                 double cash_sales = 0;
                 double collections = 0;
@@ -902,12 +938,31 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 }
 
                 date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
-
+                if (jCheckBox4.isSelected()) {
+                    date = "All";
+                }
                 double disburs = 0;
                 for (S1_disbursements.to_disbursements disburse : disbursements) {
+
+                    Srpt_end_of_day_summary_details.field disbursement = new Srpt_end_of_day_summary_details.field("Disbursement", disburse.category_name + " : " + disburse.purpose, "", FitIn.fmt_wc_0(disburse.amount));
+                    my_disbursements.add(disbursement);
                     disburs += disburse.amount;
                 }
+                my_details.addAll(my_disbursements);
                 receipt_net_total = receipt_net_total - disburs;
+                String cashier = tf_cashier.getText();
+                if (jCheckBox1.isSelected()) {
+                    cashier = "All";
+                }
+                String branch = jTextField2.getText();
+                String location = jTextField1.getText();
+                if (jCheckBox3.isSelected()) {
+                    location = "All";
+                }
+                if (jCheckBox2.isSelected()) {
+                    branch = "All";
+                    location = "All";
+                }
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
                         receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
                         bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
@@ -916,7 +971,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
                         count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                         my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
-                        total_check_payments, total_cc_payments, date, business_name, address, disburs);
+                        total_check_payments, total_cc_payments, date, business_name, address, disburs, cashier, branch, location);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_end_of_day_summary.jrxml");

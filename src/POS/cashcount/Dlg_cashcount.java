@@ -676,7 +676,7 @@ public class Dlg_cashcount extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -767,8 +767,8 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                 double cc_cash_sales = 0;
                 double cc_collections = 0;
                 double cc_prepayments = 0;
-                 double total_check_payments=0;
-                double total_cc_payments=0;      
+                double total_check_payments = 0;
+                double total_cc_payments = 0;
                 Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", "BPI 000234", "", "1,000.00");
                 Srpt_end_of_day_summary_details.field credit_card = new Srpt_end_of_day_summary_details.field("Credit Card", "", "", "1,000.00");
                 Srpt_end_of_day_summary_details.field gc = new Srpt_end_of_day_summary_details.field("Gift Certificate", "", "", "0.00");
@@ -782,22 +782,25 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                 fields.add(remit1);
                 fields.add(remit2);
                 fields.add(remit3);
-                   String business_name=System.getProperty("business_name", "");
-                String address=System.getProperty("address","");
-                double disburse=0;
-                Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales
-                        , collections, prepayments, receipts_total, receipts_line_discount
-                        , receipts_sale_discount, receipts_sub_total, receipt_net_total
-                        , bills_thousand, bills_five_hundred, bills_two_hundred, bills_one_hundred
-                        , bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty
-                        , coins_point_twenty_five, coins_point_ten, coins_point_zero_five
-                        , count_bills_thousand, count_bills_five_hundred, count_bills_two_hundred
-                        , count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten
-                        , count_coins_five, count_coins_one, count_coins_point_fifty
-                        , count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five
-                        , cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR
-                        , fields,check_cash_sales,check_collections,check_prepayments
-                        ,cc_cash_sales,cc_collections,cc_prepayments,total_check_payments,total_cc_payments,"",business_name,address,disburse);
+                String business_name = System.getProperty("business_name", "");
+                String address = System.getProperty("address", "");
+                double disburse = 0;
+                String cashier = tf_cashier.getText();
+                String branch = "";
+                String location = "";
+                Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales,
+                         collections, prepayments, receipts_total, receipts_line_discount,
+                         receipts_sale_discount, receipts_sub_total, receipt_net_total,
+                         bills_thousand, bills_five_hundred, bills_two_hundred, bills_one_hundred,
+                         bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty,
+                         coins_point_twenty_five, coins_point_ten, coins_point_zero_five,
+                         count_bills_thousand, count_bills_five_hundred, count_bills_two_hundred,
+                         count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
+                         count_coins_five, count_coins_one, count_coins_point_fifty,
+                         count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five,
+                         cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
+                         fields, check_cash_sales, check_collections, check_prepayments,
+                         cc_cash_sales, cc_collections, cc_prepayments, total_check_payments, total_cc_payments, "", business_name, address, disburse, cashier, branch, location);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
 

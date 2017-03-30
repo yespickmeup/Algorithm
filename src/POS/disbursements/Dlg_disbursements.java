@@ -7,14 +7,16 @@ package POS.disbursements;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.category.S1_inventory_category;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
+import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
@@ -25,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
@@ -35,7 +38,7 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
-import synsoftech.fields.Label;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -202,31 +205,43 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_disbursements = new javax.swing.JTable();
-        jLabel62 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel68 = new javax.swing.JLabel();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
         tf_purpose = new Field.Input();
+        jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
         tf_category_name = new Field.Combo();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel69 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         tf_amount = new Field.Input();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jButton35 = new Button.Primary();
-        jButton36 = new Button.Info();
-        jButton34 = new Button.Warning();
-        jLabel65 = new javax.swing.JLabel();
-        tf_customer_name3 = new Field.Combo();
+        jTextField2 = new Field.Combo();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new Field.Combo();
+        jButton37 = new Button.Default();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_disbursements = new javax.swing.JTable();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
         jLabel66 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel67 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jButton1 = new Button.Primary();
-        jLabel68 = new javax.swing.JLabel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel1 = new Label.Separator2();
+        jLabel65 = new javax.swing.JLabel();
+        tf_customer_name3 = new Field.Combo();
+        jButton1 = new Button.Default();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField3 = new Field.Combo();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField4 = new Field.Combo();
+        jCheckBox4 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -235,6 +250,196 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel68.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel68.setText("Date:");
+
+        jDateChooser3.setDate(new Date());
+        jDateChooser3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        tf_purpose.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_purpose.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tf_purpose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_purposeActionPerformed(evt);
+            }
+        });
+
+        jLabel62.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel62.setText("Details:");
+
+        jLabel63.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel63.setText("Category:");
+
+        tf_category_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_category_name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tf_category_name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_category_nameMouseClicked(evt);
+            }
+        });
+        tf_category_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_category_nameActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("Yes/No");
+        jCheckBox1.setFocusable(false);
+
+        jLabel69.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel69.setText("Vatable:");
+
+        jLabel64.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel64.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel64.setText("Amount:");
+
+        tf_amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_amount.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tf_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_amountActionPerformed(evt);
+            }
+        });
+
+        jButton35.setText("Save");
+        jButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton35ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Branch:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Location:");
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setFocusable(false);
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jButton37.setText("New");
+        jButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton37ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(198, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel68, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(tf_category_name)
+                                .addComponent(tf_purpose)))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_amount))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField2)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(189, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(144, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_purpose, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_category_name)
+                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(158, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Disbursement", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         tbl_disbursements.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -255,72 +460,27 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbl_disbursements);
 
-        jLabel62.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel62.setText("Purpose:");
+        jLabel70.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel70.setText("Total:");
 
-        tf_purpose.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_purpose.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        tf_purpose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_purposeActionPerformed(evt);
-            }
-        });
+        jLabel71.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel71.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel71.setText("0.00");
 
-        jLabel63.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel63.setText("Category:");
+        jLabel66.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel66.setText("Date From:");
 
-        tf_category_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_category_name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        tf_category_name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tf_category_nameMouseClicked(evt);
-            }
-        });
-        tf_category_name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_category_nameActionPerformed(evt);
-            }
-        });
+        jDateChooser1.setDate(new Date());
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel64.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel64.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel64.setText("Amount:");
+        jLabel67.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel67.setText("To:");
 
-        tf_amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_amount.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        tf_amount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_amountActionPerformed(evt);
-            }
-        });
-
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText("Yes/No");
-        jCheckBox1.setFocusable(false);
-
-        jButton35.setText("Add");
-        jButton35.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton35ActionPerformed(evt);
-            }
-        });
-
-        jButton36.setText("Update");
-        jButton36.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton36ActionPerformed(evt);
-            }
-        });
-
-        jButton34.setText("Delete");
-        jButton34.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton34ActionPerformed(evt);
-            }
-        });
+        jDateChooser2.setDate(new Date());
+        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel65.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel65.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -339,18 +499,6 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             }
         });
 
-        jLabel66.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel66.setText("Date From:");
-
-        jDateChooser1.setDate(new Date());
-
-        jLabel67.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel67.setText("To:");
-
-        jDateChooser2.setDate(new Date());
-
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,130 +506,147 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             }
         });
 
-        jLabel68.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel68.setText("Date:");
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setSelected(true);
+        jCheckBox2.setText("All");
 
-        jDateChooser3.setDate(new Date());
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox3.setSelected(true);
+        jCheckBox3.setText("All");
 
-        jLabel69.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel69.setText("Vatable:");
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Branch:");
 
-        jLabel70.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel70.setText("Total:");
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField3MouseClicked(evt);
+            }
+        });
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
-        jLabel71.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel71.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel71.setText("0.00");
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Location:");
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.setFocusable(false);
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField4MouseClicked(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setText("All");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField3)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tf_customer_name3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jTextField4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)))
+                .addGap(36, 36, 36))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox4))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCheckBox3)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_customer_name3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox2)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel70)
+                    .addComponent(jLabel71))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Reports", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tf_customer_name3, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_amount))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_category_name)
-                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_purpose)))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33))
+                .addGap(25, 25, 25)
+                .addComponent(jTabbedPane1)
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_purpose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tf_category_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel66, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_customer_name3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel70)
-                    .addComponent(jLabel71))
-                .addContainerGap())
+                .addGap(25, 25, 25)
+                .addComponent(jTabbedPane1)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -494,9 +659,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -516,14 +679,6 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
         add_disbursements();
     }//GEN-LAST:event_jButton35ActionPerformed
-
-    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
-        update_disbursements();
-    }//GEN-LAST:event_jButton36ActionPerformed
-
-    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
-        delete_disbursements();
-    }//GEN-LAST:event_jButton34ActionPerformed
 
     private void tf_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_amountActionPerformed
         // TODO add your handling code here:
@@ -557,20 +712,61 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         data_disbursements();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        init_branch_locations(jTextField2, jTextField1);
+    }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        init_branch_locations(jTextField2, jTextField1);
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        //        init_branch_locations();
+    }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        //        init_branch_locations();
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
+        init_branch_locations(jTextField3, jTextField4);
+    }//GEN-LAST:event_jTextField3MouseClicked
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        init_branch_locations(jTextField3, jTextField4);
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4MouseClicked
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton37ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
+    private javax.swing.JButton jButton37;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
@@ -583,7 +779,14 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel71;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tbl_disbursements;
     private javax.swing.JTextField tf_amount;
     private javax.swing.JTextField tf_category_name;
@@ -592,6 +795,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);
@@ -616,6 +820,23 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         my_branch_id = to.branch_id;
         my_location = to.location;
         my_location_id = "" + to.id;
+
+        Field.Combo lo = (Field.Combo) jTextField1;
+        Field.Combo br = (Field.Combo) jTextField2;
+        lo.setText(to.location);
+        lo.setId("" + to.id);
+        br.setText(to.branch);
+        br.setId("" + to.branch_id);
+
+        Field.Combo lo2 = (Field.Combo) jTextField4;
+        Field.Combo br2 = (Field.Combo) jTextField3;
+        lo2.setText(to.location);
+        lo2.setId("" + to.id);
+        br2.setText(to.branch);
+        br2.setId("" + to.branch_id);
+
+        String where = " order by branch,location asc  ";
+        branch_location_list = S1_branch_locations.ret_location_where(where);
     }
 
     public void do_pass() {
@@ -654,10 +875,18 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         String user_id = MyUser.getUser_id();
         String date_from = DateType.sf.format(jDateChooser1.getDate());
         String date_to = DateType.sf.format(jDateChooser2.getDate());
-        String where = " where user_id='" + user_id + "' and Date(date_added) between'" + date_from + "' and '" + date_to + "' ";
+        String where = " where "
+                + " user_id='" + user_id + "' "
+                + " and Date(date_added) between'" + date_from + "' and '" + date_to + "' "
+                + " ";
         if (view_all == 1) {
             where = " where  Date(date_added) between'" + date_from + "' and '" + date_to + "' ";
         }
+        if (!jCheckBox4.isSelected()) {
+            Field.Combo lo = (Field.Combo) jTextField4;
+            where = where + " and location_id='" + lo.getId() + "' ";
+        }
+
         List<S1_disbursements.to_disbursements> datas = S1_disbursements.ret_data(where);
         loadData_disbursements(datas);
 
@@ -678,7 +907,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         tbl_disbursements.setModel(tbl_disbursements_M);
         tbl_disbursements.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_disbursements.setRowHeight(25);
-        int[] tbl_widths_disbursements = {100, 100, 150, 100, 100, 0, 0, 0, 0};
+        int[] tbl_widths_disbursements = {80, 100, 150, 100, 220, 80, 30, 30, 0};
         for (int i = 0, n = tbl_widths_disbursements.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -691,7 +920,9 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         tbl_disbursements.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_disbursements.setRowHeight(25);
         tbl_disbursements.setFont(new java.awt.Font("Arial", 0, 12));
-        TableWidthUtilities.setColumnRightRenderer(tbl_disbursements, 4);
+        TableWidthUtilities.setColumnRightRenderer(tbl_disbursements, 5);
+        tbl_disbursements.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
+        tbl_disbursements.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_disbursements(List<S1_disbursements.to_disbursements> acc) {
@@ -702,7 +933,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     public static class TbldisbursementsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Purpose", "Category", "User", "Amount", "category_id", "category_name", "amount", "is_vat"
+            "Date", "Purpose", "Category", "User", "", "Amount", "", "", ""
         };
 
         public TbldisbursementsModel(ListModel listmodel) {
@@ -735,13 +966,14 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                 case 3:
                     return " " + tt.user_screen_name;
                 case 4:
-                    return FitIn.fmt_wc_0(tt.amount) + " ";
+
+                    return " " + tt.branch + " - " + tt.location;
                 case 5:
-                    return tt.category_id;
+                    return FitIn.fmt_wc_0(tt.amount) + " ";
                 case 6:
-                    return tt.category_name;
+                    return "/POS/icon_payment/edit (1).png";
                 case 7:
-                    return tt.amount;
+                    return "/POS/icon_payment/remove11.png";
                 default:
                     return tt.is_vat;
             }
@@ -750,33 +982,79 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 //</editor-fold> 
 
     private void add_disbursements() {
+        int row = tbl_disbursements.getSelectedRow();
         Field.Combo cat = (Field.Combo) tf_category_name;
-        int id = 0;
-        String user_id = MyUser.getUser_id();
-        String user_screen_name = MyUser.getUser_screen_name();
-        String date_added = DateType.now();
-        String purpose = tf_purpose.getText();
-        String category_id = cat.getId();
-        String category_name = tf_category_name.getText();
-        double amount = FitIn.toDouble(tf_amount.getText());
-        int is_vat = 0;
-        if (jCheckBox1.isSelected()) {
-            is_vat = 1;
+        Field.Combo br = (Field.Combo) jTextField2;
+        Field.Combo lo = (Field.Combo) jTextField1;
+        if (row < 0) {
+
+            int id = 0;
+            String user_id = MyUser.getUser_id();
+            String user_screen_name = MyUser.getUser_screen_name();
+            String date_added = DateType.now();
+            String purpose = tf_purpose.getText();
+
+            String category_id = cat.getId();
+            String category_name = tf_category_name.getText();
+            double amount = FitIn.toDouble(tf_amount.getText());
+            int is_vat = 0;
+            if (jCheckBox1.isSelected()) {
+                is_vat = 1;
+            }
+            String disbursement_date = DateType.sf.format(jDateChooser3.getDate());
+
+            String branch = br.getText();
+            String branch_id = br.getId();
+            String location = lo.getText();
+            String location_id = lo.getId();
+
+            S1_disbursements.to_disbursements to = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
+            S1_disbursements.add_data(to);
+            tf_purpose.setText("");
+            cat.setId("");
+            tf_category_name.setText("");
+            tf_amount.setText("");
+            data_disbursements();
+            new_disbursement();
+            Alert.set(1, "Successfully Added!");
+        } else {
+
+            S1_disbursements.to_disbursements to = (S1_disbursements.to_disbursements) tbl_disbursements_ALM.get(row);
+            int id = to.id;
+            String user_id = to.user_id;
+            String user_screen_name = to.user_screen_name;
+            String date_added = DateType.now();
+            String purpose = tf_purpose.getText();
+            String category_id = cat.getId();
+            String category_name = tf_category_name.getText();
+            double amount = FitIn.toDouble(tf_amount.getText());
+            int is_vat = 0;
+            if (jCheckBox1.isSelected()) {
+                is_vat = 1;
+            }
+            String disbursement_date = DateType.sf.format(jDateChooser3.getDate());
+            String branch = br.getText();
+            String branch_id = br.getId();
+            String location = lo.getText();
+            String location_id = lo.getId();
+            S1_disbursements.to_disbursements to1 = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
+            S1_disbursements.update_data(to1);
+
+            data_disbursements();
+            new_disbursement();
+            Alert.set(2, "Successfully Added!");
         }
-        String disbursement_date = DateType.sf.format(jDateChooser3.getDate());
 
-        String branch = my_branch;
-        String branch_id = my_branch_id;
-        String location = my_location;
-        String location_id = my_location_id;
+    }
 
-        S1_disbursements.to_disbursements to = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
-        S1_disbursements.add_data(to);
+    private void new_disbursement() {
+        Field.Combo cat = (Field.Combo) tf_category_name;
         tf_purpose.setText("");
         cat.setId("");
         tf_category_name.setText("");
         tf_amount.setText("");
-        data_disbursements();
+        tbl_disbursements.clearSelection();
+        tf_purpose.grabFocus();
     }
 
     private void select_disbursements() {
@@ -787,21 +1065,48 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         }
         Field.Combo cat = (Field.Combo) tf_category_name;
         S1_disbursements.to_disbursements to = (S1_disbursements.to_disbursements) tbl_disbursements_ALM.get(row);
-        tf_purpose.setText(to.purpose);
-        cat.setId(to.category_id);
-        tf_category_name.setText(to.category_name);
-        tf_amount.setText(FitIn.fmt_wc_0(to.amount));
-        if (to.is_vat == 1) {
-            jCheckBox1.setSelected(true);
-        } else {
-            jCheckBox1.setSelected(false);
+
+        int col = tbl_disbursements.getSelectedColumn();
+        if (col == 6) {
+            tf_purpose.setText(to.purpose);
+            cat.setId(to.category_id);
+            tf_category_name.setText(to.category_name);
+            tf_amount.setText(FitIn.fmt_wc_0(to.amount));
+            if (to.is_vat == 1) {
+                jCheckBox1.setSelected(true);
+            } else {
+                jCheckBox1.setSelected(false);
+            }
+            try {
+                Date d = DateType.sf.parse(to.disbursement_date);
+                jDateChooser3.setDate(d);
+            } catch (ParseException ex) {
+                Logger.getLogger(Dlg_disbursements.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Field.Combo br = (Field.Combo) jTextField2;
+            Field.Combo lo = (Field.Combo) jTextField1;
+            br.setText(to.branch);
+            br.setId(to.branch_id);
+            lo.setText(to.location);
+            lo.setId(to.location_id);
+            jTabbedPane1.setSelectedIndex(0);
         }
-        try {
-            Date d = DateType.sf.parse(to.disbursement_date);
-            jDateChooser3.setDate(d);
-        } catch (ParseException ex) {
-            Logger.getLogger(Dlg_disbursements.class.getName()).log(Level.SEVERE, null, ex);
+        if (col == 7) {
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    delete_disbursements();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
         }
+
     }
 
     private void update_disbursements() {
@@ -810,32 +1115,6 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        Field.Combo cat = (Field.Combo) tf_category_name;
-        S1_disbursements.to_disbursements to = (S1_disbursements.to_disbursements) tbl_disbursements_ALM.get(row);
-        int id = to.id;
-        String user_id = to.user_id;
-        String user_screen_name = to.user_screen_name;
-        String date_added = DateType.now();
-        String purpose = tf_purpose.getText();
-        String category_id = cat.getId();
-        String category_name = tf_category_name.getText();
-        double amount = FitIn.toDouble(tf_amount.getText());
-        int is_vat = 0;
-        if (jCheckBox1.isSelected()) {
-            is_vat = 1;
-        }
-        String disbursement_date = DateType.sf.format(jDateChooser3.getDate());
-        String branch = my_branch;
-        String branch_id = my_branch_id;
-        String location = my_location;
-        String location_id = my_location_id;
-        S1_disbursements.to_disbursements to1 = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
-        S1_disbursements.update_data(to1);
-        tf_purpose.setText("");
-        cat.setId("");
-        tf_category_name.setText("");
-        tf_amount.setText("");
-        data_disbursements();
 
     }
 
@@ -912,4 +1191,37 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             }
         });
     }
+
+    List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
+
+    private void init_branch_locations(JTextField br1, JTextField lo1) {
+        final Field.Combo br = (Field.Combo) br1;
+        final Field.Combo lo = (Field.Combo) lo1;
+
+        Object[][] obj = new Object[branch_location_list.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list) {
+            obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";
+
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {lo.getWidth()};
+        int width = 0;
+        String[] col_names = {"Code"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(lo, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list.get(data.selected_row);
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
+
+                br.setText(to.branch);
+                br.setId("" + to.branch_id);
+            }
+        });
+    }
+
 }

@@ -419,7 +419,7 @@ public class Dlg_inventory_categories extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_tbl_inventory_category(tbl_inventory_category);
 
     }
