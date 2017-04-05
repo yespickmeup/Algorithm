@@ -1186,7 +1186,7 @@ public class Dlg_cash_out extends javax.swing.JDialog {
     }
 
     public void do_pass_in(S1_cash_drawer.to_cash_drawer to) {
-        tf_cash_in.setText(FitIn.fmt_woc(to_cash_drawer.amount));
+        tf_cash_in.setText(FitIn.fmt_woc(to.amount));
         tf_cash_in.enable(false);
     }
 
@@ -1198,7 +1198,7 @@ public class Dlg_cash_out extends javax.swing.JDialog {
         String where = " where user_name='" + user_name + "' and Date(time_in)='" + date + "' ";
         S1_cash_drawer.to_cash_drawer to = S1_cash_drawer.cash_drawer(where);
         ids = "" + to.id;
-        tf_cash_in.setText(FitIn.fmt_woc(to_cash_drawer.amount));
+        tf_cash_in.setText(FitIn.fmt_woc(to.amount));
         loadData_cash_drawer_checks(to.checks);
         loadData_cash_drawer_expenses(to.exp);
         compute_check();
@@ -1822,7 +1822,7 @@ public class Dlg_cash_out extends javax.swing.JDialog {
         String screen_name = Users.screen_name;
         String time_in = Users.time_in;
         String time_out1 = Users.time_out;
-        double amount = to_cash_drawer.amount;
+        double amount = FitIn.toDouble(tf_cash_in.getText());
         double cash_out = 0;
         double thousand = FitIn.toDouble(tf_1000.getText());
         double five_hundred = FitIn.toDouble(tf_500.getText());

@@ -34,8 +34,8 @@ public class S1_cash_drawer {
         public final String screen_name;
         public String time_in;
         public String time_out;
-        public static double amount;
-        public static double cash_out;
+        public double amount;
+        public double cash_out;
         public final double thousand;
         public final double five_hundred;
         public final double two_hundred;
@@ -60,14 +60,12 @@ public class S1_cash_drawer {
         public final String user_id;
         public final String user_screen_name;
 
-        public static double getCash_out() {
-            return cash_out;
+        public void setAmount(double amount) {
+            this.amount = amount;
         }
 
-        public void setCash_out(double cash_out) {
-            to_cash_drawer.cash_out = cash_out;
-        }
-
+        
+        
         public String getTime_in() {
             return time_in;
         }
@@ -91,8 +89,8 @@ public class S1_cash_drawer {
             this.screen_name = screen_name;
             this.time_in = time_in;
             this.time_out = time_out;
-            to_cash_drawer.amount = amount;
-            to_cash_drawer.cash_out = cash_out;
+            this.amount = amount;
+            this.cash_out = cash_out;
             this.thousand = thousand;
             this.five_hundred = five_hundred;
             this.two_hundred = two_hundred;
@@ -122,9 +120,15 @@ public class S1_cash_drawer {
             return amount;
         }
 
-        public static void setAmount(double amount) {
-            to_cash_drawer.amount = amount;
+        public double getCash_out() {
+            return cash_out;
         }
+
+        public void setCash_out(double cash_out) {
+            this.cash_out = cash_out;
+        }
+
+      
     }
 
     public static void add_cash_drawer(to_cash_drawer to_cash_drawer) {

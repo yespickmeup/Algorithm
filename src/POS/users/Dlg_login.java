@@ -6,7 +6,6 @@ package POS.users;
 
 import POS.cash_drawer.Dlg_cashin;
 import POS.cash_drawer.S1_cash_drawer;
-import POS.cash_drawer.S1_cash_drawer.to_cash_drawer;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.MyBorder;
@@ -429,7 +428,7 @@ public class Dlg_login extends javax.swing.JDialog {
             System.out.println(to.user_level + " user level");
 
             if (to.user_level == 1) {
-                S1_cash_drawer.to_cash_drawer to1 = S1_cash_drawer.ret_data2(user_name, date);
+                final S1_cash_drawer.to_cash_drawer to1 = S1_cash_drawer.ret_data2(user_name, date);
                 if (to1 == null) {
                     Window p = (Window) this;
                     Dlg_cashin nd = Dlg_cashin.create(p, true);
@@ -454,7 +453,7 @@ public class Dlg_login extends javax.swing.JDialog {
                             Users.setScreen_name(screen_name1);
                             Users.setUser_level(to.user_level);
                             Users.setUser_name(user_name);
-                            to_cash_drawer.setAmount(amount);
+                            to1.setAmount(amount);
 
                             Users.setTime_in(time_in);
                             ok2();

@@ -21,8 +21,8 @@ import POS.util.TableRenderer;
 import POS.util.Users;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
-import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -171,6 +171,12 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         }
 
         Dlg_prepaid_payments dialog = Dlg_prepaid_payments.create(new javax.swing.JFrame(), true);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().
+                getWidth());
+        int ySize = ((int) tk.getScreenSize().
+                getHeight());
+        dialog.setSize(xSize, ySize);
         dialog.setVisible(true);
 
     }
@@ -260,6 +266,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -477,7 +484,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                                 .addGap(0, 0, 0)
                                 .addComponent(tf_from_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField1)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
@@ -567,13 +574,13 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton3)
                                     .addComponent(tf_cash)
                                     .addComponent(jLabel6))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -585,7 +592,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -748,7 +755,10 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     private javax.swing.JTextField tf_from_branch_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
         init_key();
+        
         set_default_branch();
         focus();
         init_tbl_customers();
@@ -757,6 +767,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         cursor();
         jCheckBox3.setVisible(false);
         tf_from_branch_id.setVisible(false);
+        jTextField1.grabFocus();
     }
 
     String my_branch = "";
@@ -807,7 +818,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -824,10 +835,32 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             return;
         }
         to_customers to = (to_customers) tbl_customers_ALM.get(tbl_customers.convertRowIndexToModel(row));
-        tf_customer_name.setText(to.customer_name);
+        int col = tbl_customers.getSelectedColumn();
+        if (col == 3) {
+            view_orders(to);
+        } else {
+            tf_customer_name.setText(to.customer_name);
 
-        data_payments();
-        tf_cash.grabFocus();
+            data_payments();
+            tf_cash.grabFocus();
+        }
+
+    }
+
+    private void view_orders(to_customers to) {
+        Window p = (Window) this;
+        Dlg_prepaid_payment_orders nd = Dlg_prepaid_payment_orders.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("" + to.id);
+        nd.setCallback(new Dlg_prepaid_payment_orders.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_prepaid_payment_orders.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private ArrayListModel tbl_customers_ALM;
@@ -840,7 +873,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         tbl_customers.setModel(tbl_customers_M);
         tbl_customers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_customers.setRowHeight(25);
-        int[] tbl_widths_customers = {70, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_customers = {70, 100, 100, 40, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_customers.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -850,9 +883,9 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         Dimension d = tbl_customers.getTableHeader().getPreferredSize();
         d.height = 25;
         tbl_customers.getTableHeader().setPreferredSize(d);
-        tbl_customers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 11));
+        tbl_customers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_customers.setRowHeight(25);
-        tbl_customers.setFont(new java.awt.Font("Arial", 0, 11));
+        tbl_customers.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_customers, 2);
     }
 
@@ -864,7 +897,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     public static class TblcustomersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "ID No.", "Name", "Prepaid", "contact_no", "credit_limit", "address", "term", "location", "balance", "discount", "prepaid"
+            "ID No.", "Name", "Prepaid", "", "credit_limit", "address", "term", "location", "balance", "discount", "prepaid"
         };
 
         public TblcustomersModel(ListModel listmodel) {
@@ -896,7 +929,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 case 2:
                     return FitIn.fmt_wc_0(tt.prepaid) + " ";
                 case 3:
-                    return tt.contact_no;
+                    return " View";
                 case 4:
                     return tt.credit_limit;
                 case 5:
@@ -941,9 +974,9 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         Dimension d = tbl_prepaid_payments.getTableHeader().getPreferredSize();
         d.height = 25;
         tbl_prepaid_payments.getTableHeader().setPreferredSize(d);
-        tbl_prepaid_payments.getTableHeader().setFont(new java.awt.Font("Arial", 0, 11));
+        tbl_prepaid_payments.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_prepaid_payments.setRowHeight(25);
-        tbl_prepaid_payments.setFont(new java.awt.Font("Arial", 0, 11));
+        tbl_prepaid_payments.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_prepaid_payments, 4);
     }
 

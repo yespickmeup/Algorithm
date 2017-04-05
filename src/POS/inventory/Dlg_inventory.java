@@ -1781,7 +1781,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);

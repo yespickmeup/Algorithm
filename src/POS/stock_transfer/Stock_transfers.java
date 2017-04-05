@@ -616,12 +616,10 @@ public class Stock_transfers {
                 Inventory_barcodes.to_inventory_barcodes tt1 = Inventory_barcodes.ret_to(to.barcode, to.barcodes, to_stock_transfers.from_location_id);
                 double new_qty1 = tt1.product_qty - (to.conversion * to.product_qty);
                 String s41 = "update inventory_barcodes set "
-                        + "product_qty='" + new_qty1 + "' "
+                        + " product_qty='" + new_qty1 + "' "
                         + " where  main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "' "
                         + "";
-
-                PreparedStatement stmt41 = conn.prepareStatement(s41);
-
+                
                 stmt.addBatch(s41);
 
                 //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">
