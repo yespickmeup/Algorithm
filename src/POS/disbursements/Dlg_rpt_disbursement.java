@@ -9,8 +9,6 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.reports.Dlg_report_items;
-import POS.touchscreen_reports.Srpt_sales_ledger;
-import POS.touchscreen_reports.Srpt_sales_summary;
 import POS.users.MyUser;
 import POS.users.S1_users;
 import POS.util.TableRenderer;
@@ -27,6 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -226,6 +225,8 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
         jTextField2 = new Field.Combo();
         jTextField1 = new Field.Combo();
         jButton3 = new Button.Search();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -338,6 +339,7 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
         });
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setFocusable(false);
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField1MouseClicked(evt);
@@ -358,6 +360,14 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setText("All");
+        jCheckBox2.setFocusable(false);
+
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox3.setText("All");
+        jCheckBox3.setFocusable(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -384,12 +394,16 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,7 +435,11 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
                                 .addGap(1, 1, 1)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jCheckBox2)
+                                .addGap(1, 1, 1)
+                                .addComponent(jCheckBox3)))))
                 .addContainerGap())
         );
 
@@ -475,19 +493,19 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_cashierActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        init_branches();
+        init_branch_locations2(jTextField2, jTextField1);
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        init_branches();
+        init_branch_locations2(jTextField2, jTextField1);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        init_branch_locations();
+//        init_branch_locations();
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        init_branch_locations();
+//        init_branch_locations();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -503,6 +521,8 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
@@ -522,10 +542,11 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
     private javax.swing.JTextField tf_cashier;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+
+//        System.setProperty("pool_db", "db_algorithm");
+
         init_key();
-
         set_default_branch();
-
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data2(where);
         branches_list = Branches.ret_where("");
@@ -533,6 +554,9 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
         Field.Combo user = (Field.Combo) tf_cashier;
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
+
+        String where2 = " order by branch,location asc ";
+        branch_location_list2 = S1_branch_locations.ret_location_where(where2);
     }
 
     private void set_default_branch() {
@@ -545,6 +569,39 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
 
         br.setText(to.branch);
         br.setId("" + to.branch_id);
+
+    }
+    List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
+
+    private void init_branch_locations2(JTextField b, JTextField l) {
+
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) l;
+        Object[][] obj = new Object[branch_location_list2.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list2) {
+            obj[i][0] = " " + to.branch;
+            obj[i][1] = " " + to.location;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {90, 120};
+        int width = 0;
+        String[] col_names = {"Branch", "Location"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list2.get(data.selected_row);
+
+                br.setText("" + to.branch);
+                br.setId("" + to.branch_id);
+
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
+            }
+        });
     }
 
     List<Branches.to_branches> branches_list = new ArrayList();
@@ -646,12 +703,20 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
 
                 String where = " where Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' "
-                        + " and user_id='" + f.getId() + "' "
-                        + " and location_id='" + lo.getId() + "' ";
+                        + " and user_id='" + f.getId() + "' ";
+
                 if (jCheckBox1.isSelected()) {
-                    where = " where Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' "
-                            + " and location_id='" + lo.getId() + "' ";
+                    where = " where Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' ";
+
                 }
+
+                if (!jCheckBox2.isSelected() && !jCheckBox3.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
+                }
+                if (!jCheckBox2.isSelected() && jCheckBox3.isSelected()) {
+                    where = where + " and branch_id='" + br.getId() + "' ";
+                }
+//                System.out.println(where);
                 List<S1_disbursements.to_disbursements> datas = S1_disbursements.ret_data(where);
                 List<Srpt_disbursements.field> list = new ArrayList();
                 for (S1_disbursements.to_disbursements dis : datas) {
@@ -664,17 +729,30 @@ public class Dlg_rpt_disbursement extends javax.swing.JDialog {
                     if (dis.is_vat == 0) {
                         vat = "No";
                     }
-                    Srpt_disbursements.field field = new Srpt_disbursements.field(screen_name, date_added, purpose, category, amount, vat);
+                    String location = dis.branch + " - " + dis.location;
+                    Srpt_disbursements.field field = new Srpt_disbursements.field(screen_name, date_added, purpose, category, amount, vat, location);
                     list.add(field);
                 }
 
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String address = System.getProperty("address", "Daro Highway, Dumaguete City");
                 String contact_no = System.getProperty("contact_number", "225-1235");
-                String date = "January 24, 2016";
-                String printed_by = "Administrator";
-
-                Srpt_disbursements rpt = new Srpt_disbursements(business_name, address, contact_no, date, printed_by);
+                String date = DateType.slash.format(jDateChooser3.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+                String printed_by = "";
+                String branch = jTextField2.getText();
+                String location = jTextField1.getText();
+                if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
+                    location = "All";
+                }
+                if (jCheckBox2.isSelected()) {
+                    location = "All";
+                    branch = "All";
+                }
+                String user=tf_cashier.getText();
+                if(jCheckBox1.isSelected()){
+                    user="All";
+                }
+                Srpt_disbursements rpt = new Srpt_disbursements(business_name, address, contact_no, date, printed_by, branch, location,user);
                 rpt.fields.addAll(list);
                 String jrxml = "rpt_disbursement.jrxml";
                 report_sales_items(rpt, jrxml);

@@ -7,6 +7,7 @@ package POS.prepaid_payments;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.branches.Branches;
 import POS.customers.Customers;
 import POS.customers.Customers.to_customers;
 import POS.prepaid_payments.Prepaid_payments.to_prepaid_payments;
@@ -249,10 +250,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         jButton2 = new Button.Info();
         jButton3 = new Button.Warning();
         jLabel15 = new javax.swing.JLabel();
-        tf_from_branch = new javax.swing.JTextField();
+        tf_from_branch = new Field.Combo();
         tf_from_branch_id = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jCheckBox4 = new javax.swing.JCheckBox();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu/global_values.png"))); // NOI18N
         jMenuItem1.setText("Finalize");
@@ -461,6 +463,10 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
 
         jLabel17.setText("0");
 
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setText("All");
+        jCheckBox4.setFocusable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -480,11 +486,13 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jCheckBox4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tf_from_branch)
                                 .addGap(0, 0, 0)
                                 .addComponent(tf_from_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField1)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
@@ -585,7 +593,8 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tf_from_branch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_from_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tf_from_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox4))
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -702,11 +711,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tf_from_branchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_from_branchMouseClicked
-
+        init_branches();
     }//GEN-LAST:event_tf_from_branchMouseClicked
 
     private void tf_from_branchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_branchActionPerformed
-
+        init_branches();
     }//GEN-LAST:event_tf_from_branchActionPerformed
 
     /**
@@ -721,6 +730,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -758,15 +768,17 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
-        
+
         set_default_branch();
         focus();
         init_tbl_customers();
+
         init_tbl_prepaid_payments();
         data_payments();
         cursor();
         jCheckBox3.setVisible(false);
         tf_from_branch_id.setVisible(false);
+
         jTextField1.grabFocus();
     }
 
@@ -784,6 +796,8 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
 
         tf_from_branch.setText(to.branch);
         tf_from_branch_id.setText(to.branch_id);
+
+        branches_list = Branches.ret_where("");
     }
 
     private void focus() {
@@ -836,7 +850,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         }
         to_customers to = (to_customers) tbl_customers_ALM.get(tbl_customers.convertRowIndexToModel(row));
         int col = tbl_customers.getSelectedColumn();
-        if (col == 3) {
+        if (col == 4) {
             view_orders(to);
         } else {
             tf_customer_name.setText(to.customer_name);
@@ -851,7 +865,8 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_prepaid_payment_orders nd = Dlg_prepaid_payment_orders.create(p, true);
         nd.setTitle("");
-        nd.do_pass("" + to.id);
+        nd.do_pass("" + to.id, to.customer_name, to.customer_no);
+
         nd.setCallback(new Dlg_prepaid_payment_orders.Callback() {
 
             @Override
@@ -873,7 +888,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         tbl_customers.setModel(tbl_customers_M);
         tbl_customers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_customers.setRowHeight(25);
-        int[] tbl_widths_customers = {70, 100, 100, 40, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_customers = {70, 100, 100, 100, 40, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_customers.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -886,7 +901,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         tbl_customers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_customers.setRowHeight(25);
         tbl_customers.setFont(new java.awt.Font("Arial", 0, 12));
-        TableWidthUtilities.setColumnRightRenderer(tbl_customers, 2);
+        TableWidthUtilities.setColumnRightRenderer(tbl_customers, 3);
     }
 
     private void loadData_customers(List<to_customers> acc) {
@@ -897,7 +912,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     public static class TblcustomersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "ID No.", "Name", "Prepaid", "", "credit_limit", "address", "term", "location", "balance", "discount", "prepaid"
+            "ID No.", "Name", "Branch", "Prepaid", "", "address", "term", "location", "balance", "discount", "prepaid"
         };
 
         public TblcustomersModel(ListModel listmodel) {
@@ -927,11 +942,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 case 1:
                     return " " + tt.customer_name;
                 case 2:
-                    return FitIn.fmt_wc_0(tt.prepaid) + " ";
+                   return " " + tt.branch;
                 case 3:
-                    return " View";
+                    return FitIn.fmt_wc_0(tt.prepaid) + " ";
                 case 4:
-                    return tt.credit_limit;
+                     return " View";
                 case 5:
                     return tt.address;
                 case 6:
@@ -949,8 +964,10 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }
 
     private void data_cols() {
-        String where = " where customer_name like '%" + jTextField1.getText() + "%' and branch_id='" + tf_from_branch_id.getText() + "' ";
-        System.out.println(where);
+        String where = " where customer_name like '%" + jTextField1.getText() + "%' and branch_id='" + tf_from_branch_id.getText() + "' order by customer_name asc ";
+        if (jCheckBox4.isSelected()) {
+            where = " where customer_name like '%" + jTextField1.getText() + "%' order by customer_name asc  ";
+        }
         loadData_customers(Customers.ret_data2(where));
         jLabel17.setText("" + tbl_customers_ALM.size());
     }
@@ -1351,4 +1368,33 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         });
     }
 
+    List<Branches.to_branches> branches_list = new ArrayList();
+
+    private void init_branches() {
+        final Field.Combo br = (Field.Combo) tf_from_branch;
+        Object[][] obj = new Object[branches_list.size()][2];
+        int i = 0;
+        for (Branches.to_branches to : branches_list) {
+            obj[i][0] = " " + to.id;
+            obj[i][1] = " " + to.branch;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {0, 200};
+        int width = 0;
+        String[] col_names = {"Code", "Branch"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Branches.to_branches to = branches_list.
+                        get(data.selected_row);
+                br.setText(to.branch);
+                br.setId("" + to.id);
+
+            }
+        });
+    }
 }

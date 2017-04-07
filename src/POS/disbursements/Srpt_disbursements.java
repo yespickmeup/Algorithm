@@ -31,14 +31,19 @@ public class Srpt_disbursements {
     public final String date;
     public final String printed_by;
     public final List<Srpt_disbursements.field> fields;
-
-    public Srpt_disbursements(String business_name, String address, String contact_no, String date, String printed_by) {
+    public final String branch;
+    public final String location;
+    public final String user;
+    public Srpt_disbursements(String business_name, String address, String contact_no, String date, String printed_by,String branch,String location,String user) {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
         this.date = date;
         this.printed_by = printed_by;
         this.fields = new ArrayList();
+        this.branch=branch;
+        this.location=location;
+        this.user=user;
     }
 
     public static class field {
@@ -49,19 +54,28 @@ public class Srpt_disbursements {
         String category;
         double amount;
         String vat;
-
+        String location;
         public field() {
         }
 
-        public field(String screen_name, String date_added, String purpose, String category, double amount, String vat) {
+        public field(String screen_name, String date_added, String purpose, String category, double amount, String vat,String location) {
             this.screen_name = screen_name;
             this.date_added = date_added;
             this.purpose = purpose;
             this.category = category;
             this.amount = amount;
             this.vat = vat;
+            this.location=location;
         }
 
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+        
         public String getScreen_name() {
             return screen_name;
         }
@@ -123,10 +137,11 @@ public class Srpt_disbursements {
             String category = dis.category_name;
             double amount = dis.amount;
             String vat = "Yes";
+            String location="";
             if (dis.is_vat == 0) {
                 vat = "No";
             }
-            Srpt_disbursements.field field = new field(screen_name, date_added, purpose, category, amount, vat);
+            Srpt_disbursements.field field = new field(screen_name, date_added, purpose, category, amount, vat,location);
             list.add(field);
         }
 
@@ -135,8 +150,9 @@ public class Srpt_disbursements {
         String contact_no = System.getProperty("contact_no", "225-1235");
         String date = "January 24, 2016";
         String printed_by = "Administrator";
-
-        Srpt_disbursements rpt = new Srpt_disbursements(business_name, address, contact_no, date, printed_by);
+        String branch="";
+        String location="";
+        Srpt_disbursements rpt = new Srpt_disbursements(business_name, address, contact_no, date, printed_by,branch,location,"");
         rpt.fields.addAll(list);
         String jrxml = "rpt_disbursement.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

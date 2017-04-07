@@ -55,10 +55,11 @@ public class Srpt_encoding_inventory {
         String description;
         String sheet_no;
         String counted_by;
+        String location;
         public field() {
         }
 
-        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no,String counted_by) {
+        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no,String counted_by,String location) {
             this.date_added = date_added;
             this.qty = qty;
             this.item_code = item_code;
@@ -66,8 +67,17 @@ public class Srpt_encoding_inventory {
             this.description = description;
             this.sheet_no = sheet_no;
             this.counted_by=counted_by;
+            this.location=location;
         }
 
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+        
         public String getCounted_by() {
             return counted_by;
         }
@@ -210,8 +220,8 @@ public class Srpt_encoding_inventory {
                 int status = rs.getInt(14);
                 String counted_by = rs.getString(15);
                 String checked_by = rs.getString(16);
-
-                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no,counted_by);
+                    String loc=branch+ " - "+location;
+                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no,counted_by,loc);
                 datas.add(field);
             }
             return datas;

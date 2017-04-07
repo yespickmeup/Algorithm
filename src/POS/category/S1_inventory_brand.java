@@ -68,8 +68,8 @@ public class S1_inventory_brand {
     public static List<to_inventory_brand> ret_data2(String where) {
         List<to_inventory_brand> datas = new ArrayList();
 
-        to_inventory_brand to2 = new to_inventory_brand(0, "", "All");
-        datas.add(to2);
+//        to_inventory_brand to2 = new to_inventory_brand(0, "", "All");
+//        datas.add(to2);
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "

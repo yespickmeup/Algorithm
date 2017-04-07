@@ -39,7 +39,9 @@ public class Srpt_stock_take {
     public final String model;
     public final String business_name;
     public final String date;
-    public Srpt_stock_take(String category, String classification, String sub_classification, String brand, String model,String business_name,String date) {
+    public final String branch;
+    public final String location;
+    public Srpt_stock_take(String category, String classification, String sub_classification, String brand, String model,String business_name,String date,String branch,String location) {
         this.fields = new ArrayList();
         this.category = category;
         this.classification = classification;
@@ -48,6 +50,8 @@ public class Srpt_stock_take {
         this.model = model;
         this.business_name=business_name;
         this.date=date;
+        this.branch=branch;
+        this.location=location;
     }
 
     public static class field {
@@ -60,11 +64,11 @@ public class Srpt_stock_take {
         double cost;
         String uom;
         String code;
-
+        String location;
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, double qty, double selling_price, double cost, String uom, String code) {
+        public field(String item_code, String barcode, String description, double qty, double selling_price, double cost, String uom, String code,String location) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -73,8 +77,17 @@ public class Srpt_stock_take {
             this.cost = cost;
             this.uom = uom;
             this.code = code;
+            this.location=location;
         }
 
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+        
         public String getCode() {
             return code;
         }
@@ -154,7 +167,7 @@ public class Srpt_stock_take {
         String brand = "";
         String model = "";
 
-        Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model,business_name,date);
+        Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model,business_name,date,"","");
         rpt.fields.addAll(datas);
         String jrxml = "rpt_stock_take.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -173,7 +186,7 @@ public class Srpt_stock_take {
         String brand = "";
         String model = "";
 
-        Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model,business_name,date);
+        Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model,business_name,date,"","");
         rpt.fields.addAll(datas1);
         String jrxml = "rpt_stock_take.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -305,8 +318,8 @@ public class Srpt_stock_take {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 String serial_no = rs.getString(37);
-
-                Srpt_stock_take.field field = new field("" + main_barcode, barcode, description, product_qty, selling_price, cost, unit, "" + main_barcode);
+                String loc=branch+ " - "+location;
+                Srpt_stock_take.field field = new field("" + main_barcode, barcode, description, product_qty, selling_price, cost, unit, "" + main_barcode,loc);
                 datas.add(field);
             }
             return datas;

@@ -18,6 +18,7 @@ import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -220,6 +222,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -228,9 +231,19 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton2 = new Button.Default();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField4 = new Field.Combo();
+        jTextField5 = new Field.Combo();
+        jLabel9 = new javax.swing.JLabel();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_adjustments = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -275,6 +288,11 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         jLabel1.setText("Branch:");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -285,6 +303,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         jLabel2.setText("Location:");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.setFocusable(false);
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -310,11 +329,11 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setText("All");
-        jCheckBox1.setEnabled(false);
+        jCheckBox1.setFocusable(false);
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setText("All");
-        jCheckBox2.setEnabled(false);
+        jCheckBox2.setFocusable(false);
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -323,18 +342,23 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("Item Code");
+        jCheckBox6.setText("[F1]-All");
         jCheckBox6.setFocusable(false);
 
         buttonGroup1.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("Barcode");
+        jCheckBox7.setText("[F2]-Item Code");
         jCheckBox7.setFocusable(false);
 
         buttonGroup1.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("Description");
+        jCheckBox8.setText("[F3]-Barcode");
         jCheckBox8.setFocusable(false);
+
+        buttonGroup1.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("[F4]-Description");
+        jCheckBox9.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -356,31 +380,30 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBox7)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(5, 5, 5)
-                                                .addComponent(jCheckBox1))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jCheckBox2)))
+                                            .addComponent(jCheckBox2)
+                                            .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addGap(7, 7, 7)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 304, Short.MAX_VALUE)))
+                                            .addComponent(jTextField3)
+                                            .addComponent(jTextField2)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCheckBox8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox9)))
+                                .addGap(0, 252, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -402,18 +425,19 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox2))))
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox6)
                     .addComponent(jCheckBox7)
                     .addComponent(jCheckBox8)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox9))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -451,37 +475,99 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Branch:");
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField4MouseClicked(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField5.setFocusable(false);
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Location:");
+
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setText("All");
+        jCheckBox4.setFocusable(false);
+
+        jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setText("All");
+        jCheckBox5.setFocusable(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox4)
+                            .addComponent(jCheckBox5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(jTextField4)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jCheckBox4)
+                        .addGap(1, 1, 1)
+                        .addComponent(jCheckBox5)))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(jCheckBox3))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -505,20 +591,45 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tbl_adjustments);
 
+        jLabel10.setText("Total no. of rows:");
+
+        jLabel11.setText("0");
+
+        jLabel12.setText("Status:");
+
+        jProgressBar2.setString("");
+        jProgressBar2.setStringPainted(true);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addGap(13, 13, 13)
+                        .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel12))
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -579,11 +690,11 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_inventory_barcodesMouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        init_branches();
+        init_branch_locations2(jTextField2, jTextField3);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        init_branch_locations();
+//        init_branch_locations();
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -602,6 +713,22 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         data_cols_adjustments();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        init_branch_locations2(jTextField2, jTextField3);
+    }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
+        init_branch_locations2(jTextField4, jTextField5);
+    }//GEN-LAST:event_jTextField4MouseClicked
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        init_branch_locations2(jTextField4, jTextField5);
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -613,12 +740,18 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -626,39 +759,54 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tbl_adjustments;
     private javax.swing.JTable tbl_inventory_barcodes;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         init_tbl_inventory_barcodes(tbl_inventory_barcodes);
         init_tbl_adjustments(tbl_adjustments);
 
+        String where = " order by branch,location asc ";
+        branch_location_list2 = S1_branch_locations.ret_location_where(where);
+        jTextField1.grabFocus();
     }
 
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         Field.Combo br = (Field.Combo) jTextField2;
         Field.Combo lo = (Field.Combo) jTextField3;
-        jTextField2.setText(to.branch);
+        br.setText(to.branch);
         br.setId(to.branch_id);
-        jTextField3.setText(to.location);
+        lo.setText(to.location);
         lo.setId("" + to.id);
 
+        Field.Combo br2 = (Field.Combo) jTextField4;
+        Field.Combo lo2 = (Field.Combo) jTextField5;
+        br2.setText(to.branch);
+        br2.setId(to.branch_id);
+        lo2.setText(to.location);
+        lo2.setId("" + to.id);
     }
 
     List<Branches.to_branches> branches_list = new ArrayList();
@@ -725,6 +873,40 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         });
     }
 
+    List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
+
+    private void init_branch_locations2(JTextField b, JTextField l) {
+
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) l;
+        Object[][] obj = new Object[branch_location_list2.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list2) {
+            obj[i][0] = " " + to.branch;
+            obj[i][1] = " " + to.location;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {90, 120};
+        int width = 0;
+        String[] col_names = {"Branch", "Location"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list2.get(data.selected_row);
+
+                br.setText("" + to.branch);
+                br.setId("" + to.branch_id);
+
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
+            }
+        });
+    }
+    
+
     public void do_pass() {
 
     }
@@ -742,6 +924,25 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
                 disposed();
+            }
+        });
+        jTextField1.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox6.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox7.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox8.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    jCheckBox9.setSelected(true);
+                }
             }
         });
     }
@@ -888,27 +1089,47 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     private void data_cols() {
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
+        jTextField1.setEnabled(false);
+        jButton1.setEnabled(false);
         Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
-                Field.Combo lo = (Field.Combo) jTextField3;
                 Field.Combo br = (Field.Combo) jTextField2;
-                String where = " where ";
+                Field.Combo lo = (Field.Combo) jTextField3;
 
+                String where = " where category like '%" + "" + "%' ";
                 if (jCheckBox6.isSelected()) {
-                    where = where + "  main_barcode like '" + jTextField1.getText() + "' and location_id='" + lo.getId() + "' ";
+                    where = where + "   ";
                 }
                 if (jCheckBox7.isSelected()) {
-                    where = where + "  barcode='" + jTextField1.getText() + "' and location_id='" + lo.getId() + "' ";
+                    where = where + "  "
+                            + " and main_barcode='" + jTextField1.getText() + "'  "
+                            + "  ";
                 }
                 if (jCheckBox8.isSelected()) {
-                    where = where + "  description like '%" + jTextField1.getText() + "%' and location_id='" + lo.getId() + "' ";
+                    where = where + " and  barcode like '" + jTextField1.getText() + "'   ";
                 }
+                if (jCheckBox9.isSelected()) {
+                    where = where + " and description like '%" + jTextField1.getText() + "%'  ";
+                }
+
+                if (!jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
+                }
+                if (!jCheckBox1.isSelected() && jCheckBox2.isSelected()) {
+                    where = where + " and branch_code='" + br.getId() + "' ";
+                }
+
                 where = where + " order by description asc ";
+//                System.out.println(where);
                 List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
                 loadData_inventory_barcodes(datas);
                 jLabel4.setText("" + datas.size());
+                jTextField1.setEnabled(true);
+                jButton1.setEnabled(true);
+                jTextField1.grabFocus();
+
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
             }
@@ -1004,7 +1225,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         tbl_adjustments.setModel(tbl_adjustments_M);
         tbl_adjustments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_adjustments.setRowHeight(25);
-        int[] tbl_widths_adjustments = {40, 80, 80, 100, 100, 100, 50, 70, 80, 80, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_adjustments = {40, 80, 80, 60, 100, 100, 100, 100, 50, 70, 80, 90, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_adjustments.length; i < n; i++) {
             if (i == 5) {
                 continue;
@@ -1027,7 +1248,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     public static class TbladjustmentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "No.", "Date", "User", "Item Code", "Barcode", "Description", "Type", "Previous", "Adjustment", "New Qty", "user_screen_name", "branch", "branch_id", "location", "location_id", "remarks", "transaction_no"
+            "No.", "Date", "User", "Item Code", "Barcode", "Description", "Branch", "Location", "Type", "Previous", "Adjustment", "New Qty", "branch_id", "location", "location_id", "remarks", "transaction_no"
         };
 
         public TbladjustmentsModel(ListModel listmodel) {
@@ -1066,26 +1287,25 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                     return " " + tt.description;
 
                 case 6:
+                    return " " + tt.branch;
+                case 7:
+                    return " " + tt.location;
+                case 8:
                     if (tt.is_add == 1) {
                         return " Add";
                     } else {
                         return " Deduct";
                     }
-                case 7:
-                    return " " + FitIn.fmt_woc(tt.qty);
-                case 8:
-                    return " " + FitIn.fmt_woc(tt.new_qty);
                 case 9:
+                    return " " + FitIn.fmt_woc(tt.qty);
+                case 10:
+                    return " " + FitIn.fmt_woc(tt.new_qty);
+                case 11:
                     if (tt.is_add == 1) {
                         return " " + FitIn.fmt_woc(tt.new_qty + tt.qty);
                     } else {
                         return " " + FitIn.fmt_woc(tt.qty - tt.new_qty);
                     }
-
-                case 10:
-                    return tt.user_screen_name;
-                case 11:
-                    return tt.branch;
                 case 12:
                     return tt.branch_id;
                 case 13:
@@ -1102,24 +1322,39 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
     private void data_cols_adjustments() {
 
-        jProgressBar1.setString("Loading...Please wait...");
-        jProgressBar1.setIndeterminate(true);
+        jProgressBar2.setString("Loading...Please wait...");
+        jProgressBar2.setIndeterminate(true);
+        jButton2.setEnabled(false);
         Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
+
+                Field.Combo br = (Field.Combo) jTextField4;
+                Field.Combo lo = (Field.Combo) jTextField5;
+
                 String date_from = synsoftech.util.DateType.sf.format(jDateChooser1.getDate());
                 String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
-                String where = " ";
+                String where = " where description like '%" + "" + "%' ";
                 if (!jCheckBox3.isSelected()) {
-                    where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where = " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
-                where = where + " order by id desc ";
 
+                if (!jCheckBox4.isSelected() && !jCheckBox5.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
+                }
+                if (!jCheckBox4.isSelected() && jCheckBox5.isSelected()) {
+                    where = where + " and branch_id='" + br.getId() + "' ";
+                }
+
+                where = where + " order by id desc ";
+                System.out.println(where);
                 List<to_adjustments> datas = S1_adjustments.ret_data(where);
                 loadData_adjustments(datas);
-                jProgressBar1.setString("Finished...");
-                jProgressBar1.setIndeterminate(false);
+                jLabel11.setText(""+datas.size());
+                jButton2.setEnabled(true);
+                jProgressBar2.setString("Finished...");
+                jProgressBar2.setIndeterminate(false);
             }
         });
         t.start();

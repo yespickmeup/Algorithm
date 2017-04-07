@@ -219,13 +219,13 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         tf_borrower = new Field.Input_w_department();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new Field.Input();
+        jTextField5 = new Field.Combo();
         jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new Field.Input();
+        jTextField6 = new Field.Combo();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField7 = new Field.Input();
-        jTextField8 = new Field.Input();
+        jTextField7 = new Field.Combo();
+        jTextField8 = new Field.Combo();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tf_remarks = new javax.swing.JTextArea();
@@ -248,6 +248,8 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -316,6 +318,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
         jLabel9.setText("       Location:");
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField6.setFocusable(false);
         jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField6MouseClicked(evt);
@@ -346,6 +349,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
         });
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField8.setFocusable(false);
         jTextField8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField8MouseClicked(evt);
@@ -507,7 +511,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_bs_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -544,7 +548,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
                     .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -590,7 +594,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Report", jPanel3);
@@ -605,7 +609,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Print Preview", jPanel4);
@@ -658,35 +662,35 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        init_branches(jTextField5);
+        init_branch_locations2(jTextField5, jTextField6);
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        init_branches(jTextField7);
+         init_branch_locations2(jTextField7, jTextField8);
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jTextField7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField7MouseClicked
-        init_branches(jTextField7);
+        init_branch_locations2(jTextField7, jTextField8);
     }//GEN-LAST:event_jTextField7MouseClicked
 
     private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
-        init_branches(jTextField5);
+        init_branch_locations2(jTextField5, jTextField6);
     }//GEN-LAST:event_jTextField5MouseClicked
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        init_branch_locations(jTextField5, jTextField6);
+//        init_branch_locations(jTextField5, jTextField6);
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jTextField6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField6MouseClicked
-        init_branch_locations(jTextField5, jTextField6);
+//        init_branch_locations(jTextField5, jTextField6);
     }//GEN-LAST:event_jTextField6MouseClicked
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        init_branch_locations(jTextField7, jTextField8);
+//        init_branch_locations(jTextField7, jTextField8);
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jTextField8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField8MouseClicked
-        init_branch_locations(jTextField7, jTextField8);
+//        init_branch_locations(jTextField7, jTextField8);
     }//GEN-LAST:event_jTextField8MouseClicked
 
     private void tf_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_searchMouseClicked
@@ -753,6 +757,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db","db_algorithm");
         init_key();
         set_default_branch();
         init_bs_no();
@@ -777,7 +782,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -790,15 +795,18 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
 
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
-        Field.Input from_branch = (Field.Input) jTextField5;
-        Field.Input from_location = (Field.Input) jTextField6;
-        Field.Input to_branch = (Field.Input) jTextField7;
+        Field.Combo from_branch = (Field.Combo) jTextField5;
+        Field.Combo from_location = (Field.Combo) jTextField6;
+        Field.Combo to_branch = (Field.Combo) jTextField7;
         from_branch.setText(to.branch);
         from_branch.setId("" + to.branch_id);
         to_branch.setText(to.branch);
         to_branch.setId("" + to.branch_id);
         from_location.setText(to.location);
         from_location.setId("" + to.id);
+
+        String where = " order by branch,location asc ";
+        branch_location_list2 = S1_branch_locations.ret_location_where(where);
     }
 
     List<Branches.to_branches> branches_list = new ArrayList();
@@ -849,8 +857,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
             obj[i][1] = to.location;
             i++;
         }
-        
-        
+
         JLabel[] labels = {};
         int[] tbl_widths_customers = {0, 200};
         int width = 0;
@@ -865,8 +872,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
                 locations.setId("" + to.id);
             }
         });
-        
-        
+
     }
 
     //<editor-fold defaultstate="collapsed" desc=" borrower_slip_items "> 
@@ -1333,16 +1339,13 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
 
         Field.Input i_to_branch = (Field.Input) jTextField7;
         Field.Input i_to_location = (Field.Input) jTextField8;
-        
+
         if (col == 7) {
             //update
             tf_bs_no.setText(to.bs_no);
             tf_reference_no.setText(to.reference_no);
             tf_borrower.setText(to.borrowed_by);
-            
-            
-            
-            
+
         } else if (col == 8) {
             //delete
         } else if (col == 9) {
@@ -1351,4 +1354,38 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
             //select
         }
     }
+
+    List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
+
+    private void init_branch_locations2(JTextField b, JTextField l) {
+
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) l;
+        Object[][] obj = new Object[branch_location_list2.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list2) {
+            obj[i][0] = " " + to.branch;
+            obj[i][1] = " " + to.location;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {90, 120};
+        int width = 0;
+        String[] col_names = {"Branch", "Location"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list2.get(data.selected_row);
+
+                br.setText("" + to.branch);
+                br.setId("" + to.branch_id);
+
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
+            }
+        });
+    }
+
 }

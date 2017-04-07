@@ -5,6 +5,7 @@
  */
 package POS.reports3;
 
+import static POS.reports3.Dlg_report_item.view_only;
 import POS.util.DateType;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -290,7 +291,7 @@ public class Dlg_report_item_print_preview extends javax.swing.JDialog {
         init_key();
     }
 
-    public void do_pass(final List<Srpt_stock_take.field> datas1, final String category, final String classification, final String sub_classification, final String brand, final String model) {
+    public void do_pass(final List<Srpt_stock_take.field> datas1, final String category, final String classification, final String sub_classification, final String brand, final String model,final String branch,final String location,final int view_only) {
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
         Thread t = new Thread(new Runnable() {
@@ -301,9 +302,12 @@ public class Dlg_report_item_print_preview extends javax.swing.JDialog {
                 String date = DateType.month_date.format(new Date());
                 String printed_by = "";
 
-                Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model,business_name,date);
+                Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model,business_name,date,branch,location);
                 rpt.fields.addAll(datas1);
                 String jrxml = "rpt_stock_take.jrxml";
+                if(view_only==0){
+                    jrxml = "rpt_stock_take_cost.jrxml";
+                }
                 report_customers(rpt, jrxml);
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);

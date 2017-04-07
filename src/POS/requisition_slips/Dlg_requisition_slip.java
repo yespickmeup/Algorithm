@@ -20,6 +20,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -244,6 +245,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
+        jCheckBox9 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -358,6 +360,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             }
         });
 
+        tf_search.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_search.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         tf_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,22 +399,27 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         buttonGroup2.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("Item Code");
+        jCheckBox6.setText("[F1]-All");
         jCheckBox6.setFocusable(false);
 
         buttonGroup2.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("Barcode");
+        jCheckBox7.setText("[F2]-Item Code");
         jCheckBox7.setFocusable(false);
 
         buttonGroup2.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("Description");
+        jCheckBox8.setText("[F3]-Barcode");
         jCheckBox8.setFocusable(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Search:");
+
+        buttonGroup2.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("[F4]-Description");
+        jCheckBox9.setFocusable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -467,11 +475,13 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox9)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -518,13 +528,14 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox6)
                     .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox8))
+                    .addComponent(jCheckBox8)
+                    .addComponent(jCheckBox9))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -891,6 +902,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -988,6 +1000,26 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                 disposed();
             }
         });
+        tf_search.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox6.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox7.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox8.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    jCheckBox9.setSelected(true);
+                }
+
+            }
+        });
     }
     // </editor-fold>
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
@@ -1067,16 +1099,22 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             @Override
             public void run() {
                 String search = tf_search.getText();
-                String where = " where ";
+                String where = " where category like '%" + "" + "%' ";
 
                 if (jCheckBox6.isSelected()) {
-                    where = where + "  main_barcode like '" + search + "' and location_id='" + tf_branch_id.getText() + "' ";
+                    where = where + " and location_id='" + tf_branch_id.getText() + "' ";
+
                 }
                 if (jCheckBox7.isSelected()) {
-                    where = where + "  barcode='" + search + "' and location_id='" + tf_branch_id.getText() + "' ";
+                    where = where + " and main_barcode like '" + search + "' and location_id='" + tf_branch_id.getText() + "' ";
+
                 }
                 if (jCheckBox8.isSelected()) {
-                    where = where + "  description like '%" + search + "%' and location_id='" + tf_branch_id.getText() + "' ";
+                    where = where + " and barcode='" + search + "' and location_id='" + tf_branch_id.getText() + "' ";
+
+                }
+                if (jCheckBox9.isSelected()) {
+                    where = where + "  and description like '%" + search + "%' and location_id='" + tf_branch_id.getText() + "' ";
                 }
                 where = where + " order by description asc ";
 
@@ -1111,7 +1149,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                         public void ok(TableRenderer.OutputData data) {
                             selected_row = data.selected_row;
                             add_items();
-
+                            tf_search.grabFocus();
                         }
                     });
                 }

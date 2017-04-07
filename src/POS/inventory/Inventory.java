@@ -1515,38 +1515,38 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
 
-                int exist = 0;
-                for (String s : data) {
-                    if (s.equals(branch)) {
-                        exist = 1;
-                    }
-                }
-                if (exist == 0) {
-                    data.add(branch);
-                    branch1 = branch;
-                } else {
-                    branch1 = "";
-                }
+//                int exist = 0;
+//                for (String s : data) {
+//                    if (s.equals(branch)) {
+//                        exist = 1;
+//                    }
+//                }
+//                if (exist == 0) {
+//                    data.add(branch);
+//                    branch1 = branch;
+//                } else {
+//                    branch1 = "";
+//                }
+//
+//                int exist2 = 0;
+//                for (String s : data2) {
+//                    if (s.equals(location)) {
+//                        exist2 = 1;
+//                    }
+//                }
+//                if (exist2 == 0) {
+//                    data2.add(location);
+//                    location1 = location;
+//                } else {
+//                    location1 = "";
+//                }
 
-                int exist2 = 0;
-                for (String s : data2) {
-                    if (s.equals(location)) {
-                        exist2 = 1;
-                    }
-                }
-                if (exist2 == 0) {
-                    data2.add(location);
-                    location1 = location;
-                } else {
-                    location1 = "";
-                }
-
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, branch, location, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch1, branch_code, location1, location_id, false);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, branch, location, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
                 datas.add(to);
             }
-            for (String s : data) {
-                System.out.println("Branch: " + s);
-            }
+//            for (String s : data) {
+//                System.out.println("Branch: " + s);
+//            }
             return datas;
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -7,24 +7,44 @@ package POS.prepaid_payments;
 
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.uom;
-import POS.my_sales.MySales;
+import POS.my_sales.MySales2;
 import POS.my_sales.MySales_Items;
+import POS.reports.Dlg_report_items;
+import POS.touchscreen_reports.Srpt_sales_ledger;
+import POS.touchscreen_reports.Srpt_sales_summary;
 import POS.util.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
+import synsoftech.fields.Button;
+import synsoftech.fields.Field;
 
 /**
  *
@@ -199,12 +219,21 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new Field.Input();
+        jTextField2 = new Field.Input();
+        jButton1 = new Button.Default();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        pnl_report = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -216,7 +245,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Transactions", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Transactions", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -251,6 +280,30 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("0.00");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Customer No.:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Customer Name:");
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setFocusable(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setFocusable(false);
+
+        jButton1.setText("Print Preview");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -258,7 +311,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,14 +320,35 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)))
+                        .addGap(17, 17, 17))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -287,7 +361,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,7 +401,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -349,7 +423,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -357,20 +431,65 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Orders", jPanel4);
 
+        pnl_report.setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jProgressBar1.setString("");
+        jProgressBar1.setStringPainted(true);
+
+        jLabel9.setText("Status:");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(719, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Print Preview", jPanel5);
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 493, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnl_reportLayout = new javax.swing.GroupLayout(pnl_report);
+        pnl_report.setLayout(pnl_reportLayout);
+        pnl_reportLayout.setHorizontalGroup(
+            pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnl_reportLayout.setVerticalGroup(
+            pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_reportLayout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane1.addTab("Print Preview", pnl_report);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -404,30 +523,47 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-      select_sale_items();
+        select_sale_items();
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        init_report();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel pnl_report;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
@@ -436,17 +572,20 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
 
     }
 
-    public void do_pass(String customer_id) {
+    public void do_pass(String customer_id, String customer_name, String customer_no) {
         String where = " where prepaid_customer_id='" + customer_id + "' ";
-        List<MySales.sales> sales = MySales.ret_data(where);
+        List<MySales2.sales> sales = MySales2.ret_data(where);
         loadData_sales(sales);
         double prepaid = 0;
-
-        for (MySales.sales sale : sales) {
+        for (MySales2.sales sale : sales) {
             prepaid += sale.prepaid_amount;
         }
         jLabel2.setText("" + sales.size());
         jLabel6.setText(FitIn.fmt_wc_0(prepaid));
+
+        jTextField1.setText(customer_no);
+        jTextField2.setText(customer_name);
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -477,7 +616,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         tbl_sales.setModel(tbl_sales_M);
         tbl_sales.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_sales.setRowHeight(25);
-        int[] tbl_widths_sales = {120, 80, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_sales = {120, 80, 100, 100, 100, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_sales.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -494,16 +633,15 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_sales, 4);
     }
 
-    public static void loadData_sales(List<MySales.sales> acc) {
+    public static void loadData_sales(List<MySales2.sales> acc) {
         tbl_sales_ALM.clear();
         tbl_sales_ALM.addAll(acc);
     }
 
-    
     public static class TblsalesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction No", "Date", "Added By", "Amount Due", "Prepayment", "session_no", "remarks", "gross_amount", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax", "branch", "branch_id", "location", "location_id"
+            "Transaction No", "Date", "Added By", "Amount Due", "Prepayment", "", "remarks", "gross_amount", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax", "branch", "branch_id", "location", "location_id"
         };
 
         public TblsalesModel(ListModel listmodel) {
@@ -520,7 +658,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 1000) {
+            if (col == 5) {
                 return Boolean.class;
             }
             return Object.class;
@@ -528,7 +666,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            MySales.sales tt = (MySales.sales) getRow(row);
+            MySales2.sales tt = (MySales2.sales) getRow(row);
             switch (col) {
                 case 0:
                     return " " + tt.sales_no;
@@ -541,7 +679,7 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
                 case 4:
                     return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
                 case 5:
-                    return tt.session_no;
+                    return tt.is_selected;
                 case 6:
                     return tt.remarks;
                 case 7:
@@ -794,10 +932,154 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        MySales.sales sale = (MySales.sales) tbl_sales_ALM.get(row);
-        String where = " where sales_no='" + sale.sales_no + "' ";
-        List< MySales_Items.items> items = MySales_Items.ret_data2(where);
-        loadData_sale_items(items);
-        jLabel4.setText("" + items.size());
+
+        MySales2.sales sale = (MySales2.sales) tbl_sales_ALM.get(row);
+
+        int col = jTable1.getSelectedColumn();
+        if (col == 5) {
+            if (sale.is_selected) {
+                sale.setIs_selected(false);
+            } else {
+                sale.setIs_selected(true);
+            }
+            List< MySales2.sales> sales = tbl_sales_ALM;
+            double prepaid = 0;
+            for (MySales2.sales s : sales) {
+                if (s.is_selected) {
+                    prepaid += s.prepaid_amount;
+                }
+
+            }
+            jLabel6.setText(FitIn.fmt_wc_0(prepaid));
+            tbl_sales_M.fireTableDataChanged();
+        } else {
+            String where = " where sales_no='" + sale.sales_no + "' ";
+            List< MySales_Items.items> items = MySales_Items.ret_data2(where);
+            loadData_sale_items(items);
+            jLabel4.setText("" + items.size());
+        }
+
+    }
+
+    private void init_report() {
+
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+
+        jTabbedPane1.setSelectedIndex(1);
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                List<Srpt_prepaid_orders.field> datas = new ArrayList();
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String date = DateType.slash_w_time.format(new Date());
+                String printed_by = "Administrator";
+                String branch = "Dumaguete City";
+                String location = "Selling Area";
+                String address = System.getProperty("address", "Dumaguete City");
+                List< MySales2.sales> sales = tbl_sales_ALM;
+
+                for (MySales2.sales s : sales) {
+                    if (s.is_selected) {
+                        String where = " where sales_no='" + s.sales_no + "' ";
+                        List<MySales_Items.items> items = MySales_Items.ret_data2(where);
+                        for (MySales_Items.items item : items) {
+                            String sales_no = s.sales_no;
+                            String date2 = DateType.convert_slash_datetime2(s.date_added);
+                            String item_code = item.item_code;
+                            String barcode = item.barcode;
+                            String description = item.description;
+                            String unit = "";
+                            Dlg_inventory_uom.to_uom uoms = uom.default_uom(item.unit);
+                            if (uoms != null) {
+                                unit = uoms.uom;
+                            }
+                            double qty = item.product_qty;
+                            double conversion = item.conversion;
+                            double selling_price = item.selling_price;
+                            double discount = item.discount_amount;
+                            double amount = ((qty*item.conversion) * selling_price) - discount;
+                            Srpt_prepaid_orders.field field = new Srpt_prepaid_orders.field(sales_no, date2, item_code, barcode, description, unit, qty, conversion, selling_price, discount, amount);
+                            datas.add(field);
+                        }
+                    }
+                }
+                String customer_name=jTextField2.getText();
+                double prepaid=FitIn.toDouble(jLabel6.getText());
+                Srpt_prepaid_orders rpt = new Srpt_prepaid_orders(branch, location, business_name, address, date, printed_by,customer_name,prepaid);
+                rpt.fields.addAll(datas);
+                String jrxml = "rpt_prepaid_orders.jrxml";
+                report_sales_items(rpt, jrxml);
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+
+//                InputStream is = Srpt_prepaid_orders.class.getResourceAsStream(jrxml);
+//                try {
+//                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
+//                    jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+//                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+//
+//                } catch (JRException ex) {
+//                    Logger.getLogger(Dlg_report_items.class.getName()).
+//                            log(Level.SEVERE, null, ex);
+//                }
+            }
+        });
+        t.start();
+
+    }
+
+    private void report_sales_items(final Srpt_prepaid_orders to, String jrxml_name) {
+        jPanel6.removeAll();
+        jPanel6.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_expenses(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            jPanel6.add(viewer);
+            jPanel6.updateUI();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_expenses(Srpt_prepaid_orders to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_prepaid_orders.class.getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    JasperPrint jasperPrint = null;
+
+    private void print() {
+        try {
+            if (jasperPrint != null) {
+                JasperPrintManager.printReport(jasperPrint, false);
+            }
+
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+            throw new RuntimeException(e);
+        }
     }
 }

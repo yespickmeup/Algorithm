@@ -76,8 +76,8 @@ public class S1_inventory_model {
 
     public static List<to_inventory_model> ret_data2(String where) {
         List<to_inventory_model> datas = new ArrayList();
-        to_inventory_model to2 = new to_inventory_model(0, "", "", "", "All");
-        datas.add(to2);
+//        to_inventory_model to2 = new to_inventory_model(0, "", "", "", "All");
+//        datas.add(to2);
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "

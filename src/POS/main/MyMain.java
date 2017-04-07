@@ -73,7 +73,7 @@ public class MyMain {
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
             System.out.println("Host: " + System.getProperty("pool_host"));
             System.out.println("Environment: " + System.getProperty("environment"));
-            System.out.println("inventory_item_delete: " + System.getProperty("inventory_item_delete"));
+//            System.out.println("inventory_item_delete: " + System.getProperty("inventory_item_delete"));
 
             String where = "";
             List<Settings.to_settings> datas = Settings.ret_data(where);

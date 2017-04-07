@@ -197,7 +197,7 @@ public class Srpt_inventory_over_short {
             for (Inventory_replenishment_items.to_inventory_replenishment_items rep : replenishments) {
 
                 String s0 = "select "
-                        + "sum(qty)"
+                        + " sum(qty)"
                         + " from encoding_inventory "
                         + " " + where + " and item_code='" + rep.item_code + "'"
                         + " ";

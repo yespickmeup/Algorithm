@@ -729,7 +729,8 @@ public class Dlg_customers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+        
+//       System.setProperty("pool_db","db_algorithm");
         tf_search.grabFocus();
         init_key();
         focus();

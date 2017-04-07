@@ -30,6 +30,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -231,6 +232,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         pop_receipts = new javax.swing.JMenuItem();
         pop_stock_transfer = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -255,7 +257,13 @@ public class Dlg_report_item extends javax.swing.JDialog {
         tf_branch_id = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBox14 = new javax.swing.JCheckBox();
+        jCheckBox15 = new javax.swing.JCheckBox();
+        jCheckBox16 = new javax.swing.JCheckBox();
+        jCheckBox17 = new javax.swing.JCheckBox();
+        jCheckBox18 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_inventory = new javax.swing.JTable();
@@ -271,6 +279,11 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
         jButton3 = new Button.Info();
+        jLabel30 = new javax.swing.JLabel();
+        jCheckBox10 = new javax.swing.JCheckBox();
+        jCheckBox11 = new javax.swing.JCheckBox();
+        jCheckBox12 = new javax.swing.JCheckBox();
+        jCheckBox13 = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -364,7 +377,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel3.setText("Category:");
 
         tf_category.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_category.setText("All");
         tf_category.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_categoryMouseClicked(evt);
@@ -381,7 +393,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel4.setText("Classification:");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setText("All");
         jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField3MouseClicked(evt);
@@ -398,7 +409,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel5.setText("Sub-Classification:");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setText("All");
         jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField4MouseClicked(evt);
@@ -415,7 +425,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel6.setText("Brand:");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setText("All");
         jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField5MouseClicked(evt);
@@ -432,7 +441,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel8.setText("Model:");
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setText("All");
         jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField6MouseClicked(evt);
@@ -473,6 +481,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel2.setText("Location:");
 
         tf_location.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_location.setFocusable(false);
         tf_location.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_locationMouseClicked(evt);
@@ -510,9 +519,38 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox6.setSelected(true);
         jCheckBox6.setText("All/with quantity");
 
-        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setSelected(true);
-        jCheckBox7.setText("All/Search Query");
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setText("All");
+        jCheckBox8.setFocusable(false);
+
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("All");
+        jCheckBox9.setFocusable(false);
+
+        jCheckBox14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox14.setSelected(true);
+        jCheckBox14.setText("All");
+        jCheckBox14.setFocusable(false);
+
+        jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox15.setSelected(true);
+        jCheckBox15.setText("All");
+        jCheckBox15.setFocusable(false);
+
+        jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox16.setSelected(true);
+        jCheckBox16.setText("All");
+        jCheckBox16.setFocusable(false);
+
+        jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox17.setSelected(true);
+        jCheckBox17.setText("All");
+        jCheckBox17.setFocusable(false);
+
+        jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox18.setSelected(true);
+        jCheckBox18.setText("All");
+        jCheckBox18.setFocusable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -526,21 +564,32 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tf_category, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-                            .addComponent(jTextField3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_category, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jCheckBox15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jCheckBox16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -554,18 +603,20 @@ public class Dlg_report_item extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_branch, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(tf_location))
-                        .addGap(0, 0, 0)
+                            .addComponent(jCheckBox9)
+                            .addComponent(jCheckBox8, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_branch)
+                            .addComponent(tf_location))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox6)
-                            .addComponent(jCheckBox7))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jCheckBox6)
+                        .addContainerGap(150, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,43 +628,54 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tf_category)
                                 .addComponent(tf_category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox14)))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox15))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox18)))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox17))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))
+                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox16))
+                        .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jCheckBox8)
+                                .addGap(1, 1, 1)
+                                .addComponent(jCheckBox9)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox7)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -728,6 +790,31 @@ public class Dlg_report_item extends javax.swing.JDialog {
             }
         });
 
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel30.setText("Search by:");
+
+        buttonGroup2.add(jCheckBox10);
+        jCheckBox10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox10.setSelected(true);
+        jCheckBox10.setText("[F1]-All");
+        jCheckBox10.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox11);
+        jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox11.setText("[F2]-Item Code");
+        jCheckBox11.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox12);
+        jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox12.setText("[F3]-Barcode");
+        jCheckBox12.setFocusable(false);
+
+        buttonGroup2.add(jCheckBox13);
+        jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox13.setText("[F4]-Description");
+        jCheckBox13.setFocusable(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -764,11 +851,29 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox10)
+                    .addComponent(jCheckBox11)
+                    .addComponent(jCheckBox12)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox13))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -849,7 +954,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_locationActionPerformed
 
     private void tf_branchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_branchActionPerformed
-        init_branches();
+        init_branch_locations2(tf_branch, tf_location);
     }//GEN-LAST:event_tf_branchActionPerformed
 
     private void tbl_inventoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_inventoryMouseClicked
@@ -954,7 +1059,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_locationMouseClicked
 
     private void tf_branchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_branchMouseClicked
-        init_branches();
+        init_branch_locations2(tf_branch, tf_location);
     }//GEN-LAST:event_tf_branchMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -967,20 +1072,32 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
+    private javax.swing.JCheckBox jCheckBox13;
+    private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
+    private javax.swing.JCheckBox jCheckBox17;
+    private javax.swing.JCheckBox jCheckBox18;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1018,6 +1135,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JTextField tf_location;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
 
         set_default_branch();
@@ -1033,9 +1152,14 @@ public class Dlg_report_item extends javax.swing.JDialog {
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
         client_label_request();
+
+        String where = " order by branch,location asc ";
+        branch_location_list2 = S1_branch_locations.ret_location_where(where);
+
+        jTextField1.grabFocus();
     }
 
-     private void client_label_request() {
+    private void client_label_request() {
         String pool_db = System.getProperty("pool_db", "db_algorithm");
         if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
 
@@ -1045,7 +1169,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
         }
     }
-     
+
     private void focus() {
         JTextField[] tf = {tf_category, jTextField3, jTextField4, jTextField5, jTextField6, tf_branch, tf_location, jTextField1};
         Focus_Fire.onFocus_lostFocus(tf);
@@ -1055,17 +1179,21 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private void set_default_branch() {
 
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
-        tf_branch.setText(to.branch);
-        tf_branch_id.setText(to.branch_id);
-        tf_location.setText(to.location);
-        jLabel11.setText("" + to.id);
+
+        Field.Combo br = (Field.Combo) tf_branch;
+        Field.Combo lo = (Field.Combo) tf_location;
+
+        br.setText(to.branch);
+        br.setId(to.branch_id);
+        lo.setId("" + to.id);
+        lo.setText(to.location);
+
         jCheckBox1.setVisible(false);
         jCheckBox2.setVisible(false);
         jCheckBox3.setVisible(false);
         jCheckBox4.setVisible(false);
         jCheckBox5.setVisible(false);
 
-        
     }
 
     public void do_pass() {
@@ -1095,6 +1223,25 @@ public class Dlg_report_item extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
                 disposed();
+            }
+        });
+        jTextField1.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox10.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox11.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox12.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    jCheckBox13.setSelected(true);
+                }
             }
         });
     }
@@ -1325,6 +1472,38 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         get(data.selected_row);
                 tf_location.setText("" + to.location);
                 jLabel11.setText("" + to.id);
+            }
+        });
+    }
+    List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
+
+    private void init_branch_locations2(JTextField b, JTextField l) {
+
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) l;
+        Object[][] obj = new Object[branch_location_list2.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list2) {
+            obj[i][0] = " " + to.branch;
+            obj[i][1] = " " + to.location;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {90, 120};
+        int width = 0;
+        String[] col_names = {"Branch", "Location"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list2.get(data.selected_row);
+
+                br.setText("" + to.branch);
+                br.setId("" + to.branch_id);
+
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
             }
         });
     }
@@ -1618,43 +1797,77 @@ public class Dlg_report_item extends javax.swing.JDialog {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+                Field.Combo br = (Field.Combo) tf_branch;
+                Field.Combo lo = (Field.Combo) tf_location;
+
                 String where = " where status='" + "1" + "' ";
-                if (!tf_branch_id.getText().equals("0")) {
-                    where = where + " and branch_code='" + tf_branch_id.getText() + "'";
+                if (!jCheckBox8.isSelected() && !jCheckBox9.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
                 }
-                if (!jLabel11.getText().equals("0")) {
-                    where = where + " and location_id='" + jLabel11.getText() + "'";
+                if (!jCheckBox8.isSelected() && jCheckBox9.isSelected()) {
+                    where = where + " and branch_code='" + br.getId() + "' ";
                 }
-                if (!tf_category_code.getText().equals("0")) {
+
+                if (!jCheckBox14.isSelected()) {
                     where = where + " and category_id='" + tf_category_code.getText() + "'";
                 }
 
-                if (!jTextField8.getText().equals("0")) {
+                if (!jCheckBox15.isSelected()) {
                     where = where + " and classification_id='" + jTextField8.getText() + "'";
                 }
-                if (!jTextField9.getText().equals("0")) {
+                if (!jCheckBox18.isSelected()) {
                     where = where + " and sub_classification_id='" + jTextField9.getText() + "'";
                 }
-                if (!jTextField10.getText().equals("0")) {
+                if (!jCheckBox17.isSelected()) {
                     where = where + " and brand_id='" + jTextField10.getText() + "'";
                 }
 
-                if (!jTextField11.getText().equals("0")) {
+                if (!jCheckBox16.isSelected()) {
                     where = where + " and model_id='" + jTextField11.getText() + "'";
                 }
 
-                String where2 = where + " and main_barcode = '" + jTextField1.getText() + "' order by branch,location,description asc "
-                        + " ";
-                where2 = where2.replaceAll("where", " \nor");
-                if (jCheckBox6.isSelected()) {
-                    where = where + " and description like '%" + jTextField1.getText() + "%'  ";
-                } else {
-                    where = where + " and description like '%" + jTextField1.getText() + "%' and product_qty>0";
+                if (jCheckBox10.isSelected()) {
+
+                    if (!jCheckBox6.isSelected()) {
+                        where = where + " and product_qty>0 ";
+                    }
+                }
+                if (jCheckBox11.isSelected()) {
+
+                    if (!jCheckBox6.isSelected()) {
+                        where = where + "  "
+                                + " and main_barcode='" + jTextField1.getText() + "'  "
+                                + " and product_qty>0 ";
+
+                    } else {
+                        where = where + "  "
+                                + " and main_barcode='" + jTextField1.getText() + "'  "
+                                + "  ";
+                    }
+                }
+                if (jCheckBox12.isSelected()) {
+                    if (!jCheckBox6.isSelected()) {
+                        where = where + " and  barcode like '" + jTextField1.getText() + "' "
+                                + " and product_qty>0 ";
+                    } else {
+                        where = where + " and  barcode like '" + jTextField1.getText() + "' "
+                                + "  ";
+                    }
+
+                }
+                if (jCheckBox13.isSelected()) {
+                    if (!jCheckBox6.isSelected()) {
+                        where = where + " and description like '%" + jTextField1.getText() + "%' "
+                                + " and product_qty>0 ";
+                    } else {
+                        where = where + " and description like '%" + jTextField1.getText() + "%'  ";
+                    }
+
                 }
 
-                where = where + " " + where2;
-
-                System.out.println(where);
+                where = where + " order by branch,location,description asc ";
+//                all_where = where;
+//                System.out.println(where);
                 List<to_inventory> datas = Inventory.ret_data5(where);
                 loadData_inventory_barcodes(datas);
                 jLabel9.setText("" + tbl_inventory_barcodes_ALM.size());
@@ -1932,62 +2145,59 @@ public class Dlg_report_item extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
+    String all_where = "";
+
     private void generate() {
 
-        String where = " where status='" + "1" + "' ";
-        if (!tf_branch_id.getText().equals("0")) {
-            where = where + " and branch_code='" + tf_branch_id.getText() + "'";
-        }
-        if (!jLabel11.getText().equals("0")) {
-            where = where + " and location_id='" + jLabel11.getText() + "'";
-        }
-        if (!tf_category_code.getText().equals("0")) {
-            where = where + " and category_id='" + tf_category_code.getText() + "'";
-        }
-
-        if (!jTextField8.getText().equals("0")) {
-            where = where + " and classification_id='" + jTextField8.getText() + "'";
-        }
-        if (!jTextField9.getText().equals("0")) {
-            where = where + " and sub_classification_id='" + jTextField9.getText() + "'";
-        }
-        if (!jTextField10.getText().equals("0")) {
-            where = where + " and brand_id='" + jTextField10.getText() + "'";
-        }
-
-        if (!jTextField11.getText().equals("0")) {
-            where = where + " and model_id='" + jTextField11.getText() + "'";
-        }
-        where = where + " group by main_barcode order by description asc ";
-
+        List<to_inventory> datas2 = tbl_inventory_barcodes_ALM;
         List<Srpt_stock_take.field> datas = new ArrayList();
-        if (jCheckBox7.isSelected()) {
-            datas = Srpt_stock_take.ret_data(where);
-        } else {
-            List<to_inventory> datas2 = tbl_inventory_barcodes_ALM;
-            for (to_inventory to : datas2) {
-                String item_code = to.barcode;
-                String barcode = to.barcode;
-                String description = to.description;
-                double qty = to.product_qty;
-                double selling_price = to.selling_price;
-                double cost = to.cost;
-                String uom = to.unit;
-                String code = to.barcode;
-                Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code);
-                datas.add(field);
-            }
+        for (to_inventory to : datas2) {
+            String item_code = to.barcodes;
+            String barcode = to.barcodes;
+            String description = to.description;
+            double qty = to.product_qty;
+            double selling_price = to.selling_price;
+            double cost = to.cost;
+            String uom = to.unit;
+            String code = to.barcode;
+            String loc = to.branch + " - " + to.location;
+            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code,loc);
+            datas.add(field);
         }
 
         String category1 = tf_category.getText();
+        if (jCheckBox14.isSelected()) {
+            category1 = "All";
+        }
         String classification = jTextField3.getText();
+        if (jCheckBox15.isSelected()) {
+            classification = "All";
+        }
         String sub_classification = jTextField4.getText();
+        if (jCheckBox18.isSelected()) {
+            sub_classification = "All";
+        }
         String brand = jTextField5.getText();
+        if (jCheckBox17.isSelected()) {
+            brand = "All";
+        }
         String model = jTextField6.getText();
+        if (jCheckBox16.isSelected()) {
+            model = "All";
+        }
+        String branch = tf_branch.getText();
+        String location = tf_location.getText();
+        if (jCheckBox9.isSelected()) {
+            location = "All";
+        }
+        if (jCheckBox8.isSelected()) {
+            location = "All";
+            branch = "All";
+        }
         Window p = (Window) this;
         Dlg_report_item_print_preview nd = Dlg_report_item_print_preview.create(p, true);
         nd.setTitle("");
-        nd.do_pass(datas, category1, classification, sub_classification, brand, model);
+        nd.do_pass(datas, category1, classification, sub_classification, brand, model, branch, location,view_only);
         nd.setCallback(new Dlg_report_item_print_preview.Callback() {
 
             @Override

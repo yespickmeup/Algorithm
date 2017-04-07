@@ -79,8 +79,8 @@ public class S1_inventory_classification {
 
     public static List<to_inventory_classification> ret_data2(String where) {
         List<to_inventory_classification> datas = new ArrayList();
-        to_inventory_classification to2 = new to_inventory_classification(0, "", "", "", "ALl", 0);
-        datas.add(to2);
+//        to_inventory_classification to2 = new to_inventory_classification(0, "", "", "", "ALl", 0);
+//        datas.add(to2);
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "

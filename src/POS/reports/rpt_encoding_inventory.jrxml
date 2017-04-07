@@ -15,6 +15,7 @@
 	<field name="barcode" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
 	<field name="sheet_no" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
 	<variable name="qty_1" class="java.lang.Double" resetType="Group" resetGroup="sheet_no" calculation="Sum">
 		<variableExpression><![CDATA[$F{qty}]]></variableExpression>
 	</variable>
@@ -26,7 +27,7 @@
 		<groupHeader>
 			<band height="15">
 				<staticText>
-					<reportElement uuid="e42a7d8c-04e0-4739-818f-d4521ea96a4e" mode="Transparent" x="440" y="0" width="50" height="15" backcolor="#CCCCCC"/>
+					<reportElement uuid="e42a7d8c-04e0-4739-818f-d4521ea96a4e" mode="Transparent" x="490" y="0" width="50" height="15" backcolor="#CCCCCC"/>
 					<box>
 						<topPen lineWidth="0.2"/>
 						<leftPen lineWidth="0.2"/>
@@ -40,32 +41,60 @@
 					<text><![CDATA[Qty]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="69f6df07-e952-40c4-8a22-f5fe50355361" mode="Transparent" x="0" y="0" width="100" height="15" backcolor="#CCCCCC"/>
+					<reportElement uuid="69f6df07-e952-40c4-8a22-f5fe50355361" mode="Transparent" x="0" y="0" width="50" height="15" backcolor="#CCCCCC"/>
 					<box>
 						<topPen lineWidth="0.2"/>
 						<leftPen lineWidth="0.2"/>
 						<bottomPen lineWidth="0.2"/>
 						<rightPen lineWidth="0.2"/>
 					</box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="10"/>
-						<paragraph leftIndent="5"/>
+						<paragraph leftIndent="2"/>
 					</textElement>
 					<text><![CDATA[Item Code]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="df854b7e-a14b-4b62-985c-cfe80a491337" mode="Transparent" x="100" y="0" width="340" height="15" backcolor="#CCCCCC"/>
+					<reportElement uuid="df854b7e-a14b-4b62-985c-cfe80a491337" mode="Transparent" x="136" y="0" width="218" height="15" backcolor="#CCCCCC"/>
 					<box>
 						<topPen lineWidth="0.2"/>
 						<leftPen lineWidth="0.2"/>
 						<bottomPen lineWidth="0.2"/>
 						<rightPen lineWidth="0.2"/>
 					</box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="SansSerif" size="10"/>
-						<paragraph leftIndent="5"/>
+						<paragraph leftIndent="2"/>
 					</textElement>
 					<text><![CDATA[Description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="df854b7e-a14b-4b62-985c-cfe80a491337" mode="Transparent" x="354" y="0" width="136" height="15" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.2"/>
+						<leftPen lineWidth="0.2"/>
+						<bottomPen lineWidth="0.2"/>
+						<rightPen lineWidth="0.2"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Location]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="69f6df07-e952-40c4-8a22-f5fe50355361" mode="Transparent" x="50" y="0" width="86" height="15" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.2"/>
+						<leftPen lineWidth="0.2"/>
+						<bottomPen lineWidth="0.2"/>
+						<rightPen lineWidth="0.2"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Barcode]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
@@ -258,35 +287,21 @@
 	<detail>
 		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement uuid="75229163-350a-45b3-a8a7-64b79a5aff28" mode="Transparent" x="0" y="0" width="100" height="15"/>
+				<reportElement uuid="e9926e46-52ca-4de6-9479-67b2d01d5b23" mode="Transparent" x="136" y="0" width="218" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
 					<bottomPen lineWidth="0.2"/>
 					<rightPen lineWidth="0.2"/>
 				</box>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{item_code}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="e9926e46-52ca-4de6-9479-67b2d01d5b23" mode="Transparent" x="100" y="0" width="340" height="15"/>
-				<box>
-					<topPen lineWidth="0.2"/>
-					<leftPen lineWidth="0.2"/>
-					<bottomPen lineWidth="0.2"/>
-					<rightPen lineWidth="0.2"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10"/>
-					<paragraph leftIndent="5"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0">
-				<reportElement uuid="4ca154a9-c524-4f81-8093-1a1f8dff4c78" mode="Transparent" x="440" y="0" width="50" height="15"/>
+				<reportElement uuid="4ca154a9-c524-4f81-8093-1a1f8dff4c78" mode="Transparent" x="490" y="0" width="50" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -298,6 +313,48 @@
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9926e46-52ca-4de6-9479-67b2d01d5b23" mode="Transparent" x="354" y="0" width="136" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="75229163-350a-45b3-a8a7-64b79a5aff28" mode="Transparent" x="50" y="0" width="86" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="75229163-350a-45b3-a8a7-64b79a5aff28" mode="Transparent" x="0" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_code}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
