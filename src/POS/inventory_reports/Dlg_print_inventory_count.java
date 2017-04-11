@@ -9,18 +9,21 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.reports.Dlg_report_items;
+import POS.util.DateType;
 import POS.util.TableRenderer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -293,6 +296,7 @@ public class Dlg_print_inventory_count extends javax.swing.JDialog {
         jLabel10.setText("Choose Location:");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setFocusable(false);
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField1MouseClicked(evt);
@@ -390,19 +394,19 @@ public class Dlg_print_inventory_count extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        init_branches();
+        init_branch_locations2(jTextField2,jTextField1);
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        init_branches();
+     init_branch_locations2(jTextField2,jTextField1);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        init_branch_locations();
+       
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        init_branch_locations();
+       
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -431,8 +435,12 @@ public class Dlg_print_inventory_count extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
+        
+        String where = " order by branch,location asc ";
+        branch_location_list2 = S1_branch_locations.ret_location_where(where);
     }
 
     public void do_pass() {
@@ -446,7 +454,7 @@ public class Dlg_print_inventory_count extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -531,7 +539,38 @@ public class Dlg_print_inventory_count extends javax.swing.JDialog {
             }
         });
     }
+      List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
 
+    private void init_branch_locations2(JTextField b, JTextField l) {
+
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) l;
+        Object[][] obj = new Object[branch_location_list2.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list2) {
+            obj[i][0] = " " + to.branch;
+            obj[i][1] = " " + to.location;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {90, 120};
+        int width = 0;
+        String[] col_names = {"Branch", "Location"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list2.get(data.selected_row);
+
+                br.setText("" + to.branch);
+                br.setId("" + to.branch_id);
+
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
+            }
+        });
+    }
     private void init_report() {
 
         Button.Search search = (Button.Search) jButton3;
@@ -542,9 +581,12 @@ public class Dlg_print_inventory_count extends javax.swing.JDialog {
             public void run() {
                 Field.Combo br = (Field.Combo) jTextField2;
                 Field.Combo lo = (Field.Combo) jTextField1;
-                String where = " where location_id='" + lo.getId() + "' order by main_barcode asc ";
+                String where = " where location_id='" + lo.getId() + "' order by description asc ";
                 List<Srpt_inventory_count.field> fields = Srpt_inventory_count.ret_data(where);
-                Srpt_inventory_count rpt = new Srpt_inventory_count();
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String address = System.getProperty("address", "Daro, Dumaguete City");
+                String date = DateType.slash.format(new Date());
+                Srpt_inventory_count rpt = new Srpt_inventory_count(business_name, address, date);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_inventory_count.jrxml";
                 report_sales_items(rpt, jrxml);

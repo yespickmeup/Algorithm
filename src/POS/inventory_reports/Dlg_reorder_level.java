@@ -9,13 +9,11 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
-import POS.inventory.S2_inventory_barcodes;
 import POS.inventory.uom;
-import POS.reports.Dlg_report_items;
-import POS.util.Alert;
 import POS.util.TableRenderer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -23,17 +21,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mijzcx.synapse.desk.utils.CloseDialog;
-import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
@@ -202,6 +197,7 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -217,6 +213,7 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
         pnl_report = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -251,15 +248,18 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Search Filter:");
 
+        buttonGroup1.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox4.setSelected(true);
-        jCheckBox4.setText("Item Code:");
+        jCheckBox4.setText("[F1]-All");
 
+        buttonGroup1.add(jCheckBox5);
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox5.setText("Description");
+        jCheckBox5.setText("[F2]-Item Code");
 
+        buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox6.setText("Barcode");
+        jCheckBox6.setText("[F3]-Barcode");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Search:");
@@ -298,6 +298,10 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
         jCheckBox8.setSelected(true);
         jCheckBox8.setText("Include Negative Quantity");
 
+        buttonGroup1.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("[F4]-Description");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -309,27 +313,30 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_search)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_search)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jCheckBox4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox6)
-                                .addGap(39, 39, 39)
-                                .addComponent(jCheckBox7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox8)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tf_branch_location))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox9))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jCheckBox2)
+                                    .addComponent(jCheckBox3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_branch_location)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCheckBox8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -342,7 +349,8 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_branch_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox2))
+                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox8))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,8 +358,8 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
                             .addComponent(jCheckBox5)
                             .addComponent(jCheckBox6)
                             .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jCheckBox8))
+                            .addComponent(jCheckBox9)
+                            .addComponent(jCheckBox7))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -459,6 +467,7 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -467,6 +476,7 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -480,10 +490,12 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         String where = "  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
+        tf_search.grabFocus();
     }
 
     private void set_default_branch() {
@@ -517,6 +529,26 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
                 disposed();
+            }
+        });
+        jCheckBox4.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox4.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox5.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox6.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    jCheckBox9.setSelected(true);
+                }
+
             }
         });
     }
@@ -584,22 +616,19 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
                 String printed_by = "Administrator";
 
                 String where = " where location_id='" + com.getId() + "'  ";
-                if (!jCheckBox3.isSelected()) {
-
-                    if (jCheckBox4.isSelected()) {
-                        where = where + " and main_barcode='" + tf_search.getText() + "'";
-                    }
-                    if (jCheckBox5.isSelected()) {
-                        where = where + " and description like '%" + tf_search.getText() + "%'";
-                    }
-                    if (jCheckBox6.isSelected()) {
-                        where = where + " and barcode like '%" + tf_search.getText() + "%'";
-                    }
+                if (jCheckBox5.isSelected()) {
+                    where = where + " and main_barcode='" + tf_search.getText() + "'";
+                }
+                if (jCheckBox6.isSelected()) {
+                    where = where + " and description like '%" + tf_search.getText() + "%'";
+                }
+                if (jCheckBox9.isSelected()) {
+                    where = where + " and barcode like '" + tf_search.getText() + "'";
                 }
                 where = where + " order by description asc";
 
                 List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
-              
+
                 List<Srpt_reorder_level.field> fields = new ArrayList();
                 for (Inventory_barcodes.to_inventory_barcodes field : datas) {
 
@@ -620,10 +649,10 @@ public class Dlg_reorder_level extends javax.swing.JDialog {
                     String branch_id1 = field.branch_code;
                     String location1 = field.location;
                     String location_id1 = field.location_id;
-                   
+
                     if (qty == 0 && jCheckBox7.isSelected() || qty < 0 && jCheckBox8.isSelected() || qty > 0) {
                         if (field.product_qty < field.reorder_level) {
-                            Srpt_reorder_level.field f = new Srpt_reorder_level.field(item_code, barcode, description, unit, qty, cost, selling_price, branch1, branch_id1, location1, location_id1);
+                            Srpt_reorder_level.field f = new Srpt_reorder_level.field(item_code, barcode, description, unit, qty, cost, selling_price, branch1, branch_id1, location1, location_id1,field.reorder_level);
                             fields.add(f);
                         }
 

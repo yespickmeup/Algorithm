@@ -283,6 +283,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -789,20 +790,26 @@ public class Dlg_receipts extends javax.swing.JDialog {
         buttonGroup2.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("(F1) - All");
+        jCheckBox6.setText("[F1]-All");
         jCheckBox6.setFocusable(false);
 
         jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("(F2) - Code");
+        jCheckBox7.setText("[F2]-Item Code");
         jCheckBox7.setFocusable(false);
 
         jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("(F3) - Description");
+        jCheckBox8.setText("[F3]-Barcode");
         jCheckBox8.setFocusable(false);
+
+        jCheckBox9.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("[F4]-Description");
+        jCheckBox9.setFocusable(false);
 
         javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
         jXPanel3.setLayout(jXPanel3Layout);
@@ -848,6 +855,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addComponent(jCheckBox7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox9)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -859,7 +868,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox6)
                     .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox8))
+                    .addComponent(jCheckBox8)
+                    .addComponent(jCheckBox9))
                 .addGap(5, 5, 5)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_search)
@@ -870,7 +880,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1449,6 +1459,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -1883,6 +1894,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F3) {
                     jCheckBox8.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    jCheckBox9.setSelected(true);
                 }
             }
         });
@@ -2437,9 +2451,13 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 }
                 if (jCheckBox7.isSelected()) {
                     where = where + "  main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
-                            + " or barcode like '" + search + "' and location_id='" + br.getId() + "'";
+                            + "  ";
                 }
                 if (jCheckBox8.isSelected()) {
+                    where = where + " "
+                            + "  barcode like '" + search + "' and location_id='" + br.getId() + "'";
+                }
+                if (jCheckBox9.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + br.getId() + "' ";
                 }
                 where = where + " order by description asc ";

@@ -64,11 +64,11 @@ public class Srpt_reorder_level {
         String branch_id;
         String location;
         String location_id;
-
+        double reorder;
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, double qty, double cost, double selling_price, String branch, String branch_id, String location, String location_id) {
+        public field(String item_code, String barcode, String description, String unit, double qty, double cost, double selling_price, String branch, String branch_id, String location, String location_id,double reorder) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -80,8 +80,17 @@ public class Srpt_reorder_level {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.reorder=reorder;
         }
 
+        public double getReorder() {
+            return reorder;
+        }
+
+        public void setReorder(double reorder) {
+            this.reorder = reorder;
+        }
+        
         public String getItem_code() {
             return item_code;
         }
@@ -205,7 +214,7 @@ public class Srpt_reorder_level {
                 String branch_id1 = field.branch_code;
                 String location1 = field.location;
                 String location_id1 = field.location_id;
-                Srpt_reorder_level.field f = new field(item_code, barcode, description, unit, qty, cost, selling_price, branch1, branch_id1, location1, location_id1);
+                Srpt_reorder_level.field f = new field(item_code, barcode, description, unit, qty, cost, selling_price, branch1, branch_id1, location1, location_id1,field.reorder_level);
                 fields.add(f);
             }
         }

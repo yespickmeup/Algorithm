@@ -1959,7 +1959,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1969,7 +1969,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(240, 239, 239));
 
         lbl_screen_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbl_screen_name.setForeground(new java.awt.Color(0, 0, 0));
         lbl_screen_name.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_screen_name.setText("Ronald Pascua!");
 
@@ -1984,7 +1983,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/shopping-cart.png"))); // NOI18N
         jLabel1.setText("Point of Sale");
 

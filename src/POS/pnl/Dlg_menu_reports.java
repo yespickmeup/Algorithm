@@ -595,11 +595,11 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel13MouseEntered
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
-        ok("Re-Order Level Report", jLabel19);
+        ok("Re-Order Level", jLabel19);
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jLabel19MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseEntered
-        label("Re-Order Level Report", jLabel19);
+        label("Re-Order Level", jLabel19);
     }//GEN-LAST:event_jLabel19MouseEntered
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
@@ -698,7 +698,7 @@ public class Dlg_menu_reports extends javax.swing.JDialog {
                 jLabel14.setEnabled(true);
                 jLabel14.setBackground(new java.awt.Color(96, 188, 219));
             }
-            if (to.previledge.equalsIgnoreCase("Re-Order Level Report")) {
+            if (to.previledge.equalsIgnoreCase("Re-Order Level")) {
                 jLabel19.setEnabled(true);
                 jLabel19.setBackground(new java.awt.Color(96, 188, 219));
             }

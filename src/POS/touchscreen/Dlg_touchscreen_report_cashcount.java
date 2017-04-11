@@ -14,18 +14,25 @@ import POS.users.MyUser;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -278,11 +285,15 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
-        jTextField18 = new Field.Input();
+        tf_cashin = new Field.Input();
         jLabel46 = new javax.swing.JLabel();
-        jTextField17 = new Field.Input();
+        tf_tendered = new Field.Input();
         jButton1 = new Button.Success();
         jButton3 = new Button.Default();
+        jLabel14 = new javax.swing.JLabel();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField37 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_cash_drawer = new javax.swing.JTable();
@@ -417,7 +428,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
@@ -432,6 +443,12 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField4.setNextFocusableComponent(jTextField1);
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField4KeyReleased(evt);
@@ -455,7 +472,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -488,7 +505,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -530,7 +547,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -563,7 +580,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -605,7 +622,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -698,7 +715,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -731,7 +748,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -764,7 +781,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField16, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField16, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel24Layout.setVerticalGroup(
@@ -815,7 +832,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -853,7 +870,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -914,18 +931,18 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
         jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel53.setText("Cashin:");
 
-        jTextField18.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField18.setText("0.00");
+        tf_cashin.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tf_cashin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_cashin.setText("0.00");
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel46.setText("Tendered:");
 
-        jTextField17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField17.setText("0.00");
-        jTextField17.setFocusable(false);
+        tf_tendered.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tf_tendered.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_tendered.setText("0.00");
+        tf_tendered.setFocusable(false);
 
         jButton1.setText("Update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -951,14 +968,14 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                     .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_tendered, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField18))
+                            .addComponent(tf_cashin))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -969,11 +986,11 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_cashin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel46)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_tendered, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -981,22 +998,33 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Date:");
+
+        jDateChooser3.setDate(new Date());
+        jDateChooser3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("ID:");
+
+        jTextField37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField37.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField37.setText("0");
+        jTextField37.setFocusable(false);
+        jTextField37.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField37KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)))
-                    .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1006,7 +1034,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                             .addComponent(jTextField24)
                             .addComponent(jTextField22)
                             .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel19Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1029,15 +1057,36 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                             .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1045,7 +1094,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1102,7 +1151,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
         jTabbedPane1.addTab("Cashcount", jPanel19);
@@ -1117,6 +1166,11 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
 
             }
         ));
+        tbl_cash_drawer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_cash_drawerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_cash_drawer);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1211,7 +1265,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1239,7 +1293,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                             .addComponent(jCheckBox3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                             .addComponent(jTextField19))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1282,7 +1336,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                                 .addComponent(jCheckBox1))
                             .addComponent(tf_cashier, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -1437,8 +1491,20 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        clear_cc();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tbl_cash_drawerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cash_drawerMouseClicked
+        select_cc();
+    }//GEN-LAST:event_tbl_cash_drawerMouseClicked
+
+    private void jTextField37KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField37KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField37KeyReleased
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1454,12 +1520,15 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1518,8 +1587,6 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField21;
@@ -1536,6 +1603,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField34;
     private javax.swing.JTextField jTextField36;
+    private javax.swing.JTextField jTextField37;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
@@ -1545,10 +1613,14 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     private javax.swing.JPanel pnl_cash;
     private javax.swing.JTable tbl_cash_drawer;
     private javax.swing.JTextField tf_cashier;
+    private javax.swing.JTextField tf_cashin;
+    private javax.swing.JTextField tf_tendered;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
+//        MyUser.setUser_id("1");
+
         init_key();
         key_count();
         set_default_branch();
@@ -1562,6 +1634,15 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
 
         init_tbl_cash_drawer(tbl_cash_drawer);
 
+        jDateChooser3.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                ret_cc();
+            }
+        });
+        jLabel16.setVisible(false);
+        jTextField37.setVisible(false);
+        jTextField4.grabFocus();
     }
 
     public void do_pass() {
@@ -1649,6 +1730,9 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     }
 
     private void init_branch_locations2(JTextField br1, JTextField lo1) {
+        if (!jTextField2.isEnabled()) {
+            return;
+        }
         final Field.Combo br = (Field.Combo) br1;
         final Field.Combo lo = (Field.Combo) lo1;
 
@@ -1703,7 +1787,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     }
 
     private void count_total() {
-        double cashin = FitIn.toDouble(jTextField18.getText());
+        double cashin = FitIn.toDouble(tf_cashin.getText());
         double thousand = FitIn.toDouble(jTextField4.getText()) * 1000;
         jTextField36.setText(FitIn.fmt_wc_0(thousand));
         double five_hundred = FitIn.toDouble(jTextField1.getText()) * 500;
@@ -1745,19 +1829,31 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 + point_twenty_five
                 + point_ten
                 + point_five;
-        jTextField17.setText(FitIn.fmt_wc_0(total));
+        tf_tendered.setText(FitIn.fmt_wc_0(total));
 
     }
 
     private void ret_cc() {
         String user_id = MyUser.getUser_id();
-        String date = DateType.sf.format(new Date());
+        String date = DateType.sf.format(jDateChooser3.getDate());
         String where = " where user_id='" + user_id + "' and Date(time_in)='" + date + "' ";
         Field.Combo lo = (Field.Combo) jTextField3;
         where = where + " and location_id='" + lo.getId() + "' ";
-        CashDrawer.to_cash_drawer to = CashDrawer.ret_to(where);
-        if (to != null) {
-            jTextField18.setText(FitIn.fmt_wc_0(to.amount));
+        System.out.println(where);
+        List<CashDrawer.to_cash_drawer> drawers = CashDrawer.ret_where(where);
+        if (!drawers.isEmpty()) {
+            CashDrawer.to_cash_drawer to = drawers.get(0);
+            jTextField37.setText("" + to.id);
+
+            Date d;
+            try {
+                d = DateType.datetime.parse(to.time_in);
+                jDateChooser3.setDate(d);
+            } catch (ParseException ex) {
+                Logger.getLogger(Dlg_touchscreen_report_cashcount.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tf_cashin.setText(FitIn.fmt_wc_0(to.amount));
             jTextField4.setText(FitIn.fmt_woc(to.thousand));
             jTextField1.setText(FitIn.fmt_woc(to.five_hundred));
             jTextField6.setText(FitIn.fmt_woc(to.two_hundred));
@@ -1774,53 +1870,136 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
             jTextField11.setText(FitIn.fmt_woc(to.point_zero_five));
 
             count_total();
+
         } else {
             jButton1.setText("Save");
+
+            tf_cashin.setText("0.00");
+            jTextField4.setText("0");
+            jTextField1.setText("0");
+            jTextField6.setText("0");
+            jTextField5.setText("0");
+            jTextField10.setText("0");
+            jTextField16.setText("0");
+
+            jTextField9.setText("0");
+            jTextField8.setText("0");
+            jTextField7.setText("0");
+            jTextField14.setText("0");
+            jTextField13.setText("0");
+            jTextField12.setText("0");
+            jTextField11.setText("0");
+
+            jTextField36.setText("0.00");
+            jTextField34.setText("0.00");
+            jTextField31.setText("0.00");
+            jTextField30.setText("0.00");
+            jTextField29.setText("0.00");
+            jTextField28.setText("0.00");
+
+            jTextField27.setText("0.00");
+            jTextField25.setText("0.00");
+            jTextField26.setText("0.00");
+            jTextField23.setText("0.00");
+            jTextField24.setText("0.00");
+            jTextField22.setText("0.00");
+            jTextField21.setText("0.00");
+            tf_tendered.setText("0.00");
+
+            jTextField37.setText("0");
+
         }
+
     }
 
     private void save_cc() {
 
-        double cashin = FitIn.toDouble(jTextField18.getText());
-        double thousand = FitIn.toDouble(jTextField4.getText());
-        double five_hundred = FitIn.toDouble(jTextField1.getText());
-        double two_hundred = FitIn.toDouble(jTextField6.getText());
-        double one_hundred = FitIn.toDouble(jTextField5.getText());
-        double fifty = FitIn.toDouble(jTextField10.getText());
-        double twenty = FitIn.toDouble(jTextField16.getText());
-        double ten = FitIn.toDouble(jTextField9.getText());
-        double five = FitIn.toDouble(jTextField8.getText());
-        double one = FitIn.toDouble(jTextField7.getText());
-        double point_fifty = FitIn.toDouble(jTextField14.getText());
-        double point_twenty_five = FitIn.toDouble(jTextField13.getText());
-        double point_ten = FitIn.toDouble(jTextField12.getText());
-        double point_five = FitIn.toDouble(jTextField11.getText());
+        if (jButton1.getText().equalsIgnoreCase("update")) {
+            double cashin = FitIn.toDouble(tf_cashin.getText());
+            double thousand = FitIn.toDouble(jTextField4.getText());
+            double five_hundred = FitIn.toDouble(jTextField1.getText());
+            double two_hundred = FitIn.toDouble(jTextField6.getText());
+            double one_hundred = FitIn.toDouble(jTextField5.getText());
+            double fifty = FitIn.toDouble(jTextField10.getText());
+            double twenty = FitIn.toDouble(jTextField16.getText());
+            double ten = FitIn.toDouble(jTextField9.getText());
+            double five = FitIn.toDouble(jTextField8.getText());
+            double one = FitIn.toDouble(jTextField7.getText());
+            double point_fifty = FitIn.toDouble(jTextField14.getText());
+            double point_twenty_five = FitIn.toDouble(jTextField13.getText());
+            double point_ten = FitIn.toDouble(jTextField12.getText());
+            double point_five = FitIn.toDouble(jTextField11.getText());
 
-        int id = 0;
-        String session_no = MyUser.getUser_id();
-        String user_name = "";
-        String screen_name = "";
-        String time_in = "";
-        String time_out = DateType.now();
-        double amount = 0;
-        double cash_out = 0;
-        double coins = 0;
-        double expenses = 0;
-        double point_two_five = 0;
-        double point_zero_five = point_five;
-        String branch = my_branch;
-        String branch_id = my_branch_id;
-        String location = my_location;
-        String location_id = my_location_id;
-        String user_id = MyUser.getUser_id();
-        String user_screen_name = MyUser.getUser_screen_name();
-        CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
-                time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
-                one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+            int id = FitIn.toInt(jTextField37.getText());
+            String session_no = MyUser.getUser_id();
+            String user_name = "";
+            String screen_name = "";
+            String time_in = "";
+            String time_out = DateType.now();
+            double amount = 0;
+            double cash_out = 0;
+            double coins = 0;
+            double expenses = 0;
+            double point_two_five = FitIn.toDouble(jTextField13.getText());
+            double point_zero_five = FitIn.toDouble(jTextField11.getText());
+            Field.Combo br = (Field.Combo) jTextField2;
+            Field.Combo lo = (Field.Combo) jTextField3;
+            String branch = br.getText();
+            String branch_id = br.getId();
+            String location = lo.getText();
+            String location_id = lo.getId();
+            String user_id = MyUser.getUser_id();
+            String user_screen_name = MyUser.getUser_screen_name();
+            CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
+                    time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
+                    one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
 
-        String date = DateType.sf.format(new Date());
-        CashDrawer.update_data(to, user_id, date, cashin);
-        Alert.set(2, "");
+            String date = DateType.sf.format(new Date());
+            CashDrawer.update_data(to, "" + id);
+            ret_cashcounts();
+            ret_cc();
+            Alert.set(2, "");
+        } else {
+            int id = 0;
+            String session_no = MyUser.getUser_id();
+            String user_name = MyUser.getUser_name();
+            String screen_name = MyUser.getUser_screen_name();
+            String time_in = DateType.datetime.format(jDateChooser3.getDate());
+            String time_out = DateType.datetime.format(jDateChooser3.getDate());
+            double amount = FitIn.toDouble(tf_cashin.getText());
+            double cash_out = 0;
+            double thousand = FitIn.toDouble(jTextField4.getText());
+            double five_hundred = FitIn.toDouble(jTextField1.getText());
+            double two_hundred = FitIn.toDouble(jTextField6.getText());
+            double fifty = FitIn.toDouble(jTextField10.getText());
+            double twenty = FitIn.toDouble(jTextField16.getText());
+            double coins = 0;
+            double one_hundred = FitIn.toDouble(jTextField5.getText());
+            double expenses = 0;
+            double ten = FitIn.toDouble(jTextField9.getText());
+            double five = FitIn.toDouble(jTextField8.getText());
+            double one = FitIn.toDouble(jTextField7.getText());
+            double point_five = FitIn.toDouble(jTextField14.getText());
+            double point_two_five = FitIn.toDouble(jTextField13.getText());
+            double point_ten = FitIn.toDouble(jTextField12.getText());
+            double point_zero_five = FitIn.toDouble(jTextField11.getText());
+            Field.Combo br = (Field.Combo) jTextField2;
+            Field.Combo lo = (Field.Combo) jTextField3;
+            String branch = br.getText();
+            String branch_id = br.getId();
+            String location = lo.getText();
+            String location_id = lo.getId();
+            String user_id = MyUser.getUser_id();
+            String user_screen_name = MyUser.getUser_screen_name();
+            CashDrawer.to_cash_drawer drawer = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+            CashDrawer.insert_data(drawer);
+            Alert.set(1, "");
+            ret_cashcounts();
+            ret_cc();
+//            tf_tendered.setText("0.00");
+            jButton1.setText("Update");
+
+        }
     }
 
     List<S1_users.to_users> user_list = new ArrayList();
@@ -1864,7 +2043,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
         tbl_cash_drawer.setModel(tbl_cash_drawer_M);
         tbl_cash_drawer.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_cash_drawer.setRowHeight(25);
-        int[] tbl_widths_cash_drawer = {80, 100, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_cash_drawer = {80, 100, 80, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 130, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_cash_drawer.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -1878,8 +2057,8 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
         tbl_cash_drawer.setRowHeight(25);
         tbl_cash_drawer.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_cash_drawer, 2);
-        tbl_cash_drawer.getColumnModel().getColumn(16).setCellRenderer(new ImageRenderer());
         tbl_cash_drawer.getColumnModel().getColumn(17).setCellRenderer(new ImageRenderer());
+        tbl_cash_drawer.getColumnModel().getColumn(18).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_cash_drawer(List<to_cash_drawer> acc) {
@@ -1890,7 +2069,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     public static class Tblcash_drawerModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "User", "Cashin", "0.05", "0.10", "0.25", "0.50", "1", "5", "10", "20", "50", "100", "200", "500", "1000", "", "", "one", "point_five", "point_two_five", "point_ten", "point_zero_five", "branch", "branch_id", "location", "location_id", "user_id", "user_screen_name"
+            "Date", "User", "Cashin", "0.05", "0.10", "0.25", "0.50", "1", "5", "10", "20", "50", "100", "200", "500", "1000", "Location", "", "", "point_five", "point_two_five", "point_ten", "point_zero_five", "branch", "branch_id", "location", "location_id", "user_id", "user_screen_name"
         };
 
         public Tblcash_drawerModel(ListModel listmodel) {
@@ -1950,11 +2129,11 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 case 15:
                     return " " + FitIn.fmt_woc(tt.thousand);
                 case 16:
-                    return "/POS/icon_payment/edit (1).png";
+                    return " " + tt.branch + " - " + tt.location;
                 case 17:
-                    return "/POS/icon_payment/remove11.png";
+                    return "/POS/icon_payment/edit (1).png";
                 case 18:
-                    return tt.one;
+                    return "/POS/icon_payment/remove11.png";
                 case 19:
                     return tt.point_five;
                 case 20:
@@ -1980,11 +2159,124 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
     }
 
     private void ret_cashcounts() {
-        String where = " order by id desc ";
+        String where = " where screen_name like '%" + "" + "%' ";
+        String date_from = DateType.sf.format(jDateChooser1.getDate());
+        String date_to = DateType.sf.format(jDateChooser2.getDate());
+        if (!jCheckBox4.isSelected()) {
+            where = where + " and Date(time_in) between '" + date_from + "' and '" + date_to + "' ";
+        }
+        Field.Combo user = (Field.Combo) tf_cashier;
+        if (!jCheckBox1.isSelected()) {
+            where = where + " and user_id='" + user.getId() + "' ";
+        }
+        Field.Combo br = (Field.Combo) jTextField15;
+        Field.Combo lo = (Field.Combo) jTextField19;
+        if (!jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
+            where = where + " and location_id = '" + lo.getId() + "' ";
+        }
+        if (!jCheckBox3.isSelected() && jCheckBox2.isSelected()) {
+            where = where + " and branch_id = '" + br.getId() + "' ";
+        }
+        where = where + " order by id desc ";
+//        System.out.println(where);
         List<to_cash_drawer> counts = S1_cash_drawer.ret_where(where);
         loadData_cash_drawer(counts);
         jLabel5.setText("" + counts.size());
     }
 //</editor-fold> 
 
+    private void select_cc() {
+        int row = tbl_cash_drawer.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final to_cash_drawer drawer = (to_cash_drawer) tbl_cash_drawer_ALM.get(row);
+        int col = tbl_cash_drawer.getSelectedColumn();
+        if (col == 17) {
+
+            Window p = (Window) this;
+            Dlg_touchscreen_report_cashcount_edit nd = Dlg_touchscreen_report_cashcount_edit.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(drawer);
+            nd.setCallback(new Dlg_touchscreen_report_cashcount_edit.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_report_cashcount_edit.OutputData data) {
+                    closeDialog.ok();
+                    double cashin = data.amount;
+                    double thousand = data.thousand;
+                    double five_hundred = data.five_hundred;
+                    double two_hundred = data.two_hundred;
+                    double one_hundred = data.one_hundred;
+                    double fifty = data.fifty;
+                    double twenty = data.twenty;
+                    double ten = data.ten;
+                    double five = data.five;
+                    double one = data.one;
+                    double point_fifty = data.point_five;
+                    double point_twenty_five = data.point_two_five;
+                    double point_ten = data.point_ten;
+                    double point_five = data.point_five;
+
+                    int id = drawer.id;
+                    String session_no = drawer.session_no;
+                    String user_name = drawer.user_name;
+                    String screen_name = drawer.screen_name;
+                    String time_in = drawer.time_in;
+                    String time_out = drawer.time_out;
+                    double amount = drawer.amount;
+                    double cash_out = 0;
+                    double coins = 0;
+                    double expenses = 0;
+                    double point_two_five = data.point_two_five;
+                    double point_zero_five = data.point_zero_five;
+
+                    String branch = drawer.branch;
+                    String branch_id = drawer.branch_id;
+                    String location = drawer.location;
+                    String location_id = drawer.location_id;
+                    String user_id = drawer.user_id;
+                    String user_screen_name = drawer.user_screen_name;
+                    CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
+                            time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
+                            one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+
+                    String date = DateType.sf.format(new Date());
+                    CashDrawer.update_data(to, "" + id);
+                    ret_cashcounts();
+                    Alert.set(2, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+        if (col == 18) {
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    S1_cash_drawer.delete_cash_drawer(drawer);
+                    ret_cashcounts();
+                    Alert.set(2, "");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+
+    }
+
+    private void clear_cc() {
+        ret_cc();
+        jTextField2.setEnabled(true);
+        jTextField3.setEnabled(true);
+        jDateChooser3.setEnabled(true);
+        jTextField37.setText("0");
+        tbl_cash_drawer.clearSelection();
+    }
 }

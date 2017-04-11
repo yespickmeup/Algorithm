@@ -39,6 +39,7 @@ import POS.inventory.Dlg_price_inquire;
 import POS.inventory.Dlg_print_barcode;
 import POS.inventory.Dlg_inventory_price_updates;
 import POS.inventory_replenishment.Dlg_inventory_replenishment;
+import POS.inventory_reports.Dlg_print_inventory_count;
 import POS.inventory_reports.Dlg_reorder_level;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import static POS.main.MyMain.getSerialNumber;
@@ -2795,8 +2796,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void r_print_inventory_count() {
-        Dlg_rpt_encoding_inventory dtc = new Dlg_rpt_encoding_inventory();
-        MyFrame.set(dtc.getSurface(), jPanel1, "Print Inventory Count");
+        Dlg_print_inventory_count dtc = new Dlg_print_inventory_count();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Inventory Count Sheet");
     }
 
     private void m_categories() {
@@ -3186,7 +3187,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Customers Report")) {
                     r_customers();
                 }
-                if (data.stmt.equals("Re-Order Level Report")) {
+                if (data.stmt.equals("Re-Order Level")) {
                     r_reorder_level();
                 }
                 if (data.stmt.equals("Services Report")) {

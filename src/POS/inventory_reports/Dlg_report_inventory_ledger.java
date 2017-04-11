@@ -17,6 +17,7 @@ import POS.util.TableRenderer;
 import java.awt.BorderLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -233,6 +234,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         tf_search = new Field.Search();
         jButton1 = new Button.Search();
+        jCheckBox7 = new javax.swing.JCheckBox();
         pnl_report = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -294,15 +296,15 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         buttonGroup1.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox4.setSelected(true);
-        jCheckBox4.setText("Item Code:");
+        jCheckBox4.setText("[F1]-All");
 
         buttonGroup1.add(jCheckBox5);
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox5.setText("Description");
+        jCheckBox5.setText("[F2]-Item Code");
 
         buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox6.setText("Barcode");
+        jCheckBox6.setText("[F3]-Barcode");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Search:");
@@ -328,6 +330,10 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        buttonGroup1.add(jCheckBox7);
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("[F4]-Description");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -366,7 +372,9 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                                 .addComponent(jCheckBox5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox6)
-                                .addGap(0, 482, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox7)
+                                .addGap(0, 331, Short.MAX_VALUE))
                             .addComponent(tf_search))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -398,7 +406,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox4)
                             .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox6))
+                            .addComponent(jCheckBox6)
+                            .addComponent(jCheckBox7))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -563,8 +572,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         .addGap(1, 1, 1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -651,6 +659,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -717,6 +726,25 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 disposed();
             }
         });
+        tf_search.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox4.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox5.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox6.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    jCheckBox7.setSelected(true);
+                }
+            }
+        });
     }
     // </editor-fold>
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
@@ -765,16 +793,25 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void run() {
                 String search = tf_search.getText();
-
-                String where = " "
-                        + " where main_barcode like '" + search + "' and location_id='" + my_location_id + "' "
-                        + " ";
+                Field.Combo br = (Field.Combo) tf_branch_location;
+                String where = " where ";
+                if (jCheckBox4.isSelected()) {
+                    where = where + "  main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                            + " or barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                            + " or description like '%" + search + "%' and location_id='" + br.getId() + "'";
+                }
                 if (jCheckBox5.isSelected()) {
-                    where = " where description like  '%" + search + "%' and location_id='" + my_location_id + "' order by description asc ";
+                    where = where + "  main_barcode like '" + search + "' and location_id='" + br.getId() + "' "
+                            + "  ";
                 }
                 if (jCheckBox6.isSelected()) {
-                    where = " where barcode='" + search + "' and location_id='" + my_location_id + "' ";
+                    where = where + " "
+                            + "  barcode like '" + search + "' and location_id='" + br.getId() + "'";
                 }
+                if (jCheckBox7.isSelected()) {
+                    where = where + "  description like '%" + search + "%' and location_id='" + br.getId() + "' ";
+                }
+                where = where + " order by description asc ";
 
                 inventory_barcoders_list.clear();
                 inventory_barcoders_list = S2_inventory_barcodes.ret_data(where);

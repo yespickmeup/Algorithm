@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
 	<field name="item_code" class="java.lang.String"/>
 	<field name="barcode" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
@@ -11,27 +14,30 @@
 	<field name="price" class="java.lang.Double"/>
 	<field name="branch" class="java.lang.String"/>
 	<field name="location" class="java.lang.String"/>
+	<variable name="item_code_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{item_code}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="103" splitType="Stretch">
 			<textField>
-				<reportElement uuid="8e2821f5-e577-4b30-b364-0887461e3b60" x="49" y="32" width="210" height="20"/>
+				<reportElement uuid="8e2821f5-e577-4b30-b364-0887461e3b60" x="49" y="47" width="210" height="15"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{branch}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b504b1c2-feea-4057-b6d2-59ac291273a8" x="49" y="52" width="210" height="20"/>
+				<reportElement uuid="b504b1c2-feea-4057-b6d2-59ac291273a8" x="49" y="62" width="210" height="15"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="0" y="32" width="50" height="20"/>
+				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="0" y="47" width="50" height="15"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -44,7 +50,7 @@
 				<text><![CDATA[Branch:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="0" y="52" width="50" height="20"/>
+				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="0" y="62" width="50" height="15"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -56,6 +62,56 @@
 				</textElement>
 				<text><![CDATA[Location:]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="8e2821f5-e577-4b30-b364-0887461e3b60" x="0" y="0" width="555" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="1" y="77" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b504b1c2-feea-4057-b6d2-59ac291273a8" x="50" y="77" width="210" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="1" y="32" width="258" height="17"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inventory Count Sheet]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8e2821f5-e577-4b30-b364-0887461e3b60" x="1" y="17" width="555" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -63,19 +119,6 @@
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="455" y="0" width="50" height="20"/>
-				<box>
-					<topPen lineWidth="0.2"/>
-					<leftPen lineWidth="0.2"/>
-					<bottomPen lineWidth="0.2"/>
-					<rightPen lineWidth="0.2"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Qty]]></text>
-			</staticText>
 			<staticText>
 				<reportElement uuid="672e51e6-aba7-4319-bd6f-4742c7c87696" x="0" y="0" width="51" height="20"/>
 				<box>
@@ -103,7 +146,7 @@
 				<text><![CDATA[Barcode]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b8dccacc-0004-445c-a0c0-2af68f065690" x="132" y="0" width="247" height="20"/>
+				<reportElement uuid="b8dccacc-0004-445c-a0c0-2af68f065690" x="132" y="0" width="297" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -116,7 +159,7 @@
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d1ce6061-3807-4064-b5bf-d659fd456902" x="379" y="0" width="76" height="20"/>
+				<reportElement uuid="d1ce6061-3807-4064-b5bf-d659fd456902" x="429" y="0" width="76" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -145,20 +188,6 @@
 	</columnHeader>
 	<detail>
 		<band height="12" splitType="Stretch">
-			<textField pattern="#,##0">
-				<reportElement uuid="59347e6b-1411-4ae5-895b-6b868b004e78" x="455" y="0" width="50" height="12"/>
-				<box>
-					<topPen lineWidth="0.2"/>
-					<leftPen lineWidth="0.2"/>
-					<bottomPen lineWidth="0.2"/>
-					<rightPen lineWidth="0.2"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-					<paragraph leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement uuid="0d2727ed-2bd9-48e6-b110-befef5aa14f0" x="0" y="0" width="51" height="12"/>
 				<box>
@@ -188,7 +217,7 @@
 				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="29140579-19b2-4995-9475-56e0e24acd10" x="132" y="0" width="247" height="12"/>
+				<reportElement uuid="29140579-19b2-4995-9475-56e0e24acd10" x="132" y="0" width="297" height="12"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -202,7 +231,7 @@
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="063544d4-b88f-4957-a981-7c10648b160c" x="379" y="0" width="76" height="12"/>
+				<reportElement uuid="063544d4-b88f-4957-a981-7c10648b160c" x="429" y="0" width="76" height="12"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -238,6 +267,25 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1a340790-f6d9-42b7-b953-91608d8ad1cb" x="1" y="7" width="65" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[No. of Items:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1f5f4116-d4a1-4542-bc94-3991410c48bd" x="66" y="7" width="66" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{item_code_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

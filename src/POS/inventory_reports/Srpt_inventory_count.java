@@ -28,9 +28,15 @@ import net.sf.jasperreports.swing.JRViewer;
 public class Srpt_inventory_count {
 
     public final List<Srpt_inventory_count.field> fields;
+    public final String business_name;
+    public final String address;
+    public final String date;
 
-    public Srpt_inventory_count() {
+    public Srpt_inventory_count(String business_name, String address, String date) {
         this.fields = new ArrayList();
+        this.business_name = business_name;
+        this.address = address;
+        this.date = date;
     }
 
     public static class field {
@@ -127,7 +133,10 @@ public class Srpt_inventory_count {
     public static void main(String[] args) {
         String where = " where location_id='" + "15" + "' order by main_barcode asc ";
         List<Srpt_inventory_count.field> fields = Srpt_inventory_count.ret_data(where);
-        Srpt_inventory_count rpt = new Srpt_inventory_count();
+        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+        String address = System.getProperty("address", "Daro, Dumaguete City");
+        String date = "04/06/2017";
+        Srpt_inventory_count rpt = new Srpt_inventory_count(business_name, address, date);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_inventory_count.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -243,10 +252,8 @@ public class Srpt_inventory_count {
                 String item_code = "" + main_barcode;
                 double qty = product_qty;
                 double price = selling_price;
-                if (qty > 0 || qty < 0) {
-                    Srpt_inventory_count.field field = new field(item_code, barcode, description, qty, cost, price, branch, location);
-                    datas.add(field);
-                }
+                Srpt_inventory_count.field field = new field(item_code, barcode, description, qty, cost, price, branch, location);
+                datas.add(field);
 
             }
             return datas;

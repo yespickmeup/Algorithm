@@ -4069,7 +4069,7 @@ public class Dlg_touchscreen_cashcount extends javax.swing.JDialog {
 
         
         String date = DateType.sf.format(new Date());
-        CashDrawer.update_data(to, user_id, date,cashin);
+        CashDrawer.update_data(to, ""+id);
         Alert.set(2, "");
     }
 
