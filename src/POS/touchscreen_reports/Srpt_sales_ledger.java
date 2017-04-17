@@ -7,8 +7,6 @@ package POS.touchscreen_reports;
 
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
-import POS.users.MyUser;
-import POS.users.S1_users;
 import POS.util.MyConnection;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -240,7 +238,7 @@ public class Srpt_sales_ledger {
 
     public static List<Srpt_sales_ledger.field> ret_data(String where) {
         List<Srpt_sales_ledger.field> fields = new ArrayList();
-        List<S1_users.to_users> user_list =  MyUser.ret_data(where);
+      
         
         try {
             Connection conn = MyConnection.connect();

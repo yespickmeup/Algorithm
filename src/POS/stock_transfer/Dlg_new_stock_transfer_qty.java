@@ -445,7 +445,7 @@ public class Dlg_new_stock_transfer_qty extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        jTextArea1.grabFocus();
+       ok();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextArea1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyReleased

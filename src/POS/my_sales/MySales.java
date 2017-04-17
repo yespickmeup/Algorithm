@@ -463,7 +463,7 @@ public class MySales {
                         .setString("soa_type", to.soa_type)
                         .setString("soa_type_id", to.soa_type_id)
                         .setString("soa_date", to.soa_date)
-                        .setString("date_added", to.date_added)
+                        .setString("date_added", to_sales.date_added)
                         .setString("added_by", to.added_by)
                         .setString("reference_no", to.reference_no)
                         .setString("client_name", to.client_name)
@@ -568,7 +568,7 @@ public class MySales {
                         setString("customer_id", to2.customer_id).
                         setString("customer_name", to2.customer_name).
                         setString("ar_no", to2.ar_no).
-                        setString("date_added", to2.date_added).
+                        setString("date_added", to_sales.date_added).
                         setString("user_name", to2.user_name).
                         setNumber("amount", to2.amount).
                         setNumber("discount_amount", to2.discount_amount).
@@ -710,7 +710,7 @@ public class MySales {
                         .setString("unit", to_sale_items.unit)
                         .setNumber("conversion", to_sale_items.conversion)
                         .setNumber("selling_price", to_sale_items.selling_price)
-                        .setString("date_added", to_sale_items.date_added)
+                        .setString("date_added", to_sales.date_added)
                         .setString("user_id", to_sales.user_id)
                         .setString("user_screen_name", to_sales.user_screen_name)
                         .setNumber("status", 0)

@@ -520,6 +520,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db","db_algorithm");
         init_key();
         set_default_branch();
 
@@ -649,11 +650,15 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         + " and user_id='" + f.getId() + "' "
                         + " and status='" + "0" + "' "
                         + " and location_id='" + lo.getId() + "' ";
+               
                 if (jCheckBox1.isSelected()) {
                     where = " where Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                             + " and status='" + "0" + "' "
                             + " and location_id='" + lo.getId() + "' ";
+                   
                 }
+                System.out.println(where);
+                
                 List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String contact_no = System.getProperty("telephone_number", "");

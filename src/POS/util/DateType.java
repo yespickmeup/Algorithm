@@ -175,7 +175,22 @@ public class DateType {
         date = DateType.month_date.format(d);
         return date;
     }
-
+    public static String convert_dash_date4(String datetime) {
+        String date = "";
+        Date d = new Date();
+        if (datetime.isEmpty()) {
+            datetime = DateType.datetime.format(new Date());
+        }
+        try {
+            d = DateType.sf.parse(datetime);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateType.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        date = DateType.sf.format(d);
+        return date;
+    }
+    
     public static String convert_monthDate_sf(String datetime) {
         String date = "";
         Date d = new Date();

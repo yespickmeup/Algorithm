@@ -271,6 +271,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jLabel30 = new javax.swing.JLabel();
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         btn_cash = new javax.swing.JButton();
@@ -504,6 +506,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jCheckBox8.setText("F9 - Description");
         jCheckBox8.setFocusable(false);
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Sales Date:");
+
+        jDateChooser1.setDate(new Date());
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -511,6 +519,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -542,7 +554,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -560,7 +576,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1959,7 +1975,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2825,10 +2841,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton jButton44;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox8;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -2965,11 +2983,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jTextField1.setVisible(true);
             jLabel12.setVisible(true);
             jTextField2.setVisible(true);
+            jLabel13.setVisible(true);
+            jDateChooser1.setVisible(true);
         } else {
             jLabel10.setVisible(false);
             jTextField1.setVisible(false);
             jLabel12.setVisible(false);
             jTextField2.setVisible(false);
+            
+            jLabel13.setVisible(false);
+            jDateChooser1.setVisible(false);
         }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -5045,7 +5068,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Payments.prepaid f_prepaid = Payments.prepaid;
         int id = 0;
         String sales_no = "";
-        String date_added = DateType.now();
+        String date_added = DateType.datetime.format(jDateChooser1.getDate());
         String user_screen_name = Users.get_ScreenName();
         String user_id = Users.getPassword();
         String session_no = lbl_sales_no.getText();

@@ -3145,7 +3145,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 String date_received = DateType.convert_dash_date2(to1.date_received);
                 double gross = to1.gross_total;
                 double discount = to1.discount;
-                Srpt_receipts rpt = new Srpt_receipts(transaction_no, transaction_type, supplier, receiving_location, reference_no, date_of_delivery, date_received, gross, discount);
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String address = System.getProperty("address", "Daro, Dumaguete City");
+                String contact_no = System.getProperty("contact_no", "422-1234");
+                Srpt_receipts rpt = new Srpt_receipts(transaction_no, transaction_type, supplier, receiving_location, reference_no, date_of_delivery, date_received, gross, discount,business_name,address,contact_no);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_receipts.jrxml";
                 report_customers_aging(rpt, jrxml);

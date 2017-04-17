@@ -761,11 +761,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_cashierMouseClicked
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        init_branch_locations();
+        init_branch_locations(jTextField2, jTextField1);
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        init_branch_locations();
+        init_branch_locations(jTextField2, jTextField1);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -790,11 +790,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_cashier1ActionPerformed
 
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
-        // TODO add your handling code here:
+        init_branch_locations(jTextField3, jTextField4);
     }//GEN-LAST:event_jTextField3MouseClicked
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
+        init_branch_locations(jTextField3, jTextField4);
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
@@ -806,7 +806,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        init_report_sales_summary_per_cashier();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -864,6 +864,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
 
@@ -902,6 +903,14 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
 
+        Field.Combo lo2 = (Field.Combo) jTextField4;
+        Field.Combo br2 = (Field.Combo) jTextField3;
+        lo2.setText(to.location);
+        lo2.setId("" + to.id);
+
+        br2.setText(to.branch);
+        br2.setId("" + to.branch_id);
+
     }
 
     List<Branches.to_branches> branches_list = new ArrayList();
@@ -938,9 +947,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
 
-    private void init_branch_locations() {
-        final Field.Combo br = (Field.Combo) jTextField2;
-        final Field.Combo lo = (Field.Combo) jTextField1;
+    private void init_branch_locations(JTextField b, JTextField t) {
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) t;
 
         Object[][] obj = new Object[branch_location_list.size()][2];
         int i = 0;
@@ -1294,7 +1303,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                         my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
                         total_check_payments, total_cc_payments, date, business_name, address,
-                         disburs, cashier, branch, location, status, status_amount);
+                        disburs, cashier, branch, location, status, status_amount);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_end_of_day_summary.jrxml");
@@ -1422,4 +1431,123 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
+    //<editor-fold defaultstate="collapsed" desc=" sales summary per cashier ">
+    private void init_report_sales_summary_per_cashier() {
+        Button.Search search = (Button.Search) jButton4;
+        search.load();
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Field.Combo br = (Field.Combo) jTextField3;
+                Field.Combo lo = (Field.Combo) jTextField4;
+                Field.Combo f = (Field.Combo) tf_cashier1;
+                String date_from = DateType.sf.format(jDateChooser3.getDate());
+                String date_to = DateType.sf.format(jDateChooser4.getDate());
+                String where = " where session_no like '%" + "" + "%' ";
+                if (!jCheckBox8.isSelected()) {
+                    where = where + " and Date(time_in) between '" + date_from + "' and '" + date_to + "' ";
+                }
+                if (!jCheckBox5.isSelected()) {
+                    where = where + " and user_id='" + f.getId() + "' ";
+                }
+                if (!jCheckBox7.isSelected() && !jCheckBox6.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
+                }
+                if (jCheckBox6.isSelected()) {
+                    where = where + " and branch_id='" + br.getId() + "' ";
+                }
+                System.out.println(where);
+                List<Srpt_sales_summary_per_cashier.field> fields = Srpt_sales_summary_per_cashier.ret_sales_summary_per_cashier(where);
+
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String address = System.getProperty("address", "Daro, Dumaguete City");
+                String date = DateType.slash.format(jDateChooser3.getDate()) + " - " + DateType.slash.format(jDateChooser4.getDate());
+                String branch = jTextField3.getText();
+                String location = jTextField4.getText();
+                if (jCheckBox7.isSelected() && !jCheckBox6.isSelected()) {
+                    location = "All";
+                }
+                if (jCheckBox6.isSelected()) {
+                    branch="All";
+                    location = "All";
+                }
+                String printed_by = MyUser.getUser_screen_name();
+                String cashier = "Cashier";
+                Srpt_sales_summary_per_cashier rpt = new Srpt_sales_summary_per_cashier(business_name, address, date, branch, location, printed_by, cashier);
+                rpt.fields.addAll(fields);
+                String jrxml = "rpt_sales_summary_per_cashier.jrxml";
+                report_sales_ledger_per_cashier(rpt, jrxml);
+                InputStream is = Srpt_sales_summary_per_cashier.class.getResourceAsStream(jrxml);
+                try {
+                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                    jasperPrint2 = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+                } catch (JRException ex) {
+                    Logger.getLogger(Dlg_report_items.class.getName()).
+                            log(Level.SEVERE, null, ex);
+                }
+                Button.Search search = (Button.Search) jButton4;
+                search.finish();
+            }
+        });
+        t.start();
+
+    }
+
+    private void report_sales_ledger_per_cashier(final Srpt_sales_summary_per_cashier to, String jrxml_name) {
+        pnl_report1.removeAll();
+        pnl_report1.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_expenses(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            pnl_report1.add(viewer);
+            pnl_report1.updateUI();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_expenses(Srpt_sales_summary_per_cashier to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_cashier(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_cashier(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_sales_summary_per_cashier.class.getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    JasperPrint jasperPrint2 = null;
+
+    private void print2() {
+        try {
+            if (jasperPrint2 != null) {
+                JasperPrintManager.printReport(jasperPrint2, false);
+            }
+
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+            throw new RuntimeException(e);
+        }
+    }
+
+    //</editor-fold>
 }
