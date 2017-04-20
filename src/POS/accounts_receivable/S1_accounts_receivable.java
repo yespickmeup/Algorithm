@@ -4,7 +4,6 @@
  */
 package POS.accounts_receivable;
 
-import static POS.accounts_receivable.S1_accounts_receivable_payments.ret_customer_balance;
 import POS.customers.Customers;
 import POS.sales.Sales;
 import POS.util.MyConnection;
@@ -112,6 +111,7 @@ public class S1_accounts_receivable {
     public static void add_accounts_receivable(to_accounts_receivable to_accounts_receivable) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "insert into  accounts_receivable("
                     + "customer_id"
                     + ",customer_name"
@@ -207,11 +207,22 @@ public class S1_accounts_receivable {
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
-            Lg.s(S1_accounts_receivable.class, "Successfully Added");
+            stmt.addBatch(s0);
 
-            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
-            double new_balance = cus.balance + to_accounts_receivable.amount;
+//            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
+            String s10 = "select "
+                    + "balance"
+                    + " from  customers where "
+                    + " customer_no ='" + to_accounts_receivable.customer_id + "' "
+                    + " ";
+            double customer_balance = 0;
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery(s10);
+            if (rs10.next()) {
+                customer_balance = rs10.getDouble(1);
+            }
+
+            double new_balance = customer_balance + to_accounts_receivable.amount;
             String s2 = "update  customers set "
                     + "balance= :balance"
                     + " where "
@@ -220,8 +231,10 @@ public class S1_accounts_receivable {
             s2 = SqlStringUtil.parse(s2).
                     setNumber("balance", new_balance).
                     ok();
-            PreparedStatement stmt2 = conn.prepareStatement(s2);
-            stmt2.execute();
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Sales.class, "Successfully Updated");
 
         } catch (SQLException e) {
@@ -285,6 +298,7 @@ public class S1_accounts_receivable {
     public static void edit_accounts_receivable(to_accounts_receivable to_accounts_receivable, double previous_amount, double new_amount) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "update  accounts_receivable set "
                     + "amount= :amount"
                     + ",discount_amount= :discount_amount"
@@ -333,13 +347,25 @@ public class S1_accounts_receivable {
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
-            Lg.s(S1_accounts_receivable.class, "Successfully Updated");
+            stmt.addBatch(s0);
 
-            Customers.to_customers cus = S1_accounts_receivable.ret_customer_balance(to_accounts_receivable.customer_id);
+//            Customers.to_customers cus = S1_accounts_receivable.ret_customer_balance(to_accounts_receivable.customer_id);
+            String s10 = "select "
+                    + "balance"
+                    + " from  customers where "
+                    + " customer_no ='" + to_accounts_receivable.customer_id + "' "
+                    + " ";
+            double customer_balance = 0;
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery(s10);
+            if (rs10.next()) {
+                customer_balance = rs10.getDouble(1);
+            }
+
             double total = previous_amount - new_amount;
-            double new_balance = (cus.balance - previous_amount) + (to_accounts_receivable.amount);
-            System.out.println(cus.balance + " - " + previous_amount + " = " + to_accounts_receivable.amount);
+            double new_balance = (customer_balance - previous_amount) + (to_accounts_receivable.amount);
+
+//            System.out.println(cus.balance + " - " + previous_amount + " = " + to_accounts_receivable.amount);
 //            total = cus.balance + total;
             String s2 = "update  customers set "
                     + "balance= :balance"
@@ -349,8 +375,12 @@ public class S1_accounts_receivable {
             s2 = SqlStringUtil.parse(s2).
                     setNumber("balance", new_balance).
                     ok();
-            PreparedStatement stmt2 = conn.prepareStatement(s2);
-            stmt2.execute();
+
+            stmt.addBatch(s2);
+            stmt.executeBatch();
+            conn.commit();
+
+            Lg.s(S1_accounts_receivable.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -418,16 +448,29 @@ public class S1_accounts_receivable {
     public static void delete_accounts_receivable(to_accounts_receivable to_accounts_receivable) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "delete from  accounts_receivable where "
                     + " id ='" + to_accounts_receivable.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
-            Lg.s(S1_accounts_receivable.class, "Successfully Deleted");
+            stmt.addBatch(s0);
+//            Lg.s(S1_accounts_receivable.class, "Successfully Deleted");
 
-            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
-            double total = cus.balance - to_accounts_receivable.amount + to_accounts_receivable.paid + to_accounts_receivable.discount_amount;
+//            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
+            String s10 = "select "
+                    + "balance"
+                    + " from  customers where "
+                    + " customer_no ='" + to_accounts_receivable.customer_id + "' "
+                    + " ";
+            double customer_balance = 0;
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery(s10);
+            if (rs10.next()) {
+                customer_balance = rs10.getDouble(1);
+            }
+
+            double total = customer_balance - to_accounts_receivable.amount + to_accounts_receivable.paid + to_accounts_receivable.discount_amount;
             String s2 = "update  customers set "
                     + "balance= :balance"
                     + " where "
@@ -436,15 +479,16 @@ public class S1_accounts_receivable {
             s2 = SqlStringUtil.parse(s2).
                     setNumber("balance", total).
                     ok();
-            PreparedStatement stmt2 = conn.prepareStatement(s2);
-            stmt2.execute();
+            stmt.addBatch(s2);
 
             String s3 = "delete from accounts_receivable_payments where "
                     + " ar_no ='" + to_accounts_receivable.ar_no + "' "
                     + " ";
 
-            PreparedStatement stmt3 = conn.prepareStatement(s3);
-            stmt3.execute();
+            stmt.addBatch(s3);
+
+            stmt.addBatch(s3);
+            conn.commit();
             Lg.s(S1_accounts_receivable_payments.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);

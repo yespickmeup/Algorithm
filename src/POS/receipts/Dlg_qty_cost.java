@@ -606,7 +606,7 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void tf_costActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_costActionPerformed
-        jTextArea1.grabFocus();
+       ok1();
     }//GEN-LAST:event_tf_costActionPerformed
     /**
      * @param args the command line arguments

@@ -151,7 +151,7 @@ public class Encoding_inventory {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update encoding_inventory set "
-                    + "item_code= :item_code"
+                    + " item_code= :item_code"
                     + ",barcode= :barcode"
                     + ",description= :description"
                     + ",branch= :branch"
