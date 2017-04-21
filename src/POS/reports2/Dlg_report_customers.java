@@ -6,7 +6,6 @@
 package POS.reports2;
 
 import POS.customers.Customers;
-import POS.reports.Srpt_encoding_inventory;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.Focus_Fire;
@@ -1116,7 +1115,12 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             @Override
             public void run() {
                 String where = " where customer_id='" + jTextField8.getText() + "' and amount <> paid  order by date_applied asc";
+                String pool_db = System.getProperty("pool_db", "db_smis_dumaguete_angel_buns");
+
                 String jrxml = "rpt_balance_per_transaction.jrxml";
+                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                    jrxml = "rpt_balance_per_transaction_angel_buns.jrxml";
+                }
                 List<Srpt_ar_aging.field> fields = Srpt_ar_aging.ret_aging2(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String printed_by = jTextField7.getText();
