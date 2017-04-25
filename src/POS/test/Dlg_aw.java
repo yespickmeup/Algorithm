@@ -5,7 +5,7 @@
 package POS.test;
 
 import POS.cash_drawer.Dlg_cashin;
-import POS.inventory.Dlg_items;
+
 import POS.users.Dlg_users;
 import POS.util.Center;
 import java.awt.BorderLayout;
@@ -346,38 +346,38 @@ public class Dlg_aw extends javax.swing.JDialog {
     }
 
     private void items() {
-        Dlg_items dtc = new Dlg_items();
-        Dimension d = dtc.getSize();
-        int width = d.width;
-        int height = d.height;
-        final JInternalFrame p2 = new JInternalFrame();
-        p2.add(dtc.getSurface());
-        p2.setBackground(new java.awt.Color(255, 255, 255));
-        p2.setClosable(true);
-        p2.setIconifiable(true);
-        p2.setMaximizable(true);
-//        p2.setLayer(1);
-        System.out.println("");
-        p2.setSize(width + 10, height + 20);
-
-        p2.setFrameIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/POS/img_menu/stock_status.png"))); // NOI18N
-        p2.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent fe) {
-                p2.toFront();
-            }
-
-            @Override
-            public void focusLost(FocusEvent fe) {
-                p2.toBack();
-            }
-        });
-        p2.setVisible(true);
-
-        jDesktopPane1.add(p2);
-        Center.setCenter(p2);
+//        Dlg_items dtc = new Dlg_items();
+//        Dimension d = dtc.getSize();
+//        int width = d.width;
+//        int height = d.height;
+//        final JInternalFrame p2 = new JInternalFrame();
+//        p2.add(dtc.getSurface());
+//        p2.setBackground(new java.awt.Color(255, 255, 255));
+//        p2.setClosable(true);
+//        p2.setIconifiable(true);
+//        p2.setMaximizable(true);
+////        p2.setLayer(1);
+//        System.out.println("");
+//        p2.setSize(width + 10, height + 20);
+//
+//        p2.setFrameIcon(new javax.swing.ImageIcon(getClass().
+//                getResource("/POS/img_menu/stock_status.png"))); // NOI18N
+//        p2.addFocusListener(new FocusListener() {
+//
+//            @Override
+//            public void focusGained(FocusEvent fe) {
+//                p2.toFront();
+//            }
+//
+//            @Override
+//            public void focusLost(FocusEvent fe) {
+//                p2.toBack();
+//            }
+//        });
+//        p2.setVisible(true);
+//
+//        jDesktopPane1.add(p2);
+//        Center.setCenter(p2);
 //        jPanel1.setLayout(new BorderLayout());
     }
 }
