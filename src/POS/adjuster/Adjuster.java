@@ -7,7 +7,6 @@ package POS.adjuster;
 
 import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.users.MyUser;
-import POS.util.DateType;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +23,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Adjuster {
 
-    public static void update_data(to_inventory_barcodes to_inventory_barcodes, double new_qty, int is_add, String remarks) {
+    public static void update_data(to_inventory_barcodes to_inventory_barcodes, double new_qty, int is_add, String remarks,String date) {
         try {
             Connection conn = MyConnection.connect();
             String transaction_no = "";
@@ -70,7 +69,7 @@ public class Adjuster {
                     + ",:remarks"
                     + ",transaction_no"
                     + ")";
-
+            
             s2 = SqlStringUtil.parse(s2)
                     .setString("item_code", to_inventory_barcodes.main_barcode)
                     .setString("barcode", to_inventory_barcodes.barcode)
@@ -78,7 +77,7 @@ public class Adjuster {
                     .setNumber("qty", to_inventory_barcodes.product_qty)
                     .setNumber("new_qty", new_qty)
                     .setNumber("is_add", is_add)
-                    .setString("date_added", DateType.now())
+                    .setString("date_added", date)
                     .setNumber("status", 1)
                     .setString("user_id", MyUser.getUser_id())
                     .setString("user_screen_name", MyUser.getUser_screen_name())

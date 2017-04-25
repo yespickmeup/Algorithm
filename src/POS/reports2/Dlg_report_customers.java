@@ -33,6 +33,8 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import synsoftech.fields.Button;
+import synsoftech.fields.Field;
 
 /**
  *
@@ -209,15 +211,15 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextField1 = new Field.Search();
+        jButton1 = new Button.Default();
         jProgressBar3 = new javax.swing.JProgressBar();
         jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextField3 = new Field.Search();
         jProgressBar4 = new javax.swing.JProgressBar();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -226,8 +228,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jTextField5 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jTextField5 = new Field.Search();
+        jButton2 = new Button.Default();
         jProgressBar5 = new javax.swing.JProgressBar();
         jTextField6 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -235,8 +237,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jTextField7 = new Field.Search();
+        jButton3 = new Button.Default();
         jProgressBar6 = new javax.swing.JProgressBar();
         jTextField8 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -258,7 +260,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         );
         pnl_sales_itemsLayout.setVerticalGroup(
             pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -283,7 +285,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Search");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/magnifying-glass.png"))); // NOI18N
+        jButton1.setToolTipText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -311,8 +314,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 .addGap(0, 0, 0)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,11 +326,11 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(9, 9, 9))
@@ -410,7 +413,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         );
         pnl_sales_items1Layout.setVerticalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -452,7 +455,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Search");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/magnifying-glass.png"))); // NOI18N
+        jButton2.setToolTipText("Search");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -480,8 +484,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 .addGap(0, 0, 0)
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -492,11 +496,11 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(9, 9, 9))
@@ -512,7 +516,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         );
         pnl_sales_items2Layout.setVerticalGroup(
             pnl_sales_items2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -545,7 +549,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setText("Search");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/magnifying-glass.png"))); // NOI18N
+        jButton3.setToolTipText("Search");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -556,6 +561,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jProgressBar6.setStringPainted(true);
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField8.setFocusable(false);
 
         jLabel8.setText("Status:");
 
@@ -571,8 +577,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 .addGap(0, 0, 0)
                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -582,14 +588,18 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(9, 9, 9))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(9, 9, 9))))
         );
 
         pnl_sales_items3.setBackground(new java.awt.Color(255, 255, 255));
@@ -602,7 +612,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         );
         pnl_sales_items3Layout.setVerticalGroup(
             pnl_sales_items3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -628,14 +638,14 @@ public class Dlg_report_customers extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1005, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(25, 25, 25))
         );
 
@@ -737,10 +747,15 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         jTextField2.enable(false);
         jTextField4.enable(false);
         jTextField5.enable(false);
+        jTextField8.setVisible(false);
+        jTextField2.setVisible(false);
+        jTextField4.setVisible(false);
+        jTextField6.setVisible(false);
         focus();
 
     }
@@ -791,8 +806,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list.size()][2];
         int i = 0;
         for (Customers.to_customers to : customer_list) {
-            obj[i][0] = to.customer_no;
-            obj[i][1] = to.customer_name;
+            obj[i][0] = " "+to.customer_no;
+            obj[i][1] = " "+to.customer_name;
             i++;
         }
 
@@ -969,9 +984,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list2.size()][3];
         int i = 0;
         for (Customers.to_customers to : customer_list2) {
-            obj[i][0] = to.customer_no;
-            obj[i][1] = to.customer_name;
-            obj[i][2] = FitIn.fmt_wc_0(to.balance);
+            obj[i][0] = " "+to.customer_no;
+            obj[i][1] = " "+to.customer_name;
+            obj[i][2] = " "+FitIn.fmt_wc_0(to.balance);
             i++;
         }
 
@@ -1002,9 +1017,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list3.size()][3];
         int i = 0;
         for (Customers.to_customers to : customer_list3) {
-            obj[i][0] = to.customer_no;
-            obj[i][1] = to.customer_name;
-            obj[i][2] = FitIn.fmt_wc_0(to.balance);
+            obj[i][0] = " "+to.customer_no;
+            obj[i][1] = " "+to.customer_name;
+            obj[i][2] = " "+FitIn.fmt_wc_0(to.balance);
             i++;
         }
 
@@ -1033,9 +1048,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list3.size()][3];
         int i = 0;
         for (Customers.to_customers to : customer_list3) {
-            obj[i][0] = to.customer_no;
-            obj[i][1] = to.customer_name;
-            obj[i][2] = FitIn.fmt_wc_0(to.balance);
+            obj[i][0] = " " + to.customer_no;
+            obj[i][1] = " " + to.customer_name;
+            obj[i][2] = " " + FitIn.fmt_wc_0(to.balance);
             i++;
         }
 
@@ -1049,8 +1064,11 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
+                Field.Search customer = (Field.Search) tf1;
                 Customers.to_customers to = customer_list3.get(data.selected_row);
                 tf1.setText("" + to.customer_name);
+                customer.setId(to.address);
+
                 tf2.setText("" + to.customer_no);
                 get_customers_aging2();
             }
@@ -1097,7 +1115,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 six = one + two + three + four + five;
                 String address = System.getProperty("address", "Daro, Dumaguete City");
                 String telephone_number = System.getProperty("telephone_number", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
-                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number);
+                Field.Search customer = (Field.Search) jTextField7;
+                String customer_address = customer.getId();
+                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address);
                 rpt.fields.addAll(fields);
 
                 report_customers_aging(rpt, jrxml);
@@ -1124,7 +1144,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 List<Srpt_ar_aging.field> fields = Srpt_ar_aging.ret_aging2(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String printed_by = jTextField7.getText();
-                String date = "Date: [" + DateType.month_date.format(new Date()) + "]";
+                String date = "" + DateType.month_date.format(new Date()) + "";
                 double one = 0;
                 double two = 0;
                 double three = 0;
@@ -1142,7 +1162,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 six = one + two + three + four + five;
                 String address = System.getProperty("address", "Daro, Dumaguete City");
                 String telephone_number = System.getProperty("telephone_number", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
-                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number);
+                Field.Search customer = (Field.Search) jTextField7;
+                String customer_address = customer.getId();
+                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address);
                 rpt.fields.addAll(fields);
                 report_customers_aging2(rpt, jrxml);
                 jProgressBar6.setString("Finished...");

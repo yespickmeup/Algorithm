@@ -8,7 +8,6 @@ package POS.reports2;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.MyConnection;
-import POS.util.Users;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -44,8 +43,8 @@ public class Srpt_ar_aging {
     public final double six;
     public final String address;
     public final String telephone_number;
-
-    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number) {
+    public final String customer_address;
+    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number,String customer_address) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
@@ -58,6 +57,7 @@ public class Srpt_ar_aging {
         this.six = six;
         this.address = address;
         this.telephone_number = telephone_number;
+        this.customer_address=customer_address;
     }
 
     public static class field {
@@ -214,7 +214,8 @@ public class Srpt_ar_aging {
         six = one + two + three + four + five;
         String address = "";
         String telephone_number = "";
-        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number);
+        String customer_address="";
+        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number,customer_address);
         rpt.fields.addAll(fields);
 
         JRViewer viewer = get_viewer(rpt);

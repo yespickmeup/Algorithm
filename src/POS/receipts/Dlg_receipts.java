@@ -1615,10 +1615,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
     String location_ids = "";
     List<S1_branch_locations.to_branch_locations> branch_locations = new ArrayList();
 
+    
     private void set_default_branch() {
         Field.Combo combo = (Field.Combo) tf_branch;
-        Field.Combo tf_rp_location = (Field.Combo) tf_branch1;
-        branch_locations = S1_branch_locations.ret_where("");
+        Field.Combo tf_rp_location = (Field.Combo) tf_branch1;        
+        branch_locations = S1_branch_locations.ret_where("");        
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         location_ids = "" + to.id;
         my_location_id = "" + to.id;
@@ -1632,6 +1633,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_rp_location.setText(to.location + " - [" + to.branch + "]");
         tf_rp_location.setId("" + to.id);
     }
+    
+    
 
     private void add_my_barcode() {
         Dlg_barcodes dlg = new Dlg_barcodes();
@@ -2018,7 +2021,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         }
     }
-
+    
+    
+    
     private void data_cols_items() {
         int row = tbl_receipts.getSelectedRow();
         if (row < 0) {
@@ -3223,7 +3228,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-
         final to_receipts to = (to_receipts) tbl_receipts_ALM.get(tbl_receipts.convertRowIndexToModel(row));
         if (to.status == 1) {
             Alert.set(0, "Receipt-Status [Finalized]!");

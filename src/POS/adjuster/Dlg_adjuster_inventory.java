@@ -456,7 +456,6 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         jLabel5.setText("Date From:");
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox3.setSelected(true);
         jCheckBox3.setText("All");
 
         jDateChooser1.setDate(new Date());
@@ -905,7 +904,6 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
             }
         });
     }
-    
 
     public void do_pass() {
 
@@ -1154,7 +1152,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_adjuster_qty.OutputData data) {
                     closeDialog.ok();
-                    Adjuster.update_data(to, data.qty, data.is_add, data.remarks);
+                    Adjuster.update_data(to, data.qty, data.is_add, data.remarks, data.date);
                     data_cols();
                     data_cols_adjustments();
                 }
@@ -1337,7 +1335,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                 String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
                 String where = " where description like '%" + "" + "%' ";
                 if (!jCheckBox3.isSelected()) {
-                    where = " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
 
                 if (!jCheckBox4.isSelected() && !jCheckBox5.isSelected()) {
@@ -1348,10 +1346,10 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                 }
 
                 where = where + " order by id desc ";
-                System.out.println(where);
+//                System.out.println(where);
                 List<to_adjustments> datas = S1_adjustments.ret_data(where);
                 loadData_adjustments(datas);
-                jLabel11.setText(""+datas.size());
+                jLabel11.setText("" + datas.size());
                 jButton2.setEnabled(true);
                 jProgressBar2.setString("Finished...");
                 jProgressBar2.setIndeterminate(false);

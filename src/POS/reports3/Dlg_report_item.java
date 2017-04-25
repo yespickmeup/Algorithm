@@ -259,11 +259,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
         jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
-        jCheckBox17 = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_inventory = new javax.swing.JTable();
@@ -527,31 +522,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox9.setText("All");
         jCheckBox9.setFocusable(false);
 
-        jCheckBox14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox14.setSelected(true);
-        jCheckBox14.setText("All");
-        jCheckBox14.setFocusable(false);
-
-        jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox15.setSelected(true);
-        jCheckBox15.setText("All");
-        jCheckBox15.setFocusable(false);
-
-        jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox16.setSelected(true);
-        jCheckBox16.setText("All");
-        jCheckBox16.setFocusable(false);
-
-        jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox17.setSelected(true);
-        jCheckBox17.setText("All");
-        jCheckBox17.setFocusable(false);
-
-        jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox18.setSelected(true);
-        jCheckBox18.setText("All");
-        jCheckBox18.setFocusable(false);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -564,32 +534,25 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_category, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
+                                .addGap(1, 1, 1)
+                                .addComponent(tf_category, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCheckBox15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)))
+                                .addGap(1, 1, 1)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCheckBox16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBox17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBox18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -628,35 +591,28 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tf_category)
                                 .addComponent(tf_category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox14)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox15))
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox18)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox17))
+                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox16))
+                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1080,11 +1036,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox18;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -1250,162 +1201,187 @@ public class Dlg_report_item extends javax.swing.JDialog {
     List<S1_inventory_category.to_inventory_category> categories = new ArrayList();
 
     private void init_categories() {
-        String where = " where name like '%" + tf_category.getText() + "%' order by name asc";
-        categories.clear();
-        categories = S1_inventory_category.ret_data2(where);
-        Object[][] obj = new Object[categories.size()][1];
-        int i = 0;
-        for (S1_inventory_category.to_inventory_category to : categories) {
-            obj[i][0] = " " + to.name.toUpperCase();
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf_category.getWidth()};
-        String[] col_names = {"Name"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(tf_category, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                S1_inventory_category.to_inventory_category to = (S1_inventory_category.to_inventory_category) categories.get(data.selected_row);
-                tf_category_code.setText("" + to.id);
-                tf_category.setText("" + to.name.toUpperCase());
-                jTextField3.grabFocus();
-                data_cols();
+        if (tf_category.getText().isEmpty()) {
+            data_cols();
+        } else {
+            String where = " where name like '%" + tf_category.getText() + "%' order by name asc";
+            categories.clear();
+            categories = S1_inventory_category.ret_data2(where);
+            Object[][] obj = new Object[categories.size()][1];
+            int i = 0;
+            for (S1_inventory_category.to_inventory_category to : categories) {
+                obj[i][0] = " " + to.name.toUpperCase();
+                i++;
             }
-        });
+            JLabel[] labels = {};
+            int[] tbl_widths_customers = {tf_category.getWidth()};
+            String[] col_names = {"Name"};
+            TableRenderer tr = new TableRenderer();
+            TableRenderer.setPopup(tf_category, obj, labels, tbl_widths_customers, col_names);
+            tr.setCallback(new TableRenderer.Callback() {
+                @Override
+                public void ok(TableRenderer.OutputData data) {
+                    S1_inventory_category.to_inventory_category to = (S1_inventory_category.to_inventory_category) categories.get(data.selected_row);
+                    tf_category_code.setText("" + to.id);
+                    tf_category.setText("" + to.name.toUpperCase());
+                    jTextField3.grabFocus();
+                    data_cols();
+                }
+            });
+        }
+
     }
 
     List<S1_inventory_classification.to_inventory_classification> classification_list = new ArrayList();
 
     private void init_receipt_types() {
-        String where = " where name like '%" + jTextField3.getText() + "%' and category_code='" + tf_category_code.getText() + "' order by name asc";
-        if (tf_category_code.getText().equals("0")) {
-            where = " where name like '%" + jTextField3.getText() + "%'  order by name asc";
-        }
-        classification_list.clear();
-        classification_list = S1_inventory_classification.ret_data2(where);
-        Object[][] obj = new Object[classification_list.size()][1];
-        int i = 0;
-        for (S1_inventory_classification.to_inventory_classification to : classification_list) {
-            obj[i][0] = " " + to.name.toUpperCase();
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf_category.getWidth()};
-        int width = 0;
-        String[] col_names = {"Name"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup(jTextField3, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                S1_inventory_classification.to_inventory_classification to = classification_list.get(data.selected_row);
-                jTextField3.setText(to.name.toUpperCase());
-                jTextField8.setText("" + to.id);
-                jTextField4.grabFocus();
-                data_cols();
+        if (jTextField3.getText().isEmpty()) {
+            data_cols();
+        } else {
+            String where = " where name like '%" + jTextField3.getText() + "%' and category_code='" + tf_category_code.getText() + "' order by name asc";
+            if (tf_category_code.getText().equals("0")) {
+                where = " where name like '%" + jTextField3.getText() + "%'  order by name asc";
             }
-        });
+            classification_list.clear();
+            classification_list = S1_inventory_classification.ret_data2(where);
+            Object[][] obj = new Object[classification_list.size()][1];
+            int i = 0;
+            for (S1_inventory_classification.to_inventory_classification to : classification_list) {
+                obj[i][0] = " " + to.name.toUpperCase();
+                i++;
+            }
+            JLabel[] labels = {};
+            int[] tbl_widths_customers = {tf_category.getWidth()};
+            int width = 0;
+            String[] col_names = {"Name"};
+            TableRenderer tr = new TableRenderer();
+            TableRenderer.
+                    setPopup(jTextField3, obj, labels, tbl_widths_customers, col_names);
+            tr.setCallback(new TableRenderer.Callback() {
+                @Override
+                public void ok(TableRenderer.OutputData data) {
+                    S1_inventory_classification.to_inventory_classification to = classification_list.get(data.selected_row);
+                    jTextField3.setText(to.name.toUpperCase());
+                    jTextField8.setText("" + to.id);
+                    jTextField4.grabFocus();
+                    data_cols();
+                }
+            });
+        }
+
     }
     List<S1_inventory_sub_classification.to_inventory_sub_classification> sub_classification_list = new ArrayList();
 
     private void init_sub_classification() {
-        String where = " where name like '%" + jTextField4.getText() + "%' and classification_code='" + jTextField8.getText() + "' order by name asc";
-        if (jTextField8.getText().equals("0")) {
-            where = " where name like '%" + jTextField4.getText() + "%'  order by name asc";
+        if (jTextField4.getText().isEmpty()) {
+            data_cols();
+        } else {
+            String where = " where name like '%" + jTextField4.getText() + "%' and classification_code='" + jTextField8.getText() + "' order by name asc";
+            if (jTextField8.getText().equals("0")) {
+                where = " where name like '%" + jTextField4.getText() + "%'  order by name asc";
+            }
+
+            sub_classification_list.clear();
+            sub_classification_list = S1_inventory_sub_classification.ret_data2(where);
+            Object[][] obj = new Object[sub_classification_list.size()][1];
+            int i = 0;
+            for (S1_inventory_sub_classification.to_inventory_sub_classification to : sub_classification_list) {
+                obj[i][0] = " " + to.name.toUpperCase();
+                i++;
+            }
+            JLabel[] labels = {};
+            int[] tbl_widths_customers = {tf_category.getWidth()};
+            int width = 0;
+            String[] col_names = {"Name"};
+            TableRenderer tr = new TableRenderer();
+            TableRenderer.
+                    setPopup(jTextField4, obj, labels, tbl_widths_customers, col_names);
+            tr.setCallback(new TableRenderer.Callback() {
+                @Override
+                public void ok(TableRenderer.OutputData data) {
+                    S1_inventory_sub_classification.to_inventory_sub_classification to = sub_classification_list.get(data.selected_row);
+                    jTextField4.setText(to.name.toUpperCase());
+                    jTextField9.setText("" + to.id);
+                    jTextField5.grabFocus();
+                    data_cols();
+                }
+            });
         }
 
-        sub_classification_list.clear();
-        sub_classification_list = S1_inventory_sub_classification.ret_data2(where);
-        Object[][] obj = new Object[sub_classification_list.size()][1];
-        int i = 0;
-        for (S1_inventory_sub_classification.to_inventory_sub_classification to : sub_classification_list) {
-            obj[i][0] = " " + to.name.toUpperCase();
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf_category.getWidth()};
-        int width = 0;
-        String[] col_names = {"Name"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup(jTextField4, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                S1_inventory_sub_classification.to_inventory_sub_classification to = sub_classification_list.get(data.selected_row);
-                jTextField4.setText(to.name.toUpperCase());
-                jTextField9.setText("" + to.id);
-                jTextField5.grabFocus();
-                data_cols();
-            }
-        });
     }
     List<S1_inventory_brand.to_inventory_brand> brand_list = new ArrayList();
 
     private void init_brand() {
-        String where = " where name like '%" + jTextField5.getText() + "%' order by name asc";
-        brand_list.clear();
-        brand_list = S1_inventory_brand.ret_data2(where);
-        Object[][] obj = new Object[brand_list.size()][1];
-        int i = 0;
-        for (S1_inventory_brand.to_inventory_brand to : brand_list) {
-            obj[i][0] = to.name.toUpperCase();
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf_category.getWidth()};
-        int width = 0;
-        String[] col_names = {"Name"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup(jTextField5, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                S1_inventory_brand.to_inventory_brand to = brand_list.get(data.selected_row);
-                jTextField5.setText(to.name.toUpperCase());
-                jTextField10.setText("" + to.id);
-                jTextField6.grabFocus();
-                data_cols();
+        if (jTextField5.getText().isEmpty()) {
+            data_cols();
+        } else {
+            String where = " where name like '%" + jTextField5.getText() + "%' order by name asc";
+            brand_list.clear();
+            brand_list = S1_inventory_brand.ret_data2(where);
+            Object[][] obj = new Object[brand_list.size()][1];
+            int i = 0;
+            for (S1_inventory_brand.to_inventory_brand to : brand_list) {
+                obj[i][0] = to.name.toUpperCase();
+                i++;
             }
-        });
+            JLabel[] labels = {};
+            int[] tbl_widths_customers = {tf_category.getWidth()};
+            int width = 0;
+            String[] col_names = {"Name"};
+            TableRenderer tr = new TableRenderer();
+            TableRenderer.
+                    setPopup(jTextField5, obj, labels, tbl_widths_customers, col_names);
+            tr.setCallback(new TableRenderer.Callback() {
+                @Override
+                public void ok(TableRenderer.OutputData data) {
+                    S1_inventory_brand.to_inventory_brand to = brand_list.get(data.selected_row);
+                    jTextField5.setText(to.name.toUpperCase());
+                    jTextField10.setText("" + to.id);
+                    jTextField6.grabFocus();
+                    data_cols();
+                }
+            });
+        }
+
     }
 
     List<S1_inventory_model.to_inventory_model> model_list = new ArrayList();
 
     private void init_model() {
-        String where = " where name like '%" + jTextField6.getText() + "%' and brand_code= '" + jTextField10.getText() + "'order by name asc";
-        if (jTextField10.getText().equals("0")) {
-            where = " where name like '%" + jTextField6.getText() + "%' order by name asc";
+        if (!jTextField6.getText().isEmpty()) {
+            String where = " where name like '%" + jTextField6.getText() + "%' and brand_code= '" + jTextField10.getText() + "'order by name asc";
+            if (jTextField10.getText().equals("0")) {
+                where = " where name like '%" + jTextField6.getText() + "%' order by name asc";
+            }
+
+            model_list.clear();
+            model_list = S1_inventory_model.ret_data2(where);
+            Object[][] obj = new Object[model_list.size()][1];
+            int i = 0;
+            for (S1_inventory_model.to_inventory_model to : model_list) {
+                obj[i][0] = to.name.toUpperCase();
+                i++;
+            }
+            JLabel[] labels = {};
+            int[] tbl_widths_customers = {tf_category.getWidth()};
+            int width = 0;
+            String[] col_names = {"Name"};
+            TableRenderer tr = new TableRenderer();
+            TableRenderer.
+                    setPopup(jTextField6, obj, labels, tbl_widths_customers, col_names);
+            tr.setCallback(new TableRenderer.Callback() {
+                @Override
+                public void ok(TableRenderer.OutputData data) {
+                    S1_inventory_model.to_inventory_model to = model_list.get(data.selected_row);
+                    jTextField6.setText(to.name.toUpperCase());
+                    jTextField11.setText("" + to.id);
+                    data_cols();
+                }
+            });
+        } else {
+            data_cols();
         }
 
-        model_list.clear();
-        model_list = S1_inventory_model.ret_data2(where);
-        Object[][] obj = new Object[model_list.size()][1];
-        int i = 0;
-        for (S1_inventory_model.to_inventory_model to : model_list) {
-            obj[i][0] = to.name.toUpperCase();
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf_category.getWidth()};
-        int width = 0;
-        String[] col_names = {"Name"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup(jTextField6, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                S1_inventory_model.to_inventory_model to = model_list.get(data.selected_row);
-                jTextField6.setText(to.name.toUpperCase());
-                jTextField11.setText("" + to.id);
-                data_cols();
-            }
-        });
     }
     List<Branches.to_branches> branches_list = new ArrayList();
 
@@ -1808,21 +1784,21 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     where = where + " and branch_code='" + br.getId() + "' ";
                 }
 
-                if (!jCheckBox14.isSelected()) {
+                if (!tf_category.getText().isEmpty()) {
                     where = where + " and category_id='" + tf_category_code.getText() + "'";
                 }
 
-                if (!jCheckBox15.isSelected()) {
+                if (!jTextField3.getText().isEmpty()) {
                     where = where + " and classification_id='" + jTextField8.getText() + "'";
                 }
-                if (!jCheckBox18.isSelected()) {
+                if (!jTextField4.getText().isEmpty()) {
                     where = where + " and sub_classification_id='" + jTextField9.getText() + "'";
                 }
-                if (!jCheckBox17.isSelected()) {
+                if (!jTextField5.getText().isEmpty()) {
                     where = where + " and brand_id='" + jTextField10.getText() + "'";
                 }
 
-                if (!jCheckBox16.isSelected()) {
+                if (!jTextField6.getText().isEmpty()) {
                     where = where + " and model_id='" + jTextField11.getText() + "'";
                 }
 
@@ -2161,28 +2137,28 @@ public class Dlg_report_item extends javax.swing.JDialog {
             String uom = to.unit;
             String code = to.barcode;
             String loc = to.branch + " - " + to.location;
-            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code,loc);
+            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code, loc);
             datas.add(field);
         }
 
         String category1 = tf_category.getText();
-        if (jCheckBox14.isSelected()) {
+        if (category1.isEmpty()) {
             category1 = "All";
         }
         String classification = jTextField3.getText();
-        if (jCheckBox15.isSelected()) {
+        if (classification.isEmpty()) {
             classification = "All";
         }
         String sub_classification = jTextField4.getText();
-        if (jCheckBox18.isSelected()) {
+        if (sub_classification.isEmpty()) {
             sub_classification = "All";
         }
         String brand = jTextField5.getText();
-        if (jCheckBox17.isSelected()) {
+        if (brand.isEmpty()) {
             brand = "All";
         }
         String model = jTextField6.getText();
-        if (jCheckBox16.isSelected()) {
+        if (model.isEmpty()) {
             model = "All";
         }
         String branch = tf_branch.getText();
@@ -2197,7 +2173,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_report_item_print_preview nd = Dlg_report_item_print_preview.create(p, true);
         nd.setTitle("");
-        nd.do_pass(datas, category1, classification, sub_classification, brand, model, branch, location,view_only);
+        nd.do_pass(datas, category1, classification, sub_classification, brand, model, branch, location, view_only);
         nd.setCallback(new Dlg_report_item_print_preview.Callback() {
 
             @Override
