@@ -2990,7 +2990,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jTextField1.setVisible(false);
             jLabel12.setVisible(false);
             jTextField2.setVisible(false);
-            
+
             jLabel13.setVisible(false);
             jDateChooser1.setVisible(false);
         }
@@ -3578,7 +3578,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             S1_unit_of_measure.to_uom tt = (S1_unit_of_measure.to_uom) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + tt.unit;
+                    String uom = tt.unit;
+                    uom = uom.replaceAll("#", "/");
+                    return " " + uom;
+
                 case 1:
                     return " " + FitIn.fmt_wc_0(tt.conversion);
                 default:
@@ -3630,7 +3633,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     public static class TblordersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Description", "Qty", "Code", "Amount", "UNIT", "COST", "classification", "classification_id", "sub_classification", "sub_classification_id", "product_qty", "unit", "conversion", "selling_price", "date_added", "user_name", "item_type", "status", "supplier", "fixed_price", "cost", "supplier_id", "multi_level_pricing", "vatable", "reorder_level"
+            "Description", "Qty", "Code", "Amount", "Unit", "Cost", "classification", "classification_id", "sub_classification", "sub_classification_id", "product_qty", "unit", "conversion", "selling_price", "date_added", "user_name", "item_type", "status", "supplier", "fixed_price", "cost", "supplier_id", "multi_level_pricing", "vatable", "reorder_level"
         };
 
         public TblordersModel(ListModel listmodel) {

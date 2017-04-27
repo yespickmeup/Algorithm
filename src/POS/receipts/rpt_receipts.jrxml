@@ -22,6 +22,7 @@
     <field name="serial_code" class="java.lang.String"/>
     <field name="cost" class="java.lang.Double"/>
     <field name="price" class="java.lang.Double"/>
+    <field name="unit" class="java.lang.String"/>
     <background>
         <band splitType="Stretch"/>
     </background>
@@ -177,7 +178,7 @@
                 <text><![CDATA[Barcode]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="f79c493e-d4cc-4071-9402-bcf0e736a27c" x="174" y="0" width="247" height="20"/>
+                <reportElement uuid="f79c493e-d4cc-4071-9402-bcf0e736a27c" x="174" y="0" width="219" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -205,6 +206,16 @@
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <text><![CDATA[Cost]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="36ae0880-c9bf-420d-a75e-62da9ab88c8d" x="393" y="0" width="29" height="20"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <text><![CDATA[Unit]]></text>
             </staticText>
         </band>
     </columnHeader>
@@ -241,7 +252,7 @@
                 <textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="a1b9f4bb-44ea-4e21-bf8a-a14533e60237" x="174" y="0" width="247" height="15"/>
+                <reportElement uuid="a1b9f4bb-44ea-4e21-bf8a-a14533e60237" x="174" y="0" width="219" height="15"/>
                 <box>
                     <bottomPen lineWidth="0.0"/>
                 </box>
@@ -279,6 +290,16 @@
                     <paragraph leftIndent="176" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{serial_code}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="a1b9f4bb-44ea-4e21-bf8a-a14533e60237" x="393" y="0" width="29" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

@@ -1214,7 +1214,9 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
             S1_unit_of_measure.to_uom tt = (S1_unit_of_measure.to_uom) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + tt.unit;
+                    String unit=tt.unit;
+                    unit=unit.replaceAll("#", "/");
+                    return " " + unit;
                 case 1:
                     return " " + FitIn.fmt_wc_0(tt.conversion);
                 default:

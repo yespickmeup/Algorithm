@@ -581,7 +581,9 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
             to_uom tt = (to_uom) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + tt.uom;
+                    String uom=tt.uom;
+                    uom=uom.replaceAll("#", "/");
+                    return " " + uom;
                 case 1:
                     return " " + FitIn.fmt_wc_0(tt.conversion);
                 case 2:
@@ -651,7 +653,7 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
     private void add_uom() {
         int id = 0;
         String uom = tf_unit.getText();
-        uom = uom.replaceAll("/", "̸");
+        uom = uom.replaceAll("/", "#");
         double conversion = FitIn.toDouble(tf_conversion.getText());
         double selling_price = FitIn.toDouble(tf_selling_price.getText());
         to_uom to = new to_uom(id, uom, conversion, selling_price, 0);
@@ -671,7 +673,7 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
         to_uom to = (to_uom) tbl_uom_ALM.get(row);
         int id = 0;
         String uom = tf_unit.getText();
-        uom = uom.replaceAll("/", "̸");
+        uom = uom.replaceAll("/", "#");
         double conversion = FitIn.toDouble(tf_conversion.getText());
         double selling_price = FitIn.toDouble(tf_selling_price.getText());
         to.setUom(uom);

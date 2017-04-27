@@ -1361,7 +1361,10 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     return "  " + FitIn.fmt_woc((tt.product_qty / tt.conversion) );
                 case 2:
                     Dlg_inventory_uom.to_uom uomss = uom.default_uom(tt.unit);
-                    return " " + uomss.uom;
+                     String uom = uomss.uom;
+                    uom = uom.replaceAll("#", "/");
+                   
+                    return " " + uom;
                 case 3:
                     return " " + FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 4:

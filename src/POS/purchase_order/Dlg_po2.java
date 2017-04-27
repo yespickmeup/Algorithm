@@ -13,9 +13,6 @@ import POS.inventory.uom;
 import POS.purchase_order.Purchase_order.to_purchase_orders;
 import POS.purchase_order.Purchase_order_item.to_purchase_order_items;
 import POS.receipts.Dlg_receipts;
-import POS.receipts.Receipts;
-import POS.receipts.S1_receipt_orders;
-import POS.receipts.Srpt_receipts;
 
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
@@ -1410,11 +1407,9 @@ public class Dlg_po2 extends javax.swing.JDialog {
     private void myInit() {
 
         init_key();
-
         set_date();
         set_d();
         set_default_branch();
-
         init_purchase_order_no();
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);

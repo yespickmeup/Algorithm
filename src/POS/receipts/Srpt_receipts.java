@@ -35,8 +35,9 @@ public class Srpt_receipts {
     public final String business_name;
     public final String address;
     public final String contact_no;
-    public Srpt_receipts(String transaction_no, String transaction_type, String supplier, String receiving_location, String reference_no
-            , String date_of_delivery, String date_received,double gross,double discount,String business_name,String address,String contact_no) {
+
+    public Srpt_receipts(String transaction_no, String transaction_type, String supplier, String receiving_location, String reference_no,
+             String date_of_delivery, String date_received, double gross, double discount, String business_name, String address, String contact_no) {
         this.fields = new ArrayList();
         this.transaction_no = transaction_no;
         this.transaction_type = transaction_type;
@@ -45,12 +46,12 @@ public class Srpt_receipts {
         this.reference_no = reference_no;
         this.date_of_delivery = date_of_delivery;
         this.date_received = date_received;
-        this.gross=gross;
-        this.discount=discount;
-        this.business_name=business_name;
-        this.address=address;
-        this.contact_no=contact_no;
-        
+        this.gross = gross;
+        this.discount = discount;
+        this.business_name = business_name;
+        this.address = address;
+        this.contact_no = contact_no;
+
     }
 
     public static class field {
@@ -62,11 +63,11 @@ public class Srpt_receipts {
         String serial_code;
         double cost;
         double price;
-
+        String unit;
         public field() {
         }
 
-        public field(double qty, String item_code, String barcode, String description, String serial_code, double cost, double price) {
+        public field(double qty, String item_code, String barcode, String description, String serial_code, double cost, double price,String unit) {
             this.qty = qty;
             this.item_code = item_code;
             this.barcode = barcode;
@@ -74,8 +75,17 @@ public class Srpt_receipts {
             this.serial_code = serial_code;
             this.cost = cost;
             this.price = price;
+            this.unit=unit;
         }
 
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
+        }
+        
         public double getQty() {
             return qty;
         }
@@ -137,7 +147,7 @@ public class Srpt_receipts {
 
         List<Srpt_receipts.field> fields = new ArrayList();
         for (int i = 0; i < 10; i++) {
-            Srpt_receipts.field f = new field(i, "0001", "00000000001212", "descr", "serail" + i, i, i);
+            Srpt_receipts.field f = new field(i, "0001", "00000000001212", "descr", "serail" + i, i, i,"");
             fields.add(f);
         }
         String transaction_no = "0001";
@@ -147,13 +157,13 @@ public class Srpt_receipts {
         String reference_no = "Reference No";
         String date_of_delivery = "Date of Delivery";
         String date_received = "Date Received";
-        double gross=0;
-        double discount=0;
-        String business_name=System.getProperty("business_name","Algorithm Computer Services");
-        String address=System.getProperty("address","Daro, Dumaguete City");
-        String contact_no=System.getProperty("contact_no","422-1234");
-        Srpt_receipts rpt = new Srpt_receipts(transaction_no, transaction_type, supplier, receiving_location, reference_no
-                , date_of_delivery, date_received,gross,discount,business_name,address,contact_no);
+        double gross = 0;
+        double discount = 0;
+        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+        String address = System.getProperty("address", "Daro, Dumaguete City");
+        String contact_no = System.getProperty("contact_no", "422-1234");
+        Srpt_receipts rpt = new Srpt_receipts(transaction_no, transaction_type, supplier, receiving_location, reference_no,
+                 date_of_delivery, date_received, gross, discount, business_name, address, contact_no);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_receipts.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

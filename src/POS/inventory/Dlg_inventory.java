@@ -1196,17 +1196,17 @@ public class Dlg_inventory extends javax.swing.JDialog {
         buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("(F1)-All");
+        jCheckBox6.setText("[F1]-All");
         jCheckBox6.setFocusable(false);
 
         buttonGroup1.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setText("(F2)-Code");
+        jCheckBox7.setText("[F2]-Code");
         jCheckBox7.setFocusable(false);
 
         buttonGroup1.add(jCheckBox8);
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox8.setText("Description");
+        jCheckBox8.setText("[F3]-Description");
         jCheckBox8.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1872,6 +1872,21 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 }
             }
         });
+        tf_item_code.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jCheckBox6.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    jCheckBox7.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    jCheckBox8.setSelected(true);
+                }
+            }
+        });
+
     }
 
     // </editor-fold>

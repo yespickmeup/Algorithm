@@ -351,6 +351,7 @@ public class Srpt_sales_by_item {
                     product_qty = product_qty / conversion1;
                     double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
                     int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+                    uom1 = uom1.replaceAll("#", "/");
                     unit = uom1;
                     o++;
                 }
