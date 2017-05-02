@@ -7,6 +7,7 @@ package POS.receipts;
 
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.uom;
+import POS.util.DateType;
 import POS.util.MyConnection;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -237,7 +238,7 @@ public class Srpt_items_received {
     }
 
     public static void main(String[] args) {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         String where = " where Date(date_received) between '2017-04-01' and '2017-04-11' ";
         where = where + " "
                 + " group by Date(date_received),location_id,main_barcode,cost "
@@ -249,7 +250,6 @@ public class Srpt_items_received {
         String date = "04/16/2017";
         String branch = "Dumaguete City";
         String location = "Selling Area";
-
         Srpt_items_received rpt = new Srpt_items_received(business_name, address, date, branch, location);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_items_received.jrxml";
@@ -366,6 +366,7 @@ public class Srpt_items_received {
                     unit = uoms.uom;
                 }
                 double amount = qty * cost;
+                date_received=DateType.convert_jan_1_2013_sf(date_received);
                 Srpt_items_received.field field = new field(main_barcode, barcode, description, unit, cost, conversion, cost, amount, branch, branch_id, location, location_id, supplier, supllier_id, date_added, date_received, date_delivered, qty);
                 datas.add(field);
             }

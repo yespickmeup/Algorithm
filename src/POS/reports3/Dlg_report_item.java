@@ -372,6 +372,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel3.setText("Category:");
 
         tf_category.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_category.setText("All");
         tf_category.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_categoryMouseClicked(evt);
@@ -388,6 +389,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel4.setText("Classification:");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.setText("All");
         jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField3MouseClicked(evt);
@@ -404,6 +406,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel5.setText("Sub-Classification:");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.setText("All");
         jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField4MouseClicked(evt);
@@ -420,6 +423,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel6.setText("Brand:");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField5.setText("All");
         jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField5MouseClicked(evt);
@@ -436,6 +440,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel8.setText("Model:");
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField6.setText("All");
         jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField6MouseClicked(evt);
@@ -512,7 +517,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setSelected(true);
-        jCheckBox6.setText("All/with quantity");
+        jCheckBox6.setText("All / with quantity");
 
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox8.setText("All");
@@ -534,25 +539,21 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(tf_category, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)))
+                            .addComponent(tf_category, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,7 +580,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jCheckBox6)
-                        .addContainerGap(150, Short.MAX_VALUE))))
+                        .addContainerGap(146, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -759,16 +760,19 @@ public class Dlg_report_item extends javax.swing.JDialog {
         buttonGroup2.add(jCheckBox11);
         jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox11.setText("[F2]-Item Code");
+        jCheckBox11.setEnabled(false);
         jCheckBox11.setFocusable(false);
 
         buttonGroup2.add(jCheckBox12);
         jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox12.setText("[F3]-Barcode");
+        jCheckBox12.setEnabled(false);
         jCheckBox12.setFocusable(false);
 
         buttonGroup2.add(jCheckBox13);
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox13.setText("[F4]-Description");
+        jCheckBox13.setEnabled(false);
         jCheckBox13.setFocusable(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1201,186 +1205,215 @@ public class Dlg_report_item extends javax.swing.JDialog {
     List<S1_inventory_category.to_inventory_category> categories = new ArrayList();
 
     private void init_categories() {
-        if (tf_category.getText().isEmpty()) {
-            data_cols();
-        } else {
-            String where = " where name like '%" + tf_category.getText() + "%' order by name asc";
-            categories.clear();
-            categories = S1_inventory_category.ret_data2(where);
-            Object[][] obj = new Object[categories.size()][1];
-            int i = 0;
-            for (S1_inventory_category.to_inventory_category to : categories) {
-                obj[i][0] = " " + to.name.toUpperCase();
-                i++;
-            }
-            JLabel[] labels = {};
-            int[] tbl_widths_customers = {tf_category.getWidth()};
-            String[] col_names = {"Name"};
-            TableRenderer tr = new TableRenderer();
-            TableRenderer.setPopup(tf_category, obj, labels, tbl_widths_customers, col_names);
-            tr.setCallback(new TableRenderer.Callback() {
-                @Override
-                public void ok(TableRenderer.OutputData data) {
-                    S1_inventory_category.to_inventory_category to = (S1_inventory_category.to_inventory_category) categories.get(data.selected_row);
-                    tf_category_code.setText("" + to.id);
-                    tf_category.setText("" + to.name.toUpperCase());
-                    jTextField3.grabFocus();
-                    data_cols();
-                }
-            });
+
+        String where = " where name like '%" + tf_category.getText() + "%' order by name asc";
+        if (tf_category.getText().equalsIgnoreCase("All")) {
+            where = " order by name asc";
         }
+        categories.clear();
+        S1_inventory_category.to_inventory_category c1 = new S1_inventory_category.to_inventory_category(0, "All", "");
+        List<S1_inventory_category.to_inventory_category> c2 = S1_inventory_category.ret_data2(where);
+        categories.add(c1);
+        categories.addAll(c2);
+        Object[][] obj = new Object[categories.size()][1];
+        int i = 0;
+        for (S1_inventory_category.to_inventory_category to : categories) {
+            obj[i][0] = " " + to.name.toUpperCase();
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_category.getWidth()};
+        String[] col_names = {"Name"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf_category, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_inventory_category.to_inventory_category to = (S1_inventory_category.to_inventory_category) categories.get(data.selected_row);
+                tf_category_code.setText("" + to.id);
+                tf_category.setText("" + to.name.toUpperCase());
+                jTextField3.grabFocus();
+                data_cols();
+            }
+        });
 
     }
 
     List<S1_inventory_classification.to_inventory_classification> classification_list = new ArrayList();
 
     private void init_receipt_types() {
-        if (jTextField3.getText().isEmpty()) {
-            data_cols();
+
+        String where = " where name like '%" + jTextField3.getText() + "%' and category_code='" + tf_category_code.getText() + "' order by name asc";
+        if (tf_category.getText().equalsIgnoreCase("All")) {
+            where = " where name like '%" + jTextField3.getText() + "%'  order by name asc";
+            if (jTextField3.getText().equalsIgnoreCase("All")) {
+                where = "   order by name asc";
+            }
         } else {
-            String where = " where name like '%" + jTextField3.getText() + "%' and category_code='" + tf_category_code.getText() + "' order by name asc";
-            if (tf_category_code.getText().equals("0")) {
-                where = " where name like '%" + jTextField3.getText() + "%'  order by name asc";
+            if (jTextField3.getText().equalsIgnoreCase("All")) {
+                where = " where category_code='" + tf_category_code.getText() + "' order by name asc ";
             }
-            classification_list.clear();
-            classification_list = S1_inventory_classification.ret_data2(where);
-            Object[][] obj = new Object[classification_list.size()][1];
-            int i = 0;
-            for (S1_inventory_classification.to_inventory_classification to : classification_list) {
-                obj[i][0] = " " + to.name.toUpperCase();
-                i++;
-            }
-            JLabel[] labels = {};
-            int[] tbl_widths_customers = {tf_category.getWidth()};
-            int width = 0;
-            String[] col_names = {"Name"};
-            TableRenderer tr = new TableRenderer();
-            TableRenderer.
-                    setPopup(jTextField3, obj, labels, tbl_widths_customers, col_names);
-            tr.setCallback(new TableRenderer.Callback() {
-                @Override
-                public void ok(TableRenderer.OutputData data) {
-                    S1_inventory_classification.to_inventory_classification to = classification_list.get(data.selected_row);
-                    jTextField3.setText(to.name.toUpperCase());
-                    jTextField8.setText("" + to.id);
-                    jTextField4.grabFocus();
-                    data_cols();
-                }
-            });
         }
+        classification_list.clear();
+        S1_inventory_classification.to_inventory_classification c1 = new S1_inventory_classification.to_inventory_classification(0, "", "", "", "All", 0);
+        List<S1_inventory_classification.to_inventory_classification> c2 = S1_inventory_classification.ret_data2(where);
+        classification_list.add(c1);
+        classification_list.addAll(c2);
+        Object[][] obj = new Object[classification_list.size()][1];
+        int i = 0;
+        for (S1_inventory_classification.to_inventory_classification to : classification_list) {
+            obj[i][0] = " " + to.name.toUpperCase();
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_category.getWidth()};
+        int width = 0;
+        String[] col_names = {"Name"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(jTextField3, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_inventory_classification.to_inventory_classification to = classification_list.get(data.selected_row);
+                jTextField3.setText(to.name.toUpperCase());
+                jTextField8.setText("" + to.id);
+                jTextField4.grabFocus();
+                data_cols();
+            }
+        });
 
     }
     List<S1_inventory_sub_classification.to_inventory_sub_classification> sub_classification_list = new ArrayList();
 
     private void init_sub_classification() {
-        if (jTextField4.getText().isEmpty()) {
-            data_cols();
+
+        String where = " where name like '%" + jTextField4.getText() + "%' and classification_code='" + jTextField8.getText() + "' order by name asc";
+        if (jTextField3.getText().equalsIgnoreCase("All")) {
+            where = " where name like '%" + jTextField4.getText() + "%'  order by name asc";
+            if (jTextField4.getText().equalsIgnoreCase("All")) {
+                where = " order by name asc";
+            }
         } else {
-            String where = " where name like '%" + jTextField4.getText() + "%' and classification_code='" + jTextField8.getText() + "' order by name asc";
-            if (jTextField8.getText().equals("0")) {
-                where = " where name like '%" + jTextField4.getText() + "%'  order by name asc";
+            if (jTextField4.getText().equalsIgnoreCase("All")) {
+                where = " where  classification_code='" + jTextField8.getText() + "' order by name asc";
             }
 
-            sub_classification_list.clear();
-            sub_classification_list = S1_inventory_sub_classification.ret_data2(where);
-            Object[][] obj = new Object[sub_classification_list.size()][1];
-            int i = 0;
-            for (S1_inventory_sub_classification.to_inventory_sub_classification to : sub_classification_list) {
-                obj[i][0] = " " + to.name.toUpperCase();
-                i++;
-            }
-            JLabel[] labels = {};
-            int[] tbl_widths_customers = {tf_category.getWidth()};
-            int width = 0;
-            String[] col_names = {"Name"};
-            TableRenderer tr = new TableRenderer();
-            TableRenderer.
-                    setPopup(jTextField4, obj, labels, tbl_widths_customers, col_names);
-            tr.setCallback(new TableRenderer.Callback() {
-                @Override
-                public void ok(TableRenderer.OutputData data) {
-                    S1_inventory_sub_classification.to_inventory_sub_classification to = sub_classification_list.get(data.selected_row);
-                    jTextField4.setText(to.name.toUpperCase());
-                    jTextField9.setText("" + to.id);
-                    jTextField5.grabFocus();
-                    data_cols();
-                }
-            });
         }
+
+        sub_classification_list.clear();
+        S1_inventory_sub_classification.to_inventory_sub_classification c1 = new S1_inventory_sub_classification.to_inventory_sub_classification(0, "", "", "", "", "", "All", 0);
+        List<S1_inventory_sub_classification.to_inventory_sub_classification> c2 = S1_inventory_sub_classification.ret_data2(where);
+        sub_classification_list.add(c1);
+        sub_classification_list.addAll(c2);
+
+        Object[][] obj = new Object[sub_classification_list.size()][1];
+        int i = 0;
+        for (S1_inventory_sub_classification.to_inventory_sub_classification to : sub_classification_list) {
+            obj[i][0] = " " + to.name.toUpperCase();
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_category.getWidth()};
+        int width = 0;
+        String[] col_names = {"Name"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(jTextField4, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_inventory_sub_classification.to_inventory_sub_classification to = sub_classification_list.get(data.selected_row);
+                jTextField4.setText(to.name.toUpperCase());
+                jTextField9.setText("" + to.id);
+                jTextField5.grabFocus();
+                data_cols();
+            }
+        });
 
     }
     List<S1_inventory_brand.to_inventory_brand> brand_list = new ArrayList();
 
     private void init_brand() {
-        if (jTextField5.getText().isEmpty()) {
-            data_cols();
-        } else {
-            String where = " where name like '%" + jTextField5.getText() + "%' order by name asc";
-            brand_list.clear();
-            brand_list = S1_inventory_brand.ret_data2(where);
-            Object[][] obj = new Object[brand_list.size()][1];
-            int i = 0;
-            for (S1_inventory_brand.to_inventory_brand to : brand_list) {
-                obj[i][0] = to.name.toUpperCase();
-                i++;
-            }
-            JLabel[] labels = {};
-            int[] tbl_widths_customers = {tf_category.getWidth()};
-            int width = 0;
-            String[] col_names = {"Name"};
-            TableRenderer tr = new TableRenderer();
-            TableRenderer.
-                    setPopup(jTextField5, obj, labels, tbl_widths_customers, col_names);
-            tr.setCallback(new TableRenderer.Callback() {
-                @Override
-                public void ok(TableRenderer.OutputData data) {
-                    S1_inventory_brand.to_inventory_brand to = brand_list.get(data.selected_row);
-                    jTextField5.setText(to.name.toUpperCase());
-                    jTextField10.setText("" + to.id);
-                    jTextField6.grabFocus();
-                    data_cols();
-                }
-            });
+
+        String where = " where name like '%" + jTextField5.getText() + "%' order by name asc";
+        if (jTextField5.getText().equalsIgnoreCase("All")) {
+            where = " order by name asc";
         }
+        brand_list.clear();
+        S1_inventory_brand.to_inventory_brand c1 = new S1_inventory_brand.to_inventory_brand(0, "", "All");
+        List<S1_inventory_brand.to_inventory_brand> c2 = S1_inventory_brand.ret_data2(where);
+        brand_list.add(c1);
+        brand_list.addAll(c2);
+        Object[][] obj = new Object[brand_list.size()][1];
+        int i = 0;
+        for (S1_inventory_brand.to_inventory_brand to : brand_list) {
+            obj[i][0] = " " + to.name.toUpperCase();
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_category.getWidth()};
+        int width = 0;
+        String[] col_names = {"Name"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(jTextField5, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_inventory_brand.to_inventory_brand to = brand_list.get(data.selected_row);
+                jTextField5.setText(to.name.toUpperCase());
+                jTextField10.setText("" + to.id);
+                jTextField6.grabFocus();
+                data_cols();
+            }
+        });
 
     }
 
     List<S1_inventory_model.to_inventory_model> model_list = new ArrayList();
 
     private void init_model() {
-        if (!jTextField6.getText().isEmpty()) {
-            String where = " where name like '%" + jTextField6.getText() + "%' and brand_code= '" + jTextField10.getText() + "'order by name asc";
-            if (jTextField10.getText().equals("0")) {
-                where = " where name like '%" + jTextField6.getText() + "%' order by name asc";
-            }
 
-            model_list.clear();
-            model_list = S1_inventory_model.ret_data2(where);
-            Object[][] obj = new Object[model_list.size()][1];
-            int i = 0;
-            for (S1_inventory_model.to_inventory_model to : model_list) {
-                obj[i][0] = to.name.toUpperCase();
-                i++;
+        String where = " where name like '%" + jTextField6.getText() + "%' and brand_code= '" + jTextField10.getText() + "'order by name asc";
+        if (jTextField5.getText().equalsIgnoreCase("All")) {
+            where = " where name like '%" + jTextField6.getText() + "%' order by name asc";
+            if (jTextField6.getText().equalsIgnoreCase("All")) {
+                where = "  order by name asc";
             }
-            JLabel[] labels = {};
-            int[] tbl_widths_customers = {tf_category.getWidth()};
-            int width = 0;
-            String[] col_names = {"Name"};
-            TableRenderer tr = new TableRenderer();
-            TableRenderer.
-                    setPopup(jTextField6, obj, labels, tbl_widths_customers, col_names);
-            tr.setCallback(new TableRenderer.Callback() {
-                @Override
-                public void ok(TableRenderer.OutputData data) {
-                    S1_inventory_model.to_inventory_model to = model_list.get(data.selected_row);
-                    jTextField6.setText(to.name.toUpperCase());
-                    jTextField11.setText("" + to.id);
-                    data_cols();
-                }
-            });
         } else {
-            data_cols();
+            if (jTextField6.getText().equalsIgnoreCase("All")) {
+                where = " where  brand_code= '" + jTextField10.getText() + "'order by name asc";
+            }
         }
+
+        model_list.clear();
+        S1_inventory_model.to_inventory_model c1 = new S1_inventory_model.to_inventory_model(0, "", "", "", "All");
+        List<S1_inventory_model.to_inventory_model> c2 = S1_inventory_model.ret_data2(where);
+        model_list.add(c1);
+        model_list.addAll(c2);
+        Object[][] obj = new Object[model_list.size()][1];
+        int i = 0;
+        for (S1_inventory_model.to_inventory_model to : model_list) {
+            obj[i][0] = " " + to.name.toUpperCase();
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_category.getWidth()};
+        int width = 0;
+        String[] col_names = {"Name"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(jTextField6, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_inventory_model.to_inventory_model to = model_list.get(data.selected_row);
+                jTextField6.setText(to.name.toUpperCase());
+                jTextField11.setText("" + to.id);
+                data_cols();
+            }
+        });
 
     }
     List<Branches.to_branches> branches_list = new ArrayList();
@@ -1492,12 +1525,14 @@ public class Dlg_report_item extends javax.swing.JDialog {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (!table.getValueAt(row, 0).toString().equals(" ")) {
-                cellComponent.setBackground(new java.awt.Color(156, 203, 25));
+//                cellComponent.setBackground(new java.awt.Color(156, 203, 25));
+                cellComponent.setBackground(new java.awt.Color(255, 255, 255));
             } else {
                 cellComponent.setBackground(new java.awt.Color(255, 255, 255));
             }
             if (!table.getValueAt(row, 1).toString().equals(" ") && table.getValueAt(row, 0).toString().equals(" ")) {
-                cellComponent.setBackground(new java.awt.Color(238, 230, 133));
+//                cellComponent.setBackground(new java.awt.Color(238, 230, 133));
+                cellComponent.setBackground(new java.awt.Color(255, 255, 255));
             }
             if (column == 5 || column == 6) {
                 JLabel lbl = (JLabel) cellComponent;
@@ -1784,21 +1819,21 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     where = where + " and branch_code='" + br.getId() + "' ";
                 }
 
-                if (!tf_category.getText().isEmpty()) {
+                if (!tf_category.getText().equalsIgnoreCase("All")) {
                     where = where + " and category_id='" + tf_category_code.getText() + "'";
                 }
 
-                if (!jTextField3.getText().isEmpty()) {
+                if (!jTextField3.getText().equalsIgnoreCase("All")) {
                     where = where + " and classification_id='" + jTextField8.getText() + "'";
                 }
-                if (!jTextField4.getText().isEmpty()) {
+                if (!jTextField4.getText().equalsIgnoreCase("All")) {
                     where = where + " and sub_classification_id='" + jTextField9.getText() + "'";
                 }
-                if (!jTextField5.getText().isEmpty()) {
+                if (!jTextField5.getText().equalsIgnoreCase("All")) {
                     where = where + " and brand_id='" + jTextField10.getText() + "'";
                 }
 
-                if (!jTextField6.getText().isEmpty()) {
+                if (!jTextField6.getText().equalsIgnoreCase("All")) {
                     where = where + " and model_id='" + jTextField11.getText() + "'";
                 }
 

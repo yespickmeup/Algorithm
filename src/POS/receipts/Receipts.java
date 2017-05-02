@@ -775,8 +775,8 @@ public class Receipts {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(increment_id("16"));
+    public static void main2(String[] args) {
+//        System.out.println(increment_id("16"));
     }
 
     public static String increment_id(String location_id) {
@@ -787,7 +787,7 @@ public class Receipts {
             String s0 = "select max(id) from receipts where branch_id='" + location_id + "'  ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
-            System.out.println(s0);
+//            System.out.println(s0);
             if (rs.next()) {
                 id = rs.getString(1);
 
@@ -813,7 +813,7 @@ public class Receipts {
         }
     }
 
-    public static void finalize(to_receipts to_receipts, List<S1_receipt_items.to_receipt_items> to_receipt_items1, String branch, String branch_id) {
+    public static void finalize(to_receipts to_receipts, List<S1_receipt_items.to_receipt_items> to_receipt_items1, String branch, String branch_id, int is_invoice) {
         try {
             Connection conn = MyConnection.connect();
 
@@ -821,13 +821,15 @@ public class Receipts {
 //            List<String> query = new ArrayList();
 //            Gson gson = new Gson();
             System.out.println("Adding record....");
-            String s0 = "update receipts set "
+            String s0 = " update receipts set "
                     + " status= :status"
+                    + " ,batch_no= :batch_no"
                     + " where "
                     + " receipt_no='" + to_receipts.receipt_no + "'";
 
             s0 = SqlStringUtil.parse(s0)
                     .setNumber("status", 1)
+                    .setNumber("batch_no", is_invoice)
                     .ok();
 
             //<editor-fold defaultstate="collapsed" desc=" insert query1 ">
@@ -901,10 +903,12 @@ public class Receipts {
 
             String s2 = "update receipt_items set "
                     + " status= :status"
+                    + " ,batch_no= :batch_no"
                     + " where "
                     + " receipt_no='" + to_receipts.receipt_no + "'";
             s2 = SqlStringUtil.parse(s2)
                     .setNumber("status", 1)
+                    .setNumber("batch_no", is_invoice)
                     .ok();
 
             stmt.addBatch(s2);
@@ -920,15 +924,15 @@ public class Receipts {
                             + " ";
                     Statement stmt10 = conn.createStatement();
                     ResultSet rs10 = stmt10.executeQuery(s10);
-                    double product_qty=0;
-                    double conversion=0;
-                    String serial_no="";
+                    double product_qty = 0;
+                    double conversion = 0;
+                    String serial_no = "";
                     while (rs10.next()) {
-                         product_qty = rs10.getDouble(1);
-                         conversion = rs10.getDouble(2);
-                         serial_no = rs10.getString(3);
+                        product_qty = rs10.getDouble(1);
+                        conversion = rs10.getDouble(2);
+                        serial_no = rs10.getString(3);
                     }
-                    
+
                     double new_qty = product_qty + (to_receipt_items.conversion * to_receipt_items.qty);
                     String new_serial = serial_no + "\n" + to_receipt_items.serial_no;
                     if (serial_no.isEmpty()) {

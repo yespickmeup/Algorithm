@@ -28,9 +28,24 @@ import net.sf.jasperreports.swing.JRViewer;
 public class Srpt_print_barcodes {
 
     public final List<Srpt_print_barcodes.field> fields;
+    public final String business_name;
+    public final String address;
+    public final String category;
+    public final String classification;
+    public final String sub_classification;
+    public final String brand;
+    public final String model;
 
-    public Srpt_print_barcodes() {
+    public Srpt_print_barcodes(String business_name, String address, String category, String classification, String sub_classification, String brand, String model) {
         this.fields = new ArrayList();
+        this.business_name = business_name;
+        this.address = address;
+        this.category = category;
+        this.classification = classification;
+        this.sub_classification = sub_classification;
+        this.brand = brand;
+        this.model = model;
+
     }
 
     public static class field {
@@ -40,15 +55,16 @@ public class Srpt_print_barcodes {
         double price;
         boolean selected;
         int count;
+
         public field() {
         }
 
-        public field(String barcode, String description, double price, boolean selected,int count) {
+        public field(String barcode, String description, double price, boolean selected, int count) {
             this.barcode = barcode;
             this.description = description;
             this.price = price;
             this.selected = selected;
-            this.count=count;
+            this.count = count;
         }
 
         public int getCount() {
@@ -58,7 +74,7 @@ public class Srpt_print_barcodes {
         public void setCount(int count) {
             this.count = count;
         }
-        
+
         public boolean isSelected() {
             return selected;
         }
@@ -100,10 +116,17 @@ public class Srpt_print_barcodes {
             String barcode = "0000000" + i;
             String description = "Description";
             double price = 100;
-            Srpt_print_barcodes.field field = new field(barcode, description, price, true,1);
+            Srpt_print_barcodes.field field = new field(barcode, description, price, true, 1);
             fields.add(field);
         }
-        Srpt_print_barcodes rpt = new Srpt_print_barcodes();
+        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+        String address = System.getProperty("address", "Daro, Dumaguete City");
+        String category = "All";
+        String classification="All";
+        String sub_classification="All";
+        String brand="All";
+        String model="All";
+        Srpt_print_barcodes rpt = new Srpt_print_barcodes(business_name, address, category,classification, sub_classification, brand, model);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_print_barcodes.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -223,7 +246,7 @@ public class Srpt_print_barcodes {
                 if (is_item_code == 0) {
                     code = barcode;
                 }
-                Srpt_print_barcodes.field field = new field(code, description, selling_price, false,1);
+                Srpt_print_barcodes.field field = new field(code, description, selling_price, false, 1);
                 datas.add(field);
             }
             return datas;
