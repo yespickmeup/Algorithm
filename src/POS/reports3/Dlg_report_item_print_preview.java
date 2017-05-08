@@ -376,6 +376,7 @@ public class Dlg_report_item_print_preview extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
+
     }
 
     public void do_pass(final List<Srpt_stock_take.field> datas1, final String category, final String classification, final String sub_classification, final String brand, final String model, final String branch, final String location, final int view_only) {
@@ -386,27 +387,45 @@ public class Dlg_report_item_print_preview extends javax.swing.JDialog {
             public void run() {
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.month_date.format(new Date());
-                String printed_by = "";
 
                 Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model, business_name, date, branch, location);
                 rpt.fields.addAll(datas1);
+
                 String jrxml = "rpt_stock_take.jrxml";
-                if (view_only == 0) {
-                    jrxml = "rpt_stock_take_cost.jrxml";
-                }
+//                if (view_only == 1) {
+//                    jrxml = "rpt_stock_take_cost.jrxml";
+//                }
                 report_customers(rpt, jrxml);
-                if (view_only == 0) {
-                    String rpt2 = "rpt_stock_take_cost_amount.jrxml";
-                    report_with_cost(rpt, rpt2);
-                }else{
-                    jTabbedPane1.setEnabledAt(1, false);
-                }
 
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
             }
         });
         t.start();
+        if (view_only == 0) {
+            jProgressBar2.setString("Loading...Please wait...");
+            jProgressBar2.setIndeterminate(true);
+            Thread t2 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                    String date = DateType.month_date.format(new Date());
+
+                    Srpt_stock_take rpt = new Srpt_stock_take(category, classification, sub_classification, brand, model, business_name, date, branch, location);
+                    rpt.fields.addAll(datas1);
+                    String rpt2 = "rpt_stock_take_cost_amount.jrxml";
+                    report_with_cost(rpt, rpt2);
+
+                    jProgressBar2.setString("Finished...");
+                    jProgressBar2.setIndeterminate(false);
+                }
+            });
+            t2.start();
+        } else {
+            jTabbedPane1.setEnabledAt(1, false);
+        }
+//        System.out.println("view_only: " + view_only);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">

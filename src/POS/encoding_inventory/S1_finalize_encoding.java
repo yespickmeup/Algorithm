@@ -163,7 +163,7 @@ public class S1_finalize_encoding {
                     System.out.println(s2);
                     PreparedStatement stmt2 = conn.prepareStatement(s2);
                     stmt2.execute();
-                    Lg.s(Inventory_barcodes.class, "Successfully Updated" + " : " + to_encoding_inventory.barcode + " : " + to_encoding_inventory.item_code + " : " + to_encoding_inventory.location);
+                    Lg.s(Inventory_barcodes.class, "Successfully Updated" + " : " + to_encoding_inventory.barcode + " : " + to_encoding_inventory.item_code + " : " + to_encoding_inventory.location_id);
                 }
             }
 

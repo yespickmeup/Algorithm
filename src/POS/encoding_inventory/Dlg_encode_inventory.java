@@ -15,6 +15,7 @@ import POS.sheet.Dlg_sheet;
 import POS.sheet.S1_sheet;
 import POS.unit_of_measure.S1_unit_of_measure;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Focus_Fire;
@@ -231,6 +232,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         lbl_total_items = new javax.swing.JLabel();
         lbl_total_qty = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tf_description = new javax.swing.JTextField();
@@ -257,9 +260,6 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         tf_cost = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tf_selling_price = new javax.swing.JTextField();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
-        jLabel12 = new javax.swing.JLabel();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jLabel13 = new javax.swing.JLabel();
         tf_description1 = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -269,6 +269,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         jButton4 = new Button.Default();
         jLabel16 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton5 = new Button.Default();
+        jButton6 = new Button.Success();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -306,6 +308,11 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Tota Qty:");
 
+        jLabel12.setText("Status:");
+
+        jProgressBar1.setString("");
+        jProgressBar1.setStringPainted(true);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -313,7 +320,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,20 +329,26 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_total_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(524, 524, 524)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lbl_total_items)
-                    .addComponent(jLabel7)
-                    .addComponent(lbl_total_qty))
-                .addGap(5, 5, 5))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(lbl_total_items)
+                        .addComponent(jLabel7)
+                        .addComponent(lbl_total_qty))
+                    .addComponent(jLabel12)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -412,6 +425,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         });
 
         tf_qty_branch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_qty_branch.setEnabled(false);
         tf_qty_branch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_qty_branchMouseClicked(evt);
@@ -427,6 +441,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         tf_search_branch_code.setFocusable(false);
 
         tf_location.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_location.setEnabled(false);
         tf_location.setFocusable(false);
         tf_location.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -487,12 +502,6 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel12.setText("Search Date:");
-
-        jMonthChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Barcode:");
 
@@ -537,8 +546,23 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Date:");
 
-        jDateChooser1.setDate(new Date());
+        jDateChooser1.setEnabled(false);
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/magnifying-glass.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Finalize");
+        jButton6.setEnabled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -559,12 +583,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_search_branch_code)
                             .addComponent(tf_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(264, 264, 264))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
@@ -607,13 +626,17 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                                 .addGap(0, 0, 0)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(tf_item_code)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -635,13 +658,9 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_qty_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tf_search_branch_code, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -665,12 +684,17 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                     .addComponent(jCheckBox3))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(1, 1, 1)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(1, 1, 1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_description, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -687,7 +711,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                     .addComponent(tf_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -799,6 +824,14 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         tf_item_code.grabFocus();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        choose_replenishment();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        finalize_encoding();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -809,6 +842,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -829,12 +864,11 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel lbl_total_items;
     private javax.swing.JLabel lbl_total_qty;
     private javax.swing.JTable tbl_encoding_inventory;
@@ -854,7 +888,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+
         init_key();
         focus();
         init_tbl_encoding_inventory();
@@ -865,6 +900,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                choose_replenishment();
                 tf_sheet_no.grabFocus();
             }
         });
@@ -882,6 +918,14 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         tf_search_branch_code.setText(to.branch_id);
         tf_location.setText(to.location);
         tf_location_id.setText("" + to.id);
+
+        String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
+        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+        for (S1_user_previleges.to_user_previleges to2 : datas) {
+            if (to2.previledge.equalsIgnoreCase("Inventory Count (Finalize)")) {
+                jButton6.setEnabled(true);
+            }
+        }
     }
 
     private void focus() {
@@ -970,24 +1014,25 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
 
     private void init_inventory_barcodes() {
         tf_item_code.setEnabled(false);
+        final String location_id = tf_location_id.getText();
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 String search = tf_item_code.getText();
                 String where = " ";
                 if (jCheckBox1.isSelected()) {
-                    where = " where main_barcode='" + search + "' and location_id='" + location_ids + "' "
-                            + " or barcode='" + search + "' and location_id='" + location_ids + "' "
-                            + " or description like '%" + search + "%' and location_id='" + location_ids + "' "
+                    where = " where main_barcode='" + search + "' and location_id='" + location_id + "' "
+                            + " or barcode='" + search + "' and location_id='" + location_id + "' "
+                            + " or description like '%" + search + "%' and location_id='" + location_id + "' "
                             + " order by description asc ";
                 }
                 if (jCheckBox2.isSelected()) {
-                    where = " where main_barcode='" + search + "' and location_id='" + location_ids + "' "
-                            + " or barcode='" + search + "' and location_id='" + location_ids + "' "
+                    where = " where main_barcode='" + search + "' and location_id='" + location_id + "' "
+                            + " or barcode='" + search + "' and location_id='" + location_id + "' "
                             + " order by description asc ";
                 }
                 if (jCheckBox3.isSelected()) {
-                    where = " where description like '%" + search + "%' and location_id='" + location_ids + "' "
+                    where = " where description like '%" + search + "%' and location_id='" + location_id + "' "
                             + " order by description asc";
                 }
 
@@ -1179,16 +1224,18 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     private void data_cols() {
         String where = "";
         String search = tf_sheet_no.getText();
-        String user_name = Users.user_name;
-        String year = "" + jYearChooser1.getYear();
-        String month = "" + (jMonthChooser1.getMonth() + 1);
-        String location_id = tf_location_id.getText();
-        where = where + " where sheet_no='" + search + "' and location_id='" + location_id + "' ";
-        if (Users.user_level != 0) {
-            where = where + " and user_name='" + user_name + " ' ";
+        String date_added = "";
+        try {
+            date_added = DateType.sf.format(jDateChooser1.getDate());
+        } catch (Exception e) {
+            Alert.set(0, "Select Date!");
+            choose_replenishment();
+            return;
         }
 
-        where = where + " and YEAR(date_added) ='" + year + "' and MONTH(date_added) ='" + month + "'";
+        String location_id = tf_location_id.getText();
+        where = where + " where sheet_no='" + search + "' and location_id='" + location_id + "' ";
+        where = where + " and Date(date_added) ='" + date_added + "'  ";
 
         List<to_encoding_inventory> datas = Encoding_inventory.ret_data_encoding(where);
         loadData_encoding_inventory(datas);
@@ -1215,7 +1262,15 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
             Alert.set(0, "Input Quantity");
             return;
         }
-        String date_added = DateType.datetime.format(jDateChooser1.getDate());
+        String date_added = "";
+        try {
+            date_added = DateType.datetime.format(jDateChooser1.getDate());
+        } catch (Exception e) {
+            Alert.set(0, "Select Date!");
+            choose_replenishment();
+            return;
+        }
+
         String user_name = Users.user_name;
         String screen_name = Users.screen_name;
         String sheet_no = tf_sheet_no.getText();
@@ -1240,6 +1295,10 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         }
         to_encoding_inventory to = (to_encoding_inventory) tbl_encoding_inventory_ALM.
                 get(tbl_encoding_inventory.convertRowIndexToModel(row));
+        if (to.status == 1) {
+            Alert.set(0, "Cannot proceed, already finalized!");
+            return;
+        }
         tf_item_code.setText(to.description);
         tf_description.setText(to.item_code);
         tf_qty.setText(FitIn.fmt_woc(to.qty));
@@ -1282,7 +1341,15 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         String location = tf_location.getText();
         String location_id = tf_location_id.getText();
         double qty = FitIn.toDouble(tf_qty.getText());
-        String date_added = DateType.datetime.format(jDateChooser1.getDate());
+        String date_added = "";
+        try {
+            date_added = DateType.datetime.format(jDateChooser1.getDate());
+        } catch (Exception e) {
+            Alert.set(0, "Select Date!");
+            choose_replenishment();
+            return;
+        }
+
         String user_name = Users.user_name;
         String screen_name = Users.screen_name;
         String sheet_no = tf_sheet_no.getText();
@@ -1314,7 +1381,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         to_encoding_inventory to = (to_encoding_inventory) tbl_encoding_inventory_ALM.
                 get(tbl_encoding_inventory.convertRowIndexToModel(row));
         if (to.status == 1) {
-            Alert.set(0, "Cannot delete finalized Transaction!");
+            Alert.set(0, "Cannot proceed, already finalized!");
             return;
         }
         Encoding_inventory.delete_encoding_inventory(to);
@@ -1376,4 +1443,72 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         });
     }
 
+    private void choose_replenishment() {
+        Window p = (Window) this;
+        Dlg_encoding_replenishment nd = Dlg_encoding_replenishment.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_encoding_replenishment.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_encoding_replenishment.OutputData data) {
+                try {
+                    closeDialog.ok();
+
+                    tf_qty_branch.setText(data.branch);
+                    tf_search_branch_code.setText(data.branch_id);
+                    tf_location.setText(data.location);
+                    tf_location_id.setText(data.location_id);
+                    Date d = DateType.datetime.parse(data.date);
+                    jDateChooser1.setDate(d);
+
+                    data_cols();
+                    tf_sheet_no.grabFocus();
+                } catch (ParseException ex) {
+                    Logger.getLogger(Dlg_encode_inventory.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void finalize_encoding() {
+
+        Window p = (Window) this;
+        Dlg_confirm_finalize_encoding nd = Dlg_confirm_finalize_encoding.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_finalize_encoding.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, final Dlg_confirm_finalize_encoding.OutputData data) {
+                closeDialog.ok();
+                jProgressBar1.setString("Loading... Please wait...");
+                jProgressBar1.setIndeterminate(true);
+                jProgressBar1.setStringPainted(true);
+                final Thread t2 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        List<to_encoding_inventory> datas = tbl_encoding_inventory_ALM;
+
+                        if (datas.isEmpty()) {
+                            Alert.set(0, "");
+                            return;
+                        }
+
+                        S1_finalize_encoding.edit_encoding_inventory(datas, data.include_pricing);
+                        jProgressBar1.setString("Finished");
+                        jProgressBar1.setIndeterminate(false);
+                        Alert.set(2, "");
+                        data_cols();
+
+                    }
+                });
+                t2.start();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+    }
 }

@@ -233,6 +233,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         jPopupMenu1.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -1363,6 +1366,29 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             }
         });
 
+        jPanel9.setBackground(new java.awt.Color(140, 175, 227));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel9MouseExited(evt);
+            }
+        });
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setBackground(new java.awt.Color(255, 153, 0));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("0");
+        jLabel3.setOpaque(true);
+        jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 5, 25, 15));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons4/bell-musical-tool (2).png"))); // NOI18N
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 30, -1));
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -1404,6 +1430,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -1426,6 +1454,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1702,7 +1731,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void jLabel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseEntered
 
-        
+
     }//GEN-LAST:event_jLabel11MouseEntered
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
@@ -1825,6 +1854,14 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel29MouseEntered
 
+    private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+    }//GEN-LAST:event_jPanel9MouseEntered
+
+    private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
+        jPanel9.setBackground(new java.awt.Color(140, 175, 227));
+    }//GEN-LAST:event_jPanel9MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1923,9 +1960,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1938,6 +1977,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPanel login;
     private javax.swing.JMenu maintenance;
@@ -1960,14 +2000,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         String version = System.getProperty("version", "");
         String license_code = System.getProperty("license_code", "");
         license_code = DeEncrypter.decrypt(license_code);
-
 //        jLabel1.setText("" + version + "( Full Version )");
-
         if (license_code.equalsIgnoreCase("trial version")) {
             jLabel1.setText("Trial Version");
             String where1 = "order by id asc limit 1";
             String where2 = "order by id desc limit 1";
-
             List<User_logs.to_user_logs> first = User_logs.ret_data(where1);
             List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
             if (!first.isEmpty()) {
@@ -2128,6 +2165,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
             });
         }
+
     }
 
     private void set_default_branch() {
@@ -2372,12 +2410,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void rpt_stock_status() {
         Dlg_report_item dtc = new Dlg_report_item();
+         dtc.do_pass(0);
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status Report");
     }
 
     private void rpt_stock_status2() {
         Dlg_report_item dtc = new Dlg_report_item();
-        dtc.do_pass();
+        dtc.do_pass(1);
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Take (No Cost)");
     }
 
@@ -2492,11 +2531,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
     }
+
     private void t_conversions() {
         Dlg_conversion dtc = new Dlg_conversion();
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Conversions");
     }
+
     private void t_rma() {
         Dlg_rma dtc = new Dlg_rma();
         MyFrame.set(dtc.getSurface(), jPanel1, "RMA");
@@ -3019,7 +3060,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
                 if (data.stmt.equals("logout")) {
                     logout1();
-                    
+
                 }
                 if (data.stmt.equals("minimize")) {
                     Pnl_Dashboard.this.setState(Frame.ICONIFIED);

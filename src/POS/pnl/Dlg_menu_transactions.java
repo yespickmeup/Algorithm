@@ -1108,7 +1108,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
                 jLabel21.setEnabled(true);
                 jLabel21.setBackground(new java.awt.Color(96, 188, 219));
             }
-            if (to.previledge.equalsIgnoreCase("Inventory Count (Finalize)")) {
+            if (to.previledge.equalsIgnoreCase("Inventory Count (Finalize)1")) {
                 jLabel22.setEnabled(true);
                 jLabel22.setBackground(new java.awt.Color(96, 188, 219));
             }

@@ -36,14 +36,19 @@ public class Srpt_items_received {
     public final String date;
     public final String branch;
     public final String location;
-
-    public Srpt_items_received(String business_name, String address, String date, String branch, String location) {
+    public final String supplier;
+    public final String type;
+    public final String status;
+    public Srpt_items_received(String business_name, String address, String date, String branch, String location,String supplier,String type,String status) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
         this.date = date;
         this.branch = branch;
         this.location = location;
+        this.supplier=supplier;
+        this.type=type;
+        this.status=status;
     }
 
     public static class field {
@@ -250,7 +255,10 @@ public class Srpt_items_received {
         String date = "04/16/2017";
         String branch = "Dumaguete City";
         String location = "Selling Area";
-        Srpt_items_received rpt = new Srpt_items_received(business_name, address, date, branch, location);
+        String supplier="";
+        String type="";
+        String status="";
+        Srpt_items_received rpt = new Srpt_items_received(business_name, address, date, branch, location,supplier,type,status);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_items_received.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

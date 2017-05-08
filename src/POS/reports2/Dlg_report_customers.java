@@ -806,8 +806,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list.size()][2];
         int i = 0;
         for (Customers.to_customers to : customer_list) {
-            obj[i][0] = " "+to.customer_no;
-            obj[i][1] = " "+to.customer_name;
+            obj[i][0] = " " + to.customer_no;
+            obj[i][1] = " " + to.customer_name;
             i++;
         }
 
@@ -984,9 +984,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list2.size()][3];
         int i = 0;
         for (Customers.to_customers to : customer_list2) {
-            obj[i][0] = " "+to.customer_no;
-            obj[i][1] = " "+to.customer_name;
-            obj[i][2] = " "+FitIn.fmt_wc_0(to.balance);
+            obj[i][0] = " " + to.customer_no;
+            obj[i][1] = " " + to.customer_name;
+            obj[i][2] = " " + FitIn.fmt_wc_0(to.balance);
             i++;
         }
 
@@ -1017,9 +1017,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Object[][] obj = new Object[customer_list3.size()][3];
         int i = 0;
         for (Customers.to_customers to : customer_list3) {
-            obj[i][0] = " "+to.customer_no;
-            obj[i][1] = " "+to.customer_name;
-            obj[i][2] = " "+FitIn.fmt_wc_0(to.balance);
+            obj[i][0] = " " + to.customer_no;
+            obj[i][1] = " " + to.customer_name;
+            obj[i][2] = " " + FitIn.fmt_wc_0(to.balance);
             i++;
         }
 
@@ -1086,9 +1086,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 String where = "";
                 String jrxml = "rpt_ar_aging.jrxml";
                 if (!jCheckBox2.isSelected()) {
-                    where = " where customer_id='" + jTextField6.getText() + "' and amount <> paid  order by date_applied asc";
+                    where = " where customer_id='" + jTextField6.getText() + "' and amount <> paid  and status=0 order by date_applied asc";
                 } else {
-                    where = " where amount <> paid order by customer_name,date_applied asc ";
+                    where = " where amount <> paid and status=0 order by customer_name,date_applied asc ";
                     jrxml = "rpt_ar_aging_all.jrxml";
                 }
                 List<Srpt_ar_aging.field> fields = Srpt_ar_aging.ret_aging(where);
@@ -1134,7 +1134,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                String where = " where customer_id='" + jTextField8.getText() + "' and amount <> paid  order by date_applied asc";
+                String where = " where customer_id='" + jTextField8.getText() + "' and amount <> paid  and status=0 order by date_applied asc";
                 String pool_db = System.getProperty("pool_db", "db_smis_dumaguete_angel_buns");
 
                 String jrxml = "rpt_balance_per_transaction.jrxml";

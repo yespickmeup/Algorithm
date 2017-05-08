@@ -5,7 +5,6 @@
  */
 package POS.reports2;
 
-import POS.accounts_receivable.S1_ar_ledger;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import java.io.InputStream;
@@ -195,7 +194,7 @@ public class Srpt_customer_ledger {
                     + ",ci_no"
                     + ",trust_receipt"
                     + " from  accounts_receivable where "
-                    + " customer_id ='" + search + "' "
+                    + " customer_id ='" + search + "' and status=0 "
                     + " ";
 
             Statement stmt = conn.createStatement();

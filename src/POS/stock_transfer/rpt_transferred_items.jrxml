@@ -43,7 +43,7 @@
         <groupHeader>
             <band height="34">
                 <textField>
-                    <reportElement uuid="f50310c2-ec9f-422d-ba9f-e61225fff937" x="122" y="14" width="433" height="20"/>
+                    <reportElement uuid="f50310c2-ec9f-422d-ba9f-e61225fff937" mode="Opaque" x="122" y="14" width="433" height="20" backcolor="#EDEDED"/>
                     <box>
                         <topPen lineWidth="0.2"/>
                         <leftPen lineWidth="0.2"/>
@@ -57,7 +57,7 @@
                     <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
                 </textField>
                 <staticText>
-                    <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="0" y="14" width="122" height="20"/>
+                    <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" mode="Opaque" x="0" y="14" width="122" height="20" backcolor="#EDEDED"/>
                     <box>
                         <topPen lineWidth="0.2"/>
                         <leftPen lineWidth="0.2"/>
@@ -172,7 +172,7 @@
                     <text><![CDATA[Amount]]></text>
                 </staticText>
                 <textField>
-                    <reportElement uuid="f50310c2-ec9f-422d-ba9f-e61225fff937" x="122" y="0" width="165" height="20"/>
+                    <reportElement uuid="f50310c2-ec9f-422d-ba9f-e61225fff937" mode="Opaque" x="59" y="0" width="194" height="20" backcolor="#EFEFEF"/>
                     <box>
                         <topPen lineWidth="0.2"/>
                         <leftPen lineWidth="0.2"/>
@@ -186,7 +186,7 @@
                     <textFieldExpression><![CDATA[$F{f_branch} + " - " +$F{f_location}]]></textFieldExpression>
                 </textField>
                 <staticText>
-                    <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="0" y="0" width="122" height="20"/>
+                    <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" mode="Opaque" x="0" y="0" width="59" height="20" backcolor="#EFEFEF"/>
                     <box>
                         <topPen lineWidth="0.2"/>
                         <leftPen lineWidth="0.2"/>
@@ -200,7 +200,7 @@
                     <text><![CDATA[Source:]]></text>
                 </staticText>
                 <textField>
-                    <reportElement uuid="f50310c2-ec9f-422d-ba9f-e61225fff937" x="371" y="0" width="184" height="20"/>
+                    <reportElement uuid="f50310c2-ec9f-422d-ba9f-e61225fff937" mode="Opaque" x="336" y="0" width="219" height="20" backcolor="#EFEFEF"/>
                     <box>
                         <topPen lineWidth="0.2"/>
                         <leftPen lineWidth="0.2"/>
@@ -214,7 +214,7 @@
                     <textFieldExpression><![CDATA[$F{t_branch} + " - " +$F{t_location}]]></textFieldExpression>
                 </textField>
                 <staticText>
-                    <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="287" y="0" width="84" height="20"/>
+                    <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" mode="Opaque" x="253" y="0" width="83" height="20" backcolor="#EFEFEF"/>
                     <box>
                         <topPen lineWidth="0.2"/>
                         <leftPen lineWidth="0.2"/>

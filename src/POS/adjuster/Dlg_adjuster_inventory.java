@@ -1319,7 +1319,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         tbl_adjustments.setModel(tbl_adjustments_M);
         tbl_adjustments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_adjustments.setRowHeight(25);
-        int[] tbl_widths_adjustments = {40, 80, 80, 60, 100, 100, 100, 100, 50, 70, 80, 90, 0, 0, 0, 0, 0};
+        int[] tbl_widths_adjustments = {40, 80, 80, 70, 0, 100, 170, 100, 100, 50, 70, 80, 90, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_adjustments.length; i < n; i++) {
             if (i == 5) {
                 continue;
@@ -1342,7 +1342,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     public static class TbladjustmentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "No.", "Date", "User", "Item Code", "Barcode", "Description", "Branch", "Location", "Type", "Previous", "Adjustment", "New Qty", "branch_id", "location", "location_id", "remarks", "transaction_no"
+            "No.", "Date", "User", "Item Code", "Barcode", "Description", "Reason", "Branch", "Location", "Type", "Previous", "Adjustment", "New Qty", "location", "location_id", "remarks", "transaction_no"
         };
 
         public TbladjustmentsModel(ListModel listmodel) {
@@ -1381,27 +1381,27 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                     return " " + tt.description;
 
                 case 6:
-                    return " " + tt.branch;
+                    return " " + tt.remarks;
                 case 7:
-                    return " " + tt.location;
+                    return " " + tt.branch;
                 case 8:
+                    return " " + tt.location;
+                case 9:
                     if (tt.is_add == 1) {
                         return " Add";
                     } else {
                         return " Deduct";
                     }
-                case 9:
-                    return " " + FitIn.fmt_woc(tt.qty);
                 case 10:
-                    return " " + FitIn.fmt_woc(tt.new_qty);
+                    return " " + FitIn.fmt_woc(tt.qty);
                 case 11:
+                    return " " + FitIn.fmt_woc(tt.new_qty);
+                case 12:
                     if (tt.is_add == 1) {
                         return " " + FitIn.fmt_woc(tt.new_qty + tt.qty);
                     } else {
                         return " " + FitIn.fmt_woc(tt.qty - tt.new_qty);
                     }
-                case 12:
-                    return tt.branch_id;
                 case 13:
                     return tt.location;
                 case 14:

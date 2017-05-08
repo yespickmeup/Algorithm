@@ -191,14 +191,14 @@
     <columnHeader>
         <band height="20" splitType="Stretch">
             <staticText>
-                <reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="34" y="0" width="60" height="20"/>
+                <reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="34" y="0" width="35" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
-                <text><![CDATA[Item Code]]></text>
+                <text><![CDATA[Code]]></text>
             </staticText>
             <staticText>
                 <reportElement uuid="0b9fafac-b515-48fb-8b6a-644a5e62e4b4" x="0" y="0" width="35" height="20"/>
@@ -211,7 +211,7 @@
                 <text><![CDATA[Qty]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="93" y="0" width="260" height="20"/>
+                <reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="149" y="0" width="221" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -221,7 +221,7 @@
                 <text><![CDATA[Description]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="488" y="0" width="67" height="20"/>
+                <reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="505" y="0" width="67" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -231,7 +231,7 @@
                 <text><![CDATA[Selling Price]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="353" y="0" width="135" height="20"/>
+                <reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="370" y="0" width="135" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -241,12 +241,22 @@
                 </textElement>
                 <text><![CDATA[Location]]></text>
             </staticText>
+            <staticText>
+                <reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="69" y="0" width="80" height="20"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <text><![CDATA[Barcode]]></text>
+            </staticText>
         </band>
     </columnHeader>
     <detail>
         <band height="15" splitType="Stretch">
             <textField>
-                <reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="94" y="0" width="259" height="15"/>
+                <reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="149" y="0" width="221" height="15"/>
                 <box>
                     <bottomPen lineWidth="0.2"/>
                 </box>
@@ -256,7 +266,7 @@
                 <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="34" y="0" width="60" height="15"/>
+                <reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="34" y="0" width="35" height="15"/>
                 <box>
                     <bottomPen lineWidth="0.2"/>
                 </box>
@@ -276,7 +286,7 @@
                 <textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0.00">
-                <reportElement uuid="aa4776d7-9114-4dbf-924b-d6fa96a17098" x="488" y="0" width="67" height="15"/>
+                <reportElement uuid="aa4776d7-9114-4dbf-924b-d6fa96a17098" x="505" y="0" width="67" height="15"/>
                 <box>
                     <bottomPen lineWidth="0.2"/>
                 </box>
@@ -286,7 +296,7 @@
                 <textFieldExpression><![CDATA[$F{selling_price}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="353" y="0" width="135" height="15"/>
+                <reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="370" y="0" width="135" height="15"/>
                 <box>
                     <bottomPen lineWidth="0.2"/>
                 </box>
@@ -295,6 +305,16 @@
                     <paragraph leftIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="69" y="0" width="80" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.2"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

@@ -307,7 +307,7 @@ public class DateType {
     public static List<String> listYear() {
         List<String> datas = new ArrayList();
         int year = FitIn.toInt(DateType.y.format(new Date()));
-        for (int i = 1993; i < year; i++) {
+        for (int i = 1993; i <= year; i++) {
             String s = "" + i;
             if (s.length() == 1) {
                 s = "0" + s;

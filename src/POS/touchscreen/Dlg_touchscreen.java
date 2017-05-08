@@ -3453,7 +3453,19 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             @Override
             public void run() {
                 String search = tf_search.getText();
+                boolean exists = search.contains("*");
+//                System.out.println("exists: " + exists);
+
+                if (exists) {
+                    double qty = 1;
+                    String[] list = search.split("\\*");
+                    qty = FitIn.toDouble(list[0]);
+                    search = list[1];
+                    lbl_qty.setText(FitIn.fmt_woc(qty));
+                }
+
                 String where = " where ";
+
                 if (jCheckBox6.isSelected()) {
                     where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' "
                             + " or barcode='" + search + "' and location_id='" + my_location_id + "' ";
@@ -3475,8 +3487,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     return;
                 }
                 if (tbl_items_ALM.size() == 1) {
-
                     tbl_items.setRowSelectionInterval(0, 0);
+
                     select_item();
 
                 }
@@ -5356,7 +5368,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_report_item nd = Dlg_report_item.create(p, true);
         nd.setTitle("");
-        nd.do_pass();
+        nd.do_pass(1);
         nd.setCallback(new Dlg_report_item.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item.OutputData data) {

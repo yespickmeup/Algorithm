@@ -41,6 +41,7 @@ import mijzcx.synapse.desk.utils.*;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -1767,7 +1768,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tbl_accounts_receivable.setModel(tbl_accounts_receivable_M);
         tbl_accounts_receivable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable = {100, 0, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable = {100, 0, 100, 100, 100, 100, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable.length; i < n; i++) {
             if (i == 111 || i == 0 || i == 2) {
                 continue;
@@ -1785,6 +1786,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tbl_accounts_receivable.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable, 5);
+        tbl_accounts_receivable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
 
     private void loadData_accounts_receivable(List<to_accounts_receivable> acc) {
@@ -1795,7 +1797,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     public static class Tblaccounts_receivableModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Reference #", "Trust Receipt", "Date", "Term", "Amount", "Balance", "user_name", "amount", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type"
+            "Reference #", "Trust Receipt", "Date", "Term", "Amount", "Balance", "", "amount", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type"
         };
 
         public Tblaccounts_receivableModel(ListModel listmodel) {
@@ -1822,10 +1824,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             switch (col) {
                 case 0:
                     if (tt.ci_no.isEmpty()) {
-                        return tt.trust_receipt;
+                        return " " + tt.trust_receipt;
                     }
                     if (tt.trust_receipt.isEmpty()) {
-                        return tt.ci_no;
+                        return " " + tt.ci_no;
                     }
                 case 1:
                     return " " + tt.trust_receipt;
@@ -1838,7 +1840,11 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 case 5:
                     return FitIn.fmt_wc_0(tt.amount - tt.paid) + " ";
                 case 6:
-                    return tt.user_name;
+                    if (tt.status == 1) {
+                        return "/POS/icon_payment/remove11.png";
+                    } else {
+                        return "/POS/icon_inventory/checked.png";
+                    }
                 case 7:
                     return tt.amount;
                 case 8:
@@ -1999,6 +2005,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         }
         final to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
                 get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        if (to.status == 1) {
+            Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+            return;
+        }
         int id = to.id;
         String customer_id = tf_customer_id.getText();
         String customer_name = tf_customer_name.getText();
@@ -2077,8 +2087,18 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 break;
             }
         }
+//        exists = 1;
         if (exists == 1) {
-
+            int row = tbl_accounts_receivable.getSelectedRow();
+            if (row < 0) {
+                return;
+            }
+            final to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
+                    get(tbl_accounts_receivable.convertRowIndexToModel(row));
+            if (to.status == 1) {
+                Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -2088,12 +2108,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                     closeDialog.ok();
-                    int row = tbl_accounts_receivable.getSelectedRow();
-                    if (row < 0) {
-                        return;
-                    }
-                    to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
-                            get(tbl_accounts_receivable.convertRowIndexToModel(row));
+
                     S1_accounts_receivable.delete_accounts_receivable(to);
 
                     data_cols();
@@ -2123,7 +2138,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setModel(tbl_accounts_receivable_payments_M);
         tbl_accounts_receivable_payments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable_payments.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable_payments = {100, 100, 80, 80, 80, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable_payments = {100, 100, 80, 80, 80, 60, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable_payments.length; i < n; i++) {
             if (i == 0 || i == 1) {
                 continue;
@@ -2142,6 +2157,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 2);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 3);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 4);
+        tbl_accounts_receivable_payments.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
 
     private void loadData_accounts_receivable_payments(List<to_accounts_receivable_payments> acc) {
@@ -2152,7 +2168,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     public static class Tblaccounts_receivable_paymentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "OR #", "Check", "Cash", "Discount", "", "amount", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance"
+            "Date", "OR #", "Check", "Cash", "Discount", "", "", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance"
         };
 
         public Tblaccounts_receivable_paymentsModel(ListModel listmodel) {
@@ -2194,7 +2210,11 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                         return " ---";
                     }
                 case 6:
-                    return tt.amount;
+                    if (tt.status == 2) {
+                        return "/POS/icon_payment/remove11.png";
+                    } else {
+                        return "/POS/icon_inventory/checked.png";
+                    }
                 case 7:
                     return tt.discount_amount;
                 case 8:
@@ -2364,6 +2384,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         }
         to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
                 get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
+        if (to.status == 2) {
+            Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+            return;
+        }
         int id = to.id;
         String customer_id = to.customer_id;
         String customer_name = to.customer_name;
@@ -2457,6 +2481,17 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         }
         if (exists == 1) {
+            int row = tbl_accounts_receivable_payments.getSelectedRow();
+            if (row < 0) {
+                return;
+            }
+
+            final to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
+                    get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
+            if (to.status == 2) {
+                Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -2466,12 +2501,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                     closeDialog.ok();
-                    int row = tbl_accounts_receivable_payments.getSelectedRow();
-                    if (row < 0) {
-                        return;
-                    }
-                    to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
-                            get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
+
                     S1_accounts_receivable_payments.delete_accounts_receivable_payments(to);
                     int i = tbl_accounts_receivable.getSelectedRow();
                     data_cols();

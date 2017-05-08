@@ -1735,7 +1735,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         focus();
         init_tbl_stock_transfers();
@@ -2219,7 +2219,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         if (jCheckBox11.isSelected() && !jCheckBox12.isSelected()) {
             where = where + " and to_branch_id='" + t_br.getId() + "' ";
         }
-        where = where + " order by id desc ";
+        where = where + " order by id desc,Date(date_added) desc ";
 //        System.out.println(where);
         loadData_stock_transfers(Stock_transfers.ret_data(where));
         jLabel13.setText("" + tbl_stock_transfers_ALM.size());
@@ -3080,7 +3080,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 }
                 where = where + " "
                         + " group by Date(date_added),to_location_id,barcode,selling_price "
-                        + " order by Date(date_added),to_location_id,description asc ";
+                        + " order by Date(date_added),to_location_id,barcode,description asc ";
 //                System.out.println(where);
                 List<Srpt_transferred_items.field> fields = Srpt_transferred_items.ret_data(where);
 

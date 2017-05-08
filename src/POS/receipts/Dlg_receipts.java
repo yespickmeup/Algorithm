@@ -1084,11 +1084,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         buttonGroup3.add(jCheckBox11);
         jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox11.setText("SI");
+        jCheckBox11.setText("DR");
 
         buttonGroup3.add(jCheckBox12);
         jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox12.setText("DR");
+        jCheckBox12.setText("SI");
 
         buttonGroup3.add(jCheckBox13);
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1332,11 +1332,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         buttonGroup5.add(jCheckBox17);
         jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox17.setText("SI");
+        jCheckBox17.setText("DR");
 
         buttonGroup5.add(jCheckBox18);
         jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox18.setText("DR");
+        jCheckBox18.setText("SI");
 
         buttonGroup6.add(jCheckBox19);
         jCheckBox19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -2050,7 +2050,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 //        System.setProperty("pool_host", "192.168.1.51");
         tf_search.grabFocus();
         set_default_branch();
@@ -3909,7 +3909,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         break;
                     }
                 }
-                Receipts.finalize(to, acc, branch, branch_id,data.is_invoice);
+                Receipts.finalize(to, acc, branch, branch_id, data.is_invoice);
                 data_cols();
                 Alert.set(2, "");
                 jButton6.setEnabled(false);
@@ -3976,7 +3976,26 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 String date = DateType.slash.format(jDateChooser3.getDate()) + " - " + DateType.slash.format(jDateChooser4.getDate());
                 String branch = tf_branch2.getText();
                 String location = tf_branch3.getText();
-                Srpt_items_received rpt = new Srpt_items_received(business_name, address, date, branch, location);
+                String supplier1 = jTextField3.getText();
+                if (jCheckBox22.isSelected()) {
+                    supplier1 = "All";
+                }
+                String type = "All";
+                if (jCheckBox17.isSelected()) {
+                    type = "DR";
+                }
+                if (jCheckBox18.isSelected()) {
+                    type = "SI";
+                }
+
+                String status = "All";
+                if (jCheckBox20.isSelected()) {
+                    status = "Posted";
+                }
+                if (jCheckBox19.isSelected()) {
+                    status = "Finalized";
+                }
+                Srpt_items_received rpt = new Srpt_items_received(business_name, address, date, branch, location, supplier1, type, status);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_items_received.jrxml";
                 report_items_received(rpt, jrxml);

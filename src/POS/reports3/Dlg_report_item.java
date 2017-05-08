@@ -1151,9 +1151,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
     }
 
-    public void do_pass() {
-        jButton3.setVisible(false);
-        view_only = 0;
+    public void do_pass(int view) {
+        view_only = view;
+
         init_tbl_inventory_barcodes();
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
@@ -1164,7 +1164,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             }
         });
     }
-
+   
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();
@@ -2164,7 +2164,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         List<Srpt_stock_take.field> datas = new ArrayList();
         for (to_inventory to : datas2) {
             String item_code = to.barcodes;
-            String barcode = to.barcodes;
+            String barcode = to.barcode;
             String description = to.description;
             double qty = to.product_qty;
             double selling_price = to.selling_price;
@@ -2205,6 +2205,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             location = "All";
             branch = "All";
         }
+
         Window p = (Window) this;
         Dlg_report_item_print_preview nd = Dlg_report_item_print_preview.create(p, true);
         nd.setTitle("");

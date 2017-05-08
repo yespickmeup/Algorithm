@@ -449,12 +449,13 @@ public class S1_accounts_receivable {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-            String s0 = "delete from  accounts_receivable where "
+            String s0 = "update accounts_receivable set status='1' where "
                     + " id ='" + to_accounts_receivable.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
+            System.out.println(s0);
 //            Lg.s(S1_accounts_receivable.class, "Successfully Deleted");
 
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
@@ -481,13 +482,13 @@ public class S1_accounts_receivable {
                     ok();
             stmt.addBatch(s2);
 
-            String s3 = "delete from accounts_receivable_payments where "
+            String s3 = "update accounts_receivable_payments set status=2 where "
                     + " ar_no ='" + to_accounts_receivable.ar_no + "' "
                     + " ";
 
             stmt.addBatch(s3);
-
-            stmt.addBatch(s3);
+            
+            stmt.executeBatch();
             conn.commit();
             Lg.s(S1_accounts_receivable_payments.class, "Successfully Deleted");
         } catch (SQLException e) {
