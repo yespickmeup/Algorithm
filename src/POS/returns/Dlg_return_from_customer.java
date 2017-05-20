@@ -743,6 +743,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.JTable tbl_sales;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        System.setProperty("pool_db","db_algorithm");
         init_key();
         init_tbl_sales(tbl_sales);
         init_tbl_sale_items(tbl_sale_items);

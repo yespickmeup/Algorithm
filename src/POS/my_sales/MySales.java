@@ -429,7 +429,7 @@ public class MySales {
                 String soa_type_id = to_sales.charge_type_id;
                 String soa_date = DateType.sf.format(new Date());
 
-                String date_added = POS.util.DateType.now();
+                String date_added = to_sales.date_added;
                 String added_by = Users.user_name;
                 String reference_no = to_sales.charge_reference_no;
                 String client_name = to_sales.charge_customer_name;
@@ -485,7 +485,7 @@ public class MySales {
                 String discount = "";
                 int status = 0;
                 double term = 30;
-                String date_applied = DateType.sf.format(new Date());
+                String date_applied = to_sales.date_added;
                 double paid = 0;
                 String date_paid = date_applied;
                 String remarks = "";

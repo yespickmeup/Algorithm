@@ -45,14 +45,14 @@ public class Return_to_supplier_items {
         public final String brand_id;
         public final String model;
         public final String model_id;
-        public final double conversion;
-        public final String unit;
+        public double conversion;
+        public String unit;
         public final String barcodes;
         public final String batch_no;
         public final String serial_no;
         public final String main_barcode;
-        public final double qty;
-        public final double cost;
+        public double qty;
+        public double cost;
         public final int status;
         public final String branch;
         public final String branch_id;
@@ -95,11 +95,45 @@ public class Return_to_supplier_items {
             this.location = location;
             this.location_id = location_id;
         }
+
+        public double getConversion() {
+            return conversion;
+        }
+
+        public void setConversion(double conversion) {
+            this.conversion = conversion;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
+        }
+
+        public double getQty() {
+            return qty;
+        }
+
+        public void setQty(double qty) {
+            this.qty = qty;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public void setCost(double cost) {
+            this.cost = cost;
+        }
+
     }
 
-    public static void add_data(to_return_to_supplier_items to_return_to_supplier_items) {
+    public static void add_data(to_return_to_supplier_items to_return_to_supplier_items, double gross_total) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "insert into return_to_supplier_items("
                     + "return_to_supplier_no"
                     + ",user_name"
@@ -207,7 +241,21 @@ public class Return_to_supplier_items {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            String s2 = "update return_to_suppliers set "
+                    + " gross_total= :gross_total "
+                    + " where return_to_supplier_no='" + to_return_to_supplier_items.return_to_supplier_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("gross_total", gross_total)
+                    .ok();
+
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Return_to_supplier_items.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -302,15 +350,73 @@ public class Return_to_supplier_items {
         }
     }
 
-    public static void delete_data(to_return_to_supplier_items to_return_to_supplier_items) {
+    public static void update_item(to_return_to_supplier_items to_return_to_supplier_items, double gross_total) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "update return_to_supplier_items set "
+                    + " conversion= :conversion "
+                    + ",unit= :unit "
+                    + ",qty= :qty "
+                    + ",cost= :cost "
+                    + " where id='" + to_return_to_supplier_items.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("conversion", to_return_to_supplier_items.conversion)
+                    .setString("unit", to_return_to_supplier_items.unit)
+                    .setNumber("qty", to_return_to_supplier_items.qty)
+                    .setNumber("cost", to_return_to_supplier_items.cost)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = "update return_to_suppliers set "
+                    + " gross_total= :gross_total "
+                    + " where return_to_supplier_no='" + to_return_to_supplier_items.return_to_supplier_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("gross_total", gross_total)
+                    .ok();
+
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Return_to_supplier_items.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void delete_data(to_return_to_supplier_items to_return_to_supplier_items, double gross_total) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "delete from return_to_supplier_items  "
                     + " where id='" + to_return_to_supplier_items.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            String s2 = "update return_to_suppliers set "
+                    + " gross_total= :gross_total "
+                    + " where return_to_supplier_no='" + to_return_to_supplier_items.return_to_supplier_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("gross_total", gross_total)
+                    .ok();
+
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Return_to_supplier_items.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);

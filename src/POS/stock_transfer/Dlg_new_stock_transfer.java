@@ -1735,7 +1735,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         focus();
         init_tbl_stock_transfers();

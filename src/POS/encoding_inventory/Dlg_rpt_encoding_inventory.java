@@ -15,13 +15,16 @@ import POS.util.DateType;
 import POS.util.TableRenderer;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -220,8 +223,6 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jButton1 = new Button.Success();
         jCheckBox5 = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jLabel15 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         tf_qty_branch = new Field.Combo();
@@ -230,6 +231,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         tf_location_id = new javax.swing.JTextField();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jButton3 = new Button.Default();
         pnl_sales_items = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -286,8 +289,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         });
 
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setSelected(true);
         jCheckBox5.setText("All");
-        jCheckBox5.setEnabled(false);
         jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox5ActionPerformed(evt);
@@ -298,8 +301,6 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Date:");
 
-        jMonthChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("Branch:");
@@ -309,6 +310,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jLabel31.setText("Location:");
 
         tf_qty_branch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_qty_branch.setFocusable(false);
         tf_qty_branch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_qty_branchMouseClicked(evt);
@@ -338,11 +340,24 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setText("All");
+        jCheckBox2.setEnabled(false);
         jCheckBox2.setFocusable(false);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox3.setText("All");
+        jCheckBox3.setEnabled(false);
         jCheckBox3.setFocusable(false);
+
+        jDateChooser3.setDate(new Date());
+        jDateChooser3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/magnifying-glass.png"))); // NOI18N
+        jButton3.setToolTipText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -352,17 +367,17 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_sheet_no)))
+                        .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -404,10 +419,10 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                                 .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tf_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(1, 1, 1)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -617,7 +632,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         pnl_sales_items1.setLayout(pnl_sales_items1Layout);
         pnl_sales_items1Layout.setHorizontalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 858, Short.MAX_VALUE)
+            .addGap(0, 859, Short.MAX_VALUE)
         );
         pnl_sales_items1Layout.setVerticalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -759,6 +774,10 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         init_branch_locations2(tf_qty_branch1, tf_location1);
     }//GEN-LAST:event_tf_qty_branch1MouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        encoding_dates();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -766,12 +785,14 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -782,7 +803,6 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -794,7 +814,6 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JPanel pnl_sales_items;
     private javax.swing.JPanel pnl_sales_items1;
     private javax.swing.JTextField tf_location;
@@ -810,7 +829,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         set_default_branch();
         String where = " order by branch,location asc ";
@@ -821,6 +840,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
         tf_search_branch_code1.setVisible(false);
         tf_location_id1.setVisible(false);
+
     }
 
     String location_ids = "";
@@ -881,23 +901,20 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
         jProgressBar3.setString("Loading... Please wait...");
         jProgressBar3.setIndeterminate(true);
-
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 String where = " ";
-                String year = "" + jYearChooser1.getYear();
-                String month = "" + (jMonthChooser1.getMonth() + 1);
+                String date2 = DateType.sf.format(jDateChooser3.getDate());
+
                 String location_id = tf_location_id.getText();
                 Field.Combo br = (Field.Combo) tf_qty_branch;
                 Field.Combo lo = (Field.Combo) tf_location;
                 if (jCheckBox5.isSelected()) {
-                    where = where + " where YEAR(date_added) ='" + year + "' and MONTH(date_added) ='" + month + "'";
+                    where = where + " where Date(date_added) ='" + date2 + "' ";
                 } else {
                     where = where + " where sheet_no='" + tf_sheet_no.getText() + "'  ";
-                    where = where + " and YEAR(date_added) ='" + year + "' and MONTH(date_added) ='" + month + "'";
-
+                    where = where + " where Date(date_added) ='" + date2 + "' ";
                 }
 
                 if (!jCheckBox2.isSelected() && !jCheckBox3.isSelected()) {
@@ -906,13 +923,13 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where = where + " and branch_id='" + br.getId() + "' ";
                 }
-                System.out.println(where);
+                where = where + " group by item_code,cost order by description asc ";
+//                System.out.println(where);
                 List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where);
 
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-                int month1 = jMonthChooser1.getMonth();
-                String m = DateType.noMonth("" + month1);
-                String date = m + " " + jYearChooser1.getYear();
+
+                String date = DateType.month_date.format(jDateChooser3.getDate());
                 String printed_by = "Administrator";
                 String sheet_no = "";
                 String branch = tf_qty_branch.getText();
@@ -1136,7 +1153,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(where2);
 //                System.out.println("size: " + replenishments.size());
                 List<Srpt_inventory_over_short.field> datas = Srpt_inventory_over_short.ret_data(where3, replenishments);
-                
+
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
                 String printed_by = "Administrator";
@@ -1210,4 +1227,36 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         }
     }
 
+    private void encoding_dates() {
+        Window p = (Window) this;
+        Dlg_rpt_encoding_dates nd = Dlg_rpt_encoding_dates.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_rpt_encoding_dates.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_rpt_encoding_dates.OutputData data) {
+                try {
+                    closeDialog.ok();
+                    Date d = DateType.datetime.parse(data.rep.date_added);
+
+                    jDateChooser3.setDate(d);
+
+                    Field.Combo br = (Field.Combo) tf_qty_branch;
+                    Field.Combo lo = (Field.Combo) tf_location;
+                    br.setText(data.rep.branch);
+                    br.setId(data.rep.branch_id);
+                    lo.setText(data.rep.location);
+                    lo.setId(data.rep.location_id);
+
+                    get_stocks();
+                } catch (ParseException ex) {
+                    Logger.getLogger(Dlg_rpt_encoding_inventory.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 }

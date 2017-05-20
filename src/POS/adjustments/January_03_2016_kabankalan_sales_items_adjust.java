@@ -23,7 +23,7 @@ public class January_03_2016_kabankalan_sales_items_adjust {
 
     public static void main(String[] args) {
 
-        System.setProperty("pool_db", "db_smis_kabankalan_12_27_2016");
+//        System.setProperty("pool_db", "db_smis_kabankalan_12_27_2016");
         String where = "where Date(date_added) = '" + "2017-01-03" + "' order by sales_no,id asc";
         List<MySales_Items.items> items = MySales_Items.ret_data(where);
 

@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
@@ -65,9 +66,10 @@ public class Return_to_supplier {
         }
     }
 
-    public static void add_data(to_return_to_suppliers to_return_to_suppliers) {
+    public static void add_data(to_return_to_suppliers to_return_to_suppliers, List<Return_to_supplier_items.to_return_to_supplier_items> items) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "insert into return_to_suppliers("
                     + "return_to_supplier_no"
                     + ",user_name"
@@ -127,7 +129,120 @@ public class Return_to_supplier {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            for (Return_to_supplier_items.to_return_to_supplier_items to_return_to_supplier_items : items) {
+                String s2 = "insert into return_to_supplier_items("
+                        + "return_to_supplier_no"
+                        + ",user_name"
+                        + ",session_no"
+                        + ",date_added"
+                        + ",supplier"
+                        + ",supplier_id"
+                        + ",reference_no"
+                        + ",remarks"
+                        + ",barcode"
+                        + ",description"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_class"
+                        + ",sub_class_id"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",conversion"
+                        + ",unit"
+                        + ",barcodes"
+                        + ",batch_no"
+                        + ",serial_no"
+                        + ",main_barcode"
+                        + ",qty"
+                        + ",cost"
+                        + ",status"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ")values("
+                        + ":return_to_supplier_no"
+                        + ",:user_name"
+                        + ",:session_no"
+                        + ",:date_added"
+                        + ",:supplier"
+                        + ",:supplier_id"
+                        + ",:reference_no"
+                        + ",:remarks"
+                        + ",:barcode"
+                        + ",:description"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_class"
+                        + ",:sub_class_id"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:conversion"
+                        + ",:unit"
+                        + ",:barcodes"
+                        + ",:batch_no"
+                        + ",:serial_no"
+                        + ",:main_barcode"
+                        + ",:qty"
+                        + ",:cost"
+                        + ",:status"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ")";
+
+                s2 = SqlStringUtil.parse(s2)
+                        .setString("return_to_supplier_no", to_return_to_suppliers.return_to_supplier_no)
+                        .setString("user_name", to_return_to_suppliers.user_name)
+                        .setString("session_no", to_return_to_suppliers.session_no)
+                        .setString("date_added", to_return_to_suppliers.date_added)
+                        .setString("supplier", to_return_to_suppliers.supplier)
+                        .setString("supplier_id", to_return_to_suppliers.supplier_id)
+                        .setString("reference_no", to_return_to_suppliers.reference_no)
+                        .setString("remarks", to_return_to_suppliers.remarks)
+                        .setString("barcode", to_return_to_supplier_items.barcode)
+                        .setString("description", to_return_to_supplier_items.description)
+                        .setString("category", to_return_to_supplier_items.category)
+                        .setString("category_id", to_return_to_supplier_items.category_id)
+                        .setString("classification", to_return_to_supplier_items.classification)
+                        .setString("classification_id", to_return_to_supplier_items.classification_id)
+                        .setString("sub_class", to_return_to_supplier_items.sub_class)
+                        .setString("sub_class_id", to_return_to_supplier_items.sub_class_id)
+                        .setString("brand", to_return_to_supplier_items.brand)
+                        .setString("brand_id", to_return_to_supplier_items.brand_id)
+                        .setString("model", to_return_to_supplier_items.model)
+                        .setString("model_id", to_return_to_supplier_items.model_id)
+                        .setNumber("conversion", to_return_to_supplier_items.conversion)
+                        .setString("unit", to_return_to_supplier_items.unit)
+                        .setString("barcodes", to_return_to_supplier_items.barcodes)
+                        .setString("batch_no", to_return_to_supplier_items.batch_no)
+                        .setString("serial_no", to_return_to_supplier_items.serial_no)
+                        .setString("main_barcode", to_return_to_supplier_items.main_barcode)
+                        .setNumber("qty", to_return_to_supplier_items.qty)
+                        .setNumber("cost", to_return_to_supplier_items.cost)
+                        .setNumber("status", to_return_to_suppliers.status)
+                        .setString("branch", to_return_to_suppliers.branch)
+                        .setString("branch_id", to_return_to_suppliers.branch_id)
+                        .setString("location", to_return_to_suppliers.location)
+                        .setString("location_id", to_return_to_suppliers.location_id)
+                        .ok();
+                stmt.addBatch(s2);
+            }
+
+            stmt.executeBatch();
+            conn.commit();
+
             Lg.s(Return_to_supplier.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -139,20 +254,13 @@ public class Return_to_supplier {
     public static void update_data(to_return_to_suppliers to_return_to_suppliers) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "update return_to_suppliers set "
-                    + "return_to_supplier_no= :return_to_supplier_no "
-                    + ",user_name= :user_name "
-                    + ",session_no= :session_no "
-                    + ",date_added= :date_added "
+                    + " date_added= :date_added "
                     + ",supplier= :supplier "
                     + ",supplier_id= :supplier_id "
                     + ",reference_no= :reference_no "
                     + ",remarks= :remarks "
-                    + ",status= :status "
-                    + ",branch= :branch "
-                    + ",branch_id= :branch_id "
-                    + ",location= :location "
-                    + ",location_id= :location_id "
                     + ",gross_total= :gross_total "
                     + ",discount= :discount "
                     + ",discount_amount= :discount_amount "
@@ -161,19 +269,11 @@ public class Return_to_supplier {
                     + " ";
 
             s0 = SqlStringUtil.parse(s0)
-                    .setString("return_to_supplier_no", to_return_to_suppliers.return_to_supplier_no)
-                    .setString("user_name", to_return_to_suppliers.user_name)
-                    .setString("session_no", to_return_to_suppliers.session_no)
                     .setString("date_added", to_return_to_suppliers.date_added)
                     .setString("supplier", to_return_to_suppliers.supplier)
                     .setString("supplier_id", to_return_to_suppliers.supplier_id)
                     .setString("reference_no", to_return_to_suppliers.reference_no)
                     .setString("remarks", to_return_to_suppliers.remarks)
-                    .setNumber("status", to_return_to_suppliers.status)
-                    .setString("branch", to_return_to_suppliers.branch)
-                    .setString("branch_id", to_return_to_suppliers.branch_id)
-                    .setString("location", to_return_to_suppliers.location)
-                    .setString("location_id", to_return_to_suppliers.location_id)
                     .setNumber("gross_total", to_return_to_suppliers.gross_total)
                     .setString("discount", to_return_to_suppliers.discount)
                     .setNumber("discount_amount", to_return_to_suppliers.discount_amount)
@@ -181,7 +281,98 @@ public class Return_to_supplier {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            String s2 = "update return_to_supplier_items set "
+                    + " date_added= :date_added "
+                    + ",supplier= :supplier "
+                    + ",supplier_id= :supplier_id "
+                    + ",reference_no= :reference_no "
+                    + ",remarks= :remarks "
+                    + " where return_to_supplier_no='" + to_return_to_suppliers.return_to_supplier_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setString("date_added", to_return_to_suppliers.date_added)
+                    .setString("supplier", to_return_to_suppliers.supplier)
+                    .setString("supplier_id", to_return_to_suppliers.supplier_id)
+                    .setString("reference_no", to_return_to_suppliers.reference_no)
+                    .setString("remarks", to_return_to_suppliers.remarks)
+                    .ok();
+
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            Lg.s(Return_to_supplier.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void finalize(to_return_to_suppliers to_return_to_suppliers, List<Return_to_supplier_items.to_return_to_supplier_items> items) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "update return_to_suppliers set "
+                    + " status= :status "
+                    + " where id='" + to_return_to_suppliers.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("status", 1)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = "update return_to_supplier_items set "
+                    + " status= :status "
+                    + " where return_to_supplier_no='" + to_return_to_suppliers.return_to_supplier_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("status", 1)
+                    .ok();
+            stmt.addBatch(s2);
+
+            for (Return_to_supplier_items.to_return_to_supplier_items item : items) {
+
+                String s10 = "select "
+                        + " product_qty"
+                        + ",conversion"
+                        + ",serial_no"
+                        + " from inventory_barcodes where "
+                        + " main_barcode='" + item.main_barcode + "' and location_id='" + item.location_id + "'"
+                        + " ";
+                Statement stmt10 = conn.createStatement();
+                ResultSet rs10 = stmt10.executeQuery(s10);
+                double product_qty = 0;
+                double conversion = 0;
+                String serial_no = "";
+                while (rs10.next()) {
+                    product_qty = rs10.getDouble(1);
+                    conversion = rs10.getDouble(2);
+                    serial_no = rs10.getString(3);
+                }
+
+                double new_qty = product_qty - (item.conversion * item.qty);
+
+                String s4 = "update inventory_barcodes set "
+                        + " product_qty='" + new_qty + "'"
+                        + " where  main_barcode= '" + item.main_barcode + "' and location_id='" + item.location_id + "' "
+                        + "";
+//                System.out.println(s4);
+                stmt.addBatch(s4);
+
+            }
+
+            stmt.executeBatch();
+            conn.commit();
+
             Lg.s(Return_to_supplier.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -193,12 +384,22 @@ public class Return_to_supplier {
     public static void delete_data(to_return_to_suppliers to_return_to_suppliers) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "delete from return_to_suppliers  "
                     + " where id='" + to_return_to_suppliers.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            String s2 = "delete from return_to_supplier_items  "
+                    + " where return_to_supplier_no='" + to_return_to_suppliers.return_to_supplier_no + "' "
+                    + " ";
+
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Return_to_supplier.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -260,6 +461,34 @@ public class Return_to_supplier {
                 datas.add(to);
             }
             return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static String increment_id(String branch_id) {
+        String id = "";
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from return_to_suppliers where branch_id='" + branch_id + "' ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select return_to_supplier_no from return_to_suppliers where id='" + id + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = branch_id + "|" + "000000000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+            return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

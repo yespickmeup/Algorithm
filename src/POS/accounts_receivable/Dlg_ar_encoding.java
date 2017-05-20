@@ -315,6 +315,8 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         lbl_balance1 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         lbl_balance2 = new javax.swing.JLabel();
+        lbl_balance3 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -1081,7 +1083,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel30)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_discount_amount, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+                                .addComponent(tf_discount_amount))
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tf_ap_cash, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
@@ -1187,6 +1189,14 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         lbl_balance2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_balance2.setText("0.00");
 
+        lbl_balance3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_balance3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_balance3.setText("0.00");
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel33.setText("Discount:");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -1194,28 +1204,35 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel33)
+                        .addGap(2, 2, 2)
+                        .addComponent(lbl_balance3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_balance2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_balance2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addGap(5, 5, 5)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_balance1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_balance2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_balance3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
         );
 
@@ -1483,6 +1500,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1506,6 +1524,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_balance;
     private javax.swing.JLabel lbl_balance1;
     private javax.swing.JLabel lbl_balance2;
+    private javax.swing.JLabel lbl_balance3;
     private javax.swing.JTextField lbl_credit_limit;
     private javax.swing.JTable tbl_accounts_receivable;
     private javax.swing.JTable tbl_accounts_receivable_payments;
@@ -2342,6 +2361,8 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
         tf_ap_cash.setText(FitIn.fmt_wc_0(to.amount));
         tf_ap_check_amount.setText(FitIn.fmt_wc_0(to.check_amount));
+        tf_discount_amount.setText(FitIn.fmt_wc_0(to.discount_amount));
+        tf_discount_name.setText(to.discount);
         tf_ap_check_holder.setText(to.check_holder);
         tf_ap_check_bank.setText(to.check_bank);
         tf_ap_check_no.setText(to.check_no);
@@ -2468,6 +2489,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tf_ap_check_amount.setText("");
         tf_ap_check_no.setText("");
         tf_ap_cash.grabFocus();
+        jButton4.setEnabled(true);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
     }
 
     private void delete_accounts_receivable_payments() {
@@ -2578,14 +2602,14 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
         double cash = 0;
         double check = 0;
-
+        double discount = 0;
         List<to_accounts_receivable_payments> datas = tbl_accounts_receivable_payments_ALM;
         for (to_accounts_receivable_payments to : datas) {
             cash += to.amount;
             check += to.check_amount;
-
+            discount += to.discount_amount;
         }
-
+        lbl_balance3.setText(FitIn.fmt_wc_0(discount));
         lbl_balance1.setText(FitIn.fmt_wc_0(cash));
         lbl_balance2.setText(FitIn.fmt_wc_0(check));
     }

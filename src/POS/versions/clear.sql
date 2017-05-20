@@ -33,6 +33,8 @@ delete from charge_payment_items;
 delete from conversions;
 delete from conversion_items;
 delete from disbursements;
+delete from inventory_replenishments;
+delete from inventory_replenishment_items;
 delete from encoding_inventory;
 delete from orders;
 delete from order_items;

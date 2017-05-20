@@ -36,14 +36,15 @@ public class Srpt_encoding_inventory {
     public final String branch;
     public final String location;
     public final String counted_by;
-    public Srpt_encoding_inventory(String business_name, String date, String printed_by, String branch, String location,String counted_by) {
+
+    public Srpt_encoding_inventory(String business_name, String date, String printed_by, String branch, String location, String counted_by) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
         this.printed_by = printed_by;
         this.branch = branch;
         this.location = location;
-        this.counted_by=counted_by;
+        this.counted_by = counted_by;
     }
 
     public static class field {
@@ -56,18 +57,39 @@ public class Srpt_encoding_inventory {
         String sheet_no;
         String counted_by;
         String location;
+        double cost;
+        double amount;
+
         public field() {
         }
 
-        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no,String counted_by,String location) {
+        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no, String counted_by, String location, double cost, double amount) {
             this.date_added = date_added;
             this.qty = qty;
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
             this.sheet_no = sheet_no;
-            this.counted_by=counted_by;
-            this.location=location;
+            this.counted_by = counted_by;
+            this.location = location;
+            this.cost = cost;
+            this.amount = amount;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public void setCost(double cost) {
+            this.cost = cost;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
         }
 
         public String getLocation() {
@@ -77,7 +99,7 @@ public class Srpt_encoding_inventory {
         public void setLocation(String location) {
             this.location = location;
         }
-        
+
         public String getCounted_by() {
             return counted_by;
         }
@@ -86,7 +108,6 @@ public class Srpt_encoding_inventory {
             this.counted_by = counted_by;
         }
 
-        
         public String getDate_added() {
             return date_added;
         }
@@ -144,10 +165,10 @@ public class Srpt_encoding_inventory {
         String date = DateType.month_date.format(new Date());
         String printed_by = "Administrator";
         String sheet_no = "";
-        String branch="";
-        String location="";
-        String counted_by="";
-        Srpt_encoding_inventory rpt = new Srpt_encoding_inventory(business_name, date, printed_by,branch,location,counted_by);
+        String branch = "";
+        String location = "";
+        String counted_by = "";
+        Srpt_encoding_inventory rpt = new Srpt_encoding_inventory(business_name, date, printed_by, branch, location, counted_by);
         rpt.fields.addAll(datas);
         String jrxml = "rpt_encoding_inventory.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -178,7 +199,7 @@ public class Srpt_encoding_inventory {
 
     public static List<Srpt_encoding_inventory.field> ret_data(String where) {
         List<Srpt_encoding_inventory.field> datas = new ArrayList();
-        
+
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -198,6 +219,7 @@ public class Srpt_encoding_inventory {
                     + ",status"
                     + ",counted_by"
                     + ",checked_by"
+                    + ",cost"
                     + " from encoding_inventory "
                     + " " + where
                     + " ";
@@ -220,8 +242,10 @@ public class Srpt_encoding_inventory {
                 int status = rs.getInt(14);
                 String counted_by = rs.getString(15);
                 String checked_by = rs.getString(16);
-                    String loc=branch+ " - "+location;
-                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no,counted_by,loc);
+                String loc = branch + " - " + location;
+                double cost = rs.getDouble(17);
+                double amount = qty * cost;
+                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no, counted_by, loc, cost, amount);
                 datas.add(field);
             }
             return datas;
@@ -232,4 +256,62 @@ public class Srpt_encoding_inventory {
         }
     }
 
+    public static List<Srpt_encoding_inventory.field> ret_data2(String where) {
+        List<Srpt_encoding_inventory.field> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",sum(qty)"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",screen_name"
+                    + ",sheet_no"
+                    + ",status"
+                    + ",counted_by"
+                    + ",checked_by"
+                    + ",cost"
+                    + " from encoding_inventory "
+                    + " " + where
+                    + " ";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String item_code = rs.getString(2);
+                String barcode = rs.getString(3);
+                String description = rs.getString(4);
+                String branch = rs.getString(5);
+                String branch_id = rs.getString(6);
+                String location = rs.getString(7);
+                String location_id = rs.getString(8);
+                double qty = rs.getDouble(9);
+                String date_added = rs.getString(10);
+                String user_name = rs.getString(11);
+                String screen_name = rs.getString(12);
+                String sheet_no = rs.getString(13);
+                int status = rs.getInt(14);
+                String counted_by = rs.getString(15);
+                String checked_by = rs.getString(16);
+                String loc = branch + " - " + location;
+                double cost = rs.getDouble(17);
+                double amount = qty * cost;
+                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no, counted_by, loc, cost, amount);
+                datas.add(field);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

@@ -898,11 +898,11 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel29MouseEntered
 
     private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
-        // TODO add your handling code here:
+        ok("Return/s to Supplier", jLabel30);
     }//GEN-LAST:event_jLabel30MouseClicked
 
     private void jLabel30MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseEntered
-        // TODO add your handling code here:
+        label("Return/s to Supplier", jLabel30);
     }//GEN-LAST:event_jLabel30MouseEntered
 
     private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
@@ -963,7 +963,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     }
 
     private void hover() {
-        JLabel[] lbl = {jLabel28, jLabel7, jLabel8, jLabel9, jLabel10, jLabel11, jLabel12, jLabel16, jLabel17, jLabel18, jLabel15, jLabel14, jLabel13, jLabel20, jLabel21, jLabel19, jLabel24, jLabel23, jLabel22, jLabel25, jLabel26, jLabel27, jLabel29, jLabel31};
+        JLabel[] lbl = {jLabel30,jLabel28, jLabel7, jLabel8, jLabel9, jLabel10, jLabel11, jLabel12, jLabel16, jLabel17, jLabel18, jLabel15, jLabel14, jLabel13, jLabel20, jLabel21, jLabel19, jLabel24, jLabel23, jLabel22, jLabel25, jLabel26, jLabel27, jLabel29, jLabel31};
         for (final JLabel l : lbl) {
             l.addMouseListener(new MouseAdapter() {
                 @Override

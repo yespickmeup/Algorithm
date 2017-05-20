@@ -60,6 +60,7 @@ import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
 import POS.requisition_slips.Dlg_requisition_slip;
 import POS.returns.Dlg_return_from_customer;
+import POS.returns.Dlg_return_to_supplier;
 import POS.rma.Dlg_rma;
 import POS.scripts.Dlg_Local_branch_query_updates;
 import POS.scripts.Src_item_ledger;
@@ -2410,7 +2411,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void rpt_stock_status() {
         Dlg_report_item dtc = new Dlg_report_item();
-         dtc.do_pass(0);
+        dtc.do_pass(0);
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status Report");
     }
 
@@ -2530,6 +2531,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         Dlg_return_from_customer dtc = new Dlg_return_from_customer();
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
+    }
+    private void t_returns_to_supplier() {
+        Dlg_return_to_supplier dtc = new Dlg_return_to_supplier();
+
+        MyFrame.set(dtc.getSurface(), jPanel1, "Return/s to Supplier");
     }
 
     private void t_conversions() {
@@ -3071,6 +3077,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 if (data.stmt.equals("Return/s from Customer")) {
                     t_returns_from_customer();
+
+                }
+                if (data.stmt.equals("Return/s to Supplier")) {
+                   t_returns_to_supplier();
 
                 }
                 if (data.stmt.equals("Accounts Payable")) {

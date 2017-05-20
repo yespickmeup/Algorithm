@@ -216,11 +216,11 @@ public class Dlg_confirm_finalize extends javax.swing.JDialog {
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Sales Invoice");
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setSelected(true);
         jCheckBox2.setText("Delivery Receipt");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

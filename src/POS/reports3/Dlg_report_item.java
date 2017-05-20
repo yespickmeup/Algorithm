@@ -372,7 +372,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel3.setText("Category:");
 
         tf_category.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_category.setText("All");
+        tf_category.setText("ALL");
         tf_category.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_categoryMouseClicked(evt);
@@ -389,7 +389,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel4.setText("Classification:");
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setText("All");
+        jTextField3.setText("ALL");
         jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField3MouseClicked(evt);
@@ -406,7 +406,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel5.setText("Sub-Classification:");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setText("All");
+        jTextField4.setText("ALL");
         jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField4MouseClicked(evt);
@@ -423,7 +423,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel6.setText("Brand:");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setText("All");
+        jTextField5.setText("ALL");
         jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField5MouseClicked(evt);
@@ -440,7 +440,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel8.setText("Model:");
 
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setText("All");
+        jTextField6.setText("ALL");
         jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField6MouseClicked(evt);
@@ -516,7 +516,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox6.setSelected(true);
         jCheckBox6.setText("All / with quantity");
 
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -524,6 +523,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox8.setFocusable(false);
 
         jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setSelected(true);
         jCheckBox9.setText("All");
         jCheckBox9.setFocusable(false);
 
@@ -760,19 +760,16 @@ public class Dlg_report_item extends javax.swing.JDialog {
         buttonGroup2.add(jCheckBox11);
         jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox11.setText("[F2]-Item Code");
-        jCheckBox11.setEnabled(false);
         jCheckBox11.setFocusable(false);
 
         buttonGroup2.add(jCheckBox12);
         jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox12.setText("[F3]-Barcode");
-        jCheckBox12.setEnabled(false);
         jCheckBox12.setFocusable(false);
 
         buttonGroup2.add(jCheckBox13);
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox13.setText("[F4]-Description");
-        jCheckBox13.setEnabled(false);
         jCheckBox13.setFocusable(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1164,7 +1161,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             }
         });
     }
-   
+
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();
@@ -1843,6 +1840,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         where = where + " and product_qty>0 ";
                     }
                 }
+
                 if (jCheckBox11.isSelected()) {
 
                     if (!jCheckBox6.isSelected()) {
@@ -1864,7 +1862,6 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         where = where + " and  barcode like '" + jTextField1.getText() + "' "
                                 + "  ";
                     }
-
                 }
                 if (jCheckBox13.isSelected()) {
                     if (!jCheckBox6.isSelected()) {
@@ -1876,9 +1873,20 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
                 }
 
-                where = where + " order by branch,location,description asc ";
+                if (jCheckBox10.isSelected()) {
+                    String where2 = where.replaceAll("", "") + " and  main_barcode='" + jTextField1.getText() + "'  ";
+//                    System.out.println("where2: " + where2);
+                    String where3 = " or " + where.replaceAll("where", " ") + " and  barcode like '" + jTextField1.getText() + "'  ";
+//                    System.out.println("where3: " + where3);
+                    String where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,description asc";
+//                    System.out.println("where4: " + where4);
+                    where = where2 + where3 + where4;
+                } else {
+                    where = where + " order by branch,location,description asc ";
+                }
+
 //                all_where = where;
-//                System.out.println(where);
+//                System.out.println("where: " + where);
                 List<to_inventory> datas = Inventory.ret_data5(where);
                 loadData_inventory_barcodes(datas);
                 jLabel9.setText("" + tbl_inventory_barcodes_ALM.size());

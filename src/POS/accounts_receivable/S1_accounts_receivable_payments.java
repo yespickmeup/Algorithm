@@ -800,7 +800,7 @@ public class S1_accounts_receivable_payments {
 
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
             String s10 = "select "
-                    + "balance"
+                    + " balance"
                     + " from  customers where "
                     + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                     + " ";
@@ -814,7 +814,7 @@ public class S1_accounts_receivable_payments {
             double new_balance = (customer_balance + previous_cash + previous_check) - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
 
             String s2 = "update  customers set "
-                    + "balance= :balance"
+                    + " balance= :balance"
                     + " where "
                     + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                     + " ";

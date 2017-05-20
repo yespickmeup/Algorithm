@@ -355,12 +355,12 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
         buttonGroup1.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox6.setSelected(true);
         jCheckBox6.setText("[F1]-All");
         jCheckBox6.setFocusable(false);
 
         buttonGroup1.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setSelected(true);
         jCheckBox7.setText("[F2]-Item Code");
         jCheckBox7.setFocusable(false);
 

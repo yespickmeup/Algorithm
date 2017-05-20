@@ -7,25 +7,17 @@ package POS.encoding_inventory;
 
 import POS.branch_locations.Branch_locations;
 import POS.branch_locations.S1_branch_locations.to_branch_locations;
-import POS.inventory.Inventory_barcodes;
 import POS.inventory_replenishment.Inventory_replenishments;
-import POS.users.MyUser;
-import POS.util.Alert;
 import POS.util.DateType;
-import POS.util.DateUtils1;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -40,7 +32,7 @@ import synsoftech.util.ImageRenderer;
  *
  * @author Guinness
  */
-public class Dlg_encoding_replenishment extends javax.swing.JDialog {
+public class Dlg_rpt_encoding_dates extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_encoding_replenishment
@@ -63,51 +55,43 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
 
     public static class OutputData {
 
-        public final String date;
-        public final String branch;
-        public final String branch_id;
-        public final String location;
-        public final String location_id;
+        public final Inventory_replenishments.to_inventory_replenishments rep;
 
-        public OutputData(String date, String branch, String branch_id, String location, String location_id) {
-            this.date = date;
-            this.branch = branch;
-            this.branch_id = branch_id;
-            this.location = location;
-            this.location_id = location_id;
+        public OutputData(Inventory_replenishments.to_inventory_replenishments rep) {
+            this.rep = rep;
         }
 
     }
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_encoding_replenishment(java.awt.Frame parent, boolean modal) {
+    private Dlg_rpt_encoding_dates(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_encoding_replenishment(java.awt.Dialog parent, boolean modal) {
+    private Dlg_rpt_encoding_dates(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_encoding_replenishment() {
+    public Dlg_rpt_encoding_dates() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_encoding_replenishment myRef;
+    private Dlg_rpt_encoding_dates myRef;
 
-    private void setThisRef(Dlg_encoding_replenishment myRef) {
+    private void setThisRef(Dlg_rpt_encoding_dates myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_encoding_replenishment> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_rpt_encoding_dates> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -115,7 +99,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_encoding_replenishment create(java.awt.Window parent, boolean modal) {
+    public static Dlg_rpt_encoding_dates create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -125,14 +109,14 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_encoding_replenishment create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_rpt_encoding_dates create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_encoding_replenishment dialog = dialogContainer.get(parent);
+            Dlg_rpt_encoding_dates dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_encoding_replenishment((java.awt.Frame) parent, false);
+                dialog = new Dlg_rpt_encoding_dates((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -146,10 +130,10 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_encoding_replenishment dialog = dialogContainer.get(parent);
+            Dlg_rpt_encoding_dates dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_encoding_replenishment((java.awt.Dialog) parent, false);
+                dialog = new Dlg_rpt_encoding_dates((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -176,7 +160,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_encoding_replenishment dialog = Dlg_encoding_replenishment.create(new javax.swing.JFrame(), true);
+        Dlg_rpt_encoding_dates dialog = Dlg_rpt_encoding_dates.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -215,8 +199,6 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_branch_locations = new javax.swing.JTable();
@@ -228,12 +210,6 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Choose Date:");
-
-        jDateChooser1.setDate(new Date());
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Choose Location:");
@@ -275,13 +251,8 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(0, 349, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -296,10 +267,6 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,7 +278,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -337,8 +304,6 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -349,7 +314,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
     private javax.swing.JTable tbl_branch_locations;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         init_tbl_branch_locations(tbl_branch_locations);
         ret_locations();
@@ -357,12 +322,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
     }
 
     private void set_date() {
-        jDateChooser1.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                ret_locations();
-            }
-        });
+
     }
 
     public void do_pass() {
@@ -402,7 +362,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
         tbl_branch_locations.setModel(tbl_branch_locations_M);
         tbl_branch_locations.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_branch_locations.setRowHeight(25);
-        int[] tbl_widths_branch_locations = {100, 120, 30, 0, 0, 0, 0};
+        int[] tbl_widths_branch_locations = {100, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_branch_locations.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -457,11 +417,6 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                     return " " + tt.branch + " : " + tt.location;
                 case 1:
                     String date = "";
-                    try {
-                        date = DateType.convert_jan_1_2013_datetime2(tt.type);
-                    } catch (Exception e) {
-                        date = "";
-                    }
 
                     return " " + date;
                 case 2:
@@ -483,9 +438,9 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
     }
 
     private void ret_locations() {
-        String date = DateType.sf.format(jDateChooser1.getDate());
+        String date = DateType.sf.format(new Date());
 
-        List<to_branch_locations> datas = Branch_locations.ret_all_locations2(date);
+        List<to_branch_locations> datas = Branch_locations.ret_all_locations();
         loadData_branch_locations(datas);
         jLabel4.setText("" + datas.size());
     }
@@ -496,106 +451,30 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        String date = DateType.month_date.format(jDateChooser1.getDate());
+
         final to_branch_locations to = (to_branch_locations) tbl_branch_locations_ALM.get(row);
 
-        int col = tbl_branch_locations.getSelectedColumn();
-        if (col == 1 || col == 0) {
-            try {
-                Date last_replenishment = DateType.datetime.parse(to.type);
-                jDateChooser1.setDate(last_replenishment);
-            } catch (ParseException ex) {
-                Logger.getLogger(Dlg_encoding_replenishment.class.getName()).log(Level.SEVERE, null, ex);
+        Window p = (Window) this;
+        Dlg_rpt_encoding_dates_list nd = Dlg_rpt_encoding_dates_list.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to.branch, to.branch_id, to.location, "" + to.id);
+        nd.setCallback(new Dlg_rpt_encoding_dates_list.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_rpt_encoding_dates_list.OutputData data) {
+                closeDialog.ok();
+                ok1(data.rep);
             }
-
-        }
-        if (col == 2) {
-
-            if (!to.type.isEmpty()) {
-                try {
-                    Date last_replenishment = DateType.datetime.parse(to.type);
-
-                    Date to_replenish = jDateChooser1.getDate();
-                    int days = DateUtils1.count_days(to_replenish, last_replenishment);
-                    if (days >= 1) {
-                        Alert.set(0, "Cannot proceed to date lesser than the selected date!");
-                        return;
-                    }
-                } catch (Exception e) {
-
-                }
-            }
-
-            if (to.status == 0) {
-                Window p = (Window) this;
-                Dlg_confirm_zero_out_inventory nd = Dlg_confirm_zero_out_inventory.create(p, true);
-                nd.setTitle("");
-                nd.do_pass(date, to.branch, to.location);
-                nd.setCallback(new Dlg_confirm_zero_out_inventory.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_confirm_zero_out_inventory.OutputData data) {
-                        closeDialog.ok();
-                        ready = 0;
-                        String branch = to.branch;
-                        String branch_id = to.branch_id;
-                        String location = to.location;
-                        String location_id = "" + to.id;
-                        int id = 0;
-                        String inventory_replenishment_no = Inventory_replenishments.increment_id(location_id);
-                        String date_added = DateType.datetime.format(jDateChooser1.getDate());
-                        String user_id = MyUser.getUser_id();
-                        String user_screen_name = MyUser.getUser_screen_name();
-                        String remarks = "";
-                        int status = 1;
-
-                        final Inventory_replenishments.to_inventory_replenishments replenisment = new Inventory_replenishments.to_inventory_replenishments(id, inventory_replenishment_no, date_added, user_id, user_screen_name, remarks, status, branch, branch_id, location, location_id);
-                        final String where = " where  location_id='" + to.id + "' order by description asc ";
-
-                        final List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
-                        jProgressBar1.setString("Loading...Please wait...");
-                        jProgressBar1.setIndeterminate(true);
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Inventory_replenishments.add_data(replenisment, datas);
-                                ret_locations();
-                                Alert.set(1, "Please select item/s");
-                                ready = 1;
-                                jProgressBar1.setString("Finished...");
-                                jProgressBar1.setIndeterminate(false);
-
-                            }
-                        });
-                        t.start();
-
-                    }
-                });
-                nd.setLocationRelativeTo(this);
-                nd.setVisible(true);
-            } else {
-                Window p = (Window) this;
-                Dlg_confirm_encoding nd = Dlg_confirm_encoding.create(p, true);
-                nd.setTitle("");
-                nd.do_pass(date, to.branch, to.location);
-                nd.setCallback(new Dlg_confirm_encoding.Callback() {
-
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_confirm_encoding.OutputData data) {
-                        closeDialog.ok();
-                        ok1(to);
-                    }
-                });
-                nd.setLocationRelativeTo(this);
-                nd.setVisible(true);
-            }
-        }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
-    private void ok1(to_branch_locations to) {
-        String date_added = DateType.datetime.format(jDateChooser1.getDate());
+    private void ok1(Inventory_replenishments.to_inventory_replenishments rep) {
+
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(date_added, to.branch, to.branch_id, to.location, "" + to.id));
+            callback.ok(new CloseDialog(this), new OutputData(rep));
         }
     }
 
