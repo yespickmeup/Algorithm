@@ -797,8 +797,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
-        init_key();
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_Buns");
+        init_key(); 
         jTextField2.enable(false);
         jTextField4.enable(false);
         jTextField5.enable(false);

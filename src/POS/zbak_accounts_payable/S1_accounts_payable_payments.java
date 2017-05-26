@@ -4,7 +4,6 @@
  */
 package POS.zbak_accounts_payable;
 
-import POS.main.Main.MyDB;
 import POS.suppliers.Suppliers;
 import POS.util.MyConnection;
 import java.sql.Connection;
@@ -13,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
@@ -191,7 +189,7 @@ public class S1_accounts_payable_payments {
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
 
-                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount,"","","");
             }
             return to1;
         } catch (Exception e) {

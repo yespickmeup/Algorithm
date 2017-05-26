@@ -4,7 +4,6 @@
  */
 package POS.suppliers;
 
-import POS.main.Main.MyDB;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,8 +34,11 @@ public class Suppliers {
         public final String location;
         public final double balance;
         public final double discount;
+        public final String branch;
+        public final String branch_id;
+        public final String location_id;
 
-        public to_suppliers(int id, String customer_name, String customer_no, String contact_no, double credit_limit, String address, double term, String location, double balance, double discount) {
+        public to_suppliers(int id, String customer_name, String customer_no, String contact_no, double credit_limit, String address, double term, String location, double balance, double discount, String branch, String branch_id, String location_id) {
             this.id = id;
             this.customer_name = customer_name;
             this.customer_no = customer_no;
@@ -47,6 +49,9 @@ public class Suppliers {
             this.location = location;
             this.balance = balance;
             this.discount = discount;
+            this.branch = branch;
+            this.branch_id = branch_id;
+            this.location_id = location_id;
         }
     }
 
@@ -63,6 +68,9 @@ public class Suppliers {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location_id"
                     + ")values("
                     + ":customer_name"
                     + ",:customer_no"
@@ -73,6 +81,9 @@ public class Suppliers {
                     + ",:location"
                     + ",:balance"
                     + ",:discount"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location_id"
                     + ")";
             s0 = SqlStringUtil.parse(s0).
                     setString("customer_name", to_customers.customer_name).
@@ -84,12 +95,15 @@ public class Suppliers {
                     setString("location", to_customers.location).
                     setNumber("balance", to_customers.balance).
                     setNumber("discount", to_customers.balance).
+                    setString("branch", to_customers.branch).
+                    setString("branch_id", to_customers.branch_id).
+                    setString("location_id", to_customers.location_id).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Suppliers.class, "Successfully Added");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -124,7 +138,7 @@ public class Suppliers {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Suppliers.class, "Successfully Updated");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -141,7 +155,7 @@ public class Suppliers {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Suppliers.class, "Successfully Deleted");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -164,7 +178,10 @@ public class Suppliers {
                     + ",location"
                     + ",balance"
                     + ",discount"
-                    + " from  suppliers "
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location_id"
+                    + " from suppliers "
                     + " where "
                     + " customer_name like'%" + search + "%' "
                     + " ";
@@ -182,8 +199,10 @@ public class Suppliers {
                 String location = rs.getString(8);
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
-
-                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+                String branch = rs.getString(11);
+                String branch_id = rs.getString(12);
+                String location_id = rs.getString(13);
+                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
                 datas.add(to);
             }
             return datas;
@@ -210,6 +229,9 @@ public class Suppliers {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location_id"
                     + " from  suppliers  "
                     + " " + where;
 
@@ -226,8 +248,10 @@ public class Suppliers {
                 String location = rs.getString(8);
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
-
-                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+                String branch = rs.getString(11);
+                String branch_id = rs.getString(12);
+                String location_id = rs.getString(13);
+                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
                 datas.add(to);
             }
             return datas;
@@ -258,20 +282,21 @@ public class Suppliers {
         }
     }
 
-    public static String increment_id() {
-        String ids = "0000";
+    public static String increment_id(String branch_id) {
+        String ids = "";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from  suppliers";
+            String s0 = "select max(id) from  suppliers where branch_id='" + branch_id + "' ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
                 ids = rs.getString(1);
             }
+          
             if (ids == null) {
-                ids = "0000";
+                ids = branch_id + "|0000";
             } else {
-                String s2 = "select customer_no from  suppliers where id='" + ids + "'";
+                String s2 = "select customer_no from  suppliers where id='" + ids + "'  ";
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 if (rs2.next()) {
@@ -282,7 +307,7 @@ public class Suppliers {
             ids = ReceiptIncrementor.increment(ids);
 
             return ids;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();

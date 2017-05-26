@@ -1258,10 +1258,10 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         String location = tf_location.getText();
         String location_id = tf_location_id.getText();
         double qty = FitIn.toDouble(tf_qty.getText());
-        if (qty <= 0) {
-            Alert.set(0, "Input Quantity");
-            return;
-        }
+//        if (qty <= 0) {
+//            Alert.set(0, "Input Quantity");
+//            return;
+//        }
         String date_added = "";
         try {
             date_added = DateType.datetime.format(jDateChooser1.getDate());
@@ -1270,7 +1270,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
             choose_replenishment();
             return;
         }
-
+        
         String user_name = Users.user_name;
         String screen_name = Users.screen_name;
         String sheet_no = tf_sheet_no.getText();

@@ -23,3 +23,16 @@ id int auto_increment primary key
 ,location varchar(255)
 ,location_id varchar(255)
 );
+
+
+alter table suppliers add branch varchar(255) default '';
+alter table suppliers add branch_id varchar(255) default '' ;
+alter table suppliers add location_id varchar(255) default '';
+
+update suppliers set branch='Guihulngan';
+update suppliers set branch_id='1';
+update suppliers set location='Selling Area';
+update suppliers set location_id='1';
+
+update suppliers set customer_no=concat('1|',customer_no);
+update receipts set supllier_id=concat('1|',supllier_id);

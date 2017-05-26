@@ -1089,8 +1089,12 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 Srpt_print_barcodes rpt = new Srpt_print_barcodes(business_name, address, category, classification, sub_classification, brand, model);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_print_barcodes.jrxml";
+                String pool_db = System.getProperty("pool_db", "db_algorithm");
+                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                    jrxml = "rpt_print_barcodes_angel_buns.jrxml";
+                }
                 report_customers_aging(rpt, jrxml);
-               
+
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
 

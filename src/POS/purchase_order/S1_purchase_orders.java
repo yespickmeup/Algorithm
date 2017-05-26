@@ -4,10 +4,7 @@
  */
 package POS.purchase_order;
 
-import POS.zbak_accounts_payable.Accounts_payable;
 import POS.accounts_receivable.S1_accounts_receivable;
-import POS.main.Main;
-import POS.main.Main.MyDB;
 import POS.sales.Sales;
 import POS.suppliers.Suppliers;
 import POS.util.DateType;
@@ -151,6 +148,9 @@ public class S1_purchase_orders {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location_id"
                     + " from  suppliers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
@@ -168,8 +168,10 @@ public class S1_purchase_orders {
                 String location = rs.getString(8);
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
-
-                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount);
+                String branch = rs.getString(11);
+                String branch_id = rs.getString(12);
+                String location_id = rs.getString(13);
+                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
             }
             return to1;
         } catch (SQLException e) {

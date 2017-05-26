@@ -1048,10 +1048,13 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String where_sales = " where id<>0 ";
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
+                String where_disbursements = " where id<>0 ";
                 if (!jCheckBox1.isSelected()) {
                     where_drawer = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "'";
+                    where_disbursements = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales2 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
@@ -1059,16 +1062,19 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 if (!jCheckBox4.isSelected()) {
                     where_drawer = where_drawer + "  and Date(time_in) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_disbursements = where_disbursements + " and Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (!jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and location_id='" + lo.getId() + "' ";
                     where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
+                    where_disbursements = where_disbursements + " and location_id='" + lo.getId() + "' ";
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                 }
                 if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and branch_id='" + br.getId() + "' ";
                     where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+                    where_disbursements = where_disbursements + " and branch_id='" + br.getId() + "' ";
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                 }
 
@@ -1082,7 +1088,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<Srpt_end_of_day_summary_details.field> my_gcs = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_remittances = new ArrayList();
                 List<CashDrawer_remittances.to_cash_drawer_remittances> remittances = CashDrawer_remittances.ret_data(where_sales);
-                List<S1_disbursements.to_disbursements> disbursements = S1_disbursements.ret_data(where_sales);
+                List<S1_disbursements.to_disbursements> disbursements = S1_disbursements.ret_data(where_disbursements);
                 List<Srpt_end_of_day_summary_details.field> my_disbursements = new ArrayList();
                 double cashin_beg = 0;
                 double cash_sales = 0;
@@ -1469,7 +1475,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     location = "All";
                 }
                 if (jCheckBox6.isSelected()) {
-                    branch="All";
+                    branch = "All";
                     location = "All";
                 }
                 String printed_by = MyUser.getUser_screen_name();
