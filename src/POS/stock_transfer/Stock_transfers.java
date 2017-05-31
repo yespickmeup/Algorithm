@@ -339,7 +339,6 @@ public class Stock_transfers {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 
-            
             String s2 = "update stock_transfers_items set "
                     + " branch= :branch"
                     + ",branch_code= :branch_code"
@@ -392,6 +391,85 @@ public class Stock_transfers {
 
             PreparedStatement stmt2 = conn.prepareStatement(s2);
             stmt2.execute();
+            Lg.s(Stock_transfers_items.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void delete_stock_transfers2(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> items) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "delete from stock_transfers where "
+                    + " id='" + to_stock_transfers.id + "'";
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = "delete from stock_transfers_items where "
+                    + " stock_transfer_id ='" + to_stock_transfers.transaction_no + "' "
+                    + " ";
+            stmt.addBatch(s2);
+
+            for (Stock_transfers_items.to_stock_transfers_items to : items) {
+                String s11 = "select "
+                        + " product_qty"
+                        + ",conversion"
+                        + ",serial_no"
+                        + " from inventory_barcodes where "
+                        + " main_barcode='" + to.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "'"
+                        + " ";
+                Statement stmt11 = conn.createStatement();
+                ResultSet rs11 = stmt11.executeQuery(s11);
+                double product_qty2 = 0;
+                double conversion2 = 0;
+                String serial_no2 = "";
+                while (rs11.next()) {
+                    product_qty2 = rs11.getDouble(1);
+                    conversion2 = rs11.getDouble(2);
+                    serial_no2 = rs11.getString(3);
+                }
+
+                double new_qty = product_qty2 - (to.conversion * to.product_qty);
+                String s4 = "update inventory_barcodes set "
+                        + " product_qty='" + new_qty + "' "
+                        + " where main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "' "
+                        + "";
+
+                stmt.addBatch(s4);
+
+//                Inventory_barcodes.to_inventory_barcodes tt1 = Inventory_barcodes.ret_to(to.barcode, to.barcodes, to_stock_transfers.from_location_id);
+                String s10 = "select "
+                        + " product_qty"
+                        + ",conversion"
+                        + ",serial_no"
+                        + " from inventory_barcodes where "
+                        + " main_barcode='" + to.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "'"
+                        + " ";
+                Statement stmt10 = conn.createStatement();
+                ResultSet rs10 = stmt10.executeQuery(s10);
+                double product_qty = 0;
+                double conversion = 0;
+                String serial_no = "";
+                while (rs10.next()) {
+                    product_qty = rs10.getDouble(1);
+                    conversion = rs10.getDouble(2);
+                    serial_no = rs10.getString(3);
+                }
+
+                double new_qty1 = product_qty + (to.conversion * to.product_qty);
+                String s41 = "update inventory_barcodes set "
+                        + " product_qty='" + new_qty1 + "' "
+                        + " where  main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "' "
+                        + "";
+
+                stmt.addBatch(s41);
+
+            }
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Stock_transfers_items.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);

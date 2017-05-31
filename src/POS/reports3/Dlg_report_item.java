@@ -20,6 +20,8 @@ import POS.category.Dlg_update_model;
 import POS.category.Dlg_update_sub_classification;
 import POS.inventory.Inventory;
 import POS.inventory.Inventory.to_inventory;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -516,6 +518,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
         jCheckBox6.setText("All / with quantity");
 
         jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1149,7 +1152,29 @@ public class Dlg_report_item extends javax.swing.JDialog {
     }
 
     public void do_pass(int view) {
-        view_only = view;
+        view_only = 0;
+        String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
+        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+        for (S1_user_previleges.to_user_previleges to : datas) {
+            if (to.previledge.equalsIgnoreCase("Stock Take Report")) {
+
+                view_only = 1;
+            }
+        }
+
+        init_tbl_inventory_barcodes();
+        tbl_inventory.updateUI();
+        jScrollPane1.updateUI();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                jTextField1.grabFocus();
+            }
+        });
+    }
+
+    public void do_pass2() {
+        view_only = 0;
 
         init_tbl_inventory_barcodes();
         tbl_inventory.updateUI();

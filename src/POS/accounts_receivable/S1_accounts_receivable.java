@@ -351,7 +351,7 @@ public class S1_accounts_receivable {
 
 //            Customers.to_customers cus = S1_accounts_receivable.ret_customer_balance(to_accounts_receivable.customer_id);
             String s10 = "select "
-                    + "balance"
+                    + " balance"
                     + " from  customers where "
                     + " customer_no ='" + to_accounts_receivable.customer_id + "' "
                     + " ";

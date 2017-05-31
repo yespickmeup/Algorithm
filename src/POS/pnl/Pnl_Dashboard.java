@@ -4,8 +4,7 @@
  */
 package POS.pnl;
 
-import POS.zbak_accounts_payable.Dlg_accounts_payable;
-
+import POS.accounts_payable.Dlg_accounts_payable;
 import POS.accounts_receivable.Dlg_ar_encoding;
 import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
@@ -2411,13 +2410,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void rpt_stock_status() {
         Dlg_report_item dtc = new Dlg_report_item();
-        dtc.do_pass(0);
+        dtc.do_pass(stock_take_view_only);
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status Report");
     }
 
     private void rpt_stock_status2() {
         Dlg_report_item dtc = new Dlg_report_item();
-        dtc.do_pass(1);
+        dtc.do_pass2();
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Take (No Cost)");
     }
 
@@ -2532,10 +2531,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
     }
+
     private void t_returns_to_supplier() {
         Dlg_return_to_supplier dtc = new Dlg_return_to_supplier();
-
-        MyFrame.set(dtc.getSurface(), jPanel1, "Return/s to Supplier");
+        MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
     }
 
     private void t_conversions() {
@@ -3080,7 +3079,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
                 }
                 if (data.stmt.equals("Return/s to Supplier")) {
-                   t_returns_to_supplier();
+                    t_returns_to_supplier();
 
                 }
                 if (data.stmt.equals("Accounts Payable")) {
@@ -3252,11 +3251,14 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Item Ledger")) {
                     rpt_stock_ledger();
                 }
-                if (data.stmt.equals("Stock Take")) {
-                    rpt_stock_status();
-                }
+
                 if (data.stmt.equals("Stock Take (No Cost)")) {
+
                     rpt_stock_status2();
+                }
+                if (data.stmt.equals("Stock Take")) {
+                    stock_take_view_only = 0;
+                    rpt_stock_status();
                 }
                 if (data.stmt.equals("Inventory Count")) {
                     rpt_inventory_count();
@@ -3296,6 +3298,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         nd.setLocation(point.x - 125, point.y + 37);
         nd.setVisible(true);
     }
+
+    int stock_take_view_only = 1;
 
     private void logout1() {
         Window p = (Window) this;

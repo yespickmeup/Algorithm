@@ -402,7 +402,7 @@ public class Dlg_report_item_print_preview extends javax.swing.JDialog {
             }
         });
         t.start();
-        if (view_only == 0) {
+        if (view_only == 1) {
             jProgressBar2.setString("Loading...Please wait...");
             jProgressBar2.setIndeterminate(true);
             Thread t2 = new Thread(new Runnable() {

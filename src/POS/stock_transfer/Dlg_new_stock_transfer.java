@@ -1736,6 +1736,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("environment", "development");
         init_key();
         focus();
         init_tbl_stock_transfers();
@@ -2756,7 +2758,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     datas.add(rpt);
                 }
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-                String date = DateType.month_date.format(new Date());
+                String date = DateType.convert_slash_datetime2(to.date_added);
                 String printed_by = "Administrator";
                 String transaction_no = to.transaction_no;
                 String from_branch = to.from_branch;
@@ -2963,15 +2965,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     }
 
     private void delete_transfer() {
+
         int row = tbl_stock_transfers.getSelectedRow();
         if (row < 0) {
             return;
         }
         final to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));
-        if (to.status == 1) {
-            Alert.set(0, "Cannot delete finalized transaction!");
-            return;
+        final String environment = System.getProperty("environment", "production");
+        if (environment.equalsIgnoreCase("production")) {
+            if (to.status == 1) {
+                Alert.set(0, "Cannot delete finalized transaction!");
+                return;
+            }
         }
+
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -2979,8 +2986,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                Stock_transfers.delete_stock_transfers(to);
+                 List<Stock_transfers_items.to_stock_transfers_items> items = tbl_stock_transfers_items_ALM;
+                if (environment.equalsIgnoreCase("development") && to.status == 1) {
+                    Stock_transfers.delete_stock_transfers2(to,items);
+                }
+                if (to.status == 1 && environment.equalsIgnoreCase("production")) {
+                    Alert.set(0, "Receipt-Status [Finalized]!");
+                    return;
+                }
+                if (to.status == 0) {
+                    Stock_transfers.delete_stock_transfers(to);
+                }
+
                 data_cols();
+                Alert.set(3, "");
                 tbl_stock_transfers_items_ALM.clear();
                 tbl_stock_transfers_items_M.fireTableDataChanged();
                 tf_remarks.setText("");

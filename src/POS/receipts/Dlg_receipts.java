@@ -2050,7 +2050,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("environment", "development");
 //        System.setProperty("pool_host", "192.168.1.51");
         tf_search.grabFocus();
         set_default_branch();
@@ -2204,7 +2205,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void init_po_no() {
         String search = tf_reference_no.getText();
-        String where = " where puchase_order_no like '%" + search + "%' and status=2";
+        String where = " where puchase_order_no like '%" + search + "%' and status=1";
         List<Purchase_order.to_purchase_orders> datas = Purchase_order.ret_data(where);
         Object[][] obj = new Object[datas.size()][6];
         int i = 0;
@@ -3601,10 +3602,14 @@ public class Dlg_receipts extends javax.swing.JDialog {
             return;
         }
         final to_receipts to = (to_receipts) tbl_receipts_ALM.get(tbl_receipts.convertRowIndexToModel(row));
-        if (to.status == 1) {
-            Alert.set(0, "Cannot delete finalized transaction!");
-            return;
+        final String environment = System.getProperty("environment", "production");
+        if (environment.equalsIgnoreCase("production")) {
+            if (to.status == 1) {
+                Alert.set(0, "Cannot delete finalized transaction!");
+                return;
+            }
         }
+
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -3613,12 +3618,18 @@ public class Dlg_receipts extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
+                List<S1_receipt_orders.to_receipt_items> items = tbl_receipt_items_ALM;
+                if (environment.equalsIgnoreCase("development") && to.status == 1) {
+                    Receipts.delete_receipts2(to, items);
+                }
 
-                if (to.status == 1) {
+                if (to.status == 1 && environment.equalsIgnoreCase("production")) {
                     Alert.set(0, "Receipt-Status [Finalized]!");
                     return;
                 }
-                Receipts.delete_receipts(to);
+                if (to.status == 0) {
+                    Receipts.delete_receipts(to);
+                }
                 data_cols();
                 tbl_receipt_items_ALM.clear();
                 tbl_receipt_items_M.fireTableDataChanged();

@@ -512,6 +512,62 @@ public class Receipts {
         }
     }
 
+    public static void delete_receipts2(to_receipts to_receipts, List<S1_receipt_orders.to_receipt_items> items) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "delete from  receipts where "
+                    + " id ='" + to_receipts.id + "' "
+                    + " ";
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = "delete from receipt_items where "
+                    + " receipt_no='" + to_receipts.receipt_no + "'";
+
+            stmt.addBatch(s2);
+
+            for (S1_receipt_orders.to_receipt_items to_receipt_items : items) {
+                String s10 = "select "
+                        + " product_qty"
+                        + ",conversion"
+                        + ",serial_no"
+                        + " from inventory_barcodes where "
+                        + " main_barcode='" + to_receipt_items.main_barcode + "' and location_id='" + to_receipt_items.location_id + "'"
+                        + " ";
+                Statement stmt10 = conn.createStatement();
+                ResultSet rs10 = stmt10.executeQuery(s10);
+                double product_qty = 0;
+                double conversion = 0;
+                String serial_no = "";
+                while (rs10.next()) {
+                    product_qty = rs10.getDouble(1);
+                    conversion = rs10.getDouble(2);
+                    serial_no = rs10.getString(3);
+                }
+                
+                double new_qty = product_qty - (to_receipt_items.conversion * to_receipt_items.qty);
+
+                String s4 = "update inventory_barcodes set "
+                        + " product_qty='" + new_qty + "'"
+                        + " where  main_barcode= '" + to_receipt_items.main_barcode + "' and location_id='" + to_receipt_items.branch_id + "' "
+                        + "";
+                stmt.addBatch(s4);
+
+            }
+
+            stmt.executeBatch();
+            conn.commit();
+
+            Lg.s(S1_receipt_items.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static List<to_receipts> ret_data(String search) {
         List<to_receipts> datas = new ArrayList();
 

@@ -20,8 +20,6 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  *
  * @author Guinness
  */
-
-
 public class Accounts_payable_payments {
 
     public static class to_accounts_payable_payments {
@@ -99,9 +97,10 @@ public class Accounts_payable_payments {
         }
     }
 
-    public static void add_data(to_accounts_payable_payments to_accounts_payable_payments) {
+    public static void add_data(to_accounts_payable_payments to_accounts_payable_payments, Accounts_payable.to_accounts_payable to) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "insert into accounts_payable_payments("
                     + "customer_id"
                     + ",customer_name"
@@ -209,7 +208,49 @@ public class Accounts_payable_payments {
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            String s2 = "select "
+                    + " balance"
+                    + " from  suppliers  "
+                    + " where customer_no='" + to_accounts_payable_payments.customer_id + "' ";
+
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs = stmt2.executeQuery(s2);
+            double balance = 0;
+            if (rs.next()) {
+                balance = rs.getDouble(1);
+            }
+
+            double new_balance = balance - ((to_accounts_payable_payments.amount + to_accounts_payable_payments.discount_amount) + to_accounts_payable_payments.discount_amount);
+
+            String s3 = "update  suppliers set "
+                    + " balance= :balance"
+                    + " where "
+                    + " customer_no='" + to_accounts_payable_payments.customer_id + "' "
+                    + " ";
+
+            s3 = SqlStringUtil.parse(s3).
+                    setNumber("balance", new_balance).ok();
+
+            stmt.addBatch(s3);
+
+            double ap_paid = to.paid + ((to_accounts_payable_payments.amount + to_accounts_payable_payments.check_amount) + to_accounts_payable_payments.discount_amount);
+
+            String s4 = "update accounts_payable set "
+                    + " paid= :paid "
+                    + " where id='" + to.id + "' "
+                    + " ";
+
+            s4 = SqlStringUtil.parse(s4)
+                    .setNumber("paid", ap_paid)
+                    .ok();
+
+            stmt.addBatch(s4);
+
+            stmt.executeBatch();
+            conn.commit();
+
             Lg.s(Accounts_payable_payments.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -218,84 +259,85 @@ public class Accounts_payable_payments {
         }
     }
 
-    public static void update_data(to_accounts_payable_payments to_accounts_payable_payments) {
+    public static void update_data(to_accounts_payable_payments payment_previous, to_accounts_payable_payments payment_new, Accounts_payable.to_accounts_payable to) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "update accounts_payable_payments set "
-                    + "customer_id= :customer_id "
-                    + ",customer_name= :customer_name "
-                    + ",ap_no= :ap_no "
-                    + ",date_added= :date_added "
-                    + ",user_name= :user_name "
-                    + ",amount= :amount "
+                    + " amount= :amount "
                     + ",discount_amount= :discount_amount "
                     + ",discount_rate= :discount_rate "
                     + ",discount= :discount "
-                    + ",status= :status "
-                    + ",term= :term "
-                    + ",date_applied= :date_applied "
-                    + ",paid= :paid "
                     + ",date_paid= :date_paid "
                     + ",remarks= :remarks "
-                    + ",type= :type "
-                    + ",or_no= :or_no "
-                    + ",prev_balance= :prev_balance "
                     + ",reference_no= :reference_no "
                     + ",check_amount= :check_amount "
                     + ",check_holder= :check_holder "
                     + ",check_bank= :check_bank "
                     + ",check_no= :check_no "
                     + ",check_date= :check_date "
-                    + ",user_id= :user_id "
-                    + ",user_screen_name= :user_screen_name "
-                    + ",wtax= :wtax "
-                    + ",tax_rate= :tax_rate "
-                    + ",tax_amount= :tax_amount "
-                    + ",branch= :branch "
-                    + ",branch_id= :branch_id "
-                    + ",location= :location "
-                    + ",location_id= :location_id "
-                    + " where id='" + to_accounts_payable_payments.id + "' "
+                    + " where id='" + payment_new.id + "' "
                     + " ";
 
             s0 = SqlStringUtil.parse(s0)
-                    .setString("customer_id", to_accounts_payable_payments.customer_id)
-                    .setString("customer_name", to_accounts_payable_payments.customer_name)
-                    .setString("ap_no", to_accounts_payable_payments.ap_no)
-                    .setString("date_added", to_accounts_payable_payments.date_added)
-                    .setString("user_name", to_accounts_payable_payments.user_name)
-                    .setNumber("amount", to_accounts_payable_payments.amount)
-                    .setNumber("discount_amount", to_accounts_payable_payments.discount_amount)
-                    .setNumber("discount_rate", to_accounts_payable_payments.discount_rate)
-                    .setString("discount", to_accounts_payable_payments.discount)
-                    .setNumber("status", to_accounts_payable_payments.status)
-                    .setNumber("term", to_accounts_payable_payments.term)
-                    .setString("date_applied", to_accounts_payable_payments.date_applied)
-                    .setNumber("paid", to_accounts_payable_payments.paid)
-                    .setString("date_paid", to_accounts_payable_payments.date_paid)
-                    .setString("remarks", to_accounts_payable_payments.remarks)
-                    .setString("type", to_accounts_payable_payments.type)
-                    .setString("or_no", to_accounts_payable_payments.or_no)
-                    .setNumber("prev_balance", to_accounts_payable_payments.prev_balance)
-                    .setString("reference_no", to_accounts_payable_payments.reference_no)
-                    .setNumber("check_amount", to_accounts_payable_payments.check_amount)
-                    .setString("check_holder", to_accounts_payable_payments.check_holder)
-                    .setString("check_bank", to_accounts_payable_payments.check_bank)
-                    .setString("check_no", to_accounts_payable_payments.check_no)
-                    .setString("check_date", to_accounts_payable_payments.check_date)
-                    .setString("user_id", to_accounts_payable_payments.user_id)
-                    .setString("user_screen_name", to_accounts_payable_payments.user_screen_name)
-                    .setNumber("wtax", to_accounts_payable_payments.wtax)
-                    .setNumber("tax_rate", to_accounts_payable_payments.tax_rate)
-                    .setNumber("tax_amount", to_accounts_payable_payments.tax_amount)
-                    .setString("branch", to_accounts_payable_payments.branch)
-                    .setString("branch_id", to_accounts_payable_payments.branch_id)
-                    .setString("location", to_accounts_payable_payments.location)
-                    .setString("location_id", to_accounts_payable_payments.location_id)
+                    .setNumber("amount", payment_new.amount)
+                    .setNumber("discount_amount", payment_new.discount_amount)
+                    .setNumber("discount_rate", payment_new.discount_rate)
+                    .setString("discount", payment_new.discount)
+                    .setString("date_paid", payment_new.date_paid)
+                    .setString("remarks", payment_new.remarks)
+                    .setString("reference_no", payment_new.reference_no)
+                    .setNumber("check_amount", payment_new.check_amount)
+                    .setString("check_holder", payment_new.check_holder)
+                    .setString("check_bank", payment_new.check_bank)
+                    .setString("check_no", payment_new.check_no)
+                    .setString("check_date", payment_new.check_date)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            double ap_new_balance = payment_previous.amount + payment_previous.check_amount + payment_previous.discount_amount;
+
+            ap_new_balance = (to.paid - ap_new_balance) + (payment_new.amount + payment_new.check_amount + payment_new.discount_amount);
+
+            String s4 = "update accounts_payable set "
+                    + " paid= :paid "
+                    + " where id='" + to.id + "' "
+                    + " ";
+
+            s4 = SqlStringUtil.parse(s4)
+                    .setNumber("paid", ap_new_balance)
+                    .ok();
+            stmt.addBatch(s4);
+
+            String s2 = "select "
+                    + " balance"
+                    + " from  suppliers  "
+                    + " where customer_no='" + to.customer_id + "' ";
+
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs = stmt2.executeQuery(s2);
+            double balance = 0;
+            if (rs.next()) {
+                balance = rs.getDouble(1);
+            }
+
+            double new_balance = (balance + (payment_previous.amount + payment_previous.check_amount + payment_previous.discount_amount)) - (payment_new.amount + payment_new.check_amount + payment_new.discount_amount);
+
+            String s3 = "update  suppliers set "
+                    + " balance= :balance"
+                    + " where "
+                    + " customer_no='" + to.customer_id + "' "
+                    + " ";
+
+            s3 = SqlStringUtil.parse(s3).
+                    setNumber("balance", new_balance).ok();
+
+            stmt.addBatch(s3);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Accounts_payable_payments.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -304,15 +346,58 @@ public class Accounts_payable_payments {
         }
     }
 
-    public static void delete_data(to_accounts_payable_payments to_accounts_payable_payments) {
+    public static void delete_data(to_accounts_payable_payments to_accounts_payable_payments, Accounts_payable.to_accounts_payable to) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "delete from accounts_payable_payments  "
                     + " where id='" + to_accounts_payable_payments.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            stmt.addBatch(s0);
+
+            double ap_new_balance = to_accounts_payable_payments.amount + to_accounts_payable_payments.check_amount + to_accounts_payable_payments.discount_amount;
+
+            ap_new_balance = (to.paid - ap_new_balance);
+
+            String s4 = "update accounts_payable set "
+                    + " paid= :paid "
+                    + " where id='" + to.id + "' "
+                    + " ";
+
+            s4 = SqlStringUtil.parse(s4)
+                    .setNumber("paid", ap_new_balance)
+                    .ok();
+            stmt.addBatch(s4);
+
+            String s2 = "select "
+                    + " balance"
+                    + " from  suppliers  "
+                    + " where customer_no='" + to.customer_id + "' ";
+
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs = stmt2.executeQuery(s2);
+            double balance = 0;
+            if (rs.next()) {
+                balance = rs.getDouble(1);
+            }
+
+            double new_balance = (balance + (to_accounts_payable_payments.amount + to_accounts_payable_payments.check_amount + to_accounts_payable_payments.discount_amount));
+
+            String s3 = "update  suppliers set "
+                    + " balance= :balance"
+                    + " where "
+                    + " customer_no='" + to.customer_id + "' "
+                    + " ";
+
+            s3 = SqlStringUtil.parse(s3).
+                    setNumber("balance", new_balance).ok();
+            
+            stmt.addBatch(s3);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Accounts_payable_payments.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
