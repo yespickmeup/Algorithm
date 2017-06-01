@@ -28,6 +28,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.*;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -864,9 +865,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jXPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_gross, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_gross, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -874,8 +875,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_net, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
+                        .addComponent(lbl_net, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -938,7 +939,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
-                .addGap(5, 5, 5))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1107,7 +1108,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 607, Short.MAX_VALUE)
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1202,7 +1203,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1236,7 +1237,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGap(0, 549, Short.MAX_VALUE)
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -1580,7 +1581,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -1642,7 +1643,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGap(0, 572, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -1668,7 +1669,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGap(0, 572, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -2050,7 +2051,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("environment", "development");
 //        System.setProperty("pool_host", "192.168.1.51");
         tf_search.grabFocus();
@@ -2284,8 +2285,16 @@ public class Dlg_receipts extends javax.swing.JDialog {
         for (to_receipt_items to : acc) {
             total += to.total;
         }
-        lbl_gross.setText(FitIn.fmt_wc_0(total));
-        lbl_net.setText(FitIn.fmt_wc_0(total - discount));
+
+        DecimalFormat df1 = new DecimalFormat("#,###,##0.00000000");
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+            lbl_gross.setText(df1.format(total));
+            lbl_net.setText(df1.format(total - discount));
+        } else {
+            lbl_gross.setText(FitIn.fmt_wc_0(total));
+            lbl_net.setText(FitIn.fmt_wc_0(total - discount));
+        }
     }
 
     private void focus() {
@@ -2482,9 +2491,16 @@ public class Dlg_receipts extends javax.swing.JDialog {
         @Override
         public Object getValueAt(int row, int col) {
             to_receipt_items tt = (to_receipt_items) getRow(row);
+            DecimalFormat df1 = new DecimalFormat("#.##");
             switch (col) {
                 case 0:
-                    return " " + FitIn.fmt_woc(tt.qty);
+                    String pool_db = System.getProperty("pool_db", "db_algorithm");
+                    if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                        return " " + df1.format(tt.qty);
+                    } else {
+                        return " " + FitIn.fmt_woc(tt.qty);
+                    }
+
                 case 1:
                     return " " + tt.main_barcode;
                 case 2:
@@ -3572,8 +3588,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
         for (to_receipt_items t : datas) {
             total += t.qty * t.cost;
         }
-        lbl_gross.setText(FitIn.fmt_wc_0(total));
-        lbl_net.setText(FitIn.fmt_wc_0(total - to.discount));
+        DecimalFormat df1 = new DecimalFormat("#,###,##0.00000000");
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+            lbl_gross.setText(df1.format(total));
+            lbl_net.setText(df1.format(total - to.discount));
+        } else {
+            lbl_gross.setText(FitIn.fmt_wc_0(total));
+            lbl_net.setText(FitIn.fmt_wc_0(total - to.discount));
+        }
         if (col == 6) {
             jTabbedPane1.setSelectedIndex(0);
             jButton1.setEnabled(false);
@@ -3796,6 +3819,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 Srpt_receipts rpt = new Srpt_receipts(transaction_no, transaction_type, supplier, receiving_location, reference_no, date_of_delivery, date_received, gross, discount, business_name, address, contact_no);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_receipts.jrxml";
+                String pool_db = System.getProperty("pool_db", "db_algorithm");
+                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                    jrxml = "rpt_receipts_cost_8_decimal.jrxml";
+                }
                 report_customers_aging(rpt, jrxml);
                 jProgressBar2.setString("Finished...");
                 jProgressBar2.setIndeterminate(false);
