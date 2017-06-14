@@ -679,7 +679,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 //        System.setProperty("pool_host", "192.168.1.51");
         set_default_branch();
         String where = "  ";
@@ -1084,7 +1084,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             + ",user_id"
                             + ",user_screen_name"
                             + " from encoding_inventory"
-                            + " " + where;
+                            + " " + wheree;
 
                     Statement stmt2 = conn.createStatement();
                     ResultSet rs2 = stmt2.executeQuery(s2);
@@ -2196,6 +2196,13 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         t.start();
     }
 
+    public static List<Srpt_item_ledger.field> ledger(){
+        List<Srpt_item_ledger.field> fields2=new ArrayList();
+        
+        
+        return fields2;
+    }
+    
     private void init_report2() {
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);

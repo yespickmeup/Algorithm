@@ -624,18 +624,28 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+
         init_key();
         hover();
         init_panel_layout();
         get_privelege();
 
+//        jButton3.setEnabled(true);
+//        jButton4.setEnabled(true);
+//        jButton9.setEnabled(true);
+//        jButton5.setEnabled(true);
+//        jButton6.setEnabled(true);
+//        jButton8.setEnabled(true);
+        
+        
         if (jButton3.isEnabled()) {
             init_sales_summary();
         }
-
         
         SwingUtilities.invokeLater(new Runnable() {
-            
+
             @Override
             public void run() {
                 init_cash_count();
@@ -677,8 +687,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
                 });
             }
         });
-        
-        
+
     }
 
     private void get_privelege() {

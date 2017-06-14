@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -606,7 +607,7 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void tf_costActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_costActionPerformed
-       ok1();
+        ok1();
     }//GEN-LAST:event_tf_costActionPerformed
     /**
      * @param args the command line arguments
@@ -684,7 +685,15 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
         lbl_qty.setText(FitIn.fmt_woc(product_qty));
         lbl_item_code.setText(my_barcode);
         tf_amount.setText(FitIn.fmt_woc(qty));
-        tf_cost.setText(FitIn.fmt_wc_0(cost));
+
+        DecimalFormat df1 = new DecimalFormat("#,###,##0.000000000");
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+            tf_cost.setText(df1.format(cost));
+        } else {
+            tf_cost.setText(FitIn.fmt_wc_0(cost));
+        }
+
         lbl_desc.setText(desc);
         jTextArea1.setText(serials);
         tf_amount.grabFocus();
@@ -748,7 +757,13 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
         if (qty != 0) {
             tf_amount.setText(FitIn.fmt_wc_0(qty));
         }
-        tf_cost.setText(FitIn.fmt_wc_0(cost));
+        DecimalFormat df1 = new DecimalFormat("#,###,##0.000000000");
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+            tf_cost.setText(df1.format(cost));
+        } else {
+            tf_cost.setText(FitIn.fmt_wc_0(cost));
+        }
         lbl_desc.setText(desc);
 //        lbl_unit.setText(unit);
         tf_amount.grabFocus();
@@ -972,8 +987,7 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
             }
         }
     }
-    
-    
+
     private void update_barcode() {
         List<to_receipt_barcodes> acc = tbl_receipt_barcodes_ALM;
         String barcodes = "";
@@ -1214,8 +1228,8 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
             S1_unit_of_measure.to_uom tt = (S1_unit_of_measure.to_uom) getRow(row);
             switch (col) {
                 case 0:
-                    String unit=tt.unit;
-                    unit=unit.replaceAll("#", "/");
+                    String unit = tt.unit;
+                    unit = unit.replaceAll("#", "/");
                     return " " + unit;
                 case 1:
                     return " " + FitIn.fmt_wc_0(tt.conversion);

@@ -10,6 +10,7 @@
     <parameter name="from_location" class="java.lang.String"/>
     <parameter name="to_branch" class="java.lang.String"/>
     <parameter name="to_location" class="java.lang.String"/>
+    <parameter name="status" class="java.lang.String"/>
     <field name="transaction_no" class="java.lang.String"/>
     <field name="date" class="java.lang.String"/>
     <field name="item_code" class="java.lang.String"/>
@@ -393,6 +394,22 @@
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{to_location}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="253" y="99" width="72" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <text><![CDATA[Status:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="c47bbe08-939d-4ccc-b071-2856cabff26b" x="325" y="99" width="155" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
             </textField>
         </band>
     </title>

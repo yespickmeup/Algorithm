@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="539" leftMargin="36" rightMargin="20" topMargin="0" bottomMargin="0" uuid="1bc8b7f9-d18f-47dc-97af-c8475889d90b">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<field name="category" class="java.lang.String"/>
-	<field name="name" class="java.lang.String"/>
-	<field name="credit" class="java.lang.String"/>
-	<field name="debit" class="java.lang.String"/>
-	<group name="category">
-		<groupExpression><![CDATA[$F{category}]]></groupExpression>
-		<groupHeader>
-			<band height="15">
-				<textField>
-					<reportElement uuid="063240b9-f716-4197-adcc-d2c0b3922a73" x="48" y="0" width="178" height="15"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="15" splitType="Stretch">
-			<textField>
-				<reportElement uuid="ecff438f-d476-4524-8ef9-cdd5e78de3b5" x="73" y="0" width="112" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ecff438f-d476-4524-8ef9-cdd5e78de3b5" x="185" y="0" width="75" height="15"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ecff438f-d476-4524-8ef9-cdd5e78de3b5" x="260" y="0" width="93" height="15"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band splitType="Stretch"/>
-	</summary>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <field name="category" class="java.lang.String"/>
+    <field name="name" class="java.lang.String"/>
+    <field name="credit" class="java.lang.String"/>
+    <field name="debit" class="java.lang.String"/>
+    <group name="category">
+        <groupExpression><![CDATA[$F{category}]]></groupExpression>
+        <groupHeader>
+            <band height="15">
+                <textField>
+                    <reportElement uuid="063240b9-f716-4197-adcc-d2c0b3922a73" x="48" y="0" width="450" height="15"/>
+                    <textElement/>
+                    <textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="1" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="15" splitType="Stretch">
+            <textField>
+                <reportElement uuid="ecff438f-d476-4524-8ef9-cdd5e78de3b5" x="73" y="0" width="257" height="15"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="ecff438f-d476-4524-8ef9-cdd5e78de3b5" x="330" y="0" width="75" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="ecff438f-d476-4524-8ef9-cdd5e78de3b5" x="405" y="0" width="93" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
 </jasperReport>

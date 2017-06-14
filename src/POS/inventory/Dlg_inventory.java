@@ -1780,6 +1780,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//         System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
 //        System.setProperty("pool_db", "db_algorithm");
         String environment = System.getProperty("environment", "development");

@@ -63,10 +63,11 @@ public class Srpt_sales_by_item {
         double discount;
         double amount;
         String sales_no;
+
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount,String sales_no) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -81,7 +82,7 @@ public class Srpt_sales_by_item {
             this.price = price;
             this.discount = discount;
             this.amount = amount;
-            this.sales_no=sales_no;
+            this.sales_no = sales_no;
         }
 
         public String getSales_no() {
@@ -91,7 +92,7 @@ public class Srpt_sales_by_item {
         public void setSales_no(String sales_no) {
             this.sales_no = sales_no;
         }
-        
+
         public String getItem_code() {
             return item_code;
         }
@@ -290,7 +291,7 @@ public class Srpt_sales_by_item {
                     + ",model_id"
                     + " from sale_items  "
                     + " " + where
-                    + " group by sales_no,item_code,barcode,unit,selling_price,discount_amount order by sales_no,id asc";
+                    + " group by sales_no,item_code,unit,selling_price,discount_amount order by sales_no,id asc";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -340,7 +341,7 @@ public class Srpt_sales_by_item {
 
                 String uom = unit;
                 String[] list = uom.split(",");
-              
+
                 int o = 0;
                 for (String s : list) {
                     int i = s.indexOf(":");
@@ -358,7 +359,7 @@ public class Srpt_sales_by_item {
 
                 double amount = (price * product_qty) - discount;
 
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount,sales_no);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no);
                 fields.add(field);
             }
 
@@ -370,4 +371,129 @@ public class Srpt_sales_by_item {
         }
     }
 
+    public static List<Srpt_sales_by_item.field> ret_data_group_by_code(String where) {
+        List<Srpt_sales_by_item.field> fields = new ArrayList();
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",sales_no"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",generic_name"
+                    + ",item_type"
+                    + ",supplier_name"
+                    + ",supplier_id"
+                    + ",serial_no"
+                    + ",sum(product_qty)"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",status"
+                    + ",is_vatable"
+                    + ",selling_type"
+                    + ",discount_name"
+                    + ",discount_rate"
+                    + ",discount_amount"
+                    + ",discount_customer_name"
+                    + ",discount_customer_id"
+                    + ",branch"
+                    + ",branch_code"
+                    + ",location"
+                    + ",location_id"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + " from sale_items  "
+                    + " " + where
+                    + " group by item_code,unit,selling_price,discount_amount order by description asc";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String sales_no = rs.getString(2);
+                String item_code = rs.getString(3);
+                String barcode = rs.getString(4);
+                String description = rs.getString(5);
+                String generic_name = rs.getString(6);
+                String item_type = rs.getString(7);
+                String supplier_name = rs.getString(8);
+                String supplier_id = rs.getString(9);
+                String serial_no = rs.getString(10);
+                double product_qty = rs.getDouble(11);
+                String unit = rs.getString(12);
+                double conversion = rs.getDouble(13);
+                double selling_price = rs.getDouble(14);
+                String date_added = rs.getString(15);
+                String user_id = rs.getString(16);
+                String user_screen_name = rs.getString(17);
+                int status = rs.getInt(18);
+                int is_vatable = rs.getInt(19);
+                int selling_type = rs.getInt(20);
+                String discount_name = rs.getString(21);
+                double discount_rate = rs.getDouble(22);
+                double discount_amount = rs.getDouble(23);
+                String discount_customer_name = rs.getString(24);
+                String discount_customer_id = rs.getString(25);
+                String branch = rs.getString(26);
+                String branch_code = rs.getString(27);
+                String location = rs.getString(28);
+                String location_id = rs.getString(29);
+                String category = rs.getString(30);
+                String category_id = rs.getString(31);
+                String classification = rs.getString(32);
+                String classification_id = rs.getString(33);
+                String sub_classification = rs.getString(34);
+                String sub_classification_id = rs.getString(35);
+                String brand = rs.getString(36);
+                String brand_id = rs.getString(37);
+                String model = rs.getString(38);
+                String model_id = rs.getString(39);
+                String supplier = supplier_name;
+                double price = selling_price;
+                double discount = discount_amount;
+
+                String uom = unit;
+                String[] list = uom.split(",");
+
+                int o = 0;
+                for (String s : list) {
+                    int i = s.indexOf(":");
+                    int ii = s.indexOf("/");
+                    int iii = s.indexOf("^");
+                    String uom1 = s.substring(1, i);
+                    double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                    product_qty = product_qty / conversion1;
+                    double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
+                    int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+                    uom1 = uom1.replaceAll("#", "/");
+                    unit = uom1;
+                    o++;
+                }
+
+                double amount = (price * product_qty) - discount;
+
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no);
+                fields.add(field);
+            }
+
+            return fields;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

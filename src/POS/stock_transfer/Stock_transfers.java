@@ -379,13 +379,13 @@ public class Stock_transfers {
     public static void delete_stock_transfers(to_stock_transfers to_stock_transfers) {
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "delete from stock_transfers where "
+            String s0 = "update stock_transfers set status=2 where "
                     + " id='" + to_stock_transfers.id + "'";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Stock_transfers.class, "Successfully Deleted");
 
-            String s2 = "delete from stock_transfers_items where "
+            String s2 = "update  stock_transfers_items set status=2 where "
                     + " stock_transfer_id ='" + to_stock_transfers.transaction_no + "' "
                     + " ";
 
@@ -403,12 +403,12 @@ public class Stock_transfers {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-            String s0 = "delete from stock_transfers where "
+            String s0 = "update stock_transfers set status=2 where "
                     + " id='" + to_stock_transfers.id + "'";
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 
-            String s2 = "delete from stock_transfers_items where "
+            String s2 = "update stock_transfers_items set status=2 where "
                     + " stock_transfer_id ='" + to_stock_transfers.transaction_no + "' "
                     + " ";
             stmt.addBatch(s2);

@@ -38,8 +38,8 @@ public class Srpt_transferred_items {
     public final String from_location;
     public final String to_branch;
     public final String to_location;
-
-    public Srpt_transferred_items(String business_name, String address, String date, String from_branch, String from_location, String to_branch, String to_location) {
+    public final String status;
+    public Srpt_transferred_items(String business_name, String address, String date, String from_branch, String from_location, String to_branch, String to_location,String status) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -48,6 +48,7 @@ public class Srpt_transferred_items {
         this.from_location = from_location;
         this.to_branch = to_branch;
         this.to_location = to_location;
+        this.status=status;
     }
 
     public static class field {
@@ -285,7 +286,7 @@ public class Srpt_transferred_items {
         String to_branch = "Dumaguete City";
         String to_location = "RMA";
 
-        Srpt_transferred_items rpt = new Srpt_transferred_items(business_name, address, date, from_branch, from_location, to_branch, to_location);
+        Srpt_transferred_items rpt = new Srpt_transferred_items(business_name, address, date, from_branch, from_location, to_branch, to_location,"");
         rpt.fields.addAll(fields);
         String jrxml = "rpt_transferred_items.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

@@ -18,6 +18,7 @@ import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import POS.util.Users;
@@ -320,7 +321,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -332,13 +333,13 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                         .addGap(524, 524, 524)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -888,6 +889,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 
         init_key();
@@ -1264,13 +1266,13 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
 //        }
         String date_added = "";
         try {
-            date_added = DateType.datetime.format(jDateChooser1.getDate());
+            date_added = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:01";
         } catch (Exception e) {
             Alert.set(0, "Select Date!");
             choose_replenishment();
             return;
         }
-        
+
         String user_name = Users.user_name;
         String screen_name = Users.screen_name;
         String sheet_no = tf_sheet_no.getText();
@@ -1293,30 +1295,50 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_encoding_inventory to = (to_encoding_inventory) tbl_encoding_inventory_ALM.
+        final to_encoding_inventory to = (to_encoding_inventory) tbl_encoding_inventory_ALM.
                 get(tbl_encoding_inventory.convertRowIndexToModel(row));
         if (to.status == 1) {
             Alert.set(0, "Cannot proceed, already finalized!");
             return;
         }
-        tf_item_code.setText(to.description);
-        tf_description.setText(to.item_code);
-        tf_qty.setText(FitIn.fmt_woc(to.qty));
-        tf_sheet_no.setText(to.sheet_no);
-        tf_counted_by.setText(to.counted_by);
-        tf_checked_by.setText(to.checked_by);
-        tf_cost.setText(FitIn.fmt_wc_0(to.cost));
-        tf_selling_price.setText(FitIn.fmt_wc_0(to.selling_price));
+        int col = tbl_encoding_inventory.getSelectedColumn();
+        if (col == 8) {
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
 
-        tf_qty_branch.setText(to.branch);
-        tf_search_branch_code.setText(to.branch_id);
-        tf_location.setText(to.location);
-        tf_location_id.setText(to.location_id);
-        try {
-            Date d = DateType.datetime.parse(to.date_added);
-            jDateChooser1.setDate(d);
-        } catch (ParseException ex) {
-            Logger.getLogger(Dlg_encode_inventory.class.getName()).log(Level.SEVERE, null, ex);
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    S1_finalize_encoding.edit_encoding_inventory2(to, 0);
+                    Alert.set(2, "");
+                    data_cols();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        } else {
+            tf_item_code.setText(to.description);
+            tf_description.setText(to.item_code);
+            tf_qty.setText(FitIn.fmt_woc(to.qty));
+            tf_sheet_no.setText(to.sheet_no);
+            tf_counted_by.setText(to.counted_by);
+            tf_checked_by.setText(to.checked_by);
+            tf_cost.setText(FitIn.fmt_wc_0(to.cost));
+            tf_selling_price.setText(FitIn.fmt_wc_0(to.selling_price));
+
+            tf_qty_branch.setText(to.branch);
+            tf_search_branch_code.setText(to.branch_id);
+            tf_location.setText(to.location);
+            tf_location_id.setText(to.location_id);
+            try {
+                Date d = DateType.datetime.parse(to.date_added);
+                jDateChooser1.setDate(d);
+            } catch (ParseException ex) {
+                Logger.getLogger(Dlg_encode_inventory.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -1343,7 +1365,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         double qty = FitIn.toDouble(tf_qty.getText());
         String date_added = "";
         try {
-            date_added = DateType.datetime.format(jDateChooser1.getDate());
+            date_added = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:01";
         } catch (Exception e) {
             Alert.set(0, "Select Date!");
             choose_replenishment();
@@ -1378,17 +1400,38 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_encoding_inventory to = (to_encoding_inventory) tbl_encoding_inventory_ALM.
+        final to_encoding_inventory to = (to_encoding_inventory) tbl_encoding_inventory_ALM.
                 get(tbl_encoding_inventory.convertRowIndexToModel(row));
-        if (to.status == 1) {
+        if (to.status == 1 && !jButton6.isEnabled()) {
             Alert.set(0, "Cannot proceed, already finalized!");
             return;
         }
-        Encoding_inventory.delete_encoding_inventory(to);
-        data_cols();
-        clear_encoding_inventory();
-        Alert.set(3, "");
-        tf_item_code.grabFocus();
+        if (to.status == 1 && jButton6.isEnabled()) {
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    Encoding_inventory.delete_encoding_inventory2(to);
+                    data_cols();
+                    clear_encoding_inventory();
+                    Alert.set(3, "");
+                    tf_item_code.grabFocus();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        } else {
+            Encoding_inventory.delete_encoding_inventory(to);
+            data_cols();
+            clear_encoding_inventory();
+            Alert.set(3, "");
+            tf_item_code.grabFocus();
+        }
+
     }
 
     private void prompt_sheet() {
@@ -1476,11 +1519,11 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     private void finalize_encoding() {
 
         Window p = (Window) this;
-        Dlg_confirm_finalize_encoding nd = Dlg_confirm_finalize_encoding.create(p, true);
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_finalize_encoding.Callback() {
+        nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
-            public void ok(CloseDialog closeDialog, final Dlg_confirm_finalize_encoding.OutputData data) {
+            public void ok(CloseDialog closeDialog, final Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
                 jProgressBar1.setString("Loading... Please wait...");
                 jProgressBar1.setIndeterminate(true);
@@ -1496,7 +1539,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                             return;
                         }
 
-                        S1_finalize_encoding.edit_encoding_inventory(datas, data.include_pricing);
+                        S1_finalize_encoding.edit_encoding_inventory(datas, 0);
                         jProgressBar1.setString("Finished");
                         jProgressBar1.setIndeterminate(false);
                         Alert.set(2, "");

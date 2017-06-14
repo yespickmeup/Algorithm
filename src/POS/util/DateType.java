@@ -24,6 +24,7 @@ public class DateType {
     public static SimpleDateFormat datetime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss aa");
     public static SimpleDateFormat time2 = new SimpleDateFormat("HH:mm aa");
+    public static SimpleDateFormat time4 = new SimpleDateFormat("HH:mm:ss");
     public static SimpleDateFormat sf1 = new SimpleDateFormat("EEE, MMM dd,yyyy");
     public static SimpleDateFormat d = new SimpleDateFormat("dd");
     public static SimpleDateFormat m = new SimpleDateFormat("MMMMMMMMMMM");
@@ -175,6 +176,7 @@ public class DateType {
         date = DateType.month_date.format(d);
         return date;
     }
+
     public static String convert_dash_date4(String datetime) {
         String date = "";
         Date d = new Date();
@@ -190,7 +192,7 @@ public class DateType {
         date = DateType.sf.format(d);
         return date;
     }
-    
+
     public static String convert_monthDate_sf(String datetime) {
         String date = "";
         Date d = new Date();

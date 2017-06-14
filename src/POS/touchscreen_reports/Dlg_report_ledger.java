@@ -670,6 +670,10 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_sales_ledger.jrxml";
+                String pool_db=System.getProperty("pool_db","db_smis");
+                if(pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")){
+                    jrxml = "rpt_sales_ledger_chickaloka.jrxml";
+                }
                 report_sales_items(rpt, jrxml);
 
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);

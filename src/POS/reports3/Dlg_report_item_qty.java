@@ -5,10 +5,8 @@
  */
 package POS.reports3;
 
-import POS.inventory.Inventory_barcodes;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.List;
 import java.util.logging.Level;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
@@ -359,7 +357,7 @@ public class Dlg_report_item_qty extends javax.swing.JDialog {
         init_key();
     }
 
-    public void do_pass(String branch, String location, String item_code, String barcode, String description, String location_id) {
+    public void do_pass(String branch, String location, String item_code, String barcode, String description, String location_id,double qty) {
         jTextField4.setText(branch);
         jTextField5.setText(location);
 
@@ -367,12 +365,12 @@ public class Dlg_report_item_qty extends javax.swing.JDialog {
         jTextField2.setText(barcode);
 
         jTextArea1.setText(description);
-        String where = " where main_barcode='" + item_code + "' and location_id='" + location_id + "' ";
-        List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where_barcode(where, location_id);
-        double qty = 0;
-        for (Inventory_barcodes.to_inventory_barcodes to : datas) {
-            qty += to.product_qty;
-        }
+//        String where = " where main_barcode='" + item_code + "' and location_id='" + location_id + "' ";
+//        List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where_barcode(where, location_id);
+//        double qty = 0;
+//        for (Inventory_barcodes.to_inventory_barcodes to : datas) {
+//            qty += to.product_qty;
+//        }
         jTextField3.setText(FitIn.fmt_woc((qty)));
     }
 

@@ -67,7 +67,9 @@ public class MyMain {
             System.setProperty("environment", prop.getProperty("environment", "development"));
             System.setProperty("auto_order", prop.getProperty("auto_order", "false"));
             System.setProperty("inventory_item_delete", prop.getProperty("inventory_item_delete", "false"));
-
+            System.setProperty("delete_receipts_finalized", prop.getProperty("delete_receipts_finalized", "false"));
+            System.setProperty("delete_stock_transfers_finalized", prop.getProperty("delete_stock_transfers_finalized", "false"));
+            
             System.out.println("OS: " + os);
             System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));

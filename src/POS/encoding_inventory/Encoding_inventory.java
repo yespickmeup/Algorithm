@@ -67,7 +67,7 @@ public class Encoding_inventory {
             this.user_id = user_id;
             this.user_screen_name = user_screen_name;
         }
-        
+
     }
 
     public static void add_encoding_inventory(to_encoding_inventory to_encoding_inventory) {
@@ -215,6 +215,58 @@ public class Encoding_inventory {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
+            Lg.s(Encoding_inventory.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void delete_encoding_inventory2(to_encoding_inventory to_encoding_inventory) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "delete from encoding_inventory where "
+                    + " id ='" + to_encoding_inventory.id + "' "
+                    + " ";
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            double my_qty = 0;
+            String unit = "";
+            double conversion = 0;
+            String s3 = "select"
+                    + " product_qty"
+                    + " ,unit"
+                    + " ,conversion"
+                    + " from inventory_barcodes where "
+                    + "  main_barcode ='" + to_encoding_inventory.item_code + "' "
+                    + " and location_id ='" + to_encoding_inventory.location_id + "' "
+                    + " ";
+            Statement stmt3 = conn.createStatement();
+            ResultSet rs3 = stmt3.executeQuery(s3);
+            if (rs3.next()) {
+                my_qty = rs3.getDouble(1);
+                unit = rs3.getString(2);
+                conversion = rs3.getDouble(3);
+            }
+
+            double new_qty = my_qty - to_encoding_inventory.qty;
+            String s2 = " update inventory_barcodes set "
+                    + " product_qty= :product_qty"
+                    + " where "
+                    + " main_barcode ='" + to_encoding_inventory.item_code + "' "
+                    + " and location_id='" + to_encoding_inventory.location_id + "'"
+                    + " ";
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("product_qty", new_qty)
+                    .ok();
+            stmt.addBatch(s2);
+            
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Encoding_inventory.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);

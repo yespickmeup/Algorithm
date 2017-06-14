@@ -6,6 +6,7 @@
 package POS.adjuster;
 
 import POS.util.Alert;
+import POS.util.DateType;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -16,7 +17,6 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
-import synsoftech.util.DateType;
 
 /**
  *
@@ -49,11 +49,12 @@ public class Dlg_adjuster_qty extends javax.swing.JDialog {
         public final int is_add;
         public final String remarks;
         public final String date;
-        public OutputData(double qty, int is_add, String remarks,String date) {
+
+        public OutputData(double qty, int is_add, String remarks, String date) {
             this.qty = qty;
             this.is_add = is_add;
             this.remarks = remarks;
-            this.date=date;
+            this.date = date;
         }
 
     }
@@ -430,9 +431,9 @@ public class Dlg_adjuster_qty extends javax.swing.JDialog {
         if (jCheckBox2.isSelected()) {
             is_add = 0;
         }
-        String date=DateType.datetime.format(jDateChooser1.getDate());
+        String date = DateType.sf.format(jDateChooser1.getDate()) + " " + DateType.time4.format(new Date());
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(qty, is_add, remarks,date));
+            callback.ok(new CloseDialog(this), new OutputData(qty, is_add, remarks, date));
         }
     }
 }

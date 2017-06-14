@@ -19,7 +19,6 @@ import POS.prepaid_payments.Prepaid_payments;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
-import POS.util.Alert;
 import POS.util.TableRenderer;
 import java.awt.BorderLayout;
 import java.awt.Window;
@@ -257,6 +256,24 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         pnl_report1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jButton5 = new Button.Success();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        tf_cashier2 = new Field.Combo();
+        jCheckBox9 = new javax.swing.JCheckBox();
+        jTextField5 = new Field.Combo();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField6 = new Field.Combo();
+        jButton6 = new Button.Search();
+        jCheckBox10 = new javax.swing.JCheckBox();
+        jCheckBox11 = new javax.swing.JCheckBox();
+        jCheckBox12 = new javax.swing.JCheckBox();
+        pnl_report2 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jButton7 = new Button.Success();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -718,6 +735,215 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Per Cashier", jPanel5);
 
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Date from:");
+
+        jDateChooser5.setDate(new Date());
+        jDateChooser5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Cashier:");
+
+        tf_cashier2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_cashier2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_cashier2MouseClicked(evt);
+            }
+        });
+        tf_cashier2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_cashier2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("All");
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField5MouseClicked(evt);
+            }
+        });
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Choose Branch:");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Choose Location:");
+
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField6.setFocusable(false);
+        jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField6MouseClicked(evt);
+            }
+        });
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/search19.png"))); // NOI18N
+        jButton6.setToolTipText("Search");
+        jButton6.setContentAreaFilled(false);
+        jButton6.setFocusable(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox10.setText("All");
+        jCheckBox10.setEnabled(false);
+
+        jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox11.setText("All");
+        jCheckBox11.setEnabled(false);
+
+        jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox12.setText("All");
+        jCheckBox12.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox9)
+                    .addComponent(jCheckBox12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_cashier2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox10)
+                    .addComponent(jCheckBox11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(jTextField6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox10))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox11)))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jDateChooser5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox12)))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox9))
+                            .addComponent(tf_cashier2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(15, 15, 15))
+        );
+
+        pnl_report2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnl_report2Layout = new javax.swing.GroupLayout(pnl_report2);
+        pnl_report2.setLayout(pnl_report2Layout);
+        pnl_report2Layout.setHorizontalGroup(
+            pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnl_report2Layout.setVerticalGroup(
+            pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 344, Short.MAX_VALUE)
+        );
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/printer67.png"))); // NOI18N
+        jButton7.setText("Print");
+        jButton7.setContentAreaFilled(false);
+        jButton7.setFocusable(false);
+        jButton7.setOpaque(true);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(619, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
+        );
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_report2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(pnl_report2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane1.addTab("Chickaloka", jPanel8);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -813,6 +1039,38 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void tf_cashier2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_cashier2MouseClicked
+
+    private void tf_cashier2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier2ActionPerformed
+        init_cashier(tf_cashier2);
+    }//GEN-LAST:event_tf_cashier2ActionPerformed
+
+    private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
+        init_branch_locations(jTextField5, jTextField6);
+    }//GEN-LAST:event_jTextField5MouseClicked
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        init_branch_locations(jTextField5, jTextField6);
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField6MouseClicked
+
+    }//GEN-LAST:event_jTextField6MouseClicked
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        init_report_sales_summary_chickaloka();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -823,7 +1081,12 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -831,40 +1094,55 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
+    private com.toedter.calendar.JDateChooser jDateChooser5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel pnl_report;
     private javax.swing.JPanel pnl_report1;
+    private javax.swing.JPanel pnl_report2;
     private javax.swing.JTextField tf_cashier;
     private javax.swing.JTextField tf_cashier1;
+    private javax.swing.JTextField tf_cashier2;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+
+        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+
         init_key();
         set_default_branch();
 
@@ -877,6 +1155,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         Field.Combo user2 = (Field.Combo) tf_cashier1;
         user2.setText(MyUser.getUser_screen_name());
         user2.setId(MyUser.getUser_id());
+
+        Field.Combo user3 = (Field.Combo) tf_cashier2;
+        user3.setText(MyUser.getUser_screen_name());
+        user3.setId(MyUser.getUser_id());
     }
 
     String my_branch = "";
@@ -907,9 +1189,15 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         Field.Combo br2 = (Field.Combo) jTextField3;
         lo2.setText(to.location);
         lo2.setId("" + to.id);
-
         br2.setText(to.branch);
         br2.setId("" + to.branch_id);
+
+        Field.Combo lo3 = (Field.Combo) jTextField6;
+        Field.Combo br3 = (Field.Combo) jTextField5;
+        lo3.setText(to.location);
+        lo3.setId("" + to.id);
+        br3.setText(to.branch);
+        br3.setId("" + to.branch_id);
 
     }
 
@@ -1175,6 +1463,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         my_gcs.add(gc);
                     }
                 }
+
                 cash_sales = cash_sales - cc_cash_sales;
                 cc_total = cash_sales;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
@@ -1240,9 +1529,18 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 coins_point_ten = .10 * count_coins_point_ten;
                 coins_point_zero_five = .05 * count_coins_point_zero_five;
 
-                String date = DateType.sf.format(new Date());
-                String where = " where Date(date_added)='" + date + "' and location_id='" + my_location_id + "' ";
+                String d_from = DateType.sf.format(jDateChooser1.getDate());
+                String d_to = DateType.sf.format(jDateChooser2.getDate());
+
+                String where = " where Date(date_added) between '" + d_from + "' and '" + d_to + "' ";
                 double cc_last_remittance = 0;
+                if (!jCheckBox2.isSelected() && !jCheckBox3.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "'";
+                }
+                if (jCheckBox2.isSelected() && !jCheckBox3.isSelected()) {
+                    where = where + " and branch_id='" + br.getId() + "'";
+                }
+
                 final List<S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances> datas = S1_cash_drawer_last_remittances.ret_data(where);
                 for (S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances remit : datas) {
                     cc_last_remittance += remit.amount;
@@ -1266,7 +1564,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     SUBREPORT_DIR = home + "/retail_res/rpt2/";
                 }
 
-                date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+                String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
                 if (jCheckBox4.isSelected()) {
                     date = "All";
                 }
@@ -1384,53 +1682,15 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     private void last_remittance() {
 
-        String date = DateType.sf.format(new Date());
-        String where = " where Date(date_added)='" + date + "' and location_id='" + my_location_id + "' ";
-        double amount = 0;
-        final List<S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances> datas = S1_cash_drawer_last_remittances.ret_data(where);
-        for (S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances remit : datas) {
-            amount += remit.amount;
-        }
         Window p = (Window) this;
         Dlg_last_remittance nd = Dlg_last_remittance.create(p, true);
         nd.setTitle("");
-        if (!datas.isEmpty()) {
-            nd.do_pass(amount);
-        }
+
         nd.setCallback(new Dlg_last_remittance.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_last_remittance.OutputData data) {
                 closeDialog.ok();
-                if (datas.isEmpty()) {
-                    int id = 0;
-                    String user_id = MyUser.getUser_id();
-                    String user_screen_name = MyUser.getUser_screen_name();
-                    String date_added = DateType.now();
-                    int status = 0;
-                    double amount = data.amount;
-                    String branch = my_branch;
-                    String branch_id = my_branch_id;
-                    String location = my_location;
-                    String location_id = my_location_id;
-                    S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances to = new S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances(id, user_id, user_screen_name, date_added, status, amount, branch, branch_id, location, location_id);
-                    S1_cash_drawer_last_remittances.add_data(to);
-                    Alert.set(1, "");
-                } else {
-                    S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances to1 = (S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances) datas.get(0);
-                    int id = to1.id;
-                    String user_id = to1.user_id;
-                    String user_screen_name = to1.user_screen_name;
-                    String date_added = to1.date_added;
-                    int status = 0;
-                    double amount = data.amount;
-                    String branch = to1.branch;
-                    String branch_id = to1.branch_id;
-                    String location = to1.location;
-                    String location_id = to1.location_id;
-                    S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances to = new S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances(id, user_id, user_screen_name, date_added, status, amount, branch, branch_id, location, location_id);
-                    S1_cash_drawer_last_remittances.update_data(to);
-                    Alert.set(2, "");
-                }
+
             }
         });
         nd.setLocationRelativeTo(this);
@@ -1556,4 +1816,220 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }
 
     //</editor-fold>
+    private void init_report_sales_summary_chickaloka() {
+        Button.Search search = (Button.Search) jButton6;
+        search.load();
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Field.Combo br = (Field.Combo) jTextField5;
+                Field.Combo lo = (Field.Combo) jTextField6;
+                Field.Combo f = (Field.Combo) tf_cashier2;
+                String date_from = DateType.sf.format(jDateChooser5.getDate());
+
+                String where = " where user_screen_name like '%" + "" + "%' ";
+                if (!jCheckBox12.isSelected()) {
+                    where = where + " and Date(date_added) = '" + date_from + "'  ";
+                }
+                if (!jCheckBox9.isSelected()) {
+                    where = where + " and user_id='" + f.getId() + "' ";
+                }
+                if (!jCheckBox10.isSelected() && !jCheckBox6.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
+                }
+                if (jCheckBox11.isSelected()) {
+                    where = where + " and branch_code='" + br.getId() + "' ";
+                }
+
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String address = System.getProperty("address", "Daro, Dumaguete City");
+                String date = DateType.slash.format(jDateChooser5.getDate()) ;
+                String branch = jTextField5.getText();
+                String location = jTextField6.getText();
+                if (jCheckBox11.isSelected() && !jCheckBox10.isSelected()) {
+                    location = "All";
+                }
+                if (jCheckBox10.isSelected()) {
+                    branch = "All";
+                    location = "All";
+                }
+                String printed_by = MyUser.getUser_screen_name();
+                String cashier = tf_cashier2.getText();
+                if (jCheckBox9.isSelected()) {
+                    cashier = "All";
+                }
+                double beggining_cash = 0;
+                double cash_sales = 0;
+                double operation_expenses = 0;
+                double net_sales = 0;
+                double cc_1000 = 0;
+                double cc_500 = 0;
+                double cc_200 = 0;
+                double cc_100 = 0;
+                double cc_50 = 0;
+                double cc_20 = 0;
+                double cc_10 = 0;
+                double cc_5 = 0;
+                double cc_1 = 0;
+                double cc_point_50 = 0;
+                double cc_point_25 = 0;
+                double cc_point_10 = 0;
+                double cc_point_05 = 0;
+                double cc_total = 0;
+                double cash_remitted = 0;
+                double overage_shortage = 0;
+                double cash_in_next_day = 0;
+                double cash_for_deposit = 0;
+//                System.out.println(where);
+                List<Srpt_end_of_day_summary_chickaloka.field> fields2 = Srpt_end_of_day_summary_chickaloka.ret_data_group_by_code(where);
+
+                String where_drawer = " where id<>0 ";
+                String where_sales2 = " where id<>0 "
+                        + "  and status='" + "0" + "' ";
+                String where_disbursements = " where id<>0 ";
+
+                if (!jCheckBox9.isSelected()) {
+                    where_drawer = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "'";
+                    where_sales2 = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
+                    where_disbursements = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "'";
+
+                }
+                if (!jCheckBox12.isSelected()) {
+                    where_drawer = where_drawer + "  and Date(time_in) = '" + date_from + "'  ";
+                    where_sales2 = where_sales2 + " and Date(date_added) = '" + date_from + "'  ";
+                    where_disbursements = where_disbursements + " and Date(disbursement_date) = '" + date_from + "'  ";
+                }
+                if (!jCheckBox10.isSelected() && !jCheckBox11.isSelected()) {
+                    where_drawer = where_drawer + " and location_id='" + lo.getId() + "' ";
+                    where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
+                    where_disbursements = where_disbursements + " and location_id='" + lo.getId() + "' ";
+                }
+                if (jCheckBox11.isSelected() && !jCheckBox11.isSelected()) {
+                    where_drawer = where_drawer + " and branch_id='" + br.getId() + "' ";
+                    where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
+                    where_disbursements = where_disbursements + " and branch_id='" + br.getId() + "' ";
+                }
+
+                List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
+                List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
+                List<S1_disbursements.to_disbursements> disbursements = S1_disbursements.ret_data(where_disbursements);
+
+                for (MySales.sales sale : my_sale) {
+                    cash_sales += (sale.amount_due);
+                }
+                for (CashDrawer.to_cash_drawer drawer : my_drawer) {
+                    beggining_cash += drawer.amount;
+                    cc_1000 += drawer.thousand;
+                    cc_500 += drawer.five_hundred;
+                    cc_200 += drawer.two_hundred;
+                    cc_100 += drawer.one_hundred;
+                    cc_50 += drawer.fifty;
+                    cc_20 += drawer.twenty;
+                    cc_10 += drawer.ten;
+                    cc_5 += drawer.five;
+                    cc_1 += drawer.one;
+                    cc_point_50 += drawer.point_five;
+                    cc_point_25 += drawer.point_two_five;
+                    cc_point_10 += drawer.point_ten;
+                    cc_point_05 += drawer.point_zero_five;
+                }
+                for (S1_disbursements.to_disbursements disburse : disbursements) {
+                    operation_expenses += disburse.amount;
+                }
+
+                cash_remitted = (cc_1000*1000) + (cc_500*500) + (cc_200*200) + (cc_100*100) + (cc_50*50)
+                        + (cc_20*20) + (cc_10*10) + (cc_5*5) + (cc_1*1) + (cc_point_50*.5) + (cc_point_25*.25)
+                        + (cc_point_10*.10) + (cc_point_05*.05);
+              
+                net_sales = (cash_sales + beggining_cash) - operation_expenses;
+
+                overage_shortage = cash_remitted - net_sales;
+
+                double cc_last_remittance = 0;
+                final List<S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances> datas = S1_cash_drawer_last_remittances.ret_data(where);
+                for (S1_cash_drawer_last_remittances.to_cash_drawer_last_remittances remit : datas) {
+                    cc_last_remittance += remit.amount;
+                }
+                cash_in_next_day = cash_remitted - cc_last_remittance;
+                cash_for_deposit = cc_last_remittance;
+                
+                
+                Srpt_end_of_day_summary_chickaloka rpt = new Srpt_end_of_day_summary_chickaloka(business_name, address, date, branch, location, cashier, beggining_cash, cash_sales, operation_expenses, net_sales, cc_1000, cc_500, cc_200, cc_100, cc_50, cc_20, cc_10, cc_5, cc_1, cc_point_50, cc_point_25, cc_point_10, cc_point_05, cc_total, cash_remitted, overage_shortage, cash_in_next_day, cash_for_deposit);
+                rpt.fields.addAll(fields2);
+                String jrxml = "rpt_end_of_day_summary_chickaloka.jrxml";
+                report_sales_ledger_chickaloka(rpt, jrxml);
+                InputStream is = Srpt_sales_summary_per_cashier.class.getResourceAsStream(jrxml);
+                try {
+                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                    jasperPrint2 = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+                } catch (JRException ex) {
+                    Logger.getLogger(Dlg_report_items.class.getName()).
+                            log(Level.SEVERE, null, ex);
+                }
+                Button.Search search = (Button.Search) jButton6;
+                search.finish();
+            }
+        });
+        t.start();
+
+    }
+
+    private void report_sales_ledger_chickaloka(final Srpt_end_of_day_summary_chickaloka to, String jrxml_name) {
+        pnl_report2.removeAll();
+        pnl_report2.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_expenses(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            pnl_report2.add(viewer);
+            pnl_report2.updateUI();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_expenses(Srpt_end_of_day_summary_chickaloka to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_chickaloka(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_chickaloka(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_end_of_day_summary_chickaloka.class.getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    JasperPrint jasperPrint3 = null;
+
+    private void print3() {
+        try {
+            if (jasperPrint3 != null) {
+                JasperPrintManager.printReport(jasperPrint3, false);
+            }
+
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+            throw new RuntimeException(e);
+        }
+    }
 }

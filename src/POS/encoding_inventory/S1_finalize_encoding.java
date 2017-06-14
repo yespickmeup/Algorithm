@@ -95,7 +95,9 @@ public class S1_finalize_encoding {
         try {
             System.out.println("Finalizing...");
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             for (to_encoding_inventory to_encoding_inventory : to_encoding_inventory1) {
+                PreparedStatement stmt = conn.prepareStatement("");
                 if (to_encoding_inventory.status == 0) {
 
                     String s0 = "update encoding_inventory set "
@@ -107,9 +109,8 @@ public class S1_finalize_encoding {
                     s0 = SqlStringUtil.parse(s0)
                             .setNumber("status", 1)
                             .ok();
-                    PreparedStatement stmt = conn.prepareStatement(s0);
-                    stmt.execute();
-                    Lg.s(Encoding_inventory.class, "Successfully Updated");
+
+                    stmt.addBatch(s0);
 
                     double my_qty = 0;
                     String unit = "";
@@ -148,7 +149,7 @@ public class S1_finalize_encoding {
                                 + " ,selling_price= :selling_price"
                                 + " ,cost= :cost"
                                 + " where "
-                                + "  main_barcode ='" + to_encoding_inventory.item_code + "' "
+                                + " main_barcode ='" + to_encoding_inventory.item_code + "' "
                                 + " and branch_code='" + to_encoding_inventory.branch_id + "'"
                                 + " ";
                         String units = "[" + "pc" + ":" + to_encoding_inventory.selling_price + "/" + conversion + "^1" + "]";
@@ -160,12 +161,96 @@ public class S1_finalize_encoding {
                                 .ok();
                     }
 
-                    System.out.println(s2);
-                    PreparedStatement stmt2 = conn.prepareStatement(s2);
-                    stmt2.execute();
-                    Lg.s(Inventory_barcodes.class, "Successfully Updated" + " : " + to_encoding_inventory.barcode + " : " + to_encoding_inventory.item_code + " : " + to_encoding_inventory.location_id);
+                    stmt.addBatch(s2);
+
                 }
+                stmt.executeBatch();
+                conn.commit();
+                Lg.s(Inventory_barcodes.class, "Successfully Updated" + " : " + to_encoding_inventory.barcode + " : " + to_encoding_inventory.item_code + " : " + to_encoding_inventory.location_id);
+
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void edit_encoding_inventory2(to_encoding_inventory to_encoding_inventory, int update_pricing) {
+        try {
+            System.out.println("Finalizing...");
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            PreparedStatement stmt = conn.prepareStatement("");
+
+            String s0 = "update encoding_inventory set "
+                    + " status= :status"
+                    + " where "
+                    + " id ='" + to_encoding_inventory.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("status", 1)
+                    .ok();
+
+            stmt.addBatch(s0);
+
+            double my_qty = 0;
+            String unit = "";
+            double conversion = 0;
+            String s3 = "select"
+                    + " product_qty"
+                    + " ,unit"
+                    + " ,conversion"
+                    + " from inventory_barcodes where "
+                    + " barcode ='" + to_encoding_inventory.barcode + "' "
+                    + " and main_barcode ='" + to_encoding_inventory.item_code + "' "
+                    + " and location_id ='" + to_encoding_inventory.location_id + "' "
+                    + " ";
+            Statement stmt3 = conn.createStatement();
+            ResultSet rs3 = stmt3.executeQuery(s3);
+            if (rs3.next()) {
+                my_qty = rs3.getDouble(1);
+                unit = rs3.getString(2);
+                conversion = rs3.getDouble(3);
+            }
+
+            double new_qty = my_qty + to_encoding_inventory.qty;
+            String s2 = " update inventory_barcodes set "
+                    + " product_qty= :product_qty"
+                    + " where "
+                    + " main_barcode ='" + to_encoding_inventory.item_code + "' "
+                    + " and location_id='" + to_encoding_inventory.location_id + "'"
+                    + " ";
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("product_qty", new_qty)
+                    .ok();
+            if (update_pricing == 1) {
+                s2 = " update inventory_barcodes set "
+                        + " unit= :unit"
+                        + " ,conversion= :conversion"
+                        + " ,selling_price= :selling_price"
+                        + " ,cost= :cost"
+                        + " where "
+                        + "  main_barcode ='" + to_encoding_inventory.item_code + "' "
+                        + " and branch_code='" + to_encoding_inventory.branch_id + "'"
+                        + " ";
+                String units = "[" + "pc" + ":" + to_encoding_inventory.selling_price + "/" + conversion + "^1" + "]";
+                s2 = SqlStringUtil.parse(s2)
+                        .setString("unit", units)
+                        .setNumber("conversion", conversion)
+                        .setNumber("selling_price", to_encoding_inventory.selling_price)
+                        .setNumber("cost", to_encoding_inventory.cost)
+                        .ok();
+
+            }
+
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Inventory_barcodes.class, "Successfully Updated" + " : " + to_encoding_inventory.barcode + " : " + to_encoding_inventory.item_code + " : " + to_encoding_inventory.location_id);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

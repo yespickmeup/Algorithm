@@ -11,7 +11,9 @@ import POS.delivery.Dlg_delivery_print_preview;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
 import POS.reports.Dlg_report_items;
+import POS.sales.Sales;
 import POS.users.MyUser;
+import POS.util.Alert;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -370,11 +372,11 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jCheckBox1)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                     .addComponent(jLabel2)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jCheckBox2)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -489,6 +491,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         init_tbl_sales(tbl_sales);
         tf_from_branch_id.setVisible(false);
@@ -509,8 +512,9 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
         tf_from_branch_id.setText("" + to.id);
 
     }
-    
+
     List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
+
     private void init_branch_locations2() {
         Object[][] obj = new Object[branch_location_list2.size()][2];
         int i = 0;
@@ -542,7 +546,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -563,7 +567,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
         tbl_sales.setModel(tbl_sales_M);
         tbl_sales.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_sales.setRowHeight(25);
-        int[] tbl_widths_sales = {150, 80, 100, 100, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_sales = {150, 80, 100, 100, 0, 0, 70, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_sales.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -579,6 +583,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_sales, 3);
         tbl_sales.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer1());
         tbl_sales.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer1());
+        tbl_sales.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer1());
     }
 
     public static void loadData_sales(List<MySales.sales> acc) {
@@ -589,7 +594,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
     public static class TblsalesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction #", "Date", "Customer", "Amount Due", "DR", "OR", "Status", "gross_amount", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax"
+            "Transaction #", "Date", "Customer", "Amount Due", "DR", "OR", "Status", "", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax"
         };
 
         public TblsalesModel(ListModel listmodel) {
@@ -632,7 +637,7 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
                         return " Void";
                     }
                 case 7:
-                    return tt.gross_amount;
+                    return "/POS/icon_payment/edit (1).png";
                 case 8:
                     return tt.amount_due;
                 case 9:
@@ -747,8 +752,9 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
             return;
         }
         int col = tbl_sales.getSelectedColumn();
+        MySales.sales sale = (MySales.sales) tbl_sales_ALM.get(row);
         if (col == 4) {
-            MySales.sales sale = (MySales.sales) tbl_sales_ALM.get(row);
+
             String where = "where sales_no='" + sale.sales_no + "' ";
             List<MySales_Items.items> datas = MySales_Items.ret_data(where);
 
@@ -771,6 +777,30 @@ public class Dlg_touchscreen_transactions_search extends javax.swing.JDialog {
         if (col == 5) {
             reprint_or();
         }
+        if (col == 7) {
+            edit_transaction(sale);
+        }
+    }
+
+    private void edit_transaction(final MySales.sales sale) {
+
+        Window p = (Window) this;
+        Dlg_touchscreen_transactions_search_edit nd = Dlg_touchscreen_transactions_search_edit.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(sale.customer_name);
+        nd.setCallback(new Dlg_touchscreen_transactions_search_edit.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_transactions_search_edit.OutputData data) {
+                closeDialog.ok();
+                Sales.update_customer_name(sale, data.customer_name);
+                data_cols();
+                Alert.set(2, "");
+                
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private void reprint_or() {

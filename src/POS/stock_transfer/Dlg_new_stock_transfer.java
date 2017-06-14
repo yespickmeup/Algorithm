@@ -302,6 +302,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_from_location2 = new Field.Combo();
         tf_from_branch2 = new Field.Combo();
         jCheckBox12 = new javax.swing.JCheckBox();
+        jCheckBox21 = new javax.swing.JCheckBox();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -331,6 +332,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_from_location4 = new Field.Combo();
         jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jLabel31 = new javax.swing.JLabel();
+        jCheckBox22 = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
@@ -766,6 +768,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_stock_transfersMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbl_stock_transfersMouseEntered(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbl_stock_transfersMousePressed(evt);
             }
@@ -942,6 +947,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox12.setText("All");
 
+        buttonGroup1.add(jCheckBox21);
+        jCheckBox21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox21.setText("Deleted");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -980,13 +989,15 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jCheckBox2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox4))
+                                .addComponent(jCheckBox4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jCheckBox1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -995,7 +1006,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 448, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1040,7 +1051,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox4)))
+                            .addComponent(jCheckBox4)
+                            .addComponent(jCheckBox21)))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1165,7 +1177,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         buttonGroup4.add(jCheckBox19);
         jCheckBox19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox19.setSelected(true);
         jCheckBox19.setText("Finalized");
 
         tf_from_location3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1231,6 +1242,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setText("Location:");
 
+        buttonGroup4.add(jCheckBox22);
+        jCheckBox22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox22.setSelected(true);
+        jCheckBox22.setText("Deleted");
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -1269,13 +1285,15 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addComponent(jCheckBox16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox19))
+                                .addComponent(jCheckBox19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addComponent(jCheckBox15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1329,7 +1347,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox16, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox17)
-                            .addComponent(jCheckBox19)))
+                            .addComponent(jCheckBox19)
+                            .addComponent(jCheckBox22)))
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1611,6 +1630,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_from_location4ActionPerformed
 
+    private void tbl_stock_transfersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_stock_transfersMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_stock_transfersMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -1639,6 +1662,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox19;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox20;
+    private javax.swing.JCheckBox jCheckBox21;
+    private javax.swing.JCheckBox jCheckBox22;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
@@ -1737,7 +1762,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private void myInit() {
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("environment", "development");
+//        System.setProperty("delete_stock_transfers_finalized", "true");
+
         init_key();
         focus();
         init_tbl_stock_transfers();
@@ -2164,6 +2190,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 case 4:
                     if (tt.status == 0) {
                         return " Posted";
+                    } else if (tt.status == 2) {
+                        return " Deleted";
                     } else {
                         return " Finalized";
                     }
@@ -2203,6 +2231,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         if (jCheckBox4.isSelected()) {
             where = where + " and status=1 ";
         }
+        if (jCheckBox21.isSelected()) {
+            where = where + " and status=2 ";
+        }
         Field.Combo f_br = (Field.Combo) tf_from_branch1;
         Field.Combo f_lo = (Field.Combo) tf_from_location1;
         Field.Combo t_br = (Field.Combo) tf_from_branch2;
@@ -2235,7 +2266,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         int id = 0;
         String transaction_no = Stock_transfers.increment_id(my_branch_id);
         String user_name = Users.user_name;
-        String date_added = DateType.datetime.format(jDateChooser5.getDate());
+
+        String date_added = DateType.sf.format(jDateChooser5.getDate());
+        String time = DateType.time4.format(new Date());
+        date_added = date_added + " " + time;
         String remarks = tf_remarks.getText();
         String to_branch = tf_to_branch.getText();
         String to_branch_id = tf_to_branch_id.getText();
@@ -2289,6 +2323,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             Alert.set(0, "Transaction Already Finalized!");
             return;
         }
+        if (to.status == 2) {
+            Alert.set(0, "Stock Transfer Status [Deleted]!");
+            return;
+        }
         int id = to.id;
         String transaction_no = to.transaction_no;
         String user_name = Users.user_name;
@@ -2338,7 +2376,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             Alert.set(0, "Cannot delete finalized transaction!");
             return;
         }
-
+        if (to.status == 2) {
+            Alert.set(0, "Stock Transfer Status [Deleted]!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -2517,6 +2558,14 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         return;
                     }
                     to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));
+                    if (to.status == 1) {
+                        Alert.set(0, "Stock Transfer Status [Finalized]!");
+                        return;
+                    }
+                    if (to.status == 2) {
+                        Alert.set(0, "Stock Transfer Status [Deleted]!");
+                        return;
+                    }
                     List<Stock_transfers_items.to_stock_transfers_items> datas = new ArrayList();
                     datas.add(field);
                     Stock_transfers_items.add_stock_transfers_items(datas, to.transaction_no, to);
@@ -2768,8 +2817,14 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
                 String address = System.getProperty("address", "");
                 String contact_no = System.getProperty("contact_no", "");
-
-                Srpt_stock_transfer rpt = new Srpt_stock_transfer(transaction_no, from_branch, from_location, to_branch, to_location, business_name, address, contact_no, date);
+                String status = "Posted";
+                if (to.status == 1) {
+                    status = "Finalized";
+                }
+                if (to.status == 2) {
+                    status = "Deleted";
+                }
+                Srpt_stock_transfer rpt = new Srpt_stock_transfer(transaction_no, from_branch, from_location, to_branch, to_location, business_name, address, contact_no, date, status);
                 rpt.fields.addAll(datas);
                 String jrxml = "rpt_stock_transfer.jrxml";
                 report_customers_aging(rpt, jrxml);
@@ -2853,6 +2908,14 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 tbl_stock_transfers_items_M.fireTableDataChanged();
             }
         } else {
+            if (to.status == 1) {
+                Alert.set(0, "Stock Transfer Status [Finalized]!");
+                return;
+            }
+            if (to.status == 2) {
+                Alert.set(0, "Stock Transfer Status [Deleted]!");
+                return;
+            }
             if (col == 6) {
                 Window p = (Window) this;
                 Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
@@ -2971,8 +3034,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             return;
         }
         final to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));
-        final String environment = System.getProperty("environment", "production");
-        if (environment.equalsIgnoreCase("production")) {
+        final String delete_stock_transfers_finalized = System.getProperty("delete_stock_transfers_finalized", "false");
+        if (to.status == 2) {
+            Alert.set(0, "Stock Transfer Status [Deleted]!");
+            return;
+        }
+        if (delete_stock_transfers_finalized.equalsIgnoreCase("false")) {
             if (to.status == 1) {
                 Alert.set(0, "Cannot delete finalized transaction!");
                 return;
@@ -2986,11 +3053,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                 List<Stock_transfers_items.to_stock_transfers_items> items = tbl_stock_transfers_items_ALM;
-                if (environment.equalsIgnoreCase("development") && to.status == 1) {
-                    Stock_transfers.delete_stock_transfers2(to,items);
+                List<Stock_transfers_items.to_stock_transfers_items> items = tbl_stock_transfers_items_ALM;
+                if (delete_stock_transfers_finalized.equalsIgnoreCase("true") && to.status == 1) {
+                    Stock_transfers.delete_stock_transfers2(to, items);
                 }
-                if (to.status == 1 && environment.equalsIgnoreCase("production")) {
+                if (to.status == 1 && delete_stock_transfers_finalized.equalsIgnoreCase("false")) {
                     Alert.set(0, "Receipt-Status [Finalized]!");
                     return;
                 }
@@ -3024,6 +3091,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         final to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));
         if (to.status == 1) {
             Alert.set(0, "Stock Transfer-Status [Finalized]");
+            return;
+        }
+        if (to.status == 2) {
+            Alert.set(0, "Stock Transfer-Status [Deleted]");
             return;
         }
         Window p = (Window) this;
@@ -3069,15 +3140,21 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 String date_to = DateType.sf.format(jDateChooser4.getDate());
 
                 String where = " where category like '%" + "" + "%' ";
-
+                String status = "All";
                 if (!jCheckBox15.isSelected()) {
                     where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (jCheckBox17.isSelected()) {
                     where = where + " and status=0 ";
+                    status = "Posted";
                 }
                 if (jCheckBox19.isSelected()) {
                     where = where + " and status=1 ";
+                    status = "Finalized";
+                }
+                if (jCheckBox22.isSelected()) {
+                    where = where + " and status=2 ";
+                    status = "Deleted";
                 }
                 Field.Combo f_br = (Field.Combo) tf_from_branch4;
                 Field.Combo f_lo = (Field.Combo) tf_from_location4;
@@ -3126,7 +3203,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     to_branch = "All";
                     to_location = "All";
                 }
-                Srpt_transferred_items rpt = new Srpt_transferred_items(business_name, address, date, from_branch, from_location, to_branch, to_location);
+                Srpt_transferred_items rpt = new Srpt_transferred_items(business_name, address, date, from_branch, from_location, to_branch, to_location, status);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_transferred_items.jrxml";
                 report_items_ordered(rpt, jrxml);

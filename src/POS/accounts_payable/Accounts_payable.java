@@ -352,7 +352,7 @@ public class Accounts_payable {
             if (rs.next()) {
                 balance = rs.getDouble(1);
             }
-            
+
             if (to_accounts_payable.paid > 0) {
                 double paid = (to_accounts_payable.amount - to_accounts_payable.discount_amount) - to_accounts_payable.paid;
                 balance = balance - paid;
@@ -467,11 +467,13 @@ public class Accounts_payable {
                 if (rs2.next()) {
                     id = rs2.getString(1);
                 }
+
             }
             if (id == null) {
                 id = branch_id + "|" + "000000000000";
             }
             id = ReceiptIncrementor.increment(id);
+            
             return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);

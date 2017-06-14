@@ -35,9 +35,9 @@ public class Srpt_receipts {
     public final String business_name;
     public final String address;
     public final String contact_no;
-
+    public final String status;
     public Srpt_receipts(String transaction_no, String transaction_type, String supplier, String receiving_location, String reference_no,
-             String date_of_delivery, String date_received, double gross, double discount, String business_name, String address, String contact_no) {
+             String date_of_delivery, String date_received, double gross, double discount, String business_name, String address, String contact_no,String status) {
         this.fields = new ArrayList();
         this.transaction_no = transaction_no;
         this.transaction_type = transaction_type;
@@ -51,7 +51,7 @@ public class Srpt_receipts {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
-
+        this.status=status;
     }
 
     public static class field {
@@ -163,7 +163,7 @@ public class Srpt_receipts {
         String address = System.getProperty("address", "Daro, Dumaguete City");
         String contact_no = System.getProperty("contact_no", "422-1234");
         Srpt_receipts rpt = new Srpt_receipts(transaction_no, transaction_type, supplier, receiving_location, reference_no,
-                 date_of_delivery, date_received, gross, discount, business_name, address, contact_no);
+                 date_of_delivery, date_received, gross, discount, business_name, address, contact_no,"");
         rpt.fields.addAll(fields);
         String jrxml = "rpt_receipts.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

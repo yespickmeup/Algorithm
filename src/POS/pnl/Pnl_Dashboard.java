@@ -57,12 +57,12 @@ import POS.reports2.Dlg_report_customers;
 import POS.reports2.Dlg_suppliers_report;
 import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
+import POS.reports3.Srpt_stock_take_captured;
 import POS.requisition_slips.Dlg_requisition_slip;
 import POS.returns.Dlg_return_from_customer;
 import POS.returns.Dlg_return_to_supplier;
 import POS.rma.Dlg_rma;
 import POS.scripts.Dlg_Local_branch_query_updates;
-import POS.scripts.Src_item_ledger;
 import POS.scripts.Dlg_Main_branch_query_updates;
 import POS.services.Dlg_services;
 import POS.settings.Dlg_settings;
@@ -1992,7 +1992,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void myInit() {
 
-        jButton1.setVisible(false);
+        String environment = System.getProperty("environment", "production");
+        if (environment.equalsIgnoreCase("development")) {
+            jButton1.setVisible(true);
+        } else {
+            jButton1.setVisible(false);
+        }
+
         key();
 //        Main.MyDB.setNames("db_algorithm");
         String business_name = System.getProperty("business_name", "Synapse Software Technologies");
@@ -2411,7 +2417,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void rpt_stock_status() {
         Dlg_report_item dtc = new Dlg_report_item();
         dtc.do_pass(stock_take_view_only);
-        MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status Report");
+        MyFrame.set(dtc.getSurface(), jPanel1, "Stock Take Report");
     }
 
     private void rpt_stock_status2() {
@@ -3028,7 +3034,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                Src_item_ledger.run();
+                Srpt_stock_take_captured.ret_data_adjust("");
                 jButton1.setEnabled(true);
                 jButton1.setText("Finished....");
             }

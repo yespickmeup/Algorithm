@@ -31,7 +31,7 @@ alter table suppliers add branch varchar(255) default '';
 alter table suppliers add branch_id varchar(255) default '' ;
 alter table suppliers add location_id varchar(255) default '';
 
-update suppliers set branch='Dumaguete';
+update suppliers set branch='Casili, Mandaue City, Cebu';
 update suppliers set branch_id='1';
 update suppliers set location='Selling Area';
 update suppliers set location_id='1';

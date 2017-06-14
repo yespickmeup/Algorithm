@@ -17,7 +17,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +34,6 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
-import synsoftech.util.DateType;
 
 /**
  *
@@ -525,7 +523,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         init_key();
     }
 
-    public void do_pass(List<Inventory_barcodes.to_inventory_barcodes> orders, double sale_discount1, double net_totals, MySales.sales sale, double cash_amount, double change_amount) {
+    public void do_pass(List<Inventory_barcodes.to_inventory_barcodes> orders, double sale_discount1, double net_totals, MySales.sales sale, double cash_amount, double change_amount,String sales_date) {
         String business_name = System.getProperty("business_name", "XYZ Marketing");
         String operated_by = "Operated by: " + System.getProperty("operated_by", "Juan dela Cruz");
         String address = System.getProperty("address", "Canlas Subdivision, Lower Bagacay, Dumaguete City, Negros Oriental");
@@ -539,7 +537,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         String accreditation_no = System.getProperty("accreditation_no", "0000000000");
         String business_type = System.getProperty("business_type", "VAT REG");
         String vat_percent = System.getProperty("vat_percent", "12");
-        String sales_date = "Date: " + POS.util.DateType.day_and_time.format(new Date());
+        
         String terminal_no = "Terminal No.: " + System.getProperty("terminal_no", "0001");
         String cashier = "Cashier: " + MyUser.getUser_screen_name();
         String customer_name = "" + sale.customer_name;
@@ -897,7 +895,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
                         + "\n903-215-145V\n";
                 String transaction_no = or.or_no;
                 transaction_no = transaction_no.replace("OR No.: ", "");
-                String date = DateType.convert_slash_datetime(DateType.now());
+                String date = or.sales_date;
                 String remarks = "";
                 String prepared_by = "";
                 String approved_by = "";

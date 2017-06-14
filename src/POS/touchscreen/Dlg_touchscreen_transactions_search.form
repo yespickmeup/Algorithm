@@ -92,11 +92,11 @@
                                                   <Group type="102" attributes="0">
                                                       <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jDateChooser1" min="-2" pref="111" max="-2" attributes="0"/>
+                                                      <Component id="jDateChooser1" min="-2" pref="120" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jDateChooser2" min="-2" pref="111" max="-2" attributes="0"/>
+                                                      <Component id="jDateChooser2" min="-2" pref="120" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" attributes="0">
                                                       <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>

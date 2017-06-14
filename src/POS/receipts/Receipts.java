@@ -4,8 +4,11 @@
  */
 package POS.receipts;
 
+import POS.accounts_payable.Accounts_payable;
 import POS.branch_locations.S1_branch_locations;
 import POS.inventory.Inventory;
+import POS.users.MyUser;
+import POS.util.DateType;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -491,7 +494,7 @@ public class Receipts {
     public static void delete_receipts(to_receipts to_receipts) {
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "delete from  receipts where "
+            String s0 = "update  receipts set status=2 where "
                     + " id ='" + to_receipts.id + "' "
                     + " ";
 
@@ -499,7 +502,7 @@ public class Receipts {
             stmt.execute();
             Lg.s(Receipts.class, "Successfully Deleted");
 
-            String s2 = "delete from receipt_items where "
+            String s2 = "update receipt_items set status=2 where "
                     + " receipt_no='" + to_receipts.receipt_no + "'";
 
             PreparedStatement stmt2 = conn.prepareStatement(s2);
@@ -516,14 +519,14 @@ public class Receipts {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-            String s0 = "delete from  receipts where "
+            String s0 = "update  receipts set status=2 where "
                     + " id ='" + to_receipts.id + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 
-            String s2 = "delete from receipt_items where "
+            String s2 = "update receipt_items set status=2 where "
                     + " receipt_no='" + to_receipts.receipt_no + "'";
 
             stmt.addBatch(s2);
@@ -546,7 +549,7 @@ public class Receipts {
                     conversion = rs10.getDouble(2);
                     serial_no = rs10.getString(3);
                 }
-                
+
                 double new_qty = product_qty - (to_receipt_items.conversion * to_receipt_items.qty);
 
                 String s4 = "update inventory_barcodes set "
@@ -869,7 +872,7 @@ public class Receipts {
         }
     }
 
-    public static void finalize(to_receipts to_receipts, List<S1_receipt_items.to_receipt_items> to_receipt_items1, String branch, String branch_id, int is_invoice) {
+    public static void finalize(to_receipts to_receipts, List<S1_receipt_items.to_receipt_items> to_receipt_items1, String branch, String branch_id, int is_invoice, int is_payable, String ap_date) {
         try {
             Connection conn = MyConnection.connect();
 
@@ -989,14 +992,16 @@ public class Receipts {
                         serial_no = rs10.getString(3);
                     }
 
+                    double cost=to_receipt_items.cost/to_receipt_items.conversion;
                     double new_qty = product_qty + (to_receipt_items.conversion * to_receipt_items.qty);
                     String new_serial = serial_no + "\n" + to_receipt_items.serial_no;
                     if (serial_no.isEmpty()) {
                         new_serial = to_receipt_items.serial_no;
                     }
+                    
                     String s4 = "update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
-                            + ",cost='" + to_receipt_items.cost + "' "
+                            + ",cost='" + cost + "' "
                             + ",serial_no='" + new_serial + "' "
                             + " where  main_barcode= '" + to_receipt_items.main_barcode + "' and location_id='" + to_receipt_items.branch_id + "' "
                             + "";
@@ -1007,7 +1012,7 @@ public class Receipts {
                             + " barcode ='" + to_receipt_items.main_barcode + "' "
                             + " ";
                     s5 = SqlStringUtil.parse(s5).
-                            setNumber("cost", to_receipt_items.cost).
+                            setNumber("cost", cost).
                             ok();
 
                     stmt.addBatch(s5);
@@ -1132,6 +1137,163 @@ public class Receipts {
                 }
             }
 
+            if (is_payable == 1) {
+                String customer_id = to_receipts.supllier_id;
+                String customer_name = to_receipts.supplier;
+                String ap_no = Accounts_payable.increment_id(to_receipts.branch_id);
+                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+                if (!payables.isEmpty()) {
+                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+                }
+                String date_added = DateType.now();
+                String user_name = MyUser.getUser_name();
+                double amount = to_receipts.gross_total;
+                double discount_amount = to_receipts.discount;
+                double discount_rate = 0;
+                String discount = "";
+                int status = 0;
+                double term = 0;
+                String date_applied = ap_date;
+                double paid = 0;
+                String date_paid = ap_date;
+                String remarks = "";
+                String type = "";
+                String reference_no = to_receipts.receipt_no;
+                String user_id = MyUser.getUser_id();
+                String user_screen_name = MyUser.getUser_screen_name();
+
+                String location_id = "";
+                String s3 = "select "
+                        + "id"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",code"
+                        + ",location"
+                        + ",type"
+                        + ",status"
+                        + " from branch_locations  "
+                        + " where id='" + to_receipts.branch_id + "' ";
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s3);
+                String branch1 = "";
+                String branch_id1 = "";
+                String location1 = "";
+                if (rs2.next()) {
+                    int id = rs2.getInt(1);
+                    location_id = "" + id;
+                    branch1 = rs2.getString(2);
+                    branch_id1 = rs2.getString(3);
+
+                    location1 = rs2.getString(5);
+
+                }
+
+                Accounts_payable.to_accounts_payable to_accounts_payable = new Accounts_payable.to_accounts_payable(0, customer_id, customer_name, ap_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, reference_no, user_id, user_screen_name, branch1, branch_id1, location1, location_id);
+                String s4 = "insert into accounts_payable("
+                        + " customer_id"
+                        + ",customer_name"
+                        + ",ap_no"
+                        + ",date_added"
+                        + ",user_name"
+                        + ",amount"
+                        + ",discount_amount"
+                        + ",discount_rate"
+                        + ",discount"
+                        + ",status"
+                        + ",term"
+                        + ",date_applied"
+                        + ",paid"
+                        + ",date_paid"
+                        + ",remarks"
+                        + ",type"
+                        + ",reference_no"
+                        + ",user_id"
+                        + ",user_screen_name"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ")values("
+                        + ":customer_id"
+                        + ",:customer_name"
+                        + ",:ap_no"
+                        + ",:date_added"
+                        + ",:user_name"
+                        + ",:amount"
+                        + ",:discount_amount"
+                        + ",:discount_rate"
+                        + ",:discount"
+                        + ",:status"
+                        + ",:term"
+                        + ",:date_applied"
+                        + ",:paid"
+                        + ",:date_paid"
+                        + ",:remarks"
+                        + ",:type"
+                        + ",:reference_no"
+                        + ",:user_id"
+                        + ",:user_screen_name"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ")";
+
+                s4 = SqlStringUtil.parse(s4)
+                        .setString("customer_id", to_accounts_payable.customer_id)
+                        .setString("customer_name", to_accounts_payable.customer_name)
+                        .setString("ap_no", to_accounts_payable.ap_no)
+                        .setString("date_added", to_accounts_payable.date_added)
+                        .setString("user_name", to_accounts_payable.user_name)
+                        .setNumber("amount", to_accounts_payable.amount)
+                        .setNumber("discount_amount", to_accounts_payable.discount_amount)
+                        .setNumber("discount_rate", to_accounts_payable.discount_rate)
+                        .setString("discount", to_accounts_payable.discount)
+                        .setNumber("status", to_accounts_payable.status)
+                        .setNumber("term", to_accounts_payable.term)
+                        .setString("date_applied", to_accounts_payable.date_applied)
+                        .setNumber("paid", to_accounts_payable.paid)
+                        .setString("date_paid", to_accounts_payable.date_paid)
+                        .setString("remarks", to_accounts_payable.remarks)
+                        .setString("type", to_accounts_payable.type)
+                        .setString("reference_no", to_accounts_payable.reference_no)
+                        .setString("user_id", to_accounts_payable.user_id)
+                        .setString("user_screen_name", to_accounts_payable.user_screen_name)
+                        .setString("branch", to_accounts_payable.branch)
+                        .setString("branch_id", to_accounts_payable.branch_id)
+                        .setString("location", to_accounts_payable.location)
+                        .setString("location_id", to_accounts_payable.location_id)
+                        .ok();
+
+                stmt.addBatch(s4);
+
+                String s5 = "select "
+                        + " balance"
+                        + " from  suppliers  "
+                        + " where customer_no='" + to_accounts_payable.customer_id + "' ";
+
+                Statement stmt5 = conn.createStatement();
+                ResultSet rs5 = stmt5.executeQuery(s5);
+                double balance = 0;
+                if (rs5.next()) {
+                    balance = rs5.getDouble(1);
+                }
+
+                double new_balance = (to_accounts_payable.amount - to_accounts_payable.discount_amount) + balance;
+
+                String s6 = "update  suppliers set "
+                        + "balance= :balance"
+                        + " where "
+                        + " customer_no='" + to_accounts_payable.customer_id + "' "
+                        + " ";
+
+                s6 = SqlStringUtil.parse(s6).
+                        setNumber("balance", new_balance).ok();
+
+                stmt.addBatch(s6);
+
+            }
 //            String json = gson.toJson(query);
 //            String my_branch_id = MyUser.getBranch_id();
 //            if (!my_branch_id.equalsIgnoreCase(branch_id)) {

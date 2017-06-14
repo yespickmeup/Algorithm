@@ -4,8 +4,8 @@
  */
 package POS.sales;
 
-import POS.customers.Customers;
 import POS.customers.Customers.to_customers;
+import POS.my_sales.MySales;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -294,7 +294,7 @@ public class Sales {
         } finally {
             MyConnection.close();
         }
-        
+
     }
 
     public static void edit_sales(to_sales to_sales) {
@@ -398,6 +398,25 @@ public class Sales {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Sales.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_customer_name(MySales.sales sale, String new_customer_name) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update sales set customer_name= :customer_name where "
+                    + " id ='" + sale.id + "' "
+                    + " ";
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("customer_name", new_customer_name)
+                    .ok();
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Sales.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

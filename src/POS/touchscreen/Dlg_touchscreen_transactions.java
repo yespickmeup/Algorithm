@@ -1047,6 +1047,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         hover();
         init_table_bg();
@@ -1772,10 +1773,11 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         double net_total = FitIn.toDouble(lbl_balance_due.getText());
         double cash_amount = FitIn.toDouble(lbl_cash.getText());
         double change_amount = 0;
+        String sales_date=lbl_date.getText();
         Window p = (Window) this;
         Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
         nd.setTitle("");
-        nd.do_pass(orders, sale_discount, net_total, my_sale, cash_amount, change_amount);
+        nd.do_pass(orders, sale_discount, net_total, my_sale, cash_amount, change_amount,sales_date);
         nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
 
             @Override

@@ -1110,7 +1110,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
 
         set_default_branch();
@@ -1132,7 +1132,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
         jTextField1.grabFocus();
     }
-
+    
     private void client_label_request() {
         String pool_db = System.getProperty("pool_db", "db_algorithm");
         if (pool_db.equalsIgnoreCase("db_smis_guihulngan")) {
@@ -1176,11 +1176,16 @@ public class Dlg_report_item extends javax.swing.JDialog {
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
         for (S1_user_previleges.to_user_previleges to : datas) {
             if (to.previledge.equalsIgnoreCase("Stock Take Report")) {
-
                 view_only = 1;
+
             }
         }
 
+        if (view_only == 1) {
+            jButton4.setVisible(true);
+        } else {
+            jButton4.setVisible(false);
+        }
         init_tbl_inventory_barcodes();
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
@@ -1194,7 +1199,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
     public void do_pass2() {
         view_only = 0;
-
+        jButton4.setVisible(false);
         init_tbl_inventory_barcodes();
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
@@ -1967,7 +1972,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_report_item_qty nd = Dlg_report_item_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass(to.date_added, to.user_name, to.barcodes, to.barcode, to.description, to.location_id);
+        nd.do_pass(to.branch, to.location, to.barcodes, to.barcode, to.description, to.location_id,to.product_qty);
         nd.setCallback(new Dlg_report_item_qty.Callback() {
 
             @Override
@@ -2283,7 +2288,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_capture.OutputData data) {
                 closeDialog.ok();
-                
+
             }
         });
         nd.setLocationRelativeTo(this);

@@ -863,7 +863,9 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+        
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);

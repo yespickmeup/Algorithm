@@ -937,7 +937,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     }
 
     MySales.sales my_sales = null;
-
+   
     public void do_pass(final List<Inventory_barcodes.to_inventory_barcodes> orders, final Label.Normal cust, final Label.Item_discount discount, final double gross_amount, final double line_discount, final MySales.sales sales) {
         my_sales = sales;
         tbl_orders.grabFocus();
@@ -1437,11 +1437,12 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         double net_total = FitIn.toDouble(lbl_balance_due.getText());
         double cash_amount = FitIn.toDouble(lbl_cash.getText());
         double change_amount = Payments.countChange2();
-        System.out.println("change: " + change_amount);
+        String sales_date=DateType.convert_slash_datetime(my_sales.date_added);
+//        System.out.println("change: " + change_amount);
         Window p = (Window) this;
         Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
         nd.setTitle("");
-        nd.do_pass(orders, sale_discount, net_total, my_sales, cash_amount, change_amount);
+        nd.do_pass(orders, sale_discount, net_total, my_sales, cash_amount, change_amount,sales_date);
         nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
 
             @Override

@@ -181,7 +181,8 @@ public class Branch_locations {
             }
             return datas;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return new ArrayList();
+//            throw new RuntimeException(e);
         } finally {
             MyConnection.close();
         }
