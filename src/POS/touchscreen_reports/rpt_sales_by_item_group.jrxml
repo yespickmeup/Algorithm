@@ -31,52 +31,52 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="137" splitType="Stretch">
+        <band height="118" splitType="Stretch">
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="19" width="218" height="14"/>
+                <reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="19" width="802" height="14"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="54" y="110" width="164" height="15"/>
+                <reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="54" y="96" width="164" height="15"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$P{location}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="96" width="54" height="15"/>
+                <reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="82" width="54" height="15"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font isBold="false"/>
                 </textElement>
                 <text><![CDATA[Branch:]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="110" width="54" height="15"/>
+                <reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="96" width="54" height="15"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font isBold="false"/>
                 </textElement>
                 <text><![CDATA[Location:]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="54" width="219" height="20"/>
+                <reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="40" width="219" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font size="11" isBold="false"/>
                 </textElement>
                 <text><![CDATA[Sales by Item]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="54" y="96" width="164" height="15"/>
+                <reportElement uuid="6835577e-17c5-4698-b577-5d328c03a312" x="54" y="82" width="164" height="15"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="e8b8918f-5ab8-4d45-825f-d3cb3668f8fd" x="0" y="0" width="218" height="20"/>
+                <reportElement uuid="e8b8918f-5ab8-4d45-825f-d3cb3668f8fd" x="0" y="0" width="802" height="20"/>
                 <textElement verticalAlignment="Middle">
                     <font size="11"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="74" width="219" height="14"/>
+                <reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="0" y="60" width="219" height="14"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
             </textField>
@@ -90,7 +90,10 @@
             <staticText>
                 <reportElement uuid="69ecc624-85c5-423b-9168-f0a4d6994669" x="0" y="0" width="65" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
@@ -100,7 +103,10 @@
             <staticText>
                 <reportElement uuid="abfce154-cf79-4c34-88c3-bf88659e4491" x="65" y="0" width="449" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
@@ -110,7 +116,10 @@
             <staticText>
                 <reportElement uuid="d051cd65-c3ce-48c1-a3ed-4e36b443571e" x="514" y="0" width="43" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
@@ -120,9 +129,12 @@
             <staticText>
                 <reportElement uuid="ea45c1e0-37a0-4682-b7fb-dcffcdbe0b29" x="557" y="0" width="29" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
+                <textElement textAlignment="Center" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <text><![CDATA[Qty]]></text>
@@ -130,7 +142,10 @@
             <staticText>
                 <reportElement uuid="b3f81687-a527-43aa-bc1f-6c622ea37f11" x="586" y="0" width="76" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
@@ -140,7 +155,10 @@
             <staticText>
                 <reportElement uuid="80343a22-f132-4415-a0ae-59e1641eb202" x="662" y="0" width="62" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
@@ -150,7 +168,10 @@
             <staticText>
                 <reportElement uuid="4db208f3-8c25-4a58-b9e7-5759ee33e73e" x="724" y="0" width="78" height="20"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
@@ -163,6 +184,12 @@
         <band height="15" splitType="Stretch">
             <textField>
                 <reportElement uuid="788cfe43-bddb-4db8-8710-2798b7135859" x="0" y="0" width="65" height="15"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
@@ -170,6 +197,12 @@
             </textField>
             <textField>
                 <reportElement uuid="c75f7f20-63b3-4858-8def-4479cd0e91ee" x="65" y="0" width="449" height="15"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
@@ -177,6 +210,12 @@
             </textField>
             <textField>
                 <reportElement uuid="5f9a0e2b-1541-4d5b-8737-971eb8d0a67c" x="514" y="0" width="43" height="15"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
@@ -184,13 +223,25 @@
             </textField>
             <textField pattern="###0">
                 <reportElement uuid="59d48aa5-227b-4f7a-9d1a-b4677bf43896" x="557" y="0" width="29" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{product_qty}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0.00">
                 <reportElement uuid="e4ba94fc-c431-44b1-9baa-12abd4803e6c" x="586" y="0" width="76" height="15"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
@@ -198,6 +249,12 @@
             </textField>
             <textField pattern="#,##0.00" isBlankWhenNull="false">
                 <reportElement uuid="02fddc41-6370-4b17-93d5-6715e5450739" mode="Transparent" x="662" y="0" width="62" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
                     <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
                     <paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
@@ -206,6 +263,12 @@
             </textField>
             <textField pattern="#,##0.00" isBlankWhenNull="false">
                 <reportElement uuid="fc946b16-a95d-4a2f-9a8f-91d62af75b34" mode="Transparent" x="724" y="0" width="78" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
                     <font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
                     <paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>

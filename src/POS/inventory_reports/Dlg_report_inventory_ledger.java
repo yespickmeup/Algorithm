@@ -240,13 +240,13 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new Button.Default();
-        jButton3 = new Button.Default();
-        jButton4 = new Button.Default();
-        jButton5 = new Button.Default();
-        jButton6 = new Button.Default();
-        jButton7 = new Button.Default();
-        jButton8 = new Button.Default();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -374,7 +374,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                                 .addComponent(jCheckBox6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox7)
-                                .addGap(0, 331, Short.MAX_VALUE))
+                                .addGap(0, 297, Short.MAX_VALUE))
                             .addComponent(tf_search))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -421,11 +421,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         pnl_report.setLayout(pnl_reportLayout);
         pnl_reportLayout.setHorizontalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 781, Short.MAX_VALUE)
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -457,59 +457,150 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 .addGap(5, 5, 5))
         );
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton2.setText("Inv.Count");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton9.setText("Inv.Encoding");
+        jButton9.setToolTipText("Sales Summary");
+        jButton9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton9.setContentAreaFilled(false);
+        jButton9.setFocusable(false);
+        jButton9.setOpaque(true);
+        jButton9.setSelected(true);
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton9MouseEntered(evt);
+            }
+        });
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton9ActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton3.setText("Receipts");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton10.setText("Receipts");
+        jButton10.setToolTipText("Sales Summary");
+        jButton10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton10.setContentAreaFilled(false);
+        jButton10.setFocusable(false);
+        jButton10.setOpaque(true);
+        jButton10.setSelected(true);
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton10MouseEntered(evt);
+            }
+        });
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton10ActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton4.setText("Sales");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.setText("Sales");
+        jButton11.setToolTipText("Sales Summary");
+        jButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton11.setContentAreaFilled(false);
+        jButton11.setFocusable(false);
+        jButton11.setOpaque(true);
+        jButton11.setSelected(true);
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton11MouseEntered(evt);
+            }
+        });
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton5.setText("Transfers");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton12.setText("Transfers");
+        jButton12.setToolTipText("Sales Summary");
+        jButton12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton12.setContentAreaFilled(false);
+        jButton12.setFocusable(false);
+        jButton12.setOpaque(true);
+        jButton12.setSelected(true);
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton12MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton12MouseEntered(evt);
+            }
+        });
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton12ActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton6.setText("Adjustm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton13.setText("Adjustments");
+        jButton13.setToolTipText("Sales Summary");
+        jButton13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton13.setContentAreaFilled(false);
+        jButton13.setFocusable(false);
+        jButton13.setOpaque(true);
+        jButton13.setSelected(true);
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton13MouseEntered(evt);
+            }
+        });
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton13ActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton7.setText("Returns");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButton14.setText("Returns");
+        jButton14.setToolTipText("Sales Summary");
+        jButton14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton14.setContentAreaFilled(false);
+        jButton14.setFocusable(false);
+        jButton14.setOpaque(true);
+        jButton14.setSelected(true);
+        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton14MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton14MouseEntered(evt);
+            }
+        });
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButton14ActionPerformed(evt);
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton8.setText("Charge");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButton15.setText("Charge");
+        jButton15.setToolTipText("Sales Summary");
+        jButton15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton15.setContentAreaFilled(false);
+        jButton15.setFocusable(false);
+        jButton15.setOpaque(true);
+        jButton15.setSelected(true);
+        jButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton15MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton15MouseEntered(evt);
+            }
+        });
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButton15ActionPerformed(evt);
             }
         });
 
@@ -520,46 +611,54 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnl_report, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnl_report, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,33 +710,104 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         init_report();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
+        //         jButton3.setBackground(new java.awt.Color(4, 144, 217));
+    }//GEN-LAST:event_jButton9MouseEntered
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
+        jButton9.setBackground(new java.awt.Color(4, 100, 217));
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
         inventory_count();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10MouseEntered
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        jButton10.setBackground(new java.awt.Color(4, 100, 217));
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
         receipts();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MouseEntered
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        jButton11.setBackground(new java.awt.Color(4, 100, 217));
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
         sales();
-    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseClicked
+
+    private void jButton12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseEntered
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        jButton12.setBackground(new java.awt.Color(4, 100, 217));
+        jButton12.setForeground(new java.awt.Color(255, 255, 255));
         transfers();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13MouseClicked
+
+    private void jButton13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13MouseEntered
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        jButton13.setBackground(new java.awt.Color(4, 100, 217));
+        jButton13.setForeground(new java.awt.Color(255, 255, 255));
         adjustments();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButton13ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14MouseClicked
+
+    private void jButton14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14MouseEntered
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        jButton14.setBackground(new java.awt.Color(4, 100, 217));
+        jButton14.setForeground(new java.awt.Color(255, 255, 255));
         replacements();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15MouseClicked
+
+    private void jButton15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15MouseEntered
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        jButton15.setBackground(new java.awt.Color(4, 100, 217));
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
         charge_in_advance();
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -646,13 +816,13 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -895,1295 +1065,34 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                String month = "" + (jMonthChooser1.getMonth() + 1);
-                if (month.length() == 1) {
-                    month = "0" + month;
-                }
 
-                String year = "" + jYearChooser1.getYear();
-                List<Srpt_item_ledger.field> field3 = new ArrayList();
-                List<Srpt_item_ledger.field> fields = new ArrayList();
                 Field.Combo lo = (Field.Combo) tf_branch_location;
-
-                String where = " where item_code ='" + my_item_code + "'  and location_id = '" + lo.getId() + "' "
-                        + "   ";
-                String where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + lo.getId() + "' and status=1 "
-                        + "  ";
-                String where4 = " where main_barcode ='" + my_item_code + "'  and branch_id = '" + lo.getId() + "' "
-                        + "  ";
-                String where3 = " where barcode ='" + my_item_code + "'    "
-                        + "  ";
-                String wheree = " where item_code ='" + my_item_code + "'  and location_id = '" + lo.getId() + "' and status=1 "
-                        + "   ";
-                String where5 = " where main_barcode ='" + my_item_code + "'  and from_location_id = '" + lo.getId() + "' and status=1 "
-                        + "  or main_barcode ='" + my_item_code + "'  and to_location_id = '" + lo.getId() + "' and status=1";
-                List<Srpt_item_ledger.field> sales = new ArrayList();//Srpt_item_ledger.sales(where);
-                List<Srpt_item_ledger.field> inventory_count = new ArrayList();// Srpt_item_ledger.inventory_encoding(where);
-                List<Srpt_item_ledger.field> receipts = new ArrayList(); //Srpt_item_ledger.receipts(where2);
-                List<Srpt_item_ledger.field> transfers = new ArrayList(); //Srpt_item_ledger.transfer(where3);
-                List<Srpt_item_ledger.field> adjustments = new ArrayList(); //Srpt_item_ledger.adjustments(where);
-                List<Srpt_item_ledger.field> return_exchange = new ArrayList(); //Srpt_item_ledger.item_replacements(where);
-                List<Srpt_item_ledger.field> charge_in_advance = new ArrayList(); //Srpt_item_ledger.charge_items(where);
-                List<Srpt_item_ledger.field> charge_in_advance_cancelled = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
-                List<Srpt_item_ledger.field> replenishments = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
-                List<Srpt_item_ledger.field> requistion_slips = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
-                List<Srpt_item_ledger.field> return_from_customer = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
-                List<Srpt_item_ledger.field> conversions = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
-//                    System.out.println(where);
-                try {
-                    Connection conn = MyConnection.connect();
-
-                    //<editor-fold defaultstate="collapsed" desc=" sales ">
-                    String s0 = "select "
-                            + "id"
-                            + ",sales_no"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",generic_name"
-                            + ",item_type"
-                            + ",supplier_name"
-                            + ",supplier_id"
-                            + ",serial_no"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",conversion"
-                            + ",selling_price"
-                            + ",date_added"
-                            + ",user_id"
-                            + ",user_screen_name"
-                            + ",status"
-                            + ",is_vatable"
-                            + ",selling_type"
-                            + ",discount_name"
-                            + ",discount_rate"
-                            + ",discount_amount"
-                            + ",discount_customer_name"
-                            + ",discount_customer_id"
-                            + ",branch"
-                            + ",branch_code"
-                            + ",location"
-                            + ",location_id"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_classification"
-                            + ",sub_classification_id"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",addtl_amount"
-                            + ",wtax"
-                            + " from sale_items"
-                            + " " + where;
-
-                    Statement stmt = conn.createStatement();
-                    ResultSet rs = stmt.executeQuery(s0);
-                    while (rs.next()) {
-                        int id = rs.getInt(1);
-                        String sales_no = rs.getString(2);
-                        String item_code = rs.getString(3);
-                        String barcode = rs.getString(4);
-                        String description = rs.getString(5);
-                        String generic_name = rs.getString(6);
-                        String item_type = rs.getString(7);
-                        String supplier_name = rs.getString(8);
-                        String supplier_id = rs.getString(9);
-                        String serial_no = rs.getString(10);
-                        double product_qty = rs.getDouble(11);
-                        String unit = rs.getString(12);
-                        double conversion = rs.getDouble(13);
-                        double selling_price = rs.getDouble(14);
-                        String date_added = rs.getString(15);
-                        String user_id = rs.getString(16);
-                        String user_screen_name = rs.getString(17);
-                        int status = rs.getInt(18);
-                        int is_vatable = rs.getInt(19);
-                        int selling_type = rs.getInt(20);
-                        String discount_name = rs.getString(21);
-                        double discount_rate = rs.getDouble(22);
-                        double discount_amount = rs.getDouble(23);
-                        String discount_customer_name = rs.getString(24);
-                        String discount_customer_id = rs.getString(25);
-                        String branch = rs.getString(26);
-                        String branch_code = rs.getString(27);
-                        String location = rs.getString(28);
-                        String location_id = rs.getString(29);
-                        String category = rs.getString(30);
-                        String category_id = rs.getString(31);
-                        String classification = rs.getString(32);
-                        String classification_id = rs.getString(33);
-                        String sub_classification = rs.getString(34);
-                        String sub_classification_id = rs.getString(35);
-                        String brand = rs.getString(36);
-                        String brand_id = rs.getString(37);
-                        String model = rs.getString(38);
-                        String model_id = rs.getString(39);
-                        double addtl_amount = rs.getDouble(40);
-                        double wtax = rs.getDouble(41);
-
-                        String transaction_type = "Sales";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = "";
-                        String out = FitIn.fmt_woc(product_qty);
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_code;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_screen_name;
-                        String customer_name = "";
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + sales_no;
-                        String cost1 = "";
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        String months = DateType.convert_datetime_to_month(date_added);
-
-                        Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                        sales.add(field);
-
-                        if (status == 1) {
-                            Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            sales.add(field2);
-                        }
-
-                    }
-
-                    //</editor-fold>                    
-                    //<editor-fold defaultstate="collapsed" desc=" Inventory Count ">
-                    String s2 = "select "
-                            + "id"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + ",qty"
-                            + ",date_added"
-                            + ",user_name"
-                            + ",screen_name"
-                            + ",sheet_no"
-                            + ",status"
-                            + ",counted_by"
-                            + ",checked_by"
-                            + ",cost"
-                            + ",selling_price"
-                            + ",user_id"
-                            + ",user_screen_name"
-                            + " from encoding_inventory"
-                            + " " + wheree;
-
-                    Statement stmt2 = conn.createStatement();
-                    ResultSet rs2 = stmt2.executeQuery(s2);
-                    while (rs2.next()) {
-                        int id = rs2.getInt(1);
-                        String item_code = rs2.getString(2);
-                        String barcode = rs2.getString(3);
-                        String description = rs2.getString(4);
-                        String branch = rs2.getString(5);
-                        String branch_id = rs2.getString(6);
-                        String location = rs2.getString(7);
-                        String location_id = rs2.getString(8);
-                        double qty = rs2.getDouble(9);
-                        String date_added = rs2.getString(10);
-                        String user_name = rs2.getString(11);
-                        String screen_name = rs2.getString(12);
-                        String sheet_no = rs2.getString(13);
-                        int status = rs2.getInt(14);
-                        String counted_by = rs2.getString(15);
-                        String checked_by = rs2.getString(16);
-                        double cost = rs2.getDouble(17);
-                        double selling_price = rs2.getDouble(18);
-                        String user_id = rs2.getString(19);
-                        String user_screen_name = rs2.getString(20);
-
-                        String transaction_type = "Inventory Count";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = FitIn.fmt_woc(qty);
-                        String out = "";
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_id;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = screen_name;
-                        String customer_name = "";
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + sheet_no;
-                        String cost1 = FitIn.fmt_wc_0(cost);
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        String months = DateType.convert_datetime_to_month(date_added);
-                        Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-
-                        inventory_count.add(field);
-                    }
-                    //</editor-fold>                   
-                    //<editor-fold defaultstate="collapsed" desc=" Receipts ">
-                    String s3 = "select "
-                            + " id"
-                            + ",receipt_no"
-                            + ",user_name"
-                            + ",session_no"
-                            + ",date_added"
-                            + ",supplier"
-                            + ",supllier_id"
-                            + ",remarks"
-                            + ",barcode"
-                            + ",description"
-                            + ",qty"
-                            + ",cost"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_class"
-                            + ",sub_class_id"
-                            + ",conversion"
-                            + ",unit"
-                            + ",date_delivered"
-                            + ",date_received"
-                            + ",barcodes"
-                            + ",batch_no"
-                            + ",serial_no"
-                            + ",main_barcode"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",status"
-                            + ",previous_cost"
-                            + ",receipt_type_id"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + " from receipt_items"
-                            + " " + where4;
-//                        System.out.println(where4);
-                    Statement stmt3 = conn.createStatement();
-                    ResultSet rs3 = stmt3.executeQuery(s3);
-                    while (rs3.next()) {
-                        int id = rs3.getInt(1);
-                        String receipt_no = rs3.getString(2);
-                        String user_name = rs3.getString(3);
-                        String session_no = rs3.getString(4);
-                        String date_added = rs3.getString(5);
-                        String supplier = rs3.getString(6);
-                        String supllier_id = rs3.getString(7);
-                        String remarks = rs3.getString(8);
-                        String barcode = rs3.getString(9);
-                        String description = rs3.getString(10);
-                        double qty = rs3.getDouble(11);
-                        double cost = rs3.getDouble(12);
-                        String category = rs3.getString(13);
-                        String category_id = rs3.getString(14);
-                        String classification = rs3.getString(15);
-                        String classification_id = rs3.getString(16);
-                        String sub_class = rs3.getString(17);
-                        String sub_class_id = rs3.getString(18);
-                        double conversion = rs3.getDouble(19);
-                        String unit = rs3.getString(20);
-                        String date_delivered = rs3.getString(21);
-                        String date_received = rs3.getString(22);
-                        String barcodes = rs3.getString(23);
-                        String batch_no = rs3.getString(24);
-                        String serial_no = rs3.getString(25);
-                        String main_barcode = rs3.getString(26);
-                        String brand = rs3.getString(27);
-                        String brand_id = rs3.getString(28);
-                        String model = rs3.getString(29);
-                        String model_id = rs3.getString(30);
-                        int status = rs3.getInt(31);
-                        double previous_cost = rs3.getDouble(32);
-                        String receipt_type_id = rs3.getString(33);
-                        String branch = rs3.getString(34);
-                        String branch_id = rs3.getString(35);
-                        String location = rs3.getString(36);
-                        String location_id = rs3.getString(37);
-
-                        String transaction_type = "Receipts";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        qty = qty * conversion;
-                        String in = FitIn.fmt_woc(qty);
-                        String out = "";
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_id;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_name;
-                        String customer_name = "";
-                        Date created = new Date();
-
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + receipt_no;
-                        String cost1 = FitIn.fmt_wc_0(cost);
-                        String price1 = "";
-                        String months = DateType.convert_datetime_to_month(date_added);
-
-                        Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_branch, from_branch_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                        if (status == 1) {
-                            receipts.add(field);
-                        }
-
-                    }
-
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Transfers ">
-                    List<Srpt_item_ledger.field> transfer_in = new ArrayList();
-                    List<Srpt_item_ledger.field> transfer_out = new ArrayList();
-                    String s4 = "select "
-                            + "id"
-                            + ",barcode"
-                            + ",description"
-                            + ",generic_name"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_classification"
-                            + ",sub_classification_id"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",conversion"
-                            + ",selling_price"
-                            + ",date_added"
-                            + ",user_name"
-                            + ",item_type"
-                            + ",status"
-                            + ",supplier"
-                            + ",fixed_price"
-                            + ",cost"
-                            + ",supplier_id"
-                            + ",multi_level_pricing"
-                            + ",vatable"
-                            + ",reorder_level"
-                            + ",markup"
-                            + ",barcodes"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",selling_type"
-                            + ",branch"
-                            + ",branch_code"
-                            + ",location"
-                            + ",location_id"
-                            + ",stock_transfer_id"
-                            + ",serial_no"
-                            + ",to_branch"
-                            + ",to_branch_id"
-                            + ",to_location"
-                            + ",to_location_id"
-                            + " from stock_transfers_items"
-                            + " " + where3;
-
-                    Statement stmt4 = conn.createStatement();
-                    ResultSet rs4 = stmt4.executeQuery(s4);
-                    while (rs4.next()) {
-                        int id = rs4.getInt(1);
-                        String barcode = rs4.getString(2);
-                        String description = rs4.getString(3);
-                        String generic_name = rs4.getString(4);
-                        String category = rs4.getString(5);
-                        String category_id = rs4.getString(6);
-                        String classification = rs4.getString(7);
-                        String classification_id = rs4.getString(8);
-                        String sub_classification = rs4.getString(9);
-                        String sub_classification_id = rs4.getString(10);
-                        double product_qty = rs4.getDouble(11);
-
-                        String unit = rs4.getString(12);
-                        double conversion = rs4.getDouble(13);
-                        product_qty = product_qty * conversion;
-
-                        double selling_price = rs4.getDouble(14);
-                        String date_added = rs4.getString(15);
-                        String user_name = rs4.getString(16);
-                        String item_type = rs4.getString(17);
-                        int status = rs4.getInt(18);
-                        String supplier = rs4.getString(19);
-                        int fixed_price = rs4.getInt(20);
-                        double cost = rs4.getDouble(21);
-                        String supplier_id = rs4.getString(22);
-                        int multi_level_pricing = rs4.getInt(23);
-                        int vatable = rs4.getInt(24);
-                        double reorder_level = rs4.getDouble(25);
-                        double markup = rs4.getDouble(26);
-                        String barcodes = rs4.getString(27);
-                        String brand = rs4.getString(28);
-                        String brand_id = rs4.getString(29);
-                        String model = rs4.getString(30);
-                        String model_id = rs4.getString(31);
-                        int selling_type = rs4.getInt(32);
-                        String branch = rs4.getString(33);
-                        String branch_code = rs4.getString(34);
-                        String location = rs4.getString(35);
-                        String location_id = rs4.getString(36);
-                        String stock_transfer_id = rs4.getString(37);
-                        String serial_no = rs4.getString(38);
-                        String to_branch = rs4.getString(39);
-                        String to_branch_id = rs4.getString(40);
-                        String to_location = rs4.getString(41);
-                        String to_location_id = rs4.getString(42);
-
-                        String transaction_type = "Transfer";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = FitIn.fmt_woc(product_qty);
-                        String out = "";
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_code;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch1 = "";
-                        String to_branch_id1 = "";
-                        String to_location1 = "";
-                        String to_location_id1 = "";
-                        String created_by = user_name;
-                        String customer_name = "";
-                        Date created = new Date();
-
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        String transaction_no = "" + stock_transfer_id;
-                        String cost1 = FitIn.fmt_wc_0(cost);
-                        String price1 = "";
-                        String months = DateType.convert_datetime_to_month(date_added);
-                        Srpt_item_ledger.field field_out = new Srpt_item_ledger.field("Transfer-Out", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-
-                        Srpt_item_ledger.field field_in = new Srpt_item_ledger.field("Transfer-In", date, FitIn.fmt_woc(product_qty), "", balance, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-
-                        if (status == 1) {
-
-                            if (lo.getId().equalsIgnoreCase(to_location_id)) {
-                                transfer_in.add(field_in);
-                            }
-
-                            if (lo.getId().equalsIgnoreCase(location_id)) {
-                                transfer_out.add(field_out);
-                            }
-
-                        }
-                    }
-
-                    transfers.addAll(transfer_in);
-                    transfers.addAll(transfer_out);
-
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Adjustments ">
-                    List<Srpt_item_ledger.field> adjustment_add = new ArrayList();
-                    List<Srpt_item_ledger.field> adjustment_deduct = new ArrayList();
-                    String s5 = "select "
-                            + "id"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",qty"
-                            + ",new_qty"
-                            + ",is_add"
-                            + ",date_added"
-                            + ",status"
-                            + ",user_id"
-                            + ",user_screen_name"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + " from adjustments"
-                            + " " + where;
-
-                    Statement stmt5 = conn.createStatement();
-                    ResultSet rs5 = stmt5.executeQuery(s5);
-                    while (rs5.next()) {
-                        int id = rs5.getInt(1);
-                        String item_code = rs5.getString(2);
-                        String barcode = rs5.getString(3);
-                        String description = rs5.getString(4);
-                        double qty = rs5.getDouble(5);
-                        double new_qty = rs5.getDouble(6);
-                        int is_add = rs5.getInt(7);
-                        String date_added = rs5.getString(8);
-                        int status = rs5.getInt(9);
-                        String user_id = rs5.getString(10);
-                        String user_screen_name = rs5.getString(11);
-                        String branch = rs5.getString(12);
-                        String branch_id = rs5.getString(13);
-                        String location = rs5.getString(14);
-                        String location_id = rs5.getString(15);
-
-                        String transaction_type = "Adjustment";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = FitIn.fmt_woc(new_qty);
-                        String out = "";
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_id;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_screen_name;
-                        String customer_name = "";
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + id;
-                        String cost1 = "";
-                        String price1 = "";
-                        String months = DateType.convert_datetime_to_month(date_added);
-                        if (is_add == 1) {
-                            Srpt_item_ledger.field add = new Srpt_item_ledger.field("Adjustment-Add", date, FitIn.fmt_woc(new_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            adjustment_add.add(add);
-                        } else {
-                            Srpt_item_ledger.field deduct = new Srpt_item_ledger.field("Adjustment-Deduct", date, "", FitIn.fmt_woc(new_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            adjustment_deduct.add(deduct);
-                        }
-
-                    }
-                    adjustments.addAll(adjustment_add);
-                    adjustments.addAll(adjustment_deduct);
-
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Return Exchange ">
-                    String s6 = "select "
-                            + "id"
-                            + ",sales_no"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",generic_name"
-                            + ",item_type"
-                            + ",supplier_name"
-                            + ",supplier_id"
-                            + ",serial_no"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",conversion"
-                            + ",selling_price"
-                            + ",date_added"
-                            + ",user_id"
-                            + ",user_screen_name"
-                            + ",status"
-                            + ",is_vatable"
-                            + ",selling_type"
-                            + ",discount_name"
-                            + ",discount_rate"
-                            + ",discount_amount"
-                            + ",discount_customer_name"
-                            + ",discount_customer_id"
-                            + ",branch"
-                            + ",branch_code"
-                            + ",location"
-                            + ",location_id"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_classification"
-                            + ",sub_classification_id"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",is_replacement"
-                            + " from sale_item_replacements"
-                            + " " + where;
-                    Statement stmt6 = conn.createStatement();
-                    ResultSet rs6 = stmt6.executeQuery(s6);
-                    while (rs6.next()) {
-                        int id = rs6.getInt(1);
-                        String sales_no = rs6.getString(2);
-                        String item_code = rs6.getString(3);
-                        String barcode = rs6.getString(4);
-                        String description = rs6.getString(5);
-                        String generic_name = rs6.getString(6);
-                        String item_type = rs6.getString(7);
-                        String supplier_name = rs6.getString(8);
-                        String supplier_id = rs6.getString(9);
-                        String serial_no = rs6.getString(10);
-                        double product_qty = rs6.getDouble(11);
-                        String unit = rs6.getString(12);
-                        double conversion = rs6.getDouble(13);
-                        double selling_price = rs6.getDouble(14);
-                        String date_added = rs6.getString(15);
-                        String user_id = rs6.getString(16);
-                        String user_screen_name = rs6.getString(17);
-                        int status = rs6.getInt(18);
-                        int is_vatable = rs6.getInt(19);
-                        int selling_type = rs6.getInt(20);
-                        String discount_name = rs6.getString(21);
-                        double discount_rate = rs6.getDouble(22);
-                        double discount_amount = rs6.getDouble(23);
-                        String discount_customer_name = rs6.getString(24);
-                        String discount_customer_id = rs6.getString(25);
-                        String branch = rs6.getString(26);
-                        String branch_code = rs6.getString(27);
-                        String location = rs6.getString(28);
-                        String location_id = rs6.getString(29);
-                        String category = rs6.getString(30);
-                        String category_id = rs6.getString(31);
-                        String classification = rs6.getString(32);
-                        String classification_id = rs6.getString(33);
-                        String sub_classification = rs6.getString(34);
-                        String sub_classification_id = rs6.getString(35);
-                        String brand = rs6.getString(36);
-                        String brand_id = rs6.getString(37);
-                        String model = rs6.getString(38);
-                        String model_id = rs6.getString(39);
-                        int is_replacement = rs6.getInt(40);
-
-                        String transaction_type = "Exc-Replacement";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = "";
-                        String out = FitIn.fmt_woc(product_qty);
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_code;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_screen_name;
-                        String customer_name = "";
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + sales_no;
-                        String cost1 = "";
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        if (is_replacement == 0) {
-                            transaction_type = "Exc-Returned";
-                            in = FitIn.fmt_woc(product_qty);
-                            out = "";
-
-                            String s100 = "select "
-                                    + " date_added "
-                                    + " from sales "
-                                    + " where sales_no='" + sales_no + "' ";
-
-                            Statement stmt100 = conn.createStatement();
-                            ResultSet rs100 = stmt100.executeQuery(s100);
-                            String date_added1 = "";
-                            if (rs100.next()) {
-                                date_added1 = rs100.getString(1);
-                            }
-                            String months1 = POS.util.DateType.convert_slash_datetime3(date_added1);
-
-                            String months = DateType.convert_datetime_to_month(date_added);
-                            Srpt_item_ledger.field field1 = new Srpt_item_ledger.field("Sales", months1, "", in, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            return_exchange.add(field1);
-
-                            Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, "" + id, cost1, price1, months);
-                            return_exchange.add(field11);
-                        }
-
-                    }
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Charge in Advance ">
-                    String s7 = "select "
-                            + "id"
-                            + ",customer_id"
-                            + ",customer_name"
-                            + ",ar_id"
-                            + ",ar_no"
-                            + ",date_applied"
-                            + ",reference_no"
-                            + ",soa_type"
-                            + ",soa_type_id"
-                            + ",user_screen_name"
-                            + ",user_id"
-                            + ",remarks"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",generic_name"
-                            + ",item_type"
-                            + ",supplier_name"
-                            + ",supplier_id"
-                            + ",serial_no"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",conversion"
-                            + ",selling_price"
-                            + ",date_added"
-                            + ",status"
-                            + ",is_vatable"
-                            + ",selling_type"
-                            + ",discount_name"
-                            + ",discount_rate"
-                            + ",discount_amount"
-                            + ",discount_customer_name"
-                            + ",discount_customer_id"
-                            + ",branch"
-                            + ",branch_code"
-                            + ",location"
-                            + ",location_id"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_classification"
-                            + ",sub_classification_id"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",addtl_amount"
-                            + ",wtax"
-                            + " from charge_in_advance_items"
-                            + " " + where;
-
-                    Statement stmt7 = conn.createStatement();
-                    ResultSet rs7 = stmt7.executeQuery(s7);
-                    while (rs7.next()) {
-                        int id = rs7.getInt(1);
-                        String customer_id = rs7.getString(2);
-                        String customer_name = rs7.getString(3);
-                        String ar_id = rs7.getString(4);
-                        String ar_no = rs7.getString(5);
-                        String date_applied = rs7.getString(6);
-                        String reference_no = rs7.getString(7);
-                        String soa_type = rs7.getString(8);
-                        String soa_type_id = rs7.getString(9);
-                        String user_screen_name = rs7.getString(10);
-                        String user_id = rs7.getString(11);
-                        String remarks = rs7.getString(12);
-                        String item_code = rs7.getString(13);
-                        String barcode = rs7.getString(14);
-                        String description = rs7.getString(15);
-                        String generic_name = rs7.getString(16);
-                        String item_type = rs7.getString(17);
-                        String supplier_name = rs7.getString(18);
-                        String supplier_id = rs7.getString(19);
-                        String serial_no = rs7.getString(20);
-                        double product_qty = rs7.getDouble(21);
-                        String unit = rs7.getString(22);
-                        double conversion = rs7.getDouble(23);
-                        double selling_price = rs7.getDouble(24);
-                        String date_added = rs7.getString(25);
-                        int status = rs7.getInt(26);
-                        int is_vatable = rs7.getInt(27);
-                        int selling_type = rs7.getInt(28);
-                        String discount_name = rs7.getString(29);
-                        double discount_rate = rs7.getDouble(30);
-                        double discount_amount = rs7.getDouble(31);
-                        String discount_customer_name = rs7.getString(32);
-                        String discount_customer_id = rs7.getString(33);
-                        String branch = rs7.getString(34);
-                        String branch_code = rs7.getString(35);
-                        String location = rs7.getString(36);
-                        String location_id = rs7.getString(37);
-                        String category = rs7.getString(38);
-                        String category_id = rs7.getString(39);
-                        String classification = rs7.getString(40);
-                        String classification_id = rs7.getString(41);
-                        String sub_classification = rs7.getString(42);
-                        String sub_classification_id = rs7.getString(43);
-                        String brand = rs7.getString(44);
-                        String brand_id = rs7.getString(45);
-                        String model = rs7.getString(46);
-                        String model_id = rs7.getString(47);
-                        double addtl_amount = rs7.getDouble(48);
-                        double wtax = rs7.getDouble(49);
-
-                        String transaction_type = "Charge in Advance[-]";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = "";
-                        String out = FitIn.fmt_woc(product_qty);
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_code;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_screen_name;
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + ar_no;
-                        String cost1 = "";
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        String months = DateType.convert_datetime_to_month(date_added);
-
-                        if (status == 0) {
-                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            charge_in_advance.add(field);
-                        } else {
-                            Srpt_item_ledger.field field = new Srpt_item_ledger.field("Charge in Advance[+]", date, out, "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            charge_in_advance.add(field);
-                        }
-
-                    }
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Replenishment ">
-                    String s9 = "select "
-                            + "id"
-                            + ",inventory_replenishment_no"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",conversion"
-                            + ",selling_price"
-                            + ",date_added"
-                            + ",user_id"
-                            + ",user_screen_name"
-                            + ",status"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + " from inventory_replenishment_items"
-                            + " " + wheree;
-
-                    Statement stmt9 = conn.createStatement();
-                    ResultSet rs9 = stmt9.executeQuery(s9);
-                    while (rs9.next()) {
-                        int id = rs9.getInt(1);
-                        String inventory_replenishment_no = rs9.getString(2);
-                        String item_code = rs9.getString(3);
-                        String barcode = rs9.getString(4);
-                        String description = rs9.getString(5);
-                        double product_qty = rs9.getDouble(6);
-                        String unit = rs9.getString(7);
-                        double conversion = rs9.getDouble(8);
-                        double selling_price = rs9.getDouble(9);
-                        String date_added = rs9.getString(10);
-                        String user_id = rs9.getString(11);
-                        String user_screen_name = rs9.getString(12);
-                        int status = rs9.getInt(13);
-                        String branch = rs9.getString(14);
-                        String branch_id = rs9.getString(15);
-                        String location = rs9.getString(16);
-                        String location_id = rs9.getString(17);
-
-                        String transaction_type = "Replenishment";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = "";
-                        String out = FitIn.fmt_woc(product_qty);
-
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_id;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = user_screen_name;
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + inventory_replenishment_no;
-                        String cost1 = "";
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        String months = DateType.convert_datetime_to_month(date_added);
-                        Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, user_screen_name, created, transaction_no, cost1, price1, months);
-                        replenishments.add(field);
-                    }
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Requisition Slip ">
-                    String s10 = "select "
-                            + "id"
-                            + ",requisition_slip_no"
-                            + ",requisition_date"
-                            + ",requisition_type"
-                            + ",requisition_department"
-                            + ",requisition_department_id"
-                            + ",requested_by"
-                            + ",item_code"
-                            + ",barcode"
-                            + ",description"
-                            + ",product_qty"
-                            + ",unit"
-                            + ",cost"
-                            + ",selling_price"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + ",date_added"
-                            + ",status"
-                            + " from requisition_slip_items"
-                            + " " + wheree;
-
-                    Statement stmt10 = conn.createStatement();
-                    ResultSet rs10 = stmt10.executeQuery(s10);
-                    while (rs10.next()) {
-                        int id = rs10.getInt(1);
-                        String requisition_slip_no = rs10.getString(2);
-                        String requisition_date = rs10.getString(3);
-                        String requisition_type = rs10.getString(4);
-                        String requisition_department = rs10.getString(5);
-                        String requisition_department_id = rs10.getString(6);
-                        String requested_by = rs10.getString(7);
-                        String item_code = rs10.getString(8);
-                        String barcode = rs10.getString(9);
-                        String description = rs10.getString(10);
-                        double product_qty = rs10.getDouble(11);
-
-                        String unit = rs10.getString(12);
-                        String uom = unit;
-                        String[] list = uom.split(",");
-                        String unit1 = "";
-                        double conversion = 1;
-                        int o = 0;
-                        for (String s : list) {
-                            int i = s.indexOf(":");
-                            int ii = s.indexOf("/");
-                            conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                            unit1 = s.substring(1, i);
-                            o++;
-                        }
-                        product_qty = product_qty * conversion;
-                        double cost = rs10.getDouble(13);
-                        double selling_price = rs10.getDouble(14);
-                        String branch = rs10.getString(15);
-                        String branch_id = rs10.getString(16);
-                        String location = rs10.getString(17);
-                        String location_id = rs10.getString(18);
-                        String date_added = rs10.getString(19);
-                        int status = rs10.getInt(20);
-
-                        String transaction_type = "Sales";
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        String in = "";
-                        String out = FitIn.fmt_woc(product_qty);
-                        String balance = "";
-                        String from_branch = branch;
-                        String from_branch_id = branch_id;
-                        String from_location = location;
-                        String from_location_id = location_id;
-                        String to_branch = "";
-                        String to_branch_id = "";
-                        String to_location = "";
-                        String to_location_id = "";
-                        String created_by = requested_by;
-                        String customer_name = "";
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        String transaction_no = "" + requisition_slip_no;
-                        String cost1 = "";
-                        String price1 = FitIn.fmt_wc_0(selling_price);
-                        String months = DateType.convert_datetime_to_month(date_added);
-                        if (status == 1) {
-                            Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Requisition Slip", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
-                            requistion_slips.add(field2);
-                        }
-                    }
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" Return from Customer ">
-                    String s12 = "select "
-                            + "id"
-                            + ",return_from_customer_no"
-                            + ",user_name"
-                            + ",session_no"
-                            + ",date_added"
-                            + ",supplier"
-                            + ",supplier_id"
-                            + ",reference_no"
-                            + ",remarks"
-                            + ",barcode"
-                            + ",description"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_class"
-                            + ",sub_class_id"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",conversion"
-                            + ",unit"
-                            + ",barcodes"
-                            + ",batch_no"
-                            + ",serial_no"
-                            + ",main_barcode"
-                            + ",qty"
-                            + ",cost"
-                            + ",status"
-                            + ",branch"
-                            + ",branch_id"
-                            + ",location"
-                            + ",location_id"
-                            + " from return_from_customer_items"
-                            + " " + where2;
-
-                    Statement stmt12 = conn.createStatement();
-                    ResultSet rs12 = stmt12.executeQuery(s12);
-                    while (rs12.next()) {
-                        int id = rs12.getInt(1);
-                        String user_name = rs12.getString(3);
-                        String date_added = rs12.getString(5);
-                        String reference_no = rs12.getString(8);
-                        double qty = rs12.getDouble(28);
-                        double cost = rs12.getDouble(29);
-
-                        String branch = rs12.getString(31);
-                        String branch_id = rs12.getString(32);
-                        String location = rs12.getString(33);
-                        String location_id = rs12.getString(34);
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
-                        return_from_customer.add(field2);
-                    }
-                    //</editor-fold>
-                    //<editor-fold defaultstate="collapsed" desc=" conversions ">
-                    String s13 = "select "
-                            + "id"
-                            + ",conversion_no"
-                            + ",user_name"
-                            + ",session_no"
-                            + ",date_added"
-                            + ",reference_no"
-                            + ",remarks"
-                            + ",barcode"
-                            + ",description"
-                            + ",category"
-                            + ",category_id"
-                            + ",classification"
-                            + ",classification_id"
-                            + ",sub_class"
-                            + ",sub_class_id"
-                            + ",brand"
-                            + ",brand_id"
-                            + ",model"
-                            + ",model_id"
-                            + ",conversion"
-                            + ",unit"
-                            + ",barcodes"
-                            + ",batch_no"
-                            + ",serial_no"
-                            + ",main_barcode"
-                            + ",qty"
-                            + ",cost"
-                            + ",status"
-                            + ",from_branch"
-                            + ",from_branch_id"
-                            + ",from_location"
-                            + ",from_location_id"
-                            + ",to_branch"
-                            + ",to_branch_id"
-                            + ",to_location"
-                            + ",to_location_id"
-                            + ",is_converted_from"
-                            + " from conversion_items"
-                            + " " + where5;
-
-                    Statement stmt13 = conn.createStatement();
-                    ResultSet rs13 = stmt13.executeQuery(s13);
-                    while (rs13.next()) {
-                        int id = rs13.getInt(1);
-                        String conversion_no = rs13.getString(2);
-                        String user_name = rs13.getString(3);
-                        String session_no = rs13.getString(4);
-                        String date_added = rs13.getString(5);
-                        String reference_no = rs13.getString(6);
-                        String remarks = rs13.getString(7);
-                        String barcode = rs13.getString(8);
-                        String description = rs13.getString(9);
-                        String category = rs13.getString(10);
-                        String category_id = rs13.getString(11);
-                        String classification = rs13.getString(12);
-                        String classification_id = rs13.getString(13);
-                        String sub_class = rs13.getString(14);
-                        String sub_class_id = rs13.getString(15);
-                        String brand = rs13.getString(16);
-                        String brand_id = rs13.getString(17);
-                        String model = rs13.getString(18);
-                        String model_id = rs13.getString(19);
-                        double conversion = rs13.getDouble(20);
-                        String unit = rs13.getString(21);
-                        String barcodes = rs13.getString(22);
-                        String batch_no = rs13.getString(23);
-                        String serial_no = rs13.getString(24);
-                        String main_barcode = rs13.getString(25);
-                        double qty = rs13.getDouble(26);
-                        qty = qty * conversion;
-                        double cost = rs13.getDouble(27);
-                        int status = rs13.getInt(28);
-                        String from_branch = rs13.getString(29);
-                        String from_branch_id = rs13.getString(30);
-                        String from_location = rs13.getString(31);
-                        String from_location_id = rs13.getString(32);
-                        String to_branch = rs13.getString(33);
-                        String to_branch_id = rs13.getString(34);
-                        String to_location = rs13.getString(35);
-                        String to_location_id = rs13.getString(36);
-                        int is_converted_from = rs13.getInt(37);
-
-                        String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                        Date created = new Date();
-                        try {
-                            created = POS.util.DateType.datetime.parse(date_added);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        if (is_converted_from == 1) {
-                            Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
-                            conversions.add(field2);
-                        } else {
-                            Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
-                            conversions.add(field2);
-                        }
-
-                    }
-                    //</editor-fold>
-                    fields.addAll(inventory_count);
-                    fields.addAll(sales);
-                    fields.addAll(receipts);
-                    fields.addAll(transfers);
-                    fields.addAll(adjustments);
-                    fields.addAll(return_exchange);
-                    fields.addAll(charge_in_advance);
-                    fields.addAll(charge_in_advance_cancelled);
-                    fields.addAll(replenishments);
-                    fields.addAll(requistion_slips);
-                    fields.addAll(return_from_customer);
-                    fields.addAll(conversions);
-                    List<Srpt_item_ledger.field> f_field = new ArrayList();
-
-                    Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {
-                        @Override
-                        public int compare(Srpt_item_ledger.field o1, Srpt_item_ledger.field o2) {
-                            return o1.getDate_added().compareTo(o2.getDate_added());
-                        }
-                    });
-
-                    double running_balance = 0;
-                    double qty = 0;
-                    for (Srpt_item_ledger.field f : fields) {
-                        if (FitIn.toDouble(f.getIn()) > 0) {
-                            qty += FitIn.toDouble(f.getIn());
-                        } else {
-                            qty -= FitIn.toDouble(f.getOut());
-                        }
-                        if (f.transaction_type.equalsIgnoreCase("Replenishment")) {
-                            qty = 0;
-                        }
-                        f.setFrom_branch(my_branch);
-                        f.setFrom_location(my_location);
-                        f.setBalance(FitIn.fmt_woc(qty));
-                        field3.add(f);
-                    }
-
-                    List<Srpt_item_ledger.field> fields2 = new ArrayList();
-                    String jrxml = "rpt_inventory_ledger.jrxml";
-                    for (Srpt_item_ledger.field to2 : field3) {
-                        String m = DateType.m1.format(to2.date_added);
-                        String y = DateType.y.format(to2.date_added);
-                        if (year.equals(y) && jCheckBox3.isSelected()) {
-                            fields2.add(to2);
-                            running_balance = FitIn.toDouble(to2.getBalance());
-                        }
-                        if (year.equals(y) && !jCheckBox3.isSelected()) {
-                            if (month.equalsIgnoreCase(m)) {
-                                fields2.add(to2);
-                                running_balance = FitIn.toDouble(to2.getBalance());
-                            }
-                        }
-                    }
-
-                    String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-                    String contact_no = System.getProperty("telephone_number", "");
-                    String address = System.getProperty("address", "Dumaguete City");
-                    String date = "" + jYearChooser1.getYear();
-                    String item_code = my_item_code;
-                    String barcode = my_barcode;
-                    String description = my_description;
-                    String branch = "All";
-                    String location = tf_branch_location.getText();
-                    List<Srpt_item_ledger.field> field4 = new ArrayList();
-                    int m = jMonthChooser1.getMonth();
-                    String[] mm = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
-                    Srpt_item_ledger rpt = new Srpt_item_ledger(business_name, address, contact_no, date, item_code, barcode, description, branch, location, mm[m], running_balance);
-                    rpt.fields.addAll(fields2);
-                    report_sales_items(rpt, jrxml);
-                    InputStream is = Srpt_item_ledger.class.getResourceAsStream(jrxml);
-                    try {
-                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
-
-                        jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
-
-                    } catch (JRException ex) {
-                        Logger.getLogger(Dlg_report_items.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    MyConnection.close();
+                String item_code = my_item_code;
+                String barcode = my_barcode;
+                String description = my_description;
+                String loc_id = lo.getId();
+                String year = "" + jYearChooser1.getYear();
+                int month = (jMonthChooser1.getMonth() + 1);
+                String branch = my_branch;
+                String location = my_location;
+                boolean is_month_selected = false;
+                if (jCheckBox3.isSelected()) {
+                    is_month_selected = true;
                 }
 
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected);
+
+                String jrxml = "rpt_inventory_ledger.jrxml";
+                report_sales_items(rpt, jrxml);
+                InputStream is = Srpt_item_ledger.class.getResourceAsStream(jrxml);
+                try {
+                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
+
+                    jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+                } catch (JRException ex) {
+                    Logger.getLogger(Dlg_report_items.class.getName()).log(Level.SEVERE, null, ex);
+                }
 //                
                 Button.Search search = (Button.Search) jButton1;
                 search.finish();
@@ -2196,13 +1105,12 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         t.start();
     }
 
-    public static List<Srpt_item_ledger.field> ledger(){
-        List<Srpt_item_ledger.field> fields2=new ArrayList();
-        
-        
+    public static List<Srpt_item_ledger.field> ledger() {
+        List<Srpt_item_ledger.field> fields2 = new ArrayList();
+
         return fields2;
     }
-    
+
     private void init_report2() {
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
@@ -3604,6 +2512,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_inv_count.OutputData data) {
                 closeDialog.ok();
+                jButton9.setBackground(new java.awt.Color(244, 244, 244));
+                jButton9.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3619,7 +2529,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_receipts.OutputData data) {
                 closeDialog.ok();
-
+                jButton10.setBackground(new java.awt.Color(244, 244, 244));
+                jButton10.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3635,6 +2546,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_sales.OutputData data) {
                 closeDialog.ok();
+                jButton11.setBackground(new java.awt.Color(244, 244, 244));
+                jButton11.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3650,7 +2563,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_charge_in_advance.OutputData data) {
                 closeDialog.ok();
-
+                jButton15.setBackground(new java.awt.Color(244, 244, 244));
+                jButton15.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3666,7 +2580,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_transfers.OutputData data) {
                 closeDialog.ok();
-
+                jButton12.setBackground(new java.awt.Color(244, 244, 244));
+                jButton12.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3682,7 +2597,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_adjustments.OutputData data) {
                 closeDialog.ok();
-
+                jButton13.setBackground(new java.awt.Color(244, 244, 244));
+                jButton13.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3697,6 +2613,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_item_ledger_replacements.OutputData data) {
                 closeDialog.ok();
+                jButton14.setBackground(new java.awt.Color(244, 244, 244));
+                jButton14.setForeground(new java.awt.Color(20, 20, 20));
             }
         });
         nd.setLocationRelativeTo(this);

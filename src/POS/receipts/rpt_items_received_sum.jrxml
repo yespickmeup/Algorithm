@@ -265,9 +265,9 @@
                 <reportElement uuid="eb6270b2-7c34-4ba7-8070-bda68dee6025" x="59" y="0" width="63" height="12"/>
                 <box>
                     <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
@@ -279,7 +279,9 @@
                 <reportElement uuid="11fe7104-66c5-4bc4-95c4-bfab1b4df147" x="336" y="0" width="35" height="12"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
@@ -291,7 +293,9 @@
                 <reportElement uuid="7957163e-e23a-490d-b9d1-8f9894a28e8b" x="122" y="0" width="214" height="12"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
@@ -303,6 +307,7 @@
                 <reportElement uuid="2d3e3ba5-d66b-4b13-8501-4dce8d204548" mode="Transparent" x="466" y="0" width="89" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
                     <rightPen lineWidth="0.2"/>
                 </box>
@@ -316,7 +321,9 @@
                 <reportElement uuid="406d8eb4-3eab-453a-855e-5517cad9d6db" x="371" y="0" width="30" height="12"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
@@ -330,7 +337,7 @@
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
@@ -342,7 +349,9 @@
                 <reportElement uuid="001f020c-9b91-415e-ba81-f37c2ba54ca1" x="401" y="0" width="65" height="12"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font size="9"/>
@@ -361,10 +370,12 @@
     <summary>
         <band height="22" splitType="Stretch">
             <textField pattern="#,##0" isBlankWhenNull="false">
-                <reportElement uuid="4c675be3-cb8b-4bbf-8768-0ad994fe674a" mode="Transparent" x="80" y="1" width="321" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="4c675be3-cb8b-4bbf-8768-0ad994fe674a" mode="Transparent" x="122" y="1" width="249" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
                     <font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -373,9 +384,10 @@
                 <textFieldExpression><![CDATA[$V{qty_1}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0.00" isBlankWhenNull="false">
-                <reportElement uuid="95105de0-cd15-4d29-af20-5c6e9b26b6a1" mode="Transparent" x="465" y="1" width="89" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="95105de0-cd15-4d29-af20-5c6e9b26b6a1" mode="Transparent" x="466" y="1" width="88" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
                 <box>
                     <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
                     <rightPen lineWidth="0.2"/>
                 </box>
@@ -386,11 +398,12 @@
                 <textFieldExpression><![CDATA[$V{amount_1}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="401" y="1" width="65" height="15"/>
+                <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="371" y="1" width="95" height="15"/>
                 <box>
                     <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font size="9" isBold="true"/>
@@ -399,11 +412,12 @@
                 <text><![CDATA[Total Amount:]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="0" y="1" width="81" height="15"/>
+                <reportElement uuid="0cb01b4a-25ff-4279-a19d-748006860f21" x="0" y="1" width="122" height="15"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
                     <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font size="9" isBold="true"/>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3638d0d1-06fc-4c2b-9cae-9a791d0fa2d3">
     <property name="ireport.zoom" value="2.0"/>
     <property name="ireport.x" value="0"/>
-    <property name="ireport.y" value="43"/>
+    <property name="ireport.y" value="39"/>
     <parameter name="business_name" class="java.lang.String"/>
     <parameter name="address" class="java.lang.String"/>
     <parameter name="date" class="java.lang.String"/>
@@ -420,11 +420,14 @@
         <band splitType="Stretch"/>
     </columnHeader>
     <detail>
-        <band height="15" splitType="Stretch">
+        <band height="13" splitType="Stretch">
             <textField>
-                <reportElement uuid="235c7311-6e83-4cba-9766-f6ef1f59e930" x="0" y="0" width="59" height="15"/>
+                <reportElement uuid="235c7311-6e83-4cba-9766-f6ef1f59e930" x="0" y="0" width="59" height="13"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="5"/>
@@ -432,43 +435,76 @@
                 <textFieldExpression><![CDATA[$F{item_code}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="eb6270b2-7c34-4ba7-8070-bda68dee6025" x="59" y="0" width="63" height="15"/>
+                <reportElement uuid="eb6270b2-7c34-4ba7-8070-bda68dee6025" x="59" y="0" width="63" height="13"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="7957163e-e23a-490d-b9d1-8f9894a28e8b" x="122" y="0" width="214" height="15"/>
+                <reportElement uuid="7957163e-e23a-490d-b9d1-8f9894a28e8b" x="122" y="0" width="214" height="13"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0">
-                <reportElement uuid="11fe7104-66c5-4bc4-95c4-bfab1b4df147" x="336" y="0" width="35" height="15"/>
+                <reportElement uuid="11fe7104-66c5-4bc4-95c4-bfab1b4df147" x="336" y="0" width="35" height="13"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0.00">
-                <reportElement uuid="001f020c-9b91-415e-ba81-f37c2ba54ca1" x="401" y="0" width="65" height="15"/>
+                <reportElement uuid="001f020c-9b91-415e-ba81-f37c2ba54ca1" x="401" y="0" width="65" height="13"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <paragraph leftIndent="2" rightIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="406d8eb4-3eab-453a-855e-5517cad9d6db" x="371" y="0" width="30" height="15"/>
+                <reportElement uuid="406d8eb4-3eab-453a-855e-5517cad9d6db" x="371" y="0" width="30" height="13"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0.00" isBlankWhenNull="false">
-                <reportElement uuid="2d3e3ba5-d66b-4b13-8501-4dce8d204548" mode="Transparent" x="466" y="0" width="89" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="2d3e3ba5-d66b-4b13-8501-4dce8d204548" mode="Transparent" x="466" y="0" width="89" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
                 <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">

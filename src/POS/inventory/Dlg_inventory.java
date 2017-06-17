@@ -16,7 +16,7 @@ import POS.receipts.S1_receipt_items;
 import POS.selling_type.S1_selling_type;
 import POS.util.Alert;
 import POS.util.DateType;
-import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -2415,13 +2415,13 @@ public class Dlg_inventory extends javax.swing.JDialog {
             return;
         }
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
 //        nd.do_pass(services);
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 Inventory.to_inventory to1 = inventory_list.get(selected_row);
                 Inventory.delete_inventory(to1);

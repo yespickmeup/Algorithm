@@ -12,7 +12,6 @@ import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
-import POS.my_services.Dlg_my_service_confirm;
 import POS.purchase_order.Purchase_order;
 import POS.purchase_order.Purchase_order_item;
 import POS.receipts.S1_receipt_orders.to_receipt_items;
@@ -2072,7 +2071,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 //        System.setProperty("module_accounts_payable","1");
 //        System.setProperty("delete_receipts_finalized", "true");
 //        System.setProperty("pool_host", "192.168.1.51");
@@ -2291,7 +2290,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String branch_id = to.branch_id;
             String location = to.location;
             String location_id = to.location_id;
-            to_receipt_items t = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id);
+            int status = 0;
+            to_receipt_items t = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
 
             acc.add(t);
         }
@@ -2459,7 +2459,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.
                 setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_receipt_items.setRowHeight(25);
-        int[] tbl_widths_receipt_items = {70, 70, 100, 70, 80, 100, 100, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_receipt_items = {70, 70, 100, 70, 80, 100, 100, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_receipt_items.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -2489,7 +2489,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     public static class Tblreceipt_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Qty", "Item Code", "Description", "Unit", "Conversion", "Cost", "Total", "", "", "Description", "id", "Cost", "category", "category_id", "classification", "classification_id", "sub_class", "Total"
+            "Qty", "Item Code", "Description", "Unit", "Conversion", "Cost", "Total", "", "", "", "id", "Cost", "category", "category_id", "classification", "classification_id", "sub_class", "Total"
         };
 
         public Tblreceipt_itemsModel(ListModel listmodel) {
@@ -2559,7 +2559,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 case 8:
                     return " Delete";
                 case 9:
-                    return tt.description;
+                    if (tt.status == 0 && tt.id == -1) {
+                        return " ";
+                    } else if (tt.status == 1) {
+                        return " Finalized";
+                    } else if (tt.status == 0 && tt.id != -1) {
+                        return " Posted";
+                    } else {
+                        return " Deleted";
+                    }
                 case 10:
                     return tt.qty;
                 case 11:
@@ -2625,8 +2633,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String branch_id = rec.branch_id;
             String location = rec.location;
             String location_id = rec.location_id;
-
-            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id);
+            int status = rec.status;
+            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
             datas2.add(d);
         }
         loadData_receipt_items(datas2);
@@ -2689,7 +2697,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 double conversion = data.conversion;
                 String unit = data.unit;
 //                System.out.println("unit: " + unit);
-                to_receipt_items to2 = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id);
+                int status = 0;
+                to_receipt_items to2 = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
                 int naa = 0;
                 for (to_receipt_items to3 : datas) {
                     if (to3.barcode.equals(to2.barcode) && to3.unit.
@@ -2718,7 +2727,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         List<S1_receipt_items.to_receipt_items> d = new ArrayList();
                         String sup = supplier;
                         String sup_id = supllier_id;
-                        int status = 0;
+
                         S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to.conversion, to.unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, location, location_id, location, location_id);
                         d.add(to4);
                         S1_receipt_items.add_receipt_items(d, too.receipt_no);
@@ -3357,8 +3366,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String branch_id = rec.branch_id;
             String location = rec.location;
             String location_id = rec.location_id;
-
-            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id);
+            int status = rec.status;
+            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
             datas2.add(d);
         }
         loadData_receipt_items(datas2);
@@ -3692,12 +3701,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
         }
 
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 List<S1_receipt_orders.to_receipt_items> items = tbl_receipt_items_ALM;
                 if (delete_receipts_finalized.equalsIgnoreCase("true") && to.status == 1) {
@@ -3823,12 +3832,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     return;
                 }
                 Window p = (Window) this;
-                Dlg_my_service_confirm nd = Dlg_my_service_confirm.create(p, true);
+                Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
                 nd.setTitle("");
-                nd.setCallback(new Dlg_my_service_confirm.Callback() {
-
+                nd.setCallback(new Dlg_confirm_delete.Callback() {
                     @Override
-                    public void ok(CloseDialog closeDialog, Dlg_my_service_confirm.OutputData data) {
+                    public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                         closeDialog.ok();
                         S1_receipt_items.delete_receipt_items4("" + to.id);
                         data_cols_items();

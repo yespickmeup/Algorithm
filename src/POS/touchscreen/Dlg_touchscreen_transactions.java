@@ -309,6 +309,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton1 = new Button.Success();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -668,12 +669,9 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     .addComponent(lbl_sale_discount))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel48)
-                        .addGap(1, 1, 1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel49)
-                        .addGap(1, 1, 1)))
+                    .addComponent(jLabel48)
+                    .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(1, 1, 1)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -861,6 +859,9 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Void/Item Replacements/Print");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -869,6 +870,17 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -887,27 +899,20 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                         .addGap(1, 1, 1)
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(1, 1, 1)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
+                    .addComponent(jCheckBox3)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1011,6 +1016,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1086,7 +1092,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1359,12 +1365,12 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     return html;
                 case 1:
 
-                    return "  " + FitIn.fmt_woc((tt.product_qty / tt.conversion) );
+                    return "  " + FitIn.fmt_woc((tt.product_qty / tt.conversion));
                 case 2:
                     Dlg_inventory_uom.to_uom uomss = uom.default_uom(tt.unit);
-                     String uom = uomss.uom;
+                    String uom = uomss.uom;
                     uom = uom.replaceAll("#", "/");
-                   
+
                     return " " + uom;
                 case 3:
                     return " " + FitIn.fmt_wc_0(tt.discount_amount) + " ";
@@ -1471,17 +1477,20 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         if (my_sale == null) {
             return;
         }
-        try {
-            Date from = DateType.datetime.parse(my_sale.date_added);
-            Date now = new Date();
-            int count_days = Counter.getDayCount(from, now);
-            Alert.set(0, count_days + " day/s have past!");
-            if (count_days > 0) {
-                Alert.set(0, "Unable to void transaction, " + count_days + " day/s have past!");
-                return;
+        String pool_db = System.getProperty("pool_db", "db_smis");
+        if (!pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+            try {
+                Date from = DateType.datetime.parse(my_sale.date_added);
+                Date now = new Date();
+                int count_days = Counter.getDayCount(from, now);
+                Alert.set(0, count_days + " day/s have past!");
+                if (count_days > 0) {
+                    Alert.set(0, "Unable to void transaction, " + count_days + " day/s have past!");
+                    return;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(Dlg_touchscreen_transactions.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(Dlg_touchscreen_transactions.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Window p = (Window) this;
@@ -1765,19 +1774,19 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-    
-     private void reprint_or() {
-         
+
+    private void reprint_or() {
+
         List<Inventory_barcodes.to_inventory_barcodes> orders = MySales_Items.convert_order2(tbl_sale_items_ALM);
         double sale_discount = FitIn.toDouble(lbl_sale_discount.getText());
         double net_total = FitIn.toDouble(lbl_balance_due.getText());
         double cash_amount = FitIn.toDouble(lbl_cash.getText());
         double change_amount = 0;
-        String sales_date=lbl_date.getText();
+        String sales_date = lbl_date.getText();
         Window p = (Window) this;
         Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
         nd.setTitle("");
-        nd.do_pass(orders, sale_discount, net_total, my_sale, cash_amount, change_amount,sales_date);
+        nd.do_pass(orders, sale_discount, net_total, my_sale, cash_amount, change_amount, sales_date);
         nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
 
             @Override

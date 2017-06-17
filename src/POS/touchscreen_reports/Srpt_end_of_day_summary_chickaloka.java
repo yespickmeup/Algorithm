@@ -5,13 +5,21 @@
  */
 package POS.touchscreen_reports;
 
+import POS.inventory_reports.MyLedger;
+import POS.inventory_reports.Srpt_item_ledger;
+import POS.util.DateType;
+import POS.util.DateUtils1;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mijzcx.synapse.desk.utils.FitIn;
 
 /**
@@ -98,10 +106,12 @@ public class Srpt_end_of_day_summary_chickaloka {
         double voucher;
         double shortage;
         double selling_price;
+        double other_adjustment;
+
         public field() {
         }
 
-        public field(String item_code, String description, double beg_inv, double new_in, double damage, double sales_qty, double end_inv, double amount, double po, double transfer, double left_over, double voucher, double shortage,double selling_price) {
+        public field(String item_code, String description, double beg_inv, double new_in, double damage, double sales_qty, double end_inv, double amount, double po, double transfer, double left_over, double voucher, double shortage, double selling_price, double other_adjustment) {
             this.item_code = item_code;
             this.description = description;
             this.beg_inv = beg_inv;
@@ -115,7 +125,16 @@ public class Srpt_end_of_day_summary_chickaloka {
             this.left_over = left_over;
             this.voucher = voucher;
             this.shortage = shortage;
-            this.selling_price=selling_price;
+            this.selling_price = selling_price;
+            this.other_adjustment = other_adjustment;
+        }
+
+        public double getOther_adjustment() {
+            return other_adjustment;
+        }
+
+        public void setOther_adjustment(double other_adjustment) {
+            this.other_adjustment = other_adjustment;
         }
 
         public double getSelling_price() {
@@ -125,7 +144,7 @@ public class Srpt_end_of_day_summary_chickaloka {
         public void setSelling_price(double selling_price) {
             this.selling_price = selling_price;
         }
-        
+
         public String getItem_code() {
             return item_code;
         }
@@ -232,8 +251,12 @@ public class Srpt_end_of_day_summary_chickaloka {
 
     }
 
-    public static List<Srpt_end_of_day_summary_chickaloka.field> ret_data_group_by_code(String where) {
+    public static List<Srpt_end_of_day_summary_chickaloka.field> ret_data_group_by_code(String where, String year, int month, boolean is_month_selected, Date date, Date beggining_date) {
         List<Srpt_end_of_day_summary_chickaloka.field> fields = new ArrayList();
+
+//        System.out.println("Yesterday: " + beggining_date);
+//        System.out.println("Todays Date: " + date);
+//        System.out.println("--------------------------");
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -345,7 +368,6 @@ public class Srpt_end_of_day_summary_chickaloka {
                 }
 
                 double amount = (price * product_qty) - discount;
-
                 double beg_inv = 0;
                 double new_in = 0;
                 double damage = 0;
@@ -356,7 +378,69 @@ public class Srpt_end_of_day_summary_chickaloka {
                 double left_over = 0;
                 double voucher = 0;
                 double shortage = 0;
-                Srpt_end_of_day_summary_chickaloka.field field = new field(item_code, description, beg_inv, new_in, damage, sales_qty, end_inv, amount, po, transfer, left_over, voucher, shortage,selling_price);
+                double other_adjustment = 0;
+//                System.out.println("item_code: " + item_code);
+//                System.out.println("Description: " + description);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected);
+                List<Srpt_item_ledger.field> ledger = rpt.fields;
+
+                for (Srpt_item_ledger.field field : ledger) {
+                    try {
+                        Date f_date = DateType.slash_w_time.parse(field.getDate());
+                        int count = DateUtils1.count_days(f_date, date);
+                        if (count >= 1) {  //yesterday
+
+                            if (FitIn.toDouble(field.getIn()) > 0) {
+                                beg_inv += FitIn.toDouble(field.getIn());
+                            } else {
+                                beg_inv -= FitIn.toDouble(field.getOut());
+                            }
+                        }
+                        if (count == 0) {
+//                            today
+                            if (field.getTransaction_type().equalsIgnoreCase("Inventory Count")) {
+                                beg_inv += FitIn.toDouble(field.getIn());
+
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Transfer-In") || field.getTransaction_type().equalsIgnoreCase("Receipts")) {
+                                new_in += FitIn.toDouble(field.getIn());
+
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Add")) {
+                                if (field.getCustomer_name().contains("Damage")) {
+                                    damage += FitIn.toDouble(field.getIn());
+                                } else if (field.getCustomer_name().contains("Leftover")) {
+                                    left_over += FitIn.toDouble(field.getIn());
+                                } else if (field.getCustomer_name().contains("Voucher")) {
+                                    voucher += FitIn.toDouble(field.getIn());
+                                } else {
+                                    other_adjustment += FitIn.toDouble(field.getIn());
+                                }
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Deduct")) {
+                                if (field.getCustomer_name().contains("Damage")) {
+                                    damage -= FitIn.toDouble(field.getOut());
+                                } else if (field.getCustomer_name().contains("Leftover")) {
+                                    left_over -= FitIn.toDouble(field.getOut());
+                                } else if (field.getCustomer_name().contains("Voucher")) {
+                                    voucher -= FitIn.toDouble(field.getOut());
+                                } else {
+                                    other_adjustment -= FitIn.toDouble(field.getOut());
+                                }
+                            }
+                        } else {
+
+                        }
+//                        System.out.println("    " + field.getTransaction_type() + " : " + f_date + " / " + date + " | count: " + count);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Srpt_end_of_day_summary_chickaloka.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                end_inv = (beg_inv + ((new_in) + other_adjustment)) - sales_qty;
+                end_inv = end_inv + (damage + left_over + voucher);
+//                System.out.println("************************");
+                Srpt_end_of_day_summary_chickaloka.field field = new field(item_code, description, beg_inv, new_in, damage, sales_qty, end_inv, amount, po, transfer, left_over, voucher, shortage, selling_price, other_adjustment);
                 fields.add(field);
             }
 

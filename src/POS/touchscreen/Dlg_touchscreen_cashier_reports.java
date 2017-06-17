@@ -15,7 +15,6 @@ import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -191,6 +190,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         pnl_holder = new javax.swing.JPanel();
         pnl_summary = new javax.swing.JPanel();
@@ -226,7 +226,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_summary.setLayout(pnl_summaryLayout);
         pnl_summaryLayout.setHorizontalGroup(
             pnl_summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_summaryLayout.setVerticalGroup(
             pnl_summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +241,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_cashcount.setLayout(pnl_cashcountLayout);
         pnl_cashcountLayout.setHorizontalGroup(
             pnl_cashcountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_cashcountLayout.setVerticalGroup(
             pnl_cashcountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +256,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_ledger.setLayout(pnl_ledgerLayout);
         pnl_ledgerLayout.setHorizontalGroup(
             pnl_ledgerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_ledgerLayout.setVerticalGroup(
             pnl_ledgerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +271,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_item.setLayout(pnl_itemLayout);
         pnl_itemLayout.setHorizontalGroup(
             pnl_itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_itemLayout.setVerticalGroup(
             pnl_itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +286,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_transaction.setLayout(pnl_transactionLayout);
         pnl_transactionLayout.setHorizontalGroup(
             pnl_transactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_transactionLayout.setVerticalGroup(
             pnl_transactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +301,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_remittance.setLayout(pnl_remittanceLayout);
         pnl_remittanceLayout.setHorizontalGroup(
             pnl_remittanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_remittanceLayout.setVerticalGroup(
             pnl_remittanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,7 +316,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_ar_payments.setLayout(pnl_ar_paymentsLayout);
         pnl_ar_paymentsLayout.setHorizontalGroup(
             pnl_ar_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_ar_paymentsLayout.setVerticalGroup(
             pnl_ar_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +331,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         pnl_prepaid_payments.setLayout(pnl_prepaid_paymentsLayout);
         pnl_prepaid_paymentsLayout.setHorizontalGroup(
             pnl_prepaid_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGap(0, 987, Short.MAX_VALUE)
         );
         pnl_prepaid_paymentsLayout.setVerticalGroup(
             pnl_prepaid_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,15 +342,20 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(244, 244, 244));
 
-        jButton3.setBackground(new java.awt.Color(244, 244, 244));
+        jButton3.setBackground(new java.awt.Color(4, 100, 217));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/summary.png"))); // NOI18N
         jButton3.setToolTipText("Sales Summary");
+        buttonGroup1.add(jButton3);
         jButton3.setContentAreaFilled(false);
         jButton3.setFocusable(false);
         jButton3.setOpaque(true);
+        jButton3.setSelected(true);
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton3MouseEntered(evt);
             }
         });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -362,6 +367,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         jButton4.setBackground(new java.awt.Color(244, 244, 244));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/abacus7.png"))); // NOI18N
         jButton4.setToolTipText("Cash Count");
+        buttonGroup1.add(jButton4);
         jButton4.setContentAreaFilled(false);
         jButton4.setFocusable(false);
         jButton4.setOpaque(true);
@@ -379,9 +385,18 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         jButton5.setBackground(new java.awt.Color(244, 244, 244));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/seo2 (1).png"))); // NOI18N
         jButton5.setToolTipText("Sales Transactions");
+        buttonGroup1.add(jButton5);
         jButton5.setContentAreaFilled(false);
         jButton5.setFocusable(false);
         jButton5.setOpaque(true);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton5MouseEntered(evt);
+            }
+        });
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -391,9 +406,15 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         jButton6.setBackground(new java.awt.Color(244, 244, 244));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/item.png"))); // NOI18N
         jButton6.setToolTipText("Sales by Item");
+        buttonGroup1.add(jButton6);
         jButton6.setContentAreaFilled(false);
         jButton6.setFocusable(false);
         jButton6.setOpaque(true);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -414,9 +435,15 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         jButton8.setBackground(new java.awt.Color(244, 244, 244));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/touchscreen_icons/strategical.png"))); // NOI18N
         jButton8.setToolTipText("Void/Item Replacements/Print");
+        buttonGroup1.add(jButton8);
         jButton8.setContentAreaFilled(false);
         jButton8.setFocusable(false);
         jButton8.setOpaque(true);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -426,6 +453,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         jButton9.setBackground(new java.awt.Color(244, 244, 244));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons3/moneybox (1).png"))); // NOI18N
         jButton9.setToolTipText("Remitances");
+        buttonGroup1.add(jButton9);
         jButton9.setContentAreaFilled(false);
         jButton9.setFocusable(false);
         jButton9.setOpaque(true);
@@ -561,11 +589,11 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-
+        get_selected_button(0);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-
+        get_selected_button(1);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -578,7 +606,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
-        // TODO add your handling code here:
+        get_selected_button(2);
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -596,11 +624,32 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         cardLayout.show(pnl_holder, "8");
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseEntered
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        get_selected_button(3);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        get_selected_button(4);
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        get_selected_button(5);
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
+//         jButton3.setBackground(new java.awt.Color(4, 144, 217));
+    }//GEN-LAST:event_jButton3MouseEntered
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
@@ -628,22 +677,21 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 
         init_key();
-        hover();
+
         init_panel_layout();
         get_privelege();
 
-//        jButton3.setEnabled(true);
-//        jButton4.setEnabled(true);
-//        jButton9.setEnabled(true);
-//        jButton5.setEnabled(true);
-//        jButton6.setEnabled(true);
-//        jButton8.setEnabled(true);
-        
-        
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton9.setEnabled(true);
+        jButton5.setEnabled(true);
+        jButton6.setEnabled(true);
+        jButton8.setEnabled(true);
+
         if (jButton3.isEnabled()) {
             init_sales_summary();
         }
-        
+
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -863,37 +911,14 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     }
 //</editor-fold>
 
-    private void hover() {
-        JButton[] btns = {jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9, jButton10, jButton11};
-        final String[] txts = {"Sales Summary", "Cash Count", "Sales Ledger", "Sales by Item", "Close", "Sales Transaction", "Remittance", "AR Payments", "Prepayments"};
-        int i = 0;
-        for (final JButton btn : btns) {
-            final int ii = i;
-            btn.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    Point point = btn.getLocationOnScreen();
-                    point = new Point(point.x + 100, point.y + 15);
-//                    Tip.set(Dlg_touchscreen_cashier_reports.this, point, txts[ii]);
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    btn.setBackground(new java.awt.Color(4, 176, 217));
-                    Point point = btn.getLocationOnScreen();
-                    point = new Point(point.x + 100, point.y + 15);
-//                    Tip.set(Dlg_touchscreen_cashier_reports.this, point, txts[ii]);
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    btn.setBackground(new java.awt.Color(244, 244, 244));
-                }
-            });
-            if (i < txts.length) {
-                i++;
+    private void get_selected_button(int index) {
+        JButton[] btns = {jButton3, jButton4, jButton9, jButton5, jButton6, jButton8};
+        for (int i = 0; i < btns.length; i++) {
+            if (i == index) {
+                btns[i].setBackground(new java.awt.Color(4, 100, 217));
+            } else {
+                btns[i].setBackground(new java.awt.Color(244, 244, 244));
             }
         }
     }
-
 }

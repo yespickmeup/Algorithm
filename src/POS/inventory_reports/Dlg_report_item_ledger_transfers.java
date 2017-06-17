@@ -5,7 +5,6 @@
  */
 package POS.inventory_reports;
 
-import POS.my_sales.MySales_Items;
 import POS.receipts.Stock_transfers_items;
 import POS.util.Alert;
 import POS.util.TableRenderer;
@@ -213,6 +212,7 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
         jTextField11 = new javax.swing.JTextField();
         jTextField12 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -315,6 +315,9 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("       Location:");
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel15.setText("Transfers");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -372,7 +375,8 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
                                     .addComponent(jTextField11))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -382,7 +386,9 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -455,7 +461,7 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        disposed();
+      ok();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
@@ -472,6 +478,7 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
@@ -516,7 +523,7 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
+//                disposed();
             }
         });
     }
@@ -582,5 +589,10 @@ public class Dlg_report_item_ledger_transfers extends javax.swing.JDialog {
                 jLabel11.setText(FitIn.fmt_woc(to.product_qty));
             }
         });
+    }
+    private void ok() {
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData());
+        }
     }
 }

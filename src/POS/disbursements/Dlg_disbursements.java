@@ -12,7 +12,7 @@ import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.DateType;
-import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -1207,12 +1207,12 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         }
         if (col == 7) {
             Window p = (Window) this;
-            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
-            nd.setCallback(new Dlg_confirm_action.Callback() {
+            nd.setCallback(new Dlg_confirm_delete.Callback() {
 
                 @Override
-                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
                     delete_disbursements();
                 }

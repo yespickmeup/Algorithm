@@ -19,6 +19,7 @@ import POS.prepaid_payments.Prepaid_payments;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
+import POS.util.DateType;
 import POS.util.TableRenderer;
 import java.awt.BorderLayout;
 import java.awt.Window;
@@ -26,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,7 +50,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
-import synsoftech.util.DateType;
 
 /**
  *
@@ -274,6 +275,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         pnl_report2 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jButton7 = new Button.Success();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -291,7 +293,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -327,7 +329,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 522, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -681,7 +683,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_report1Layout.setVerticalGroup(
             pnl_report1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -703,7 +705,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(619, Short.MAX_VALUE)
+                .addContainerGap(728, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -761,6 +763,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         });
 
         jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setSelected(true);
         jCheckBox9.setText("All");
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -843,7 +846,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     .addComponent(jCheckBox11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                     .addComponent(jTextField6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -890,7 +893,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_report2Layout.setVerticalGroup(
             pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -912,7 +915,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(619, Short.MAX_VALUE)
+                .addContainerGap(728, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -944,15 +947,28 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Chickaloka", jPanel8);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Sales Summary");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1113,6 +1129,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
@@ -1141,8 +1158,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     private void myInit() {
 
-        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
-
+//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         set_default_branch();
 
@@ -1159,6 +1175,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         Field.Combo user3 = (Field.Combo) tf_cashier2;
         user3.setText(MyUser.getUser_screen_name());
         user3.setId(MyUser.getUser_id());
+
+        String pool_db = System.getProperty("pool_db", "db_smis");
+        if (!pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+            jTabbedPane1.removeTabAt(2);
+        }
     }
 
     String my_branch = "";
@@ -1251,7 +1272,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         int width = 0;
         String[] col_names = {"Code"};
         TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(lo, obj, labels, tbl_widths_customers, col_names);
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
@@ -1259,9 +1280,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 lo.setText("" + to.location);
                 lo.setId("" + to.id);
 
-                Field.Combo branch = (Field.Combo) jTextField2;
-                branch.setText(to.branch);
-                branch.setId("" + to.branch_id);
+                br.setText(to.branch);
+                br.setId("" + to.branch_id);
             }
         });
     }
@@ -1739,10 +1759,17 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     location = "All";
                 }
                 String printed_by = MyUser.getUser_screen_name();
-                String cashier = "Cashier";
+                String cashier = tf_cashier1.getText();
+                if (jCheckBox5.isSelected()) {
+                    cashier = "All";
+                }
                 Srpt_sales_summary_per_cashier rpt = new Srpt_sales_summary_per_cashier(business_name, address, date, branch, location, printed_by, cashier);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_sales_summary_per_cashier.jrxml";
+                String pool_db = System.getProperty("pool_db", "db_smis");
+                if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+                    jrxml = "rpt_sales_summary_per_cashier_chickaloka.jrxml";
+                }
                 report_sales_ledger_per_cashier(rpt, jrxml);
                 InputStream is = Srpt_sales_summary_per_cashier.class.getResourceAsStream(jrxml);
                 try {
@@ -1844,7 +1871,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String address = System.getProperty("address", "Daro, Dumaguete City");
-                String date = DateType.slash.format(jDateChooser5.getDate()) ;
+                String date = DateType.slash.format(jDateChooser5.getDate());
                 String branch = jTextField5.getText();
                 String location = jTextField6.getText();
                 if (jCheckBox11.isSelected() && !jCheckBox10.isSelected()) {
@@ -1882,7 +1909,24 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 double cash_in_next_day = 0;
                 double cash_for_deposit = 0;
 //                System.out.println(where);
-                List<Srpt_end_of_day_summary_chickaloka.field> fields2 = Srpt_end_of_day_summary_chickaloka.ret_data_group_by_code(where);
+
+                String year = DateType.y.format(jDateChooser5.getDate());
+                int month = (FitIn.toInt(DateType.m1.format(jDateChooser5.getDate())) + 1);
+
+                boolean is_month_selected = true;
+                Date d = jDateChooser5.getDate();
+
+                int days = -1;
+                Date beggining_date = new Date();
+
+                Date dt = jDateChooser5.getDate();
+                Calendar c = Calendar.getInstance();
+                c.setTime(dt);
+                c.add(Calendar.DATE, -1);
+                dt = c.getTime();
+                beggining_date = dt;
+
+                List<Srpt_end_of_day_summary_chickaloka.field> fields2 = Srpt_end_of_day_summary_chickaloka.ret_data_group_by_code(where, year, month, is_month_selected, d, beggining_date);
 
                 String where_drawer = " where id<>0 ";
                 String where_sales2 = " where id<>0 "
@@ -1941,10 +1985,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     operation_expenses += disburse.amount;
                 }
 
-                cash_remitted = (cc_1000*1000) + (cc_500*500) + (cc_200*200) + (cc_100*100) + (cc_50*50)
-                        + (cc_20*20) + (cc_10*10) + (cc_5*5) + (cc_1*1) + (cc_point_50*.5) + (cc_point_25*.25)
-                        + (cc_point_10*.10) + (cc_point_05*.05);
-              
+                cash_remitted = (cc_1000 * 1000) + (cc_500 * 500) + (cc_200 * 200) + (cc_100 * 100) + (cc_50 * 50)
+                        + (cc_20 * 20) + (cc_10 * 10) + (cc_5 * 5) + (cc_1 * 1) + (cc_point_50 * .5) + (cc_point_25 * .25)
+                        + (cc_point_10 * .10) + (cc_point_05 * .05);
+
                 net_sales = (cash_sales + beggining_cash) - operation_expenses;
 
                 overage_shortage = cash_remitted - net_sales;
@@ -1956,8 +2000,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 }
                 cash_in_next_day = cash_remitted - cc_last_remittance;
                 cash_for_deposit = cc_last_remittance;
-                
-                
+
                 Srpt_end_of_day_summary_chickaloka rpt = new Srpt_end_of_day_summary_chickaloka(business_name, address, date, branch, location, cashier, beggining_cash, cash_sales, operation_expenses, net_sales, cc_1000, cc_500, cc_200, cc_100, cc_50, cc_20, cc_10, cc_5, cc_1, cc_point_50, cc_point_25, cc_point_10, cc_point_05, cc_total, cash_remitted, overage_shortage, cash_in_next_day, cash_for_deposit);
                 rpt.fields.addAll(fields2);
                 String jrxml = "rpt_end_of_day_summary_chickaloka.jrxml";

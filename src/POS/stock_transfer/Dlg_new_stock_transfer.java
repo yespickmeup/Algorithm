@@ -19,6 +19,7 @@ import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import POS.util.Users;
@@ -1177,6 +1178,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         buttonGroup4.add(jCheckBox19);
         jCheckBox19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox19.setSelected(true);
         jCheckBox19.setText("Finalized");
 
         tf_from_location3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1244,7 +1246,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         buttonGroup4.add(jCheckBox22);
         jCheckBox22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox22.setSelected(true);
         jCheckBox22.setText("Deleted");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -2587,7 +2588,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tbl_stock_transfers_items.setModel(tbl_stock_transfers_items_M);
         tbl_stock_transfers_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_stock_transfers_items.setRowHeight(25);
-        int[] tbl_widths_stock_transfers_items = {100, 100, 50, 50, 80, 80, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_stock_transfers_items = {100, 100, 50, 50, 80, 80, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_stock_transfers_items.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -2610,7 +2611,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     public static class Tblstock_transfers_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Code", "Description", "Qty", "Unit", "Cost", "Price", "", "", "sub_classification", "sub_classification_id", "product_qty", "unit", "conversion", "selling_price", "date_added", "user_name", "item_type", "status", "supplier", "fixed_price", "cost", "supplier_id", "multi_level_pricing", "vatable", "reorder_level", "markup", "barcodes", "brand", "brand_id", "model", "model_id", "selling_type", "branch", "branch_code", "location", "location_id"
+            "Code", "Description", "Qty", "Unit", "Cost", "Price", "", "", "Status", "sub_classification_id", "product_qty", "unit", "conversion", "selling_price", "date_added", "user_name", "item_type", "status", "supplier", "fixed_price", "cost", "supplier_id", "multi_level_pricing", "vatable", "reorder_level", "markup", "barcodes", "brand", "brand_id", "model", "model_id", "selling_type", "branch", "branch_code", "location", "location_id"
         };
 
         public Tblstock_transfers_itemsModel(ListModel listmodel) {
@@ -2660,7 +2661,15 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 case 7:
                     return " Delete";
                 case 8:
-                    return tt.sub_classification;
+                    if (tt.status == 0 && tt.id == 0) {
+                        return " ";
+                    } else if (tt.status == 1) {
+                        return " Finalized";
+                    } else if (tt.status == 0 && tt.id != 0) {
+                        return " Posted";
+                    } else {
+                        return " Deleted";
+                    }
                 case 9:
                     return tt.sub_classification_id;
                 case 10:
@@ -2940,9 +2949,23 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 if (!jButton7.isEnabled()) {
                     return;
                 }
-                Stock_transfers_items.delete_stock_transfers_items2("" + to.id);
-                data_cols_items();
-                Alert.set(3, "");
+                Window p = (Window) this;
+                Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+                nd.setTitle("");
+
+                nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                        closeDialog.ok();
+                        Stock_transfers_items.delete_stock_transfers_items2("" + to.id);
+                        data_cols_items();
+                        Alert.set(3, "");
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+
             }
         }
 
@@ -3047,11 +3070,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
 
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 List<Stock_transfers_items.to_stock_transfers_items> items = tbl_stock_transfers_items_ALM;
                 if (delete_stock_transfers_finalized.equalsIgnoreCase("true") && to.status == 1) {

@@ -21,3 +21,5 @@ update suppliers set balance=0;
 
 update encoding_inventory set date_added='2017-05-01 00:00:01' where date_added='2017-05-01 00:00:00';
 
+update sales set date_added='2017-05-01 00:00:01' where date_added='2017-05-01 00:00:00';
+update sale_items set date_added='2017-05-01 00:00:01' where date_added='2017-05-01 00:00:00';

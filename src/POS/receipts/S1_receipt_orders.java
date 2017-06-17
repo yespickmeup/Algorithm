@@ -46,8 +46,8 @@ public class S1_receipt_orders {
         public final String branch_id;
         public final String location;
         public final String location_id;
-
-        public to_receipt_items(int id, String receipt_no, String user_name, String session_no, String date_added, String supplier, String supllier_id, String remarks, String barcode, String description, double qty, double cost, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, double total, double conversion, String unit, String barcodes, String serial_nos, String batch_no, String main_barcode, String brand, String brand_id, String model, String model_id, double previous_cost, String branch, String branch_id, String location, String location_id) {
+        public final int status;
+        public to_receipt_items(int id, String receipt_no, String user_name, String session_no, String date_added, String supplier, String supllier_id, String remarks, String barcode, String description, double qty, double cost, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, double total, double conversion, String unit, String barcodes, String serial_nos, String batch_no, String main_barcode, String brand, String brand_id, String model, String model_id, double previous_cost, String branch, String branch_id, String location, String location_id,int status) {
             this.id = id;
             this.receipt_no = receipt_no;
             this.user_name = user_name;
@@ -82,6 +82,7 @@ public class S1_receipt_orders {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.status=status;
         }
 
         public String getSerial_nos() {

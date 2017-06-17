@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -69,11 +70,12 @@ public class Srpt_sales_summary_per_cashier {
         double cash_count;
         String status;
         double cashin;
+        double dibursement;
 
         public field() {
         }
 
-        public field(String date, String branch, String location, String user_id, String user_screen_name, double amount_due, double line_discount, double sale_discount, double cash, double charge, double cheque, double credit_card, double gift_certificate, double prepaid, double balance_due, String location_id, double cash_count, String status, double cashin) {
+        public field(String date, String branch, String location, String user_id, String user_screen_name, double amount_due, double line_discount, double sale_discount, double cash, double charge, double cheque, double credit_card, double gift_certificate, double prepaid, double balance_due, String location_id, double cash_count, String status, double cashin, double dibursement) {
             this.date = date;
             this.branch = branch;
             this.location = location;
@@ -93,6 +95,15 @@ public class Srpt_sales_summary_per_cashier {
             this.cash_count = cash_count;
             this.status = status;
             this.cashin = cashin;
+            this.dibursement = dibursement;
+        }
+
+        public double getDibursement() {
+            return dibursement;
+        }
+
+        public void setDibursement(double dibursement) {
+            this.dibursement = dibursement;
         }
 
         public double getCashin() {
@@ -271,7 +282,7 @@ public class Srpt_sales_summary_per_cashier {
             double cash_count = 0;
             String status = "Balance";
             double cashin = 1000;
-            Srpt_sales_summary_per_cashier.field field = new Srpt_sales_summary_per_cashier.field(date, branch, location, user_id, user_screen_name, amount_due, line_discount, sale_discount, cash, charge, cheque, credit_card, gift_certificate, prepaid, balance_due, location_id, cash_count, status, cashin);
+            Srpt_sales_summary_per_cashier.field field = new Srpt_sales_summary_per_cashier.field(date, branch, location, user_id, user_screen_name, amount_due, line_discount, sale_discount, cash, charge, cheque, credit_card, gift_certificate, prepaid, balance_due, location_id, cash_count, status, cashin, 0);
             fields.add(field);
         }
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
@@ -422,6 +433,7 @@ public class Srpt_sales_summary_per_cashier {
 
     public static List<Srpt_sales_summary_per_cashier.field> ret_sales_summary_per_cashier(String where) {
         List<Srpt_sales_summary_per_cashier.field> datas = new ArrayList();
+        String pool_db = System.getProperty("pool_db", "db_smis");
 
         try {
             Connection conn = MyConnection.connect();
@@ -460,6 +472,7 @@ public class Srpt_sales_summary_per_cashier {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
+            String customer = "";
             while (rs.next()) {
                 int id1 = rs.getInt(1);
                 String session_no1 = rs.getString(2);
@@ -526,7 +539,7 @@ public class Srpt_sales_summary_per_cashier {
                         + (point_fifty1 * .50)
                         + (point_twenty_five1 * .25)
                         + (point_ten1 * .10)
-                        + (point_five1 * .05) + amount;
+                        + (point_five1 * .05);
                 amount_due = amount1;
                 double line_discount = 0;
                 double sale_discount = 0;
@@ -606,6 +619,7 @@ public class Srpt_sales_summary_per_cashier {
                     line_discount += line_discount2;
                     String customer_id = rs2.getString(13);
                     String customer_name = rs2.getString(14);
+                    customer = customer_name;
                     String discount_name = rs2.getString(15);
                     double discount_rate = rs2.getDouble(16);
                     double discount_amount = rs2.getDouble(17);
@@ -648,13 +662,39 @@ public class Srpt_sales_summary_per_cashier {
                     double balance_due2 = amount_due;
 
                 }
-                if (cash_count < cash) {
-                    status = "Short";
+
+                String where3 = " where Date(disbursement_date)='" + sf + "' and user_id='" + user_id1 + "' and location_id='" + location_id + "' "
+                        + " group by Date(disbursement_date ),user_id ";
+
+                String s3 = "select "
+                        + "amount"
+                        + " from disbursements"
+                        + " " + where3;
+                double disburse = 0;
+                Statement stmt3 = conn.createStatement();
+                ResultSet rs3 = stmt3.executeQuery(s3);
+                while (rs3.next()) {
+                    disburse += rs3.getDouble(1);
                 }
-                if (cash_count > cash) {
-                    status = "Over";
+                cash = (cash + cashin) - disburse;
+                cash_count = amount1;
+                double total = cash_count - cash;
+//                System.out.println("total: " + total);
+
+                if (total > 0) {
+                    status = "Over [" + FitIn.fmt_wc_0(total) + "]";
                 }
-                Srpt_sales_summary_per_cashier.field field = new Srpt_sales_summary_per_cashier.field(date, branch, location, user_id, user_screen_name, amount_due, line_discount, sale_discount, cash, charge, cheque, credit_card, gift_certificate, prepaid, balance_due, location_id, cash_count, status, cashin);
+                if (total < 0) {
+                    total = total * -1;
+                    status = "Short [" + FitIn.fmt_wc_0(total) + "]";
+                }
+                if (total == 0) {
+                    status = "Ok";
+                }
+                if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+                    user_screen_name = customer;
+                }
+                Srpt_sales_summary_per_cashier.field field = new Srpt_sales_summary_per_cashier.field(date, branch, location, user_id, user_screen_name, amount_due, line_discount, sale_discount, cash, charge, cheque, credit_card, gift_certificate, prepaid, balance_due, location_id, cash_count, status, cashin, disburse);
                 datas.add(field);
             }
             return datas;

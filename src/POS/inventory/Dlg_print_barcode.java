@@ -967,6 +967,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//         System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_algorithm");
         jTextField2.setVisible(false);
         init_key();
@@ -1394,8 +1395,8 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_print_barcode_qty.OutputData data) {
                     closeDialog.ok();
-
-                    Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.description, to.price, true, data.qty);
+                    String description=to.description.replace("  ", "");
+                    Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, description, to.price, true, data.qty);
                     tbl_inventory_barcodes_ALM2.add(field);
                     jLabel11.setText("" + tbl_inventory_barcodes_ALM2.size());
                     Alert.set(1, "");
