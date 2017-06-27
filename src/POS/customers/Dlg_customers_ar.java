@@ -8,12 +8,11 @@ package POS.customers;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customers.to_customers;
-import POS.my_sales.MySales;
-import POS.my_sales.MySales_Items;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
@@ -33,10 +32,8 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
-import synsoftech.fields.Label;
 import synsoftech.panels.Authenticate;
 import synsoftech.panels.Warning;
-import synsoftech.util.Show;
 
 /**
  *
@@ -519,7 +516,7 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -639,10 +636,24 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
         String branch = tf_from_branch.getText();
         String branch_id = tf_from_branch_id.getText();
         String location_id = tf_from_location_id.getText();
-        to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
-        Customers.add_customers(to);
-        data_cols();
-        Alert.set(1, "");
+        final to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Customers.add_customers(to);
+                data_cols();
+                Alert.set(1, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_customers() {
@@ -678,10 +689,24 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
         String branch = to.branch;
         String branch_id = to.branch_id;
         String location_id = to.location_id;
-        to_customers to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
-        Customers.edit_customers(to1);
-        data_cols();
-        Alert.set(2, "");
+        final to_customers to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Customers.edit_customers(to1);
+                data_cols();
+                Alert.set(2, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void check_delete() {
@@ -758,12 +783,13 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
             return;
         }
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 to_customers to = (to_customers) tbl_customers_ALM.get(tbl_customers.
                         convertRowIndexToModel(row));

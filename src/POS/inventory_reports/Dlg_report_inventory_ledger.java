@@ -941,9 +941,14 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 lo.setText(to.branch + " - ( " + to.location + " )");
                 lo.setId("" + to.id);
                 selected_branch = to.branch;
+                my_location = to.location;
+                my_location_id = "" + to.id;
+                my_branch_id = to.branch_id;
+                my_branch = to.branch;
             }
         });
     }
+
     String my_branch = "";
     String my_branch_id = "";
     String my_location = "";

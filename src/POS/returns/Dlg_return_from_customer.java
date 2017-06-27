@@ -35,7 +35,7 @@ import POS.users.MyUser;
 import POS.util.Alert;
 import synsoftech.fields.Button;
 import synsoftech.util.ImageRenderer;
-import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 
 /**
  *
@@ -1541,11 +1541,11 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 return;
             }
             Window p = (Window) this;
-            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
-            nd.setCallback(new Dlg_confirm_action.Callback() {
+            nd.setCallback(new Dlg_confirm_delete.Callback() {
                 @Override
-                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
                     Return_from_customer_items.delete_data(item);
                     Alert.set(3, "");

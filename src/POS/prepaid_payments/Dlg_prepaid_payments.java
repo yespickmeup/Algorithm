@@ -17,6 +17,7 @@ import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import POS.util.Users;
@@ -942,11 +943,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 case 1:
                     return " " + tt.customer_name;
                 case 2:
-                   return " " + tt.branch;
+                    return " " + tt.branch;
                 case 3:
                     return FitIn.fmt_wc_0(tt.prepaid) + " ";
                 case 4:
-                     return " View";
+                    return " View";
                 case 5:
                     return tt.address;
                 case 6:
@@ -1099,7 +1100,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }
 
     private void add_prepaid_payments() {
-        int row = tbl_customers.getSelectedRow();
+        final int row = tbl_customers.getSelectedRow();
         if (row < 0) {
             return;
         }
@@ -1112,8 +1113,8 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         } else {
             cash = 0;
         }
-        System.out.println("Cash: " + cash);
-        System.out.println("Cheque: " + check_amount);
+//        System.out.println("Cash: " + cash);
+//        System.out.println("Cheque: " + check_amount);
 
         String check_bank = tf_check_bank.getText();
         String check_no = tf_check_no.getText();
@@ -1130,21 +1131,35 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         String location = my_location;
         String location_id = my_location_id;
 
-        to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id);
-        Prepaid_payments.add_prepaid_payments(to2);
-        data_cols();
-        tbl_customers.setRowSelectionInterval(row, row);
-        data_payments();
-        tf_cash.setText("");
-        tf_check_bank.setText("");
-        tf_cash.setText("");
-        tf_check_no.setText("");
-        tf_cash.grabFocus();
-        Alert.set(1, "Payment Added");
+        final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Prepaid_payments.add_prepaid_payments(to2);
+                data_cols();
+                tbl_customers.setRowSelectionInterval(row, row);
+                data_payments();
+                tf_cash.setText("");
+                tf_check_bank.setText("");
+                tf_cash.setText("");
+                tf_check_no.setText("");
+                tf_cash.grabFocus();
+                Alert.set(1, "Payment Added");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void update_prepaid_payments() {
-        int row = tbl_prepaid_payments.getSelectedRow();
+        final int row = tbl_prepaid_payments.getSelectedRow();
         if (row < 0) {
             return;
         }
@@ -1173,17 +1188,31 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         String branch_id = my_branch_id;
         String location = my_location;
         String location_id = my_location_id;
-        to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, to.user_id, to.user_screen_name, branch, branch_id, location, location_id);
-        Prepaid_payments.edit_prepaid_payments(to2);
-        data_cols();
-        tbl_customers.setRowSelectionInterval(row, row);
-        data_payments();
-        tf_cash.setText("");
-        tf_check_bank.setText("");
-        tf_cash.setText("");
-        tf_check_no.setText("");
-        tf_cash.grabFocus();
-        Alert.set(2, "Payment Added");
+        final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, to.user_id, to.user_screen_name, branch, branch_id, location, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Prepaid_payments.edit_prepaid_payments(to2);
+                data_cols();
+                tbl_customers.setRowSelectionInterval(row, row);
+                data_payments();
+                tf_cash.setText("");
+                tf_check_bank.setText("");
+                tf_cash.setText("");
+                tf_check_no.setText("");
+                tf_cash.grabFocus();
+                Alert.set(2, "Payment Added");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_prepaid_payments() {
@@ -1237,13 +1266,13 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
 
     private void delete_prepaid_payments() {
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
 
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 int row = tbl_prepaid_payments.getSelectedRow();
                 if (row < 0) {

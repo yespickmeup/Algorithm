@@ -13,6 +13,7 @@ import POS.requisition_slips.Requisition_slip_items.to_requisition_slip_items;
 import POS.requisition_slips.Requisition_slips.to_requisition_slips;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -1539,7 +1540,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Are you sure you want to post and finalize this transaction?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -1617,21 +1618,35 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
         String date_added = DateType.now();
         int status = to.status;
 
-        Requisition_slips.to_requisition_slips slip = new Requisition_slips.to_requisition_slips(id, requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, branch, branch_id, location, location_id, date_added, status);
+        final Requisition_slips.to_requisition_slips slip = new Requisition_slips.to_requisition_slips(id, requisition_slip_no, requisition_date, requisition_type, requisition_department, requisition_department_id, requested_by, branch, branch_id, location, location_id, date_added, status);
         if (tbl_requisition_slip_items_ALM.size() <= 0) {
             Alert.set(0, "No Item/s Added!");
             return;
         }
         List<to_requisition_slip_items> datas = tbl_requisition_slip_items_ALM;
-        Requisition_slips.update_data(slip);
-        Alert.set(1, branch);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
 
-        init_no();
-        tbl_requisition_slip_items_ALM.clear();
-        tbl_requisition_slip_items_M.fireTableDataChanged();
-        jLabel3.setText("" + tbl_requisition_slip_items_ALM.size());
-        tf_search.grabFocus();
-        data_cols_slips();
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Requisition_slips.update_data(slip);
+                Alert.set(1, "");
+
+                init_no();
+                tbl_requisition_slip_items_ALM.clear();
+                tbl_requisition_slip_items_M.fireTableDataChanged();
+                jLabel3.setText("" + tbl_requisition_slip_items_ALM.size());
+                tf_search.grabFocus();
+                data_cols_slips();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_requisition_slip() {
@@ -1652,6 +1667,7 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
+            nd.do_pass("Are you sure you want to finalize this transaction?");
             nd.setCallback(new Dlg_confirm_action.Callback() {
 
                 @Override
@@ -1695,12 +1711,12 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
                 return;
             }
             Window p = (Window) this;
-            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
-            nd.setCallback(new Dlg_confirm_action.Callback() {
+            nd.setCallback(new Dlg_confirm_delete.Callback() {
 
                 @Override
-                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
                     Requisition_slips.delete_data(to);
                     Alert.set(3, "");

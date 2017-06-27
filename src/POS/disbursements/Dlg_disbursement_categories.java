@@ -6,9 +6,12 @@
 package POS.disbursements;
 
 import POS.disbursements.S1_disbursement_categories.to_disbursement_categories;
+import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -219,13 +222,13 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
 
         tbl_disbursement_categories.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbl_disbursement_categories.setGridColor(new java.awt.Color(204, 204, 204));
@@ -365,7 +368,7 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -381,7 +384,7 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
         List<to_disbursement_categories> acc = S1_disbursement_categories.ret_data(where);
         loadData_disbursement_categories(acc);
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc=" disbursement_categories "> 
     public static ArrayListModel tbl_disbursement_categories_ALM;
     public static Tbldisbursement_categoriesModel tbl_disbursement_categories_M;
@@ -449,15 +452,28 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
     }
 
 //</editor-fold> 
-    
     private void add_disbursement_categories() {
         int id = 0;
         String category_name = tf_category_name.getText();
-        to_disbursement_categories to = new to_disbursement_categories(id, category_name);
-        S1_disbursement_categories.add_data(to);
-        tf_category_name.setText("");
-        data_disbursement_categories();
-        tf_category_name.grabFocus();
+        final to_disbursement_categories to = new to_disbursement_categories(id, category_name);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_disbursement_categories.add_data(to);
+                tf_category_name.setText("");
+                data_disbursement_categories();
+                tf_category_name.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_disbursement_categories() {
@@ -481,11 +497,24 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
         int id = to.id;
         String category_name = tf_category_name.getText();
 
-        to_disbursement_categories to1 = new to_disbursement_categories(id, category_name);
-        S1_disbursement_categories.update_data(to1);
-        tf_category_name.setText("");
-        data_disbursement_categories();
-        tf_category_name.grabFocus();
+        final to_disbursement_categories to1 = new to_disbursement_categories(id, category_name);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_disbursement_categories.update_data(to1);
+                tf_category_name.setText("");
+                data_disbursement_categories();
+                tf_category_name.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
@@ -494,10 +523,24 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_disbursement_categories to = (to_disbursement_categories) tbl_disbursement_categories_ALM.get(row);
-        S1_disbursement_categories.delete_data(to);
-        tf_category_name.setText("");
-        data_disbursement_categories();
-        tf_category_name.grabFocus();
+        final to_disbursement_categories to = (to_disbursement_categories) tbl_disbursement_categories_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                closeDialog.ok();
+                S1_disbursement_categories.delete_data(to);
+                tf_category_name.setText("");
+                data_disbursement_categories();
+                tf_category_name.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 }

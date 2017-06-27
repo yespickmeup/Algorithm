@@ -63,11 +63,12 @@ public class Srpt_sales_by_item {
         double discount;
         double amount;
         String sales_no;
+        String status;
 
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -83,6 +84,15 @@ public class Srpt_sales_by_item {
             this.discount = discount;
             this.amount = amount;
             this.sales_no = sales_no;
+            this.status = status;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public String getSales_no() {
@@ -358,8 +368,11 @@ public class Srpt_sales_by_item {
                 }
 
                 double amount = (price * product_qty) - discount;
-
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no);
+                String status1 = "Counted";
+                if (status == 1) {
+                    status1 = "Void";
+                }
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1);
                 fields.add(field);
             }
 
@@ -484,8 +497,11 @@ public class Srpt_sales_by_item {
                 }
 
                 double amount = (price * product_qty) - discount;
-
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no);
+                String status1 = "Counted";
+                if (status == 1) {
+                    status1 = "Void";
+                }
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no,status1);
                 fields.add(field);
             }
 

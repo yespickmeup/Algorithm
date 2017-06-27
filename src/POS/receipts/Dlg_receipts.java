@@ -2860,7 +2860,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Continue posting transaction?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -3988,6 +3988,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_finalize nd = Dlg_confirm_finalize.create(p, true);
         nd.setTitle("");
+       
         nd.setCallback(new Dlg_confirm_finalize.Callback() {
 
             @Override

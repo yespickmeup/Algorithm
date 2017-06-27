@@ -12,6 +12,7 @@ import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -863,9 +864,8 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        
+
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
-        
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);
@@ -1097,7 +1097,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 
     private void add_disbursements() {
         int row = tbl_disbursements.getSelectedRow();
-        Field.Combo cat = (Field.Combo) tf_category_name;
+        final Field.Combo cat = (Field.Combo) tf_category_name;
         Field.Combo br = (Field.Combo) jTextField2;
         Field.Combo lo = (Field.Combo) jTextField1;
         if (row < 0) {
@@ -1122,15 +1122,29 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             String location = lo.getText();
             String location_id = lo.getId();
 
-            S1_disbursements.to_disbursements to = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
-            S1_disbursements.add_data(to);
-            tf_purpose.setText("");
-            cat.setId("");
-            tf_category_name.setText("");
-            tf_amount.setText("");
-            data_disbursements();
-            new_disbursement();
-            Alert.set(1, "Successfully Added!");
+            final S1_disbursements.to_disbursements to = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+            nd.do_pass("Proceed adding this record?");
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    S1_disbursements.add_data(to);
+                    tf_purpose.setText("");
+                    cat.setId("");
+                    tf_category_name.setText("");
+                    tf_amount.setText("");
+                    data_disbursements();
+                    new_disbursement();
+                    Alert.set(1, "Successfully Added!");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+
         } else {
 
             S1_disbursements.to_disbursements to = (S1_disbursements.to_disbursements) tbl_disbursements_ALM.get(row);
@@ -1151,12 +1165,27 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             String branch_id = br.getId();
             String location = lo.getText();
             String location_id = lo.getId();
-            S1_disbursements.to_disbursements to1 = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
-            S1_disbursements.update_data(to1);
+            final S1_disbursements.to_disbursements to1 = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
 
-            data_disbursements();
-            new_disbursement();
-            Alert.set(2, "Successfully Added!");
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+            nd.do_pass("Are you sure you want to update this record?");
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    S1_disbursements.update_data(to1);
+
+                    data_disbursements();
+                    new_disbursement();
+                    Alert.set(2, "Successfully Added!");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+
         }
 
     }

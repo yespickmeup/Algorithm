@@ -227,7 +227,7 @@ public class Encoding_inventory {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-            String s0 = "delete from encoding_inventory where "
+            String s0 = "update  encoding_inventory set status = 2 where "
                     + " id ='" + to_encoding_inventory.id + "' "
                     + " ";
 
@@ -264,7 +264,7 @@ public class Encoding_inventory {
                     .setNumber("product_qty", new_qty)
                     .ok();
             stmt.addBatch(s2);
-            
+
             stmt.executeBatch();
             conn.commit();
             Lg.s(Encoding_inventory.class, "Successfully Deleted");

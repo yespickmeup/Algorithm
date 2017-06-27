@@ -10,6 +10,7 @@ import POS.payment_terms.S1_payment_terms;
 import POS.reports3.Dlg_report_item_receipts;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -699,7 +700,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
     private javax.swing.JTextField tf_search;
     private javax.swing.JTextField tf_term;
     // End of variables declaration//GEN-END:variables
-    
+
     private void myInit() {
 //        System.setProperty("pool_db", "db_smis");
         tf_search.grabFocus();
@@ -983,7 +984,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         int id = -1;
         String customer_name = tf_customer_name.getText();
         String customer_no = Suppliers.increment_id(my_branch_id);
-      
+
         List<Suppliers.to_suppliers> suppliers = Suppliers.ret_data2(" where customer_no='" + customer_no + "'");
         if (!suppliers.isEmpty()) {
             Alert.set(0, "Already exists!");
@@ -999,12 +1000,26 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         String branch = my_branch;
         String branch_id = my_branch_id;
         String location_id = my_location_id;
-        Suppliers.to_suppliers to = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
-        Suppliers.add_customers(to);
-        data_cols();
-        Alert.set(1, "");
-        clear_customers();
-        init_no();
+        final Suppliers.to_suppliers to = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Suppliers.add_customers(to);
+                data_cols();
+                Alert.set(1, "");
+                clear_customers();
+                init_no();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_customers() {
@@ -1048,7 +1063,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Are you sure you want to update this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -1084,13 +1099,13 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         final Suppliers.to_suppliers to = (Suppliers.to_suppliers) tbl_customers_ALM.
                 get(tbl_customers.convertRowIndexToModel(row));
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
 
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 Suppliers.delete_customers(to);
                 data_cols();
@@ -1109,7 +1124,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
             jPopupMenu1.show(tbl_customers, evt.getX(), evt.getY());
         }
     }
-
+    
     private void show_receipts() {
         int row = tbl_customers.getSelectedRow();
         if (row < 0) {

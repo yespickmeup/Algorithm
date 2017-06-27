@@ -2238,7 +2238,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Proceed posting this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -2508,7 +2508,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }
 
     private void update_conversion() {
-        int row = jTable3.getSelectedRow();
+        final int row = jTable3.getSelectedRow();
         if (row < 0) {
             return;
         }
@@ -2518,11 +2518,24 @@ public class Dlg_conversion extends javax.swing.JDialog {
             Alert.set(0, "Cannot proceed, transaction already finalized!");
             return;
         }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
 
-        Conversions.update_conversion(conversion, jTextArea1.getText());
-        ret_conversions();
-        Alert.set(2, "");
-        jTable3.setRowSelectionInterval(row, row);
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Conversions.update_conversion(conversion, jTextArea1.getText());
+                ret_conversions();
+                Alert.set(2, "");
+                jTable3.setRowSelectionInterval(row, row);
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void finalize_conversion() {
@@ -2540,6 +2553,7 @@ public class Dlg_conversion extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Are you sure you want to finalize this transaction?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {

@@ -514,7 +514,7 @@ public class Dlg_banks extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -603,10 +603,24 @@ public class Dlg_banks extends javax.swing.JDialog {
     private void add_banks() {
         int id = -1;
         String bank_name = tf_bank_name.getText();
-        to_banks to = new to_banks(id, bank_name);
-        Banks.add_banks(to);
-        data_cols();
-        clear_banks();
+        final to_banks to = new to_banks(id, bank_name);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Banks.add_banks(to);
+                data_cols();
+                clear_banks();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_banks() {
@@ -628,10 +642,24 @@ public class Dlg_banks extends javax.swing.JDialog {
                 convertRowIndexToModel(row));
         int id = to.id;
         String bank_name = tf_bank_name.getText();
-        to_banks to1 = new to_banks(id, bank_name);
-        Banks.edit_banks(to1);
-        data_cols();
-        clear_banks();
+        final to_banks to1 = new to_banks(id, bank_name);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Banks.edit_banks(to1);
+                data_cols();
+                clear_banks();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void clear_banks() {

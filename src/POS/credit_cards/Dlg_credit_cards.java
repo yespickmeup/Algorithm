@@ -6,9 +6,12 @@
 package POS.credit_cards;
 
 import POS.credit_cards.S1_credit_cards.to_credit_cards;
+import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -204,13 +207,13 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
 
         tbl_credit_cards.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbl_credit_cards.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -361,7 +364,7 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -453,12 +456,26 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
         String name = tf_name.getText();
         double rate = FitIn.toDouble(tf_rate.getText());
 
-        to_credit_cards to = new to_credit_cards(id, name, rate);
-        S1_credit_cards.add_credit_cards(to);
-        tf_name.setText("");
-        tf_rate.setText("");
-        data_cols();
-        tf_name.grabFocus();
+        final to_credit_cards to = new to_credit_cards(id, name, rate);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_credit_cards.add_credit_cards(to);
+                tf_name.setText("");
+                tf_rate.setText("");
+                data_cols();
+                tf_name.grabFocus();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_credit_cards() {
@@ -484,11 +501,25 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
         String name = tf_name.getText();
         double rate = FitIn.toDouble(tf_rate.getText());
 
-        to_credit_cards to1 = new to_credit_cards(id, name, rate);
-        S1_credit_cards.edit_credit_cards(to1);
-        tf_name.setText("");
-        tf_rate.setText("");
-        data_cols();
+        final to_credit_cards to1 = new to_credit_cards(id, name, rate);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_credit_cards.edit_credit_cards(to1);
+                tf_name.setText("");
+                tf_rate.setText("");
+                data_cols();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void delete_credit_cards() {
@@ -497,11 +528,25 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_credit_cards to = (to_credit_cards) tbl_credit_cards_ALM.get(row);
-        S1_credit_cards.delete_credit_cards(to);
-        tf_name.setText("");
-        tf_rate.setText("");
-        data_cols();
+        final to_credit_cards to = (to_credit_cards) tbl_credit_cards_ALM.get(row);
+        Window p = (Window) this;
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                closeDialog.ok();
+                S1_credit_cards.delete_credit_cards(to);
+                tf_name.setText("");
+                tf_rate.setText("");
+                data_cols();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
 }

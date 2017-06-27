@@ -6,7 +6,6 @@ package POS.branches;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branches.Branches.to_branches;
-import POS.inventory.Inventory_barcodes;
 import POS.main.Main;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
@@ -546,7 +545,7 @@ public class Dlg_branches extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -641,11 +640,25 @@ public class Dlg_branches extends javax.swing.JDialog {
         String branch = tf_branch.getText();
         String address = tf_address.getText();
         int status = 1;
-        to_branches to = new to_branches(id, code, branch, address, status);
-        Branches.add_branches(to);
-        data_cols();
-        clear_branches();
-        Alert.set(1, "");
+        final to_branches to = new to_branches(id, code, branch, address, status);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Branches.add_branches(to);
+                data_cols();
+                clear_branches();
+                Alert.set(1, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_branches() {
@@ -671,11 +684,26 @@ public class Dlg_branches extends javax.swing.JDialog {
         String branch = tf_branch.getText();
         String address = tf_address.getText();
 
-        to_branches to1 = new to_branches(id, code, branch, address, 0);
-        Branches.edit_branches(to1);
-        data_cols();
-        clear_branches();
-        Alert.set(2, "");
+        final to_branches to1 = new to_branches(id, code, branch, address, 0);
+
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Branches.edit_branches(to1);
+                data_cols();
+                clear_branches();
+                Alert.set(2, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void clear_branches() {
@@ -696,7 +724,7 @@ public class Dlg_branches extends javax.swing.JDialog {
             Alert.set(0, "Unable to remove, many records associated with this branch!");
             return;
         }
-        
+
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");

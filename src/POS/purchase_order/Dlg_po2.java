@@ -2214,6 +2214,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -2565,7 +2566,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Are you sure you want to update this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -2689,6 +2690,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
         final to_purchase_orders order = (to_purchase_orders) tbl_purchase_orders_ALM.get(row);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.do_pass("Are you sure you want to finalize this transaction?");
         nd.setTitle("");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
@@ -2712,6 +2714,7 @@ public class Dlg_po2 extends javax.swing.JDialog {
         final to_purchase_orders order = (to_purchase_orders) tbl_purchase_orders_ALM.get(row);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.do_pass("Are you sure you want to return this transaction?");
         nd.setTitle("");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override

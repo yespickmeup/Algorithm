@@ -107,11 +107,12 @@ public class Srpt_end_of_day_summary_chickaloka {
         double shortage;
         double selling_price;
         double other_adjustment;
+        double over;
 
         public field() {
         }
 
-        public field(String item_code, String description, double beg_inv, double new_in, double damage, double sales_qty, double end_inv, double amount, double po, double transfer, double left_over, double voucher, double shortage, double selling_price, double other_adjustment) {
+        public field(String item_code, String description, double beg_inv, double new_in, double damage, double sales_qty, double end_inv, double amount, double po, double transfer, double left_over, double voucher, double shortage, double selling_price, double other_adjustment, double over) {
             this.item_code = item_code;
             this.description = description;
             this.beg_inv = beg_inv;
@@ -127,6 +128,15 @@ public class Srpt_end_of_day_summary_chickaloka {
             this.shortage = shortage;
             this.selling_price = selling_price;
             this.other_adjustment = other_adjustment;
+            this.over = over;
+        }
+
+        public double getOver() {
+            return over;
+        }
+
+        public void setOver(double over) {
+            this.over = over;
         }
 
         public double getOther_adjustment() {
@@ -379,6 +389,7 @@ public class Srpt_end_of_day_summary_chickaloka {
                 double voucher = 0;
                 double shortage = 0;
                 double other_adjustment = 0;
+                double over = 0;
 //                System.out.println("item_code: " + item_code);
 //                System.out.println("Description: " + description);
                 Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected);
@@ -407,26 +418,26 @@ public class Srpt_end_of_day_summary_chickaloka {
 
                             }
                             if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Add")) {
-                                if (field.getCustomer_name().contains("Damage")) {
-                                    damage += FitIn.toDouble(field.getIn());
-                                } else if (field.getCustomer_name().contains("Leftover")) {
-                                    left_over += FitIn.toDouble(field.getIn());
-                                } else if (field.getCustomer_name().contains("Voucher")) {
-                                    voucher += FitIn.toDouble(field.getIn());
-                                } else {
-                                    other_adjustment += FitIn.toDouble(field.getIn());
-                                }
+                                other_adjustment += FitIn.toDouble(field.getIn());
                             }
                             if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Deduct")) {
-                                if (field.getCustomer_name().contains("Damage")) {
-                                    damage -= FitIn.toDouble(field.getOut());
-                                } else if (field.getCustomer_name().contains("Leftover")) {
-                                    left_over -= FitIn.toDouble(field.getOut());
-                                } else if (field.getCustomer_name().contains("Voucher")) {
-                                    voucher -= FitIn.toDouble(field.getOut());
-                                } else {
-                                    other_adjustment -= FitIn.toDouble(field.getOut());
-                                }
+                                other_adjustment -= FitIn.toDouble(field.getOut());
+                            }
+
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Damage")) {
+                                damage -= FitIn.toDouble(field.getOut());
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Leftover")) {
+                                left_over -= FitIn.toDouble(field.getOut());
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Voucher")) {
+                                voucher -= FitIn.toDouble(field.getOut());
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Short")) {
+                                shortage -= FitIn.toDouble(field.getOut());
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Over")) {
+                                over -= FitIn.toDouble(field.getIn());
                             }
                         } else {
 
@@ -438,9 +449,22 @@ public class Srpt_end_of_day_summary_chickaloka {
                 }
 
                 end_inv = (beg_inv + ((new_in) + other_adjustment)) - sales_qty;
-                end_inv = end_inv + (damage + left_over + voucher);
+                end_inv = end_inv + (damage + left_over + voucher + shortage) + over;
+
+                if (damage < 0) {
+                    damage = damage * -1;
+                }
+                if (left_over < 0) {
+                    left_over = left_over * -1;
+                }
+                if (voucher < 0) {
+                    voucher = voucher * -1;
+                }
+                if (shortage < 0) {
+                    shortage = shortage * -1;
+                }
 //                System.out.println("************************");
-                Srpt_end_of_day_summary_chickaloka.field field = new field(item_code, description, beg_inv, new_in, damage, sales_qty, end_inv, amount, po, transfer, left_over, voucher, shortage, selling_price, other_adjustment);
+                Srpt_end_of_day_summary_chickaloka.field field = new field(item_code, description, beg_inv, new_in, damage, sales_qty, end_inv, amount, po, transfer, left_over, voucher, shortage, selling_price, other_adjustment, over);
                 fields.add(field);
             }
 

@@ -69,6 +69,8 @@ public class MyMain {
             System.setProperty("inventory_item_delete", prop.getProperty("inventory_item_delete", "false"));
             System.setProperty("delete_receipts_finalized", prop.getProperty("delete_receipts_finalized", "false"));
             System.setProperty("delete_stock_transfers_finalized", prop.getProperty("delete_stock_transfers_finalized", "false"));
+            System.setProperty("delete_other_adjustments_finalized", prop.getProperty("delete_other_adjustments_finalized", "false"));
+            
             
             System.out.println("OS: " + os);
             System.out.println("Home: " + home);

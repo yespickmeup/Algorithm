@@ -56,6 +56,7 @@ public class MyLedger {
         List<Srpt_item_ledger.field> requistion_slips = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
         List<Srpt_item_ledger.field> return_from_customer = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
         List<Srpt_item_ledger.field> conversions = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
+        List<Srpt_item_ledger.field> other_adjustments = new ArrayList();
 //                    System.out.println(where);
         try {
             Connection conn = MyConnection.connect();
@@ -1114,13 +1115,14 @@ public class MyLedger {
                 String location = rs12.getString(33);
                 String location_id = rs12.getString(34);
                 String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                 String months = DateType.convert_datetime_to_month(date_added);
                 Date created = new Date();
                 try {
                     created = POS.util.DateType.datetime.parse(date_added);
                 } catch (ParseException ex) {
                     Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months);
                 return_from_customer.add(field2);
             }
             //</editor-fold>
@@ -1209,6 +1211,7 @@ public class MyLedger {
                 int is_converted_from = rs13.getInt(37);
 
                 String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                 String months = DateType.convert_datetime_to_month(date_added);
                 Date created = new Date();
                 try {
                     created = POS.util.DateType.datetime.parse(date_added);
@@ -1216,14 +1219,90 @@ public class MyLedger {
                     Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (is_converted_from == 1) {
-                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months);
                     conversions.add(field2);
                 } else {
-                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months);
                     conversions.add(field2);
                 }
 
             }
+            //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc=" Other Adjustments ">
+
+            String s30 = "select "
+                    + " adjustment_date"
+                    + ",adjustment_type"
+                    + ",status"
+                    + ",description"
+                    + ",conversion"
+                    + ",unit"
+                    + ",main_barcode"
+                    + ",qty"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",user_screen_name"
+                    + ",selling_price"
+                    + ",id"
+                    + " from other_adjustments"
+                    + " " + where2;
+
+            Statement stmt30 = conn.createStatement();
+            ResultSet rs30 = stmt30.executeQuery(s30);
+            while (rs30.next()) {
+                String adjustment_date = rs30.getString(1);
+                int adjustment_type = rs30.getInt(2);
+                int status = rs30.getInt(3);
+                String description = rs30.getString(4);
+                double convers30ion = rs30.getDouble(5);
+                String unit = rs30.getString(6);
+                String main_barcode = rs30.getString(7);
+                double qty = rs30.getDouble(8);
+                String branch = rs30.getString(9);
+                String branch_id = rs30.getString(10);
+                String location = rs30.getString(11);
+                String location_id = rs30.getString(12);
+                String user_screen_name = rs30.getString(13);
+                double selling_price = rs30.getDouble(14);
+                int id = rs30.getInt(15);
+                String type = "";
+                if (adjustment_type == 0) {
+                    type = "Damage";
+                }
+                if (adjustment_type == 1) {
+                    type = "Leftover";
+                }
+                if (adjustment_type == 2) {
+                    type = "Voucher";
+                }
+                if (adjustment_type == 3) {
+                    type = "Short";
+                }
+                if (adjustment_type == 4) {
+                    type = "Over";
+                }
+
+                String date = POS.util.DateType.convert_slash_datetime3(adjustment_date);
+                 String months = DateType.convert_datetime_to_month(adjustment_date);
+                Date created = new Date();
+                try {
+                    created = POS.util.DateType.datetime.parse(adjustment_date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (status == 1) {
+                    if (adjustment_type == 4) {
+                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Adjustment-" + type, date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, "", "", "", "", user_screen_name, "", created, "" + id, FitIn.fmt_wc_0(selling_price), "" + FitIn.fmt_wc_0(selling_price), months);
+                        other_adjustments.add(field2);
+                    } else {
+                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Adjustment-" + type, date, "", FitIn.fmt_woc(qty), "", branch, branch_id, location, location_id, "", "", "", "", user_screen_name, "", created, "" + id, FitIn.fmt_wc_0(selling_price), "" + FitIn.fmt_wc_0(selling_price), months);
+                        other_adjustments.add(field2);
+                    }
+                }
+            }
+
             //</editor-fold>
             fields.addAll(inventory_count);
             fields.addAll(sales);
@@ -1237,6 +1316,7 @@ public class MyLedger {
             fields.addAll(requistion_slips);
             fields.addAll(return_from_customer);
             fields.addAll(conversions);
+            fields.addAll(other_adjustments);
             List<Srpt_item_ledger.field> f_field = new ArrayList();
 
             Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {
@@ -1287,7 +1367,7 @@ public class MyLedger {
             String item_code = my_item_code;
             String barcode = my_barcode;
             String description = my_description;
-            String branch = "All";
+            String branch = my_branch;
             String location = my_location;
 
             int m = month;

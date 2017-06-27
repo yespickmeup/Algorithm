@@ -215,6 +215,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -585,6 +586,20 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             }
         });
 
+        jLabel32.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_transactions/maximize.png"))); // NOI18N
+        jLabel32.setOpaque(true);
+        jLabel32.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel32MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel32MouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -640,7 +655,10 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -682,7 +700,9 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -913,6 +933,14 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
         label("Conversion", jLabel31);
     }//GEN-LAST:event_jLabel31MouseEntered
 
+    private void jLabel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseClicked
+        ok("Other Adjustments", jLabel32);
+    }//GEN-LAST:event_jLabel32MouseClicked
+
+    private void jLabel32MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseEntered
+        label("Other Adjustments", jLabel32);
+    }//GEN-LAST:event_jLabel32MouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -940,6 +968,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -963,7 +992,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     }
 
     private void hover() {
-        JLabel[] lbl = {jLabel30,jLabel28, jLabel7, jLabel8, jLabel9, jLabel10, jLabel11, jLabel12, jLabel16, jLabel17, jLabel18, jLabel15, jLabel14, jLabel13, jLabel20, jLabel21, jLabel19, jLabel24, jLabel23, jLabel22, jLabel25, jLabel26, jLabel27, jLabel29, jLabel31};
+        JLabel[] lbl = {jLabel32, jLabel30, jLabel28, jLabel7, jLabel8, jLabel9, jLabel10, jLabel11, jLabel12, jLabel16, jLabel17, jLabel18, jLabel15, jLabel14, jLabel13, jLabel20, jLabel21, jLabel19, jLabel24, jLabel23, jLabel22, jLabel25, jLabel26, jLabel27, jLabel29, jLabel31};
         for (final JLabel l : lbl) {
             l.addMouseListener(new MouseAdapter() {
                 @Override
@@ -985,7 +1014,7 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
     }
 
     private void hide2() {
-        JLabel[] lbl = {jLabel28, jLabel7, jLabel8, jLabel9, jLabel10, jLabel11, jLabel22, jLabel12, jLabel16, jLabel25, jLabel17, jLabel18, jLabel26, jLabel27, jLabel15, jLabel14, jLabel13, jLabel20, jLabel21, jLabel23, jLabel19, jLabel24, jLabel29, jLabel31};
+        JLabel[] lbl = {jLabel32,jLabel28, jLabel7, jLabel8, jLabel9, jLabel10, jLabel11, jLabel22, jLabel12, jLabel16, jLabel25, jLabel17, jLabel18, jLabel26, jLabel27, jLabel15, jLabel14, jLabel13, jLabel20, jLabel21, jLabel23, jLabel19, jLabel24, jLabel29, jLabel31};
         for (JLabel l : lbl) {
             l.setEnabled(false);
         }
@@ -1002,6 +1031,11 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
         String module_services = System.getProperty("module_services", "0");
 
         for (S1_user_previleges.to_user_previleges to : datas) {
+            if (to.previledge.equalsIgnoreCase("Other Adjustments")) {
+                jLabel32.setEnabled(true);
+                jLabel32.setBackground(new java.awt.Color(96, 188, 219));
+
+            }
             if (to.previledge.equalsIgnoreCase("Conversion")) {
                 jLabel31.setEnabled(true);
                 jLabel31.setBackground(new java.awt.Color(96, 188, 219));

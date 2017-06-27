@@ -9,6 +9,7 @@ import POS.accounts_receivable.Dlg_ar_encoding;
 import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
+import POS.adjuster.Dlg_other_adjustments;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -831,6 +832,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel51.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel51MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel51MouseEntered(evt);
             }
         });
 
@@ -1862,6 +1866,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(140, 175, 227));
     }//GEN-LAST:event_jPanel9MouseExited
 
+    private void jLabel51MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel51MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel51MouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -1992,6 +2000,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void myInit() {
 
+        
         String environment = System.getProperty("environment", "production");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -2562,6 +2571,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void t_requisition_slip() {
         Dlg_requisition_slip dtc = new Dlg_requisition_slip();
         MyFrame.set(dtc.getSurface(), jPanel1, "Requisition Slip");
+    }
+
+    private void t_other_adjustments() {
+        Dlg_other_adjustments dtc = new Dlg_other_adjustments();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Other Adjustments");
     }
 
     private void r_stock_status() {
@@ -3159,6 +3173,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Requistion Slip")) {
 
                     t_requisition_slip();
+
+                }
+                if (data.stmt.equals("Other Adjustments")) {
+
+                    t_other_adjustments();
 
                 }
                 //</editor-fold>

@@ -1320,7 +1320,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                 String location_id = my_location_id;
 
                 Accounts_payable.to_accounts_payable payable = new to_accounts_payable(id, customer_id, customer_name, ap_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
-              
+
                 Accounts_payable.add_data(payable);
                 ret_accounts_payable();
                 Alert.set(1, "");
@@ -1739,7 +1739,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
-
+            nd.do_pass("Proceed saving payment?");
             nd.setCallback(new Dlg_confirm_action.Callback() {
 
                 @Override
@@ -1885,7 +1885,6 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
-
             nd.setCallback(new Dlg_confirm_delete.Callback() {
 
                 @Override

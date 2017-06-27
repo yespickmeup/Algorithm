@@ -15,7 +15,7 @@ import POS.inventory_assembly.S1_inventory_assembly.to_inventory_assembly;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
-import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -937,12 +937,12 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
         }
         if (col == 6) {
             Window p = (Window) this;
-            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
-            nd.setCallback(new Dlg_confirm_action.Callback() {
+            nd.setCallback(new Dlg_confirm_delete.Callback() {
 
                 @Override
-                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
                     S1_inventory_assembly.delete_data(field);
                     ret_uoms();
@@ -981,12 +981,12 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
         }
 
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 S1_inventory_assembly.delete_assembly(datas2);
                 Alert.set(3, "");

@@ -7,8 +7,8 @@ package POS.customers;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customers.to_customers;
-import POS.main.Main;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -729,7 +729,7 @@ public class Dlg_customers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        
+
 //       System.setProperty("pool_db","db_algorithm");
         tf_search.grabFocus();
         init_key();
@@ -955,11 +955,25 @@ public class Dlg_customers extends javax.swing.JDialog {
         String branch_id = tf_from_branch_id.getText();
         String location_id = tf_from_location_id.getText();
 
-        to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
-        Customers.add_customers(to);
-        data_cols();
-        clear_customers();
-        init_no();
+        final to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Customers.add_customers(to);
+                data_cols();
+                clear_customers();
+                init_no();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_customers() {
@@ -998,10 +1012,24 @@ public class Dlg_customers extends javax.swing.JDialog {
         String branch = to.branch;
         String branch_id = to.branch_id;
         String location_id = to.location_id;
-        to_customers to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
-        Customers.edit_customers(to1);
-        data_cols();
-        clear_customers();
+        final to_customers to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Customers.edit_customers(to1);
+                data_cols();
+                clear_customers();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void clear_customers() {
@@ -1016,12 +1044,12 @@ public class Dlg_customers extends javax.swing.JDialog {
 
     private void delete_customers() {
         Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 int row = tbl_customers.getSelectedRow();
                 if (row < 0) {

@@ -225,7 +225,7 @@ public class Dlg_confirm_finalize extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Are you sure you want to continue?");
+        jLabel1.setText("Continue finalizing this transaction?");
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

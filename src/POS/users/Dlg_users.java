@@ -14,6 +14,7 @@ import POS.util.Alert;
 import POS.util.Courier;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -1725,12 +1726,25 @@ public class Dlg_users extends javax.swing.JDialog {
             t_salesman = "1";
         }
 
-        to_users to = new to_users(id, screen_name, user_name, password, user_level, date_added, is_active, t_sales, t_receipts, t_stock_transfer, m_items, m_category, m_users, m_uom, m_suppliers, r_sales, r_cash_count, r_receipts, r_stock_transferred, r_stock_take, m_customers, m_discount, m_banks, r_stock_left_supplier, t_inventory_adjuster, t_salesman, tf_from_branch.getText(), tf_from_branch_id.getText(), tf_from_location.getText(), tf_from_location_id.getText());
+        final to_users to = new to_users(id, screen_name, user_name, password, user_level, date_added, is_active, t_sales, t_receipts, t_stock_transfer, m_items, m_category, m_users, m_uom, m_suppliers, r_sales, r_cash_count, r_receipts, r_stock_transferred, r_stock_take, m_customers, m_discount, m_banks, r_stock_left_supplier, t_inventory_adjuster, t_salesman, tf_from_branch.getText(), tf_from_branch_id.getText(), tf_from_location.getText(), tf_from_location_id.getText());
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
 
-        S1_users.add_users(to);
-        data_cols();
-        clear_users();
-        Alert.set(1, "");
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_users.add_users(to);
+                data_cols();
+                clear_users();
+                Alert.set(1, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void select_users() {
@@ -1866,12 +1880,26 @@ public class Dlg_users extends javax.swing.JDialog {
         if (cb_t_salesman.isSelected()) {
             t_salesman = "1";
         }
-        to_users to1 = new to_users(id, screen_name, user_name, password, user_level, date_added, is_active, t_sales, t_receipts, t_stock_transfer, m_items, m_category, m_users, m_uom, m_suppliers, r_sales, r_cash_count, r_receipts, r_stock_transferred, r_stock_take, m_customers, m_discount, m_banks, r_stock_left_supplier, t_inventory_adjuster, t_salesman, to.branch, to.branch_id, to.location, to.location_id);
+        final to_users to1 = new to_users(id, screen_name, user_name, password, user_level, date_added, is_active, t_sales, t_receipts, t_stock_transfer, m_items, m_category, m_users, m_uom, m_suppliers, r_sales, r_cash_count, r_receipts, r_stock_transferred, r_stock_take, m_customers, m_discount, m_banks, r_stock_left_supplier, t_inventory_adjuster, t_salesman, to.branch, to.branch_id, to.location, to.location_id);
 
-        S1_users.edit_users(to1);
-        data_cols();
-        clear_users();
-        Alert.set(2, "");
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_users.edit_users(to1);
+                data_cols();
+                clear_users();
+                Alert.set(2, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void clear_users() {
@@ -1885,12 +1913,27 @@ public class Dlg_users extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_users to = (to_users) tbl_users_ALM.get(tbl_users.
+        final to_users to = (to_users) tbl_users_ALM.get(tbl_users.
                 convertRowIndexToModel(row));
-        S1_users.delete_users(to);
-        data_cols();
-        clear_users();
-        Alert.set(3, "");
+        Window p = (Window) this;
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                closeDialog.ok();
+                S1_users.delete_users(to);
+                data_cols();
+                clear_users();
+                Alert.set(3, "");
+            }
+
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private ArrayListModel tbl_user_default_previleges_ALM;
@@ -2169,7 +2212,7 @@ public class Dlg_users extends javax.swing.JDialog {
         int id = -1;
 
         List<to_user_previleges> prev = tbl_user_previleges_ALM;
-        List<to_user_previleges> list = new ArrayList();
+        final List<to_user_previleges> list = new ArrayList();
         List<to_user_default_previleges> selected = tbl_user_default_previleges_ALM;
         for (to_user_default_previleges d : selected) {
             String account = d.account;
@@ -2191,8 +2234,22 @@ public class Dlg_users extends javax.swing.JDialog {
 
             }
         }
-        S1_user_previleges.add_user_previleges(list);
-        data_cols_previleges();
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed adding this records?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_user_previleges.add_user_previleges(list);
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     private void delete_user_previleges() {
@@ -2200,9 +2257,22 @@ public class Dlg_users extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_user_previleges to = (to_user_previleges) tbl_user_previleges_ALM.get(tbl_user_previleges.convertRowIndexToModel(row));
-        S1_user_previleges.delete_user_previleges(to);
-        data_cols_previleges();
+        final to_user_previleges to = (to_user_previleges) tbl_user_previleges_ALM.get(tbl_user_previleges.convertRowIndexToModel(row));
+        Window p = (Window) this;
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                closeDialog.ok();
+                S1_user_previleges.delete_user_previleges(to);
+                data_cols_previleges();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
@@ -2216,7 +2286,7 @@ public class Dlg_users extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Proceed adding this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -2260,7 +2330,7 @@ public class Dlg_users extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Proceed adding this records?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -2321,6 +2391,7 @@ public class Dlg_users extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Proceed adding this records?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
@@ -2363,6 +2434,7 @@ public class Dlg_users extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Proceed adding this records?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
@@ -2399,6 +2471,7 @@ public class Dlg_users extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Proceed adding this records?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {

@@ -2291,6 +2291,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Are you sure you want to post this transaction?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
@@ -3123,6 +3124,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
+        nd.do_pass("Are you sure you want to finalize this transaction?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {

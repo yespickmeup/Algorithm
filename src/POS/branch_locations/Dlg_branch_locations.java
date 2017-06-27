@@ -7,7 +7,6 @@ package POS.branch_locations;
 import POS.branch_locations.S1_branch_locations.to_branch_locations;
 import POS.branches.Branches;
 import POS.util.Alert;
-import POS.util.Dlg_auth;
 import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
@@ -562,7 +561,7 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -700,7 +699,7 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Proceed adding this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
@@ -788,36 +787,49 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
         btn_add.setEnabled(false);
         btn_edit.setEnabled(false);
         btn_delete.setEnabled(false);
-        Thread t = new Thread(new Runnable() {
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to update this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
             @Override
-            public void run() {
-                int row = tbl_branch_locations.getSelectedRow();
-                if (row < 0) {
-                    return;
-                }
-                to_branch_locations to = (to_branch_locations) tbl_branch_locations_ALM.
-                        get(tbl_branch_locations.convertRowIndexToModel(row));
-                int id = to.id;
-                String branch = tf_branch.getText();
-                String branch_id = tf_branch_id.getText();
-                String code = "";
-                String location = tf_location.getText();
-                String type = "USER";
-                int status = 0;
-                to_branch_locations to1 = new to_branch_locations(id, branch, branch_id, code, location, type, status);
-                S1_branch_locations.edit_branch_locations(to1);
-                data_cols();
-                clear_branch_locations();
-                Alert.set(2, "");
-                jProgressBar1.setString("Finished...");
-                jProgressBar1.setIndeterminate(false);
-                btn_new.setEnabled(true);
-                btn_add.setEnabled(true);
-                btn_edit.setEnabled(true);
-                btn_delete.setEnabled(true);
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int row = tbl_branch_locations.getSelectedRow();
+                        if (row < 0) {
+                            return;
+                        }
+                        to_branch_locations to = (to_branch_locations) tbl_branch_locations_ALM.
+                                get(tbl_branch_locations.convertRowIndexToModel(row));
+                        int id = to.id;
+                        String branch = tf_branch.getText();
+                        String branch_id = tf_branch_id.getText();
+                        String code = "";
+                        String location = tf_location.getText();
+                        String type = "USER";
+                        int status = 0;
+                        to_branch_locations to1 = new to_branch_locations(id, branch, branch_id, code, location, type, status);
+                        S1_branch_locations.edit_branch_locations(to1);
+                        data_cols();
+                        clear_branch_locations();
+                        Alert.set(2, "");
+                        jProgressBar1.setString("Finished...");
+                        jProgressBar1.setIndeterminate(false);
+                        btn_new.setEnabled(true);
+                        btn_add.setEnabled(true);
+                        btn_edit.setEnabled(true);
+                        btn_delete.setEnabled(true);
+                    }
+                });
+                t.start();
             }
         });
-        t.start();
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
@@ -836,12 +848,13 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
             return;
         }
         Window p = (Window) this;
-        Dlg_auth nd = Dlg_auth.create(p, true);
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_auth.Callback() {
+        nd.do_pass("Are you sure you want to delete this transaction?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_auth.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
                 jProgressBar1.setString("Loading...Please wait...");
                 jProgressBar1.setIndeterminate(true);

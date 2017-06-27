@@ -18,6 +18,7 @@ import POS.users.S1_users.to_users;
 import POS.users.S2_users;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -666,7 +667,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-         init_branch_locations2(jTextField7, jTextField8);
+        init_branch_locations2(jTextField7, jTextField8);
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jTextField7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField7MouseClicked
@@ -1131,7 +1132,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
     }
 
     private void add_borrower_slips() {
-        Field.Input_w_department borrower = (Field.Input_w_department) tf_borrower;
+        final Field.Input_w_department borrower = (Field.Input_w_department) tf_borrower;
         Field.Input i_from_branch = (Field.Input) jTextField5;
         Field.Input i_from_location = (Field.Input) jTextField6;
 
@@ -1142,7 +1143,7 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
         String user_id = MyUser.getUser_id();
         String user_screen_name = MyUser.getUser_screen_name();
         String date_added = DateType.now();
-        String bs_no = S1_borrower_slips.increment_id();
+        final String bs_no = S1_borrower_slips.increment_id();
         String reference_no = tf_reference_no.getText();
         double items_borrowed = FitIn.toDouble(jLabel2.getText());
         double items_returned = 0;
@@ -1160,22 +1161,37 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
         String to_location = i_to_location.getText();
         String to_location_id = i_to_location.getId();
         String remarks = tf_remarks.getText();
-        to_borrower_slips to = new to_borrower_slips(id, user_id, user_screen_name, date_added, bs_no, reference_no, items_borrowed, items_returned, borrowed_by, borrowed_by_id, borrowed_by_department, borrowed_by_department_id, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, remarks);
+        final to_borrower_slips to = new to_borrower_slips(id, user_id, user_screen_name, date_added, bs_no, reference_no, items_borrowed, items_returned, borrowed_by, borrowed_by_id, borrowed_by_department, borrowed_by_department_id, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, remarks);
         S1_borrower_slips.add_data(to);
-        List<to_borrower_slip_items> datas = tbl_borrower_slip_items_ALM;
-        S1_borrower_slip_items.add_data(datas, to);
+        final List<to_borrower_slip_items> datas = tbl_borrower_slip_items_ALM;
 
-        tf_bs_no.setText("");
-        tf_reference_no.setText("");
-        tf_borrower.setText("");
-        tf_remarks.setText("");
-        borrower.setId("");
-        borrower.setDepartment("");
-        borrower.setDepartment_id("");
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Are you sure you want to post this record?");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
 
-        tbl_borrower_slip_items_ALM.clear();
-        tbl_borrower_slip_items_M.fireTableDataChanged();
-        Alert.set(1, bs_no);
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_borrower_slip_items.add_data(datas, to);
+
+                tf_bs_no.setText("");
+                tf_reference_no.setText("");
+                tf_borrower.setText("");
+                tf_remarks.setText("");
+                borrower.setId("");
+                borrower.setDepartment("");
+                borrower.setDepartment_id("");
+
+                tbl_borrower_slip_items_ALM.clear();
+                tbl_borrower_slip_items_M.fireTableDataChanged();
+                Alert.set(1, bs_no);
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
     }
 
     //<editor-fold defaultstate="collapsed" desc=" borrower_slips "> 

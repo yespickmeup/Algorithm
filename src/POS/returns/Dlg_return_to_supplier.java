@@ -1857,7 +1857,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
+        nd.do_pass("Proceed posting this record?");
         nd.setCallback(new Dlg_confirm_action.Callback() {
 
             @Override
