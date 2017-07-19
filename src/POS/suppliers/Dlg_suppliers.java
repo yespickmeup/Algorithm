@@ -702,7 +702,7 @@ public class Dlg_suppliers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_smis");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         tf_search.grabFocus();
         init_key();
 //        hover();
@@ -984,8 +984,8 @@ public class Dlg_suppliers extends javax.swing.JDialog {
         int id = -1;
         String customer_name = tf_customer_name.getText();
         String customer_no = Suppliers.increment_id(my_branch_id);
-
-        List<Suppliers.to_suppliers> suppliers = Suppliers.ret_data2(" where customer_no='" + customer_no + "'");
+       
+        List<Suppliers.to_suppliers> suppliers = Suppliers.ret_data2(" where customer_name='" + customer_name + "'");
         if (!suppliers.isEmpty()) {
             Alert.set(0, "Already exists!");
             return;

@@ -7,7 +7,10 @@
  * Author:  Guinness
  * Created: Jun 3, 2017
  */
-
+--  nd.do_pass("Are you sure you want to finalize this transaction?");
+--  nd.do_pass("Proceed adding this record?");
+-- nd.do_pass("Are you sure you want to update this record?");
+--  nd.do_pass("Proceed posting this record?");
 
 select s.customer_no,s.customer_name,ifnull((select sum(r.gross_total-r.discount)
 from receipts r where r.supllier_id=s.customer_no),0) as amount
@@ -62,3 +65,66 @@ id int auto_increment primary key
 );
 
 insert into user_default_previleges(account,name)values('Administrator','Other Adjustments');
+
+drop table if exists bank_accounts;
+create table bank_accounts(
+id int auto_increment primary key
+,bank_account_no varchar(255)
+,bank_holder varchar(255)
+,bank_name varchar(255)
+,remarks varchar(255)
+,outstanding_balance double
+,withdrawable_balance double
+,status int
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
+
+
+drop table if exists bank_accounts;
+create table bank_accounts(
+id int auto_increment primary key
+,bank_account_no varchar(255)
+,bank_holder varchar(255)
+,bank_name varchar(255)
+,remarks varchar(255)
+,outstanding_balance double
+,withdrawable_balance double
+,created_at datetime
+,updated_at datetime
+,created_by varchar(255)
+,updated_by varchar(255)
+,status int
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
+
+drop table if exists bank_account_deposits;
+create table bank_account_deposits(
+id int auto_increment primary key
+,reference_no varchar(255)
+,bank_account_no varchar(255)
+,bank_holder varchar(255)
+,bank_name varchar(255)
+,remarks varchar(255)
+,cash double
+,check_amount double
+,check_holder varchar(255)
+,check_no varchar(255)
+,check_date date
+,check_is_cleared int
+,created_at datetime
+,updated_at datetime
+,created_by varchar(255)
+,updated_by varchar(255)
+,status int
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
+

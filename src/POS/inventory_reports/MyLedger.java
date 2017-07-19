@@ -1348,6 +1348,9 @@ public class MyLedger {
             for (Srpt_item_ledger.field to2 : field3) {
                 String m = DateType.m1.format(to2.date_added);
                 String y = DateType.y.format(to2.date_added);
+                
+                
+                
                 if (year.equals(y) && is_month_selected == true) {
                     fields2.add(to2);
                     running_balance = FitIn.toDouble(to2.getBalance());

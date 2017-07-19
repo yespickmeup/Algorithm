@@ -731,12 +731,12 @@ public class S1_accounts_receivable_payments {
         }
     }
 
-    public static void edit_accounts_receivable_payments(to_accounts_receivable_payments to_accounts_receivable_payments, double previous_cash, double previous_check) {
+    public static void edit_accounts_receivable_payments(to_accounts_receivable_payments to_accounts_receivable_payments, to_accounts_receivable_payments ar_previous, to_accounts_receivable to_ar) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
             String s0 = "update  accounts_receivable_payments set "
-                    + "customer_id= :customer_id"
+                    + " customer_id= :customer_id"
                     + ",customer_name= :customer_name"
                     + ",ar_no= :ar_no"
                     + ",date_added= :date_added"
@@ -797,6 +797,19 @@ public class S1_accounts_receivable_payments {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 //         
+            double ar_new_balance = ar_previous.amount + ar_previous.check_amount + ar_previous.discount_amount;
+
+            ar_new_balance = (to_ar.paid - ar_new_balance) + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
+
+            String s3 = "update  accounts_receivable set "
+                    + " paid= :paid"
+                    + " where "
+                    + " ar_no ='" + to_accounts_receivable_payments.ar_no + "' "
+                    + " ";
+            s3 = SqlStringUtil.parse(s3).
+                    setNumber("paid", ar_new_balance).
+                    ok();
+            stmt.addBatch(s3);
 
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
             String s10 = "select "
@@ -811,7 +824,7 @@ public class S1_accounts_receivable_payments {
                 customer_balance = rs10.getDouble(1);
             }
 
-            double new_balance = (customer_balance + previous_cash + previous_check) - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
+            double new_balance = (customer_balance + (ar_previous.amount + ar_previous.check_amount + ar_previous.discount_amount)) - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
 
             String s2 = "update  customers set "
                     + " balance= :balance"
@@ -836,19 +849,6 @@ public class S1_accounts_receivable_payments {
                 paid = rs11.getDouble(1);
             }
 
-            double new_paid = (paid + to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount)
-                    - (previous_cash + previous_check);
-
-            String s3 = "update  accounts_receivable set "
-                    + " paid= :paid"
-                    + " where "
-                    + " ar_no ='" + to_accounts_receivable_payments.ar_no + "' "
-                    + " ";
-            s3 = SqlStringUtil.parse(s3).
-                    setNumber("paid", new_paid).
-                    ok();
-            stmt.addBatch(s3);
-
             stmt.executeBatch();
             conn.commit();
             Lg.s(S1_accounts_receivable_payments.class, "Successfully Updated");
@@ -859,7 +859,7 @@ public class S1_accounts_receivable_payments {
         }
     }
 
-    public static void delete_accounts_receivable_payments(to_accounts_receivable_payments to_accounts_receivable_payments) {
+    public static void delete_accounts_receivable_payments(to_accounts_receivable_payments to_accounts_receivable_payments, to_accounts_receivable to_ar) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
@@ -873,7 +873,7 @@ public class S1_accounts_receivable_payments {
 
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
             String s10 = "select "
-                    + "balance"
+                    + " balance"
                     + " from  customers where "
                     + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                     + " ";
@@ -884,9 +884,9 @@ public class S1_accounts_receivable_payments {
                 customer_balance = rs10.getDouble(1);
             }
 
-            double new_balance = customer_balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
+            double new_balance = (customer_balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount));
             String s2 = "update  customers set "
-                    + "balance= :balance"
+                    + " balance= :balance"
                     + " where "
                     + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                     + " ";
@@ -896,26 +896,17 @@ public class S1_accounts_receivable_payments {
             stmt.addBatch(s2);
 
 //            to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-            String s11 = "select "
-                    + " paid"
-                    + " from  accounts_receivable where "
-                    + " ar_no ='" + to_accounts_receivable_payments.ar_no + "' "
-                    + " ";
-            double paid = 0;
-            Statement stmt11 = conn.createStatement();
-            ResultSet rs11 = stmt11.executeQuery(s11);
-            while (rs11.next()) {
-                paid = rs11.getDouble(1);
-            }
+            double ar_new_balance = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount;
 
-            double new_paid = paid - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
+            ar_new_balance = (to_ar.paid - ar_new_balance);
+
             String s3 = "update  accounts_receivable set "
-                    + "paid= :paid"
+                    + " paid= :paid"
                     + " where "
                     + " ar_no ='" + to_accounts_receivable_payments.ar_no + "' "
                     + " ";
             s3 = SqlStringUtil.parse(s3).
-                    setNumber("paid", new_paid).
+                    setNumber("paid", ar_new_balance).
                     ok();
             stmt.addBatch(s3);
 

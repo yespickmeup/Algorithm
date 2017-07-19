@@ -777,8 +777,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox13.setFocusable(false);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/save29.png"))); // NOI18N
-        jButton4.setText("Capture");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_payment/document98.png"))); // NOI18N
+        jButton4.setText("Captured");
         jButton4.setToolTipText("Save Inventory to Database");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2280,13 +2280,13 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
     private void capture() {
         Window p = (Window) this;
-        Dlg_report_item_capture nd = Dlg_report_item_capture.create(p, true);
+        Dlg_report_stock_take_date nd = Dlg_report_stock_take_date.create(p, true);
         nd.setTitle("");
 
-        nd.setCallback(new Dlg_report_item_capture.Callback() {
+        nd.setCallback(new Dlg_report_stock_take_date.Callback() {
 
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_report_item_capture.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_report_stock_take_date.OutputData data) {
                 closeDialog.ok();
 
             }

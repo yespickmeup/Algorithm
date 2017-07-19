@@ -311,8 +311,8 @@ public class Srpt_end_of_day_summary_chickaloka {
                     + ",model_id"
                     + " from sale_items  "
                     + " " + where
-                    + " group by item_code,unit,selling_price,discount_amount order by description asc";
-
+                    + " group by item_code,unit,selling_price,discount_amount ";
+            
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {

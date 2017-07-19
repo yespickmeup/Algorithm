@@ -649,6 +649,7 @@ public class S1_branch_locations {
                 String location = rs.getString(5);
                 String type = rs.getString(6);
                 int status = rs.getInt(7);
+               
                 to_branch_locations to = new to_branch_locations(id, branch, branch_id, code, location, type, status);
                 datas.add(to);
             }

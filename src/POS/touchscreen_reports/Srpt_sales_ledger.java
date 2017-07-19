@@ -238,11 +238,10 @@ public class Srpt_sales_ledger {
 
     public static List<Srpt_sales_ledger.field> ret_data(String where) {
         List<Srpt_sales_ledger.field> fields = new ArrayList();
-      
-        
+
         try {
             Connection conn = MyConnection.connect();
-            
+
             String s0 = "select "
                     + "id"
                     + ",sales_no"
@@ -285,6 +284,12 @@ public class Srpt_sales_ledger {
                     + ",prepaid_customer_name"
                     + ",prepaid_customer_id"
                     + ",prepaid_amount"
+                    + ",addtl_amount"
+                    + ",wtax"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
                     + " from sales  "
                     + " " + where;
 
@@ -332,7 +337,13 @@ public class Srpt_sales_ledger {
                 String prepaid_customer_name = rs.getString(39);
                 String prepaid_customer_id = rs.getString(40);
                 double prepaid_amount = rs.getDouble(41);
-
+                double addtl_amount = rs.getDouble(42);
+                double wtax = rs.getDouble(43);
+                String branch = rs.getString(44);
+                String branch_id = rs.getString(45);
+                String location = rs.getString(46);
+                String location_id = rs.getString(47);
+                
                 double sales_discount = discount_amount;
                 double cash = amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount);
                 double cheque_amount = check_amount;
@@ -446,11 +457,11 @@ public class Srpt_sales_ledger {
                 double prepaid_amount = rs.getDouble(41);
 
                 double sales_discount = discount_amount;
-                double cash = (amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount)) ;
+                double cash = (amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount));
                 double cheque_amount = check_amount;
                 double gc_amount = gift_certificate_amount;
-                double balance_due = amount_due ;
-                
+                double balance_due = amount_due;
+
                 List<MySales_Items.items> items = new ArrayList();
                 //<editor-fold defaultstate="collapsed" desc=" items ">
                 String s2 = "select "

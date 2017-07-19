@@ -31,13 +31,13 @@ alter table suppliers add branch varchar(255) default '';
 alter table suppliers add branch_id varchar(255) default '' ;
 alter table suppliers add location_id varchar(255) default '';
 
-update suppliers set branch='Casili, Mandaue City, Cebu';
-update suppliers set branch_id='1';
+update suppliers set branch='Algorithm - Kabankalan';
+update suppliers set branch_id='10';
 update suppliers set location='Selling Area';
-update suppliers set location_id='1';
+update suppliers set location_id='18';
 
-update suppliers set customer_no=concat('1|',customer_no);
-update receipts set supllier_id=concat('1|',supllier_id);
+update suppliers set customer_no=concat('10|',customer_no);
+update receipts set supllier_id=concat('10|',supllier_id);
 
 alter table accounts_payable add user_id varchar(255) default '' after reference_no;
 alter table accounts_payable add user_screen_name varchar(255) default '' after user_id;

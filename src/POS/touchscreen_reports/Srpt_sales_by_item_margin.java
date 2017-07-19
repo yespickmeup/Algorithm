@@ -5,7 +5,6 @@
  */
 package POS.touchscreen_reports;
 
-import POS.util.DateType;
 import POS.util.MyConnection;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -27,9 +26,9 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author Guinness
  */
-public class Srpt_sales_by_item {
+public class Srpt_sales_by_item_margin {
 
-    public final List<Srpt_sales_by_item.field> fields;
+    public final List<Srpt_sales_by_item_margin.field> fields;
     public final String business_name;
     public final String address;
     public final String contact_no;
@@ -42,7 +41,7 @@ public class Srpt_sales_by_item {
     public final String brand;
     public final String model;
 
-    public Srpt_sales_by_item(String business_name, String address, String contact_no, String date, String branch, String location, String category, String classification, String sub_classification, String brand, String model) {
+    public Srpt_sales_by_item_margin(String business_name, String address, String contact_no, String date, String branch, String location, String category, String classification, String sub_classification, String brand, String model) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -78,13 +77,10 @@ public class Srpt_sales_by_item {
         double cost;
         double margin;
         double total_margin;
-        double addtl_amount;
-        String date;
-
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status,double cost,double margin,double total_margin) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -101,35 +97,9 @@ public class Srpt_sales_by_item {
             this.amount = amount;
             this.sales_no = sales_no;
             this.status = status;
-            this.cost = cost;
-            this.margin = margin;
-            this.total_margin = total_margin;
-            this.addtl_amount = addtl_amount;
-            this.date = date;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-
-        public double getAddtl_amount() {
-            return addtl_amount;
-        }
-
-        public void setAddtl_amount(double addtl_amount) {
-            this.addtl_amount = addtl_amount;
-        }
-
-        public double getCost() {
-            return cost;
-        }
-
-        public void setCost(double cost) {
-            this.cost = cost;
+            this.cost=cost;
+            this.margin=margin;
+            this.total_margin=total_margin;
         }
 
         public double getMargin() {
@@ -147,7 +117,15 @@ public class Srpt_sales_by_item {
         public void setTotal_margin(double total_margin) {
             this.total_margin = total_margin;
         }
+        
+        public double getCost() {
+            return cost;
+        }
 
+        public void setCost(double cost) {
+            this.cost = cost;
+        }
+        
         public String getStatus() {
             return status;
         }
@@ -279,7 +257,7 @@ public class Srpt_sales_by_item {
 
     public static void main(String[] args) {
 
-        List<Srpt_sales_by_item.field> fields = Srpt_sales_by_item.ret_data("");
+        List<Srpt_sales_by_item_margin.field> fields = Srpt_sales_by_item_margin.ret_data("");
         String business_name = "";
         String address = "";
         String contact_no = "";
@@ -291,7 +269,7 @@ public class Srpt_sales_by_item {
         String sub_classification = "";
         String brand = "";
         String model = "";
-        Srpt_sales_by_item rpt = new Srpt_sales_by_item(business_name, address, contact_no, date, branch, location, category, classification, sub_classification, brand, model);
+        Srpt_sales_by_item_margin rpt = new Srpt_sales_by_item_margin(business_name, address, contact_no, date, branch, location, category, classification, sub_classification, brand, model);
 
         rpt.fields.addAll(fields);
         String jrxml = "rpt_sales_by_item.jrxml";
@@ -304,7 +282,7 @@ public class Srpt_sales_by_item {
     public static JasperReport compileJasper(String jrxml) {
         try {
 
-            InputStream is = Srpt_sales_by_item.class.getResourceAsStream(jrxml);
+            InputStream is = Srpt_sales_by_item_margin.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
 
             return jasper;
@@ -313,7 +291,7 @@ public class Srpt_sales_by_item {
         }
     }
 
-    public static JRViewer get_viewer(Srpt_sales_by_item to, String jrxml) {
+    public static JRViewer get_viewer(Srpt_sales_by_item_margin to, String jrxml) {
 
         return JasperUtil.getJasperViewer(
                 compileJasper(jrxml),
@@ -321,8 +299,8 @@ public class Srpt_sales_by_item {
                 JasperUtil.makeDatasource(to.fields));
     }
 
-    public static List<Srpt_sales_by_item.field> ret_data(String where) {
-        List<Srpt_sales_by_item.field> fields = new ArrayList();
+    public static List<Srpt_sales_by_item_margin.field> ret_data(String where) {
+        List<Srpt_sales_by_item_margin.field> fields = new ArrayList();
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -438,12 +416,10 @@ public class Srpt_sales_by_item {
                 if (status == 1) {
                     status1 = "Void";
                 }
-                double cost = 0;
-                double margin = 0;
-                double total_margin = 0;
-                double addtl_amount = 0;
-                String date = "";
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
+                double cost=0;
+                double margin=0;
+                double total_margin=0;
+                Srpt_sales_by_item_margin.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1,cost,margin,total_margin);
                 fields.add(field);
             }
 
@@ -455,8 +431,8 @@ public class Srpt_sales_by_item {
         }
     }
 
-    public static List<Srpt_sales_by_item.field> ret_data_group_by_code(String where) {
-        List<Srpt_sales_by_item.field> fields = new ArrayList();
+    public static List<Srpt_sales_by_item_margin.field> ret_data_group_by_code(String where) {
+        List<Srpt_sales_by_item_margin.field> fields = new ArrayList();
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -572,179 +548,11 @@ public class Srpt_sales_by_item {
                 if (status == 1) {
                     status1 = "Void";
                 }
-                double cost = 0;
-                double margin = 0;
-                double total_margin = 0;
-                double addtl_amount = 0;
-                String date = "";
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
-                fields.add(field);
-            }
-
-            return fields;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            MyConnection.close();
-        }
-    }
-
-    public static List<Srpt_sales_by_item.field> ret_data_margin(String where) {
-        List<Srpt_sales_by_item.field> fields = new ArrayList();
-        try {
-            Connection conn = MyConnection.connect();
-            String s0 = "select "
-                    + "id"
-                    + ",sales_no"
-                    + ",item_code"
-                    + ",barcode"
-                    + ",description"
-                    + ",generic_name"
-                    + ",item_type"
-                    + ",supplier_name"
-                    + ",supplier_id"
-                    + ",serial_no"
-                    + ",sum(product_qty)"
-                    + ",unit"
-                    + ",conversion"
-                    + ",selling_price"
-                    + ",date_added"
-                    + ",user_id"
-                    + ",user_screen_name"
-                    + ",status"
-                    + ",is_vatable"
-                    + ",selling_type"
-                    + ",discount_name"
-                    + ",discount_rate"
-                    + ",discount_amount"
-                    + ",discount_customer_name"
-                    + ",discount_customer_id"
-                    + ",branch"
-                    + ",branch_code"
-                    + ",location"
-                    + ",location_id"
-                    + ",category"
-                    + ",category_id"
-                    + ",classification"
-                    + ",classification_id"
-                    + ",sub_classification"
-                    + ",sub_classification_id"
-                    + ",brand"
-                    + ",brand_id"
-                    + ",model"
-                    + ",model_id"
-                    + ",addtl_amount"
-                    + " from sale_items  "
-                    + " " + where
-                    + " group by item_code,unit,selling_price,discount_amount,addtl_amount order by description asc";
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(s0);
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String sales_no = rs.getString(2);
-                String item_code = rs.getString(3);
-                String barcode = rs.getString(4);
-                String description = rs.getString(5);
-                String generic_name = rs.getString(6);
-                String item_type = rs.getString(7);
-                String supplier_name = rs.getString(8);
-                String supplier_id = rs.getString(9);
-                String serial_no = rs.getString(10);
-                double product_qty = rs.getDouble(11);
-                String unit = rs.getString(12);
-                double conversion = rs.getDouble(13);
-                double selling_price = rs.getDouble(14);
-                String date_added = rs.getString(15);
-                String user_id = rs.getString(16);
-                String user_screen_name = rs.getString(17);
-                int status = rs.getInt(18);
-                int is_vatable = rs.getInt(19);
-                int selling_type = rs.getInt(20);
-                String discount_name = rs.getString(21);
-                double discount_rate = rs.getDouble(22);
-                double discount_amount = rs.getDouble(23);
-                String discount_customer_name = rs.getString(24);
-                String discount_customer_id = rs.getString(25);
-                String branch = rs.getString(26);
-                String branch_code = rs.getString(27);
-                String location = rs.getString(28);
-                String location_id = rs.getString(29);
-                String category = rs.getString(30);
-                String category_id = rs.getString(31);
-                String classification = rs.getString(32);
-                String classification_id = rs.getString(33);
-                String sub_classification = rs.getString(34);
-                String sub_classification_id = rs.getString(35);
-                String brand = rs.getString(36);
-                String brand_id = rs.getString(37);
-                String model = rs.getString(38);
-                String model_id = rs.getString(39);
-                double addtl_amount = rs.getDouble(40);
-                String supplier = supplier_name;
-                double price = selling_price;
-                double discount = discount_amount;
-
-                String uom = unit;
-                String[] list = uom.split(",");
-
-                int o = 0;
-                for (String s : list) {
-                    int i = s.indexOf(":");
-                    int ii = s.indexOf("/");
-                    int iii = s.indexOf("^");
-                    String uom1 = s.substring(1, i);
-                    double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                    product_qty = product_qty / conversion1;
-                    double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
-                    int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-                    uom1 = uom1.replaceAll("#", "/");
-                    unit = uom1;
-                    o++;
-                }
-
-                double amount = ((price * product_qty) - discount) + addtl_amount;
-                String status1 = "Counted";
-                if (status == 1) {
-                    status1 = "Void";
-                }
-
-                String sf = DateType.convert_dash_date4(date_added);
-
-                double cost = 0;
-                double margin = 0;
-                double total_margin = 0;
-                String s2 = "select "
-                        + " supplier"
-                        + ",supllier_id"
-                        + ",cost"
-                        + ",unit"
-                        + " from  receipt_items  "
-                        + " where Date(date_delivered) < '" + sf + "' and main_barcode = '" + item_code + "' order by id desc limit 1";
-
-                Statement stmt2 = conn.createStatement();
-                ResultSet rs2 = stmt2.executeQuery(s2);
-                if (rs2.next()) {
-                    supplier = rs2.getString(1);
-                    String supllier_id = rs2.getString(2);
-                    cost = rs2.getDouble(3);
-                    String unit1 = rs2.getString(4);
-                } else {
-                    String s3 = "select "
-                            + " cost"
-                            + " from  inventory_barcodes  "
-                            + " where  main_barcode = '" + item_code + "' and location_id='" + location_id + "' limit 1";
-
-                    Statement stmt3 = conn.createStatement();
-                    ResultSet rs3 = stmt3.executeQuery(s3);
-                    if (rs3.next()) {
-                        cost = rs3.getDouble(1);
-                    }
-                }
-                total_margin = (selling_price + addtl_amount - discount_amount) - cost;
-                margin = (total_margin / (selling_price + addtl_amount - discount_amount)) * 100;
-                String date = DateType.convert_slash_datetime(date_added);
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
+                double cost=0;
+                double margin=0;
+                double total_margin=0;
+                
+                Srpt_sales_by_item_margin.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1,cost,margin,total_margin);
                 fields.add(field);
             }
 

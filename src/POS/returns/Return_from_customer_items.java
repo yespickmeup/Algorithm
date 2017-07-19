@@ -26,7 +26,7 @@ public class Return_from_customer_items {
     public static class to_return_from_customer_items {
 
         public final int id;
-        public final String return_to_supplier_no;
+        public final String return_from_customer_no;
         public final String user_name;
         public final String session_no;
         public final String date_added;
@@ -60,9 +60,9 @@ public class Return_from_customer_items {
         public final String location;
         public final String location_id;
 
-        public to_return_from_customer_items(int id, String return_to_supplier_no, String user_name, String session_no, String date_added, String supplier, String supplier_id, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String branch, String branch_id, String location, String location_id) {
+        public to_return_from_customer_items(int id, String return_from_customer_no, String user_name, String session_no, String date_added, String supplier, String supplier_id, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String branch, String branch_id, String location, String location_id) {
             this.id = id;
-            this.return_to_supplier_no = return_to_supplier_no;
+            this.return_from_customer_no = return_from_customer_no;
             this.user_name = user_name;
             this.session_no = session_no;
             this.date_added = date_added;
@@ -102,7 +102,7 @@ public class Return_from_customer_items {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "insert into return_from_customer_items("
-                    + "return_to_supplier_no"
+                    + " return_from_customer_no"
                     + ",user_name"
                     + ",session_no"
                     + ",date_added"
@@ -136,7 +136,7 @@ public class Return_from_customer_items {
                     + ",location"
                     + ",location_id"
                     + ")values("
-                    + ":return_to_supplier_no"
+                    + ":return_from_customer_no"
                     + ",:user_name"
                     + ",:session_no"
                     + ",:date_added"
@@ -172,7 +172,7 @@ public class Return_from_customer_items {
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
-                    .setString("return_to_supplier_no", to_return_from_customer_items.return_to_supplier_no)
+                    .setString("return_from_customer_no", to_return_from_customer_items.return_from_customer_no)
                     .setString("user_name", to_return_from_customer_items.user_name)
                     .setString("session_no", to_return_from_customer_items.session_no)
                     .setString("date_added", to_return_from_customer_items.date_added)
@@ -221,7 +221,7 @@ public class Return_from_customer_items {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update return_from_customer_items set "
-                    + "return_to_supplier_no= :return_to_supplier_no "
+                    + " return_from_customer_no= :return_from_customer_no "
                     + ",user_name= :user_name "
                     + ",session_no= :session_no "
                     + ",date_added= :date_added "
@@ -258,7 +258,7 @@ public class Return_from_customer_items {
                     + " ";
 
             s0 = SqlStringUtil.parse(s0)
-                    .setString("return_to_supplier_no", to_return_from_customer_items.return_to_supplier_no)
+                    .setString("return_from_customer_no", to_return_from_customer_items.return_from_customer_no)
                     .setString("user_name", to_return_from_customer_items.user_name)
                     .setString("session_no", to_return_from_customer_items.session_no)
                     .setString("date_added", to_return_from_customer_items.date_added)
@@ -363,7 +363,7 @@ public class Return_from_customer_items {
             Connection conn = MyConnection.connect();
             String s0 = "select "
                     + "id"
-                    + ",return_to_supplier_no"
+                    + ",return_from_customer_no"
                     + ",user_name"
                     + ",session_no"
                     + ",date_added"

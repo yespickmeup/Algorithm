@@ -993,6 +993,11 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jLabel20.setText("Check Bank:");
 
         tf_ap_check_bank.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_ap_check_bank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_ap_check_bankActionPerformed(evt);
+            }
+        });
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1457,6 +1462,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         clear_accounts_receivable_payments();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tf_ap_check_bankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_check_bankActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_ap_check_bankActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -2406,12 +2415,17 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
+        final to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
                 get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
         if (to.status == 2) {
             Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
             return;
         }
+        int row2 = tbl_accounts_receivable.getSelectedRow();
+        if (row2 < 0) {
+            return;
+        }
+        final to_accounts_receivable to_ar = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row2));
         int id = to.id;
         String customer_id = to.customer_id;
         String customer_name = to.customer_name;
@@ -2466,7 +2480,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                S1_accounts_receivable_payments.edit_accounts_receivable_payments(to1, previous_cash, previous_check);
+                S1_accounts_receivable_payments.edit_accounts_receivable_payments(to1, to, to_ar);
                 int i = tbl_accounts_receivable.getSelectedRow();
                 data_cols();
 
@@ -2507,6 +2521,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 break;
             }
         }
+//        exists=1;
         if (exists == 1) {
             int row = tbl_accounts_receivable_payments.getSelectedRow();
             if (row < 0) {
@@ -2519,6 +2534,11 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
                 return;
             }
+            int row2 = tbl_accounts_receivable.getSelectedRow();
+            if (row2 < 0) {
+                return;
+            }
+            final to_accounts_receivable to_ar = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row2));
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
@@ -2529,7 +2549,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
 
-                    S1_accounts_receivable_payments.delete_accounts_receivable_payments(to);
+                    S1_accounts_receivable_payments.delete_accounts_receivable_payments(to,to_ar);
                     int i = tbl_accounts_receivable.getSelectedRow();
                     data_cols();
                     tbl_accounts_receivable.setRowSelectionInterval(i, i);

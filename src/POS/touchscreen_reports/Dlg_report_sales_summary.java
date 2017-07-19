@@ -21,11 +21,15 @@ import POS.users.MyUser;
 import POS.users.S1_users;
 import POS.util.DateType;
 import POS.util.TableRenderer;
+import com.jgoodies.binding.adapter.AbstractTableAdapter;
+import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,11 +40,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -272,9 +279,13 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jCheckBox10 = new javax.swing.JCheckBox();
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox12 = new javax.swing.JCheckBox();
-        pnl_report2 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jButton7 = new Button.Success();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        pnl_report2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_chickaloka_items = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -293,7 +304,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -683,7 +694,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_report1Layout.setVerticalGroup(
             pnl_report1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -846,7 +857,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     .addComponent(jCheckBox11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                    .addComponent(jTextField5)
                     .addComponent(jTextField6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -883,19 +894,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 .addGap(15, 15, 15))
         );
 
-        pnl_report2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout pnl_report2Layout = new javax.swing.GroupLayout(pnl_report2);
-        pnl_report2.setLayout(pnl_report2Layout);
-        pnl_report2Layout.setHorizontalGroup(
-            pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnl_report2Layout.setVerticalGroup(
-            pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
-        );
-
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -915,7 +913,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(728, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -927,20 +925,71 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 .addGap(5, 5, 5))
         );
 
+        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        pnl_report2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnl_report2Layout = new javax.swing.GroupLayout(pnl_report2);
+        pnl_report2.setLayout(pnl_report2Layout);
+        pnl_report2Layout.setHorizontalGroup(
+            pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 895, Short.MAX_VALUE)
+        );
+        pnl_report2Layout.setVerticalGroup(
+            pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Print Preview", pnl_report2);
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbl_chickaloka_items.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_chickaloka_items);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane2.addTab("Tabular", jPanel9);
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_report2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(pnl_report2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -958,7 +1007,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1141,7 +1190,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -1151,6 +1203,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     private javax.swing.JPanel pnl_report;
     private javax.swing.JPanel pnl_report1;
     private javax.swing.JPanel pnl_report2;
+    private javax.swing.JTable tbl_chickaloka_items;
     private javax.swing.JTextField tf_cashier;
     private javax.swing.JTextField tf_cashier1;
     private javax.swing.JTextField tf_cashier2;
@@ -1161,6 +1214,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         set_default_branch();
+
+        init_tbl_chickaloka_items();
 
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data(where);
@@ -2005,6 +2060,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 rpt.fields.addAll(fields2);
                 String jrxml = "rpt_end_of_day_summary_chickaloka.jrxml";
                 report_sales_ledger_chickaloka(rpt, jrxml);
+                loadData_chickaloka(rpt.fields);
                 InputStream is = Srpt_sales_summary_per_cashier.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
@@ -2075,4 +2131,109 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" chickaloka items ">
+    private ArrayListModel tbl_chickaloka_items_ALM;
+    private TblchickaModel tbl_chickaloka_items_M;
+
+    private void init_tbl_chickaloka_items() {
+        tbl_chickaloka_items_ALM = new ArrayListModel();
+        tbl_chickaloka_items_M = new TblchickaModel(tbl_chickaloka_items_ALM);
+        tbl_chickaloka_items.getTableHeader().
+                setPreferredSize(new Dimension(100, 40));
+        tbl_chickaloka_items.setModel(tbl_chickaloka_items_M);
+        tbl_chickaloka_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_chickaloka_items.setRowHeight(25);
+        int[] tbl_widths_banks = {60, 100, 60, 50, 60, 50, 60, 60, 60, 50, 50, 60, 50, 50, 60, 70};
+        for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
+            if (i == 1) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_chickaloka_items, i, tbl_widths_banks[i]);
+        }
+        Dimension d = tbl_chickaloka_items.getTableHeader().
+                getPreferredSize();
+        d.height = 25;
+        tbl_chickaloka_items.getTableHeader().
+                setPreferredSize(d);
+        tbl_chickaloka_items.getTableHeader().
+                setFont(new java.awt.Font("Arial", 0, 11));
+        tbl_chickaloka_items.setRowHeight(25);
+        tbl_chickaloka_items.setFont(new java.awt.Font("Arial", 0, 11));
+        TableWidthUtilities.setColumnRightRenderer(tbl_chickaloka_items, 14);
+        TableWidthUtilities.setColumnRightRenderer(tbl_chickaloka_items, 15);
+    }
+
+    private void loadData_chickaloka(List<Srpt_end_of_day_summary_chickaloka.field> acc) {
+        tbl_chickaloka_items_ALM.clear();
+        tbl_chickaloka_items_ALM.addAll(acc);
+    }
+
+    public static class TblchickaModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Item Code", "Description", "Beg. Inv.", "New In", "Sales Qty", "Dmg", "Left Over", "Other Adj.", "Voucher", "Short", "Over", "Transfer", "PO", "End Inv.", "Price", "Amount"
+        };
+
+        public TblchickaModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            Srpt_end_of_day_summary_chickaloka.field tt = (Srpt_end_of_day_summary_chickaloka.field) getRow(row);
+            DecimalFormat df1 = new DecimalFormat("#,###,##0.0");
+            switch (col) {
+                case 0:
+                    return " " + tt.item_code;
+                case 1:
+                    return " " + tt.description;
+                case 2:
+                    return " " + df1.format(tt.beg_inv);
+                case 3:
+                    return " " + df1.format(tt.new_in);
+                case 4:
+                    return " " + df1.format(tt.sales_qty);
+                case 5:
+                    return " " + df1.format(tt.damage);
+                case 6:
+                    return " " + df1.format(tt.left_over);
+                case 7:
+                    return " " + df1.format(tt.other_adjustment);
+                case 8:
+                    return " " + df1.format(tt.voucher);
+                case 9:
+                    return " " + df1.format(tt.shortage);
+                case 10:
+                    return " " + df1.format(tt.over);
+                case 11:
+                    return " " + df1.format(tt.transfer);
+                case 12:
+                    return " " + df1.format(tt.po);
+                case 13:
+                    return " " + df1.format(tt.end_inv);
+                case 14:
+                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
+
+                default:
+                    return FitIn.fmt_wc_0(tt.amount) + " ";
+            }
+        }
+    }
+
+//</editor-fold>
 }
