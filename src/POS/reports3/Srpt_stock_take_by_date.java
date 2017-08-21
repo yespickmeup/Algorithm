@@ -293,8 +293,9 @@ public class Srpt_stock_take_by_date {
                 for (Srpt_item_ledger.field r : rpt.fields) {
                     String sf = DateType.sf.format(r.getDate_added());
                     int count = DateUtils1.count_days(r.getDate_added(), d);
+                    
                     if (count >= 0) {
-                        if (r.getTransaction_type().equalsIgnoreCase("Receipts")) {
+                        if (r.getTransaction_type().equalsIgnoreCase("Receipts")|| r.getTransaction_type().equalsIgnoreCase("Inventory Count")) {
                             cost1 = FitIn.toDouble(r.getCost());
                         }
                     }

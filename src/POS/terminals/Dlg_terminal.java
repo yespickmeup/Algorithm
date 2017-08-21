@@ -5,6 +5,7 @@
  */
 package POS.terminals;
 
+
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.terminals.Terminal.to_terminals;

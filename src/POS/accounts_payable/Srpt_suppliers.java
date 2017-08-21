@@ -169,4 +169,72 @@ public class Srpt_suppliers {
         }
     }
 
+    public static List<Srpt_suppliers.field> ret_data2(String where, String where2) {
+        List<Srpt_suppliers.field> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",customer_name"
+                    + ",customer_no"
+                    + ",contact_no"
+                    + ",credit_limit"
+                    + ",address"
+                    + ",term"
+                    + ",location"
+                    + ",balance"
+                    + ",discount"
+                    + " from suppliers "
+                    + " " + where + " order by customer_name asc";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_name = rs.getString(2);
+                String customer_no = rs.getString(3);
+                String contact_no = rs.getString(4);
+                double credit_limit = rs.getDouble(5);
+                String address = rs.getString(6);
+                double term = rs.getDouble(7);
+                String location = rs.getString(8);
+                double balance = rs.getDouble(9);
+                double discount = rs.getDouble(10);
+
+                double paid = 0;
+
+                String s2 = "select "
+                        + "id"
+                        + ",amount"
+                        + ",discount_amount"
+                        + ",date_paid"
+                        + ",check_amount"
+                        + " from accounts_payable_payments"
+                        + " where customer_id='" + customer_no + "' and status=0 "
+                        + " " + where2;
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                while (rs2.next()) {
+                    int id2 = rs2.getInt(1);
+                    double amount = rs2.getDouble(2);
+                    double discount_amount = rs2.getDouble(3);
+                    String date_paid = rs2.getString(4);
+                    double check_amount = rs2.getDouble(5);
+                    double total = (amount + check_amount) + discount;
+                    paid += total;
+                }
+
+                Srpt_suppliers.field to = new field(customer_no, customer_name, paid, contact_no);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3638d0d1-06fc-4c2b-9cae-9a791d0fa2d3">
     <property name="ireport.zoom" value="2.0"/>
-    <property name="ireport.x" value="0"/>
-    <property name="ireport.y" value="39"/>
+    <property name="ireport.x" value="128"/>
+    <property name="ireport.y" value="18"/>
     <parameter name="business_name" class="java.lang.String"/>
     <parameter name="address" class="java.lang.String"/>
     <parameter name="date" class="java.lang.String"/>
@@ -11,6 +11,7 @@
     <parameter name="to_branch" class="java.lang.String"/>
     <parameter name="to_location" class="java.lang.String"/>
     <parameter name="status" class="java.lang.String"/>
+    <parameter name="am" class="java.lang.String"/>
     <field name="transaction_no" class="java.lang.String"/>
     <field name="date" class="java.lang.String"/>
     <field name="item_code" class="java.lang.String"/>
@@ -147,19 +148,6 @@
                     <text><![CDATA[Unit]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement uuid="0834b604-f947-4758-8e8e-a36625d00039" x="401" y="20" width="65" height="15"/>
-                    <box>
-                        <topPen lineWidth="0.2"/>
-                        <leftPen lineWidth="0.2"/>
-                        <bottomPen lineWidth="0.2"/>
-                        <rightPen lineWidth="0.2"/>
-                    </box>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <paragraph leftIndent="2" rightIndent="5"/>
-                    </textElement>
-                    <text><![CDATA[Cost]]></text>
-                </staticText>
-                <staticText>
                     <reportElement uuid="41221b30-d2ee-4f02-99f3-70670cd763ed" x="466" y="20" width="89" height="15"/>
                     <box>
                         <topPen lineWidth="0.2"/>
@@ -228,6 +216,14 @@
                     </textElement>
                     <text><![CDATA[Destination:]]></text>
                 </staticText>
+                <textField>
+                    <reportElement uuid="c47bbe08-939d-4ccc-b071-2856cabff26b" x="401" y="20" width="65" height="15"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10"/>
+                        <paragraph leftIndent="2" rightIndent="5"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$P{am}]]></textFieldExpression>
+                </textField>
             </band>
         </groupHeader>
         <groupFooter>

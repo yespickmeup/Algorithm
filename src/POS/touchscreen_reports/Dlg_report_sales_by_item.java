@@ -5,6 +5,7 @@
  */
 package POS.touchscreen_reports;
 
+
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
@@ -1070,7 +1071,10 @@ public class Dlg_report_sales_by_item extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_smis_dumaguete_algorithm");
+
+        
+//        System.setProperty("pool_db", "db_smis_guihulngan");
+
 
         init_key();
         set_default_branch();
@@ -1082,6 +1086,7 @@ public class Dlg_report_sales_by_item extends javax.swing.JDialog {
         user.setId(MyUser.getUser_id());
 
         init_tbl_sale_items(tbl_sale_items);
+        
     }
 
     private void set_default_branch() {

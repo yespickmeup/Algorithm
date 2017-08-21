@@ -31,6 +31,7 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 
+
 /**
  *
  * @author Guinness

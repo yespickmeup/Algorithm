@@ -674,7 +674,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 
         init_key();
 

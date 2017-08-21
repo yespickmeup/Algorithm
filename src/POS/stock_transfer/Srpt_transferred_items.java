@@ -39,7 +39,8 @@ public class Srpt_transferred_items {
     public final String to_branch;
     public final String to_location;
     public final String status;
-    public Srpt_transferred_items(String business_name, String address, String date, String from_branch, String from_location, String to_branch, String to_location,String status) {
+    public final String am;
+    public Srpt_transferred_items(String business_name, String address, String date, String from_branch, String from_location, String to_branch, String to_location,String status,String am) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -49,6 +50,7 @@ public class Srpt_transferred_items {
         this.to_branch = to_branch;
         this.to_location = to_location;
         this.status=status;
+        this.am=am;
     }
 
     public static class field {
@@ -285,8 +287,8 @@ public class Srpt_transferred_items {
         String from_location = "Selling Area";
         String to_branch = "Dumaguete City";
         String to_location = "RMA";
-
-        Srpt_transferred_items rpt = new Srpt_transferred_items(business_name, address, date, from_branch, from_location, to_branch, to_location,"");
+        String am="Sel";
+        Srpt_transferred_items rpt = new Srpt_transferred_items(business_name, address, date, from_branch, from_location, to_branch, to_location,"",am);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_transferred_items.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -311,7 +313,7 @@ public class Srpt_transferred_items {
                 JasperUtil.makeDatasource(to.fields));
     }
 
-    public static List<Srpt_transferred_items.field> ret_data(String where) {
+    public static List<Srpt_transferred_items.field> ret_data(String where, int is_price) {
         List<Srpt_transferred_items.field> datas = new ArrayList();
 
         try {
@@ -436,7 +438,13 @@ public class Srpt_transferred_items {
                 String t_location_id = to_location_id;
                 double amount = qty * cost;
                 String group_id = f_location_id + "&" + t_location_id;
-                Srpt_transferred_items.field field = new Srpt_transferred_items.field(transaction_no, date, item_code, barcode, description, unit, qty, selling_price, cost, f_branch, f_branch_id, f_location, f_location_id, t_branch, t_branch_id, t_location, t_location_id, amount, group_id);
+                double am=cost;
+                if(is_price==1){
+                    am=selling_price;
+                    amount=qty*selling_price;
+                }
+                
+                Srpt_transferred_items.field field = new Srpt_transferred_items.field(transaction_no, date, item_code, barcode, description, unit, qty, selling_price, am, f_branch, f_branch_id, f_location, f_location_id, t_branch, t_branch_id, t_location, t_location_id, amount, group_id);
                 datas.add(field);
             }
             return datas;

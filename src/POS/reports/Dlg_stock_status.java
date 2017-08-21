@@ -5,6 +5,7 @@
  */
 package POS.reports;
 
+
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
@@ -40,11 +41,9 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.swing.JRViewer;
 
 /**

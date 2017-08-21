@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
@@ -380,6 +381,58 @@ public class Accounts_payable {
         }
     }
 
+    public static void main(String[] args) {
+        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+
+        String where = " where id>84 ";
+        List<to_accounts_payable> datas = ret_data(where);
+        for (to_accounts_payable to : datas) {
+
+            try {
+                String am = FitIn.fmt_woc(to.paid);
+                Connection conn = MyConnection.connect();
+                String s2 = "select "
+                        + " amount"
+                        + ", id"
+                        + " from accounts_payable_payments"
+                        + "  where customer_id='" + to.customer_id + "' and Date(date_applied) = '" + to.date_applied + "' and amount between '" + am + "' and '" + ((to.paid) + 10) + "' ";
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                double amount = 0;
+                int id = 0;
+                while (rs2.next()) {
+                    amount += rs2.getDouble(1);
+                    id = rs2.getInt(2);
+                }
+
+                if (to.paid > 0) {
+                    if (amount != to.paid) {
+                        System.out.println("id: " + to.id + " | " + to.ap_no + " . Paid: " + to.paid + " = Paid: " + amount);
+                    } else {
+                        System.out.println("id: " + to.id + " | " + to.ap_no + " . Paid: " + to.paid + " = Paid: " + amount);
+                    }
+                    String s3 = "update accounts_payable_payments set "
+                            + " ap_no=:ap_no "
+                            + " where id='" + id + "' "
+                            + " ";
+
+                    s3 = SqlStringUtil.parse(s3)
+                            .setString("ap_no", to.ap_no)
+                            .ok();
+
+                    PreparedStatement stmt3 = conn.prepareStatement(s3);
+                    stmt3.execute();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                MyConnection.close();
+            }
+        }
+    }
+
     public static List<to_accounts_payable> ret_data(String where) {
         List<to_accounts_payable> datas = new ArrayList();
 
@@ -473,7 +526,7 @@ public class Accounts_payable {
                 id = branch_id + "|" + "000000000000";
             }
             id = ReceiptIncrementor.increment(id);
-            
+
             return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -312,7 +312,7 @@ public class Srpt_end_of_day_summary_chickaloka {
                     + " from sale_items  "
                     + " " + where
                     + " group by item_code,unit,selling_price,discount_amount ";
-            
+
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -377,11 +377,12 @@ public class Srpt_end_of_day_summary_chickaloka {
                     o++;
                 }
 
-                double amount = (price * product_qty) - discount;
+                double amount = 0;
                 double beg_inv = 0;
                 double new_in = 0;
                 double damage = 0;
                 double sales_qty = product_qty;
+                double sales_qty_x = 0;
                 double end_inv = 0;
                 double po = 0;
                 double transfer = 0;
@@ -413,9 +414,17 @@ public class Srpt_end_of_day_summary_chickaloka {
                                 beg_inv += FitIn.toDouble(field.getIn());
 
                             }
+                            if (field.getTransaction_type().equalsIgnoreCase("Sales - X")) {
+                                sales_qty_x += FitIn.toDouble(field.getIn());
+
+                            }
                             if (field.getTransaction_type().equalsIgnoreCase("Transfer-In") || field.getTransaction_type().equalsIgnoreCase("Receipts")) {
                                 new_in += FitIn.toDouble(field.getIn());
-
+//                                System.out.println("        Item: "+description+ " = "+field.);
+                            }
+                            if (field.getTransaction_type().equalsIgnoreCase("Transfer-Out")) {
+                                transfer += FitIn.toDouble(field.getOut());
+//                                System.out.println("        Item: "+description+ " = "+field.);
                             }
                             if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Add")) {
                                 other_adjustment += FitIn.toDouble(field.getIn());
@@ -447,10 +456,11 @@ public class Srpt_end_of_day_summary_chickaloka {
                         Logger.getLogger(Srpt_end_of_day_summary_chickaloka.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
-                end_inv = (beg_inv + ((new_in) + other_adjustment)) - sales_qty;
+                sales_qty = sales_qty - sales_qty_x;
+                amount = (price * sales_qty) - discount;
+                end_inv = (beg_inv + ((new_in) + other_adjustment)) - (sales_qty + transfer);
                 end_inv = end_inv + (damage + left_over + voucher + shortage) + over;
-
+//                System.out.println("Item: " + description + " : beg_inv: " + beg_inv + " ,new_in: " + new_in + " ,other_adjustment: " + other_adjustment + " ,sales_qty: " + sales_qty+ ", transfer: "+transfer);
                 if (damage < 0) {
                     damage = damage * -1;
                 }

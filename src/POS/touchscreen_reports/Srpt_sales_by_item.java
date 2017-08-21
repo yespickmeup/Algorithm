@@ -636,7 +636,7 @@ public class Srpt_sales_by_item {
                     + ",addtl_amount"
                     + " from sale_items  "
                     + " " + where
-                    + " group by item_code,unit,selling_price,discount_amount,addtl_amount order by description asc";
+                    + " group by sales_no,item_code,unit,selling_price,discount_amount,addtl_amount order by description asc";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -741,10 +741,15 @@ public class Srpt_sales_by_item {
                         cost = rs3.getDouble(1);
                     }
                 }
-                total_margin = (selling_price + addtl_amount - discount_amount) - cost;
-                margin = (total_margin / (selling_price + addtl_amount - discount_amount)) * 100;
+                double amount2 = ((selling_price * product_qty) + addtl_amount) - discount_amount;
+                double total_cost = (cost * product_qty);
+                double total_amount = (amount2 * product_qty);
+                margin = ((amount2 - total_cost)) / amount2 * 100;
+
+                total_margin = amount2 - total_cost;
+//                System.out.println("amount: " + total_amount + " , cost: " + total_cost+ " = "+total_margin);
                 String date = DateType.convert_slash_datetime(date_added);
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
                 fields.add(field);
             }
 

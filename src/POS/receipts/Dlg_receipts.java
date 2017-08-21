@@ -4,6 +4,7 @@
  */
 package POS.receipts;
 
+import POS.accounts_payable.Accounts_payable;
 import POS.barcodes.Dlg_barcodes;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
@@ -2071,7 +2072,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("module_accounts_payable","1");
 //        System.setProperty("delete_receipts_finalized", "true");
 //        System.setProperty("pool_host", "192.168.1.51");
@@ -3988,12 +3989,13 @@ public class Dlg_receipts extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_finalize nd = Dlg_confirm_finalize.create(p, true);
         nd.setTitle("");
-       
+
         nd.setCallback(new Dlg_confirm_finalize.Callback() {
 
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_finalize.OutputData data) {
                 closeDialog.ok();
+
                 List<to_receipt_items> datas = tbl_receipt_items_ALM;
                 List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
                 for (to_receipt_items to3 : datas) {
@@ -4033,6 +4035,14 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         break;
                     }
                 }
+                String ap_no = Accounts_payable.increment_id(branch_id);
+                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+                if (!payables.isEmpty()) {
+                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+                    Alert.set(0, "AP No. already added!");
+                    return;
+                }
+
                 Receipts.finalize(to, acc, branch, branch_id, data.is_invoice, data.is_payable, data.ap_date);
                 data_cols();
                 Alert.set(2, "");

@@ -1140,7 +1140,8 @@ public class Receipts {
             if (is_payable == 1) {
                 String customer_id = to_receipts.supllier_id;
                 String customer_name = to_receipts.supplier;
-                String ap_no = Accounts_payable.increment_id(to_receipts.branch_id);
+                String ap_no = Accounts_payable.increment_id(branch_id);
+//                System.out.println("branch_id: "+branch_id);
                 List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
                 if (!payables.isEmpty()) {
                     payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");

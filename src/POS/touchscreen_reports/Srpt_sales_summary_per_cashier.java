@@ -505,7 +505,7 @@ public class Srpt_sales_summary_per_cashier {
                 String user_screen_name1 = rs.getString(29);
                 String sf = DateType.convert_dash_date4(time_in);
 
-                String where2 = " where Date(date_added)='" + sf + "' and user_id='" + user_id1 + "' and location_id='" + location_id + "' "
+                String where2 = " where Date(date_added)='" + sf + "' and user_id='" + user_id1 + "' and location_id='" + location_id + "' and status=0 "
                         + " group by Date(date_added),user_id ";
 
                 String date = DateType.convert_slash_datetime(time_in);
@@ -600,7 +600,7 @@ public class Srpt_sales_summary_per_cashier {
                         + ",sum(prepaid_amount)"
                         + " from sales  "
                         + " " + where2;
-
+//                System.out.println("where2: "+where2);
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 while (rs2.next()) {
@@ -613,6 +613,7 @@ public class Srpt_sales_summary_per_cashier {
                     String remarks = rs2.getString(7);
                     double gross_amount = rs2.getDouble(8);
                     double amount_due2 = rs2.getDouble(9);
+//                    System.out.println("amount_due2: "+amount_due2);
                     int status2 = rs2.getInt(10);
                     int sales_type = rs2.getInt(11);
                     double line_discount2 = rs2.getDouble(12);
@@ -664,10 +665,10 @@ public class Srpt_sales_summary_per_cashier {
                 }
 
                 String where3 = " where Date(disbursement_date)='" + sf + "' and user_id='" + user_id1 + "' and location_id='" + location_id + "' "
-                        + " group by Date(disbursement_date ),user_id ";
-
+                        + " group by Date(disbursement_date),user_id ";
+//                System.out.println("where3: "+where3);
                 String s3 = "select "
-                        + "amount"
+                        + " sum(amount)"
                         + " from disbursements"
                         + " " + where3;
                 double disburse = 0;
@@ -676,11 +677,12 @@ public class Srpt_sales_summary_per_cashier {
                 while (rs3.next()) {
                     disburse += rs3.getDouble(1);
                 }
+//                  System.out.println("cash: "+cash+ " ,cashin: "+cashin+ " ,disburse: "+disburse+ " ,cash_count: "+amount1+ " ,disburse: "+disburse);
                 cash = (cash + cashin) - disburse;
                 cash_count = amount1;
                 double total = cash_count - cash;
-//                System.out.println("total: " + total);
 
+//              System.out.println("total: " + total + " ,disburse: "+disburse);
                 if (total > 0) {
                     status = "Over [" + FitIn.fmt_wc_0(total) + "]";
                 }

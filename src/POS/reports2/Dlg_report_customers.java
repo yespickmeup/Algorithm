@@ -6,6 +6,7 @@
 package POS.reports2;
 
 import POS.customers.Customers;
+import POS.users.MyUser;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.Focus_Fire;
@@ -253,6 +254,21 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         pnl_sales_items3 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField9 = new Field.Search();
+        jButton4 = new Button.Default();
+        jProgressBar7 = new javax.swing.JProgressBar();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jDateChooser6 = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        pnl_sales_items4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -361,7 +377,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 .addComponent(pnl_sales_items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Customers", jPanel2);
+        jTabbedPane1.addTab("Customer's Balances", jPanel2);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -721,6 +737,149 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Balance per Transaction", jPanel8);
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Customer:");
+
+        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img_menu2/magnifying-glass.png"))); // NOI18N
+        jButton4.setToolTipText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jProgressBar7.setString("");
+        jProgressBar7.setStringPainted(true);
+
+        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField10.setFocusable(false);
+
+        jLabel14.setText("Status:");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("Date from:");
+
+        jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setSelected(true);
+        jCheckBox5.setText("All");
+
+        jDateChooser5.setDate(new Date());
+        jDateChooser5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDateChooser6.setDate(new Date());
+        jDateChooser6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("To:");
+
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("All");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCheckBox5)
+                    .addComponent(jCheckBox6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(194, 194, 194)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jDateChooser5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jDateChooser6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(1, 1, 1)))
+                .addContainerGap())
+        );
+
+        pnl_sales_items4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnl_sales_items4Layout = new javax.swing.GroupLayout(pnl_sales_items4);
+        pnl_sales_items4.setLayout(pnl_sales_items4Layout);
+        pnl_sales_items4Layout.setHorizontalGroup(
+            pnl_sales_items4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnl_sales_items4Layout.setVerticalGroup(
+            pnl_sales_items4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_sales_items4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(pnl_sales_items4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Payment Summary", jPanel10);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -789,6 +948,14 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         get_customers_aging2();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        init_customers_payment_summary(jTextField9, jTextField10);
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        get_customers_paid();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -797,18 +964,27 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
+    private com.toedter.calendar.JDateChooser jDateChooser5;
+    private com.toedter.calendar.JDateChooser jDateChooser6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -818,6 +994,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -830,8 +1008,10 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JProgressBar jProgressBar5;
     private javax.swing.JProgressBar jProgressBar6;
+    private javax.swing.JProgressBar jProgressBar7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -839,14 +1019,16 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel pnl_sales_items;
     private javax.swing.JPanel pnl_sales_items1;
     private javax.swing.JPanel pnl_sales_items2;
     private javax.swing.JPanel pnl_sales_items3;
+    private javax.swing.JPanel pnl_sales_items4;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
         jTextField2.enable(false);
         jTextField4.enable(false);
@@ -855,8 +1037,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jTextField2.setVisible(false);
         jTextField4.setVisible(false);
         jTextField6.setVisible(false);
+        jTextField10.setVisible(false);
         focus();
-
     }
 
     public void do_pass() {
@@ -1357,4 +1539,118 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         }
     }
 
+    //<editor-fold defaultstate="collapsed" desc=" payment summary ">
+    private void init_customers_payment_summary(final JTextField tf1, final JTextField tf2) {
+        String search = tf1.getText();
+        customer_list3.clear();
+        customer_list3 = Customers.ret_data(search);
+        Object[][] obj = new Object[customer_list3.size()][2];
+        int i = 0;
+        for (Customers.to_customers to : customer_list3) {
+            obj[i][0] = " " + to.customer_no;
+            obj[i][1] = " " + to.customer_name;
+
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {50, 200};
+        int width = 0;
+        String[] col_names = {"Id", "Name"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf1, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Field.Search customer = (Field.Search) tf1;
+                Customers.to_customers to = customer_list3.get(data.selected_row);
+                tf1.setText("" + to.customer_name);
+                customer.setId(to.address);
+                tf2.setText("" + to.customer_no);
+
+                get_customers_paid();
+            }
+        });
+    }
+
+    private void get_customers_paid() {
+        jProgressBar7.setString("Loading... Please wait...");
+        jProgressBar7.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String where = "";
+                String where2 = "";
+
+                String jrxml = "rpt_customers.jrxml";
+                if (!jCheckBox6.isSelected()) {
+                    where = where + " where customer_no='" + jTextField10.getText() + "' ";
+                }
+                if (!jCheckBox5.isSelected()) {
+                    String date_from = DateType.sf.format(jDateChooser5.getDate());
+                    String date_to = DateType.sf.format(jDateChooser6.getDate());
+                    where2 = " and Date(date_paid) between '" + date_from + "' and '" + date_to + "' ";
+                }
+                List<Srpt_customers.field> datas = Srpt_customers.ret_data_paid(where, where2);
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String date = "Date: [" + DateType.slash.format(jDateChooser5.getDate()) + " - " + DateType.slash.format(jDateChooser6.getDate()) + "]";
+                if (jCheckBox5.isSelected()) {
+                    date = "All";
+                }
+                String printed_by = MyUser.getUser_screen_name();// Users.screen_name.toUpperCase();
+                String sheet_no = "";
+                Srpt_customers rpt = new Srpt_customers(business_name, date, printed_by);
+                rpt.fields.addAll(datas);
+
+                report_customers_paid(rpt, jrxml);
+                jProgressBar7.setString("Finished...");
+                jProgressBar7.setIndeterminate(false);
+            }
+        });
+
+        t.start();
+    }
+
+    private void report_customers_paid(final Srpt_customers to, String jrxml_name) {
+        pnl_sales_items4.removeAll();
+        pnl_sales_items4.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_customers(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            pnl_sales_items4.add(viewer);
+            pnl_sales_items4.updateUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_customers_paid(Srpt_customers to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_paid(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_paid(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_customers.class.
+                    getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //</editor-fold>
 }

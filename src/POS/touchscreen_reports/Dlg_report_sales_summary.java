@@ -5,6 +5,7 @@
  */
 package POS.touchscreen_reports;
 
+
 import POS.accounts_receivable.S1_accounts_receivable_payments;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
@@ -1210,11 +1211,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-
+        
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         set_default_branch();
-
         init_tbl_chickaloka_items();
 
         String where = "  order by screen_name asc";
