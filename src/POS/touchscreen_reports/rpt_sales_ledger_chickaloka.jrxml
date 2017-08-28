@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="633272d5-b0b3-456b-9fef-25aacda9ae4d">
-    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.zoom" value="1.5"/>
     <property name="ireport.x" value="0"/>
     <property name="ireport.y" value="0"/>
     <parameter name="business_name" class="java.lang.String"/>
@@ -23,6 +23,7 @@
     <field name="prepaid_amount" class="java.lang.Double"/>
     <field name="balance_due" class="java.lang.Double"/>
     <field name="user_screen_name" class="java.lang.String"/>
+    <field name="date" class="java.lang.String"/>
     <variable name="balance_due_1" class="java.lang.Double" calculation="Sum">
         <variableExpression><![CDATA[$F{balance_due}]]></variableExpression>
     </variable>
@@ -124,7 +125,7 @@
                 <text><![CDATA[Transaction No]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="eb3c6c5b-34de-4455-bb42-1688974f590e" x="82" y="16" width="450" height="20"/>
+                <reportElement uuid="eb3c6c5b-34de-4455-bb42-1688974f590e" x="128" y="16" width="404" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.2"/>
                 </box>
@@ -184,6 +185,16 @@
                 </textElement>
                 <text><![CDATA[Balance Due]]></text>
             </staticText>
+            <staticText>
+                <reportElement uuid="938287b7-853f-4a94-b013-59f3c6584145" x="81" y="16" width="47" height="20"/>
+                <box>
+                    <bottomPen lineWidth="0.2"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <text><![CDATA[Date]]></text>
+            </staticText>
         </band>
     </columnHeader>
     <detail>
@@ -197,7 +208,7 @@
                 <textFieldExpression><![CDATA[$F{sales_no}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="abf6a1db-3191-4157-9f5e-aff8f34505e8" x="82" y="0" width="450" height="15"/>
+                <reportElement uuid="abf6a1db-3191-4157-9f5e-aff8f34505e8" x="128" y="0" width="404" height="15"/>
                 <textElement verticalAlignment="Middle">
                     <paragraph leftIndent="2"/>
                 </textElement>
@@ -241,6 +252,14 @@
                     <paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{balance_due}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="4a3ecc4b-1137-4be4-a4e9-d4f395f125f5" x="81" y="0" width="47" height="15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

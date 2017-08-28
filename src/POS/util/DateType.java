@@ -128,7 +128,21 @@ public class DateType {
         date = DateType.slash_w_time.format(d);
         return date;
     }
-
+     public static String convert_slash_datetime4(String datetime) {
+        String date = "";
+        Date d = new Date();
+        if (datetime.isEmpty()) {
+            datetime = DateType.sf.format(new Date());
+        }
+        try {
+            d = DateType.sf.parse(datetime);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateType.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        date = DateType.slash_w_time.format(d);
+        return date;
+    }
     public static String convert_slash_datetime2(String datetime) {
         String date = "";
         Date d = new Date();
@@ -192,7 +206,22 @@ public class DateType {
         date = DateType.sf.format(d);
         return date;
     }
-
+      public static String convert_dash_date5(String datetime) {
+        String date = "";
+        Date d = new Date();
+        if (datetime.isEmpty()) {
+            datetime = DateType.datetime.format(new Date());
+        }
+        try {
+            d = DateType.time4.parse(datetime);
+             
+        } catch (ParseException ex) {
+            Logger.getLogger(DateType.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        date = DateType.time4.format(d);
+        return date;
+    }
     public static String convert_monthDate_sf(String datetime) {
         String date = "";
         Date d = new Date();

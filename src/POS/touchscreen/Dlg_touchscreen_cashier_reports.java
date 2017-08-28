@@ -676,6 +676,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
 
+
         init_key();
 
         init_panel_layout();

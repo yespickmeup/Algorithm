@@ -5,7 +5,6 @@
  */
 package POS.touchscreen_reports;
 
-
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
@@ -951,9 +950,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             prepaid = 0;
             cash = 0;
         }
-        int[] tbl_widths_banks = {100, 100, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, amount};
+        int[] tbl_widths_banks = {100, 70, 100, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, amount};
         for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
-            if (i == 1) {
+            if (i == 2) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_ledger, i, tbl_widths_banks[i]);
@@ -967,7 +966,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 setFont(new java.awt.Font("Arial", 0, 11));
         tbl_ledger.setRowHeight(25);
         tbl_ledger.setFont(new java.awt.Font("Arial", 0, 11));
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 3);
+//        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 3);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 5);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 6);
@@ -976,6 +975,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 9);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 10);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 11);
+        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 12);
     }
 
     private void loadData_banks(List<Srpt_sales_ledger.field> acc) {
@@ -986,7 +986,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     public static class TblledgerModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction No", "Customer", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Net Due"
+            "Transaction No", "Date", "Customer", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Net Due"
         };
 
         public TblledgerModel(ListModel listmodel) {
@@ -1014,24 +1014,26 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 case 0:
                     return " " + tt.sales_no;
                 case 1:
-                    return " " + tt.customer_name;
+                    return " " +tt.date;
                 case 2:
-                    return " " + tt.user_screen_name;
+                    return " " + tt.customer_name;
                 case 3:
-                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
+                    return " " + tt.user_screen_name;
                 case 4:
-                    return FitIn.fmt_wc_0(tt.line_discount) + " ";
+                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
                 case 5:
-                    return FitIn.fmt_wc_0(tt.sales_discount) + " ";
+                    return FitIn.fmt_wc_0(tt.line_discount) + " ";
                 case 6:
-                    return FitIn.fmt_wc_0(tt.cash) + " ";
+                    return FitIn.fmt_wc_0(tt.sales_discount) + " ";
                 case 7:
-                    return FitIn.fmt_wc_0(tt.charge_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.cash) + " ";
                 case 8:
-                    return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.charge_amount) + " ";
                 case 9:
-                    return FitIn.fmt_wc_0(tt.gc_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
                 case 10:
+                    return FitIn.fmt_wc_0(tt.gc_amount) + " ";
+                case 11:
                     return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
                 default:
                     return FitIn.fmt_wc_0(tt.amount_due) + " ";

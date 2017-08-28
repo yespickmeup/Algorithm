@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import synsoftech.util.DateType;
 
 /**
  *
@@ -63,11 +64,11 @@ public class Srpt_sales_ledger {
         double prepaid_amount;
         double balance_due;
         String user_screen_name;
-
+        String date;
         public field() {
         }
 
-        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name) {
+        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name,String date) {
             this.sales_no = sales_no;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -82,8 +83,17 @@ public class Srpt_sales_ledger {
             this.prepaid_amount = prepaid_amount;
             this.balance_due = balance_due;
             this.user_screen_name = user_screen_name;
+            this.date=date;
         }
 
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+        
         public String getUser_screen_name() {
             return user_screen_name;
         }
@@ -349,8 +359,8 @@ public class Srpt_sales_ledger {
                 double cheque_amount = check_amount;
                 double gc_amount = gift_certificate_amount;
                 double balance_due = amount_due;
-
-                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name);
+                String date= DateType.convert_slash_datetime(date_added);
+                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name,date);
                 fields.add(field);
             }
             return fields;

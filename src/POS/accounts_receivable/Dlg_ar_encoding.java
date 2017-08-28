@@ -2279,8 +2279,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
-                get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
         loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data(to.ar_no));
 
         compute_payments();

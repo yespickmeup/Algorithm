@@ -352,7 +352,12 @@ public class MyLedger {
                 String location_id = rs3.getString(37);
 
                 String transaction_type = "Receipts";
-                String date = POS.util.DateType.convert_slash_datetime3(date_added);
+               
+
+                String time = date_added.substring(10,date_added.length());
+                String sf_time = date_received + " " + time;
+
+                String date = POS.util.DateType.convert_slash_datetime3(sf_time);
                 qty = qty * conversion;
                 String in = FitIn.fmt_woc(qty);
                 String out = "";
@@ -370,14 +375,14 @@ public class MyLedger {
                 Date created = new Date();
 
                 try {
-                    created = POS.util.DateType.datetime.parse(date_added);
+                    created = POS.util.DateType.datetime.parse(sf_time);
                 } catch (ParseException ex) {
                     Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 String transaction_no = "" + receipt_no;
                 String cost1 = FitIn.fmt_wc_0(cost);
                 String price1 = "";
-                String months = DateType.convert_datetime_to_month(date_added);
+                String months = DateType.convert_datetime_to_month(sf_time);
 
                 Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_branch, from_branch_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
                 if (status == 1) {
@@ -1115,7 +1120,7 @@ public class MyLedger {
                 String location = rs12.getString(33);
                 String location_id = rs12.getString(34);
                 String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                 String months = DateType.convert_datetime_to_month(date_added);
+                String months = DateType.convert_datetime_to_month(date_added);
                 Date created = new Date();
                 try {
                     created = POS.util.DateType.datetime.parse(date_added);
@@ -1211,7 +1216,7 @@ public class MyLedger {
                 int is_converted_from = rs13.getInt(37);
 
                 String date = POS.util.DateType.convert_slash_datetime3(date_added);
-                 String months = DateType.convert_datetime_to_month(date_added);
+                String months = DateType.convert_datetime_to_month(date_added);
                 Date created = new Date();
                 try {
                     created = POS.util.DateType.datetime.parse(date_added);
@@ -1285,7 +1290,7 @@ public class MyLedger {
                 }
 
                 String date = POS.util.DateType.convert_slash_datetime3(adjustment_date);
-                 String months = DateType.convert_datetime_to_month(adjustment_date);
+                String months = DateType.convert_datetime_to_month(adjustment_date);
                 Date created = new Date();
                 try {
                     created = POS.util.DateType.datetime.parse(adjustment_date);
@@ -1348,9 +1353,7 @@ public class MyLedger {
             for (Srpt_item_ledger.field to2 : field3) {
                 String m = DateType.m1.format(to2.date_added);
                 String y = DateType.y.format(to2.date_added);
-                
-                
-                
+
                 if (year.equals(y) && is_month_selected == true) {
                     fields2.add(to2);
                     running_balance = FitIn.toDouble(to2.getBalance());
