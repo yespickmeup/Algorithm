@@ -24,7 +24,6 @@ import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 
-
 /**
  *
  * @author Guinness

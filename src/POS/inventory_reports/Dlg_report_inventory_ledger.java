@@ -1064,7 +1064,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 tf_search.grabFocus();
             }
         });
-        
+
     }
 
     private void set_default_branch() {
@@ -1510,12 +1510,12 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String cost1 = "";
                             String price1 = FitIn.fmt_wc_0(selling_price);
                             String months = DateType.convert_datetime_to_month(date_added);
-
-                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            String remarks = "";
+                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks);
                             sales.add(field);
 
                             if (status == 1) {
-                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks);
                                 sales.add(field2);
                             }
 
@@ -1596,7 +1596,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String cost1 = FitIn.fmt_wc_0(cost);
                             String price1 = FitIn.fmt_wc_0(selling_price);
                             String months = DateType.convert_datetime_to_month(date_added);
-                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            String remarks = "";
+                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks);
 
                             inventory_count.add(field);
                         }
@@ -1712,7 +1713,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String price1 = "";
                             String months = DateType.convert_datetime_to_month(date_added);
 
-                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_branch, from_branch_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_branch, from_branch_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                             if (status == 1) {
                                 receipts.add(field);
                             }
@@ -1845,9 +1846,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String cost1 = FitIn.fmt_wc_0(cost);
                             String price1 = "";
                             String months = DateType.convert_datetime_to_month(date_added);
-                            Srpt_item_ledger.field field_out = new Srpt_item_ledger.field("Transfer-Out", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            String remarks1 = "To: " + to_branch + " - " + to_location;
+                            String remarks2 = "From: " + from_branch + " - " + from_location;
+                            Srpt_item_ledger.field field_out = new Srpt_item_ledger.field("Transfer-Out", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks1);
 
-                            Srpt_item_ledger.field field_in = new Srpt_item_ledger.field("Transfer-In", date, FitIn.fmt_woc(product_qty), "", balance, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                            Srpt_item_ledger.field field_in = new Srpt_item_ledger.field("Transfer-In", date, FitIn.fmt_woc(product_qty), "", balance, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks2);
 
                             if (status == 1) {
 
@@ -1933,10 +1936,10 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String price1 = "";
                             String months = DateType.convert_datetime_to_month(date_added);
                             if (is_add == 1) {
-                                Srpt_item_ledger.field add = new Srpt_item_ledger.field("Adjustment-Add", date, FitIn.fmt_woc(new_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field add = new Srpt_item_ledger.field("Adjustment-Add", date, FitIn.fmt_woc(new_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                                 adjustment_add.add(add);
                             } else {
-                                Srpt_item_ledger.field deduct = new Srpt_item_ledger.field("Adjustment-Deduct", date, "", FitIn.fmt_woc(new_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field deduct = new Srpt_item_ledger.field("Adjustment-Deduct", date, "", FitIn.fmt_woc(new_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                                 adjustment_deduct.add(deduct);
                             }
 
@@ -2076,10 +2079,10 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                                 String months1 = POS.util.DateType.convert_slash_datetime3(date_added1);
 
                                 String months = DateType.convert_datetime_to_month(date_added);
-                                Srpt_item_ledger.field field1 = new Srpt_item_ledger.field("Sales", months1, "", in, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field field1 = new Srpt_item_ledger.field("Sales", months1, "", in, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                                 return_exchange.add(field1);
 
-                                Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, "" + id, cost1, price1, months);
+                                Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, "" + id, cost1, price1, months, "");
                                 return_exchange.add(field11);
                             }
 
@@ -2218,10 +2221,10 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String months = DateType.convert_datetime_to_month(date_added);
 
                             if (status == 0) {
-                                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                                 charge_in_advance.add(field);
                             } else {
-                                Srpt_item_ledger.field field = new Srpt_item_ledger.field("Charge in Advance[+]", date, out, "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field field = new Srpt_item_ledger.field("Charge in Advance[+]", date, out, "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                                 charge_in_advance.add(field);
                             }
 
@@ -2295,7 +2298,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String cost1 = "";
                             String price1 = FitIn.fmt_wc_0(selling_price);
                             String months = DateType.convert_datetime_to_month(date_added);
-                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, user_screen_name, created, transaction_no, cost1, price1, months);
+                            Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, user_screen_name, created, transaction_no, cost1, price1, months, "");
                             replenishments.add(field);
                         }
                         //</editor-fold>
@@ -2388,7 +2391,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             String price1 = FitIn.fmt_wc_0(selling_price);
                             String months = DateType.convert_datetime_to_month(date_added);
                             if (status == 1) {
-                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Requisition Slip", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Requisition Slip", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                                 requistion_slips.add(field2);
                             }
                         }
@@ -2453,7 +2456,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                             } catch (ParseException ex) {
                                 Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                            Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "", "");
                             return_from_customer.add(field2);
                         }
                         //</editor-fold>
@@ -2549,10 +2552,10 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                                 Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             if (is_converted_from == 1) {
-                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "", "");
                                 conversions.add(field2);
                             } else {
-                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "");
+                                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), "", "");
                                 conversions.add(field2);
                             }
 
@@ -2854,9 +2857,9 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         tbl_ledger.setModel(tbl_ledger_M);
         tbl_ledger.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_ledger.setRowHeight(25);
-        int[] tbl_widths_banks = {100, 120, 100, 100, 80, 80, 50, 50, 50};
+        int[] tbl_widths_banks = {100, 120, 100, 120, 100, 80, 80, 50, 50, 50};
         for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
-            if (i == 0 || i == 2) {
+            if ( i == 3) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_ledger, i, tbl_widths_banks[i]);
@@ -2870,8 +2873,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 setFont(new java.awt.Font("Arial", 0, 11));
         tbl_ledger.setRowHeight(25);
         tbl_ledger.setFont(new java.awt.Font("Arial", 0, 11));
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 5);
+        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 6);
     }
 
     private void loadData_ledger(List<Srpt_item_ledger.field> acc) {
@@ -2882,7 +2885,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     public static class TblledgerModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Type", "Date", "Transaction No", "User", "Cost", "Selling Price", "In", "Out", "Balance"
+            "Type", "Date", "Transaction No", "Remarks", "User", "Cost", "Selling Price", "In", "Out", "Balance"
         };
 
         public TblledgerModel(ListModel listmodel) {
@@ -2914,19 +2917,21 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 case 2:
                     return " " + tt.transaction_no;
                 case 3:
-                    return " " + tt.customer_name;
+                    return " " + tt.remarks;
                 case 4:
-                    return FitIn.fmt_wc_0(tt.cost) + " ";
+                    return " " + tt.customer_name;
                 case 5:
-                    return FitIn.fmt_wc_0(tt.price) + " ";
+                    return FitIn.fmt_wc_0(tt.cost) + " ";
                 case 6:
+                    return FitIn.fmt_wc_0(tt.price) + " ";
+
+                case 7:
                     if (tt.in.equalsIgnoreCase("0")) {
                         return "";
                     } else {
                         return " " + tt.in;
                     }
-
-                case 7:
+                case 8:
                     if (tt.out.equalsIgnoreCase("0")) {
                         return "";
                     } else {

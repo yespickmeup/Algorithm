@@ -264,7 +264,7 @@ public class Srpt_customer_ledger {
                 int id = rs2.getInt(1);
                 double paid = rs2.getDouble(7);
                 double check_amount = rs2.getDouble(20);
-                String date = rs2.getString(13);
+                String date = rs2.getString(15);
                 String transaction_no = rs2.getString(25);
                 String or_payment_no = rs2.getString(26);
                 String or_no = rs2.getString(18);
@@ -298,7 +298,8 @@ public class Srpt_customer_ledger {
                             compareTo(o2.getDate_added());
                 }
             });
-
+            
+            
             double amount = 0;
             double total = 0;
             List<Srpt_customer_ledger.field> datas2 = new ArrayList();

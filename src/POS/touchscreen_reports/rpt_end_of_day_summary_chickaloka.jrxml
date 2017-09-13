@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10bd8fe4-350d-4e3e-ac0d-377b6f6dfa33">
     <property name="ireport.zoom" value="2.0"/>
-    <property name="ireport.x" value="0"/>
-    <property name="ireport.y" value="190"/>
+    <property name="ireport.x" value="52"/>
+    <property name="ireport.y" value="178"/>
     <parameter name="business_name" class="java.lang.String"/>
     <parameter name="address" class="java.lang.String"/>
     <parameter name="date" class="java.lang.String"/>
@@ -937,7 +937,7 @@
                 <text><![CDATA[Short]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="d794a42b-633b-4b85-96ad-c4addd62f0b2" x="387" y="0" width="40" height="23"/>
+                <reportElement uuid="d794a42b-633b-4b85-96ad-c4addd62f0b2" x="387" y="0" width="35" height="23"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
@@ -945,7 +945,7 @@
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
-                    <font size="9"/>
+                    <font size="8"/>
                     <paragraph leftIndent="2"/>
                 </textElement>
                 <text><![CDATA[Transfer]]></text>
@@ -979,7 +979,7 @@
                 <text><![CDATA[Amount]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="d794a42b-633b-4b85-96ad-c4addd62f0b2" x="427" y="0" width="21" height="23"/>
+                <reportElement uuid="d794a42b-633b-4b85-96ad-c4addd62f0b2" x="422" y="0" width="26" height="23"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
@@ -1165,7 +1165,7 @@
                 <textFieldExpression><![CDATA[$F{shortage}]]></textFieldExpression>
             </textField>
             <textField pattern="###0.0" isBlankWhenNull="false">
-                <reportElement uuid="ed009a09-2658-4b3b-84d9-cd01ee79f939" mode="Transparent" x="387" y="0" width="40" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="ed009a09-2658-4b3b-84d9-cd01ee79f939" mode="Transparent" x="387" y="0" width="35" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
@@ -1173,7 +1173,7 @@
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-                    <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
                     <paragraph lineSpacing="Single" leftIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{transfer}]]></textFieldExpression>
@@ -1207,7 +1207,7 @@
                 <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
             </textField>
             <textField pattern="###0.0" isBlankWhenNull="false">
-                <reportElement uuid="ed009a09-2658-4b3b-84d9-cd01ee79f939" mode="Transparent" x="427" y="0" width="21" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="ed009a09-2658-4b3b-84d9-cd01ee79f939" mode="Transparent" x="422" y="0" width="26" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>

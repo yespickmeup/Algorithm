@@ -5,7 +5,6 @@
  */
 package POS.touchscreen_reports;
 
-
 import POS.accounts_receivable.S1_accounts_receivable_payments;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
@@ -1211,7 +1210,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        
+
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         set_default_branch();
@@ -2144,7 +2143,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         tbl_chickaloka_items.setModel(tbl_chickaloka_items_M);
         tbl_chickaloka_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_chickaloka_items.setRowHeight(25);
-        int[] tbl_widths_banks = {60, 100, 60, 50, 60, 50, 60, 60, 60, 50, 50, 60, 50, 50, 60, 70};
+        int[] tbl_widths_banks = {60, 100, 0, 60, 50, 60, 50, 60, 60, 60, 50, 50, 60, 50, 50, 60, 70};
         for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -2160,8 +2159,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 setFont(new java.awt.Font("Arial", 0, 11));
         tbl_chickaloka_items.setRowHeight(25);
         tbl_chickaloka_items.setFont(new java.awt.Font("Arial", 0, 11));
-        TableWidthUtilities.setColumnRightRenderer(tbl_chickaloka_items, 14);
         TableWidthUtilities.setColumnRightRenderer(tbl_chickaloka_items, 15);
+        TableWidthUtilities.setColumnRightRenderer(tbl_chickaloka_items, 16);
     }
 
     private void loadData_chickaloka(List<Srpt_end_of_day_summary_chickaloka.field> acc) {
@@ -2172,7 +2171,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     public static class TblchickaModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Item Code", "Description", "Beg. Inv.", "New In", "Sales Qty", "Dmg", "Left Over", "Other Adj.", "Voucher", "Short", "Over", "Transfer", "PO", "End Inv.", "Price", "Amount"
+            "Item Code", "Description", "Remarks", "Beg. Inv.", "New In", "Sales Qty", "Dmg", "Left Over", "Other Adj.", "Voucher", "Short", "Over", "Transfer", "PO", "End Inv.", "Price", "Amount"
         };
 
         public TblchickaModel(ListModel listmodel) {
@@ -2203,32 +2202,33 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 case 1:
                     return " " + tt.description;
                 case 2:
-                    return " " + df1.format(tt.beg_inv);
+                    return " " + tt.remarks;
                 case 3:
-                    return " " + df1.format(tt.new_in);
+                    return " " + df1.format(tt.beg_inv);
                 case 4:
-                    return " " + df1.format(tt.sales_qty);
+                    return " " + df1.format(tt.new_in);
                 case 5:
-                    return " " + df1.format(tt.damage);
+                    return " " + df1.format(tt.sales_qty);
                 case 6:
-                    return " " + df1.format(tt.left_over);
+                    return " " + df1.format(tt.damage);
                 case 7:
-                    return " " + df1.format(tt.other_adjustment);
+                    return " " + df1.format(tt.left_over);
                 case 8:
-                    return " " + df1.format(tt.voucher);
+                    return " " + df1.format(tt.other_adjustment);
                 case 9:
-                    return " " + df1.format(tt.shortage);
+                    return " " + df1.format(tt.voucher);
                 case 10:
-                    return " " + df1.format(tt.over);
+                    return " " + df1.format(tt.shortage);
                 case 11:
-                    return " " + df1.format(tt.transfer);
+                    return " " + df1.format(tt.over);
                 case 12:
-                    return " " + df1.format(tt.po);
+                    return " " + df1.format(tt.transfer);
                 case 13:
-                    return " " + df1.format(tt.end_inv);
+                    return " " + df1.format(tt.po);
                 case 14:
+                    return " " + df1.format(tt.end_inv);
+                case 15:
                     return FitIn.fmt_wc_0(tt.selling_price) + " ";
-
                 default:
                     return FitIn.fmt_wc_0(tt.amount) + " ";
             }

@@ -65,10 +65,12 @@ public class Srpt_sales_ledger {
         double balance_due;
         String user_screen_name;
         String date;
+        String location;
+
         public field() {
         }
 
-        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name,String date) {
+        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location) {
             this.sales_no = sales_no;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -83,7 +85,16 @@ public class Srpt_sales_ledger {
             this.prepaid_amount = prepaid_amount;
             this.balance_due = balance_due;
             this.user_screen_name = user_screen_name;
-            this.date=date;
+            this.date = date;
+            this.location = location;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
         }
 
         public String getDate() {
@@ -93,7 +104,7 @@ public class Srpt_sales_ledger {
         public void setDate(String date) {
             this.date = date;
         }
-        
+
         public String getUser_screen_name() {
             return user_screen_name;
         }
@@ -353,14 +364,15 @@ public class Srpt_sales_ledger {
                 String branch_id = rs.getString(45);
                 String location = rs.getString(46);
                 String location_id = rs.getString(47);
-                
+
                 double sales_discount = discount_amount;
                 double cash = amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount);
                 double cheque_amount = check_amount;
                 double gc_amount = gift_certificate_amount;
                 double balance_due = amount_due;
-                String date= DateType.convert_slash_datetime(date_added);
-                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name,date);
+                String date = DateType.convert_slash_datetime(date_added);
+                String location1 = branch + " - " + location;
+                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location1);
                 fields.add(field);
             }
             return fields;

@@ -5,7 +5,6 @@
  */
 package POS.reports3;
 
-
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.my_services.S1_my_service_type;
@@ -915,6 +914,8 @@ public class Dlg_report_services extends javax.swing.JDialog {
     private javax.swing.JTextField tf_service_type_id1;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         Date d = DateUtils1.add_day(new Date(), -30);
         dp_from.setDate(d);
@@ -930,9 +931,6 @@ public class Dlg_report_services extends javax.swing.JDialog {
         jLabel50.setVisible(false);
         tf_from_branch.setVisible(false);
         tf_from_location.setVisible(false);
-
-      
-        
 
         String where = " order by branch,location asc ";
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
@@ -1003,7 +1001,7 @@ public class Dlg_report_services extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {

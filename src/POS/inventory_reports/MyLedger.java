@@ -178,11 +178,11 @@ public class MyLedger {
                 String price1 = FitIn.fmt_wc_0(selling_price);
                 String months = DateType.convert_datetime_to_month(date_added);
 
-                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                 sales.add(field);
 
                 if (status == 1) {
-                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Sales - X", date, FitIn.fmt_woc(product_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                     sales.add(field2);
                 }
 
@@ -263,7 +263,7 @@ public class MyLedger {
                 String cost1 = FitIn.fmt_wc_0(cost);
                 String price1 = FitIn.fmt_wc_0(selling_price);
                 String months = DateType.convert_datetime_to_month(date_added);
-                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
 
                 inventory_count.add(field);
             }
@@ -352,9 +352,8 @@ public class MyLedger {
                 String location_id = rs3.getString(37);
 
                 String transaction_type = "Receipts";
-               
 
-                String time = date_added.substring(10,date_added.length());
+                String time = date_added.substring(10, date_added.length());
                 String sf_time = date_received + " " + time;
 
                 String date = POS.util.DateType.convert_slash_datetime3(sf_time);
@@ -384,13 +383,11 @@ public class MyLedger {
                 String price1 = "";
                 String months = DateType.convert_datetime_to_month(sf_time);
 
-                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_branch, from_branch_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_branch, from_branch_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                 if (status == 1) {
                     receipts.add(field);
                 }
-
             }
-
             //</editor-fold>
             //<editor-fold defaultstate="collapsed" desc=" Transfers ">
             List<Srpt_item_ledger.field> transfer_in = new ArrayList();
@@ -517,9 +514,11 @@ public class MyLedger {
                 String cost1 = FitIn.fmt_wc_0(cost);
                 String price1 = "";
                 String months = DateType.convert_datetime_to_month(date_added);
-                Srpt_item_ledger.field field_out = new Srpt_item_ledger.field("Transfer-Out", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                String remarks1 = "To: " + to_branch + " - " + to_location;
+                String remarks2 = "Fr: " + from_branch + " - " + from_location;
+                Srpt_item_ledger.field field_out = new Srpt_item_ledger.field("Transfer-Out", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks1);
 
-                Srpt_item_ledger.field field_in = new Srpt_item_ledger.field("Transfer-In", date, FitIn.fmt_woc(product_qty), "", balance, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                Srpt_item_ledger.field field_in = new Srpt_item_ledger.field("Transfer-In", date, FitIn.fmt_woc(product_qty), "", balance, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, remarks2);
 
                 if (status == 1) {
 
@@ -606,10 +605,10 @@ public class MyLedger {
                 String price1 = "";
                 String months = DateType.convert_datetime_to_month(date_added);
                 if (is_add == 1) {
-                    Srpt_item_ledger.field add = new Srpt_item_ledger.field("Adjustment-Add", date, FitIn.fmt_woc(new_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, remarks, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field add = new Srpt_item_ledger.field("Adjustment-Add", date, FitIn.fmt_woc(new_qty), "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, remarks, created, transaction_no, cost1, price1, months, "");
                     adjustment_add.add(add);
                 } else {
-                    Srpt_item_ledger.field deduct = new Srpt_item_ledger.field("Adjustment-Deduct", date, "", FitIn.fmt_woc(new_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, remarks, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field deduct = new Srpt_item_ledger.field("Adjustment-Deduct", date, "", FitIn.fmt_woc(new_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, remarks, created, transaction_no, cost1, price1, months, "");
                     adjustment_deduct.add(deduct);
                 }
 
@@ -749,10 +748,10 @@ public class MyLedger {
                     String months1 = POS.util.DateType.convert_slash_datetime3(date_added1);
 
                     String months = DateType.convert_datetime_to_month(date_added);
-                    Srpt_item_ledger.field field1 = new Srpt_item_ledger.field("Sales", months1, "", in, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field field1 = new Srpt_item_ledger.field("Sales", months1, "", in, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                     return_exchange.add(field1);
 
-                    Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, "" + id, cost1, price1, months);
+                    Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, "" + id, cost1, price1, months, "");
                     return_exchange.add(field11);
                 }
 
@@ -891,10 +890,10 @@ public class MyLedger {
                 String months = DateType.convert_datetime_to_month(date_added);
 
                 if (status == 0) {
-                    Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                     charge_in_advance.add(field);
                 } else {
-                    Srpt_item_ledger.field field = new Srpt_item_ledger.field("Charge in Advance[+]", date, out, "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field field = new Srpt_item_ledger.field("Charge in Advance[+]", date, out, "", balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                     charge_in_advance.add(field);
                 }
 
@@ -968,7 +967,7 @@ public class MyLedger {
                 String cost1 = "";
                 String price1 = FitIn.fmt_wc_0(selling_price);
                 String months = DateType.convert_datetime_to_month(date_added);
-                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, user_screen_name, created, transaction_no, cost1, price1, months);
+                Srpt_item_ledger.field field = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, user_screen_name, created, transaction_no, cost1, price1, months, "");
                 replenishments.add(field);
             }
             //</editor-fold>
@@ -1061,7 +1060,7 @@ public class MyLedger {
                 String price1 = FitIn.fmt_wc_0(selling_price);
                 String months = DateType.convert_datetime_to_month(date_added);
                 if (status == 1) {
-                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Requisition Slip", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months);
+                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Requisition Slip", date, "", FitIn.fmt_woc(product_qty), balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, transaction_no, cost1, price1, months, "");
                     requistion_slips.add(field2);
                 }
             }
@@ -1127,7 +1126,7 @@ public class MyLedger {
                 } catch (ParseException ex) {
                     Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months);
+                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Customer Return/s", date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months, "");
                 return_from_customer.add(field2);
             }
             //</editor-fold>
@@ -1224,10 +1223,10 @@ public class MyLedger {
                     Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (is_converted_from == 1) {
-                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months);
+                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - From", date, "", FitIn.fmt_woc(qty), "", from_branch, from_branch_id, from_location, from_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months, "");
                     conversions.add(field2);
                 } else {
-                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months);
+                    Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Conversion - To", date, FitIn.fmt_woc(qty), "", "", to_branch, to_branch_id, to_location, to_location_id, "", "", "", "", user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months, "");
                     conversions.add(field2);
                 }
 
@@ -1288,7 +1287,9 @@ public class MyLedger {
                 if (adjustment_type == 4) {
                     type = "Over";
                 }
-
+                if (adjustment_type == 5) {
+                    type = "Pull Out";
+                }
                 String date = POS.util.DateType.convert_slash_datetime3(adjustment_date);
                 String months = DateType.convert_datetime_to_month(adjustment_date);
                 Date created = new Date();
@@ -1299,10 +1300,10 @@ public class MyLedger {
                 }
                 if (status == 1) {
                     if (adjustment_type == 4) {
-                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Adjustment-" + type, date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, "", "", "", "", user_screen_name, "", created, "" + id, FitIn.fmt_wc_0(selling_price), "" + FitIn.fmt_wc_0(selling_price), months);
+                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Adjustment-" + type, date, FitIn.fmt_woc(qty), "", "", branch, branch_id, location, location_id, "", "", "", "", user_screen_name, "", created, "" + id, FitIn.fmt_wc_0(selling_price), "" + FitIn.fmt_wc_0(selling_price), months, "");
                         other_adjustments.add(field2);
                     } else {
-                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Adjustment-" + type, date, "", FitIn.fmt_woc(qty), "", branch, branch_id, location, location_id, "", "", "", "", user_screen_name, "", created, "" + id, FitIn.fmt_wc_0(selling_price), "" + FitIn.fmt_wc_0(selling_price), months);
+                        Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Adjustment-" + type, date, "", FitIn.fmt_woc(qty), "", branch, branch_id, location, location_id, "", "", "", "", user_screen_name, "", created, "" + id, FitIn.fmt_wc_0(selling_price), "" + FitIn.fmt_wc_0(selling_price), months, "");
                         other_adjustments.add(field2);
                     }
                 }

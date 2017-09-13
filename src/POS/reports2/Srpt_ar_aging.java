@@ -427,6 +427,72 @@ public class Srpt_ar_aging {
             MyConnection.close();
         }
     }
+    public static List<Srpt_ar_aging.field> ret_aging3(String where) {
+        List<Srpt_ar_aging.field> datas = new ArrayList();
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",customer_id"
+                    + ",customer_name"
+                    + ",ar_no"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",amount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ",discount"
+                    + ",status"
+                    + ",term"
+                    + ",date_applied"
+                    + ",paid"
+                    + ",date_paid"
+                    + ",remarks"
+                    + ",type"
+                    + ",or_no"
+                    + ",ci_no"
+                    + ",trust_receipt"
+                    + " from  accounts_receivable  "
+                    + " " + where;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_id = rs.getString(2);
+                String customer_name = rs.getString(3);
+                String ar_no = rs.getString(4);
+                String date_added = rs.getString(5);
+                String user_name = rs.getString(6);
+                double amount = rs.getDouble(7);
+                double discount_amount = rs.getDouble(8);
+                double discount_rate = rs.getDouble(9);
+                String discount = rs.getString(10);
+                int status = rs.getInt(11);
+                double term = rs.getDouble(12);
+                String date_applied = rs.getString(13);
+                double paid = rs.getDouble(14);
+                String date_paid = rs.getString(15);
+                String remarks = rs.getString(16);
+                String type = rs.getString(17);
+                String or_no = rs.getString(18);
+                String ci_no = rs.getString(19);
+                String trust_receipt = rs.getString(20);
+                ci_no = ci_no + "" + trust_receipt;
+                trust_receipt = remarks;
+                int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
+                String t_amount = FitIn.fmt_wc_0(amount);
+               
+                String applied = DateType.convert_dash_date2(date_applied);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, t_amount, t_amount, t_amount, t_amount, t_amount, applied);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 
     public static void main(String[] args) {
 

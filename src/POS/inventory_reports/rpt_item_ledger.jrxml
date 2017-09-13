@@ -31,12 +31,13 @@
     <field name="transaction_no" class="java.lang.String"/>
     <field name="cost" class="java.lang.String"/>
     <field name="price" class="java.lang.String"/>
+    <field name="remarks" class="java.lang.String"/>
     <group name="location">
         <groupExpression><![CDATA[$F{from_location_id}]]></groupExpression>
         <groupHeader>
             <band height="45">
                 <staticText>
-                    <reportElement uuid="7eac2dde-8121-4e89-a1a0-159bd35fbf1a" x="0" y="30" width="78" height="15"/>
+                    <reportElement uuid="7eac2dde-8121-4e89-a1a0-159bd35fbf1a" x="0" y="30" width="60" height="15"/>
                     <box>
                         <topPen lineWidth="0.5"/>
                         <leftPen lineWidth="0.5"/>
@@ -49,7 +50,7 @@
                     <text><![CDATA[Type]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="78" y="30" width="78" height="15"/>
+                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="60" y="30" width="74" height="15"/>
                     <box>
                         <topPen lineWidth="0.5"/>
                         <leftPen lineWidth="0.5"/>
@@ -101,7 +102,7 @@
                     <text><![CDATA[Balance]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement uuid="3b54f6ec-9cc5-4ed1-b5a1-1d76263ff4b4" x="253" y="30" width="82" height="15"/>
+                    <reportElement uuid="3b54f6ec-9cc5-4ed1-b5a1-1d76263ff4b4" x="214" y="30" width="50" height="15"/>
                     <box>
                         <topPen lineWidth="0.5"/>
                         <leftPen lineWidth="0.5"/>
@@ -156,7 +157,7 @@
                     <text><![CDATA[Branch:]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="156" y="30" width="97" height="15"/>
+                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="134" y="30" width="80" height="15"/>
                     <box>
                         <topPen lineWidth="0.5"/>
                         <leftPen lineWidth="0.5"/>
@@ -169,7 +170,7 @@
                     <text><![CDATA[Transaction #]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="335" y="30" width="56" height="15"/>
+                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="354" y="30" width="50" height="15"/>
                     <box>
                         <topPen lineWidth="0.5"/>
                         <leftPen lineWidth="0.5"/>
@@ -182,7 +183,7 @@
                     <text><![CDATA[Cost]]></text>
                 </staticText>
                 <staticText>
-                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="391" y="30" width="63" height="15"/>
+                    <reportElement uuid="2f8015fe-8889-4287-8b03-e6dba3adcf10" x="404" y="30" width="50" height="15"/>
                     <box>
                         <topPen lineWidth="0.5"/>
                         <leftPen lineWidth="0.5"/>
@@ -192,7 +193,7 @@
                     <textElement textAlignment="Right" verticalAlignment="Middle">
                         <paragraph leftIndent="2" rightIndent="2"/>
                     </textElement>
-                    <text><![CDATA[Selling Price]]></text>
+                    <text><![CDATA[Price]]></text>
                 </staticText>
                 <textField>
                     <reportElement uuid="89edb88d-a236-480a-9759-e4d2bcd95986" x="55" y="15" width="500" height="15"/>
@@ -208,6 +209,19 @@
                     </textElement>
                     <textFieldExpression><![CDATA[$F{from_location}]]></textFieldExpression>
                 </textField>
+                <staticText>
+                    <reportElement uuid="3b54f6ec-9cc5-4ed1-b5a1-1d76263ff4b4" x="264" y="30" width="90" height="15"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                        <leftPen lineWidth="0.5"/>
+                        <bottomPen lineWidth="0.5"/>
+                        <rightPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <paragraph leftIndent="2" rightIndent="2"/>
+                    </textElement>
+                    <text><![CDATA[Remarks]]></text>
+                </staticText>
             </band>
         </groupHeader>
     </group>
@@ -330,7 +344,7 @@
     <detail>
         <band height="12" splitType="Stretch">
             <textField>
-                <reportElement uuid="68593ba1-d5b1-4b54-8c4d-741b6a63e44f" x="0" y="0" width="78" height="12"/>
+                <reportElement uuid="68593ba1-d5b1-4b54-8c4d-741b6a63e44f" x="0" y="0" width="60" height="12"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <leftPen lineWidth="0.5"/>
@@ -344,7 +358,7 @@
                 <textFieldExpression><![CDATA[$F{transaction_type}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="78" y="0" width="78" height="12"/>
+                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="60" y="0" width="74" height="12"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <leftPen lineWidth="0.5"/>
@@ -400,7 +414,7 @@
                 <textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
             </textField>
             <textField isBlankWhenNull="true">
-                <reportElement uuid="9825bf31-6ab6-41b6-b263-a8048273c404" x="253" y="0" width="82" height="12"/>
+                <reportElement uuid="9825bf31-6ab6-41b6-b263-a8048273c404" x="214" y="0" width="50" height="12"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <leftPen lineWidth="0.5"/>
@@ -408,13 +422,13 @@
                     <rightPen lineWidth="0.5"/>
                 </box>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="9"/>
+                    <font size="8"/>
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{created_by}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="156" y="0" width="97" height="12"/>
+                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="134" y="0" width="80" height="12"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <leftPen lineWidth="0.5"/>
@@ -428,7 +442,7 @@
                 <textFieldExpression><![CDATA[$F{transaction_no}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="335" y="0" width="56" height="12"/>
+                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="354" y="0" width="50" height="12"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <leftPen lineWidth="0.5"/>
@@ -442,7 +456,7 @@
                 <textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="391" y="0" width="63" height="12"/>
+                <reportElement uuid="8abf8fb2-c6fe-477f-b30d-3cfefbbc8bfb" x="404" y="0" width="50" height="12"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <leftPen lineWidth="0.5"/>
@@ -454,6 +468,20 @@
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="9825bf31-6ab6-41b6-b263-a8048273c404" x="264" y="0" width="90" height="12"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8"/>
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

@@ -173,6 +173,13 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         Dlg_report_ledger dialog = Dlg_report_ledger.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        int xSize = ((int) tk.getScreenSize().
+//                getWidth());
+//        int ySize = ((int) tk.getScreenSize().
+//                getHeight());
+//        dialog.setSize(xSize, ySize);
+//        dialog.setVisible(true);
 
     }
     //</editor-fold>
@@ -950,7 +957,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             prepaid = 0;
             cash = 0;
         }
-        int[] tbl_widths_banks = {100, 70, 100, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, amount};
+        int[] tbl_widths_banks = {100, 70, 100, 180, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, amount};
         for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -986,7 +993,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     public static class TblledgerModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction No", "Date", "Customer", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Net Due"
+            "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Net Due"
         };
 
         public TblledgerModel(ListModel listmodel) {
@@ -1014,26 +1021,28 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 case 0:
                     return " " + tt.sales_no;
                 case 1:
-                    return " " +tt.date;
+                    return " " + tt.date;
                 case 2:
                     return " " + tt.customer_name;
                 case 3:
-                    return " " + tt.user_screen_name;
+                    return " " + tt.location;
                 case 4:
-                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
+                    return " " + tt.user_screen_name;
                 case 5:
-                    return FitIn.fmt_wc_0(tt.line_discount) + " ";
+                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
                 case 6:
-                    return FitIn.fmt_wc_0(tt.sales_discount) + " ";
+                    return FitIn.fmt_wc_0(tt.line_discount) + " ";
                 case 7:
-                    return FitIn.fmt_wc_0(tt.cash) + " ";
+                    return FitIn.fmt_wc_0(tt.sales_discount) + " ";
                 case 8:
-                    return FitIn.fmt_wc_0(tt.charge_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.cash) + " ";
                 case 9:
-                    return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.charge_amount) + " ";
                 case 10:
-                    return FitIn.fmt_wc_0(tt.gc_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
                 case 11:
+                    return FitIn.fmt_wc_0(tt.gc_amount) + " ";
+                case 12:
                     return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
                 default:
                     return FitIn.fmt_wc_0(tt.amount_due) + " ";

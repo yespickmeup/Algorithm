@@ -230,6 +230,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -338,6 +339,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jLabel34 = new javax.swing.JLabel();
         jCheckBox23 = new javax.swing.JCheckBox();
         jCheckBox24 = new javax.swing.JCheckBox();
+        jLabel35 = new javax.swing.JLabel();
+        jCheckBox25 = new javax.swing.JCheckBox();
+        jCheckBox26 = new javax.swing.JCheckBox();
+        jCheckBox27 = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
@@ -1264,6 +1269,23 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jCheckBox24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox24.setText("Cost");
 
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel35.setText("Type:");
+
+        buttonGroup6.add(jCheckBox25);
+        jCheckBox25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox25.setSelected(true);
+        jCheckBox25.setText("All");
+
+        buttonGroup6.add(jCheckBox26);
+        jCheckBox26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox26.setText("Donation");
+
+        buttonGroup6.add(jCheckBox27);
+        jCheckBox27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox27.setText("Snacks");
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -1311,10 +1333,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                     .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(1, 1, 1)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox18)
                             .addComponent(jCheckBox20, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -1323,10 +1346,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(tf_from_location3)
                             .addComponent(tf_from_branch3)))
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jCheckBox23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jCheckBox23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox24))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox27)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1365,7 +1398,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jDateChooser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooser4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jDateChooser4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(1, 1, 1)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1673,6 +1711,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1696,6 +1735,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox22;
     private javax.swing.JCheckBox jCheckBox23;
     private javax.swing.JCheckBox jCheckBox24;
+    private javax.swing.JCheckBox jCheckBox25;
+    private javax.swing.JCheckBox jCheckBox26;
+    private javax.swing.JCheckBox jCheckBox27;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
@@ -1736,6 +1778,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1793,7 +1836,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("delete_stock_transfers_finalized", "true");
 
@@ -3197,21 +3240,21 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 String date_from = DateType.sf.format(jDateChooser3.getDate());
                 String date_to = DateType.sf.format(jDateChooser4.getDate());
 
-                String where = " where category like '%" + "" + "%' ";
+                String where = " where st.category like '%" + "" + "%' ";
                 String status = "All";
                 if (!jCheckBox15.isSelected()) {
-                    where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where = where + " and Date(st.date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (jCheckBox17.isSelected()) {
-                    where = where + " and status=0 ";
+                    where = where + " and st.status=0 ";
                     status = "Posted";
                 }
                 if (jCheckBox19.isSelected()) {
-                    where = where + " and status=1 ";
+                    where = where + " and st.status=1 ";
                     status = "Finalized";
                 }
                 if (jCheckBox22.isSelected()) {
-                    where = where + " and status=2 ";
+                    where = where + " and st.status=2 ";
                     status = "Deleted";
                 }
                 Field.Combo f_br = (Field.Combo) tf_from_branch4;
@@ -3220,22 +3263,34 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Field.Combo t_lo = (Field.Combo) tf_from_location3;
 
                 if (!jCheckBox14.isSelected() && !jCheckBox13.isSelected()) {
-                    where = where + " and location_id='" + f_lo.getId() + "' ";
+                    where = where + " and st.location_id='" + f_lo.getId() + "' ";
                 }
                 if (jCheckBox14.isSelected() && !jCheckBox13.isSelected()) {
-                    where = where + " and branch_code='" + f_br.getId() + "' ";
+                    where = where + " and st.branch_code='" + f_br.getId() + "' ";
                 }
 
                 if (!jCheckBox18.isSelected() && !jCheckBox20.isSelected()) {
-                    where = where + " and to_location_id='" + t_lo.getId() + "' ";
+                    where = where + " and st.to_location_id='" + t_lo.getId() + "' ";
                 }
                 if (jCheckBox18.isSelected() && !jCheckBox20.isSelected()) {
-                    where = where + " and to_branch_id='" + t_br.getId() + "' ";
+                    where = where + " and st.to_branch_id='" + t_br.getId() + "' ";
+                }
+                if (!jCheckBox25.isSelected()) {
+                    if (jCheckBox26.isSelected()) {
+                        where = " join stock_transfers as s "
+                                + " on s.transaction_no = st.stock_transfer_id "
+                                + where + " and s.remarks like '%" + "donat" + "%' ";
+                    } else {
+                        where = " join stock_transfers as s "
+                                + " on s.transaction_no = st.stock_transfer_id "
+                                + where + " and s.remarks like '%" + "snack" + "%' ";
+                    }
+
                 }
                 where = where + " "
-                        + " group by Date(date_added),to_location_id,barcode,selling_price "
-                        + " order by Date(date_added),to_location_id,barcode,description asc ";
-//                System.out.println(where);
+                        + " group by Date(st.date_added),st.to_location_id,st.barcode,st.selling_price "
+                        + " order by Date(st.date_added),st.to_location_id,st.barcode,st.description asc ";
+
                 int is_price = 0;
                 if (jCheckBox23.isSelected()) {
                     is_price = 1;

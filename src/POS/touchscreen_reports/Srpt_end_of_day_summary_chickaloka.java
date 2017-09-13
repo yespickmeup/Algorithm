@@ -108,11 +108,12 @@ public class Srpt_end_of_day_summary_chickaloka {
         double selling_price;
         double other_adjustment;
         double over;
+        String remarks;
 
         public field() {
         }
 
-        public field(String item_code, String description, double beg_inv, double new_in, double damage, double sales_qty, double end_inv, double amount, double po, double transfer, double left_over, double voucher, double shortage, double selling_price, double other_adjustment, double over) {
+        public field(String item_code, String description, double beg_inv, double new_in, double damage, double sales_qty, double end_inv, double amount, double po, double transfer, double left_over, double voucher, double shortage, double selling_price, double other_adjustment, double over, String remarks) {
             this.item_code = item_code;
             this.description = description;
             this.beg_inv = beg_inv;
@@ -129,6 +130,15 @@ public class Srpt_end_of_day_summary_chickaloka {
             this.selling_price = selling_price;
             this.other_adjustment = other_adjustment;
             this.over = over;
+            this.remarks = remarks;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
         }
 
         public double getOver() {
@@ -311,7 +321,7 @@ public class Srpt_end_of_day_summary_chickaloka {
                     + ",model_id"
                     + " from sale_items  "
                     + " " + where
-                    + " group by item_code,unit,selling_price,discount_amount ";
+                    + " group by item_code,unit,selling_price,discount_amount order by id asc ";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -395,8 +405,9 @@ public class Srpt_end_of_day_summary_chickaloka {
 //                System.out.println("Description: " + description);
                 Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected);
                 List<Srpt_item_ledger.field> ledger = rpt.fields;
-
+                String remarks = "";
                 for (Srpt_item_ledger.field field : ledger) {
+
                     try {
                         Date f_date = DateType.slash_w_time.parse(field.getDate());
                         int count = DateUtils1.count_days(f_date, date);
@@ -426,6 +437,7 @@ public class Srpt_end_of_day_summary_chickaloka {
                                 transfer += FitIn.toDouble(field.getOut());
 //                                System.out.println("        Item: "+description+ " = "+field.);
                             }
+
                             if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Add")) {
                                 other_adjustment += FitIn.toDouble(field.getIn());
                             }
@@ -448,6 +460,12 @@ public class Srpt_end_of_day_summary_chickaloka {
                             if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Over")) {
                                 over -= FitIn.toDouble(field.getIn());
                             }
+                            if (field.getTransaction_type().equalsIgnoreCase("Adjustment-Pull Out")) {
+                                po -= FitIn.toDouble(field.getOut());
+                            }
+
+                            remarks = field.getRemarks();
+//                            System.out.println("remarks: " + remarks);
                         } else {
 
                         }
@@ -459,7 +477,8 @@ public class Srpt_end_of_day_summary_chickaloka {
                 sales_qty = sales_qty - sales_qty_x;
                 amount = (price * sales_qty) - discount;
                 end_inv = (beg_inv + ((new_in) + other_adjustment)) - (sales_qty + transfer);
-                end_inv = end_inv + (damage + left_over + voucher + shortage) + over;
+                end_inv = end_inv + (damage + left_over + voucher + shortage + po) + over;
+
 //                System.out.println("Item: " + description + " : beg_inv: " + beg_inv + " ,new_in: " + new_in + " ,other_adjustment: " + other_adjustment + " ,sales_qty: " + sales_qty+ ", transfer: "+transfer);
                 if (damage < 0) {
                     damage = damage * -1;
@@ -474,7 +493,8 @@ public class Srpt_end_of_day_summary_chickaloka {
                     shortage = shortage * -1;
                 }
 //                System.out.println("************************");
-                Srpt_end_of_day_summary_chickaloka.field field = new field(item_code, description, beg_inv, new_in, damage, sales_qty, end_inv, amount, po, transfer, left_over, voucher, shortage, selling_price, other_adjustment, over);
+                po = po * -1;
+                Srpt_end_of_day_summary_chickaloka.field field = new field(item_code, description, beg_inv, new_in, damage, sales_qty, end_inv, amount, po, transfer, left_over, voucher, shortage, selling_price, other_adjustment, over, remarks);
                 fields.add(field);
             }
 

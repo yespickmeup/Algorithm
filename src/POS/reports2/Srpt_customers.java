@@ -211,11 +211,12 @@ public class Srpt_customers {
                         + ",date_paid"
                         + ",check_amount"
                         + " from accounts_receivable_payments"
-                        + " where customer_id='" + customer_no + "' and status=0 "
+                            + " where customer_id='" + customer_no + "' and status=0 "
                         + " " + where2;
 
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
+//                System.out.println("s2: " + s2);
                 while (rs2.next()) {
                     int id2 = rs2.getInt(1);
                     double amount = rs2.getDouble(2);
@@ -224,9 +225,10 @@ public class Srpt_customers {
                     double check_amount = rs2.getDouble(5);
 
                     double total = (amount + check_amount) + discount;
+                    System.out.println("    date_paid: " + date_paid + " = " + total);
                     paid += total;
                 }
-
+//                System.out.println("paid: "+paid);
                 Srpt_customers.field to = new field(customer_no, customer_name, paid, contact_no);
                 datas.add(to);
             }
