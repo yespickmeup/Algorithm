@@ -5108,7 +5108,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         String charge_customer_name = f_charge.customer_name;
         String charge_customer_id = f_charge.customer_id;
         double charge_amount = f_charge.amount;
-
+        int charge_days=f_charge.days;
         String check_bank = f_cheque.bank;
         String check_no = f_cheque.check_no;
         double check_amount = f_cheque.amount;
@@ -5140,7 +5140,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         String location = lo.getText();
         String location_id = my_location_id;
 
-        final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1);
+        final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,charge_days);
         try {
             sales_no = MySales.add_sales(sales, items, location_id);
             sales.setSales_no(sales_no);

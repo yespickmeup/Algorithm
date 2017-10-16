@@ -1306,6 +1306,18 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 jTextField7.setText(description);
                 jLabel23.setText(FitIn.fmt_wc_0(rpt.running_balance));
                 loadData_ledger(rpt.fields);
+
+                String environment = System.getProperty("environment", "production");
+//                System.out.println("environment: "+environment);
+                if (environment.equalsIgnoreCase("development")) {
+                    List<Inventory_barcodes.to_inventory_barcodes> items = Inventory_barcodes.ret_where(" where main_barcode='" + item_code + "' and location_id='" + loc_id + "' ");
+                    Inventory_barcodes.to_inventory_barcodes item = (Inventory_barcodes.to_inventory_barcodes) items.get(0);
+//                    System.out.println("Item: "+item_code+ " = "+rpt.running_balance+ " ,"+item.product_qty);
+                    if (rpt.running_balance != item.product_qty) {
+                        update_inventory_barcodes(item_code, description, loc_id, rpt.running_balance, item.product_qty);
+                    }
+                }
+
                 InputStream is = Srpt_item_ledger.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
@@ -1325,6 +1337,23 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             }
         });
         t.start();
+    }
+
+    private void update_inventory_barcodes(final String item_code, String description, final String location_id, final double qty_ledger, final double qty_maintenance) {
+        Window p = (Window) this;
+        Dlg_report_inventory_ledger_update_inv_barcodes nd = Dlg_report_inventory_ledger_update_inv_barcodes.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(item_code, description, qty_ledger, qty_maintenance);
+        nd.setCallback(new Dlg_report_inventory_ledger_update_inv_barcodes.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_inventory_ledger_update_inv_barcodes.OutputData data) {
+                closeDialog.ok();
+                S2_inventory_barcodes.update_inventory_barcodes(item_code, location_id, qty_ledger, qty_maintenance);
+                Alert.set(2, item_code);
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     public static List<Srpt_item_ledger.field> ledger() {
@@ -1391,6 +1420,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     List<Srpt_item_ledger.field> return_from_customer = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
                     List<Srpt_item_ledger.field> conversions = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
 //                    System.out.println(where);
+
                     try {
                         Connection conn = MyConnection.connect();
 
@@ -2859,7 +2889,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         tbl_ledger.setRowHeight(25);
         int[] tbl_widths_banks = {100, 120, 100, 120, 100, 80, 80, 50, 50, 50};
         for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
-            if ( i == 3) {
+            if (i == 3) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_ledger, i, tbl_widths_banks[i]);

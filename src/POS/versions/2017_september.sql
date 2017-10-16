@@ -9,13 +9,10 @@
  */
 
 select remarks from stock_transfers where to_location_id=10 group by remarks order by remarks asc;
-
 update stock_transfers set remarks = concat('Snacks: ',remarks) where remarks = '' and to_location_id=10;
 update stock_transfers set remarks = concat('Donation: ',remarks) where remarks = '' and to_location_id=10;
-
 update stock_transfers set remarks = 'Snacks: to R.M.V. and to the farm.' where remarks like '%Snacks to R.M.V. and to the farm.%' and to_location_id=10;
 update stock_transfers set remarks = 'Snacks: 1 gallon to sir Raul.' where remarks like '%1 gallon to sir Raul.%' and to_location_id=10;
-
 update stock_transfers set remarks = 'Donation: Basura' where remarks like 'Basura' and to_location_id=10;
 update stock_transfers set remarks = 'Donation: Bian Yek' where remarks like '%Bian Yek%' and to_location_id=10;
 update stock_transfers set remarks = 'Donation: Columbia' where remarks like 'Columbia' and to_location_id=10;
@@ -36,7 +33,6 @@ update stock_transfers set remarks = 'Snacks: Farm' where remarks like 'for farm
 update stock_transfers set remarks = 'Snacks: For sir Raul snacks.' where remarks like 'For sir Raul snacks.' and to_location_id=10;
 update stock_transfers set remarks = 'Snacks: Farm' where remarks like 'For snacks in the farm' and to_location_id=10;
 update stock_transfers set remarks = 'Snacks: softdrinks requested by sir Raul.' where remarks like 'softdrinks requested by sir Raul.' and to_location_id=10;
-
 update stock_transfers set remarks = 'Donation: For Matiao and Payalin' where remarks like 'For Matiao and Payalin' and to_location_id=10;
 update stock_transfers set remarks = 'Donation: For homeless person begging for food.' where remarks like 'For homeless person begging for food.' and to_location_id=10;
 update stock_transfers set remarks = 'Donation: For the garbage men.' where remarks like 'For the garbage men.' and to_location_id=10;
@@ -49,11 +45,13 @@ update stock_transfers set remarks = 'Donation: For Traffic Dumaguete City' wher
 update stock_transfers set remarks = 'Snacks: For Sir Raul in the farm' where remarks like 'Snack to Sir Raul in the farm' and to_location_id=10;
 update stock_transfers set remarks = 'Snacks: For EPV' where remarks like 'snack-epv' and to_location_id=10;
 update stock_transfers set remarks = 'Snacks: ' where remarks like 'snacks' and to_location_id=10;
-
 update stock_transfers set remarks = 'Snacks: Farm' where remarks like 'farm' and to_location_id=10;
 update stock_transfers set remarks = 'Snacks: Farm' where remarks like 'For Farm' and to_location_id=10;
-
 update stock_transfers set remarks = 'Snacks: Customers' where remarks like 'to the customer\'s snacks.' and to_location_id=10;'
 update stock_transfers set remarks = 'Snacks: ' where remarks like '' and to_location_id=10;
 
+
+
+alter table customers add category varchar(255) default '';
+alter table customers add category_id int default 0;
 

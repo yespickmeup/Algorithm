@@ -238,8 +238,8 @@ public class S2_inventory_barcodes {
                 String branch_code = rs.getString(34);
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
-                String serial_no=rs.getString(37);
-                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id,serial_no,"",0,0,"","","",0,0);
+                String serial_no = rs.getString(37);
+                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0);
                 datas.add(to);
             }
             return datas;
@@ -250,4 +250,24 @@ public class S2_inventory_barcodes {
         }
     }
 
+    public static void update_inventory_barcodes(String item_code, String location_id, double qty_ledger, double qty_maintenance) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            Statement stmt = conn.createStatement();
+            String s4 = "update inventory_barcodes set "
+                    + " product_qty='" + qty_ledger + "'"
+                    + " where  main_barcode= '" + item_code + "' and location_id='" + location_id + "' "
+                    + "";
+            stmt.addBatch(s4);
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(S2_inventory_barcodes.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

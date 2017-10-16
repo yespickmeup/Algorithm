@@ -726,7 +726,6 @@ public class Stock_transfers {
                         + " product_qty='" + new_qty1 + "' "
                         + " where  main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "' "
                         + "";
-
                 stmt.addBatch(s41);
 
                 //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">

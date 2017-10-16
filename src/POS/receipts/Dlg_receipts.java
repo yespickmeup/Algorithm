@@ -257,16 +257,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_receipt_no4 = new javax.swing.JTextField();
         tf_receipt_type = new Field.Combo();
         tf_receipt_type_id = new javax.swing.JTextField();
-        tf_dr_month = new SearchField();
-        tf_dr_day = new SearchField();
-        tf_dr_year = new SearchField();
-        tf_dd_month = new SearchField();
-        tf_dd_day = new SearchField();
-        tf_dd_year = new SearchField();
         jLabel22 = new javax.swing.JLabel();
         lbl_batch_no = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         tf_disc = new javax.swing.JTextField();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jDateChooser6 = new com.toedter.calendar.JDateChooser();
         jXPanel3 = new org.jdesktop.swingx.JXPanel();
         jLabel8 = new javax.swing.JLabel();
         tf_search = new Field.Input();
@@ -520,48 +516,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tf_receipt_type_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_receipt_type_id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        tf_dr_month.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_dr_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_dr_monthActionPerformed(evt);
-            }
-        });
-
-        tf_dr_day.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_dr_day.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_dr_dayActionPerformed(evt);
-            }
-        });
-
-        tf_dr_year.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_dr_year.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_dr_yearActionPerformed(evt);
-            }
-        });
-
-        tf_dd_month.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_dd_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_dd_monthActionPerformed(evt);
-            }
-        });
-
-        tf_dd_day.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_dd_day.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_dd_dayActionPerformed(evt);
-            }
-        });
-
-        tf_dd_year.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_dd_year.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_dd_yearActionPerformed(evt);
-            }
-        });
-
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Batch No:");
@@ -576,6 +530,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jLabel27.setText("Discount:");
 
         tf_disc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDateChooser5.setDate(new Date());
+        jDateChooser5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDateChooser6.setDate(new Date());
+        jDateChooser6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
@@ -600,23 +560,18 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
-                        .addGap(5, 5, 5)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jXPanel2Layout.createSequentialGroup()
-                                .addComponent(tf_dd_month, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(tf_dd_day, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(tf_dd_year, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(5, 5, 5)
+                                .addComponent(tf_remarks))
+                            .addGroup(jXPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_dr_month, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(tf_dr_day, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(tf_dr_year, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
-                            .addComponent(tf_remarks)))
+                                .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jXPanel2Layout.createSequentialGroup()
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -637,7 +592,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_batch_no, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -658,7 +613,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_disc)
+                .addComponent(tf_disc, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jXPanel2Layout.setVerticalGroup(
@@ -705,17 +660,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_dd_month, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_dd_day, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_dd_year, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_dr_month, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_dr_day, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_dr_year, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_disc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_disc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jDateChooser5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1114,7 +1067,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 607, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 620, Short.MAX_VALUE)
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1132,7 +1085,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         .addComponent(jCheckBox3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 286, Short.MAX_VALUE))
+                        .addGap(0, 296, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1167,9 +1120,9 @@ public class Dlg_receipts extends javax.swing.JDialog {
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(574, 574, 574)
                                         .addComponent(jCheckBox28, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(67, 67, 67)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1766,33 +1719,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_supplierMouseClicked
 
-    private void tf_dd_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dd_monthActionPerformed
-        // TODO add your handling code here:
-        tf_dd_day.grabFocus();
-    }//GEN-LAST:event_tf_dd_monthActionPerformed
-
-    private void tf_dd_dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dd_dayActionPerformed
-        tf_dd_year.grabFocus();
-    }//GEN-LAST:event_tf_dd_dayActionPerformed
-
-    private void tf_dd_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dd_yearActionPerformed
-        tf_dr_month.grabFocus();
-    }//GEN-LAST:event_tf_dd_yearActionPerformed
-
-    private void tf_dr_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dr_monthActionPerformed
-        tf_dr_day.grabFocus();
-    }//GEN-LAST:event_tf_dr_monthActionPerformed
-
-    private void tf_dr_dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dr_dayActionPerformed
-        tf_dr_year.grabFocus();
-    }//GEN-LAST:event_tf_dr_dayActionPerformed
-
-    private void tf_dr_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dr_yearActionPerformed
-        tf_search.grabFocus();
-    }//GEN-LAST:event_tf_dr_yearActionPerformed
-
     private void tf_remarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_remarksActionPerformed
-        tf_dd_month.grabFocus();
+       
     }//GEN-LAST:event_tf_remarksActionPerformed
 
     private void tf_discountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_discountKeyReleased
@@ -1825,22 +1753,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        init_receipt_no();
-        tf_receipt_type.setText("");
-        tf_receipt_type_id.setText("");
-        tf_supplier.setText("");
-        tf_supplier_id.setText("");
-        tf_remarks.setText("");
-        tbl_receipt_items_ALM.clear();
-        tbl_receipt_items_M.fireTableDataChanged();
-        tf_reference_no.setText("");
-        tf_receipt_type.grabFocus();
-        jButton1.setEnabled(true);
-        jButton3.setEnabled(false);
-        jButton6.setEnabled(false);
-        tf_branch.setEnabled(true);
-        tf_search.setEnabled(true);
-        compute();
+        new_post();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tbl_receiptsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_receiptsMouseEntered
@@ -1966,6 +1880,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
+    private com.toedter.calendar.JDateChooser jDateChooser5;
+    private com.toedter.calendar.JDateChooser jDateChooser6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2047,14 +1963,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JTextField tf_branch2;
     private javax.swing.JTextField tf_branch3;
     private javax.swing.JTextField tf_branch_id;
-    private javax.swing.JTextField tf_dd_day;
-    private javax.swing.JTextField tf_dd_month;
-    private javax.swing.JTextField tf_dd_year;
     private javax.swing.JTextField tf_disc;
     private javax.swing.JTextField tf_discount;
-    private javax.swing.JTextField tf_dr_day;
-    private javax.swing.JTextField tf_dr_month;
-    private javax.swing.JTextField tf_dr_year;
     private javax.swing.JTextField tf_receipt_no;
     private javax.swing.JTextField tf_receipt_no1;
     private javax.swing.JTextField tf_receipt_no2;
@@ -2072,7 +1982,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("module_accounts_payable","1");
 //        System.setProperty("delete_receipts_finalized", "true");
 //        System.setProperty("pool_host", "192.168.1.51");
@@ -2182,27 +2092,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void set_d() {
-        String month = DateType.m.format(new Date());
-        String day = DateType.add_zero(DateType.d.format(new Date()));
-        String year = DateType.y.format(new Date());
-        tf_dd_day.setText(day);
-        tf_dd_month.setText(month);
-        tf_dd_year.setText(year);
-
-        tf_dr_day.setText(day);
-        tf_dr_month.setText(month);
-        tf_dr_year.setText(year);
+ 
 
     }
 
     private void set_date() {
-        testOfFaith.set(tf_dd_month, DateType.listMonths(), "Month");
-        testOfFaith.set(tf_dd_day, DateType.listDays(), "Day");
-        testOfFaith.set(tf_dd_year, DateType.listYear(), "Year");
 
-        testOfFaith.set(tf_dr_month, DateType.listMonths(), "Month");
-        testOfFaith.set(tf_dr_day, DateType.listDays(), "Day");
-        testOfFaith.set(tf_dr_year, DateType.listYear(), "Year");
     }
 
     private void init_po_number() {
@@ -2322,7 +2217,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void focus() {
         tf_receipt_type_id.enable(false);
-        JTextField[] tf = {tf_search, tf_reference_no, tf_supplier, tf_branch, tf_remarks, tf_dd_day, tf_dd_month, tf_dd_year, tf_dr_day, tf_dr_month, tf_dr_year, tf_receipt_no, tf_receipt_type, jTextField1, tf_disc};
+        JTextField[] tf = {tf_search, tf_reference_no, tf_supplier, tf_branch, tf_remarks, tf_receipt_no, tf_receipt_type, jTextField1, tf_disc};
         Focus_Fire.onFocus_lostFocus(tf);
         Focus_Fire.select_all(tf);
     }
@@ -2688,11 +2583,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 String branch_id = to.branch_code;
                 String location = to.location;
                 String location_id = to.location_id;
-                String date_delivered = tf_dd_month.getText() + " " + tf_dd_day.
-                        getText() + ", " + tf_dd_year.getText();
-                date_delivered = DateType.convert_monthDate_sf(date_delivered);
-                String date_received = tf_dr_month.getText() + " " + tf_dr_day.getText() + ", " + tf_dr_year.
-                        getText();
+                String date_delivered = DateType.sf.format(jDateChooser5.getDate());
+                String date_received = DateType.sf.format(jDateChooser6.getDate());
                 date_received = DateType.convert_monthDate_sf(date_received);
 
                 double conversion = data.conversion;
@@ -2812,11 +2704,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             return;
         }
         final String remarks = tf_remarks.getText();
-        String date_delivered = tf_dd_month.getText() + " " + tf_dd_day.
-                getText() + ", " + tf_dd_year.getText();
-        date_delivered = DateType.convert_monthDate_sf(date_delivered);
-        String date_received = tf_dr_month.getText() + " " + tf_dr_day.getText() + ", " + tf_dr_year.
-                getText();
+        String date_delivered = DateType.sf.format(jDateChooser5.getDate());
+        String date_received = DateType.sf.format(jDateChooser6.getDate());
         date_received = DateType.convert_monthDate_sf(date_received);
         String receipt_type = tf_receipt_type.getText();
         String reference_no = tf_reference_no.getText();
@@ -3292,20 +3181,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         try {
             Date delivered = DateType.sf.parse(to.date_delivered);
-            String d_month = DateType.m.format(delivered);
-            String d_day = DateType.d.format(delivered);
-            String d_year = DateType.y.format(delivered);
-            tf_dd_month.setText(d_month);
-            tf_dd_day.setText(d_day);
-            tf_dd_year.setText(d_year);
+            jDateChooser5.setDate(delivered);
 
             Date received = DateType.sf.parse(to.date_received);
-            String r_month = DateType.m.format(received);
-            String r_day = DateType.d.format(received);
-            String r_year = DateType.y.format(received);
-            tf_dr_month.setText(r_month);
-            tf_dr_day.setText(r_day);
-            tf_dr_year.setText(r_year);
+            jDateChooser6.setDate(received);
         } catch (ParseException ex) {
             Logger.getLogger(Dlg_receipts.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3579,10 +3458,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
             return;
         }
         String remarks = tf_remarks.getText();
-        String date_delivered = tf_dd_month.getText() + " " + tf_dd_day.
-                getText() + ", " + tf_dd_year.getText();
-        date_delivered = DateType.convert_monthDate_sf(date_delivered);
-        String date_received = tf_dr_month.getText() + " " + tf_dr_day.getText() + ", " + tf_dr_year.getText();
+        String date_delivered = DateType.sf.format(jDateChooser5.getDate());
+        String date_received = DateType.sf.format(jDateChooser6.getDate());
         date_received = DateType.convert_monthDate_sf(date_received);
         String receipt_type = tf_receipt_type.getText();
         String reference_no = tf_reference_no.getText();
@@ -3626,20 +3503,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         try {
             Date delivered = DateType.sf.parse(to.date_delivered);
-            String d_month = DateType.m.format(delivered);
-            String d_day = DateType.d.format(delivered);
-            String d_year = DateType.y.format(delivered);
-            tf_dd_month.setText(d_month);
-            tf_dd_day.setText(d_day);
-            tf_dd_year.setText(d_year);
+            jDateChooser5.setDate(delivered);
 
             Date received = DateType.sf.parse(to.date_received);
-            String r_month = DateType.m.format(received);
-            String r_day = DateType.d.format(received);
-            String r_year = DateType.y.format(received);
-            tf_dr_month.setText(r_month);
-            tf_dr_day.setText(r_day);
-            tf_dr_year.setText(r_year);
+            jDateChooser6.setDate(received);
+
         } catch (ParseException ex) {
             Logger.getLogger(Dlg_receipts.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3722,19 +3590,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                     Receipts.delete_receipts(to);
                 }
                 data_cols();
-                tbl_receipt_items_ALM.clear();
-                tbl_receipt_items_M.fireTableDataChanged();
-
-                tf_receipt_type.setText("");
-                tf_receipt_type_id.setText("");
-                tf_supplier.setText("");
-                tf_supplier_id.setText("");
-                tf_branch.setText("");
-                tf_branch_id.setText("");
-                tf_remarks.setText("");
-                tf_reference_no.setText("");
-                tf_receipt_type.grabFocus();
-                compute();
+                new_post();
             }
         });
         nd.setLocationRelativeTo(this);
@@ -4045,6 +3901,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
                 Receipts.finalize(to, acc, branch, branch_id, data.is_invoice, data.is_payable, data.ap_date);
                 data_cols();
+                new_post();
                 Alert.set(2, "");
                 jButton6.setEnabled(false);
             }
@@ -4185,4 +4042,24 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
 //</editor-fold>
+    private void new_post() {
+        init_receipt_no();
+        tf_receipt_type.setText("");
+        tf_receipt_type_id.setText("");
+        tf_supplier.setText("");
+        tf_supplier_id.setText("");
+        tf_remarks.setText("");
+        tbl_receipt_items_ALM.clear();
+        tbl_receipt_items_M.fireTableDataChanged();
+        tf_reference_no.setText("");
+        tf_receipt_type.grabFocus();
+        jButton1.setEnabled(true);
+        jButton3.setEnabled(false);
+        jButton6.setEnabled(false);
+        tf_branch.setEnabled(true);
+        tf_search.setEnabled(true);
+        tbl_receipts.clearSelection();
+        tbl_receipt_items.clearSelection();
+        compute();
+    }
 }
