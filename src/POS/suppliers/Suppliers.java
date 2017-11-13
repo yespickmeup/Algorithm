@@ -37,8 +37,10 @@ public class Suppliers {
         public final String branch;
         public final String branch_id;
         public final String location_id;
+        public final String department;
+        public final String department_id;
 
-        public to_suppliers(int id, String customer_name, String customer_no, String contact_no, double credit_limit, String address, double term, String location, double balance, double discount, String branch, String branch_id, String location_id) {
+        public to_suppliers(int id, String customer_name, String customer_no, String contact_no, double credit_limit, String address, double term, String location, double balance, double discount, String branch, String branch_id, String location_id, String department, String department_id) {
             this.id = id;
             this.customer_name = customer_name;
             this.customer_no = customer_no;
@@ -52,6 +54,8 @@ public class Suppliers {
             this.branch = branch;
             this.branch_id = branch_id;
             this.location_id = location_id;
+            this.department = department;
+            this.department_id = department_id;
         }
     }
 
@@ -71,6 +75,8 @@ public class Suppliers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + ")values("
                     + ":customer_name"
                     + ",:customer_no"
@@ -84,6 +90,8 @@ public class Suppliers {
                     + ",:branch"
                     + ",:branch_id"
                     + ",:location_id"
+                    + ",:department"
+                    + ",:department_id"
                     + ")";
             s0 = SqlStringUtil.parse(s0).
                     setString("customer_name", to_customers.customer_name).
@@ -98,6 +106,8 @@ public class Suppliers {
                     setString("branch", to_customers.branch).
                     setString("branch_id", to_customers.branch_id).
                     setString("location_id", to_customers.location_id).
+                    setString("department", to_customers.department).
+                    setString("department_id", to_customers.department_id).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -121,6 +131,8 @@ public class Suppliers {
                     + ",term= :term"
                     + ",location= :location"
                     + ",discount= :discount"
+                    + ",department= :department"
+                    + ",department_id= :department_id"
                     + " where "
                     + " id ='" + to_customers.id + "' "
                     + " ";
@@ -133,6 +145,8 @@ public class Suppliers {
                     setNumber("term", to_customers.term).
                     setString("location", to_customers.location).
                     setNumber("discount", to_customers.discount).
+                    setString("department", to_customers.department).
+                    setString("department_id", to_customers.department_id).
                     ok();
             System.out.println("" + to_customers.location);
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -181,6 +195,8 @@ public class Suppliers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from suppliers "
                     + " where "
                     + " customer_name like'%" + search + "%' "
@@ -202,11 +218,13 @@ public class Suppliers {
                 String branch = rs.getString(11);
                 String branch_id = rs.getString(12);
                 String location_id = rs.getString(13);
-                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
+                String department=rs.getString(14);
+                String department_id=rs.getString(15);
+                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id,department,department_id);
                 datas.add(to);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -232,6 +250,8 @@ public class Suppliers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from  suppliers  "
                     + " " + where;
 
@@ -251,7 +271,9 @@ public class Suppliers {
                 String branch = rs.getString(11);
                 String branch_id = rs.getString(12);
                 String location_id = rs.getString(13);
-                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
+                String department=rs.getString(14);
+                String department_id=rs.getString(15);
+                to_suppliers to = new to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id,department,department_id);
                 datas.add(to);
             }
             return datas;
@@ -275,7 +297,7 @@ public class Suppliers {
                 datas.add(id);
             }
             return datas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
@@ -292,7 +314,7 @@ public class Suppliers {
             if (rs.next()) {
                 ids = rs.getString(1);
             }
-          
+
             if (ids == null) {
                 ids = branch_id + "|0000";
             } else {

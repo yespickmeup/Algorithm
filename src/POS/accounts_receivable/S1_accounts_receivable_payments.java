@@ -593,6 +593,8 @@ public class S1_accounts_receivable_payments {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from  customers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
@@ -614,8 +616,9 @@ public class S1_accounts_receivable_payments {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-
-                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id);
+                String department = rs.getString(15);
+                String department_id = rs.getString(16);
+                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id, department, department_id);
             }
             return to1;
         } catch (SQLException e) {
@@ -645,6 +648,8 @@ public class S1_accounts_receivable_payments {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from  customers where "
                     + " id ='" + account_id + "' "
                     + " ";
@@ -666,8 +671,9 @@ public class S1_accounts_receivable_payments {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-
-                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id);
+                String department = rs.getString(15);
+                String department_id = rs.getString(16);
+                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id, department, department_id);
 
             }
             return to1;
@@ -698,6 +704,8 @@ public class S1_accounts_receivable_payments {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from  customers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
@@ -719,8 +727,9 @@ public class S1_accounts_receivable_payments {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-
-                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id);
+                String department=rs.getString(15);
+                String department_id=rs.getString(16);
+                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id,department,department_id);
 
             }
             return to1;

@@ -382,7 +382,7 @@ public class Accounts_payable {
     }
 
     public static void main(String[] args) {
-        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 
         String where = " where id>84 ";
         List<to_accounts_payable> datas = ret_data(where);

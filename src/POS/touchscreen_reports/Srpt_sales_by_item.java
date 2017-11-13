@@ -80,11 +80,12 @@ public class Srpt_sales_by_item {
         double total_margin;
         double addtl_amount;
         String date;
+        String with_cost;
 
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date, String with_cost) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -106,6 +107,15 @@ public class Srpt_sales_by_item {
             this.total_margin = total_margin;
             this.addtl_amount = addtl_amount;
             this.date = date;
+            this.with_cost = with_cost;
+        }
+
+        public String getWith_cost() {
+            return with_cost;
+        }
+
+        public void setWith_cost(String with_cost) {
+            this.with_cost = with_cost;
         }
 
         public String getDate() {
@@ -443,7 +453,11 @@ public class Srpt_sales_by_item {
                 double total_margin = 0;
                 double addtl_amount = 0;
                 String date = "";
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
+                String with_cost = "With Cost";
+                if (cost <= 0) {
+                    with_cost = "No Cost";
+                }
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost);
                 fields.add(field);
             }
 
@@ -577,7 +591,11 @@ public class Srpt_sales_by_item {
                 double total_margin = 0;
                 double addtl_amount = 0;
                 String date = "";
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
+                String with_cost = "With Cost";
+                if (cost <= 0) {
+                    with_cost = "No Cost";
+                }
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost);
                 fields.add(field);
             }
 
@@ -591,6 +609,9 @@ public class Srpt_sales_by_item {
 
     public static List<Srpt_sales_by_item.field> ret_data_margin(String where) {
         List<Srpt_sales_by_item.field> fields = new ArrayList();
+
+        List<Srpt_sales_by_item.field> with_cost_list = new ArrayList();
+        List<Srpt_sales_by_item.field> no_cost_list = new ArrayList();
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -636,7 +657,7 @@ public class Srpt_sales_by_item {
                     + ",addtl_amount"
                     + " from sale_items  "
                     + " " + where
-                    + " group by sales_no,item_code,unit,selling_price,discount_amount,addtl_amount order by description asc";
+                    + " group by sales_no,item_code,unit,selling_price,discount_amount,addtl_amount order by  description asc";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -744,15 +765,26 @@ public class Srpt_sales_by_item {
                 double amount2 = ((selling_price * product_qty) + addtl_amount) - discount_amount;
                 double total_cost = (cost * product_qty);
                 double total_amount = (amount2 * product_qty);
-                margin = ((amount2 - total_cost)) / amount2 * 100;
+                margin = ((amount2 - total_cost) / (amount2 * 100));
 
                 total_margin = amount2 - total_cost;
 //                System.out.println("amount: " + total_amount + " , cost: " + total_cost+ " = "+total_margin);
                 String date = DateType.convert_slash_datetime(date_added);
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date);
-                fields.add(field);
+                String with_cost = "With Cost";
+                if (cost <= 0) {
+                    with_cost = "No Cost";
+                }
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost);
+                if (cost <= 0) {
+                    no_cost_list.add(field);
+                } else {
+                    with_cost_list.add(field);
+                }
+
             }
 
+            fields.addAll(with_cost_list);
+            fields.addAll(no_cost_list);
             return fields;
         } catch (SQLException e) {
             throw new RuntimeException(e);

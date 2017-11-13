@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.customers;
+package POS.suppliers;
 
-import POS.customers.Customer_departments.to_customer_departments;
+import POS.suppliers.Supplier_departments.to_supplier_departments;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -34,7 +34,7 @@ import synsoftech.util.ImageRenderer1;
  *
  * @author Guinness
  */
-public class Dlg_customer_department extends javax.swing.JDialog {
+public class Dlg_supplier_department extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_template
@@ -60,33 +60,33 @@ public class Dlg_customer_department extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_customer_department(java.awt.Frame parent, boolean modal) {
+    private Dlg_supplier_department(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_customer_department(java.awt.Dialog parent, boolean modal) {
+    private Dlg_supplier_department(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_customer_department() {
+    public Dlg_supplier_department() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_customer_department myRef;
+    private Dlg_supplier_department myRef;
 
-    private void setThisRef(Dlg_customer_department myRef) {
+    private void setThisRef(Dlg_supplier_department myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_customer_department> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_supplier_department> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -94,7 +94,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_customer_department create(java.awt.Window parent, boolean modal) {
+    public static Dlg_supplier_department create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -104,14 +104,14 @@ public class Dlg_customer_department extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_customer_department create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_supplier_department create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_customer_department dialog = dialogContainer.get(parent);
+            Dlg_supplier_department dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_customer_department((java.awt.Frame) parent, false);
+                dialog = new Dlg_supplier_department((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -125,10 +125,10 @@ public class Dlg_customer_department extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_customer_department dialog = dialogContainer.get(parent);
+            Dlg_supplier_department dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_customer_department((java.awt.Dialog) parent, false);
+                dialog = new Dlg_supplier_department((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -155,7 +155,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_customer_department dialog = Dlg_customer_department.create(new javax.swing.JFrame(), true);
+        Dlg_supplier_department dialog = Dlg_supplier_department.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -370,7 +370,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
         init_key();
         Field.Search search = (Field.Search) tf_search;
         search.setPrompt("Search");
@@ -379,7 +379,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
         ret_departments();
     }
     int is_callback = 0;
-
+    
     public void do_pass() {
         is_callback = 1;
     }
@@ -401,8 +401,8 @@ public class Dlg_customer_department extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc=" customer_departments "> 
+    
+    //<editor-fold defaultstate="collapsed" desc=" supplier_departments "> 
     public static ArrayListModel tbl_customer_departments_ALM;
     public static Tblcustomer_departmentsModel tbl_customer_departments_M;
 
@@ -429,7 +429,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
         tbl_customer_departments.getColumnModel().getColumn(2).setCellRenderer(new ImageRenderer1());
     }
 
-    public static void loadData_customer_departments(List<to_customer_departments> acc) {
+    public static void loadData_customer_departments(List<to_supplier_departments> acc) {
         tbl_customer_departments_ALM.clear();
         tbl_customer_departments_ALM.addAll(acc);
     }
@@ -462,7 +462,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            to_customer_departments tt = (to_customer_departments) getRow(row);
+            to_supplier_departments tt = (to_supplier_departments) getRow(row);
             switch (col) {
                 case 0:
                     return " " + tt.department;
@@ -481,7 +481,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
     }
 
     private void ret_departments() {
-        List<to_customer_departments> datas = Customer_departments.ret_data(" order by department asc ");
+        List<to_supplier_departments> datas = Supplier_departments.ret_data(" order by department asc ");
         loadData_customer_departments(datas);
         jLabel2.setText("" + datas.size());
     }
@@ -501,7 +501,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
             String updated_at = DateType.now();
             String created_by = MyUser.getUser_id();
             String updated_by = MyUser.getUser_id();
-            final to_customer_departments dep = new to_customer_departments(id, department, created_at, updated_at, created_by, updated_by);
+            final to_supplier_departments dep = new to_supplier_departments(id, department, created_at, updated_at, created_by, updated_by);
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -509,7 +509,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                     closeDialog.ok();
-                    Customer_departments.add_data(dep);
+                    Supplier_departments.add_data(dep);
                     ret_departments();
                     clear_department();
                     Alert.set(1, "");
@@ -523,14 +523,14 @@ public class Dlg_customer_department extends javax.swing.JDialog {
             nd.setVisible(true);
 
         } else {
-            to_customer_departments to = (to_customer_departments) tbl_customer_departments_ALM.get(row);
+            to_supplier_departments to = (to_supplier_departments) tbl_customer_departments_ALM.get(row);
             int id = to.id;
             String department = jTextField1.getText();
             String created_at = to.created_at;
             String updated_at = DateType.now();
             String created_by = to.created_by;
             String updated_by = MyUser.getUser_id();
-            final to_customer_departments dep = new to_customer_departments(id, department, created_at, updated_at, created_by, updated_by);
+            final to_supplier_departments dep = new to_supplier_departments(id, department, created_at, updated_at, created_by, updated_by);
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -538,7 +538,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                     closeDialog.ok();
-                    Customer_departments.update_data(dep);
+                    Supplier_departments.update_data(dep);
                     ret_departments();
                     clear_department();
                     Alert.set(2, "");
@@ -558,7 +558,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        final to_customer_departments to = (to_customer_departments) tbl_customer_departments_ALM.get(row);
+        final to_supplier_departments to = (to_supplier_departments) tbl_customer_departments_ALM.get(row);
         int col = tbl_customer_departments.getSelectedColumn();
         if (col == 1) {
             jTextField1.setText(to.department);
@@ -574,7 +574,7 @@ public class Dlg_customer_department extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
-                    Customer_departments.delete_data(to);
+                    Supplier_departments.delete_data(to);
                     ret_departments();
                     clear_department();
                     Alert.set(3, "");

@@ -9,6 +9,7 @@ import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +138,7 @@ public class S1_accounts_payable_payments {
             Suppliers.to_suppliers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
             double new_balance = cus.balance - to_accounts_receivable_payments.amount;
 //            JOptionPane.showMessageDialog(null, cus.balance + " "+to_accounts_receivable_payments.amount);
-            
+
             String s2 = "update  suppliers set "
                     + "balance= :balance"
                     + " where "
@@ -171,6 +172,8 @@ public class S1_accounts_payable_payments {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    + ",department"
+                    + ",department_id"
                     + " from  suppliers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
@@ -188,11 +191,12 @@ public class S1_accounts_payable_payments {
                 String location = rs.getString(8);
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
-
-                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount,"","","");
+                String department = rs.getString(11);
+                String department_id = rs.getString(12);
+                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, "", "", "", department, department_id);
             }
             return to1;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();

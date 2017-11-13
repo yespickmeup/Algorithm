@@ -10,6 +10,7 @@ import POS.accounts_payable.Accounts_payable_payments.to_accounts_payable_paymen
 import POS.banks.Banks;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.suppliers.Supplier_departments;
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
 import POS.util.Alert;
@@ -277,6 +278,9 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jButton4 = new Button.Default();
         jProgressBar3 = new javax.swing.JProgressBar();
         jLabel26 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jCheckBox10 = new javax.swing.JCheckBox();
+        tf_customer_name2 = new Field.Combo();
         pnl_sales_items = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -300,6 +304,9 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jDateChooser6 = new com.toedter.calendar.JDateChooser();
         jLabel32 = new javax.swing.JLabel();
         jCheckBox6 = new javax.swing.JCheckBox();
+        jLabel34 = new javax.swing.JLabel();
+        jCheckBox11 = new javax.swing.JCheckBox();
+        tf_customer_name3 = new Field.Combo();
         pnl_sales_items4 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -490,7 +497,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(59, 59, 59)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
@@ -755,7 +762,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -814,7 +821,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setText("Supplier:");
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -846,20 +853,48 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         jLabel26.setText("Status:");
 
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel33.setText("Department:");
+
+        jCheckBox10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox10.setSelected(true);
+        jCheckBox10.setText("All");
+
+        tf_customer_name2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_customer_name2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_customer_name2MouseClicked(evt);
+            }
+        });
+        tf_customer_name2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_customer_name2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 450, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jCheckBox10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_customer_name2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -868,7 +903,12 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_customer_name2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -890,7 +930,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         );
         pnl_sales_itemsLayout.setVerticalGroup(
             pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 511, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -949,7 +989,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                 .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 438, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -979,7 +1019,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         );
         pnl_sales_items1Layout.setVerticalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -1055,33 +1095,62 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jCheckBox6.setSelected(true);
         jCheckBox6.setText("All");
 
+        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel34.setText("Department:");
+
+        jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox11.setSelected(true);
+        jCheckBox11.setText("All");
+
+        tf_customer_name3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_customer_name3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_customer_name3MouseClicked(evt);
+            }
+        });
+        tf_customer_name3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_customer_name3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox5))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox6)
+                            .addComponent(jCheckBox11))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_customer_name3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1090,30 +1159,34 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel30)
-                            .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_customer_name3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDateChooser5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDateChooser6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(1, 1, 1)))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel13Layout.createSequentialGroup()
+                            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGap(1, 1, 1)))
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel30)))
                 .addContainerGap())
         );
 
@@ -1127,7 +1200,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         );
         pnl_sales_items4Layout.setVerticalGroup(
             pnl_sales_items4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGap(0, 478, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1153,7 +1226,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1029, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1276,12 +1349,28 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField16ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         get_suppliers_paid() ;
+        get_suppliers_paid();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField16MouseClicked
         init_suppliers4(jTextField16);
     }//GEN-LAST:event_jTextField16MouseClicked
+
+    private void tf_customer_name2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_customer_name2MouseClicked
+        init_departments(tf_customer_name2);
+    }//GEN-LAST:event_tf_customer_name2MouseClicked
+
+    private void tf_customer_name2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_customer_name2ActionPerformed
+        init_departments(tf_customer_name2);
+    }//GEN-LAST:event_tf_customer_name2ActionPerformed
+
+    private void tf_customer_name3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_customer_name3MouseClicked
+        init_departments(tf_customer_name3);
+    }//GEN-LAST:event_tf_customer_name3MouseClicked
+
+    private void tf_customer_name3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_customer_name3ActionPerformed
+        init_departments(tf_customer_name3);
+    }//GEN-LAST:event_tf_customer_name3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1295,6 +1384,8 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -1327,6 +1418,8 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1375,9 +1468,11 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     private javax.swing.JTable tbl_accounts_payable;
     private javax.swing.JTable tbl_accounts_payable_payments;
     private javax.swing.JTextField tf_check_bank;
+    private javax.swing.JTextField tf_customer_name2;
+    private javax.swing.JTextField tf_customer_name3;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         init_tbl_accounts_payable(tbl_accounts_payable);
@@ -1387,7 +1482,27 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         jTextField1.grabFocus();
         jTextField17.setVisible(false);
+        ret_customer_departments();
+    }
 
+    private void ret_customer_departments() {
+        departments = Supplier_departments.ret_data(" order by department asc ");
+        if (!departments.isEmpty()) {
+            Supplier_departments.to_supplier_departments to = (Supplier_departments.to_supplier_departments) departments.get(0);
+
+            Field.Combo dep2 = (Field.Combo) tf_customer_name2;
+            Field.Combo dep3 = (Field.Combo) tf_customer_name3;
+//            Field.Combo dep4 = (Field.Combo) tf_customer_name4;
+//            Field.Combo dep5 = (Field.Combo) tf_customer_name5;
+            dep2.setText(to.department);
+            dep2.setId("" + to.id);
+            dep3.setText(to.department);
+            dep3.setId("" + to.id);
+//            dep4.setText(to.department);
+//            dep4.setId("" + to.id);
+//            dep5.setText(to.department);
+//            dep5.setId("" + to.id);
+        }
     }
 
     String my_branch = "";
@@ -2119,12 +2234,16 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                String where = "";
+                String where = " where contact_no like '%" + "" + "%' ";
                 String jrxml = "rpt_suppliers.jrxml";
+                if (!jCheckBox10.isSelected()) {
+                    Field.Combo dep2 = (Field.Combo) tf_customer_name2;
+                    where = where + " and department_id='" + dep2.getId() + "' ";
+                }
                 if (!jCheckBox1.isSelected()) {
-                    where = " where customer_no='" + jTextField2.getText() + "' order by customer_name asc";
+                    where = where + " and customer_no='" + jTextField2.getText() + "' order by customer_name asc";
                 } else {
-                    where = " where balance>0 order by customer_name asc";
+                    where = where + " and balance>0 order by customer_name asc";
                 }
                 List<Srpt_suppliers.field> datas = Srpt_suppliers.ret_data(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
@@ -2350,7 +2469,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
                 Suppliers.to_suppliers to = suppliers4.get(data.selected_row);
                 tf.setText(to.customer_name);
                 jTextField17.setText(to.customer_no);
-                get_suppliers_paid() ;
+                get_suppliers_paid();
             }
         });
     }
@@ -2361,11 +2480,17 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                String where = "";
+                String where = " where contact_no like '%" + "" + "%' ";
                 String where2 = "";
                 String jrxml = "rpt_suppliers.jrxml";
+
+                if (!jCheckBox11.isSelected()) {
+                    Field.Combo dep2 = (Field.Combo) tf_customer_name3;
+                    where = where + " and department_id='" + dep2.getId() + "' ";
+                }
+
                 if (!jCheckBox6.isSelected()) {
-                    where = where + " where customer_no='" + jTextField17.getText() + "' ";
+                    where = where + " and customer_no='" + jTextField17.getText() + "' ";
                 }
                 if (!jCheckBox5.isSelected()) {
                     String date_from = DateType.sf.format(jDateChooser5.getDate());
@@ -2433,4 +2558,33 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     }
 
     //</editor-fold>
+    List<Supplier_departments.to_supplier_departments> departments = new ArrayList();
+
+    private void init_departments(final JTextField tf1) {
+
+        departments.clear();
+        departments = Supplier_departments.ret_data("");
+        Object[][] obj = new Object[departments.size()][1];
+        int i = 0;
+        for (Supplier_departments.to_supplier_departments to : departments) {
+            obj[i][0] = " " + to.department;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf1.getWidth()};
+        String[] col_names = {"Id"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf1, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Supplier_departments.to_supplier_departments to = departments.get(data.selected_row);
+                Field.Combo dep = (Field.Combo) tf1;
+                dep.setText("" + to.department);
+                dep.setId("" + to.id);
+            }
+        });
+    }
 }

@@ -44,7 +44,8 @@ public class Srpt_ar_aging {
     public final String address;
     public final String telephone_number;
     public final String customer_address;
-    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number,String customer_address) {
+
+    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number, String customer_address) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
@@ -57,7 +58,7 @@ public class Srpt_ar_aging {
         this.six = six;
         this.address = address;
         this.telephone_number = telephone_number;
-        this.customer_address=customer_address;
+        this.customer_address = customer_address;
     }
 
     public static class field {
@@ -214,8 +215,8 @@ public class Srpt_ar_aging {
         six = one + two + three + four + five;
         String address = "";
         String telephone_number = "";
-        String customer_address="";
-        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number,customer_address);
+        String customer_address = "";
+        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address);
         rpt.fields.addAll(fields);
 
         JRViewer viewer = get_viewer(rpt);
@@ -257,27 +258,29 @@ public class Srpt_ar_aging {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
-                    + "id"
-                    + ",customer_id"
-                    + ",customer_name"
-                    + ",ar_no"
-                    + ",date_added"
-                    + ",user_name"
-                    + ",amount"
-                    + ",discount_amount"
-                    + ",discount_rate"
-                    + ",discount"
-                    + ",status"
-                    + ",term"
-                    + ",date_applied"
-                    + ",paid"
-                    + ",date_paid"
-                    + ",remarks"
-                    + ",type"
-                    + ",or_no"
-                    + ",ci_no"
-                    + ",trust_receipt"
-                    + " from  accounts_receivable  "
+                    + "ar.id"
+                    + ",ar.customer_id"
+                    + ",ar.customer_name"
+                    + ",ar.ar_no"
+                    + ",ar.date_added"
+                    + ",ar.user_name"
+                    + ",ar.amount"
+                    + ",ar.discount_amount"
+                    + ",ar.discount_rate"
+                    + ",ar.discount"
+                    + ",ar.status"
+                    + ",ar.term"
+                    + ",ar.date_applied"
+                    + ",ar.paid"
+                    + ",ar.date_paid"
+                    + ",ar.remarks"
+                    + ",ar.type"
+                    + ",ar.or_no"
+                    + ",ar.ci_no"
+                    + ",ar.trust_receipt"
+                    + " from  accounts_receivable ar "
+                    + " join customers c on "
+                    + " c.customer_no = ar.customer_id"
                     + " " + where;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -427,32 +430,35 @@ public class Srpt_ar_aging {
             MyConnection.close();
         }
     }
+
     public static List<Srpt_ar_aging.field> ret_aging3(String where) {
         List<Srpt_ar_aging.field> datas = new ArrayList();
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
-                    + "id"
-                    + ",customer_id"
-                    + ",customer_name"
-                    + ",ar_no"
-                    + ",date_added"
-                    + ",user_name"
-                    + ",amount"
-                    + ",discount_amount"
-                    + ",discount_rate"
-                    + ",discount"
-                    + ",status"
-                    + ",term"
-                    + ",date_applied"
-                    + ",paid"
-                    + ",date_paid"
-                    + ",remarks"
-                    + ",type"
-                    + ",or_no"
-                    + ",ci_no"
-                    + ",trust_receipt"
-                    + " from  accounts_receivable  "
+                    + "ar.id"
+                    + ",ar.customer_id"
+                    + ",ar.customer_name"
+                    + ",ar.ar_no"
+                    + ",ar.date_added"
+                    + ",ar.user_name"
+                    + ",ar.amount"
+                    + ",ar.discount_amount"
+                    + ",ar.discount_rate"
+                    + ",ar.discount"
+                    + ",ar.status"
+                    + ",ar.term"
+                    + ",ar.date_applied"
+                    + ",ar.paid"
+                    + ",ar.date_paid"
+                    + ",ar.remarks"
+                    + ",ar.type"
+                    + ",ar.or_no"
+                    + ",ar.ci_no"
+                    + ",ar.trust_receipt"
+                    + " from  accounts_receivable ar "
+                    + " join customers c on "
+                    + " c.customer_no = ar.customer_id "
                     + " " + where;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
@@ -481,7 +487,7 @@ public class Srpt_ar_aging {
                 trust_receipt = remarks;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
                 String t_amount = FitIn.fmt_wc_0(amount);
-               
+
                 String applied = DateType.convert_dash_date2(date_applied);
                 Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, t_amount, t_amount, t_amount, t_amount, t_amount, applied);
                 datas.add(to);

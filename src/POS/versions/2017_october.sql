@@ -21,6 +21,48 @@ id int auto_increment primary key
 alter table customers add department varchar(255) default '';
 alter table customers add department_id  varchar(255) default '';
 
+update customers set department='Customers';
+update customers set department_id='1';
+
+
+
+
+drop table if exists supplier_departments;
+create table supplier_departments(
+id int auto_increment primary key
+,department varchar(255)
+,created_at datetime
+,updated_at datetime
+,created_by varchar(255)
+,updated_by varchar(255)
+);
+
+alter table suppliers add department varchar(255) default '';
+alter table suppliers add department_id  varchar(255) default '';
+
+update suppliers set department='Suppliers';
+update suppliers set department_id='1';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 select transaction_no,date_added,from_location_id,to_location_id,at_location_id from stock_transfers where from_location_id=to_location_id and YEAR(date_added)='2017';

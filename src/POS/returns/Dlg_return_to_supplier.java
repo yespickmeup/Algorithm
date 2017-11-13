@@ -10,6 +10,7 @@ import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
+import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.returns.Return_to_supplier.to_return_to_suppliers;
 import POS.returns.Return_to_supplier_items.to_return_to_supplier_items;
 import POS.suppliers.Suppliers;
@@ -39,6 +40,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
@@ -287,6 +289,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jProgressBar3 = new javax.swing.JProgressBar();
+        jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -825,7 +828,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                         .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -863,7 +866,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                                 .addComponent(tf_branch2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -932,12 +935,12 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
 
         jTabbedPane1.addTab("Reports", jPanel3);
@@ -1000,6 +1003,21 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Print Preview", jPanel6);
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 970, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 573, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Item Ledger", jPanel8);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1185,6 +1203,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1218,6 +1237,19 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         init_tbl_return_to_suppliers(tbl_return_to_suppliers);
         init_tbl_return_to_supplier_items(tbl_return_to_supplier_items);
         init_trans_no();
+        item_ledger();
+    }
+
+    private void item_ledger() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                jPanel8.setLayout(new BorderLayout());
+                Dlg_report_inventory_ledger dlg = new Dlg_report_inventory_ledger();
+                jPanel8.add(dlg.getSurface());
+            }
+        });
+
     }
 
     String br_id = "";
@@ -2266,9 +2298,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
         nd.setCallback(new Dlg_confirm_action.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();

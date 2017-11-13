@@ -151,6 +151,8 @@ public class S1_purchase_orders {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from  suppliers where "
                     + " customer_no ='" + account_id + "' "
                     + " ";
@@ -171,7 +173,9 @@ public class S1_purchase_orders {
                 String branch = rs.getString(11);
                 String branch_id = rs.getString(12);
                 String location_id = rs.getString(13);
-                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id);
+                String department = rs.getString(14);
+                String department_id = rs.getString(15);
+                to1 = new Suppliers.to_suppliers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, branch, branch_id, location_id, department, department_id);
             }
             return to1;
         } catch (SQLException e) {

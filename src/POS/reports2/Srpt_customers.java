@@ -225,7 +225,7 @@ public class Srpt_customers {
                     double check_amount = rs2.getDouble(5);
 
                     double total = (amount + check_amount) + discount;
-                    System.out.println("    date_paid: " + date_paid + " = " + total);
+//                    System.out.println("    date_paid: " + date_paid + " = " + total);
                     paid += total;
                 }
 //                System.out.println("paid: "+paid);

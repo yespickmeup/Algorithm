@@ -141,6 +141,7 @@ public class Srpt_suppliers {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    
                     + " from suppliers "
                     + " " + where;
 

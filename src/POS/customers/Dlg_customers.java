@@ -4,19 +4,20 @@
  */
 package POS.customers;
 
-
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customers.to_customers;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
+import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
@@ -27,7 +28,7 @@ import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.*;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
-
+import synsoftech.fields.Field;
 
 /**
  *
@@ -240,6 +241,8 @@ public class Dlg_customers extends javax.swing.JDialog {
         jButton6 = new Button.Info();
         jButton7 = new Button.Warning();
         jButton8 = new Button.Default();
+        jLabel15 = new javax.swing.JLabel();
+        tf_customer_name1 = new Field.Combo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -505,6 +508,21 @@ public class Dlg_customers extends javax.swing.JDialog {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Department:");
+
+        tf_customer_name1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_customer_name1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_customer_name1MouseClicked(evt);
+            }
+        });
+        tf_customer_name1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_customer_name1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
         jXPanel2.setLayout(jXPanel2Layout);
         jXPanel2Layout.setHorizontalGroup(
@@ -521,17 +539,16 @@ public class Dlg_customers extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jXPanel2Layout.createSequentialGroup()
-                        .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jXPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_customer_no)
@@ -541,7 +558,8 @@ public class Dlg_customers extends javax.swing.JDialog {
                             .addComponent(tf_discount)
                             .addComponent(tf_credit_limit)
                             .addComponent(tf_contact_no)
-                            .addComponent(jScrollPane4))))
+                            .addComponent(jScrollPane4)
+                            .addComponent(tf_customer_name1))))
                 .addContainerGap())
         );
         jXPanel2Layout.setVerticalGroup(
@@ -559,6 +577,10 @@ public class Dlg_customers extends javax.swing.JDialog {
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_customer_name1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -686,6 +708,14 @@ public class Dlg_customers extends javax.swing.JDialog {
     private void tf_from_locationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_locationActionPerformed
 
     }//GEN-LAST:event_tf_from_locationActionPerformed
+
+    private void tf_customer_name1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_customer_name1MouseClicked
+        init_departments(tf_customer_name1);
+    }//GEN-LAST:event_tf_customer_name1MouseClicked
+
+    private void tf_customer_name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_customer_name1ActionPerformed
+        init_departments(tf_customer_name1);
+    }//GEN-LAST:event_tf_customer_name1ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -700,6 +730,7 @@ public class Dlg_customers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -720,6 +751,7 @@ public class Dlg_customers extends javax.swing.JDialog {
     private javax.swing.JTextField tf_contact_no;
     private javax.swing.JTextField tf_credit_limit;
     private javax.swing.JTextArea tf_customer_name;
+    private javax.swing.JTextField tf_customer_name1;
     private javax.swing.JTextField tf_customer_no;
     private javax.swing.JTextField tf_discount;
     private javax.swing.JTextField tf_from_branch;
@@ -747,6 +779,22 @@ public class Dlg_customers extends javax.swing.JDialog {
         tf_from_location_id.setVisible(false);
         set_default_branch();
         init_no();
+        ret_customer_departments();
+    }
+
+    private void ret_customer_departments() {
+        departments = Customer_departments.ret_data(" order by department asc ");
+        if (!departments.isEmpty()) {
+            Customer_departments.to_customer_departments to = (Customer_departments.to_customer_departments) departments.get(0);
+            Field.Combo dep1 = (Field.Combo) tf_customer_name1;
+           
+
+            dep1.setText(to.department);
+            dep1.setId("" + to.id);
+
+          
+
+        }
     }
 
     private void set_default_branch() {
@@ -943,6 +991,7 @@ public class Dlg_customers extends javax.swing.JDialog {
     }
 
     private void add_customers() {
+        Field.Combo dep = (Field.Combo) tf_customer_name1;
         int id = -1;
         String customer_name = tf_customer_name.getText();
         String customer_no = Customers.increment_id(tf_from_branch_id.getText());
@@ -956,8 +1005,9 @@ public class Dlg_customers extends javax.swing.JDialog {
         String branch = tf_from_branch.getText();
         String branch_id = tf_from_branch_id.getText();
         String location_id = tf_from_location_id.getText();
-
-        final to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
+        String department = dep.getText();
+        String department_id = dep.getId();
+        final to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id, department, department_id);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -991,7 +1041,9 @@ public class Dlg_customers extends javax.swing.JDialog {
         tf_credit_limit.setText(FitIn.fmt_wc_0(to.credit_limit));
         tf_term.setText(FitIn.fmt_woc(to.term));
         tf_address.setText(to.address);
-
+        Field.Combo dep = (Field.Combo) tf_customer_name1;
+        dep.setText(to.department);
+        dep.setId(to.department_id);
     }
 
     private void edit_customers() {
@@ -1001,6 +1053,7 @@ public class Dlg_customers extends javax.swing.JDialog {
         }
         to_customers to = (to_customers) tbl_customers_ALM.get(tbl_customers.
                 convertRowIndexToModel(row));
+        Field.Combo dep = (Field.Combo) tf_customer_name1;
         int id = to.id;
         String customer_name = tf_customer_name.getText();
         String customer_no = tf_customer_no.getText();
@@ -1014,7 +1067,9 @@ public class Dlg_customers extends javax.swing.JDialog {
         String branch = to.branch;
         String branch_id = to.branch_id;
         String location_id = to.location_id;
-        final to_customers to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id);
+        String department = dep.getText();
+        String department_id = dep.getId();
+        final to_customers to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, 0, branch, branch_id, location_id, department, department_id);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1068,6 +1123,37 @@ public class Dlg_customers extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
 
+    }
+
+    List<Customer_departments.to_customer_departments> departments = new ArrayList();
+
+    private void init_departments(final JTextField tf1) {
+
+        departments.clear();
+        departments = Customer_departments.ret_data("");
+        Object[][] obj = new Object[departments.size()][1];
+        int i = 0;
+        for (Customer_departments.to_customer_departments to : departments) {
+            obj[i][0] = " " + to.department;
+
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf1.getWidth()};
+        String[] col_names = {"Id"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf1, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Customer_departments.to_customer_departments to = departments.get(data.selected_row);
+                Field.Combo dep = (Field.Combo) tf1;
+                dep.setText("" + to.department);
+                dep.setId("" + to.id);
+            }
+        });
     }
 
 }

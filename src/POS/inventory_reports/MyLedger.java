@@ -57,6 +57,7 @@ public class MyLedger {
         List<Srpt_item_ledger.field> return_from_customer = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
         List<Srpt_item_ledger.field> conversions = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
         List<Srpt_item_ledger.field> other_adjustments = new ArrayList();
+        List<Srpt_item_ledger.field> return_to_supplier = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
 //                    System.out.println(where);
         try {
             Connection conn = MyConnection.connect();
@@ -1310,6 +1311,70 @@ public class MyLedger {
             }
 
             //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc=" Return to Customer ">
+            String s15 = "select "
+                    + "id"
+                    + ",return_to_supplier_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supplier_id"
+                    + ",reference_no"
+                    + ",remarks"
+                    + ",barcode"
+                    + ",description"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_class"
+                    + ",sub_class_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",conversion"
+                    + ",unit"
+                    + ",barcodes"
+                    + ",batch_no"
+                    + ",serial_no"
+                    + ",main_barcode"
+                    + ",qty"
+                    + ",cost"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from return_to_supplier_items"
+                    + " " + where2;
+
+            Statement stmt15 = conn.createStatement();
+            ResultSet rs15 = stmt15.executeQuery(s15);
+            while (rs15.next()) {
+                int id = rs15.getInt(1);
+                String user_name = rs15.getString(3);
+                String date_added = rs15.getString(5);
+                String reference_no = rs15.getString(8);
+                double qty = rs15.getDouble(28);
+                double cost = rs15.getDouble(29);
+
+                String branch = rs15.getString(31);
+                String branch_id = rs15.getString(32);
+                String location = rs15.getString(33);
+                String location_id = rs15.getString(34);
+                String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                String months = DateType.convert_datetime_to_month(date_added);
+                Date created = new Date();
+                try {
+                    created = POS.util.DateType.datetime.parse(date_added);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Return to Supplier", date, "", FitIn.fmt_woc(qty), "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months, "");
+                return_to_supplier.add(field2);
+            }
             fields.addAll(inventory_count);
             fields.addAll(sales);
             fields.addAll(receipts);
@@ -1323,6 +1388,7 @@ public class MyLedger {
             fields.addAll(return_from_customer);
             fields.addAll(conversions);
             fields.addAll(other_adjustments);
+            fields.addAll(return_to_supplier);
             List<Srpt_item_ledger.field> f_field = new ArrayList();
 
             Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {

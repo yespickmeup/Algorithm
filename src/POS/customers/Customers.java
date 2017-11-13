@@ -4,7 +4,6 @@
  */
 package POS.customers;
 
-import POS.main.Main.MyDB;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,8 +38,10 @@ public class Customers {
         public final String branch;
         public final String branch_id;
         public final String location_id;
+        public final String department;
+        public final String department_id;
 
-        public to_customers(int id, String customer_name, String customer_no, String contact_no, double credit_limit, String address, double term, String location, double balance, double discount, double prepaid, String branch, String branch_id, String location_id) {
+        public to_customers(int id, String customer_name, String customer_no, String contact_no, double credit_limit, String address, double term, String location, double balance, double discount, double prepaid, String branch, String branch_id, String location_id, String department, String department_id) {
             this.id = id;
             this.customer_name = customer_name;
             this.customer_no = customer_no;
@@ -55,6 +56,8 @@ public class Customers {
             this.branch = branch;
             this.branch_id = branch_id;
             this.location_id = location_id;
+            this.department = department;
+            this.department_id = department_id;
         }
     }
 
@@ -75,6 +78,8 @@ public class Customers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + ")values("
                     + ":customer_name"
                     + ",:customer_no"
@@ -89,6 +94,8 @@ public class Customers {
                     + ",:branch"
                     + ",:branch_id"
                     + ",:location_id"
+                    + ",:department"
+                    + ",:department_id"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -105,6 +112,8 @@ public class Customers {
                     .setString("branch", to_customers.branch)
                     .setString("branch_id", to_customers.branch_id)
                     .setString("location_id", to_customers.location_id)
+                    .setString("department", to_customers.department)
+                    .setString("department_id", to_customers.department_id)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -128,6 +137,8 @@ public class Customers {
                     + ",address= :address "
                     + ",term= :term "
                     + ",discount= :discount "
+                    + ",department= :department"
+                    + ",department_id= :department_id"
                     + " where id='" + to_customers.id + "' "
                     + " ";
 
@@ -139,6 +150,8 @@ public class Customers {
                     .setString("address", to_customers.address)
                     .setNumber("term", to_customers.term)
                     .setNumber("discount", to_customers.discount)
+                    .setString("department", to_customers.department)
+                    .setString("department_id", to_customers.department_id)
                     .ok();
             System.out.println("" + to_customers.location);
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -188,6 +201,8 @@ public class Customers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from customers"
                     + " where customer_name like'%" + search + "%' order by customer_name asc ";
 
@@ -208,8 +223,9 @@ public class Customers {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-
-                to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id);
+                String department=rs.getString(15);
+                String department_id=rs.getString(16);
+                to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id,department,department_id);
                 datas.add(to);
             }
             return datas;
@@ -240,6 +256,8 @@ public class Customers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from customers"
                     + " " + where;
 
@@ -260,8 +278,9 @@ public class Customers {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-
-                to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id);
+                String department=rs.getString(15);
+                String department_id=rs.getString(16);
+                to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id,department,department_id);
                 datas.add(to);
             }
             return datas;
@@ -275,7 +294,7 @@ public class Customers {
     public static List<to_customers> ret_data3(String where) {
         List<to_customers> datas = new ArrayList();
 
-        to_customers to2 = new to_customers(0, "", "", "", 0, "", 0, "", 0, 0, 0, "", "", "");
+        to_customers to2 = new to_customers(0, "", "", "", 0, "", 0, "", 0, 0, 0, "", "", "","","");
         datas.add(to2);
         try {
             Connection conn = MyConnection.connect();
@@ -294,6 +313,8 @@ public class Customers {
                     + ",branch"
                     + ",branch_id"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from customers"
                     + " " + where;
 
@@ -314,8 +335,9 @@ public class Customers {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-
-                to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id);
+                String department=rs.getString(15);
+                String department_id=rs.getString(16);
+                to_customers to = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id,department,department_id);
                 datas.add(to);
             }
             return datas;
