@@ -14,6 +14,7 @@
     <parameter name="six" class="java.lang.Double"/>
     <parameter name="address" class="java.lang.String"/>
     <parameter name="telephone_number" class="java.lang.String"/>
+    <parameter name="department" class="java.lang.String"/>
     <field name="ci_no" class="java.lang.String"/>
     <field name="transaction_no" class="java.lang.String"/>
     <field name="customer" class="java.lang.String"/>
@@ -33,9 +34,9 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="116" splitType="Stretch">
+        <band height="111" splitType="Stretch">
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="91" width="70" height="20"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="80" width="72" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="12"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
@@ -43,14 +44,14 @@
                 <text><![CDATA[Customer:]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="70" y="91" width="286" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="72" y="80" width="286" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="12" isBold="true" isUnderline="true"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{printed_by}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="66" width="286" height="15"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="50" width="286" height="15"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="11" isBold="true"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
@@ -78,6 +79,27 @@
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{telephone_number}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="65" width="72" height="15"/>
+                <box>
+                    <topPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                    <paragraph leftIndent="5" rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[Department:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="9eaca578-06e3-4ec3-83da-2b131387fe90" x="72" y="65" width="176" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{department}]]></textFieldExpression>
             </textField>
         </band>
     </title>

@@ -1221,7 +1221,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 case 4:
                     return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 5:
-                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount) -tt.discount_amount) + " ";
+                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount) - tt.discount_amount) + " ";
                 case 6:
                     if (tt.status == 0) {
                         return " Finalized";
@@ -1316,7 +1316,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-       
+
         int col = tbl_accounts_receivable_payments.getSelectedColumn();
         if (col == 7) {
             to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
@@ -1446,15 +1446,16 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 datas2.add(t);
             }
         }
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                S1_accounts_receivable_payments.finalize_accounts_receivable_payments(datas2);
-                data_cols_payments();
-                Alert.set(0, "Payment Finalized!");
-            }
-        });
-        t.start();
+        S1_accounts_receivable_payments.finalize_accounts_receivable_payments(datas2);
+        data_cols_payments();
+        Alert.set(0, "Payment Finalized!");
+//        Thread t = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//               
+//            }
+//        });
+//        t.start();
     }
 }

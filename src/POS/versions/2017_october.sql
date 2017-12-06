@@ -25,8 +25,6 @@ update customers set department='Customers';
 update customers set department_id='1';
 
 
-
-
 drop table if exists supplier_departments;
 create table supplier_departments(
 id int auto_increment primary key
@@ -36,6 +34,7 @@ id int auto_increment primary key
 ,created_by varchar(255)
 ,updated_by varchar(255)
 );
+
 
 alter table suppliers add department varchar(255) default '';
 alter table suppliers add department_id  varchar(255) default '';

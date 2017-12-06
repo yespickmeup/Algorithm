@@ -42,7 +42,8 @@ public class Srpt_check_payments {
     public final double on_dated_checks;
     public final String check_type;
     public final String customer;
-    public Srpt_check_payments(String business_name, String date, String printed_by, double total_check_payments, double post_dated_checks, double on_dated_checks,String check_type,String customer) {
+
+    public Srpt_check_payments(String business_name, String date, String printed_by, double total_check_payments, double post_dated_checks, double on_dated_checks, String check_type, String customer) {
         this.business_name = business_name;
         this.date = date;
         this.printed_by = printed_by;
@@ -50,8 +51,8 @@ public class Srpt_check_payments {
         this.total_check_payments = total_check_payments;
         this.post_dated_checks = post_dated_checks;
         this.on_dated_checks = on_dated_checks;
-        this.check_type=check_type;
-        this.customer=customer;
+        this.check_type = check_type;
+        this.customer = customer;
     }
 
     public static class field {
@@ -296,9 +297,9 @@ public class Srpt_check_payments {
         double total_check_payments = 0;
         double post_dated_checks = 0;
         double on_dated_checks = 0;
-        String check_type="All";
-        String customer="";
-        Srpt_check_payments rpt = new Srpt_check_payments(business_name, date, printed_by, total_check_payments, post_dated_checks, on_dated_checks,check_type,customer);
+        String check_type = "All";
+        String customer = "";
+        Srpt_check_payments rpt = new Srpt_check_payments(business_name, date, printed_by, total_check_payments, post_dated_checks, on_dated_checks, check_type, customer);
         rpt.fields.addAll(datas);
         String jrxml = "rpt_check_payments.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -376,6 +377,143 @@ public class Srpt_check_payments {
                     + " from accounts_receivable_payments p "
                     + " join accounts_receivable ar "
                     + " on ar.ar_no=p.ar_no "
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_id = rs.getString(2);
+                String customer_name = rs.getString(3);
+                String ar_no = rs.getString(4);
+                String date_added = rs.getString(5);
+                String user_name = rs.getString(6);
+                double amount = rs.getDouble(7);
+                double discount_amount = rs.getDouble(8);
+                double discount_rate = rs.getDouble(9);
+                String discount = rs.getString(10);
+                int status = rs.getInt(11);
+                double term = rs.getDouble(12);
+                String date_applied = rs.getString(13);
+                double paid = rs.getDouble(14);
+                String date_paid = rs.getString(15);
+                String remarks = rs.getString(16);
+                String type = rs.getString(17);
+                String or_no = rs.getString(18);
+                double prev_balance = rs.getDouble(19);
+                double check_amount = rs.getDouble(20);
+                String check_holder = rs.getString(21);
+                String check_bank = rs.getString(22);
+                String check_no = rs.getString(23);
+                String ci_no = rs.getString(24);
+                String trust_receipt = rs.getString(25);
+                String or_payment_no = rs.getString(26);
+                String soa_id = rs.getString(27);
+                String soa_type = rs.getString(28);
+                String soa_type_id = rs.getString(29);
+                String reference_no = rs.getString(30);
+                String check_date = rs.getString(31);
+                String user_id = rs.getString(32);
+                String user_screen_name = rs.getString(33);
+                double wtax = rs.getDouble(34);
+                double tax_rate = rs.getDouble(35);
+                double tax_amount = rs.getDouble(36);
+                String branch = rs.getString(37);
+                String branch_id = rs.getString(38);
+                String location = rs.getString(39);
+                String location_id = rs.getString(40);
+                String term2 = rs.getString(41);
+                String added_by = user_screen_name;
+                int days = 0;
+                Date d = new Date();
+                Date d2 = new Date();
+                if (check_date != null) {
+                    try {
+                        d = DateType.sf.parse(check_date);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Srpt_check_payments.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (date_applied != null) {
+                    try {
+                        d2 = DateType.sf.parse(date_applied);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Srpt_check_payments.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                days = DateUtils1.count_days(d, new Date());
+
+                if (date_applied != null) {
+                    date_applied = DateType.convert_slash_datetime2(date_applied);
+                } else {
+                    date_applied = "";
+                }
+                if (check_date != null) {
+                    check_date = DateType.convert_slash_datetime2(check_date);
+                } else {
+                    check_date = "";
+                }
+                Srpt_check_payments.field f = new field(customer_id, customer_name, ar_no, date_added, added_by, date_applied, date_paid, check_amount, check_holder, check_bank, check_no, check_date, tax_rate, tax_amount, reference_no, soa_type, branch, branch_id, location, location_id, days, term2);
+                datas.add(f);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static List<field> ret_data_payable(String where) {
+        List<field> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + " p.id"
+                    + ",p.customer_id"
+                    + ",p.customer_name"
+                    + ",p.ar_no"
+                    + ",p.date_added"
+                    + ",p.user_name"
+                    + ",p.amount"
+                    + ",p.discount_amount"
+                    + ",p.discount_rate"
+                    + ",p.discount"
+                    + ",p.status"
+                    + ",p.term"
+                    + ",p.date_applied"
+                    + ",p.paid"
+                    + ",p.date_paid"
+                    + ",p.remarks"
+                    + ",p.type"
+                    + ",p.or_no"
+                    + ",p.prev_balance"
+                    + ",p.check_amount"
+                    + ",p.check_holder"
+                    + ",p.check_bank"
+                    + ",p.check_no"
+                    + ",p.ci_no"
+                    + ",p.trust_receipt"
+                    + ",p.or_payment_no"
+                    + ",p.soa_id"
+                    + ",p.soa_type"
+                    + ",p.soa_type_id"
+                    + ",p.reference_no"
+                    + ",p.check_date"
+                    + ",p.user_id"
+                    + ",p.user_screen_name"
+                    + ",p.wtax"
+                    + ",p.tax_rate"
+                    + ",p.tax_amount"
+                    + ",p.branch"
+                    + ",p.branch_id"
+                    + ",p.location"
+                    + ",p.location_id"
+                    + ",ap.term"
+                    + " from accounts_receivable_payments p "
+                    + " join accounts_payable ap "
+                    + " on ap.ap_no=p.ap_no "
                     + " " + where;
 
             Statement stmt = conn.createStatement();

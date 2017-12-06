@@ -2585,7 +2585,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 String location_id = to.location_id;
                 String date_delivered = DateType.sf.format(jDateChooser5.getDate());
                 String date_received = DateType.sf.format(jDateChooser6.getDate());
-                date_received = DateType.convert_monthDate_sf(date_received);
+//                date_received = DateType.convert_monthDate_sf(date_received);
 
                 double conversion = data.conversion;
                 String unit = data.unit;
@@ -2706,7 +2706,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         final String remarks = tf_remarks.getText();
         String date_delivered = DateType.sf.format(jDateChooser5.getDate());
         String date_received = DateType.sf.format(jDateChooser6.getDate());
-        date_received = DateType.convert_monthDate_sf(date_received);
+//        date_received = DateType.convert_monthDate_sf(date_received);
         String receipt_type = tf_receipt_type.getText();
         String reference_no = tf_reference_no.getText();
         String branch = combo.getText();
@@ -3460,7 +3460,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         String remarks = tf_remarks.getText();
         String date_delivered = DateType.sf.format(jDateChooser5.getDate());
         String date_received = DateType.sf.format(jDateChooser6.getDate());
-        date_received = DateType.convert_monthDate_sf(date_received);
+//        date_received = DateType.convert_monthDate_sf(date_received);
         String receipt_type = tf_receipt_type.getText();
         String reference_no = tf_reference_no.getText();
         String branch = tf_branch.getText();

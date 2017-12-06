@@ -33,12 +33,14 @@ public class Srpt_customers {
     public final String business_name;
     public final String date;
     public final String printed_by;
-
-    public Srpt_customers(String business_name, String date, String printed_by) {
+    public final String department;
+    
+    public Srpt_customers(String business_name, String date, String printed_by,String department) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
         this.printed_by = printed_by;
+        this.department=department;
     }
 
     public static class field {
@@ -47,17 +49,26 @@ public class Srpt_customers {
         String customer_name;
         double balance;
         String contact_no;
-
+        String department;
         public field() {
         }
 
-        public field(String customer_id, String customer_name, double balance, String contact_no) {
+        public field(String customer_id, String customer_name, double balance, String contact_no,String department) {
             this.customer_id = customer_id;
             this.customer_name = customer_name;
             this.balance = balance;
             this.contact_no = contact_no;
+            this.department=department;
         }
 
+        public String getDepartment() {
+            return department;
+        }
+
+        public void setDepartment(String department) {
+            this.department = department;
+        }
+        
         public String getContact_no() {
             return contact_no;
         }
@@ -97,7 +108,8 @@ public class Srpt_customers {
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
         String date = DateType.month_date.format(new Date());
         String printed_by = "Administrator";
-        Srpt_customers rpt = new Srpt_customers(business_name, date, printed_by);
+        String department="All";
+        Srpt_customers rpt = new Srpt_customers(business_name, date, printed_by,department);
         rpt.fields.addAll(datas);
         String jrxml = "rpt_customers.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -141,6 +153,7 @@ public class Srpt_customers {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    + ",department"
                     + " from customers "
                     + " " + where;
 
@@ -157,8 +170,8 @@ public class Srpt_customers {
                 String location = rs.getString(8);
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
-
-                Srpt_customers.field to = new field(customer_no, customer_name, balance, contact_no);
+                String department=rs.getString(11);
+                Srpt_customers.field to = new field(customer_no, customer_name, balance, contact_no,department);
                 datas.add(to);
             }
             return datas;
@@ -185,6 +198,7 @@ public class Srpt_customers {
                     + ",location"
                     + ",balance"
                     + ",discount"
+                    + ",department"
                     + " from customers  "
                     + " " + where + " order by customer_name asc";
 
@@ -202,6 +216,7 @@ public class Srpt_customers {
                 String location = rs.getString(8);
                 double balance = rs.getDouble(9);
                 double discount = rs.getDouble(10);
+                String department=rs.getString(11);
                 double paid = 0;
 
                 String s2 = "select "
@@ -229,7 +244,7 @@ public class Srpt_customers {
                     paid += total;
                 }
 //                System.out.println("paid: "+paid);
-                Srpt_customers.field to = new field(customer_no, customer_name, paid, contact_no);
+                Srpt_customers.field to = new field(customer_no, customer_name, paid, contact_no,department);
                 datas.add(to);
             }
             return datas;

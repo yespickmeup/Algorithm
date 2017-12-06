@@ -112,7 +112,7 @@ public class Adjuster {
             MyConnection.close();
         }
     }
-
+    
     public static void main(String[] args) {
         System.out.println(increment_id());
     }
@@ -144,7 +144,6 @@ public class Adjuster {
             String s0 = "delete from inventory_barcodes  "
                     + " where id='" + to_inventory_barcodes.id + "' "
                     + " ";
-
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Adjuster.class, "Successfully Updated");

@@ -1375,6 +1375,7 @@ public class MyLedger {
                 Srpt_item_ledger.field field2 = new Srpt_item_ledger.field("Return to Supplier", date, "", FitIn.fmt_woc(qty), "", branch, branch_id, location, location_id, branch, branch_id, location, location_id, user_name, "", created, "" + id, FitIn.fmt_wc_0(cost), "" + FitIn.fmt_wc_0(cost), months, "");
                 return_to_supplier.add(field2);
             }
+            //</editor-fold>
             fields.addAll(inventory_count);
             fields.addAll(sales);
             fields.addAll(receipts);
@@ -1443,7 +1444,8 @@ public class MyLedger {
             String branch = my_branch;
             String location = my_location;
 
-            int m = month;
+            int m = month-1;
+//            System.out.println("m: "+m);
             String[] mm = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
             Srpt_item_ledger rpt = new Srpt_item_ledger(business_name, address, contact_no, date, item_code, barcode, description, branch, location, mm[m], running_balance);

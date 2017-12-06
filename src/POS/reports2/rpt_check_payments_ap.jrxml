@@ -60,7 +60,7 @@
                     <font size="15"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
                 </textElement>
-                <text><![CDATA[AR Check Payments]]></text>
+                <text><![CDATA[AP Check Payments]]></text>
             </staticText>
             <staticText>
                 <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="54" width="79" height="16"/>
