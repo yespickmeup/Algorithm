@@ -7,6 +7,7 @@ package POS.disbursements;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
+import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
@@ -17,10 +18,12 @@ import POS.util.Dlg_confirm_delete;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +31,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
@@ -35,9 +40,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.ImageRenderer;
@@ -205,6 +218,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -249,6 +263,13 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jCheckBox6 = new javax.swing.JCheckBox();
         tf_cashier = new Field.Combo();
         jLabel72 = new javax.swing.JLabel();
+        jButton2 = new Button.Info();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -408,7 +429,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(151, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -441,7 +462,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Disbursement", jPanel3);
@@ -579,6 +600,13 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jLabel72.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel72.setText("From:");
 
+        jButton2.setText("Preview");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -599,7 +627,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_cashier, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
+                                .addComponent(tf_cashier, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
@@ -610,7 +638,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                                     .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                                     .addComponent(jTextField4)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -633,29 +661,36 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                                .addGap(221, 221, 221)))))
+                                .addGap(145, 145, 145)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(36, 36, 36))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox5))
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox4))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox3))))
-                .addGap(1, 1, 1)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox5))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox4))
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox3))))
+                        .addGap(1, 1, 1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -678,7 +713,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                             .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel70)
@@ -687,6 +722,77 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Reports", jPanel4);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jProgressBar1.setString("");
+        jProgressBar1.setStringPainted(true);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 882, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Grouped by Category", jPanel7);
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 882, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Detailed", jPanel8);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jTabbedPane3))
+        );
+
+        jTabbedPane1.addTab("Print Preview", jPanel5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -812,12 +918,17 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         init_cashier();
     }//GEN-LAST:event_tf_cashierActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       init_report();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton37;
     private javax.swing.JCheckBox jCheckBox1;
@@ -849,8 +960,15 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -865,7 +983,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);
@@ -1166,18 +1284,15 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             String location = lo.getText();
             String location_id = lo.getId();
             final S1_disbursements.to_disbursements to1 = new S1_disbursements.to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id, category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
-
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
             nd.do_pass("Are you sure you want to update this record?");
             nd.setCallback(new Dlg_confirm_action.Callback() {
-
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                     closeDialog.ok();
                     S1_disbursements.update_data(to1);
-
                     data_disbursements();
                     new_disbursement();
                     Alert.set(2, "Successfully Added!");
@@ -1367,4 +1482,100 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         });
     }
 
+    private void init_report() {
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Field.Combo br = (Field.Combo) jTextField2;
+                Field.Combo lo = (Field.Combo) jTextField1;
+                Field.Combo f = (Field.Combo) tf_cashier;
+                String date_from = synsoftech.util.DateType.sf.format(jDateChooser3.getDate());
+                String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
+                String where = " where YEAR(disbursement_date)='2017' and MONTH(disbursement_date)='11' group by category_name order by category_name asc ";
+                List<Srpt_disbursements_category.field> datas = Srpt_disbursements_category.ret_data(where);
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String address = System.getProperty("address", "Daro Highway, Dumaguete City");
+                String contact_no = System.getProperty("contact_no", "225-1235");
+                String date = "January 24, 2016";
+                String printed_by = "Administrator";
+                String branch = "";
+                String location = "";
+                Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location);
+                rpt.fields.addAll(datas);
+                String jrxml = "rpt_disbursement_category.jrxml";
+                report_sales_items(rpt, jrxml);
+                InputStream is = Srpt_disbursements_category.class.getResourceAsStream(jrxml);
+                try {
+                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                    jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+                } catch (JRException ex) {
+                    Logger.getLogger(Dlg_report_items.class.getName()).
+                            log(Level.SEVERE, null, ex);
+                }
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+            }
+        });
+        t.start();
+
+    }
+
+    private void report_sales_items(final Srpt_disbursements_category to, String jrxml_name) {
+        jPanel7.removeAll();
+        jPanel7.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_expenses(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            jPanel7.add(viewer);
+            jPanel7.updateUI();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_expenses(Srpt_disbursements_category to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_disbursements_category.class.getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    JasperPrint jasperPrint = null;
+
+    private void print() {
+        try {
+            if (jasperPrint != null) {
+                JasperPrintManager.printReport(jasperPrint, false);
+            }
+
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+            throw new RuntimeException(e);
+        }
+    }
 }
