@@ -5,7 +5,6 @@
 package POS.cash_drawer;
 
 import POS.cash_drawer.S1_cash_drawer.to_cash_drawer;
-import POS.main.Main;
 import POS.util.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -406,7 +405,7 @@ public class Dlg_rpt_cashdrawer extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
 
 
         init_key();

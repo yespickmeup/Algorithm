@@ -6,9 +6,11 @@ package POS.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -128,13 +130,15 @@ public class MyConnection {
             String host = System.getProperty("pool_host", "128.199.80.53");
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
-            String user = System.getProperty("pool_user", "root");
-            String password = System.getProperty("pool_password", "password");
-            String db_name = System.getProperty("pool_db", "db_smis");
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://" + host + "/" + db_name;
-
+            String user = System.getProperty("pool_user", "smis");
+            String password = System.getProperty("pool_password", "synapse246");
+            String db_name = System.getProperty("pool_db", "db_algorithm");
+            System.out.println("Connecting to cloud....");
             try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                String url = "jdbc:mysql://" + host + "/" + db_name + "";
+
                 conn2 = DriverManager.getConnection(url, user, password);
                 //DriverManager.getConnection("proxool.pool_connection");
             } catch (SQLException ex) {
@@ -151,7 +155,7 @@ public class MyConnection {
 
     public static void main(String[] args) {
         int connected = check_cloud_connection();
-        System.out.println("Is Connected: " + connected);
+        System.out.println("Connection Status: " + connected);
     }
 
     public static int check_cloud_connection() {
@@ -160,24 +164,31 @@ public class MyConnection {
         String host = System.getProperty("cloud_host", "128.199.80.53");
         String port = System.getProperty("cloud_port", "3306");
         host = host + ":" + port;
-        String user = System.getProperty("cloud_user", "root");
-        String password = System.getProperty("cloud_password", "password");
-        String db_name = System.getProperty("cloud_db", "db_smis");
+        String user = System.getProperty("cloud_user", "smis");
+        String password = System.getProperty("cloud_password", "synapse246");
+        String db_name = System.getProperty("cloud_db", "db_algorithm");
+        System.out.println("Connecting to cloud....");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://" + host + "/" + db_name;
+            String url = "jdbc:mysql://" + host + "/" + db_name + "";
+//            System.out.println("Url: "+url);
+//            System.out.println("User: "+user);
+//            System.out.println("Password: "+password);
             try {
                 Connection conn1 = DriverManager.getConnection(url, user, password);
                 String s0 = "select "
                         + " id"
+                        + ",user_name"
                         + " from users"
                         + " limit 1";
                 Statement stmt = conn1.createStatement();
                 ResultSet rs = stmt.executeQuery(s0);
                 if (rs.next()) {
+//                    System.out.println(rs.getString(2));
                     connected = 1;
                 }
             } catch (SQLException ex) {
+                System.out.println(ex);
                 return 0;
             }
         } catch (ClassNotFoundException ex) {
@@ -239,5 +250,26 @@ public class MyConnection {
                     log(Level.SEVERE, null, ex);
         }
         return conn;
+    }
+
+    public static void exec_cloud_query(List<String> query) {
+        try {
+            Connection cloud = MyConnection.cloud_connect();
+            cloud.setAutoCommit(false);
+            System.out.println("Preparing to execute command...");
+            PreparedStatement stmt = cloud.prepareStatement("");
+            for (String s : query) {
+
+                stmt.addBatch(s);
+
+            }
+            stmt.executeBatch();
+            cloud.commit();
+            System.out.println("Successfully executed!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
     }
 }

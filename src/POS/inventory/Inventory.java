@@ -6,18 +6,14 @@ package POS.inventory;
 
 import POS.branch_locations.Branch_locations;
 import POS.branch_locations.S1_branch_locations;
-import POS.scripts.Main_branch_query_uploads;
-import POS.users.MyUser;
 import POS.util.DateType;
 import POS.util.MyConnection;
-import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
@@ -120,7 +116,7 @@ public class Inventory {
 
     }
 
-    public static void add_inventory(to_inventory to_inventory) {
+    public static List<String> add_inventory(to_inventory to_inventory) {
         try {
             Connection conn = MyConnection.connect();
             List<String> query = new ArrayList();
@@ -160,6 +156,7 @@ public class Inventory {
                     + ",selling_type"
                     + ",location"
                     + ",location_id"
+                    + ",updated_at"
                     + ")values("
                     + ":barcode"
                     + ",:description"
@@ -193,7 +190,8 @@ public class Inventory {
                     + ",:model_id"
                     + ",:selling_type"
                     + ",:location"
-                    + ",location_id"
+                    + ",:location_id"
+                    + ",:updated_at"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -230,6 +228,7 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setString("updated_at", to_inventory.date_added).
                     ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
@@ -275,6 +274,7 @@ public class Inventory {
                         + ",location"
                         + ",location_id"
                         + ",serial_no"
+                        + ",updated_at"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -312,6 +312,7 @@ public class Inventory {
                         + ",:location"
                         + ",:location_id"
                         + ",:serial_no"
+                        + ",:updated_at"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2).
@@ -351,23 +352,14 @@ public class Inventory {
                         setString("location", to.location).
                         setString("location_id", "" + to.id).
                         setString("serial_no", to_inventory_barcodes.serial_no).
+                        setString("updated_at", to_inventory_barcodes.date_added).
                         ok();
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
                 query.add(s2);
                 Lg.s(Inventory.class, "Successfully Added" + " Barcode:" + to_inventory_barcodes.main_barcode + " = " + to.location);
             }
-
-            Gson gson = new Gson();
-            String is_server = System.getProperty("is_server", "false");
-            String location = System.getProperty("location", "main_branch");
-            String json = gson.toJson(query);
-
-            if (location.equalsIgnoreCase("main_branch")) {
-                Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-                System.out.println("Item Added...");
-            }
-
+            return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -619,14 +611,14 @@ public class Inventory {
         }
     }
 
-    public static void edit_inventory(to_inventory to_inventory, to_inventory old_inventory, String where) {
+    public static List<String> edit_inventory(to_inventory to_inventory, to_inventory old_inventory, String where) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             List<String> query = new ArrayList();
-            Gson gson = new Gson();
 
             String s0 = "update inventory set "
-                    + "description= :description"
+                    + " description= :description"
                     + ",generic_name= :generic_name"
                     + ",category= :category"
                     + ",category_id= :category_id"
@@ -634,7 +626,6 @@ public class Inventory {
                     + ",classification_id= :classification_id"
                     + ",sub_classification= :sub_classification"
                     + ",sub_classification_id= :sub_classification_id"
-                    + ",product_qty= :product_qty"
                     + ",unit= :unit"
                     + ",conversion= :conversion"
                     + ",selling_price= :selling_price"
@@ -672,7 +663,6 @@ public class Inventory {
                     setString("classification_id", to_inventory.classification_id).
                     setString("sub_classification", to_inventory.sub_classification).
                     setString("sub_classification_id", to_inventory.sub_classification_id).
-                    setNumber("product_qty", to_inventory.product_qty).
                     setString("unit", to_inventory.unit).
                     setNumber("conversion", to_inventory.conversion).
                     setNumber("selling_price", to_inventory.selling_price).
@@ -697,11 +687,77 @@ public class Inventory {
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
                     ok();
+            String s01 = "update inventory set "
+                    + " description= :description"
+                    + ",generic_name= :generic_name"
+                    + ",category= :category"
+                    + ",category_id= :category_id"
+                    + ",classification= :classification"
+                    + ",classification_id= :classification_id"
+                    + ",sub_classification= :sub_classification"
+                    + ",sub_classification_id= :sub_classification_id"
+                    + ",unit= :unit"
+                    + ",conversion= :conversion"
+                    + ",date_added= :date_added"
+                    + ",user_name= :user_name"
+                    + ",item_type= :item_type"
+                    + ",status= :status"
+                    + ",supplier= :supplier"
+                    + ",fixed_price= :fixed_price"
+                    + ",supplier_id= :supplier_id"
+                    + ",multi_level_pricing= :multi_level_pricing"
+                    + ",vatable= :vatable"
+                    + ",reorder_level= :reorder_level"
+                    + ",markup= :markup"
+                    + ",barcodes= :barcodes"
+                    + ",brand= :brand"
+                    + ",brand_id= :brand_id"
+                    + ",model= :model"
+                    + ",model_id= :model_id"
+                    + ",selling_type= :selling_type"
+                    + ",location=:location"
+                    + ",location_id=:location_id"
+                    + " where "
+                    + " barcode ='" + to_inventory.barcode + "' "
+                    + " ";
 
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            s01 = SqlStringUtil.parse(s01).
+                    setString("barcode", to_inventory.barcode).
+                    setString("description", to_inventory.description).
+                    setString("generic_name", to_inventory.generic_name).
+                    setString("category", to_inventory.category).
+                    setString("category_id", to_inventory.category_id).
+                    setString("classification", to_inventory.classification).
+                    setString("classification_id", to_inventory.classification_id).
+                    setString("sub_classification", to_inventory.sub_classification).
+                    setString("sub_classification_id", to_inventory.sub_classification_id).
+                    setString("unit", to_inventory.unit).
+                    setNumber("conversion", to_inventory.conversion).
+                    setString("date_added", to_inventory.date_added).
+                    setString("user_name", to_inventory.user_name).
+                    setString("item_type", to_inventory.item_type).
+                    setNumber("status", to_inventory.status).
+                    setString("supplier", to_inventory.supplier).
+                    setNumber("fixed_price", to_inventory.fixed_price).
+                    setString("supplier_id", to_inventory.supplier_id).
+                    setNumber("multi_level_pricing", to_inventory.multi_level_pricing).
+                    setNumber("vatable", to_inventory.vatable).
+                    setNumber("reorder_level", to_inventory.reorder_level).
+                    setNumber("markup", to_inventory.markup).
+                    setString("barcodes", to_inventory.barcodes).
+                    setString("brand", to_inventory.brand).
+                    setString("brand_id", to_inventory.brand_id).
+                    setString("model", to_inventory.model).
+                    setString("model_id", to_inventory.model_id).
+                    setNumber("selling_type", to_inventory.selling_type).
+                    setString("location", to_inventory.location).
+                    setString("location_id", to_inventory.location_id).
+                    ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
             Lg.s(Inventory.class, "Successfully Updated");
-            query.add(s0);
+            query.add(s01);
 
             Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
 
@@ -756,19 +812,62 @@ public class Inventory {
                     setString("barcode", to_inventory_barcodes.barcode).
                     ok();
 
-            PreparedStatement stmt2 = conn.prepareStatement(s2);
-            stmt2.execute();
+            String s21 = "update inventory_barcodes set "
+                    + " description= :description"
+                    + ",generic_name= :generic_name"
+                    + ",category= :category"
+                    + ",category_id= :category_id"
+                    + ",classification= :classification"
+                    + ",classification_id= :classification_id"
+                    + ",sub_classification= :sub_classification"
+                    + ",sub_classification_id= :sub_classification_id"
+                    + ",unit= :unit"
+                    + ",conversion= :conversion"
+                    + ",supplier= :supplier"
+                    + ",vatable= :vatable"
+                    + ",reorder_level= :reorder_level"
+                    + ",markup= :markup"
+                    + ",brand= :brand"
+                    + ",brand_id= :brand_id"
+                    + ",model= :model"
+                    + ",model_id= :model_id"
+                    + ",selling_type= :selling_type"
+                    + ",item_type= :item_type"
+                    + ",barcode= :barcode"
+                    + " " + where;
+            s21 = SqlStringUtil.parse(s21).
+                    setString("description", to_inventory_barcodes.description).
+                    setString("generic_name", to_inventory_barcodes.generic_name).
+                    setString("category", to_inventory_barcodes.category).
+                    setString("category_id", to_inventory_barcodes.category_id).
+                    setString("classification", to_inventory_barcodes.classification).
+                    setString("classification_id", to_inventory_barcodes.classification_id).
+                    setString("sub_classification", to_inventory_barcodes.sub_classification).
+                    setString("sub_classification_id", to_inventory_barcodes.sub_classification_id).
+                    setString("unit", to_inventory_barcodes.unit).
+                    setNumber("conversion", to_inventory_barcodes.conversion).
+                    setString("supplier", to_inventory_barcodes.supplier).
+                    setNumber("vatable", to_inventory_barcodes.vatable).
+                    setNumber("reorder_level", to_inventory_barcodes.reorder_level).
+                    setNumber("markup", to_inventory_barcodes.markup).
+                    setString("brand", to_inventory_barcodes.brand).
+                    setString("brand_id", to_inventory_barcodes.brand_id).
+                    setString("model", to_inventory_barcodes.model).
+                    setString("model_id", to_inventory_barcodes.model_id).
+                    setNumber("selling_type", to_inventory_barcodes.selling_type).
+                    setString("item_type", to_inventory_barcodes.item_type).
+                    setString("barcode", to_inventory_barcodes.barcode).
+                    ok();
+
+            stmt.addBatch(s2);
+            stmt.executeBatch();
+
+            conn.commit();
+
             Lg.s(Inventory_barcodes.class, "Successfully Updated");
-            query.add(s2);
+            query.add(s21);
 
-            String is_server = System.getProperty("is_server", "false");
-            String location = System.getProperty("location", "main_branch");
-            String json = gson.toJson(query);
-
-            if (location.equalsIgnoreCase("main_branch")) {
-                Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
-                System.out.println("Item Added...");
-            }
+            return query;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -923,24 +1022,29 @@ public class Inventory {
         }
     }
 
-    public static void delete_inventory(to_inventory to_inventory) {
+    public static List<String> delete_inventory(to_inventory to_inventory) {
         try {
+            List<String> query = new ArrayList();
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "delete from inventory where "
-                    + " id ='" + to_inventory.id + "' "
+                    + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
 
             PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
-            Lg.s(Inventory.class, "Successfully Deleted");
-
+            stmt.addBatch(s0);
+            query.add(s0);
             String s2 = "delete from inventory_barcodes where "
                     + " main_barcode ='" + to_inventory.barcode + "' "
                     + " ";
 
-            PreparedStatement stmt2 = conn.prepareStatement(s2);
-            stmt2.execute();
+            stmt.addBatch(s2);
+            query.add(s2);
+            stmt.executeBatch();
+            conn.commit();
+
             Lg.s(Inventory_barcodes.class, "Successfully Deleted");
+            return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -1540,7 +1644,6 @@ public class Inventory {
 //                } else {
 //                    location1 = "";
 //                }
-
                 to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, branch, location, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
                 datas.add(to);
             }

@@ -6,7 +6,6 @@ package POS.branches;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branches.Branches.to_branches;
-import POS.main.Main;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
@@ -467,7 +466,7 @@ public class Dlg_branches extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

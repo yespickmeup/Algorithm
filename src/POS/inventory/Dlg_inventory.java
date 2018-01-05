@@ -16,7 +16,10 @@ import POS.receipts.S1_receipt_items;
 import POS.selling_type.S1_selling_type;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
+import POS.util.Dlg_confirm_cloud;
 import POS.util.Dlg_confirm_delete;
+import POS.util.MyConnection;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -1783,6 +1786,11 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //         System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("inventory_item_delete", "true");
+//        System.setProperty("cloud_inventory_insert", "true");
+//        System.setProperty("cloud_inventory_update", "true");
+//        System.setProperty("cloud_inventory_delete", "true");
+
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -2141,13 +2149,72 @@ public class Dlg_inventory extends javax.swing.JDialog {
             unit = uom.convert_to_string2(units.getId(), to2);
         }
 
-        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+        final to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
 
-        Inventory.add_inventory(to);
-        clear_inventory();
-        init_item_code();
-        Alert.set(1, "");
-        tf_item_code.grabFocus();
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                List<String> query = Inventory.add_inventory(to);
+
+                String cloud_inventory_insert = System.getProperty("cloud_inventory_insert", "true");
+                if (cloud_inventory_insert.equalsIgnoreCase("true")) {
+                    Alert.set(1, "");
+                    clear_inventory();
+                    init_item_code();
+                    tf_item_code.grabFocus();
+                    cloud_insert(query, "Upload new record to cloud?");
+
+                } else {
+                    Alert.set(1, "");
+                    clear_inventory();
+                    init_item_code();
+                    tf_item_code.grabFocus();
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void cloud_insert(final List<String> query, String stmt) {
+        Window p = (Window) this;
+        Dlg_confirm_cloud nd = Dlg_confirm_cloud.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(stmt);
+        nd.setCallback(new Dlg_confirm_cloud.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_cloud.OutputData data) {
+                closeDialog.ok();
+                MyConnection.exec_cloud_query(query);
+                Alert.set(0, "Successfully saved to clound!");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void cloud_delete(final List<String> query, String stmt) {
+        Window p = (Window) this;
+        Dlg_confirm_cloud nd = Dlg_confirm_cloud.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(stmt);
+        nd.setCallback(new Dlg_confirm_cloud.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_cloud.OutputData data) {
+                closeDialog.ok();
+                MyConnection.exec_cloud_query(query);
+                Alert.set(0, "Successfully deleted from clound!");
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private List<String> add_inventory_console() {
@@ -2424,17 +2491,26 @@ public class Dlg_inventory extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
                 Inventory.to_inventory to1 = inventory_list.get(selected_row);
-                Inventory.delete_inventory(to1);
-                clear_inventory();
-                init_item_code();
-                Alert.set(3, "");
-                tbl_inventory_barcodes_ALM.clear();
-                tbl_inventory_barcodes_M.fireTableDataChanged();
-//        data_cols_inventory_barcodes();
-//        data_cols_multi_level_pricing();
-//        data_cols_assembly();
-//        data_cols();
-                tf_item_code.grabFocus();
+                List<String> query = Inventory.delete_inventory(to1);
+
+                String cloud_inventory_delete = System.getProperty("cloud_inventory_delete", "true");
+                if (cloud_inventory_delete.equalsIgnoreCase("true")) {
+                    clear_inventory();
+                    init_item_code();
+                    Alert.set(3, "");
+                    tbl_inventory_barcodes_ALM.clear();
+                    tbl_inventory_barcodes_M.fireTableDataChanged();
+                    tf_item_code.grabFocus();
+                    cloud_delete(query, "Delete entry to cloud?");
+                } else {
+                    clear_inventory();
+                    init_item_code();
+                    Alert.set(3, "");
+                    tbl_inventory_barcodes_ALM.clear();
+                    tbl_inventory_barcodes_M.fireTableDataChanged();
+                    tf_item_code.grabFocus();
+                }
+
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3720,4 +3796,5 @@ public class Dlg_inventory extends javax.swing.JDialog {
         nd.setLocation(point.x + 35, point.y);
         nd.setVisible(true);
     }
+
 }

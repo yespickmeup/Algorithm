@@ -4,18 +4,13 @@
  */
 package POS.bir_session;
 
-import POS.main.Main;
 import POS.reports.Srpt_sales_by_item;
-import POS.reports.Srpt_sales_items;
-import POS.sales.Sales;
 import POS.util.DateType;
-import POS.util.Users;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -362,7 +357,7 @@ public class Dlg_x_reading extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_key();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());

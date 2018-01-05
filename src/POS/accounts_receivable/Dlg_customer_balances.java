@@ -6,7 +6,6 @@ package POS.accounts_receivable;
 
 import POS.customers.Customers;
 import POS.customers.Customers.to_customers;
-import POS.main.Main;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
@@ -319,7 +318,7 @@ public class Dlg_customer_balances extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_tbl_customers();
         data_cols();
 

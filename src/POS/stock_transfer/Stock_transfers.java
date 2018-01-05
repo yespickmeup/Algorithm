@@ -570,11 +570,11 @@ public class Stock_transfers {
         }
     }
 
-    public static void finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas) {
+    public static List<String> finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-//            List<String> query = new ArrayList();
+            List<String> query = new ArrayList();
 //            Gson gson = new Gson();
             System.out.println("Adding record....");
 
@@ -603,66 +603,66 @@ public class Stock_transfers {
 
             stmt.addBatch(s2);
 
-            //<editor-fold defaultstate="collapsed" desc=" query to insert ">
-//            String query1 = "insert into stock_transfers("
-//                    + "transaction_no"
-//                    + ",user_name"
-//                    + ",date_added"
-//                    + ",remarks"
-//                    + ",to_branch"
-//                    + ",to_branch_id"
-//                    + ",to_location"
-//                    + ",to_location_id"
-//                    + ",from_branch"
-//                    + ",from_branch_id"
-//                    + ",from_location"
-//                    + ",from_location_id"
-//                    + ",status"
-//                    + ",at_branch"
-//                    + ",at_branch_id"
-//                    + ",at_location"
-//                    + ",at_location_id"
-//                    + ")values("
-//                    + ":transaction_no"
-//                    + ",:user_name"
-//                    + ",:date_added"
-//                    + ",:remarks"
-//                    + ",:to_branch"
-//                    + ",:to_branch_id"
-//                    + ",:to_location"
-//                    + ",:to_location_id"
-//                    + ",:from_branch"
-//                    + ",:from_branch_id"
-//                    + ",:from_location"
-//                    + ",:from_location_id"
-//                    + ",:status"
-//                    + ",:at_branch"
-//                    + ",:at_branch_id"
-//                    + ",:at_location"
-//                    + ",:at_location_id"
-//                    + ")";
-//
-//            query1 = SqlStringUtil.parse(query1)
-//                    .setString("transaction_no", to_stock_transfers.transaction_no)
-//                    .setString("user_name", to_stock_transfers.user_name)
-//                    .setString("date_added", to_stock_transfers.date_added)
-//                    .setString("remarks", to_stock_transfers.remarks)
-//                    .setString("to_branch", to_stock_transfers.to_branch)
-//                    .setString("to_branch_id", to_stock_transfers.to_branch_id)
-//                    .setString("to_location", to_stock_transfers.to_location)
-//                    .setString("to_location_id", to_stock_transfers.to_location_id)
-//                    .setString("from_branch", to_stock_transfers.from_branch)
-//                    .setString("from_branch_id", to_stock_transfers.from_branch_id)
-//                    .setString("from_location", to_stock_transfers.from_location)
-//                    .setString("from_location_id", to_stock_transfers.from_location_id)
-//                    .setNumber("status", to_stock_transfers.status)
-//                    .setString("at_branch", to_stock_transfers.at_branch)
-//                    .setString("at_branch_id", to_stock_transfers.at_branch_id)
-//                    .setString("at_location", to_stock_transfers.at_location)
-//                    .setString("at_location_id", to_stock_transfers.at_location_id)
-//                    .ok();
-//            query.add(query1);
-            //</editor-fold>
+//            <editor-fold defaultstate="collapsed" desc=" query to insert ">
+            String query1 = "insert into stock_transfers("
+                    + "transaction_no"
+                    + ",user_name"
+                    + ",date_added"
+                    + ",remarks"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",to_location"
+                    + ",to_location_id"
+                    + ",from_branch"
+                    + ",from_branch_id"
+                    + ",from_location"
+                    + ",from_location_id"
+                    + ",status"
+                    + ",at_branch"
+                    + ",at_branch_id"
+                    + ",at_location"
+                    + ",at_location_id"
+                    + ")values("
+                    + ":transaction_no"
+                    + ",:user_name"
+                    + ",:date_added"
+                    + ",:remarks"
+                    + ",:to_branch"
+                    + ",:to_branch_id"
+                    + ",:to_location"
+                    + ",:to_location_id"
+                    + ",:from_branch"
+                    + ",:from_branch_id"
+                    + ",:from_location"
+                    + ",:from_location_id"
+                    + ",:status"
+                    + ",:at_branch"
+                    + ",:at_branch_id"
+                    + ",:at_location"
+                    + ",:at_location_id"
+                    + ")";
+
+            query1 = SqlStringUtil.parse(query1)
+                    .setString("transaction_no", to_stock_transfers.transaction_no)
+                    .setString("user_name", to_stock_transfers.user_name)
+                    .setString("date_added", to_stock_transfers.date_added)
+                    .setString("remarks", to_stock_transfers.remarks)
+                    .setString("to_branch", to_stock_transfers.to_branch)
+                    .setString("to_branch_id", to_stock_transfers.to_branch_id)
+                    .setString("to_location", to_stock_transfers.to_location)
+                    .setString("to_location_id", to_stock_transfers.to_location_id)
+                    .setString("from_branch", to_stock_transfers.from_branch)
+                    .setString("from_branch_id", to_stock_transfers.from_branch_id)
+                    .setString("from_location", to_stock_transfers.from_location)
+                    .setString("from_location_id", to_stock_transfers.from_location_id)
+                    .setNumber("status", to_stock_transfers.status)
+                    .setString("at_branch", to_stock_transfers.at_branch)
+                    .setString("at_branch_id", to_stock_transfers.at_branch_id)
+                    .setString("at_location", to_stock_transfers.at_location)
+                    .setString("at_location_id", to_stock_transfers.at_location_id)
+                    .ok();
+            query.add(query1);
+//            </editor-fold>
             for (Stock_transfers_items.to_stock_transfers_items to : datas) {
 //                Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to.barcode, to.barcodes, to_stock_transfers.to_location_id);
                 String s11 = "select "
@@ -729,148 +729,148 @@ public class Stock_transfers {
                 stmt.addBatch(s41);
 
                 //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">
-//                String query2 = "insert into stock_transfers_items("
-//                        + "barcode"
-//                        + ",description"
-//                        + ",generic_name"
-//                        + ",category"
-//                        + ",category_id"
-//                        + ",classification"
-//                        + ",classification_id"
-//                        + ",sub_classification"
-//                        + ",sub_classification_id"
-//                        + ",product_qty"
-//                        + ",unit"
-//                        + ",conversion"
-//                        + ",selling_price"
-//                        + ",date_added"
-//                        + ",user_name"
-//                        + ",item_type"
-//                        + ",status"
-//                        + ",supplier"
-//                        + ",fixed_price"
-//                        + ",cost"
-//                        + ",supplier_id"
-//                        + ",multi_level_pricing"
-//                        + ",vatable"
-//                        + ",reorder_level"
-//                        + ",markup"
-//                        + ",barcodes"
-//                        + ",brand"
-//                        + ",brand_id"
-//                        + ",model"
-//                        + ",model_id"
-//                        + ",selling_type"
-//                        + ",branch"
-//                        + ",branch_code"
-//                        + ",location"
-//                        + ",location_id"
-//                        + ",stock_transfer_id"
-//                        + ",serial_no"
-//                        + ",to_branch"
-//                        + ",to_branch_id"
-//                        + ",to_location"
-//                        + ",to_location_id"
-//                        + ",at_branch"
-//                        + ",at_branch_id"
-//                        + ",at_location"
-//                        + ",at_location_id"
-//                        + ")values("
-//                        + ":barcode"
-//                        + ",:description"
-//                        + ",:generic_name"
-//                        + ",:category"
-//                        + ",:category_id"
-//                        + ",:classification"
-//                        + ",:classification_id"
-//                        + ",:sub_classification"
-//                        + ",:sub_classification_id"
-//                        + ",:product_qty"
-//                        + ",:unit"
-//                        + ",:conversion"
-//                        + ",:selling_price"
-//                        + ",:date_added"
-//                        + ",:user_name"
-//                        + ",:item_type"
-//                        + ",:status"
-//                        + ",:supplier"
-//                        + ",:fixed_price"
-//                        + ",:cost"
-//                        + ",:supplier_id"
-//                        + ",:multi_level_pricing"
-//                        + ",:vatable"
-//                        + ",:reorder_level"
-//                        + ",:markup"
-//                        + ",:barcodes"
-//                        + ",:brand"
-//                        + ",:brand_id"
-//                        + ",:model"
-//                        + ",:model_id"
-//                        + ",:selling_type"
-//                        + ",:branch"
-//                        + ",:branch_code"
-//                        + ",:location"
-//                        + ",:location_id"
-//                        + ",:stock_transfer_id"
-//                        + ",:serial_no"
-//                        + ",:to_branch"
-//                        + ",:to_branch_id"
-//                        + ",:to_location"
-//                        + ",:to_location_id"
-//                        + ",:at_branch"
-//                        + ",:at_branch_id"
-//                        + ",:at_location"
-//                        + ",:at_location_id"
-//                        + ")";
-//
-//                query2 = SqlStringUtil.parse(query2)
-//                        .setString("barcode", to.barcode)
-//                        .setString("description", to.description)
-//                        .setString("generic_name", to.generic_name)
-//                        .setString("category", to.category)
-//                        .setString("category_id", to.category_id)
-//                        .setString("classification", to.classification)
-//                        .setString("classification_id", to.classification_id)
-//                        .setString("sub_classification", to.sub_classification)
-//                        .setString("sub_classification_id", to.sub_classification_id)
-//                        .setNumber("product_qty", to.product_qty)
-//                        .setString("unit", to.unit)
-//                        .setNumber("conversion", to.conversion)
-//                        .setNumber("selling_price", to.selling_price)
-//                        .setString("date_added", to.date_added)
-//                        .setString("user_name", to.user_name)
-//                        .setString("item_type", to.item_type)
-//                        .setNumber("status", 0)
-//                        .setString("supplier", to.supplier)
-//                        .setNumber("fixed_price", to.fixed_price)
-//                        .setNumber("cost", to.cost)
-//                        .setString("supplier_id", to.supplier_id)
-//                        .setNumber("multi_level_pricing", to.multi_level_pricing)
-//                        .setNumber("vatable", to.vatable)
-//                        .setNumber("reorder_level", to.reorder_level)
-//                        .setNumber("markup", to.markup)
-//                        .setString("barcodes", to.barcodes)
-//                        .setString("brand", to.brand)
-//                        .setString("brand_id", to.brand_id)
-//                        .setString("model", to.model)
-//                        .setString("model_id", to.model_id)
-//                        .setNumber("selling_type", to.selling_type)
-//                        .setString("branch", to.branch)
-//                        .setString("branch_code", to.branch_code)
-//                        .setString("location", to.location)
-//                        .setString("location_id", to.location_id)
-//                        .setString("stock_transfer_id", to_stock_transfers.transaction_no)
-//                        .setString("serial_no", to.serial_no)
-//                        .setString("to_branch", to_stock_transfers.to_branch)
-//                        .setString("to_branch_id", to_stock_transfers.to_branch_id)
-//                        .setString("to_location", to_stock_transfers.to_location)
-//                        .setString("to_location_id", to_stock_transfers.to_location_id)
-//                        .setString("at_branch", to.at_branch)
-//                        .setString("at_branch_id", to.at_branch_id)
-//                        .setString("at_location", to.at_location)
-//                        .setString("at_location_id", to.at_location_id)
-//                        .ok();
-//                query.add(query2);
+                String query2 = "insert into stock_transfers_items("
+                        + "barcode"
+                        + ",description"
+                        + ",generic_name"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",selling_price"
+                        + ",date_added"
+                        + ",user_name"
+                        + ",item_type"
+                        + ",status"
+                        + ",supplier"
+                        + ",fixed_price"
+                        + ",cost"
+                        + ",supplier_id"
+                        + ",multi_level_pricing"
+                        + ",vatable"
+                        + ",reorder_level"
+                        + ",markup"
+                        + ",barcodes"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",selling_type"
+                        + ",branch"
+                        + ",branch_code"
+                        + ",location"
+                        + ",location_id"
+                        + ",stock_transfer_id"
+                        + ",serial_no"
+                        + ",to_branch"
+                        + ",to_branch_id"
+                        + ",to_location"
+                        + ",to_location_id"
+                        + ",at_branch"
+                        + ",at_branch_id"
+                        + ",at_location"
+                        + ",at_location_id"
+                        + ")values("
+                        + ":barcode"
+                        + ",:description"
+                        + ",:generic_name"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_classification"
+                        + ",:sub_classification_id"
+                        + ",:product_qty"
+                        + ",:unit"
+                        + ",:conversion"
+                        + ",:selling_price"
+                        + ",:date_added"
+                        + ",:user_name"
+                        + ",:item_type"
+                        + ",:status"
+                        + ",:supplier"
+                        + ",:fixed_price"
+                        + ",:cost"
+                        + ",:supplier_id"
+                        + ",:multi_level_pricing"
+                        + ",:vatable"
+                        + ",:reorder_level"
+                        + ",:markup"
+                        + ",:barcodes"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:selling_type"
+                        + ",:branch"
+                        + ",:branch_code"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:stock_transfer_id"
+                        + ",:serial_no"
+                        + ",:to_branch"
+                        + ",:to_branch_id"
+                        + ",:to_location"
+                        + ",:to_location_id"
+                        + ",:at_branch"
+                        + ",:at_branch_id"
+                        + ",:at_location"
+                        + ",:at_location_id"
+                        + ")";
+
+                query2 = SqlStringUtil.parse(query2)
+                        .setString("barcode", to.barcode)
+                        .setString("description", to.description)
+                        .setString("generic_name", to.generic_name)
+                        .setString("category", to.category)
+                        .setString("category_id", to.category_id)
+                        .setString("classification", to.classification)
+                        .setString("classification_id", to.classification_id)
+                        .setString("sub_classification", to.sub_classification)
+                        .setString("sub_classification_id", to.sub_classification_id)
+                        .setNumber("product_qty", to.product_qty)
+                        .setString("unit", to.unit)
+                        .setNumber("conversion", to.conversion)
+                        .setNumber("selling_price", to.selling_price)
+                        .setString("date_added", to.date_added)
+                        .setString("user_name", to.user_name)
+                        .setString("item_type", to.item_type)
+                        .setNumber("status", 0)
+                        .setString("supplier", to.supplier)
+                        .setNumber("fixed_price", to.fixed_price)
+                        .setNumber("cost", to.cost)
+                        .setString("supplier_id", to.supplier_id)
+                        .setNumber("multi_level_pricing", to.multi_level_pricing)
+                        .setNumber("vatable", to.vatable)
+                        .setNumber("reorder_level", to.reorder_level)
+                        .setNumber("markup", to.markup)
+                        .setString("barcodes", to.barcodes)
+                        .setString("brand", to.brand)
+                        .setString("brand_id", to.brand_id)
+                        .setString("model", to.model)
+                        .setString("model_id", to.model_id)
+                        .setNumber("selling_type", to.selling_type)
+                        .setString("branch", to.branch)
+                        .setString("branch_code", to.branch_code)
+                        .setString("location", to.location)
+                        .setString("location_id", to.location_id)
+                        .setString("stock_transfer_id", to_stock_transfers.transaction_no)
+                        .setString("serial_no", to.serial_no)
+                        .setString("to_branch", to_stock_transfers.to_branch)
+                        .setString("to_branch_id", to_stock_transfers.to_branch_id)
+                        .setString("to_location", to_stock_transfers.to_location)
+                        .setString("to_location_id", to_stock_transfers.to_location_id)
+                        .setString("at_branch", to.at_branch)
+                        .setString("at_branch_id", to.at_branch_id)
+                        .setString("at_location", to.at_location)
+                        .setString("at_location_id", to.at_location_id)
+                        .ok();
+                query.add(query2);
                 //</editor-fold>
             }
 
@@ -889,10 +889,13 @@ public class Stock_transfers {
 //                }
 //
 //            }
+
             stmt.executeBatch();
             conn.commit();
 
             Lg.s(Stock_transfers.class, "Successfully Updated");
+            
+            return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

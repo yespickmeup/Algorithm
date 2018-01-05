@@ -5,7 +5,6 @@
 package POS.check_holders;
 
 import POS.check_holders.S1_check_holders.to_check_holders;
-import POS.main.Main;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
@@ -481,7 +480,7 @@ public class Dlg_check_holders extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

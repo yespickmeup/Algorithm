@@ -8,7 +8,6 @@ import POS.banks.Banks;
 import POS.check_holders.S1_check_holders;
 import POS.discount_customers.S1_discount_customers;
 import POS.discounts.S1_discounts;
-import POS.main.Main;
 import POS.util.Alert;
 import POS.util.Focus_Fire;
 import java.awt.event.*;
@@ -780,7 +779,7 @@ public class Dlg_ar_payment extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_key();
         focus();
         init();

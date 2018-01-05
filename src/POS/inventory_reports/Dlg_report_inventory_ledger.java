@@ -1051,7 +1051,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         set_default_branch();
         init_tbl_ledger();

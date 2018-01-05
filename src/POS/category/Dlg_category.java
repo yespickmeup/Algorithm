@@ -7,7 +7,6 @@ package POS.category;
 import POS.category.S1_inv_categories.to_inv_categories;
 import POS.category.S1_inv_classifications.to_inv_classifications;
 import POS.category.S1_inv_sub_classifications.to_inv_sub_classifications;
-import POS.main.Main;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
@@ -904,7 +903,7 @@ public class Dlg_category extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

@@ -5,7 +5,6 @@
 package POS.banks;
 
 import POS.banks.Banks.to_banks;
-import POS.main.Main;
 import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -435,7 +434,7 @@ public class Dlg_banks extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();
