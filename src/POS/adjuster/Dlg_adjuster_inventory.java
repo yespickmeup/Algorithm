@@ -14,6 +14,7 @@ import POS.category.S1_inventory_classification;
 import POS.category.S1_inventory_model;
 import POS.category.S1_inventory_sub_classification;
 import POS.inventory.Inventory_barcodes;
+import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
@@ -1212,7 +1213,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        adjust_all_errors();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -1301,8 +1302,8 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_host", "192.168.1.51");
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_host", "192.168.1.51");
+        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         init_tbl_inventory_barcodes(tbl_inventory_barcodes);
@@ -2224,6 +2225,8 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Errors ">
+    List<Srpt_adjust_errors.field> errors = new ArrayList();
+
     private void ret_errors() {
         jProgressBar4.setString("Loading...Please wait...");
         jProgressBar4.setIndeterminate(true);
@@ -2234,6 +2237,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
             @Override
             public void run() {
+                errors.clear();
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String address = System.getProperty("address", "Daro, Dumaguete City");
                 String date = DateType.month_date.format(new Date());
@@ -2241,6 +2245,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
                 String where = " where location_id='" + lo.getId() + "'  order by description asc  ";
                 List<Srpt_adjust_errors.field> fields = Srpt_adjust_errors.ret_data(where);
+                errors = fields;
                 System.out.println("size: " + fields.size());
                 Srpt_adjust_errors rpt = new Srpt_adjust_errors(business_name, address, date);
                 rpt.fields.addAll(fields);
@@ -2294,6 +2299,40 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         } catch (JRException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void adjust_all_errors() {
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                jProgressBar4.setString("Loading...Please wait...");
+                jProgressBar4.setIndeterminate(true);
+                jButton5.setEnabled(false);
+                jButton4.setEnabled(false);
+                Thread t = new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Srpt_adjust_errors.adjust_erros(errors);
+                        Alert.set(2, "");
+                        jButton5.setEnabled(true);
+                        jButton4.setEnabled(true);
+                        jProgressBar4.setString("Finished...");
+                        jProgressBar4.setIndeterminate(false);
+                    }
+                });
+                t.start();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
     //</editor-fold>
 

@@ -11,6 +11,7 @@ import POS.util.DateType;
 import POS.util.MyConnection;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.JasperUtil;
+import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.SqlStringUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
@@ -275,12 +278,12 @@ public class Srpt_adjust_errors {
                 System.out.println("Item Code: " + item_code);
                 System.out.println("Description: " + description);
                 System.out.println("Searching Ledger......");
-              
+
                 qty_ledger = rpt.running_balance;
                 if (qty_ledger != qty_stock_take) {
                     field f = new field(item_code, description, cost, price, branch_id, location_id, qty_stock_take, qty_ledger);
                     datas.add(f);
-                    System.out.println("    Item qty does not match the ledger... adding record: Stock take: "+qty_stock_take+ " : Ledger: "+qty_ledger);
+                    System.out.println("    Item qty does not match the ledger... adding record: Stock take: " + qty_stock_take + " : Ledger: " + qty_ledger);
                 }
                 System.out.println("-----------------------------");
             }
@@ -292,4 +295,32 @@ public class Srpt_adjust_errors {
         }
     }
 
+    public static void adjust_erros(List<Srpt_adjust_errors.field> fields) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            for (Srpt_adjust_errors.field field : fields) {
+                String s0 = "update inventory_barcodes set "
+                        + " product_qty= :product_qty "
+                        + " where main_barcode='" + field.item_code + "' "
+                        + " and location_id = '" + field.location_id + "'"
+                        + " ";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setNumber("product_qty", field.qty_ledger)
+                        .ok();
+                stmt.addBatch(s0);
+            }
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Adjuster.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }
