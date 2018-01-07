@@ -1341,7 +1341,8 @@ public class Dlg_finalize_encoding extends javax.swing.JDialog {
         double selling_price = FitIn.toDouble(tf_selling_price.getText());
         String user_id = to.user_id;
         String user_screen_name = to.user_screen_name;
-        to_encoding_inventory to1 = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, to.status, to.counted_by, to.checked_by, cost, selling_price, user_id, user_screen_name);
+        String remarks="";
+        to_encoding_inventory to1 = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, to.status, to.counted_by, to.checked_by, cost, selling_price, user_id, user_screen_name,remarks);
         Encoding_inventory.edit_encoding_inventory(to1);
         data_cols();
         clear_encoding_inventory();

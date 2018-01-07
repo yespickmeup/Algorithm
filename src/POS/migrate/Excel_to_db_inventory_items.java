@@ -6,14 +6,10 @@
 package POS.migrate;
 
 import POS.encoding_inventory.Encoding_inventory;
-import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory;
-import POS.inventory.uom;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
-import POS.util.Users;
-import java.awt.FileDialog;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,8 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import mijzcx.synapse.desk.utils.FitIn;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
@@ -187,7 +181,8 @@ public class Excel_to_db_inventory_items {
 
             String user_id = MyUser.getUser_id();
             String user_screen_name = MyUser.getUser_screen_name();
-            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+            String remarks="";
+            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
             Encoding_inventory.add_encoding_inventory(en);
 
         }

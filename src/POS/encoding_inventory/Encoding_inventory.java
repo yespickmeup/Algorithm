@@ -44,8 +44,8 @@ public class Encoding_inventory {
         public final double selling_price;
         public final String user_id;
         public final String user_screen_name;
-
-        public to_encoding_inventory(int id, String item_code, String barcode, String description, String branch, String branch_id, String location, String location_id, double qty, String date_added, String user_name, String screen_name, String sheet_no, int status, String counted_by, String checked_by, double cost, double selling_price, String user_id, String user_screen_name) {
+        public final String remarks;
+        public to_encoding_inventory(int id, String item_code, String barcode, String description, String branch, String branch_id, String location, String location_id, double qty, String date_added, String user_name, String screen_name, String sheet_no, int status, String counted_by, String checked_by, double cost, double selling_price, String user_id, String user_screen_name,String remarks) {
             this.id = id;
             this.item_code = item_code;
             this.barcode = barcode;
@@ -66,6 +66,7 @@ public class Encoding_inventory {
             this.selling_price = selling_price;
             this.user_id = user_id;
             this.user_screen_name = user_screen_name;
+            this.remarks=remarks;
         }
 
     }
@@ -93,6 +94,7 @@ public class Encoding_inventory {
                     + ",selling_price"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",remarks"
                     + ")values("
                     + ":item_code"
                     + ",:barcode"
@@ -113,6 +115,7 @@ public class Encoding_inventory {
                     + ",:selling_price"
                     + ",:user_id"
                     + ",:user_screen_name"
+                    + ",:remarks"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -135,6 +138,7 @@ public class Encoding_inventory {
                     setNumber("selling_price", to_encoding_inventory.selling_price).
                     setString("user_id", to_encoding_inventory.user_id).
                     setString("user_screen_name", to_encoding_inventory.user_screen_name).
+                    setString("remarks",to_encoding_inventory.remarks).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -170,6 +174,7 @@ public class Encoding_inventory {
                     + ",selling_price= :selling_price"
                     + ",user_id= :user_id"
                     + ",user_screen_name= :user_screen_name"
+                    + ",remarks= :remarks"
                     + " where "
                     + " id ='" + to_encoding_inventory.id + "' "
                     + " ";
@@ -194,6 +199,7 @@ public class Encoding_inventory {
                     setNumber("selling_price", to_encoding_inventory.selling_price).
                     setString("user_id", to_encoding_inventory.user_id).
                     setString("user_screen_name", to_encoding_inventory.user_screen_name).
+                    setString("remarks",to_encoding_inventory.remarks).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -302,6 +308,7 @@ public class Encoding_inventory {
                     + ",selling_price"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",remarks"
                     + " from encoding_inventory where "
                     + " sheet_no ='" + search + "' and user_name='" + user_name1 + "'"
                     + " order by id desc";
@@ -329,7 +336,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+                String remarks=rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
                 datas.add(to);
                 count++;
             }
@@ -368,6 +376,7 @@ public class Encoding_inventory {
                     + ",selling_price"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",remarks"
                     + " from encoding_inventory where "
                     + " sheet_no ='" + search + "'"
                     + " order by id desc";
@@ -395,7 +404,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+                String remarks=rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
                 datas.add(to);
                 count++;
             }
@@ -434,6 +444,7 @@ public class Encoding_inventory {
                     + ",selling_price"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",remarks"
                     + " from encoding_inventory "
                     + " "
                     + " " + where
@@ -462,7 +473,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+                String remarks=rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
 
                 datas.add(to);
                 count++;
@@ -502,6 +514,7 @@ public class Encoding_inventory {
                     + ",selling_price"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",remarks"
                     + " from encoding_inventory "
                     + " " + where;
 
@@ -528,7 +541,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+                String remarks=rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
 
                 datas.add(to);
                 count++;

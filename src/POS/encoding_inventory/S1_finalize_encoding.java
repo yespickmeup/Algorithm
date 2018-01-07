@@ -52,6 +52,7 @@ public class S1_finalize_encoding {
                     + ",selling_price"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",remarks"
                     + " from encoding_inventory  "
                     + " " + where;
 
@@ -78,8 +79,8 @@ public class S1_finalize_encoding {
                 double selling_price = rs.getDouble(19);
                 String user_id = rs.getString(20);
                 String user_screen_name = rs.getString(21);
-
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name);
+                String remarks=rs.getString(22);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
 
                 datas.add(to);
             }
