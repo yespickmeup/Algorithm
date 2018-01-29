@@ -647,7 +647,7 @@ public class Dlg_encoding extends javax.swing.JDialog {
                     where = where + " and YEAR(date_added) ='" + year + "' and MONTH(date_added) ='" + month + "'";
 
                 }
-                List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where);
+                List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where,0,0);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.month_date.format(new Date());
                 String printed_by = "Administrator";

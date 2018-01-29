@@ -119,6 +119,7 @@ public class Inventory {
     public static List<String> add_inventory(to_inventory to_inventory) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             List<String> query = new ArrayList();
 
             System.out.println("Preparing to add item......");
@@ -230,8 +231,8 @@ public class Inventory {
                     setString("location_id", to_inventory.location_id).
                     setString("updated_at", to_inventory.date_added).
                     ok();
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
             Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
             query.add(s0);
 
@@ -354,11 +355,17 @@ public class Inventory {
                         setString("serial_no", to_inventory_barcodes.serial_no).
                         setString("updated_at", to_inventory_barcodes.date_added).
                         ok();
-                PreparedStatement stmt2 = conn.prepareStatement(s2);
-                stmt2.execute();
+                stmt.addBatch(s2);
+                
                 query.add(s2);
                 Lg.s(Inventory.class, "Successfully Added" + " Barcode:" + to_inventory_barcodes.main_barcode + " = " + to.location);
             }
+            String cloud_inventory_insert = System.getProperty("cloud_inventory_insert", "true");
+            if(cloud_inventory_insert.equalsIgnoreCase("true")){
+                
+            }
+            stmt.executeBatch();
+            conn.commit();
             return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);

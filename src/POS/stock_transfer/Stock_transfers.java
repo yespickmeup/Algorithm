@@ -688,8 +688,9 @@ public class Stock_transfers {
                         + " product_qty='" + new_qty + "' "
                         + " where main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "' "
                         + "";
-
-                stmt.addBatch(s4);
+                if (to_stock_transfers.status == 0) {
+                    stmt.addBatch(s4);
+                }
 
                 String s5 = "update inventory set "
                         + " cost= :cost"
@@ -889,12 +890,11 @@ public class Stock_transfers {
 //                }
 //
 //            }
-
             stmt.executeBatch();
             conn.commit();
 
             Lg.s(Stock_transfers.class, "Successfully Updated");
-            
+
             return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -60,10 +60,13 @@ public class Srpt_encoding_inventory {
         double cost;
         double amount;
 
+        String checked_by;
+        String encoded_by;
+
         public field() {
         }
 
-        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no, String counted_by, String location, double cost, double amount) {
+        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no, String counted_by, String location, double cost, double amount, String checked_by, String encoded_by) {
             this.date_added = date_added;
             this.qty = qty;
             this.item_code = item_code;
@@ -74,6 +77,24 @@ public class Srpt_encoding_inventory {
             this.location = location;
             this.cost = cost;
             this.amount = amount;
+            this.checked_by = checked_by;
+            this.encoded_by = encoded_by;
+        }
+
+        public String getChecked_by() {
+            return checked_by;
+        }
+
+        public void setChecked_by(String checked_by) {
+            this.checked_by = checked_by;
+        }
+
+        public String getEncoded_by() {
+            return encoded_by;
+        }
+
+        public void setEncoded_by(String encoded_by) {
+            this.encoded_by = encoded_by;
         }
 
         public double getCost() {
@@ -160,7 +181,7 @@ public class Srpt_encoding_inventory {
 
     public static void main(String[] args) {
         String where = "";
-        List<Srpt_encoding_inventory.field> datas = ret_data(where);
+        List<Srpt_encoding_inventory.field> datas = ret_data(where,0,0);
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
         String date = DateType.month_date.format(new Date());
         String printed_by = "Administrator";
@@ -197,11 +218,12 @@ public class Srpt_encoding_inventory {
                 JasperUtil.makeDatasource(to.fields));
     }
 
-    public static List<Srpt_encoding_inventory.field> ret_data(String where) {
+    public static List<Srpt_encoding_inventory.field> ret_data(String where,int no_cost,int sum) {
         List<Srpt_encoding_inventory.field> datas = new ArrayList();
 
         try {
             Connection conn = MyConnection.connect();
+            
             String s0 = "select "
                     + "id"
                     + ",item_code"
@@ -220,9 +242,34 @@ public class Srpt_encoding_inventory {
                     + ",counted_by"
                     + ",checked_by"
                     + ",cost"
+                    + ",selling_price"
                     + " from encoding_inventory "
                     + " " + where
                     + " ";
+            if(sum==1){
+                  s0 = "select "
+                    + "id"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",sum(qty)"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",screen_name"
+                    + ",sheet_no"
+                    + ",status"
+                    + ",counted_by"
+                    + ",checked_by"
+                    + ",cost"
+                    + ",selling_price"
+                    + " from encoding_inventory "
+                    + " " + where
+                    + " ";
+            }
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -244,8 +291,13 @@ public class Srpt_encoding_inventory {
                 String checked_by = rs.getString(16);
                 String loc = branch + " - " + location;
                 double cost = rs.getDouble(17);
+                double price = rs.getDouble(18);
                 double amount = qty * cost;
-                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no, counted_by, loc, cost, amount);
+                if(no_cost==1){
+                     amount = qty * price;
+                }
+
+                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no, counted_by, loc, cost, amount, checked_by, screen_name);
                 datas.add(field);
             }
             return datas;
@@ -304,7 +356,7 @@ public class Srpt_encoding_inventory {
                 String loc = branch + " - " + location;
                 double cost = rs.getDouble(17);
                 double amount = qty * cost;
-                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no, counted_by, loc, cost, amount);
+                Srpt_encoding_inventory.field field = new field(date_added, qty, item_code, barcode, description, sheet_no, counted_by, loc, cost, amount, checked_by, screen_name);
                 datas.add(field);
             }
             return datas;

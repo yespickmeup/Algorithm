@@ -1860,8 +1860,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("delete_stock_transfers_finalized", "true");
 
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("cloud_stock_transfer_insert", "true");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("cloud_stock_transfer_insert", "true");
         
         init_key();
         focus();

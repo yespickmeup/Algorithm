@@ -127,12 +127,12 @@ public class MyConnection {
     public static Connection cloud_connect() {
         try {
             //        init();
-            String host = System.getProperty("pool_host", "128.199.80.53");
-            String port = System.getProperty("pool_port", "3306");
+            String host = System.getProperty("cloud_host", "128.199.80.53");
+            String port = System.getProperty("cloud_port", "3306");
             host = host + ":" + port;
-            String user = System.getProperty("pool_user", "smis");
-            String password = System.getProperty("pool_password", "synapse246");
-            String db_name = System.getProperty("pool_db", "db_algorithm");
+            String user = System.getProperty("cloud_user", "smis");
+            String password = System.getProperty("cloud_password", "synapse246");
+            String db_name = System.getProperty("cloud_db", "db_algorithm");
             System.out.println("Connecting to cloud....");
             try {
 

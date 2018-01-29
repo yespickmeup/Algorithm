@@ -385,4 +385,7 @@ public class Dlg_cloud_update extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
+    private void check_inventory_cloud(){
+        
+    }
 }

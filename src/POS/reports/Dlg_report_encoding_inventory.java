@@ -1137,7 +1137,7 @@ public class Dlg_report_encoding_inventory extends javax.swing.JDialog {
             @Override
             public void run() {
                 String where = "";
-                List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where);
+                List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where,0,0);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.month_date.format(new Date());
                 String printed_by = "Administrator";
@@ -1394,7 +1394,7 @@ public class Dlg_report_encoding_inventory extends javax.swing.JDialog {
             public void run() {
                 System.out.println("Compiling");
                 List<Srpt_encoding_inventory.field> datas = new ArrayList();
-                Srpt_encoding_inventory.field to=new Srpt_encoding_inventory.field("", 0, "", "", "", "","","",0,0);
+                Srpt_encoding_inventory.field to=new Srpt_encoding_inventory.field("", 0, "", "", "", "","","",0,0,"","");
                 datas.add(to);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.month_date.format(new Date());

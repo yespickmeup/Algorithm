@@ -983,7 +983,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 
     private void myInit() {
 
-        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);

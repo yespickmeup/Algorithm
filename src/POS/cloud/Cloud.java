@@ -5,6 +5,7 @@
  */
 package POS.cloud;
 
+import POS.inventory.Inventory;
 import POS.inventory.Inventory.to_inventory;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,23 +23,23 @@ import java.util.List;
  * @author Guinness
  */
 public class Cloud {
-    
-    public static class table{
+
+    public static class table {
+
         public String transaction_no;
         public String date;
         public int item_count;
         public int total_qty;
         public boolean selected;
-        
 
-        public table(String transaction_no, String date, int item_count,int total_qty,boolean selected) {
+        public table(String transaction_no, String date, int item_count, int total_qty, boolean selected) {
             this.transaction_no = transaction_no;
             this.date = date;
             this.item_count = item_count;
-            this.total_qty=total_qty;
+            this.total_qty = total_qty;
             this.selected = selected;
         }
-        
+
         public String getTransaction_no() {
             return transaction_no;
         }
@@ -77,15 +79,43 @@ public class Cloud {
         public void setSelected(boolean selected) {
             this.selected = selected;
         }
-        
-        
+
     }
+
     public static void main(String[] args) {
-        List<to_inventory> inventory = ret_inventory(" where is_added= 0 ");
+        System.setProperty("pool_host", "192.168.1.51");
+        System.setProperty("pool_db", "db_algorithm");
+
+        List<to_inventory> inventory_cloud = ret_inventory("");
+        List<to_inventory> inventory_local = Inventory.ret_data6("");
         System.out.println("Retrieving record/s...");
-        for (to_inventory to : inventory) {
-            System.out.println("Item: " + to.description);
+        
+        int new_items=0;
+        int items_do_not_match=0;
+        List<String> codes=new ArrayList();
+        for (to_inventory to : inventory_local) {
+            int exists = 0;
+            System.out.println("Item: " + to.barcode + " = " + to.description);
+            for (to_inventory to2 : inventory_cloud) {
+                if (to.barcode.equals(to2.barcode)) {
+                    exists = 1;
+                    if(!to.description.equalsIgnoreCase(to2.description)){
+                        items_do_not_match++;
+                    }
+                    break;
+                }
+
+            }
+            if (exists == 0) {
+                codes.add(""+to.barcode);
+                System.out.println("Item not found!" + to.barcode + " | " + to.description);
+                new_items++;
+            }
         }
+        System.out.println("Cloud Size: " + inventory_cloud.size());
+        System.out.println("Local Size: " + inventory_local.size());
+        System.out.println("New Item/s: "+new_items + " = "+Arrays.asList(codes));
+        System.out.println("Does not match: "+items_do_not_match);
     }
 
     //<editor-fold defaultstate="collapsed" desc=" inventory ">
@@ -176,7 +206,7 @@ public class Cloud {
                 String location_id = rs.getString(36);
                 String updated_at = rs.getString(37);
 
-                to_inventory to = new to_inventory(id, barcodes, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true);
+                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true);
                 datas.add(to);
             }
             return datas;
@@ -366,8 +396,7 @@ public class Cloud {
     }
 
     //</editor-fold>
-    
     public static void main2(String[] args) {
-        
+
     }
 }

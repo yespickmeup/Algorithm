@@ -1302,8 +1302,8 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        System.setProperty("pool_host", "192.168.1.51");
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
         init_tbl_inventory_barcodes(tbl_inventory_barcodes);

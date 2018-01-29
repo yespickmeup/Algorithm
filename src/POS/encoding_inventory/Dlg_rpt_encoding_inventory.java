@@ -233,6 +233,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jCheckBox3 = new javax.swing.JCheckBox();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jButton3 = new Button.Default();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
         pnl_sales_items = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -340,12 +342,10 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setText("All");
-        jCheckBox2.setEnabled(false);
         jCheckBox2.setFocusable(false);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox3.setText("All");
-        jCheckBox3.setEnabled(false);
         jCheckBox3.setFocusable(false);
 
         jDateChooser3.setDate(new Date());
@@ -359,6 +359,11 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
             }
         });
 
+        jCheckBox4.setText("Exclude Cost");
+
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("Sum up Qty");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -366,19 +371,19 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jCheckBox5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
+                        .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -388,48 +393,62 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_qty_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
+                    .addComponent(tf_qty_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_search_branch_code)
                     .addComponent(tf_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jCheckBox2)
-                        .addGap(1, 1, 1)
-                        .addComponent(jCheckBox3))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox2)
+                            .addGap(1, 1, 1)
+                            .addComponent(jCheckBox3))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_qty_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_search_branch_code, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(1, 1, 1)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(1, 1, 1)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(tf_qty_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCheckBox4)
+                            .addComponent(tf_search_branch_code))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(tf_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox6)))))
+                .addGap(37, 37, 37))
         );
 
         pnl_sales_items.setBackground(new java.awt.Color(255, 255, 255));
@@ -442,7 +461,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         );
         pnl_sales_itemsLayout.setVerticalGroup(
             pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 385, Short.MAX_VALUE)
+            .addGap(0, 398, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -636,7 +655,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         );
         pnl_sales_items1Layout.setVerticalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -789,7 +808,9 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -829,6 +850,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
     private void myInit() {
 
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
         set_default_branch();
@@ -904,36 +927,56 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                String where = " ";
+                String where = " where remarks like '%" + "" + "%' ";
                 String date2 = DateType.sf.format(jDateChooser3.getDate());
 
                 String location_id = tf_location_id.getText();
                 Field.Combo br = (Field.Combo) tf_qty_branch;
                 Field.Combo lo = (Field.Combo) tf_location;
                 if (jCheckBox5.isSelected()) {
-                    where = where + " where Date(date_added) ='" + date2 + "' ";
+                    where = where + " and Date(date_added) ='" + date2 + "' ";
                 } else {
-                    where = where + " where sheet_no='" + tf_sheet_no.getText() + "'  ";
-                    where = where + " where Date(date_added) ='" + date2 + "' ";
+                    where = where + " and sheet_no='" + tf_sheet_no.getText() + "'  ";
+                    where = where + " and Date(date_added) ='" + date2 + "' ";
                 }
-
+                int order = 1;
+                String branch = "All";
+                String location = "All";
                 if (!jCheckBox2.isSelected() && !jCheckBox3.isSelected()) {
                     where = where + " and location_id='" + lo.getId() + "' ";
+                    branch = tf_qty_branch.getText();
+                    location = tf_location.getText();
+                    order = 0;
                 }
                 if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where = where + " and branch_id='" + br.getId() + "' ";
+                    location = tf_location.getText();
                 }
-                where = where + " group by item_code,cost order by description asc ";
-//                System.out.println(where);
-                List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where);
+                int sum = 0;
+                if (jCheckBox6.isSelected()) {
+                    if (order == 1) {
+                        where = where + " group by item_code order by description asc ";
+                    } else {
+                        where = where + " group by item_code order by id asc ";
+                    }
+                    sum = 1;
+                } else {
+                    where = where + "  order by id asc ";
+                }
+
+                int no_cost = 0;
+                if (jCheckBox4.isSelected()) {
+                    no_cost = 1;
+                }
+                System.out.println(where);
+                List<Srpt_encoding_inventory.field> datas = Srpt_encoding_inventory.ret_data(where, no_cost, sum);
 
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
 
                 String date = DateType.month_date.format(jDateChooser3.getDate());
                 String printed_by = "Administrator";
                 String sheet_no = "";
-                String branch = tf_qty_branch.getText();
-                String location = tf_location.getText();
+
                 String counted_by = "";
                 for (Srpt_encoding_inventory.field f : datas) {
                     counted_by = f.getCounted_by();
@@ -941,6 +984,10 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 Srpt_encoding_inventory rpt = new Srpt_encoding_inventory(business_name, date, printed_by, branch, location, counted_by);
                 rpt.fields.addAll(datas);
                 String jrxml = "rpt_encoding_inventory.jrxml";
+
+                if (no_cost == 1) {
+                    jrxml = "rpt_encoding_inventory_no_cost.jrxml";
+                }
                 report_sales_items(rpt, jrxml);
                 jProgressBar3.setString("Finished...");
                 jProgressBar3.setIndeterminate(false);
@@ -1158,8 +1205,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
                 String printed_by = "Administrator";
                 String sheet_no = "";
-                String branch = tf_qty_branch.getText();
-                String location = tf_location.getText();
+                String branch = tf_qty_branch1.getText();
+                String location = tf_location1.getText();
                 String counted_by = "";
 
                 Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);

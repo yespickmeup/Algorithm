@@ -2159,21 +2159,21 @@ public class Dlg_inventory extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
                 List<String> query = Inventory.add_inventory(to);
+                Alert.set(1, "");
+                clear_inventory();
+                init_item_code();
+                tf_item_code.grabFocus();
+                
+//                if (cloud_inventory_insert.equalsIgnoreCase("true")) {
 
-                String cloud_inventory_insert = System.getProperty("cloud_inventory_insert", "true");
-                if (cloud_inventory_insert.equalsIgnoreCase("true")) {
-                    Alert.set(1, "");
-                    clear_inventory();
-                    init_item_code();
-                    tf_item_code.grabFocus();
-                    cloud_insert(query, "Upload new record to cloud?");
-
-                } else {
-                    Alert.set(1, "");
-                    clear_inventory();
-                    init_item_code();
-                    tf_item_code.grabFocus();
-                }
+//                    cloud_insert(query, "Upload new record to cloud?");
+//
+//                } else {
+//                    Alert.set(1, "");
+//                    clear_inventory();
+//                    init_item_code();
+//                    tf_item_code.grabFocus();
+//                }
             }
         });
         nd.setLocationRelativeTo(this);
