@@ -124,22 +124,39 @@ public class MyConnection {
         }
     }
 
+//    public static void close2() {
+//        if (conn3 != null) {
+//            try {
+//                conn3.close();
+//
+//                conn3 = null;
+//            } catch (SQLException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//        }
+//    }
+//    ;
     public static Connection cloud_connect() {
+
+        Connection conn3 = null;
         try {
             //        init();
+
             String host = System.getProperty("cloud_host", "128.199.80.53");
             String port = System.getProperty("cloud_port", "3306");
             host = host + ":" + port;
-            String user = System.getProperty("cloud_user", "smis");
-            String password = System.getProperty("cloud_password", "synapse246");
-            String db_name = System.getProperty("cloud_db", "db_algorithm");
+            String user = System.getProperty("cloud_user", "smis2");
+            String password = System.getProperty("cloud_password", "nopassword101");
+            String db_name = System.getProperty("cloud_db", "db_algorithm_development");
             System.out.println("Connecting to cloud....");
             try {
 
                 Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://" + host + "/" + db_name + "";
+                String url = "jdbc:mysql://" + host + "/" + db_name + "?autoReconnect=true&zeroDateTimeBehavior=convertToNull&connectTimeout=10000&socketTimeout=30000";
+//                String url = "jdbc:mysql://" + host + "/" + db_name + ""; &connectTimeout=10000&socketTimeout=30000
 
-                conn2 = DriverManager.getConnection(url, user, password);
+                conn3 = DriverManager.getConnection(url, user, password);
+//                conn2.setNetworkTimeout(Executors.newFixedThreadPool(1), 1000);
                 //DriverManager.getConnection("proxool.pool_connection");
             } catch (SQLException ex) {
                 Logger.getLogger(MyConnection.class.getName()).
@@ -150,7 +167,7 @@ public class MyConnection {
             Logger.getLogger(MyConnection.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        return conn2;
+        return conn3;
     }
 
     public static void main(String[] args) {
@@ -164,13 +181,13 @@ public class MyConnection {
         String host = System.getProperty("cloud_host", "128.199.80.53");
         String port = System.getProperty("cloud_port", "3306");
         host = host + ":" + port;
-        String user = System.getProperty("cloud_user", "smis");
-        String password = System.getProperty("cloud_password", "synapse246");
-        String db_name = System.getProperty("cloud_db", "db_algorithm");
+        String user = System.getProperty("cloud_user", "smis2");
+        String password = System.getProperty("cloud_password", "nopassword101");
+        String db_name = System.getProperty("cloud_db", "db_algorithm_development");
         System.out.println("Connecting to cloud....");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://" + host + "/" + db_name + "";
+            String url = "jdbc:mysql://" + host + "/" + db_name + "?autoReconnect=true&zeroDateTimeBehavior=convertToNull&connectTimeout=10000&socketTimeout=30000";
 //            System.out.println("Url: "+url);
 //            System.out.println("User: "+user);
 //            System.out.println("Password: "+password);
@@ -188,7 +205,7 @@ public class MyConnection {
                     connected = 1;
                 }
             } catch (SQLException ex) {
-                System.out.println(ex);
+//                System.out.println(ex);
                 return 0;
             }
         } catch (ClassNotFoundException ex) {

@@ -5,9 +5,11 @@
  */
 package POS.touchscreen_reports;
 
+import POS.accounts_receivable.S1_accounts_receivable_payments;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
+import POS.item_replacements.Item_replacements;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
@@ -783,6 +785,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String date_from = DateType.sf.format(jDateChooser3.getDate());
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
                 int status = 0;
+                String where_sales2 = " where id<>0 "
+                        + "  and status='" + "0" + "' ";
+                String where_sales = " where id<>0 ";
                 if (jCheckBox10.isSelected()) {
                     status = 1;
                 }
@@ -790,9 +795,15 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
                 if (!jCheckBox2.isSelected()) {
                     where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (!jCheckBox1.isSelected()) {
                     where = where + " and user_id='" + f.getId() + "' ";
+                    where_sales2 = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
+                    where_sales = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "'";
                 }
                 if (jCheckBox1.isSelected()) {
                     where = where + "  "
@@ -800,12 +811,16 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 }
                 if (!jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
                     where = where + " and location_id='" + lo.getId() + "' ";
+                    where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
+                    where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
                 }
                 if (jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
                     where = where + " and branch_id='" + br.getId() + "' ";
+                    where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
+                    where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
                 }
                 where = where + " order by id asc ";
-                System.out.println(where);
+//                System.out.println(where);
 
                 List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
@@ -815,7 +830,43 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String date = "Date as of " + DateType.convert_slash_datetime2(date_from) + " - " + DateType.convert_slash_datetime2(date_to);
                 String branch = br.getText();
                 String location = lo.getText();
-                Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location);
+                double return_exchange = 0;
+                double collections = 0;
+                double cash_on_hand = 0;
+                List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales2);
+                double collections_cheque = 0;
+                double collections_cheque_on_hand = 0;
+                for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
+                  
+                    if (collection.check_amount > 0) {
+                        collections_cheque += collection.check_amount;
+                    } else {
+                        collections += collection.amount;
+                    }
+                }
+                double na_short = 0;
+                double over = 0;
+                List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales);
+                for (Item_replacements.to_item_replacements rep : replacements) {
+                    double amount = rep.replacement_amount + rep.discount;
+                    double due = rep.amount_due;
+                    double total = amount - due;
+                    if (amount < rep.amount_due) {
+                        na_short += amount - rep.amount_due;
+                    }
+                    if (amount > rep.amount_due) {
+                        over += amount - rep.amount_due;
+                    }
+                    return_exchange += total;
+                }
+                for (Srpt_sales_ledger.field field : fields) {
+                    cash_on_hand += field.cash;
+                    collections_cheque_on_hand+=field.cheque_amount;
+                }
+                collections_cheque_on_hand=collections_cheque_on_hand+collections_cheque;
+                cash_on_hand = cash_on_hand + collections+return_exchange;
+
+                Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque, collections_cheque_on_hand);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_sales_ledger.jrxml";
                 String pool_db = System.getProperty("pool_db", "db_smis");

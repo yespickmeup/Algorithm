@@ -70,8 +70,7 @@ public class MyMain {
             System.setProperty("delete_receipts_finalized", prop.getProperty("delete_receipts_finalized", "false"));
             System.setProperty("delete_stock_transfers_finalized", prop.getProperty("delete_stock_transfers_finalized", "false"));
             System.setProperty("delete_other_adjustments_finalized", prop.getProperty("delete_other_adjustments_finalized", "false"));
-            
-            
+
             System.out.println("OS: " + os);
             System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
@@ -149,11 +148,6 @@ public class MyMain {
             System.setProperty("license_code", prop.getProperty("license_code", ""));
             System.setProperty("version", prop.getProperty("version", ""));
 
-            System.setProperty("cloud_host", prop.getProperty("cloud_host", "128.199.80.53"));
-            System.setProperty("cloud_port", prop.getProperty("cloud_port", "3306"));
-            System.setProperty("cloud_user", prop.getProperty("cloud_user", "root"));
-            System.setProperty("cloud_password", prop.getProperty("cloud_password", "password"));
-            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_smis"));
             System.setProperty("terminal_number", prop.getProperty("terminal_number", "0"));
             System.setProperty("hdd_drive", prop.getProperty("hdd_drive", ""));
             System.setProperty("img_path", prop.getProperty("img_path", System.getProperty("user.home", "C:\\Users\\User") + "\\"));
@@ -169,6 +163,8 @@ public class MyMain {
 
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
+            System.setProperty("main_branch", prop.getProperty("main_branch", "false"));
+            System.setProperty("return_exchange_days", prop.getProperty("return_exchange_days", "0"));
 
             if (setting.module_prepayments == 1) {
                 System.setProperty("module_prepayments", prop.getProperty("module_prepayments", "1"));
@@ -186,6 +182,12 @@ public class MyMain {
             if (setting.module_services == 1) {
                 System.setProperty("module_services", prop.getProperty("module_services", "1"));
             }
+
+            System.setProperty("cloud_host", prop.getProperty("cloud_host", "128.199.80.53"));
+            System.setProperty("cloud_port", prop.getProperty("cloud_port", "3306"));
+            System.setProperty("cloud_user", prop.getProperty("cloud_user", "smis"));
+            System.setProperty("cloud_password", prop.getProperty("cloud_password", "nopassword101"));
+            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_algorithm_development"));
 
             String version = System.getProperty("version", "");
             System.setProperty("version", version);

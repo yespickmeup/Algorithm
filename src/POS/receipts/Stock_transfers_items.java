@@ -425,15 +425,30 @@ public class Stock_transfers_items {
         }
     }
 
-    public static void delete_stock_transfers_items2(String id) {
+    public static void delete_stock_transfers_items2(String id, String stock_transfer_no) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "delete from stock_transfers_items where "
                     + " id ='" + id + "' "
                     + " ";
 
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = "update stock_transfers set "
+                    + " is_uploaded= :is_uploaded"
+                    + " where "
+                    + " transaction_no ='" + stock_transfer_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("is_uploaded", 4)
+                    .ok();
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Stock_transfers_items.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -547,11 +562,11 @@ public class Stock_transfers_items {
                 String at_location = rs.getString(45);
                 String at_location_id = rs.getString(46);
 
-                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification
-                        , classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name
-                        , item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes
-                        , brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no
-                        , to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification,
+                        classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name,
+                        item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes,
+                        brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no,
+                        to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
                 datas.add(to);
             }
             return datas;
@@ -562,11 +577,135 @@ public class Stock_transfers_items {
         }
     }
 
-    public static void edit_stock_transfers_items2(String id, double qty, String serial_no) {
+    public static List<to_stock_transfers_items> ret_data_cloud(String where) {
+        List<to_stock_transfers_items> datas = new ArrayList();
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            String s0 = "select "
+                    + "id"
+                    + ",barcode"
+                    + ",description"
+                    + ",generic_name"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",item_type"
+                    + ",status"
+                    + ",supplier"
+                    + ",fixed_price"
+                    + ",cost"
+                    + ",supplier_id"
+                    + ",multi_level_pricing"
+                    + ",vatable"
+                    + ",reorder_level"
+                    + ",markup"
+                    + ",barcodes"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",selling_type"
+                    + ",branch"
+                    + ",branch_code"
+                    + ",location"
+                    + ",location_id"
+                    + ",stock_transfer_id"
+                    + ",serial_no"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",to_location"
+                    + ",to_location_id"
+                    + ",at_branch"
+                    + ",at_branch_id"
+                    + ",at_location"
+                    + ",at_location_id"
+                    + " from stock_transfers_items  "
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String barcode = rs.getString(2);
+                String description = rs.getString(3);
+                String generic_name = rs.getString(4);
+                String category = rs.getString(5);
+                String category_id = rs.getString(6);
+                String classification = rs.getString(7);
+                String classification_id = rs.getString(8);
+                String sub_classification = rs.getString(9);
+                String sub_classification_id = rs.getString(10);
+                double product_qty = rs.getDouble(11);
+                String unit = rs.getString(12);
+                double conversion = rs.getDouble(13);
+                double selling_price = rs.getDouble(14);
+                String date_added = rs.getString(15);
+                String user_name = rs.getString(16);
+                String item_type = rs.getString(17);
+                int status = rs.getInt(18);
+                String supplier = rs.getString(19);
+                int fixed_price = rs.getInt(20);
+                double cost = rs.getDouble(21);
+                String supplier_id = rs.getString(22);
+                int multi_level_pricing = rs.getInt(23);
+                int vatable = rs.getInt(24);
+                double reorder_level = rs.getDouble(25);
+                double markup = rs.getDouble(26);
+                String barcodes = rs.getString(27);
+                String brand = rs.getString(28);
+                String brand_id = rs.getString(29);
+                String model = rs.getString(30);
+                String model_id = rs.getString(31);
+                int selling_type = rs.getInt(32);
+                String branch = rs.getString(33);
+                String branch_code = rs.getString(34);
+                String location = rs.getString(35);
+                String location_id = rs.getString(36);
+                String stock_transfer_id = rs.getString(37);
+                String serial_no = rs.getString(38);
+                String to_branch = rs.getString(39);
+                String to_branch_id = rs.getString(40);
+                String to_location = rs.getString(41);
+                String to_location_id = rs.getString(42);
+                String at_branch = rs.getString(43);
+                String at_branch_id = rs.getString(44);
+                String at_location = rs.getString(45);
+                String at_location_id = rs.getString(46);
+
+                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification,
+                        classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name,
+                        item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes,
+                        brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no,
+                        to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                datas.add(to);
+            }
+            conn.close();
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
+    public static void edit_stock_transfers_items2(String id, double qty, String serial_no, String stock_transfer_no) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
+            PreparedStatement stmt = conn.prepareStatement("");
+
             String s0 = "update stock_transfers_items set "
-                    + "product_qty= :product_qty"
+                    + " product_qty= :product_qty"
                     + ",serial_no= :serial_no"
                     + " where "
                     + " id ='" + id + "' "
@@ -576,9 +715,21 @@ public class Stock_transfers_items {
                     .setNumber("product_qty", qty)
                     .setString("serial_no", serial_no)
                     .ok();
+            stmt.addBatch(s0);
 
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            String s2 = "update stock_transfers set "
+                    + " is_uploaded= :is_uploaded"
+                    + " where "
+                    + " transaction_no ='" + stock_transfer_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("is_uploaded", 4)
+                    .ok();
+            stmt.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Stock_transfers_items.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);

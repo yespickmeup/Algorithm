@@ -32,7 +32,7 @@ public class MySales_Items {
         public final String supplier_name;
         public final String supplier_id;
         public final String serial_no;
-        public final double product_qty;
+        public  double product_qty;
         public final String unit;
         public final double conversion;
         public final double selling_price;
@@ -110,6 +110,30 @@ public class MySales_Items {
             this.wtax = wtax;
         }
 
+        public double getProduct_qty() {
+            return product_qty;
+        }
+
+        public void setProduct_qty(double product_qty) {
+            this.product_qty = product_qty;
+        }
+
+        public double getAddtl_amount() {
+            return addtl_amount;
+        }
+
+        public void setAddtl_amount(double addtl_amount) {
+            this.addtl_amount = addtl_amount;
+        }
+
+        public double getWtax() {
+            return wtax;
+        }
+
+        public void setWtax(double wtax) {
+            this.wtax = wtax;
+        }
+        
         public boolean isSelected() {
             return selected;
         }

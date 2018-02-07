@@ -8,10 +8,12 @@ package POS.touchscreen;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
+import POS.item_replacements.Dlg_item_replacements;
 import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
 import POS.sale_item_replacements.Dlg_sale_item_replacements;
 import POS.sale_item_replacements.S1_sale_item_replacements;
+import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
@@ -958,7 +960,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_sale_itemsMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        touchscreen_transaction_item_replacements();
+        returns_exchange();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1683,6 +1685,33 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 jLabel3.setText(FitIn.fmt_wc_0(gross_amount));
             }
         });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void returns_exchange() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange' ";
+        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Previlege not added!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_item_replacements nd = Dlg_item_replacements.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_item_replacements.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_item_replacements.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().
+                getWidth());
+        int ySize = ((int) tk.getScreenSize().
+                getHeight());
+        nd.setSize(xSize, ySize);
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }

@@ -13,6 +13,7 @@ import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import POS.util.TableRenderer;
 import POS.util.Users;
@@ -1446,9 +1447,23 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 datas2.add(t);
             }
         }
-        S1_accounts_receivable_payments.finalize_accounts_receivable_payments(datas2);
-        data_cols_payments();
-        Alert.set(0, "Payment Finalized!");
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Finalize Payment");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                S1_accounts_receivable_payments.finalize_accounts_receivable_payments(datas2);
+                data_cols_payments();
+                Alert.set(0, "Payment Finalized!");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
 //        Thread t = new Thread(new Runnable() {
 //            @Override
 //            public void run() {

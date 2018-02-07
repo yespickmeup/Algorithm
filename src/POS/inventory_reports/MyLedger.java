@@ -58,6 +58,7 @@ public class MyLedger {
         List<Srpt_item_ledger.field> conversions = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
         List<Srpt_item_ledger.field> other_adjustments = new ArrayList();
         List<Srpt_item_ledger.field> return_to_supplier = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
+        List<Srpt_item_ledger.field> returns_exchange2 = new ArrayList();
 //                    System.out.println(where);
         try {
             Connection conn = MyConnection.connect();
@@ -1376,6 +1377,136 @@ public class MyLedger {
                 return_to_supplier.add(field2);
             }
             //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc=" Return Exchange2 ">
+            String s20 = "select "
+                    + "id"
+                    + ",item_replacement_no"
+                    + ",sales_no"
+                    + ",customer_name"
+                    + ",customer_id"
+                    + ",date_added"
+                    + ",user_screen_name"
+                    + ",user_id"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",generic_name"
+                    + ",description"
+                    + ",item_type"
+                    + ",serial_no"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",is_vatable"
+                    + ",selling_type"
+                    + ",discount_name"
+                    + ",discount_amount"
+                    + ",discount_customer_name"
+                    + ",discount_customer_id"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",is_replacement"
+                    + ",reason"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from item_replacement_details"
+                    + " " + wheree;
+
+            Statement stmt20 = conn.createStatement();
+            ResultSet rs20 = stmt20.executeQuery(s20);
+            while (rs20.next()) {
+                int id = rs20.getInt(1);
+                String item_replacement_no = rs20.getString(2);
+                String sales_no = rs20.getString(3);
+                String customer_name = rs20.getString(4);
+                String customer_id = rs20.getString(5);
+                String date_added = rs20.getString(6);
+                String user_screen_name = rs20.getString(7);
+                String user_id = rs20.getString(8);
+                String item_code = rs20.getString(9);
+                String barcode = rs20.getString(10);
+                String generic_name = rs20.getString(11);
+                String description = rs20.getString(12);
+                String item_type = rs20.getString(13);
+                String serial_no = rs20.getString(14);
+                double product_qty = rs20.getDouble(15);
+                String unit = rs20.getString(16);
+                double convers20ion = rs20.getDouble(17);
+                double selling_price = rs20.getDouble(18);
+                int is_vatable = rs20.getInt(19);
+                int selling_type = rs20.getInt(20);
+                String discount_name = rs20.getString(21);
+                double discount_amount = rs20.getDouble(22);
+                String discount_customer_name = rs20.getString(23);
+                String discount_customer_id = rs20.getString(24);
+                String category = rs20.getString(25);
+                String category_id = rs20.getString(26);
+                String classification = rs20.getString(27);
+                String classification_id = rs20.getString(28);
+                String sub_classification = rs20.getString(29);
+                String sub_classification_id = rs20.getString(30);
+                String brand = rs20.getString(31);
+                String brand_id = rs20.getString(32);
+                String model = rs20.getString(33);
+                String model_id = rs20.getString(34);
+                int is_replacement = rs20.getInt(35);
+                String reason = rs20.getString(36);
+                int status = rs20.getInt(37);
+                String branch = rs20.getString(38);
+                String branch_id = rs20.getString(39);
+                String location = rs20.getString(40);
+                String location_id = rs20.getString(41);
+
+                String date = POS.util.DateType.convert_slash_datetime3(date_added);
+                String balance = "";
+                String from_branch = branch;
+                String from_branch_id = branch_id;
+                String from_location = location;
+                String from_location_id = location_id;
+                String to_branch = "";
+                String to_branch_id = "";
+                String to_location = "";
+                String to_location_id = "";
+                String created_by = user_screen_name;
+
+                Date created = new Date();
+                try {
+                    created = POS.util.DateType.datetime.parse(date_added);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                String transaction_no = "" + sales_no;
+                String cost1 = "";
+                String price1 = FitIn.fmt_wc_0(selling_price);
+                String transaction_type = "Exc-Returned";
+                String in = FitIn.fmt_woc(product_qty);
+                String out = "";
+               
+                if (is_replacement == 1) {
+                    transaction_type = "Exc-Replacement";
+                    in = "";
+                    out = FitIn.fmt_woc(product_qty);
+                }
+
+                String months = DateType.convert_datetime_to_month(date_added);
+
+                Srpt_item_ledger.field field11 = new Srpt_item_ledger.field(transaction_type, date, in, out, balance, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, created_by, customer_name, created, item_replacement_no, cost1, price1, months, "");
+                returns_exchange2.add(field11);
+
+            }
+            //</editor-fold>
             fields.addAll(inventory_count);
             fields.addAll(sales);
             fields.addAll(receipts);
@@ -1390,6 +1521,7 @@ public class MyLedger {
             fields.addAll(conversions);
             fields.addAll(other_adjustments);
             fields.addAll(return_to_supplier);
+            fields.addAll(returns_exchange2);
             List<Srpt_item_ledger.field> f_field = new ArrayList();
 
             Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {
@@ -1444,7 +1576,7 @@ public class MyLedger {
             String branch = my_branch;
             String location = my_location;
 
-            int m = month-1;
+            int m = month - 1;
 //            System.out.println("m: "+m);
             String[] mm = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 

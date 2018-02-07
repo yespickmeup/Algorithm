@@ -46,8 +46,9 @@ public class Stock_transfers {
         public final String at_branch_id;
         public final String at_location;
         public final String at_location_id;
+        public final int is_uploaded;
 
-        public to_stock_transfers(int id, String transaction_no, String user_name, String date_added, String remarks, String to_branch, String to_branch_id, String to_location, String to_location_id, String from_branch, String from_branch_id, String from_location, String from_location_id, int status, boolean selected, String at_branch, String at_branch_id, String at_location, String at_location_id) {
+        public to_stock_transfers(int id, String transaction_no, String user_name, String date_added, String remarks, String to_branch, String to_branch_id, String to_location, String to_location_id, String from_branch, String from_branch_id, String from_location, String from_location_id, int status, boolean selected, String at_branch, String at_branch_id, String at_location, String at_location_id, int is_uploaded) {
             this.id = id;
             this.transaction_no = transaction_no;
             this.user_name = user_name;
@@ -67,6 +68,7 @@ public class Stock_transfers {
             this.at_branch_id = at_branch_id;
             this.at_location = at_location;
             this.at_location_id = at_location_id;
+            this.is_uploaded = is_uploaded;
         }
 
         public boolean isSelected() {
@@ -318,6 +320,7 @@ public class Stock_transfers {
                     + ",from_location= :from_location "
                     + ",from_location_id= :from_location_id "
                     + ",status= :status "
+                    + ",is_uploaded= :is_uploaded"
                     + " where id='" + to_stock_transfers.id + "' "
                     + " ";
 
@@ -335,6 +338,7 @@ public class Stock_transfers {
                     .setString("from_location", to_stock_transfers.from_location)
                     .setString("from_location_id", to_stock_transfers.from_location_id)
                     .setNumber("status", to_stock_transfers.status)
+                    .setNumber("is_uploaded", 2)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
@@ -348,6 +352,7 @@ public class Stock_transfers {
                     + ",to_branch_id= :to_branch_id"
                     + ",to_location= :to_location"
                     + ",to_location_id= :to_location_id"
+                    + ",is_uploaded= :is_uploaded"
                     + " where "
                     + " stock_transfer_id ='" + to_stock_transfers.transaction_no + "' "
                     + " ";
@@ -361,6 +366,7 @@ public class Stock_transfers {
                     .setString("to_branch_id", to_stock_transfers.to_branch_id)
                     .setString("to_location", to_stock_transfers.to_location)
                     .setString("to_location_id", to_stock_transfers.to_location_id)
+                    .setNumber("is_uploaded", 2)
                     .ok();
 
             stmt.addBatch(s2);
@@ -502,6 +508,7 @@ public class Stock_transfers {
                     + ",at_branch_id"
                     + ",at_location"
                     + ",at_location_id"
+                    + ",is_uploaded"
                     + " from stock_transfers"
                     + " " + where;
 
@@ -526,8 +533,8 @@ public class Stock_transfers {
                 String at_branch_id = rs.getString(16);
                 String at_location = rs.getString(17);
                 String at_location_id = rs.getString(18);
-
-                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id);
+                int is_uploaded = rs.getInt(19);
+                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
                 datas.add(to);
             }
             return datas;
@@ -535,6 +542,68 @@ public class Stock_transfers {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
+        }
+    }
+
+    public static List<to_stock_transfers> ret_data_cloud(String where) {
+        List<to_stock_transfers> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            String s0 = "select "
+                    + "id"
+                    + ",transaction_no"
+                    + ",user_name"
+                    + ",date_added"
+                    + ",remarks"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",to_location"
+                    + ",to_location_id"
+                    + ",from_branch"
+                    + ",from_branch_id"
+                    + ",from_location"
+                    + ",from_location_id"
+                    + ",status"
+                    + ",at_branch"
+                    + ",at_branch_id"
+                    + ",at_location"
+                    + ",at_location_id"
+                    + ",is_uploaded"
+                    + " from stock_transfers"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String transaction_no = rs.getString(2);
+                String user_name = rs.getString(3);
+                String date_added = rs.getString(4);
+                String remarks = rs.getString(5);
+                String to_branch = rs.getString(6);
+                String to_branch_id = rs.getString(7);
+                String to_location = rs.getString(8);
+                String to_location_id = rs.getString(9);
+                String from_branch = rs.getString(10);
+                String from_branch_id = rs.getString(11);
+                String from_location = rs.getString(12);
+                String from_location_id = rs.getString(13);
+                int status = rs.getInt(14);
+                String at_branch = rs.getString(15);
+                String at_branch_id = rs.getString(16);
+                String at_location = rs.getString(17);
+                String at_location_id = rs.getString(18);
+                int is_uploaded = rs.getInt(19);
+                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+                datas.add(to);
+            }
+            conn.close();
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+           
         }
     }
 
@@ -581,7 +650,7 @@ public class Stock_transfers {
             String s0 = "update stock_transfers set "
                     + " status= :status"
                     + " where "
-                    + " id ='" + to_stock_transfers.id + "' "
+                    + " transaction_no ='" + to_stock_transfers.transaction_no + "' "
                     + " ";
 
             s0 = SqlStringUtil.parse(s0)
@@ -927,6 +996,7 @@ public class Stock_transfers {
                     + ",at_branch_id"
                     + ",at_location"
                     + ",at_location_id"
+                    + ",is_uploaded"
                     + " from stock_transfers  "
                     + " " + where;
 
@@ -951,7 +1021,8 @@ public class Stock_transfers {
                 String at_branch_id = rs.getString(16);
                 String at_location = rs.getString(17);
                 String at_location_id = rs.getString(18);
-                to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id);
+                int is_uploaded = rs.getInt(19);
+                to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
 
             }
             return to;

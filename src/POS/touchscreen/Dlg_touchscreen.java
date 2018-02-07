@@ -4352,8 +4352,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     int is_vatable = to.is_vatable;
                     double discount_rate = to.discount_rate;
                     double addtl_amount = to.addtl_amount;
-
-                    Inventory_barcodes.to_inventory_barcodes t = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax);
+                    
+                    Inventory_barcodes.to_inventory_barcodes t = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name
+                            , category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty
+                            , unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id
+                            , multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type
+                            , branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name
+                            , discount_customer_name, discount_customer_id, addtl_amount, wtax);
                     datas.add(t);
                 }
 

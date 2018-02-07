@@ -37,8 +37,12 @@ public class Srpt_sales_ledger {
     public final String date;
     public final String branch;
     public final String location;
-
-    public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location) {
+    public final double return_exchange;
+    public final double collections;
+    public final double cash_on_hand;
+    public final double collections_cheque;
+    public final double collections_cheque_on_hand;
+    public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location,double return_exchange,double collections,double cash_on_hand,double collections_cheque,double collections_cheque_on_hand) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -46,6 +50,11 @@ public class Srpt_sales_ledger {
         this.date = date;
         this.branch = branch;
         this.location = location;
+        this.return_exchange=return_exchange;
+        this.collections=collections;
+        this.collections_cheque=collections_cheque;
+        this.collections_cheque_on_hand=collections_cheque_on_hand;
+        this.cash_on_hand=cash_on_hand;
     }
 
     public static class field {
@@ -228,7 +237,12 @@ public class Srpt_sales_ledger {
         String date = "";
         String branch = "";
         String location = "";
-        Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location);
+        double return_exchange=0;
+        double collections=0;
+        double cash_on_hand=0;
+        double collections_cheque=0;
+        double collections_cheque_on_hand=0;
+        Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location,return_exchange,collections,cash_on_hand,collections_cheque,collections_cheque_on_hand);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_sales_ledger.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
