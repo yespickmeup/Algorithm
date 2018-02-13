@@ -45,8 +45,9 @@ public class Srpt_ar_aging {
     public final String telephone_number;
     public final String customer_address;
     public final String department;
-    
-    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number, String customer_address,String department) {
+    public final String ar_footer;
+    public final String img_path;
+    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number, String customer_address,String department,String ar_footer,String img_path) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
@@ -61,6 +62,8 @@ public class Srpt_ar_aging {
         this.telephone_number = telephone_number;
         this.customer_address = customer_address;
         this.department=department;
+        this.ar_footer=ar_footer;
+        this.img_path=img_path;
     }
 
     public static class field {
@@ -219,7 +222,9 @@ public class Srpt_ar_aging {
         String telephone_number = "";
         String customer_address = "";
         String department="All";
-        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address,department);
+        String ar_footer=System.getProperty("ar_footer","Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+        String img_path=System.getProperty("img_path","C:\\Users\\Guinness\\smis\\logo.png");
+        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address,department,ar_footer,img_path);
         rpt.fields.addAll(fields);
 
         JRViewer viewer = get_viewer(rpt);

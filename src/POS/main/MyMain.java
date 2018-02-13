@@ -185,10 +185,11 @@ public class MyMain {
 
             System.setProperty("cloud_host", prop.getProperty("cloud_host", "128.199.80.53"));
             System.setProperty("cloud_port", prop.getProperty("cloud_port", "3306"));
-            System.setProperty("cloud_user", prop.getProperty("cloud_user", "smis"));
+            System.setProperty("cloud_user", prop.getProperty("cloud_user", "smis2"));
             System.setProperty("cloud_password", prop.getProperty("cloud_password", "nopassword101"));
-            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_algorithm_development"));
-
+            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_algorithm"));
+            System.setProperty("active_branches", prop.getProperty("active_branches", ""));
+            System.setProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
             String version = System.getProperty("version", "");
             System.setProperty("version", version);
             //

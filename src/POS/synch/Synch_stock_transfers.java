@@ -153,7 +153,7 @@ public class Synch_stock_transfers {
         System.out.println("2.) Retrieving Stock transfers...");
         System.setProperty("pool_db", "db_algorithm");
         System.setProperty("pool_host", "192.168.1.51");
-        List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data(" order by id asc ");
+        List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data(" where id>7477 order by id asc ");
         List<Stock_transfers.to_stock_transfers> stock_transfers_insert = new ArrayList();
         List<Stock_transfers_items.to_stock_transfers_items> st_items_insert = new ArrayList();
         for (Stock_transfers.to_stock_transfers to : stock_transfers) {
@@ -845,33 +845,39 @@ public class Synch_stock_transfers {
         }
     }
 
-    public static void update_status_stock_transfer_cloud(String transaction_no, int status) {
+    public static void update_status_stock_transfer_cloud(String transaction_no, int status, String at_location_id) {
         try {
-            Connection conn = MyConnection.connect();
+            Connection conn = MyConnection.cloud_connect();
             conn.setAutoCommit(false);
 
             PreparedStatement stmt4 = conn.prepareStatement("");
 
             String s4 = "update stock_transfers set "
                     + " is_uploaded= :is_uploaded"
+                    + " ,status= :status"
                     + " where "
                     + " transaction_no ='" + transaction_no + "' "
+                    + " and at_location_id ='" + at_location_id + "' "
                     + " ";
 
             s4 = SqlStringUtil.parse(s4)
                     .setNumber("is_uploaded", status)
+                    .setNumber("status", status)
                     .ok();
 
             stmt4.addBatch(s4);
 
             String s5 = "update stock_transfers_items set "
                     + " is_uploaded= :is_uploaded"
+                    + " ,status= :status"
                     + " where "
                     + " stock_transfer_id ='" + transaction_no + "' "
+                    + " and at_location_id ='" + at_location_id + "' "
                     + " ";
 
             s5 = SqlStringUtil.parse(s5)
                     .setNumber("is_uploaded", status)
+                    .setNumber("status", status)
                     .ok();
 
             stmt4.addBatch(s5);

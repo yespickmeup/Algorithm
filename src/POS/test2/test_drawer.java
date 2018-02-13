@@ -16,6 +16,10 @@ import java.util.logging.Logger;
 public class test_drawer {
 
     public static void main(String[] args) {
+        String path=System.getProperty("user.home","" );
+        System.out.println(path);       
+    }
+    public static void main2(String[] args) {
 
         try {
             String path = "cmd /c start C:\\Users\\Guinness\\drawer\\serial1.bat";

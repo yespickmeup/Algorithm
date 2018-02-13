@@ -370,7 +370,7 @@ public class Dlg_supplier_department extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         Field.Search search = (Field.Search) tf_search;
         search.setPrompt("Search");

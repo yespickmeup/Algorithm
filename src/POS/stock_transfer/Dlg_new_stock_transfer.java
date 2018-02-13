@@ -15,6 +15,7 @@ import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
+import POS.synch.Synch_stock_transfers;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -1616,7 +1617,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_searchActionPerformed
 
     private void tbl_stock_transfersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_stock_transfersMouseClicked
-        select_stock_transfer();
+        select_stock_transfer(evt);
     }//GEN-LAST:event_tbl_stock_transfersMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1881,8 +1882,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private void myInit() {
 //        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("pool_db", "db_smis_kabankalan_with_encoding");
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("main_branch", "true");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("main_branch", "false");
 //        System.setProperty("delete_stock_transfers_finalized", "true");
 
 //        System.setProperty("pool_db", "db_algorithm");
@@ -1890,7 +1891,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         init_key();
         focus();
         init_tbl_stock_transfers();
-
+        
         jTextField2.grabFocus();
         set_default_branch();
 
@@ -1902,7 +1903,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_from_location_id.setVisible(false);
         tf_to_branch_id.setVisible(false);
         tf_to_location_id.setVisible(false);
-
+        
         String where = " order by branch,location asc ";
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
         branch_location_list3 = branch_location_list2;
@@ -2478,20 +2479,91 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
     }
 
-    private void upload_transction_to_cloud(String transaction_no) {
-        Window p = (Window) this;
-        Dlg_new_stock_transfer_upload_to_cloud nd = Dlg_new_stock_transfer_upload_to_cloud.create(p, true);
-        nd.setTitle("");
-        nd.do_pass(transaction_no);
-        nd.setCallback(new Dlg_new_stock_transfer_upload_to_cloud.Callback() {
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_upload_to_cloud.OutputData data) {
-                closeDialog.ok();
+    private void upload_transction_to_cloud(final String transaction_no, final String at_location_id, final to_stock_transfers to) {
+        if (to.status == 1 && to.is_uploaded == 1) {
+            Alert.set(0, "Transaction already Uploaded and Finalized");
 
+        } else if (to.status == 2) {
+            Alert.set(0, "Transaction Deleted!");
+        } else if (to.status == 0 && to.is_uploaded == 1) {
+            int connected = MyConnection.check_cloud_connection();
+            if (connected == 0) {
+                Alert.set(0, "Error Connecting to cloud server!");
+            } else {
+                jProgressBar1.setString("Loading...Please wait...");
+                jProgressBar1.setIndeterminate(true);
+                Thread t = new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        String where = " where transaction_no ='" + transaction_no + "' and at_location_id='" + at_location_id + "' ";
+                        List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data_cloud(where);
+                        if (!stock_transfers.isEmpty()) {
+                            Stock_transfers.to_stock_transfers st = (Stock_transfers.to_stock_transfers) stock_transfers.get(0);
+                            List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
+                            if (st.status == 1 && st.is_uploaded == 1) {
+                                confirm_finalize_cloud(to, datas);
+
+                            } else {
+                                Alert.set(0, "Transaction not yet finalized by the other branch");
+                            }
+
+                        }
+                        jProgressBar1.setString("Finished...");
+                        jProgressBar1.setIndeterminate(false);
+                    }
+                });
+                t.start();
+
+            }
+
+        } else {
+            Window p = (Window) this;
+            Dlg_new_stock_transfer_upload_to_cloud nd = Dlg_new_stock_transfer_upload_to_cloud.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(transaction_no);
+            nd.setCallback(new Dlg_new_stock_transfer_upload_to_cloud.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_upload_to_cloud.OutputData data) {
+                    closeDialog.ok();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+
+    }
+
+    private void confirm_finalize_cloud(final Stock_transfers.to_stock_transfers to, final List<Stock_transfers_items.to_stock_transfers_items> datas) {
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.do_pass("Proceed Finalizing Transaction");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Stock_transfers.finalize(to, datas);
+                Synch_stock_transfers.update_status_stock_transfer(to.transaction_no, 1);
+                data_cols();
+                Alert.set(0, "Stock Transfer Finalized");
+                init_no();
+                tf_remarks.setText("");
+                jButton5.setEnabled(true);
+                jButton1.setEnabled(false);
+                jButton7.setEnabled(false);
+                tf_to_branch.setText("");
+                tf_to_branch_id.setText("");
+                tf_to_location.setText("");
+                tf_to_location_id.setText("");
+                tbl_stock_transfers_items_ALM.clear();
+                tbl_stock_transfers_items_M.fireTableDataChanged();
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
+
     }
 
     private void update_stock_transfer() {
@@ -2570,41 +2642,41 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     }
 
     private void delete_stock_transfer() {
-        final int row = tbl_stock_transfers.getSelectedRow();
-        if (row < 0) {
-            return;
-        }
-        int col = tbl_stock_transfers.getSelectedColumn();
-        final to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));
-        if (to.status == 1) {
-            Alert.set(0, "Cannot delete finalized transaction!");
-            return;
-        }
-        if (to.status == 2) {
-            Alert.set(0, "Stock Transfer Status [Deleted]!");
-            return;
-        }
-        Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
-        nd.setTitle("");
-        nd.setCallback(new Dlg_confirm_action.Callback() {
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
-                closeDialog.ok();
-                Stock_transfers.delete_stock_transfers(to);
-                data_cols();
-                tbl_stock_transfers_items_ALM.clear();
-                tbl_stock_transfers_items_M.fireTableDataChanged();
-                tf_to_location.setText("");
-                tf_to_location_id.setText("");
-                tf_remarks.setText("");
-                init_no();
-                tf_to_location.grabFocus();
-                Alert.set(3, "");
-            }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+//        final int row = tbl_stock_transfers.getSelectedRow();
+//        if (row < 0) {
+//            return;
+//        }
+//        int col = tbl_stock_transfers.getSelectedColumn();
+//        final to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));
+//        if (to.status == 1) {
+//            Alert.set(0, "Cannot delete finalized transaction!");
+//            return;
+//        }
+//        if (to.status == 2) {
+//            Alert.set(0, "Stock Transfer Status [Deleted]!");
+//            return;
+//        }
+//        Window p = (Window) this;
+//        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+//        nd.setTitle("");
+//        nd.setCallback(new Dlg_confirm_action.Callback() {
+//            @Override
+//            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+//                closeDialog.ok();
+//                Stock_transfers.delete_stock_transfers(to);
+//                data_cols();
+//                tbl_stock_transfers_items_ALM.clear();
+//                tbl_stock_transfers_items_M.fireTableDataChanged();
+//                tf_to_location.setText("");
+//                tf_to_location_id.setText("");
+//                tf_remarks.setText("");
+//                init_no();
+//                tf_to_location.grabFocus();
+//                Alert.set(3, "");
+//            }
+//        });
+//        nd.setLocationRelativeTo(this);
+//        nd.setVisible(true);
 
     }
 
@@ -3244,7 +3316,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
     }
 
-    private void select_stock_transfer() {
+    private void select_stock_transfer(MouseEvent evt) {
         int row = tbl_stock_transfers.getSelectedRow();
         if (row < 0) {
             return;
@@ -3271,8 +3343,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
 
         data_cols_items();
+
         int col = tbl_stock_transfers.getSelectedColumn();
-        System.out.println("Col: " + col);
+//        System.out.println("Col: " + col);
         if (col == 5) {
             jTabbedPane1.setSelectedIndex(0);
             jButton5.setEnabled(false);
@@ -3281,16 +3354,37 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             if (to.status == 0) {
                 jButton7.setEnabled(true);
                 jButton1.setEnabled(true);
+
+                String ab = System.getProperty("active_branches", "10");
+                String[] active_branches = ab.split(",");
+                int active = 0;
+                for (String br : active_branches) {
+                    
+                    if (br.equalsIgnoreCase(my_branch_id)) {
+                        active = 1;
+                        break;
+                    }
+                }
+                if (active == 0) {
+                    jButton7.setEnabled(false);
+//                    jButton1.setEnabled(false);
+                }
+
             } else {
                 jButton7.setEnabled(false);
                 jButton1.setEnabled(false);
             }
+
         } else if (col == 6) {
-//            delete_transfer();
+
+            delete_transfer();
+
         } else if (col == 7) {
             get_customers_aging();
+
         } else if (col == 8) {
-            upload_transction_to_cloud(to.transaction_no);
+            upload_transction_to_cloud(to.transaction_no, to.at_location_id, to);
+
         } else {
 
         }
@@ -3435,7 +3529,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
                     Stock_transfers.add_stock_transfers(rpt, datas);
                     Stock_transfers.finalize(rpt, datas);
-
+                    Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
+                    Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
                     data_cols();
                     Alert.set(0, "Stock Transfer Finalized");
                     init_no();

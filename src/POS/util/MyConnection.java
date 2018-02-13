@@ -147,7 +147,7 @@ public class MyConnection {
             host = host + ":" + port;
             String user = System.getProperty("cloud_user", "smis2");
             String password = System.getProperty("cloud_password", "nopassword101");
-            String db_name = System.getProperty("cloud_db", "db_algorithm_development");
+            String db_name = System.getProperty("cloud_db", "db_algorithm");
             System.out.println("Connecting to cloud....");
             try {
 
@@ -183,7 +183,7 @@ public class MyConnection {
         host = host + ":" + port;
         String user = System.getProperty("cloud_user", "smis2");
         String password = System.getProperty("cloud_password", "nopassword101");
-        String db_name = System.getProperty("cloud_db", "db_algorithm_development");
+        String db_name = System.getProperty("cloud_db", "db_algorithm");
         System.out.println("Connecting to cloud....");
         try {
             Class.forName("com.mysql.jdbc.Driver");

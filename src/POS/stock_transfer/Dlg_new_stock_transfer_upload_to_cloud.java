@@ -344,7 +344,8 @@ public class Dlg_new_stock_transfer_upload_to_cloud extends javax.swing.JDialog 
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
-
+    
+    
     private void myInit() {
         init_key();
     }

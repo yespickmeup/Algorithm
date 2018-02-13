@@ -39,6 +39,7 @@ alter table stock_transfers_items add is_uploaded int default 0;
 
 CREATE USER 'smis2'@'%' IDENTIFIED BY 'nopassword101';
 CREATE USER 'smis'@'%' IDENTIFIED BY 'nopassword101';
+
 GRANT ALL PRIVILEGES ON * . * TO 'smis'@'%';
 GRANT ALL PRIVILEGES ON * . * TO 'smis2'@'%';
 flush privileges;

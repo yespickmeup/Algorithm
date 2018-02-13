@@ -274,6 +274,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         lbl_charge_amount5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lbl_gross_amount1 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_orders = new javax.swing.JTable();
@@ -338,7 +339,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(246, 246, 246));
 
         lbl_change.setBackground(new java.awt.Color(4, 176, 217));
-        lbl_change.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lbl_change.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lbl_change.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_change.setText("P 1,000.00 ");
         lbl_change.setOpaque(true);
@@ -533,11 +534,13 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         lbl_gross_amount1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_gross_amount1.setText("0000000000000000");
 
+        jLabel44.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel44.setText("Change");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_change, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -654,6 +657,10 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_gross_amount1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_change, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,7 +779,9 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                     .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(lbl_tendered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_change, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_change, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -881,6 +890,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;

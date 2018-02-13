@@ -666,6 +666,7 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                         Field.Input br = (Field.Input) tf_from_branch;
                         jProgressBar1.setString("Retrieving records...");
                         String where = " where status=0 and at_branch_id<>'" + br.getId() + "' and to_branch_id='" + br.getId() + "'";
+                        System.out.println(where);
                         List<Stock_transfers.to_stock_transfers> datas = Stock_transfers.ret_data_cloud(where);
                         loadData_stock_transfers(datas);
                         jLabel2.setText("" + datas.size());

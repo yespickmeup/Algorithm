@@ -432,7 +432,7 @@ public class Dlg_bank_recon extends javax.swing.JDialog {
     private javax.swing.JTable tbl_bank_accounts;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
         set_default_location();
         init_tbl_bank_accounts(tbl_bank_accounts);
