@@ -10,6 +10,7 @@
     <parameter name="printed_by" class="java.lang.String"/>
     <parameter name="branch" class="java.lang.String"/>
     <parameter name="location" class="java.lang.String"/>
+    <parameter name="cashier" class="java.lang.String"/>
     <field name="date" class="java.lang.String"/>
     <field name="added_by" class="java.lang.String"/>
     <field name="purpose" class="java.lang.String"/>
@@ -34,9 +35,9 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="108" splitType="Stretch">
+        <band height="118" splitType="Stretch">
             <textField>
-                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="192" y="68" width="108" height="13"/>
+                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="202" y="69" width="108" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="2"/>
@@ -67,7 +68,7 @@
                 <textFieldExpression><![CDATA[$P{contact_no}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="142" y="81" width="50" height="13"/>
+                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="152" y="82" width="50" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="2"/>
@@ -75,7 +76,7 @@
                 <text><![CDATA[Printed by:]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="192" y="81" width="108" height="13"/>
+                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="202" y="82" width="108" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="2"/>
@@ -83,7 +84,7 @@
                 <textFieldExpression><![CDATA[$P{printed_by}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="39" y="80" width="103" height="13"/>
+                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="49" y="81" width="103" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="5"/>
@@ -91,7 +92,7 @@
                 <textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="142" y="68" width="50" height="13"/>
+                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="152" y="69" width="50" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="2"/>
@@ -106,7 +107,7 @@
                 <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="39" y="68" width="103" height="13"/>
+                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="49" y="69" width="103" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="5"/>
@@ -114,7 +115,7 @@
                 <textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="0" y="68" width="39" height="13"/>
+                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="0" y="68" width="49" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="5"/>
@@ -122,13 +123,29 @@
                 <text><![CDATA[Branch:]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="0" y="80" width="39" height="13"/>
+                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="0" y="80" width="49" height="13"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
                     <paragraph leftIndent="5"/>
                 </textElement>
                 <text><![CDATA[Date:]]></text>
             </staticText>
+            <staticText>
+                <reportElement uuid="fb8623ff-bd90-4d84-be45-b0a54630b48c" x="0" y="93" width="49" height="13"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <text><![CDATA[Cashier:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="76859b81-655a-4363-ad06-4db11339714e" x="49" y="93" width="103" height="13"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                    <paragraph leftIndent="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cashier}]]></textFieldExpression>
+            </textField>
         </band>
     </title>
     <pageHeader>

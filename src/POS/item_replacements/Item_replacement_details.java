@@ -66,7 +66,7 @@ public class Item_replacement_details {
         public final String location;
         public final String location_id;
 
-        public to_item_replacement_details(int id, String item_replacement_no, String sales_no, String customer_name, String customer_id, String date_added, String user_screen_name, String user_id, String item_code, String barcode, String generic_name,String description, String item_type, String serial_no, double product_qty, String unit, double conversion, double selling_price, int is_vatable, int selling_type, String discount_name, double discount_amount, String discount_customer_name, String discount_customer_id, String category, String category_id, String classification, String classification_id,String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, int is_replacement, String reason, int status, String branch, String branch_id, String location, String location_id) {
+        public to_item_replacement_details(int id, String item_replacement_no, String sales_no, String customer_name, String customer_id, String date_added, String user_screen_name, String user_id, String item_code, String barcode, String generic_name, String description, String item_type, String serial_no, double product_qty, String unit, double conversion, double selling_price, int is_vatable, int selling_type, String discount_name, double discount_amount, String discount_customer_name, String discount_customer_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, int is_replacement, String reason, int status, String branch, String branch_id, String location, String location_id) {
             this.id = id;
             this.item_replacement_no = item_replacement_no;
             this.sales_no = sales_no;
@@ -78,7 +78,7 @@ public class Item_replacement_details {
             this.item_code = item_code;
             this.barcode = barcode;
             this.generic_name = generic_name;
-            this.description=description;
+            this.description = description;
             this.item_type = item_type;
             this.serial_no = serial_no;
             this.product_qty = product_qty;
@@ -94,7 +94,7 @@ public class Item_replacement_details {
             this.category = category;
             this.category_id = category_id;
             this.classification = classification;
-            this.classification_id=classification_id;
+            this.classification_id = classification_id;
             this.sub_classification = sub_classification;
             this.sub_classification_id = sub_classification_id;
             this.brand = brand;
@@ -341,6 +341,28 @@ public class Item_replacement_details {
         }
     }
 
+    public static void update_serial(to_item_replacement_details to_item_replacement_details, String serial) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update item_replacement_details set "
+                    + " serial_no= :serial_no "
+                    + " where id='" + to_item_replacement_details.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("serial_no", serial)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Item_replacement_details.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_data(to_item_replacement_details to_item_replacement_details) {
         try {
             Connection conn = MyConnection.connect();
@@ -405,7 +427,6 @@ public class Item_replacement_details {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
-                   
                     + " from item_replacement_details"
                     + " " + where;
 
@@ -423,7 +444,7 @@ public class Item_replacement_details {
                 String item_code = rs.getString(9);
                 String barcode = rs.getString(10);
                 String generic_name = rs.getString(11);
-                String description=rs.getString(12);
+                String description = rs.getString(12);
                 String item_type = rs.getString(13);
                 String serial_no = rs.getString(14);
                 double product_qty = rs.getDouble(15);
@@ -439,7 +460,7 @@ public class Item_replacement_details {
                 String category = rs.getString(25);
                 String category_id = rs.getString(26);
                 String classification = rs.getString(27);
-                String classification_id=rs.getString(28);
+                String classification_id = rs.getString(28);
                 String sub_classification = rs.getString(29);
                 String sub_classification_id = rs.getString(30);
                 String brand = rs.getString(31);
@@ -454,7 +475,7 @@ public class Item_replacement_details {
                 String location = rs.getString(40);
                 String location_id = rs.getString(41);
 
-                to_item_replacement_details to = new to_item_replacement_details(id, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, user_id, item_code, barcode, generic_name,description, item_type, serial_no, product_qty, unit, conversion, selling_price, is_vatable, selling_type, discount_name, discount_amount, discount_customer_name, discount_customer_id, category, category_id, classification,classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, is_replacement, reason, status, branch, branch_id, location, location_id);
+                to_item_replacement_details to = new to_item_replacement_details(id, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, user_id, item_code, barcode, generic_name, description, item_type, serial_no, product_qty, unit, conversion, selling_price, is_vatable, selling_type, discount_name, discount_amount, discount_customer_name, discount_customer_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, is_replacement, reason, status, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;

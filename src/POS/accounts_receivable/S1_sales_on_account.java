@@ -260,6 +260,24 @@ public class S1_sales_on_account {
         }
     }
 
+    public static String increment_id_conn( Connection conn) {
+        String id = "";
+        try {
+            String s0 = "select max(id) from sales_on_account";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+            }
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+//            MyConnection.close();
+        }
+    }
+
     public static String increment_id2(String where) {
         String id = "0000";
         try {

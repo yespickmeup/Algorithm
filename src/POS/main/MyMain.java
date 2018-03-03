@@ -190,6 +190,8 @@ public class MyMain {
             System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_algorithm"));
             System.setProperty("active_branches", prop.getProperty("active_branches", ""));
             System.setProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+            System.setProperty("img_logo", prop.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png"));
+
             String version = System.getProperty("version", "");
             System.setProperty("version", version);
             //

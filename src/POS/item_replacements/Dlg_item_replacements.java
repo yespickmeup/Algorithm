@@ -180,7 +180,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 getWidth());
         int ySize = ((int) tk.getScreenSize().
                 getHeight());
-//        dialog.setSize(xSize, ySize);
+        dialog.setSize(xSize, ySize);
         dialog.setVisible(true);
 
     }
@@ -756,6 +756,11 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 
             }
         ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable3);
 
         jLabel21.setText("Total no. of item/s:");
@@ -1110,7 +1115,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        init_sales_transactions();
+//        init_sales_transactions();
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -1165,6 +1170,10 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     private void tbl_report_item_replacementsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_report_item_replacementsMouseClicked
         select_report_item_replacement();
     }//GEN-LAST:event_tbl_report_item_replacementsMouseClicked
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        select_replacements();
+    }//GEN-LAST:event_jTable3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1253,9 +1262,10 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     private javax.swing.JTextField tf_branch1;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        
+
 //        System.setProperty("pool_db", "db_algorithm");
-//         System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("return_exchange_days","2000");
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);
@@ -1637,7 +1647,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         tbl_item_replacements.setRowHeight(25);
         int[] tbl_widths_item_replacements = {100, 120, 150, 80, 70, 70, 50, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_item_replacements.length; i < n; i++) {
-            if (i == 2||i == 1) {
+            if (i == 2 || i == 1) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_item_replacements, i, tbl_widths_item_replacements[i]);
@@ -1705,7 +1715,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 5:
                     return FitIn.fmt_wc_0(tt.discount) + " ";
                 case 6:
-                    double total = tt.amount_due - (tt.replacement_amount + tt.discount);
+                    double total = (tt.amount_due- tt.discount) - (tt.replacement_amount );
                     if (total < 0) {
                         return " Over";
                     } else if (total == 0) {
@@ -1751,7 +1761,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }
 
     private void select_item_replacement() {
-        int row = tbl_item_replacements.getSelectedRow();
+        final int row = tbl_item_replacements.getSelectedRow();
         if (row < 0) {
             return;
         }
@@ -1820,6 +1830,28 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                     jLabel22.setText("0");
                     jLabel19.setText("0.00");
                     jLabel23.setText("0.00");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        } else if (col == 5) {
+            if (to.status == 1) {
+                Alert.set(0, "Transaction already finalized!");
+                return;
+            }
+            Window p = (Window) this;
+            Dlg_item_replacement_edit_discount nd = Dlg_item_replacement_edit_discount.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.discount);
+            nd.setCallback(new Dlg_item_replacement_edit_discount.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_item_replacement_edit_discount.OutputData data) {
+                    closeDialog.ok();
+                    Item_replacements.update_discount(to, data.discount);
+                    ret_item_replacements();
+                    Alert.set(2, "");
+                    tbl_item_replacements.setRowSelectionInterval(row, row);
                 }
             });
             nd.setLocationRelativeTo(this);
@@ -2179,6 +2211,35 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         jLabel23.setText(FitIn.fmt_wc_0(amount));
         jLabel22.setText("" + datas.size());
     }
+
+    private void select_replacements() {
+        int row = jTable3.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final Item_replacement_details.to_item_replacement_details to = (Item_replacement_details.to_item_replacement_details) tbl_replacement_ALM.get(row);
+        if (to.status == 1) {
+            Alert.set(0, "Transaction already finalized!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_item_replacement_edit_serial nd = Dlg_item_replacement_edit_serial.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to.serial_no);
+        nd.setCallback(new Dlg_item_replacement_edit_serial.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_item_replacement_edit_serial.OutputData data) {
+                closeDialog.ok();
+                Item_replacement_details.update_serial(to, data.serial);
+                ret_item_replacement_details_replacement();
+                Alert.set(2, "");
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" item_replacements "> 
@@ -2208,7 +2269,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_report_item_replacements, 6);
         TableWidthUtilities.setColumnRightRenderer(tbl_report_item_replacements, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_report_item_replacements, 5);
-         TableWidthUtilities.setColumnRightRenderer(tbl_report_item_replacements, 8);
+        TableWidthUtilities.setColumnRightRenderer(tbl_report_item_replacements, 8);
         tbl_report_item_replacements.getColumnModel().getColumn(9).setCellRenderer(new ImageRenderer());
         tbl_report_item_replacements.getColumnModel().getColumn(10).setCellRenderer(new ImageRenderer());
 
@@ -2264,7 +2325,8 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 6:
                     return FitIn.fmt_wc_0(tt.discount) + " ";
                 case 7:
-                    double total = tt.amount_due - (tt.replacement_amount + tt.discount);
+                    
+                    double total = (tt.replacement_amount - tt.discount)-tt.amount_due  ;
                     if (total < 0) {
                         return " Over";
                     } else if (total == 0) {
@@ -2273,7 +2335,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                         return " Short";
                     }
                 case 8:
-                    double total2 =  (tt.replacement_amount + tt.discount)-tt.amount_due ;
+                    double total2 = (tt.replacement_amount - tt.discount)-tt.amount_due  ;
                     return FitIn.fmt_wc_0(total2) + " ";
                 case 9:
                     if (tt.status == 0) {
@@ -2329,10 +2391,10 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         for (to_item_replacements to : datas) {
             double total = to.replacement_amount + to.discount;
             if (total < to.amount_due) {
-                na_short += total-to.amount_due;
+                na_short += total - to.amount_due;
             }
             if (total > to.amount_due) {
-                over += total-to.amount_due;
+                over += total - to.amount_due;
             }
         }
 

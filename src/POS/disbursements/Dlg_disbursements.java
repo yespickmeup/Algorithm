@@ -919,7 +919,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_cashierActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       init_report();
+        init_report();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -984,6 +984,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     private void myInit() {
 
 //        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);
@@ -1118,7 +1119,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         if (!jCheckBox4.isSelected() && jCheckBox5.isSelected()) {
             where = where + " and branch_id='" + br.getId() + "' ";
         }
-        System.out.println(where);
+//        System.out.println(where);
         List<S1_disbursements.to_disbursements> datas = S1_disbursements.ret_data(where);
         loadData_disbursements(datas);
 
@@ -1485,7 +1486,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     private void init_report() {
         jProgressBar1.setString("Loading...Please wait...");
         jProgressBar1.setIndeterminate(true);
-
+        jTabbedPane1.setSelectedIndex(2);
         Thread t = new Thread(new Runnable() {
 
             @Override
@@ -1493,18 +1494,44 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                 Field.Combo br = (Field.Combo) jTextField2;
                 Field.Combo lo = (Field.Combo) jTextField1;
                 Field.Combo f = (Field.Combo) tf_cashier;
-                String date_from = synsoftech.util.DateType.sf.format(jDateChooser3.getDate());
+                String date_from = synsoftech.util.DateType.sf.format(jDateChooser1.getDate());
                 String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
-                String where = " where YEAR(disbursement_date)='2017' and MONTH(disbursement_date)='11' group by category_name order by category_name asc ";
+
+                String where = " where user_screen_name like '%" + "" + "%' ";
+
+                Field.Combo user = (Field.Combo) tf_cashier;
+                Field.Combo cat = (Field.Combo) tf_customer_name3;
+                String cashier = "All";
+
+                if (!jCheckBox6.isSelected()) {
+                    where = where + " and user_id='" + user.getId() + "'";
+                    cashier = tf_cashier.getText();
+                }
+                if (!jCheckBox2.isSelected()) {
+                    where = where + " and category_id='" + cat.getId() + "'";
+                }
+                if (!jCheckBox3.isSelected()) {
+                    where = where + " and Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' ";
+                }
+                if (!jCheckBox4.isSelected() && !jCheckBox5.isSelected()) {
+                    where = where + " and location_id='" + lo.getId() + "' ";
+                }
+                if (!jCheckBox4.isSelected() && jCheckBox5.isSelected()) {
+                    where = where + " and branch_id='" + br.getId() + "' ";
+                }
+
+                where = where + " group by category_name order by category_name asc";
+//                System.out.println(where);
                 List<Srpt_disbursements_category.field> datas = Srpt_disbursements_category.ret_data(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String address = System.getProperty("address", "Daro Highway, Dumaguete City");
                 String contact_no = System.getProperty("contact_no", "225-1235");
-                String date = "January 24, 2016";
-                String printed_by = "Administrator";
-                String branch = "";
-                String location = "";
-                Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location);
+                String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+                String printed_by = MyUser.getUser_screen_name();
+                String branch = jTextField3.getText();
+                String location = jTextField4.getText();
+
+                Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location,cashier);
                 rpt.fields.addAll(datas);
                 String jrxml = "rpt_disbursement_category.jrxml";
                 report_sales_items(rpt, jrxml);

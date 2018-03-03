@@ -678,14 +678,14 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         br.setId("" + to.branch_id);
 
     }
-    
-   final List<MySales_Items.items> my_items = new ArrayList();
+
+    final List<MySales_Items.items> my_items = new ArrayList();
 
     public void do_pass(List<MySales_Items.items> acc) {
-        
+
         my_items.clear();
         my_items.addAll(acc);
-        
+
         double amount = 0;
 
         for (MySales_Items.items item : acc) {
@@ -878,23 +878,50 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         int col = jTable1.getSelectedColumn();
         if (col == 0) {
             final MySales_Items.items item = (MySales_Items.items) tbl_sale_items_ALM.get(row);
-            double qty=0;
-            for(MySales_Items.items it:my_items){
-                if(it.item_code.equalsIgnoreCase(item.item_code)){
-                    qty=it.product_qty;
+            double qty = 0;
+            for (MySales_Items.items it : my_items) {
+                if (it.item_code.equalsIgnoreCase(item.item_code)) {
+                    qty = it.product_qty;
                     break;
                 }
             }
-           
+
             Window p = (Window) this;
             Dlg_item_replacement_selected_qty nd = Dlg_item_replacement_selected_qty.create(p, true);
             nd.setTitle("");
-            nd.do_pass2(item,qty);
+            nd.do_pass2(item, qty);
             nd.setCallback(new Dlg_item_replacement_selected_qty.Callback() {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_item_replacement_selected_qty.OutputData data) {
                     closeDialog.ok();
                     item.setProduct_qty(data.qty);
+                    tbl_sale_items_M.fireTableDataChanged();
+                    double amount = 0;
+                    List<MySales_Items.items> acc = tbl_sale_items_ALM;
+                    for (MySales_Items.items item : acc) {
+                        amount += item.product_qty * item.selling_price;
+                    }
+
+                    jLabel6.setText(FitIn.fmt_wc_0(amount));
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+
+        if (col == 4) {
+            final MySales_Items.items item = (MySales_Items.items) tbl_sale_items_ALM.get(row);
+            Window p = (Window) this;
+            Dlg_item_replacement_original_price nd = Dlg_item_replacement_original_price.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(item);
+            nd.setCallback(new Dlg_item_replacement_original_price.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_item_replacement_original_price.OutputData data) {
+                    closeDialog.ok();
+
+                    item.setSelling_price(data.selling_price);
                     tbl_sale_items_M.fireTableDataChanged();
                     double amount = 0;
                     List<MySales_Items.items> acc = tbl_sale_items_ALM;
@@ -1002,6 +1029,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_item_replacement_select_qty.OutputData data) {
                 closeDialog.ok();
                 item.setProduct_qty(data.qty);
+                item.setSerial_no(data.serial);
                 List<Inventory_barcodes.to_inventory_barcodes> item2 = new ArrayList();
                 item2.add(item);
 
@@ -1198,6 +1226,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                 public void ok(CloseDialog closeDialog, Dlg_item_replacement_select_qty.OutputData data) {
                     closeDialog.ok();
                     item.setProduct_qty(data.qty);
+                    item.setSerial_no(data.serial);
                     tbl_sale_items_M2.fireTableDataChanged();
                     count_amount_replacements();
                 }

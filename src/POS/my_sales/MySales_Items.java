@@ -31,11 +31,11 @@ public class MySales_Items {
         public final String item_type;
         public final String supplier_name;
         public final String supplier_id;
-        public final String serial_no;
+        public  String serial_no;
         public  double product_qty;
         public final String unit;
         public final double conversion;
-        public final double selling_price;
+        public  double selling_price;
         public final String date_added;
         public final String user_id;
         public final String user_screen_name;
@@ -110,6 +110,22 @@ public class MySales_Items {
             this.wtax = wtax;
         }
 
+        public double getSelling_price() {
+            return selling_price;
+        }
+
+        public void setSelling_price(double selling_price) {
+            this.selling_price = selling_price;
+        }
+        
+        public String getSerial_no() {
+            return serial_no;
+        }
+
+        public void setSerial_no(String serial_no) {
+            this.serial_no = serial_no;
+        }
+        
         public double getProduct_qty() {
             return product_qty;
         }

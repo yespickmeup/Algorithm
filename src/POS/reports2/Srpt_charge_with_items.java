@@ -41,8 +41,10 @@ public class Srpt_charge_with_items {
     public final List<field> fields;
     public final String img_path;
     public final double total_balance;
+    public final String ar_footer;
+    public final String telephone_number;
 
-    public Srpt_charge_with_items(String business_name, String address, String contact_no, String date, String customer_name, String customer_address, String customer_id, String img_path, double total_balance) {
+    public Srpt_charge_with_items(String business_name, String address, String contact_no, String date, String customer_name, String customer_address, String customer_id, String img_path, double total_balance, String ar_footer, String telephone_number) {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
@@ -53,6 +55,8 @@ public class Srpt_charge_with_items {
         this.fields = new ArrayList();
         this.img_path = img_path;
         this.total_balance = total_balance;
+        this.ar_footer = ar_footer;
+        this.telephone_number = telephone_number;
     }
 
     public static class field {
@@ -258,8 +262,10 @@ public class Srpt_charge_with_items {
         String customer_id = "9|0391";
 
         String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
+        String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
+        String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
 
-        Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance);
+        Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance, ar_footer, telephone_number);
 
         rpt.fields.addAll(fields);
 
@@ -354,7 +360,7 @@ public class Srpt_charge_with_items {
                 int status = rs.getInt(11);
                 double term = rs.getDouble(12);
                 String date_applied = rs.getString(13);
-                date_applied=DateType.convert_slash_datetime2(date_applied);
+                date_applied = DateType.convert_slash_datetime2(date_applied);
                 double paid = rs.getDouble(14);
                 String date_paid = rs.getString(15);
                 String remarks = rs.getString(16);

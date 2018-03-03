@@ -298,6 +298,60 @@ public class S1_accounts_receivable {
             MyConnection.close();
         }
     }
+    public static Customers.to_customers ret_customer_balance_conn(String account_id, Connection conn) {
+        Customers.to_customers to1 = null;
+        try {
+           
+            String s0 = "select "
+                    + "id"
+                    + ",customer_name"
+                    + ",customer_no"
+                    + ",contact_no"
+                    + ",credit_limit"
+                    + ",address"
+                    + ",term"
+                    + ",location"
+                    + ",balance"
+                    + ",discount"
+                    + ",prepaid"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location_id"
+                    + ",department"
+                    + ",department_id"
+                    + " from  customers where "
+                    + " customer_no ='" + account_id + "' "
+                    + " ";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_name = rs.getString(2);
+                String customer_no = rs.getString(3);
+                String contact_no = rs.getString(4);
+                double credit_limit = rs.getDouble(5);
+                String address = rs.getString(6);
+                double term = rs.getDouble(7);
+                String location = rs.getString(8);
+                double balance = rs.getDouble(9);
+                double discount = rs.getDouble(10);
+                double prepaid = rs.getDouble(11);
+                String branch = rs.getString(11);
+                String branch_id = rs.getString(12);
+                String location_id = rs.getString(13);
+                String department = rs.getString(14);
+                String department_id = rs.getString(15);
+                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id, department, department_id
+                );
+            }
+            return to1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+//            MyConnection.close();
+        }
+    }
 
     public static void edit_accounts_receivable(to_accounts_receivable to_accounts_receivable, double previous_amount, double new_amount) {
         try {
@@ -1157,6 +1211,37 @@ public class S1_accounts_receivable {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();
+        }
+    }
+
+    public static String increment_id_conn(String branch_id,Connection conn) {
+        String ids = "";
+        try {
+          
+            String s0 = "select max(id) from accounts_receivable where branch_id='" + branch_id + "'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                ids = rs.getString(1);
+            }
+            if (ids == null) {
+                ids = branch_id + "|AR-00000001";
+            } else {
+                String s2 = "select ar_no from accounts_receivable where id='" + ids + "'";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    ids = rs2.getString(1);
+                }
+            }
+
+            ids = ReceiptIncrementor.increment(ids);
+
+            return ids;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+//            MyConnection.close();
         }
     }
 }

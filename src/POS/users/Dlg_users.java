@@ -6,10 +6,10 @@ package POS.users;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
-import POS.main.Main;
 import POS.users.S1_user_default_previleges.to_user_default_previleges;
 import POS.users.S1_user_previleges.to_user_previleges;
 import POS.users.S1_users.to_users;
+import POS.users.User_default_priveleges.to_user_default_priveleges;
 import POS.util.Alert;
 import POS.util.Courier;
 import POS.util.DateType;
@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -36,6 +37,7 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -289,6 +291,9 @@ public class Dlg_users extends javax.swing.JDialog {
         jButton1 = new Button.Default();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbl_user_default_priveleges = new javax.swing.JTable();
 
         pm_cashier1.setText("Select Previleges to Copy");
         jPopupMenu1.add(pm_cashier1);
@@ -1043,13 +1048,46 @@ public class Dlg_users extends javax.swing.JDialog {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
-                .addGap(23, 23, 23))
+                .addContainerGap())
+        );
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Privileges", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        tbl_user_default_priveleges.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(tbl_user_default_priveleges);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1065,6 +1103,10 @@ public class Dlg_users extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jXPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1073,8 +1115,10 @@ public class Dlg_users extends javax.swing.JDialog {
                     .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1290,10 +1334,12 @@ public class Dlg_users extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -1307,6 +1353,7 @@ public class Dlg_users extends javax.swing.JDialog {
     private javax.swing.JMenuItem pm_inventory;
     private javax.swing.JMenuItem pm_services;
     private javax.swing.JTable tbl_user_default_previleges;
+    private javax.swing.JTable tbl_user_default_priveleges;
     private javax.swing.JTable tbl_user_previleges;
     private org.jdesktop.swingx.JXTable tbl_users;
     private javax.swing.JTextField tf_from_branch;
@@ -1320,7 +1367,10 @@ public class Dlg_users extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
+
+//        System.setProperty("pool_db", "db_algorithm");
+
         tf_search.grabFocus();
         init_key();
         hover();
@@ -1333,14 +1383,15 @@ public class Dlg_users extends javax.swing.JDialog {
         jLabel3.setVisible(false);
         cb_lvl.setVisible(false);
         jPanel2.setVisible(false);
-
+        
         init_tbl_user_default_previleges();
         data_cols_default();
-
+        init_tbl_user_default_priveleges(tbl_user_default_priveleges);
         init_tbl_user_previleges();
-
+        
         String where = " order by branch,location asc ";
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
+        
     }
 
     List<S1_branch_locations.to_branch_locations> branch_location_list2 = new ArrayList();
@@ -1592,6 +1643,7 @@ public class Dlg_users extends javax.swing.JDialog {
                     }
 
                 case 7:
+                    
                     return tt.t_sales;
                 case 8:
                     return tt.t_receipts;
@@ -2304,7 +2356,17 @@ public class Dlg_users extends javax.swing.JDialog {
                     "Credit Card",
                     "Sales",
                     "Cashier Report",
-                    "Stock Ledger Report"
+                    "Stock Ledger Report",
+                    "Cashier CashCount",
+                    "Cashier Report - Sales Summary",
+                    "Cashier Report - Cash Count",
+                    "Cashier Report - Sales Ledger",
+                    "Cashier Report - Sales by Item",
+                    "Cashier Report - Void/Replacement",
+                    "Cashier Report - Remittance",
+                    "Cashier Report - AR Payments",
+                    "Cashier Report - Prepaid Payments",
+                    "Return/Exchange"
                 };
                 for (String prev : previleges) {
                     to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
@@ -2554,8 +2616,18 @@ public class Dlg_users extends javax.swing.JDialog {
                     "AR Items",
                     "Update Item Pricing any Branches",
                     "Update Item Pricing per Branch",
-                    "Finalize Price Updates"
-
+                    "Finalize Price Updates",
+                    "Cashier CashCount",
+                    "Cashier Report - Sales Summary",
+                    "Cashier Report - Cash Count",
+                    "Cashier Report - Sales Ledger",
+                    "Cashier Report - Sales by Item",
+                    "Cashier Report - Void/Replacement",
+                    "Cashier Report - Remittance",
+                    "Cashier Report - AR Payments",
+                    "Cashier Report - Prepaid Payments",
+                    "Return/Exchange",
+                    "Return/Exchange - (Finalize)"
                 };
                 for (String prev : previleges) {
                     to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
@@ -2569,4 +2641,91 @@ public class Dlg_users extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" user_default_priveleges "> 
+    public static ArrayListModel tbl_user_default_priveleges_ALM;
+    public static Tbluser_default_privelegesModel tbl_user_default_priveleges_M;
+
+    public static void init_tbl_user_default_priveleges(JTable tbl_user_default_priveleges) {
+        tbl_user_default_priveleges_ALM = new ArrayListModel();
+        tbl_user_default_priveleges_M = new Tbluser_default_privelegesModel(tbl_user_default_priveleges_ALM);
+        tbl_user_default_priveleges.setModel(tbl_user_default_priveleges_M);
+        tbl_user_default_priveleges.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_user_default_priveleges.setRowHeight(25);
+        int[] tbl_widths_user_default_priveleges = {100, 100, 60, 60, 60, 60, 60, 60, 0, 0};
+        for (int i = 0, n = tbl_widths_user_default_priveleges.length; i < n; i++) {
+            if (i == 0) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_user_default_priveleges, i, tbl_widths_user_default_priveleges[i]);
+        }
+        Dimension d = tbl_user_default_priveleges.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_user_default_priveleges.getTableHeader().setPreferredSize(d);
+        tbl_user_default_priveleges.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_user_default_priveleges.setRowHeight(25);
+        tbl_user_default_priveleges.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_user_default_priveleges.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
+    }
+
+    public static void loadData_user_default_priveleges(List<to_user_default_priveleges> acc) {
+        tbl_user_default_priveleges_ALM.clear();
+        tbl_user_default_priveleges_ALM.addAll(acc);
+    }
+
+    public static class Tbluser_default_privelegesModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Privelege", "Type", "  View", "  Add", " Edit", " Delete", "Finalize", "Report", "", ""
+        };
+
+        public Tbluser_default_privelegesModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int column) {
+            if (column == 2 || column == 3 || column == 4 || column == 5 || column == 6 || column == 7) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_user_default_priveleges tt = (to_user_default_priveleges) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.name;
+                case 1:
+                    return " " + tt.account;
+                case 2:
+                    return tt.view;
+                case 3:
+                    return tt.add;
+                case 4:
+                    return tt.edit;
+                case 5:
+                    return tt.delete;
+                case 6:
+                    return tt.finalize;
+                case 7:
+                    return tt.report;
+                case 8:
+                    return "/cms/icons/remove11.png";
+
+                default:
+                    return tt.is_uploaded;
+            }
+        }
+    }
+
 }

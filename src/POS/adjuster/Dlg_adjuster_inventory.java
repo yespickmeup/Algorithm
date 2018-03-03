@@ -1615,86 +1615,78 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 //</editor-fold> 
 
     private void data_cols() {
-        jProgressBar1.setString("Loading...Please wait...");
-        jProgressBar1.setIndeterminate(true);
         jTextField1.setEnabled(false);
         jButton1.setEnabled(false);
-        Thread t = new Thread(new Runnable() {
+        Field.Combo br = (Field.Combo) jTextField2;
+        Field.Combo lo = (Field.Combo) jTextField3;
 
-            @Override
-            public void run() {
-                Field.Combo br = (Field.Combo) jTextField2;
-                Field.Combo lo = (Field.Combo) jTextField3;
+        String where = " where category like '%" + "" + "%' ";
+        if (jCheckBox6.isSelected()) {
+            where = where + "   ";
+        }
+        if (jCheckBox7.isSelected()) {
+            where = where + "  "
+                    + " and main_barcode='" + jTextField1.getText() + "'  "
+                    + "  ";
+        }
+        if (jCheckBox8.isSelected()) {
+            where = where + " and  barcode like '" + jTextField1.getText() + "'   ";
+        }
+        if (jCheckBox9.isSelected()) {
+            where = where + " and description like '%" + jTextField1.getText() + "%'  ";
+        }
 
-                String where = " where category like '%" + "" + "%' ";
-                if (jCheckBox6.isSelected()) {
-                    where = where + "   ";
-                }
-                if (jCheckBox7.isSelected()) {
-                    where = where + "  "
-                            + " and main_barcode='" + jTextField1.getText() + "'  "
-                            + "  ";
-                }
-                if (jCheckBox8.isSelected()) {
-                    where = where + " and  barcode like '" + jTextField1.getText() + "'   ";
-                }
-                if (jCheckBox9.isSelected()) {
-                    where = where + " and description like '%" + jTextField1.getText() + "%'  ";
-                }
+        if (!jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
+            where = where + " and location_id='" + lo.getId() + "' ";
+        }
+        if (!jCheckBox1.isSelected() && jCheckBox2.isSelected()) {
+            where = where + " and branch_code='" + br.getId() + "' ";
+        }
 
-                if (!jCheckBox1.isSelected() && !jCheckBox2.isSelected()) {
-                    where = where + " and location_id='" + lo.getId() + "' ";
-                }
-                if (!jCheckBox1.isSelected() && jCheckBox2.isSelected()) {
-                    where = where + " and branch_code='" + br.getId() + "' ";
-                }
+        String category = "All";
+        String classification = "All";
+        String sub_classification = "All";
+        String brand = "All";
+        String model = "All";
+        if (!jCheckBox10.isSelected()) {
+            Field.Combo cat = (Field.Combo) tf_category;
+            where = where + " and category_id ='" + cat.getId() + "' ";
+            category = cat.getText();
+        }
+        if (!jCheckBox11.isSelected()) {
+            Field.Combo clas = (Field.Combo) tf_classification;
+            where = where + " and classification_id ='" + clas.getId() + "' ";
+            classification = clas.getText();
+        }
+        if (!jCheckBox12.isSelected()) {
+            Field.Combo sub_clas = (Field.Combo) tf_sub_classification;
+            where = where + " and sub_class_id ='" + sub_clas.getId() + "' ";
+            sub_classification = sub_clas.getText();
+        }
 
-                String category = "All";
-                String classification = "All";
-                String sub_classification = "All";
-                String brand = "All";
-                String model = "All";
-                if (!jCheckBox10.isSelected()) {
-                    Field.Combo cat = (Field.Combo) tf_category;
-                    where = where + " and category_id ='" + cat.getId() + "' ";
-                    category = cat.getText();
-                }
-                if (!jCheckBox11.isSelected()) {
-                    Field.Combo clas = (Field.Combo) tf_classification;
-                    where = where + " and classification_id ='" + clas.getId() + "' ";
-                    classification = clas.getText();
-                }
-                if (!jCheckBox12.isSelected()) {
-                    Field.Combo sub_clas = (Field.Combo) tf_sub_classification;
-                    where = where + " and sub_class_id ='" + sub_clas.getId() + "' ";
-                    sub_classification = sub_clas.getText();
-                }
+        if (!jCheckBox14.isSelected()) {
+            Field.Combo bra = (Field.Combo) tf_brand;
+            where = where + " and brand_id ='" + bra.getId() + "' ";
+            brand = bra.getText();
+        }
+        if (!jCheckBox13.isSelected()) {
+            Field.Combo mod = (Field.Combo) tf_model;
+            where = where + " and model_id ='" + mod.getId() + "' ";
+            model = mod.getText();
+        }
 
-                if (!jCheckBox14.isSelected()) {
-                    Field.Combo bra = (Field.Combo) tf_brand;
-                    where = where + " and brand_id ='" + bra.getId() + "' ";
-                    brand = bra.getText();
-                }
-                if (!jCheckBox13.isSelected()) {
-                    Field.Combo mod = (Field.Combo) tf_model;
-                    where = where + " and model_id ='" + mod.getId() + "' ";
-                    model = mod.getText();
-                }
-
-                where = where + " order by description asc ";
+        where = where + " order by description asc ";
 //                System.out.println(where);
-                List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
-                loadData_inventory_barcodes(datas);
-                jLabel4.setText("" + datas.size());
-                jTextField1.setEnabled(true);
-                jButton1.setEnabled(true);
-                jTextField1.grabFocus();
+        List<Inventory_barcodes.to_inventory_barcodes> datas = Inventory_barcodes.ret_where(where);
+        loadData_inventory_barcodes(datas);
+        jLabel4.setText("" + datas.size());
+        jTextField1.setEnabled(true);
+        jButton1.setEnabled(true);
+        jTextField1.grabFocus();
 
-                jProgressBar1.setString("Finished...");
-                jProgressBar1.setIndeterminate(false);
-            }
-        });
-        t.start();
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+
     }
 
     private void select_item() {
@@ -1883,42 +1875,32 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
 
     private void data_cols_adjustments() {
 
-        jProgressBar2.setString("Loading...Please wait...");
-        jProgressBar2.setIndeterminate(true);
         jButton2.setEnabled(false);
-        Thread t = new Thread(new Runnable() {
+        Field.Combo br = (Field.Combo) jTextField4;
+        Field.Combo lo = (Field.Combo) jTextField5;
 
-            @Override
-            public void run() {
+        String date_from = synsoftech.util.DateType.sf.format(jDateChooser1.getDate());
+        String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
+        String where = " where description like '%" + "" + "%' ";
+        if (!jCheckBox3.isSelected()) {
+            where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+        }
 
-                Field.Combo br = (Field.Combo) jTextField4;
-                Field.Combo lo = (Field.Combo) jTextField5;
+        if (!jCheckBox4.isSelected() && !jCheckBox5.isSelected()) {
+            where = where + " and location_id='" + lo.getId() + "' ";
+        }
+        if (!jCheckBox4.isSelected() && jCheckBox5.isSelected()) {
+            where = where + " and branch_id='" + br.getId() + "' ";
+        }
 
-                String date_from = synsoftech.util.DateType.sf.format(jDateChooser1.getDate());
-                String date_to = synsoftech.util.DateType.sf.format(jDateChooser2.getDate());
-                String where = " where description like '%" + "" + "%' ";
-                if (!jCheckBox3.isSelected()) {
-                    where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                }
-
-                if (!jCheckBox4.isSelected() && !jCheckBox5.isSelected()) {
-                    where = where + " and location_id='" + lo.getId() + "' ";
-                }
-                if (!jCheckBox4.isSelected() && jCheckBox5.isSelected()) {
-                    where = where + " and branch_id='" + br.getId() + "' ";
-                }
-
-                where = where + " order by id desc ";
+        where = where + " order by id desc ";
 //                System.out.println(where);
-                List<to_adjustments> datas = S1_adjustments.ret_data(where);
-                loadData_adjustments(datas);
-                jLabel11.setText("" + datas.size());
-                jButton2.setEnabled(true);
-                jProgressBar2.setString("Finished...");
-                jProgressBar2.setIndeterminate(false);
-            }
-        });
-        t.start();
+        List<to_adjustments> datas = S1_adjustments.ret_data(where);
+        loadData_adjustments(datas);
+        jLabel11.setText("" + datas.size());
+        jButton2.setEnabled(true);
+        
+        
 
     }
 //</editor-fold> 

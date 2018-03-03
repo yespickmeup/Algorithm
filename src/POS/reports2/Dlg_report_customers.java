@@ -2234,7 +2234,6 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-
         init_key();
         jTextField2.enable(false);
         jTextField4.enable(false);
@@ -2772,7 +2771,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 }
                 six = one + two + three + four + five;
                 String address = System.getProperty("address", "Daro, Dumaguete City");
-                String telephone_number = System.getProperty("telephone_number", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
+                String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
+                String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+
                 Field.Search customer = (Field.Search) jTextField7;
                 String customer_address = customer.getId();
                 String department = "All";
@@ -2780,8 +2781,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 if (!jCheckBox11.isSelected()) {
                     department = dep.getText();
                 }
-                String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
-                String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
+
+                String img_path = System.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png");
                 Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address,
                         department, ar_footer, img_path);
                 rpt.fields.addAll(fields);
@@ -3335,9 +3336,11 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 String customer_address = customer.getId();
                 String customer_id = jTextField16.getText();
 
-                String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
-
-                Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance);
+                String img_path = System.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png");
+                 String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
+                  String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+               
+                Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance,ar_footer,telephone_number);
                 String jrxml = "rpt_balance_per_transaction_items.jrxml";
                 rpt.fields.addAll(fields);
                 report_transaction_items(rpt, jrxml);

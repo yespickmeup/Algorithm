@@ -36,8 +36,8 @@ public class Srpt_disbursements_category {
     public final String branch;
     public final String location;
     public final List<field> fields;
-
-    public Srpt_disbursements_category(String business_name, String address, String contact_no, String date, String printed_by, String branch, String location) {
+    public final String cashier;
+    public Srpt_disbursements_category(String business_name, String address, String contact_no, String date, String printed_by, String branch, String location,String cashier) {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
@@ -46,6 +46,7 @@ public class Srpt_disbursements_category {
         this.branch = branch;
         this.location = location;
         this.fields = new ArrayList();
+        this.cashier=cashier;
     }
 
     public static class field {
@@ -152,7 +153,8 @@ public class Srpt_disbursements_category {
         String printed_by = "Administrator";
         String branch = "";
         String location = "";
-        Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location);
+        String cashier="";
+        Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location,cashier);
         rpt.fields.addAll(datas);
         String jrxml = "rpt_disbursement_category.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

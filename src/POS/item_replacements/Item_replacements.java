@@ -443,6 +443,28 @@ public class Item_replacements {
         }
     }
 
+    public static void update_discount(to_item_replacements to_item_replacements, double new_discount) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update item_replacements set "
+                    + " discount= :discount "
+                    + " where id='" + to_item_replacements.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("discount", new_discount)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Item_replacements.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_data(to_item_replacements to_item_replacements) {
         try {
             Connection conn = MyConnection.connect();
