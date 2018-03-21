@@ -505,6 +505,78 @@ public class Accounts_payable {
         }
     }
 
+    public static List<to_accounts_payable> ret_data_conn(String where, Connection conn) {
+        List<to_accounts_payable> datas = new ArrayList();
+
+        try {
+
+            String s0 = "select "
+                    + "id"
+                    + ",customer_id"
+                    + ",customer_name"
+                    + ",ap_no"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",amount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ",discount"
+                    + ",status"
+                    + ",term"
+                    + ",date_applied"
+                    + ",paid"
+                    + ",date_paid"
+                    + ",remarks"
+                    + ",type"
+                    + ",reference_no"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from accounts_payable"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_id = rs.getString(2);
+                String customer_name = rs.getString(3);
+                String ap_no = rs.getString(4);
+                String date_added = rs.getString(5);
+                String user_name = rs.getString(6);
+                double amount = rs.getDouble(7);
+                double discount_amount = rs.getDouble(8);
+                double discount_rate = rs.getDouble(9);
+                String discount = rs.getString(10);
+                int status = rs.getInt(11);
+                double term = rs.getDouble(12);
+                String date_applied = rs.getString(13);
+                double paid = rs.getDouble(14);
+                String date_paid = rs.getString(15);
+                String remarks = rs.getString(16);
+                String type = rs.getString(17);
+                String reference_no = rs.getString(18);
+                String user_id = rs.getString(19);
+                String user_screen_name = rs.getString(20);
+                String branch = rs.getString(21);
+                String branch_id = rs.getString(22);
+                String location = rs.getString(23);
+                String location_id = rs.getString(24);
+
+                to_accounts_payable to = new to_accounts_payable(id, customer_id, customer_name, ap_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+//            MyConnection.close();
+        }
+    }
+
     public static String increment_id(String branch_id) {
         String id = "000000000000";
         try {

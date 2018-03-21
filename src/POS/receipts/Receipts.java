@@ -1142,9 +1142,9 @@ public class Receipts {
                 String customer_name = to_receipts.supplier;
                 String ap_no = Accounts_payable.increment_id(branch_id);
 //                System.out.println("branch_id: "+branch_id);
-                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data_conn(" where ap_no='" + ap_no + "' ",conn);
                 if (!payables.isEmpty()) {
-                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+                    payables = Accounts_payable.ret_data_conn(" where ap_no='" + ap_no + "' ",conn);
                 }
                 String date_added = DateType.now();
                 String user_name = MyUser.getUser_name();
