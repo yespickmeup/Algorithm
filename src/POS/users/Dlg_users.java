@@ -10,6 +10,7 @@ import POS.users.S1_user_default_previleges.to_user_default_previleges;
 import POS.users.S1_user_previleges.to_user_previleges;
 import POS.users.S1_users.to_users;
 import POS.users.User_default_priveleges.to_user_default_priveleges;
+import POS.users.User_previlege_others.to_user_previlege_others;
 import POS.util.Alert;
 import POS.util.Courier;
 import POS.util.DateType;
@@ -2461,54 +2462,99 @@ public class Dlg_users extends javax.swing.JDialog {
                 closeDialog.ok();
                 to_users to = (to_users) tbl_users_ALM.get(row2);
                 List<to_user_previleges> list = new ArrayList();
-                String[] p1 = {
+                List<to_user_previlege_others> list2 = new ArrayList();
+                //<editor-fold defaultstate="collapsed" desc=" Transactions ">
+
+                String[] previleges_transactions = {
                     "Accounts Receivable Payments - (View)",
                     "Accounts Receivable Payments - (Add)",
                     "Accounts Receivable Payments - (Edit)",
                     "Accounts Receivable Payments - (Delete)",
-                    "Prepaid Payments - (View)",
-                    "Prepaid Payments - (Add)",
-                    "Prepaid Payments - (Edit)",
-                    "Prepaid Payments - (Delete)",
                     "Disbursements - (View)",
                     "Disbursements - (Add)",
                     "Disbursements - (Edit)",
                     "Disbursements - (Delete)",
+                    "Prepaid Payments - (View)",
+                    "Prepaid Payments - (Add)",
+                    "Prepaid Payments - (Edit)",
+                    "Prepaid Payments - (Delete)",
+                    "Price Inquiry - (View)",
+                    "Return Exchange - (View)",
+                    "Return Exchange - (Add)",
+                    "Return Exchange - (Edit)",
+                    "Return Exchange - (Delete)",
                     "Sales - (View)",
-                    "Banks - (View)",
-                    "Credit Cards - (View)",
-                    "Cashier Report - (View)",
-                    "Stock Take - (View)",};
-
-//                String[] previleges = {"Banks - (View)",
-//                    "Disbursements - (View)",
-//                    "Disbursements Report",
-//                    "Accounts Receivable Payment - (View)",
-//                    "Customers - (View)",
-//                    "Disbursement Categories",
-//                    "Prepaid Payment - (View)",
-//                    "Credit Card - (View)",
-//                    "Sales - (View)",
-//                    "Cashier Report - (View)",
-//                    "Stock Ledger Report - (View)",
-//                    "Cashier CashCount",
-//                    "Cashier Report - Sales Summary",
-//                    "Cashier Report - Cash Count",
-//                    "Cashier Report - Sales Ledger",
-//                    "Cashier Report - Sales by Item",
-//                    "Cashier Report - Void/Replacement",
-//                    "Cashier Report - Remittance",
-//                    "Cashier Report - AR Payments",
-//                    "Cashier Report - Prepaid Payments",
-//                    "Return/Exchange"
-//                };
-                for (String prev : p1) {
-                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                    "Sales - (Add)",
+                    "Sales - (Edit)",
+                    "Sales - (Delete)",};
+                for (String prev : previleges_transactions) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Transactions", prev, 1, "" + to.id, to.user_name);
                     list.add(to1);
                 }
+
+                String[] previleges_maintenance = {
+                    "Banks - (View)",
+                    "Banks - (Add)",
+                    "Banks - (Edit)",
+                    "Banks - (Delete)",
+                    "Credit Cards - (View)",
+                    "Credit Cards - (Add)",
+                    "Credit Cards - (Edit)",
+                    "Credit Cards - (Delete)",
+                    "Customers - (View)",
+                    "Customers - (Add)",
+                    "Customers - (Edit)",
+                    "Customers - (Delete)",
+                    "Disbursements - (View)",
+                    "Disbursements - (Add)",
+                    "Disbursements - (Edit)",
+                    "Disbursements - (Delete)",
+                    "Discounts - (View)",
+                    "Discounts - (Add)",
+                    "Discounts - (Edit)",
+                    "Discounts - (Delete)",};
+                for (String prev : previleges_maintenance) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Maintenance", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] previleges_reports = {
+                    "Cashier Report - (View)",
+                    "Stock Take - (View)"
+
+                };
+                for (String prev : previleges_reports) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Reports", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] privilege_others_transactions = {
+                    "Cashcount - (View)",
+                    "Discount-Item - (View)",
+                    "Discount-Amount - (View)",
+                    "Sales by Item - (View)",
+                    "Return Exchange - (View)",
+                    "Remittance - (View)",
+                    "Sales Ledger - (View)",
+                    "Sales Summary - (View)",
+                    "Sales Transactions - (View)",
+                    "Void - (View)"
+
+                };
+                for (String prev : privilege_others_transactions) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Transactions", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
+                String[] privilege_others_maintenance = {
+                    "Customers AR",
+                    "Disbursement Categories",};
+                for (String prev : privilege_others_maintenance) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
                 S1_user_previleges.add_user_previleges(list);
+                S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
+                //</editor-fold>
             }
         });
         nd.setLocationRelativeTo(this);
@@ -2534,43 +2580,92 @@ public class Dlg_users extends javax.swing.JDialog {
                 closeDialog.ok();
                 to_users to = (to_users) tbl_users_ALM.get(row2);
                 List<to_user_previleges> list = new ArrayList();
-                String[] previleges = {
-                    "Banks",
-                    "Purchase Order",
-                    "Purchase Order Report",
-                    "Receipts",
-                    "Receipts Report",
-                    "Stock Ledger Report",
-                    "Stock Transfer",
-                    "Stock Transfer Report",
-                    "Unit of Measure",
-                    "Item Maintenance",
-                    "Stocks Status Report",
-                    "Stock Take Report",
-                    "Stock Take",
-                    "Item Barcodes",
-                    "Category",
-                    "Branches",
-                    "Branch Locations",
-                    "Suppliers",
-                    "Update Barcodes",
-                    "Price Inquiry",
-                    "Inventory Count",
-                    "Print Barcodes",
-                    "Finalize Stock Transfer",
-                    "RMA",
-                    "Print Inventory Count",
-                    "Finalize Receipt",
-                    "Borrower Slip (Finalize)",
-                    "Requistion Slip"
-                };
-                for (String prev : previleges) {
-                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                List<to_user_previlege_others> list2 = new ArrayList();
+                //<editor-fold defaultstate="collapsed" desc=" Transactions ">
+
+                String[] previleges_transactions = {
+                    "Conversion - (View)",
+                    "Conversion - (Add)",
+                    "Conversion - (Edit)",
+                    "Conversion - (Delete)",
+                    "Price Inquiry - (View)",
+                    "Purchase Order - (View)",
+                    "Purchase Order - (Add)",
+                    "Purchase Order - (Edit)",
+                    "Purchase Order - (Delete)",
+                    "Receipts - (View)",
+                    "Receipts - (Add)",
+                    "Receipts - (Edit)",
+                    "Receipts - (Delete)",
+                    "Requisition Slip - (View)",
+                    "Requisition Slip - (Add)",
+                    "Requisition Slip - (Edit)",
+                    "Requisition Slip - (Delete)",
+                    "Return to Supplier - (View)",
+                    "Return to Supplier - (Add)",
+                    "Return to Supplier - (Edit)",
+                    "Return to Supplier - (Delete)",
+                    "RMA - (View)",
+                    "Stock Transfer - (View)",
+                    "Stock Transfer - (Add)",
+                    "Stock Transfer - (Edit)",
+                    "Stock Transfer - (Delete)",};
+                for (String prev : previleges_transactions) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Transactions", prev, 1, "" + to.id, to.user_name);
                     list.add(to1);
                 }
+
+                String[] previleges_maintenance = {
+                    "Categories - (View)",
+                    "Categories - (Add)",
+                    "Categories - (Edit)",
+                    "Categories - (Delete)",
+                    "Item Barcodes - (View)",
+                    "Item Maintenance - (View)",
+                    "Item Maintenance - (Add)",
+                    "Item Maintenance - (Edit)",
+                    "Item Maintenance - (Delete)",
+                    "Suppliers - (View)",
+                    "Suppliers - (Add)",
+                    "Suppliers - (Edit)",
+                    "Suppliers - (Delete)",
+                    "Unit of Measure - (View)",
+                    "Unit of Measure - (Add)",
+                    "Unit of Measure - (Edit)",
+                    "Unit of Measure - (Delete)",};
+                for (String prev : previleges_maintenance) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Maintenance", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] previleges_reports = {
+                    "Barcodes - (View)",
+                    "Inventory Count - (View)",
+                    "Item Ledger - (View)",
+                    "Re-Order Level - (View)",
+                    "Stock Take - (View)"
+
+                };
+                for (String prev : previleges_reports) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Reports", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] privilege_others_transactions = {};
+                for (String prev : privilege_others_transactions) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Transactions", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
+                String[] privilege_others_maintenance = {
+                    "Customers AR",
+                    "Disbursement Categories",};
+                for (String prev : privilege_others_maintenance) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
                 S1_user_previleges.add_user_previleges(list);
+                S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
+                //</editor-fold>
             }
         });
         nd.setLocationRelativeTo(this);
@@ -2594,27 +2689,109 @@ public class Dlg_users extends javax.swing.JDialog {
                 closeDialog.ok();
                 to_users to = (to_users) tbl_users_ALM.get(row2);
                 List<to_user_previleges> list = new ArrayList();
-                String[] previleges = {
-                    "Accounts Receivable",
-                    "Accounts Receivable Payment",
-                    "AR Aging Report",
-                    "Customer's Balances Report",
-                    "Customer's Ledger Report",
-                    "Customers",
-                    "Finalize Account Receivable Payments",
-                    "Services Report",
-                    "Cashier Report",
-                    "Prepaid Payment Finalize",
-                    "Prepaid Payment",
-                    "AR Items"
-                };
-                for (String prev : previleges) {
-                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                List<to_user_previlege_others> list2 = new ArrayList();
+                //<editor-fold defaultstate="collapsed" desc=" Transactions ">
+
+                String[] previleges_transactions = {
+                    "Accounts Payable - (View)",
+                    "Accounts Payable - (Add)",
+                    "Accounts Payable - (Edit)",
+                    "Accounts Payable - (Delete)",
+                    "Accounts Payable - (Finalize)",
+                    "Accounts Payable Payments - (View)",
+                    "Accounts Payable Payments - (Add)",
+                    "Accounts Payable Payments - (Edit)",
+                    "Accounts Payable Payments - (Delete)",
+                    "Accounts Payable Payments - (Finalize)",
+                    "Accounts Receivable - (View)",
+                    "Accounts Receivable - (Add)",
+                    "Accounts Receivable - (Edit)",
+                    "Accounts Receivable - (Delete)",
+                    "Accounts Receivable - (Finalize)",
+                    "Accounts Receivable Payments - (View)",
+                    "Accounts Receivable Payments - (Add)",
+                    "Accounts Receivable Payments - (Edit)",
+                    "Accounts Receivable Payments - (Delete)",
+                    "Accounts Receivable Payments - (Finalize)",
+                    "Disbursements - (View)",
+                    "Disbursements - (Add)",
+                    "Disbursements - (Edit)",
+                    "Disbursements - (Delete)",
+                    "Disbursements - (Finalize)",
+                    "Prepaid Payments - (View)",
+                    "Prepaid Payments - (Add)",
+                    "Prepaid Payments - (Edit)",
+                    "Prepaid Payments - (Delete)",
+                    "Prepaid Payments - (Finalize)",
+                    "Price Inquiry - (View)",};
+                for (String prev : previleges_transactions) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Transactions", prev, 1, "" + to.id, to.user_name);
                     list.add(to1);
                 }
+
+                String[] previleges_maintenance = {
+                    "Credit Cards - (View)",
+                    "Credit Cards - (Add)",
+                    "Credit Cards - (Edit)",
+                    "Credit Cards - (Delete)",
+                    "Customers - (View)",
+                    "Customers - (Add)",
+                    "Customers - (Edit)",
+                    "Customers - (Delete)",
+                    "Disbursements - (View)",
+                    "Disbursements - (Add)",
+                    "Disbursements - (Edit)",
+                    "Disbursements - (Delete)",
+                    "Discounts - (View)",
+                    "Discounts - (Add)",
+                    "Discounts - (Edit)",
+                    "Discounts - (Delete)",};
+                for (String prev : previleges_maintenance) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Maintenance", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] previleges_reports = {
+                    "AR Items - (View)",
+                    "BIR - (View)",
+                    "Cashier Report - (View)",
+                    "Customers - (View)",
+                    "Re-Order Level - (View)",
+                    "Suppliers - (View)",
+                    "Stock Take - (View)"
+
+                };
+                for (String prev : previleges_reports) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Reports", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] privilege_others_transactions = {
+                    "Cashcount - (View)",
+                    "Choose Location - (View)",
+                    "Sales by Item - (View)",
+                    "Return Exchange - (View)",
+                    "Remittance - (View)",
+                    "Sales Ledger - (View)",
+                    "Sales Summary - (View)",
+                    "Sales Transactions - (View)",
+                    "Void - (View)"
+
+                };
+                for (String prev : privilege_others_transactions) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Transactions", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
+                String[] privilege_others_maintenance = {
+                    "Customers AR",
+                    "Disbursement Categories",};
+                for (String prev : privilege_others_maintenance) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
                 S1_user_previleges.add_user_previleges(list);
+                S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
+                //</editor-fold>
             }
         });
         nd.setLocationRelativeTo(this);
@@ -2674,102 +2851,232 @@ public class Dlg_users extends javax.swing.JDialog {
                 closeDialog.ok();
                 to_users to = (to_users) tbl_users_ALM.get(row2);
                 List<to_user_previleges> list = new ArrayList();
-                String[] previleges = {
-                    "Backup",
-                    "Branch Locations",
-                    "Branches",
-                    "Cash Count Report",
-                    "Discounts",
-                    "Preferences",
-                    "Themes",
-                    "Users",
-                    "Banks",
-                    "Daily Sales Summary Report",
-                    "Disbursements",
-                    "Disbursements Report",
-                    "Service Transaction Releasing",
-                    "Void Items Report",
-                    "Voider",
-                    "Accounts Payable",
-                    "Accounts Receivable",
-                    "AR Aging Report",
-                    "Category",
-                    "Customer's Balances Report",
-                    "Customer's Ledger Report",
-                    "Customers",
-                    "Item Barcodes",
-                    "Item Maintenance",
-                    "Purchase Order",
-                    "Purchase Order Report",
-                    "Receipts",
-                    "Receipts Report",
-                    "Service Department Members",
-                    "Service Departments",
-                    "Service Transaction Type",
-                    "Services Item Replacement Report",
-                    "Services Report",
-                    "Services-Transaction",
-                    "Services-View/Encode",
-                    "Stock Ledger Report",
-                    "Stock Take",
-                    "Stock Take Report",
-                    "Stock Transfer",
-                    "Stock Transfer Report",
-                    "Stocks Status Report",
-                    "Unit of Measure",
-                    "Finalize Stock Transfer",
-                    "Finalize Receipt",
-                    "Accounts Receivable Payment",
-                    "Finalize Account Receivable Payments",
-                    "Sales Report",
-                    "Update Barcodes",
-                    "Inventory Count Report",
-                    "Inventory Count",
-                    "Inventory Count (Finalize)",
-                    "Borrower Slip",
-                    "Borrower Slip (Finalize)",
-                    "Cashier CashCount",
-                    "Cashier Report",
-                    "Credit Card",
-                    "Disbursement (View All)",
-                    "Disbursement Categories",
-                    "Inventory Update Item Pricing",
-                    "Prepaid Payment",
-                    "Prepaid Payment Finalize",
-                    "Sales",
-                    "Services-View",
-                    "Suppliers",
-                    "Void Sales",
-                    "Adjuster",
-                    "Sales (Choose Location)",
-                    "Update CashDrawer",
-                    "Charge in Advance",
-                    "Inventory Replenishment",
-                    "Print Inventory Count",
-                    "Print Barcodes",
-                    "AR Items",
-                    "Update Item Pricing any Branches",
-                    "Update Item Pricing per Branch",
-                    "Finalize Price Updates",
-                    "Cashier CashCount",
-                    "Cashier Report - Sales Summary",
-                    "Cashier Report - Cash Count",
-                    "Cashier Report - Sales Ledger",
-                    "Cashier Report - Sales by Item",
-                    "Cashier Report - Void/Replacement",
-                    "Cashier Report - Remittance",
-                    "Cashier Report - AR Payments",
-                    "Cashier Report - Prepaid Payments",
-                    "Return/Exchange",
-                    "Return/Exchange - (Finalize)"
-                };
-                for (String prev : previleges) {
-                    to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
+                List<to_user_previlege_others> list2 = new ArrayList();
+                //<editor-fold defaultstate="collapsed" desc=" Transactions ">
+
+                String[] previleges_transactions = {
+                    "Accounts Payable - (View)",
+                    "Accounts Payable - (Add)",
+                    "Accounts Payable - (Edit)",
+                    "Accounts Payable - (Delete)",
+                    "Accounts Payable - (Finalize)",
+                    "Accounts Payable Payments - (View)",
+                    "Accounts Payable Payments - (Add)",
+                    "Accounts Payable Payments - (Edit)",
+                    "Accounts Payable Payments - (Delete)",
+                    "Accounts Payable Payments - (Finalize)",
+                    "Accounts Receivable - (View)",
+                    "Accounts Receivable - (Add)",
+                    "Accounts Receivable - (Edit)",
+                    "Accounts Receivable - (Delete)",
+                    "Accounts Receivable - (Finalize)",
+                    "Accounts Receivable Payments - (View)",
+                    "Accounts Receivable Payments - (Add)",
+                    "Accounts Receivable Payments - (Edit)",
+                    "Accounts Receivable Payments - (Delete)",
+                    "Accounts Receivable Payments - (Finalize)",
+                    "Borrower Slip - (View)",
+                    "Borrower Slip - (Add)",
+                    "Borrower Slip - (Edit)",
+                    "Borrower Slip - (Delete)",
+                    "Borrower Slip - (Finalize)",
+                    "Charge In Advance - (View)",
+                    "Charge In Advance - (Add)",
+                    "Charge In Advance - (Edit)",
+                    "Charge In Advance - (Delete)",
+                    "Charge In Advance - (Finalize)",
+                    "Conversion - (View)",
+                    "Conversion - (Add)",
+                    "Conversion - (Edit)",
+                    "Conversion - (Delete)",
+                    "Conversion - (Finalize)",
+                    "Disbursements - (View)",
+                    "Disbursements - (Add)",
+                    "Disbursements - (Edit)",
+                    "Disbursements - (Delete)",
+                    "Disbursements - (Finalize)",
+                    "Inventory Adjuster - (View)",
+                    "Inventory Adjuster - (Add)",
+                    "Inventory Adjuster - (Edit)",
+                    "Inventory Adjuster - (Delete)",
+                    "Inventory Adjuster - (Finalize)",
+                    "Inventory Encoding - (View)",
+                    "Inventory Encoding - (Add)",
+                    "Inventory Encoding - (Edit)",
+                    "Inventory Encoding - (Delete)",
+                    "Inventory Encoding - (Finalize)",
+                    "Inventory Replenishment - (View)",
+                    "Inventory Replenishment - (Add)",
+                    "Inventory Replenishment - (Edit)",
+                    "Inventory Replenishment - (Delete)",
+                    "Inventory Replenishment - (Finalize)",
+                    "Other Adjustments - (View)",
+                    "Other Adjustments - (Add)",
+                    "Other Adjustments - (Edit)",
+                    "Other Adjustments - (Delete)",
+                    "Other Adjustments - (Finalize)",
+                    "Prepaid Payments - (View)",
+                    "Prepaid Payments - (Add)",
+                    "Prepaid Payments - (Edit)",
+                    "Prepaid Payments - (Delete)",
+                    "Prepaid Payments - (Finalize)",
+                    "Price Inquiry - (View)",
+                    "Purchase Order - (View)",
+                    "Purchase Order - (Add)",
+                    "Purchase Order - (Edit)",
+                    "Purchase Order - (Delete)",
+                    "Purchase Order - (Finalize)",
+                    "Receipts - (View)",
+                    "Receipts - (Add)",
+                    "Receipts - (Edit)",
+                    "Receipts - (Delete)",
+                    "Receipts - (Finalize)",
+                    "Requisition Slip - (View)",
+                    "Requisition Slip - (Add)",
+                    "Requisition Slip - (Edit)",
+                    "Requisition Slip - (Delete)",
+                    "Requisition Slip - (Finalize)",
+                    "Return from Customer - (View)",
+                    "Return from Customer - (Add)",
+                    "Return from Customer - (Edit)",
+                    "Return from Customer - (Delete)",
+                    "Return from Customer - (Finalize)",
+                    "Return Exchange - (View)",
+                    "Return Exchange - (Add)",
+                    "Return Exchange - (Edit)",
+                    "Return Exchange - (Delete)",
+                    "Return Exchange - (Finalize)",
+                    "Return to Supplier - (View)",
+                    "Return to Supplier - (Add)",
+                    "Return to Supplier - (Edit)",
+                    "Return to Supplier - (Delete)",
+                    "Return to Supplier - (Finalize)",
+                    "RMA - (View)",
+                    "Sales - (View)",
+                    "Sales - (Add)",
+                    "Sales - (Edit)",
+                    "Sales - (Delete)",
+                    "Sales - (Finalize)",
+                    "Services",
+                    "Stock Transfer - (View)",
+                    "Stock Transfer - (Add)",
+                    "Stock Transfer - (Edit)",
+                    "Stock Transfer - (Delete)",
+                    "Stock Transfer - (Finalize)",};
+                for (String prev : previleges_transactions) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Transactions", prev, 1, "" + to.id, to.user_name);
                     list.add(to1);
                 }
+
+                String[] previleges_maintenance = {
+                    "Backup - (View)",
+                    "Banks - (View)",
+                    "Banks - (Add)",
+                    "Banks - (Edit)",
+                    "Banks - (Delete)",
+                    "Banks - (Finalize)",
+                    "Branches - (View)",
+                    "Branches - (Add)",
+                    "Branches - (Edit)",
+                    "Branches - (Delete)",
+                    "Branch Locations - (View)",
+                    "Branch Locations - (Add)",
+                    "Branch Locations - (Edit)",
+                    "Branch Locations - (Delete)",
+                    "Categories - (View)",
+                    "Categories - (Add)",
+                    "Categories - (Edit)",
+                    "Categories - (Delete)",
+                    "Credit Cards - (View)",
+                    "Credit Cards - (Add)",
+                    "Credit Cards - (Edit)",
+                    "Credit Cards - (Delete)",
+                    "Customers - (View)",
+                    "Customers - (Add)",
+                    "Customers - (Edit)",
+                    "Customers - (Delete)",
+                    "Disbursements - (View)",
+                    "Disbursements - (Add)",
+                    "Disbursements - (Edit)",
+                    "Disbursements - (Delete)",
+                    "Discounts - (View)",
+                    "Discounts - (Add)",
+                    "Discounts - (Edit)",
+                    "Discounts - (Delete)",
+                    "Item Barcodes - (View)",
+                    "Item Maintenance - (View)",
+                    "Item Maintenance - (Add)",
+                    "Item Maintenance - (Edit)",
+                    "Item Maintenance - (Delete)",
+                    "Preferences - (View)",
+                    "Price Update - (View)",
+                    "Services",
+                    "Suppliers - (View)",
+                    "Suppliers - (Add)",
+                    "Suppliers - (Edit)",
+                    "Suppliers - (Delete)",
+                    "Unit of Measure - (View)",
+                    "Unit of Measure - (Add)",
+                    "Unit of Measure - (Edit)",
+                    "Unit of Measure - (Delete)",
+                    "Users - (View)",
+                    "Users - (Add)",
+                    "Users - (Edit)",
+                    "Users - (Delete)"
+
+                };
+                for (String prev : previleges_maintenance) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Maintenance", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] previleges_reports = {
+                    "AR Items - (View)",
+                    "Barcodes - (View)",
+                    "BIR - (View)",
+                    "Cashier Report - (View)",
+                    "Customers - (View)",
+                    "Inventory Count - (View)",
+                    "Item Ledger - (View)",
+                    "Re-Order Level - (View)",
+                    "Services - (View)",
+                    "Suppliers - (View)",
+                    "Stock Take - (View)"
+
+                };
+                for (String prev : previleges_reports) {
+                    to_user_previleges to1 = new to_user_previleges(0, "Reports", prev, 1, "" + to.id, to.user_name);
+                    list.add(to1);
+                }
+                String[] privilege_others_transactions = {
+                    "Cashcount - (View)",
+                    "Choose Location - (View)",
+                    "Discount-Item - (View)",
+                    "Discount-Amount - (View)",
+                    "Sales by Item - (View)",
+                    "Return Exchange - (View)",
+                    "Remittance - (View)",
+                    "Sales Ledger - (View)",
+                    "Sales Summary - (View)",
+                    "Sales Transactions - (View)",
+                    "Void - (View)"
+
+                };
+                for (String prev : privilege_others_transactions) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Transactions", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
+                String[] privilege_others_maintenance = {
+                    "Customers AR",
+                    "Disbursement Categories",};
+                for (String prev : privilege_others_maintenance) {
+                    to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
+                    list2.add(to1);
+                }
                 S1_user_previleges.add_user_previleges(list);
+                S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
+                //</editor-fold>
             }
         });
         nd.setLocationRelativeTo(this);

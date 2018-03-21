@@ -2051,6 +2051,12 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     }
 
     private void accounst_payable_payment() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Payable Payments - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = tbl_accounts_payable.getSelectedRow();
         final to_accounts_payable to = (to_accounts_payable) tbl_accounts_payable_ALM.get(row);
         if (to.status == 1) {
@@ -2208,6 +2214,12 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         int col = tbl_accounts_payable_payments.getSelectedColumn();
         if (col == 6) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Payable Payments - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");

@@ -19,6 +19,7 @@ delete from user_default_previleges;
 
 /* Transactions  */
 insert into user_default_previleges(account,name)values('Transactions','Accounts Payable');
+insert into user_default_previleges(account,name)values('Transactions','Accounts Payable Payments');
 insert into user_default_previleges(account,name)values('Transactions','Accounts Receivable');
 insert into user_default_previleges(account,name)values('Transactions','Accounts Receivable Payments');
 insert into user_default_previleges(account,name)values('Transactions','Borrower Slip');
@@ -121,7 +122,7 @@ delete from user_previleges;
 --             Alert.set(0, "Privilege not added!");
 --             return;
 --         }
--- 
+--
 --
 --
 --         String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Choose Location - (View)" + "' limit 1";

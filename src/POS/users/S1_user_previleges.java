@@ -114,6 +114,44 @@ public class S1_user_previleges {
         }
     }
 
+    public static void add_user_previleges_others(List<User_previlege_others.to_user_previlege_others> to_user_previleges1) {
+        try {
+            Connection conn = MyConnection.connect();
+            for (User_previlege_others.to_user_previlege_others to_user_previleges : to_user_previleges1) {
+                String s0 = "insert into user_previlege_others("
+                        + "account"
+                        + ",account_name"
+                        + ",name"
+                        + ",user_id"
+                        + ",user_name"
+                        + ")values("
+                        + ":account"
+                        + ",:account_name"
+                        + ",:name"
+                        + ",:user_id"
+                        + ",:user_name"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setString("account", to_user_previleges.account)
+                        .setString("account_name", to_user_previleges.account_name)
+                        .setString("name", to_user_previleges.name)
+                        .setString("user_id", to_user_previleges.user_id)
+                        .setString("user_name", to_user_previleges.user_name)
+                        .ok();
+                System.out.println(s0);
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+                Lg.s(S1_user_previleges.class, "Successfully Added");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_user_previleges(to_user_previleges to_user_previleges) {
         try {
             Connection conn = MyConnection.connect();
@@ -177,6 +215,7 @@ public class S1_user_previleges {
             MyConnection.close();
         }
     }
+
     public static void delete_user_previleges_others_where(String where) {
         try {
             Connection conn = MyConnection.connect();
@@ -192,6 +231,7 @@ public class S1_user_previleges {
             MyConnection.close();
         }
     }
+
     public static List<to_user_previleges> ret_data(String where) {
         List<to_user_previleges> datas = new ArrayList();
 

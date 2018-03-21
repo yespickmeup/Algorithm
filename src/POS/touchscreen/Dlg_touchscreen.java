@@ -2864,7 +2864,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
 //                String businessname = System.getProperty("business_name", "Algorithm Computer Services");
                 jLabel1.setText("Point of Sale");
-                lbl_screen_name.setText("Welcome, " + Users.get_ScreenName());
+               lbl_screen_name.setText("Welcome, " + MyUser.getUser_screen_name());
                 tf_search.grabFocus();
             }
         });
@@ -2906,6 +2906,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             @Override
             public void run() {
                 tf_search.grabFocus();
+                lbl_screen_name.setText("Welcome, " + MyUser.getUser_screen_name());
             }
         });
     }
