@@ -5,6 +5,9 @@
 package POS.banks;
 
 import POS.banks.Banks.to_banks;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
+import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -600,6 +603,12 @@ public class Dlg_banks extends javax.swing.JDialog {
     }
 
     private void add_banks() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Banks - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = -1;
         String bank_name = tf_bank_name.getText();
         final to_banks to = new to_banks(id, bank_name);
@@ -633,6 +642,12 @@ public class Dlg_banks extends javax.swing.JDialog {
     }
 
     private void edit_banks() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Banks - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_banks.getSelectedRow();
         if (row < 0) {
             return;
@@ -666,6 +681,12 @@ public class Dlg_banks extends javax.swing.JDialog {
     }
 
     private void delete_banks() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Banks - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");

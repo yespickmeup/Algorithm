@@ -62,8 +62,6 @@ insert into user_default_previleges(account,name)values('Maintenance','Unit of M
 insert into user_default_previleges(account,name)values('Maintenance','Users');
 
 
-
-
 insert into user_default_previleges(account,name)values('Reports','AR Items');
 insert into user_default_previleges(account,name)values('Reports','Barcodes');
 insert into user_default_previleges(account,name)values('Reports','BIR');
@@ -102,10 +100,14 @@ insert into user_default_previlege_others(account,account_name,name)values('Tran
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Discount-Amount');
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Sales by Item');
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Return Exchange');
+insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Remittance');
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Sales Ledger');
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Sales Summary');
+insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Sales Transactions');
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Void');
 
+insert into user_default_previlege_others(account,account_name,name)values('Maintenance','Sales','Customers AR');
+insert into user_default_previlege_others(account,account_name,name)values('Maintenance','Sales','Disbursement Categories');
 
 
 delete from user_previleges;
@@ -113,7 +115,21 @@ delete from user_previleges;
 
 
 
-
+--         String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Payable - (Add)" + "' limit 1";
+--         List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+--         if (privileges.isEmpty()) {
+--             Alert.set(0, "Privilege not added!");
+--             return;
+--         }
+-- 
+--
+--
+--         String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Choose Location - (View)" + "' limit 1";
+--         List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+--         if (privileges.isEmpty()) {
+--             Alert.set(0, "Privilege not added!");
+--             return;
+--         }
 
 
 

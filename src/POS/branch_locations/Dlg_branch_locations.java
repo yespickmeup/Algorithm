@@ -6,6 +6,8 @@ package POS.branch_locations;
 
 import POS.branch_locations.S1_branch_locations.to_branch_locations;
 import POS.branches.Branches;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
@@ -693,6 +695,12 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
     }
 
     private void add_branch_locations() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Branch Locations - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         if (tf_branch.getText().isEmpty()) {
             return;
         }
@@ -778,6 +786,12 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
     }
 
     private void edit_branch_locations() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Branch Locations - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         if (tf_branch.getText().isEmpty()) {
             return;
         }
@@ -838,6 +852,12 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
     }
 
     private void delete_branch_locations() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Branch Locations - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_branch_locations.getSelectedRow();
         if (row < 0) {
             return;

@@ -6,6 +6,9 @@
 package POS.disbursements;
 
 import POS.disbursements.S1_disbursement_categories.to_disbursement_categories;
+import POS.users.MyUser;
+import POS.users.User_previlege_others;
+import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -453,6 +456,12 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
 
 //</editor-fold> 
     private void add_disbursement_categories() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Disbursement Categories - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = 0;
         String category_name = tf_category_name.getText();
         final to_disbursement_categories to = new to_disbursement_categories(id, category_name);
@@ -488,7 +497,12 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
     }
 
     private void update_disbursement_categories() {
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Disbursement Categories - (Edit)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_disbursement_categories.getSelectedRow();
         if (row < 0) {
             return;
@@ -519,6 +533,12 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
     }
 
     private void delete_disbursement_categories() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Disbursement Categories - (Delete)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_disbursement_categories.getSelectedRow();
         if (row < 0) {
             return;

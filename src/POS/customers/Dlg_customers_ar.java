@@ -9,8 +9,8 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customer_departments.to_customer_departments;
 import POS.customers.Customers.to_customers;
-import POS.users.S1_user_previleges;
-import POS.users.S1_users;
+import POS.users.MyUser;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
@@ -37,7 +37,6 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
-import synsoftech.panels.Authenticate;
 import synsoftech.panels.Warning;
 
 /**
@@ -777,6 +776,12 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
     }
 
     private void add_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Customers AR - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo dep = (Field.Combo) tf_customer_name1;
         int id = -1;
         String customer_name = tf_customer_name.getText();
@@ -829,6 +834,12 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
     }
 
     private void edit_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Customers AR - (Edit)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_customers.getSelectedRow();
         if (row < 0) {
             return;
@@ -873,47 +884,53 @@ public class Dlg_customers_ar extends javax.swing.JDialog {
     }
 
     private void check_delete() {
-
-        Window p = (Window) this;
-        Authenticate nd = Authenticate.create(p, true);
-        nd.setTitle("");
-        nd.do_pass(this.getSurface(), "");
-
-        nd.setCallback(new Authenticate.Callback() {
-            @Override
-            public void ok(CloseDialog closeDialog, Authenticate.OutputData data) {
-                closeDialog.ok();
-                String username = data.username;
-                String password = data.password;
-                final S1_users.to_users to = S1_users.ret_data_autho(username, password);
-                if (to == null) {
-                    warning("Input correct credentials!");
-                } else {
-                    String where = " where user_name='" + username + "' order by previledge asc";
-                    List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-                    int exist = 0;
-                    for (S1_user_previleges.to_user_previleges to2 : datas) {
-                        if (to2.previledge.equalsIgnoreCase("Customers (Update/Delete)")) {
-                            exist = 1;
-                            break;
-                        }
-                    }
-                    if (exist == 1) {
-                        delete_customers();
-                    } else {
-                        warning("User priviledge not added!");
-                    }
-                }
-
-            }
-        });
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        int xSize = ((int) tk.getScreenSize().
-                getWidth());
-        int ySize = ((int) tk.getScreenSize().
-                getHeight());
-        nd.setSize(xSize, ySize);
-        nd.setVisible(true);
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Customers AR - (Delete)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+        delete_customers();
+//        Window p = (Window) this;
+//        Authenticate nd = Authenticate.create(p, true);
+//        nd.setTitle("");
+//        nd.do_pass(this.getSurface(), "");
+//
+//        nd.setCallback(new Authenticate.Callback() {
+//            @Override
+//            public void ok(CloseDialog closeDialog, Authenticate.OutputData data) {
+//                closeDialog.ok();
+//                String username = data.username;
+//                String password = data.password;
+//                final S1_users.to_users to = S1_users.ret_data_autho(username, password);
+//                if (to == null) {
+//                    warning("Input correct credentials!");
+//                } else {
+//                    String where = " where user_name='" + username + "' order by previledge asc";
+//                    List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//                    int exist = 0;
+//                    for (S1_user_previleges.to_user_previleges to2 : datas) {
+//                        if (to2.previledge.equalsIgnoreCase("Customers (Update/Delete)")) {
+//                            exist = 1;
+//                            break;
+//                        }
+//                    }
+//                    if (exist == 1) {
+//                      
+//                    } else {
+//                        warning("User priviledge not added!");
+//                    }
+//                }
+//
+//            }
+//        });
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        int xSize = ((int) tk.getScreenSize().
+//                getWidth());
+//        int ySize = ((int) tk.getScreenSize().
+//                getHeight());
+//        nd.setSize(xSize, ySize);
+//        nd.setVisible(true);
     }
 
     private void warning(String message) {

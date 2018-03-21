@@ -6,15 +6,15 @@
  */
 package POS.touchscreen;
 
-import POS.touchscreen_reports.Dlg_report_ar_payments;
 import POS.touchscreen_reports.Dlg_report_ledger;
-import POS.touchscreen_reports.Dlg_report_prepaid_payments;
 import POS.touchscreen_reports.Dlg_report_sales_by_item;
 import POS.touchscreen_reports.Dlg_report_sales_summary;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
-import java.awt.BorderLayout;
+import POS.users.User_previlege_others;
+import POS.util.Alert;
 import java.awt.CardLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -22,7 +22,6 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JButton;
-import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
@@ -565,27 +564,27 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        cardLayout.show(pnl_holder, "1");
-
+//        cardLayout.show(pnl_holder, "1");
+        init_sales_summary();
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        cardLayout.show(pnl_holder, "2");
-
+//        cardLayout.show(pnl_holder, "2");
+        init_cash_count();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        cardLayout.show(pnl_holder, "3");
-
+//        cardLayout.show(pnl_holder, "3");
+        init_ledger();
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        cardLayout.show(pnl_holder, "4");
+//        cardLayout.show(pnl_holder, "4");
 
-
+        init_sales_by_item();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -602,7 +601,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
-        cardLayout.show(pnl_holder, "5");
+//        cardLayout.show(pnl_holder, "5");
+        init_transaction();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
@@ -611,7 +611,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
-        cardLayout.show(pnl_holder, "6");
+//        cardLayout.show(pnl_holder, "6");
+        init_remitance();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -675,79 +676,75 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
     private void myInit() {
 
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
-
-
         init_key();
-
+        jButton10.setVisible(false);
+        jButton11.setVisible(false);
         init_panel_layout();
-        get_privelege();
+//        get_privelege();
 
-        jButton3.setEnabled(true);
-        jButton4.setEnabled(true);
-        jButton9.setEnabled(true);
-        jButton5.setEnabled(true);
-        jButton6.setEnabled(true);
-        jButton8.setEnabled(true);
-
-        if (jButton3.isEnabled()) {
-            init_sales_summary();
-        }
-
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                init_cash_count();
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        init_ar_payments();
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                init_ledger();
-                                SwingUtilities.invokeLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        init_prepaid_payments();
-                                        SwingUtilities.invokeLater(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                init_remitance();
-                                                SwingUtilities.invokeLater(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        init_sales_by_item();
-                                                        SwingUtilities.invokeLater(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                init_transaction();
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
+//        jButton3.setEnabled(true);
+//        jButton4.setEnabled(true);
+//        jButton9.setEnabled(true);
+//        jButton5.setEnabled(true);
+//        jButton6.setEnabled(true);
+//        jButton8.setEnabled(true);
+//        if (jButton3.isEnabled()) {
+//            init_sales_summary();
+//        }
+//        SwingUtilities.invokeLater(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                init_cash_count();
+//                SwingUtilities.invokeLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        init_ar_payments();
+//                        SwingUtilities.invokeLater(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                init_ledger();
+//                                SwingUtilities.invokeLater(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        init_prepaid_payments();
+//                                        SwingUtilities.invokeLater(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                init_remitance();
+//                                                SwingUtilities.invokeLater(new Runnable() {
+//                                                    @Override
+//                                                    public void run() {
+//                                                        init_sales_by_item();
+//                                                        SwingUtilities.invokeLater(new Runnable() {
+//                                                            @Override
+//                                                            public void run() {
+//                                                                init_transaction();
+//                                                            }
+//                                                        });
+//                                                    }
+//                                                });
+//                                            }
+//                                        });
+//                                    }
+//                                });
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
     }
 
     private void get_privelege() {
-        jButton3.setEnabled(false);
-        jButton4.setEnabled(false);
-        jButton9.setEnabled(false);
-        jButton5.setEnabled(false);
-        jButton6.setEnabled(false);
-        jButton8.setEnabled(false);
-        jButton10.setEnabled(false);
-        jButton11.setEnabled(false);
+//        jButton3.setEnabled(false);
+//        jButton4.setEnabled(false);
+//        jButton9.setEnabled(false);
+//        jButton5.setEnabled(false);
+//        jButton6.setEnabled(false);
+//        jButton8.setEnabled(false);
+//        jButton10.setEnabled(false);
+//        jButton11.setEnabled(false);
 
         String where = " where user_id='" + MyUser.getUser_id() + "' and account like 'Sales' ";
         List<S1_user_previleges.to_user_previleges> list = S1_user_previleges.ret_data(where);
@@ -798,75 +795,209 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
     private void init_sales_summary() {
 
-        Dlg_report_sales_summary summary = new Dlg_report_sales_summary();
-        pnl_summary.setLayout(new BorderLayout());
-        pnl_summary.add(summary.getSurface());
-        pnl_holder.updateUI();
+//        Dlg_report_sales_summary summary = new Dlg_report_sales_summary();
+//        pnl_summary.setLayout(new BorderLayout());
+//        pnl_summary.add(summary.getSurface());
+//        pnl_holder.updateUI();
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Sales Summary - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_report_sales_summary nd = Dlg_report_sales_summary.create(p, true);
+        nd.setTitle("");
 
+        nd.setCallback(new Dlg_report_sales_summary.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_sales_summary.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private void init_cash_count() {
 
-        Dlg_touchscreen_report_cashcount cashcount = new Dlg_touchscreen_report_cashcount();
-        pnl_cashcount.setLayout(new BorderLayout());
-        pnl_cashcount.add(cashcount.getSurface());
-        pnl_holder.updateUI();
+//        Dlg_touchscreen_report_cashcount cashcount = new Dlg_touchscreen_report_cashcount();
+//        pnl_cashcount.setLayout(new BorderLayout());
+//        pnl_cashcount.add(cashcount.getSurface());
+//        pnl_holder.updateUI();
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Cashcount - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_touchscreen_report_cashcount nd = Dlg_touchscreen_report_cashcount.create(p, true);
+        nd.setTitle("");
 
+        nd.setCallback(new Dlg_touchscreen_report_cashcount.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_report_cashcount.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 
     private void init_ledger() {
 
-        Dlg_report_ledger ledger = new Dlg_report_ledger();
-        pnl_ledger.setLayout(new BorderLayout());
-        pnl_ledger.add(ledger.getSurface());
-        pnl_holder.updateUI();
+//        Dlg_report_ledger ledger = new Dlg_report_ledger();
+//        pnl_ledger.setLayout(new BorderLayout());
+//        pnl_ledger.add(ledger.getSurface());
+//        pnl_holder.updateUI();
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Sales Ledger - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+
+        Window p = (Window) this;
+        Dlg_report_ledger nd = Dlg_report_ledger.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_report_ledger.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_ledger.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
     private void init_sales_by_item() {
+//
+//        Dlg_report_sales_by_item item = new Dlg_report_sales_by_item();
+//        pnl_item.setLayout(new BorderLayout());
+//        pnl_item.add(item.getSurface());
+//        pnl_holder.updateUI();
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Sales by Item - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
 
-        Dlg_report_sales_by_item item = new Dlg_report_sales_by_item();
-        pnl_item.setLayout(new BorderLayout());
-        pnl_item.add(item.getSurface());
-        pnl_holder.updateUI();
+        Window p = (Window) this;
+        Dlg_report_sales_by_item nd = Dlg_report_sales_by_item.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_report_sales_by_item.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_sales_by_item.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
     private void init_transaction() {
 
-        Dlg_touchscreen_transactions transaction = new Dlg_touchscreen_transactions();
-        transaction.do_pass(Dlg_touchscreen_cashier_reports.this);
-        pnl_transaction.setLayout(new BorderLayout());
-        pnl_transaction.add(transaction.getSurface());
-        pnl_holder.updateUI();
+//        Dlg_touchscreen_transactions transaction = new Dlg_touchscreen_transactions();
+//        transaction.do_pass(Dlg_touchscreen_cashier_reports.this);
+//        pnl_transaction.setLayout(new BorderLayout());
+//        pnl_transaction.add(transaction.getSurface());
+//        pnl_holder.updateUI();
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Sales Transactions - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+
+        Window p = (Window) this;
+        Dlg_touchscreen_transactions nd = Dlg_touchscreen_transactions.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_touchscreen_transactions.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_transactions.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
     private void init_remitance() {
 
-        Dlg_touchscreen_report_remittance remittance = new Dlg_touchscreen_report_remittance();
-        pnl_remittance.setLayout(new BorderLayout());
-        pnl_remittance.add(remittance.getSurface());
-        pnl_holder.updateUI();
+//        Dlg_touchscreen_report_remittance remittance = new Dlg_touchscreen_report_remittance();
+//        pnl_remittance.setLayout(new BorderLayout());
+//        pnl_remittance.add(remittance.getSurface());
+//        pnl_holder.updateUI();
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Remittance - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+
+        Window p = (Window) this;
+        Dlg_touchscreen_report_remittance nd = Dlg_touchscreen_report_remittance.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_touchscreen_report_remittance.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_report_remittance.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 
     private void init_ar_payments() {
 
-        Dlg_report_ar_payments remittance = new Dlg_report_ar_payments();
-        pnl_ar_payments.setLayout(new BorderLayout());
-        pnl_ar_payments.add(remittance.getSurface());
-        pnl_holder.updateUI();
-
+//        Dlg_report_ar_payments remittance = new Dlg_report_ar_payments();
+//        pnl_ar_payments.setLayout(new BorderLayout());
+//        pnl_ar_payments.add(remittance.getSurface());
+//        pnl_holder.updateUI();
+//        Window p = (Window) this;
+//        Dlg_report_ar_payments nd = Dlg_report_ar_payments.create(p, true);
+//        nd.setTitle("");
+//        
+//        nd.setCallback(new Dlg_report_ar_payments.Callback() {
+//            
+//            @Override
+//            public void ok(CloseDialog closeDialog, Dlg_report_ar_payments.OutputData data) {
+//                closeDialog.ok();
+//                
+//            }
+//        });
+//        nd.setLocationRelativeTo(this);
+//        nd.setVisible(true);
     }
 
     private void init_prepaid_payments() {
 
-        Dlg_report_prepaid_payments remittance = new Dlg_report_prepaid_payments();
-        pnl_prepaid_payments.setLayout(new BorderLayout());
-        pnl_prepaid_payments.add(remittance.getSurface());
-        pnl_holder.updateUI();
-
+//        Dlg_report_prepaid_payments remittance = new Dlg_report_prepaid_payments();
+//        pnl_prepaid_payments.setLayout(new BorderLayout());
+//        pnl_prepaid_payments.add(remittance.getSurface());
+//        pnl_holder.updateUI();
     }
 
     public void do_pass() {

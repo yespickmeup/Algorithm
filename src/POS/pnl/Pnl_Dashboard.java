@@ -2719,7 +2719,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
         for (S1_user_previleges.to_user_previleges to : datas) {
 
-            if (to.previledge.equalsIgnoreCase("Sales")) {
+            if (to.previledge.equalsIgnoreCase("Sales - (View)")) {
                 cashin();
                 jPanel6.setVisible(false);
             }

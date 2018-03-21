@@ -5,6 +5,9 @@
  */
 package POS.inventory;
 
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
+import POS.util.Alert;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -581,8 +584,8 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
             to_uom tt = (to_uom) getRow(row);
             switch (col) {
                 case 0:
-                    String uom=tt.uom;
-                    uom=uom.replaceAll("#", "/");
+                    String uom = tt.uom;
+                    uom = uom.replaceAll("#", "/");
                     return " " + uom;
                 case 1:
                     return " " + FitIn.fmt_wc_0(tt.conversion);
@@ -651,6 +654,12 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
     }
 
     private void add_uom() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Unit of Measure - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = 0;
         String uom = tf_unit.getText();
         uom = uom.replaceAll("/", "#");
@@ -665,6 +674,12 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
     }
 
     private void update_uom() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Unit of Measure - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_uom.getSelectedRow();
         if (row < 0) {
             return;
@@ -697,6 +712,12 @@ public class Dlg_inventory_uom extends javax.swing.JDialog {
     }
 
     private void delete_uom() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Unit of Measure - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_uom.getSelectedRow();
         if (row < 0) {
             return;

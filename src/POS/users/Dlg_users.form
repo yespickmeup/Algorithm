@@ -1376,6 +1376,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_user_default_previlege_othersMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

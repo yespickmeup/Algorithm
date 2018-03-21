@@ -180,7 +180,7 @@ public class S1_user_previleges {
     public static void delete_user_previleges_others_where(String where) {
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "delete from to_user_previlege_others  "
+            String s0 = "delete from user_previlege_others  "
                     + " " + where;
 
             PreparedStatement stmt = conn.prepareStatement(s0);

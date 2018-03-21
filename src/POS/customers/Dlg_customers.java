@@ -7,6 +7,9 @@ package POS.customers;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customers.to_customers;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
+import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
@@ -787,12 +790,9 @@ public class Dlg_customers extends javax.swing.JDialog {
         if (!departments.isEmpty()) {
             Customer_departments.to_customer_departments to = (Customer_departments.to_customer_departments) departments.get(0);
             Field.Combo dep1 = (Field.Combo) tf_customer_name1;
-           
 
             dep1.setText(to.department);
             dep1.setId("" + to.id);
-
-          
 
         }
     }
@@ -991,6 +991,12 @@ public class Dlg_customers extends javax.swing.JDialog {
     }
 
     private void add_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Customers - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo dep = (Field.Combo) tf_customer_name1;
         int id = -1;
         String customer_name = tf_customer_name.getText();
@@ -1047,6 +1053,12 @@ public class Dlg_customers extends javax.swing.JDialog {
     }
 
     private void edit_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Customers - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_customers.getSelectedRow();
         if (row < 0) {
             return;
@@ -1100,6 +1112,12 @@ public class Dlg_customers extends javax.swing.JDialog {
     }
 
     private void delete_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Customers - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");

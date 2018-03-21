@@ -228,6 +228,7 @@ public class Dlg_report_cashcount extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel2.setOpaque(false);
 
@@ -273,11 +274,11 @@ public class Dlg_report_cashcount extends javax.swing.JDialog {
         pnl_report.setLayout(pnl_reportLayout);
         pnl_reportLayout.setHorizontalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 769, Short.MAX_VALUE)
+            .addGap(0, 767, Short.MAX_VALUE)
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
 
         jPanel5.setOpaque(false);

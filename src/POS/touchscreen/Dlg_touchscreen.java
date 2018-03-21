@@ -26,6 +26,7 @@ import POS.unit_of_measure.S1_unit_of_measure.to_uom;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.KeyCodes;
@@ -2882,8 +2883,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jButton40.setEnabled(true);
             jButton40.setVisible(true);
         }
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Choose Location - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
 
-        if (can_choose_location == 1) {
+        if (!datas.isEmpty()) {
             jLabel10.setVisible(true);
             jTextField1.setVisible(true);
             jLabel12.setVisible(true);
@@ -2963,7 +2966,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 RenderButtons.border5(b5);
                 JButton[] b6 = {};
                 RenderButtons.border6(b6);
-                JButton[] b7 = { lbl_p_amount_due};
+                JButton[] b7 = {lbl_p_amount_due};
                 RenderButtons.border7(b7);
                 JButton[] b8 = {lbl_p_change, lbl_p_balance_due};
                 RenderButtons.border8(b8);
@@ -4519,6 +4522,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     private void item_discount() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Discount-Item - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row2 = tbl_uom.getSelectedRow();
         if (row2 < 0) {
             return;
@@ -4595,6 +4604,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     private void due_discount() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Discount-Amount - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Label.Item_discount lbl = (Label.Item_discount) lbl_due_discount;
 
         double total = FitIn.toDouble(lbl_total.getText());
@@ -4739,7 +4754,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void input_amount() {
         double tendered = FitIn.toDouble(tf_amount_tendered.getText());
-        JButton[] btns = {btn_charge20, btn_charge21, btn_charge22, btn_charge17, btn_charge19, btn_charge18, btn_charge12, btn_charge15, btn_charge16, btn_charge13, btn_charge14,btn_charge23,btn_charge26,btn_charge25,btn_charge24};
+        JButton[] btns = {btn_charge20, btn_charge21, btn_charge22, btn_charge17, btn_charge19, btn_charge18, btn_charge12, btn_charge15, btn_charge16, btn_charge13, btn_charge14, btn_charge23, btn_charge26, btn_charge25, btn_charge24};
         for (final JButton b : btns) {
             b.addActionListener(new ActionListener() {
                 @Override
@@ -5443,8 +5458,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             Alert.set(0, "No items added!");
             return;
         }
-        double due_discount=FitIn.toDouble(lbl_due_discount.getText());
-        nd.do_pass(orders,due_discount);
+        double due_discount = FitIn.toDouble(lbl_due_discount.getText());
+        nd.do_pass(orders, due_discount);
         nd.setCallback(new Dlg_touchscreen_order_list.Callback() {
 
             @Override

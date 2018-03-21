@@ -8,6 +8,8 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.payment_terms.S1_payment_terms;
 import POS.reports3.Dlg_report_item_receipts;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
@@ -1090,6 +1092,12 @@ public class Dlg_suppliers extends javax.swing.JDialog {
     }
 
     private void add_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Suppliers - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo dep = (Field.Combo) tf_customer_name1;
         int id = -1;
         String customer_name = tf_customer_name.getText();
@@ -1155,6 +1163,12 @@ public class Dlg_suppliers extends javax.swing.JDialog {
     }
 
     private void edit_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Suppliers - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_customers.getSelectedRow();
         if (row < 0) {
             return;
@@ -1210,6 +1224,12 @@ public class Dlg_suppliers extends javax.swing.JDialog {
     }
 
     private void delete_customers() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Suppliers - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_customers.getSelectedRow();
         if (row < 0) {
             return;

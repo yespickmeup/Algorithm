@@ -6,6 +6,9 @@ package POS.discounts;
 
 import POS.discounts.S1_discounts.to_discounts;
 import POS.main.Main;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
+import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
 import POS.util.Focus_Fire;
@@ -662,6 +665,13 @@ public class Dlg_discounts extends javax.swing.JDialog {
     }
 
     private void add_discounts() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Discounts - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+
         int id = -1;
         String discount_name = tf_discount_name.getText();
         double discount_rate = FitIn.toDouble(tf_discount_rate.getText());
@@ -697,6 +707,12 @@ public class Dlg_discounts extends javax.swing.JDialog {
     }
 
     private void edit_discounts() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Discounts - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_discounts.getSelectedRow();
         if (row < 0) {
             return;
@@ -732,6 +748,12 @@ public class Dlg_discounts extends javax.swing.JDialog {
     }
 
     private void delete_discounts() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Discounts - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_discounts.getSelectedRow();
         if (row < 0) {
             return;

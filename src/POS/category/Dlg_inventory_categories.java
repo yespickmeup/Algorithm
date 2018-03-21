@@ -6,6 +6,8 @@
 package POS.category;
 
 import POS.category.S1_inventory_category.to_inventory_category;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -578,6 +580,12 @@ public class Dlg_inventory_categories extends javax.swing.JDialog {
     private void save_category() {
         int row = tbl_inventory_category.getSelectedRow();
         if (row < 0) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Categories - (Add)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             String category = tf_category.getText();
             String category_code = tf_category_code.getText();
             if (category.isEmpty()) {
@@ -598,6 +606,12 @@ public class Dlg_inventory_categories extends javax.swing.JDialog {
             ret_inventory_categories();
             new_category();
         } else {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Categories - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             String category = tf_category.getText();
             String category_code = tf_category_code.getText();
             if (category.isEmpty()) {

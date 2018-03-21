@@ -14,6 +14,8 @@ import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.inventory.S1_inventory_multi_level_pricing.to_inventory_multi_level_pricing;
 import POS.receipts.S1_receipt_items;
 import POS.selling_type.S1_selling_type;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -2093,6 +2095,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     int selected_row = -1;
 
     private void add_inventory() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo cat = (Field.Combo) tf_category;
         Field.Combo classi = (Field.Combo) tf_classification;
         Field.Combo sub_class = (Field.Combo) tf_sub_classification;
@@ -2163,9 +2171,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 clear_inventory();
                 init_item_code();
                 tf_item_code.grabFocus();
-                
-//                if (cloud_inventory_insert.equalsIgnoreCase("true")) {
 
+//                if (cloud_inventory_insert.equalsIgnoreCase("true")) {
 //                    cloud_insert(query, "Upload new record to cloud?");
 //
 //                } else {
@@ -2291,6 +2298,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     String my_old_barcode = "";
 
     private void edit_inventory() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_inventory_update_confirm nd = Dlg_inventory_update_confirm.create(p, true);
         nd.setTitle("");
@@ -2478,6 +2491,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     }
 
     private void delete_inventory() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         if (selected_row == -1) {
             return;
         }

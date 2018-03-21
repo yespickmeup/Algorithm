@@ -6,6 +6,8 @@ package POS.branches;
 
 import POS.branch_locations.S1_branch_locations;
 import POS.branches.Branches.to_branches;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
@@ -634,6 +636,12 @@ public class Dlg_branches extends javax.swing.JDialog {
     }
 
     private void add_branches() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Branches - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = -1;
         String code = "";
         String branch = tf_branch.getText();
@@ -672,6 +680,12 @@ public class Dlg_branches extends javax.swing.JDialog {
     }
 
     private void edit_branches() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Branches - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_branches.getSelectedRow();
         if (row < 0) {
             return;
@@ -711,6 +725,12 @@ public class Dlg_branches extends javax.swing.JDialog {
     }
 
     private void delete_branches() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Branches - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_branches.getSelectedRow();
         if (row < 0) {
             return;

@@ -6,6 +6,9 @@
 package POS.credit_cards;
 
 import POS.credit_cards.S1_credit_cards.to_credit_cards;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
+import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -451,7 +454,12 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
 //</editor-fold> 
 
     private void add_credit_cards() {
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Credit Cards - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = 0;
         String name = tf_name.getText();
         double rate = FitIn.toDouble(tf_rate.getText());
@@ -491,7 +499,12 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
     }
 
     private void update_credit_cards() {
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Credit Cards - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_credit_cards.getSelectedRow();
         if (row < 0) {
             return;
@@ -523,7 +536,12 @@ public class Dlg_credit_cards extends javax.swing.JDialog {
     }
 
     private void delete_credit_cards() {
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Credit Cards - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_credit_cards.getSelectedRow();
         if (row < 0) {
             return;
