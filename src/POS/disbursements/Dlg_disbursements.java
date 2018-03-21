@@ -390,7 +390,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addContainerGap(245, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -424,7 +424,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextField2)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,23 +611,23 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_cashier, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                                .addComponent(tf_cashier, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
@@ -638,7 +638,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                                     .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                                     .addComponent(jTextField4)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -652,18 +652,18 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                             .addComponent(jLabel72, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel67, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(145, 145, 145)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                     .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                                .addGap(145, 145, 145)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(36, 36, 36))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(24, 24, 24))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -753,7 +753,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
+            .addGap(0, 976, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,7 +768,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
+            .addGap(0, 976, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -984,7 +984,6 @@ public class Dlg_disbursements extends javax.swing.JDialog {
     private void myInit() {
 
 //        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
-
         init_key();
         set_default_branch();
         init_tbl_disbursements(tbl_disbursements);
@@ -1215,12 +1214,18 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 //</editor-fold> 
 
     private void add_disbursements() {
+
         int row = tbl_disbursements.getSelectedRow();
         final Field.Combo cat = (Field.Combo) tf_category_name;
         Field.Combo br = (Field.Combo) jTextField2;
         Field.Combo lo = (Field.Combo) jTextField1;
         if (row < 0) {
-
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursements - (Add)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             int id = 0;
             String user_id = MyUser.getUser_id();
             String user_screen_name = MyUser.getUser_screen_name();
@@ -1265,7 +1270,12 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             nd.setVisible(true);
 
         } else {
-
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursements - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             S1_disbursements.to_disbursements to = (S1_disbursements.to_disbursements) tbl_disbursements_ALM.get(row);
             int id = to.id;
             String user_id = to.user_id;
@@ -1327,6 +1337,12 @@ public class Dlg_disbursements extends javax.swing.JDialog {
 
         int col = tbl_disbursements.getSelectedColumn();
         if (col == 6) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursements - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             tf_purpose.setText(to.purpose);
             cat.setId(to.category_id);
             tf_category_name.setText(to.category_name);
@@ -1351,6 +1367,13 @@ public class Dlg_disbursements extends javax.swing.JDialog {
             jTabbedPane1.setSelectedIndex(0);
         }
         if (col == 7) {
+
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursements - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
@@ -1520,7 +1543,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                     where = where + " and branch_id='" + br.getId() + "' ";
                 }
 
-                where = where + " group by category_name order by category_name asc";
+                where = where + " order by category_name asc";
 //                System.out.println(where);
                 List<Srpt_disbursements_category.field> datas = Srpt_disbursements_category.ret_data(where);
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
@@ -1531,7 +1554,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
                 String branch = jTextField3.getText();
                 String location = jTextField4.getText();
 
-                Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location,cashier);
+                Srpt_disbursements_category rpt = new Srpt_disbursements_category(business_name, address, contact_no, date, printed_by, branch, location, cashier);
                 rpt.fields.addAll(datas);
                 String jrxml = "rpt_disbursement_category.jrxml";
                 report_sales_items(rpt, jrxml);

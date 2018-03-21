@@ -1928,6 +1928,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void add_accounts_receivable() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = -1;
         String customer_id = tf_customer_id.getText();
         String customer_name = tf_customer_name.getText();
@@ -2030,6 +2036,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void edit_accounts_receivable() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
             return;
@@ -2109,53 +2121,45 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable() {
-        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-        int exists = 0;
-        for (S1_user_previleges.to_user_previleges to : datas) {
-            if (to.previledge.equalsIgnoreCase("Delete AR Transaction")) {
-                exists = 1;
-                break;
-            }
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
         }
-//        exists = 1;
-        if (exists == 1) {
-            int row = tbl_accounts_receivable.getSelectedRow();
-            if (row < 0) {
-                return;
-            }
-            final to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
-                    get(tbl_accounts_receivable.convertRowIndexToModel(row));
-            if (to.status == 1) {
-                Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
-                return;
-            }
-            Window p = (Window) this;
-            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
-            nd.setTitle("");
 
-            nd.setCallback(new Dlg_confirm_delete.Callback() {
-
-                @Override
-                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
-                    closeDialog.ok();
-
-                    S1_accounts_receivable.delete_accounts_receivable(to);
-
-                    data_cols();
-                    tbl_accounts_receivable_payments_ALM.clear();
-                    tbl_accounts_receivable_payments_M.fireTableDataChanged();
-                    compute_payments();
-                    clear_accounts_receivable();
-                    Alert.set(3, "");
-                }
-            });
-            nd.setLocationRelativeTo(this);
-            nd.setVisible(true);
-
-        } else {
-            Alert.set(0, "No privilege to delete transaction!");
+        int row = tbl_accounts_receivable.getSelectedRow();
+        if (row < 0) {
+            return;
         }
+        final to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
+                get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        if (to.status == 1) {
+            Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                closeDialog.ok();
+
+                S1_accounts_receivable.delete_accounts_receivable(to);
+
+                data_cols();
+                tbl_accounts_receivable_payments_ALM.clear();
+                tbl_accounts_receivable_payments_M.fireTableDataChanged();
+                compute_payments();
+                clear_accounts_receivable();
+                Alert.set(3, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
     private ArrayListModel tbl_accounts_receivable_payments_ALM;
@@ -2286,6 +2290,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void add_ar_payment() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
             return;
@@ -2410,6 +2420,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void edit_accounts_receivable_payments() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_accounts_receivable_payments.getSelectedRow();
         if (row < 0) {
             return;
@@ -2511,17 +2527,23 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable_payments() {
-        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-        int exists = 0;
-        for (S1_user_previleges.to_user_previleges to : datas) {
-            if (to.previledge.equalsIgnoreCase("Delete AR Payment")) {
-                exists = 1;
-                break;
-            }
+        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
         }
+//        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
+//        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//        int exists = 0;
+//        for (S1_user_previleges.to_user_previleges to : datas) {
+//            if (to.previledge.equalsIgnoreCase("Delete AR Payment")) {
+//                exists = 1;
+//                break;
+//            }
+//        }
 //        exists=1;
-        if (exists == 1) {
+//        if (exists == 1) {
             int row = tbl_accounts_receivable_payments.getSelectedRow();
             if (row < 0) {
                 return;
@@ -2548,7 +2570,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
 
-                    S1_accounts_receivable_payments.delete_accounts_receivable_payments(to,to_ar);
+                    S1_accounts_receivable_payments.delete_accounts_receivable_payments(to, to_ar);
                     int i = tbl_accounts_receivable.getSelectedRow();
                     data_cols();
                     tbl_accounts_receivable.setRowSelectionInterval(i, i);
@@ -2560,9 +2582,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
 
-        } else {
-            Alert.set(0, "No privelege to delete transaction");
-        }
+//        } else {
+//            Alert.set(0, "No privelege to delete transaction");
+//        }
 
     }
 

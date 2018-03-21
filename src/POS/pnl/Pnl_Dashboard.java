@@ -43,6 +43,7 @@ import POS.inventory_replenishment.Dlg_inventory_replenishment;
 import POS.inventory_reports.Dlg_print_inventory_count;
 import POS.inventory_reports.Dlg_reorder_level;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
+import POS.item_replacements.Dlg_item_replacements;
 import static POS.main.MyMain.getSerialNumber;
 import POS.my_services.Dlg_my_service_type;
 import POS.my_services.Dlg_my_services;
@@ -2000,7 +2001,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void myInit() {
 
-        
+//        System.setProperty("pool_db", "db_algorithm");
+//        MyUser.setUser_id("" + 1);
         String environment = System.getProperty("environment", "production");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -2540,13 +2542,17 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
     }
-
+    
     private void t_returns_from_customer() {
         Dlg_return_from_customer dtc = new Dlg_return_from_customer();
-
         MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
     }
 
+    private void t_return_exchange() {
+        Dlg_item_replacements dtc = new Dlg_item_replacements();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Return Exchange");
+    }
+    
     private void t_returns_to_supplier() {
         Dlg_return_to_supplier dtc = new Dlg_return_to_supplier();
         MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
@@ -3096,6 +3102,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 }
                 if (data.stmt.equals("Return/s from Customer")) {
                     t_returns_from_customer();
+
+                }
+                if (data.stmt.equals("Return Exchange")) {
+                    t_return_exchange();
 
                 }
                 if (data.stmt.equals("Return/s to Supplier")) {

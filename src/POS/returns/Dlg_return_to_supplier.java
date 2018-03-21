@@ -15,6 +15,7 @@ import POS.returns.Return_to_supplier.to_return_to_suppliers;
 import POS.returns.Return_to_supplier_items.to_return_to_supplier_items;
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -1845,7 +1846,12 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
 //</editor-fold> 
 
     private void post_return() {
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo supp = (Field.Combo) tf_supplier;
         Field.Combo br = (Field.Combo) tf_branch1;
         Field.Combo lo = (Field.Combo) tf_branch;
@@ -2068,6 +2074,12 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         final to_return_to_suppliers to = (to_return_to_suppliers) tbl_return_to_suppliers_ALM.get(row);
         int col = tbl_return_to_suppliers.getSelectedColumn();
         if (col == 7) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Field.Combo sup = (Field.Combo) tf_supplier;
             Field.Combo br = (Field.Combo) tf_branch1;
             Field.Combo lo = (Field.Combo) tf_branch;
@@ -2098,6 +2110,12 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
 
         }
         if (col == 8) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Transaction already finalized!");
                 return;
@@ -2230,6 +2248,12 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     }
 
     private void update_return_to_supplier() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_return_to_suppliers.getSelectedRow();
         if (row < 0) {
             return;
@@ -2286,6 +2310,12 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     }
 
     private void finalize_return_to_supplier() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_return_to_suppliers.getSelectedRow();
         if (row < 0) {
             return;

@@ -14,6 +14,8 @@ import POS.category.S1_inventory_classification;
 import POS.category.S1_inventory_model;
 import POS.category.S1_inventory_sub_classification;
 import POS.inventory.Inventory_barcodes;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -1697,6 +1699,12 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         int col = tbl_inventory_barcodes.getSelectedColumn();
         final Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_inventory_barcodes_ALM.get(row);
         if (col == 0) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Adjuster - (Add)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             String reference_no = Adjuster.increment_id();
             Window p = (Window) this;
             Dlg_adjuster_qty nd = Dlg_adjuster_qty.create(p, true);
@@ -1716,6 +1724,12 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         }
 
         if (col == 6) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Adjuster - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -1735,6 +1749,12 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         }
 
         if (col == 2) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Adjuster - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_adjuster_input_barcode nd = Dlg_adjuster_input_barcode.create(p, true);
             nd.setTitle("");
@@ -1751,6 +1771,12 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
             nd.setVisible(true);
         }
         if (col == 3) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Adjuster - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_adjuster_description nd = Dlg_adjuster_description.create(p, true);
             nd.setTitle("");
@@ -1899,8 +1925,6 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
         loadData_adjustments(datas);
         jLabel11.setText("" + datas.size());
         jButton2.setEnabled(true);
-        
-        
 
     }
 //</editor-fold> 

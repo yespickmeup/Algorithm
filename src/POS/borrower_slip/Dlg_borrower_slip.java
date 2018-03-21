@@ -13,6 +13,7 @@ import POS.branches.Branches;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.users.S1_users.to_users;
 import POS.users.S2_users;
@@ -1132,6 +1133,12 @@ public class Dlg_borrower_slip extends javax.swing.JDialog {
     }
 
     private void add_borrower_slips() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Borrower Slip - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final Field.Input_w_department borrower = (Field.Input_w_department) tf_borrower;
         Field.Input i_from_branch = (Field.Input) jTextField5;
         Field.Input i_from_location = (Field.Input) jTextField6;

@@ -32,6 +32,7 @@ import mijzcx.synapse.desk.utils.FitIn;
 import synsoftech.util.DateType;
 import java.awt.Window;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import synsoftech.fields.Button;
 import synsoftech.util.ImageRenderer;
@@ -1124,6 +1125,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     }
 
     private void select_sale_item() {
+
         int row = tbl_sale_items.getSelectedRow();
         if (row < 0) {
             return;
@@ -1149,7 +1151,12 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 total_returned += ret.qty;
             }
         }
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return from Customer - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_return_from_customer_qty nd = Dlg_return_from_customer_qty.create(p, true);
         nd.setTitle("");
@@ -1363,7 +1370,6 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     }
 
 //</editor-fold> 
-    
     public static ArrayListModel tbl_return_from_customer_items_ALM2;
     public static Tblreturn_from_customer_itemsModel2 tbl_return_from_customer_items_M2;
 
@@ -1397,14 +1403,12 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_return_from_customer_items_ALM2.addAll(acc);
     }
 
-    
-    
     public static class Tblreturn_from_customer_itemsModel2 extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
             "Qty", "Item Code", "Description", "Reason", "Unit", "Price", "Amount", "", "", "", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "branch", "branch_id", "location", "location_id"
         };
-        
+
         public Tblreturn_from_customer_itemsModel2(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
@@ -1508,7 +1512,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void ret_sale_returned_items() {
         String where2 = " where supplier like '%" + "" + "%' ";
         if (!jCheckBox7.isSelected()) {
@@ -1536,6 +1540,12 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         final to_return_from_customer_items item = (to_return_from_customer_items) tbl_return_from_customer_items_ALM2.get(row);
         int col = jTable2.getSelectedColumn();
         if (col == 7) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return from Customer - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (item.status == 1) {
                 Alert.set(0, "Cannot proceed, item has been finalized!");
                 return;
@@ -1556,6 +1566,12 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             nd.setVisible(true);
         }
         if (col == 8) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return from Customer - (Finalize)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_return_from_customer_finalize nd = Dlg_return_from_customer_finalize.create(p, true);
             nd.setTitle("");

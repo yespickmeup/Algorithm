@@ -281,4 +281,54 @@ public class MyUser {
         }
     }
 
+    public static List<User_default_priveleges.to_user_default_priveleges> ret_privileges(String where) {
+        List<User_default_priveleges.to_user_default_priveleges> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+
+            String s0 = "select "
+                    + "id"
+                    + ",account"
+                    + ",previledge"
+                    + ",status"
+                    + ",user_id"
+                    + ",user_name"
+                    + " from user_previleges  "
+                    + " " + where + " order by previledge asc";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String account = rs.getString(2);
+                String previledge = rs.getString(3);
+                int status = rs.getInt(4);
+                String user_id1 = rs.getString(5);
+                String user_name1 = rs.getString(6);
+
+                String name = previledge;
+                String created_by = "";
+                String updated_by = "";
+                String created_at = "";
+                String updated_at = "";
+
+                int is_uploaded = 0;
+                boolean view = false;
+                boolean add = false;
+                boolean edit = false;
+                boolean delete = false;
+                boolean finalize = false;
+                boolean report = false;
+                User_default_priveleges.to_user_default_priveleges to = new User_default_priveleges.to_user_default_priveleges(id, account, name, created_by, updated_by, created_at, updated_at, status, is_uploaded, view, add, edit, delete, finalize, report);
+                datas.add(to);
+            }
+
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

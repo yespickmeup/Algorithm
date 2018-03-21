@@ -16,6 +16,7 @@ import POS.receipts.Dlg_receipts;
 
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -2149,6 +2150,12 @@ public class Dlg_po2 extends javax.swing.JDialog {
     }
 
     private void post_ordered() {
+        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Purchase Order - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = 0;
         Field.Combo combo = (Field.Combo) tf_branch;
         Field.Combo supp = (Field.Combo) tf_supplier;
@@ -2399,6 +2406,12 @@ public class Dlg_po2 extends javax.swing.JDialog {
         Field.Combo sup = (Field.Combo) tf_supplier;
 
         if (col == 8) {
+            String where3 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Purchase Order - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where3);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             to_purchase_orders order = (to_purchase_orders) tbl_purchase_orders_ALM.get(row);
             tf_receipt_no.setText(order.puchase_order_no);
             my_branch = order.branch;
@@ -2469,6 +2482,12 @@ public class Dlg_po2 extends javax.swing.JDialog {
 
         }
         if (col == 9) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Purchase Order - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             delete_order();
         }
         if (col == 10) {
@@ -2514,6 +2533,12 @@ public class Dlg_po2 extends javax.swing.JDialog {
     }
 
     private void update_purchase_order() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Purchase Order - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = tbl_purchase_orders.getSelectedRow();
         if (row < 0) {
             return;
@@ -2683,6 +2708,12 @@ public class Dlg_po2 extends javax.swing.JDialog {
     }
 
     private void finalize_order() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Purchase Order - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_purchase_orders.getSelectedRow();
         if (row < 0) {
             return;

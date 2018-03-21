@@ -158,19 +158,19 @@ public class Prepaid_payments {
                     + ",check_bank= :check_bank "
                     + ",check_no= :check_no "
                     + ",check_amount= :check_amount "
-                    + ",added_by= :added_by "
-                    + ",date_added= :date_added "
-                    + ",customer_name= :customer_name "
-                    + ",customer_id= :customer_id "
-                    + ",status= :status "
+//                    + ",added_by= :added_by "
+//                    + ",date_added= :date_added "
+//                    + ",customer_name= :customer_name "
+//                    + ",customer_id= :customer_id "
+//                    + ",status= :status "
                     + ",cheque_holder= :cheque_holder "
                     + ",cheque_date= :cheque_date "
-                    + ",user_id= :user_id "
-                    + ",user_screen_name= :user_screen_name "
-                    + ",branch= :branch "
-                    + ",branch_id= :branch_id "
-                    + ",location= :location "
-                    + ",location_id= :location_id "
+//                    + ",user_id= :user_id "
+//                    + ",user_screen_name= :user_screen_name "
+//                    + ",branch= :branch "
+//                    + ",branch_id= :branch_id "
+//                    + ",location= :location "
+//                    + ",location_id= :location_id "
                     + " where id='" + to_prepaid_payments.id + "' "
                     + " ";
 
@@ -179,19 +179,19 @@ public class Prepaid_payments {
                     .setString("check_bank", to_prepaid_payments.check_bank)
                     .setString("check_no", to_prepaid_payments.check_no)
                     .setNumber("check_amount", to_prepaid_payments.check_amount)
-                    .setString("added_by", to_prepaid_payments.added_by)
-                    .setString("date_added", to_prepaid_payments.date_added)
-                    .setString("customer_name", to_prepaid_payments.customer_name)
-                    .setString("customer_id", to_prepaid_payments.customer_id)
-                    .setNumber("status", to_prepaid_payments.status)
+//                    .setString("added_by", to_prepaid_payments.added_by)
+//                    .setString("date_added", to_prepaid_payments.date_added)
+//                    .setString("customer_name", to_prepaid_payments.customer_name)
+//                    .setString("customer_id", to_prepaid_payments.customer_id)
+//                    .setNumber("status", to_prepaid_payments.status)
                     .setString("cheque_holder", to_prepaid_payments.cheque_holder)
                     .setString("cheque_date", to_prepaid_payments.cheque_date)
-                    .setString("user_id", to_prepaid_payments.user_id)
-                    .setString("user_screen_name", to_prepaid_payments.user_screen_name)
-                    .setString("branch", to_prepaid_payments.branch)
-                    .setString("branch_id", to_prepaid_payments.branch_id)
-                    .setString("location", to_prepaid_payments.location)
-                    .setString("location_id", to_prepaid_payments.location_id)
+//                    .setString("user_id", to_prepaid_payments.user_id)
+//                    .setString("user_screen_name", to_prepaid_payments.user_screen_name)
+//                    .setString("branch", to_prepaid_payments.branch)
+//                    .setString("branch_id", to_prepaid_payments.branch_id)
+//                    .setString("location", to_prepaid_payments.location)
+//                    .setString("location_id", to_prepaid_payments.location_id)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);

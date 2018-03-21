@@ -88,8 +88,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Inventory Replenishment">
-                    <Property name="tabTitle" type="java.lang.String" value="Inventory Replenishment"/>
+                  <JTabbedPaneConstraints tabName="Inventory Encoding">
+                    <Property name="tabTitle" type="java.lang.String" value="Inventory Encoding"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>

@@ -583,9 +583,9 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton3)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tf_cash)
                                     .addComponent(jLabel6))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -602,7 +602,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1100,6 +1100,12 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }
 
     private void add_prepaid_payments() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Prepaid Payments - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = tbl_customers.getSelectedRow();
         if (row < 0) {
             return;
@@ -1159,6 +1165,12 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }
 
     private void update_prepaid_payments() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Prepaid Payments - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = tbl_prepaid_payments.getSelectedRow();
         if (row < 0) {
             return;
@@ -1253,7 +1265,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             }
             tf_check_bank.setText(to.check_bank);
             tf_check_no.setText(to.check_no);
-            tf_cash.setText(FitIn.fmt_wc_0(to.check_amount));
+//            tf_cash.setText(FitIn.fmt_wc_0(to.check_amount));
             tf_customer_name.setText(to.customer_name);
             try {
                 Date d = DateType.sf.parse(to.cheque_date);
@@ -1265,6 +1277,12 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }
 
     private void delete_prepaid_payments() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Prepaid Payments - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
@@ -1295,7 +1313,12 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }
 
     private void finalize_payment() {
-
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Prepaid Payments - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         List<to_prepaid_payments> datas = tbl_prepaid_payments_ALM;
         final List<to_prepaid_payments> selected = new ArrayList();
         for (to_prepaid_payments to : datas) {
@@ -1329,18 +1352,16 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     private void popup(MouseEvent evt) {
 
         if (evt.isPopupTrigger()) {
-            int exists = 0;
-            String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
-            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-            for (S1_user_previleges.to_user_previleges to : datas) {
-                if (to.previledge.equalsIgnoreCase("Prepaid Payment Finalize")) {
-                    exists = 1;
-                    break;
-                }
-            }
-            if (exists == 1) {
-                jPopupMenu1.show(tbl_prepaid_payments, evt.getX(), evt.getY());
-            }
+            jPopupMenu1.show(tbl_prepaid_payments, evt.getX(), evt.getY());
+//            int exists = 0;
+//            String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
+//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//            for (S1_user_previleges.to_user_previleges to : datas) {
+//                if (to.previledge.equalsIgnoreCase("Prepaid Payment Finalize")) {
+//                    exists = 1;
+//                    break;
+//                }
+//            }
 
         }
     }

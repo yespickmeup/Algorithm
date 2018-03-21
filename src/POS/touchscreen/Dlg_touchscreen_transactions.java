@@ -1690,12 +1690,13 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     }
 
     private void returns_exchange() {
-        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange' ";
-        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-        if (datas.isEmpty()) {
-            Alert.set(0, "Previlege not added!");
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (View)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
             return;
         }
+       
         Window p = (Window) this;
         Dlg_item_replacements nd = Dlg_item_replacements.create(p, true);
         nd.setTitle("");

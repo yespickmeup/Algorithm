@@ -20,12 +20,13 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  *
  * @author Guinness
  */
-public class User_default_priveleges {
+public class User_default_privelege_others {
 
     public static class to_user_default_priveleges {
 
         public final int id;
         public final String account;
+        public final String account_name;
         public final String name;
         public final String created_by;
         public final String updated_by;
@@ -40,9 +41,10 @@ public class User_default_priveleges {
         public final boolean finalize;
         public final boolean report;
 
-        public to_user_default_priveleges(int id, String account, String name, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded, boolean view, boolean add, boolean edit, boolean delete, boolean finalize, boolean report) {
+        public to_user_default_priveleges(int id, String account, String account_name, String name, String created_by, String updated_by, String created_at, String updated_at, int status, int is_uploaded, boolean view, boolean add, boolean edit, boolean delete, boolean finalize, boolean report) {
             this.id = id;
             this.account = account;
+            this.account_name = account_name;
             this.name = name;
             this.created_by = created_by;
             this.updated_by = updated_by;
@@ -62,8 +64,9 @@ public class User_default_priveleges {
     public static void add_data(to_user_default_priveleges to_user_default_priveleges) {
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "insert into user_default_priveleges("
+            String s0 = "insert into user_default_privelege_others("
                     + "account"
+                    + ",account_name"
                     + ",name"
                     + ",created_by"
                     + ",updated_by"
@@ -73,6 +76,7 @@ public class User_default_priveleges {
                     + ",is_uploaded"
                     + ")values("
                     + ":account"
+                    + ",:account_name"
                     + ",:name"
                     + ",:created_by"
                     + ",:updated_by"
@@ -84,6 +88,7 @@ public class User_default_priveleges {
 
             s0 = SqlStringUtil.parse(s0)
                     .setString("account", to_user_default_priveleges.account)
+                    .setString("account_name", to_user_default_priveleges.account_name)
                     .setString("name", to_user_default_priveleges.name)
                     .setString("created_by", to_user_default_priveleges.created_by)
                     .setString("updated_by", to_user_default_priveleges.updated_by)
@@ -95,7 +100,7 @@ public class User_default_priveleges {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(User_default_priveleges.class, "Successfully Added");
+            Lg.s(User_default_privelege_others.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -108,6 +113,7 @@ public class User_default_priveleges {
             Connection conn = MyConnection.connect();
             String s0 = "update user_default_priveleges set "
                     + "account= :account "
+                    + ",account_name= :account_name"
                     + ",name= :name "
                     + ",created_by= :created_by "
                     + ",updated_by= :updated_by "
@@ -120,6 +126,7 @@ public class User_default_priveleges {
 
             s0 = SqlStringUtil.parse(s0)
                     .setString("account", to_user_default_priveleges.account)
+                    .setString("account_name", to_user_default_priveleges.account_name)
                     .setString("name", to_user_default_priveleges.name)
                     .setString("created_by", to_user_default_priveleges.created_by)
                     .setString("updated_by", to_user_default_priveleges.updated_by)
@@ -131,7 +138,7 @@ public class User_default_priveleges {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(User_default_priveleges.class, "Successfully Updated");
+            Lg.s(User_default_privelege_others.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -148,7 +155,7 @@ public class User_default_priveleges {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
-            Lg.s(User_default_priveleges.class, "Successfully Deleted");
+            Lg.s(User_default_privelege_others.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -158,16 +165,17 @@ public class User_default_priveleges {
 
     public static List<to_user_default_priveleges> ret_data(String where, String where2) {
         List<to_user_default_priveleges> datas = new ArrayList();
-        List<S1_user_previleges.to_user_previleges> priveleges = new ArrayList();
+        List<User_previlege_others.to_user_previlege_others> priveleges = new ArrayList();
         try {
             Connection conn = MyConnection.connect();
             String s2 = "select "
                     + "id"
                     + ",account"
-                    + ",previledge"
+                    + ",account_name"
+                    + ",name"
                     + ",user_id"
                     + ",user_name"
-                    + " from user_previleges"
+                    + " from user_previlege_others"
                     + " " + where;
 
             Statement stmt2 = conn.createStatement();
@@ -175,24 +183,25 @@ public class User_default_priveleges {
             while (rs2.next()) {
                 int id = rs2.getInt(1);
                 String account = rs2.getString(2);
-                String privelege = rs2.getString(3);
-                String user_id = rs2.getString(4);
-                String user_name = rs2.getString(5);
-                S1_user_previleges.to_user_previleges to = new S1_user_previleges.to_user_previleges(id, account, privelege, 0, user_id, user_name);
+                 String account_name = rs2.getString(3);
+                String name = rs2.getString(4);
+                String user_id = rs2.getString(5);
+                String user_name = rs2.getString(6);
+                User_previlege_others.to_user_previlege_others to = new User_previlege_others.to_user_previlege_others(id, account,account_name, name,  user_id, user_name);
                 priveleges.add(to);
             }
 
             String s0 = "select "
                     + "id"
                     + ",account"
+                    + ",account_name"
                     + ",name"
                     + ",name"
                     + ",name"
                     + ",name"
                     + ",name"
                     + ",name"
-                    + ",name"
-                    + " from user_default_previleges " + where2 + " order by name asc "
+                    + " from  user_default_previlege_others " + where2 + " order by name asc "
                     + " ";
 
             Statement stmt = conn.createStatement();
@@ -200,8 +209,8 @@ public class User_default_priveleges {
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String account = rs.getString(2);
-                String name = rs.getString(3);
-                String created_by = rs.getString(4);
+                String account_name = rs.getString(3);
+                String name = rs.getString(4);
                 String updated_by = rs.getString(5);
                 String created_at = rs.getString(6);
                 String updated_at = rs.getString(7);
@@ -214,27 +223,27 @@ public class User_default_priveleges {
                 boolean delete = false;
                 boolean finalize = false;
                 boolean report = false;
-                for (S1_user_previleges.to_user_previleges priv : priveleges) {
-                    if (priv.previledge.equalsIgnoreCase(name + " - (View)")) {
+                for (User_previlege_others.to_user_previlege_others priv : priveleges) {
+                    if (priv.name.equalsIgnoreCase(name + " - (View)")) {
                         view = true;
                     }
-                    if (priv.previledge.equalsIgnoreCase(name + " - (Add)")) {
+                    if (priv.name.equalsIgnoreCase(name + " - (Add)")) {
                         add = true;
                     }
-                    if (priv.previledge.equalsIgnoreCase(name + " - (Edit)")) {
+                    if (priv.name.equalsIgnoreCase(name + " - (Edit)")) {
                         edit = true;
                     }
-                    if (priv.previledge.equalsIgnoreCase(name + " - (Delete)")) {
+                    if (priv.name.equalsIgnoreCase(name + " - (Delete)")) {
                         delete = true;
                     }
-                    if (priv.previledge.equalsIgnoreCase(name + " - (Finalize)")) {
+                    if (priv.name.equalsIgnoreCase(name + " - (Finalize)")) {
                         finalize = true;
                     }
-                    if (priv.previledge.equalsIgnoreCase(name + " - (Report)")) {
+                    if (priv.name.equalsIgnoreCase(name + " - (Report)")) {
                         report = true;
                     }
                 }
-                to_user_default_priveleges to = new to_user_default_priveleges(id, account, name, created_by, updated_by, created_at, updated_at, status, is_uploaded,
+                to_user_default_priveleges to = new to_user_default_priveleges(id, account, account_name, name, name, updated_by, created_at, updated_at, status, is_uploaded,
                         view, add, edit, delete, finalize, report);
                 datas.add(to);
             }

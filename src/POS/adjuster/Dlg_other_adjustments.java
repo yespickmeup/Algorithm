@@ -15,6 +15,7 @@ import POS.category.S1_inventory_sub_classification;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
@@ -1724,6 +1725,12 @@ public class Dlg_other_adjustments extends javax.swing.JDialog {
     }
 
     private void select_item() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Other Adjustments - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_inventory_barcodes.getSelectedRow();
         if (row < 0) {
             return;
@@ -1812,7 +1819,7 @@ public class Dlg_other_adjustments extends javax.swing.JDialog {
         tbl_other_adjustments.getColumnModel().getColumn(11).setCellRenderer(new ImageRenderer());
         tbl_other_adjustments.getColumnModel().getColumn(12).setCellRenderer(new ImageRenderer());
     }
-    
+
     public static void loadData_other_adjustments(List<to_other_adjustments> acc) {
         tbl_other_adjustments_ALM.clear();
         tbl_other_adjustments_ALM.addAll(acc);
@@ -2012,6 +2019,12 @@ public class Dlg_other_adjustments extends javax.swing.JDialog {
         final to_other_adjustments to = (to_other_adjustments) tbl_other_adjustments_ALM.get(row);
         int col = tbl_other_adjustments.getSelectedColumn();
         if (col == 10) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Other Adjustments - (Finalize)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Cannot proceed, Transaction already finalized!");
                 return;
@@ -2038,6 +2051,12 @@ public class Dlg_other_adjustments extends javax.swing.JDialog {
             nd.setVisible(true);
         }
         if (col == 11) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Other Adjustments - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Cannot proceed, Transaction already finalized!");
                 return;
@@ -2106,6 +2125,12 @@ public class Dlg_other_adjustments extends javax.swing.JDialog {
             nd.setVisible(true);
         }
         if (col == 12) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Other Adjustments - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 2) {
                 Alert.set(0, "Cannot proceed, Transaction deleted!");
                 return;

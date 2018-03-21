@@ -11,6 +11,8 @@ import POS.inventory.Inventory_barcodes;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.requisition_slips.Requisition_slip_items.to_requisition_slip_items;
 import POS.requisition_slips.Requisition_slips.to_requisition_slips;
+import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
@@ -1515,6 +1517,12 @@ public class Dlg_requisition_slip extends javax.swing.JDialog {
     }
 
     private void post() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Requisition Slip - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo dep = (Field.Combo) jTextField3;
         int id = 0;
         String requisition_slip_no = Requisition_slips.increment_id(location_ids);

@@ -14,6 +14,7 @@ import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -2186,7 +2187,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
 //</editor-fold> 
 
     private void post_conversion() {
-
+        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Conversion - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         String conversion_no = Conversions.increment_id();
         String where = " where conversion_no='" + conversion_no + "' ";
         List<Conversions.to_conversions> conversion_list = Conversions.ret_data(where);
@@ -2443,7 +2449,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
         int col = jTable3.getSelectedColumn();
         if (col == 5) {
             //edit
-
+            String where3 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Conversion - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where3);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Field.Combo f_branch = (Field.Combo) tf_from_branch;
             Field.Combo f_location = (Field.Combo) tf_from_location;
             Field.Combo t_branch = (Field.Combo) tf_to_branch;
@@ -2483,6 +2494,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
             tf_to_location.setEnabled(false);
         }
         if (col == 6) {
+            String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Conversion - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (conversion.status == 1) {
                 Alert.set(0, "Cannot proceed, transaction already finalized!");
                 return;
@@ -2508,6 +2525,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }
 
     private void update_conversion() {
+        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Conversion - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = jTable3.getSelectedRow();
         if (row < 0) {
             return;
@@ -2539,6 +2562,12 @@ public class Dlg_conversion extends javax.swing.JDialog {
     }
 
     private void finalize_conversion() {
+        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Conversion - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = jTable3.getSelectedRow();
         if (row < 0) {
             return;

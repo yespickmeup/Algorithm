@@ -10,6 +10,7 @@ import POS.branch_locations.S1_branch_locations.to_branch_locations;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory_replenishment.Inventory_replenishments;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.DateUtils1;
@@ -522,11 +523,17 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                         return;
                     }
                 } catch (Exception e) {
-
+                    System.out.println(e);
                 }
             }
 
             if (to.status == 0) {
+                String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Replenishment - (Add)" + "' limit 1";
+                List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+                if (privileges.isEmpty()) {
+                    Alert.set(0, "Privilege not added!");
+                    return;
+                }
                 Window p = (Window) this;
                 Dlg_confirm_zero_out_inventory nd = Dlg_confirm_zero_out_inventory.create(p, true);
                 nd.setTitle("");

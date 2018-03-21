@@ -22,10 +22,51 @@
     <variable name="amount_1" class="java.lang.Double" calculation="Sum">
         <variableExpression><![CDATA[$F{amount}]]></variableExpression>
     </variable>
+    <variable name="amount_2" class="java.lang.Double" resetType="Group" resetGroup="cate" calculation="Sum">
+        <variableExpression><![CDATA[$F{amount}]]></variableExpression>
+    </variable>
     <group name="cat">
         <groupExpression><![CDATA[$F{category_id}]]></groupExpression>
         <groupHeader>
             <band/>
+        </groupHeader>
+        <groupFooter>
+            <band/>
+        </groupFooter>
+    </group>
+    <group name="cate">
+        <groupExpression><![CDATA[$F{category_name}]]></groupExpression>
+        <groupHeader>
+            <band height="15">
+                <textField>
+                    <reportElement uuid="319f66b2-b624-49a6-89b8-ba629f6884ed" x="0" y="0" width="216" height="15"/>
+                    <box>
+                        <topPen lineWidth="0.2"/>
+                        <leftPen lineWidth="0.2"/>
+                        <bottomPen lineWidth="0.2"/>
+                        <rightPen lineWidth="0.2"/>
+                    </box>
+                    <textElement verticalAlignment="Middle">
+                        <font size="11" isBold="true"/>
+                        <paragraph leftIndent="2" rightIndent="2"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{category_name}]]></textFieldExpression>
+                </textField>
+                <textField evaluationTime="Group" evaluationGroup="cate" pattern="#,##0.00" isBlankWhenNull="false">
+                    <reportElement uuid="ab989432-7217-4c98-9321-a3a40f0f3b74" mode="Transparent" x="216" y="0" width="84" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+                    <box>
+                        <topPen lineWidth="0.2"/>
+                        <leftPen lineWidth="0.2"/>
+                        <bottomPen lineWidth="0.2"/>
+                        <rightPen lineWidth="0.2"/>
+                    </box>
+                    <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+                        <font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                        <paragraph lineSpacing="Single" rightIndent="2"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{amount_2}]]></textFieldExpression>
+                </textField>
+            </band>
         </groupHeader>
         <groupFooter>
             <band/>
@@ -162,6 +203,7 @@
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
+                    <font size="11"/>
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <text><![CDATA[Category]]></text>
@@ -175,6 +217,7 @@
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="11"/>
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <text><![CDATA[Amount]]></text>
@@ -183,19 +226,6 @@
     </columnHeader>
     <detail>
         <band height="15" splitType="Stretch">
-            <textField>
-                <reportElement uuid="319f66b2-b624-49a6-89b8-ba629f6884ed" x="0" y="0" width="216" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2" rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{category_name}]]></textFieldExpression>
-            </textField>
             <textField pattern="#,##0.00">
                 <reportElement uuid="40a3eb92-841c-46f7-9d3c-f3468158903a" x="216" y="0" width="84" height="15"/>
                 <box>
@@ -208,6 +238,19 @@
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="3174a6fe-83d9-408a-8ec2-91bd852496cc" x="0" y="0" width="216" height="15"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                    <leftPen lineWidth="0.2"/>
+                    <bottomPen lineWidth="0.2"/>
+                    <rightPen lineWidth="0.2"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{purpose}]]></textFieldExpression>
             </textField>
         </band>
     </detail>
@@ -228,7 +271,7 @@
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
-                    <font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+                    <font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
                     <paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$V{amount_1}]]></textFieldExpression>
@@ -242,7 +285,7 @@
                     <rightPen lineWidth="0.2"/>
                 </box>
                 <textElement verticalAlignment="Middle">
-                    <font isBold="true"/>
+                    <font size="11" isBold="true"/>
                     <paragraph leftIndent="2" rightIndent="2"/>
                 </textElement>
                 <text><![CDATA[Total]]></text>

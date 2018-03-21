@@ -13,6 +13,7 @@ import POS.branch_locations.S4_branch_locations;
 import POS.suppliers.Supplier_departments;
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -1579,6 +1580,12 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     }
 
     private void new_accounts_payable() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Payable - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
 
         if (jTextField2.getText().isEmpty()) {
             Alert.set(0, "Select supplier!");
@@ -1817,6 +1824,12 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
 
         ret_ap_payments();
         if (col == 6) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Payable - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Cannot proceed, transaction already cancelled!");
                 return;
@@ -1845,6 +1858,12 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
             nd.setVisible(true);
         }
         if (col == 7) {
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Payable - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Cannot proceed, transaction already cancelled!");
                 return;

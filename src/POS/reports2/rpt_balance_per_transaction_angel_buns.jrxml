@@ -110,12 +110,12 @@
                 <text><![CDATA[Applied]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="b77365de-e044-4ca3-bf27-e5eb91ee0f5a" x="312" y="0" width="164" height="20"/>
+                <reportElement uuid="b77365de-e044-4ca3-bf27-e5eb91ee0f5a" x="312" y="0" width="226" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
                 <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="5" rightIndent="5"/>
+                    <paragraph leftIndent="35" rightIndent="5"/>
                 </textElement>
                 <text><![CDATA[Remarks]]></text>
             </staticText>
@@ -148,10 +148,10 @@
                 <textFieldExpression><![CDATA[$F{applied}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="3c3af858-c3c3-499f-bfe0-34863343955e" x="312" y="0" width="164" height="15"/>
+                <reportElement uuid="3c3af858-c3c3-499f-bfe0-34863343955e" x="312" y="0" width="226" height="15"/>
                 <textElement verticalAlignment="Middle">
                     <font size="10"/>
-                    <paragraph leftIndent="5" rightIndent="5"/>
+                    <paragraph leftIndent="35" rightIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{transaction_no}]]></textFieldExpression>
             </textField>

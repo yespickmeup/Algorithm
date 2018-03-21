@@ -798,7 +798,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Inventory Replenishment", jPanel1);
+        jTabbedPane1.addTab("Inventory Encoding", jPanel1);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1559,7 +1559,13 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                             int i = s.indexOf(":");
                             int ii = s.indexOf("/");
                             int iii = s.indexOf("^");
-                            String uom1 = s.substring(1, i);
+                            String uom1 = "";
+                            try {
+                                uom1 = s.substring(1, i);
+                            } catch (Exception e) {
+                                uom1="";
+                            }
+
                             double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
                             double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
                             int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
@@ -1737,6 +1743,12 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     }
 
     private void add_encoding_inventory() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Encoding - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int id = -1;
         String item_code = tf_description.getText();
         String barcode = tf_description1.getText();
@@ -1768,8 +1780,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         double selling_price = FitIn.toDouble(tf_selling_price.getText());
         String user_id = MyUser.getUser_id();
         String user_screen_name = MyUser.getUser_screen_name();
-        String remarks=tf_qty1.getText();
-        to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+        String remarks = tf_qty1.getText();
+        to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
         Encoding_inventory.add_encoding_inventory(to);
         data_cols();
         clear_encoding_inventory();
@@ -1836,6 +1848,12 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     }
 
     private void edit_encoding_inventory() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Encoding - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_encoding_inventory.getSelectedRow();
         if (row < 0) {
             return;
@@ -1877,8 +1895,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         double selling_price = FitIn.toDouble(tf_cost.getText());
         String user_id = to.user_id;
         String user_screen_name = to.user_screen_name;
-        String remarks=tf_qty1.getText();
-        final to_encoding_inventory to1 = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, to.status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+        String remarks = tf_qty1.getText();
+        final to_encoding_inventory to1 = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, to.status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1908,6 +1926,12 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     }
 
     private void delete_encoding_inventory() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Encoding - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_encoding_inventory.getSelectedRow();
         if (row < 0) {
             return;
@@ -2036,6 +2060,12 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     }
 
     private void choose_replenishment() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Replenishment - (View)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_encoding_replenishment nd = Dlg_encoding_replenishment.create(p, true);
         nd.setTitle("");
@@ -2076,7 +2106,12 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
     }
 
     private void finalize_encoding() {
-
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Inventory Encoding - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");

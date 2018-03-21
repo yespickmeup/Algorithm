@@ -724,6 +724,12 @@ public class Dlg_suppliers_report extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_algorithm");
         init_key();
         ret_customer_departments();
+
+        jTabbedPane1.remove(1);
+        jTabbedPane1.remove(1);
+        jTabbedPane1.remove(1);
+        jTabbedPane1.remove(1);
+        jTextField14.setVisible(false);
     }
 
     public void do_pass() {

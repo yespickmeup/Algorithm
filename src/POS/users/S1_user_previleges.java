@@ -162,6 +162,36 @@ public class S1_user_previleges {
         }
     }
 
+    public static void delete_user_previleges_where(String where) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "delete from user_previleges  "
+                    + " " + where;
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(S1_user_previleges.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+    public static void delete_user_previleges_others_where(String where) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "delete from to_user_previlege_others  "
+                    + " " + where;
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(S1_user_previleges.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
     public static List<to_user_previleges> ret_data(String where) {
         List<to_user_previleges> datas = new ArrayList();
 

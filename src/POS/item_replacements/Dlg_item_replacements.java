@@ -385,6 +385,15 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 
             }
         ));
+        jTable2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
 
         jLabel17.setText("Total no. of item/s:");
@@ -838,7 +847,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Item Replacements", jPanel2);
+        jTabbedPane1.addTab("Return Exchange", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1174,6 +1183,10 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         select_replacements();
     }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable2AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2AncestorAdded
 
     /**
      * @param args the command line arguments
@@ -1584,7 +1597,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }
 
     private void replace_items() {
-
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final List<MySales_Items.items> selected = new ArrayList();
         List<MySales_Items.items> items = tbl_sale_items_ALM;
         for (MySales_Items.items item : items) {
@@ -1715,7 +1733,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 5:
                     return FitIn.fmt_wc_0(tt.discount) + " ";
                 case 6:
-                    double total = (tt.amount_due- tt.discount) - (tt.replacement_amount );
+                    double total = (tt.amount_due - tt.discount) - (tt.replacement_amount);
                     if (total < 0) {
                         return " Over";
                     } else if (total == 0) {
@@ -1768,6 +1786,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         int col = tbl_item_replacements.getSelectedColumn();
         final to_item_replacements to = (to_item_replacements) tbl_item_replacements_ALM.get(row);
         if (col == 8) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Transaction already finalized!");
                 return;
@@ -1796,17 +1820,23 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         } else if (col == 7) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Finalize)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Transaction already finalized!");
                 return;
             }
 
-            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange - (Finalize)' ";
-            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-            if (datas.isEmpty()) {
-                Alert.set(0, "Previlege not added!");
-                return;
-            }
+//            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange - (Finalize)' ";
+//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//            if (datas.isEmpty()) {
+//                Alert.set(0, "Previlege not added!");
+//                return;
+//            }
             ret_item_replacement_details_for_replacement();
             ret_item_replacement_details_replacement();
 
@@ -1835,6 +1865,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         } else if (col == 5) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             if (to.status == 1) {
                 Alert.set(0, "Transaction already finalized!");
                 return;
@@ -2213,6 +2249,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }
 
     private void select_replacements() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = jTable3.getSelectedRow();
         if (row < 0) {
             return;
@@ -2325,8 +2367,8 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 6:
                     return FitIn.fmt_wc_0(tt.discount) + " ";
                 case 7:
-                    
-                    double total = (tt.replacement_amount - tt.discount)-tt.amount_due  ;
+
+                    double total = (tt.replacement_amount - tt.discount) - tt.amount_due;
                     if (total < 0) {
                         return " Over";
                     } else if (total == 0) {
@@ -2335,7 +2377,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                         return " Short";
                     }
                 case 8:
-                    double total2 = (tt.replacement_amount - tt.discount)-tt.amount_due  ;
+                    double total2 = (tt.replacement_amount - tt.discount) - tt.amount_due;
                     return FitIn.fmt_wc_0(total2) + " ";
                 case 9:
                     if (tt.status == 0) {

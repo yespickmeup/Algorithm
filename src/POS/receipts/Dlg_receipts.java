@@ -18,6 +18,7 @@ import POS.purchase_order.Purchase_order_item;
 import POS.receipts.S1_receipt_orders.to_receipt_items;
 import POS.receipts.Receipts.to_receipts;
 import POS.suppliers.Suppliers;
+import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.*;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -1720,7 +1721,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_supplierMouseClicked
 
     private void tf_remarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_remarksActionPerformed
-       
+
     }//GEN-LAST:event_tf_remarksActionPerformed
 
     private void tf_discountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_discountKeyReleased
@@ -2092,7 +2093,6 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void set_d() {
- 
 
     }
 
@@ -2679,6 +2679,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void add_receipt() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Receipts - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         if (tbl_receipt_items_ALM.isEmpty()) {
             Alert.set(0, "NO RECORD");
             return;
@@ -3432,6 +3438,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void update_receipt() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Receipts - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_receipts.getSelectedRow();
         if (row < 0) {
             return;
@@ -3527,6 +3539,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
             lbl_net.setText(FitIn.fmt_wc_0(total - to.discount));
         }
         if (col == 6) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Receipts - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             jTabbedPane1.setSelectedIndex(0);
             jButton1.setEnabled(false);
             jButton3.setEnabled(true);
@@ -3543,6 +3561,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         }
         if (col == 7) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Receipts - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             delete_receipts();
         }
         if (col == 8) {
@@ -3829,6 +3853,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
     }
 
     private void finalize_receipt() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Receipts - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final int row = tbl_receipts.getSelectedRow();
         if (row < 0) {
             return;

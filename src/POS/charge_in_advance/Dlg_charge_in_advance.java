@@ -11,6 +11,7 @@ import POS.delivery.Dlg_delivery_print_preview;
 import POS.inventory.Inventory_barcodes;
 import POS.touchscreen.Payments;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -696,7 +697,7 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -744,6 +745,12 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
     }
 
     private void dlg_item_search() {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Charge In Advance - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         if (ar == null) {
             Alert.set(0, "Please Select AR Transaction!");
             return;
@@ -901,9 +908,9 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
                     ps = (ps + tt.addtl_amount) - tt.discount_amount;
                     return FitIn.fmt_wc_0(ps) + " ";
                 case 5:
-                    if(tt.status==1){
-                        return " Void";                                
-                    }else{
+                    if (tt.status == 1) {
+                        return " Void";
+                    } else {
                         return " Ok";
                     }
                 case 6:
@@ -998,7 +1005,7 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
 
     private void data_cols() {
         String where = " where ar_no='" + jTextField3.getText() + "' and status='" + "0" + "' order by id asc ";
-        System.out.println("AR No.: "+jTextField3.getText());
+        System.out.println("AR No.: " + jTextField3.getText());
         List<Charge_in_advance_items.to_charge_in_advance_items> datas = Charge_in_advance_items.ret_data(where);
         loadData_charge_in_advance_items(datas);
         compute_total();
@@ -1067,7 +1074,13 @@ public class Dlg_charge_in_advance extends javax.swing.JDialog {
     }
 
     private void cancel_item() {
-
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Charge In Advance - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
+        
         int row = tbl_charge_in_advance_items.getSelectedRow();
         if (row < 0) {
             return;

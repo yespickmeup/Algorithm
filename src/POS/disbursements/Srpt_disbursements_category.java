@@ -195,7 +195,7 @@ public class Srpt_disbursements_category {
                     + ",purpose"
                     + ",ifnull(category_id,0)"
                     + ",category_name"
-                    + ",sum(amount)"
+                    + ",(amount)"
                     + ",is_vat"
                     + ",disbursement_date"
                     + ",branch"

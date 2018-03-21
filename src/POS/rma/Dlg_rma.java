@@ -587,7 +587,7 @@ public class Dlg_rma extends javax.swing.JDialog {
             }
         }
     }
-
+    
     private void data_cols() {
         String where = " where supplier like '%" + "" + "%' ";
         String from = DateType.sf.format(jDateChooser1.getDate());

@@ -30,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -257,6 +258,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jPanel8 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jProgressBar4 = new javax.swing.JProgressBar();
+        jPanel9 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -711,6 +713,19 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Over/Short", jPanel6);
 
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 869, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 534, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Sheet", jPanel9);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -832,6 +847,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -864,6 +880,14 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         tf_search_branch_code1.setVisible(false);
         tf_location_id1.setVisible(false);
 
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+               jPanel9.setLayout(new BorderLayout());
+               Dlg_rpt_encoding_inventory dtc = new Dlg_rpt_encoding_inventory();
+               jPanel9.add(dtc);
+            }
+        });
     }
 
     String location_ids = "";
