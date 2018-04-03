@@ -45,8 +45,9 @@ public class Prepaid_payments {
         public final String branch_id;
         public final String location;
         public final String location_id;
+        public final String remarks;
 
-        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id) {
+        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, String remarks) {
             this.id = id;
             this.cash = cash;
             this.check_bank = check_bank;
@@ -66,6 +67,7 @@ public class Prepaid_payments {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.remarks = remarks;
         }
 
         public boolean isSelected() {
@@ -99,6 +101,7 @@ public class Prepaid_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",remarks"
                     + ")values("
                     + ":cash"
                     + ",:check_bank"
@@ -117,6 +120,7 @@ public class Prepaid_payments {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:remarks"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -137,6 +141,7 @@ public class Prepaid_payments {
                     .setString("branch_id", to_prepaid_payments.branch_id)
                     .setString("location", to_prepaid_payments.location)
                     .setString("location_id", to_prepaid_payments.location_id)
+                    .setString("remarks", to_prepaid_payments.remarks)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -158,19 +163,20 @@ public class Prepaid_payments {
                     + ",check_bank= :check_bank "
                     + ",check_no= :check_no "
                     + ",check_amount= :check_amount "
-//                    + ",added_by= :added_by "
-//                    + ",date_added= :date_added "
-//                    + ",customer_name= :customer_name "
-//                    + ",customer_id= :customer_id "
-//                    + ",status= :status "
+                    //                    + ",added_by= :added_by "
+                    //                    + ",date_added= :date_added "
+                    //                    + ",customer_name= :customer_name "
+                    //                    + ",customer_id= :customer_id "
+                    //                    + ",status= :status "
                     + ",cheque_holder= :cheque_holder "
                     + ",cheque_date= :cheque_date "
-//                    + ",user_id= :user_id "
-//                    + ",user_screen_name= :user_screen_name "
-//                    + ",branch= :branch "
-//                    + ",branch_id= :branch_id "
-//                    + ",location= :location "
-//                    + ",location_id= :location_id "
+                    + ",remarks= :remarks "
+                    //                    + ",user_id= :user_id "
+                    //                    + ",user_screen_name= :user_screen_name "
+                    //                    + ",branch= :branch "
+                    //                    + ",branch_id= :branch_id "
+                    //                    + ",location= :location "
+                    //                    + ",location_id= :location_id "
                     + " where id='" + to_prepaid_payments.id + "' "
                     + " ";
 
@@ -179,19 +185,20 @@ public class Prepaid_payments {
                     .setString("check_bank", to_prepaid_payments.check_bank)
                     .setString("check_no", to_prepaid_payments.check_no)
                     .setNumber("check_amount", to_prepaid_payments.check_amount)
-//                    .setString("added_by", to_prepaid_payments.added_by)
-//                    .setString("date_added", to_prepaid_payments.date_added)
-//                    .setString("customer_name", to_prepaid_payments.customer_name)
-//                    .setString("customer_id", to_prepaid_payments.customer_id)
-//                    .setNumber("status", to_prepaid_payments.status)
+                    //                    .setString("added_by", to_prepaid_payments.added_by)
+                    //                    .setString("date_added", to_prepaid_payments.date_added)
+                    //                    .setString("customer_name", to_prepaid_payments.customer_name)
+                    //                    .setString("customer_id", to_prepaid_payments.customer_id)
+                    //                    .setNumber("status", to_prepaid_payments.status)
                     .setString("cheque_holder", to_prepaid_payments.cheque_holder)
                     .setString("cheque_date", to_prepaid_payments.cheque_date)
-//                    .setString("user_id", to_prepaid_payments.user_id)
-//                    .setString("user_screen_name", to_prepaid_payments.user_screen_name)
-//                    .setString("branch", to_prepaid_payments.branch)
-//                    .setString("branch_id", to_prepaid_payments.branch_id)
-//                    .setString("location", to_prepaid_payments.location)
-//                    .setString("location_id", to_prepaid_payments.location_id)
+                    .setString("remarks", to_prepaid_payments.remarks)
+                    //                    .setString("user_id", to_prepaid_payments.user_id)
+                    //                    .setString("user_screen_name", to_prepaid_payments.user_screen_name)
+                    //                    .setString("branch", to_prepaid_payments.branch)
+                    //                    .setString("branch_id", to_prepaid_payments.branch_id)
+                    //                    .setString("location", to_prepaid_payments.location)
+                    //                    .setString("location_id", to_prepaid_payments.location_id)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -218,7 +225,7 @@ public class Prepaid_payments {
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
                 Lg.s(Prepaid_payments.class, "Successfully Updated");
-                
+
                 Customers.to_customers cus = S1_accounts_receivable_payments.ret_customer_balance2(to_prepaid_payments.customer_id);
                 double new_balance = cus.prepaid + (to_prepaid_payments.cash + to_prepaid_payments.check_amount);
                 String s2 = "update  customers set "
@@ -281,6 +288,7 @@ public class Prepaid_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",remarks"
                     + " from prepaid_payments"
                     + " " + where;
 
@@ -301,13 +309,14 @@ public class Prepaid_payments {
                 String cheque_date = rs.getString(12);
                 String user_id = rs.getString(13);
                 String user_screen_name = rs.getString(14);
-                String branch=rs.getString(15);
-                String branch_id=rs.getString(16);
-                String location=rs.getString(17);
-                String location_id=rs.getString(18);
-                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added
-                        , customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id
-                        , user_screen_name,branch,branch_id,location,location_id);
+                String branch = rs.getString(15);
+                String branch_id = rs.getString(16);
+                String location = rs.getString(17);
+                String location_id = rs.getString(18);
+                String remarks = rs.getString(19);
+                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added,
+                        customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id,
+                        user_screen_name, branch, branch_id, location, location_id,remarks);
                 datas.add(to);
             }
             return datas;

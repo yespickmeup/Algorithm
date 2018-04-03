@@ -111,6 +111,7 @@ insert into user_default_previlege_others(account,account_name,name)values('Main
 insert into user_default_previlege_others(account,account_name,name)values('Maintenance','Sales','Disbursement Categories');
 
 
+
 delete from user_previleges;
 
 

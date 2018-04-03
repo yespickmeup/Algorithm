@@ -695,7 +695,21 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         jLabel2.setText("" + acc.size());
         jLabel6.setText(FitIn.fmt_wc_0(amount));
     }
+    public void do_pass2(List<MySales_Items.items> acc) {
 
+        my_items.clear();
+        my_items.addAll(acc);
+
+        double amount = 0;
+
+        for (MySales_Items.items item : acc) {
+            amount += item.product_qty * item.selling_price;
+        }
+        loadData_sale_items(acc);
+        jLabel2.setText("" + acc.size());
+        jLabel6.setText(FitIn.fmt_wc_0(amount));
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();

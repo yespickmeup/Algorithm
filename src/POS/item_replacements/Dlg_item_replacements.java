@@ -1278,7 +1278,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-//        System.setProperty("return_exchange_days","2000");
+//        System.setProperty("return_exchange_days", "2000");
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);
@@ -1604,6 +1604,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
             return;
         }
         final List<MySales_Items.items> selected = new ArrayList();
+        final List<MySales_Items.items> others = new ArrayList();
         List<MySales_Items.items> items = tbl_sale_items_ALM;
         for (MySales_Items.items item : items) {
             if (item.selected) {
@@ -1614,10 +1615,80 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
             Alert.set(0, "Please select item/s");
             return;
         }
+
+        List<to_item_replacements> replacements = tbl_item_replacements_ALM;
+        int size = replacements.size() - 1;
+        int is_others = 0;
+        if (size > -1) {
+
+            to_item_replacements rep = (to_item_replacements) tbl_item_replacements_ALM.get(size);
+            double total = (rep.replacement_amount - rep.discount) - rep.amount_due;
+            String where = " where item_replacement_no='" + rep.item_replacement_no + "' and is_replacement=1 ";
+//        System.out.println(where);
+            List<Item_replacement_details.to_item_replacement_details> datas = Item_replacement_details.ret_data(where);
+            for (Item_replacement_details.to_item_replacement_details data : datas) {
+                if (data.description.equalsIgnoreCase("Others")) {
+                    is_others = 1;
+                    //<editor-fold defaultstate="collapsed" desc=" Others ">
+                    int id = data.id;
+                    String sales_no = data.sales_no;
+                    String item_code = data.item_code;
+                    String barcode = data.barcode;
+                    String description = data.description;
+                    String generic_name = data.generic_name;
+                    String item_type = data.item_type;
+                    String supplier_name = "";
+                    String supplier_id = "";
+                    String serial_no = data.serial_no;
+                    double product_qty = total;
+                    String unit = data.unit;
+                    double conversion = data.conversion;
+                    double selling_price = 1;
+                    String date_added = data.date_added;
+                    String user_id = data.user_id;
+                    String user_screen_name = data.user_screen_name;
+                    int status = data.status;
+                    int is_vatable = data.is_vatable;
+                    int selling_type = data.selling_type;
+                    String discount_name = data.discount_name;
+                    double discount_rate = 0;
+                    double discount_amount = data.discount_amount;
+                    String discount_customer_name = data.customer_name;
+                    String discount_customer_id = data.customer_id;
+                    String branch = data.branch;
+                    String branch_code = data.branch_id;
+                    String location = data.location;
+                    String location_id = data.location_id;
+                    String category = data.category;
+                    String category_id = data.category_id;
+                    String classification = data.classification;
+                    String classification_id = data.classification_id;
+                    String sub_classification = data.sub_classification;
+                    String sub_classification_id = data.sub_classification_id;
+                    String brand = data.brand;
+                    String brand_id = data.brand_id;
+                    String model = data.model;
+                    String model_id = data.model_id;
+                    boolean selected1 = true;
+                    double addtl_amount = 0;
+                    double wtax = 0;
+                    MySales_Items.items other = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected1, addtl_amount, wtax);
+                    others.add(other);
+                    //</editor-fold>
+                    break;
+                }
+            }
+        }
+        System.out.println("is_others:" + is_others);
         Window p = (Window) this;
         Dlg_item_replacements_select nd = Dlg_item_replacements_select.create(p, true);
         nd.setTitle("");
-        nd.do_pass(selected);
+        if (is_others == 1) {
+            nd.do_pass(others);
+        } else {
+            nd.do_pass(selected);
+        }
+
         nd.setCallback(new Dlg_item_replacements_select.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_item_replacements_select.OutputData data) {
@@ -2063,7 +2134,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         }
         to_item_replacements to = (to_item_replacements) tbl_item_replacements_ALM.get(row);
         String where = " where item_replacement_no='" + to.item_replacement_no + "' and is_replacement=0 ";
-        System.out.println(where);
+//        System.out.println(where);
         List<Item_replacement_details.to_item_replacement_details> datas = Item_replacement_details.ret_data(where);
         loadData_for_replacement(datas);
         double amount = 0;

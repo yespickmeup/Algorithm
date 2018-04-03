@@ -18,6 +18,7 @@
     <parameter name="department" class="java.lang.String"/>
     <parameter name="ar_footer" class="java.lang.String"/>
     <parameter name="img_path" class="java.lang.String"/>
+    <parameter name="prepared_by" class="java.lang.String"/>
     <field name="ci_no" class="java.lang.String"/>
     <field name="transaction_no" class="java.lang.String"/>
     <field name="customer" class="java.lang.String"/>
@@ -34,9 +35,9 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="189" splitType="Stretch">
+        <band height="208" splitType="Stretch">
             <staticText>
-                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="70" y="114" width="215" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
+                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="70" y="141" width="215" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
                 <box>
                     <topPen lineWidth="0.2" lineColor="#CCCCCC"/>
                     <leftPen lineWidth="0.2" lineColor="#CCCCCC"/>
@@ -50,7 +51,7 @@
                 <text><![CDATA[Bill To:]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="70" y="134" width="215" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="70" y="161" width="215" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="11" isBold="false" isUnderline="false"/>
                     <paragraph leftIndent="5"/>
@@ -58,7 +59,7 @@
                 <textFieldExpression><![CDATA[$P{printed_by}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="71" y="153" width="214" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="71" y="180" width="214" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="false" isUnderline="false"/>
                     <paragraph leftIndent="5"/>
@@ -66,7 +67,7 @@
                 <textFieldExpression><![CDATA[$P{customer_address}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="328" y="114" width="174" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
+                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="328" y="141" width="174" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
                 <box>
                     <topPen lineWidth="0.2" lineColor="#CCCCCC"/>
                     <leftPen lineWidth="0.2" lineColor="#CCCCCC"/>
@@ -80,7 +81,7 @@
                 <text><![CDATA[Account Summary]]></text>
             </staticText>
             <textField pattern="#,##0.00">
-                <reportElement uuid="0a64f0af-1c7c-44fe-b04f-7046c69d0cb5" mode="Transparent" x="407" y="134" width="95" height="20" forecolor="#000000" backcolor="#1058C5"/>
+                <reportElement uuid="0a64f0af-1c7c-44fe-b04f-7046c69d0cb5" mode="Transparent" x="407" y="161" width="95" height="20" forecolor="#000000" backcolor="#1058C5"/>
                 <box>
                     <topPen lineWidth="0.0" lineColor="#CCCCCC"/>
                     <leftPen lineWidth="0.0" lineColor="#CCCCCC"/>
@@ -94,7 +95,7 @@
                 <textFieldExpression><![CDATA[$P{six}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="328" y="134" width="79" height="20"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="328" y="161" width="79" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="false"/>
                     <paragraph leftIndent="5"/>
@@ -121,6 +122,13 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
             </textField>
+            <staticText>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="71" y="103" width="431" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="14" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Statement of Account]]></text>
+            </staticText>
         </band>
     </title>
     <pageHeader>
@@ -276,16 +284,6 @@
                 <text><![CDATA[Prepared by:]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="134" y="159" width="148" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="8" isBold="false"/>
-                </textElement>
-                <text><![CDATA[Customer Signature over printed name]]></text>
-            </staticText>
-            <staticText>
                 <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="70" y="0" width="347" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
                 <box>
                     <topPen lineWidth="0.2" lineColor="#CCCCCC"/>
@@ -357,6 +355,16 @@
                     <font size="11" isUnderline="true"/>
                 </textElement>
                 <textFieldExpression><![CDATA["Make all check payments to "+$P{business_name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="135" y="160" width="150" height="14"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{prepared_by}]]></textFieldExpression>
             </textField>
         </band>
     </summary>

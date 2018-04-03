@@ -1428,6 +1428,7 @@ public class MySales {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",remarks"
                     + " from prepaid_payments"
                     + " " + where;
 
@@ -1452,7 +1453,8 @@ public class MySales {
                 String branch_id = rs.getString(16);
                 String location = rs.getString(17);
                 String location_id = rs.getString(18);
-                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id);
+                String remarks= rs.getString(19);
+                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id,remarks);
                 datas.add(to);
             }
             return datas;
