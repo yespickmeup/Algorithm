@@ -536,7 +536,7 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(pnl_holder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
@@ -817,7 +817,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
             }
         });
-        nd.setLocationRelativeTo(this);
+        nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
+        nd.setLocationRelativeTo(pnl_summary);
         nd.setVisible(true);
     }
 
@@ -845,7 +846,9 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
             }
         });
-        nd.setLocationRelativeTo(this);
+        nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
+        nd.setLocationRelativeTo(pnl_summary);
+
         nd.setVisible(true);
     }
 
@@ -874,7 +877,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
             }
         });
-        nd.setLocationRelativeTo(this);
+        nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
+        nd.setLocationRelativeTo(pnl_summary);
         nd.setVisible(true);
 
     }
@@ -904,7 +908,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
             }
         });
-        nd.setLocationRelativeTo(this);
+        nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
+        nd.setLocationRelativeTo(pnl_summary);
         nd.setVisible(true);
 
     }
@@ -935,11 +940,12 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
             }
         });
-        nd.setLocationRelativeTo(this);
+        nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
+        nd.setLocationRelativeTo(pnl_summary);
         nd.setVisible(true);
 
     }
-
+    
     private void init_remitance() {
 
 //        Dlg_touchscreen_report_remittance remittance = new Dlg_touchscreen_report_remittance();
@@ -965,7 +971,8 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
             }
         });
-        nd.setLocationRelativeTo(this);
+        nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
+        nd.setLocationRelativeTo(pnl_summary);
         nd.setVisible(true);
 
     }
