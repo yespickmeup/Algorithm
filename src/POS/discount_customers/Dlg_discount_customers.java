@@ -5,7 +5,6 @@
 package POS.discount_customers;
 
 import POS.discount_customers.S1_discount_customers.to_discount_customers;
-import POS.main.Main;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
@@ -483,7 +482,7 @@ public class Dlg_discount_customers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

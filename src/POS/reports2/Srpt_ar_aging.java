@@ -318,7 +318,7 @@ public class Srpt_ar_aging {
                 String trust_receipt = rs.getString(20);
                 ci_no = ci_no + "" + trust_receipt;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
-
+               
                 String t_amount = FitIn.fmt_wc_0(amount - paid);
                 String one = "";
                 if (day > 0 && day <= 30) {
@@ -343,7 +343,7 @@ public class Srpt_ar_aging {
                     above = t_amount;
                 }
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + FitIn.fmt_wc_0(amount), "" + day, one, two, three, four, above, applied);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + FitIn.fmt_wc_0(t_amount), "" + day, one, two, three, four, above, applied);
                 datas.add(to);
             }
             return datas;

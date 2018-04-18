@@ -356,7 +356,7 @@ public class Dlg_notifications extends javax.swing.JDialog {
     private javax.swing.JTable tbl_notifications;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         init_tbl_notifications(tbl_notifications);
     }

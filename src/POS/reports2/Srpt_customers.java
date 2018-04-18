@@ -201,7 +201,7 @@ public class Srpt_customers {
                     + ",department"
                     + " from customers  "
                     + " " + where + " order by customer_name asc";
-
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
 

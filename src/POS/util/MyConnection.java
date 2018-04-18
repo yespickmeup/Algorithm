@@ -156,14 +156,17 @@ public class MyConnection {
 //                String url = "jdbc:mysql://" + host + "/" + db_name + ""; &connectTimeout=10000&socketTimeout=30000
 
                 conn3 = DriverManager.getConnection(url, user, password);
+                System.out.println("Connection established!");
 //                conn2.setNetworkTimeout(Executors.newFixedThreadPool(1), 1000);
                 //DriverManager.getConnection("proxool.pool_connection");
             } catch (SQLException ex) {
+                System.out.println("Unable to connect!");
                 Logger.getLogger(MyConnection.class.getName()).
                         log(Level.SEVERE, null, ex);
             }
 
         } catch (ClassNotFoundException ex) {
+
             Logger.getLogger(MyConnection.class.getName()).
                     log(Level.SEVERE, null, ex);
         }

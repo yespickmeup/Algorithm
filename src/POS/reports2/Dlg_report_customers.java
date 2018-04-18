@@ -291,6 +291,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jLabel36 = new javax.swing.JLabel();
         jTextField17 = new Field.Search();
         jCheckBox22 = new javax.swing.JCheckBox();
+        jLabel43 = new javax.swing.JLabel();
+        jTextField22 = new Field.Input();
         pnl_sales_items7 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -1058,6 +1060,17 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jCheckBox22.setSelected(true);
         jCheckBox22.setText("All");
 
+        jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel43.setText("Prepared by:");
+
+        jTextField22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField22ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -1079,22 +1092,25 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                         .addComponent(jDateChooser14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jLabel36)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                        .addComponent(jLabel33)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgressBar10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar10, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
@@ -1110,7 +1126,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                                 .addComponent(jCheckBox21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jDateChooser13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jDateChooser14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(1, 1, 1)))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1122,7 +1140,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                         .addComponent(jLabel33)
                         .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jCheckBox22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
 
@@ -2090,6 +2109,10 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField21ActionPerformed
 
+    private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField22ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2186,6 +2209,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2237,6 +2261,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField21;
+    private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -2279,6 +2304,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         focus();
         ret_customer_departments();
         jTextField21.setText(MyUser.getUser_screen_name());
+        jTextField22.setText(MyUser.getUser_screen_name());
     }
 
     private void ret_customer_departments() {
@@ -2746,8 +2772,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 }
                 String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
                 String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
-                String prepared_by="";
-                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address, department, ar_footer, img_path,prepared_by);
+                String prepared_by = "";
+                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address, department, ar_footer, img_path, prepared_by);
                 rpt.fields.addAll(fields);
 
                 report_customers_aging(rpt, jrxml);
@@ -2803,7 +2829,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 six = one + two + three + four + five;
                 String address = System.getProperty("address", "Daro, Dumaguete City");
                 String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
-                String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+                String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact the Accounting Department ");
 
                 Field.Search customer = (Field.Search) jTextField7;
                 String customer_address = customer.getId();
@@ -2814,9 +2840,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 }
 
                 String img_path = System.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png");
-                String prepared_by=jTextField21.getText();
+                String prepared_by = jTextField21.getText();
                 Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address,
-                        department, ar_footer, img_path,prepared_by);
+                        department, ar_footer, img_path, prepared_by);
                 rpt.fields.addAll(fields);
                 report_customers_aging2(rpt, jrxml);
                 jProgressBar6.setString("Finished...");
@@ -2929,7 +2955,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
                 String jrxml = "rpt_customers.jrxml";
                 if (!jCheckBox6.isSelected()) {
-                    where = where + " where customer_no='" + jTextField10.getText() + "' ";
+                    where = where + " and customer_no='" + jTextField10.getText() + "' ";
                 }
                 if (!jCheckBox12.isSelected()) {
                     Field.Combo dep = (Field.Combo) tf_customer_name4;
@@ -3059,8 +3085,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 }
                 String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
                 String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
-                String prepared_by="";
-                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address, department, ar_footer, img_path,prepared_by);
+                String prepared_by = "";
+                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address, department, ar_footer, img_path, prepared_by);
                 rpt.fields.addAll(fields);
                 report_customers_transactions(rpt, jrxml);
                 jProgressBar8.setString("Finished...");
@@ -3370,10 +3396,10 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 String customer_id = jTextField16.getText();
 
                 String img_path = System.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png");
-                 String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
-                  String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
-               
-                Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance,ar_footer,telephone_number);
+                String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
+                String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+                String prepared_by = jTextField22.getText();
+                Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance, ar_footer, telephone_number, prepared_by);
                 String jrxml = "rpt_balance_per_transaction_items.jrxml";
                 rpt.fields.addAll(fields);
                 report_transaction_items(rpt, jrxml);

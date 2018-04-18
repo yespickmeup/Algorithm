@@ -298,10 +298,11 @@ public class S1_accounts_receivable {
             MyConnection.close();
         }
     }
+
     public static Customers.to_customers ret_customer_balance_conn(String account_id, Connection conn) {
         Customers.to_customers to1 = null;
         try {
-           
+
             String s0 = "select "
                     + "id"
                     + ",customer_name"
@@ -446,6 +447,52 @@ public class S1_accounts_receivable {
         }
     }
 
+    public static void edit_accounts_receivable3(to_accounts_receivable to_accounts_receivable, double previous_amount, double new_amount) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "update  accounts_receivable set "
+                    + " term= :term"
+                    + ",date_applied= :date_applied"
+                    + ",remarks= :remarks"
+                    + ",type= :type"
+                    + ",ci_no= :ci_no"
+                    + ",trust_receipt= :trust_receipt"
+                    + ",soa_id= :soa_id"
+                    + ",soa_type= :soa_type"
+                    + ",soa_type_id= :soa_type_id"
+                    + ",reference_no= :reference_no"
+                    + " where "
+                    + " id ='" + to_accounts_receivable.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0).
+                    setNumber("term", to_accounts_receivable.term).
+                    setString("date_applied", to_accounts_receivable.date_applied).
+                    setString("remarks", to_accounts_receivable.remarks).
+                    setString("type", to_accounts_receivable.type).
+                    setString("ci_no", to_accounts_receivable.ci_no).
+                    setString("trust_receipt", to_accounts_receivable.trust_receipt).
+                    setString("soa_id", to_accounts_receivable.soa_id).
+                    setString("soa_type", to_accounts_receivable.soa_type).
+                    setString("soa_type_id", to_accounts_receivable.soa_type_id).
+                    setString("reference_no", to_accounts_receivable.reference_no).
+                    ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            Lg.s(S1_accounts_receivable.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_accounts_receivable2(to_accounts_receivable to_accounts_receivable, double previous_amount, double new_amount) {
         try {
             Connection conn = MyConnection.connect();
@@ -518,7 +565,7 @@ public class S1_accounts_receivable {
 
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable.customer_id);
             String s10 = "select "
-                    + "balance"
+                    + " balance"
                     + " from  customers where "
                     + " customer_no ='" + to_accounts_receivable.customer_id + "' "
                     + " ";
@@ -531,7 +578,7 @@ public class S1_accounts_receivable {
 
             double total = customer_balance - to_accounts_receivable.amount + to_accounts_receivable.paid + to_accounts_receivable.discount_amount;
             String s2 = "update  customers set "
-                    + "balance= :balance"
+                    + " balance= :balance"
                     + " where "
                     + " customer_no ='" + to_accounts_receivable.customer_id + "' "
                     + " ";
@@ -1214,10 +1261,10 @@ public class S1_accounts_receivable {
         }
     }
 
-    public static String increment_id_conn(String branch_id,Connection conn) {
+    public static String increment_id_conn(String branch_id, Connection conn) {
         String ids = "";
         try {
-          
+
             String s0 = "select max(id) from accounts_receivable where branch_id='" + branch_id + "'";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);

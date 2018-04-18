@@ -727,9 +727,9 @@ public class S1_accounts_receivable_payments {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-                String department=rs.getString(15);
-                String department_id=rs.getString(16);
-                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id,department,department_id);
+                String department = rs.getString(15);
+                String department_id = rs.getString(16);
+                to1 = new Customers.to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id, department, department_id);
 
             }
             return to1;
@@ -868,14 +868,52 @@ public class S1_accounts_receivable_payments {
         }
     }
 
+    public static void edit_accounts_receivable_payments2(to_accounts_receivable_payments to_accounts_receivable_payments, to_accounts_receivable_payments ar_previous, to_accounts_receivable to_ar) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "update  accounts_receivable_payments set "
+                    + " date_applied= :date_applied"
+                    + ",remarks= :remarks"
+                    + ",check_holder= :check_holder"
+                    + ",check_bank= :check_bank"
+                    + ",check_no= :check_no"
+                    + ",or_payment_no= :or_payment_no"
+                    + ",check_date= :check_date"
+                    + " where "
+                    + " id ='" + to_accounts_receivable_payments.id + "' "
+                    + " ";
+            s0 = SqlStringUtil.parse(s0).
+                    setString("date_applied", to_accounts_receivable_payments.date_applied).
+                    setString("remarks", to_accounts_receivable_payments.remarks).
+                    setString("check_holder", to_accounts_receivable_payments.check_holder).
+                    setString("check_bank", to_accounts_receivable_payments.check_bank).
+                    setString("check_no", to_accounts_receivable_payments.check_no).
+                    setString("or_payment_no", to_accounts_receivable_payments.or_payment_no).
+                    setString("check_date", to_accounts_receivable_payments.check_date).
+                    ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(S1_accounts_receivable_payments.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_accounts_receivable_payments(to_accounts_receivable_payments to_accounts_receivable_payments, to_accounts_receivable to_ar) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
-            String s0 = "delete from  accounts_receivable_payments where "
+
+            String s0 = "update accounts_receivable_payments set status=2 where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
-
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 //            Lg.s(S1_accounts_receivable_payments.class, "Successfully Deleted");

@@ -337,6 +337,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
+        jButton13 = new Button.Default();
+        jButton16 = new Button.Default();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -1214,6 +1216,24 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jCheckBox8.setText("[F3]-Description");
         jCheckBox8.setFocusable(false);
 
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons4/cloud-storage-uploading-option (3).png"))); // NOI18N
+        jButton13.setText("Upload");
+        jButton13.setFocusable(false);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons4/cloud-storage-uploading-option (3).png"))); // NOI18N
+        jButton16.setText("Match Items");
+        jButton16.setFocusable(false);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1223,8 +1243,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_description)
@@ -1284,8 +1304,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
                                         .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 0, 0)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -1405,7 +1429,10 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1666,6 +1693,14 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         set_console_statements();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        cloud_upload();
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+       check_items();
+    }//GEN-LAST:event_jButton16ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1683,8 +1718,10 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1793,6 +1830,15 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //        System.setProperty("cloud_inventory_update", "true");
 //        System.setProperty("cloud_inventory_delete", "true");
 
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("main_branch", "true");
+//        System.setProperty("active_branches", "10");
+//        System.setProperty("cloud_host", "128.199.80.53");
+//        System.setProperty("cloud_user", "smis2");
+//        System.setProperty("cloud_password", "nopassword101");
+//        System.setProperty("cloud_db", "db_algorithm");
+
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -1819,6 +1865,13 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jPanel7.setVisible(false);
 
         client_label_request();
+
+        jButton13.setVisible(false);
+        String cloud_host = System.getProperty("cloud_host", "");
+        if (!cloud_host.isEmpty()) {
+            jButton13.setVisible(true);
+        }
+//        cloud_upload();
     }
 
     private void client_label_request() {
@@ -2156,8 +2209,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
             to_uom to2 = new to_uom(0, tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
             unit = uom.convert_to_string2(units.getId(), to2);
         }
-
-        final to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+        int is_uploaded = 0;
+        final to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -2280,8 +2333,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
             to_uom to2 = new to_uom(0, tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
             unit = uom.convert_to_string2(units.getId(), to2);
         }
-
-        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+        int is_uploaded = 0;
+        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
 
         List<String> query = Inventory.add_inventory_to_console(to);
         return query;
@@ -2298,12 +2351,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     String my_old_barcode = "";
 
     private void edit_inventory() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Edit)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Edit)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
         Window p = (Window) this;
         Dlg_inventory_update_confirm nd = Dlg_inventory_update_confirm.create(p, true);
         nd.setTitle("");
@@ -2377,7 +2430,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
                     to_uom to2 = new to_uom(0, tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
                     unit = uom.convert_to_string2(units.getId(), to2);
                 }
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+                int is_uploaded = 2;
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
                 String where = " where main_barcode='" + barcode + "'  ";
                 if (!data.branch_id.equalsIgnoreCase("All")) {
                     where = " where main_barcode='" + barcode + "' and branch_code='" + data.branch_id + "' ";
@@ -2462,7 +2516,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
             to_uom to2 = new to_uom(0, tf_unit.getText(), FitIn.toDouble(tf_uom_conversion.getText()), selling_price, 1);
             unit = uom.convert_to_string2(units.getId(), to2);
         }
-        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false);
+        int is_uploaded = 2;
+        to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
         String where = " where main_barcode='" + barcode + "'  ";
 
         List<String> query = Inventory.edit_inventory_to_console(to, my_item, where);
@@ -2511,25 +2566,25 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 closeDialog.ok();
                 Inventory.to_inventory to1 = inventory_list.get(selected_row);
                 List<String> query = Inventory.delete_inventory(to1);
+                clear_inventory();
+                init_item_code();
+                Alert.set(3, "");
+                tbl_inventory_barcodes_ALM.clear();
+                tbl_inventory_barcodes_M.fireTableDataChanged();
+                tf_item_code.grabFocus();
 
-                String cloud_inventory_delete = System.getProperty("cloud_inventory_delete", "true");
-                if (cloud_inventory_delete.equalsIgnoreCase("true")) {
-                    clear_inventory();
-                    init_item_code();
-                    Alert.set(3, "");
-                    tbl_inventory_barcodes_ALM.clear();
-                    tbl_inventory_barcodes_M.fireTableDataChanged();
-                    tf_item_code.grabFocus();
-                    cloud_delete(query, "Delete entry to cloud?");
-                } else {
-                    clear_inventory();
-                    init_item_code();
-                    Alert.set(3, "");
-                    tbl_inventory_barcodes_ALM.clear();
-                    tbl_inventory_barcodes_M.fireTableDataChanged();
-                    tf_item_code.grabFocus();
-                }
-
+//                String cloud_inventory_delete = System.getProperty("cloud_inventory_delete", "true");
+//                if (cloud_inventory_delete.equalsIgnoreCase("true")) {
+//                    clear_inventory();
+//                    init_item_code();
+//                    Alert.set(3, "");
+//                    tbl_inventory_barcodes_ALM.clear();
+//                    tbl_inventory_barcodes_M.fireTableDataChanged();
+//                    tf_item_code.grabFocus();
+//                    cloud_delete(query, "Delete entry to cloud?");
+//                } else {
+//
+//                }
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3816,4 +3871,41 @@ public class Dlg_inventory extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
+    private void cloud_upload() {
+        String cloud_host = System.getProperty("cloud_host", "");
+        if (!cloud_host.isEmpty()) {
+            String where = " where is_uploaded=0 or is_uploaded=2 limit 1";
+            List<Inventory.to_inventory> inventory_local = Inventory.ret_data22(where);
+            if (!inventory_local.isEmpty()) {
+                Window p = (Window) this;
+                Dlg_inventory_cloud_transactions_main nd = Dlg_inventory_cloud_transactions_main.create(p, true);
+                nd.setTitle("");
+                nd.setCallback(new Dlg_inventory_cloud_transactions_main.Callback() {
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_inventory_cloud_transactions_main.OutputData data) {
+                        closeDialog.ok();
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
+
+        }
+    }
+    
+    private void check_items(){
+        Window p = (Window) this;
+        Dlg_inventory_cloud_transactions_local nd = Dlg_inventory_cloud_transactions_local.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_inventory_cloud_transactions_local.Callback() {
+            
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_inventory_cloud_transactions_local.OutputData data) {
+                closeDialog.ok();
+                
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 }

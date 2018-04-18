@@ -8,6 +8,8 @@ package POS.stock_transfer;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
+import POS.inventory.Dlg_inventory_cloud_transactions_local;
+import POS.inventory.Dlg_inventory_cloud_transactions_main;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
@@ -16,7 +18,6 @@ import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
 import POS.synch.Synch_stock_transfers;
-import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -278,6 +279,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jDateChooser5 = new com.toedter.calendar.JDateChooser();
         jPanel18 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -646,18 +652,78 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
         });
 
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/cloud-storage3.png"))); // NOI18N
+        jButton8.setText("Upload/Sync");
+        jButton8.setFocusable(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/cloud-storage3.png"))); // NOI18N
+        jButton9.setText("Check Items");
+        jButton9.setFocusable(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("0");
+        jLabel37.setOpaque(true);
+
+        jLabel38.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel38.setText("0");
+        jLabel38.setOpaque(true);
+
+        jLabel39.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel39.setText("0");
+        jLabel39.setOpaque(true);
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(30, 30, 30))
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton8)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton9)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -680,7 +746,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jTextField2)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_from_location, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                    .addComponent(tf_from_location, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                                     .addComponent(tf_from_branch))
                                 .addGap(0, 0, 0)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,15 +778,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(197, 197, 197)))
+                        .addGap(191, 191, 191)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -770,7 +838,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                             .addComponent(jLabel9)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1743,6 +1811,14 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         cloud_transfers();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        check_for_synch();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        check_items();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1761,6 +1837,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
@@ -1822,6 +1900,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1880,18 +1961,27 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_to_location_id;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        [255,153,0]
 //        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("pool_db", "db_smis_kabankalan_with_encoding");
+
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("main_branch", "true");
+//        System.setProperty("active_branches", "10");
+//        System.setProperty("cloud_host", "128.199.80.53");
+//        System.setProperty("cloud_user", "smis2");
+//        System.setProperty("cloud_password", "nopassword101");
+//        System.setProperty("cloud_db", "db_algorithm");
+        
 //        System.setProperty("main_branch", "false");
 //        System.setProperty("delete_stock_transfers_finalized", "true");
-
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("cloud_stock_transfer_insert", "true");
         init_key();
         focus();
         init_tbl_stock_transfers();
-        
+
         jTextField2.grabFocus();
         set_default_branch();
 
@@ -1903,7 +1993,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_from_location_id.setVisible(false);
         tf_to_branch_id.setVisible(false);
         tf_to_location_id.setVisible(false);
-        
+
         String where = " order by branch,location asc ";
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
         branch_location_list3 = branch_location_list2;
@@ -1912,6 +2002,23 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         init_no();
         tf_to_branch.grabFocus();
 
+        String cloud_host = System.getProperty("cloud_host", "");
+        if (!cloud_host.isEmpty()) {
+            jButton4.setVisible(true);
+            jButton8.setVisible(true);
+            jLabel38.setVisible(true);
+            jLabel37.setVisible(true);
+            ret_for_upload();
+        } else {
+            jButton4.setVisible(false);
+            jButton8.setVisible(false);
+            jLabel38.setVisible(false);
+            jLabel37.setVisible(false);
+        }
+        String main_branch = System.getProperty("main_branch", "false");
+        if (main_branch.equalsIgnoreCase("false")) {
+//            check_items();
+        }
     }
 
     String my_branch = "";
@@ -2090,7 +2197,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             i++;
         }
         JLabel[] labels = {};
-        int[] tbl_widths_customers = {90, 120};
+        int[] tbl_widths_customers = {120, 90};
         int width = 0;
         String[] col_names = {"Branch", "Location"};
         TableRenderer tr = new TableRenderer();
@@ -2129,8 +2236,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             obj[i][1] = " " + to.location;
             i++;
         }
+
         JLabel[] labels = {};
-        int[] tbl_widths_customers = {90, 120};
+        int[] tbl_widths_customers = {120, 90};
         int width = 0;
         String[] col_names = {"Branch", "Location"};
         TableRenderer tr = new TableRenderer();
@@ -2161,7 +2269,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             i++;
         }
         JLabel[] labels = {};
-        int[] tbl_widths_customers = {90, 120};
+        int[] tbl_widths_customers = {120, 90};
         int width = 0;
         String[] col_names = {"Branch", "Location"};
         TableRenderer tr = new TableRenderer();
@@ -2204,8 +2312,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         int width = 0;
         String[] col_names = {"Code", "Branch"};
         TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup(tf1, obj, labels, tbl_widths_customers, col_names);
+        TableRenderer.setPopup(tf1, obj, labels, tbl_widths_customers, col_names);
         tr.setCallback(new TableRenderer.Callback() {
             @Override
             public void ok(TableRenderer.OutputData data) {
@@ -2417,7 +2524,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
         where = where + " order by id desc,Date(date_added) desc ";
 //        System.out.println(where);
-        loadData_stock_transfers(Stock_transfers.ret_data(where));
+        List<to_stock_transfers> transfers = Stock_transfers.ret_data(where);
+        loadData_stock_transfers(transfers);
+        int for_upload = 0;
+        int waiting_for_finalization = 0;
+        for (to_stock_transfers to : transfers) {
+            if (to.is_uploaded == 0) {
+                for_upload++;
+            }
+            if (to.status == 0 && to.is_uploaded == 1) {
+                waiting_for_finalization++;
+            }
+        }
+        jLabel38.setText("" + (for_upload + waiting_for_finalization));
+
         jLabel13.setText("" + tbl_stock_transfers_ALM.size());
     }
 
@@ -2514,7 +2634,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     }
                 });
                 t.start();
-
             }
 
         } else {
@@ -2526,6 +2645,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_upload_to_cloud.OutputData data) {
                     closeDialog.ok();
+                    data_cols();
                 }
             });
             nd.setLocationRelativeTo(this);
@@ -2856,7 +2976,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         upload_update_item_transction_to_cloud(to.transaction_no, to.at_location_id);
                     }
                 }
-
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3288,32 +3407,32 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
     private void show_popup(MouseEvent evt) {
 
-        int col = tbl_stock_transfers.getSelectedColumn();
-        jMenuItem1.setVisible(false);
-        jMenuItem2.setVisible(false);
-        if (col == 4) {
-            int row = tbl_stock_transfers.getSelectedRow();
-            if (row < 0) {
-                return;
-            }
-            String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-            int exists = 0;
-            for (S1_user_previleges.to_user_previleges to : datas) {
-                if (to.previledge.equalsIgnoreCase("Finalize Stock Transfer")) {
-                    exists = 1;
-                    break;
-                }
-            }
-
-            if (exists == 1) {
-                data_cols_items();
-                if (evt.isPopupTrigger()) {
-                    jMenuItem1.setVisible(true);
-                    jPopupMenu1.show(tbl_stock_transfers, evt.getX(), evt.getY());
-                }
-            }
-        }
+//        int col = tbl_stock_transfers.getSelectedColumn();
+//        jMenuItem1.setVisible(false);
+//        jMenuItem2.setVisible(false);
+//        if (col == 4) {
+//            int row = tbl_stock_transfers.getSelectedRow();
+//            if (row < 0) {
+//                return;
+//            }
+//            String where = " where user_name='" + Users.user_name + "' order by previledge asc";
+//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//            int exists = 0;
+//            for (S1_user_previleges.to_user_previleges to : datas) {
+//                if (to.previledge.equalsIgnoreCase("Finalize Stock Transfer")) {
+//                    exists = 1;
+//                    break;
+//                }
+//            }
+//
+//            if (exists == 1) {
+//                data_cols_items();
+//                if (evt.isPopupTrigger()) {
+//                    jMenuItem1.setVisible(true);
+//                    jPopupMenu1.show(tbl_stock_transfers, evt.getX(), evt.getY());
+//                }
+//            }
+//        }
     }
 
     private void select_stock_transfer(MouseEvent evt) {
@@ -3352,21 +3471,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             jButton1.setEnabled(true);
 
             if (to.status == 0) {
-                jButton7.setEnabled(true);
+                jButton7.setEnabled(false);
                 jButton1.setEnabled(true);
 
-                String ab = System.getProperty("active_branches", "10");
+                String ab = System.getProperty("active_branches", "");
                 String[] active_branches = ab.split(",");
-                int active = 0;
+                int active = 1;
                 for (String br : active_branches) {
-                    
-                    if (br.equalsIgnoreCase(my_branch_id)) {
-                        active = 1;
+                    if (br.equalsIgnoreCase(to.to_branch_id)) {
+                        active = 0;
                         break;
                     }
                 }
-                if (active == 0) {
-                    jButton7.setEnabled(false);
+                if (active == 1) {
+                    jButton7.setEnabled(true);
 //                    jButton1.setEnabled(false);
                 }
 
@@ -3738,7 +3856,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Dlg_new_stock_transfer_cloud_transactions nd = Dlg_new_stock_transfer_cloud_transactions.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_new_stock_transfer_cloud_transactions.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_new_stock_transfer_cloud_transactions.OutputData data) {
                 closeDialog.ok();
@@ -3780,5 +3897,138 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
+    }
+
+    private void check_for_synch() {
+        String cloud_host = System.getProperty("cloud_host", "");
+        if (!cloud_host.isEmpty()) {
+            String ab = System.getProperty("active_branches", "10");
+            String where = " where remarks like '%%' ";
+            where = where + " and status=0 and is_uploaded<> 1 "
+                    + " or remarks like '%%' and status=0 and is_uploaded= 1 "
+                    + " or  remarks like '%%' and status=1 and is_uploaded=0 ";
+            List<to_stock_transfers> transfers = Stock_transfers.ret_data(where);
+            System.out.println("transfers: " + transfers.size());
+            int for_upload = 0;
+            int waiting_finalization = 0;
+            for (to_stock_transfers to : transfers) {
+                if (to.status == 0 && to.is_uploaded == 1) {
+                    if (!to.to_branch_id.equalsIgnoreCase(my_branch_id)) {
+
+                        String[] active_branches = ab.split(",");
+                        int active = 1;
+                        for (String br : active_branches) {
+                            if (br.equalsIgnoreCase(to.to_branch_id)) {
+                                active = 0;
+                                break;
+                            }
+                        }
+                        if (active == 0) {
+
+                            waiting_finalization++;
+                        }
+
+                    }
+                }
+
+                if (to.status == 0 && to.is_uploaded != 1 || to.status == 1 && to.is_uploaded == 0) {
+                    for_upload++;
+                }
+            }
+            System.out.println("for_upload: " + for_upload);
+            System.out.println("waiting_finalization: " + waiting_finalization);
+            if (for_upload > 0 || waiting_finalization > 0) {
+                Window p = (Window) this;
+                Dlg_stock_transfer_check_upload nd = Dlg_stock_transfer_check_upload.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(for_upload, waiting_finalization, my_branch_id);
+                nd.setCallback(new Dlg_stock_transfer_check_upload.Callback() {
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_stock_transfer_check_upload.OutputData data) {
+                        closeDialog.ok();
+                    }
+                });
+                nd.setLocationRelativeTo(this);
+                nd.setVisible(true);
+            }
+
+        }
+    }
+
+    private void check_items() {
+        String main_branch = System.getProperty("main_branch", "false");
+        if (main_branch.equalsIgnoreCase("true")) {
+
+            Window p = (Window) this;
+            Dlg_inventory_cloud_transactions_main nd = Dlg_inventory_cloud_transactions_main.create(p, true);
+            nd.setTitle("");
+            nd.setCallback(new Dlg_inventory_cloud_transactions_main.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_inventory_cloud_transactions_main.OutputData data) {
+                    closeDialog.ok();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        } else {
+            Window p = (Window) this;
+            Dlg_inventory_cloud_transactions_local nd = Dlg_inventory_cloud_transactions_local.create(p, true);
+            nd.setTitle("");
+            nd.setCallback(new Dlg_inventory_cloud_transactions_local.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_inventory_cloud_transactions_local.OutputData data) {
+                    closeDialog.ok();
+
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+
+    }
+
+    private void ret_for_upload() {
+
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                String ab = System.getProperty("active_branches", "10");
+                String where = " where remarks like '%%'";
+                where = where + " and status=0 and is_uploaded<> 1 or status=0 and is_uploaded= 1 or status=1 and is_uploaded=0 ";
+                List<to_stock_transfers> transfers = Stock_transfers.ret_data(where);
+                int for_upload = 0;
+                int waiting_finalization = 0;
+                for (to_stock_transfers to : transfers) {
+                    if (to.status == 0 && to.is_uploaded == 1) {
+                        if (!to.to_branch_id.equalsIgnoreCase(my_branch_id)) {
+
+                            String[] active_branches = ab.split(",");
+                            int active = 1;
+                            for (String br : active_branches) {
+                                if (br.equalsIgnoreCase(to.to_branch_id)) {
+                                    active = 0;
+                                    break;
+                                }
+                            }
+                            if (active == 0) {
+
+                                waiting_finalization++;
+                            }
+
+                        }
+                    }
+
+                    if (to.status == 0 && to.is_uploaded != 1 || to.status == 1 && to.is_uploaded == 0) {
+                        for_upload++;
+                    }
+                    jLabel38.setText("" + (for_upload + waiting_finalization));
+                }
+
+            }
+        });
+        t.start();
     }
 }

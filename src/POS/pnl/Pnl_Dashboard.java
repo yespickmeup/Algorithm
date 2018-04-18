@@ -10,6 +10,7 @@ import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
 import POS.adjuster.Dlg_other_adjustments;
+import POS.adjustments.Dlg_adjust_inventory_price_branches;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -59,7 +60,6 @@ import POS.reports2.Dlg_report_customers;
 import POS.reports2.Dlg_suppliers_report;
 import POS.reports3.Dlg_report_item;
 import POS.reports3.Dlg_report_services;
-import POS.reports3.Srpt_stock_take_captured;
 import POS.requisition_slips.Dlg_requisition_slip;
 import POS.returns.Dlg_return_from_customer;
 import POS.returns.Dlg_return_to_supplier;
@@ -3049,17 +3049,29 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void run_script() {
-        jButton1.setEnabled(false);
-        jButton1.setText("Script is running....");
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Srpt_stock_take_captured.ret_data_adjust("");
-                jButton1.setEnabled(true);
-                jButton1.setText("Finished....");
-            }
-        });
-        t.start();
+      
+            Window p = (Window) this;
+            Dlg_adjust_inventory_price_branches nd = Dlg_adjust_inventory_price_branches.create(p, true);
+            nd.setTitle("");
+            nd.setCallback(new Dlg_adjust_inventory_price_branches.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_adjust_inventory_price_branches.OutputData data) {
+                    closeDialog.ok();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+//        jButton1.setEnabled(false);
+//        jButton1.setText("Script is running....");
+//        Thread t = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Srpt_stock_take_captured.ret_data_adjust("");
+//                jButton1.setEnabled(true);
+//                jButton1.setText("Finished....");
+//            }
+//        });
+//        t.start();
     }
 
     private void menu() {

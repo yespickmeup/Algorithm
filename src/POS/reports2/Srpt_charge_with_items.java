@@ -43,8 +43,8 @@ public class Srpt_charge_with_items {
     public final double total_balance;
     public final String ar_footer;
     public final String telephone_number;
-
-    public Srpt_charge_with_items(String business_name, String address, String contact_no, String date, String customer_name, String customer_address, String customer_id, String img_path, double total_balance, String ar_footer, String telephone_number) {
+    public final String prepared_by;
+    public Srpt_charge_with_items(String business_name, String address, String contact_no, String date, String customer_name, String customer_address, String customer_id, String img_path, double total_balance, String ar_footer, String telephone_number,String prepared_by) {
         this.business_name = business_name;
         this.address = address;
         this.contact_no = contact_no;
@@ -57,6 +57,7 @@ public class Srpt_charge_with_items {
         this.total_balance = total_balance;
         this.ar_footer = ar_footer;
         this.telephone_number = telephone_number;
+        this.prepared_by=prepared_by;
     }
 
     public static class field {
@@ -264,8 +265,8 @@ public class Srpt_charge_with_items {
         String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
         String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
         String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
-
-        Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance, ar_footer, telephone_number);
+        String prepared_by="";
+        Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance, ar_footer, telephone_number,prepared_by);
 
         rpt.fields.addAll(fields);
 

@@ -193,6 +193,7 @@ public class Stock_transfers {
                         + ",at_branch_id"
                         + ",at_location"
                         + ",at_location_id"
+                        + ",is_uploaded"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -239,6 +240,7 @@ public class Stock_transfers {
                         + ",:at_branch_id"
                         + ",:at_location"
                         + ",:at_location_id"
+                        + ",:is_uploaded"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2)
@@ -258,7 +260,7 @@ public class Stock_transfers {
                         .setString("date_added", to_stock_transfers.date_added)
                         .setString("user_name", to_stock_transfers_items.user_name)
                         .setString("item_type", to_stock_transfers_items.item_type)
-                        .setNumber("status", to_stock_transfers_items.status)
+                        .setNumber("status", to_stock_transfers.status)
                         .setString("supplier", to_stock_transfers_items.supplier)
                         .setNumber("fixed_price", to_stock_transfers_items.fixed_price)
                         .setNumber("cost", to_stock_transfers_items.cost)
@@ -287,6 +289,7 @@ public class Stock_transfers {
                         .setString("at_branch_id", to_stock_transfers_items.at_branch_id)
                         .setString("at_location", to_stock_transfers_items.at_location)
                         .setString("at_location_id", to_stock_transfers_items.at_location_id)
+                        .setNumber("is_uploaded", to_stock_transfers.is_uploaded)
                         .ok();
                 stmt.addBatch(s2);
             }
@@ -603,7 +606,7 @@ public class Stock_transfers {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-           
+
         }
     }
 

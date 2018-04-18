@@ -4,7 +4,6 @@
  */
 package POS.receipts;
 
-import POS.main.Main;
 import POS.receipts.S1_receipt_items.to_receipt_items;
 import POS.receipts.Receipts.to_receipts;
 import POS.suppliers.Suppliers;
@@ -495,7 +494,7 @@ public class Dlg_rpt_receipts extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
 
         init_key();
         dp_from.setDate(new Date());

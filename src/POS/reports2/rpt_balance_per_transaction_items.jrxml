@@ -14,6 +14,7 @@
     <parameter name="total_balance" class="java.lang.Double"/>
     <parameter name="ar_footer" class="java.lang.String"/>
     <parameter name="telephone_number" class="java.lang.String"/>
+    <parameter name="prepared_by" class="java.lang.String"/>
     <field name="ar_no" class="java.lang.String"/>
     <field name="sales_no" class="java.lang.String"/>
     <field name="reference_no" class="java.lang.String"/>
@@ -426,9 +427,9 @@
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="169" splitType="Stretch">
+        <band height="214" splitType="Stretch">
             <staticText>
-                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="0" y="97" width="214" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
+                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="0" y="139" width="214" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
                 <box>
                     <topPen lineWidth="0.2" lineColor="#CCCCCC"/>
                     <leftPen lineWidth="0.2" lineColor="#CCCCCC"/>
@@ -442,7 +443,7 @@
                 <text><![CDATA[Bill To:]]></text>
             </staticText>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="0" y="136" width="214" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="0" y="178" width="214" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="false" isUnderline="false"/>
                     <paragraph leftIndent="5"/>
@@ -450,7 +451,7 @@
                 <textFieldExpression><![CDATA[$P{customer_address}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="0" y="117" width="214" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="0" y="159" width="214" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="true" isUnderline="false"/>
                     <paragraph leftIndent="5"/>
@@ -458,7 +459,7 @@
                 <textFieldExpression><![CDATA[$P{customer_name}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="388" y="97" width="167" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
+                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" mode="Opaque" x="388" y="139" width="167" height="20" forecolor="#FFFFFF" backcolor="#1058C5"/>
                 <box>
                     <topPen lineWidth="0.2" lineColor="#CCCCCC"/>
                     <leftPen lineWidth="0.2" lineColor="#CCCCCC"/>
@@ -472,7 +473,7 @@
                 <text><![CDATA[Account Summary]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" mode="Opaque" x="388" y="137" width="78" height="19" backcolor="#FFFFCC"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" mode="Opaque" x="388" y="179" width="78" height="19" backcolor="#FFFFCC"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
@@ -506,7 +507,7 @@
                 <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="388" y="117" width="41" height="20"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="388" y="159" width="41" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="false"/>
                     <paragraph leftIndent="5"/>
@@ -514,7 +515,7 @@
                 <text><![CDATA[Date:]]></text>
             </staticText>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="429" y="117" width="126" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="429" y="159" width="126" height="20"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="false" isUnderline="false"/>
                     <paragraph leftIndent="5" rightIndent="2"/>
@@ -522,7 +523,7 @@
                 <textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
             </textField>
             <textField evaluationTime="Report" pattern="#,##0.00">
-                <reportElement uuid="dc73d18f-051d-4fea-aec6-858a775fb7d2" mode="Opaque" x="466" y="137" width="89" height="19" backcolor="#FFFFCC"/>
+                <reportElement uuid="dc73d18f-051d-4fea-aec6-858a775fb7d2" mode="Opaque" x="466" y="179" width="89" height="19" backcolor="#FFFFCC"/>
                 <box>
                     <topPen lineWidth="0.2"/>
                     <leftPen lineWidth="0.2"/>
@@ -535,6 +536,13 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$P{total_balance}]]></textFieldExpression>
             </textField>
+            <staticText>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="103" width="555" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="14" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Statement of Account]]></text>
+            </staticText>
         </band>
     </title>
     <pageHeader>
@@ -706,22 +714,22 @@
                 <text><![CDATA[Customer Signature over printed name]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="117" y="138" width="148" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="8" isBold="false"/>
-                </textElement>
-                <text><![CDATA[Customer Signature over printed name]]></text>
-            </staticText>
-            <staticText>
                 <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="275" y="123" width="63" height="15"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="10" isBold="false"/>
                 </textElement>
                 <text><![CDATA[Received by:]]></text>
             </staticText>
+            <textField>
+                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="118" y="139" width="150" height="14"/>
+                <box>
+                    <topPen lineWidth="0.2"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{prepared_by}]]></textFieldExpression>
+            </textField>
         </band>
     </summary>
 </jasperReport>

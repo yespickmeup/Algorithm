@@ -4,7 +4,6 @@
  */
 package POS.payment_terms;
 
-import POS.main.Main;
 import POS.payment_terms.S1_payment_terms.to_payment_terms;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -453,7 +452,7 @@ public class Dlg_payment_terms extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

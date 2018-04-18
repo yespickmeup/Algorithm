@@ -315,6 +315,7 @@ public class Dlg_update_pricing_enter_price extends javax.swing.JDialog {
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setText("Default");
+        jCheckBox1.setFocusable(false);
 
         jButton3.setText("ADD NEW");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -515,6 +516,43 @@ public class Dlg_update_pricing_enter_price extends javax.swing.JDialog {
         tbl_uom.setRowSelectionInterval(oo, oo);
     }
 
+    public void do_pass2(Inventory_price_updates.to_inventory_price_updates to) {
+        jTextField2.setText(to.item_code);
+        jTextField3.setText(to.barcode);
+        jTextArea1.setText(to.description);
+
+        List<S1_unit_of_measure.to_uom> uoms = new ArrayList();
+        String uom = to.unit;
+        String[] list = uom.split(",");
+        int def = 0;
+        int o = 0;
+        int oo = 0;
+        for (String s : list) {
+            int i = s.indexOf(":");
+            int ii = s.indexOf("/");
+            int iii = s.indexOf("^");
+            String uom1 = s.substring(1, i);
+            double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+            double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+
+            int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+            S1_unit_of_measure.to_uom to1 = new S1_unit_of_measure.to_uom(uom1, selling_price, conversion, is_default);
+            uoms.add(to1);
+            if (to1.is_default == 1) {
+                def = o;
+                jTextField5.setText(uom1);
+                jTextField6.setText("" + conversion);
+                jTextField4.setText(FitIn.fmt_wc_0(selling_price));
+                jCheckBox1.setSelected(true);
+                oo = o;
+            }
+            o++;
+        }
+
+        loadData_uom(uoms);
+        tbl_uom.setRowSelectionInterval(oo, oo);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();
@@ -549,7 +587,7 @@ public class Dlg_update_pricing_enter_price extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -759,21 +797,21 @@ public class Dlg_update_pricing_enter_price extends javax.swing.JDialog {
     private void ok() {
         String uom = "";
         double price = 0;
-        double conversion=0;
+        double conversion = 0;
         List< S1_unit_of_measure.to_uom> datas = tbl_uom_ALM;
         for (S1_unit_of_measure.to_uom to : datas) {
 
             if (to.is_default == 1) {
                 price = to.price;
-                conversion=to.conversion;
+                conversion = to.conversion;
             }
             uom = uom + ",[" + to.unit + ":" + to.price + "/" + to.conversion + "^" + to.is_default + "]";
         }
         uom = uom.substring(1, uom.length());
 
-        System.out.println(uom);
+//        System.out.println(uom);
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(uom, price,conversion));
+            callback.ok(new CloseDialog(this), new OutputData(uom, price, conversion));
         }
     }
 }

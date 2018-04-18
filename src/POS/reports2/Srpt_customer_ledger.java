@@ -255,7 +255,7 @@ public class Srpt_customer_ledger {
                     + ",trust_receipt"
                     + ",or_payment_no"
                     + " from  accounts_receivable_payments where "
-                    + " customer_id ='" + search + "' "
+                    + " customer_id ='" + search + "' and status<>2 "
                     + " ";
 
             Statement stmt2 = conn.createStatement();

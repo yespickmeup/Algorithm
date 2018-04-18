@@ -344,8 +344,7 @@ public class Dlg_new_stock_transfer_upload_to_cloud extends javax.swing.JDialog 
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
-    
-    
+
     private void myInit() {
         init_key();
     }
@@ -462,6 +461,7 @@ public class Dlg_new_stock_transfer_upload_to_cloud extends javax.swing.JDialog 
                     jCheckBox3.setSelected(true);
                     jProgressBar1.setString("Finished...");
                     Alert.set(1, "");
+                    ok1();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Dlg_new_stock_transfer_upload_to_cloud.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -496,6 +496,7 @@ public class Dlg_new_stock_transfer_upload_to_cloud extends javax.swing.JDialog 
                     jCheckBox3.setForeground(Color.BLUE);
                     jProgressBar1.setString("Finished...");
                     Alert.set(1, "");
+                    ok1();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Dlg_new_stock_transfer_upload_to_cloud.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -569,6 +570,7 @@ public class Dlg_new_stock_transfer_upload_to_cloud extends javax.swing.JDialog 
                     jCheckBox3.setForeground(Color.BLUE);
                     jProgressBar1.setString("Finished...");
                     Alert.set(1, "");
+                    ok1();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Dlg_new_stock_transfer_upload_to_cloud.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -579,5 +581,11 @@ public class Dlg_new_stock_transfer_upload_to_cloud extends javax.swing.JDialog 
         });
         t.start();
 
+    }
+
+    private void ok1() {
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData());
+        }
     }
 }

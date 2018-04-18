@@ -3833,23 +3833,23 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         int col = tbl_items.getSelectedColumn();
 
         if (col == 4) {
-            String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-            int exists = 0;
-            for (S1_user_previleges.to_user_previleges to1 : datas) {
-                if (to1.previledge.equalsIgnoreCase("Inventory Update Item Pricing")) {
-                    exists = 1;
-                    break;
-                }
-            }
-
-            if (exists == 1) {
-                update_pricing(to, row);
-            } else {
-                tbl_items.clearSelection();
-                tf_search.selectAll();
-                tf_search.grabFocus();
-            }
+//            String where = " where user_name='" + Users.user_name + "' order by previledge asc";
+//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//            int exists = 0;
+//            for (S1_user_previleges.to_user_previleges to1 : datas) {
+//                if (to1.previledge.equalsIgnoreCase("Inventory Update Item Pricing")) {
+//                    exists = 1;
+//                    break;
+//                }
+//            }
+//
+//            if (exists == 1) {
+//                update_pricing(to, row);
+//            } else {
+//                tbl_items.clearSelection();
+//                tf_search.selectAll();
+//                tf_search.grabFocus();
+//            }
 
         } else if (col == 5) {
             Window p = (Window) this;

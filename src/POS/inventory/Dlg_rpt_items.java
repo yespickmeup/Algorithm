@@ -7,19 +7,12 @@ package POS.inventory;
 import POS.category.S1_inv_categories;
 import POS.category.S1_inv_classifications;
 import POS.category.S1_inv_sub_classifications;
-import POS.template.*;
-import POS.main.Main;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import javax.swing.JLabel;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.*;
@@ -464,7 +457,7 @@ public class Dlg_rpt_items extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
 
         init_key();
         init_cb();

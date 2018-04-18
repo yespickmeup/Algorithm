@@ -3,77 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package POS.util;
+package POS.adjustments;
 
-import POS.branch_locations.S1_branch_locations.to_branch_locations;
-import POS.inventory.Inventory;
-import POS.inventory.Inventory.to_inventory;
+import POS.inventory.Inventory_barcodes;
+import POS.util.MyConnection;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import mijzcx.synapse.desk.utils.Lg;
+import mijzcx.synapse.desk.utils.SqlStringUtil;
 
 /**
  *
  * @author Guinness
  */
-public class Refresher {
+public class Adjust_inventory_price {
 
-    public static void inventory() {
-
+    public static List<Inventory_barcodes.to_inventory_barcodes> ret_where(String where, String db_name) throws ClassNotFoundException {
+        List<Inventory_barcodes.to_inventory_barcodes> datas = new ArrayList();
         try {
-            Connection conn = MyConnection.connect();
-            String s0 = "select "
-                    + "id"
-                    + ",branch"
-                    + ",branch_id"
-                    + ",code"
-                    + ",location"
-                    + ",type"
-                    + ",status"
-                    + " from branch_locations  "
-                    + " ";
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(s0);
+            String host = System.getProperty("pool_host", "localhost");
+            String port = System.getProperty("pool_port", "3306");
+            host = host + ":" + port;
+            String user = System.getProperty("pool_user", "root");
+            String password = System.getProperty("pool_password", "password");
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://" + host + "/" + db_name;
 
-            List<to_inventory> datas = ret_data();
-            for (to_inventory inv : datas) {
-                Inventory.add_inventory(inv);
-            }
-            
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String branch = rs.getString(2);
-                String branch_id = rs.getString(3);
-                String code = rs.getString(4);
-                String location = rs.getString(5);
-                String type = rs.getString(6);
-                int status = rs.getInt(7);
-                to_branch_locations to = new to_branch_locations(id, branch, branch_id, code, location, type, status);
-
-                System.out.println("=======================================end=======================================" + " : " + location);
-
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            MyConnection.close();
-        }
-    }
-
-    public static void main(String[] args) {
-        inventory();
-    }
-
-    public static List<to_inventory> ret_data() {
-        List<to_inventory> datas = new ArrayList();
-
-        try {
-            Connection conn = MyConnection.connect3();
+            Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println(url);
             String s0 = "select "
                     + "id"
                     + ",barcode"
@@ -101,7 +65,7 @@ public class Refresher {
                     + ",vatable"
                     + ",reorder_level"
                     + ",markup"
-                    + ",barcodes"
+                    + ",main_barcode"
                     + ",brand"
                     + ",brand_id"
                     + ",model"
@@ -111,10 +75,10 @@ public class Refresher {
                     + ",branch_code"
                     + ",location"
                     + ",location_id"
-                    + ",is_uploaded"
-                    + " from inventory "
-                    + " ";
-
+                    + ",serial_no"
+                    + " from inventory_barcodes "
+                    + " " + where;
+            System.out.println(where);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -144,7 +108,7 @@ public class Refresher {
                 int vatable = rs.getInt(24);
                 double reorder_level = rs.getDouble(25);
                 double markup = rs.getDouble(26);
-                String barcodes = rs.getString(27);
+                String main_barcode = rs.getString(27);
                 String brand = rs.getString(28);
                 String brand_id = rs.getString(29);
                 String model = rs.getString(30);
@@ -152,10 +116,11 @@ public class Refresher {
                 int selling_type = rs.getInt(32);
                 String branch = rs.getString(33);
                 String branch_code = rs.getString(34);
+
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
-                int is_uploaded=rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false,is_uploaded);
+                String serial_no = rs.getString(37);
+                Inventory_barcodes.to_inventory_barcodes to = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0);
                 datas.add(to);
             }
             return datas;
@@ -166,4 +131,32 @@ public class Refresher {
         }
     }
 
+    public static void update_item(List<Inventory_barcodes.to_inventory_barcodes> items) {
+        try {
+            Connection conn = MyConnection.connect();
+
+            for (Inventory_barcodes.to_inventory_barcodes to : items) {
+
+                String s2 = "update inventory_barcodes set "
+                        + " unit= :unit"
+                        + ",conversion= :conversion"
+                        + ",selling_price= :selling_price"
+                        + " where main_barcode='" + to.main_barcode + "' and location_id='" + to.location_id + "' ";
+                s2 = SqlStringUtil.parse(s2).
+                        setString("unit", to.unit).
+                        setNumber("conversion", to.conversion).
+                        setNumber("selling_price", to.selling_price).
+                        ok();
+
+                PreparedStatement stmt2 = conn.prepareStatement(s2);
+                stmt2.execute();
+                Lg.s(Inventory_barcodes.class, "Item Code: " + to.main_barcode + " | " + to.description + " - Successfully Updated!");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }

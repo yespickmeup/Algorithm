@@ -110,9 +110,10 @@ insert into user_default_previlege_others(account,account_name,name)values('Tran
 insert into user_default_previlege_others(account,account_name,name)values('Maintenance','Sales','Customers AR');
 insert into user_default_previlege_others(account,account_name,name)values('Maintenance','Sales','Disbursement Categories');
 
+insert into user_default_previlege_others(account,account_name,name)values('Maintenance','Customers','Customers AR');
 
 
-delete from user_previleges;
+-- delete from user_previleges;
 
 
 

@@ -247,10 +247,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         tf_paid = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        tf_ar_month = new SearchField();
-        tf_ar_day = new SearchField();
-        tf_ar_year = new SearchField();
         jLabel12 = new javax.swing.JLabel();
         tf_amount = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
@@ -261,6 +257,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jButton8 = new Button.Primary();
         jButton9 = new Button.Info();
         jButton10 = new Button.Warning();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel10 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -283,10 +280,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jLabel23 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         tf_discount_amount = new Field.Input();
-        jPanel8 = new javax.swing.JPanel();
-        tf_ap_month = new SearchField();
-        tf_ap_day = new SearchField();
-        tf_ap_year = new SearchField();
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         tf_or_payment_no = new javax.swing.JTextField();
@@ -294,10 +287,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tf_ap_cash = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         tf_remarks2 = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
-        tf_ap_month1 = new SearchField();
-        tf_ap_day1 = new SearchField();
-        tf_ap_year1 = new SearchField();
         jLabel20 = new javax.swing.JLabel();
         tf_ap_check_bank = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
@@ -309,6 +298,8 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jButton4 = new Button.Primary();
         jButton3 = new Button.Info();
         jButton2 = new Button.Warning();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_accounts_receivable_payments = new javax.swing.JTable();
@@ -492,48 +483,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        tf_ar_month.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ar_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ar_monthActionPerformed(evt);
-            }
-        });
-
-        tf_ar_day.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ar_day.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ar_dayActionPerformed(evt);
-            }
-        });
-
-        tf_ar_year.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ar_year.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ar_yearActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(tf_ar_month)
-                .addGap(0, 0, 0)
-                .addComponent(tf_ar_day, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tf_ar_year, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(tf_ar_month, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tf_ar_day, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tf_ar_year, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Amount:");
@@ -585,6 +534,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         });
 
+        jDateChooser1.setDate(new Date());
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -602,7 +554,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                         .addGap(5, 5, 5)
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(tf_trust_receipt))
+                        .addComponent(tf_trust_receipt, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -620,7 +572,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_remarks)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tf_reference_no, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(tf_soa_type)
@@ -640,7 +591,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel19)
-                                    .addComponent(tf_paid))))))
+                                    .addComponent(tf_paid)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -653,9 +607,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                     .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_trust_receipt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -793,7 +747,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                         .addGap(6, 6, 6))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -883,48 +837,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         });
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-
-        tf_ap_month.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ap_monthActionPerformed(evt);
-            }
-        });
-
-        tf_ap_day.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_day.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ap_dayActionPerformed(evt);
-            }
-        });
-
-        tf_ap_year.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_year.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ap_yearActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(tf_ap_month, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tf_ap_day, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tf_ap_year))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(tf_ap_month, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tf_ap_day, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tf_ap_year, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("Date Applied:");
@@ -945,48 +857,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jLabel9.setText("Remarks:");
 
         tf_remarks2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
-        tf_ap_month1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_month1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ap_month1ActionPerformed(evt);
-            }
-        });
-
-        tf_ap_day1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_day1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ap_day1ActionPerformed(evt);
-            }
-        });
-
-        tf_ap_year1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_year1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_ap_year1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(tf_ap_month1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tf_ap_day1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tf_ap_year1))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(tf_ap_month1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tf_ap_day1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tf_ap_year1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1052,6 +922,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             }
         });
 
+        jDateChooser2.setDate(new Date());
+        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDateChooser3.setDate(new Date());
+        jDateChooser3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1078,20 +954,21 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                             .addComponent(tf_ap_check_no)
                             .addComponent(tf_ap_check_holder)
                             .addComponent(tf_ap_check_bank)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tf_or_payment_no)
                             .addComponent(tf_discount_name)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(tf_ap_check_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(tf_discount_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel30)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tf_discount_amount))
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tf_ap_cash, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(tf_ap_cash, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_ap_check_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1107,9 +984,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1131,9 +1008,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_ap_check_no, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1210,7 +1087,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1300,7 +1177,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
     private void tf_termActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_termActionPerformed
         // TODO add your handling code here:
-        tf_reference_no.grabFocus();
+        tf_amount.grabFocus();
 //        add_accounts_receivable();
     }//GEN-LAST:event_tf_termActionPerformed
 
@@ -1308,37 +1185,13 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         init_popup();
     }//GEN-LAST:event_tf_search_customerActionPerformed
 
-    private void tf_ar_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ar_monthActionPerformed
-        // TODO add your handling code here:
-        tf_ar_day.grabFocus();
-    }//GEN-LAST:event_tf_ar_monthActionPerformed
-
-    private void tf_ar_dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ar_dayActionPerformed
-        tf_ar_year.grabFocus();
-    }//GEN-LAST:event_tf_ar_dayActionPerformed
-
-    private void tf_ar_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ar_yearActionPerformed
-        tf_amount.grabFocus();
-    }//GEN-LAST:event_tf_ar_yearActionPerformed
-
     private void tf_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_amountActionPerformed
-        tf_term.grabFocus();
+        tf_remarks.grabFocus();
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void tbl_accounts_receivableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_accounts_receivableMouseClicked
         select_accounts_receivable();
     }//GEN-LAST:event_tbl_accounts_receivableMouseClicked
-
-    private void tf_ap_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_monthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_ap_monthActionPerformed
-
-    private void tf_ap_dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_dayActionPerformed
-    }//GEN-LAST:event_tf_ap_dayActionPerformed
-
-    private void tf_ap_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_yearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_ap_yearActionPerformed
 
     private void tbl_accounts_receivable_paymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_accounts_receivable_paymentsMouseClicked
         // TODO add your handling code here:
@@ -1359,7 +1212,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_trust_receiptActionPerformed
 
     private void tf_reference_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_reference_noActionPerformed
-        tf_trust_receipt.grabFocus();
+        tf_term.grabFocus();
     }//GEN-LAST:event_tf_reference_noActionPerformed
 
     private void tf_paidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_paidActionPerformed
@@ -1393,18 +1246,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private void tf_customer_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_customer_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_customer_nameActionPerformed
-
-    private void tf_ap_month1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_month1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_ap_month1ActionPerformed
-
-    private void tf_ap_day1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_day1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_ap_day1ActionPerformed
-
-    private void tf_ap_year1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_year1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_ap_year1ActionPerformed
 
     private void tf_discount_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_discount_nameMouseClicked
         init_discount();
@@ -1485,6 +1326,9 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1525,10 +1369,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
@@ -1545,16 +1386,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     private javax.swing.JTextField tf_ap_check_bank;
     private javax.swing.JTextField tf_ap_check_holder;
     private javax.swing.JTextField tf_ap_check_no;
-    private javax.swing.JTextField tf_ap_day;
-    private javax.swing.JTextField tf_ap_day1;
-    private javax.swing.JTextField tf_ap_month;
-    private javax.swing.JTextField tf_ap_month1;
-    private javax.swing.JTextField tf_ap_year;
-    private javax.swing.JTextField tf_ap_year1;
-    private javax.swing.JTextField tf_ar_day;
-    private javax.swing.JTextField tf_ar_month;
     private javax.swing.JLabel tf_ar_no;
-    private javax.swing.JTextField tf_ar_year;
     private javax.swing.JTextField tf_customer_id;
     private javax.swing.JTextField tf_customer_name;
     private javax.swing.JTextField tf_discount_amount;
@@ -1574,7 +1406,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
     private void myInit() {
 //        Main.MyDB.setNames("db_algorithm");
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         set_default_branch();
@@ -1590,6 +1422,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
         jLabel25.setVisible(false);
         tf_trust_receipt.setVisible(false);
+        jButton1.setVisible(false);
 
     }
     String my_branch = "";
@@ -1606,14 +1439,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void focus() {
-        JTextField[] tf = {tf_search_customer, tf_ar_month, tf_ar_day, tf_ar_year, tf_amount, tf_term, tf_ap_month, tf_ap_day, tf_ap_year, tf_ap_cash, tf_ap_check_bank, tf_ap_check_holder, tf_ap_check_amount, tf_ap_check_no, tf_reference_no, tf_trust_receipt, tf_paid, jTextField1, tf_soa_type, tf_remarks, tf_remarks2};
+        JTextField[] tf = {tf_search_customer, tf_amount, tf_term, tf_ap_cash, tf_ap_check_bank, tf_ap_check_holder, tf_ap_check_amount, tf_ap_check_no, tf_reference_no, tf_trust_receipt, tf_paid, jTextField1, tf_soa_type, tf_remarks, tf_remarks2};
         Focus_Fire.onFocus_lostFocus(tf);
     }
 
     private void init_focus() {
-        Focus_Fire.nextFocus(tf_ap_month, tf_ap_day);
-        Focus_Fire.nextFocus(tf_ap_day, tf_ap_year);
-        Focus_Fire.nextFocus(tf_ap_year, tf_ap_cash);
+
         Focus_Fire.nextFocus(tf_ap_cash, tf_ap_check_bank);
         Focus_Fire.nextFocus(tf_ap_check_bank, tf_ap_check_holder);
         Focus_Fire.nextFocus(tf_ap_check_holder, tf_ap_check_amount);
@@ -1626,27 +1457,16 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void enable_ar(boolean stmt) {
-        tf_ar_month.setEnabled(stmt);
-        tf_ar_day.setEnabled(stmt);
-        tf_ar_year.setEnabled(stmt);
+        jDateChooser1.setEnabled(stmt);
+
         tf_amount.setEnabled(stmt);
         tf_term.setEnabled(stmt);
         jButton10.setEnabled(stmt);
     }
 
     private void init_search() {
-        testOfFaith.set(tf_ar_month, DateType.listMonths(), "Month");
-        testOfFaith.set(tf_ar_day, DateType.listDays(), "Day");
-        testOfFaith.set(tf_ar_year, DateType.listYear(), "Year");
+
         testOfFaith.set(tf_term, S1_terms.ret_cb_data(), "TERM");
-
-        testOfFaith.set(tf_ap_month, DateType.listMonths(), "Month");
-        testOfFaith.set(tf_ap_day, DateType.listDays(), "Day");
-        testOfFaith.set(tf_ap_year, DateType.listYear(), "Year");
-
-        testOfFaith.set(tf_ap_month1, DateType.listMonths(), "Month");
-        testOfFaith.set(tf_ap_day1, DateType.listDays(), "Day");
-        testOfFaith.set(tf_ap_year1, DateType.listYear(), "Year");
 
         Date d = new Date();
         Date d2 = new Date();
@@ -1654,14 +1474,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String month = DateType.m.format(d);
         String day = DateType.d.format(d);
         String year = DateType.y.format(d);
-        tf_ap_month.setText(month);
-        tf_ap_month1.setText(month);
-
-        tf_ap_day.setText(day);
-        tf_ap_day1.setText(day);
-
-        tf_ap_year.setText(year);
-        tf_ap_year1.setText(year);
 
     }
 
@@ -1711,7 +1523,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     data_cols_ar_payments();
-                    tf_ap_month.grabFocus();
+
                     e.consume();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -1781,7 +1593,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 tbl_accounts_receivable_payments_M.fireTableDataChanged();
                 data_cols();
                 enable_ar(true);
-                tf_ar_month.grabFocus();
+                tf_soa_type.grabFocus();
             }
         });
     }
@@ -1946,8 +1758,8 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String discount = "";//tf_discount.getText();
         int status = 0;// FitIn.toInt(tf_status.getText());
         double term = FitIn.toDouble(tf_term.getText());
-        String date_applied = tf_ar_month.getText() + " " + tf_ar_day.getText() + ", " + tf_ar_year.getText();
-        date_applied = DateType.mDate_to_Date(date_applied);
+        String date_applied = DateType.sf.format(jDateChooser1.getDate());
+
         double paid = 0;
         String date_paid = date_applied;
         String remarks = tf_remarks.getText();
@@ -1979,8 +1791,8 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 data_cols();
                 clear_accounts_receivable();
                 init_ar_no();
-                tf_ar_month.grabFocus();
                 Alert.set(1, "");
+                tf_soa_type.grabFocus();
             }
         });
         nd.setLocationRelativeTo(this);
@@ -1992,7 +1804,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         List<to_accounts_receivable> datas = tbl_accounts_receivable_ALM;
         double total = 0;
         for (to_accounts_receivable to : datas) {
-            total += to.amount - to.paid;
+            if (to.status != 1) {
+                total += to.amount - to.paid;
+            }
+
         }
         lbl_balance.setText(FitIn.fmt_wc_0(total));
     }
@@ -2017,16 +1832,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         Date d = new Date();
         try {
             d = DateType.sf.parse(to.date_applied);
+            jDateChooser1.setDate(d);
         } catch (ParseException ex) {
             Logger.getLogger(Dlg_ar_encoding.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        String month = DateType.m.format(d);
-        String day = DateType.d.format(d);
-        String year = DateType.y.format(d);
-        tf_ar_month.setText(month);
-        tf_ar_day.setText(day);
-        tf_ar_year.setText(year);
+
         jButton8.setEnabled(false);
         jButton9.setEnabled(true);
         jButton10.setEnabled(true);
@@ -2064,9 +1875,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String discount = "";//tf_discount.getText();
         int status = 0;// FitIn.toInt(tf_status.getText());
         double term = FitIn.toDouble(tf_term.getText());
-        String date_applied = tf_ar_month.getText() + " " + tf_ar_day.getText() + ", " + tf_ar_year.
-                getText();
-        date_applied = DateType.mDate_to_Date(date_applied);
+        String date_applied = DateType.sf.format(jDateChooser1.getDate());
         double paid = FitIn.toDouble(tf_paid.getText());
         String date_paid = date_applied;
         String remarks = tf_remarks.getText();
@@ -2094,7 +1903,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                S1_accounts_receivable.edit_accounts_receivable(to1, to.amount, to1.paid);
+                S1_accounts_receivable.edit_accounts_receivable3(to1, to.amount, to1.paid);
                 data_cols();
                 tbl_accounts_receivable.setRowSelectionInterval(row, row);
                 data_cols_ar_payments();
@@ -2114,10 +1923,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tf_reference_no.setText("");
         tf_trust_receipt.setText("");
 
-        tf_ar_month.setText("");
-        tf_ar_day.setText("");
-        tf_ar_year.setText("");
-
+        tf_remarks.setText("");
     }
 
     private void delete_accounts_receivable() {
@@ -2141,9 +1947,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
-
         nd.setCallback(new Dlg_confirm_delete.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
@@ -2301,6 +2105,10 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             return;
         }
         to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        if (to.status == 1) {
+            Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+            return;
+        }
         String customer_id = to.customer_id;
         String customer_name = to.customer_name;
         String ar_no = to.ar_no;
@@ -2312,9 +2120,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String discount = tf_discount_name.getText();
         int status = 0;
         double term = 0;
-        String date_applied = tf_ap_month.getText() + " " + tf_ap_day.getText() + ", " + tf_ap_year.
-                getText();
-        date_applied = DateType.mDate_to_Date(date_applied);
+        String date_applied = DateType.sf.format(jDateChooser2.getDate());
         double paid = 0;
         String date_paid = DateType.sf.format(new Date());
         String remarks = tf_remarks2.getText();
@@ -2332,8 +2138,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String soa_type = to.soa_type;
         String soa_type_id = to.soa_type_id;
         String reference_no = to.reference_no;
-        String check_date = tf_ap_month1.getText() + " " + tf_ap_day1.getText() + ", " + tf_ap_year1.getText();
-        check_date = DateType.mDate_to_Date(check_date);
+        String check_date = DateType.sf.format(jDateChooser3.getDate());
         String user_id = MyUser.getUser_id();
         String user_screen_name = MyUser.getUser_screen_name();
         double tax_rate = 0;
@@ -2363,7 +2168,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 data_cols_ar_payments();
 
                 clear_accounts_receivable_payments();
-                tf_ap_month.grabFocus();
+
                 Alert.set(1, "");
             }
         });
@@ -2394,25 +2199,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         try {
             d = DateType.sf.parse(to.date_applied);
             d2 = DateType.sf.parse(to.check_date);
+            jDateChooser2.setDate(d);
+            jDateChooser3.setDate(d2);
         } catch (ParseException ex) {
             Logger.getLogger(Dlg_ar_encoding.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        String month = DateType.m.format(d);
-        String day = DateType.d.format(d);
-        String year = DateType.y.format(d);
-
-        String month2 = DateType.m.format(d2);
-        String day2 = DateType.d.format(d2);
-        String year2 = DateType.y.format(d2);
-
-        tf_ap_month.setText(month);
-        tf_ap_day.setText(day);
-        tf_ap_year.setText(year);
-
-        tf_ap_month1.setText(month);
-        tf_ap_day1.setText(day);
-        tf_ap_year1.setText(year);
 
         jButton4.setEnabled(false);
         jButton3.setEnabled(true);
@@ -2453,9 +2245,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String discount = tf_discount_name.getText();
         int status = 0;
         double term = 0;
-        String date_applied = tf_ap_month.getText() + " " + tf_ap_day.getText() + ", " + tf_ap_year.
-                getText();
-        date_applied = DateType.mDate_to_Date(date_applied);
+        String date_applied = DateType.sf.format(jDateChooser2.getDate());
         double paid = 0;
         String date_paid = DateType.sf.format(new Date());
         String remarks = tf_remarks2.getText();
@@ -2473,7 +2263,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String soa_type = to.soa_type;
         String soa_type_id = to.soa_type_id;
         String reference_no = to.reference_no;
-        String check_date = tf_ap_month1.getText() + " " + tf_ap_day1.getText() + ", " + tf_ap_year1.getText();
+        String check_date = DateType.sf.format(jDateChooser3.getDate());
         String user_id = to.user_id;
         String user_screen_name = to.user_screen_name;
         double tax_rate = 0;
@@ -2495,7 +2285,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                S1_accounts_receivable_payments.edit_accounts_receivable_payments(to1, to, to_ar);
+                S1_accounts_receivable_payments.edit_accounts_receivable_payments2(to1, to, to_ar);
                 int i = tbl_accounts_receivable.getSelectedRow();
                 data_cols();
 
@@ -2513,13 +2303,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
     private void clear_accounts_receivable_payments() {
         tf_ap_cash.setText("");
-        tf_ap_month.setText("");
-        tf_ap_day.setText("");
-        tf_ap_year.setText("");
         tf_ap_check_bank.setText("");
         tf_ap_check_holder.setText("");
         tf_ap_check_amount.setText("");
         tf_ap_check_no.setText("");
+        tf_or_payment_no.setText("");
+        tf_remarks2.setText("");
         tf_ap_cash.grabFocus();
         jButton4.setEnabled(true);
         jButton2.setEnabled(false);
@@ -2533,6 +2322,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             Alert.set(0, "Privilege not added!");
             return;
         }
+
 //        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
 //        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
 //        int exists = 0;
@@ -2544,48 +2334,47 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 //        }
 //        exists=1;
 //        if (exists == 1) {
-            int row = tbl_accounts_receivable_payments.getSelectedRow();
-            if (row < 0) {
-                return;
+        int row = tbl_accounts_receivable_payments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+
+        final to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
+                get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
+        if (to.status == 2) {
+            Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
+            return;
+        }
+        int row2 = tbl_accounts_receivable.getSelectedRow();
+        if (row2 < 0) {
+            return;
+        }
+        final to_accounts_receivable to_ar = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row2));
+        Window p = (Window) this;
+        Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_delete.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
+                closeDialog.ok();
+
+                S1_accounts_receivable_payments.delete_accounts_receivable_payments(to, to_ar);
+                int i = tbl_accounts_receivable.getSelectedRow();
+                data_cols();
+                tbl_accounts_receivable.setRowSelectionInterval(i, i);
+                data_cols_ar_payments();
+                clear_accounts_receivable_payments();
+                Alert.set(3, "");
             }
-
-            final to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.
-                    get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
-            if (to.status == 2) {
-                Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
-                return;
-            }
-            int row2 = tbl_accounts_receivable.getSelectedRow();
-            if (row2 < 0) {
-                return;
-            }
-            final to_accounts_receivable to_ar = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row2));
-            Window p = (Window) this;
-            Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
-            nd.setTitle("");
-
-            nd.setCallback(new Dlg_confirm_delete.Callback() {
-
-                @Override
-                public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
-                    closeDialog.ok();
-
-                    S1_accounts_receivable_payments.delete_accounts_receivable_payments(to, to_ar);
-                    int i = tbl_accounts_receivable.getSelectedRow();
-                    data_cols();
-                    tbl_accounts_receivable.setRowSelectionInterval(i, i);
-                    data_cols_ar_payments();
-                    clear_accounts_receivable_payments();
-                    Alert.set(3, "");
-                }
-            });
-            nd.setLocationRelativeTo(this);
-            nd.setVisible(true);
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
 //        } else {
 //            Alert.set(0, "No privelege to delete transaction");
 //        }
-
     }
 
     private void customers() {
@@ -2697,6 +2486,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 S1_account_receivable_types.to_accounts_receivable_types to = type_list.get(data.selected_row);
                 tf2.setText("" + to.id);
                 tf1.setText(to.type_name);
+                tf_reference_no.grabFocus();
             }
         });
     }

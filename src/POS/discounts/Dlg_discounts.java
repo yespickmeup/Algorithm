@@ -5,7 +5,6 @@
 package POS.discounts;
 
 import POS.discounts.S1_discounts.to_discounts;
-import POS.main.Main;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
@@ -499,7 +498,7 @@ public class Dlg_discounts extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

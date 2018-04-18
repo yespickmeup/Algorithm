@@ -9,7 +9,6 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Inventory_price_updates.to_inventory_price_updates;
 import POS.users.MyUser;
-import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
@@ -39,6 +38,7 @@ import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.DateType;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -226,14 +226,16 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
-        jButton1 = new Button.Success();
+        jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jButton2 = new Button.Default();
         jLabel10 = new javax.swing.JLabel();
         jTextField2 = new Field.Search();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jButton2 = new Button.Default();
+        jButton3 = new Button.Primary();
+        jButton1 = new Button.Success();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -345,7 +347,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
                                 .addGap(289, 289, 289)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))))
+                                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -367,7 +369,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,50 +412,10 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         jProgressBar2.setString("");
         jProgressBar2.setStringPainted(true);
 
-        jButton1.setText("Finalize Updates");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jPanel4.setOpaque(false);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Status:");
-
-        buttonGroup1.add(jCheckBox2);
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox2.setText("Posted");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jCheckBox3);
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox3.setText("Finalized");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jCheckBox4);
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox4.setSelected(true);
-        jCheckBox4.setText("All");
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Item Code/Description:");
@@ -470,11 +432,114 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(jCheckBox4);
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setText("All");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jCheckBox2);
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setSelected(true);
+        jCheckBox2.setText("Posted");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jCheckBox3);
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox3.setText("Finalized");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Upload Requests");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Check Finalized");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jCheckBox4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(5, 5, 5))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
@@ -482,48 +547,19 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(289, 289, 289)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCheckBox4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox3))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,7 +570,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
                 .addGap(16, 16, 16))
         );
 
-        jTabbedPane1.addTab("Posted", jPanel3);
+        jTabbedPane1.addTab("Reports", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -604,7 +640,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        data_cols_ipu();
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
@@ -616,12 +652,16 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        update_item();
+        check_cloud_finalized();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_inventory_price_updatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_inventory_price_updatesMouseClicked
         update_item_single();
     }//GEN-LAST:event_tbl_inventory_price_updatesMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        upload_price_change_request();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -631,6 +671,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -648,6 +689,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -662,6 +704,18 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_kabankalan_with_encoding");
+//        System.setProperty("pool_host", "localhost");
+//        System.setProperty("main_branch", "false");
+////        System.setProperty("main_branch", "true");
+//        System.setProperty("active_branches", "10");
+//        System.setProperty("cloud_host", "128.199.80.53");
+//        System.setProperty("cloud_user", "smis2");
+//        System.setProperty("cloud_password", "nopassword101");
+//        System.setProperty("cloud_db", "db_algorithm_development");
+
         set_default_branch();
         init_key();
         init_tbl_inventory();
@@ -672,14 +726,25 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         String where = " group by branch_id order by branch asc ";
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
 
-        String where2 = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
-        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where2);
-        for (S1_user_previleges.to_user_previleges to : datas) {
-            if (to.previledge.equalsIgnoreCase("Finalize Price Updates")) {
-                can_finalize = 1;
-                break;
-            }
+//        String where2 = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
+//        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where2);
+//        for (S1_user_previleges.to_user_previleges to : datas) {
+//            if (to.previledge.equalsIgnoreCase("Finalize Price Updates")) {
+//                can_finalize = 1;
+//                break;
+//            }
+//        }
+        String main_branch = System.getProperty("main_branch", "false");
+        if (main_branch.equalsIgnoreCase("false")) {
+            jButton3.setVisible(true);
+
+            jButton3.setText("Upload Requests");
+            jButton1.setText("Check Finalized");
+        } else {
+            jButton3.setVisible(false);
+            jButton1.setText("Check Requests");
         }
+
     }
 
     int can_finalize = 0;
@@ -710,6 +775,8 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         });
     }
 
+    String my_branch = "";
+    String my_branch_id = "";
     String my_location = "";
     String my_location_id = "";
 
@@ -719,6 +786,8 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         tf_from_branch_id.setText(to.branch_id);
         my_location = to.location;
         my_location_id = "" + to.id;
+        my_branch = to.branch;
+        my_branch_id = to.branch_id;
     }
 
     public void do_pass() {
@@ -733,7 +802,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -773,6 +842,43 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
             }
 
         });
+        tbl_inventory_price_updates.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    jTextField1.grabFocus();
+                    int row = tbl_inventory_price_updates.getSelectedRow();
+                    if (row < 0) {
+                        return;
+                    }
+                    to_inventory_price_updates to = (to_inventory_price_updates) tbl_inventory_price_updates_ALM.get(row);
+                    if (to.status == 1 && to.is_uploaded == 1) {
+                        Alert.set(0, "Cannot proceed, record has been finalized and uploaded!");
+                        return;
+                    }
+                    delete_ipu(to);
+                }
+            }
+
+        });
+    }
+
+    private void delete_ipu(final to_inventory_price_updates to) {
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Inventory_price_updates.delete_data(to);
+                Alert.set(3, "");
+                data_cols_ipu();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
     // </editor-fold>
 
@@ -816,7 +922,13 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
                 String branch_id = tf_from_branch_id.getText();
                 String location = my_location;
                 String location_id = my_location_id;
-                Inventory_price_updates.to_inventory_price_updates ipu = new Inventory_price_updates.to_inventory_price_updates(id, item_code, barcode, description, old_unit, unit, conversion, old_selling_price, selling_price, update_all_branch, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id);
+                int is_uploaded = 0;
+                String ipu_no = Inventory_price_updates.increment_id(my_branch_id);
+                String at_branch = my_branch;
+                String at_branch_id = my_branch_id;
+                String at_location = my_location;
+                String at_location_id = my_location_id;
+                Inventory_price_updates.to_inventory_price_updates ipu = new Inventory_price_updates.to_inventory_price_updates(id, item_code, barcode, description, old_unit, unit, conversion, old_selling_price, selling_price, update_all_branch, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id, is_uploaded, ipu_no, at_branch, at_branch_id, at_location, at_location_id);
                 Inventory_price_updates.add_data(ipu);
                 data_cols_ipu();
                 Alert.set(0, "Update Posted!... Waiting for approval.");
@@ -1006,9 +1118,9 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         tbl_inventory_price_updates.setModel(tbl_inventory_price_updates_M);
         tbl_inventory_price_updates.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_inventory_price_updates.setRowHeight(25);
-        int[] tbl_widths_inventory_price_updates = {80, 100, 100, 100, 100, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_inventory_price_updates = {90, 80, 100, 100, 100, 100, 70, 70, 30, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_inventory_price_updates.length; i < n; i++) {
-            if (i == 2) {
+            if (i == 3) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_inventory_price_updates, i, tbl_widths_inventory_price_updates[i]);
@@ -1019,8 +1131,9 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         tbl_inventory_price_updates.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_inventory_price_updates.setRowHeight(25);
         tbl_inventory_price_updates.setFont(new java.awt.Font("Arial", 0, 12));
-        TableWidthUtilities.setColumnRightRenderer(tbl_inventory_price_updates, 3);
         TableWidthUtilities.setColumnRightRenderer(tbl_inventory_price_updates, 4);
+        TableWidthUtilities.setColumnRightRenderer(tbl_inventory_price_updates, 5);
+        tbl_inventory_price_updates.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_inventory_price_updates(List<to_inventory_price_updates> acc) {
@@ -1031,7 +1144,7 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     public static class Tblinventory_price_updatesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Item Code", "Barcode", "Description", "Old Price", "New Price", "User", "Status", "selling_price", "update_all_branch", "status", "date_added", "user_id", "user_screen_name", "branch", "branch_id", "location", "location_id"
+            "Transaction #", "Item Code", "Barcode", "Description", "Old Price", "New Price", "User", "Status", "", "status", "date_added", "user_id", "user_screen_name", "branch", "branch_id", "location", "location_id"
         };
 
         public Tblinventory_price_updatesModel(ListModel listmodel) {
@@ -1059,27 +1172,37 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
             to_inventory_price_updates tt = (to_inventory_price_updates) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + tt.item_code;
+                    return " " + tt.ipu_no;
                 case 1:
-                    return " " + tt.barcode;
+                    return " " + tt.item_code;
                 case 2:
-                    return " " + tt.description;
+                    return " " + tt.barcode;
                 case 3:
-                    return FitIn.fmt_wc_0(tt.old_selling_price) + " ";
+                    return " " + tt.description;
                 case 4:
-                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
+                    return FitIn.fmt_wc_0(tt.old_selling_price) + " ";
                 case 5:
-                    return " " + tt.user_screen_name;
+                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
                 case 6:
+                    return " " + tt.user_screen_name;
+                case 7:
                     if (tt.status == 0) {
                         return " Posted";
                     } else {
                         return " Finalized";
                     }
-                case 7:
-                    return tt.status;
                 case 8:
-                    return tt.date_added;
+                    if (tt.is_uploaded == 0) {
+                        return "/POS/icons4/cloud-storage-uploading-option (3).png";
+                    } else if (tt.is_uploaded == 2) {
+                        return "/POS/icons4/cloud-storage-uploading-option (4).png";
+                    } else if (tt.is_uploaded == 3) {
+                        return "/POS/icons4/cloud-storage-uploading-option (6)";
+                    } else if (tt.is_uploaded == 4) {
+                        return "/POS/icons4/cloud-storage-uploading-option (5).png";
+                    } else {
+                        return "/POS/icons4/cloud-storage-uploading-option (2).png";
+                    }
                 case 9:
                     return tt.user_id;
                 case 10:
@@ -1144,37 +1267,160 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
     }
 
     private void update_item_single() {
-        if (can_finalize == 0) {
-            Alert.set(0, "No privilege to finalize update!");
-            return;
+//        if (can_finalize == 0) {
+//            Alert.set(0, "No privilege to finalize update!");
+//            return;
+//        }
+//        final List<to_inventory_price_updates> to_add = new ArrayList();
+//        int row = tbl_inventory_price_updates.getSelectedRow();
+//        if (row < 0) {
+//            return;
+//        }
+//        final to_inventory_price_updates to = (to_inventory_price_updates) tbl_inventory_price_updates_ALM.get(row);
+//        if (to.status == 1) {
+//            Alert.set(0, "Record already finalized!");
+//            return;
+//        }
+//        Window p = (Window) this;
+//        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+//        nd.setTitle("");
+//
+//        nd.setCallback(new Dlg_confirm_action.Callback() {
+//
+//            @Override
+//            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+//                closeDialog.ok();
+//                to_add.add(to);
+//                Inventory_price_updates.update_item(to_add);
+//                data_cols_ipu();
+//                Alert.set(2, "");
+//            }
+//        });
+//        nd.setLocationRelativeTo(this);
+//        nd.setVisible(true);
+
+    }
+
+    private void upload_price_change_request() {
+        final List<to_inventory_price_updates> datas = tbl_inventory_price_updates_ALM;
+        List<to_inventory_price_updates> upload = new ArrayList();
+        for (to_inventory_price_updates to : datas) {
+            if (to.status == 0 && to.is_uploaded == 0) {
+                upload.add(to);
+            }
         }
-        final List<to_inventory_price_updates> to_add = new ArrayList();
-        int row = tbl_inventory_price_updates.getSelectedRow();
-        if (row < 0) {
-            return;
-        }
-        final to_inventory_price_updates to = (to_inventory_price_updates) tbl_inventory_price_updates_ALM.get(row);
-        if (to.status == 1) {
-            Alert.set(0, "Record already finalized!");
+        if (upload.isEmpty()) {
+            Alert.set(0, "Nothing to upload!");
             return;
         }
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
         nd.setCallback(new Dlg_confirm_action.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                to_add.add(to);
-                Inventory_price_updates.update_item(to_add);
-                data_cols_ipu();
-                Alert.set(2, "");
+                jProgressBar2.setString("Loading...Please wait...");
+                jProgressBar2.setIndeterminate(true);
+                Thread t = new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Inventory_price_updates.add_data_cloud(datas);
+                        Alert.set(1, "");
+                        data_cols_ipu();
+                        jProgressBar2.setString("Finished...");
+                        jProgressBar2.setIndeterminate(false);
+                    }
+                });
+                t.start();
+
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
-
     }
+
+    private void check_cloud_finalized() {
+
+        if (jButton1.getText().equalsIgnoreCase("Check Finalized")) {
+            jProgressBar2.setString("Loading...Please wait...");
+            jProgressBar2.setIndeterminate(true);
+            Thread t = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    String where = " where status=0 and is_uploaded=1 and at_branch_id='" + my_branch_id + "' ";
+                    System.out.println(where);
+                    List<to_inventory_price_updates> datas = Inventory_price_updates.ret_data_cloud(where);
+                    if (!datas.isEmpty()) {
+                        view_finalized_updates(datas);
+                    } else {
+                        Alert.set(0, "No updates from main branch!");
+                    }
+                    jProgressBar2.setString("Finished...");
+                    jProgressBar2.setIndeterminate(false);
+                }
+            });
+            t.start();
+        } else {
+            jProgressBar2.setString("Loading...Please wait...");
+            jProgressBar2.setIndeterminate(true);
+            Thread t = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    String where = " where status=0 and is_uploaded=0 ";
+                    System.out.println(where);
+                    List<to_inventory_price_updates> datas = Inventory_price_updates.ret_data_cloud(where);
+                    if (!datas.isEmpty()) {
+                        finalized_updates(datas);
+                    } else {
+                        Alert.set(0, "No new requests from other branches!");
+                    }
+                    jProgressBar2.setString("Finished...");
+                    jProgressBar2.setIndeterminate(false);
+                }
+            });
+            t.start();
+        }
+    }
+
+    private void view_finalized_updates(List<to_inventory_price_updates> datas) {
+        Window p = (Window) this;
+        Dlg_inventory_price_updates_finalized nd = Dlg_inventory_price_updates_finalized.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(datas);
+        nd.setCallback(new Dlg_inventory_price_updates_finalized.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, final Dlg_inventory_price_updates_finalized.OutputData data) {
+                closeDialog.ok();
+                Inventory_price_updates.update_ipu_finalized(data.datas);
+                Alert.set(2, "");
+                data_cols_ipu();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void finalized_updates(List<to_inventory_price_updates> datas) {
+        Window p = (Window) this;
+        Dlg_inventory_price_updates_review nd = Dlg_inventory_price_updates_review.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(datas);
+        nd.setCallback(new Dlg_inventory_price_updates_review.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, final Dlg_inventory_price_updates_review.OutputData data) {
+                closeDialog.ok();
+
+                Inventory_price_updates.finalize_price_request(data.datas);
+                Alert.set(2, "");
+                data_cols_ipu();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
 }

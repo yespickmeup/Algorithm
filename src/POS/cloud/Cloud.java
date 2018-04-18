@@ -85,7 +85,7 @@ public class Cloud {
     public static void main(String[] args) {
         System.setProperty("pool_host", "192.168.1.51");
         System.setProperty("pool_db", "db_algorithm");
-
+        
         List<to_inventory> inventory_cloud = ret_inventory("");
         List<to_inventory> inventory_local = Inventory.ret_data6("");
         System.out.println("Retrieving record/s...");
@@ -104,7 +104,6 @@ public class Cloud {
                     }
                     break;
                 }
-
             }
             if (exists == 0) {
                 codes.add(""+to.barcode);
@@ -161,7 +160,7 @@ public class Cloud {
                     + ",branch_code"
                     + ",location"
                     + ",location_id"
-                    + ",updated_at"
+                    + ",is_uploaded"
                     + " from inventory"
                     + " " + where;
 
@@ -204,9 +203,9 @@ public class Cloud {
                 String branch_code = rs.getString(34);
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
-                String updated_at = rs.getString(37);
+                int is_uploaded=rs.getInt(37);
 
-                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true);
+                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true,is_uploaded);
                 datas.add(to);
             }
             return datas;
