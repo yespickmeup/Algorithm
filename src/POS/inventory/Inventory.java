@@ -641,7 +641,8 @@ public class Inventory {
             stmt2.executeBatch();
             conn.commit();
             conn2.commit();
-            MyConnection.close();
+            conn.close();
+            conn2.close();
             return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -1321,7 +1322,7 @@ public class Inventory {
                     + ",classification_id= :classification_id"
                     + ",sub_classification= :sub_classification"
                     + ",sub_classification_id= :sub_classification_id"
-//                    + ",unit= :unit"
+                    //                    + ",unit= :unit"
                     + ",conversion= :conversion"
                     + ",cost= :cost"
                     + ",supplier= :supplier"
@@ -1346,7 +1347,7 @@ public class Inventory {
                     setString("classification_id", to_inventory_barcodes.classification_id).
                     setString("sub_classification", to_inventory_barcodes.sub_classification).
                     setString("sub_classification_id", to_inventory_barcodes.sub_classification_id).
-//                    setString("unit", to_inventory_barcodes.unit).
+                    //                    setString("unit", to_inventory_barcodes.unit).
                     setNumber("conversion", to_inventory_barcodes.conversion).
                     setNumber("cost", to_inventory_barcodes.cost).
                     setString("supplier", to_inventory_barcodes.supplier).
@@ -1371,7 +1372,7 @@ public class Inventory {
                     + ",classification_id= :classification_id"
                     + ",sub_classification= :sub_classification"
                     + ",sub_classification_id= :sub_classification_id"
-//                    + ",unit= :unit"
+                    //                    + ",unit= :unit"
                     + ",conversion= :conversion"
                     + ",supplier= :supplier"
                     + ",vatable= :vatable"
@@ -1394,7 +1395,7 @@ public class Inventory {
                     setString("classification_id", to_inventory_barcodes.classification_id).
                     setString("sub_classification", to_inventory_barcodes.sub_classification).
                     setString("sub_classification_id", to_inventory_barcodes.sub_classification_id).
-//                    setString("unit", to_inventory_barcodes.unit).
+                    //                    setString("unit", to_inventory_barcodes.unit).
                     setNumber("conversion", to_inventory_barcodes.conversion).
                     setString("supplier", to_inventory_barcodes.supplier).
                     setNumber("vatable", to_inventory_barcodes.vatable).
@@ -1957,11 +1958,12 @@ public class Inventory {
                 to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
                 datas.add(to);
             }
+           
             return datas;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            MyConnection.close();
+           MyConnection.close();
         }
     }
 

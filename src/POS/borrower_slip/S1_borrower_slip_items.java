@@ -132,7 +132,7 @@ public class S1_borrower_slip_items {
         }
     }
 
-    public static void add_data(List<to_borrower_slip_items> to_borrower_slip_items1,S1_borrower_slips.to_borrower_slips to_borrower_slips) {
+    public static void add_data(List<to_borrower_slip_items> to_borrower_slip_items1, S1_borrower_slips.to_borrower_slips to_borrower_slips) {
         try {
             Connection conn = MyConnection.connect();
             for (to_borrower_slip_items to_borrower_slip_items : to_borrower_slip_items1) {
@@ -297,6 +297,194 @@ public class S1_borrower_slip_items {
                 stmt.execute();
                 Lg.s(S1_borrower_slip_items.class, "Successfully Added");
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_data_cloud(to_borrower_slip_items to_borrower_slip_items) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+
+            String s0 = "insert into borrower_slip_items("
+                    + "user_id"
+                    + ",user_screen_name"
+                    + ",date_added"
+                    + ",bs_no"
+                    + ",reference_no"
+                    + ",borrowed_by"
+                    + ",borrowed_by_id"
+                    + ",borrowed_by_department"
+                    + ",borrowed_by_department_id"
+                    + ",status"
+                    + ",from_branch"
+                    + ",from_branch_id"
+                    + ",from_location"
+                    + ",from_location_id"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",to_location"
+                    + ",to_location_id"
+                    + ",remarks"
+                    + ",barcode"
+                    + ",description"
+                    + ",generic_name"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",item_type"
+                    + ",supplier"
+                    + ",fixed_price"
+                    + ",cost"
+                    + ",supplier_id"
+                    + ",multi_level_pricing"
+                    + ",vatable"
+                    + ",reorder_level"
+                    + ",markup"
+                    + ",main_barcode"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",selling_type"
+                    + ",serial_no"
+                    + ",qty_borrowed"
+                    + ",qty_returned"
+                    + ")values("
+                    + ":user_id"
+                    + ",:user_screen_name"
+                    + ",:date_added"
+                    + ",:bs_no"
+                    + ",:reference_no"
+                    + ",:borrowed_by"
+                    + ",:borrowed_by_id"
+                    + ",:borrowed_by_department"
+                    + ",:borrowed_by_department_id"
+                    + ",:status"
+                    + ",:from_branch"
+                    + ",:from_branch_id"
+                    + ",:from_location"
+                    + ",:from_location_id"
+                    + ",:to_branch"
+                    + ",:to_branch_id"
+                    + ",:to_location"
+                    + ",:to_location_id"
+                    + ",:remarks"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:generic_name"
+                    + ",:category"
+                    + ",:category_id"
+                    + ",:classification"
+                    + ",:classification_id"
+                    + ",:sub_classification"
+                    + ",:sub_classification_id"
+                    + ",:product_qty"
+                    + ",:unit"
+                    + ",:conversion"
+                    + ",:selling_price"
+                    + ",:item_type"
+                    + ",:supplier"
+                    + ",:fixed_price"
+                    + ",:cost"
+                    + ",:supplier_id"
+                    + ",:multi_level_pricing"
+                    + ",:vatable"
+                    + ",:reorder_level"
+                    + ",:markup"
+                    + ",:main_barcode"
+                    + ",:brand"
+                    + ",:brand_id"
+                    + ",:model"
+                    + ",:model_id"
+                    + ",:selling_type"
+                    + ",:serial_no"
+                    + ",:qty_borrowed"
+                    + ",:qty_returned"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("user_id", to_borrower_slip_items.user_id)
+                    .setString("user_screen_name", to_borrower_slip_items.user_screen_name)
+                    .setString("date_added", to_borrower_slip_items.date_added)
+                    .setString("bs_no", to_borrower_slip_items.bs_no)
+                    .setString("reference_no", to_borrower_slip_items.reference_no)
+                    .setString("borrowed_by", to_borrower_slip_items.borrowed_by)
+                    .setString("borrowed_by_id", to_borrower_slip_items.borrowed_by_id)
+                    .setString("borrowed_by_department", to_borrower_slip_items.borrowed_by_department)
+                    .setString("borrowed_by_department_id", to_borrower_slip_items.borrowed_by_department_id)
+                    .setNumber("status", to_borrower_slip_items.status)
+                    .setString("from_branch", to_borrower_slip_items.from_branch)
+                    .setString("from_branch_id", to_borrower_slip_items.from_branch_id)
+                    .setString("from_location", to_borrower_slip_items.from_location)
+                    .setString("from_location_id", to_borrower_slip_items.from_location_id)
+                    .setString("to_branch", to_borrower_slip_items.to_branch)
+                    .setString("to_branch_id", to_borrower_slip_items.to_branch_id)
+                    .setString("to_location", to_borrower_slip_items.to_location)
+                    .setString("to_location_id", to_borrower_slip_items.to_location_id)
+                    .setString("remarks", to_borrower_slip_items.remarks)
+                    .setString("barcode", to_borrower_slip_items.barcode)
+                    .setString("description", to_borrower_slip_items.description)
+                    .setString("generic_name", to_borrower_slip_items.generic_name)
+                    .setString("category", to_borrower_slip_items.category)
+                    .setString("category_id", to_borrower_slip_items.category_id)
+                    .setString("classification", to_borrower_slip_items.classification)
+                    .setString("classification_id", to_borrower_slip_items.classification_id)
+                    .setString("sub_classification", to_borrower_slip_items.sub_classification)
+                    .setString("sub_classification_id", to_borrower_slip_items.sub_classification_id)
+                    .setNumber("product_qty", to_borrower_slip_items.product_qty)
+                    .setString("unit", to_borrower_slip_items.unit)
+                    .setNumber("conversion", to_borrower_slip_items.conversion)
+                    .setNumber("selling_price", to_borrower_slip_items.selling_price)
+                    .setString("item_type", to_borrower_slip_items.item_type)
+                    .setString("supplier", to_borrower_slip_items.supplier)
+                    .setNumber("fixed_price", to_borrower_slip_items.fixed_price)
+                    .setNumber("cost", to_borrower_slip_items.cost)
+                    .setString("supplier_id", to_borrower_slip_items.supplier_id)
+                    .setNumber("multi_level_pricing", to_borrower_slip_items.multi_level_pricing)
+                    .setNumber("vatable", to_borrower_slip_items.vatable)
+                    .setNumber("reorder_level", to_borrower_slip_items.reorder_level)
+                    .setNumber("markup", to_borrower_slip_items.markup)
+                    .setString("main_barcode", to_borrower_slip_items.main_barcode)
+                    .setString("brand", to_borrower_slip_items.brand)
+                    .setString("brand_id", to_borrower_slip_items.brand_id)
+                    .setString("model", to_borrower_slip_items.model)
+                    .setString("model_id", to_borrower_slip_items.model_id)
+                    .setString("selling_type", to_borrower_slip_items.selling_type)
+                    .setString("serial_no", to_borrower_slip_items.serial_no)
+                    .setNumber("qty_borrowed", to_borrower_slip_items.qty_borrowed)
+                    .setNumber("qty_returned", to_borrower_slip_items.qty_returned)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update borrower_slip_items set is_uploaded=1 where id='" + to_borrower_slip_items.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(S1_borrower_slip_items.class, "Successfully Added: "+to_borrower_slip_items.bs_no+ " : "+to_borrower_slip_items.description);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -567,60 +755,60 @@ public class S1_borrower_slip_items {
         }
     }
 
-    public static to_borrower_slip_items convert_inv_to_slip_items(Inventory_barcodes.to_inventory_barcodes items,double qty) {
-        int id=0;
-        String user_id="";
-        String user_screen_name="";
-        String date_added="";
-        String bs_no="";
-        String reference_no="";
-        String borrowed_by="";
-        String borrowed_by_id="";
-        String borrowed_by_department="";
-        String borrowed_by_department_id="";
-        int status=0;
-        String from_branch="";
-        String from_branch_id="";
-        String from_location="";
-        String from_location_id="";
-        String to_branch="";
-        String to_branch_id="";
-        String to_location="";
-        String to_location_id="";
-        String remarks="";
-        String barcode=items.barcode;
-        String description=items.description;
-        String generic_name=items.generic_name;
-        String category=items.category;
-        String category_id=items.category_id;
-        String classification=items.classification;
-        String classification_id=items.classification_id;
-        String sub_classification=items.sub_classification;
-        String sub_classification_id=items.sub_classification_id;
-        double product_qty=qty;
-        String unit=items.unit;
-        double conversion=items.conversion;
-        double selling_price=items.selling_price;
-        String item_type=items.item_type;
-        String supplier=items.supplier;
-        int fixed_price=items.fixed_price;
-        double cost=items.cost;
-        String supplier_id=items.supplier_id;
-        int multi_level_pricing=items.multi_level_pricing;
-        int vatable=items.vatable;
-        double reorder_level=items.reorder_level;
-        double markup=items.markup;
-        String main_barcode=items.main_barcode;
-        String brand=items.brand;
-        String brand_id=items.brand_id;
-        String model=items.model;
-        String model_id=items.model_id;
-        String selling_type=""+items.selling_type;
-        String serial_no=items.serial_no;
-        double qty_borrowed=qty;
-        double qty_returned=0;
-        
-        to_borrower_slip_items to=new to_borrower_slip_items(id, user_id, user_screen_name, date_added, bs_no, reference_no, borrowed_by, borrowed_by_id, borrowed_by_department, borrowed_by_department_id, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, remarks, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, item_type, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, serial_no, qty_borrowed, qty_returned);
+    public static to_borrower_slip_items convert_inv_to_slip_items(Inventory_barcodes.to_inventory_barcodes items, double qty) {
+        int id = 0;
+        String user_id = "";
+        String user_screen_name = "";
+        String date_added = "";
+        String bs_no = "";
+        String reference_no = "";
+        String borrowed_by = "";
+        String borrowed_by_id = "";
+        String borrowed_by_department = "";
+        String borrowed_by_department_id = "";
+        int status = 0;
+        String from_branch = "";
+        String from_branch_id = "";
+        String from_location = "";
+        String from_location_id = "";
+        String to_branch = "";
+        String to_branch_id = "";
+        String to_location = "";
+        String to_location_id = "";
+        String remarks = "";
+        String barcode = items.barcode;
+        String description = items.description;
+        String generic_name = items.generic_name;
+        String category = items.category;
+        String category_id = items.category_id;
+        String classification = items.classification;
+        String classification_id = items.classification_id;
+        String sub_classification = items.sub_classification;
+        String sub_classification_id = items.sub_classification_id;
+        double product_qty = qty;
+        String unit = items.unit;
+        double conversion = items.conversion;
+        double selling_price = items.selling_price;
+        String item_type = items.item_type;
+        String supplier = items.supplier;
+        int fixed_price = items.fixed_price;
+        double cost = items.cost;
+        String supplier_id = items.supplier_id;
+        int multi_level_pricing = items.multi_level_pricing;
+        int vatable = items.vatable;
+        double reorder_level = items.reorder_level;
+        double markup = items.markup;
+        String main_barcode = items.main_barcode;
+        String brand = items.brand;
+        String brand_id = items.brand_id;
+        String model = items.model;
+        String model_id = items.model_id;
+        String selling_type = "" + items.selling_type;
+        String serial_no = items.serial_no;
+        double qty_borrowed = qty;
+        double qty_returned = 0;
+
+        to_borrower_slip_items to = new to_borrower_slip_items(id, user_id, user_screen_name, date_added, bs_no, reference_no, borrowed_by, borrowed_by_id, borrowed_by_department, borrowed_by_department_id, status, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, remarks, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, item_type, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, serial_no, qty_borrowed, qty_returned);
         return to;
     }
 }

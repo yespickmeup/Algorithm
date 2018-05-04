@@ -788,11 +788,12 @@ public class Dlg_inventory_price_updates extends javax.swing.JDialog {
         my_location_id = "" + to.id;
         my_branch = to.branch;
         my_branch_id = to.branch_id;
+        
     }
 
     public void do_pass() {
-        jCheckBox1.setEnabled(true);
-        tf_from_branch.setEnabled(true);
+//        jCheckBox1.setEnabled(true);
+//        tf_from_branch.setEnabled(true);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">

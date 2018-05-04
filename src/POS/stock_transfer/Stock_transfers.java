@@ -634,11 +634,12 @@ public class Stock_transfers {
                 id = branch_id + "|0000";
             }
             id = ReceiptIncrementor.increment(id);
+            conn.close();
             return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            MyConnection.close();
+//            MyConnection.close();
         }
     }
 

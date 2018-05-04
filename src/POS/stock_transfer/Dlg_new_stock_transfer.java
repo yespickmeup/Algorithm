@@ -11,6 +11,7 @@ import POS.branches.Branches;
 import POS.inventory.Dlg_inventory_cloud_transactions_local;
 import POS.inventory.Dlg_inventory_cloud_transactions_main;
 import POS.inventory.Dlg_inventory_uom;
+import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
@@ -30,6 +31,7 @@ import POS.util.Users;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -1972,8 +1974,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 //        System.setProperty("cloud_host", "128.199.80.53");
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
-//        System.setProperty("cloud_db", "db_algorithm");
-        
+//        System.setProperty("cloud_db", "db_algorithm_development");
+
 //        System.setProperty("main_branch", "false");
 //        System.setProperty("delete_stock_transfers_finalized", "true");
 //        System.setProperty("pool_db", "db_algorithm");
@@ -2018,6 +2020,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String main_branch = System.getProperty("main_branch", "false");
         if (main_branch.equalsIgnoreCase("false")) {
 //            check_items();
+        } else {
+            check_for_upload();
         }
     }
 
@@ -3955,10 +3959,38 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
     }
 
+    private void check_for_upload() {
+        List<Inventory.to_inventory> to_add = new ArrayList();
+        List<Inventory.to_inventory> to_update = new ArrayList();
+        String cloud_host = System.getProperty("cloud_host", "");
+        if (!cloud_host.isEmpty()) {
+            System.out.println("Retrieving records...");
+            String where = " where is_uploaded=0 or is_uploaded=2 ";
+            List<Inventory.to_inventory> inventory_local = Inventory.ret_data22(where);
+
+            for (Inventory.to_inventory to : inventory_local) {
+                if (to.is_uploaded == 0) {
+                    to_add.add(to);
+                }
+                if (to.is_uploaded == 2) {
+                    to_update.add(to);
+                }
+            }
+            int count = to_add.size() + to_update.size();
+            if (count > 0) {
+                jLabel39.setBackground(new Color(255, 153, 0));
+
+            }else{
+                 jLabel39.setBackground(new Color(153,153,153));
+            }
+            jLabel39.setText(FitIn.fmt_woc(to_add.size() + to_update.size()));
+
+        }
+    }
+
     private void check_items() {
         String main_branch = System.getProperty("main_branch", "false");
         if (main_branch.equalsIgnoreCase("true")) {
-
             Window p = (Window) this;
             Dlg_inventory_cloud_transactions_main nd = Dlg_inventory_cloud_transactions_main.create(p, true);
             nd.setTitle("");

@@ -131,6 +131,90 @@ public class S1_adjustments {
         }
     }
 
+    public static void add_data_cloud(to_adjustments to_adjustments) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into adjustments("
+                    + "item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",qty"
+                    + ",new_qty"
+                    + ",is_add"
+                    + ",date_added"
+                    + ",status"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",remarks"
+                    + ",transaction_no"
+                    + ")values("
+                    + ":item_code"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:qty"
+                    + ",:new_qty"
+                    + ",:is_add"
+                    + ",:date_added"
+                    + ",:status"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:remarks"
+                    + ",:transaction_no"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("item_code", to_adjustments.item_code)
+                    .setString("barcode", to_adjustments.barcode)
+                    .setString("description", to_adjustments.description)
+                    .setNumber("qty", to_adjustments.qty)
+                    .setNumber("new_qty", to_adjustments.new_qty)
+                    .setNumber("is_add", to_adjustments.is_add)
+                    .setString("date_added", to_adjustments.date_added)
+                    .setNumber("status", to_adjustments.status)
+                    .setString("user_id", to_adjustments.user_id)
+                    .setString("user_screen_name", to_adjustments.user_screen_name)
+                    .setString("branch", to_adjustments.branch)
+                    .setString("branch_id", to_adjustments.branch_id)
+                    .setString("location", to_adjustments.location)
+                    .setString("location_id", to_adjustments.location_id)
+                    .setString("remarks", to_adjustments.remarks)
+                    .setString("transaction_no", to_adjustments.transaction_no)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update adjustments set is_uploaded=1 where id='" + to_adjustments.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(S1_adjustments.class, "Successfully Added: " + to_adjustments.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_adjustments to_adjustments) {
         try {
             Connection conn = MyConnection.connect();
@@ -245,8 +329,8 @@ public class S1_adjustments {
                 String location_id = rs.getString(15);
                 String remarks = rs.getString(16);
                 String transaction_no = rs.getString(17);
-                to_adjustments to = new to_adjustments(id, item_code, barcode, description, qty, new_qty, is_add, date_added, status
-                        , user_id, user_screen_name, branch, branch_id, location, location_id,remarks,transaction_no);
+                to_adjustments to = new to_adjustments(id, item_code, barcode, description, qty, new_qty, is_add, date_added, status,
+                        user_id, user_screen_name, branch, branch_id, location, location_id, remarks, transaction_no);
                 datas.add(to);
             }
             return datas;

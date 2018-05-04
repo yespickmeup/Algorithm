@@ -117,6 +117,82 @@ public class S1_disbursements {
         }
     }
 
+    public static void add_data_cloud(to_disbursements to_disbursements) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into disbursements("
+                    + "user_id"
+                    + ",user_screen_name"
+                    + ",date_added"
+                    + ",purpose"
+                    + ",category_id"
+                    + ",category_name"
+                    + ",amount"
+                    + ",is_vat"
+                    + ",disbursement_date"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":user_id"
+                    + ",:user_screen_name"
+                    + ",:date_added"
+                    + ",:purpose"
+                    + ",:category_id"
+                    + ",:category_name"
+                    + ",:amount"
+                    + ",:is_vat"
+                    + ",:disbursement_date"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("user_id", to_disbursements.user_id)
+                    .setString("user_screen_name", to_disbursements.user_screen_name)
+                    .setString("date_added", to_disbursements.date_added)
+                    .setString("purpose", to_disbursements.purpose)
+                    .setString("category_id", to_disbursements.category_id)
+                    .setString("category_name", to_disbursements.category_name)
+                    .setNumber("amount", to_disbursements.amount)
+                    .setNumber("is_vat", to_disbursements.is_vat)
+                    .setString("disbursement_date", to_disbursements.disbursement_date)
+                    .setString("branch", to_disbursements.branch)
+                    .setString("branch_id", to_disbursements.branch_id)
+                    .setString("location", to_disbursements.location)
+                    .setString("location_id", to_disbursements.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update disbursements set is_uploaded=1 where id='" + to_disbursements.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+
+            Lg.s(S1_disbursements.class, "Successfully Added: " + to_disbursements.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_disbursements to_disbursements) {
         try {
             Connection conn = MyConnection.connect();
@@ -216,12 +292,12 @@ public class S1_disbursements {
                 double amount = rs.getDouble(8);
                 int is_vat = rs.getInt(9);
                 String disbursement_date = rs.getString(10);
-                String branch=rs.getString(11);
-                String branch_id=rs.getString(12);
-                String location=rs.getString(13);
-                String location_id=rs.getString(14);
-                to_disbursements to = new to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id
-                        , category_name, amount, is_vat, disbursement_date,branch,branch_id,location,location_id);
+                String branch = rs.getString(11);
+                String branch_id = rs.getString(12);
+                String location = rs.getString(13);
+                String location_id = rs.getString(14);
+                to_disbursements to = new to_disbursements(id, user_id, user_screen_name, date_added, purpose, category_id,
+                         category_name, amount, is_vat, disbursement_date, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;

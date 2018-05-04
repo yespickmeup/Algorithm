@@ -121,6 +121,83 @@ public class CashDrawer_remittances {
         }
     }
 
+        public static void add_data_cloud(to_cash_drawer_remittances to_cash_drawer_remittances) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into cash_drawer_remittances("
+                    + "user_id"
+                    + ",user_screen_name"
+                    + ",date_added"
+                    + ",cash_amount"
+                    + ",cheque_amount"
+                    + ",cheque_holder"
+                    + ",cheque_bank"
+                    + ",cheque_no"
+                    + ",cheque_date"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":user_id"
+                    + ",:user_screen_name"
+                    + ",:date_added"
+                    + ",:cash_amount"
+                    + ",:cheque_amount"
+                    + ",:cheque_holder"
+                    + ",:cheque_bank"
+                    + ",:cheque_no"
+                    + ",:cheque_date"
+                    + ",:status"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("user_id", to_cash_drawer_remittances.user_id)
+                    .setString("user_screen_name", to_cash_drawer_remittances.user_screen_name)
+                    .setString("date_added", to_cash_drawer_remittances.date_added)
+                    .setNumber("cash_amount", to_cash_drawer_remittances.cash_amount)
+                    .setNumber("cheque_amount", to_cash_drawer_remittances.cheque_amount)
+                    .setString("cheque_holder", to_cash_drawer_remittances.cheque_holder)
+                    .setString("cheque_bank", to_cash_drawer_remittances.cheque_bank)
+                    .setString("cheque_no", to_cash_drawer_remittances.cheque_no)
+                    .setString("cheque_date", to_cash_drawer_remittances.cheque_date)
+                    .setNumber("status", to_cash_drawer_remittances.status)
+                    .setString("branch", to_cash_drawer_remittances.branch)
+                    .setString("branch_id", to_cash_drawer_remittances.branch_id)
+                    .setString("location", to_cash_drawer_remittances.location)
+                    .setString("location_id", to_cash_drawer_remittances.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update cash_drawer_remittances set is_uploaded=1 where id='" + to_cash_drawer_remittances.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(CashDrawer_remittances.class, "Successfully Added: "+to_cash_drawer_remittances.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
     public static void update_data(to_cash_drawer_remittances to_cash_drawer_remittances) {
         try {
             Connection conn = MyConnection.connect();

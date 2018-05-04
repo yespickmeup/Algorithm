@@ -45,7 +45,8 @@ public class Encoding_inventory {
         public final String user_id;
         public final String user_screen_name;
         public final String remarks;
-        public to_encoding_inventory(int id, String item_code, String barcode, String description, String branch, String branch_id, String location, String location_id, double qty, String date_added, String user_name, String screen_name, String sheet_no, int status, String counted_by, String checked_by, double cost, double selling_price, String user_id, String user_screen_name,String remarks) {
+
+        public to_encoding_inventory(int id, String item_code, String barcode, String description, String branch, String branch_id, String location, String location_id, double qty, String date_added, String user_name, String screen_name, String sheet_no, int status, String counted_by, String checked_by, double cost, double selling_price, String user_id, String user_screen_name, String remarks) {
             this.id = id;
             this.item_code = item_code;
             this.barcode = barcode;
@@ -66,7 +67,7 @@ public class Encoding_inventory {
             this.selling_price = selling_price;
             this.user_id = user_id;
             this.user_screen_name = user_screen_name;
-            this.remarks=remarks;
+            this.remarks = remarks;
         }
 
     }
@@ -138,12 +139,108 @@ public class Encoding_inventory {
                     setNumber("selling_price", to_encoding_inventory.selling_price).
                     setString("user_id", to_encoding_inventory.user_id).
                     setString("user_screen_name", to_encoding_inventory.user_screen_name).
-                    setString("remarks",to_encoding_inventory.remarks).
+                    setString("remarks", to_encoding_inventory.remarks).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(Encoding_inventory.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_encoding_inventory_cloud(to_encoding_inventory to_encoding_inventory) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into encoding_inventory("
+                    + "item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",qty"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",screen_name"
+                    + ",sheet_no"
+                    + ",status"
+                    + ",counted_by"
+                    + ",checked_by"
+                    + ",cost"
+                    + ",selling_price"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",remarks"
+                    + ")values("
+                    + ":item_code"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:qty"
+                    + ",:date_added"
+                    + ",:user_name"
+                    + ",:screen_name"
+                    + ",:sheet_no"
+                    + ",:status"
+                    + ",:counted_by"
+                    + ",:checked_by"
+                    + ",:cost"
+                    + ",:selling_price"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:remarks"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0).
+                    setString("item_code", to_encoding_inventory.item_code).
+                    setString("barcode", to_encoding_inventory.barcode).
+                    setString("description", to_encoding_inventory.description).
+                    setString("branch", to_encoding_inventory.branch).
+                    setString("branch_id", to_encoding_inventory.branch_id).
+                    setString("location", to_encoding_inventory.location).
+                    setString("location_id", to_encoding_inventory.location_id).
+                    setNumber("qty", to_encoding_inventory.qty).
+                    setString("date_added", to_encoding_inventory.date_added).
+                    setString("user_name", to_encoding_inventory.user_name).
+                    setString("screen_name", to_encoding_inventory.screen_name).
+                    setString("sheet_no", to_encoding_inventory.sheet_no).
+                    setNumber("status", to_encoding_inventory.status).
+                    setString("counted_by", to_encoding_inventory.counted_by).
+                    setString("checked_by", to_encoding_inventory.checked_by).
+                    setNumber("cost", to_encoding_inventory.cost).
+                    setNumber("selling_price", to_encoding_inventory.selling_price).
+                    setString("user_id", to_encoding_inventory.user_id).
+                    setString("user_screen_name", to_encoding_inventory.user_screen_name).
+                    setString("remarks", to_encoding_inventory.remarks).
+                    ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update encoding_inventory set is_uploaded=1 where id='" + to_encoding_inventory.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Encoding_inventory.class, "Successfully Added: " + to_encoding_inventory.id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -199,7 +296,7 @@ public class Encoding_inventory {
                     setNumber("selling_price", to_encoding_inventory.selling_price).
                     setString("user_id", to_encoding_inventory.user_id).
                     setString("user_screen_name", to_encoding_inventory.user_screen_name).
-                    setString("remarks",to_encoding_inventory.remarks).
+                    setString("remarks", to_encoding_inventory.remarks).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -336,8 +433,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                String remarks=rs.getString(21);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+                String remarks = rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
                 datas.add(to);
                 count++;
             }
@@ -404,8 +501,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                String remarks=rs.getString(21);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+                String remarks = rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
                 datas.add(to);
                 count++;
             }
@@ -473,8 +570,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                String remarks=rs.getString(21);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+                String remarks = rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
 
                 datas.add(to);
                 count++;
@@ -541,8 +638,8 @@ public class Encoding_inventory {
                 double selling_price = rs.getDouble(18);
                 String user_id = rs.getString(19);
                 String user_screen_name = rs.getString(20);
-                String remarks=rs.getString(21);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+                String remarks = rs.getString(21);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
 
                 datas.add(to);
                 count++;

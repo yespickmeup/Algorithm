@@ -36,3 +36,65 @@ alter table inventory_price_updates add at_branch varchar(255);
 alter table inventory_price_updates add at_branch_id varchar(255);
 alter table inventory_price_updates add at_location varchar(255);
 alter table inventory_price_updates add at_location_id varchar(255);
+
+
+
+alter table sales add is_uploaded int default 0;
+alter table sale_items add is_uploaded int default 0;
+
+alter table prepaid_payments add is_uploaded int default 0;
+
+alter table accounts_payable add is_uploaded int default 0;
+alter table accounts_payable_payments add is_uploaded int default 0;
+
+alter table accounts_receivable add is_uploaded int default 0;
+alter table accounts_receivable_payments add is_uploaded int default 0;
+
+alter table borrower_slips add is_uploaded int default 0;
+alter table borrower_slip_items add is_uploaded int default 0;
+
+alter table cash_drawer add is_uploaded int default 0;
+alter table cash_drawer_remittances add is_uploaded int default 0;
+
+alter table charge_in_advance add is_uploaded int default 0;
+alter table charge_in_advance_items add is_uploaded int default 0;
+alter table charge_in_advance_cancelled_items add is_uploaded int default 0;
+
+alter table conversions add is_uploaded int default 0;
+alter table conversion_items add is_uploaded int default 0;
+
+alter table disbursements add is_uploaded int default 0;
+
+alter table adjustments add is_uploaded int default 0;
+
+alter table encoding_inventory add is_uploaded int default 0;
+
+alter table inventory_replenishments add is_uploaded int default 0;
+alter table inventory_replenishment_items add is_uploaded int default 0;
+
+alter table other_adjustments add is_uploaded int default 0;
+
+alter table purchase_orders add is_uploaded int default 0;
+alter table purchase_order_items add is_uploaded int default 0;
+
+alter table receipts add is_uploaded int default 0;
+alter table receipt_items add is_uploaded int default 0;
+
+alter table requisition_slips add is_uploaded int default 0;
+alter table requisition_slip_items add is_uploaded int default 0;
+
+alter table return_to_suppliers add is_uploaded int default 0;
+alter table return_to_supplier_items add is_uploaded int default 0;
+alter table return_from_customers add is_uploaded int default 0;
+alter table return_from_customer_items add is_uploaded int default 0;
+
+
+alter table my_services add is_uploaded int default 0;
+alter table my_services_barcodes_customers add is_uploaded int default 0;
+alter table my_services_description_customers add is_uploaded int default 0;
+alter table my_services_item_replacements_customers add is_uploaded int default 0;
+alter table my_services_others_customers add is_uploaded int default 0;
+alter table my_services_problems_customers add is_uploaded int default 0;
+
+
+

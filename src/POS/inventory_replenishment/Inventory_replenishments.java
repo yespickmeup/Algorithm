@@ -181,6 +181,72 @@ public class Inventory_replenishments {
         }
     }
 
+    public static void add_data_cloud(to_inventory_replenishments to_inventory_replenishments) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into inventory_replenishments("
+                    + "inventory_replenishment_no"
+                    + ",date_added"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",remarks"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":inventory_replenishment_no"
+                    + ",:date_added"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("inventory_replenishment_no", to_inventory_replenishments.inventory_replenishment_no)
+                    .setString("date_added", to_inventory_replenishments.date_added)
+                    .setString("user_id", to_inventory_replenishments.user_id)
+                    .setString("user_screen_name", to_inventory_replenishments.user_screen_name)
+                    .setString("remarks", to_inventory_replenishments.remarks)
+                    .setNumber("status", to_inventory_replenishments.status)
+                    .setString("branch", to_inventory_replenishments.branch)
+                    .setString("branch_id", to_inventory_replenishments.branch_id)
+                    .setString("location", to_inventory_replenishments.location)
+                    .setString("location_id", to_inventory_replenishments.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update inventory_replenishments set is_uploaded=1 where id='" + to_inventory_replenishments.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Inventory_replenishments.class, "Successfully Added: " + to_inventory_replenishments.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
     public static void update_data(to_inventory_replenishments to_inventory_replenishments) {
         try {
             Connection conn = MyConnection.connect();

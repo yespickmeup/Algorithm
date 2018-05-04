@@ -131,6 +131,90 @@ public class Inventory_replenishment_items {
         }
     }
 
+    public static void add_data_cloud(to_inventory_replenishment_items to_inventory_replenishment_items) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into inventory_replenishment_items("
+                    + "inventory_replenishment_no"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":inventory_replenishment_no"
+                    + ",:item_code"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:product_qty"
+                    + ",:unit"
+                    + ",:conversion"
+                    + ",:selling_price"
+                    + ",:date_added"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:status"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("inventory_replenishment_no", to_inventory_replenishment_items.inventory_replenishment_no)
+                    .setString("item_code", to_inventory_replenishment_items.item_code)
+                    .setString("barcode", to_inventory_replenishment_items.barcode)
+                    .setString("description", to_inventory_replenishment_items.description)
+                    .setNumber("product_qty", to_inventory_replenishment_items.product_qty)
+                    .setString("unit", to_inventory_replenishment_items.unit)
+                    .setNumber("conversion", to_inventory_replenishment_items.conversion)
+                    .setNumber("selling_price", to_inventory_replenishment_items.selling_price)
+                    .setString("date_added", to_inventory_replenishment_items.date_added)
+                    .setString("user_id", to_inventory_replenishment_items.user_id)
+                    .setString("user_screen_name", to_inventory_replenishment_items.user_screen_name)
+                    .setNumber("status", to_inventory_replenishment_items.status)
+                    .setString("branch", to_inventory_replenishment_items.branch)
+                    .setString("branch_id", to_inventory_replenishment_items.branch_id)
+                    .setString("location", to_inventory_replenishment_items.location)
+                    .setString("location_id", to_inventory_replenishment_items.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update inventory_replenishment_items set is_uploaded=1 where id='" + to_inventory_replenishment_items.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Inventory_replenishment_items.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
     public static void update_data(to_inventory_replenishment_items to_inventory_replenishment_items) {
         try {
             Connection conn = MyConnection.connect();

@@ -3610,7 +3610,6 @@ public class Dlg_users extends javax.swing.JDialog {
                     ret_user_privileges_others();
                 }
             }
-
         }
         if (col == 6) {
             //report

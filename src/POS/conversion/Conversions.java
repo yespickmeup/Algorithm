@@ -251,6 +251,88 @@ public class Conversions {
         }
     }
 
+    public static void add_data_cloud(to_conversions to_conversions) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into conversions("
+                    + "conversion_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",reference_no"
+                    + ",remarks"
+                    + ",status"
+                    + ",from_branch"
+                    + ",from_branch_id"
+                    + ",from_location"
+                    + ",from_location_id"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",to_location"
+                    + ",to_location_id"
+                    + ")values("
+                    + ":conversion_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:reference_no"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:from_branch"
+                    + ",:from_branch_id"
+                    + ",:from_location"
+                    + ",:from_location_id"
+                    + ",:to_branch"
+                    + ",:to_branch_id"
+                    + ",:to_location"
+                    + ",:to_location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("conversion_no", to_conversions.conversion_no)
+                    .setString("user_name", to_conversions.user_name)
+                    .setString("session_no", to_conversions.session_no)
+                    .setString("date_added", to_conversions.date_added)
+                    .setString("reference_no", to_conversions.reference_no)
+                    .setString("remarks", to_conversions.remarks)
+                    .setNumber("status", to_conversions.status)
+                    .setString("from_branch", to_conversions.from_branch)
+                    .setString("from_branch_id", to_conversions.from_branch_id)
+                    .setString("from_location", to_conversions.from_location)
+                    .setString("from_location_id", to_conversions.from_location_id)
+                    .setString("to_branch", to_conversions.to_branch)
+                    .setString("to_branch_id", to_conversions.to_branch_id)
+                    .setString("to_location", to_conversions.to_location)
+                    .setString("to_location_id", to_conversions.to_location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update conversions set is_uploaded=1 where id='" + to_conversions.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+
+            Lg.s(Conversions.class, "Successfully Added: " + to_conversions.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
     public static void update_data(to_conversions to_conversions) {
         try {
             Connection conn = MyConnection.connect();

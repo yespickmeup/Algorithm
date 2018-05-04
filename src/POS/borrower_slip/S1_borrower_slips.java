@@ -157,6 +157,106 @@ public class S1_borrower_slips {
         }
     }
 
+    public static void add_data_cloud(to_borrower_slips to_borrower_slips) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into borrower_slips("
+                    + "user_id"
+                    + ",user_screen_name"
+                    + ",date_added"
+                    + ",bs_no"
+                    + ",reference_no"
+                    + ",items_borrowed"
+                    + ",items_returned"
+                    + ",borrowed_by"
+                    + ",borrowed_by_id"
+                    + ",borrowed_by_department"
+                    + ",borrowed_by_department_id"
+                    + ",status"
+                    + ",from_branch"
+                    + ",from_branch_id"
+                    + ",from_location"
+                    + ",from_location_id"
+                    + ",to_branch"
+                    + ",to_branch_id"
+                    + ",to_location"
+                    + ",to_location_id"
+                    + ",remarks"
+                    + ")values("
+                    + ":user_id"
+                    + ",:user_screen_name"
+                    + ",:date_added"
+                    + ",:bs_no"
+                    + ",:reference_no"
+                    + ",:items_borrowed"
+                    + ",:items_returned"
+                    + ",:borrowed_by"
+                    + ",:borrowed_by_id"
+                    + ",:borrowed_by_department"
+                    + ",:borrowed_by_department_id"
+                    + ",:status"
+                    + ",:from_branch"
+                    + ",:from_branch_id"
+                    + ",:from_location"
+                    + ",:from_location_id"
+                    + ",:to_branch"
+                    + ",:to_branch_id"
+                    + ",:to_location"
+                    + ",:to_location_id"
+                    + ",:remarks"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("user_id", to_borrower_slips.user_id)
+                    .setString("user_screen_name", to_borrower_slips.user_screen_name)
+                    .setString("date_added", to_borrower_slips.date_added)
+                    .setString("bs_no", to_borrower_slips.bs_no)
+                    .setString("reference_no", to_borrower_slips.reference_no)
+                    .setNumber("items_borrowed", to_borrower_slips.items_borrowed)
+                    .setNumber("items_returned", to_borrower_slips.items_returned)
+                    .setString("borrowed_by", to_borrower_slips.borrowed_by)
+                    .setString("borrowed_by_id", to_borrower_slips.borrowed_by_id)
+                    .setString("borrowed_by_department", to_borrower_slips.borrowed_by_department)
+                    .setString("borrowed_by_department_id", to_borrower_slips.borrowed_by_department_id)
+                    .setNumber("status", to_borrower_slips.status)
+                    .setString("from_branch", to_borrower_slips.from_branch)
+                    .setString("from_branch_id", to_borrower_slips.from_branch_id)
+                    .setString("from_location", to_borrower_slips.from_location)
+                    .setString("from_location_id", to_borrower_slips.from_location_id)
+                    .setString("to_branch", to_borrower_slips.to_branch)
+                    .setString("to_branch_id", to_borrower_slips.to_branch_id)
+                    .setString("to_location", to_borrower_slips.to_location)
+                    .setString("to_location_id", to_borrower_slips.to_location_id)
+                    .setString("remarks", to_borrower_slips.remarks)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update borrower_slips set is_uploaded=1 where id='" + to_borrower_slips.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+
+            Lg.s(S1_borrower_slips.class, "Successfully Added: " + to_borrower_slips.bs_no);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
     public static void update_data(to_borrower_slips to_borrower_slips) {
         try {
             Connection conn = MyConnection.connect();

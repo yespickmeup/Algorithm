@@ -6,6 +6,7 @@ package POS.accounts_receivable;
 
 import POS.accounts_receivable.S1_accounts_receivable.to_accounts_receivable;
 import POS.customers.Customers;
+import POS.sales.Sales;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -302,6 +303,156 @@ public class S1_accounts_receivable_payments {
             stmt.executeBatch();
             conn.commit();
             Lg.s(S1_accounts_receivable_payments.class, "Successfully Updated");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_accounts_receivable_payments_cloud(to_accounts_receivable_payments to_accounts_receivable_payments) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            conn.setAutoCommit(false);
+            Connection conn2 = MyConnection.connect();
+            conn2.setAutoCommit(false);
+            String s0 = "insert into  accounts_receivable_payments("
+                    + "customer_id"
+                    + ",customer_name"
+                    + ",ar_no"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",amount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ",discount"
+                    + ",status"
+                    + ",term"
+                    + ",date_applied"
+                    + ",paid"
+                    + ",date_paid"
+                    + ",remarks"
+                    + ",type"
+                    + ",or_no"
+                    + ",prev_balance"
+                    + ",check_amount"
+                    + ",check_holder"
+                    + ",check_bank"
+                    + ",check_no"
+                    + ",ci_no"
+                    + ",trust_receipt"
+                    + ",or_payment_no"
+                    + ",soa_id"
+                    + ",soa_type"
+                    + ",soa_type_id"
+                    + ",reference_no"
+                    + ",check_date"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",tax_rate"
+                    + ",tax_amount"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":customer_id"
+                    + ",:customer_name"
+                    + ",:ar_no"
+                    + ",:date_added"
+                    + ",:user_name"
+                    + ",:amount"
+                    + ",:discount_amount"
+                    + ",:discount_rate"
+                    + ",:discount"
+                    + ",:status"
+                    + ",:term"
+                    + ",:date_applied"
+                    + ",:paid"
+                    + ",:date_paid"
+                    + ",:remarks"
+                    + ",:type"
+                    + ",:or_no"
+                    + ",:prev_balance"
+                    + ",:check_amount"
+                    + ",:check_holder"
+                    + ",:check_bank"
+                    + ",:check_no"
+                    + ",:ci_no"
+                    + ",:trust_receipt"
+                    + ",:or_payment_no"
+                    + ",:soa_id"
+                    + ",:soa_type"
+                    + ",:soa_type_id"
+                    + ",:reference_no"
+                    + ",:check_date"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:tax_rate"
+                    + ",:tax_amount"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0).
+                    setString("customer_id", to_accounts_receivable_payments.customer_id).
+                    setString("customer_name", to_accounts_receivable_payments.customer_name).
+                    setString("ar_no", to_accounts_receivable_payments.ar_no).
+                    setString("date_added", to_accounts_receivable_payments.date_added).
+                    setString("user_name", to_accounts_receivable_payments.user_name).
+                    setNumber("amount", to_accounts_receivable_payments.amount).
+                    setNumber("discount_amount", to_accounts_receivable_payments.discount_amount).
+                    setNumber("discount_rate", to_accounts_receivable_payments.discount_rate).
+                    setString("discount", to_accounts_receivable_payments.discount).
+                    setNumber("status", to_accounts_receivable_payments.status).
+                    setNumber("term", to_accounts_receivable_payments.term).
+                    setString("date_applied", to_accounts_receivable_payments.date_applied).
+                    setNumber("paid", to_accounts_receivable_payments.paid).
+                    setString("date_paid", to_accounts_receivable_payments.date_paid).
+                    setString("remarks", to_accounts_receivable_payments.remarks).
+                    setString("type", to_accounts_receivable_payments.type).
+                    setString("or_no", to_accounts_receivable_payments.or_no).
+                    setNumber("prev_balance", to_accounts_receivable_payments.prev_balance).
+                    setNumber("check_amount", to_accounts_receivable_payments.check_amount).
+                    setString("check_holder", to_accounts_receivable_payments.check_holder).
+                    setString("check_bank", to_accounts_receivable_payments.check_bank).
+                    setString("check_no", to_accounts_receivable_payments.check_no).
+                    setString("ci_no", to_accounts_receivable_payments.ci_no).
+                    setString("trust_receipt", to_accounts_receivable_payments.trust_receipt).
+                    setString("or_payment_no", to_accounts_receivable_payments.or_payment_no).
+                    setString("soa_id", to_accounts_receivable_payments.soa_id).
+                    setString("soa_type", to_accounts_receivable_payments.soa_type).
+                    setString("soa_type_id", to_accounts_receivable_payments.soa_type_id).
+                    setString("reference_no", to_accounts_receivable_payments.reference_no).
+                    setString("check_date", to_accounts_receivable_payments.check_date).
+                    setString("user_id", to_accounts_receivable_payments.user_id).
+                    setString("user_screen_name", to_accounts_receivable_payments.user_screen_name).
+                    setNumber("tax_rate", to_accounts_receivable_payments.tax_rate).
+                    setNumber("tax_amount", to_accounts_receivable_payments.tax_amount).
+                    setString("branch", to_accounts_receivable_payments.branch).
+                    setString("branch_id", to_accounts_receivable_payments.branch_id).
+                    setString("location", to_accounts_receivable_payments.location).
+                    setString("location_id", to_accounts_receivable_payments.location_id).
+                    ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = " update accounts_receivable_payments set is_uploaded=1 where id='" + to_accounts_receivable_payments.id + "' ";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Sales.class, "Successfully Added: " + to_accounts_receivable_payments.ar_no + " : " + to_accounts_receivable_payments.amount);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

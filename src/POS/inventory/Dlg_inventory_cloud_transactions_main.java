@@ -5,7 +5,6 @@
  */
 package POS.inventory;
 
-import static POS.cloud.Cloud.ret_inventory;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import java.awt.Window;
@@ -431,7 +430,6 @@ public class Dlg_inventory_cloud_transactions_main extends javax.swing.JDialog {
             System.out.println("Retrieving records...");
             String where = " where is_uploaded=0 or is_uploaded=2 ";
             List<Inventory.to_inventory> inventory_local = Inventory.ret_data22(where);
-            List<Inventory.to_inventory> inventory_cloud = ret_inventory("");
 
             for (Inventory.to_inventory to : inventory_local) {
                 if (to.is_uploaded == 0) {
@@ -442,7 +440,6 @@ public class Dlg_inventory_cloud_transactions_main extends javax.swing.JDialog {
                 }
             }
 
-            System.out.println("Cloud Size: " + inventory_cloud.size());
             System.out.println("Local Size: " + inventory_local.size());
             System.out.println("New Item/s: " + to_add.size());
             System.out.println("Does not match: " + to_update.size());

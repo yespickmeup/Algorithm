@@ -259,6 +259,141 @@ public class Accounts_payable_payments {
         }
     }
 
+    public static void add_data_cloud(to_accounts_payable_payments to_accounts_payable_payments) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into accounts_payable_payments("
+                    + "customer_id"
+                    + ",customer_name"
+                    + ",ap_no"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",amount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ",discount"
+                    + ",status"
+                    + ",term"
+                    + ",date_applied"
+                    + ",paid"
+                    + ",date_paid"
+                    + ",remarks"
+                    + ",type"
+                    + ",or_no"
+                    + ",prev_balance"
+                    + ",reference_no"
+                    + ",check_amount"
+                    + ",check_holder"
+                    + ",check_bank"
+                    + ",check_no"
+                    + ",check_date"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",wtax"
+                    + ",tax_rate"
+                    + ",tax_amount"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":customer_id"
+                    + ",:customer_name"
+                    + ",:ap_no"
+                    + ",:date_added"
+                    + ",:user_name"
+                    + ",:amount"
+                    + ",:discount_amount"
+                    + ",:discount_rate"
+                    + ",:discount"
+                    + ",:status"
+                    + ",:term"
+                    + ",:date_applied"
+                    + ",:paid"
+                    + ",:date_paid"
+                    + ",:remarks"
+                    + ",:type"
+                    + ",:or_no"
+                    + ",:prev_balance"
+                    + ",:reference_no"
+                    + ",:check_amount"
+                    + ",:check_holder"
+                    + ",:check_bank"
+                    + ",:check_no"
+                    + ",:check_date"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:wtax"
+                    + ",:tax_rate"
+                    + ",:tax_amount"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("customer_id", to_accounts_payable_payments.customer_id)
+                    .setString("customer_name", to_accounts_payable_payments.customer_name)
+                    .setString("ap_no", to_accounts_payable_payments.ap_no)
+                    .setString("date_added", to_accounts_payable_payments.date_added)
+                    .setString("user_name", to_accounts_payable_payments.user_name)
+                    .setNumber("amount", to_accounts_payable_payments.amount)
+                    .setNumber("discount_amount", to_accounts_payable_payments.discount_amount)
+                    .setNumber("discount_rate", to_accounts_payable_payments.discount_rate)
+                    .setString("discount", to_accounts_payable_payments.discount)
+                    .setNumber("status", to_accounts_payable_payments.status)
+                    .setNumber("term", to_accounts_payable_payments.term)
+                    .setString("date_applied", to_accounts_payable_payments.date_applied)
+                    .setNumber("paid", to_accounts_payable_payments.paid)
+                    .setString("date_paid", to_accounts_payable_payments.date_paid)
+                    .setString("remarks", to_accounts_payable_payments.remarks)
+                    .setString("type", to_accounts_payable_payments.type)
+                    .setString("or_no", to_accounts_payable_payments.or_no)
+                    .setNumber("prev_balance", to_accounts_payable_payments.prev_balance)
+                    .setString("reference_no", to_accounts_payable_payments.reference_no)
+                    .setNumber("check_amount", to_accounts_payable_payments.check_amount)
+                    .setString("check_holder", to_accounts_payable_payments.check_holder)
+                    .setString("check_bank", to_accounts_payable_payments.check_bank)
+                    .setString("check_no", to_accounts_payable_payments.check_no)
+                    .setString("check_date", to_accounts_payable_payments.check_date)
+                    .setString("user_id", to_accounts_payable_payments.user_id)
+                    .setString("user_screen_name", to_accounts_payable_payments.user_screen_name)
+                    .setNumber("wtax", to_accounts_payable_payments.wtax)
+                    .setNumber("tax_rate", to_accounts_payable_payments.tax_rate)
+                    .setNumber("tax_amount", to_accounts_payable_payments.tax_amount)
+                    .setString("branch", to_accounts_payable_payments.branch)
+                    .setString("branch_id", to_accounts_payable_payments.branch_id)
+                    .setString("location", to_accounts_payable_payments.location)
+                    .setString("location_id", to_accounts_payable_payments.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = " update accounts_payable_payments set is_uploaded=1 where id='" + to_accounts_payable_payments.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Accounts_payable_payments.class, "Accounts Payable Payment: " + to_accounts_payable_payments.ap_no + " " + to_accounts_payable_payments.amount);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
     public static void update_data(to_accounts_payable_payments payment_previous, to_accounts_payable_payments payment_new, Accounts_payable.to_accounts_payable to) {
         try {
             Connection conn = MyConnection.connect();
@@ -393,7 +528,7 @@ public class Accounts_payable_payments {
 
             s3 = SqlStringUtil.parse(s3).
                     setNumber("balance", new_balance).ok();
-            
+
             stmt.addBatch(s3);
 
             stmt.executeBatch();

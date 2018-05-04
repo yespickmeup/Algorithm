@@ -133,6 +133,90 @@ public class Charge_in_advance {
         }
     }
 
+    public static void add_data_cloud(to_charge_in_advance to_charge_in_advance) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into charge_in_advance("
+                    + "customer_id"
+                    + ",customer_name"
+                    + ",ar_id"
+                    + ",ar_no"
+                    + ",date_applied"
+                    + ",reference_no"
+                    + ",soa_type"
+                    + ",soa_type_id"
+                    + ",remarks"
+                    + ",status"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":customer_id"
+                    + ",:customer_name"
+                    + ",:ar_id"
+                    + ",:ar_no"
+                    + ",:date_applied"
+                    + ",:reference_no"
+                    + ",:soa_type"
+                    + ",:soa_type_id"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("customer_id", to_charge_in_advance.customer_id)
+                    .setString("customer_name", to_charge_in_advance.customer_name)
+                    .setString("ar_id", to_charge_in_advance.ar_id)
+                    .setString("ar_no", to_charge_in_advance.ar_no)
+                    .setString("date_applied", to_charge_in_advance.date_applied)
+                    .setString("reference_no", to_charge_in_advance.reference_no)
+                    .setString("soa_type", to_charge_in_advance.soa_type)
+                    .setString("soa_type_id", to_charge_in_advance.soa_type_id)
+                    .setString("remarks", to_charge_in_advance.remarks)
+                    .setNumber("status", to_charge_in_advance.status)
+                    .setString("user_id", to_charge_in_advance.user_id)
+                    .setString("user_screen_name", to_charge_in_advance.user_screen_name)
+                    .setString("branch", to_charge_in_advance.branch)
+                    .setString("branch_id", to_charge_in_advance.branch_id)
+                    .setString("location", to_charge_in_advance.location)
+                    .setString("location_id", to_charge_in_advance.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update charge_in_advance set is_uploaded=1 where id='" + to_charge_in_advance.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Charge_in_advance.class, "Successfully Added: " + to_charge_in_advance.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+        }
+    }
+
     public static void update_data(to_charge_in_advance to_charge_in_advance) {
         try {
             Connection conn = MyConnection.connect();

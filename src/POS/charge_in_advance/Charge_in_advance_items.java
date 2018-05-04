@@ -283,7 +283,7 @@ public class Charge_in_advance_items {
                         .setNumber("addtl_amount", to_charge_in_advance_items.addtl_amount)
                         .setNumber("wtax", to_charge_in_advance_items.wtax)
                         .ok();
-                
+
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
                 Lg.s(Charge_in_advance_items.class, "Successfully Added");
@@ -304,6 +304,189 @@ public class Charge_in_advance_items {
         } finally {
             MyConnection.close();
         }
+    }
+
+    public static void add_data_cloud(to_charge_in_advance_items to_charge_in_advance_items) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+
+            String s0 = "insert into charge_in_advance_items("
+                    + "customer_id"
+                    + ",customer_name"
+                    + ",ar_id"
+                    + ",ar_no"
+                    + ",date_applied"
+                    + ",reference_no"
+                    + ",soa_type"
+                    + ",soa_type_id"
+                    + ",user_screen_name"
+                    + ",user_id"
+                    + ",remarks"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",generic_name"
+                    + ",item_type"
+                    + ",supplier_name"
+                    + ",supplier_id"
+                    + ",serial_no"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",status"
+                    + ",is_vatable"
+                    + ",selling_type"
+                    + ",discount_name"
+                    + ",discount_rate"
+                    + ",discount_amount"
+                    + ",discount_customer_name"
+                    + ",discount_customer_id"
+                    + ",branch"
+                    + ",branch_code"
+                    + ",location"
+                    + ",location_id"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",addtl_amount"
+                    + ",wtax"
+                    + ")values("
+                    + ":customer_id"
+                    + ",:customer_name"
+                    + ",:ar_id"
+                    + ",:ar_no"
+                    + ",:date_applied"
+                    + ",:reference_no"
+                    + ",:soa_type"
+                    + ",:soa_type_id"
+                    + ",:user_screen_name"
+                    + ",:user_id"
+                    + ",:remarks"
+                    + ",:item_code"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:generic_name"
+                    + ",:item_type"
+                    + ",:supplier_name"
+                    + ",:supplier_id"
+                    + ",:serial_no"
+                    + ",:product_qty"
+                    + ",:unit"
+                    + ",:conversion"
+                    + ",:selling_price"
+                    + ",:date_added"
+                    + ",:status"
+                    + ",:is_vatable"
+                    + ",:selling_type"
+                    + ",:discount_name"
+                    + ",:discount_rate"
+                    + ",:discount_amount"
+                    + ",:discount_customer_name"
+                    + ",:discount_customer_id"
+                    + ",:branch"
+                    + ",:branch_code"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:category"
+                    + ",:category_id"
+                    + ",:classification"
+                    + ",:classification_id"
+                    + ",:sub_classification"
+                    + ",:sub_classification_id"
+                    + ",:brand"
+                    + ",:brand_id"
+                    + ",:model"
+                    + ",:model_id"
+                    + ",:addtl_amount"
+                    + ",:wtax"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("customer_id", to_charge_in_advance_items.customer_id)
+                    .setString("customer_name", to_charge_in_advance_items.customer_name)
+                    .setString("ar_id", to_charge_in_advance_items.ar_id)
+                    .setString("ar_no", to_charge_in_advance_items.ar_no)
+                    .setString("date_applied", to_charge_in_advance_items.date_applied)
+                    .setString("reference_no", to_charge_in_advance_items.reference_no)
+                    .setString("soa_type", to_charge_in_advance_items.soa_type)
+                    .setString("soa_type_id", to_charge_in_advance_items.soa_type_id)
+                    .setString("user_screen_name", to_charge_in_advance_items.user_screen_name)
+                    .setString("user_id", to_charge_in_advance_items.user_id)
+                    .setString("remarks", to_charge_in_advance_items.remarks)
+                    .setString("item_code", to_charge_in_advance_items.item_code)
+                    .setString("barcode", to_charge_in_advance_items.barcode)
+                    .setString("description", to_charge_in_advance_items.description)
+                    .setString("generic_name", to_charge_in_advance_items.generic_name)
+                    .setString("item_type", to_charge_in_advance_items.item_type)
+                    .setString("supplier_name", to_charge_in_advance_items.supplier_name)
+                    .setString("supplier_id", to_charge_in_advance_items.supplier_id)
+                    .setString("serial_no", to_charge_in_advance_items.serial_no)
+                    .setNumber("product_qty", to_charge_in_advance_items.product_qty)
+                    .setString("unit", to_charge_in_advance_items.unit)
+                    .setNumber("conversion", to_charge_in_advance_items.conversion)
+                    .setNumber("selling_price", to_charge_in_advance_items.selling_price)
+                    .setString("date_added", to_charge_in_advance_items.date_added)
+                    .setNumber("status", to_charge_in_advance_items.status)
+                    .setNumber("is_vatable", to_charge_in_advance_items.is_vatable)
+                    .setNumber("selling_type", to_charge_in_advance_items.selling_type)
+                    .setString("discount_name", to_charge_in_advance_items.discount_name)
+                    .setNumber("discount_rate", to_charge_in_advance_items.discount_rate)
+                    .setNumber("discount_amount", to_charge_in_advance_items.discount_amount)
+                    .setString("discount_customer_name", to_charge_in_advance_items.discount_customer_name)
+                    .setString("discount_customer_id", to_charge_in_advance_items.discount_customer_id)
+                    .setString("branch", to_charge_in_advance_items.branch)
+                    .setString("branch_code", to_charge_in_advance_items.branch_code)
+                    .setString("location", to_charge_in_advance_items.location)
+                    .setString("location_id", to_charge_in_advance_items.location_id)
+                    .setString("category", to_charge_in_advance_items.category)
+                    .setString("category_id", to_charge_in_advance_items.category_id)
+                    .setString("classification", to_charge_in_advance_items.classification)
+                    .setString("classification_id", to_charge_in_advance_items.classification_id)
+                    .setString("sub_classification", to_charge_in_advance_items.sub_classification)
+                    .setString("sub_classification_id", to_charge_in_advance_items.sub_classification_id)
+                    .setString("brand", to_charge_in_advance_items.brand)
+                    .setString("brand_id", to_charge_in_advance_items.brand_id)
+                    .setString("model", to_charge_in_advance_items.model)
+                    .setString("model_id", to_charge_in_advance_items.model_id)
+                    .setNumber("addtl_amount", to_charge_in_advance_items.addtl_amount)
+                    .setNumber("wtax", to_charge_in_advance_items.wtax)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update charge_in_advance_items set is_uploaded=1 where id='" + to_charge_in_advance_items.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Charge_in_advance_items.class, "Successfully Added: " + to_charge_in_advance_items.id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+
     }
 
     public static void update_data(to_charge_in_advance_items to_charge_in_advance_items) {
@@ -656,13 +839,13 @@ public class Charge_in_advance_items {
                 double addtl_amount = rs.getDouble(40);
                 double wtax = rs.getDouble(41);
 
-                to_charge_in_advance_items to = new to_charge_in_advance_items(id
-                        , "", "", "", "", "", "", "", ""
-                        , user_screen_name, user_id, "", item_code, barcode, description, generic_name, item_type
-                        , supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added
-                        , status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name
-                        , discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification
-                        , classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                to_charge_in_advance_items to = new to_charge_in_advance_items(id,
+                        "", "", "", "", "", "", "", "",
+                        user_screen_name, user_id, "", item_code, barcode, description, generic_name, item_type,
+                        supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added,
+                        status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name,
+                        discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification,
+                        classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                 datas.add(to);
             }
             return datas;
