@@ -17,7 +17,6 @@ import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
-
 /**
  *
  * @author Guinness
@@ -36,8 +35,9 @@ public class My_services_barcodes_customers {
         public final String branch_id;
         public final String location;
         public final String location_id;
-        public  boolean selected;
-        public to_my_services_barcodes_customers(int id, String customer_id, String customer_name, String transaction_no, String date_added, String barcode, String branch, String branch_id, String location, String location_id,boolean selected) {
+        public boolean selected;
+
+        public to_my_services_barcodes_customers(int id, String customer_id, String customer_name, String transaction_no, String date_added, String barcode, String branch, String branch_id, String location, String location_id, boolean selected) {
             this.id = id;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -48,7 +48,7 @@ public class My_services_barcodes_customers {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
-            this.selected=selected;
+            this.selected = selected;
         }
 
         public boolean isSelected() {
@@ -58,7 +58,7 @@ public class My_services_barcodes_customers {
         public void setSelected(boolean selected) {
             this.selected = selected;
         }
-        
+
     }
 
     public static void add_data(to_my_services_barcodes_customers to_my_services_barcodes_customers) {
@@ -100,6 +100,69 @@ public class My_services_barcodes_customers {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
+            Lg.s(My_services_barcodes_customers.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_data_cloud(to_my_services_barcodes_customers to_my_services_barcodes_customers) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into my_services_barcodes_customers("
+                    + "customer_id"
+                    + ",customer_name"
+                    + ",transaction_no"
+                    + ",date_added"
+                    + ",barcode"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":customer_id"
+                    + ",:customer_name"
+                    + ",:transaction_no"
+                    + ",:date_added"
+                    + ",:barcode"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("customer_id", to_my_services_barcodes_customers.customer_id)
+                    .setString("customer_name", to_my_services_barcodes_customers.customer_name)
+                    .setString("transaction_no", to_my_services_barcodes_customers.transaction_no)
+                    .setString("date_added", to_my_services_barcodes_customers.date_added)
+                    .setString("barcode", to_my_services_barcodes_customers.barcode)
+                    .setString("branch", to_my_services_barcodes_customers.branch)
+                    .setString("branch_id", to_my_services_barcodes_customers.branch_id)
+                    .setString("location", to_my_services_barcodes_customers.location)
+                    .setString("location_id", to_my_services_barcodes_customers.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update my_services_barcodes_customers set is_uploaded=1 where id='" + to_my_services_barcodes_customers.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
             Lg.s(My_services_barcodes_customers.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -196,7 +259,7 @@ public class My_services_barcodes_customers {
                 String location = rs.getString(9);
                 String location_id = rs.getString(10);
 
-                to_my_services_barcodes_customers to = new to_my_services_barcodes_customers(id, customer_id, customer_name, transaction_no, date_added, barcode, branch, branch_id, location, location_id,true);
+                to_my_services_barcodes_customers to = new to_my_services_barcodes_customers(id, customer_id, customer_name, transaction_no, date_added, barcode, branch, branch_id, location, location_id, true);
                 datas.add(to);
             }
             return datas;

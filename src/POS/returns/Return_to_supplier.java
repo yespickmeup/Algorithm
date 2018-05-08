@@ -251,6 +251,93 @@ public class Return_to_supplier {
         }
     }
 
+    public static void add_data_cloud(to_return_to_suppliers to_return_to_suppliers) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into return_to_suppliers("
+                    + "return_to_supplier_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supplier_id"
+                    + ",reference_no"
+                    + ",remarks"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",gross_total"
+                    + ",discount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ")values("
+                    + ":return_to_supplier_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supplier_id"
+                    + ",:reference_no"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:gross_total"
+                    + ",:discount"
+                    + ",:discount_amount"
+                    + ",:discount_rate"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("return_to_supplier_no", to_return_to_suppliers.return_to_supplier_no)
+                    .setString("user_name", to_return_to_suppliers.user_name)
+                    .setString("session_no", to_return_to_suppliers.session_no)
+                    .setString("date_added", to_return_to_suppliers.date_added)
+                    .setString("supplier", to_return_to_suppliers.supplier)
+                    .setString("supplier_id", to_return_to_suppliers.supplier_id)
+                    .setString("reference_no", to_return_to_suppliers.reference_no)
+                    .setString("remarks", to_return_to_suppliers.remarks)
+                    .setNumber("status", to_return_to_suppliers.status)
+                    .setString("branch", to_return_to_suppliers.branch)
+                    .setString("branch_id", to_return_to_suppliers.branch_id)
+                    .setString("location", to_return_to_suppliers.location)
+                    .setString("location_id", to_return_to_suppliers.location_id)
+                    .setNumber("gross_total", to_return_to_suppliers.gross_total)
+                    .setString("discount", to_return_to_suppliers.discount)
+                    .setNumber("discount_amount", to_return_to_suppliers.discount_amount)
+                    .setNumber("discount_rate", to_return_to_suppliers.discount_rate)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update return_to_suppliers set is_uploaded=1 where id='" + to_return_to_suppliers.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Return_to_supplier.class, "Successfully Added: " + to_return_to_suppliers.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_return_to_suppliers to_return_to_suppliers) {
         try {
             Connection conn = MyConnection.connect();

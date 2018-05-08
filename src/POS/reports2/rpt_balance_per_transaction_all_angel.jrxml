@@ -14,6 +14,7 @@
     <parameter name="six" class="java.lang.Double"/>
     <parameter name="address" class="java.lang.String"/>
     <parameter name="telephone_number" class="java.lang.String"/>
+    <parameter name="department" class="java.lang.String"/>
     <field name="ci_no" class="java.lang.String"/>
     <field name="transaction_no" class="java.lang.String"/>
     <field name="customer" class="java.lang.String"/>
@@ -26,50 +27,79 @@
     <field name="four" class="java.lang.String"/>
     <field name="above" class="java.lang.String"/>
     <field name="applied" class="java.lang.String"/>
+    <variable name="amount_1" class="java.lang.Integer" calculation="DistinctCount">
+        <variableExpression><![CDATA[$F{amount}]]></variableExpression>
+    </variable>
     <background>
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="131" splitType="Stretch">
+        <band height="188" splitType="Stretch">
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="93" y="106" width="52" height="20"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="37" y="149" width="72" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="12"/>
-                    <paragraph rightIndent="5"/>
+                    <paragraph leftIndent="5" rightIndent="5"/>
                 </textElement>
-                <text><![CDATA[Attn:]]></text>
+                <text><![CDATA[Customer:]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="145" y="106" width="286" height="20"/>
+                <reportElement uuid="9a70aa77-6ce2-4e88-88db-a1b373235a50" x="109" y="149" width="249" height="20"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="12" isBold="true" isUnderline="true"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{printed_by}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="145" y="79" width="286" height="15"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="37" y="119" width="503" height="15"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="11" isBold="true"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
                 </textElement>
-                <text><![CDATA[Statement of Account]]></text>
+                <text><![CDATA[Accounts Receivable Transactions]]></text>
             </staticText>
             <textField>
-                <reportElement uuid="aecc8ee0-8f55-4294-824f-2c8748e82714" x="39" y="19" width="501" height="20"/>
+                <reportElement uuid="aecc8ee0-8f55-4294-824f-2c8748e82714" x="37" y="73" width="503" height="20"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="13" isBold="true"/>
+                    <paragraph leftIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="39" y="38" width="501" height="14"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="37" y="92" width="503" height="14"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="39" y="51" width="501" height="14"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="37" y="105" width="503" height="14"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <paragraph leftIndent="5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$P{telephone_number}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="37" y="134" width="72" height="15"/>
+                <box>
+                    <topPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                    <paragraph leftIndent="5" rightIndent="5"/>
+                </textElement>
+                <text><![CDATA[Department:]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="9eaca578-06e3-4ec3-83da-2b131387fe90" x="109" y="134" width="139" height="15"/>
+                <box>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{department}]]></textFieldExpression>
             </textField>
         </band>
     </title>
@@ -79,7 +109,7 @@
     <columnHeader>
         <band height="21" splitType="Stretch">
             <staticText>
-                <reportElement uuid="b77365de-e044-4ca3-bf27-e5eb91ee0f5a" x="70" y="1" width="74" height="20"/>
+                <reportElement uuid="b77365de-e044-4ca3-bf27-e5eb91ee0f5a" x="107" y="1" width="74" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -89,7 +119,7 @@
                 <text><![CDATA[Reference #]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="0c33f554-f7f3-44ed-a91e-24f2b066dcb3" x="144" y="1" width="61" height="20"/>
+                <reportElement uuid="0c33f554-f7f3-44ed-a91e-24f2b066dcb3" x="181" y="1" width="61" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -99,7 +129,7 @@
                 <text><![CDATA[Amount]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" x="0" y="1" width="70" height="20"/>
+                <reportElement uuid="c7277c57-bad0-4762-8ed5-df9956c2d4c3" x="37" y="1" width="70" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
@@ -109,12 +139,12 @@
                 <text><![CDATA[Applied]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="b77365de-e044-4ca3-bf27-e5eb91ee0f5a" x="204" y="1" width="283" height="20"/>
+                <reportElement uuid="b77365de-e044-4ca3-bf27-e5eb91ee0f5a" x="241" y="1" width="283" height="20"/>
                 <box>
                     <bottomPen lineWidth="0.5"/>
                 </box>
                 <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="5" rightIndent="5"/>
+                    <paragraph leftIndent="20" rightIndent="5"/>
                 </textElement>
                 <text><![CDATA[Remarks]]></text>
             </staticText>
@@ -123,7 +153,7 @@
     <detail>
         <band height="13" splitType="Stretch">
             <textField>
-                <reportElement uuid="3c3af858-c3c3-499f-bfe0-34863343955e" x="70" y="1" width="74" height="12"/>
+                <reportElement uuid="3c3af858-c3c3-499f-bfe0-34863343955e" x="107" y="1" width="74" height="12"/>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
@@ -131,7 +161,7 @@
                 <textFieldExpression><![CDATA[$F{ci_no}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="ef2f85bb-93b3-43f7-b4b3-e744978b4128" x="144" y="1" width="61" height="12"/>
+                <reportElement uuid="ef2f85bb-93b3-43f7-b4b3-e744978b4128" x="181" y="1" width="61" height="12"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font size="9"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
@@ -139,7 +169,7 @@
                 <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="12462e16-810d-4295-a15a-d686f43a0e32" x="0" y="1" width="70" height="12"/>
+                <reportElement uuid="12462e16-810d-4295-a15a-d686f43a0e32" x="37" y="1" width="70" height="12"/>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
                     <paragraph leftIndent="5" rightIndent="5"/>
@@ -147,10 +177,10 @@
                 <textFieldExpression><![CDATA[$F{applied}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="3c3af858-c3c3-499f-bfe0-34863343955e" x="204" y="1" width="283" height="12"/>
+                <reportElement uuid="3c3af858-c3c3-499f-bfe0-34863343955e" x="241" y="1" width="283" height="12"/>
                 <textElement verticalAlignment="Middle">
                     <font size="9"/>
-                    <paragraph leftIndent="5" rightIndent="5"/>
+                    <paragraph leftIndent="20" rightIndent="5"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{transaction_no}]]></textFieldExpression>
             </textField>
@@ -163,9 +193,9 @@
         <band splitType="Stretch"/>
     </pageFooter>
     <summary>
-        <band height="227" splitType="Stretch">
+        <band height="77" splitType="Stretch">
             <textField pattern="#,##0.00">
-                <reportElement uuid="0a64f0af-1c7c-44fe-b04f-7046c69d0cb5" x="120" y="0" width="85" height="15"/>
+                <reportElement uuid="0a64f0af-1c7c-44fe-b04f-7046c69d0cb5" x="107" y="0" width="135" height="15"/>
                 <box>
                     <topPen lineWidth="0.5"/>
                     <bottomPen lineWidth="1.5" lineStyle="Double"/>
@@ -177,52 +207,12 @@
                 <textFieldExpression><![CDATA[$P{six}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="93" y="38" width="337" height="15"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="37" y="0" width="70" height="15"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="10" isBold="false"/>
-                    <paragraph rightIndent="5"/>
+                    <font fontName="Tahoma" size="10" isBold="true"/>
+                    <paragraph leftIndent="5" rightIndent="5"/>
                 </textElement>
-                <text><![CDATA[Note: Please notify us immediately for any corrections. Thank you.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="93" y="96" width="337" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="10" isBold="false"/>
-                    <paragraph rightIndent="5"/>
-                </textElement>
-                <text><![CDATA[Received Copy of Billing Statement by:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="93" y="128" width="337" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="9" isBold="false"/>
-                    <paragraph rightIndent="5"/>
-                </textElement>
-                <text><![CDATA[Signature over printed name / date]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="93" y="142" width="337" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="9" isBold="false"/>
-                    <paragraph rightIndent="5"/>
-                </textElement>
-                <text><![CDATA[Please return this bill or fax to 422-1953]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="430" y="66" width="142" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="10" isBold="false"/>
-                    <paragraph rightIndent="5"/>
-                </textElement>
-                <text><![CDATA[Prepared by:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="487" y="81" width="85" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="9" isBold="false"/>
-                    <paragraph rightIndent="5"/>
-                </textElement>
-                <text><![CDATA[Accounting Dept.]]></text>
+                <text><![CDATA[Total:]]></text>
             </staticText>
         </band>
     </summary>

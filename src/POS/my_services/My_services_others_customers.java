@@ -107,6 +107,75 @@ public class My_services_others_customers {
         }
     }
 
+    public static void add_data_cloud(to_my_services_others_customers to_my_services_others_customers) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into my_services_others_customers("
+                    + "customer_id"
+                    + ",customer_name"
+                    + ",transaction_no"
+                    + ",date_added"
+                    + ",name"
+                    + ",amount"
+                    + ",qty"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":customer_id"
+                    + ",:customer_name"
+                    + ",:transaction_no"
+                    + ",:date_added"
+                    + ",:name"
+                    + ",:amount"
+                    + ",:qty"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("customer_id", to_my_services_others_customers.customer_id)
+                    .setString("customer_name", to_my_services_others_customers.customer_name)
+                    .setString("transaction_no", to_my_services_others_customers.transaction_no)
+                    .setString("date_added", to_my_services_others_customers.date_added)
+                    .setString("name", to_my_services_others_customers.name)
+                    .setNumber("amount", to_my_services_others_customers.amount)
+                    .setNumber("qty", to_my_services_others_customers.qty)
+                    .setString("branch", to_my_services_others_customers.branch)
+                    .setString("branch_id", to_my_services_others_customers.branch_id)
+                    .setString("location", to_my_services_others_customers.location)
+                    .setString("location_id", to_my_services_others_customers.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update my_services_others_customers set is_uploaded=1 where id='" + to_my_services_others_customers.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(My_services_others_customers.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void add_my_services_others_customers(List<to_my_services_others_customers> to_my_services_others_customers1) {
         try {
             Connection conn = MyConnection.connect();
@@ -253,6 +322,56 @@ public class My_services_others_customers {
                 double qty = rs.getDouble(8);
 
                 to_my_services_others to = new to_my_services_others(id, name, amount, qty);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static List<to_my_services_others_customers> ret_data2(String where) {
+        List<to_my_services_others_customers> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",customer_id"
+                    + ",customer_name"
+                    + ",transaction_no"
+                    + ",date_added"
+                    + ",name"
+                    + ",amount"
+                    + ",qty"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",is_uploaded"
+                    + " from my_services_others_customers"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_id = rs.getString(2);
+                String customer_name = rs.getString(3);
+                String transaction_no = rs.getString(4);
+                String date_added = rs.getString(5);
+                String name = rs.getString(6);
+                double amount = rs.getDouble(7);
+                double qty = rs.getDouble(8);
+                String branch = rs.getString(9);
+                String branch_id = rs.getString(10);
+                String location = rs.getString(11);
+                String location_id = rs.getString(12);
+                int is_uploaded = rs.getInt(13);
+
+                to_my_services_others_customers to = new to_my_services_others_customers(id, customer_id, customer_name, transaction_no, date_added, name, amount, qty, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;

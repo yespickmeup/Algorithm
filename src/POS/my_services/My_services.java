@@ -223,6 +223,139 @@ public class My_services {
         }
     }
 
+    public static void add_my_services_cloud(to_my_services to_my_services) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+
+            String s0 = "insert into my_services("
+                    + "transaction_no"
+                    + ",service_slip_no"
+                    + ",serviced_by"
+                    + ",service_by_id"
+                    + ",department_manager"
+                    + ",department_manager_id"
+                    + ",department"
+                    + ",department_id"
+                    + ",customer_name"
+                    + ",customer_id"
+                    + ",qty"
+                    + ",unit"
+                    + ",description"
+                    + ",problem"
+                    + ",date_received"
+                    + ",date_assigned"
+                    + ",date_released"
+                    + ",added_by"
+                    + ",remarks"
+                    + ",status"
+                    + ",service_type"
+                    + ",service_type_id"
+                    + ",amount"
+                    + ",cashier"
+                    + ",cashier_id"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",customer_contact_no"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":transaction_no"
+                    + ",:service_slip_no"
+                    + ",:serviced_by"
+                    + ",:service_by_id"
+                    + ",:department_manager"
+                    + ",:department_manager_id"
+                    + ",:department"
+                    + ",:department_id"
+                    + ",:customer_name"
+                    + ",:customer_id"
+                    + ",:qty"
+                    + ",:unit"
+                    + ",:description"
+                    + ",:problem"
+                    + ",:date_received"
+                    + ",:date_assigned"
+                    + ",:date_released"
+                    + ",:added_by"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:service_type"
+                    + ",:service_type_id"
+                    + ",:amount"
+                    + ",:cashier"
+                    + ",:cashier_id"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:customer_contact_no"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("transaction_no", to_my_services.transaction_no)
+                    .setString("service_slip_no", to_my_services.service_slip_no)
+                    .setString("serviced_by", to_my_services.serviced_by)
+                    .setString("service_by_id", to_my_services.service_by_id)
+                    .setString("department_manager", to_my_services.department_manager)
+                    .setString("department_manager_id", to_my_services.department_manager_id)
+                    .setString("department", to_my_services.department)
+                    .setString("department_id", to_my_services.department_id)
+                    .setString("customer_name", to_my_services.customer_name)
+                    .setString("customer_id", to_my_services.customer_id)
+                    .setNumber("qty", to_my_services.qty)
+                    .setString("unit", to_my_services.unit)
+                    .setString("description", to_my_services.description)
+                    .setString("problem", to_my_services.problem)
+                    .setString("date_received", to_my_services.date_received)
+                    .setString("date_assigned", to_my_services.date_assigned)
+                    .setString("date_released", to_my_services.date_released)
+                    .setString("added_by", to_my_services.added_by)
+                    .setString("remarks", to_my_services.remarks)
+                    .setNumber("status", to_my_services.status)
+                    .setString("service_type", to_my_services.service_type)
+                    .setString("service_type_id", to_my_services.service_type_id)
+                    .setNumber("amount", to_my_services.amount)
+                    .setString("cashier", to_my_services.cashier)
+                    .setString("cashier_id", to_my_services.cashier_id)
+                    .setString("user_id", to_my_services.user_id)
+                    .setString("user_screen_name", to_my_services.user_screen_name)
+                    .setString("customer_contact_no", to_my_services.customer_contact_no)
+                    .setString("branch", to_my_services.branch)
+                    .setString("branch_id", to_my_services.branch_id)
+                    .setString("location", to_my_services.location)
+                    .setString("location_id", to_my_services.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update my_services set is_uploaded=1 where id='" + to_my_services.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(My_services.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_my_services(to_my_services to_my_services) {
         try {
             Connection conn = MyConnection.connect();
@@ -431,11 +564,11 @@ public class My_services {
         }
     }
 
-    public static String increment_id(String where ) {
+    public static String increment_id(String where) {
         String id = "000000000000";
         try {
             Connection conn = MyConnection.connect();
-            String s0 = "select max(id) from my_services "+where;
+            String s0 = "select max(id) from my_services " + where;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {

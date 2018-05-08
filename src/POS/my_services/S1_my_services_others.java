@@ -72,7 +72,6 @@ public class S1_my_services_others {
                     + ":name"
                     + ",:amount"
                     + ")";
-
             s0 = SqlStringUtil.parse(s0)
                     .setString("name", to_my_services_others.name)
                     .setNumber("amount", to_my_services_others.amount)
@@ -80,6 +79,48 @@ public class S1_my_services_others {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
+            Lg.s(S1_my_services_others.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_data_cloud(to_my_services_others to_my_services_others) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into my_services_others("
+                    + "name"
+                    + ",amount"
+                    + ")values("
+                    + ":name"
+                    + ",:amount"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("name", to_my_services_others.name)
+                    .setNumber("amount", to_my_services_others.amount)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update my_services_others set is_uploaded=1 where id='" + to_my_services_others.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
             Lg.s(S1_my_services_others.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);

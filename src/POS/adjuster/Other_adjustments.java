@@ -206,6 +206,135 @@ public class Other_adjustments {
         }
     }
 
+    public static void add_data_cloud(to_other_adjustments to_other_adjustments) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into other_adjustments("
+                    + "user_id"
+                    + ",user_screen_name"
+                    + ",date_added"
+                    + ",adjustment_date"
+                    + ",adjustment_type"
+                    + ",remarks"
+                    + ",status"
+                    + ",barcode"
+                    + ",description"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_class"
+                    + ",sub_class_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",conversion"
+                    + ",unit"
+                    + ",barcodes"
+                    + ",main_barcode"
+                    + ",previous_qty"
+                    + ",qty"
+                    + ",cost"
+                    + ",selling_price"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":user_id"
+                    + ",:user_screen_name"
+                    + ",:date_added"
+                    + ",:adjustment_date"
+                    + ",:adjustment_type"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:category"
+                    + ",:category_id"
+                    + ",:classification"
+                    + ",:classification_id"
+                    + ",:sub_class"
+                    + ",:sub_class_id"
+                    + ",:brand"
+                    + ",:brand_id"
+                    + ",:model"
+                    + ",:model_id"
+                    + ",:conversion"
+                    + ",:unit"
+                    + ",:barcodes"
+                    + ",:main_barcode"
+                    + ",:previous_qty"
+                    + ",:qty"
+                    + ",:cost"
+                    + ",:selling_price"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("user_id", to_other_adjustments.user_id)
+                    .setString("user_screen_name", to_other_adjustments.user_screen_name)
+                    .setString("date_added", to_other_adjustments.date_added)
+                    .setString("adjustment_date", to_other_adjustments.adjustment_date)
+                    .setNumber("adjustment_type", to_other_adjustments.adjustment_type)
+                    .setString("remarks", to_other_adjustments.remarks)
+                    .setNumber("status", to_other_adjustments.status)
+                    .setString("barcode", to_other_adjustments.barcode)
+                    .setString("description", to_other_adjustments.description)
+                    .setString("category", to_other_adjustments.category)
+                    .setString("category_id", to_other_adjustments.category_id)
+                    .setString("classification", to_other_adjustments.classification)
+                    .setString("classification_id", to_other_adjustments.classification_id)
+                    .setString("sub_class", to_other_adjustments.sub_class)
+                    .setString("sub_class_id", to_other_adjustments.sub_class_id)
+                    .setString("brand", to_other_adjustments.brand)
+                    .setString("brand_id", to_other_adjustments.brand_id)
+                    .setString("model", to_other_adjustments.model)
+                    .setString("model_id", to_other_adjustments.model_id)
+                    .setNumber("conversion", to_other_adjustments.conversion)
+                    .setString("unit", to_other_adjustments.unit)
+                    .setString("barcodes", to_other_adjustments.barcodes)
+                    .setString("main_barcode", to_other_adjustments.main_barcode)
+                    .setNumber("previous_qty", to_other_adjustments.previous_qty)
+                    .setNumber("qty", to_other_adjustments.qty)
+                    .setNumber("cost", to_other_adjustments.cost)
+                    .setNumber("selling_price", to_other_adjustments.selling_price)
+                    .setString("branch", to_other_adjustments.branch)
+                    .setString("branch_id", to_other_adjustments.branch_id)
+                    .setString("location", to_other_adjustments.location)
+                    .setString("location_id", to_other_adjustments.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update other_adjustments set is_uploaded=1 where id='" + to_other_adjustments.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Other_adjustments.class, "Successfully Added: " + to_other_adjustments.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_other_adjustments to_other_adjustments) {
         try {
             Connection conn = MyConnection.connect();

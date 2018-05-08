@@ -251,6 +251,160 @@ public class S1_my_services_item_replacements_customers {
         }
     }
 
+    public static void add_data_cloud(S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers to_my_services_item_replacements_customers) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into my_services_item_replacements_customers("
+                    + "transaction_no"
+                    + ",customer_id"
+                    + ",customer_name"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",qty"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_classification"
+                    + ",sub_classification_id"
+                    + ",unit"
+                    + ",conversion"
+                    + ",item_type"
+                    + ",status"
+                    + ",supplier"
+                    + ",fixed_price"
+                    + ",supplier_id"
+                    + ",multi_level_pricing"
+                    + ",vatable"
+                    + ",reorder_level"
+                    + ",markup"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",selling_type"
+                    + ",branch"
+                    + ",branch_code"
+                    + ",location"
+                    + ",location_id"
+                    + ",serial_no"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ")values("
+                    + ":transaction_no"
+                    + ",:customer_id"
+                    + ",:customer_name"
+                    + ",:item_code"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:qty"
+                    + ",:selling_price"
+                    + ",:date_added"
+                    + ",:user_name"
+                    + ",:category"
+                    + ",:category_id"
+                    + ",:classification"
+                    + ",:classification_id"
+                    + ",:sub_classification"
+                    + ",:sub_classification_id"
+                    + ",:unit"
+                    + ",:conversion"
+                    + ",:item_type"
+                    + ",:status"
+                    + ",:supplier"
+                    + ",:fixed_price"
+                    + ",:supplier_id"
+                    + ",:multi_level_pricing"
+                    + ",:vatable"
+                    + ",:reorder_level"
+                    + ",:markup"
+                    + ",:brand"
+                    + ",:brand_id"
+                    + ",:model"
+                    + ",:model_id"
+                    + ",:selling_type"
+                    + ",:branch"
+                    + ",:branch_code"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:serial_no"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("transaction_no", to_my_services_item_replacements_customers.transaction_no)
+                    .setString("customer_id", to_my_services_item_replacements_customers.customer_id)
+                    .setString("customer_name", to_my_services_item_replacements_customers.customer_name)
+                    .setString("item_code", to_my_services_item_replacements_customers.item_code)
+                    .setString("barcode", to_my_services_item_replacements_customers.barcode)
+                    .setString("description", to_my_services_item_replacements_customers.description)
+                    .setNumber("qty", to_my_services_item_replacements_customers.qty)
+                    .setNumber("selling_price", to_my_services_item_replacements_customers.selling_price)
+                    .setString("date_added", to_my_services_item_replacements_customers.date_added)
+                    .setString("user_name", to_my_services_item_replacements_customers.user_name)
+                    .setString("category", to_my_services_item_replacements_customers.category)
+                    .setString("category_id", to_my_services_item_replacements_customers.category_id)
+                    .setString("classification", to_my_services_item_replacements_customers.classification)
+                    .setString("classification_id", to_my_services_item_replacements_customers.classification_id)
+                    .setString("sub_classification", to_my_services_item_replacements_customers.sub_classification)
+                    .setString("sub_classification_id", to_my_services_item_replacements_customers.sub_classification_id)
+                    .setString("unit", to_my_services_item_replacements_customers.unit)
+                    .setNumber("conversion", to_my_services_item_replacements_customers.conversion)
+                    .setString("item_type", to_my_services_item_replacements_customers.item_type)
+                    .setNumber("status", to_my_services_item_replacements_customers.status)
+                    .setString("supplier", to_my_services_item_replacements_customers.supplier)
+                    .setNumber("fixed_price", to_my_services_item_replacements_customers.fixed_price)
+                    .setString("supplier_id", to_my_services_item_replacements_customers.supplier_id)
+                    .setNumber("multi_level_pricing", to_my_services_item_replacements_customers.multi_level_pricing)
+                    .setNumber("vatable", to_my_services_item_replacements_customers.vatable)
+                    .setNumber("reorder_level", to_my_services_item_replacements_customers.reorder_level)
+                    .setNumber("markup", to_my_services_item_replacements_customers.markup)
+                    .setString("brand", to_my_services_item_replacements_customers.brand)
+                    .setString("brand_id", to_my_services_item_replacements_customers.brand_id)
+                    .setString("model", to_my_services_item_replacements_customers.model)
+                    .setString("model_id", to_my_services_item_replacements_customers.model_id)
+                    .setString("selling_type", to_my_services_item_replacements_customers.selling_type)
+                    .setString("branch", to_my_services_item_replacements_customers.branch)
+                    .setString("branch_code", to_my_services_item_replacements_customers.branch_code)
+                    .setString("location", to_my_services_item_replacements_customers.location)
+                    .setString("location_id", to_my_services_item_replacements_customers.location_id)
+                    .setString("serial_no", to_my_services_item_replacements_customers.serial_no)
+                    .setString("user_id", to_my_services_item_replacements_customers.user_id)
+                    .setString("user_screen_name", to_my_services_item_replacements_customers.user_screen_name)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update my_services_item_replacements_customers set is_uploaded=1 where id='" + to_my_services_item_replacements_customers.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(S1_my_services_item_replacements_customers.class, "Successfully Added");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_my_services_item_replacements_customers to_my_services_item_replacements_customers) {
         try {
             Connection conn = MyConnection.connect();
@@ -559,8 +713,8 @@ public class S1_my_services_item_replacements_customers {
             String discount_name = "";
             String discount_customer_name = "";
             String discount_customer_id = "";
-            
-            Inventory_barcodes.to_inventory_barcodes to1=new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id,0,0);
+
+            Inventory_barcodes.to_inventory_barcodes to1 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, 0, 0);
             items.add(to1);
 
         }

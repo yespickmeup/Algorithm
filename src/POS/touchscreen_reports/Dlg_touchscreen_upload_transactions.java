@@ -32,11 +32,10 @@ import POS.my_services.My_services_description_customers;
 import POS.my_services.My_services_others_customers;
 
 import POS.my_services.S1_my_services_item_replacements_customers;
-import POS.my_services.S1_my_services_others;
-import POS.my_services.S1_my_services_problems;
 import POS.my_services.S1_my_services_problems_customers;
 import POS.prepaid_payments.Prepaid_payments;
 import POS.purchase_order.Purchase_order;
+import POS.purchase_order.Purchase_order_item;
 import POS.receipts.Receipts;
 import POS.receipts.S1_receipt_items;
 import POS.requisition_slips.Requisition_slip_items;
@@ -1207,46 +1206,20 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
         ret_inventory_adjuster();
         ret_inventory_encoding();
         ret_inventory_replenishment();
+        ret_prepaid();
+        ret_other_adjustments();
+        ret_purchase_order();
+        ret_receipts();
+        ret_requisition_slip();
+        ret_return_to_supplier();
+        ret_return_from_customers();
+        ret_my_services();
 
-        List<Prepaid_payments.to_prepaid_payments> my_prepaid = Prepaid_payments.ret_data(where);
-        jLabel13.setText("" + my_prepaid.size());
-
-        List<Other_adjustments.to_other_adjustments> other_adjustments = Other_adjustments.ret_data(where);
-        jLabel40.setText("" + other_adjustments.size());
-
-        List<Purchase_order.to_purchase_orders> purchase_order = Purchase_order.ret_data(where);
-        List<Purchase_order.to_purchase_orders> purchase_order_items = Purchase_order.ret_data(where);
-        jLabel42.setText("" + purchase_order.size());
-
-        List<Receipts.to_receipts> receipts = Receipts.ret_data3(where);
-        List<S1_receipt_items.to_receipt_items> receipt_items = S1_receipt_items.ret_data5(where);
-        jLabel44.setText("" + receipts.size());
-
-        List<Requisition_slips.to_requisition_slips> requisition_slips = Requisition_slips.ret_data(where);
-        List<Requisition_slip_items.to_requisition_slip_items> requisition_slip_items = Requisition_slip_items.ret_data(where);
-        jLabel18.setText("" + requisition_slips.size());
-
-        List<Return_to_supplier.to_return_to_suppliers> return_to_supplier = Return_to_supplier.ret_data(where);
-        List<Return_to_supplier_items.to_return_to_supplier_items> return_to_supplier_items = Return_to_supplier_items.ret_data(where);
-        jLabel48.setText("" + return_to_supplier.size());
-
-        List<Return_from_customers.to_return_from_customers> return_from_customers = Return_from_customers.ret_data(where);
-        List<Return_from_customer_items.to_return_from_customer_items> return_from_customer_items = Return_from_customer_items.ret_data(where);
-        jLabel50.setText("" + return_from_customers.size());
-
-        List<My_services.to_my_services> services = My_services.ret_data(where);
-        List<My_services_description_customers.to_my_services_description_customers> services_description = My_services_description_customers.ret_data3(where);
-        List<My_services_barcodes_customers.to_my_services_barcodes_customers> services_barcode = My_services_barcodes_customers.ret_data(where);
-        List<S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers> services_replacements = S1_my_services_item_replacements_customers.ret_data(where);
-        List<S1_my_services_others.to_my_services_others> services_others = My_services_others_customers.ret_data(where);
-        List<S1_my_services_problems.to_my_services_problems> services_problems = S1_my_services_problems_customers.ret_data(where);
-        jLabel54.setText("" + services.size());
-
+//        ret_sales();
         List<Stock_transfers.to_stock_transfers> stock_transfer = Stock_transfers.ret_data(where);
         List<Stock_transfer_items.to_receipt_items> stock_transfer_items = Stock_transfer_items.ret_data(where);
         jLabel56.setText("" + stock_transfer.size());
 
-        ret_sales();
     }
 
     List<Accounts_payable.to_accounts_payable> my_ap = new ArrayList();
@@ -1348,6 +1321,85 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
         jLabel38.setText("" + inventory_replenishments.size());
 
     }
+    List<Prepaid_payments.to_prepaid_payments> my_prepaid = new ArrayList();
+
+    private void ret_prepaid() {
+        String where = " where is_uploaded<>1 ";
+        my_prepaid = Prepaid_payments.ret_data(where);
+        jLabel13.setText("" + my_prepaid.size());
+    }
+
+    List<Other_adjustments.to_other_adjustments> other_adjustments = new ArrayList();
+
+    private void ret_other_adjustments() {
+        String where = " where is_uploaded<>1 ";
+        other_adjustments = Other_adjustments.ret_data(where);
+        jLabel40.setText("" + other_adjustments.size());
+    }
+    List<Purchase_order.to_purchase_orders> purchase_order = new ArrayList();
+    List<Purchase_order_item.to_purchase_order_items> purchase_order_items = new ArrayList();
+
+    private void ret_purchase_order() {
+        String where = " where is_uploaded<>1 ";
+        purchase_order = Purchase_order.ret_data(where);
+        purchase_order_items = Purchase_order_item.ret_data(where);
+        jLabel42.setText("" + purchase_order.size());
+    }
+    List<Receipts.to_receipts> receipts = new ArrayList();
+    List<S1_receipt_items.to_receipt_items> receipt_items = new ArrayList();
+
+    private void ret_receipts() {
+        String where = " where is_uploaded<>1 ";
+        receipts = Receipts.ret_data3(where);
+        receipt_items = S1_receipt_items.ret_data5(where);
+        jLabel44.setText("" + receipts.size());
+    }
+
+    List<Requisition_slips.to_requisition_slips> requisition_slips = new ArrayList();
+    List<Requisition_slip_items.to_requisition_slip_items> requisition_slip_items = new ArrayList();
+
+    private void ret_requisition_slip() {
+        String where = " where is_uploaded<>1 ";
+        requisition_slips = Requisition_slips.ret_data(where);
+        requisition_slip_items = Requisition_slip_items.ret_data(where);
+        jLabel18.setText("" + requisition_slips.size());
+    }
+
+    List<Return_to_supplier.to_return_to_suppliers> return_to_supplier = new ArrayList();
+    List<Return_to_supplier_items.to_return_to_supplier_items> return_to_supplier_items = new ArrayList();
+
+    private void ret_return_to_supplier() {
+        String where = " where is_uploaded<>1 ";
+        return_to_supplier = Return_to_supplier.ret_data(where);
+        return_to_supplier_items = Return_to_supplier_items.ret_data(where);
+        jLabel48.setText("" + return_to_supplier.size());
+    }
+    List<Return_from_customers.to_return_from_customers> return_from_customers = new ArrayList();
+    List<Return_from_customer_items.to_return_from_customer_items> return_from_customer_items = new ArrayList();
+
+    private void ret_return_from_customers() {
+        String where = " where is_uploaded<>1 ";
+        return_from_customers = Return_from_customers.ret_data(where);
+        return_from_customer_items = Return_from_customer_items.ret_data(where);
+        jLabel50.setText("" + return_from_customers.size());
+    }
+    List<My_services.to_my_services> services = new ArrayList();
+    List<My_services_description_customers.to_my_services_description_customers> services_description = new ArrayList();
+    List<My_services_barcodes_customers.to_my_services_barcodes_customers> services_barcode = new ArrayList();
+    List<S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers> services_replacements = new ArrayList();
+    List<My_services_others_customers.to_my_services_others_customers> services_others = new ArrayList();
+    List<S1_my_services_problems_customers.to_my_services_problems_customers> services_problems = new ArrayList();
+
+    private void ret_my_services() {
+        String where = " where is_uploaded<>1 ";
+        services = My_services.ret_data(where);
+        services_description = My_services_description_customers.ret_data3(where);
+        services_barcode = My_services_barcodes_customers.ret_data(where);
+        services_replacements = S1_my_services_item_replacements_customers.ret_data(where);
+        services_others = My_services_others_customers.ret_data2(where);
+        services_problems = S1_my_services_problems_customers.ret_data2(where);
+        jLabel54.setText("" + services.size());
+    }
 
     private void upload_records() {
         Window p = (Window) this;
@@ -1423,7 +1475,67 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
 //                for (Inventory_replenishment_items.to_inventory_replenishment_items to : inventory_replenishment_items ) {
 //                    Inventory_replenishment_items.add_data_cloud(to);
 //                }
-
+                //Prepaid Payment
+//                for (Prepaid_payments.to_prepaid_payments to : my_prepaid) {
+//                    Prepaid_payments.add_prepaid_payments_cloud(to);
+//                }
+                //Other Adjustments
+//                for (Other_adjustments.to_other_adjustments to : other_adjustments) {
+//                    Other_adjustments.add_data_cloud(to);
+//                }
+                //Purchase Order
+//                for (Purchase_order.to_purchase_orders to : purchase_order) {
+//                    Purchase_order.add_data_cloud(to);
+//                for (Purchase_order_item.to_purchase_order_items to : purchase_order_items) {
+//                    Purchase_order_item.add_data_cloud(to);
+//                }
+                //Receipts
+//                for (Receipts.to_receipts to :  receipts ) {
+//                    Receipts.add_receipts_cloud(to);
+//                }
+//                for (S1_receipt_items.to_receipt_items to : receipt_items ) {
+//                    S1_receipt_items.add_receipt_items_cloud(to);
+//                }
+                //Requisition Slip
+//                for (Requisition_slips.to_requisition_slips to : requisition_slips ) {
+//                    Requisition_slips.add_data_cloud(to);
+//                }
+//                for (Requisition_slip_items.to_requisition_slip_items to : requisition_slip_items ) {
+//                    Requisition_slip_items.add_data_cloud(to);
+//                }
+                //Return to Supplier
+//                for (Return_to_supplier.to_return_to_suppliers to : return_to_supplier ) {
+//                    Return_to_supplier.add_data_cloud(to);
+//                }
+//                for (Return_to_supplier_items.to_return_to_supplier_items to : return_to_supplier_items ) {
+//                    Return_to_supplier_items.add_data_cloud(to);
+//                }
+                // Return from Customer
+//                for (Return_from_customers.to_return_from_customers to : return_from_customers ) {
+//                    Return_from_customers.add_data_cloud(to);
+//                }
+//                for (Return_from_customer_items.to_return_from_customer_items to : return_from_customer_items ) {
+//                    Return_from_customer_items.add_data_cloud(to);
+//                }
+                // Services
+//                for (My_services.to_my_services to : services ) {
+//                    My_services.add_my_services_cloud(to);
+//                }
+//                for (My_services_description_customers.to_my_services_description_customers to : services_description ) {
+//                    My_services_description_customers.add_data_cloud(to);
+//                }
+//                for (My_services_barcodes_customers.to_my_services_barcodes_customers to : services_barcode ) {
+//                    My_services_barcodes_customers.add_data_cloud(to);
+//                }
+//                for (S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers to : services_replacements ) {
+//                    S1_my_services_item_replacements_customers.add_data_cloud(to);
+//                }
+//                for (My_services_others_customers.to_my_services_others_customers to : services_others ) {
+//                    My_services_others_customers.add_data_cloud(to);
+//                }
+//                for (S1_my_services_problems_customers.to_my_services_problems_customers to : services_problems ) {
+//                    S1_my_services_problems_customers.add_data_cloud(to);
+//                }
                 Alert.set(1, "");
                 ret_transactions();
             }

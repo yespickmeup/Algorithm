@@ -276,6 +276,99 @@ public class Receipts {
         }
     }
 
+    public static void add_receipts_cloud(to_receipts to_receipts) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+
+            String s0 = "insert into receipts("
+                    + "receipt_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supllier_id"
+                    + ",remarks"
+                    + ",date_delivered"
+                    + ",date_received"
+                    + ",receipt_type"
+                    + ",reference_no"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",gross_total"
+                    + ",net_total"
+                    + ",batch_no"
+                    + ",discount"
+                    + ",receipt_type_id"
+                    + ",status"
+                    + ")values("
+                    + ":receipt_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supllier_id"
+                    + ",:remarks"
+                    + ",:date_delivered"
+                    + ",:date_received"
+                    + ",:receipt_type"
+                    + ",:reference_no"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:gross_total"
+                    + ",:net_total"
+                    + ",:batch_no"
+                    + ",:discount"
+                    + ",:receipt_type_id"
+                    + ",:status"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0).
+                    setString("receipt_no", to_receipts.receipt_no).
+                    setString("user_name", to_receipts.user_name).
+                    setString("session_no", to_receipts.session_no).
+                    setString("date_added", to_receipts.date_added).
+                    setString("supplier", to_receipts.supplier).
+                    setString("supllier_id", to_receipts.supllier_id).
+                    setString("remarks", to_receipts.remarks).
+                    setString("date_delivered", to_receipts.date_delivered).
+                    setString("date_received", to_receipts.date_received).
+                    setString("receipt_type", to_receipts.receipt_type).
+                    setString("reference_no", to_receipts.reference_no).
+                    setString("branch", to_receipts.branch).
+                    setString("branch_id", to_receipts.branch_id).
+                    setNumber("gross_total", to_receipts.gross_total).
+                    setNumber("net_total", to_receipts.net_total).
+                    setString("batch_no", to_receipts.batch_no).
+                    setNumber("discount", to_receipts.discount).
+                    setString("receipt_type_id", to_receipts.receipt_type_id).
+                    setNumber("status", to_receipts.status).
+                    ok();
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update receipts set is_uploaded=1 where id='" + to_receipts.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Receipts.class, "Successfully Added: " + to_receipts.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_receipts(to_receipts to_receipts) {
         try {
             Connection conn = MyConnection.connect();
@@ -992,13 +1085,13 @@ public class Receipts {
                         serial_no = rs10.getString(3);
                     }
 
-                    double cost=to_receipt_items.cost/to_receipt_items.conversion;
+                    double cost = to_receipt_items.cost / to_receipt_items.conversion;
                     double new_qty = product_qty + (to_receipt_items.conversion * to_receipt_items.qty);
                     String new_serial = serial_no + "\n" + to_receipt_items.serial_no;
                     if (serial_no.isEmpty()) {
                         new_serial = to_receipt_items.serial_no;
                     }
-                    
+
                     String s4 = "update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
                             + ",cost='" + cost + "' "
@@ -1142,9 +1235,9 @@ public class Receipts {
                 String customer_name = to_receipts.supplier;
                 String ap_no = Accounts_payable.increment_id(branch_id);
 //                System.out.println("branch_id: "+branch_id);
-                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data_conn(" where ap_no='" + ap_no + "' ",conn);
+                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data_conn(" where ap_no='" + ap_no + "' ", conn);
                 if (!payables.isEmpty()) {
-                    payables = Accounts_payable.ret_data_conn(" where ap_no='" + ap_no + "' ",conn);
+                    payables = Accounts_payable.ret_data_conn(" where ap_no='" + ap_no + "' ", conn);
                 }
                 String date_added = DateType.now();
                 String user_name = MyUser.getUser_name();

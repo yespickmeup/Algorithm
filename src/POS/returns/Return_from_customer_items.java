@@ -217,6 +217,141 @@ public class Return_from_customer_items {
         }
     }
 
+    public static void add_data_cloud(to_return_from_customer_items to_return_from_customer_items) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into return_from_customer_items("
+                    + " return_from_customer_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supplier_id"
+                    + ",reference_no"
+                    + ",remarks"
+                    + ",barcode"
+                    + ",description"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_class"
+                    + ",sub_class_id"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",conversion"
+                    + ",unit"
+                    + ",barcodes"
+                    + ",batch_no"
+                    + ",serial_no"
+                    + ",main_barcode"
+                    + ",qty"
+                    + ",cost"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":return_from_customer_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supplier_id"
+                    + ",:reference_no"
+                    + ",:remarks"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:category"
+                    + ",:category_id"
+                    + ",:classification"
+                    + ",:classification_id"
+                    + ",:sub_class"
+                    + ",:sub_class_id"
+                    + ",:brand"
+                    + ",:brand_id"
+                    + ",:model"
+                    + ",:model_id"
+                    + ",:conversion"
+                    + ",:unit"
+                    + ",:barcodes"
+                    + ",:batch_no"
+                    + ",:serial_no"
+                    + ",:main_barcode"
+                    + ",:qty"
+                    + ",:cost"
+                    + ",:status"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("return_from_customer_no", to_return_from_customer_items.return_from_customer_no)
+                    .setString("user_name", to_return_from_customer_items.user_name)
+                    .setString("session_no", to_return_from_customer_items.session_no)
+                    .setString("date_added", to_return_from_customer_items.date_added)
+                    .setString("supplier", to_return_from_customer_items.supplier)
+                    .setString("supplier_id", to_return_from_customer_items.supplier_id)
+                    .setString("reference_no", to_return_from_customer_items.reference_no)
+                    .setString("remarks", to_return_from_customer_items.remarks)
+                    .setString("barcode", to_return_from_customer_items.barcode)
+                    .setString("description", to_return_from_customer_items.description)
+                    .setString("category", to_return_from_customer_items.category)
+                    .setString("category_id", to_return_from_customer_items.category_id)
+                    .setString("classification", to_return_from_customer_items.classification)
+                    .setString("classification_id", to_return_from_customer_items.classification_id)
+                    .setString("sub_class", to_return_from_customer_items.sub_class)
+                    .setString("sub_class_id", to_return_from_customer_items.sub_class_id)
+                    .setString("brand", to_return_from_customer_items.brand)
+                    .setString("brand_id", to_return_from_customer_items.brand_id)
+                    .setString("model", to_return_from_customer_items.model)
+                    .setString("model_id", to_return_from_customer_items.model_id)
+                    .setNumber("conversion", to_return_from_customer_items.conversion)
+                    .setString("unit", to_return_from_customer_items.unit)
+                    .setString("barcodes", to_return_from_customer_items.barcodes)
+                    .setString("batch_no", to_return_from_customer_items.batch_no)
+                    .setString("serial_no", to_return_from_customer_items.serial_no)
+                    .setString("main_barcode", to_return_from_customer_items.main_barcode)
+                    .setNumber("qty", to_return_from_customer_items.qty)
+                    .setNumber("cost", to_return_from_customer_items.cost)
+                    .setNumber("status", to_return_from_customer_items.status)
+                    .setString("branch", to_return_from_customer_items.branch)
+                    .setString("branch_id", to_return_from_customer_items.branch_id)
+                    .setString("location", to_return_from_customer_items.location)
+                    .setString("location_id", to_return_from_customer_items.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update return_from_customer_items set is_uploaded=1 where id='" + to_return_from_customer_items.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Return_from_customer_items.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_return_from_customer_items to_return_from_customer_items) {
         try {
             Connection conn = MyConnection.connect();

@@ -117,6 +117,82 @@ public class My_services_description_customers {
         }
     }
 
+    public static void add_data_cloud(to_my_services_description_customers to_my_services_description_customers) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into my_services_description_customers("
+                    + "description"
+                    + ",amount"
+                    + ",customer_id"
+                    + ",customer_name"
+                    + ",transaction_no"
+                    + ",date_added"
+                    + ",user_name"
+                    + ",unit"
+                    + ",barcode"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":description"
+                    + ",:amount"
+                    + ",:customer_id"
+                    + ",:customer_name"
+                    + ",:transaction_no"
+                    + ",:date_added"
+                    + ",:user_name"
+                    + ",:unit"
+                    + ",:barcode"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("description", to_my_services_description_customers.description)
+                    .setNumber("amount", to_my_services_description_customers.amount)
+                    .setString("customer_id", to_my_services_description_customers.customer_id)
+                    .setString("customer_name", to_my_services_description_customers.customer_name)
+                    .setString("transaction_no", to_my_services_description_customers.transaction_no)
+                    .setString("date_added", to_my_services_description_customers.date_added)
+                    .setString("user_name", to_my_services_description_customers.user_name)
+                    .setString("unit", to_my_services_description_customers.unit)
+                    .setString("barcode", to_my_services_description_customers.barcode)
+                    .setString("branch", to_my_services_description_customers.branch)
+                    .setString("branch_id", to_my_services_description_customers.branch_id)
+                    .setString("location", to_my_services_description_customers.location)
+                    .setString("location_id", to_my_services_description_customers.location_id)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update my_services_description_customers set is_uploaded=1 where id='" + to_my_services_description_customers.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+
+            Lg.s(My_services_description_customers.class, "Successfully Added: " + to_my_services_description_customers.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void add_my_services_description_customers(List<to_my_services_description_customers> to_my_services_description_customers1) {
         try {
             Connection conn = MyConnection.connect();
@@ -471,8 +547,8 @@ public class My_services_description_customers {
                 String branch_id = rs.getString(12);
                 String location = rs.getString(13);
                 String location_id = rs.getString(14);
-                to_my_services_description_customers to = new to_my_services_description_customers(id, description, amount, customer_id, customer_name, transaction_no
-                        , date_added, user_name, unit, barcode, branch, branch_id, location, location_id);
+                to_my_services_description_customers to = new to_my_services_description_customers(id, description, amount, customer_id, customer_name, transaction_no,
+                        date_added, user_name, unit, barcode, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;

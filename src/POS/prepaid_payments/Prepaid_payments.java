@@ -155,6 +155,97 @@ public class Prepaid_payments {
         }
     }
 
+    public static void add_prepaid_payments_cloud(to_prepaid_payments to_prepaid_payments) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into prepaid_payments("
+                    + "cash"
+                    + ",check_bank"
+                    + ",check_no"
+                    + ",check_amount"
+                    + ",added_by"
+                    + ",date_added"
+                    + ",customer_name"
+                    + ",customer_id"
+                    + ",status"
+                    + ",cheque_holder"
+                    + ",cheque_date"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",remarks"
+                    + ")values("
+                    + ":cash"
+                    + ",:check_bank"
+                    + ",:check_no"
+                    + ",:check_amount"
+                    + ",:added_by"
+                    + ",:date_added"
+                    + ",:customer_name"
+                    + ",:customer_id"
+                    + ",:status"
+                    + ",:cheque_holder"
+                    + ",:cheque_date"
+                    + ",:user_id"
+                    + ",:user_screen_name"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:remarks"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("cash", to_prepaid_payments.cash)
+                    .setString("check_bank", to_prepaid_payments.check_bank)
+                    .setString("check_no", to_prepaid_payments.check_no)
+                    .setNumber("check_amount", to_prepaid_payments.check_amount)
+                    .setString("added_by", to_prepaid_payments.added_by)
+                    .setString("date_added", to_prepaid_payments.date_added)
+                    .setString("customer_name", to_prepaid_payments.customer_name)
+                    .setString("customer_id", to_prepaid_payments.customer_id)
+                    .setNumber("status", to_prepaid_payments.status)
+                    .setString("cheque_holder", to_prepaid_payments.cheque_holder)
+                    .setString("cheque_date", to_prepaid_payments.cheque_date)
+                    .setString("user_id", to_prepaid_payments.user_id)
+                    .setString("user_screen_name", to_prepaid_payments.user_screen_name)
+                    .setString("branch", to_prepaid_payments.branch)
+                    .setString("branch_id", to_prepaid_payments.branch_id)
+                    .setString("location", to_prepaid_payments.location)
+                    .setString("location_id", to_prepaid_payments.location_id)
+                    .setString("remarks", to_prepaid_payments.remarks)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update prepaid_payments set is_uploaded=1 where id='" + to_prepaid_payments.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Prepaid_payments.class, "Successfully Added: " + to_prepaid_payments.id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_prepaid_payments(to_prepaid_payments to_prepaid_payments) {
         try {
             Connection conn = MyConnection.connect();
@@ -316,7 +407,7 @@ public class Prepaid_payments {
                 String remarks = rs.getString(19);
                 to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added,
                         customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id,
-                        user_screen_name, branch, branch_id, location, location_id,remarks);
+                        user_screen_name, branch, branch_id, location, location_id, remarks);
                 datas.add(to);
             }
             return datas;

@@ -184,6 +184,79 @@ public class Requisition_slips {
         }
     }
 
+    public static void add_data_cloud(to_requisition_slips to_requisition_slips) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+
+            String s0 = "insert into requisition_slips("
+                    + "requisition_slip_no"
+                    + ",requisition_date"
+                    + ",requisition_type"
+                    + ",requisition_department"
+                    + ",requisition_department_id"
+                    + ",requested_by"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",date_added"
+                    + ",status"
+                    + ")values("
+                    + ":requisition_slip_no"
+                    + ",:requisition_date"
+                    + ",:requisition_type"
+                    + ",:requisition_department"
+                    + ",:requisition_department_id"
+                    + ",:requested_by"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:date_added"
+                    + ",:status"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("requisition_slip_no", to_requisition_slips.requisition_slip_no)
+                    .setString("requisition_date", to_requisition_slips.requisition_date)
+                    .setString("requisition_type", to_requisition_slips.requisition_type)
+                    .setString("requisition_department", to_requisition_slips.requisition_department)
+                    .setString("requisition_department_id", to_requisition_slips.requisition_department_id)
+                    .setString("requested_by", to_requisition_slips.requested_by)
+                    .setString("branch", to_requisition_slips.branch)
+                    .setString("branch_id", to_requisition_slips.branch_id)
+                    .setString("location", to_requisition_slips.location)
+                    .setString("location_id", to_requisition_slips.location_id)
+                    .setString("date_added", to_requisition_slips.date_added)
+                    .setNumber("status", to_requisition_slips.status)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update requisition_slips set is_uploaded=1 where id='" + to_requisition_slips.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Requisition_slips.class, "Successfully Added: " + to_requisition_slips.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void post_and_finalize(to_requisition_slips to_requisition_slips, List<Requisition_slip_items.to_requisition_slip_items> to_requisition_slip_items1) {
         try {
             Connection conn = MyConnection.connect();

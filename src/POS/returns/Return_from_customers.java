@@ -16,10 +16,6 @@ import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
-
-
-
-
 /**
  *
  * @author Guinness
@@ -139,7 +135,93 @@ public class Return_from_customers {
             MyConnection.close();
         }
     }
-    
+
+    public static void add_data_cloud(to_return_from_customers to_return_from_customers) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into return_from_customers("
+                    + "return_from_customer_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supplier_id"
+                    + ",reference_no"
+                    + ",remarks"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",gross_total"
+                    + ",discount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ")values("
+                    + ":return_from_customer_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supplier_id"
+                    + ",:reference_no"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:gross_total"
+                    + ",:discount"
+                    + ",:discount_amount"
+                    + ",:discount_rate"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("return_from_customer_no", to_return_from_customers.return_from_customer_no)
+                    .setString("user_name", to_return_from_customers.user_name)
+                    .setString("session_no", to_return_from_customers.session_no)
+                    .setString("date_added", to_return_from_customers.date_added)
+                    .setString("supplier", to_return_from_customers.supplier)
+                    .setString("supplier_id", to_return_from_customers.supplier_id)
+                    .setString("reference_no", to_return_from_customers.reference_no)
+                    .setString("remarks", to_return_from_customers.remarks)
+                    .setNumber("status", to_return_from_customers.status)
+                    .setString("branch", to_return_from_customers.branch)
+                    .setString("branch_id", to_return_from_customers.branch_id)
+                    .setString("location", to_return_from_customers.location)
+                    .setString("location_id", to_return_from_customers.location_id)
+                    .setNumber("gross_total", to_return_from_customers.gross_total)
+                    .setString("discount", to_return_from_customers.discount)
+                    .setNumber("discount_amount", to_return_from_customers.discount_amount)
+                    .setNumber("discount_rate", to_return_from_customers.discount_rate)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update return_from_customers set is_uploaded=1 where id='" + to_return_from_customers.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Return_from_customers.class, "Successfully Added: " + to_return_from_customers.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 
     public static void update_data(to_return_from_customers to_return_from_customers) {
         try {

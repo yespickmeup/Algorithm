@@ -103,11 +103,11 @@
                 <text><![CDATA[Total Amount:]]></text>
             </staticText>
             <image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-                <reportElement uuid="ad3e7022-319a-4c53-b215-9226e78abbf6" x="71" y="32" width="64" height="58"/>
+                <reportElement uuid="ad3e7022-319a-4c53-b215-9226e78abbf6" x="73" y="39" width="64" height="58"/>
                 <imageExpression><![CDATA[$P{img_path}]]></imageExpression>
             </image>
             <textField>
-                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="140" y="32" width="267" height="17"/>
+                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="142" y="39" width="267" height="17"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font size="12" isBold="true"/>
                     <paragraph leftIndent="5"/>
@@ -115,7 +115,7 @@
                 <textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="140" y="49" width="267" height="17"/>
+                <reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="142" y="56" width="267" height="17"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font size="11" isBold="false"/>
                     <paragraph leftIndent="5"/>
@@ -123,7 +123,7 @@
                 <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="71" y="103" width="431" height="20"/>
+                <reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="71" y="109" width="431" height="20"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font fontName="Tahoma" size="14" isBold="false"/>
                 </textElement>

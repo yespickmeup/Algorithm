@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
@@ -66,12 +65,12 @@ public class S1_receipt_items {
         public final String location;
         public final String location_id;
 
-        public to_receipt_items(int id, String receipt_no, String user_name, String session_no, String date_added, String supplier
-                , String supllier_id, String remarks, String barcode, String description, double qty, double cost, String category
-                , String category_id, String classification, String classification_id, String sub_class, String sub_class_id
-                , double conversion, String unit, String date_delivered, String date_received, String barcodes, String serial_no
-                , String batch_no, String main_barcode, String brand, String brand_id, String model, String model_id, int status
-                , double previous_cost,String receipt_type_id, String branch, String branch_id, String location, String location_id) {
+        public to_receipt_items(int id, String receipt_no, String user_name, String session_no, String date_added, String supplier,
+                String supllier_id, String remarks, String barcode, String description, double qty, double cost, String category,
+                String category_id, String classification, String classification_id, String sub_class, String sub_class_id,
+                double conversion, String unit, String date_delivered, String date_received, String barcodes, String serial_no,
+                String batch_no, String main_barcode, String brand, String brand_id, String model, String model_id, int status,
+                double previous_cost, String receipt_type_id, String branch, String branch_id, String location, String location_id) {
             this.id = id;
             this.receipt_no = receipt_no;
             this.user_name = user_name;
@@ -104,7 +103,7 @@ public class S1_receipt_items {
             this.model_id = model_id;
             this.status = status;
             this.previous_cost = previous_cost;
-            this.receipt_type_id=receipt_type_id;
+            this.receipt_type_id = receipt_type_id;
             this.branch = branch;
             this.branch_id = branch_id;
             this.location = location;
@@ -241,7 +240,7 @@ public class S1_receipt_items {
                         setString("model_id", to_receipt_items.model_id).
                         setNumber("status", to_receipt_items.status).
                         setNumber("previous_cost", to_receipt_items.previous_cost).
-                        setString("receipt_type_id",to_receipt_items.receipt_type_id).
+                        setString("receipt_type_id", to_receipt_items.receipt_type_id).
                         setString("branch", to_receipt_items.branch).
                         setString("branch_id", to_receipt_items.branch_id).
                         setString("location", to_receipt_items.location).
@@ -264,6 +263,151 @@ public class S1_receipt_items {
 //                PreparedStatement stmt2 = conn.prepareStatement(s2);
 //                stmt2.execute();
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_receipt_items_cloud(to_receipt_items to_receipt_items) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+
+            String s0 = "insert into  receipt_items("
+                    + "receipt_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supllier_id"
+                    + ",remarks"
+                    + ",barcode"
+                    + ",description"
+                    + ",qty"
+                    + ",cost"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_class"
+                    + ",sub_class_id"
+                    + ",conversion"
+                    + ",unit"
+                    + ",date_delivered"
+                    + ",date_received"
+                    + ",barcodes"
+                    + ",serial_no"
+                    + ",batch_no"
+                    + ",main_barcode"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",status"
+                    + ",previous_cost"
+                    + ",receipt_type_id"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ")values("
+                    + ":receipt_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supllier_id"
+                    + ",:remarks"
+                    + ",:barcode"
+                    + ",:description"
+                    + ",:qty"
+                    + ",:cost"
+                    + ",:category"
+                    + ",:category_id"
+                    + ",:classification"
+                    + ",:classification_id"
+                    + ",:sub_class"
+                    + ",:sub_class_id"
+                    + ",:conversion"
+                    + ",:unit"
+                    + ",:date_delivered"
+                    + ",:date_received"
+                    + ",:barcodes"
+                    + ",:serial_no"
+                    + ",:batch_no"
+                    + ",:main_barcode"
+                    + ",:brand"
+                    + ",:brand_id"
+                    + ",:model"
+                    + ",:model_id"
+                    + ",:status"
+                    + ",:previous_cost"
+                    + ",:receipt_type_id"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0).
+                    setString("receipt_no", to_receipt_items.receipt_no).
+                    setString("user_name", to_receipt_items.user_name).
+                    setString("session_no", to_receipt_items.session_no).
+                    setString("date_added", to_receipt_items.date_added).
+                    setString("supplier", to_receipt_items.supplier).
+                    setString("supllier_id", to_receipt_items.supllier_id).
+                    setString("remarks", to_receipt_items.remarks).
+                    setString("barcode", to_receipt_items.barcode).
+                    setString("description", to_receipt_items.description).
+                    setNumber("qty", to_receipt_items.qty).
+                    setNumber("cost", to_receipt_items.cost).
+                    setString("category", to_receipt_items.category).
+                    setString("category_id", to_receipt_items.category_id).
+                    setString("classification", to_receipt_items.classification).
+                    setString("classification_id", to_receipt_items.classification_id).
+                    setString("sub_class", to_receipt_items.sub_class).
+                    setString("sub_class_id", to_receipt_items.sub_class_id).
+                    setNumber("conversion", to_receipt_items.conversion).
+                    setString("unit", to_receipt_items.unit).
+                    setString("date_delivered", to_receipt_items.date_delivered).
+                    setString("date_received", to_receipt_items.date_received).
+                    setString("barcodes", to_receipt_items.barcodes).
+                    setString("serial_no", to_receipt_items.serial_no).
+                    setString("batch_no", to_receipt_items.batch_no).
+                    setString("main_barcode", to_receipt_items.main_barcode).
+                    setString("brand", to_receipt_items.brand).
+                    setString("brand_id", to_receipt_items.brand_id).
+                    setString("model", to_receipt_items.model).
+                    setString("model_id", to_receipt_items.model_id).
+                    setNumber("status", to_receipt_items.status).
+                    setNumber("previous_cost", to_receipt_items.previous_cost).
+                    setString("receipt_type_id", to_receipt_items.receipt_type_id).
+                    setString("branch", to_receipt_items.branch).
+                    setString("branch_id", to_receipt_items.branch_id).
+                    setString("location", to_receipt_items.location).
+                    setString("location_id", to_receipt_items.location_id).
+                    ok();
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update receipt_items set is_uploaded=1 where id='" + to_receipt_items.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(S1_receipt_items.class, "Successfully Added");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -597,17 +741,17 @@ public class S1_receipt_items {
                 String model_id = rs.getString(30);
                 int status = rs.getInt(31);
                 double previous_cost = rs.getDouble(32);
-                String receipt_type_id=rs.getString(33);
+                String receipt_type_id = rs.getString(33);
                 String branch = rs.getString(34);
                 String branch_id = rs.getString(35);
                 String location = rs.getString(36);
                 String location_id = rs.getString(37);
 
-                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id
-                        , remarks, barcode, description, qty, cost, category, category_id, classification, classification_id
-                        , sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no
-                        , main_barcode, brand, brand_id, model, model_id, status, previous_cost,receipt_type_id, branch, branch_id, location
-                        , location_id);
+                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
+                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no,
+                        main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location,
+                        location_id);
                 datas.add(to);
             }
             return datas;
@@ -701,17 +845,17 @@ public class S1_receipt_items {
                 String model_id = rs.getString(30);
                 int status = rs.getInt(31);
                 double previous_cost = rs.getDouble(32);
-                String receipt_type_id=rs.getString(33);
+                String receipt_type_id = rs.getString(33);
                 String branch = rs.getString(34);
                 String branch_id = rs.getString(35);
                 String location = rs.getString(36);
                 String location_id = rs.getString(37);
 
-                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id
-                        , remarks, barcode, description, qty, cost, category, category_id, classification, classification_id
-                        , sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no
-                        , batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost,receipt_type_id, branch, branch_id
-                        , location, location_id);
+                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
+                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
+                        batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id,
+                        location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -806,17 +950,17 @@ public class S1_receipt_items {
                 String model_id = rs.getString(30);
                 int status = rs.getInt(31);
                 double previous_cost = rs.getDouble(32);
-                String receipt_type_id=rs.getString(33);
+                String receipt_type_id = rs.getString(33);
                 String branch = rs.getString(34);
                 String branch_id = rs.getString(35);
                 String location = rs.getString(36);
                 String location_id = rs.getString(37);
 
-                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id
-                        , remarks, barcode, description, qty, cost, category, category_id, classification, classification_id
-                        , sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no
-                        , batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id,branch, branch_id
-                        , location, location_id);
+                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
+                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
+                        batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id,
+                        location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -964,16 +1108,16 @@ public class S1_receipt_items {
                 String model_id = rs.getString(30);
                 int status = rs.getInt(31);
                 double previous_cost = rs.getDouble(32);
-                String receipt_type_id=rs.getString(33);
+                String receipt_type_id = rs.getString(33);
                 String branch = rs.getString(34);
                 String branch_id = rs.getString(35);
                 String location = rs.getString(36);
                 String location_id = rs.getString(37);
 
-                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id
-                        , remarks, barcode, description, qty, cost, category, category_id, classification, classification_id
-                        , sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no
-                        , main_barcode, brand, brand_id, model, model_id, status, previous_cost,receipt_type_id, branch, branch_id, location, location_id);
+                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
+                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no,
+                        main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -1067,16 +1211,16 @@ public class S1_receipt_items {
                 String model_id = rs.getString(30);
                 int status = rs.getInt(31);
                 double previous_cost = rs.getDouble(32);
-                String receipt_type_id=rs.getString(33);
+                String receipt_type_id = rs.getString(33);
                 String branch = rs.getString(34);
                 String branch_id = rs.getString(35);
                 String location = rs.getString(36);
                 String location_id = rs.getString(37);
 
-                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id
-                        , remarks, barcode, description, qty, cost, category, category_id, classification, classification_id
-                        , sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no
-                        , batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost,receipt_type_id, branch, branch_id, location, location_id);
+                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
+                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
+                        batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
             }
             return datas;
         } catch (SQLException e) {
@@ -1167,16 +1311,16 @@ public class S1_receipt_items {
                 String model_id = rs.getString(30);
                 int status = rs.getInt(31);
                 double previous_cost = rs.getDouble(32);
-                String receipt_type_id=rs.getString(33);
+                String receipt_type_id = rs.getString(33);
                 String branch = rs.getString(34);
                 String branch_id = rs.getString(35);
                 String location = rs.getString(36);
                 String location_id = rs.getString(37);
 
-                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id
-                        , remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class
-                        , sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode
-                        , brand, brand_id, model, model_id, status, previous_cost,receipt_type_id, branch, branch_id, location, location_id);
+                to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
+                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class,
+                        sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode,
+                        brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;

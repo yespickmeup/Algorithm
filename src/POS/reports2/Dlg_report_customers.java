@@ -3054,8 +3054,11 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                     where = where + " and c.department_id='" + dep.getId() + "' ";
                 }
                 where = where + " order by date_applied,id asc";
-
+                String pool_db = System.getProperty("pool_db", "db_smis_dumaguete_angel_buns");
                 String jrxml = "rpt_balance_per_transaction_all.jrxml";
+                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                    jrxml = "rpt_balance_per_transaction_all_angel.jrxml";
+                }
                 List<Srpt_ar_aging.field> fields = Srpt_ar_aging.ret_aging3(where);
 
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");

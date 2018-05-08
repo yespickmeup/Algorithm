@@ -302,6 +302,114 @@ public class Purchase_order {
         }
     }
 
+    public static void add_data_cloud(to_purchase_orders to_purchase_orders) {
+        try {
+            Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
+            conn.setAutoCommit(false);
+            conn2.setAutoCommit(false);
+            String s0 = "insert into purchase_orders("
+                    + "puchase_order_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supplier_id"
+                    + ",remarks"
+                    + ",status"
+                    + ",date_delivered"
+                    + ",date_received"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",reference_no"
+                    + ",gross_total"
+                    + ",discount"
+                    + ",discount_amount"
+                    + ",discount_rate"
+                    + ",receipt_no"
+                    + ",receipt_type"
+                    + ",receipt_type_id"
+                    + ",total_qty_ordered"
+                    + ",total_qty_received"
+                    + ")values("
+                    + ":puchase_order_no"
+                    + ",:user_name"
+                    + ",:session_no"
+                    + ",:date_added"
+                    + ",:supplier"
+                    + ",:supplier_id"
+                    + ",:remarks"
+                    + ",:status"
+                    + ",:date_delivered"
+                    + ",:date_received"
+                    + ",:branch"
+                    + ",:branch_id"
+                    + ",:location"
+                    + ",:location_id"
+                    + ",:reference_no"
+                    + ",:gross_total"
+                    + ",:discount"
+                    + ",:discount_amount"
+                    + ",:discount_rate"
+                    + ",:receipt_no"
+                    + ",:receipt_type"
+                    + ",:receipt_type_id"
+                    + ",:total_qty_ordered"
+                    + ",:total_qty_received"
+                    + ")";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("puchase_order_no", to_purchase_orders.puchase_order_no)
+                    .setString("user_name", to_purchase_orders.user_name)
+                    .setString("session_no", to_purchase_orders.session_no)
+                    .setString("date_added", to_purchase_orders.date_added)
+                    .setString("supplier", to_purchase_orders.supplier)
+                    .setString("supplier_id", to_purchase_orders.supplier_id)
+                    .setString("remarks", to_purchase_orders.remarks)
+                    .setNumber("status", to_purchase_orders.status)
+                    .setString("date_delivered", to_purchase_orders.date_delivered)
+                    .setString("date_received", to_purchase_orders.date_received)
+                    .setString("branch", to_purchase_orders.branch)
+                    .setString("branch_id", to_purchase_orders.branch_id)
+                    .setString("location", to_purchase_orders.location)
+                    .setString("location_id", to_purchase_orders.location_id)
+                    .setString("reference_no", to_purchase_orders.reference_no)
+                    .setNumber("gross_total", to_purchase_orders.gross_total)
+                    .setString("discount", to_purchase_orders.discount)
+                    .setNumber("discount_amount", to_purchase_orders.discount_amount)
+                    .setNumber("discount_rate", to_purchase_orders.discount_rate)
+                    .setString("receipt_no", to_purchase_orders.receipt_no)
+                    .setString("receipt_type", to_purchase_orders.receipt_type)
+                    .setString("receipt_type_id", to_purchase_orders.receipt_type_id)
+                    .setNumber("total_qty_ordered", to_purchase_orders.total_qty_ordered)
+                    .setNumber("total_qty_received", to_purchase_orders.total_qty_received)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = " update purchase_orders set is_uploaded=1 where id='" + to_purchase_orders.id + "'";
+            PreparedStatement stmt2 = conn2.prepareStatement("");
+            stmt2.addBatch(s2);
+
+            stmt.executeBatch();
+            conn.commit();
+
+            stmt2.executeBatch();
+            conn2.commit();
+
+            conn.close();
+            conn2.close();
+            Lg.s(Purchase_order.class, "Successfully Added: " + to_purchase_orders.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_data(to_purchase_orders to_purchase_orders) {
         try {
             Connection conn = MyConnection.connect();
