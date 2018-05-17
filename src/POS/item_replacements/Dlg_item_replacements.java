@@ -1679,16 +1679,16 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 }
             }
         }
-        System.out.println("is_others:" + is_others);
+//        System.out.println("is_others:" + is_others);
         Window p = (Window) this;
         Dlg_item_replacements_select nd = Dlg_item_replacements_select.create(p, true);
         nd.setTitle("");
-        if (is_others == 1) {
-            nd.do_pass(others);
-        } else {
-            nd.do_pass(selected);
-        }
-
+//        if (is_others == 1) {
+//            nd.do_pass(others);
+//        } else {
+//           
+//        }
+         nd.do_pass(selected);
         nd.setCallback(new Dlg_item_replacements_select.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_item_replacements_select.OutputData data) {

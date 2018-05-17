@@ -703,7 +703,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         double amount = 0;
 
         for (MySales_Items.items item : acc) {
-            amount += item.product_qty * item.selling_price;
+            amount += (item.product_qty * item.selling_price)-item.discount_amount;
         }
         loadData_sale_items(acc);
         jLabel2.setText("" + acc.size());
@@ -913,7 +913,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                     double amount = 0;
                     List<MySales_Items.items> acc = tbl_sale_items_ALM;
                     for (MySales_Items.items item : acc) {
-                        amount += item.product_qty * item.selling_price;
+                        amount += (item.product_qty * item.selling_price)-item.discount_amount;
                     }
 
                     jLabel6.setText(FitIn.fmt_wc_0(amount));
@@ -940,7 +940,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                     double amount = 0;
                     List<MySales_Items.items> acc = tbl_sale_items_ALM;
                     for (MySales_Items.items item : acc) {
-                        amount += item.product_qty * item.selling_price;
+                        amount += (item.product_qty * item.selling_price)-item.discount_amount;
                     }
 
                     jLabel6.setText(FitIn.fmt_wc_0(amount));

@@ -457,7 +457,7 @@ public class S1_accounts_receivable_payments {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            MyConnection.close();
+//            MyConnection.close();
         }
     }
 
