@@ -1842,10 +1842,10 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments ar_payment : accounts_receivable_payments) {
                     S1_accounts_receivable_payments.add_accounts_receivable_payments_cloud(ar_payment);
                 }
-                //Upload Borrowers Slip
-//                for (S1_borrower_slips.to_borrower_slips bs : borrowers_slip) {
-//                    S1_borrower_slips.add_data_cloud(bs);
-//                }
+//                Upload Borrowers Slip
+                for (S1_borrower_slips.to_borrower_slips bs : borrowers_slip) {
+                    S1_borrower_slips.add_data_cloud(bs);
+                }
 //                for (S1_borrower_slip_items.to_borrower_slip_items bs_items : borrowers_slip_items) {
 //                    S1_borrower_slip_items.add_data_cloud(bs_items);
 //                }
@@ -1950,9 +1950,9 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
 //                for (My_services_others_customers.to_my_services_others_customers to : services_others ) {
 //                    My_services_others_customers.add_data_cloud(to);
 //                }
-//                for (S1_my_services_problems_customers.to_my_services_problems_customers to : services_problems ) {
-//                    S1_my_services_problems_customers.add_data_cloud(to);
-//                }
+                for (S1_my_services_problems_customers.to_my_services_problems_customers to : services_problems ) {
+                    S1_my_services_problems_customers.add_data_cloud(to);
+                }
                 Alert.set(1, "");
                 ret_transactions();
             }
@@ -1979,7 +1979,6 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
                         jLabel11.setText("" + my_sale_items.size());
                     }
                 });
-
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
             }

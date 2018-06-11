@@ -7,7 +7,7 @@ package POS.disbursements;
 
 import POS.disbursements.S1_disbursement_categories.to_disbursement_categories;
 import POS.users.MyUser;
-import POS.users.User_previlege_others;
+import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_delete;
@@ -355,6 +355,7 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+
         init_key();
         init_tbl_disbursement_categories(tbl_disbursement_categories);
         data_disbursement_categories();
@@ -456,9 +457,9 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
 
 //</editor-fold> 
     private void add_disbursement_categories() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Disbursement Categories - (Add)" + "' limit 1";
-        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
-        if (datas.isEmpty()) {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursement Categories - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
             Alert.set(0, "Privilege not added!");
             return;
         }
@@ -497,9 +498,9 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
     }
 
     private void update_disbursement_categories() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Disbursement Categories - (Edit)" + "' limit 1";
-        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
-        if (datas.isEmpty()) {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursement Categories - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
             Alert.set(0, "Privilege not added!");
             return;
         }
@@ -533,9 +534,9 @@ public class Dlg_disbursement_categories extends javax.swing.JDialog {
     }
 
     private void delete_disbursement_categories() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Disbursement Categories - (Delete)" + "' limit 1";
-        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
-        if (datas.isEmpty()) {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Disbursement Categories - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
             Alert.set(0, "Privilege not added!");
             return;
         }

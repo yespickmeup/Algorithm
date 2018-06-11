@@ -1975,7 +1975,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
 //        System.setProperty("cloud_db", "db_algorithm_development");
-
 //        System.setProperty("main_branch", "false");
 //        System.setProperty("delete_stock_transfers_finalized", "true");
 //        System.setProperty("pool_db", "db_algorithm");
@@ -2021,7 +2020,13 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         if (main_branch.equalsIgnoreCase("false")) {
 //            check_items();
         } else {
-            check_for_upload();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    check_for_upload();
+                }
+            });
+
         }
     }
 
@@ -3980,8 +3985,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             if (count > 0) {
                 jLabel39.setBackground(new Color(255, 153, 0));
 
-            }else{
-                 jLabel39.setBackground(new Color(153,153,153));
+            } else {
+                jLabel39.setBackground(new Color(153, 153, 153));
             }
             jLabel39.setText(FitIn.fmt_woc(to_add.size() + to_update.size()));
 

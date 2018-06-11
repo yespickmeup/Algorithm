@@ -938,7 +938,7 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                         String to_location_id = to.to_location_id;
 
                         int status = 0;
-                        int is_uploaded = 1;
+                        int is_uploaded = 0;
 
                         if (my_branch_id.equalsIgnoreCase(to_branch_id)) {
                             status = 1;

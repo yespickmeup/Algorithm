@@ -10,6 +10,7 @@ import POS.accounts_receivable.S1_sales_on_account;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customers;
+import POS.util.Alert;
 import POS.util.TableRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -611,6 +612,11 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         String reference_no = tf_reference_no.getText();
         String customer_name = tf_customer_name.getText();
         String customer_id = tf_customer_id.getText();
+        if (customer_id.isEmpty() || customer_id == null) {
+            tf_customer_name.grabFocus();
+            Alert.set(0, "Select Customer!");
+            return;
+        }
         double amount = FitIn.toDouble(tf_amount.getText());
         int days = FitIn.toInt(tf_amount1.getText());
         Payments.charge charg = new Payments.charge(charge_type, charge_type_id, reference_no, customer_name, customer_id, amount, days);

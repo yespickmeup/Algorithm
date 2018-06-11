@@ -8,6 +8,7 @@ package POS.touchscreen;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.customers.Customers;
+import POS.util.Alert;
 import POS.util.TableRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -428,7 +429,7 @@ public class Dlg_touchscreen_prepaid extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -518,6 +519,11 @@ public class Dlg_touchscreen_prepaid extends javax.swing.JDialog {
 
         String customer_name = tf_customer_name.getText();
         String customer_id = tf_customer_id.getText();
+        if (customer_id.isEmpty() || customer_id == null) {
+            tf_customer_name.grabFocus();
+            Alert.set(0, "Select Customer!");
+            return;
+        }
         double amount = FitIn.toDouble(tf_amount.getText());
         double balance = FitIn.toDouble(tf_balance.getText());
         Payments.prepaid card = new Payments.prepaid(customer_name, customer_id, amount, balance);

@@ -4441,7 +4441,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String item_code = to.main_barcode;
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
-                        S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                        S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price
+                                , date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1
+                                , discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification
+                                , classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                         orders.add(ord);
                     }
                     System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
@@ -4495,7 +4498,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String item_code = to.main_barcode;
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
-                        S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                        S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name
+                                , item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id
+                                , user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1, discount_customer_name1
+                                , discount_customer_id1, branch, branch_code, location, location_id, category, category_id
+                                , classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                         orders.add(ord);
                     }
                     S1_orders.update_data(order);

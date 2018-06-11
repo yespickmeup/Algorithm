@@ -2724,70 +2724,70 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 jPanel6.setVisible(false);
             }
             if (to.previledge.equalsIgnoreCase("Salesman")) {
-                t_tavern();
+//                t_tavern();
             }
             //<editor-fold defaultstate="collapsed" desc=" menu icons ">
 
-            if (to.previledge.equalsIgnoreCase("Accounts Payable")) {
+            if (to.previledge.equalsIgnoreCase("Accounts Payable - (View)")) {
                 jLabel25.setVisible(true);
             }
-            if (to.previledge.equalsIgnoreCase("Accounts Receivable")) {
+            if (to.previledge.equalsIgnoreCase("Accounts Receivable - (View)")) {
                 jLabel9.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Purchase Order")) {
+            if (to.previledge.equalsIgnoreCase("Purchase Order - (View)")) {
                 jLabel19.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Receipts")) {
+            if (to.previledge.equalsIgnoreCase("Receipts - (View)")) {
                 jLabel16.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Services-Transaction")) {
+            if (to.previledge.equalsIgnoreCase("Services - (View)")) {
                 jLabel18.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Stock Transfer")) {
+            if (to.previledge.equalsIgnoreCase("Stock Transfer - (View)")) {
                 jLabel15.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Sales")) {
+            if (to.previledge.equalsIgnoreCase("Sales - (View)")) {
                 jLabel17.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Inventory Count")) {
+            if (to.previledge.equalsIgnoreCase("Inventory Encoding - (View)")) {
                 jLabel11.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Adjuster")) {
+            if (to.previledge.equalsIgnoreCase("Inventory Adjuster - (View)")) {
                 jLabel10.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("RMA")) {
+            if (to.previledge.equalsIgnoreCase("RMA - (View)")) {
 
                 jLabel27.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Item Maintenance")) {
+            if (to.previledge.equalsIgnoreCase("Item Maintenance - (View)")) {
                 jLabel23.setVisible(true);
             }
-            if (to.previledge.equalsIgnoreCase("Users")) {
+            if (to.previledge.equalsIgnoreCase("Users - (View)")) {
                 jLabel24.setVisible(true);
             }
 
-            if (to.previledge.equalsIgnoreCase("Customer's Balances Report")) {
+            if (to.previledge.equalsIgnoreCase("Customer - (View)")) {
                 jLabel21.setVisible(true);
             }
-            if (to.previledge.equalsIgnoreCase("Stock Ledger Report")) {
+            if (to.previledge.equalsIgnoreCase("Item Ledger - (View)")) {
                 jLabel20.setVisible(true);
             }
-            if (to.previledge.equalsIgnoreCase("Cashier Report")) {
+            if (to.previledge.equalsIgnoreCase("Cashier Report - (View)")) {
                 jLabel22.setVisible(true);
             }
-            if (to.previledge.equalsIgnoreCase("Services Report")) {
+            if (to.previledge.equalsIgnoreCase("Services - (View)")) {
                 jLabel28.setVisible(true);
             }
-            if (to.previledge.equalsIgnoreCase("Stock Take Report")) {
+            if (to.previledge.equalsIgnoreCase("Stock Take - (View)")) {
                 jLabel29.setVisible(true);
             }
             //</editor-fold>
