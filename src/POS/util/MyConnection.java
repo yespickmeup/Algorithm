@@ -179,6 +179,7 @@ public class MyConnection {
     }
 
     public static int check_cloud_connection() {
+        
         int connected = 0;
         String host = System.getProperty("cloud_host", "128.199.80.53");
         String port = System.getProperty("cloud_port", "3306");

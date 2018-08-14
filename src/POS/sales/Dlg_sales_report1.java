@@ -33,7 +33,7 @@ import org.jdesktop.swingx.combobox.ListComboBoxModel;
  *
  * @author Maytopacka
  */
-public class Dlg_sales_report extends javax.swing.JDialog {
+public class Dlg_sales_report1 extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_location
@@ -60,33 +60,33 @@ public class Dlg_sales_report extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_sales_report(java.awt.Frame parent, boolean modal) {
+    private Dlg_sales_report1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_sales_report(java.awt.Dialog parent, boolean modal) {
+    private Dlg_sales_report1(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_sales_report() {
+    public Dlg_sales_report1() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_sales_report myRef;
+    private Dlg_sales_report1 myRef;
 
-    private void setThisRef(Dlg_sales_report myRef) {
+    private void setThisRef(Dlg_sales_report1 myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_sales_report> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_sales_report1> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -94,7 +94,7 @@ public class Dlg_sales_report extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_sales_report create(java.awt.Window parent, boolean modal) {
+    public static Dlg_sales_report1 create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -104,14 +104,14 @@ public class Dlg_sales_report extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_sales_report create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_sales_report1 create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_sales_report dialog = dialogContainer.get(parent);
+            Dlg_sales_report1 dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_sales_report((java.awt.Frame) parent, false);
+                dialog = new Dlg_sales_report1((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().
@@ -126,10 +126,10 @@ public class Dlg_sales_report extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_sales_report dialog = dialogContainer.get(parent);
+            Dlg_sales_report1 dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_sales_report((java.awt.Dialog) parent, false);
+                dialog = new Dlg_sales_report1((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().
@@ -159,7 +159,7 @@ public class Dlg_sales_report extends javax.swing.JDialog {
         }
 
 
-        Dlg_sales_report dialog = Dlg_sales_report.create(new javax.swing.JFrame(), true);
+        Dlg_sales_report1 dialog = Dlg_sales_report1.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }

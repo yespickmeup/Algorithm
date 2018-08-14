@@ -29,6 +29,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,15 +37,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.ImageRenderer;
@@ -298,6 +305,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -1064,6 +1072,19 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Item Ledger", jPanel5);
 
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1039, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 595, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Print Preview", jPanel10);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1245,6 +1266,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1688,7 +1710,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 //        } else {
 //           
 //        }
-         nd.do_pass(selected);
+        nd.do_pass(selected);
         nd.setCallback(new Dlg_item_replacements_select.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_item_replacements_select.OutputData data) {
@@ -2365,7 +2387,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         tbl_report_item_replacements.setModel(tbl_report_item_replacements_M);
         tbl_report_item_replacements.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_report_item_replacements.setRowHeight(25);
-        int[] tbl_widths_report_item_replacements = {100, 150, 150, 150, 100, 100, 100, 70, 80, 30, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_report_item_replacements = {100, 150, 150, 150, 100, 100, 100, 70, 80, 30, 30, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_report_item_replacements.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -2458,7 +2480,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                         return "/POS/icon_inventory/checked.png";
                     }
                 case 10:
-                    return "/POS/icon_payment/eye.png";
+                    return "/POS/img_menu2/magnifying-glass.png";
                 case 11:
                     return tt.discount;
                 case 12:
@@ -2550,5 +2572,102 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 
             jTabbedPane1.setSelectedIndex(0);
         }
+        if (col == 10) {
+            to_item_replacements to = (to_item_replacements) tbl_report_item_replacements_ALM.get(row);
+            String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+            String address = System.getProperty("address", "Dumaguete");
+            String contact_no = System.getProperty("contact_no", "2342342");
+            int irn=to.item_replacement_no.indexOf("|");
+            String item_replacement_no = to.item_replacement_no.substring(irn+1, to.item_replacement_no.length());
+            int sn=to.sales_no.indexOf("|");
+            String sales_no = to.sales_no.substring(sn+1, to.sales_no.length());
+            String customer_name = to.customer_name;
+            String customer_id = to.customer_id;
+            String date_added = DateType.convert_slash_datetime(to.date_added);
+            String user_screen_name = to.user_screen_name;
+            String reason = to.reason;
+            double amount_due = to.amount_due;
+            double replacement_amount = to.replacement_amount;
+            double discount = to.discount;
+            String branch = to.branch;
+            String location = to.location;
+            double total = (to.replacement_amount - to.discount) - to.amount_due;
+            List<Item_replacement_details.to_item_replacement_details> datas = Item_replacement_details.ret_data(" where item_replacement_no='" + to.item_replacement_no + "' ");
+            List<Srpt_return_exchange.field> fields = new ArrayList();
+            for (Item_replacement_details.to_item_replacement_details item : datas) {
+                String item_code = item.item_code;
+                String barcode = item.barcode;
+                String description = item.description;
+                String serial_no = item.serial_no;
+                serial_no = serial_no.replaceAll("\n", ", ");
+                double product_qty = item.product_qty;
+
+                String unit = "";
+                Dlg_inventory_uom.to_uom uoms = uom.default_uom(item.unit);
+                if (uoms != null) {
+                    unit = uoms.uom;
+                }
+
+                unit = unit.replaceAll("#", "/");
+                double conversion = item.conversion;
+                double selling_price = item.selling_price;
+                double discount_amount = item.discount_amount;
+                double amount = (product_qty * selling_price) - discount_amount;
+                String replacement_type = " For Replacement";
+                if (item.is_replacement == 1) {
+                    replacement_type = "Replacement";
+                }
+                Srpt_return_exchange.field field = new Srpt_return_exchange.field(item_code, barcode, description, serial_no, product_qty, unit, conversion, selling_price, discount_amount, amount, replacement_type);
+                fields.add(field);
+            }
+
+            Srpt_return_exchange rpt = new Srpt_return_exchange(business_name, address, contact_no, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, reason, amount_due, replacement_amount, discount, branch, location, total);
+            rpt.fields.addAll(fields);
+            String jrxml = "rpt_return_exchange.jrxml";
+            report_return_exchange(rpt, jrxml);
+
+            jTabbedPane1.setSelectedIndex(3);
+        }
     }
+
+    private void report_return_exchange(final Srpt_return_exchange to, String jrxml_name) {
+        jPanel10.removeAll();
+        jPanel10.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_return_exchange(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            jPanel10.add(viewer);
+            jPanel10.updateUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_return_exchange(Srpt_return_exchange to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_return_exchange(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_return_exchange(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_return_exchange.class.
+                    getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

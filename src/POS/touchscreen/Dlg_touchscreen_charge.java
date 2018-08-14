@@ -193,8 +193,8 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         tf_reference_no = new Field.Input_w_clear();
         jButton2 = new Button.Default();
         jButton1 = new Button.Primary();
-        tf_customer_name = new Field.Input_w_clear();
-        tf_customer_id = new Field.Input_w_clear();
+        tf_customer_name = new Field.Input();
+        tf_customer_id = new Field.Input();
         tf_amount = new Field.Input_w_clear();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -476,6 +476,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_branch();
     }
@@ -612,7 +613,8 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         String reference_no = tf_reference_no.getText();
         String customer_name = tf_customer_name.getText();
         String customer_id = tf_customer_id.getText();
-        if (customer_id.isEmpty() || customer_id == null) {
+       
+        if (customer_id == null || customer_id.isEmpty()) {
             tf_customer_name.grabFocus();
             Alert.set(0, "Select Customer!");
             return;

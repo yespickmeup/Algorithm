@@ -607,7 +607,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
             double addt_amount = field.addtl_amount;
             double wtax = field.wtax;
             String serial_nos = field.serial_no;
-            double net_total = amount - line_discount1;
+            double net_total = (amount - (line_discount1+addt_amount));
             Official_receipt.field f = new Official_receipt.field(item_code, barcode, description, unit, qty, selling_price, line_discount1, amount, vatable, addt_amount, wtax, serial_nos, net_total);
             fields.add(f);
 

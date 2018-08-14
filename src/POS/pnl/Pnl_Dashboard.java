@@ -892,10 +892,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         login.setOpaque(false);
 
         jLabel8.setBackground(new java.awt.Color(16, 88, 197));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(16, 88, 197));
         jLabel8.setText("Username:");
 
+        tf_username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tf_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_usernameActionPerformed(evt);
@@ -903,10 +904,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         });
 
         jLabel12.setBackground(new java.awt.Color(16, 88, 197));
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(16, 88, 197));
         jLabel12.setText("Password:");
 
+        tf_password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tf_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_passwordActionPerformed(evt);
@@ -919,7 +921,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel13.setText("Login with your ");
 
         jLabel14.setBackground(new java.awt.Color(16, 88, 197));
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(16, 88, 197));
         jLabel14.setText("credentials!");
 

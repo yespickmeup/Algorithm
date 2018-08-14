@@ -470,9 +470,9 @@ public class CashDrawer_tables {
         tbl_cash_drawer_remittances.setModel(tbl_cash_drawer_remittances_M);
         tbl_cash_drawer_remittances.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_cash_drawer_remittances.setRowHeight(25);
-        int[] tbl_widths_cash_drawer_remittances = {100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_cash_drawer_remittances = {100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_cash_drawer_remittances.length; i < n; i++) {
-            if (i == 1) {
+            if (i == 2) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_cash_drawer_remittances, i, tbl_widths_cash_drawer_remittances[i]);
@@ -483,8 +483,8 @@ public class CashDrawer_tables {
         tbl_cash_drawer_remittances.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_cash_drawer_remittances.setRowHeight(25);
         tbl_cash_drawer_remittances.setFont(new java.awt.Font("Arial", 0, 12));
-        TableWidthUtilities.setColumnRightRenderer(tbl_cash_drawer_remittances, 2);
         TableWidthUtilities.setColumnRightRenderer(tbl_cash_drawer_remittances, 3);
+        TableWidthUtilities.setColumnRightRenderer(tbl_cash_drawer_remittances, 4);
     }
 
     public static void loadData_cash_drawer_remittances(List<CashDrawer_remittances.to_cash_drawer_remittances> acc) {
@@ -495,7 +495,7 @@ public class CashDrawer_tables {
     public static class Tblcash_drawer_remittancesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Name", "Cash", "Cheque", "cash_amount", "cheque_amount", "cheque_holder", "cheque_bank", "cheque_no", "cheque_date", "status"
+            "Date Added", "Check Date", "Name", "Cash", "Cheque", "cheque_amount", "cheque_holder", "cheque_bank", "cheque_no", "cheque_date", "status"
         };
 
         public Tblcash_drawer_remittancesModel(ListModel listmodel) {
@@ -520,25 +520,24 @@ public class CashDrawer_tables {
             CashDrawer_remittances.to_cash_drawer_remittances tt = (CashDrawer_remittances.to_cash_drawer_remittances) getRow(row);
             switch (col) {
                 case 0:
+                    return " " + DateType.convert_slash_datetime2(tt.date_added);
+                case 1:
                     if (tt.cash_amount > 0) {
                         return "";
                     } else {
                         return " " + DateType.convert_slash_datetime2(tt.cheque_date);
                     }
 
-                case 1:
+                case 2:
                     if (tt.cash_amount > 0) {
                         return "";
                     } else {
                         return " " + tt.cheque_holder;
                     }
-
-                case 2:
-                    return FitIn.fmt_wc_0(tt.cash_amount) + " ";
                 case 3:
-                    return FitIn.fmt_wc_0(tt.cheque_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.cash_amount) + " ";
                 case 4:
-                    return tt.cash_amount;
+                    return FitIn.fmt_wc_0(tt.cheque_amount) + " ";
                 case 5:
                     return tt.cheque_amount;
                 case 6:

@@ -3365,9 +3365,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
 
             if (col == 7) {
-                if (!jButton7.isEnabled()) {
-                    return;
-                }
+//                if (!jButton7.isEnabled()) {
+//                    return;
+//                }
                 if (jButton7.getText().equalsIgnoreCase("Post and Finalize")) {
                     Alert.set(0, "Editing Disabled!");
                     return;
@@ -3375,7 +3375,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Window p = (Window) this;
                 Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
                 nd.setTitle("");
-
                 nd.setCallback(new Dlg_confirm_delete.Callback() {
 
                     @Override
@@ -3960,7 +3959,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 nd.setLocationRelativeTo(this);
                 nd.setVisible(true);
             }
-
         }
     }
 
