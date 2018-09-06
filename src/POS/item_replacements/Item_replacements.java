@@ -168,6 +168,8 @@ public class Item_replacements {
                         + ",branch_id"
                         + ",location"
                         + ",location_id"
+                        + ",addtl_amount"
+                        + ",wtax"
                         + ")values("
                         + ":item_replacement_no"
                         + ",:sales_no"
@@ -208,6 +210,8 @@ public class Item_replacements {
                         + ",:branch_id"
                         + ",:location"
                         + ",:location_id"
+                        + ",:addtl_amount"
+                        + ",:wtax"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2)
@@ -250,6 +254,8 @@ public class Item_replacements {
                         .setString("branch_id", to_item_replacements.branch_id)
                         .setString("location", to_item_replacements.location)
                         .setString("location_id", to_item_replacements.location_id)
+                        .setNumber("addtl_amount", to_item_replacement_details.addtl_amount)
+                        .setNumber("wtax", to_item_replacement_details.wtax)
                         .ok();
                 stmt.addBatch(s2);
             }
@@ -294,6 +300,8 @@ public class Item_replacements {
                         + ",branch_id"
                         + ",location"
                         + ",location_id"
+                        + ",addtl_amount"
+                        + ",wtax"
                         + ")values("
                         + ":item_replacement_no"
                         + ",:sales_no"
@@ -334,6 +342,8 @@ public class Item_replacements {
                         + ",:branch_id"
                         + ",:location"
                         + ",:location_id"
+                        + ",:addtl_amount"
+                        + ",:wtax"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2)
@@ -376,6 +386,8 @@ public class Item_replacements {
                         .setString("branch_id", to_item_replacements.branch_id)
                         .setString("location", to_item_replacements.location)
                         .setString("location_id", to_item_replacements.location_id)
+                        .setNumber("addtl_amount", to_item_replacement_details.addtl_amount)
+                        .setNumber("wtax", to_item_replacement_details.wtax)
                         .ok();
                 stmt.addBatch(s2);
             }

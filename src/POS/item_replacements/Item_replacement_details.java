@@ -65,8 +65,9 @@ public class Item_replacement_details {
         public final String branch_id;
         public final String location;
         public final String location_id;
-
-        public to_item_replacement_details(int id, String item_replacement_no, String sales_no, String customer_name, String customer_id, String date_added, String user_screen_name, String user_id, String item_code, String barcode, String generic_name, String description, String item_type, String serial_no, double product_qty, String unit, double conversion, double selling_price, int is_vatable, int selling_type, String discount_name, double discount_amount, String discount_customer_name, String discount_customer_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, int is_replacement, String reason, int status, String branch, String branch_id, String location, String location_id) {
+        public final double addtl_amount;
+        public final double wtax;
+        public to_item_replacement_details(int id, String item_replacement_no, String sales_no, String customer_name, String customer_id, String date_added, String user_screen_name, String user_id, String item_code, String barcode, String generic_name, String description, String item_type, String serial_no, double product_qty, String unit, double conversion, double selling_price, int is_vatable, int selling_type, String discount_name, double discount_amount, String discount_customer_name, String discount_customer_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, int is_replacement, String reason, int status, String branch, String branch_id, String location, String location_id,double addtl_amount,double wtax) {
             this.id = id;
             this.item_replacement_no = item_replacement_no;
             this.sales_no = sales_no;
@@ -108,6 +109,8 @@ public class Item_replacement_details {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.addtl_amount=addtl_amount;
+            this.wtax=wtax;
         }
     }
 
@@ -153,6 +156,8 @@ public class Item_replacement_details {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",addtl_amount"
+                    + ",wtax"
                     + ")values("
                     + ":item_replacement_no"
                     + ",:sales_no"
@@ -192,6 +197,8 @@ public class Item_replacement_details {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:addtl_amount"
+                    + ",:wtax"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -233,6 +240,8 @@ public class Item_replacement_details {
                     .setString("branch_id", to_item_replacement_details.branch_id)
                     .setString("location", to_item_replacement_details.location)
                     .setString("location_id", to_item_replacement_details.location_id)
+                    .setNumber("addtl_amount", to_item_replacement_details.addtl_amount)
+                    .setNumber("wtax", to_item_replacement_details.wtax)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -287,6 +296,8 @@ public class Item_replacement_details {
                     + ",branch_id= :branch_id "
                     + ",location= :location "
                     + ",location_id= :location_id "
+                    + ",addtl_amount= :addtl_amount"
+                    + ",wtax= :wtax"
                     + " where id='" + to_item_replacement_details.id + "' "
                     + " ";
 
@@ -329,6 +340,8 @@ public class Item_replacement_details {
                     .setString("branch_id", to_item_replacement_details.branch_id)
                     .setString("location", to_item_replacement_details.location)
                     .setString("location_id", to_item_replacement_details.location_id)
+                    .setNumber("addtl_amount", to_item_replacement_details.addtl_amount)
+                    .setNumber("wtax", to_item_replacement_details.wtax)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -427,6 +440,8 @@ public class Item_replacement_details {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",addtl_amount"
+                    + ",wtax"
                     + " from item_replacement_details"
                     + " " + where;
 
@@ -474,8 +489,9 @@ public class Item_replacement_details {
                 String branch_id = rs.getString(39);
                 String location = rs.getString(40);
                 String location_id = rs.getString(41);
-
-                to_item_replacement_details to = new to_item_replacement_details(id, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, user_id, item_code, barcode, generic_name, description, item_type, serial_no, product_qty, unit, conversion, selling_price, is_vatable, selling_type, discount_name, discount_amount, discount_customer_name, discount_customer_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, is_replacement, reason, status, branch, branch_id, location, location_id);
+                double addtl_amount=rs.getDouble(42);
+                double wtax=rs.getDouble(43);
+                to_item_replacement_details to = new to_item_replacement_details(id, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, user_id, item_code, barcode, generic_name, description, item_type, serial_no, product_qty, unit, conversion, selling_price, is_vatable, selling_type, discount_name, discount_amount, discount_customer_name, discount_customer_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, is_replacement, reason, status, branch, branch_id, location, location_id,addtl_amount,wtax);
                 datas.add(to);
             }
             return datas;

@@ -689,7 +689,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         double amount = 0;
 
         for (MySales_Items.items item : acc) {
-            amount += item.product_qty * item.selling_price;
+            amount += (item.product_qty * item.selling_price)+item.addtl_amount-item.discount_amount;
         }
         loadData_sale_items(acc);
         jLabel2.setText("" + acc.size());
@@ -703,7 +703,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         double amount = 0;
 
         for (MySales_Items.items item : acc) {
-            amount += (item.product_qty * item.selling_price)-item.discount_amount;
+            amount += (item.product_qty * item.selling_price)+item.addtl_amount-item.discount_amount;
         }
         loadData_sale_items(acc);
         jLabel2.setText("" + acc.size());

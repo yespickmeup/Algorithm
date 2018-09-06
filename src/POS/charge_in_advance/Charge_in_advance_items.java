@@ -856,4 +856,60 @@ public class Charge_in_advance_items {
         }
     }
 
+    public static List<Inventory_barcodes.to_inventory_barcodes> convert_to_items(List<to_charge_in_advance_items> datas) {
+        List<Inventory_barcodes.to_inventory_barcodes> orders = new ArrayList();
+        for (to_charge_in_advance_items to : datas) {
+            int id = to.id;
+            String barcode = to.barcode;
+            String description = to.description;
+            String generic_name = to.generic_name;
+            String category = to.category;
+            String category_id = to.category_id;
+            String classification = to.classification;
+            String classification_id = to.classification_id;
+            String sub_classification = to.sub_classification;
+            String sub_classification_id = to.sub_classification_id;
+            double product_qty = to.product_qty;
+            String unit = to.unit;
+            double conversion = to.conversion;
+            double selling_price = to.selling_price;
+            String date_added = to.date_added;
+            String user_name = to.user_screen_name;
+            String item_type = to.item_type;
+            int status = to.status;
+            String supplier = to.supplier_name;
+            int fixed_price = 0;
+            double cost = to.selling_price;
+            String supplier_id = to.supplier_id;
+            int multi_level_pricing = 1;
+            int vatable = to.is_vatable;
+            double reorder_level = 0;
+            double markup = 0;
+            String main_barcode = to.item_code;
+            String brand = to.brand;
+            String brand_id = to.brand_id;
+            String model = to.model;
+            String model_id = to.model_id;
+            int selling_type = to.selling_type;
+            String branch = to.branch;
+            String branch_code = to.branch_code;
+            String location = to.location;
+            String location_id = to.location_id;
+            String serial_no = to.serial_no;
+            String selected_serials = to.serial_no;
+            double discount = to.discount_rate;
+            double discount_amount = to.discount_amount;
+            String discount_name = to.discount_name;
+            String discount_customer_name = to.discount_customer_name;
+            String discount_customer_id = to.discount_customer_id;
+            double addtl_amount = to.addtl_amount;
+            double wtax = to.wtax;
+
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax);
+            orders.add(order);
+        }
+        return orders;
+
+    }
+
 }

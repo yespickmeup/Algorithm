@@ -51,7 +51,6 @@ update stock_transfers set remarks = 'Snacks: Customers' where remarks like 'to 
 update stock_transfers set remarks = 'Snacks: ' where remarks like '' and to_location_id=10;
 
 
-
 alter table customers add category varchar(255) default '';
 alter table customers add category_id int default 0;
 

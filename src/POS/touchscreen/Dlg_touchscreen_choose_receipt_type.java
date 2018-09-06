@@ -8,6 +8,7 @@ package POS.touchscreen;
 import POS.bir.Acknowledgement_receipt;
 import POS.bir.Delivery_receipt;
 import POS.bir.Official_receipt;
+import POS.charge_in_advance.Charge_in_advance_items;
 import POS.inventory.Inventory_barcodes;
 import POS.my_sales.MySales;
 import POS.reports.Dlg_report_items;
@@ -523,7 +524,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         init_key();
     }
 
-    public void do_pass(List<Inventory_barcodes.to_inventory_barcodes> orders, double sale_discount1, double net_totals, MySales.sales sale, double cash_amount, double change_amount,String sales_date) {
+    public void do_pass(List<Inventory_barcodes.to_inventory_barcodes> orders, double sale_discount1, double net_totals, MySales.sales sale, double cash_amount, double change_amount, String sales_date) {
         String business_name = System.getProperty("business_name", "XYZ Marketing");
         String operated_by = "Operated by: " + System.getProperty("operated_by", "Juan dela Cruz");
         String address = System.getProperty("address", "Canlas Subdivision, Lower Bagacay, Dumaguete City, Negros Oriental");
@@ -537,7 +538,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         String accreditation_no = System.getProperty("accreditation_no", "0000000000");
         String business_type = System.getProperty("business_type", "VAT REG");
         String vat_percent = System.getProperty("vat_percent", "12");
-        
+
         String terminal_no = "Terminal No.: " + System.getProperty("terminal_no", "0001");
         String cashier = "Cashier: " + MyUser.getUser_screen_name();
         String customer_name = "" + sale.customer_name;
@@ -585,6 +586,7 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         int index = or_no.indexOf("|");
         or_no = or_no.substring(index + 1, or_no.length());
         or_no = "OR No.: " + or_no;
+
         String receipt_footer = System.getProperty("receipt_footer", "THIS INVOICE/RECEIPT SHALL BE VALID FOR FIVE(5) YEARS FROM THE DATE OF THE PERMIT TO USE\nTHIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAX");
         String supplier_name = "Supplier: " + System.getProperty("developer", "Synapse Software Technologies");
         String supplier_address = System.getProperty("developer_address", "Daro, Dumaguete City, Negros Oriental");
@@ -593,9 +595,12 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
         String supplier_accreditation_date = "Accreditation Date: " + System.getProperty("developer_accreditation_date", "mm/dd/yyyy");
         String bir_permit_to_use_no = "PTU No.: " + System.getProperty("bir_permit_to_use_no", "0000000000");
         List<Official_receipt.field> fields = new ArrayList();
+        List<Charge_in_advance_items.to_charge_in_advance_items> charge_items = Charge_in_advance_items.ret_data(" where customer_id='" + sale.charge_customer_id + "' and reference_no='" + sale.charge_reference_no + "' ");
+        List<Inventory_barcodes.to_inventory_barcodes> charge_items_converted = Charge_in_advance_items.convert_to_items(charge_items);
 
         for (Inventory_barcodes.to_inventory_barcodes field : orders) {
             String item_code = field.main_barcode;
+            
             String barcode = field.barcode;
             String description = field.description;
             String unit = field.unit;
@@ -607,10 +612,28 @@ public class Dlg_touchscreen_choose_receipt_type extends javax.swing.JDialog {
             double addt_amount = field.addtl_amount;
             double wtax = field.wtax;
             String serial_nos = field.serial_no;
-            double net_total = (amount - (line_discount1+addt_amount));
+            double net_total = (amount - line_discount1 + addt_amount);
             Official_receipt.field f = new Official_receipt.field(item_code, barcode, description, unit, qty, selling_price, line_discount1, amount, vatable, addt_amount, wtax, serial_nos, net_total);
             fields.add(f);
+            total_items += field.product_qty;
+        }
+        for (Inventory_barcodes.to_inventory_barcodes field : charge_items_converted) {
+            String item_code = field.main_barcode;
 
+            String barcode = field.barcode;
+            String description = field.description;
+            String unit = field.unit;
+            double qty = field.product_qty;
+            double selling_price = field.selling_price;
+            double line_discount1 = field.discount_amount;
+            double amount = ((qty * selling_price));
+            String vatable = "V";
+            double addt_amount = field.addtl_amount;
+            double wtax = field.wtax;
+            String serial_nos = field.serial_no;
+            double net_total = (amount - line_discount1 + addt_amount);
+            Official_receipt.field f = new Official_receipt.field(item_code, barcode, description, unit, qty, selling_price, line_discount1, amount, vatable, addt_amount, wtax, serial_nos, net_total);
+            fields.add(f);
             total_items += field.product_qty;
         }
         vatable_sales = sale.amount_due / 1.12;

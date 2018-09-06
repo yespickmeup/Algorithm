@@ -1186,7 +1186,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField7MouseClicked
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
+        ret_report_item_replacements();
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
@@ -2079,7 +2079,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 7:
                     return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 8:
-                    double amount = (tt.product_qty * tt.selling_price) - (tt.discount_amount);
+                    double amount = (tt.product_qty * tt.selling_price) - (tt.discount_amount) + tt.addtl_amount;
                     return FitIn.fmt_wc_0(amount) + " ";
                 case 9:
                     return tt.product_qty;
@@ -2161,7 +2161,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         loadData_for_replacement(datas);
         double amount = 0;
         for (Item_replacement_details.to_item_replacement_details item : datas) {
-            amount += item.product_qty * item.selling_price;
+            amount += (item.product_qty * item.selling_price) + item.addtl_amount - item.discount_amount;
         }
         jLabel19.setText(FitIn.fmt_wc_0(amount));
         jLabel18.setText("" + datas.size());
@@ -2254,7 +2254,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 7:
                     return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 8:
-                    double amount = (tt.product_qty * tt.selling_price) - (tt.discount_amount);
+                    double amount = (tt.product_qty * tt.selling_price) - (tt.discount_amount) + tt.addtl_amount;
                     return FitIn.fmt_wc_0(amount) + " ";
                 case 9:
                     return tt.product_qty;
@@ -2335,7 +2335,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         loadData_replacement(datas);
         double amount = 0;
         for (Item_replacement_details.to_item_replacement_details item : datas) {
-            amount += item.product_qty * item.selling_price;
+            amount += (item.product_qty * item.selling_price) + item.addtl_amount - item.discount_amount;
         }
         jLabel23.setText(FitIn.fmt_wc_0(amount));
         jLabel22.setText("" + datas.size());
@@ -2514,7 +2514,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
         if (jCheckBox5.isSelected()) {
             where = where + " and sales_no like '%" + jTextField7.getText() + "%' ";
         }
-        where = where + " order by id asc ";
+        where = where + " order by id desc ";
         List<to_item_replacements> datas = Item_replacements.ret_data(where);
         loadData_report_item_replacements(datas);
 
@@ -2577,10 +2577,10 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
             String business_name = System.getProperty("business_name", "Algorithm Computer Services");
             String address = System.getProperty("address", "Dumaguete");
             String contact_no = System.getProperty("contact_no", "2342342");
-            int irn=to.item_replacement_no.indexOf("|");
-            String item_replacement_no = to.item_replacement_no.substring(irn+1, to.item_replacement_no.length());
-            int sn=to.sales_no.indexOf("|");
-            String sales_no = to.sales_no.substring(sn+1, to.sales_no.length());
+            int irn = to.item_replacement_no.indexOf("|");
+            String item_replacement_no = to.item_replacement_no.substring(irn + 1, to.item_replacement_no.length());
+            int sn = to.sales_no.indexOf("|");
+            String sales_no = to.sales_no.substring(sn + 1, to.sales_no.length());
             String customer_name = to.customer_name;
             String customer_id = to.customer_id;
             String date_added = DateType.convert_slash_datetime(to.date_added);

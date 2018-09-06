@@ -165,7 +165,7 @@ public class MyMain {
             System.setProperty("location", prop.getProperty("location", "main_branch"));
             System.setProperty("main_branch", prop.getProperty("main_branch", "false"));
             System.setProperty("return_exchange_days", prop.getProperty("return_exchange_days", "0"));
-
+            
             if (setting.module_prepayments == 1) {
                 System.setProperty("module_prepayments", prop.getProperty("module_prepayments", "1"));
             }
@@ -216,7 +216,7 @@ public class MyMain {
     private void start() {
         Application.setSystemLookAndFeel();
         Pnl_Dashboard pnl = new Pnl_Dashboard();
-        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/POS/img_menu/synapse.png"));
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/POS/icons3/smis_logo (Custom).png"));
         pnl.setIconImage(image);
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().
