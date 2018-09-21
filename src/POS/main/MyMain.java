@@ -216,7 +216,7 @@ public class MyMain {
     private void start() {
         Application.setSystemLookAndFeel();
         Pnl_Dashboard pnl = new Pnl_Dashboard();
-        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/POS/icons3/smis_logo (Custom).png"));
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/POS/main/icon.png"));
         pnl.setIconImage(image);
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().
@@ -256,4 +256,5 @@ public class MyMain {
         }
         return result.trim();
     }
+    
 }

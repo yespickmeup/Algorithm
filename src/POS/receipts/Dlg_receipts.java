@@ -4,7 +4,6 @@
  */
 package POS.receipts;
 
-import POS.accounts_payable.Accounts_payable;
 import POS.barcodes.Dlg_barcodes;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
@@ -3921,13 +3920,13 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         break;
                     }
                 }
-                String ap_no = Accounts_payable.increment_id(branch_id);
-                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
-                if (!payables.isEmpty()) {
-                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
-                    Alert.set(0, "AP No. already added!");
-                    return;
-                }
+//                String ap_no = Accounts_payable.increment_id(branch_id);
+//                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+//                if (!payables.isEmpty()) {
+//                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+//                    Alert.set(0, "AP No. already added!");
+//                    return;
+//                }
 
                 Receipts.finalize(to, acc, branch, branch_id, data.is_invoice, data.is_payable, data.ap_date);
                 data_cols();
