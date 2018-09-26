@@ -47,8 +47,10 @@ public class Stock_transfers {
         public final String at_location;
         public final String at_location_id;
         public final int is_uploaded;
+        public final String finalized_by_id;
+        public final String finalized_by;
 
-        public to_stock_transfers(int id, String transaction_no, String user_name, String date_added, String remarks, String to_branch, String to_branch_id, String to_location, String to_location_id, String from_branch, String from_branch_id, String from_location, String from_location_id, int status, boolean selected, String at_branch, String at_branch_id, String at_location, String at_location_id, int is_uploaded) {
+        public to_stock_transfers(int id, String transaction_no, String user_name, String date_added, String remarks, String to_branch, String to_branch_id, String to_location, String to_location_id, String from_branch, String from_branch_id, String from_location, String from_location_id, int status, boolean selected, String at_branch, String at_branch_id, String at_location, String at_location_id, int is_uploaded, String finalized_by_id, String finalized_by) {
             this.id = id;
             this.transaction_no = transaction_no;
             this.user_name = user_name;
@@ -69,6 +71,8 @@ public class Stock_transfers {
             this.at_location = at_location;
             this.at_location_id = at_location_id;
             this.is_uploaded = is_uploaded;
+            this.finalized_by_id = finalized_by_id;
+            this.finalized_by = finalized_by;
         }
 
         public boolean isSelected() {
@@ -385,6 +389,49 @@ public class Stock_transfers {
         }
     }
 
+    public static void edit_stock_transfers2(to_stock_transfers to_stock_transfers) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+
+            String s0 = "update stock_transfers set "
+                    + " remarks= :remarks "
+                    + " ,date_added= :date_added "
+                    + " ,is_uploaded= :is_uploaded "
+                    + " where id='" + to_stock_transfers.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("remarks", to_stock_transfers.remarks)
+                    .setString("date_added", to_stock_transfers.date_added)
+                    .setNumber("is_uploaded", 2)
+                    .ok();
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.addBatch(s0);
+
+            String s2 = "update stock_transfers_items set "
+                    + " date_added= :date_added"
+                    + " where "
+                    + " stock_transfer_id ='" + to_stock_transfers.transaction_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setString("date_added", to_stock_transfers.date_added)
+                    .ok();
+
+            stmt.addBatch(s2);
+            stmt.executeBatch();
+            conn.commit();
+
+            Lg.s(Stock_transfers_items.class, "Successfully Updated");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_stock_transfers(to_stock_transfers to_stock_transfers) {
         try {
             Connection conn = MyConnection.connect();
@@ -512,6 +559,8 @@ public class Stock_transfers {
                     + ",at_location"
                     + ",at_location_id"
                     + ",is_uploaded"
+                    + ",finalized_by_id"
+                    + ",finalized_by"
                     + " from stock_transfers"
                     + " " + where;
 
@@ -537,7 +586,9 @@ public class Stock_transfers {
                 String at_location = rs.getString(17);
                 String at_location_id = rs.getString(18);
                 int is_uploaded = rs.getInt(19);
-                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+                String finalized_by_id = rs.getString(20);
+                String finalized_by = rs.getString(21);
+                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
                 datas.add(to);
             }
             return datas;
@@ -573,6 +624,8 @@ public class Stock_transfers {
                     + ",at_location"
                     + ",at_location_id"
                     + ",is_uploaded"
+                    + ",finalized_by_id"
+                    + ",finalized_by"
                     + " from stock_transfers"
                     + " " + where;
 
@@ -584,6 +637,7 @@ public class Stock_transfers {
                 String user_name = rs.getString(3);
                 String date_added = rs.getString(4);
                 String remarks = rs.getString(5);
+//                System.out.println("get: " + remarks);
                 String to_branch = rs.getString(6);
                 String to_branch_id = rs.getString(7);
                 String to_location = rs.getString(8);
@@ -598,7 +652,9 @@ public class Stock_transfers {
                 String at_location = rs.getString(17);
                 String at_location_id = rs.getString(18);
                 int is_uploaded = rs.getInt(19);
-                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+                String finalized_by_id = rs.getString(20);
+                String finalized_by = rs.getString(21);
+                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
                 datas.add(to);
             }
             conn.close();
@@ -643,7 +699,7 @@ public class Stock_transfers {
         }
     }
 
-    public static List<String> finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas) {
+    public static List<String> finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas,String finalized_by_id,String finalized_by) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
@@ -653,12 +709,16 @@ public class Stock_transfers {
 
             String s0 = "update stock_transfers set "
                     + " status= :status"
+                    + " ,finalized_by_id= :finalized_by_id"
+                    + " ,finalized_by= :finalized_by"
                     + " where "
                     + " transaction_no ='" + to_stock_transfers.transaction_no + "' "
                     + " ";
 
             s0 = SqlStringUtil.parse(s0)
                     .setNumber("status", 1)
+                    .setString("finalized_by_id",finalized_by_id)
+                    .setString("finalized_by", finalized_by)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
 
@@ -666,76 +726,22 @@ public class Stock_transfers {
 
             String s2 = "update stock_transfers_items set "
                     + " status= :status"
+                    + " ,finalized_by_id= :finalized_by_id"
+                    + " ,finalized_by= :finalized_by"
                     + " where "
                     + " stock_transfer_id ='" + to_stock_transfers.transaction_no + "' "
                     + " ";
 
             s2 = SqlStringUtil.parse(s2)
                     .setNumber("status", 1)
+                    .setString("finalized_by_id", finalized_by_id)
+                    .setString("finalized_by", finalized_by)
                     .ok();
 
             stmt.addBatch(s2);
 
-//            <editor-fold defaultstate="collapsed" desc=" query to insert ">
-            String query1 = "insert into stock_transfers("
-                    + "transaction_no"
-                    + ",user_name"
-                    + ",date_added"
-                    + ",remarks"
-                    + ",to_branch"
-                    + ",to_branch_id"
-                    + ",to_location"
-                    + ",to_location_id"
-                    + ",from_branch"
-                    + ",from_branch_id"
-                    + ",from_location"
-                    + ",from_location_id"
-                    + ",status"
-                    + ",at_branch"
-                    + ",at_branch_id"
-                    + ",at_location"
-                    + ",at_location_id"
-                    + ")values("
-                    + ":transaction_no"
-                    + ",:user_name"
-                    + ",:date_added"
-                    + ",:remarks"
-                    + ",:to_branch"
-                    + ",:to_branch_id"
-                    + ",:to_location"
-                    + ",:to_location_id"
-                    + ",:from_branch"
-                    + ",:from_branch_id"
-                    + ",:from_location"
-                    + ",:from_location_id"
-                    + ",:status"
-                    + ",:at_branch"
-                    + ",:at_branch_id"
-                    + ",:at_location"
-                    + ",:at_location_id"
-                    + ")";
-
-            query1 = SqlStringUtil.parse(query1)
-                    .setString("transaction_no", to_stock_transfers.transaction_no)
-                    .setString("user_name", to_stock_transfers.user_name)
-                    .setString("date_added", to_stock_transfers.date_added)
-                    .setString("remarks", to_stock_transfers.remarks)
-                    .setString("to_branch", to_stock_transfers.to_branch)
-                    .setString("to_branch_id", to_stock_transfers.to_branch_id)
-                    .setString("to_location", to_stock_transfers.to_location)
-                    .setString("to_location_id", to_stock_transfers.to_location_id)
-                    .setString("from_branch", to_stock_transfers.from_branch)
-                    .setString("from_branch_id", to_stock_transfers.from_branch_id)
-                    .setString("from_location", to_stock_transfers.from_location)
-                    .setString("from_location_id", to_stock_transfers.from_location_id)
-                    .setNumber("status", to_stock_transfers.status)
-                    .setString("at_branch", to_stock_transfers.at_branch)
-                    .setString("at_branch_id", to_stock_transfers.at_branch_id)
-                    .setString("at_location", to_stock_transfers.at_location)
-                    .setString("at_location_id", to_stock_transfers.at_location_id)
-                    .ok();
-            query.add(query1);
-//            </editor-fold>
+//          
+//          
             for (Stock_transfers_items.to_stock_transfers_items to : datas) {
 //                Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to.barcode, to.barcodes, to_stock_transfers.to_location_id);
                 String s11 = "select "
@@ -802,167 +808,8 @@ public class Stock_transfers {
                         + "";
                 stmt.addBatch(s41);
 
-                //<editor-fold defaultstate="collapsed" desc=" insert query 2 ">
-                String query2 = "insert into stock_transfers_items("
-                        + "barcode"
-                        + ",description"
-                        + ",generic_name"
-                        + ",category"
-                        + ",category_id"
-                        + ",classification"
-                        + ",classification_id"
-                        + ",sub_classification"
-                        + ",sub_classification_id"
-                        + ",product_qty"
-                        + ",unit"
-                        + ",conversion"
-                        + ",selling_price"
-                        + ",date_added"
-                        + ",user_name"
-                        + ",item_type"
-                        + ",status"
-                        + ",supplier"
-                        + ",fixed_price"
-                        + ",cost"
-                        + ",supplier_id"
-                        + ",multi_level_pricing"
-                        + ",vatable"
-                        + ",reorder_level"
-                        + ",markup"
-                        + ",barcodes"
-                        + ",brand"
-                        + ",brand_id"
-                        + ",model"
-                        + ",model_id"
-                        + ",selling_type"
-                        + ",branch"
-                        + ",branch_code"
-                        + ",location"
-                        + ",location_id"
-                        + ",stock_transfer_id"
-                        + ",serial_no"
-                        + ",to_branch"
-                        + ",to_branch_id"
-                        + ",to_location"
-                        + ",to_location_id"
-                        + ",at_branch"
-                        + ",at_branch_id"
-                        + ",at_location"
-                        + ",at_location_id"
-                        + ")values("
-                        + ":barcode"
-                        + ",:description"
-                        + ",:generic_name"
-                        + ",:category"
-                        + ",:category_id"
-                        + ",:classification"
-                        + ",:classification_id"
-                        + ",:sub_classification"
-                        + ",:sub_classification_id"
-                        + ",:product_qty"
-                        + ",:unit"
-                        + ",:conversion"
-                        + ",:selling_price"
-                        + ",:date_added"
-                        + ",:user_name"
-                        + ",:item_type"
-                        + ",:status"
-                        + ",:supplier"
-                        + ",:fixed_price"
-                        + ",:cost"
-                        + ",:supplier_id"
-                        + ",:multi_level_pricing"
-                        + ",:vatable"
-                        + ",:reorder_level"
-                        + ",:markup"
-                        + ",:barcodes"
-                        + ",:brand"
-                        + ",:brand_id"
-                        + ",:model"
-                        + ",:model_id"
-                        + ",:selling_type"
-                        + ",:branch"
-                        + ",:branch_code"
-                        + ",:location"
-                        + ",:location_id"
-                        + ",:stock_transfer_id"
-                        + ",:serial_no"
-                        + ",:to_branch"
-                        + ",:to_branch_id"
-                        + ",:to_location"
-                        + ",:to_location_id"
-                        + ",:at_branch"
-                        + ",:at_branch_id"
-                        + ",:at_location"
-                        + ",:at_location_id"
-                        + ")";
-
-                query2 = SqlStringUtil.parse(query2)
-                        .setString("barcode", to.barcode)
-                        .setString("description", to.description)
-                        .setString("generic_name", to.generic_name)
-                        .setString("category", to.category)
-                        .setString("category_id", to.category_id)
-                        .setString("classification", to.classification)
-                        .setString("classification_id", to.classification_id)
-                        .setString("sub_classification", to.sub_classification)
-                        .setString("sub_classification_id", to.sub_classification_id)
-                        .setNumber("product_qty", to.product_qty)
-                        .setString("unit", to.unit)
-                        .setNumber("conversion", to.conversion)
-                        .setNumber("selling_price", to.selling_price)
-                        .setString("date_added", to.date_added)
-                        .setString("user_name", to.user_name)
-                        .setString("item_type", to.item_type)
-                        .setNumber("status", 0)
-                        .setString("supplier", to.supplier)
-                        .setNumber("fixed_price", to.fixed_price)
-                        .setNumber("cost", to.cost)
-                        .setString("supplier_id", to.supplier_id)
-                        .setNumber("multi_level_pricing", to.multi_level_pricing)
-                        .setNumber("vatable", to.vatable)
-                        .setNumber("reorder_level", to.reorder_level)
-                        .setNumber("markup", to.markup)
-                        .setString("barcodes", to.barcodes)
-                        .setString("brand", to.brand)
-                        .setString("brand_id", to.brand_id)
-                        .setString("model", to.model)
-                        .setString("model_id", to.model_id)
-                        .setNumber("selling_type", to.selling_type)
-                        .setString("branch", to.branch)
-                        .setString("branch_code", to.branch_code)
-                        .setString("location", to.location)
-                        .setString("location_id", to.location_id)
-                        .setString("stock_transfer_id", to_stock_transfers.transaction_no)
-                        .setString("serial_no", to.serial_no)
-                        .setString("to_branch", to_stock_transfers.to_branch)
-                        .setString("to_branch_id", to_stock_transfers.to_branch_id)
-                        .setString("to_location", to_stock_transfers.to_location)
-                        .setString("to_location_id", to_stock_transfers.to_location_id)
-                        .setString("at_branch", to.at_branch)
-                        .setString("at_branch_id", to.at_branch_id)
-                        .setString("at_location", to.at_location)
-                        .setString("at_location_id", to.at_location_id)
-                        .ok();
-                query.add(query2);
-                //</editor-fold>
             }
 
-//            String json = gson.toJson(query);
-//            String my_branch_id = MyUser.getBranch_id();
-//            if (!my_branch_id.equalsIgnoreCase(to_stock_transfers.to_branch_id)) {
-//                String is_server = System.getProperty("is_server", "false");
-//                String location = System.getProperty("location", "main_branch");
-//                if (location.equalsIgnoreCase("main_branch")) {
-//                    Main_branch_query_uploads.add_data2(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Stock Transfer", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), to_stock_transfers.to_branch, to_stock_transfers.to_branch_id);
-//                    System.out.println("Record added....");
-//                }
-//                if (location.equalsIgnoreCase("local_branch")) {
-//                    Local_branch_query_uploads.add_data2(new Local_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Stock Transfer", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0), to_stock_transfers.to_branch, to_stock_transfers.to_branch_id);
-//                    System.out.println("Record added....");
-//                }
-//
-//            }
             stmt.executeBatch();
             conn.commit();
 
@@ -1001,6 +848,8 @@ public class Stock_transfers {
                     + ",at_location"
                     + ",at_location_id"
                     + ",is_uploaded"
+                    + ",finalized_by_id"
+                    + ",finalized_by"
                     + " from stock_transfers  "
                     + " " + where;
 
@@ -1026,7 +875,9 @@ public class Stock_transfers {
                 String at_location = rs.getString(17);
                 String at_location_id = rs.getString(18);
                 int is_uploaded = rs.getInt(19);
-                to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+                String finalized_by_id = rs.getString(20);
+                String finalized_by = rs.getString(21);
+                to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
 
             }
             return to;

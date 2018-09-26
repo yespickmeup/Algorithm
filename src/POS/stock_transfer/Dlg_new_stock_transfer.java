@@ -19,7 +19,9 @@ import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
 import POS.synch.Synch_stock_transfers;
+import POS.users.MyUser;
 import POS.util.Alert;
+import POS.util.Button;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_confirm_cloud;
@@ -31,7 +33,6 @@ import POS.util.Users;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -62,7 +63,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
-import synsoftech.fields.Button;
+
 import synsoftech.fields.Field;
 import synsoftech.util.ImageRenderer;
 
@@ -283,9 +284,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -672,59 +670,26 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
         });
 
-        jLabel37.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setText("0");
-        jLabel37.setOpaque(true);
-
-        jLabel38.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setText("0");
-        jLabel38.setOpaque(true);
-
-        jLabel39.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setText("0");
-        jLabel39.setOpaque(true);
-
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+            .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton8)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1024,6 +989,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox5.setText("All");
+        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox5ActionPerformed(evt);
+            }
+        });
 
         jCheckBox10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox10.setSelected(true);
@@ -1692,17 +1662,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        init_no();
-        tf_remarks.setText("");
-        jButton5.setEnabled(true);
-        jButton1.setEnabled(false);
-        jButton7.setEnabled(false);
-        tf_to_branch.setText("");
-        tf_to_branch_id.setText("");
-        tf_to_location.setText("");
-        tf_to_location_id.setText("");
-        tbl_stock_transfers_items_ALM.clear();
-        tbl_stock_transfers_items_M.fireTableDataChanged();
+        new_post();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1821,6 +1781,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         check_items();
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+        check_all_branches("from");
+    }//GEN-LAST:event_jCheckBox5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1902,9 +1866,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1968,6 +1929,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_smis_kabankalan_with_encoding");
 
 //        System.setProperty("pool_db", "db_algorithm");
+//        MyUser.setUser_id("41");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("main_branch", "true");
 //        System.setProperty("active_branches", "10");
@@ -2000,6 +1962,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         branch_location_list3 = branch_location_list2;
         branch_location_list4 = branch_location_list3;
 
+        String where3 = " where user_id='" + MyUser.getUser_id() + "' ";
+        stock_transfer_privileges = Stock_transfer_privileges.ret_data(where3);
+
         init_no();
         tf_to_branch.grabFocus();
 
@@ -2007,27 +1972,27 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         if (!cloud_host.isEmpty()) {
             jButton4.setVisible(true);
             jButton8.setVisible(true);
-            jLabel38.setVisible(true);
-            jLabel37.setVisible(true);
-            ret_for_upload();
+//            jLabel38.setVisible(true);
+//            jLabel37.setVisible(true);
+//            ret_for_upload();
         } else {
             jButton4.setVisible(false);
             jButton8.setVisible(false);
-            jLabel38.setVisible(false);
-            jLabel37.setVisible(false);
+//            jLabel38.setVisible(false);
+//            jLabel37.setVisible(false);
         }
-        String main_branch = System.getProperty("main_branch", "false");
-        if (main_branch.equalsIgnoreCase("false")) {
-//            check_items();
-        } else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    check_for_upload();
-                }
-            });
-
-        }
+//        String main_branch = System.getProperty("main_branch", "false");
+//        if (main_branch.equalsIgnoreCase("false")) {
+////            check_items();
+//        } else {
+//            SwingUtilities.invokeLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    check_for_upload();
+//                }
+//            });
+//
+//        }
     }
 
     String my_branch = "";
@@ -2039,6 +2004,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     String my_at_branch_id = "";
     String my_at_location = "";
     String my_at_location_id = "";
+    List<Stock_transfer_privileges.to_stock_transfer_privileges> stock_transfer_privileges = new ArrayList();
 
     private void item_ledger() {
         SwingUtilities.invokeLater(new Runnable() {
@@ -2216,19 +2182,34 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             public void ok(TableRenderer.OutputData data) {
                 S1_branch_locations.to_branch_locations to = branch_location_list2.get(data.selected_row);
 
-                String main_branch = System.getProperty("main_branch", "false");
-                if (main_branch.equalsIgnoreCase("false")) {
-                    if (!my_branch_id.equalsIgnoreCase(to.branch_id)) {
-                        Alert.set(0, "Transfer from own branch to another restricted!");
-                        return;
+                int add_transfer = 0;
+                String to_location_id = tf_to_location_id.getText();
+                if (tf_to_location.getText().isEmpty()) {
+                    for (Stock_transfer_privileges.to_stock_transfer_privileges stp : stock_transfer_privileges) {
+                        if (stp.from_location_id.equalsIgnoreCase("" + to.id) && stp.add_transfer == 1) {
+                            add_transfer = 1;
+                            break;
+                        }
+                    }
+                } else {
+                    for (Stock_transfer_privileges.to_stock_transfer_privileges stp : stock_transfer_privileges) {
+                        if (stp.from_location_id.equalsIgnoreCase("" + to.id) && stp.to_location_id.equalsIgnoreCase(to_location_id) && stp.add_transfer == 1) {
+                            add_transfer = 1;
+                            break;
+                        }
                     }
                 }
 
-                tf_from_branch.setText("" + to.branch);
-                tf_from_branch_id.setText("" + to.branch_id);
+                if (add_transfer == 1) {
+                    tf_from_branch.setText("" + to.branch);
+                    tf_from_branch_id.setText("" + to.branch_id);
 
-                tf_from_location.setText("" + to.location);
-                tf_from_location_id.setText("" + to.id);
+                    tf_from_location.setText("" + to.location);
+                    tf_from_location_id.setText("" + to.id);
+                } else {
+                    Alert.set(0, "Privilege to transfer this location not added!");
+                }
+
             }
         });
     }
@@ -2287,18 +2268,25 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             @Override
             public void ok(TableRenderer.OutputData data) {
                 S1_branch_locations.to_branch_locations to = branch_location_list3.get(data.selected_row);
-                String main_branch = System.getProperty("main_branch", "false");
-                if (main_branch.equalsIgnoreCase("false")) {
-                    if (my_branch_id.equalsIgnoreCase(to.branch_id)) {
-                        Alert.set(0, "Transfer from own branch to another restricted!");
-                        return;
+                int add_transfer = 0;
+                String from_location_id = tf_from_location_id.getText();
+                for (Stock_transfer_privileges.to_stock_transfer_privileges stp : stock_transfer_privileges) {
+                    if (stp.to_location_id.equalsIgnoreCase("" + to.id) && stp.from_location_id.equalsIgnoreCase(from_location_id) && stp.add_transfer == 1) {
+                        add_transfer = 1;
+                        break;
                     }
                 }
-                tf_to_branch.setText("" + to.branch);
-                tf_to_branch_id.setText("" + to.branch_id);
 
-                tf_to_location.setText("" + to.location);
-                tf_to_location_id.setText("" + to.id);
+                if (add_transfer == 1) {
+                    tf_to_branch.setText("" + to.branch);
+                    tf_to_branch_id.setText("" + to.branch_id);
+
+                    tf_to_location.setText("" + to.location);
+                    tf_to_location_id.setText("" + to.id);
+                } else {
+                    Alert.set(0, "Privilege to transfer this location not added!");
+                }
+
             }
         });
     }
@@ -2399,7 +2387,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tbl_stock_transfers.setModel(tbl_stock_transfers_M);
         tbl_stock_transfers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_stock_transfers.setRowHeight(25);
-        int[] tbl_widths_stock_transfers = {70, 100, 150, 150, 60, 50, 50, 50, 30, 0, 0, 0, 0};
+        int[] tbl_widths_stock_transfers = {70, 100, 150, 150, 100, 60, 50, 50, 50, 30, 0, 0, 0};
         for (int i = 0, n = tbl_widths_stock_transfers.length; i < n; i++) {
             if (i == 2 || i == 3) {
                 continue;
@@ -2412,7 +2400,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tbl_stock_transfers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_stock_transfers.setRowHeight(25);
         tbl_stock_transfers.setFont(new java.awt.Font("Arial", 0, 12));
-        tbl_stock_transfers.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
+        tbl_stock_transfers.getColumnModel().getColumn(9).setCellRenderer(new ImageRenderer());
     }
 
     private void loadData_stock_transfers(List<to_stock_transfers> acc) {
@@ -2423,7 +2411,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     public static class Tblstock_transfersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Trans #", "Date", "From", "To", "Status", "", "", "", "", "", "", "from_location", "from_location_id"
+            "Trans #", "Date", "From", "To", "Finalized by.", "Status", "", "", "", "", "", "", "from_location_id"
         };
 
         public Tblstock_transfersModel(ListModel listmodel) {
@@ -2457,6 +2445,13 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 case 3:
                     return " " + tt.to_branch + " : " + tt.to_location;
                 case 4:
+                    if (tt.finalized_by == null) {
+                        return " ";
+                    } else {
+                        return " " + tt.finalized_by;
+                    }
+
+                case 5:
                     if (tt.status == 0) {
                         return " Posted";
                     } else if (tt.status == 2) {
@@ -2464,13 +2459,13 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     } else {
                         return " Finalized";
                     }
-                case 5:
-                    return " Update";
                 case 6:
-                    return " Delete";
+                    return " Update";
                 case 7:
-                    return " Print";
+                    return " Delete";
                 case 8:
+                    return " Print";
+                case 9:
                     if (tt.is_uploaded == 0) {
                         return "/POS/icons4/cloud-storage-uploading-option (3).png";
                     } else if (tt.is_uploaded == 2) {
@@ -2482,8 +2477,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     } else {
                         return "/POS/icons4/cloud-storage-uploading-option (2).png";
                     }
-                case 9:
-                    return " Print";
                 case 10:
                     return " Print";
                 case 11:
@@ -2534,7 +2527,22 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         where = where + " order by id desc,Date(date_added) desc ";
 //        System.out.println(where);
         List<to_stock_transfers> transfers = Stock_transfers.ret_data(where);
-        loadData_stock_transfers(transfers);
+        List<to_stock_transfers> filter_transfers = new ArrayList();
+
+        for (to_stock_transfers transfer : transfers) {
+            int exists = 0;
+            for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+                if ((priv.from_location_id.equalsIgnoreCase(transfer.from_location_id)) && (priv.to_location_id.equalsIgnoreCase(transfer.to_location_id)) && (priv.report_transfer == 1)) {
+                    exists = 1;
+                    break;
+                }
+            }
+            if (exists == 1) {
+                filter_transfers.add(transfer);
+            }
+        }
+
+        loadData_stock_transfers(filter_transfers);
         int for_upload = 0;
         int waiting_for_finalization = 0;
         for (to_stock_transfers to : transfers) {
@@ -2545,7 +2553,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 waiting_for_finalization++;
             }
         }
-        jLabel38.setText("" + (for_upload + waiting_for_finalization));
+//        jLabel38.setText("" + (for_upload + waiting_for_finalization));
 
         jLabel13.setText("" + tbl_stock_transfers_ALM.size());
     }
@@ -2555,6 +2563,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             Alert.set(0, "Please select location to transfer!");
             return;
         }
+
         int id = 0;
         final String transaction_no = Stock_transfers.increment_id(my_branch_id);
         String user_name = Users.user_name;
@@ -2578,7 +2587,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String at_location = my_location;
         String at_location_id = my_location_id;
         int is_uploaded = 0;
-        final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+        String finalized_by_id = MyUser.getUser_id();
+        String finalized_by = MyUser.getUser_screen_name();
+
+        final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
+                to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
+                is_uploaded, finalized_by_id, finalized_by);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -2590,15 +2604,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
                 List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
                 Stock_transfers.add_stock_transfers(rpt, datas);
-                init_no();
+
                 data_cols();
-                tf_to_location.setText("");
-                tf_to_location_id.setText("");
-                tf_to_branch.setText("");
-                tf_to_branch_id.setText("");
-                tf_remarks.setText("");
-                tbl_stock_transfers_items_ALM.clear();
-                tbl_stock_transfers_items_M.fireTableDataChanged();
+                new_post();
                 Alert.set(1, "");
 
             }
@@ -2673,7 +2681,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                Stock_transfers.finalize(to, datas);
+                String finalized_by_id = MyUser.getUser_id();
+                String finalized_by = MyUser.getUser_screen_name();
+                Stock_transfers.finalize(to, datas, finalized_by_id, finalized_by);
                 Synch_stock_transfers.update_status_stock_transfer(to.transaction_no, 1);
                 data_cols();
                 Alert.set(0, "Stock Transfer Finalized");
@@ -2711,23 +2721,38 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         }
         int id = to.id;
         String transaction_no = to.transaction_no;
-        String user_name = Users.user_name;
+        String user_name = to.user_name;
         String date_added = DateType.datetime.format(jDateChooser5.getDate());
         String remarks = tf_remarks.getText();
-        String to_branch = tf_to_branch.getText();
-        String to_branch_id = tf_to_branch_id.getText();
-        String to_location = tf_to_location.getText();
-        String to_location_id = tf_to_location_id.getText();
-        String from_branch = tf_from_branch.getText();
-        String from_branch_id = tf_from_branch_id.getText();
-        String from_location = tf_from_location.getText();
-        String from_location_id = tf_from_location_id.getText();
+        String to_branch = to.to_branch;
+        String to_branch_id = to.to_branch_id;
+        String to_location = to.to_location;
+        String to_location_id = to.to_location_id;
+        String from_branch = to.from_branch;
+        String from_branch_id = to.from_branch_id;
+        String from_location = to.from_location;
+        String from_location_id = to.from_location_id;
         String at_branch = to.at_branch;
         String at_branch_id = to.at_branch_id;
         String at_location = to.at_location;
         String at_location_id = to.at_location_id;
-        int is_uploaded = 0;
-        final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+        int is_uploaded = to.status;
+        int exists = 0;
+        for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+            if ((priv.from_location_id.equalsIgnoreCase(from_location_id)) && (priv.to_location_id.equalsIgnoreCase(to_location_id)) && (priv.edit_transfer == 1)) {
+                exists = 1;
+                break;
+            }
+        }
+        if (exists == 0) {
+            Alert.set(0, "Privilege to Update transfer to this location not added!");
+            return;
+        }
+        String finalized_by_id = MyUser.getUser_id();
+        String finalized_by = MyUser.getUser_screen_name();
+        final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
+                to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
+                is_uploaded, finalized_by_id, finalized_by);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -2737,16 +2762,15 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                Stock_transfers.edit_stock_transfers(rpt);
+                Stock_transfers.edit_stock_transfers2(rpt);
                 data_cols();
-                tbl_stock_transfers.setRowSelectionInterval(row, row);
+                new_post();
                 Alert.set(2, "");
 
-                String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
-                if (!cloud_host.isEmpty()) {
-                    upload_update_transction_to_cloud(rpt);
-                }
-
+//                String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
+//                if (!cloud_host.isEmpty()) {
+//                    upload_update_transction_to_cloud(rpt);
+//                }
             }
         });
         nd.setLocationRelativeTo(this);
@@ -2975,15 +2999,26 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         Alert.set(0, "Stock Transfer Status [Deleted]!");
                         return;
                     }
+                    int exists = 0;
+                    for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+                        if ((priv.from_location_id.equalsIgnoreCase(to.from_location_id)) && (priv.to_location_id.equalsIgnoreCase(to.to_location_id)) && (priv.add_transfer == 1)) {
+                            exists = 1;
+                            break;
+                        }
+                    }
+                    if (exists == 0) {
+                        Alert.set(0, "Privilege to Add transfer to this location not added!");
+                        return;
+                    }
                     List<Stock_transfers_items.to_stock_transfers_items> datas = new ArrayList();
                     datas.add(field);
-                    Stock_transfers_items.add_stock_transfers_items(datas, to.transaction_no, to);
+                    Stock_transfers_items.add_stock_transfers_items2(datas, to.transaction_no, to);
                     data_cols_items();
                     Alert.set(1, "");
-                    String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
-                    if (!cloud_host.isEmpty()) {
-                        upload_update_item_transction_to_cloud(to.transaction_no, to.at_location_id);
-                    }
+//                    String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
+//                    if (!cloud_host.isEmpty()) {
+//                        upload_update_item_transction_to_cloud(to.transaction_no, to.at_location_id);
+//                    }
                 }
             }
         });
@@ -3341,6 +3376,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Alert.set(0, "Editing Disabled!");
                 return;
             }
+            int exists = 0;
+            for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+                if ((priv.from_location_id.equalsIgnoreCase(to.location_id)) && (priv.to_location_id.equalsIgnoreCase(to.to_location_id)) && (priv.edit_transfer == 1)) {
+                    exists = 1;
+                    break;
+                }
+            }
+            if (exists == 0) {
+                Alert.set(0, "Privilege to Edit transfer to this location not added!");
+                return;
+            }
             if (col == 6) {
                 Window p = (Window) this;
                 Dlg_new_stock_transfer_qty nd = Dlg_new_stock_transfer_qty.create(p, true);
@@ -3353,10 +3399,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         Stock_transfers_items.edit_stock_transfers_items2("" + to.id, data.qty, data.serial_no, to.stock_transfer_id);
                         data_cols_items();
                         Alert.set(2, "");
-                        String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
-                        if (!cloud_host.isEmpty()) {
-                            upload_update_item_transction_to_cloud(to.stock_transfer_id, to.at_location_id);
-                        }
+//                        String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
+//                        if (!cloud_host.isEmpty()) {
+//                            upload_update_item_transction_to_cloud(to.stock_transfer_id, to.at_location_id);
+//                        }
                     }
                 });
 
@@ -3372,6 +3418,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     Alert.set(0, "Editing Disabled!");
                     return;
                 }
+                int exists2 = 0;
+                for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+                    if ((priv.from_location_id.equalsIgnoreCase(to.location_id)) && (priv.to_location_id.equalsIgnoreCase(to.to_location_id)) && (priv.delete_transfer == 1)) {
+                        exists2 = 1;
+                        break;
+                    }
+                }
+                if (exists2 == 0) {
+                    Alert.set(0, "Privilege to Delete transfer to this location not added!");
+                    return;
+                }
                 Window p = (Window) this;
                 Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
                 nd.setTitle("");
@@ -3383,10 +3440,10 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         Stock_transfers_items.delete_stock_transfers_items2("" + to.id, to.stock_transfer_id);
                         data_cols_items();
                         Alert.set(3, "");
-                        String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
-                        if (!cloud_host.isEmpty()) {
-                            upload_update_item_transction_to_cloud(to.stock_transfer_id, to.at_location_id);
-                        }
+//                        String cloud_host = System.getProperty("cloud_host", "128.199.80.53");
+//                        if (!cloud_host.isEmpty()) {
+//                            upload_update_item_transction_to_cloud(to.stock_transfer_id, to.at_location_id);
+//                        }
                     }
                 });
                 nd.setLocationRelativeTo(this);
@@ -3473,43 +3530,37 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
         int col = tbl_stock_transfers.getSelectedColumn();
 //        System.out.println("Col: " + col);
-        if (col == 5) {
+        if (col == 6) {
+
+            Button.Success btn1 = (Button.Success) jButton7;
+            Button.Info btn2 = (Button.Info) jButton1;
+            Button.Primary btn3 = (Button.Primary) jButton5;
+            btn1.set_enabled(false);
+            btn2.set_enabled(false);
+            btn3.set_enabled(true);
+
             jTabbedPane1.setSelectedIndex(0);
-            jButton5.setEnabled(false);
-            jButton1.setEnabled(true);
+            btn3.set_enabled(false);
 
+            tf_from_branch.setEnabled(false);
+            tf_to_branch.setEnabled(false);
             if (to.status == 0) {
-                jButton7.setEnabled(false);
-                jButton1.setEnabled(true);
-
-                String ab = System.getProperty("active_branches", "");
-                String[] active_branches = ab.split(",");
-                int active = 1;
-                for (String br : active_branches) {
-                    if (br.equalsIgnoreCase(to.to_branch_id)) {
-                        active = 0;
-                        break;
-                    }
-                }
-                if (active == 1) {
-                    jButton7.setEnabled(true);
-//                    jButton1.setEnabled(false);
-                }
-
+                btn1.set_enabled(true);
+                btn2.set_enabled(true);
             } else {
-                jButton7.setEnabled(false);
-                jButton1.setEnabled(false);
+                btn1.set_enabled(false);
+                btn2.set_enabled(false);
             }
 
-        } else if (col == 6) {
+        } else if (col == 7) {
 
             delete_transfer();
 
-        } else if (col == 7) {
+        } else if (col == 8) {
             get_customers_aging();
 
-        } else if (col == 8) {
-            upload_transction_to_cloud(to.transaction_no, to.at_location_id, to);
+        } else if (col == 9) {
+//            upload_transction_to_cloud(to.transaction_no, to.at_location_id, to);
 
         } else {
 
@@ -3539,6 +3590,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
         }
 
+        int exists = 0;
+        for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+            if ((priv.from_location_id.equalsIgnoreCase(to.from_location_id)) && (priv.to_location_id.equalsIgnoreCase(to.to_location_id)) && (priv.delete_transfer == 1)) {
+                exists = 1;
+                break;
+            }
+        }
+        if (exists == 0) {
+            Alert.set(0, "Privilege to Delete transfer to this location not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
@@ -3559,17 +3621,9 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 }
 
                 data_cols();
+                new_post();
                 Alert.set(3, "");
-                tbl_stock_transfers_items_ALM.clear();
-                tbl_stock_transfers_items_M.fireTableDataChanged();
-                tf_remarks.setText("");
-                jButton5.setEnabled(true);
-                jButton1.setEnabled(false);
-                jButton7.setEnabled(false);
-                tf_to_branch.setText("");
-                tf_to_branch_id.setText("");
-                tf_to_location.setText("");
-                tf_to_location_id.setText("");
+
             }
         });
         nd.setLocationRelativeTo(this);
@@ -3591,6 +3645,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 Alert.set(0, "Stock Transfer-Status [Deleted]");
                 return;
             }
+            int exists = 0;
+            for (Stock_transfer_privileges.to_stock_transfer_privileges priv : stock_transfer_privileges) {
+                if ((priv.from_location_id.equalsIgnoreCase(to.from_location_id)) && (priv.to_location_id.equalsIgnoreCase(to.to_location_id)) && (priv.finalize_transfer == 1)) {
+                    exists = 1;
+                    break;
+                }
+            }
+            if (exists == 0) {
+                Alert.set(0, "Privilege to Finalize transfer to this location not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -3602,20 +3667,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     closeDialog.ok();
                     if (jButton7.getText().equalsIgnoreCase("Finalize")) {
                         List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
-                        Stock_transfers.finalize(to, datas);
+                        String finalized_by_id = MyUser.getUser_id();
+                        String finalized_by = MyUser.getUser_screen_name();
+                        Stock_transfers.finalize(to, datas, finalized_by_id, finalized_by);
                         data_cols();
+                        new_post();
                         Alert.set(0, "Stock Transfer Finalized");
-                        init_no();
-                        tf_remarks.setText("");
-                        jButton5.setEnabled(true);
-                        jButton1.setEnabled(false);
-                        jButton7.setEnabled(false);
-                        tf_to_branch.setText("");
-                        tf_to_branch_id.setText("");
-                        tf_to_location.setText("");
-                        tf_to_location_id.setText("");
-                        tbl_stock_transfers_items_ALM.clear();
-                        tbl_stock_transfers_items_M.fireTableDataChanged();
                     }
                 }
             });
@@ -3651,10 +3708,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     String at_location = my_at_location;
                     String at_location_id = my_at_location_id;
                     int is_uploaded = 1;
-                    final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+                    String finalized_by_id = MyUser.getUser_id();
+                    String finalized_by = MyUser.getUser_screen_name();
+                    final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
                     List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
                     Stock_transfers.add_stock_transfers(rpt, datas);
-                    Stock_transfers.finalize(rpt, datas);
+                    Stock_transfers.finalize(rpt, datas, finalized_by_id, finalized_by);
                     Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
                     Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
                     data_cols();
@@ -3922,20 +3981,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             for (to_stock_transfers to : transfers) {
                 if (to.status == 0 && to.is_uploaded == 1) {
                     if (!to.to_branch_id.equalsIgnoreCase(my_branch_id)) {
-
-                        String[] active_branches = ab.split(",");
-                        int active = 1;
-                        for (String br : active_branches) {
-                            if (br.equalsIgnoreCase(to.to_branch_id)) {
-                                active = 0;
-                                break;
-                            }
-                        }
-                        if (active == 0) {
-
-                            waiting_finalization++;
-                        }
-
+                        waiting_finalization++;
                     }
                 }
 
@@ -3943,8 +3989,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     for_upload++;
                 }
             }
-            System.out.println("for_upload: " + for_upload);
-            System.out.println("waiting_finalization: " + waiting_finalization);
+//            System.out.println("for_upload: " + for_upload);
+//            System.out.println("waiting_finalization: " + waiting_finalization);
             if (for_upload > 0 || waiting_finalization > 0) {
                 Window p = (Window) this;
                 Dlg_stock_transfer_check_upload nd = Dlg_stock_transfer_check_upload.create(p, true);
@@ -3981,12 +4027,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
             int count = to_add.size() + to_update.size();
             if (count > 0) {
-                jLabel39.setBackground(new Color(255, 153, 0));
+//                jLabel39.setBackground(new Color(255, 153, 0));
 
             } else {
-                jLabel39.setBackground(new Color(153, 153, 153));
+//                jLabel39.setBackground(new Color(153, 153, 153));
             }
-            jLabel39.setText(FitIn.fmt_woc(to_add.size() + to_update.size()));
+//            jLabel39.setText(FitIn.fmt_woc(to_add.size() + to_update.size()));
 
         }
     }
@@ -4038,32 +4084,62 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 int waiting_finalization = 0;
                 for (to_stock_transfers to : transfers) {
                     if (to.status == 0 && to.is_uploaded == 1) {
-                        if (!to.to_branch_id.equalsIgnoreCase(my_branch_id)) {
-
-                            String[] active_branches = ab.split(",");
-                            int active = 1;
-                            for (String br : active_branches) {
-                                if (br.equalsIgnoreCase(to.to_branch_id)) {
-                                    active = 0;
-                                    break;
-                                }
-                            }
-                            if (active == 0) {
-
-                                waiting_finalization++;
-                            }
+                        if (to.to_branch_id.equalsIgnoreCase(my_branch_id)) {
+                            waiting_finalization++;
 
                         }
+
                     }
 
                     if (to.status == 0 && to.is_uploaded != 1 || to.status == 1 && to.is_uploaded == 0) {
                         for_upload++;
                     }
-                    jLabel38.setText("" + (for_upload + waiting_finalization));
-                }
 
+                }
+                System.out.println("for_upload: " + for_upload);
+                System.out.println("waiting_finalization: " + waiting_finalization);
+//                jLabel38.setText("" + (for_upload + waiting_finalization));
             }
         });
         t.start();
+    }
+
+    private void new_post() {
+
+        init_no();
+        tf_remarks.setText("");
+
+        tf_to_branch.setText("");
+        tf_to_branch_id.setText("");
+        tf_to_location.setText("");
+        tf_to_location_id.setText("");
+        tbl_stock_transfers_items_ALM.clear();
+        tbl_stock_transfers_items_M.fireTableDataChanged();
+        tbl_stock_transfers.clearSelection();
+        tf_from_branch.setEnabled(true);
+        tf_to_branch.setEnabled(true);
+
+        Button.Success btn1 = (Button.Success) jButton7;
+        Button.Info btn2 = (Button.Info) jButton1;
+        Button.Primary btn3 = (Button.Primary) jButton5;
+        btn1.set_enabled(false);
+        btn2.set_enabled(false);
+        btn3.set_enabled(true);
+
+    }
+
+    private void check_all_branches(String stmt) {
+
+//        S1_branch_locations.to_branch_locations to = branch_location_list2
+        if (stmt.equals("from")) {
+            int count = 0;
+            for (Stock_transfer_privileges.to_stock_transfer_privileges stp : stock_transfer_privileges) {
+                if (stp.add_transfer == 1) {
+                    count++;
+                }
+            }
+            System.out.println("count: " + count);
+            System.out.println("stock_transfer_privileges: " + stock_transfer_privileges.size());
+        }
     }
 }

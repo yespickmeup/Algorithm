@@ -904,7 +904,7 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                 List<Stock_transfers_items.to_stock_transfers_items> st_items_insert = new ArrayList();
 
                 List<Synch_stock_transfers.synch_stock_transfers> synch_stock_transfers = ret_synch_stock_transfers2(" where status=0 ");
-                List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data(" where status=0 and is_uploaded<> 1 or status=1 and is_uploaded=0 ");
+                List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data(" where status=0 and is_uploaded<> 1 or status=1 and is_uploaded=0 or status=0 and is_uploaded=1 ");
                 for (Stock_transfers.to_stock_transfers to : stock_transfers) {
                     List<Stock_transfers_items.to_stock_transfers_items> items = Stock_transfers_items.ret_data("where stock_transfer_id ='" + to.transaction_no + "' ");
                     System.out.println("Stock_transfer_no: " + to.transaction_no + " Item/s: " + items.size());
@@ -917,50 +917,39 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                             break;
                         }
                     }
+                    int id = 0;
+                    String stock_transfer_no = to.transaction_no;
+                    String created_at = DateType.now();
+                    String updated_at = DateType.now();
+                    String created_by = MyUser.getUser_id();
+                    String updated_by = MyUser.getUser_id();
+                    String at_branch = to.at_branch;
+                    String at_branch_id = to.at_branch_id;
+                    String at_location = to.at_location;
+                    String at_location_id = to.at_location_id;
+                    String from_branch = to.from_branch;
+                    String from_branch_id = to.from_branch_id;
+                    String from_location = to.from_location;
+                    String from_location_id = to.from_location_id;
+                    String to_branch = to.to_branch;
+                    String to_branch_id = to.to_branch_id;
+                    String to_location = to.to_location;
+                    String to_location_id = to.to_location_id;
+
+                    int status = 0;
+                    int is_uploaded = 0;
+
+                    if (my_branch_id.equalsIgnoreCase(to_branch_id)) {
+                        status = 1;
+                        is_uploaded = 1;
+                    }
+
+                    String remarks = to.remarks;
+                    String date_added = to.date_added;
+                    Synch_stock_transfers.synch_stock_transfers syn = new Synch_stock_transfers.synch_stock_transfers(id, stock_transfer_no, created_at, updated_at, created_by, updated_by, at_branch, at_branch_id, at_location, at_location_id, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, status, is_uploaded, remarks, date_added);
+
                     if (exists == 0) {
-                        int id = 0;
-                        String stock_transfer_no = to.transaction_no;
-                        String created_at = DateType.now();
-                        String updated_at = DateType.now();
-                        String created_by = MyUser.getUser_id();
-                        String updated_by = MyUser.getUser_id();
-                        String at_branch = to.at_branch;
-                        String at_branch_id = to.at_branch_id;
-                        String at_location = to.at_location;
-                        String at_location_id = to.at_location_id;
-                        String from_branch = to.from_branch;
-                        String from_branch_id = to.from_branch_id;
-                        String from_location = to.from_location;
-                        String from_location_id = to.from_location_id;
-                        String to_branch = to.to_branch;
-                        String to_branch_id = to.to_branch_id;
-                        String to_location = to.to_location;
-                        String to_location_id = to.to_location_id;
 
-                        int status = 0;
-                        int is_uploaded = 0;
-
-                        if (my_branch_id.equalsIgnoreCase(to_branch_id)) {
-                            status = 1;
-                            is_uploaded = 1;
-                        } else {
-                            String ab = System.getProperty("active_branches", "10");
-                            String[] active_branches = ab.split(",");
-                            int active = 1;
-                            for (String br : active_branches) {
-                                if (br.equalsIgnoreCase(to.to_branch_id)) {
-                                    active = 0;
-                                    break;
-                                }
-                            }
-                            if (active == 1) {
-                                status = 1;
-                                is_uploaded = 1;
-                            }
-                        }
-
-                        String remarks = to.remarks;
-                        Synch_stock_transfers.synch_stock_transfers syn = new Synch_stock_transfers.synch_stock_transfers(id, stock_transfer_no, created_at, updated_at, created_by, updated_by, at_branch, at_branch_id, at_location, at_location_id, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, status, is_uploaded, remarks);
                         synch_stock_transfers_insert.add(syn);
                         stock_transfers_insert.add(to);
                         st_items_insert.addAll(items);
@@ -968,6 +957,18 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                         synch_stock_transfers_insert.clear();
                         stock_transfers_insert.clear();
                         st_items_insert.clear();
+                    } else {
+
+                        if (to.is_uploaded == 2 && to.status == 0) {
+                            synch_stock_transfers_insert.add(syn);
+                            stock_transfers_insert.add(to);
+                            st_items_insert.addAll(items);
+                            Synch_stock_transfers.update_synch_stock_transfer(synch_stock_transfers_insert, stock_transfers_insert, st_items_insert);
+                            synch_stock_transfers_insert.clear();
+                            stock_transfers_insert.clear();
+                            st_items_insert.clear();
+                        }
+
                     }
                 }
                 Alert.set(0, "Successfully Uploaded!");
@@ -994,7 +995,7 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                
+
                 List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data(" where status=0 and is_uploaded=1 and to_branch_id<>'" + my_branch_id + "' ");
 
                 for (Stock_transfers.to_stock_transfers stock_transfer : stock_transfers) {
@@ -1010,7 +1011,9 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                         System.out.println("Branch: " + to.at_branch);
                         System.out.println("----------------------------");
                         if (to.status == 1 && to.is_uploaded == 1) {
-                            Stock_transfers.finalize(to, items);
+                            String finalized_by_id = to.finalized_by_id;
+                            String finalized_by = to.finalized_by;
+                            Stock_transfers.finalize(to, items, finalized_by_id, finalized_by);
                             Synch_stock_transfers.update_status_stock_transfer(to.transaction_no, 1);
 
                             Alert.set(0, "Transaction No.:" + to.transaction_no + " Finalized!");
@@ -1037,25 +1040,15 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
     private void ret_st_for_upload() {
         String ab = System.getProperty("active_branches", "10");
         String where = " where remarks like '%%'";
-        where = where + " and status=0 and is_uploaded<> 1 or status=0 and is_uploaded= 1";
+        where = where + " and status=0 and is_uploaded<> 1 or status=0 and is_uploaded= 1 ";
         List<to_stock_transfers> transfers = Stock_transfers.ret_data(where);
         int for_upload = 0;
         int waiting_finalization = 0;
         for (to_stock_transfers to : transfers) {
             if (to.status == 0 && to.is_uploaded == 1) {
-                String[] active_branches = ab.split(",");
-                int active = 1;
-                for (String br : active_branches) {
-                    if (br.equalsIgnoreCase(to.to_branch_id)) {
-                        active = 0;
-                        break;
-                    }
-                }
-                if (active == 0) {
-
+                if (!to.to_branch_id.equalsIgnoreCase(my_branch_id)) {
                     waiting_finalization++;
                 }
-
             }
             if (to.status == 0 && to.is_uploaded != 1) {
                 for_upload++;

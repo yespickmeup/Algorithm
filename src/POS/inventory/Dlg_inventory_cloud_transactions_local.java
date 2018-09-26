@@ -397,7 +397,7 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
 
         init_key();
 
-        check_for_upload();
+//        check_for_upload();
     }
 
     public void do_pass() {
@@ -562,6 +562,8 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                             System.out.println("Finished checking records...");
                             System.out.println("Items to add: "+to_add.size());
                             System.out.println("Adding items...");
+                            jLabel11.setText(""+to_add.size());
+                            jLabel12.setText(""+to_update.size());
                             for (Inventory.to_inventory to : to_add) {
                                 System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
                                 Inventory.add_inventory(to);
@@ -572,7 +574,7 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                                 System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
                                 Inventory.edit_inventory_no_price(to, to, " where main_barcode='" + to.barcode + "' ");
                             }
-                            Alert.set(0, "Checking successfull!");
+                            Alert.set(0, "Check and Download Successfull!");
                             System.out.println("Finished updating items...");
 
 //                            jButton1.setEnabled(true);

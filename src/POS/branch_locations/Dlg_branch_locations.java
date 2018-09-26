@@ -479,7 +479,7 @@ public class Dlg_branch_locations extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-
+//        System.setProperty("pool_db", "db_algorithm");
         tf_branch.grabFocus();
         init_key();
         hover();

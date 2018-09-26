@@ -208,12 +208,13 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         jLabel25 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -472,20 +473,6 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             }
         });
 
-        jLabel16.setBackground(new java.awt.Color(234, 234, 234));
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/worker37.png"))); // NOI18N
-        jLabel16.setOpaque(true);
-        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel16MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel16MouseEntered(evt);
-            }
-        });
-
         jLabel15.setBackground(new java.awt.Color(234, 234, 234));
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -564,8 +551,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(60, 60, 60)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -581,9 +567,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -594,6 +578,34 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        jLabel16.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/worker37.png"))); // NOI18N
+        jLabel16.setOpaque(true);
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel16MouseEntered(evt);
+            }
+        });
+
+        jLabel23.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_transactions/transfer5.png"))); // NOI18N
+        jLabel23.setOpaque(true);
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel23MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -628,19 +640,24 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -672,10 +689,13 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289))
         );
@@ -892,6 +912,14 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         label("Terminals", jLabel30);
     }//GEN-LAST:event_jLabel30MouseEntered
 
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        ok("Stock Transfer Privileges", jLabel23);
+    }//GEN-LAST:event_jLabel23MouseClicked
+
+    private void jLabel23MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseEntered
+        label("Stock Transfer Privileges", jLabel23);
+    }//GEN-LAST:event_jLabel23MouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -910,6 +938,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -935,17 +964,17 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 //
 //        System.setProperty("pool_db", "db_algorithm");
 //        MyUser.setUser_id("" + 1);
-
         init_key();
         hide2();
         set_previledge();
         hover();
 
         jPanel2.setVisible(false);
+        jLabel16.setVisible(false);
     }
 
     private void hover() {
-        JLabel[] lbl = {jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel28, jLabel29};
+        JLabel[] lbl = {jLabel23, jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel28, jLabel29};
         for (final JLabel l : lbl) {
             l.addMouseListener(new MouseAdapter() {
                 @Override
@@ -969,7 +998,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }
 
     private void hide2() {
-        JLabel[] lbl = {jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel27, jLabel26, jLabel28, jLabel29};
+        JLabel[] lbl = {jLabel23, jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel27, jLabel26, jLabel28, jLabel29};
         for (JLabel l : lbl) {
             l.setEnabled(false);
         }
@@ -1056,7 +1085,6 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 //                }
 //
 //            }
-
             if (to.previledge.equalsIgnoreCase("Services - (View)")) {
                 if (module_services.equals("1")) {
                     jLabel22.setEnabled(true);
@@ -1081,12 +1109,10 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 //                }
 //
 //            }
-
 //            if (to.previledge.equalsIgnoreCase("Update Barcodes")) {
 //                jLabel18.setEnabled(true);
 //                jLabel18.setBackground(new java.awt.Color(96, 188, 219));
 //            }
-
             if (to.previledge.equalsIgnoreCase("Disbursements - (View)")) {
                 jLabel25.setEnabled(true);
                 jLabel25.setBackground(new java.awt.Color(96, 188, 219));
@@ -1112,6 +1138,10 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             if (to.previledge.equalsIgnoreCase("Price Update - (View)")) {
                 jLabel29.setEnabled(true);
                 jLabel29.setBackground(new java.awt.Color(96, 188, 219));
+            }
+            if (to.previledge.equalsIgnoreCase("Stock Transfer Privileges - (View)")) {
+                jLabel23.setEnabled(true);
+                jLabel23.setBackground(new java.awt.Color(96, 188, 219));
             }
 //            if (to.previledge.equalsIgnoreCase("Terminals")) {
 //                jLabel30.setEnabled(true);

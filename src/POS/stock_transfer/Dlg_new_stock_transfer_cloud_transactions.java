@@ -9,6 +9,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.receipts.Stock_transfers_items;
 import POS.synch.Synch_stock_transfers;
+import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -983,6 +984,7 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                         String user_name = to.user_name;
                         String date_added = to.date_added;
                         String remarks = to.remarks;
+//                        System.out.println("Remarks: "+to.remarks);
                         String to_branch = to.to_branch;
                         String to_branch_id = to.to_branch_id;
                         String to_location = to.to_location;
@@ -998,14 +1000,19 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                         String at_location = to.at_location;
                         String at_location_id = to.at_location_id;
                         int is_uploaded = 1;
-                        final Stock_transfers.to_stock_transfers rpt = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded);
+                        String finalized_by_id=MyUser.getUser_id();
+                        String finalized_by=MyUser.getUser_screen_name();
+                        final Stock_transfers.to_stock_transfers rpt = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks
+                                , to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false
+                                , at_branch, at_branch_id, at_location, at_location_id, is_uploaded,finalized_by_id,finalized_by);
                         List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
                         if (datas.isEmpty()) {
                             Alert.set(0, "No Item Added!");
                             return;
                         }
                         Stock_transfers.add_stock_transfers(rpt, datas);
-                        Stock_transfers.finalize(rpt, datas);
+                     
+                        Stock_transfers.finalize(rpt, datas,finalized_by_id,finalized_by);
                         Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
                         Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
                         Alert.set(0, "Stock Transfer Posted and Finalized");

@@ -297,6 +297,176 @@ public class Stock_transfers_items {
         }
     }
 
+    public static void add_stock_transfers_items2(List<to_stock_transfers_items> to_stock_transfers_items1, String stock_transfer_id, Stock_transfers.to_stock_transfers transfer) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            PreparedStatement stmt = conn.prepareStatement("");
+            String s2 = "update stock_transfers set "
+                    + " is_uploaded= :is_uploaded "
+                    + " where transaction_no='" + transfer.transaction_no + "' "
+                    + " ";
+
+            s2 = SqlStringUtil.parse(s2)
+                    .setNumber("is_uploaded", 2)
+                    .ok();
+            stmt.addBatch(s2);
+            for (to_stock_transfers_items to_stock_transfers_items : to_stock_transfers_items1) {
+                String s0 = "insert into stock_transfers_items("
+                        + "barcode"
+                        + ",description"
+                        + ",generic_name"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",selling_price"
+                        + ",date_added"
+                        + ",user_name"
+                        + ",item_type"
+                        + ",status"
+                        + ",supplier"
+                        + ",fixed_price"
+                        + ",cost"
+                        + ",supplier_id"
+                        + ",multi_level_pricing"
+                        + ",vatable"
+                        + ",reorder_level"
+                        + ",markup"
+                        + ",barcodes"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",selling_type"
+                        + ",branch"
+                        + ",branch_code"
+                        + ",location"
+                        + ",location_id"
+                        + ",stock_transfer_id"
+                        + ",serial_no"
+                        + ",to_branch"
+                        + ",to_branch_id"
+                        + ",to_location"
+                        + ",to_location_id"
+                        + ",at_branch"
+                        + ",at_branch_id"
+                        + ",at_location"
+                        + ",at_location_id"
+                        + ")values("
+                        + ":barcode"
+                        + ",:description"
+                        + ",:generic_name"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_classification"
+                        + ",:sub_classification_id"
+                        + ",:product_qty"
+                        + ",:unit"
+                        + ",:conversion"
+                        + ",:selling_price"
+                        + ",:date_added"
+                        + ",:user_name"
+                        + ",:item_type"
+                        + ",:status"
+                        + ",:supplier"
+                        + ",:fixed_price"
+                        + ",:cost"
+                        + ",:supplier_id"
+                        + ",:multi_level_pricing"
+                        + ",:vatable"
+                        + ",:reorder_level"
+                        + ",:markup"
+                        + ",:barcodes"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:selling_type"
+                        + ",:branch"
+                        + ",:branch_code"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:stock_transfer_id"
+                        + ",:serial_no"
+                        + ",:to_branch"
+                        + ",:to_branch_id"
+                        + ",:to_location"
+                        + ",:to_location_id"
+                        + ",:at_branch"
+                        + ",:at_branch_id"
+                        + ",:at_location"
+                        + ",:at_location_id"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setString("barcode", to_stock_transfers_items.barcode)
+                        .setString("description", to_stock_transfers_items.description)
+                        .setString("generic_name", to_stock_transfers_items.generic_name)
+                        .setString("category", to_stock_transfers_items.category)
+                        .setString("category_id", to_stock_transfers_items.category_id)
+                        .setString("classification", to_stock_transfers_items.classification)
+                        .setString("classification_id", to_stock_transfers_items.classification_id)
+                        .setString("sub_classification", to_stock_transfers_items.sub_classification)
+                        .setString("sub_classification_id", to_stock_transfers_items.sub_classification_id)
+                        .setNumber("product_qty", to_stock_transfers_items.product_qty)
+                        .setString("unit", to_stock_transfers_items.unit)
+                        .setNumber("conversion", to_stock_transfers_items.conversion)
+                        .setNumber("selling_price", to_stock_transfers_items.selling_price)
+                        .setString("date_added", to_stock_transfers_items.date_added)
+                        .setString("user_name", to_stock_transfers_items.user_name)
+                        .setString("item_type", to_stock_transfers_items.item_type)
+                        .setNumber("status", to_stock_transfers_items.status)
+                        .setString("supplier", to_stock_transfers_items.supplier)
+                        .setNumber("fixed_price", to_stock_transfers_items.fixed_price)
+                        .setNumber("cost", to_stock_transfers_items.cost)
+                        .setString("supplier_id", to_stock_transfers_items.supplier_id)
+                        .setNumber("multi_level_pricing", to_stock_transfers_items.multi_level_pricing)
+                        .setNumber("vatable", to_stock_transfers_items.vatable)
+                        .setNumber("reorder_level", to_stock_transfers_items.reorder_level)
+                        .setNumber("markup", to_stock_transfers_items.markup)
+                        .setString("barcodes", to_stock_transfers_items.barcodes)
+                        .setString("brand", to_stock_transfers_items.brand)
+                        .setString("brand_id", to_stock_transfers_items.brand_id)
+                        .setString("model", to_stock_transfers_items.model)
+                        .setString("model_id", to_stock_transfers_items.model_id)
+                        .setNumber("selling_type", to_stock_transfers_items.selling_type)
+                        .setString("branch", to_stock_transfers_items.branch)
+                        .setString("branch_code", to_stock_transfers_items.branch_code)
+                        .setString("location", to_stock_transfers_items.location)
+                        .setString("location_id", to_stock_transfers_items.location_id)
+                        .setString("stock_transfer_id", stock_transfer_id)
+                        .setString("serial_no", to_stock_transfers_items.serial_no)
+                        .setString("to_branch", transfer.to_branch)
+                        .setString("to_branch_id", transfer.to_branch_id)
+                        .setString("to_location", transfer.to_location)
+                        .setString("to_location_id", transfer.to_location_id)
+                        .setString("at_branch", to_stock_transfers_items.at_branch)
+                        .setString("at_branch_id", to_stock_transfers_items.at_branch_id)
+                        .setString("at_location", to_stock_transfers_items.at_location)
+                        .setString("at_location_id", to_stock_transfers_items.at_location_id)
+                        .ok();
+
+                stmt.addBatch(s0);
+
+            }
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Stock_transfers_items.class, "Successfully Added");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_stock_transfers_items(to_stock_transfers_items to_stock_transfers_items) {
         try {
             Connection conn = MyConnection.connect();
@@ -443,7 +613,7 @@ public class Stock_transfers_items {
                     + " ";
 
             s2 = SqlStringUtil.parse(s2)
-                    .setNumber("is_uploaded", 4)
+                    .setNumber("is_uploaded", 2)
                     .ok();
             stmt.addBatch(s2);
 
@@ -724,7 +894,7 @@ public class Stock_transfers_items {
                     + " ";
 
             s2 = SqlStringUtil.parse(s2)
-                    .setNumber("is_uploaded", 4)
+                    .setNumber("is_uploaded", 2)
                     .ok();
             stmt.addBatch(s2);
 

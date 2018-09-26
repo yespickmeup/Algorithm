@@ -9,6 +9,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.stock_transfer.Stock_transfer_privileges.to_stock_transfer_privileges;
 import POS.users.MyUser;
+import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
@@ -218,6 +219,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         jTextField3 = new Field.Combo();
         jTextField4 = new Field.Combo();
         jButton2 = new Button.Default();
+        jCheckBox7 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_stock_transfer_privileges = new javax.swing.JTable();
@@ -366,6 +368,15 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
             }
         });
 
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setSelected(true);
+        jCheckBox7.setText("Report");
+        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -389,6 +400,9 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                        .addComponent(jTextField4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -396,15 +410,13 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                            .addComponent(jTextField4))
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                    .addComponent(jCheckBox7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -419,7 +431,8 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                         .addComponent(jCheckBox2)
                         .addComponent(jCheckBox3)
                         .addComponent(jCheckBox4)
-                        .addComponent(jCheckBox5)))
+                        .addComponent(jCheckBox5)
+                        .addComponent(jCheckBox7)))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -677,6 +690,10 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -690,6 +707,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -713,7 +731,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         set_default_location();
         String where2 = "  order by screen_name asc";
@@ -723,6 +741,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         branch_location_list = S1_branch_locations.ret_location_where(where);
         init_tbl_stock_transfer_privileges(tbl_stock_transfer_privileges);
         set_user();
+
     }
 
     private void set_default_location() {
@@ -822,7 +841,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         tbl_stock_transfer_privileges.setModel(tbl_stock_transfer_privileges_M);
         tbl_stock_transfer_privileges.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_stock_transfer_privileges.setRowHeight(25);
-        int[] tbl_widths_stock_transfer_privileges = {100, 100, 50, 50, 50, 55, 50, 50, 0, 0, 0, 0};
+        int[] tbl_widths_stock_transfer_privileges = {100, 100, 50, 50, 50, 55, 55, 50, 50, 0, 0, 0};
         for (int i = 0, n = tbl_widths_stock_transfer_privileges.length; i < n; i++) {
             if (i == 0 || i == 1) {
                 continue;
@@ -839,6 +858,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         tbl_stock_transfer_privileges.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer());
         tbl_stock_transfer_privileges.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
         tbl_stock_transfer_privileges.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());
+        tbl_stock_transfer_privileges.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_stock_transfer_privileges(List<to_stock_transfer_privileges> acc) {
@@ -849,7 +869,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
     public static class Tblstock_transfer_privilegesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "From", "To", "Add", "Edit", "Delete", "Finalize", "", "", "", "edit_transfer", "delete_transfer", "finalize_transfer"
+            "From", "To", "Add", "Edit", "Delete", "Finalize", "Report", "", "", "", "delete_transfer", "finalize_transfer"
         };
 
         public Tblstock_transfer_privilegesModel(ListModel listmodel) {
@@ -905,11 +925,15 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                         return "/POS/icon_payment/remove11.png";
                     }
                 case 6:
-                    return "   Edit";
+                    if (tt.report_transfer == 1) {
+                        return "/POS/icon_inventory/checked.png";
+                    } else {
+                        return "/POS/icon_payment/remove11.png";
+                    }
                 case 7:
-                    return " Delete";
+                    return "   Edit";
                 case 8:
-                    return tt.edit_transfer;
+                    return " Delete";
                 case 9:
                     return tt.delete_transfer;
                 default:
@@ -1000,6 +1024,13 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         Field.Combo tlo = (Field.Combo) jTextField4;
         if (row < 0) {
 
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Stock Transfer Privileges - (Add)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
+
             int id = 0;
             String user_id = user.getId();
             String user_screen_name = user.getText();
@@ -1029,10 +1060,14 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                 delete_transfer = 1;
             }
             int finalize_transfer = 0;
-            if (jCheckBox5.isSelected()) { 
+            if (jCheckBox5.isSelected()) {
                 finalize_transfer = 1;
             }
-            Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer);
+            int report_transfer = 0;
+            if (jCheckBox7.isSelected()) {
+                report_transfer = 1;
+            }
+            Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer, report_transfer);
 
             int exists = 0;
             List<Stock_transfer_privileges.to_stock_transfer_privileges> datas = tbl_stock_transfer_privileges_ALM;
@@ -1052,6 +1087,12 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
             }
 
         } else {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Stock Transfer Privileges - (Edit)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Stock_transfer_privileges.to_stock_transfer_privileges to = (Stock_transfer_privileges.to_stock_transfer_privileges) tbl_stock_transfer_privileges_ALM.get(row);
 
             int id = to.id;
@@ -1069,12 +1110,12 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
             if (jCheckBox2.isSelected()) {
                 add_transfer = 1;
             }
-            
+
             int edit_transfer = 0;
             if (jCheckBox3.isSelected()) {
                 edit_transfer = 1;
             }
-            
+
             int delete_transfer = 0;
             if (jCheckBox4.isSelected()) {
                 delete_transfer = 1;
@@ -1083,7 +1124,11 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
             if (jCheckBox5.isSelected()) {
                 finalize_transfer = 1;
             }
-            Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer);
+            int report_transfer = 0;
+            if (jCheckBox7.isSelected()) {
+                report_transfer = 1;
+            }
+            Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer, report_transfer);
             Stock_transfer_privileges.update_data(stp);
             ret_privileges();
             Alert.set(2, "");
@@ -1112,7 +1157,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
         Field.Combo tlo = (Field.Combo) jTextField4;
 
         int col = tbl_stock_transfer_privileges.getSelectedColumn();
-        if (col == 6) {
+        if (col == 7) {
             user.setId(to.user_id);
             user.setText(to.user_screen_name);
 
@@ -1145,8 +1190,19 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
             } else {
                 jCheckBox5.setSelected(true);
             }
+            if (to.report_transfer == 0) {
+                jCheckBox7.setSelected(false);
+            } else {
+                jCheckBox7.setSelected(true);
+            }
         }
-        if (col == 7) {
+        if (col == 8) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Stock Transfer Privileges - (Delete)" + "' limit 1";
+            List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+            if (privileges.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
             nd.setTitle("");
@@ -1165,6 +1221,12 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
     }
 
     private void add_all_privileges() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Stock Transfer Privileges - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1178,7 +1240,7 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                 List<Stock_transfer_privileges.to_stock_transfer_privileges> datas = Stock_transfer_privileges.ret_data(" where user_id='" + user.getId() + "' ");
 
                 for (S1_branch_locations.to_branch_locations to : branch_location_list) {
-                    
+
                     for (S1_branch_locations.to_branch_locations to2 : branch_location_list) {
 
                         int exists = 0;
@@ -1206,7 +1268,8 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                             int edit_transfer = 0;
                             int delete_transfer = 0;
                             int finalize_transfer = 0;
-                            Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer);
+                            int report_transfer = 0;
+                            Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer, report_transfer);
                             Stock_transfer_privileges.add_data(stp);
 
                         }

@@ -69,6 +69,7 @@ import POS.scripts.Dlg_Main_branch_query_updates;
 import POS.services.Dlg_services;
 import POS.settings.Dlg_settings;
 import POS.stock_transfer.Dlg_new_stock_transfer;
+import POS.stock_transfer.Dlg_stock_transfer_privilege;
 
 import POS.suppliers.Dlg_suppliers;
 import POS.synch_locations.Dlg_download_from_cloud;
@@ -2544,7 +2545,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
         MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
     }
-    
+
     private void t_returns_from_customer() {
         Dlg_return_from_customer dtc = new Dlg_return_from_customer();
         MyFrame.set(dtc.getSurface(), jPanel1, "Return/s from Customer");
@@ -2554,7 +2555,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         Dlg_item_replacements dtc = new Dlg_item_replacements();
         MyFrame.set(dtc.getSurface(), jPanel1, "Return Exchange");
     }
-    
+
     private void t_returns_to_supplier() {
         Dlg_return_to_supplier dtc = new Dlg_return_to_supplier();
         MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
@@ -2958,6 +2959,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set2(dtc.getSurface(), jPanel1, "Credit Cards", dtc.getWidth(), dtc.getHeight());
     }
 
+    private void m_stock_transfer_privileges() {
+        Dlg_stock_transfer_privilege dtc = new Dlg_stock_transfer_privilege();
+        MyFrame.set2(dtc.getSurface(), jPanel1, "Stock Transfer Privileges", dtc.getWidth(), dtc.getHeight());
+    }
+
     private void m_upload_to_cloud() {
         Window p = (Window) this;
         Dlg_upload_to_cloud nd = Dlg_upload_to_cloud.create(p, true);
@@ -3051,18 +3057,18 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void run_script() {
-      
-            Window p = (Window) this;
-            Dlg_adjust_inventory_price_branches nd = Dlg_adjust_inventory_price_branches.create(p, true);
-            nd.setTitle("");
-            nd.setCallback(new Dlg_adjust_inventory_price_branches.Callback() {
-                @Override
-                public void ok(CloseDialog closeDialog, Dlg_adjust_inventory_price_branches.OutputData data) {
-                    closeDialog.ok();
-                }
-            });
-            nd.setLocationRelativeTo(this);
-            nd.setVisible(true);
+
+        Window p = (Window) this;
+        Dlg_adjust_inventory_price_branches nd = Dlg_adjust_inventory_price_branches.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_adjust_inventory_price_branches.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_adjust_inventory_price_branches.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 //        jButton1.setEnabled(false);
 //        jButton1.setText("Script is running....");
 //        Thread t = new Thread(new Runnable() {
@@ -3261,6 +3267,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
                 if (data.stmt.equals("Credit Cards")) {
                     m_credit_card();
+                }
+                if (data.stmt.equals("Stock Transfer Privileges")) {
+                    m_stock_transfer_privileges();
                 }
                 if (data.stmt.equals("Upload to Cloud")) {
                     m_upload_to_cloud();

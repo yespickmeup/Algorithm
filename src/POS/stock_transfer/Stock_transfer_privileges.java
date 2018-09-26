@@ -39,8 +39,8 @@ public class Stock_transfer_privileges {
         public final int edit_transfer;
         public final int delete_transfer;
         public final int finalize_transfer;
-
-        public to_stock_transfer_privileges(int id, String user_id, String user_screen_name, String from_branch, String from_branch_id, String from_location, String from_location_id, String to_branch, String to_branch_id, String to_location, String to_location_id, int add_transfer, int edit_transfer, int delete_transfer, int finalize_transfer) {
+        public final int report_transfer;
+        public to_stock_transfer_privileges(int id, String user_id, String user_screen_name, String from_branch, String from_branch_id, String from_location, String from_location_id, String to_branch, String to_branch_id, String to_location, String to_location_id, int add_transfer, int edit_transfer, int delete_transfer, int finalize_transfer,int report_transfer) {
             this.id = id;
             this.user_id = user_id;
             this.user_screen_name = user_screen_name;
@@ -56,6 +56,7 @@ public class Stock_transfer_privileges {
             this.edit_transfer = edit_transfer;
             this.delete_transfer = delete_transfer;
             this.finalize_transfer = finalize_transfer;
+            this.report_transfer=report_transfer;
         }
     }
 
@@ -77,6 +78,7 @@ public class Stock_transfer_privileges {
                     + ",edit_transfer"
                     + ",delete_transfer"
                     + ",finalize_transfer"
+                    + ",report_transfer"
                     + ")values("
                     + ":user_id"
                     + ",:user_screen_name"
@@ -92,6 +94,7 @@ public class Stock_transfer_privileges {
                     + ",:edit_transfer"
                     + ",:delete_transfer"
                     + ",:finalize_transfer"
+                    + ",:report_transfer"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -109,6 +112,7 @@ public class Stock_transfer_privileges {
                     .setNumber("edit_transfer", to_stock_transfer_privileges.edit_transfer)
                     .setNumber("delete_transfer", to_stock_transfer_privileges.delete_transfer)
                     .setNumber("finalize_transfer", to_stock_transfer_privileges.finalize_transfer)
+                    .setNumber("report_transfer",to_stock_transfer_privileges.report_transfer)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -139,6 +143,7 @@ public class Stock_transfer_privileges {
                     + ",edit_transfer= :edit_transfer "
                     + ",delete_transfer= :delete_transfer "
                     + ",finalize_transfer= :finalize_transfer "
+                    + ",report_transfer= :report_transfer"
                     + " where id='" + to_stock_transfer_privileges.id + "' "
                     + " ";
 
@@ -157,6 +162,7 @@ public class Stock_transfer_privileges {
                     .setNumber("edit_transfer", to_stock_transfer_privileges.edit_transfer)
                     .setNumber("delete_transfer", to_stock_transfer_privileges.delete_transfer)
                     .setNumber("finalize_transfer", to_stock_transfer_privileges.finalize_transfer)
+                    .setNumber("report_transfer",to_stock_transfer_privileges.report_transfer)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -206,6 +212,7 @@ public class Stock_transfer_privileges {
                     + ",edit_transfer"
                     + ",delete_transfer"
                     + ",finalize_transfer"
+                    + ",report_transfer"
                     + " from stock_transfer_privileges"
                     + " " + where;
 
@@ -227,8 +234,8 @@ public class Stock_transfer_privileges {
                 int edit_transfer = rs.getInt(13);
                 int delete_transfer = rs.getInt(14);
                 int finalize_transfer = rs.getInt(15);
-
-                to_stock_transfer_privileges to = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer);
+                int report_transfer=rs.getInt(16);
+                to_stock_transfer_privileges to = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer,report_transfer);
                 datas.add(to);
             }
             return datas;
