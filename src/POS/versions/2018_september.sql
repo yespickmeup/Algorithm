@@ -38,3 +38,5 @@ alter table stock_transfers_items add finalized_by_id varchar(255) after is_uplo
 alter table stock_transfers_items add finalized_by varchar(255);
 
 alter table settings add is_main_branch int default 0;
+
+

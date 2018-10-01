@@ -63,8 +63,8 @@ public class Settings {
         public final int module_prepayments;
         public final int module_requisition_slip;
         public final int module_charge_in_advance;
-
-        public to_settings(int id, String company_name, String company_address, String company_operated_by, String company_slogan, String company_contact_no, String company_fax_no, String company_email_address, String bir_serial_no, String bir_permit_no, String bir_accreditation_no, String bir_tin, String bir_machine_no, String bir_min_no, String bir_business_type, String bir_vat_percent, String bir_receipt_footer, String bir_invoice_footer, int receipt_printing_enabled, int receipt_printer_show_dialog, int kitchen_printing_enable, int allow_negative_inventory, int is_server, String location, int receipt_printing_enabled2, String drawer, String developer, String developer_address, String developer_tin_no, String developer_accreditation_no, String developer_accreditation_date, String developer_contact_no, String module_software_type, int module_accounts_payable, int module_accounts_receivable, int module_services, int module_prepayments, int module_requisition_slip, int module_charge_in_advance) {
+        public final int is_main_branch;
+        public to_settings(int id, String company_name, String company_address, String company_operated_by, String company_slogan, String company_contact_no, String company_fax_no, String company_email_address, String bir_serial_no, String bir_permit_no, String bir_accreditation_no, String bir_tin, String bir_machine_no, String bir_min_no, String bir_business_type, String bir_vat_percent, String bir_receipt_footer, String bir_invoice_footer, int receipt_printing_enabled, int receipt_printer_show_dialog, int kitchen_printing_enable, int allow_negative_inventory, int is_server, String location, int receipt_printing_enabled2, String drawer, String developer, String developer_address, String developer_tin_no, String developer_accreditation_no, String developer_accreditation_date, String developer_contact_no, String module_software_type, int module_accounts_payable, int module_accounts_receivable, int module_services, int module_prepayments, int module_requisition_slip, int module_charge_in_advance,int is_main_branch) {
             this.id = id;
             this.company_name = company_name;
             this.company_address = company_address;
@@ -104,6 +104,7 @@ public class Settings {
             this.module_prepayments = module_prepayments;
             this.module_requisition_slip = module_requisition_slip;
             this.module_charge_in_advance = module_charge_in_advance;
+            this.is_main_branch=is_main_branch;
         }
     }
 
@@ -224,7 +225,7 @@ public class Settings {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update settings set "
-                    + "company_name= :company_name "
+                    + " company_name= :company_name "
                     + ",company_address= :company_address "
                     + ",company_operated_by= :company_operated_by "
                     + ",company_slogan= :company_slogan "
@@ -255,6 +256,7 @@ public class Settings {
                     + ",developer_accreditation_no= :developer_accreditation_no "
                     + ",developer_accreditation_date= :developer_accreditation_date "
                     + ",developer_contact_no= :developer_contact_no"
+                    + ",is_main_branch= :is_main_branch"
                     + " where id='" + to_settings.id + "' "
                     + " ";
 
@@ -290,6 +292,7 @@ public class Settings {
                     .setString("developer_accreditation_no", to_settings.developer_accreditation_no)
                     .setString("developer_accreditation_date", to_settings.developer_accreditation_date)
                     .setString("developer_contact_no", to_settings.developer_contact_no)
+                    .setNumber("is_main_branch", to_settings.is_main_branch)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -399,6 +402,7 @@ public class Settings {
                     + ",module_prepayments"
                     + ",module_requisition_slip"
                     + ",module_charge_in_advance"
+                    + ",is_main_branch"
                     + " from settings"
                     + " " + where;
 
@@ -444,8 +448,8 @@ public class Settings {
                 int module_prepayments = rs.getInt(37);
                 int module_requisition_slip = rs.getInt(38);
                 int module_charge_in_advance = rs.getInt(39);
-
-                to_settings to = new to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, module_software_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance);
+                int is_main_branch=rs.getInt(40);
+                to_settings to = new to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, module_software_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance,is_main_branch);
                 datas.add(to);
             }
             return datas;

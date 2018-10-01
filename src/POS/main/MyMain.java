@@ -163,13 +163,17 @@ public class MyMain {
 
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
-            System.setProperty("main_branch", prop.getProperty("main_branch", "false"));
+
             System.setProperty("return_exchange_days", prop.getProperty("return_exchange_days", "0"));
-            
+
+            if (setting.is_main_branch == 0) {
+                System.setProperty("main_branch", prop.getProperty("main_branch", "false"));
+            } else {
+                System.setProperty("main_branch", prop.getProperty("main_branch", "true"));
+            }
             if (setting.module_prepayments == 1) {
                 System.setProperty("module_prepayments", prop.getProperty("module_prepayments", "1"));
             }
-
             if (setting.module_accounts_receivable == 1) {
                 System.setProperty("module_accounts_receivable", prop.getProperty("module_accounts_receivable", "1"));
             }
@@ -256,5 +260,5 @@ public class MyMain {
         }
         return result.trim();
     }
-    
+
 }
