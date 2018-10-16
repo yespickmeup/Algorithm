@@ -1070,7 +1070,7 @@ public class S1_accounts_receivable_payments {
 //            Lg.s(S1_accounts_receivable_payments.class, "Successfully Deleted");
 
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
-            if (to_ar.status == 1) {
+            if (to_ar.status == 0) {
                 String s10 = "select "
                         + " balance"
                         + " from  customers where "
@@ -1084,6 +1084,7 @@ public class S1_accounts_receivable_payments {
                 }
 
                 double new_balance = (customer_balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount));
+
                 String s2 = "update  customers set "
                         + " balance= :balance"
                         + " where "
@@ -1096,9 +1097,12 @@ public class S1_accounts_receivable_payments {
 
 //            to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
                 double ar_new_balance = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount;
+                System.out.println("to_accounts_receivable_payments.amount: " + to_accounts_receivable_payments.amount);
+                System.out.println("to_accounts_receivable_payments.check_amount: " + to_accounts_receivable_payments.check_amount);
 
                 ar_new_balance = (to_ar.paid - ar_new_balance);
-
+                System.out.println("to_ar.paid: " + to_ar.paid);
+                System.out.println("ar_new_balance: " + ar_new_balance);
                 String s3 = "update  accounts_receivable set "
                         + " paid= :paid"
                         + " where "
@@ -1149,7 +1153,7 @@ public class S1_accounts_receivable_payments {
         }
     }
 
-    public static List<to_accounts_receivable_payments> ret_data(String search) {
+    public static List<to_accounts_receivable_payments> ret_data(String search, String cust_id) {
         List<to_accounts_receivable_payments> datas = new ArrayList();
         try {
             Connection conn = MyConnection.connect();
@@ -1194,7 +1198,7 @@ public class S1_accounts_receivable_payments {
                     + ",location"
                     + ",location_id"
                     + " from  accounts_receivable_payments where "
-                    + " ar_no ='" + search + "' order by Date(date_applied) asc"
+                    + " ar_no ='" + search + "' and customer_id='" + cust_id + "' order by Date(date_applied) asc"
                     + " ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);

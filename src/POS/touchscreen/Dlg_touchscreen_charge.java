@@ -501,7 +501,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         cm.setId(charg.charge_type_id);
         tf_reference_no.setText(charg.reference_no);
         tf_customer_name.setText(charg.customer_name);
-        tf_customer_id.setText(charg.customer_name);
+        tf_customer_id.setText(charg.customer_id);
         tf_amount.setText(FitIn.fmt_wc_0(charg.amount));
         tf_amount1.setText(FitIn.fmt_woc(charg.days));
     }

@@ -32,11 +32,14 @@ id int auto_increment primary key
 insert into user_default_previleges(account,name)values('Maintenance','Stock Transfer Privileges');
 
 alter table stock_transfers  add finalized_by_id varchar(255);
-alter table stock_transfers  add finalized_by varchar(255);
+alter table stock_transfers  add fiadnalized_by varchar(255);
 
 alter table stock_transfers_items add finalized_by_id varchar(255) after is_uploaded;
 alter table stock_transfers_items add finalized_by varchar(255);
 
 alter table settings add is_main_branch int default 0;
 
+insert into user_default_previlege_others(account,account_name,name)values('Transactions','Accounts Receivable','Delete Finalized AR');
+insert into user_default_previlege_others(account,account_name,name)values('Transactions','Accounts Receivable Payments','Delete Finalized AR Payment');
+insert into user_default_previlege_others(account,account_name,name)values('Transactions','Sales','Void Sales');
 

@@ -458,7 +458,7 @@ public class Dlg_rma extends javax.swing.JDialog {
     private void myInit() {
         init_key();
         init_tbl_receipts(tbl_receipts);
-              
+
         jLabel6.setVisible(false);
         jTextField2.setVisible(false);
     }
@@ -474,7 +474,7 @@ public class Dlg_rma extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
+                KeyEvent.VK_ESCAPE, new KeyAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -484,7 +484,7 @@ public class Dlg_rma extends javax.swing.JDialog {
         });
     }
     // </editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc=" receipts "> 
     public static ArrayListModel tbl_receipts_ALM;
     public static TblreceiptsModel tbl_receipts_M;
@@ -587,7 +587,7 @@ public class Dlg_rma extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void data_cols() {
         String where = " where supplier like '%" + "" + "%' ";
         String from = DateType.sf.format(jDateChooser1.getDate());
@@ -642,14 +642,14 @@ public class Dlg_rma extends javax.swing.JDialog {
         }
     }
 //</editor-fold> 
-    
+
     private void details() {
 
         int row = tbl_receipts.getSelectedRow();
         if (row < 0) {
             return;
         }
-              
+
         to_receipts to = (to_receipts) tbl_receipts_ALM.get(row);
         int col = tbl_receipts.getSelectedColumn();
         if (col == 6) {
@@ -658,14 +658,19 @@ public class Dlg_rma extends javax.swing.JDialog {
             nd.setTitle("");
             nd.do_pass(to);
             nd.setCallback(new Dlg_rma_details.Callback() {
+
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_rma_details.OutputData data) {
                     closeDialog.ok();
+                    
+                    System.out.println("" + data.stmt);
+                    
                 }
             });
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
-        }        
+
+        }
     }
-    
+
 }

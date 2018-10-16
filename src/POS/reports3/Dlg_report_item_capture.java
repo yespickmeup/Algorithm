@@ -967,16 +967,19 @@ public class Dlg_report_item_capture extends javax.swing.JDialog {
                 String sub_classification = "All";
                 String brand = "All";
                 String model = "All";
+                
                 if (!jCheckBox3.isSelected()) {
                     Field.Combo cat = (Field.Combo) tf_category;
                     where = where + " and category_id ='" + cat.getId() + "' ";
                     category=cat.getText();
                 }
+                
                 if (!jCheckBox4.isSelected()) {
                     Field.Combo clas = (Field.Combo) tf_classification;
                     where = where + " and classification_id ='" + clas.getId() + "' ";
                     classification=clas.getText();
                 }
+                
                 if (!jCheckBox5.isSelected()) {
                     Field.Combo sub_clas = (Field.Combo) tf_sub_classification;
                     where = where + " and sub_class_id ='" + sub_clas.getId() + "' ";

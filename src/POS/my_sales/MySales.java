@@ -740,7 +740,7 @@ public class MySales {
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to_conn(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id, conn);
                     tt_qty = tt.product_qty;
                 } catch (Exception e) {
-                    tt_qty=0;
+                    tt_qty = 0;
                 }
                 double new_qty = tt_qty - (to_sale_items.conversion * to_sale_items.product_qty);
 
@@ -1021,8 +1021,8 @@ public class MySales {
             MyConnection.close();
         }
     }
-    
-       public static List<MySales.sales> ret_data_cloud(String where) {
+
+    public static List<MySales.sales> ret_data_cloud(String where) {
         List<MySales.sales> datas = new ArrayList();
         List<MySales_Items.items> items = new ArrayList();
         try {
@@ -1141,10 +1141,10 @@ public class MySales {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            
+
         }
     }
-       
+
     public static void main(String[] args) {
         System.out.println(increment_id("17"));
     }
@@ -1239,8 +1239,12 @@ public class MySales {
                         ok();
                 stmt.addBatch(s5);
 
-                String s6 = " delete from accounts_receivable where reference_no='" + sale.charge_reference_no + "' and amount='" + sale.charge_amount + "' ";
+                String s6 = " update accounts_receivable set status=1 where customer_id='" + sale.charge_customer_id + "' and reference_no='" + sale.charge_reference_no + "'  ";
                 stmt.addBatch(s6);
+//                System.out.println("s6: " + s6);
+                String s7 = " update accounts_receivable_payments set status=2 where customer_id='" + sale.charge_customer_id + "' and reference_no='" + sale.charge_reference_no + "'  ";
+                stmt.addBatch(s7);
+//                System.out.println("s7: " + s7);
 
             }
 
@@ -1576,8 +1580,8 @@ public class MySales {
                 String branch_id = rs.getString(16);
                 String location = rs.getString(17);
                 String location_id = rs.getString(18);
-                String remarks= rs.getString(19);
-                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id,remarks);
+                String remarks = rs.getString(19);
+                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks);
                 datas.add(to);
             }
             return datas;

@@ -53,6 +53,12 @@ public class Dlg_rma_details extends javax.swing.JDialog {
     }
 
     public static class OutputData {
+        public final String stmt;
+
+        public OutputData(String stmt) {
+            this.stmt = stmt;
+        }
+        
     }
 //</editor-fold>
 

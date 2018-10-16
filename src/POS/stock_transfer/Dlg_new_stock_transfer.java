@@ -3187,17 +3187,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         loadData_stock_transfers_items(Stock_transfers_items.ret_data(where));
 
         jLabel15.setText("" + tbl_stock_transfers_items_ALM.size());
-        if (col == 9) {
+        if (col == 8) {
             get_customers_aging();
         }
 
-        if (col == 7) {
+        if (col == 6) {
             select_transfer();
             jTabbedPane1.setSelectedIndex(0);
             jButton5.setEnabled(false);
             jButton1.setEnabled(true);
         }
-        if (col == 8) {
+        if (col == 7) {
             delete_stock_transfer();
         }
 
@@ -3574,7 +3574,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             return;
         }
         int col = tbl_stock_transfers.getSelectedColumn();
-        if (col != 6) {
+        if (col != 7) {
             return;
         }
         final to_stock_transfers to = (to_stock_transfers) tbl_stock_transfers_ALM.get(tbl_stock_transfers.convertRowIndexToModel(row));

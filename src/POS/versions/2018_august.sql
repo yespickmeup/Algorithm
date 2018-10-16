@@ -11,3 +11,4 @@
 alter table item_replacement_details add addtl_amount double;
 alter table item_replacement_details add wtax double;
 
+

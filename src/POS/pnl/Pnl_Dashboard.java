@@ -10,7 +10,7 @@ import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
 import POS.adjuster.Dlg_other_adjustments;
-import POS.adjustments.Dlg_adjust_inventory_price_branches;
+import POS.adjustments.Dlg_adjust_price;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -3059,11 +3059,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     private void run_script() {
 
         Window p = (Window) this;
-        Dlg_adjust_inventory_price_branches nd = Dlg_adjust_inventory_price_branches.create(p, true);
+        Dlg_adjust_price nd = Dlg_adjust_price.create(p, true);
         nd.setTitle("");
-        nd.setCallback(new Dlg_adjust_inventory_price_branches.Callback() {
+        nd.setCallback(new Dlg_adjust_price.Callback() {
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_adjust_inventory_price_branches.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_adjust_price.OutputData data) {
                 closeDialog.ok();
             }
         });

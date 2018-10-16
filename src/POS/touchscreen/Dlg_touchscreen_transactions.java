@@ -16,6 +16,7 @@ import POS.sale_item_replacements.S1_sale_item_replacements;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.Counter;
 import POS.util.DateType;
@@ -67,7 +68,6 @@ import synsoftech.fields.Button;
 import synsoftech.fields.Label;
 import synsoftech.panels.Authenticate;
 import synsoftech.panels.Warning;
-import synsoftech.util.Show;
 
 /**
  *
@@ -1494,7 +1494,10 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 Logger.getLogger(Dlg_touchscreen_transactions.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        if (my_sale.status == 1) {
+            Alert.set(0, "Cannot Proceed, Transaction already cancelled!");
+            return;
+        }
         Window p = (Window) this;
         Authenticate nd = Authenticate.create(p, true);
         nd.setTitle("");
@@ -1513,30 +1516,18 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 if (to == null) {
                     warning("Input correct credentials!");
                 } else {
-                    String where = " where user_name='" + username + "' order by previledge asc";
-                    List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-                    int exist = 0;
-                    for (S1_user_previleges.to_user_previleges to2 : datas) {
-                        if (to2.previledge.equalsIgnoreCase("Void Sales")) {
-                            exist = 1;
-                            break;
-                        }
+                    String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Void Sales - (Add)" + "' limit 1";
+                    List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+                    if (datas.isEmpty()) {
+                        Alert.set(0, "Privilege not added!");
+                        return;
                     }
-                    if (exist == 1) {
-                        Label.Status or = (Label.Status) lbl_sales_no;
-                        int status = or.getStatus();
-
-                        List<MySales_Items.items> orders = tbl_sale_items_ALM;
-                        MySales.void_sale(or.getId(), status, orders, my_sale);
-                        if (status == 0) {
-                            Show.notification(1, "Transaction Cancelled");
-                        } else {
-                            Show.notification(1, "Transaction Reverted");
-                        }
-                        clear_data();
-                    } else {
-                        warning("User priviledge not added!");
-                    }
+                    Label.Status or = (Label.Status) lbl_sales_no;
+                    int status = or.getStatus();
+                    List<MySales_Items.items> orders = tbl_sale_items_ALM;
+                    MySales.void_sale(or.getId(), status, orders, my_sale);
+                    Alert.set(0, "Transaction cancelled!");
+                    clear_data();
                 }
 
             }
@@ -1696,7 +1687,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
             Alert.set(0, "Privilege not added!");
             return;
         }
-       
+
         Window p = (Window) this;
         Dlg_item_replacements nd = Dlg_item_replacements.create(p, true);
         nd.setTitle("");

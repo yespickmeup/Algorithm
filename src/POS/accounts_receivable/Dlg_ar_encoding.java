@@ -15,6 +15,7 @@ import POS.discounts.S1_discounts;
 import POS.terms.S1_terms;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -1287,6 +1288,8 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         clear_accounts_receivable();
         init_ar_no();
         jButton8.setEnabled(true);
+        jButton9.setEnabled(false);
+        jButton10.setEnabled(false);
         tbl_accounts_receivable.clearSelection();
         tf_search_customer.grabFocus();
 
@@ -1461,7 +1464,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
         tf_amount.setEnabled(stmt);
         tf_term.setEnabled(stmt);
-        jButton10.setEnabled(stmt);
+
     }
 
     private void init_search() {
@@ -1562,7 +1565,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     List<Customers.to_customers> customer_list = new ArrayList();
 
     private void init_popup() {
-
+        
         String search = tf_search_customer.getText();
         customer_list.clear();
         customer_list = Customers.ret_data(search);
@@ -1777,6 +1780,11 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String branch_id = my_branch_id;
         String location = my_location;
         String location_id = my_location_id;
+        if (amount <= 0) {
+            Alert.set(0, "Enter Amount");
+            tf_amount.grabFocus();
+            return;
+        }
         final to_accounts_receivable to = new to_accounts_receivable(true, id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
@@ -1927,12 +1935,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable() {
-        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Delete)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Delete)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
 
         int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
@@ -1940,6 +1948,14 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         }
         final to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.
                 get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        if (to.status == 0) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Delete Finalized AR - (Add)" + "' limit 1";
+            List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+            if (datas.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
+        }
         if (to.status == 1) {
             Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
             return;
@@ -1959,6 +1975,13 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 tbl_accounts_receivable_payments_M.fireTableDataChanged();
                 compute_payments();
                 clear_accounts_receivable();
+
+                init_ar_no();
+                jButton8.setEnabled(true);
+                jButton9.setEnabled(false);
+                jButton10.setEnabled(false);
+                tbl_accounts_receivable.clearSelection();
+                tf_search_customer.grabFocus();
                 Alert.set(3, "");
             }
         });
@@ -2045,10 +2068,13 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 case 5:
                     if (tt.status == 0) {
                         return " Finalized";
+                    } else if (tt.status == 1) {
+                        return " Posted";
                     } else {
-                        return " ---";
+                        return " Deleted";
                     }
                 case 6:
+
                     if (tt.status == 2) {
                         return "/POS/icon_payment/remove11.png";
                     } else {
@@ -2088,18 +2114,18 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             return;
         }
         to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
-        loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data(to.ar_no));
+        loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data(to.ar_no, to.customer_id));
 
         compute_payments();
     }
 
     private void add_ar_payment() {
-        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
         int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
             return;
@@ -2148,6 +2174,13 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         String branch_id = my_branch_id;
         String location = my_location;
         String location_id = my_location_id;
+
+        double total_amount = check_amount + amount;
+        if (total_amount <= 0) {
+            Alert.set(0, "Please input amount!");
+            tf_ap_cash.grabFocus();
+            return;
+        }
         final S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                 status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id);
         Window p = (Window) this;
@@ -2316,12 +2349,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable_payments() {
-        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Delete)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where2);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String where2 = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Delete)" + "' limit 1";
+//        List<User_default_privelege_others.to_user_default_priveleges> privileges = User_default_privelege_others.ret_data(where2);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
 
 //        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
 //        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
@@ -2344,6 +2377,14 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         if (to.status == 2) {
             Alert.set(0, "Cannot proceed, Transaction has been cancelled!");
             return;
+        }
+        if (to.status == 0) {
+            String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Delete Finalized AR Payment - (Add)" + "' limit 1";
+            List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+            if (datas.isEmpty()) {
+                Alert.set(0, "Privilege not added!");
+                return;
+            }
         }
         int row2 = tbl_accounts_receivable.getSelectedRow();
         if (row2 < 0) {
@@ -2438,9 +2479,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         double discount = 0;
         List<to_accounts_receivable_payments> datas = tbl_accounts_receivable_payments_ALM;
         for (to_accounts_receivable_payments to : datas) {
-            cash += to.amount;
-            check += to.check_amount;
-            discount += to.discount_amount;
+            if (to.status == 0) {
+                cash += to.amount;
+                check += to.check_amount;
+                discount += to.discount_amount;
+            }
+
         }
         lbl_balance3.setText(FitIn.fmt_wc_0(discount));
         lbl_balance1.setText(FitIn.fmt_wc_0(cash));
