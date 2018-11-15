@@ -946,6 +946,9 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
 
     }
     
+    private void init_serials(){
+        
+    }
     private void init_remitance() {
 
 //        Dlg_touchscreen_report_remittance remittance = new Dlg_touchscreen_report_remittance();

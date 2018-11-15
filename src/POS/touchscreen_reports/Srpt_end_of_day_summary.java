@@ -80,6 +80,8 @@ public class Srpt_end_of_day_summary {
     public final String status;
     public final double status_amount;
     public final double return_exchange;
+    public final double refund;
+    public final double refund_cheque;
     public Srpt_end_of_day_summary(double cashin_beg, double cash_sales, double collections
             , double prepayments, double receipts_total, double receipts_line_discount
             , double receipts_sale_discount, double receipts_sub_total, double receipt_net_total
@@ -99,7 +101,7 @@ public class Srpt_end_of_day_summary {
             ,double total_check_payments,double total_cc_payments
             ,String date,String business_name,String address
             ,double disbursement,String cashier,String branch,String location
-            ,String status,double status_amount,double return_exchange
+            ,String status,double status_amount,double return_exchange,double refund,double refund_cheque
     ) {
         this.cashin_beg = cashin_beg;
         this.cash_sales = cash_sales;
@@ -159,6 +161,8 @@ public class Srpt_end_of_day_summary {
         this.status=status;
         this.status_amount=status_amount;
         this.return_exchange=return_exchange;
+        this.refund=refund;
+        this.refund_cheque=refund_cheque;
     }
 
     public static void main(String[] args) {
@@ -230,6 +234,8 @@ public class Srpt_end_of_day_summary {
         String branch="";
         String location="";
         double return_exchange=0;
+        double refund=0;
+        double refund_cheque=0;
         Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections
                 , prepayments, receipts_total, receipts_line_discount, receipts_sale_discount
                 , receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred
@@ -241,7 +247,7 @@ public class Srpt_end_of_day_summary {
                 , count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five
                 , cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR, fields
                 ,check_cash_sales,check_collections,check_prepayments,cc_cash_sales,cc_collections,cc_prepayments
-                ,total_check_payments,total_cc_payments,"","","",disbursement,cashier,branch,location,"",0,return_exchange);
+                ,total_check_payments,total_cc_payments,"","","",disbursement,cashier,branch,location,"",0,return_exchange,refund,refund_cheque);
         
         
         

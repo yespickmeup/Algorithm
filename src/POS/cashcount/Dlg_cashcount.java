@@ -676,14 +676,14 @@ public class Dlg_cashcount extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
 
     // </editor-fold>
@@ -788,21 +788,25 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                 String cashier = tf_cashier.getText();
                 String branch = "";
                 String location = "";
-                double return_exchange=0;
+                double return_exchange = 0;
+                double collections_prepaid = 0;
+                double collections_prepaid_cheque = 0;
+                double refund = 0;
+                double refund_cheque = 0;
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales,
-                         collections, prepayments, receipts_total, receipts_line_discount,
-                         receipts_sale_discount, receipts_sub_total, receipt_net_total,
-                         bills_thousand, bills_five_hundred, bills_two_hundred, bills_one_hundred,
-                         bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty,
-                         coins_point_twenty_five, coins_point_ten, coins_point_zero_five,
-                         count_bills_thousand, count_bills_five_hundred, count_bills_two_hundred,
-                         count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
-                         count_coins_five, count_coins_one, count_coins_point_fifty,
-                         count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five,
-                         cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
-                         fields, check_cash_sales, check_collections, check_prepayments,
-                         cc_cash_sales, cc_collections, cc_prepayments, total_check_payments
-                        , total_cc_payments, "", business_name, address, disburse, cashier, branch, location,"",0,return_exchange);
+                                                                          collections, prepayments, receipts_total, receipts_line_discount,
+                                                                          receipts_sale_discount, receipts_sub_total, receipt_net_total,
+                                                                          bills_thousand, bills_five_hundred, bills_two_hundred, bills_one_hundred,
+                                                                          bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty,
+                                                                          coins_point_twenty_five, coins_point_ten, coins_point_zero_five,
+                                                                          count_bills_thousand, count_bills_five_hundred, count_bills_two_hundred,
+                                                                          count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
+                                                                          count_coins_five, count_coins_one, count_coins_point_fifty,
+                                                                          count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five,
+                                                                          cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
+                                                                          fields, check_cash_sales, check_collections, check_prepayments,
+                                                                          cc_cash_sales, cc_collections, cc_prepayments, total_check_payments,
+                         total_cc_payments, "", business_name, address, disburse, cashier, branch, location, "", 0, return_exchange,refund,refund_cheque);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
 
@@ -810,7 +814,7 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                            setParameter(rpt), JasperUtil.emptyDatasource());
+                                                               setParameter(rpt), JasperUtil.emptyDatasource());
 
                 } catch (JRException ex) {
                     Logger.getLogger(Dlg_report_items.class.getName()).

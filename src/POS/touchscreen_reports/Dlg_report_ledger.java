@@ -10,6 +10,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.item_replacements.Item_replacements;
+import POS.prepaid_payments.Prepaid_payments;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
@@ -762,14 +763,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -874,8 +875,30 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 }
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
                 cash_on_hand = cash_on_hand + collections + return_exchange;
+                List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
+                double collections_prepaid = 0;
+                double collections_prepaid_cheque = 0;
+                double refund = 0;
+                double refund_cheque = 0;
+                for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
+                    collections_prepaid += prepayment.cash;
+                    if (prepayment.check_amount > 0) {
+                        Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
+                        collections_prepaid_cheque += prepayment.check_amount;
+                    }
+                    if (prepayment.refund == 1) {
+                        if (prepayment.check_amount > 0) {
+                            refund_cheque += prepayment.check_amount;
+                        } else {
+                            refund += prepayment.cash;
+                        }
+                    }
+                }
+                cash_on_hand = cash_on_hand + collections_prepaid - refund;
+                collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
 
-                Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque, collections_cheque_on_hand);
+                Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
+                                                              collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_sales_ledger.jrxml";
                 String pool_db = System.getProperty("pool_db", "db_smis");
@@ -893,7 +916,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+                                                               setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
 
                 } catch (JRException ex) {
                     Logger.getLogger(Dlg_report_items.class.getName()).

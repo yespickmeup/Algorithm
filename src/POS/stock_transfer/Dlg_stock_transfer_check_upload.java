@@ -949,7 +949,7 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                     Synch_stock_transfers.synch_stock_transfers syn = new Synch_stock_transfers.synch_stock_transfers(id, stock_transfer_no, created_at, updated_at, created_by, updated_by, at_branch, at_branch_id, at_location, at_location_id, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, status, is_uploaded, remarks, date_added);
 
                     if (exists == 0) {
-
+                        System.out.println("Adding Record... + "+syn.stock_transfer_no);
                         synch_stock_transfers_insert.add(syn);
                         stock_transfers_insert.add(to);
                         st_items_insert.addAll(items);

@@ -10,6 +10,8 @@ import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
 import POS.reports.Dlg_report_items;
+import POS.users.MyUser;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.MyConnection;
@@ -1067,6 +1069,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
     }
 
+    static int show_cost = 1;
+
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
 
@@ -1079,6 +1083,14 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         my_location = to.location;
         my_location_id = "" + to.id;
         selected_branch = my_branch;
+
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Item Ledger - Show Cost - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            show_cost = 0;
+        } else {
+            show_cost = 1;
+        }
     }
 
     public void do_pass() {
@@ -1092,14 +1104,14 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         tf_search.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -1289,7 +1301,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     is_month_selected = true;
                 }
 
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,show_cost);
 
                 String jrxml = "rpt_inventory_ledger.jrxml";
                 report_sales_items(rpt, jrxml);
@@ -2606,11 +2618,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         List<Srpt_item_ledger.field> f_field = new ArrayList();
 
                         Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {
-                            @Override
-                            public int compare(Srpt_item_ledger.field o1, Srpt_item_ledger.field o2) {
-                                return o1.getDate_added().compareTo(o2.getDate_added());
-                            }
-                        });
+                                     @Override
+                                     public int compare(Srpt_item_ledger.field o1, Srpt_item_ledger.field o2) {
+                                         return o1.getDate_added().compareTo(o2.getDate_added());
+                                     }
+                                 });
 
                         double running_balance = 0;
                         double qty = 0;

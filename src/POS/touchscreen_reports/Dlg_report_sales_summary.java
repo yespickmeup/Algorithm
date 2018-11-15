@@ -1254,7 +1254,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
 //        System.setProperty("cloud_db", "db_algorithm_development");
-
         init_key();
         set_default_branch();
         init_tbl_chickaloka_items();
@@ -1399,14 +1398,14 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -1600,6 +1599,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         cc_total += collection.amount;
                     }
                 }
+                double refund = 0;
+                double refund_cheque = 0;
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
                     prepayments += prepayment.cash;
                     if (prepayment.check_amount > 0) {
@@ -1609,6 +1610,13 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         check_prepayments += prepayment.check_amount;
                     } else {
                         cc_total += prepayment.cash;
+                    }
+                    if (prepayment.refund == 1) {
+                        if (prepayment.check_amount > 0) {
+                            refund_cheque += prepayment.check_amount;
+                        } else {
+                            refund += prepayment.cash;
+                        }
                     }
                 }
 
@@ -1739,26 +1747,29 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     return_exchange += total;
                 }
                 receipts_total = receipts_total + return_exchange;
+                receipts_total=receipts_total-refund;
+                
                 receipts_sub_total = receipts_sub_total + return_exchange;
                 receipt_net_total = receipt_net_total + return_exchange;
-
+                
+                total_check_payments=total_check_payments-refund_cheque;
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
-                        receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
-                        bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
-                        coins_point_ten, coins_point_zero_five, count_bills_thousand, count_bills_five_hundred,
-                        count_bills_two_hundred, count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
-                        count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
-                        count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
-                        my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
-                        total_check_payments, total_cc_payments, date, business_name, address,
-                        disburs, cashier, branch, location, status, status_amount, return_exchange);
+                                                                          receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
+                                                                          bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
+                                                                          coins_point_ten, coins_point_zero_five, count_bills_thousand, count_bills_five_hundred,
+                                                                          count_bills_two_hundred, count_bills_one_hundred, count_bills_fifty, count_bills_twenty, count_coins_ten,
+                                                                          count_coins_five, count_coins_one, count_coins_point_fifty, count_coins_point_twenty_five,
+                                                                          count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
+                                                                          my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
+                                                                          total_check_payments, total_cc_payments, date, business_name, address,
+                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange,refund,refund_cheque);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_end_of_day_summary.jrxml");
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                            setParameter(rpt), JasperUtil.emptyDatasource());
+                                                               setParameter(rpt), JasperUtil.emptyDatasource());
 
                 } catch (JRException ex) {
                     Logger.getLogger(Dlg_report_items.class.getName()).log(Level.SEVERE, null, ex);
@@ -1899,7 +1910,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint2 = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+                                                                setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
 
                 } catch (JRException ex) {
                     Logger.getLogger(Dlg_report_items.class.getName()).
@@ -2134,7 +2145,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint2 = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                            setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+                                                                setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
 
                 } catch (JRException ex) {
                     Logger.getLogger(Dlg_report_items.class.getName()).
@@ -2170,7 +2181,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     compileJasper_chickaloka(rpt_name),
                     JasperUtil.setParameter(to),
                     JasperUtil.makeDatasource(to.fields));
-        } catch (Exception e) { 
+        } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
         }
@@ -2305,12 +2316,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }
 
 //</editor-fold>
-    
     private void ret_transactions() {
-        String where = " where is_uploaded<>1";
+        String where = " where remarks like '%%' ";
 
         List<MySales.sales> my_sale = MySales.ret_data(where);
-        
+
         System.out.println("Sales: " + my_sale.size());
         if (my_sale.size() > 0) {
             jLabel39.setBackground(new Color(255, 153, 0));
@@ -2318,7 +2328,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
             jLabel39.setBackground(new Color(153, 153, 153));
         }
         jLabel39.setText(FitIn.fmt_wc(my_sale.size()));
-        
+
     }
-    
+
 }

@@ -1522,6 +1522,8 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                         Alert.set(0, "Privilege not added!");
                         return;
                     }
+                    
+                    
                     Label.Status or = (Label.Status) lbl_sales_no;
                     int status = or.getStatus();
                     List<MySales_Items.items> orders = tbl_sale_items_ALM;
@@ -1529,7 +1531,6 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     Alert.set(0, "Transaction cancelled!");
                     clear_data();
                 }
-
             }
         });
         Toolkit tk = Toolkit.getDefaultToolkit();

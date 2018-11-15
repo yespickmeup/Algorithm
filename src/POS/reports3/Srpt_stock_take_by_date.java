@@ -285,7 +285,7 @@ public class Srpt_stock_take_by_date {
                 String branch_id = branch_code;
                 location = branch + " - " + location;
 
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected,1);
 //                System.out.println("Item: " + item_code + " : " + description);
                 double balance = 0;
                 double cost1 = 0;

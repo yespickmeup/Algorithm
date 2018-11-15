@@ -20,6 +20,7 @@ import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
 import POS.synch.Synch_stock_transfers;
 import POS.users.MyUser;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.Button;
 import POS.util.DateType;
@@ -2004,11 +2005,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     String my_at_branch_id = "";
     String my_at_location = "";
     String my_at_location_id = "";
+    static int show_cost = 1;
     List<Stock_transfer_privileges.to_stock_transfer_privileges> stock_transfer_privileges = new ArrayList();
 
     private void item_ledger() {
         SwingUtilities.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 jPanel11.setLayout(new BorderLayout());
@@ -2058,6 +2059,15 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         t_br2.setId(to.branch_id);
         t_lo2.setText(to.location);
         t_lo2.setId("" + to.id);
+
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Stock Transfer - Show Cost - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+           show_cost=0;
+        }else{
+            show_cost=1;
+        }
+        
     }
 
     List<Stock_transfers.to_stock_transfers> receipt_list = new ArrayList();
@@ -2342,21 +2352,21 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_CONTROL, new KeyAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton5.doClick();
-            }
-        });
+                              KeyEvent.VK_CONTROL, new KeyAction() {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              jButton5.doClick();
+                          }
+                      });
         tf_search.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -2591,8 +2601,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String finalized_by = MyUser.getUser_screen_name();
 
         final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
-                to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
-                is_uploaded, finalized_by_id, finalized_by);
+                                                                              to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
+                                                                              is_uploaded, finalized_by_id, finalized_by);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -2719,6 +2729,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             Alert.set(0, "Stock Transfer Status [Deleted]!");
             return;
         }
+
         int id = to.id;
         String transaction_no = to.transaction_no;
         String user_name = to.user_name;
@@ -2751,8 +2762,8 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String finalized_by_id = MyUser.getUser_id();
         String finalized_by = MyUser.getUser_screen_name();
         final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
-                to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
-                is_uploaded, finalized_by_id, finalized_by);
+                                                                              to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
+                                                                              is_uploaded, finalized_by_id, finalized_by);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -3100,7 +3111,12 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     }
                     return " " + unit;
                 case 4:
-                    return " " + FitIn.fmt_wc_0(tt.cost);
+                    if(show_cost==1){
+                        return " " + FitIn.fmt_wc_0(tt.cost);
+                    }else{
+                        return " ";
+                    }
+                    
                 case 5:
                     return " " + FitIn.fmt_wc_0(tt.selling_price);
                 case 6:

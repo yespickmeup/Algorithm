@@ -8,8 +8,10 @@ package POS.stock_transfer;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.receipts.Stock_transfers_items;
+import static POS.stock_transfer.Dlg_new_stock_transfer.show_cost;
 import POS.synch.Synch_stock_transfers;
 import POS.users.MyUser;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -577,6 +579,8 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
         init_tbl_stock_transfers_items();
     }
 
+    static int show_cost = 1;
+
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
 
@@ -587,6 +591,13 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
         f_lo.setText(to.location);
         f_lo.setId("" + to.id);
 
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Stock Transfer - Show Cost - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            show_cost = 0;
+        } else {
+            show_cost = 1;
+        }
     }
 
     public void do_pass() {
@@ -600,14 +611,14 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -880,7 +891,12 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                     }
                     return " " + unit;
                 case 4:
-                    return " " + FitIn.fmt_wc_0(tt.cost);
+                    if (show_cost == 1) {
+                        return " " + FitIn.fmt_wc_0(tt.cost);
+                    } else {
+                        return " ";
+                    }
+
                 case 5:
                     return " " + FitIn.fmt_wc_0(tt.selling_price);
                 case 6:
@@ -1000,19 +1016,19 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                         String at_location = to.at_location;
                         String at_location_id = to.at_location_id;
                         int is_uploaded = 1;
-                        String finalized_by_id=MyUser.getUser_id();
-                        String finalized_by=MyUser.getUser_screen_name();
-                        final Stock_transfers.to_stock_transfers rpt = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks
-                                , to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false
-                                , at_branch, at_branch_id, at_location, at_location_id, is_uploaded,finalized_by_id,finalized_by);
+                        String finalized_by_id = MyUser.getUser_id();
+                        String finalized_by = MyUser.getUser_screen_name();
+                        final Stock_transfers.to_stock_transfers rpt = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks,
+                                                                                                              to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false,
+                                                                                                              at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
                         List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
                         if (datas.isEmpty()) {
                             Alert.set(0, "No Item Added!");
                             return;
                         }
                         Stock_transfers.add_stock_transfers(rpt, datas);
-                     
-                        Stock_transfers.finalize(rpt, datas,finalized_by_id,finalized_by);
+
+                        Stock_transfers.finalize(rpt, datas, finalized_by_id, finalized_by);
                         Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
                         Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
                         Alert.set(0, "Stock Transfer Posted and Finalized");
@@ -1024,11 +1040,10 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                     }
                 });
                 t.start();
-
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
-
     }
 }
+

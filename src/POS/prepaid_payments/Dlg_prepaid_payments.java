@@ -245,6 +245,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         jButton2 = new Button.Info();
         jButton3 = new Button.Warning();
         jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_prepaid_payments = new javax.swing.JTable();
@@ -404,6 +405,14 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             }
         });
 
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setText("Refund");
+        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -421,7 +430,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
@@ -445,9 +454,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jCheckBox2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCheckBox6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jCheckBox5))
                                 .addComponent(tf_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -458,7 +469,8 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -654,7 +666,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                                 .addGap(0, 0, 0)
                                 .addComponent(tf_from_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField1)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -819,8 +831,18 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_cheque_holderActionPerformed
 
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
-        // TODO add your handling code here:
+        if (jCheckBox5.isSelected()) {
+            jCheckBox6.setVisible(true);
+            jCheckBox6.setSelected(false);
+        } else {
+            jCheckBox6.setVisible(false);
+            jCheckBox6.setSelected(false);
+        }
     }//GEN-LAST:event_jCheckBox5ActionPerformed
+
+    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -836,6 +858,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -898,6 +921,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         cursor();
         jCheckBox3.setVisible(false);
         tf_from_branch_id.setVisible(false);
+        jCheckBox6.setVisible(false);
         jTextField1.grabFocus();
     }
 
@@ -951,14 +975,14 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -1266,7 +1290,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         if (jCheckBox5.isSelected()) {
             remarks = "Adjustment: " + remarks;
         }
-        final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks);
+        int refund = 0;
+        if (jCheckBox6.isSelected()) {
+            refund = 1;
+        }
+        final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks, refund);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1339,7 +1367,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         String location = my_location;
         String location_id = my_location_id;
         String remarks = jTextArea1.getText();
-        final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, to.user_id, to.user_screen_name, branch, branch_id, location, location_id, remarks);
+        int refund = 0;
+        if (jCheckBox6.isSelected()) {
+            refund = 1;
+        }
+        final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, to.user_id, to.user_screen_name, branch, branch_id, location, location_id, remarks, refund);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1404,6 +1436,11 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 jDateChooser1.setEnabled(false);
                 tf_customer_name.setEnabled(true);
                 tf_customer_name.setText("");
+            }
+            if (to.refund == 0) {
+                jCheckBox6.setSelected(false);
+            } else {
+                jCheckBox6.setSelected(true);
             }
             tf_check_bank.setText(to.check_bank);
             tf_check_no.setText(to.check_no);

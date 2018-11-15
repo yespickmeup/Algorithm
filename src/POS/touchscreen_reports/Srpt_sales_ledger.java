@@ -42,7 +42,12 @@ public class Srpt_sales_ledger {
     public final double cash_on_hand;
     public final double collections_cheque;
     public final double collections_cheque_on_hand;
-    public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location,double return_exchange,double collections,double cash_on_hand,double collections_cheque,double collections_cheque_on_hand) {
+    public final double collections_prepaid;
+    public final double collections_prepaid_cheque;
+    public final double refund;
+    public final double refund_cheque;
+
+    public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location, double return_exchange, double collections, double cash_on_hand, double collections_cheque, double collections_cheque_on_hand, double collections_prepaid, double collections_prepaid_cheque, double refund, double refund_cheque) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -50,11 +55,15 @@ public class Srpt_sales_ledger {
         this.date = date;
         this.branch = branch;
         this.location = location;
-        this.return_exchange=return_exchange;
-        this.collections=collections;
-        this.collections_cheque=collections_cheque;
-        this.collections_cheque_on_hand=collections_cheque_on_hand;
-        this.cash_on_hand=cash_on_hand;
+        this.return_exchange = return_exchange;
+        this.collections = collections;
+        this.collections_cheque = collections_cheque;
+        this.collections_cheque_on_hand = collections_cheque_on_hand;
+        this.cash_on_hand = cash_on_hand;
+        this.collections_prepaid = collections_prepaid;
+        this.collections_prepaid_cheque = collections_prepaid_cheque;
+        this.refund = refund;
+        this.refund_cheque = refund_cheque;
     }
 
     public static class field {
@@ -237,12 +246,16 @@ public class Srpt_sales_ledger {
         String date = "";
         String branch = "";
         String location = "";
-        double return_exchange=0;
-        double collections=0;
-        double cash_on_hand=0;
-        double collections_cheque=0;
-        double collections_cheque_on_hand=0;
-        Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location,return_exchange,collections,cash_on_hand,collections_cheque,collections_cheque_on_hand);
+        double return_exchange = 0;
+        double collections = 0;
+        double cash_on_hand = 0;
+        double collections_cheque = 0;
+        double collections_cheque_on_hand = 0;
+        double collections_prepaid = 0;
+        double collections_prepaid_cheque = 0;
+        double refund = 0;
+        double refund_cheque = 0;
+        Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_sales_ledger.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -491,7 +504,7 @@ public class Srpt_sales_ledger {
                 String prepaid_customer_name = rs.getString(39);
                 String prepaid_customer_id = rs.getString(40);
                 double prepaid_amount = rs.getDouble(41);
-                int charge_days=0;
+                int charge_days = 0;
                 double sales_discount = discount_amount;
                 double cash = (amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount));
                 double cheque_amount = check_amount;
@@ -594,7 +607,7 @@ public class Srpt_sales_ledger {
                 }
 
                 //</editor-fold>
-                MySales.sales sale = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_no, check_bank, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, gc_amount, cash, remarks, user_id, check_no, session_no, items,charge_days);
+                MySales.sales sale = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_no, check_bank, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, gc_amount, cash, remarks, user_id, check_no, session_no, items, charge_days);
 
                 fields.add(sale);
             }

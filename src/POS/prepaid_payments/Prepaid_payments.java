@@ -46,8 +46,8 @@ public class Prepaid_payments {
         public final String location;
         public final String location_id;
         public final String remarks;
-
-        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, String remarks) {
+        public final int refund;
+        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, String remarks,int refund) {
             this.id = id;
             this.cash = cash;
             this.check_bank = check_bank;
@@ -68,6 +68,7 @@ public class Prepaid_payments {
             this.location = location;
             this.location_id = location_id;
             this.remarks = remarks;
+            this.refund=refund;
         }
 
         public boolean isSelected() {
@@ -102,6 +103,7 @@ public class Prepaid_payments {
                     + ",location"
                     + ",location_id"
                     + ",remarks"
+                    + ",refund"
                     + ")values("
                     + ":cash"
                     + ",:check_bank"
@@ -121,6 +123,7 @@ public class Prepaid_payments {
                     + ",:location"
                     + ",:location_id"
                     + ",:remarks"
+                    + ",:refund"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -142,6 +145,7 @@ public class Prepaid_payments {
                     .setString("location", to_prepaid_payments.location)
                     .setString("location_id", to_prepaid_payments.location_id)
                     .setString("remarks", to_prepaid_payments.remarks)
+                    .setNumber("refund",to_prepaid_payments.refund)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -180,6 +184,7 @@ public class Prepaid_payments {
                     + ",location"
                     + ",location_id"
                     + ",remarks"
+                    + ",refund"
                     + ")values("
                     + ":cash"
                     + ",:check_bank"
@@ -199,6 +204,7 @@ public class Prepaid_payments {
                     + ",:location"
                     + ",:location_id"
                     + ",:remarks"
+                    + ",:refund"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -220,6 +226,7 @@ public class Prepaid_payments {
                     .setString("location", to_prepaid_payments.location)
                     .setString("location_id", to_prepaid_payments.location_id)
                     .setString("remarks", to_prepaid_payments.remarks)
+                    .setNumber("refund",to_prepaid_payments.refund)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -380,6 +387,7 @@ public class Prepaid_payments {
                     + ",location"
                     + ",location_id"
                     + ",remarks"
+                    + ",refund"
                     + " from prepaid_payments"
                     + " " + where;
 
@@ -405,9 +413,10 @@ public class Prepaid_payments {
                 String location = rs.getString(17);
                 String location_id = rs.getString(18);
                 String remarks = rs.getString(19);
+                int refund=rs.getInt(20);
                 to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added,
                         customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id,
-                        user_screen_name, branch, branch_id, location, location_id, remarks);
+                        user_screen_name, branch, branch_id, location, location_id, remarks,refund);
                 datas.add(to);
             }
             return datas;
