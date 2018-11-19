@@ -1269,6 +1269,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 return;
             }
         }
+        
 //        System.out.println("Cash: " + cash);
 //        System.out.println("Cheque: " + check_amount);
 

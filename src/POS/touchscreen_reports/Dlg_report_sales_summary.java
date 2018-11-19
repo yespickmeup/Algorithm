@@ -1563,6 +1563,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     count_coins_point_ten += drawer.point_ten;
                     count_coins_point_zero_five += drawer.point_zero_five;
                 }
+                double prepaid_sales=0;
                 for (MySales.sales sale : my_sale) {
 
                     cash_sales += sale.gross_amount;
@@ -1584,8 +1585,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         Srpt_end_of_day_summary_details.field gc = new Srpt_end_of_day_summary_details.field("Gift Certificate", sale.gift_certificate_from, "", FitIn.fmt_wc_0(sale.gift_certificate_amount));
                         my_gcs.add(gc);
                     }
+                    if(sale.prepaid_amount>0){
+                        prepaid_sales+=sale.prepaid_amount;
+                    }
                 }
-
+                cash_sales=cash_sales-prepaid_sales;
                 cash_sales = cash_sales - cc_cash_sales;
                 cc_total = cash_sales;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
@@ -1602,20 +1606,23 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 double refund = 0;
                 double refund_cheque = 0;
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
-                    prepayments += prepayment.cash;
-                    if (prepayment.check_amount > 0) {
-                        Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
-                        my_checks.add(check);
 
-                        check_prepayments += prepayment.check_amount;
-                    } else {
-                        cc_total += prepayment.cash;
-                    }
                     if (prepayment.refund == 1) {
                         if (prepayment.check_amount > 0) {
                             refund_cheque += prepayment.check_amount;
                         } else {
                             refund += prepayment.cash;
+                        }
+                    } else {
+
+                        if (prepayment.check_amount > 0) {
+                            Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
+                            my_checks.add(check);
+
+                            check_prepayments += prepayment.check_amount;
+                        } else {
+                            cc_total += prepayment.cash;
+                            prepayments += prepayment.cash;
                         }
                     }
                 }
@@ -1722,7 +1729,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     location = "All";
                 }
                 String status = "[Equal]";
-                double status_amount = cc_total - receipt_net_total;
+                double status_amount = cc_total - receipt_net_total-refund;
                 if (status_amount < 0) {
                     status = "[Short]";
                 }
@@ -1747,12 +1754,12 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     return_exchange += total;
                 }
                 receipts_total = receipts_total + return_exchange;
-                receipts_total=receipts_total-refund;
+                receipts_total = receipts_total + refund;
+
+                receipts_sub_total = receipts_sub_total + return_exchange+refund;
+                receipt_net_total = receipt_net_total + return_exchange+refund;
                 
-                receipts_sub_total = receipts_sub_total + return_exchange;
-                receipt_net_total = receipt_net_total + return_exchange;
-                
-                total_check_payments=total_check_payments-refund_cheque;
+                total_check_payments = total_check_payments - refund_cheque;
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
                                                                           receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,
                                                                           bills_one_hundred, bills_fifty, bills_twenty, coins_ten, coins_five, coins_one, coins_point_fifty, coins_point_twenty_five,
@@ -1762,7 +1769,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                                                                           count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                                                                           my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
                                                                           total_check_payments, total_cc_payments, date, business_name, address,
-                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange,refund,refund_cheque);
+                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange, refund, refund_cheque);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
                 InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_end_of_day_summary.jrxml");

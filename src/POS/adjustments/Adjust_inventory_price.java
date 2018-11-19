@@ -231,16 +231,20 @@ public class Adjust_inventory_price {
                         + ",selling_price= :selling_price"
                         + " where barcode='" + to.item_code + "' ";
                 s3 = SqlStringUtil.parse(s3).
-                        setString("unit", to.local_uom).
-                        setNumber("conversion", to.local_conversion).
-                        setNumber("selling_price", to.local_price).
+                        setString("unit", to.cloud_uom).
+                        setNumber("conversion", to.cloud_conversion).
+                        setNumber("selling_price", to.cloud_price).
                         ok();
 
                 stmt2.addBatch(s3);
 
                 stmt2.executeBatch();
+                
                 conn.commit();
-                Lg.s(Inventory_barcodes.class, "Item Code: " + to.item_code + " | " + to.description + " - Successfully Updated!");
+                System.out.println(s2);
+                System.out.println(s3);
+                System.out.println("--------------------------");
+//                Lg.s(Inventory_barcodes.class, "Item Code: " + to.item_code + " | " + to.description + " - Successfully Updated!");
             }
 
         } catch (SQLException e) {

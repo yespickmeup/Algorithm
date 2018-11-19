@@ -3400,7 +3400,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
                 String img_path = System.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png");
                 String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");
-                String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+                String ar_footer = System.getProperty("ar_footer", "Should you have any inquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
                 String prepared_by = jTextField22.getText();
                 Srpt_charge_with_items rpt = new Srpt_charge_with_items(business_name, address, contact_n, date, customer_name, customer_address, customer_id, img_path, total_balance, ar_footer, telephone_number, prepared_by);
                 String jrxml = "rpt_balance_per_transaction_items.jrxml";

@@ -430,11 +430,11 @@ public class Dlg_match_branch_prices extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-        System.setProperty("pool_host", "192.168.1.51");
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("cloud_host", "128.199.80.53");
-        System.setProperty("cloud_user", "smis2");
-        System.setProperty("cloud_password", "nopassword101");
+//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("cloud_host", "128.199.80.53");
+//        System.setProperty("cloud_user", "smis2");
+//        System.setProperty("cloud_password", "nopassword101");
 
         set_default_branch();
 
@@ -627,9 +627,9 @@ public class Dlg_match_branch_prices extends javax.swing.JDialog {
                 Field.Combo l_br = (Field.Combo) tf_from_branch1;
                 String where = " where branch_code='" + c_br.getId() + "' group by main_barcode order by description asc ";
                 List<Inventory_barcodes.to_inventory_barcodes> cloud = Inventory_barcodes.ret_where_cloud(where);
-                System.out.println("Cloud: " + cloud.size());
+                System.out.println("Cloud: " + cloud.size() + " - " + c_br.getId());
                 List<Inventory_barcodes.to_inventory_barcodes> local = Inventory_barcodes.ret_where(where);
-                System.out.println("Local: " + local.size());
+                System.out.println("Local: " + local.size() + " - " + l_br.getId());
 
                 List<field> diff = new ArrayList();
                 for (Inventory_barcodes.to_inventory_barcodes c : cloud) {
@@ -644,8 +644,8 @@ public class Dlg_match_branch_prices extends javax.swing.JDialog {
                                 double local_price = l.selling_price;
                                 String local_uom = l.unit;
                                 double local_conversion = l.conversion;
-                                String branch = c.branch;
-                                String branch_id = c.branch_code;
+                                String branch = c_br.getText();
+                                String branch_id = c_br.getId();
                                 String local_branch = l_br.getText();
                                 String local_branch_id = l_br.getId();
                                 field f = new field(item_code, description, cloud_price, cloud_uom, cloud_conversion, local_price, local_uom, local_conversion, branch, branch_id, local_branch, local_branch_id);

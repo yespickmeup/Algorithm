@@ -881,20 +881,24 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double refund = 0;
                 double refund_cheque = 0;
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
-                    collections_prepaid += prepayment.cash;
-                    if (prepayment.check_amount > 0) {
-                        Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
-                        collections_prepaid_cheque += prepayment.check_amount;
-                    }
+
                     if (prepayment.refund == 1) {
                         if (prepayment.check_amount > 0) {
                             refund_cheque += prepayment.check_amount;
                         } else {
                             refund += prepayment.cash;
                         }
+                    } else {
+
+                        if (prepayment.check_amount > 0) {
+                            Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
+                            collections_prepaid_cheque += prepayment.check_amount;
+                        } else {
+                            collections_prepaid += prepayment.cash;
+                        }
                     }
                 }
-                cash_on_hand = cash_on_hand + collections_prepaid - refund;
+                cash_on_hand = cash_on_hand + collections_prepaid + refund;
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
 
                 Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
