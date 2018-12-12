@@ -1091,8 +1091,15 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         } else {
             show_cost = 1;
         }
+        String wheree2 = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Stock Transfer - Hide Price - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas2 = User_previlege_others.ret_data(wheree2);
+        if (datas2.isEmpty()) {
+            hide_price = 0;
+        } else {
+            hide_price = 1;
+        }
     }
-
+    int hide_price=0;
     public void do_pass() {
 
     }
@@ -1301,7 +1308,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     is_month_selected = true;
                 }
 
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,show_cost);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,show_cost,hide_price);
 
                 String jrxml = "rpt_inventory_ledger.jrxml";
                 report_sales_items(rpt, jrxml);

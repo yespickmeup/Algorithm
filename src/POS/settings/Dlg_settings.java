@@ -205,8 +205,6 @@ public class Dlg_settings extends javax.swing.JDialog {
         tf_operated_by = new Field.Input();
         jLabel10 = new javax.swing.JLabel();
         tf_slogan = new Field.Input();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jLabel25 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         tf_serial_no = new Field.Input();
@@ -230,6 +228,8 @@ public class Dlg_settings extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
+        jLabel25 = new javax.swing.JLabel();
+        tf_email_address1 = new Field.Input();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jTextField15 = new Field.Input();
@@ -312,12 +312,6 @@ public class Dlg_settings extends javax.swing.JDialog {
 
         tf_slogan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox9.setText("Yes/No");
-
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setText("Main Branch:");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -350,15 +344,9 @@ public class Dlg_settings extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tf_slogan))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jCheckBox9)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tf_email_address))))
+                        .addComponent(tf_email_address)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -392,11 +380,7 @@ public class Dlg_settings extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_email_address, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox9)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(208, 208, 208))
         );
 
         jTabbedPane1.addTab("Company", jPanel2);
@@ -461,6 +445,16 @@ public class Dlg_settings extends javax.swing.JDialog {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel25.setText("AR Footer:");
+
+        tf_email_address1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_email_address1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_email_address1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -468,6 +462,10 @@ public class Dlg_settings extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_email_address1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
@@ -544,8 +542,12 @@ public class Dlg_settings extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_email_address1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("BIR", jPanel3);
@@ -823,7 +825,7 @@ public class Dlg_settings extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -879,6 +881,10 @@ public class Dlg_settings extends javax.swing.JDialog {
         init_open_drawer();        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField21MouseClicked
 
+    private void tf_email_address1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_email_address1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_email_address1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -896,7 +902,6 @@ public class Dlg_settings extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -953,6 +958,7 @@ public class Dlg_settings extends javax.swing.JDialog {
     private javax.swing.JTextField tf_company_name;
     private javax.swing.JTextField tf_contact_number;
     private javax.swing.JTextField tf_email_address;
+    private javax.swing.JTextField tf_email_address1;
     private javax.swing.JTextField tf_fax_number;
     private javax.swing.JTextField tf_operated_by;
     private javax.swing.JTextField tf_serial_no;
@@ -960,7 +966,7 @@ public class Dlg_settings extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         seed_cash_drawer();
 
@@ -1014,14 +1020,14 @@ public class Dlg_settings extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         tf_company_name.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -1073,7 +1079,7 @@ public class Dlg_settings extends javax.swing.JDialog {
         jTextField24.setText(setting.bir_vat_percent);
         jTextArea2.setText(setting.bir_receipt_footer);
         jTextArea3.setText(setting.bir_invoice_footer);
-
+        tf_email_address1.setText(setting.ar_footer);
         if (setting.receipt_printing_enabled == 1) {
             jCheckBox1.setSelected(true);
         } else {
@@ -1110,11 +1116,7 @@ public class Dlg_settings extends javax.swing.JDialog {
         } else {
             jCheckBox8.setSelected(false);
         }
-        if (setting.is_main_branch == 1) {
-            jCheckBox9.setSelected(true);
-        } else {
-            jCheckBox9.setSelected(false);
-        }
+
         jTextField21.setText(setting.drawer);
         jTextField16.setText(setting.developer);
         tf_address1.setText(setting.developer_address);
@@ -1122,6 +1124,7 @@ public class Dlg_settings extends javax.swing.JDialog {
         jTextField19.setText(setting.developer_accreditation_no);
         jTextField20.setText(setting.developer_accreditation_date);
         jTextField17.setText(setting.developer_contact_no);
+
     }
 
     private void update_settings() {
@@ -1185,11 +1188,20 @@ public class Dlg_settings extends javax.swing.JDialog {
         int module_requisition_slip = 0;
         int module_charge_in_advance = 0;
         int is_main_branch = 0;
-        if (jCheckBox9.isSelected()) {
-            is_main_branch = 1;
-        }
-        Settings.to_settings setting1 = new Settings.to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, bir_business_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance, is_main_branch);
+//        if (jCheckBox9.isSelected()) {
+//            is_main_branch = 1;
+//        }
+        String version = "";
+        String cloud_host = "";
+        String cloud_port = "";
+        String cloud_user = "";
+        String cloud_password = "";
+        String cloud_db = "";
+        String ar_footer = tf_email_address1.getText();
+
+        Settings.to_settings setting1 = new Settings.to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, bir_business_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance, is_main_branch, version, cloud_host, cloud_port, cloud_user, cloud_password, cloud_db, ar_footer);
         Settings.update_data(setting1);
         Alert.set(2, "");
+
     }
 }

@@ -274,7 +274,7 @@ public class Srpt_adjust_errors {
                 String loc_id = location_id;
                 int month = 11;
                 boolean is_month_selected = true;
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,1);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,1,0);
                 System.out.println("Item Code: " + item_code);
                 System.out.println("Description: " + description);
                 System.out.println("Searching Ledger......");

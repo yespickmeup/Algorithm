@@ -1026,6 +1026,7 @@
                                               <Component id="tf_selling_price" min="-2" pref="120" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jButton1" min="-2" pref="37" max="-2" attributes="0"/>
@@ -1033,14 +1034,15 @@
                                       <Component id="jButton2" min="-2" pref="32" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                       <Component id="jButton13" min="-2" pref="109" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                       <Component id="jButton16" min="-2" pref="128" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton17" min="-2" pref="173" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                                       <Component id="jButton4" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton3" min="-2" pref="80" max="-2" attributes="0"/>
@@ -1059,7 +1061,7 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel12" max="32767" attributes="0"/>
                                                   <Component id="jLabel9" max="32767" attributes="0"/>
@@ -1195,6 +1197,7 @@
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="jButton13" alignment="3" pref="0" max="32767" attributes="0"/>
                               <Component id="jButton16" alignment="3" pref="0" max="32767" attributes="0"/>
+                              <Component id="jButton17" alignment="3" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1744,6 +1747,21 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton16ActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Button.Default()"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton17">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/POS/icons_menu_maintenance/team2.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="User Price Change"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton17ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Button.Default()"/>

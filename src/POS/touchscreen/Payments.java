@@ -19,14 +19,16 @@ public class Payments {
     public static charge charge;
     public static double change;
     public static double balance_due;
+    public static online online;
 
-    public Payments(cash cash, credit_card credit_card, gift_certificate gift_certificate, prepaid prepaid, cheque cheque, charge charge) {
+    public Payments(cash cash, credit_card credit_card, gift_certificate gift_certificate, prepaid prepaid, cheque cheque, charge charge, online online) {
         Payments.cash = cash;
         Payments.credit_card = credit_card;
         Payments.gift_certificate = gift_certificate;
         Payments.prepaid = prepaid;
         Payments.cheque = cheque;
         Payments.charge = charge;
+        Payments.online = online;
     }
 
     public static void clearAll() {
@@ -36,6 +38,23 @@ public class Payments {
         Payments.clearGift_certificate();
         Payments.clearPrepaid();
         Payments.clear_credit_card();
+        Payments.clearOnline();
+    }
+
+    public static online getOnline() {
+        return online;
+    }
+
+    public static void setOnline(online online) {
+        Payments.online = online;
+    }
+
+    public static double getBalance_due() {
+        return balance_due;
+    }
+
+    public static void setBalance_due(double balance_due) {
+        Payments.balance_due = balance_due;
     }
 
     public static double getChange() {
@@ -94,7 +113,7 @@ public class Payments {
     }
 
     public static void clearPrepaid() {
-        prepaid pre = new prepaid("", "", 0,0);
+        prepaid pre = new prepaid("", "", 0, 0);
         Payments.prepaid = pre;
     }
 
@@ -107,8 +126,13 @@ public class Payments {
     }
 
     public static void clearCheque() {
-        cheque ch = new cheque("", "", 0,"","");
+        cheque ch = new cheque("", "", 0, "", "");
         Payments.cheque = ch;
+    }
+
+    public static void clearOnline() {
+        online ch = new online("", "", 0, "", "");
+        Payments.online = ch;
     }
 
     public charge getCharge() {
@@ -120,7 +144,7 @@ public class Payments {
     }
 
     public static void clearCharge() {
-        charge ch = new charge("", "", "", "", "", 0,0);
+        charge ch = new charge("", "", "", "", "", 0, 0);
         Payments.charge = ch;
     }
 
@@ -155,6 +179,7 @@ public class Payments {
         public final String card_no;
         public final String card_holder;
         public final String approval_code;
+
         public credit_card(String card_type, double rate, double amount, double to_pay, String card_no, String card_holder, String approval_code) {
             this.card_type = card_type;
             this.rate = rate;
@@ -189,11 +214,12 @@ public class Payments {
         public final String customer_id;
         public final double amount;
         public final double balance;
-        public prepaid(String customer_name, String customer_id, double amount,double balance) {
+
+        public prepaid(String customer_name, String customer_id, double amount, double balance) {
             this.customer_name = customer_name;
             this.customer_id = customer_id;
             this.amount = amount;
-            this.balance=balance;
+            this.balance = balance;
         }
 
     }
@@ -205,12 +231,30 @@ public class Payments {
         public final double amount;
         public final String check_holder;
         public final String check_date;
-        public cheque(String bank, String check_no, double amount,String check_holder,String check_date) {
+
+        public cheque(String bank, String check_no, double amount, String check_holder, String check_date) {
             this.bank = bank;
             this.check_no = check_no;
             this.amount = amount;
-            this.check_holder=check_holder;
-            this.check_date=check_date;
+            this.check_holder = check_holder;
+            this.check_date = check_date;
+        }
+    }
+
+    public static class online {
+
+        public final String bank;
+        public final String reference_no;
+        public final double amount;
+        public final String check_holder;
+        public final String check_date;
+
+        public online(String bank, String reference_no, double amount, String check_holder, String check_date) {
+            this.bank = bank;
+            this.reference_no = reference_no;
+            this.amount = amount;
+            this.check_holder = check_holder;
+            this.check_date = check_date;
         }
     }
 
@@ -223,14 +267,15 @@ public class Payments {
         public final String customer_id;
         public final double amount;
         public final int days;
-        public charge(String charge_type, String charge_type_id, String reference_no, String customer_name, String customer_id, double amount,int days) {
+
+        public charge(String charge_type, String charge_type_id, String reference_no, String customer_name, String customer_id, double amount, int days) {
             this.charge_type = charge_type;
             this.charge_type_id = charge_type_id;
             this.reference_no = reference_no;
             this.customer_name = customer_name;
             this.customer_id = customer_id;
             this.amount = amount;
-            this.days=days;
+            this.days = days;
         }
     }
 
@@ -259,7 +304,9 @@ public class Payments {
         prepaid prep = prepaid;
         cheque cheq = cheque;
         charge charg = charge;
-        double change1 = balance_due - (cash.cash + cc.amount + gc.amount + prep.amount + cheq.amount + charg.amount);
+        online onl = online;
+
+        double change1 = balance_due - (cash.cash + cc.amount + gc.amount + prep.amount + cheq.amount + charg.amount + onl.amount);
         return change1;
     }
 
@@ -269,8 +316,9 @@ public class Payments {
         gift_certificate gc = gift_certificate;
         prepaid prep = prepaid;
         cheque cheq = cheque;
-        charge charg = charge;    
-        double change1 = (cash.cash + cc.amount + gc.amount + prep.amount + cheq.amount + charg.amount) - balance_due;
+        charge charg = charge;
+        online onl = online;
+        double change1 = (cash.cash + cc.amount + gc.amount + prep.amount + cheq.amount + charg.amount + onl.amount) - balance_due;
         return change1;
     }
 }

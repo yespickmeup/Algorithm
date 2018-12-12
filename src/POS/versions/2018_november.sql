@@ -13,6 +13,9 @@
 insert into user_default_previlege_others(account,account_name,name)values('Transactions','Stock Transfer','Stock Transfer - Show Cost');
 insert into user_default_previlege_others(account,account_name,name)values('Reports','Item Ledger','Item Ledger - Show Cost');
 
+insert into user_default_previlege_others(account,account_name,name)values('Transactions','Stock Transfer','Stock Transfer - Hide Price');
+insert into user_default_previlege_others(account,account_name,name)values('Reports','Item Ledger','Item Ledger - Hide Price');
+
 
 select transaction_no,count(*) as cnt from stock_transfers where  is_uploaded=0  group by transaction_no having(cnt>1) ;
 
@@ -31,3 +34,19 @@ update stock_transfers set to_branch_id=10 where to_branch='Office use - Kabanka
 update stock_transfers_items set to_branch_id=10 where to_branch='Office use - Kabankalan';
 
 alter table prepaid_payments add refund int default 0;
+
+
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10113';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10114';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10115';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10186';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10187';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10196';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10244';
+
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10154';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10198';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10199';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10201';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10204';
+update stock_transfers set status=1,is_uploaded=1 where transaction_no='9|10168';

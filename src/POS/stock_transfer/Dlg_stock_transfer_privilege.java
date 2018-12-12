@@ -1264,11 +1264,11 @@ public class Dlg_stock_transfer_privilege extends javax.swing.JDialog {
                             String to_branch_id = to2.branch_id;
                             String to_location = to2.location;
                             String to_location_id = "" + to2.id;
-                            int add_transfer = 0;
-                            int edit_transfer = 0;
-                            int delete_transfer = 0;
-                            int finalize_transfer = 0;
-                            int report_transfer = 0;
+                            int add_transfer = 1;
+                            int edit_transfer = 1;
+                            int delete_transfer = 1;
+                            int finalize_transfer = 1;
+                            int report_transfer = 1;
                             Stock_transfer_privileges.to_stock_transfer_privileges stp = new to_stock_transfer_privileges(id, user_id, user_screen_name, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, add_transfer, edit_transfer, delete_transfer, finalize_transfer, report_transfer);
                             Stock_transfer_privileges.add_data(stp);
 

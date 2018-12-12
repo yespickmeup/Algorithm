@@ -2006,6 +2006,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     String my_at_location = "";
     String my_at_location_id = "";
     static int show_cost = 1;
+    static int hide_price = 0;
     List<Stock_transfer_privileges.to_stock_transfer_privileges> stock_transfer_privileges = new ArrayList();
 
     private void item_ledger() {
@@ -2063,11 +2064,19 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Stock Transfer - Show Cost - (Add)" + "' limit 1";
         List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
         if (datas.isEmpty()) {
-           show_cost=0;
-        }else{
-            show_cost=1;
+            show_cost = 0;
+        } else {
+            show_cost = 1;
         }
-        
+
+        String wheree2 = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Stock Transfer - Hide Price - (Add)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas2 = User_previlege_others.ret_data(wheree2);
+        if (datas2.isEmpty()) {
+            hide_price = 0;
+        } else {
+            hide_price = 1;
+        }
+
     }
 
     List<Stock_transfers.to_stock_transfers> receipt_list = new ArrayList();
@@ -3111,14 +3120,20 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     }
                     return " " + unit;
                 case 4:
-                    if(show_cost==1){
+                    if (show_cost == 1) {
                         return " " + FitIn.fmt_wc_0(tt.cost);
-                    }else{
+                    } else {
                         return " ";
                     }
-                    
+
                 case 5:
-                    return " " + FitIn.fmt_wc_0(tt.selling_price);
+
+                    if (hide_price == 1) {
+                        return " ";
+                    } else {
+                        return " " + FitIn.fmt_wc_0(tt.selling_price);
+                    }
+
                 case 6:
                     return " Update";
                 case 7:

@@ -6,6 +6,7 @@ package POS.inventory;
 
 import POS.branch_locations.Branch_locations;
 import POS.branch_locations.S1_branch_locations;
+import POS.users.User_price_change_request_logs;
 import POS.util.DateType;
 import POS.util.MyConnection;
 import java.sql.Connection;
@@ -1958,12 +1959,12 @@ public class Inventory {
                 to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
                 datas.add(to);
             }
-           
+
             return datas;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-           MyConnection.close();
+            MyConnection.close();
         }
     }
 
@@ -2717,11 +2718,13 @@ public class Inventory {
         }
     }
 
-    public static void update_price(String item_code, double price, String unit) {
+    public static void update_price(String item_code, double price, String unit, User_price_change_request_logs.to_user_price_change_request_logs log) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            PreparedStatement stmt = conn.prepareStatement("");
             String s0 = "update inventory set "
-                    + "selling_price= :selling_price"
+                    + " selling_price= :selling_price"
                     + ",unit= :unit"
                     + " where "
                     + " barcode ='" + item_code + "' "
@@ -2732,12 +2735,10 @@ public class Inventory {
                     .setString("unit", unit)
                     .ok();
 
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
-            Lg.s(Inventory.class, "Successfully Updated");
+            stmt.addBatch(s0);
 
             String s2 = "update inventory_barcodes set "
-                    + "selling_price= :selling_price"
+                    + " selling_price= :selling_price"
                     + ",unit= :unit"
                     + " where "
                     + " main_barcode ='" + item_code + "' "
@@ -2747,9 +2748,51 @@ public class Inventory {
                     .setNumber("selling_price", price)
                     .setString("unit", unit)
                     .ok();
+            stmt.addBatch(s2);
 
-            PreparedStatement stmt2 = conn.prepareStatement(s2);
-            stmt2.execute();
+            String s3 = "insert into user_price_change_request_logs("
+                    + "user_id"
+                    + ",user_name"
+                    + ",created_at"
+                    + ",updated_at"
+                    + ",item_code"
+                    + ",description"
+                    + ",old_unit"
+                    + ",new_unit"
+                    + ",old_price"
+                    + ",new_price"
+                    + ",status"
+                    + ")values("
+                    + ":user_id"
+                    + ",:user_name"
+                    + ",:created_at"
+                    + ",:updated_at"
+                    + ",:item_code"
+                    + ",:description"
+                    + ",:old_unit"
+                    + ",:new_unit"
+                    + ",:old_price"
+                    + ",:new_price"
+                    + ",:status"
+                    + ")";
+
+            s3 = SqlStringUtil.parse(s3)
+                    .setString("user_id", log.user_id)
+                    .setString("user_name", log.user_name)
+                    .setString("created_at", log.created_at)
+                    .setString("updated_at", log.updated_at)
+                    .setString("item_code", log.item_code)
+                    .setString("description", log.description)
+                    .setString("old_unit", log.old_unit)
+                    .setString("new_unit", log.new_unit)
+                    .setNumber("old_price", log.old_price)
+                    .setNumber("new_price", log.new_price)
+                    .setNumber("status", log.status)
+                    .ok();
+            stmt.addBatch(s3);
+            stmt.executeBatch();
+            conn.commit();
+
             Lg.s(Inventory.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);

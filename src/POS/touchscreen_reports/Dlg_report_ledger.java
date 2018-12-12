@@ -12,6 +12,7 @@ import POS.branches.Branches;
 import POS.item_replacements.Item_replacements;
 import POS.prepaid_payments.Prepaid_payments;
 import POS.reports.Dlg_report_items;
+import POS.returns.Return_from_customer_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
 import POS.util.TableRenderer;
@@ -790,6 +791,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
                 String where_sales = " where id<>0 ";
+                String where_sales_status = " where id<>0 and status=1 ";
                 String where_sales3 = " where id<>0 and status=1 ";
                 if (jCheckBox10.isSelected()) {
                     status = 1;
@@ -802,6 +804,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                             + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
                     where_sales = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
+                    where_sales_status = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "' and status=1 ";
                     where_sales3 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status=1 ";
 
@@ -810,6 +814,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (jCheckBox1.isSelected()) {
@@ -820,12 +825,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where = where + " and location_id='" + lo.getId() + "' ";
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                     where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
+                    where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
                     where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
                 }
                 if (jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
                     where = where + " and branch_id='" + br.getId() + "' ";
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                     where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+                    where_sales_status = where_sales_status + " and branch_id='" + br.getId() + "' ";
                     where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
                 }
                 where = where + " order by id asc ";
@@ -876,6 +883,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
                 cash_on_hand = cash_on_hand + collections + return_exchange;
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
+                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_status);
                 double collections_prepaid = 0;
                 double collections_prepaid_cheque = 0;
                 double refund = 0;
@@ -896,6 +904,11 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         } else {
                             collections_prepaid += prepayment.cash;
                         }
+                    }
+                }
+                for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
+                    if (rfc.status == 1) {
+                        refund -= (rfc.qty * rfc.cost);
                     }
                 }
                 cash_on_hand = cash_on_hand + collections_prepaid + refund;

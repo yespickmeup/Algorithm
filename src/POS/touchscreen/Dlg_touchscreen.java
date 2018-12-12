@@ -27,6 +27,8 @@ import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
 import POS.users.User_previlege_others;
+import POS.users.User_price_change_request_logs;
+import POS.users.User_price_change_requests;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.KeyCodes;
@@ -329,6 +331,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         lbl_separator2 = new Label.Separator();
         jButton34 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        btn_online = new javax.swing.JButton();
+        lbl_online = new javax.swing.JButton();
+        btn_charge8 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -1127,7 +1132,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tf_amount_tendered, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addComponent(tf_amount_tendered)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -1341,60 +1346,111 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Done");
 
+        btn_online.setBackground(new java.awt.Color(255, 255, 255));
+        btn_online.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        btn_online.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_payment/charge.png"))); // NOI18N
+        btn_online.setText("F6 - Online");
+        btn_online.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btn_online.setContentAreaFilled(false);
+        btn_online.setFocusable(false);
+        btn_online.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_online.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_online.setOpaque(true);
+        btn_online.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_onlineActionPerformed(evt);
+            }
+        });
+
+        lbl_online.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_online.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        lbl_online.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        lbl_online.setContentAreaFilled(false);
+        lbl_online.setFocusable(false);
+        lbl_online.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lbl_online.setOpaque(true);
+        lbl_online.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lbl_onlineActionPerformed(evt);
+            }
+        });
+
+        btn_charge8.setBackground(new java.awt.Color(255, 255, 255));
+        btn_charge8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_charge8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_payment/close33 (Custom).png"))); // NOI18N
+        btn_charge8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btn_charge8.setContentAreaFilled(false);
+        btn_charge8.setFocusable(false);
+        btn_charge8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_charge8.setOpaque(true);
+        btn_charge8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_charge8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_gift, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_prepaid, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_cheque, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_charge, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(lbl_gift, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(btn_charge3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(lbl_prepaid, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(btn_charge4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(lbl_cheque, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(btn_charge5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(lbl_charge, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(btn_charge6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_charge2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_charge1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(lbl_separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(btn_cash3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(1, 1, 1)
-                        .addComponent(lbl_p_change, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_cash4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_cash1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_p_balance_due, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                            .addComponent(lbl_p_amount_due, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(5, 5, 5)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btn_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_gift, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_prepaid, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_cheque, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_charge, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 0, 0)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(lbl_gift, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
+                                    .addComponent(btn_charge3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(lbl_prepaid, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
+                                    .addComponent(btn_charge4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(lbl_cheque, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
+                                    .addComponent(btn_charge5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(lbl_charge, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
+                                    .addComponent(btn_charge6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lbl_cash, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbl_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btn_charge2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_charge1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(btn_cash3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(1, 1, 1)
+                            .addComponent(lbl_p_change, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btn_cash4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_cash1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(0, 0, 0)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl_p_balance_due, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                .addComponent(lbl_p_amount_due, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbl_separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                            .addComponent(btn_online, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(lbl_online, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(btn_charge8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -1419,7 +1475,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_p_balance_due, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                             .addComponent(btn_cash4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGap(5, 5, 5)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1459,14 +1515,20 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                                             .addComponent(btn_charge5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, 0)
                                         .addComponent(btn_charge6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbl_online, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_online, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_charge8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5)
                         .addComponent(lbl_separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_p_change, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                             .addComponent(btn_cash3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -2437,7 +2499,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void btn_charge11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_charge11ActionPerformed
         tf_amount_tendered.setText("");
-         type_cash();
+        type_cash();
     }//GEN-LAST:event_btn_charge11ActionPerformed
 
     private void btn_charge13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_charge13ActionPerformed
@@ -2692,6 +2754,18 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         order_list();
     }//GEN-LAST:event_jButton45ActionPerformed
 
+    private void btn_onlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_onlineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_onlineActionPerformed
+
+    private void lbl_onlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbl_onlineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_onlineActionPerformed
+
+    private void btn_charge8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_charge8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_charge8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2724,9 +2798,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton btn_charge4;
     private javax.swing.JButton btn_charge5;
     private javax.swing.JButton btn_charge6;
+    private javax.swing.JButton btn_charge8;
     private javax.swing.JButton btn_cheque;
     private javax.swing.JButton btn_credit;
     private javax.swing.JButton btn_gift;
+    private javax.swing.JButton btn_online;
     private javax.swing.JButton btn_prepaid;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -2822,6 +2898,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_item_discount;
     private javax.swing.JLabel lbl_line_discount;
     private javax.swing.JLabel lbl_line_discount1;
+    private javax.swing.JButton lbl_online;
     private javax.swing.JButton lbl_p_amount_due;
     private javax.swing.JButton lbl_p_balance_due;
     private javax.swing.JButton lbl_p_change;
@@ -2845,7 +2922,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
 //        jPanel2.setVisible(false);
         init_key();
         set_cardlayout();
@@ -2956,13 +3033,17 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //            btn_charge8,btn_charge7, btn_charge9,  btn_charge10,, btn_cash2,lbl_p_all_tendered,
             @Override
             public void run() {
-                JButton[] b1 = {btn_cash, btn_credit, btn_gift, btn_prepaid, btn_cheque, btn_cash1};
+                JButton[] b1 = {btn_cash, btn_credit, btn_gift, btn_prepaid, btn_cheque, btn_cash1, btn_charge};
                 RenderButtons.border1(b1);
-                JButton[] b2 = {btn_charge, btn_cash3, btn_cash4};
-                RenderButtons.border2(b2);
-                JButton[] b3 = {lbl_cash, lbl_credit, lbl_gift, lbl_prepaid, lbl_cheque, btn_charge1, btn_charge2, btn_charge3, btn_charge4, btn_charge5};
+//                JButton[] b2 = {btn_charge, btn_cash3, btn_cash4};
+//                RenderButtons.border2(b2);
+
+                JButton[] b11 = {btn_online, lbl_online, btn_charge8};
+                RenderButtons.border2(b11);
+
+                JButton[] b3 = {lbl_cash, lbl_credit, lbl_gift, lbl_prepaid, lbl_cheque, btn_charge1, btn_charge2, btn_charge3, btn_charge4, btn_charge5, lbl_charge, btn_charge6};
                 RenderButtons.border3(b3);
-                JButton[] b4 = {lbl_p_balance_due, btn_charge6};
+                JButton[] b4 = {lbl_p_balance_due, btn_charge8};
                 RenderButtons.border4(b4);
                 JButton[] b5 = {btn_cash1};
                 RenderButtons.border5(b5);
@@ -2972,13 +3053,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 RenderButtons.border7(b7);
                 JButton[] b8 = {lbl_p_change, lbl_p_balance_due};
                 RenderButtons.border8(b8);
-                JButton[] b9 = {lbl_charge};
+                JButton[] b9 = {lbl_online};
                 RenderButtons.border9(b9);
                 JTextField[] b10 = {tf_amount_tendered};
                 RenderButtons.border2(b10);
-                JButton[] btns1 = {btn_cash, btn_credit, btn_gift, btn_prepaid, btn_cheque, btn_charge};
-                JButton[] btns2 = {lbl_cash, lbl_credit, lbl_gift, lbl_prepaid, lbl_cheque, lbl_charge};
-                JButton[] btns3 = {btn_charge1, btn_charge2, btn_charge3, btn_charge4, btn_charge5, btn_charge6};
+                JButton[] btns1 = {btn_cash, btn_credit, btn_gift, btn_prepaid, btn_cheque, btn_charge, btn_online};
+                JButton[] btns2 = {lbl_cash, lbl_credit, lbl_gift, lbl_prepaid, lbl_cheque, lbl_charge, lbl_online};
+                JButton[] btns3 = {btn_charge1, btn_charge2, btn_charge3, btn_charge4, btn_charge5, btn_charge6, btn_charge8};
                 RenderButtons.hover_touchscreen(btns1, btns2, btns3);
                 JButton[] btns4 = {btn_charge11, btn_charge13, btn_charge14, btn_charge12, btn_charge15, btn_charge16, btn_charge17, btn_charge19, btn_charge18, btn_charge20, btn_charge21, btn_charge22, btn_charge23, btn_charge26, btn_charge25, btn_charge24};
                 RenderButtons.hover_numpad(btns4);
@@ -3179,6 +3260,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F5) {
                     payment_charge();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F6) {
+                    payment_online();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F7) {
                     advance_search2();
@@ -3834,23 +3918,19 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         int col = tbl_items.getSelectedColumn();
 
         if (col == 4) {
-//            String where = " where user_name='" + Users.user_name + "' order by previledge asc";
-//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-//            int exists = 0;
-//            for (S1_user_previleges.to_user_previleges to1 : datas) {
-//                if (to1.previledge.equalsIgnoreCase("Inventory Update Item Pricing")) {
-//                    exists = 1;
-//                    break;
-//                }
-//            }
-//
-//            if (exists == 1) {
-//                update_pricing(to, row);
-//            } else {
-//                tbl_items.clearSelection();
-//                tf_search.selectAll();
-//                tf_search.grabFocus();
-//            }
+            String where = " where item_code='" + to.main_barcode + "' and user_id='" + MyUser.getUser_id() + "' ";
+            List<User_price_change_requests.to_user_price_change_requests> change = User_price_change_requests.ret_data(where);
+            if (change.isEmpty()) {
+                Alert.set(0, "Cannot change item price");
+                tbl_items.clearSelection();
+                tf_search.selectAll();
+                tf_search.grabFocus();
+                return;
+            }
+            update_pricing(to, row);
+            tbl_items.clearSelection();
+            tf_search.selectAll();
+            tf_search.grabFocus();
 
         } else if (col == 5) {
             Window p = (Window) this;
@@ -3868,6 +3948,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             });
             nd.setLocationRelativeTo(jScrollPane3);
             nd.setVisible(true);
+            tbl_items.clearSelection();
+            tf_search.selectAll();
+            tf_search.grabFocus();
         } else {
             if (to.selling_type == 0) {
                 String detail = "Description: " + to.description + "\n";
@@ -3969,8 +4052,22 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     index++;
                 }
 
-                Inventory.update_price(to.main_barcode, data.selling_price, uoms);
+                int id = 0;
+                String user_id = MyUser.getUser_id();
+                String user_name = MyUser.getUser_name();
+                String created_at = DateType.now();
+                String updated_at = DateType.now();
+                String item_code = to.main_barcode;
+                String description = to.description;
+                String old_unit = to.unit;
+                String new_unit = uoms;
+                double old_price = to.selling_price;
+                int status = 0;
+                User_price_change_request_logs.to_user_price_change_request_logs log = new User_price_change_request_logs.to_user_price_change_request_logs(id, user_id, user_name, created_at, updated_at, item_code, description, old_unit, new_unit, old_price, new_price, status);
+
+                Inventory.update_price(to.main_barcode, data.selling_price, uoms, log);
                 data_cols();
+                Alert.set(0, "Item price changed!");
                 tbl_items.clearSelection();
                 tf_search.selectAll();
                 tf_search.grabFocus();
@@ -4287,11 +4384,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     double addtl_amount = to.addtl_amount;
 
                     Inventory_barcodes.to_inventory_barcodes t = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name,
-                            category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty,
-                            unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id,
-                            multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
-                            branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name,
-                            discount_customer_name, discount_customer_id, addtl_amount, wtax);
+                                                                                                              category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty,
+                                                                                                              unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id,
+                                                                                                              multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
+                                                                                                              branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name,
+                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax);
                     datas.add(t);
                 }
 
@@ -4443,9 +4540,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
                         S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price,
-                                 date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1,
-                                 discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification,
-                                 classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                                                                                              date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1,
+                                                                                              discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification,
+                                                                                              classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                         orders.add(ord);
                     }
                     System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
@@ -4500,10 +4597,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
                         S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name,
-                                 item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id,
-                                 user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1, discount_customer_name1,
-                                 discount_customer_id1, branch, branch_code, location, location_id, category, category_id,
-                                 classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                                                                                              item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id,
+                                                                                              user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1, discount_customer_name1,
+                                                                                              discount_customer_id1, branch, branch_code, location, location_id, category, category_id,
+                                                                                              classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                         orders.add(ord);
                     }
                     S1_orders.update_data(order);
@@ -4861,6 +4958,26 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         nd.setLocation(loc.x + 46, loc.y - 137);
         nd.setVisible(true);
     }
+    
+    private void payment_online() {
+        Window p = (Window) this;
+        Dlg_touchscreen_payment_online nd = Dlg_touchscreen_payment_online.create(p, true);
+        nd.setTitle("");
+        nd.do_pass();
+        nd.setCallback(new Dlg_touchscreen_payment_online.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_payment_online.OutputData data) {
+                closeDialog.ok();
+                Payments.online card = Payments.online;
+                lbl_online.setText(FitIn.fmt_wc_0(card.amount));
+                lbl_p_change.setText(FitIn.fmt_wc_0(Payments.countChange2()));
+            }
+        });
+        Point loc = btn_charge2.getLocationOnScreen();
+        nd.setLocation(loc.x + 46, loc.y - 137);
+        nd.setVisible(true);
+    }
 
     private void payment_charge() {
         String charge_payment = System.getProperty("module_accounts_receivable", "0");
@@ -5005,18 +5122,18 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     Timer time = new Timer(1000, new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (mytime == 5) {
-                mytime = 0;
-                time.stop();
+                       @Override
+                       public void actionPerformed(ActionEvent e) {
+                           if (mytime == 5) {
+                               mytime = 0;
+                               time.stop();
 //                load.disposed();
 //                load.setVisible(false);
-            }
+                           }
 
-            mytime++;
-        }
-    });
+                           mytime++;
+                       }
+                   });
 
     private void show_loader() {
         Toolkit tk = Toolkit.getDefaultToolkit();

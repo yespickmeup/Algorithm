@@ -245,6 +245,9 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -506,10 +509,26 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Reason:");
 
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel17.setText("Amount:");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("0.00");
+        jLabel18.setOpaque(true);
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("[         Equal        ]");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -535,9 +554,16 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                             .addComponent(tf_branch)
                             .addComponent(tf_branch1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -554,7 +580,14 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 0, 0)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -637,6 +670,9 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -689,12 +725,14 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         double amount = 0;
 
         for (MySales_Items.items item : acc) {
-            amount += (item.product_qty * item.selling_price)+item.addtl_amount-item.discount_amount;
+            amount += (item.product_qty * item.selling_price) + item.addtl_amount - item.discount_amount;
         }
         loadData_sale_items(acc);
         jLabel2.setText("" + acc.size());
         jLabel6.setText(FitIn.fmt_wc_0(amount));
+        count_amount_replacements();
     }
+
     public void do_pass2(List<MySales_Items.items> acc) {
 
         my_items.clear();
@@ -703,13 +741,14 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         double amount = 0;
 
         for (MySales_Items.items item : acc) {
-            amount += (item.product_qty * item.selling_price)+item.addtl_amount-item.discount_amount;
+            amount += (item.product_qty * item.selling_price) + item.addtl_amount - item.discount_amount;
         }
         loadData_sale_items(acc);
         jLabel2.setText("" + acc.size());
         jLabel6.setText(FitIn.fmt_wc_0(amount));
+        count_amount_replacements();
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();
@@ -717,14 +756,14 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -913,7 +952,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                     double amount = 0;
                     List<MySales_Items.items> acc = tbl_sale_items_ALM;
                     for (MySales_Items.items item : acc) {
-                        amount += (item.product_qty * item.selling_price)-item.discount_amount;
+                        amount += (item.product_qty * item.selling_price) - item.discount_amount;
                     }
 
                     jLabel6.setText(FitIn.fmt_wc_0(amount));
@@ -940,7 +979,7 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
                     double amount = 0;
                     List<MySales_Items.items> acc = tbl_sale_items_ALM;
                     for (MySales_Items.items item : acc) {
-                        amount += (item.product_qty * item.selling_price)-item.discount_amount;
+                        amount += (item.product_qty * item.selling_price) - item.discount_amount;
                     }
 
                     jLabel6.setText(FitIn.fmt_wc_0(amount));
@@ -1063,6 +1102,20 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
             amount += item.selling_price * item.product_qty;
         }
         jLabel7.setText(FitIn.fmt_wc_0(amount));
+
+        double to_be_replaced = FitIn.toDouble(jLabel6.getText());
+        double replacements = FitIn.toDouble(jLabel7.getText());
+        double total = replacements - to_be_replaced;
+        if (total == 0) {
+            jLabel19.setText("[         Equal        ]");
+        }
+        if (total < 0) {
+            jLabel19.setText("[         Short        ]");
+        }
+        if (total > 0) {
+            jLabel19.setText("[         Over         ]");
+        }
+        jLabel18.setText(FitIn.fmt_wc_0(total));
     }
     public static ArrayListModel tbl_sale_items_ALM2;
     public static Tblsale_itemsModel2 tbl_sale_items_M2;
@@ -1289,4 +1342,5 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
             callback.ok(new CloseDialog(this), new OutputData(replacements, discount, reason, amount_due, replacement_amount));
         }
     }
+    
 }

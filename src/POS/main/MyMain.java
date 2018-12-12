@@ -187,17 +187,16 @@ public class MyMain {
                 System.setProperty("module_services", prop.getProperty("module_services", "1"));
             }
 
-            System.setProperty("cloud_host", prop.getProperty("cloud_host", "128.199.80.53"));
-            System.setProperty("cloud_port", prop.getProperty("cloud_port", "3306"));
-            System.setProperty("cloud_user", prop.getProperty("cloud_user", "smis2"));
-            System.setProperty("cloud_password", prop.getProperty("cloud_password", "nopassword101"));
-            System.setProperty("cloud_db", prop.getProperty("cloud_db", "db_algorithm"));
+            System.setProperty("cloud_host", setting.cloud_host);
+            System.setProperty("cloud_port", setting.cloud_port);
+            System.setProperty("cloud_user", setting.cloud_user);
+            System.setProperty("cloud_password", setting.cloud_password);
+            System.setProperty("cloud_db", setting.cloud_db);
             System.setProperty("active_branches", prop.getProperty("active_branches", ""));
-            System.setProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact the Accounting Department");
-            System.setProperty("img_logo", prop.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png"));
+            System.setProperty("ar_footer", setting.ar_footer);
+            System.setProperty("img_logo", prop.getProperty("img_logo", System.getProperty("user.home") + "\\smis\\logo.png"));
 
-            String version = System.getProperty("version", "");
-            System.setProperty("version", version);
+            System.setProperty("version", setting.version);
             //
         } catch (IOException e) {
             throw new RuntimeException(e);

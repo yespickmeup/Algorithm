@@ -14,6 +14,7 @@ import POS.inventory.Inventory_barcodes.to_inventory_barcodes;
 import POS.inventory.S1_inventory_multi_level_pricing.to_inventory_multi_level_pricing;
 import POS.receipts.S1_receipt_items;
 import POS.selling_type.S1_selling_type;
+import POS.users.Dlg_user_price_change;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
@@ -339,6 +340,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jCheckBox8 = new javax.swing.JCheckBox();
         jButton13 = new Button.Default();
         jButton16 = new Button.Default();
+        jButton17 = new Button.Default();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -1234,6 +1236,15 @@ public class Dlg_inventory extends javax.swing.JDialog {
             }
         });
 
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/team2.png"))); // NOI18N
+        jButton17.setText("User Price Change");
+        jButton17.setFocusable(false);
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1301,19 +1312,21 @@ public class Dlg_inventory extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(40, 40, 40))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(1, 1, 1)
                                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
+                                .addGap(125, 125, 125)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1329,7 +1342,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(91, 91, 91)
+                                        .addGap(51, 51, 51)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1432,7 +1445,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1701,6 +1715,10 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
        check_items();
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+       user_price_change();
+    }//GEN-LAST:event_jButton17ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1722,6 +1740,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -3901,6 +3920,21 @@ public class Dlg_inventory extends javax.swing.JDialog {
             
             @Override
             public void ok(CloseDialog closeDialog, Dlg_inventory_cloud_transactions_local.OutputData data) {
+                closeDialog.ok();
+                
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    private void user_price_change(){
+        Window p = (Window) this;
+        Dlg_user_price_change nd = Dlg_user_price_change.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_user_price_change.Callback() {
+            
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_user_price_change.OutputData data) {
                 closeDialog.ok();
                 
             }

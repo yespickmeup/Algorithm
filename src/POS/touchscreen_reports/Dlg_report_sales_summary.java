@@ -18,6 +18,7 @@ import POS.last_remittance.S1_cash_drawer_last_remittances;
 import POS.my_sales.MySales;
 import POS.prepaid_payments.Prepaid_payments;
 import POS.reports.Dlg_report_items;
+import POS.returns.Return_from_customer_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
 import POS.util.DateType;
@@ -1454,6 +1455,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
                 String where_drawer = " where id<>0 ";
                 String where_sales = " where id<>0 ";
+                String where_sales_status = " where id<>0 and status=1 ";
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
                 String where_disbursements = " where id<>0 ";
@@ -1462,6 +1464,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                             + "  and user_id='" + f.getId() + "'";
                     where_sales = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
+                    where_sales_status = " where id<>0 "
+                            + "  and user_id='" + f.getId() + "' and status=1 ";
                     where_disbursements = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales2 = " where id<>0 "
@@ -1470,18 +1474,21 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 if (!jCheckBox4.isSelected()) {
                     where_drawer = where_drawer + "  and Date(time_in) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_disbursements = where_disbursements + " and Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (!jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and location_id='" + lo.getId() + "' ";
                     where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
+                    where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
                     where_disbursements = where_disbursements + " and location_id='" + lo.getId() + "' ";
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                 }
                 if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and branch_id='" + br.getId() + "' ";
                     where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+                    where_sales_status = where_sales_status + " and branch_id='" + br.getId() + "' ";
                     where_disbursements = where_disbursements + " and branch_id='" + br.getId() + "' ";
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                 }
@@ -1490,6 +1497,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales2);
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
+                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_status);
                 List<Srpt_end_of_day_summary_details.field> my_details = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_checks = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_credit_cards = new ArrayList();
@@ -1563,7 +1571,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     count_coins_point_ten += drawer.point_ten;
                     count_coins_point_zero_five += drawer.point_zero_five;
                 }
-                double prepaid_sales=0;
+                double prepaid_sales = 0;
                 for (MySales.sales sale : my_sale) {
 
                     cash_sales += sale.gross_amount;
@@ -1585,11 +1593,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         Srpt_end_of_day_summary_details.field gc = new Srpt_end_of_day_summary_details.field("Gift Certificate", sale.gift_certificate_from, "", FitIn.fmt_wc_0(sale.gift_certificate_amount));
                         my_gcs.add(gc);
                     }
-                    if(sale.prepaid_amount>0){
-                        prepaid_sales+=sale.prepaid_amount;
+                    if (sale.prepaid_amount > 0) {
+                        prepaid_sales += sale.prepaid_amount;
                     }
                 }
-                cash_sales=cash_sales-prepaid_sales;
+                cash_sales = cash_sales - prepaid_sales;
                 cash_sales = cash_sales - cc_cash_sales;
                 cc_total = cash_sales;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
@@ -1627,6 +1635,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     }
                 }
 
+                for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
+                    if (rfc.status == 1) {
+                        refund -= (rfc.qty * rfc.cost);
+                    }
+                }
                 double total_remittance = 0;
                 for (CashDrawer_remittances.to_cash_drawer_remittances remittance : remittances) {
                     double am = remittance.cash_amount;
@@ -1729,7 +1742,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     location = "All";
                 }
                 String status = "[Equal]";
-                double status_amount = cc_total - receipt_net_total-refund;
+                double status_amount = cc_total - receipt_net_total - refund;
                 if (status_amount < 0) {
                     status = "[Short]";
                 }
@@ -1756,9 +1769,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 receipts_total = receipts_total + return_exchange;
                 receipts_total = receipts_total + refund;
 
-                receipts_sub_total = receipts_sub_total + return_exchange+refund;
-                receipt_net_total = receipt_net_total + return_exchange+refund;
-                
+                receipts_sub_total = receipts_sub_total + return_exchange + refund;
+                receipt_net_total = receipt_net_total + return_exchange + refund;
+
                 total_check_payments = total_check_payments - refund_cheque;
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections, prepayments, receipts_total, receipts_line_discount,
                                                                           receipts_sale_discount, receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred, bills_two_hundred,

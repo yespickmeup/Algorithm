@@ -64,7 +64,15 @@ public class Settings {
         public final int module_requisition_slip;
         public final int module_charge_in_advance;
         public final int is_main_branch;
-        public to_settings(int id, String company_name, String company_address, String company_operated_by, String company_slogan, String company_contact_no, String company_fax_no, String company_email_address, String bir_serial_no, String bir_permit_no, String bir_accreditation_no, String bir_tin, String bir_machine_no, String bir_min_no, String bir_business_type, String bir_vat_percent, String bir_receipt_footer, String bir_invoice_footer, int receipt_printing_enabled, int receipt_printer_show_dialog, int kitchen_printing_enable, int allow_negative_inventory, int is_server, String location, int receipt_printing_enabled2, String drawer, String developer, String developer_address, String developer_tin_no, String developer_accreditation_no, String developer_accreditation_date, String developer_contact_no, String module_software_type, int module_accounts_payable, int module_accounts_receivable, int module_services, int module_prepayments, int module_requisition_slip, int module_charge_in_advance,int is_main_branch) {
+        public final String version;
+        public final String cloud_host;
+        public final String cloud_port;
+        public final String cloud_user;
+        public final String cloud_password;
+        public final String cloud_db;
+        public final String ar_footer;
+
+        public to_settings(int id, String company_name, String company_address, String company_operated_by, String company_slogan, String company_contact_no, String company_fax_no, String company_email_address, String bir_serial_no, String bir_permit_no, String bir_accreditation_no, String bir_tin, String bir_machine_no, String bir_min_no, String bir_business_type, String bir_vat_percent, String bir_receipt_footer, String bir_invoice_footer, int receipt_printing_enabled, int receipt_printer_show_dialog, int kitchen_printing_enable, int allow_negative_inventory, int is_server, String location, int receipt_printing_enabled2, String drawer, String developer, String developer_address, String developer_tin_no, String developer_accreditation_no, String developer_accreditation_date, String developer_contact_no, String module_software_type, int module_accounts_payable, int module_accounts_receivable, int module_services, int module_prepayments, int module_requisition_slip, int module_charge_in_advance, int is_main_branch, String version, String cloud_host, String cloud_port, String cloud_user, String cloud_password, String cloud_db, String ar_footer) {
             this.id = id;
             this.company_name = company_name;
             this.company_address = company_address;
@@ -104,7 +112,14 @@ public class Settings {
             this.module_prepayments = module_prepayments;
             this.module_requisition_slip = module_requisition_slip;
             this.module_charge_in_advance = module_charge_in_advance;
-            this.is_main_branch=is_main_branch;
+            this.is_main_branch = is_main_branch;
+            this.version = version;
+            this.cloud_host = cloud_host;
+            this.cloud_port = cloud_port;
+            this.cloud_user = cloud_user;
+            this.cloud_password = cloud_password;
+            this.cloud_db = cloud_db;
+            this.ar_footer = ar_footer;
         }
     }
 
@@ -143,6 +158,21 @@ public class Settings {
                     + ",developer_accreditation_no"
                     + ",developer_accreditation_date"
                     + ",developer_contact_no"
+                    + ",module_software_type"
+                    + ",module_accounts_payable"
+                    + ",module_accounts_receivable"
+                    + ",module_services"
+                    + ",module_prepayments"
+                    + ",module_requisition_slip"
+                    + ",module_charge_in_advance"
+                    + ",is_main_branch"
+                    + ",version"
+                    + ",cloud_host"
+                    + ",cloud_port"
+                    + ",cloud_user"
+                    + ",cloud_password"
+                    + ",cloud_db"
+                    + ",ar_footer"
                     + ")values("
                     + ":company_name"
                     + ",:company_address"
@@ -175,6 +205,21 @@ public class Settings {
                     + ",:developer_accreditation_no"
                     + ",:developer_accreditation_date"
                     + ",:developer_contact_no"
+                    + ",:module_software_type"
+                    + ",:module_accounts_payable"
+                    + ",:module_accounts_receivable"
+                    + ",:module_services"
+                    + ",:module_prepayments"
+                    + ",:module_requisition_slip"
+                    + ",:module_charge_in_advance"
+                    + ",:is_main_branch"
+                    + ",:version"
+                    + ",:cloud_host"
+                    + ",:cloud_port"
+                    + ",:cloud_user"
+                    + ",:cloud_password"
+                    + ",:cloud_db"
+                    + ",:ar_footer"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -209,6 +254,21 @@ public class Settings {
                     .setString("developer_accreditation_no", to_settings.developer_accreditation_no)
                     .setString("developer_accreditation_date", to_settings.developer_accreditation_date)
                     .setString("developer_contact_no", to_settings.developer_contact_no)
+                    .setString("module_software_type", to_settings.module_software_type)
+                    .setNumber("module_accounts_payable", to_settings.module_accounts_payable)
+                    .setNumber("module_accounts_receivable", to_settings.module_accounts_receivable)
+                    .setNumber("module_services", to_settings.module_services)
+                    .setNumber("module_prepayments", to_settings.module_prepayments)
+                    .setNumber("module_requisition_slip", to_settings.module_requisition_slip)
+                    .setNumber("module_charge_in_advance", to_settings.module_charge_in_advance)
+                    .setNumber("is_main_branch", to_settings.is_main_branch)
+                    .setString("version", to_settings.version)
+                    .setString("cloud_host", to_settings.cloud_host)
+                    .setString("cloud_port", to_settings.cloud_port)
+                    .setString("cloud_user", to_settings.cloud_user)
+                    .setString("cloud_password", to_settings.cloud_password)
+                    .setString("cloud_db", to_settings.cloud_db)
+                    .setString("ar_footer", to_settings.ar_footer)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -255,8 +315,22 @@ public class Settings {
                     + ",developer_tin_no= :developer_tin_no "
                     + ",developer_accreditation_no= :developer_accreditation_no "
                     + ",developer_accreditation_date= :developer_accreditation_date "
-                    + ",developer_contact_no= :developer_contact_no"
-                    + ",is_main_branch= :is_main_branch"
+                    + ",developer_contact_no= :developer_contact_no "
+                    //                    + ",module_software_type= :module_software_type "
+                    //                    + ",module_accounts_payable= :module_accounts_payable "
+                    //                    + ",module_accounts_receivable= :module_accounts_receivable "
+                    //                    + ",module_services= :module_services "
+                    //                    + ",module_prepayments= :module_prepayments "
+                    //                    + ",module_requisition_slip= :module_requisition_slip "
+                    //                    + ",module_charge_in_advance= :module_charge_in_advance "
+                    //                    + ",is_main_branch= :is_main_branch "
+                    //                    + ",version= :version "
+                    //                    + ",cloud_host= :cloud_host "
+                    //                    + ",cloud_port= :cloud_port "
+                    //                    + ",cloud_user= :cloud_user "
+                    //                    + ",cloud_password= :cloud_password "
+                    //                    + ",cloud_db= :cloud_db "
+                    + ",ar_footer= :ar_footer "
                     + " where id='" + to_settings.id + "' "
                     + " ";
 
@@ -292,7 +366,21 @@ public class Settings {
                     .setString("developer_accreditation_no", to_settings.developer_accreditation_no)
                     .setString("developer_accreditation_date", to_settings.developer_accreditation_date)
                     .setString("developer_contact_no", to_settings.developer_contact_no)
-                    .setNumber("is_main_branch", to_settings.is_main_branch)
+                    //                    .setString("module_software_type", to_settings.module_software_type)
+                    //                    .setNumber("module_accounts_payable", to_settings.module_accounts_payable)
+                    //                    .setNumber("module_accounts_receivable", to_settings.module_accounts_receivable)
+                    //                    .setNumber("module_services", to_settings.module_services)
+                    //                    .setNumber("module_prepayments", to_settings.module_prepayments)
+                    //                    .setNumber("module_requisition_slip", to_settings.module_requisition_slip)
+                    //                    .setNumber("module_charge_in_advance", to_settings.module_charge_in_advance)
+                    //                    .setNumber("is_main_branch", to_settings.is_main_branch)
+                    //                    .setString("version", to_settings.version)
+                    //                    .setString("cloud_host", to_settings.cloud_host)
+                    //                    .setString("cloud_port", to_settings.cloud_port)
+                    //                    .setString("cloud_user", to_settings.cloud_user)
+                    //                    .setString("cloud_password", to_settings.cloud_password)
+                    //                    .setString("cloud_db", to_settings.cloud_db)
+                    .setString("ar_footer", to_settings.ar_footer)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -339,13 +427,46 @@ public class Settings {
         }
     }
 
+    public static void update_data_cloud(int id, String version, String cloud_host, String cloud_port, String cloud_user, String cloud_password, String cloud_db,int is_main_branch) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update settings set "
+                    + " version= :version "
+                    + ",cloud_host= :cloud_host "
+                    + ",cloud_port= :cloud_port "
+                    + ",cloud_user= :cloud_user "
+                    + ",cloud_password= :cloud_password "
+                    + ",cloud_db= :cloud_db "
+                    + ",is_main_branch= :is_main_branch"
+                    + " where id='" + id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("version", version)
+                    .setString("cloud_host", cloud_host)
+                    .setString("cloud_port", cloud_port)
+                    .setString("cloud_user", cloud_user)
+                    .setString("cloud_password", cloud_password)
+                    .setString("cloud_db", cloud_db)
+                    .setNumber("is_main_branch",is_main_branch)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Settings.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_data(to_settings to_settings) {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "delete from settings  "
                     + " where id='" + to_settings.id + "' "
                     + " ";
-
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg
@@ -356,14 +477,14 @@ public class Settings {
             MyConnection.close();
         }
     }
-
+    
     public static List<to_settings> ret_data(String where) {
         List<to_settings> datas = new ArrayList();
 
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
-                    + "id"
+                    + " id"
                     + ",company_name"
                     + ",company_address"
                     + ",company_operated_by"
@@ -403,6 +524,13 @@ public class Settings {
                     + ",module_requisition_slip"
                     + ",module_charge_in_advance"
                     + ",is_main_branch"
+                    + ",version"
+                    + ",cloud_host"
+                    + ",cloud_port"
+                    + ",cloud_user"
+                    + ",cloud_password"
+                    + ",cloud_db"
+                    + ",ar_footer"
                     + " from settings"
                     + " " + where;
 
@@ -448,8 +576,17 @@ public class Settings {
                 int module_prepayments = rs.getInt(37);
                 int module_requisition_slip = rs.getInt(38);
                 int module_charge_in_advance = rs.getInt(39);
-                int is_main_branch=rs.getInt(40);
-                to_settings to = new to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, module_software_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance,is_main_branch);
+                int is_main_branch = rs.getInt(40);
+
+                String version = rs.getString(41);
+                String cloud_host = rs.getString(42);
+                String cloud_port = rs.getString(43);
+                String cloud_user = rs.getString(44);
+                String cloud_password = rs.getString(45);
+                String cloud_db = rs.getString(46);
+                String ar_footer = rs.getString(47);
+
+                to_settings to = new to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, module_software_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance, is_main_branch, version, cloud_host, cloud_port, cloud_user, cloud_password, cloud_db, ar_footer);
                 datas.add(to);
             }
             return datas;

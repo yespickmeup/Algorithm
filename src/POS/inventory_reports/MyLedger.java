@@ -27,7 +27,7 @@ import mijzcx.synapse.desk.utils.FitIn;
  */
 public class MyLedger {
 
-    public static Srpt_item_ledger get(String my_item_code, String my_barcode, String my_description, String loc_id, String year, int month, String my_branch, String my_location, boolean is_month_selected,int show_cost) {
+    public static Srpt_item_ledger get(String my_item_code, String my_barcode, String my_description, String loc_id, String year, int month, String my_branch, String my_location, boolean is_month_selected,int show_cost,int hide_price) {
 
         List<Srpt_item_ledger.field> field3 = new ArrayList();
         List<Srpt_item_ledger.field> fields = new ArrayList();
