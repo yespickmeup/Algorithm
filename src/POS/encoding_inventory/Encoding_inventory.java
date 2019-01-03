@@ -69,7 +69,6 @@ public class Encoding_inventory {
             this.user_screen_name = user_screen_name;
             this.remarks = remarks;
         }
-
     }
 
     public static void add_encoding_inventory(to_encoding_inventory to_encoding_inventory) {

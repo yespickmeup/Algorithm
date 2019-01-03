@@ -779,7 +779,7 @@ public class Dlg_report_serial_no extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_tbl_sales(tbl_sales);
         jTextField1.grabFocus();
     }

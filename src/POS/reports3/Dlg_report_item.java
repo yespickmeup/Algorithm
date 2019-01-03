@@ -1392,7 +1392,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
             }
         }
-
+        
         if (view_only == 1) {
             jButton4.setVisible(true);
         } else {

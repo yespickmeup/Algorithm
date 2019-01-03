@@ -292,6 +292,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -410,7 +411,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
@@ -427,7 +428,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jCheckBox4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -467,18 +469,17 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -545,7 +546,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jCheckBox5)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -561,15 +562,15 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(5, 5, 5))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(1, 1, 1)
                 .addComponent(jCheckBox5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -589,20 +590,23 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(5, 5, 5))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -736,13 +740,14 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private javax.swing.JTable tbl_accounts_receivable_payments;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         init_tbl_accounts_receivable();
         focus();
         set_default_branch();
         init_tbl_accounts_receivable_payments();
         data_cols_payments();
-
+        jTextField1.grabFocus();
     }
 
     String my_branch = "";
@@ -775,14 +780,14 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -796,7 +801,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable.setModel(tbl_accounts_receivable_M);
         tbl_accounts_receivable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable = {70, 70, 100, 50, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable = {70, 70, 100, 100, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -969,12 +974,12 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     }
 
     private void payment() {
-        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
 
         int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
@@ -1035,8 +1040,32 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 String branch_id = my_branch_id;
                 String location = my_location;
                 String location_id = my_location_id;
+
+                String prepaid_customer_name = data.prepaid_customer_name;
+                String prepaid_customer_id = data.prepaid_customer_id;
+                double prepaid_amount = data.prepaid_amount;
+                String credit_card_type = data.credit_card_type;
+                double credit_card_rate = data.credit_card_rate;
+                String credit_card_no = data.credit_card_no;
+                String credit_card_holder = data.credit_card_holder;
+                double credit_card_amount = data.credit_card_amount;
+                String gift_certificate_from = data.gift_certificate_from;
+                String gift_certificate_description = data.gift_certificate_description;
+                String gift_certificate_no = data.gift_certificate_no;
+                double gift_certificate_amount = data.gift_certificate_amount;
+                String online_bank = data.online_bank;
+                String online_reference_no = data.online_reference_no;
+                String online_holder = data.online_holder;
+                String online_date = data.online_date;
+                double online_amount = data.online_amount;
+
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
-                        status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id, location, location_id);
+                        status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status,
+                        term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no,
+                        trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate,
+                        data.tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
+                        credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
+                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
                 S1_accounts_receivable_payments.add_accounts_receivable_payments2(to1);
                 data_cols_payments();
                 Alert.set(1, type);
@@ -1056,7 +1085,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setModel(tbl_accounts_receivable_payments_M);
         tbl_accounts_receivable_payments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable_payments.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 70, 70, 60, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 70, 70, 70, 70, 70, 70, 60, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable_payments.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -1073,8 +1102,12 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 3);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 5);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 6);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 7);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 8);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 9);
 
-        TableColumn tc = tbl_accounts_receivable_payments.getColumnModel().getColumn(7);
+        TableColumn tc = tbl_accounts_receivable_payments.getColumnModel().getColumn(11);
         tc.setCellEditor(tbl_accounts_receivable_payments.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(tbl_accounts_receivable_payments.getDefaultRenderer(Boolean.class));
         tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
@@ -1193,7 +1226,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     public static class Tblaccounts_receivable_paymentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Ref #", "Cash", "Check", "Discount", "Amount", "", "", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance", "check_amount", "check_holder", "check_bank", "check_no", "ci_no", "trust_receipt", "or_payment_no", "soa_id", "soa_type", "soa_type_id", "reference_no"
+            "Date", "Ref #", "Cash", "Check", "Prepaid", "Credit Card", "GC", "Online", "Discount", "Amount", "", "", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance", "check_amount", "check_holder", "check_bank", "check_no", "ci_no", "trust_receipt", "or_payment_no", "soa_id", "soa_type", "soa_type_id", "reference_no"
         };
 
         public Tblaccounts_receivable_paymentsModel(ListModel listmodel) {
@@ -1208,7 +1241,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 7) {
+            if (col == 11) {
                 return Boolean.class;
             }
             return Object.class;
@@ -1227,27 +1260,27 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 case 3:
                     return FitIn.fmt_wc_0(tt.check_amount) + " ";
                 case 4:
-                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
                 case 5:
-                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount) - tt.discount_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
                 case 6:
+                    return FitIn.fmt_wc_0(tt.gift_certificate_amount) + " ";
+                case 7:
+                    return FitIn.fmt_wc_0(tt.online_amount) + " ";
+                case 8:
+                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                case 9:
+                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount) - tt.discount_amount) + " ";
+                case 10:
                     if (tt.status == 0) {
                         return " Finalized";
                     } else {
                         return " Posted";
                     }
-                case 7:
-                    return tt.selected;
-                case 8:
-                    return tt.discount_rate;
-                case 9:
-                    return tt.discount;
-                case 10:
-                    return tt.status;
                 case 11:
-                    return tt.term;
+                    return tt.selected;
                 case 12:
-                    return tt.date_applied;
+
                 case 13:
                     return tt.paid;
                 case 14:
@@ -1326,7 +1359,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         }
 
         int col = tbl_accounts_receivable_payments.getSelectedColumn();
-        if (col == 7) {
+        if (col == 11) {
             to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
             if (to.status == 1) {
                 if (to.selected == true) {
@@ -1343,6 +1376,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         if (evt.isPopupTrigger()) {
             jPopupMenu2.show(tbl_accounts_receivable_payments, evt.getX(), evt.getY());
         }
+
 //        String where = " where user_name='" + Users.user_name + "' order by previledge asc";
 //        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
 //        int exists = 0;
@@ -1459,8 +1493,26 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 String branch_id = my_branch_id;
                 String location = my_location;
                 String location_id = my_location_id;
+                String prepaid_customer_name = data.prepaid_customer_name;
+                String prepaid_customer_id = data.prepaid_customer_id;
+                double prepaid_amount = data.prepaid_amount;
+                String credit_card_type = data.credit_card_type;
+                double credit_card_rate = data.credit_card_rate;
+                String credit_card_no = data.credit_card_no;
+                String credit_card_holder = data.credit_card_holder;
+                double credit_card_amount = data.credit_card_amount;
+                String gift_certificate_from = data.gift_certificate_from;
+                String gift_certificate_description = data.gift_certificate_description;
+                String gift_certificate_no = data.gift_certificate_no;
+                double gift_certificate_amount = data.gift_certificate_amount;
+                String online_bank = data.online_bank;
+                String online_reference_no = data.online_reference_no;
+                String online_holder = data.online_holder;
+                String online_date = data.online_date;
+                double online_amount = data.online_amount;
+
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
-                        to.id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id, location, location_id);
+                        to.id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
                 S1_accounts_receivable_payments.update_accounts_receivable_payments3(to1);
                 data_cols_payments();
                 Alert.set(2, type);
@@ -1495,6 +1547,9 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
                 S1_accounts_receivable_payments.finalize_accounts_receivable_payments(datas2);
+                int row = tbl_accounts_receivable.getSelectedRow();
+                data_cols();
+                tbl_accounts_receivable.setRowSelectionInterval(row, row);
                 data_cols_payments();
                 Alert.set(0, "Payment Finalized!");
             }

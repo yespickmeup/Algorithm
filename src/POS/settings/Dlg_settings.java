@@ -7,6 +7,7 @@ package POS.settings;
 
 import POS.batch_file.Drawer;
 import POS.util.Alert;
+import POS.util.Dlg_confirm_action;
 import POS.util.TableRenderer;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -1199,9 +1200,24 @@ public class Dlg_settings extends javax.swing.JDialog {
         String cloud_db = "";
         String ar_footer = tf_email_address1.getText();
 
-        Settings.to_settings setting1 = new Settings.to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, bir_business_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance, is_main_branch, version, cloud_host, cloud_port, cloud_user, cloud_password, cloud_db, ar_footer);
-        Settings.update_data(setting1);
-        Alert.set(2, "");
+        final Settings.to_settings setting1 = new Settings.to_settings(id, company_name, company_address, company_operated_by, company_slogan, company_contact_no, company_fax_no, company_email_address, bir_serial_no, bir_permit_no, bir_accreditation_no, bir_tin, bir_machine_no, bir_min_no, bir_business_type, bir_vat_percent, bir_receipt_footer, bir_invoice_footer, receipt_printing_enabled, receipt_printer_show_dialog, kitchen_printing_enable, allow_negative_inventory, is_server, location, receipt_printing_enabled2, drawer, developer, developer_address, developer_tin_no, developer_accreditation_no, developer_accreditation_date, developer_contact_no, bir_business_type, module_accounts_payable, module_accounts_receivable, module_services, module_prepayments, module_requisition_slip, module_charge_in_advance, is_main_branch, version, cloud_host, cloud_port, cloud_user, cloud_password, cloud_db, ar_footer);
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
 
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                Settings.update_data(setting1);
+                Alert.set(2, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+        
     }
+    
 }

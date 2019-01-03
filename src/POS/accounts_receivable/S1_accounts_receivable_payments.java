@@ -6,7 +6,10 @@ package POS.accounts_receivable;
 
 import POS.accounts_receivable.S1_accounts_receivable.to_accounts_receivable;
 import POS.customers.Customers;
+import POS.prepaid_payments.Prepaid_payments;
 import POS.sales.Sales;
+import POS.users.MyUser;
+import POS.util.DateType;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
@@ -66,8 +70,25 @@ public class S1_accounts_receivable_payments {
         public final String branch_id;
         public final String location;
         public final String location_id;
+        public final String prepaid_customer_name;
+        public final String prepaid_customer_id;
+        public final double prepaid_amount;
+        public final String credit_card_type;
+        public final double credit_card_rate;
+        public final String credit_card_no;
+        public final String credit_card_holder;
+        public final double credit_card_amount;
+        public final String gift_certificate_from;
+        public final String gift_certificate_description;
+        public final String gift_certificate_no;
+        public final double gift_certificate_amount;
+        public final String online_bank;
+        public final String online_reference_no;
+        public final String online_holder;
+        public final String online_date;
+        public final double online_amount;
 
-        public to_accounts_receivable_payments(int id, String customer_id, String customer_name, String ar_no, String date_added, String user_name, double amount, double discount_amount, double discount_rate, String discount, int status, double term, String date_applied, double paid, String date_paid, String remarks, String type, String or_no, double prev_balance, double check_amount, String check_holder, String check_bank, String check_no, String ci_no, String trust_receipt, String or_payment_no, String soa_id, String soa_type, String soa_type_id, String reference_no, boolean selected, String check_date, String user_id, String user_screen_name, double tax_rate, double tax_amount, String branch, String branch_id, String location, String location_id) {
+        public to_accounts_receivable_payments(int id, String customer_id, String customer_name, String ar_no, String date_added, String user_name, double amount, double discount_amount, double discount_rate, String discount, int status, double term, String date_applied, double paid, String date_paid, String remarks, String type, String or_no, double prev_balance, double check_amount, String check_holder, String check_bank, String check_no, String ci_no, String trust_receipt, String or_payment_no, String soa_id, String soa_type, String soa_type_id, String reference_no, boolean selected, String check_date, String user_id, String user_screen_name, double tax_rate, double tax_amount, String branch, String branch_id, String location, String location_id, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount) {
             this.id = id;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -108,6 +129,23 @@ public class S1_accounts_receivable_payments {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.prepaid_customer_name = prepaid_customer_name;
+            this.prepaid_customer_id = prepaid_customer_id;
+            this.prepaid_amount = prepaid_amount;
+            this.credit_card_type = credit_card_type;
+            this.credit_card_rate = credit_card_rate;
+            this.credit_card_no = credit_card_no;
+            this.credit_card_holder = credit_card_holder;
+            this.credit_card_amount = credit_card_amount;
+            this.gift_certificate_from = gift_certificate_from;
+            this.gift_certificate_description = gift_certificate_description;
+            this.gift_certificate_no = gift_certificate_no;
+            this.gift_certificate_amount = gift_certificate_amount;
+            this.online_bank = online_bank;
+            this.online_reference_no = online_reference_no;
+            this.online_holder = online_holder;
+            this.online_date = online_date;
+            this.online_amount = online_amount;
         }
 
         public boolean isSelected() {
@@ -163,6 +201,23 @@ public class S1_accounts_receivable_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -202,6 +257,23 @@ public class S1_accounts_receivable_payments {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:prepaid_customer_name"
+                    + ",:prepaid_customer_id"
+                    + ",:prepaid_amount"
+                    + ",:credit_card_type"
+                    + ",:credit_card_rate"
+                    + ",:credit_card_no"
+                    + ",:credit_card_holder"
+                    + ",:credit_card_amount"
+                    + ",:gift_certificate_from"
+                    + ",:gift_certificate_description"
+                    + ",:gift_certificate_no"
+                    + ",:gift_certificate_amount"
+                    + ",:online_bank"
+                    + ",:online_reference_no"
+                    + ",:online_holder"
+                    + ",:online_date"
+                    + ",:online_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -242,8 +314,25 @@ public class S1_accounts_receivable_payments {
                     setString("branch", to_accounts_receivable_payments.branch).
                     setString("branch_id", to_accounts_receivable_payments.branch_id).
                     setString("location", to_accounts_receivable_payments.location).
-                    setString("location_id", to_accounts_receivable_payments.location_id).
-                    ok();
+                    setString("location_id", to_accounts_receivable_payments.location_id)
+                    .setString("prepaid_customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_accounts_receivable_payments.prepaid_amount)
+                    .setString("credit_card_type", to_accounts_receivable_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_accounts_receivable_payments.credit_card_rate)
+                    .setString("credit_card_no", to_accounts_receivable_payments.credit_card_no)
+                    .setString("credit_card_holder", to_accounts_receivable_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_accounts_receivable_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_accounts_receivable_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_accounts_receivable_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_accounts_receivable_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_accounts_receivable_payments.gift_certificate_amount)
+                    .setString("online_bank", to_accounts_receivable_payments.online_bank)
+                    .setString("online_reference_no", to_accounts_receivable_payments.online_reference_no)
+                    .setString("online_holder", to_accounts_receivable_payments.online_holder)
+                    .setString("online_date", to_accounts_receivable_payments.online_date)
+                    .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
@@ -356,6 +445,23 @@ public class S1_accounts_receivable_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -395,6 +501,23 @@ public class S1_accounts_receivable_payments {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:prepaid_customer_name"
+                    + ",:prepaid_customer_id"
+                    + ",:prepaid_amount"
+                    + ",:credit_card_type"
+                    + ",:credit_card_rate"
+                    + ",:credit_card_no"
+                    + ",:credit_card_holder"
+                    + ",:credit_card_amount"
+                    + ",:gift_certificate_from"
+                    + ",:gift_certificate_description"
+                    + ",:gift_certificate_no"
+                    + ",:gift_certificate_amount"
+                    + ",:online_bank"
+                    + ",:online_reference_no"
+                    + ",:online_holder"
+                    + ",:online_date"
+                    + ",:online_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -435,8 +558,25 @@ public class S1_accounts_receivable_payments {
                     setString("branch", to_accounts_receivable_payments.branch).
                     setString("branch_id", to_accounts_receivable_payments.branch_id).
                     setString("location", to_accounts_receivable_payments.location).
-                    setString("location_id", to_accounts_receivable_payments.location_id).
-                    ok();
+                    setString("location_id", to_accounts_receivable_payments.location_id)
+                    .setString("prepaid_customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_accounts_receivable_payments.prepaid_amount)
+                    .setString("credit_card_type", to_accounts_receivable_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_accounts_receivable_payments.credit_card_rate)
+                    .setString("credit_card_no", to_accounts_receivable_payments.credit_card_no)
+                    .setString("credit_card_holder", to_accounts_receivable_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_accounts_receivable_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_accounts_receivable_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_accounts_receivable_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_accounts_receivable_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_accounts_receivable_payments.gift_certificate_amount)
+                    .setString("online_bank", to_accounts_receivable_payments.online_bank)
+                    .setString("online_reference_no", to_accounts_receivable_payments.online_reference_no)
+                    .setString("online_holder", to_accounts_receivable_payments.online_holder)
+                    .setString("online_date", to_accounts_receivable_payments.online_date)
+                    .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
@@ -503,6 +643,23 @@ public class S1_accounts_receivable_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -542,6 +699,23 @@ public class S1_accounts_receivable_payments {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:prepaid_customer_name"
+                    + ",:prepaid_customer_id"
+                    + ",:prepaid_amount"
+                    + ",:credit_card_type"
+                    + ",:credit_card_rate"
+                    + ",:credit_card_no"
+                    + ",:credit_card_holder"
+                    + ",:credit_card_amount"
+                    + ",:gift_certificate_from"
+                    + ",:gift_certificate_description"
+                    + ",:gift_certificate_no"
+                    + ",:gift_certificate_amount"
+                    + ",:online_bank"
+                    + ",:online_reference_no"
+                    + ",:online_holder"
+                    + ",:online_date"
+                    + ",:online_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -582,8 +756,25 @@ public class S1_accounts_receivable_payments {
                     setString("branch", to_accounts_receivable_payments.branch).
                     setString("branch_id", to_accounts_receivable_payments.branch_id).
                     setString("location", to_accounts_receivable_payments.location).
-                    setString("location_id", to_accounts_receivable_payments.location_id).
-                    ok();
+                    setString("location_id", to_accounts_receivable_payments.location_id)
+                    .setString("prepaid_customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_accounts_receivable_payments.prepaid_amount)
+                    .setString("credit_card_type", to_accounts_receivable_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_accounts_receivable_payments.credit_card_rate)
+                    .setString("credit_card_no", to_accounts_receivable_payments.credit_card_no)
+                    .setString("credit_card_holder", to_accounts_receivable_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_accounts_receivable_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_accounts_receivable_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_accounts_receivable_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_accounts_receivable_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_accounts_receivable_payments.gift_certificate_amount)
+                    .setString("online_bank", to_accounts_receivable_payments.online_bank)
+                    .setString("online_reference_no", to_accounts_receivable_payments.online_reference_no)
+                    .setString("online_holder", to_accounts_receivable_payments.online_holder)
+                    .setString("online_date", to_accounts_receivable_payments.online_date)
+                    .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
@@ -611,6 +802,23 @@ public class S1_accounts_receivable_payments {
                     + ",reference_no= :reference_no"
                     + ",or_no= :or_no"
                     + ",check_date= :check_date"
+                    + ",prepaid_customer_name= :prepaid_customer_name "
+                    + ",prepaid_customer_id= :prepaid_customer_id "
+                    + ",prepaid_amount= :prepaid_amount "
+                    + ",credit_card_type= :credit_card_type "
+                    + ",credit_card_rate= :credit_card_rate "
+                    + ",credit_card_no= :credit_card_no "
+                    + ",credit_card_holder= :credit_card_holder "
+                    + ",credit_card_amount= :credit_card_amount "
+                    + ",gift_certificate_from= :gift_certificate_from "
+                    + ",gift_certificate_description= :gift_certificate_description "
+                    + ",gift_certificate_no= :gift_certificate_no "
+                    + ",gift_certificate_amount= :gift_certificate_amount "
+                    + ",online_bank= :online_bank "
+                    + ",online_reference_no= :online_reference_no "
+                    + ",online_holder= :online_holder "
+                    + ",online_date= :online_date "
+                    + ",online_amount= :online_amount "
                     + " where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
@@ -628,6 +836,23 @@ public class S1_accounts_receivable_payments {
                     .setString("reference_no", to_accounts_receivable_payments.reference_no)
                     .setString("or_no", to_accounts_receivable_payments.or_no)
                     .setString("check_date", to_accounts_receivable_payments.check_date)
+                    .setString("prepaid_customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_accounts_receivable_payments.prepaid_amount)
+                    .setString("credit_card_type", to_accounts_receivable_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_accounts_receivable_payments.credit_card_rate)
+                    .setString("credit_card_no", to_accounts_receivable_payments.credit_card_no)
+                    .setString("credit_card_holder", to_accounts_receivable_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_accounts_receivable_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_accounts_receivable_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_accounts_receivable_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_accounts_receivable_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_accounts_receivable_payments.gift_certificate_amount)
+                    .setString("online_bank", to_accounts_receivable_payments.online_bank)
+                    .setString("online_reference_no", to_accounts_receivable_payments.online_reference_no)
+                    .setString("online_holder", to_accounts_receivable_payments.online_holder)
+                    .setString("online_date", to_accounts_receivable_payments.online_date)
+                    .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -922,6 +1147,23 @@ public class S1_accounts_receivable_payments {
                     + ",soa_id= :soa_id"
                     + ",tax_rate= :tax_rate"
                     + ",tax_amount= :tax_amount"
+                    + ",prepaid_customer_name= :prepaid_customer_name "
+                    + ",prepaid_customer_id= :prepaid_customer_id "
+                    + ",prepaid_amount= :prepaid_amount "
+                    + ",credit_card_type= :credit_card_type "
+                    + ",credit_card_rate= :credit_card_rate "
+                    + ",credit_card_no= :credit_card_no "
+                    + ",credit_card_holder= :credit_card_holder "
+                    + ",credit_card_amount= :credit_card_amount "
+                    + ",gift_certificate_from= :gift_certificate_from "
+                    + ",gift_certificate_description= :gift_certificate_description "
+                    + ",gift_certificate_no= :gift_certificate_no "
+                    + ",gift_certificate_amount= :gift_certificate_amount "
+                    + ",online_bank= :online_bank "
+                    + ",online_reference_no= :online_reference_no "
+                    + ",online_holder= :online_holder "
+                    + ",online_date= :online_date "
+                    + ",online_amount= :online_amount "
                     + " where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
@@ -951,8 +1193,25 @@ public class S1_accounts_receivable_payments {
                     setString("or_payment_no", to_accounts_receivable_payments.or_payment_no).
                     setString("soa_id", to_accounts_receivable_payments.soa_id).
                     setNumber("tax_rate", to_accounts_receivable_payments.tax_rate).
-                    setNumber("tax_amount", to_accounts_receivable_payments.tax_amount).
-                    ok();
+                    setNumber("tax_amount", to_accounts_receivable_payments.tax_amount)
+                    .setString("prepaid_customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_accounts_receivable_payments.prepaid_amount)
+                    .setString("credit_card_type", to_accounts_receivable_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_accounts_receivable_payments.credit_card_rate)
+                    .setString("credit_card_no", to_accounts_receivable_payments.credit_card_no)
+                    .setString("credit_card_holder", to_accounts_receivable_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_accounts_receivable_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_accounts_receivable_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_accounts_receivable_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_accounts_receivable_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_accounts_receivable_payments.gift_certificate_amount)
+                    .setString("online_bank", to_accounts_receivable_payments.online_bank)
+                    .setString("online_reference_no", to_accounts_receivable_payments.online_reference_no)
+                    .setString("online_holder", to_accounts_receivable_payments.online_holder)
+                    .setString("online_date", to_accounts_receivable_payments.online_date)
+                    .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
@@ -1197,6 +1456,23 @@ public class S1_accounts_receivable_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + " from  accounts_receivable_payments where "
                     + " ar_no ='" + search + "' and customer_id='" + cust_id + "' order by Date(date_applied) asc"
                     + " ";
@@ -1242,7 +1518,24 @@ public class S1_accounts_receivable_payments {
                 String branch_id = rs.getString(37);
                 String location = rs.getString(38);
                 String location_id = rs.getString(39);
-                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id);
+                String prepaid_customer_name = rs.getString(40);
+                String prepaid_customer_id = rs.getString(41);
+                double prepaid_amount = rs.getDouble(42);
+                String credit_card_type = rs.getString(43);
+                double credit_card_rate = rs.getDouble(44);
+                String credit_card_no = rs.getString(45);
+                String credit_card_holder = rs.getString(46);
+                double credit_card_amount = rs.getDouble(47);
+                String gift_certificate_from = rs.getString(48);
+                String gift_certificate_description = rs.getString(49);
+                String gift_certificate_no = rs.getString(50);
+                double gift_certificate_amount = rs.getDouble(51);
+                String online_bank = rs.getString(52);
+                String online_reference_no = rs.getString(53);
+                String online_holder = rs.getString(54);
+                String online_date = rs.getString(55);
+                double online_amount = rs.getDouble(56);
+                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
                 datas.add(to);
             }
             return datas;
@@ -1298,6 +1591,23 @@ public class S1_accounts_receivable_payments {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + " from  accounts_receivable_payments  "
                     + " " + where;
             Statement stmt = conn.createStatement();
@@ -1342,7 +1652,30 @@ public class S1_accounts_receivable_payments {
                 String branch_id = rs.getString(37);
                 String location = rs.getString(38);
                 String location_id = rs.getString(39);
-                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id);
+                String prepaid_customer_name = rs.getString(40);
+                String prepaid_customer_id = rs.getString(41);
+                double prepaid_amount = rs.getDouble(42);
+                String credit_card_type = rs.getString(43);
+                double credit_card_rate = rs.getDouble(44);
+                String credit_card_no = rs.getString(45);
+                String credit_card_holder = rs.getString(46);
+                double credit_card_amount = rs.getDouble(47);
+                String gift_certificate_from = rs.getString(48);
+                String gift_certificate_description = rs.getString(49);
+                String gift_certificate_no = rs.getString(50);
+                double gift_certificate_amount = rs.getDouble(51);
+                String online_bank = rs.getString(52);
+                String online_reference_no = rs.getString(53);
+                String online_holder = rs.getString(54);
+                String online_date = rs.getString(55);
+                double online_amount = rs.getDouble(56);
+                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount,
+                                                                                         discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount,
+                                                                                         check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date,
+                                                                                         user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id,
+                                                                                         prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from,
+                                                                                         gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date,
+                                                                                         online_amount);
                 datas.add(to);
             }
             return datas;
@@ -1373,9 +1706,11 @@ public class S1_accounts_receivable_payments {
                 //update customers balance
                 Lg.s(S1_accounts_receivable_payments.class, "Successfully Added");
                 Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
-                double new_balance = cus.balance - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
+                double tendered = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.prepaid_amount + to_accounts_receivable_payments.credit_card_amount + to_accounts_receivable_payments.gift_certificate_amount + to_accounts_receivable_payments.online_amount;
+                double new_balance = cus.balance - (tendered + to_accounts_receivable_payments.discount_amount);
+
                 String s2 = "update  customers set "
-                        + "balance= :balance"
+                        + " balance= :balance"
                         + " where "
                         + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                         + " ";
@@ -1387,7 +1722,7 @@ public class S1_accounts_receivable_payments {
 
                 //update customers paid
                 to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-                double new_paid = tar.paid + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
+                double new_paid = tar.paid + (tendered + to_accounts_receivable_payments.discount_amount);
                 String s3 = "update  accounts_receivable set "
                         + "paid= :paid"
                         + " where "
@@ -1400,6 +1735,111 @@ public class S1_accounts_receivable_payments {
 
                 PreparedStatement stmt3 = conn.prepareStatement(s3);
                 stmt3.execute();
+
+                if (to_accounts_receivable_payments.prepaid_amount > 0) {
+                    int id = -1;
+                    double cash = to_accounts_receivable_payments.prepaid_amount;
+                    double check_amount = 0;
+
+                    String check_bank = "";
+                    String check_no = "";
+                    String added_by = MyUser.getUser_id();
+                    String date_added = DateType.now();
+                    String customer_name = to_accounts_receivable_payments.customer_name;
+                    String customer_id = "" + cus.id;
+                    String cheque_holder = "";
+                    String cheque_date = DateType.sf.format(new Date());
+                    String user_id = MyUser.getUser_id();
+                    String user_screen_name = MyUser.getUser_screen_name();
+                    String branch = to_accounts_receivable_payments.branch;
+                    String branch_id = to_accounts_receivable_payments.branch_id;
+                    String location = to_accounts_receivable_payments.location;
+                    String location_id = to_accounts_receivable_payments.location_id;
+                    String remarks = "Prepaid Payment:" + to_accounts_receivable_payments.ar_no;
+                    int refund = 0;
+
+                    final Prepaid_payments.to_prepaid_payments to_prepaid_payments = new Prepaid_payments.to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 1, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks, refund);
+                    String s4 = "insert into prepaid_payments("
+                            + "cash"
+                            + ",check_bank"
+                            + ",check_no"
+                            + ",check_amount"
+                            + ",added_by"
+                            + ",date_added"
+                            + ",customer_name"
+                            + ",customer_id"
+                            + ",status"
+                            + ",cheque_holder"
+                            + ",cheque_date"
+                            + ",user_id"
+                            + ",user_screen_name"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + ",remarks"
+                            + ",refund"
+                            + ")values("
+                            + ":cash"
+                            + ",:check_bank"
+                            + ",:check_no"
+                            + ",:check_amount"
+                            + ",:added_by"
+                            + ",:date_added"
+                            + ",:customer_name"
+                            + ",:customer_id"
+                            + ",:status"
+                            + ",:cheque_holder"
+                            + ",:cheque_date"
+                            + ",:user_id"
+                            + ",:user_screen_name"
+                            + ",:branch"
+                            + ",:branch_id"
+                            + ",:location"
+                            + ",:location_id"
+                            + ",:remarks"
+                            + ",:refund"
+                            + ")";
+
+                    s4 = SqlStringUtil.parse(s4)
+                            .setNumber("cash", to_prepaid_payments.cash)
+                            .setString("check_bank", to_prepaid_payments.check_bank)
+                            .setString("check_no", to_prepaid_payments.check_no)
+                            .setNumber("check_amount", to_prepaid_payments.check_amount)
+                            .setString("added_by", to_prepaid_payments.added_by)
+                            .setString("date_added", to_prepaid_payments.date_added)
+                            .setString("customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                            .setString("customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                            .setNumber("status", to_prepaid_payments.status)
+                            .setString("cheque_holder", to_prepaid_payments.cheque_holder)
+                            .setString("cheque_date", to_prepaid_payments.cheque_date)
+                            .setString("user_id", to_prepaid_payments.user_id)
+                            .setString("user_screen_name", to_prepaid_payments.user_screen_name)
+                            .setString("branch", to_prepaid_payments.branch)
+                            .setString("branch_id", to_prepaid_payments.branch_id)
+                            .setString("location", to_prepaid_payments.location)
+                            .setString("location_id", to_prepaid_payments.location_id)
+                            .setString("remarks", to_prepaid_payments.remarks)
+                            .setNumber("refund", to_prepaid_payments.refund)
+                            .ok();
+
+                    PreparedStatement stmt4 = conn.prepareStatement(s4);
+                    stmt4.execute();
+
+                    Customers.to_customers cus5 = S1_accounts_receivable_payments.ret_customer_balance2(to_accounts_receivable_payments.prepaid_customer_id);
+                    double new_balance5 = cus5.prepaid - (to_accounts_receivable_payments.prepaid_amount);
+                   
+                    String s5 = "update  customers set "
+                            + " prepaid= :prepaid"
+                            + " where "
+                            + " id ='" + to_accounts_receivable_payments.prepaid_customer_id + "' "
+                            + " ";
+                    s5 = SqlStringUtil.parse(s5).
+                            setNumber("prepaid", new_balance5).
+                            ok();
+                    PreparedStatement stmt5 = conn.prepareStatement(s5);
+                    stmt5.execute();
+                }
                 System.out.println("Info: " + to_accounts_receivable_payments.customer_id + "," + to_accounts_receivable_payments.ar_no);
             }
 

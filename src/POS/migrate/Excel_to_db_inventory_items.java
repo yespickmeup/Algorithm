@@ -46,8 +46,9 @@ public class Excel_to_db_inventory_items {
     public final String sub_classification;
     public final String brand;
     public final String model;
+    public final String unit;
 
-    public Excel_to_db_inventory_items(String qty, String item_code, String barcode, String description, String cost, String selling_price, String category, String classification, String sub_classification, String brand, String model) {
+    public Excel_to_db_inventory_items(String qty, String item_code, String barcode, String description, String cost, String selling_price, String category, String classification, String sub_classification, String brand, String model, String unit) {
         this.qty = qty;
         this.item_code = item_code;
         this.barcode = barcode;
@@ -59,11 +60,12 @@ public class Excel_to_db_inventory_items {
         this.sub_classification = sub_classification;
         this.brand = brand;
         this.model = model;
+        this.unit = unit;
     }
 
     public static void main(String[] args) {
-
-        String file = "C:\\Users\\Guinness\\Desktop\\Clients\\Zamboanguita\\encode.xls";
+        System.setProperty("pool_db", "db_smis_dumaguete_refreshments");
+        String file = "C:\\Users\\Ronescape\\Documents\\Excel Files\\Ray Buenavista\\encode.xls";
 
         if (file == null || file.isEmpty()) {
             return;
@@ -159,13 +161,13 @@ public class Excel_to_db_inventory_items {
             String model_id = "";
             int selling_type = 1;
 
-            String branch = "Zamboanguita";
+            String branch = "Dumaguete-Main Branch";
             String branch_code = "1";
-            String location = "Selling Area";
+            String location = "Warehouse";
             String location_id = "1";
-            String unit = "[pc:" + encoded.selling_price + "/1.0^1]";
-            int is_uploaded=0;
-            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false,is_uploaded);
+            String unit = "[" + encoded.unit + ":" + encoded.selling_price + "/1.0^1]";
+            int is_uploaded = 0;
+            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
             Inventory.add_inventory(to);
 
             //encoding
@@ -182,8 +184,8 @@ public class Excel_to_db_inventory_items {
 
             String user_id = MyUser.getUser_id();
             String user_screen_name = MyUser.getUser_screen_name();
-            String remarks="";
-            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+            String remarks = "";
+            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
             Encoding_inventory.add_encoding_inventory(en);
 
         }
@@ -203,7 +205,7 @@ public class Excel_to_db_inventory_items {
             for (int i = 0; i < sheetData.size(); i++) {
                 List list = (List) sheetData.get(i);
                 int size = list.size();
-                String[] record = new String[11];
+                String[] record = new String[12];
                 int record_size = 0;
                 for (int j = 0; j < list.size(); j++) {
 
@@ -244,8 +246,8 @@ public class Excel_to_db_inventory_items {
                 String sub_classification = record[8];
                 String brand = record[9];
                 String model = record[10];
-
-                Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model);
+                String unit = record[11];
+                Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit);
                 if (record[0] != null) {
                     datas.add(encoded);
                     System.out.println("");

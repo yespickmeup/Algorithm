@@ -1298,9 +1298,9 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-//        System.setProperty("return_exchange_days", "2000");
+        System.setProperty("return_exchange_days", "2000");
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);
@@ -1619,12 +1619,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }
 
     private void replace_items() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Add)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Add)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
         final List<MySales_Items.items> selected = new ArrayList();
         final List<MySales_Items.items> others = new ArrayList();
         List<MySales_Items.items> items = tbl_sale_items_ALM;

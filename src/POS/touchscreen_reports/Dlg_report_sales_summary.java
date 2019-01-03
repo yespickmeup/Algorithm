@@ -1460,12 +1460,18 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         + "  and status='" + "0" + "' ";
                 String where_disbursements = " where id<>0 ";
                 if (!jCheckBox1.isSelected()) {
+                    List<S1_users.to_users> users = S1_users.ret_where(" where id='" + f.getId() + "' ");
+                    String user_name="";
+                    if(!users.isEmpty()){
+                        S1_users.to_users user=(S1_users.to_users)users.get(0);
+                        user_name=user.user_name;
+                    }
                     where_drawer = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales_status = " where id<>0 "
-                            + "  and user_id='" + f.getId() + "' and status=1 ";
+                            + "  and user_name='" + user_name + "' and status=1 ";
                     where_disbursements = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales2 = " where id<>0 "
@@ -1572,6 +1578,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     count_coins_point_zero_five += drawer.point_zero_five;
                 }
                 double prepaid_sales = 0;
+                double online_sales=0;
                 for (MySales.sales sale : my_sale) {
 
                     cash_sales += sale.gross_amount;
@@ -1596,8 +1603,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     if (sale.prepaid_amount > 0) {
                         prepaid_sales += sale.prepaid_amount;
                     }
+                    if (sale.online_amount > 0) {
+                        online_sales += sale.online_amount;
+                    }
                 }
-                cash_sales = cash_sales - prepaid_sales;
+                cash_sales = cash_sales - (prepaid_sales+online_sales);
                 cash_sales = cash_sales - cc_cash_sales;
                 cc_total = cash_sales;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {

@@ -296,6 +296,8 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         lbl_charge_amount2 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        lbl_online = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_sale_items = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -521,6 +523,13 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel49.setText("Counted");
 
+        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel50.setText("Online:");
+
+        lbl_online.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_online.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_online.setText("0.00");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -611,6 +620,16 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel48)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(3, 3, 3)
+                            .addComponent(lbl_online, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -631,13 +650,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                             .addGap(14, 14, 14)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lbl_charge_customer_name, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                .addComponent(lbl_chage_reference, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel48)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lbl_chage_reference, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -739,6 +752,10 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
                     .addComponent(lbl_charge_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel50)
+                    .addComponent(lbl_online))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1015,6 +1032,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1047,6 +1065,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_gross_amount;
     private javax.swing.JLabel lbl_items;
     private javax.swing.JLabel lbl_line_discount;
+    private javax.swing.JLabel lbl_online;
     private javax.swing.JLabel lbl_prepaid_amount;
     private javax.swing.JLabel lbl_prepaid_cust_name;
     private javax.swing.JLabel lbl_sale_discount;
@@ -1761,11 +1780,14 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 lbl_charge_type.setText(sale.charge_type);
                 lbl_chage_reference.setText(sale.charge_reference_no);
                 lbl_charge_customer_name.setText(sale.charge_customer_name);
+                lbl_online.setText(FitIn.fmt_wc_0(sale.online_amount));
                 double cash = sale.amount_due - (sale.credit_card_amount
                         + sale.gift_certificate_amount
                         + sale.prepaid_amount
                         + sale.check_amount
-                        + sale.charge_amount);
+                        + sale.charge_amount
+                         + sale.online_amount
+                        );
                 lbl_cash.setText(FitIn.fmt_wc_0(cash));
                 String where = "where sales_no='" + sale.sales_no + "' and location_id ='" + sale.location_id + "' ";
                 List<MySales_Items.items> datas = MySales_Items.ret_data(where);

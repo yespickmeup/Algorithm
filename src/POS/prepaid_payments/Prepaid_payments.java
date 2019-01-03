@@ -47,7 +47,8 @@ public class Prepaid_payments {
         public final String location_id;
         public final String remarks;
         public final int refund;
-        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, String remarks,int refund) {
+
+        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, String remarks, int refund) {
             this.id = id;
             this.cash = cash;
             this.check_bank = check_bank;
@@ -68,7 +69,7 @@ public class Prepaid_payments {
             this.location = location;
             this.location_id = location_id;
             this.remarks = remarks;
-            this.refund=refund;
+            this.refund = refund;
         }
 
         public boolean isSelected() {
@@ -145,7 +146,7 @@ public class Prepaid_payments {
                     .setString("location", to_prepaid_payments.location)
                     .setString("location_id", to_prepaid_payments.location_id)
                     .setString("remarks", to_prepaid_payments.remarks)
-                    .setNumber("refund",to_prepaid_payments.refund)
+                    .setNumber("refund", to_prepaid_payments.refund)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -226,7 +227,7 @@ public class Prepaid_payments {
                     .setString("location", to_prepaid_payments.location)
                     .setString("location_id", to_prepaid_payments.location_id)
                     .setString("remarks", to_prepaid_payments.remarks)
-                    .setNumber("refund",to_prepaid_payments.refund)
+                    .setNumber("refund", to_prepaid_payments.refund)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -313,29 +314,32 @@ public class Prepaid_payments {
         try {
             Connection conn = MyConnection.connect();
             for (to_prepaid_payments to_prepaid_payments : to_prepaid_payments1) {
-                String s0 = "update prepaid_payments set "
-                        + " status= :status"
-                        + " where "
-                        + " id= '" + to_prepaid_payments.id + "'";
-                s0 = SqlStringUtil.parse(s0)
-                        .setNumber("status", 1)
-                        .ok();
-                PreparedStatement stmt = conn.prepareStatement(s0);
-                stmt.execute();
-                Lg.s(Prepaid_payments.class, "Successfully Updated");
+                if (to_prepaid_payments.status == 0) {
+                    String s0 = "update prepaid_payments set "
+                            + " status= :status"
+                            + " where "
+                            + " id= '" + to_prepaid_payments.id + "'";
+                    s0 = SqlStringUtil.parse(s0)
+                            .setNumber("status", 1)
+                            .ok();
+                    PreparedStatement stmt = conn.prepareStatement(s0);
+                    stmt.execute();
+                    Lg.s(Prepaid_payments.class, "Successfully Updated");
 
-                Customers.to_customers cus = S1_accounts_receivable_payments.ret_customer_balance2(to_prepaid_payments.customer_id);
-                double new_balance = cus.prepaid + (to_prepaid_payments.cash + to_prepaid_payments.check_amount);
-                String s2 = "update  customers set "
-                        + " prepaid= :prepaid"
-                        + " where "
-                        + " id ='" + to_prepaid_payments.customer_id + "' "
-                        + " ";
-                s2 = SqlStringUtil.parse(s2).
-                        setNumber("prepaid", new_balance).
-                        ok();
-                PreparedStatement stmt2 = conn.prepareStatement(s2);
-                stmt2.execute();
+                    Customers.to_customers cus = S1_accounts_receivable_payments.ret_customer_balance2(to_prepaid_payments.customer_id);
+                    double new_balance = cus.prepaid + (to_prepaid_payments.cash + to_prepaid_payments.check_amount);
+                    String s2 = "update  customers set "
+                            + " prepaid= :prepaid"
+                            + " where "
+                            + " id ='" + to_prepaid_payments.customer_id + "' "
+                            + " ";
+                    s2 = SqlStringUtil.parse(s2).
+                            setNumber("prepaid", new_balance).
+                            ok();
+                    PreparedStatement stmt2 = conn.prepareStatement(s2);
+                    stmt2.execute();
+                }
+
             }
 
         } catch (SQLException e) {
@@ -354,6 +358,39 @@ public class Prepaid_payments {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
+            Lg.s(Prepaid_payments.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void delete_prepaid_payments_finalized(to_prepaid_payments to_prepaid_payments) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            PreparedStatement stmt = conn.prepareStatement("");
+            String s0 = "update prepaid_payments set status=2 where "
+                    + " id ='" + to_prepaid_payments.id + "' "
+                    + " ";
+
+            stmt.addBatch(s0);
+
+            Customers.to_customers cus = S1_accounts_receivable_payments.ret_customer_balance2(to_prepaid_payments.customer_id);
+            double new_balance = cus.prepaid - (to_prepaid_payments.cash + to_prepaid_payments.check_amount);
+            String s2 = "update  customers set "
+                    + " prepaid= :prepaid"
+                    + " where "
+                    + " id ='" + to_prepaid_payments.customer_id + "' "
+                    + " ";
+            s2 = SqlStringUtil.parse(s2).
+                    setNumber("prepaid", new_balance).
+                    ok();
+
+            stmt.addBatch(s2);
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Prepaid_payments.class, "Successfully Deleted");
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -413,10 +450,10 @@ public class Prepaid_payments {
                 String location = rs.getString(17);
                 String location_id = rs.getString(18);
                 String remarks = rs.getString(19);
-                int refund=rs.getInt(20);
+                int refund = rs.getInt(20);
                 to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added,
-                        customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id,
-                        user_screen_name, branch, branch_id, location, location_id, remarks,refund);
+                                                                 customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id,
+                                                                 user_screen_name, branch, branch_id, location, location_id, remarks, refund);
                 datas.add(to);
             }
             return datas;

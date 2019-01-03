@@ -723,7 +723,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         btn_cheque.setBackground(new java.awt.Color(255, 255, 255));
         btn_cheque.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btn_cheque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_payment/cheque.png"))); // NOI18N
-        btn_cheque.setText("F4 - Cheque");
+        btn_cheque.setText("F4 - Check");
         btn_cheque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         btn_cheque.setContentAreaFilled(false);
         btn_cheque.setFocusable(false);
@@ -1080,6 +1080,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         tf_amount_tendered.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         tf_amount_tendered.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_amount_tendered.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        tf_amount_tendered.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_amount_tenderedActionPerformed(evt);
+            }
+        });
         tf_amount_tendered.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_amount_tenderedKeyReleased(evt);
@@ -1942,7 +1947,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2755,7 +2760,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton45ActionPerformed
 
     private void btn_onlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_onlineActionPerformed
-        // TODO add your handling code here:
+          payment_online();
     }//GEN-LAST:event_btn_onlineActionPerformed
 
     private void lbl_onlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbl_onlineActionPerformed
@@ -2765,6 +2770,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private void btn_charge8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_charge8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_charge8ActionPerformed
+
+    private void tf_amount_tenderedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_amount_tenderedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_amount_tenderedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2922,7 +2931,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        jPanel2.setVisible(false);
         init_key();
         set_cardlayout();
@@ -4079,6 +4088,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void add_order() {
         if (jButton43.getText().equalsIgnoreCase("Add Order")) {
+            String allow_negative_inventory = System.getProperty("allow_negative_inventory", "false");
             int row = tbl_items.getSelectedRow();
             if (row < 0) {
                 return;
@@ -4097,6 +4107,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             String sub_classification = to.sub_classification;
             String sub_classification_id = to.sub_classification_id;
             double product_qty = FitIn.toDouble(lbl_qty.getText());
+            if (allow_negative_inventory.equalsIgnoreCase("true") && product_qty > to.product_qty) {
+                Alert.set(0, "Not enough stock/s!");
+                return;
+            }
+
             int row2 = tbl_uom.getSelectedRow();
             if (row2 < 0) {
                 return;
@@ -4176,6 +4191,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             if (row < 0) {
                 return;
             }
+            
             Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(row);
             Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
             Label.Item_discount serial = (Label.Item_discount) jLabel47;
@@ -4212,7 +4228,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             tf_wtax.setText("");
             tf_search.grabFocus();
         }
-
     }
 
     private void set_qty(boolean increase) {
@@ -4958,7 +4973,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         nd.setLocation(loc.x + 46, loc.y - 137);
         nd.setVisible(true);
     }
-    
+
     private void payment_online() {
         Window p = (Window) this;
         Dlg_touchscreen_payment_online nd = Dlg_touchscreen_payment_online.create(p, true);
@@ -5156,6 +5171,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Payments.credit_card f_credit_card = Payments.credit_card;
         Payments.gift_certificate f_gift_certificate = Payments.gift_certificate;
         Payments.prepaid f_prepaid = Payments.prepaid;
+        Payments.online f_online = Payments.online;
         int id = 0;
         String sales_no = "";
         String date_added = DateType.datetime.format(jDateChooser1.getDate());
@@ -5214,8 +5230,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         String branch_id = br.getId();
         String location = lo.getText();
         String location_id = my_location_id;
-
-        final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1, charge_days);
+        String online_bank = f_online.bank;
+        String online_reference_no = f_online.reference_no;
+        double online_amount = f_online.amount;
+        String online_holder = f_online.check_holder;
+        String online_date = f_online.check_date;
+        if (online_date == null || online_date.isEmpty()) {
+            online_date = "2000-01-01";
+        }
+        final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
+                                                      charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date);
         try {
             sales_no = MySales.add_sales(sales, items, location_id);
             sales.setSales_no(sales_no);

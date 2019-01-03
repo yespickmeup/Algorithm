@@ -83,8 +83,8 @@ public class Official_receipt {
     public final String bir_permit_to_use_no;
     public final List<Official_receipt.field> fields;
     public final double total_items;
-
-    public Official_receipt(String business_name, String operated_by, String address, String tin_no, String machine_no, String min_no, String serial_no, String permit_no, String pos_no, String accreditation_no, String business_type, String vat_percent, String sales_date, String terminal_no, String cashier, String customer_name, String customer_address, String customer_id_no, double sub_total, double line_discount, double sale_discount, double amount_due, double cash, String credit_card_type, double credit_card_rate, double credit_card_amount, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String cheque_holder, String cheque_bank, String cheque_no, String cheque_date, double cheque_amount, String charge_type, String charge_reference_no, String charge_customer_name, String charge_customer_no, double charge_amount, double vatable_sales, double vatable_exempt_sales, double zero_rated_sales, double vat, double change, String or_no, String receipt_footer, String supplier_name, String supplier_address, String supplier_tin_no, String supplier_accreditation_no, String supplier_accreditation_date, String bir_permit_to_use_no, double total_items) {
+    public final double online_amount;
+    public Official_receipt(String business_name, String operated_by, String address, String tin_no, String machine_no, String min_no, String serial_no, String permit_no, String pos_no, String accreditation_no, String business_type, String vat_percent, String sales_date, String terminal_no, String cashier, String customer_name, String customer_address, String customer_id_no, double sub_total, double line_discount, double sale_discount, double amount_due, double cash, String credit_card_type, double credit_card_rate, double credit_card_amount, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String cheque_holder, String cheque_bank, String cheque_no, String cheque_date, double cheque_amount, String charge_type, String charge_reference_no, String charge_customer_name, String charge_customer_no, double charge_amount, double vatable_sales, double vatable_exempt_sales, double zero_rated_sales, double vat, double change, String or_no, String receipt_footer, String supplier_name, String supplier_address, String supplier_tin_no, String supplier_accreditation_no, String supplier_accreditation_date, String bir_permit_to_use_no, double total_items,double online_amount) {
         this.business_name = business_name;
         this.operated_by = operated_by;
         this.address = address;
@@ -146,6 +146,7 @@ public class Official_receipt {
         this.bir_permit_to_use_no = bir_permit_to_use_no;
         this.fields = new ArrayList();
         this.total_items = total_items;
+        this.online_amount=online_amount;
     }
 
    
@@ -371,7 +372,8 @@ public class Official_receipt {
             fields.add(field);
         }
         double total_items = 0;
-        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
+        double online_amount=0;
+        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items,online_amount);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_official_receipt.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

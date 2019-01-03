@@ -799,13 +799,19 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String where = " where remarks like '%" + "" + "%' ";
 
                 if (!jCheckBox1.isSelected()) {
+                    List<S1_users.to_users> users = S1_users.ret_where(" where id='" + f.getId() + "' ");
+                    String user_name = "";
+                    if (!users.isEmpty()) {
+                        S1_users.to_users user = (S1_users.to_users) users.get(0);
+                        user_name = user.user_name;
+                    }
                     where = where + " and user_id='" + f.getId() + "' ";
                     where_sales2 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
                     where_sales = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales_status = " where id<>0 "
-                            + "  and user_id='" + f.getId() + "' and status=1 ";
+                            + "  and user_name='" + user_name + "' and status=1 ";
                     where_sales3 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status=1 ";
 
@@ -890,21 +896,24 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double refund_cheque = 0;
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
 
-                    if (prepayment.refund == 1) {
-                        if (prepayment.check_amount > 0) {
-                            refund_cheque += prepayment.check_amount;
+                    if (prepayment.status == 1) {
+                        if (prepayment.refund == 1) {
+                            if (prepayment.check_amount > 0) {
+                                refund_cheque += prepayment.check_amount;
+                            } else {
+                                refund += prepayment.cash;
+                            }
                         } else {
-                            refund += prepayment.cash;
-                        }
-                    } else {
 
-                        if (prepayment.check_amount > 0) {
-                            Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
-                            collections_prepaid_cheque += prepayment.check_amount;
-                        } else {
-                            collections_prepaid += prepayment.cash;
+                            if (prepayment.check_amount > 0) {
+                                Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
+                                collections_prepaid_cheque += prepayment.check_amount;
+                            } else {
+                                collections_prepaid += prepayment.cash;
+                            }
                         }
                     }
+
                 }
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
                     if (rfc.status == 1) {
@@ -1045,6 +1054,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         int credit_card = 60;
         int gc = 60;
         int prepaid = 60;
+        int online = 60;
         int amount = 60;
         int cash = 60;
         String pool_db = System.getProperty("pool_db", "db_smis");
@@ -1057,7 +1067,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             prepaid = 0;
             cash = 0;
         }
-        int[] tbl_widths_banks = {100, 70, 100, 180, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, amount};
+        int[] tbl_widths_banks = {100, 70, 100, 180, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, online, amount};
         for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -1074,7 +1084,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         tbl_ledger.setRowHeight(25);
         tbl_ledger.setFont(new java.awt.Font("Arial", 0, 11));
 //        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 3);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 4);
+//        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 5);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 6);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 7);
@@ -1083,6 +1093,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 10);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 11);
         TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 12);
+        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 13);
+        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 14);
     }
 
     private void loadData_banks(List<Srpt_sales_ledger.field> acc) {
@@ -1093,7 +1105,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     public static class TblledgerModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Net Due"
+            "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Online", "Net Due"
         };
 
         public TblledgerModel(ListModel listmodel) {
@@ -1144,6 +1156,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     return FitIn.fmt_wc_0(tt.gc_amount) + " ";
                 case 12:
                     return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
+                case 13:
+                    return FitIn.fmt_wc_0(tt.online_payment) + " ";
                 default:
                     return FitIn.fmt_wc_0(tt.amount_due) + " ";
             }

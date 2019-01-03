@@ -901,6 +901,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
     private void myInit() {
 
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("delete_prepaid_payment_finalized", "true");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
 
@@ -1189,8 +1190,10 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 case 5:
                     if (tt.status == 0) {
                         return " Posted";
-                    } else {
+                    } else if (tt.status == 1) {
                         return " Finalized";
+                    } else {
+                        return " Deleted";
                     }
                 case 6:
                     return tt.selected;
@@ -1269,9 +1272,6 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 return;
             }
         }
-        
-//        System.out.println("Cash: " + cash);
-//        System.out.println("Cheque: " + check_amount);
 
         String check_bank = tf_check_bank.getText();
         String check_no = tf_check_no.getText();
@@ -1296,6 +1296,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             refund = 1;
         }
         final to_prepaid_payments to2 = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, 0, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks, refund);
+       
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1335,6 +1336,9 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         to_prepaid_payments to = (to_prepaid_payments) tbl_prepaid_payments_ALM.get(tbl_prepaid_payments.convertRowIndexToModel(row));
         if (to.status == 1) {
             Alert.set(0, "Payment Already Finalized!");
+            return;
+        } else if (to.status == 2) {
+            Alert.set(0, "Payment Deleted!");
             return;
         }
         int id = to.id;
@@ -1405,21 +1409,32 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             return;
         }
         int col = tbl_prepaid_payments.getSelectedColumn();
+        String delete_prepaid_payment_finalized = System.getProperty("delete_prepaid_payment_finalized", "false");
         to_prepaid_payments to = (to_prepaid_payments) tbl_prepaid_payments_ALM.get(tbl_prepaid_payments.convertRowIndexToModel(row));
         if (col == 6) {
             if (to.selected == true) {
                 to.setSelected(false);
             } else {
-                if (to.status == 1) {
+                if (to.status == 1 && delete_prepaid_payment_finalized.equalsIgnoreCase("false")) {
                     Alert.set(0, "Already Finalized!");
                     return;
+                } else if (to.status == 1 && delete_prepaid_payment_finalized.equalsIgnoreCase("true")) {
+
+                } else if (to.status == 2) {
+                    Alert.set(0, "Payment Deleted!");
+                    return;
+                } else {
+                    to.setSelected(true);
                 }
-                to.setSelected(true);
             }
             tbl_prepaid_payments_M.fireTableDataChanged();
         } else {
-            if (to.status == 1) {
+
+            if (to.status == 1 && delete_prepaid_payment_finalized.equalsIgnoreCase("false")) {
                 Alert.set(0, "Already Finalized!");
+                return;
+            } else if (to.status == 2) {
+                Alert.set(0, "Transaction Deleted!");
                 return;
             }
             if (to.check_amount == 0) {
@@ -1464,6 +1479,18 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             Alert.set(0, "Privilege not added!");
             return;
         }
+
+        final int row = tbl_prepaid_payments.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final int row2 = tbl_customers.getSelectedRow();
+        final String delete_prepaid_payment_finalized = System.setProperty("delete_prepaid_payment_finalized", "false");
+
+        final to_prepaid_payments to = (to_prepaid_payments) tbl_prepaid_payments_ALM.get(tbl_prepaid_payments.convertRowIndexToModel(row));
+        if (to.status == 1 && delete_prepaid_payment_finalized.equalsIgnoreCase("false")) {
+            Alert.set(0, "Payment Already Finalized!");
+        }
         Window p = (Window) this;
         Dlg_confirm_delete nd = Dlg_confirm_delete.create(p, true);
         nd.setTitle("");
@@ -1473,19 +1500,22 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
-                int row = tbl_prepaid_payments.getSelectedRow();
-                if (row < 0) {
-                    return;
+
+                if (to.status == 1 && delete_prepaid_payment_finalized.equalsIgnoreCase("false")) {
+                    Alert.set(0, "Payment Already Finalized!");
+                } else if (to.status == 1 && delete_prepaid_payment_finalized.equalsIgnoreCase("true")) {
+
+                    Prepaid_payments.delete_prepaid_payments_finalized(to);
+                    data_cols();
+                    tbl_customers.setRowSelectionInterval(row2, row2);
+                    data_payments();
+                    Alert.set(3, "Payment Deleted");
+                } else {
+                    Prepaid_payments.delete_prepaid_payments(to);
+                    data_payments();
+                    Alert.set(3, "Payment Added");
                 }
 
-                to_prepaid_payments to = (to_prepaid_payments) tbl_prepaid_payments_ALM.get(tbl_prepaid_payments.convertRowIndexToModel(row));
-                if (to.status == 1) {
-                    Alert.set(0, "Payment Already Finalized!");
-                    return;
-                }
-                Prepaid_payments.delete_prepaid_payments(to);
-                data_payments();
-                Alert.set(3, "Payment Added");
             }
         });
         nd.setLocationRelativeTo(this);
@@ -1503,6 +1533,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
         List<to_prepaid_payments> datas = tbl_prepaid_payments_ALM;
         final List<to_prepaid_payments> selected = new ArrayList();
         for (to_prepaid_payments to : datas) {
+
             if (to.selected == true && to.status == 0) {
                 selected.add(to);
             }
@@ -1524,6 +1555,7 @@ public class Dlg_prepaid_payments extends javax.swing.JDialog {
                 tbl_customers.setRowSelectionInterval(row, row);
                 data_payments();
                 Alert.set(2, "");
+                
             }
         });
         nd.setLocationRelativeTo(jScrollPane2);

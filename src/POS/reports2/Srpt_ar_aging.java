@@ -48,7 +48,14 @@ public class Srpt_ar_aging {
     public final String ar_footer;
     public final String img_path;
     public final String prepared_by;
-    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address, String telephone_number, String customer_address,String department,String ar_footer,String img_path,String prepared_by) {
+    public final double days_1_30;
+    public final double days_31_60;
+    public final double days_61_90;
+    public final double days_91_10;
+    public final double days_above;
+    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address
+            , String telephone_number, String customer_address,String department,String ar_footer,String img_path
+            ,String prepared_by, double days_1_30,double days_31_60,double days_61_90,double days_91_10,double days_above) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
@@ -66,6 +73,11 @@ public class Srpt_ar_aging {
         this.ar_footer=ar_footer;
         this.img_path=img_path;
         this.prepared_by=prepared_by;
+        this.days_1_30=days_1_30;
+        this.days_31_60=days_31_60;
+        this.days_61_90=days_61_90;
+        this.days_91_10=days_91_10;
+        this.days_above=days_above;
     }
 
     public static class field {
@@ -227,7 +239,13 @@ public class Srpt_ar_aging {
         String ar_footer=System.getProperty("ar_footer","Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
         String img_path=System.getProperty("img_path","C:\\Users\\Guinness\\smis\\logo.png");
         String prepared_by="";
-        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address,department,ar_footer,img_path,prepared_by);
+        double days_1_30=0;
+        double days_31_60=0;
+        double  days_61_90=0;
+        double days_91_10=0;
+        double days_above=0;
+        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address,department
+                ,ar_footer,img_path,prepared_by,days_1_30,days_31_60,days_61_90,days_91_10,days_above);
         rpt.fields.addAll(fields);
 
         JRViewer viewer = get_viewer(rpt);

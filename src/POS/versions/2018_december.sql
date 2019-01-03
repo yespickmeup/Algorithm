@@ -41,3 +41,35 @@ id int auto_increment primary key
 );
 
 
+
+alter table sales add online_bank varchar(255) default '';
+alter table sales add online_reference_no varchar(255) default '';
+alter table sales add online_amount double default 0;
+alter table sales add online_holder varchar(255) default '';
+alter table sales add online_date date default '2000-01-01';
+
+
+alter table settings add version varchar(255) default '';
+alter table settings add cloud_host varchar(255) default '';
+alter table settings add cloud_port varchar(255) default '';
+alter table settings add cloud_user varchar(255) default '';
+alter table settings add cloud_password varchar(255) default '';
+alter table settings add cloud_db varchar(255) default '';
+alter table settings add ar_footer varchar(255) default '';
+
+update settings set version='V.1.20170206';
+update settings set cloud_host='128.199.80.53';
+update settings set cloud_port='3306';
+update settings set cloud_user='smis2';
+update settings set cloud_password='nopassword101';
+update settings set cloud_db='db_algorithm';
+update settings set ar_footer='Should you have any inquiries concerning this statement, please contact the Accounting Department';
+
+
+
+
+
+
+
+
+

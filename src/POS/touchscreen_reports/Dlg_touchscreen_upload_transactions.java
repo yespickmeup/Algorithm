@@ -1573,14 +1573,14 @@ public class Dlg_touchscreen_upload_transactions extends javax.swing.JDialog {
     private void myInit() {
         init_key();
 
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("pool_host", "localhost");
-        System.setProperty("main_branch", "true");
-        System.setProperty("active_branches", "10");
-        System.setProperty("cloud_host", "128.199.80.53");
-        System.setProperty("cloud_user", "smis2");
-        System.setProperty("cloud_password", "nopassword101");
-        System.setProperty("cloud_db", "db_algorithm_development");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "localhost");
+//        System.setProperty("main_branch", "true");
+//        System.setProperty("active_branches", "10");
+//        System.setProperty("cloud_host", "128.199.80.53");
+//        System.setProperty("cloud_user", "smis2");
+//        System.setProperty("cloud_password", "nopassword101");
+//        System.setProperty("cloud_db", "db_algorithm_development");
 
         ret_transactions();
 

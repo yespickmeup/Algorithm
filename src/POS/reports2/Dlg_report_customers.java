@@ -208,6 +208,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -1609,19 +1610,20 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jDateChooser12.setDate(new Date());
         jDateChooser12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        buttonGroup1.add(jCheckBox16);
+        buttonGroup3.add(jCheckBox16);
         jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox16.setSelected(true);
         jCheckBox16.setText("All");
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setText("Status:");
 
-        buttonGroup1.add(jCheckBox17);
+        buttonGroup3.add(jCheckBox17);
         jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox17.setText("Post Dated");
 
-        buttonGroup1.add(jCheckBox18);
+        buttonGroup3.add(jCheckBox18);
         jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox18.setText("On Date");
 
@@ -2120,6 +2122,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -2285,7 +2288,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-
+//
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
@@ -2344,14 +2347,14 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -2652,7 +2655,6 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 Customers.to_customers to = customer_list3.get(data.selected_row);
                 tf1.setText("" + to.customer_name);
                 customer.setId(to.address);
-
                 tf2.setText("" + to.customer_no);
                 get_customers_aging2();
             }
@@ -2773,7 +2775,13 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
                 String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
                 String prepared_by = "";
-                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address, department, ar_footer, img_path, prepared_by);
+                double days_1_30 = 0;
+                double days_31_60 = 0;
+                double days_61_90 = 0;
+                double days_91_10 = 0;
+                double days_above = 0;
+                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address,
+                         department, ar_footer, img_path, prepared_by, days_1_30, days_31_60, days_61_90, days_91_10, days_above);
                 rpt.fields.addAll(fields);
 
                 report_customers_aging(rpt, jrxml);
@@ -2839,10 +2847,15 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                     department = dep.getText();
                 }
 
-                String img_path = System.getProperty("img_logo", "C:\\Users\\Guinness\\smis\\logo.png");
+                String img_path = System.getProperty("img_logo", "C:\\Users\\Ronescape\\smis\\logo.png");
                 String prepared_by = jTextField21.getText();
+                double days_1_30 = 0;
+                double days_31_60 = 0;
+                double days_61_90 = 0;
+                double days_91_10 = 0;
+                double days_above = 0;
                 Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address,
-                        department, ar_footer, img_path, prepared_by);
+                                                      department, ar_footer, img_path, prepared_by, days_1_30, days_31_60, days_61_90, days_91_10, days_above);
                 rpt.fields.addAll(fields);
                 report_customers_aging2(rpt, jrxml);
                 jProgressBar6.setString("Finished...");
@@ -3089,7 +3102,13 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
                 String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
                 String prepared_by = "";
-                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address, department, ar_footer, img_path, prepared_by);
+                double days_1_30 = 0;
+                double days_31_60 = 0;
+                double days_61_90 = 0;
+                double days_91_10 = 0;
+                double days_above = 0;
+                Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address,
+                         department, ar_footer, img_path, prepared_by, days_1_30, days_31_60, days_61_90, days_91_10, days_above);
                 rpt.fields.addAll(fields);
                 report_customers_transactions(rpt, jrxml);
                 jProgressBar8.setString("Finished...");
@@ -3185,10 +3204,10 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 String customer_id = cus.getId();
                 String customer_name = cus.getText();
                 if (!jCheckBox15.isSelected()) {
-                    where = where + " and Date(ar.date_applied) between '" + date_from + "' and '" + date_to + "' ";
+                    where = where + " and Date(p.date_applied) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (!jCheckBox14.isSelected()) {
-                    where = where + " and ar.customer_id ='" + customer_id + "' ";
+                    where = where + " and p.customer_id ='" + customer_id + "' ";
                 } else {
                     customer_name = "All";
                 }

@@ -513,14 +513,14 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -613,7 +613,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         String reference_no = tf_reference_no.getText();
         String customer_name = tf_customer_name.getText();
         String customer_id = tf_customer_id.getText();
-       
+
         if (customer_id == null || customer_id.isEmpty()) {
             tf_customer_name.grabFocus();
             Alert.set(0, "Select Customer!");
@@ -628,3 +628,4 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         }
     }
 }
+

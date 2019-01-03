@@ -373,12 +373,10 @@ public class Srpt_check_payments {
                     + ",p.branch_id"
                     + ",p.location"
                     + ",p.location_id"
-                    + ",ar.term"
+                    + ",ifnull((select ar.term from accounts_receivable ar where ar.ar_no= p.ar_no),0)"
                     + " from accounts_receivable_payments p "
-                    + " join accounts_receivable ar "
-                    + " on ar.ar_no=p.ar_no "
                     + " " + where;
-
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {

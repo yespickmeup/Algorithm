@@ -275,6 +275,8 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         lbl_gross_amount1 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        lbl_online = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_orders = new javax.swing.JTable();
@@ -537,10 +539,21 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel44.setText("Change");
 
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel46.setText("Online:");
+
+        lbl_online.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_online.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_online.setText("0.00");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_change, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -655,12 +668,12 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_gross_amount1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lbl_gross_amount1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(lbl_online, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_change, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,6 +765,10 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
                     .addComponent(lbl_charge_customer_name, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46)
+                    .addComponent(lbl_online))
                 .addGap(1, 1, 1)
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
@@ -892,6 +909,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -924,6 +942,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_gross_amount;
     private javax.swing.JLabel lbl_gross_amount1;
     private javax.swing.JLabel lbl_line_discount;
+    private javax.swing.JLabel lbl_online;
     private javax.swing.JLabel lbl_prepaid_amount;
     private javax.swing.JLabel lbl_prepaid_cust_name;
     private javax.swing.JLabel lbl_sale_discount;
@@ -947,7 +966,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     }
 
     MySales.sales my_sales = null;
-   
+
     public void do_pass(final List<Inventory_barcodes.to_inventory_barcodes> orders, final Label.Normal cust, final Label.Item_discount discount, final double gross_amount, final double line_discount, final MySales.sales sales) {
         my_sales = sales;
         tbl_orders.grabFocus();
@@ -984,6 +1003,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
                 lbl_charge_type.setText(Payments.charge.charge_type);
                 lbl_chage_reference.setText(Payments.charge.reference_no);
                 lbl_charge_customer_name.setText(Payments.charge.customer_name);
+                lbl_online.setText(FitIn.fmt_wc_0(Payments.online.amount));
 
                 double tendered = Payments.cash.cash + Payments.credit_card.amount + Payments.gift_certificate.amount + Payments.prepaid.amount + Payments.cheque.amount + Payments.charge.amount;
                 lbl_tendered.setText(FitIn.fmt_wc_0(tendered));
@@ -1162,7 +1182,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         String charge_customer_name = my_sales.charge_customer_name;
         String charge_customer_no = my_sales.charge_customer_id;
         double charge_amount = my_sales.charge_amount;
-
+        double online_amount = my_sales.online_amount;
         double total_items = 0;
         double vatable_sales = 0;
         double vatable_exempt_sales = 0;
@@ -1206,14 +1226,15 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         vatable_sales = my_sales.amount_due / 1.12;
         vat_percent1 = vatable_sales * .12;
         vat = vat_percent1;
-        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items);
+      
+        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items,online_amount);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_official_receipt.jrxml";
         InputStream is = Official_receipt.class.getResourceAsStream(jrxml);
         try {
             JasperReport jasperReport = JasperCompileManager.compileReport(is);
             jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                    setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+                                                       setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
 
             try {
                 if (jasperPrint != null) {
@@ -1238,21 +1259,21 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ok();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              ok();
+                          }
+                      });
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ENTER, new KeyAction() {
+                              KeyEvent.VK_ENTER, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ok();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              ok();
+                          }
+                      });
         tbl_orders.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -1447,12 +1468,12 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         double net_total = FitIn.toDouble(lbl_balance_due.getText());
         double cash_amount = FitIn.toDouble(lbl_cash.getText());
         double change_amount = Payments.countChange2();
-        String sales_date=DateType.convert_slash_datetime(my_sales.date_added);
+        String sales_date = DateType.convert_slash_datetime(my_sales.date_added);
 //        System.out.println("change: " + change_amount);
         Window p = (Window) this;
         Dlg_touchscreen_choose_receipt_type nd = Dlg_touchscreen_choose_receipt_type.create(p, true);
         nd.setTitle("");
-        nd.do_pass(orders, sale_discount, net_total, my_sales, cash_amount, change_amount,sales_date);
+        nd.do_pass(orders, sale_discount, net_total, my_sales, cash_amount, change_amount, sales_date);
         nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
 
             @Override
