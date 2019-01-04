@@ -411,14 +411,14 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -560,19 +560,29 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                                 }
                             }
                             System.out.println("Finished checking records...");
-                            System.out.println("Items to add: "+to_add.size());
+                            System.out.println("Items to add: " + to_add.size());
                             System.out.println("Adding items...");
-                            jLabel11.setText(""+to_add.size());
-                            jLabel12.setText(""+to_update.size());
+                            jLabel11.setText("" + to_add.size());
+                            jLabel12.setText("" + to_update.size());
                             for (Inventory.to_inventory to : to_add) {
                                 System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
                                 Inventory.add_inventory(to);
                             }
-                            System.out.println("Items to update: "+to_update.size());
+                            System.out.println("Items to update: " + to_update.size());
                             System.out.println("Updating items...");
-                            for (Inventory.to_inventory to : to_update) {
-                                System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
-                                Inventory.edit_inventory_no_price(to, to, " where main_barcode='" + to.barcode + "' ");
+                            String main_branch = System.getProperty("main_branch", "false");
+                            String receipt_printing_enabled2 = System.getProperty("receipt_printing_enabled2", "false");
+                            if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("false")) {
+                                for (Inventory.to_inventory to : to_update) {
+                                    System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
+                                    Inventory.edit_inventory_no_price(to, to, " where main_barcode='" + to.barcode + "' ");
+                                }
+                            }
+                            if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("true")) {
+                                for (Inventory.to_inventory to : to_update) {
+                                    System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
+                                    Inventory.edit_inventory_with_price(to, to, " where main_barcode='" + to.barcode + "' ");
+                                }
                             }
                             Alert.set(0, "Check and Download Successfull!");
                             System.out.println("Finished updating items...");

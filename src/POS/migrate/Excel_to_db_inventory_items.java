@@ -134,7 +134,7 @@ public class Excel_to_db_inventory_items {
             double selling_price = FitIn.toDouble(encoded.selling_price);
             String date_added = DateType.now();
             String user_name = "";
-            String item_type = "";
+            String item_type = "Regular";
             int status = 1;
 
             String supplier = "";
@@ -166,6 +166,7 @@ public class Excel_to_db_inventory_items {
             String location = "Warehouse";
             String location_id = "1";
             String unit = "[" + encoded.unit + ":" + encoded.selling_price + "/1.0^1]";
+//            System.out.println("Unit: "+unit);
             int is_uploaded = 0;
             Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
             Inventory.add_inventory(to);
@@ -213,7 +214,7 @@ public class Excel_to_db_inventory_items {
                     HSSFCell cell = (HSSFCell) list.get(j);
                     HSSFDataFormatter hdf = new HSSFDataFormatter();
                     String data = "";
-                    if (j >= 11) {
+                    if (j >= 12) {
                         break;
                     }
                     if (j == 1 || j == 4 || j == 5) {
@@ -232,7 +233,7 @@ public class Excel_to_db_inventory_items {
                     }
 
                     record[record_size] = data;
-                    System.out.print(data + " | ");
+//                    System.out.print(data + " | ");
                     record_size++;
                 }
                 String qty = record[0];
@@ -246,7 +247,10 @@ public class Excel_to_db_inventory_items {
                 String sub_classification = record[8];
                 String brand = record[9];
                 String model = record[10];
+
                 String unit = record[11];
+                System.out.println("model:" + model);
+                System.out.println("unit:" + unit);
                 Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit);
                 if (record[0] != null) {
                     datas.add(encoded);

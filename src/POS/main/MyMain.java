@@ -73,10 +73,10 @@ public class MyMain {
             System.setProperty("delete_prepaid_payment_finalized", prop.getProperty("delete_prepaid_payment_finalized", "false"));
             
             System.out.println("OS: " + os);
-            System.out.println("Home: " + home);
+//            System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
             System.out.println("Host: " + System.getProperty("pool_host"));
-            System.out.println("Environment: " + System.getProperty("environment"));
+//            System.out.println("Environment: " + System.getProperty("environment"));
 //            System.out.println("inventory_item_delete: " + System.getProperty("inventory_item_delete"));
 
             String where = "";
@@ -86,6 +86,9 @@ public class MyMain {
             if (setting.receipt_printing_enabled == 1) {
                 System.setProperty("receipt_printing_enabled", "true");
                 System.setProperty("print_to_receipts", "true");
+                
+                
+                
             } else {
                 System.setProperty("print_to_receipts", "false");
                 System.setProperty("receipt_printing_enabled", "false");

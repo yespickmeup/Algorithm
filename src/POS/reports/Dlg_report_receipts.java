@@ -492,7 +492,7 @@ public class Dlg_report_receipts extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());
         init_supplier();

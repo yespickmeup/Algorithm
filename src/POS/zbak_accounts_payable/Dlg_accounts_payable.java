@@ -416,7 +416,7 @@ public class Dlg_accounts_payable extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_key();
         init_tbl_customers();
         init_tbl_accounts_payable(tbl_accounts_receivable);

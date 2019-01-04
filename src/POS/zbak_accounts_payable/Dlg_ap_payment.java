@@ -780,7 +780,7 @@ public class Dlg_ap_payment extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_key();
         focus();
         init();

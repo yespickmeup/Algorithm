@@ -1868,15 +1868,16 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                     lbl_credit_card_rate.setText("");
                     tf_credit_card_amount.setText("");
                     tf_credit_card_type.setText("");
-                    tf_credit_card_amount.setText("");
+                  
                 } else {
                     double rate = FitIn.toDouble(lbl_credit_card_rate.getText());
-                    double amount = FitIn.toDouble(tf_credit_card_amount.getText());
+                    double amount = FitIn.toDouble(tf_ap_cash7.getText());
 
                     rate = rate / 100;
                     rate = rate * amount;
                     rate = amount + rate;
-//                    tf_cc_topay.setText(FitIn.fmt_wc_0(rate));
+                    System.out.println("rate: "+rate);
+                    tf_credit_card_amount.setText(FitIn.fmt_wc_0(rate));
                 }
 
                 tf_credit_card_amount.grabFocus();

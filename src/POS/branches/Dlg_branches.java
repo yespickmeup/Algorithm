@@ -469,7 +469,7 @@ public class Dlg_branches extends javax.swing.JDialog {
 
     private void myInit() {
         
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         tf_search.grabFocus();
         init_key();
         hover();

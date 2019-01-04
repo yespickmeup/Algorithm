@@ -1713,11 +1713,11 @@ public class Dlg_inventory extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-       check_items();
+        check_items();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-       user_price_change();
+        user_price_change();
     }//GEN-LAST:event_jButton17ActionPerformed
     /**
      * @param args the command line arguments
@@ -1857,7 +1857,6 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
 //        System.setProperty("cloud_db", "db_algorithm");
-
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -1886,9 +1885,15 @@ public class Dlg_inventory extends javax.swing.JDialog {
         client_label_request();
 
         jButton13.setVisible(false);
+        jButton16.setVisible(false);
         String cloud_host = System.getProperty("cloud_host", "");
-        if (!cloud_host.isEmpty()) {
+        String main_branch = System.getProperty("main_branch", "false");
+        if (main_branch.equalsIgnoreCase("true")) {
             jButton13.setVisible(true);
+            jButton13.setText("Upload");
+        } else {
+            jButton13.setVisible(true);
+            jButton13.setText("Download");
         }
 //        cloud_upload();
     }
@@ -1938,14 +1943,14 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         tf_category.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -3911,32 +3916,33 @@ public class Dlg_inventory extends javax.swing.JDialog {
 
         }
     }
-    
-    private void check_items(){
+
+    private void check_items() {
         Window p = (Window) this;
         Dlg_inventory_cloud_transactions_local nd = Dlg_inventory_cloud_transactions_local.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_inventory_cloud_transactions_local.Callback() {
-            
+
             @Override
             public void ok(CloseDialog closeDialog, Dlg_inventory_cloud_transactions_local.OutputData data) {
                 closeDialog.ok();
-                
+
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-    private void user_price_change(){
+
+    private void user_price_change() {
         Window p = (Window) this;
         Dlg_user_price_change nd = Dlg_user_price_change.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_user_price_change.Callback() {
-            
+
             @Override
             public void ok(CloseDialog closeDialog, Dlg_user_price_change.OutputData data) {
                 closeDialog.ok();
-                
+
             }
         });
         nd.setLocationRelativeTo(this);

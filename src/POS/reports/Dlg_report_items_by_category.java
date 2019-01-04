@@ -355,7 +355,7 @@ public class Dlg_report_items_by_category extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_key();
 
         init_category();

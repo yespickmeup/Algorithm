@@ -383,7 +383,7 @@ public class Dlg_sales_by_item extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        Main.MyDB.setNames("db_algorithm");
+//        Main.MyDB.setNames("db_algorithm");
         init_key();
         dp_from.setDate(new Date());
         dp_to.setDate(new Date());

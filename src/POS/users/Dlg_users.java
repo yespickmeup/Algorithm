@@ -1630,14 +1630,14 @@ public class Dlg_users extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
     private ArrayListModel tbl_users_ALM;
@@ -2179,7 +2179,9 @@ public class Dlg_users extends javax.swing.JDialog {
         } else {
             where = " where name like '%" + jTextField2.getText() + "%' and account like '" + jTextField1.getText() + "' order by name asc";
         }
-        loadData_user_default_previleges(S1_user_default_previleges.ret_data(where));
+        List<to_user_default_previleges> datas = S1_user_default_previleges.ret_data(where);
+
+        loadData_user_default_previleges(datas);
     }
     List<Courier.status> accounts_list = new ArrayList();
 
@@ -2550,7 +2552,38 @@ public class Dlg_users extends javax.swing.JDialog {
                     to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
                     list2.add(to1);
                 }
-                S1_user_previleges.add_user_previleges(list);
+                String module_prepayments = System.getProperty("module_prepayments", "0");
+                String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+                String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+                String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+                String module_services = System.getProperty("module_services", "0");
+                List<to_user_previleges> lists1 = new ArrayList();
+                for (to_user_previleges l : list) {
+                    if (l.previledge.contains("Accounts Payable")) {
+                        if (module_accounts_payable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Accounts Receivable")) {
+                        if (module_accounts_receivable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Prepaid Payments")) {
+                        if (module_prepayments.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Charge In Advance")) {
+                        if (module_charge_in_advance.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Services")) {
+                        if (module_services.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else {
+                        lists1.add(l);
+                    }
+                }
+                S1_user_previleges.add_user_previleges(lists1);
                 S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
@@ -2787,7 +2820,38 @@ public class Dlg_users extends javax.swing.JDialog {
                     to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
                     list2.add(to1);
                 }
-                S1_user_previleges.add_user_previleges(list);
+                String module_prepayments = System.getProperty("module_prepayments", "0");
+                String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+                String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+                String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+                String module_services = System.getProperty("module_services", "0");
+                List<to_user_previleges> lists1 = new ArrayList();
+                for (to_user_previleges l : list) {
+                    if (l.previledge.contains("Accounts Payable")) {
+                        if (module_accounts_payable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Accounts Receivable")) {
+                        if (module_accounts_receivable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Prepaid Payments")) {
+                        if (module_prepayments.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Charge In Advance")) {
+                        if (module_charge_in_advance.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Services")) {
+                        if (module_services.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else {
+                        lists1.add(l);
+                    }
+                }
+                S1_user_previleges.add_user_previleges(lists1);
                 S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
@@ -2826,7 +2890,38 @@ public class Dlg_users extends javax.swing.JDialog {
                     to_user_previleges to1 = new to_user_previleges(0, "Sales", prev, 1, "" + to.id, to.user_name);
                     list.add(to1);
                 }
-                S1_user_previleges.add_user_previleges(list);
+                String module_prepayments = System.getProperty("module_prepayments", "0");
+                String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+                String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+                String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+                String module_services = System.getProperty("module_services", "0");
+                List<to_user_previleges> lists1 = new ArrayList();
+                for (to_user_previleges l : list) {
+                    if (l.previledge.contains("Accounts Payable")) {
+                        if (module_accounts_payable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Accounts Receivable")) {
+                        if (module_accounts_receivable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Prepaid Payments")) {
+                        if (module_prepayments.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Charge In Advance")) {
+                        if (module_charge_in_advance.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Services")) {
+                        if (module_services.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else {
+                        lists1.add(l);
+                    }
+                }
+                S1_user_previleges.add_user_previleges(lists1);
                 Alert.set(1, "");
                 data_cols_previleges();
             }
@@ -3072,7 +3167,39 @@ public class Dlg_users extends javax.swing.JDialog {
                     to_user_previlege_others to1 = new to_user_previlege_others(0, "Maintenance", "Sales", prev, "" + to.id, to.user_name);
                     list2.add(to1);
                 }
-                S1_user_previleges.add_user_previleges(list);
+
+                String module_prepayments = System.getProperty("module_prepayments", "0");
+                String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+                String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+                String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+                String module_services = System.getProperty("module_services", "0");
+                List<to_user_previleges> lists1 = new ArrayList();
+                for (to_user_previleges l : list) {
+                    if (l.previledge.contains("Accounts Payable")) {
+                        if (module_accounts_payable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Accounts Receivable")) {
+                        if (module_accounts_receivable.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Prepaid Payments")) {
+                        if (module_prepayments.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Charge In Advance")) {
+                        if (module_charge_in_advance.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else if (l.previledge.contains("Services")) {
+                        if (module_services.equalsIgnoreCase("1")) {
+                            lists1.add(l);
+                        }
+                    } else {
+                        lists1.add(l);
+                    }
+                }
+                S1_user_previleges.add_user_previleges(lists1);
                 S1_user_previleges.add_user_previleges_others(list2);
                 Alert.set(1, "");
                 data_cols_previleges();
@@ -3117,7 +3244,7 @@ public class Dlg_users extends javax.swing.JDialog {
     public static class Tbluser_default_privelegesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Privelege", "Type", "  View", "  Add/Post", " Edit", " Delete", "Finalize", "Report", "Others", ""
+            "Privilege", "Type", "  View", "  Add/Post", " Edit", " Delete", "Finalize", "Report", "Others", ""
         };
 
         public Tbluser_default_privelegesModel(ListModel listmodel) {
@@ -3179,7 +3306,39 @@ public class Dlg_users extends javax.swing.JDialog {
         String where = " where user_id='" + to.id + "' ";
         String where2 = " where account like '" + cb.getText() + "' ";
         List<User_default_priveleges.to_user_default_priveleges> datas = User_default_priveleges.ret_data(where, where2);
-        loadData_user_default_priveleges2(datas);
+        List<User_default_priveleges.to_user_default_priveleges> datas2 = new ArrayList();
+        String module_prepayments = System.getProperty("module_prepayments", "0");
+
+        String module_accounts_receivable = System.getProperty("module_accounts_receivable", "0");
+        String module_accounts_payable = System.getProperty("module_accounts_payable", "0");
+        String module_charge_in_advance = System.getProperty("module_charge_in_advance", "0");
+        String module_services = System.getProperty("module_services", "0");
+        for (User_default_priveleges.to_user_default_priveleges prev : datas) {
+            if (prev.name.equalsIgnoreCase("Prepaid Payments")) {
+                if (module_prepayments.equalsIgnoreCase("1")) {
+                    datas2.add(prev);
+                }
+            } else if (prev.name.equalsIgnoreCase("Accounts Payable") || prev.name.equalsIgnoreCase("Accounts Payable Payments")) {
+                if (module_accounts_receivable.equalsIgnoreCase("1")) {
+                    datas2.add(prev);
+                }
+            } else if (prev.name.equalsIgnoreCase("Accounts Receivable") || prev.name.equalsIgnoreCase("Accounts Receivable Payments")) {
+                if (module_accounts_receivable.equalsIgnoreCase("1")) {
+                    datas2.add(prev);
+                }
+            } else if (prev.name.equalsIgnoreCase("Charge In Advance")) {
+                if (module_charge_in_advance.equalsIgnoreCase("1")) {
+                    datas2.add(prev);
+                }
+            } else if (prev.name.equalsIgnoreCase("Services")) {
+                if (module_services.equalsIgnoreCase("1")) {
+                    datas2.add(prev);
+                }
+            } else {
+                datas2.add(prev);
+            }
+        }
+        loadData_user_default_priveleges2(datas2);
     }
 
     private void init_privilege_list(final JTextField tf) {

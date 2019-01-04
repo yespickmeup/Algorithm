@@ -30,6 +30,20 @@ alter table accounts_receivable_payments add online_date date;
 alter table accounts_receivable_payments add online_amount double;
 
 
+GRANT SUPER ON *.* TO 'smis2'@'%' IDENTIFIED BY PASSWORD
+GRANT SUPER ON *.* TO 'smis2'@'%' IDENTIFIED BY 'nopassword101';
+FLUSH PRIVILEGES;
 
 
+CREATE USER 'smis5'@'%' IDENTIFIED BY 'nopassword101';
+GRANT ALL PRIVILEGES ON *.* TO 'smis5'@'%'  ;
+flush privileges;
+
+
+
+/* Refreshments Updates */
+
+update inventory i set i.category_id=(select ic.id from inventory_category ic where ic.name=i.category);
+update inventory_barcodes i set i.category_id=(select ic.id from inventory_category ic where ic.name=i.category);
+update inventory set is_uploaded=1;
 
