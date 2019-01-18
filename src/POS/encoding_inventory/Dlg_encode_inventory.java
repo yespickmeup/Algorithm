@@ -1385,7 +1385,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
         for (S1_user_previleges.to_user_previleges to2 : datas) {
-            if (to2.previledge.equalsIgnoreCase("Inventory Count (Finalize)")) {
+            if (to2.previledge.equalsIgnoreCase("Inventory Count - (Finalize)")) {
                 jButton6.setEnabled(true);
             }
         }

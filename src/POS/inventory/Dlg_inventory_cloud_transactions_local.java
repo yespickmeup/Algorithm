@@ -541,6 +541,7 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                                         break;
                                     }
                                 }
+
                                 if (exists == 0) {
                                     to_add.add(cloud);
                                 } else {
@@ -551,7 +552,14 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                                             || !cnull(cloud.sub_classification).equalsIgnoreCase(cnull(to.sub_classification))
                                             || !cnull(cloud.item_type).equalsIgnoreCase(cnull(to.item_type))
                                             || !cnull(cloud.brand).equalsIgnoreCase(cnull(to.brand))
-                                            || !cnull(cloud.model).equalsIgnoreCase(cnull(to.model))) {
+                                            || !cnull(cloud.model).equalsIgnoreCase(cnull(to.model))
+                                            || !cnull(cloud.barcodes).equalsIgnoreCase(cnull(to.barcodes))
+                                            || !cnull(cloud.unit).equalsIgnoreCase(cnull(to.unit))
+                                            || (cloud.selling_price != to.selling_price)
+                                            || (cloud.conversion != to.conversion)
+                                            || (cloud.allow_negative_inventory != to.allow_negative_inventory)
+                                            || (cloud.auto_order != to.auto_order)
+                                            ) {
                                         update = 1;
                                     }
                                     if (update == 1) {

@@ -504,12 +504,12 @@ public class Dlg_touchscreen_orders extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
 
         jTextField1.addKeyListener(new KeyAdapter() {
 
@@ -541,6 +541,7 @@ public class Dlg_touchscreen_orders extends javax.swing.JDialog {
     // </editor-fold>
 
     to_orders my_order;
+
     private void init_order() {
         String search = jTextField1.getText();
         String where = " where customer_name like '%" + search + "%' and status=0  or sales_no like '%" + search + "%' and status=0 order by sales_no,customer_name  asc ";
@@ -573,7 +574,7 @@ public class Dlg_touchscreen_orders extends javax.swing.JDialog {
                 jLabel6.setText(FitIn.fmt_wc_0(order.line_discount));
                 jLabel8.setText(FitIn.fmt_wc_0(order.discount_amount));
                 jLabel10.setText(FitIn.fmt_wc_0(order.amount_due));
-                
+
                 List<S1_order_items.to_order_items> datas = S1_order_items.ret_data(" where sales_no='" + order.sales_no + "' ");
                 List<Inventory_barcodes.to_inventory_barcodes> orders = new ArrayList();
                 for (S1_order_items.to_order_items to : datas) {
@@ -620,9 +621,12 @@ public class Dlg_touchscreen_orders extends javax.swing.JDialog {
                     String discount_name = to.discount_name;
                     String discount_customer_name = to.discount_customer_name;
                     String discount_customer_id = to.discount_customer_id;
-                    double addtl_amount=0;
-                    double wtax=0;                   
-                    Inventory_barcodes.to_inventory_barcodes item = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id,addtl_amount,wtax);
+                    double addtl_amount = 0;
+                    double wtax = 0;
+
+                    int allow_negative_inventory = 0;
+                    int auto_order = 1;
+                    Inventory_barcodes.to_inventory_barcodes item = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order);
                     orders.add(item);
                 }
                 loadData_orders(orders);

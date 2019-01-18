@@ -85,36 +85,36 @@ public class Cloud {
     public static void main(String[] args) {
         System.setProperty("pool_host", "192.168.1.51");
         System.setProperty("pool_db", "db_algorithm");
-        
+
         List<to_inventory> inventory_cloud = ret_inventory("");
         List<to_inventory> inventory_local = Inventory.ret_data6("");
         System.out.println("Retrieving record/s...");
-        
-        int new_items=0;
-        int items_do_not_match=0;
-        List<String> codes=new ArrayList();
+
+        int new_items = 0;
+        int items_do_not_match = 0;
+        List<String> codes = new ArrayList();
         for (to_inventory to : inventory_local) {
             int exists = 0;
             System.out.println("Item: " + to.barcode + " = " + to.description);
             for (to_inventory to2 : inventory_cloud) {
                 if (to.barcode.equals(to2.barcode)) {
                     exists = 1;
-                    if(!to.description.equalsIgnoreCase(to2.description)){
+                    if (!to.description.equalsIgnoreCase(to2.description)) {
                         items_do_not_match++;
                     }
                     break;
                 }
             }
             if (exists == 0) {
-                codes.add(""+to.barcode);
+                codes.add("" + to.barcode);
                 System.out.println("Item not found!" + to.barcode + " | " + to.description);
                 new_items++;
             }
         }
         System.out.println("Cloud Size: " + inventory_cloud.size());
         System.out.println("Local Size: " + inventory_local.size());
-        System.out.println("New Item/s: "+new_items + " = "+Arrays.asList(codes));
-        System.out.println("Does not match: "+items_do_not_match);
+        System.out.println("New Item/s: " + new_items + " = " + Arrays.asList(codes));
+        System.out.println("Does not match: " + items_do_not_match);
     }
 
     //<editor-fold defaultstate="collapsed" desc=" inventory ">
@@ -161,6 +161,8 @@ public class Cloud {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory"
                     + " " + where;
 
@@ -203,9 +205,11 @@ public class Cloud {
                 String branch_code = rs.getString(34);
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
-                int is_uploaded=rs.getInt(37);
+                int is_uploaded = rs.getInt(37);
 
-                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true,is_uploaded);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true, is_uploaded,allow_negative_inventory,auto_order);
                 datas.add(to);
             }
             return datas;
@@ -268,9 +272,9 @@ public class Cloud {
                 String at_branch_id = rs.getString(16);
                 String at_location = rs.getString(17);
                 String at_location_id = rs.getString(18);
-                String finalized_by_id=rs.getString(19);
-                String finalized_by=rs.getString(20);
-                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id,0,finalized_by_id,finalized_by);
+                String finalized_by_id = rs.getString(19);
+                String finalized_by = rs.getString(20);
+                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, 0, finalized_by_id, finalized_by);
                 datas.add(to);
             }
             return datas;

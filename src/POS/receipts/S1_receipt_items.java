@@ -459,6 +459,8 @@ public class S1_receipt_items {
                     + ",location"
                     + ",location_id"
                     + ",serial_no"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory_barcodes  "
                     + " " + where;
 
@@ -502,7 +504,9 @@ public class S1_receipt_items {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 String serial_no = rs.getString(37);
-                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
             }
             return to1;
         } catch (SQLException e) {
@@ -748,10 +752,10 @@ public class S1_receipt_items {
                 String location_id = rs.getString(37);
 
                 to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
-                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
-                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no,
-                        main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location,
-                        location_id);
+                                                           remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                                                           sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no,
+                                                           main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location,
+                                                           location_id);
                 datas.add(to);
             }
             return datas;
@@ -852,10 +856,10 @@ public class S1_receipt_items {
                 String location_id = rs.getString(37);
 
                 to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
-                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
-                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
-                        batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id,
-                        location, location_id);
+                                                           remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                                                           sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
+                                                           batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id,
+                                                           location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -957,10 +961,10 @@ public class S1_receipt_items {
                 String location_id = rs.getString(37);
 
                 to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
-                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
-                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
-                        batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id,
-                        location, location_id);
+                                                           remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                                                           sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
+                                                           batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id,
+                                                           location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -1115,9 +1119,9 @@ public class S1_receipt_items {
                 String location_id = rs.getString(37);
 
                 to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
-                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
-                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no,
-                        main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
+                                                           remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                                                           sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no,
+                                                           main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;
@@ -1218,9 +1222,9 @@ public class S1_receipt_items {
                 String location_id = rs.getString(37);
 
                 to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
-                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
-                        sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
-                        batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
+                                                           remarks, barcode, description, qty, cost, category, category_id, classification, classification_id,
+                                                           sub_class, sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no,
+                                                           batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
             }
             return datas;
         } catch (SQLException e) {
@@ -1318,9 +1322,9 @@ public class S1_receipt_items {
                 String location_id = rs.getString(37);
 
                 to_receipt_items to = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id,
-                        remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class,
-                        sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode,
-                        brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
+                                                           remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class,
+                                                           sub_class_id, conversion, unit, date_delivered, date_received, barcodes, serial_no, batch_no, main_barcode,
+                                                           brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;

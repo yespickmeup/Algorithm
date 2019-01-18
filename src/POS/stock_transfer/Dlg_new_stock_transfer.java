@@ -3286,7 +3286,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     String barcode = f.barcodes;
                     String description = f.description;
                     double qty = f.product_qty;
-                    String unit = f.unit;
+                    String unit = "";
+                    Dlg_inventory_uom.to_uom uoms = uom.default_uom(f.unit);
+                    if (uoms != null) {
+                        unit = uoms.uom;
+                    }
                     String serial_no = f.serial_no;
                     double price = f.selling_price;
                     double amount = f.selling_price * f.product_qty;
@@ -3295,6 +3299,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 }
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.convert_slash_datetime2(to.date_added);
+                System.out.println(date);
                 String printed_by = "Administrator";
                 String transaction_no = to.transaction_no;
                 String from_branch = to.from_branch;
@@ -4006,7 +4011,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     + " or remarks like '%%' and status=0 and is_uploaded= 1 "
                     + " or  remarks like '%%' and status=1 and is_uploaded=0 ";
             List<to_stock_transfers> transfers = Stock_transfers.ret_data(where);
-            System.out.println("transfers: " + transfers.size());
+//            System.out.println("transfers: " + transfers.size());
             int for_upload = 0;
             int waiting_finalization = 0;
             for (to_stock_transfers to : transfers) {

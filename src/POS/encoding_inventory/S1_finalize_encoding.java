@@ -79,8 +79,8 @@ public class S1_finalize_encoding {
                 double selling_price = rs.getDouble(19);
                 String user_id = rs.getString(20);
                 String user_screen_name = rs.getString(21);
-                String remarks=rs.getString(22);
-                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name,remarks);
+                String remarks = rs.getString(22);
+                to_encoding_inventory to = new to_encoding_inventory(id, item_code, barcode, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, status, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
 
                 datas.add(to);
             }
@@ -361,6 +361,8 @@ public class S1_finalize_encoding {
                     + ",location"
                     + ",location_id"
                     + ",serial_no"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory_barcodes where "
                     + " barcode ='" + barcodes + "' "
                     + " and main_barcode ='" + item_codes + "' "
@@ -407,7 +409,9 @@ public class S1_finalize_encoding {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 String serial_no = rs.getString(37);
-                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
             }
             return to1;
         } catch (SQLException e) {

@@ -840,12 +840,12 @@ public class Charge_in_advance_items {
                 double wtax = rs.getDouble(41);
 
                 to_charge_in_advance_items to = new to_charge_in_advance_items(id,
-                        "", "", "", "", "", "", "", "",
-                        user_screen_name, user_id, "", item_code, barcode, description, generic_name, item_type,
-                        supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added,
-                        status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name,
-                        discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification,
-                        classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                                                                               "", "", "", "", "", "", "", "",
+                                                                               user_screen_name, user_id, "", item_code, barcode, description, generic_name, item_type,
+                                                                               supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added,
+                                                                               status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name,
+                                                                               discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification,
+                                                                               classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
                 datas.add(to);
             }
             return datas;
@@ -904,8 +904,9 @@ public class Charge_in_advance_items {
             String discount_customer_id = to.discount_customer_id;
             double addtl_amount = to.addtl_amount;
             double wtax = to.wtax;
-
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax);
+            int allow_negative_inventory = 0;
+            int auto_order = 1;
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order);
             orders.add(order);
         }
         return orders;

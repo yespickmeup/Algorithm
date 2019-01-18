@@ -43,7 +43,7 @@ public class Refresher {
             for (to_inventory inv : datas) {
                 Inventory.add_inventory(inv);
             }
-            
+
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String branch = rs.getString(2);
@@ -112,6 +112,8 @@ public class Refresher {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory "
                     + " ";
 
@@ -154,8 +156,10 @@ public class Refresher {
                 String branch_code = rs.getString(34);
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
-                int is_uploaded=rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false,is_uploaded);
+                int is_uploaded = rs.getInt(37);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded,allow_negative_inventory,auto_order);
                 datas.add(to);
             }
             return datas;

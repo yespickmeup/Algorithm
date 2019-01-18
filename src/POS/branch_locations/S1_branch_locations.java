@@ -149,6 +149,8 @@ public class S1_branch_locations {
                     + ",branch_code"
                     + ",location"
                     + ",location_id"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory"
                     + " ";
 
@@ -191,8 +193,9 @@ public class S1_branch_locations {
                 String branch_code = "" + to_branch_locations.branch_id;
                 String location = to_branch_locations.location;
                 String location_id = location_ids;
-
-                Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, "", "", 0, 0, "", "", "", 0, 0);
+                int allow_negative_inventory = rs2.getInt(37);
+                int auto_order = rs2.getInt(38);
+                Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, "", "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order);
 
                 String s5 = "insert into inventory_barcodes("
                         + "barcode"
@@ -315,7 +318,7 @@ public class S1_branch_locations {
             }
 
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record added....");
 
         } catch (SQLException e) {
@@ -369,7 +372,7 @@ public class S1_branch_locations {
             query.add(s2);
 
             String json = gson.toJson(query);
-            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json,"","", "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
+            Main_branch_query_uploads.add_data(new Main_branch_query_uploads.to_main_branch_query_uploads(0, json, "", "", "Branch Location - Inventory", MyUser.getBranch(), MyUser.getBranch_id(), MyUser.getLocation(), MyUser.getLocation_id(), DateType.datetime.format(new Date()), 0));
             System.out.println("Record updated....");
 
         } catch (SQLException e) {
@@ -649,7 +652,7 @@ public class S1_branch_locations {
                 String location = rs.getString(5);
                 String type = rs.getString(6);
                 int status = rs.getInt(7);
-               
+
                 to_branch_locations to = new to_branch_locations(id, branch, branch_id, code, location, type, status);
                 datas.add(to);
             }
@@ -756,7 +759,9 @@ public class S1_branch_locations {
                     String location = t.location;
                     String location_id = "" + t.id;
                     String serial_no = "";
-                    Inventory_barcodes.to_inventory_barcodes ti = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0);
+                    int allow_negative_inventory = to.allow_negative_inventory;
+                    int auto_order = to.auto_order;
+                    Inventory_barcodes.to_inventory_barcodes ti = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
                     Inventory_barcodes.add_inventory_barcodes(ti);
                 }
 

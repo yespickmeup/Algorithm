@@ -50,7 +50,6 @@ import synsoftech.fields.Label;
 import synsoftech.panels.Confirm;
 import synsoftech.util.ImageRenderer;
 
-
 /**
  *
  * @author Guinness
@@ -1200,11 +1199,11 @@ public class Dlg_charge_in_advance_add_item extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                disposed();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              disposed();
+                          }
+                      });
         tbl_uom.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -1387,7 +1386,7 @@ public class Dlg_charge_in_advance_add_item extends javax.swing.JDialog {
                 String search = tf_search.getText();
                 String where = " where main_barcode='" + search + "' and location_id='" + my_location_id + "' "
                         + " or barcode='" + search + "' and location_id='" + my_location_id + "' "
-                         + " or description like '%" + search + "%' and location_id='" + my_location_id + "' ";
+                        + " or description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 where = where + " order by description asc ";
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel2.setText("" + tbl_items_ALM.size());
@@ -1777,7 +1776,9 @@ public class Dlg_charge_in_advance_add_item extends javax.swing.JDialog {
             String discount_customer_id = lbl.getDiscount_customer_id();
             double addtl_cash = FitIn.toDouble(tf_addtl_cash.getText());
             double wtax = FitIn.toDouble(tf_wtax.getText());
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax);
+            int allow_negative_inventory = to.allow_negative_inventory;
+            int auto_order = to.auto_order;
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax, allow_negative_inventory, auto_order);
             tbl_orders_ALM.add(order);
             tbl_orders_M.fireTableDataChanged();
             compute_total();

@@ -76,6 +76,8 @@ public class Adjust_inventory_price {
                     + ",location"
                     + ",location_id"
                     + ",serial_no"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory_barcodes "
                     + " " + where;
             System.out.println(where);
@@ -120,7 +122,10 @@ public class Adjust_inventory_price {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 String serial_no = rs.getString(37);
-                Inventory_barcodes.to_inventory_barcodes to = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0);
+                
+                int allow_negative_inventory=rs.getInt(38);
+                int auto_order=rs.getInt(39);
+                Inventory_barcodes.to_inventory_barcodes to = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
                 datas.add(to);
             }
             return datas;
@@ -239,7 +244,7 @@ public class Adjust_inventory_price {
                 stmt2.addBatch(s3);
 
                 stmt2.executeBatch();
-                
+
                 conn.commit();
                 System.out.println(s2);
                 System.out.println(s3);

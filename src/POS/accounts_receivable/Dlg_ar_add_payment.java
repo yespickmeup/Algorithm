@@ -93,8 +93,9 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         public final String online_holder;
         public final String online_date;
         public final double online_amount;
+        public final double actual_tendered;
 
-        public OutputData(String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amount, String check_no, String check_date, double tax_rate, double tax_amount, String discount, double discount_rate, double discount_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount) {
+        public OutputData(String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amount, String check_no, String check_date, double tax_rate, double tax_amount, String discount, double discount_rate, double discount_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount, double actual_tendered) {
             this.date_applied = date_applied;
             this.cash = cash;
             this.or_no = or_no;
@@ -125,6 +126,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             this.online_holder = online_holder;
             this.online_date = online_date;
             this.online_amount = online_amount;
+            this.actual_tendered = actual_tendered;
         }
 
     }
@@ -597,7 +599,6 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         jLabel20.setText("Cheque Bank:");
 
         tf_check_bank.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_check_bank.setEnabled(false);
         tf_check_bank.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tf_check_bankMouseClicked(evt);
@@ -614,14 +615,12 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         jLabel21.setText("Cheque Holder:");
 
         tf_ap_check_holder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_check_holder.setEnabled(false);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel23.setText("Cheque No:");
 
         tf_ap_check_no.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_ap_check_no.setEnabled(false);
         tf_ap_check_no.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_ap_check_noActionPerformed(evt);
@@ -633,7 +632,6 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         jLabel25.setText("Cheque Date:");
 
         jDateChooser4.setDate(new Date());
-        jDateChooser4.setEnabled(false);
         jDateChooser4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1721,16 +1719,17 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         online_amount = FitIn.toDouble(tf_ap_cash9.getText());
 
         double total_tendered = FitIn.toDouble(tf_ap_cash10.getText());
-        double tendered = FitIn.toDouble(tf_ap_cash.getText());
+        double tendered = FitIn.toDouble(tf_ap_cash2.getText());
         if (total_tendered != tendered) {
             Alert.set(0, "Not enough amount entered!");
             return;
         }
+        double actual_tendered = FitIn.toDouble(tf_ap_cash.getText());
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(date_applied, cash, or_no, check_bank, check_holder, check_amount, check_no, check_date, tax_rate
-                    , tax_amount, discount, discount_rate, discount_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type
-                    , credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description
-                    , gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount));
+            callback.ok(new CloseDialog(this), new OutputData(date_applied, cash, or_no, check_bank, check_holder, check_amount, check_no, check_date, tax_rate,
+                         tax_amount, discount, discount_rate, discount_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
+                         credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
+                         gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_tendered));
         }
     }
 
@@ -1868,7 +1867,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                     lbl_credit_card_rate.setText("");
                     tf_credit_card_amount.setText("");
                     tf_credit_card_type.setText("");
-                  
+
                 } else {
                     double rate = FitIn.toDouble(lbl_credit_card_rate.getText());
                     double amount = FitIn.toDouble(tf_ap_cash7.getText());
@@ -1876,7 +1875,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                     rate = rate / 100;
                     rate = rate * amount;
                     rate = amount + rate;
-                    System.out.println("rate: "+rate);
+                    System.out.println("rate: " + rate);
                     tf_credit_card_amount.setText(FitIn.fmt_wc_0(rate));
                 }
 
@@ -1894,7 +1893,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         double gift_certificate = FitIn.toDouble(tf_ap_cash8.getText());
         double online = FitIn.toDouble(tf_ap_cash9.getText());
 
-        double tendered = FitIn.toDouble(tf_ap_cash.getText());
+        double tendered = FitIn.toDouble(tf_ap_cash2.getText());
         double total_tendered = cash + check + prepaid + credit_card + gift_certificate + online;
 
         tf_ap_cash10.setText(FitIn.fmt_wc_0(total_tendered));

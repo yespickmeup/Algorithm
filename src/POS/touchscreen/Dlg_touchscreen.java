@@ -2760,7 +2760,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton45ActionPerformed
 
     private void btn_onlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_onlineActionPerformed
-          payment_online();
+        payment_online();
     }//GEN-LAST:event_btn_onlineActionPerformed
 
     private void lbl_onlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbl_onlineActionPerformed
@@ -4154,7 +4154,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             String discount_customer_id = lbl.getDiscount_customer_id();
             double addtl_cash = FitIn.toDouble(tf_addtl_cash.getText());
             double wtax = FitIn.toDouble(tf_wtax.getText());
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax);
+            int allow_negative_inventory1 = to.allow_negative_inventory;
+            int auto_order = to.auto_order;
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax, allow_negative_inventory1, auto_order);
             List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
             int order_exists = 0;
             int order_row = 0;
@@ -4191,7 +4193,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             if (row < 0) {
                 return;
             }
-            
+
             Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(row);
             Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
             Label.Item_discount serial = (Label.Item_discount) jLabel47;
@@ -4398,12 +4400,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     double discount_rate = to.discount_rate;
                     double addtl_amount = to.addtl_amount;
 
+                    int allow_negative_inventory1 = 0;
+                    int auto_order = 1;
                     Inventory_barcodes.to_inventory_barcodes t = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name,
                                                                                                               category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty,
                                                                                                               unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id,
                                                                                                               multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
                                                                                                               branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name,
-                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax);
+                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory1, auto_order);
                     datas.add(t);
                 }
 

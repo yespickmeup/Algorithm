@@ -67,8 +67,15 @@ public class Inventory {
         public final String location_id;
         public boolean selected;
         public final int is_uploaded;
+        public final int allow_negative_inventory;
+        public final int auto_order;
 
-        public to_inventory(int id, String barcode, String description, String generic_name, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost, String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String barcodes, String brand, String brand_id, String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, boolean selected, int is_uploaded) {
+        public to_inventory(int id, String barcode, String description, String generic_name, String category, String category_id, String classification,
+                String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion,
+                double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost,
+                String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String barcodes, String brand, String brand_id,
+                String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, boolean selected,
+                int is_uploaded, int allow_negative_inventory, int auto_order) {
             this.id = id;
             this.barcode = barcode;
             this.description = description;
@@ -107,6 +114,8 @@ public class Inventory {
             this.location_id = location_id;
             this.selected = selected;
             this.is_uploaded = is_uploaded;
+            this.allow_negative_inventory = allow_negative_inventory;
+            this.auto_order = auto_order;
         }
 
         public boolean isSelected() {
@@ -161,6 +170,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",updated_at"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + ")values("
                     + ":barcode"
                     + ",:description"
@@ -196,6 +207,8 @@ public class Inventory {
                     + ",:location"
                     + ",:location_id"
                     + ",:updated_at"
+                    + ",:allow_negative_inventory"
+                    + ",:auto_order"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -233,10 +246,19 @@ public class Inventory {
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
                     setString("updated_at", to_inventory.date_added).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
             PreparedStatement stmt = conn.prepareStatement("");
             stmt.addBatch(s0);
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description,
+                                                                                                                          to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id,
+                                                                                                                          to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion,
+                                                                                                                          to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier,
+                                                                                                                          to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable,
+                                                                                                                          to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model,
+                                                                                                                          to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location,
+                                                                                                                          to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order);
             query.add(s0);
 
             List<S1_branch_locations.to_branch_locations> datas = Branch_locations.ret_all_locations();
@@ -279,6 +301,8 @@ public class Inventory {
                         + ",location_id"
                         + ",serial_no"
                         + ",updated_at"
+                        + ",allow_negative_inventory"
+                        + ",auto_order"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -317,6 +341,8 @@ public class Inventory {
                         + ",:location_id"
                         + ",:serial_no"
                         + ",:updated_at"
+                        + ",:allow_negative_inventory"
+                        + ",:auto_order"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2).
@@ -357,6 +383,8 @@ public class Inventory {
                         setString("location_id", "" + to.id).
                         setString("serial_no", to_inventory_barcodes.serial_no).
                         setString("updated_at", to_inventory_barcodes.date_added).
+                        setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                        setNumber("auto_order", to_inventory_barcodes.auto_order).
                         ok();
                 stmt.addBatch(s2);
 
@@ -417,6 +445,8 @@ public class Inventory {
                     + ",selling_type"
                     + ",location"
                     + ",location_id"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + ")values("
                     + ":barcode"
                     + ",:description"
@@ -451,6 +481,8 @@ public class Inventory {
                     + ",:selling_type"
                     + ",:location"
                     + ",:location_id"
+                    + ",:allow_negative_inventory"
+                    + ",:auto_order"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -487,11 +519,20 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
             PreparedStatement stmt = conn.prepareStatement("");
 
             stmt.addBatch(s0);
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description,
+                                                                                                                          to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id,
+                                                                                                                          to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion,
+                                                                                                                          to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier,
+                                                                                                                          to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable,
+                                                                                                                          to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model,
+                                                                                                                          to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id,
+                                                                                                                          "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order);
             query.add(s0);
 
             List<S1_branch_locations.to_branch_locations> datas = Branch_locations.ret_all_locations();
@@ -533,6 +574,8 @@ public class Inventory {
                         + ",location"
                         + ",location_id"
                         + ",serial_no"
+                        + ",allow_negative_inventory"
+                        + ",auto_order"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -570,6 +613,8 @@ public class Inventory {
                         + ",:location"
                         + ",:location_id"
                         + ",:serial_no"
+                        + ",:allow_negative_inventory"
+                        + ",:auto_order"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2).
@@ -609,11 +654,17 @@ public class Inventory {
                         setString("location", to.location).
                         setString("location_id", "" + to.id).
                         setString("serial_no", to_inventory_barcodes.serial_no).
+                        setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                        setNumber("auto_order", to_inventory.auto_order).
                         ok();
                 stmt.addBatch(s2);
 
                 query.add(s2);
                 Lg.s(Inventory.class, "Successfully Added" + " Barcode:" + to_inventory_barcodes.main_barcode + " = " + to.location);
+            }
+
+            if (to_inventory.selling_type == 1) {
+
             }
 
             PreparedStatement stmt2 = conn2.prepareStatement("");
@@ -691,6 +742,8 @@ public class Inventory {
                     + ",selling_type"
                     + ",location"
                     + ",location_id"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + ")values("
                     + ":barcode"
                     + ",:description"
@@ -724,7 +777,9 @@ public class Inventory {
                     + ",:model_id"
                     + ",:selling_type"
                     + ",:location"
-                    + ",location_id"
+                    + ",:location_id"
+                    + ",:allow_negative_inventory"
+                    + ",:auto_order"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -761,9 +816,18 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description,
+                                                                                                                          to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id,
+                                                                                                                          to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion,
+                                                                                                                          to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier,
+                                                                                                                          to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable,
+                                                                                                                          to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model,
+                                                                                                                          to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id,
+                                                                                                                          "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order);
             s0 = s0 + ";";
             query.add(s0);
 
@@ -806,6 +870,8 @@ public class Inventory {
                         + ",location"
                         + ",location_id"
                         + ",serial_no"
+                        + ",allow_negative_inventory"
+                        + ",auto_order"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -843,6 +909,8 @@ public class Inventory {
                         + ",:location"
                         + ",:location_id"
                         + ",:serial_no"
+                        + ",:allow_negative_inventory"
+                        + ",:auto_order"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2).
@@ -882,6 +950,8 @@ public class Inventory {
                         setString("location", to.location).
                         setString("location_id", "" + to.id).
                         setString("serial_no", to_inventory_barcodes.serial_no).
+                        setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                        setNumber("auto_order", to_inventory_barcodes.auto_order).
                         ok();
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 s2 = s2 + ";";
@@ -935,6 +1005,8 @@ public class Inventory {
                     + ",location=:location"
                     + ",location_id=:location_id"
                     + ",is_uploaded = 2"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -972,6 +1044,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
             String s01 = "update inventory set "
                     + " description= :description"
@@ -1003,6 +1077,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",location=:location"
                     + ",location_id=:location_id"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1038,6 +1114,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -1045,7 +1123,7 @@ public class Inventory {
             Lg.s(Inventory.class, "Successfully Updated");
             query.add(s01);
 
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order);
 
             String s2 = "update inventory_barcodes set "
                     + " description= :description"
@@ -1072,6 +1150,8 @@ public class Inventory {
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
                     + ",is_uploaded = 2"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s2 = SqlStringUtil.parse(s2).
                     setString("description", to_inventory_barcodes.description).
@@ -1097,6 +1177,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory_barcodes.auto_order).
                     ok();
 
             String s21 = "update inventory_barcodes set "
@@ -1121,6 +1203,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s21 = SqlStringUtil.parse(s21).
                     setString("description", to_inventory_barcodes.description).
@@ -1144,6 +1228,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory_barcodes.auto_order).
                     ok();
 
             stmt.addBatch(s2);
@@ -1202,6 +1288,8 @@ public class Inventory {
                     + ",location=:location"
                     + ",location_id=:location_id"
                     + ",is_uploaded = 2"
+                    + ",:allow_negative_inventory"
+                    + ",:auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1239,6 +1327,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
             String s01 = "update inventory set "
                     + " description= :description"
@@ -1270,6 +1360,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",location=:location"
                     + ",location_id=:location_id"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1305,6 +1397,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -1312,7 +1406,7 @@ public class Inventory {
             Lg.s(Inventory.class, "Successfully Updated");
             query.add(s01);
 
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order);
 
             String s2 = "update inventory_barcodes set "
                     + " description= :description"
@@ -1338,6 +1432,8 @@ public class Inventory {
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
                     + ",is_uploaded = 2"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s2 = SqlStringUtil.parse(s2).
                     setString("description", to_inventory_barcodes.description).
@@ -1362,6 +1458,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory_barcodes.auto_order).
                     ok();
 
             String s21 = "update inventory_barcodes set "
@@ -1386,6 +1484,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s21 = SqlStringUtil.parse(s21).
                     setString("description", to_inventory_barcodes.description).
@@ -1409,6 +1509,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             stmt.addBatch(s2);
@@ -1468,6 +1570,8 @@ public class Inventory {
                     + ",location=:location"
                     + ",location_id=:location_id"
                     + ",is_uploaded = 2"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1505,6 +1609,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
             String s01 = "update inventory set "
                     + " description= :description"
@@ -1537,6 +1643,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",location=:location"
                     + ",location_id=:location_id"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1573,6 +1681,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -1580,7 +1690,8 @@ public class Inventory {
             Lg.s(Inventory.class, "Successfully Updated");
             query.add(s01);
 
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order
+            );
 
             String s2 = "update inventory_barcodes set "
                     + " description= :description"
@@ -1607,6 +1718,8 @@ public class Inventory {
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
                     + ",is_uploaded = 2"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s2 = SqlStringUtil.parse(s2).
                     setString("description", to_inventory_barcodes.description).
@@ -1632,6 +1745,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             String s21 = "update inventory_barcodes set "
@@ -1657,6 +1772,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s21 = SqlStringUtil.parse(s21).
                     setString("description", to_inventory_barcodes.description).
@@ -1681,6 +1798,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             stmt.addBatch(s2);
@@ -1693,7 +1812,7 @@ public class Inventory {
 
             MyConnection.close();
             return query;
-            
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -1736,6 +1855,8 @@ public class Inventory {
                     + ",model_id= :model_id"
                     + ",selling_type= :selling_type"
                     + ",is_uploaded = 2"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1768,13 +1889,16 @@ public class Inventory {
                     setString("model", to_inventory.model).
                     setString("model_id", to_inventory.model_id).
                     setNumber("selling_type", to_inventory.selling_type).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
             stmt.addBatch(s0);
             Lg.s(Inventory.class, "Successfully Updated");
 
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0,
+                                                                                                                          to_inventory.allow_negative_inventory, to_inventory.auto_order);
 
             String s2 = "update inventory_barcodes set "
                     + " description= :description"
@@ -1801,6 +1925,8 @@ public class Inventory {
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
                     + ",is_uploaded =:is_uploaded"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where main_barcode= '" + to_inventory.barcode + "' ";
             s2 = SqlStringUtil.parse(s2).
                     setString("description", to_inventory_barcodes.description).
@@ -1827,6 +1953,8 @@ public class Inventory {
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
                     setNumber("is_uploaded", 2).
+                    setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory_barcodes.auto_order).
                     ok();
 
             stmt.addBatch(s2);
@@ -1905,6 +2033,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",location=:location"
                     + ",location_id=:location_id"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
@@ -1943,12 +2073,15 @@ public class Inventory {
                     setNumber("selling_type", to_inventory.selling_type).
                     setString("location", to_inventory.location).
                     setString("location_id", to_inventory.location_id).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             s0 = s0 + ";";
             query.add(s0);
 
-            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description, to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id, to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion, to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier, to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable, to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model, to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location, to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order
+            );
 
             String s2 = "update inventory_barcodes set "
                     + " description= :description"
@@ -1974,6 +2107,8 @@ public class Inventory {
                     + ",selling_type= :selling_type"
                     + ",item_type= :item_type"
                     + ",barcode= :barcode"
+                    + ",allow_negative_inventory= :allow_negative_inventory"
+                    + ",auto_order= :auto_order"
                     + " " + where;
             s2 = SqlStringUtil.parse(s2).
                     setString("description", to_inventory_barcodes.description).
@@ -1999,6 +2134,8 @@ public class Inventory {
                     setNumber("selling_type", to_inventory_barcodes.selling_type).
                     setString("item_type", to_inventory_barcodes.item_type).
                     setString("barcode", to_inventory_barcodes.barcode).
+                    setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                    setNumber("auto_order", to_inventory.auto_order).
                     ok();
 
             PreparedStatement stmt2 = conn.prepareStatement(s2);
@@ -2086,6 +2223,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory where "
                     + " barcode like '%" + search + "%' "
                     + " or description like '%" + search + "%' "
@@ -2131,7 +2270,9 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
             return datas;
@@ -2185,6 +2326,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory  "
                     + " " + where;
 
@@ -2228,7 +2371,9 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
 
@@ -2283,6 +2428,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory  "
                     + " " + where;
 
@@ -2326,7 +2473,9 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
             MyConnection.close();
@@ -2381,6 +2530,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory where "
                     + " barcode = '" + search + "' "
                     //                    + " or description like '%" + search + "%' "
@@ -2426,7 +2577,10 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
             return datas;
@@ -2479,6 +2633,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory_barcodes  "
                     + " " + where;
 
@@ -2522,7 +2678,10 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
             return datas;
@@ -2575,6 +2734,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory  "
                     + " " + where;
 
@@ -2618,7 +2779,9 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
             return datas;
@@ -2671,6 +2834,8 @@ public class Inventory {
                     + ",location"
                     + ",location_id"
                     + ",is_uploaded"
+                    + ",allow_negative_inventory"
+                    + ",auto_order"
                     + " from inventory_barcodes  "
                     + " " + where;
             Statement stmt = conn.createStatement();
@@ -2720,6 +2885,8 @@ public class Inventory {
                 String location = rs.getString(35);
                 String location_id = rs.getString(36);
                 int is_uploaded = rs.getInt(37);
+                int allow_negative_inventory = rs.getInt(38);
+                int auto_order = rs.getInt(39);
 //                int exist = 0;
 //                for (String s : data) {
 //                    if (s.equals(branch)) {
@@ -2745,7 +2912,7 @@ public class Inventory {
 //                } else {
 //                    location1 = "";
 //                }
-                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, branch, location, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded);
+                to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, branch, location, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
 //            for (String s : data) {
@@ -2800,9 +2967,11 @@ public class Inventory {
             String location = to.location;
             String location_id = to.location_id;
             int is_uploaded = 0;
-            to_inventory t1 = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, location, location_id, false, is_uploaded);
+            int allow_negative_inventory = 0;
+            int auto_order = 1;
+            to_inventory t1 = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, location, location_id, false, is_uploaded,allow_negative_inventory,auto_order);
             add_inventory(t1);
-            Inventory_barcodes.to_inventory_barcodes codes = new Inventory_barcodes.to_inventory_barcodes(id, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, to.location, to.location_id, "", "", 0, 0, "", "", "", 0, 0);
+            Inventory_barcodes.to_inventory_barcodes codes = new Inventory_barcodes.to_inventory_barcodes(id, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, to.location, to.location_id, "", "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
 //          S1_inventory_barcodes.add_inventory_barcodes(codes);
         }
     }
@@ -2958,6 +3127,7 @@ public class Inventory {
             Connection conn = MyConnection.connect();
             String s0 = "update inventory set "
                     + " barcodes= :barcodes"
+                    + " ,is_uploaded= 2"
                     + " where "
                     + " barcode ='" + item_code + "' "
                     + " ";
@@ -2972,6 +3142,7 @@ public class Inventory {
 
             String s2 = "update inventory_barcodes set "
                     + "barcode= :barcode"
+                    + " ,is_uploaded= 2"
                     + " where "
                     + " main_barcode ='" + item_code + "' "
                     + " ";

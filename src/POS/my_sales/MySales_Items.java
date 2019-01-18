@@ -31,11 +31,11 @@ public class MySales_Items {
         public final String item_type;
         public final String supplier_name;
         public final String supplier_id;
-        public  String serial_no;
-        public  double product_qty;
+        public String serial_no;
+        public double product_qty;
         public final String unit;
         public final double conversion;
-        public  double selling_price;
+        public double selling_price;
         public final String date_added;
         public final String user_id;
         public final String user_screen_name;
@@ -117,7 +117,7 @@ public class MySales_Items {
         public void setSelling_price(double selling_price) {
             this.selling_price = selling_price;
         }
-        
+
         public String getSerial_no() {
             return serial_no;
         }
@@ -125,7 +125,7 @@ public class MySales_Items {
         public void setSerial_no(String serial_no) {
             this.serial_no = serial_no;
         }
-        
+
         public double getProduct_qty() {
             return product_qty;
         }
@@ -149,7 +149,7 @@ public class MySales_Items {
         public void setWtax(double wtax) {
             this.wtax = wtax;
         }
-        
+
         public boolean isSelected() {
             return selected;
         }
@@ -210,6 +210,7 @@ public class MySales_Items {
 
         return datas;
     }
+
     public static List<Inventory_barcodes.to_inventory_barcodes> convert_order2(List<MySales_Items.items> orders) {
         List<Inventory_barcodes.to_inventory_barcodes> datas = new ArrayList();
         for (MySales_Items.items to : orders) {
@@ -254,7 +255,9 @@ public class MySales_Items {
             String model_id = to.model_id;
             double addtl_amount = to.addtl_amount;
             double wtax = to.wtax;
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_id, item_type, status, supplier_id, is_vatable, wtax, supplier_id, selling_type, is_vatable, conversion, wtax, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, serial_no, discount_rate, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax);
+            int allow_negative_inventory = 0;
+            int auto_order = 1;
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_id, item_type, status, supplier_id, is_vatable, wtax, supplier_id, selling_type, is_vatable, conversion, wtax, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, serial_no, discount_rate, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order);
             datas.add(order);
         }
 

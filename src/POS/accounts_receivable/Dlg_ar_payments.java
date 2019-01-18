@@ -1058,14 +1058,14 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 String online_holder = data.online_holder;
                 String online_date = data.online_date;
                 double online_amount = data.online_amount;
-
+                double actual_amount = data.actual_tendered;
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                         status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status,
                         term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no,
                         trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate,
                         data.tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
                         credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
-                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
+                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount);
                 S1_accounts_receivable_payments.add_accounts_receivable_payments2(to1);
                 data_cols_payments();
                 Alert.set(1, type);
@@ -1270,7 +1270,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 case 8:
                     return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 9:
-                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount) - tt.discount_amount) + " ";
+                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount)) + " ";
                 case 10:
                     if (tt.status == 0) {
                         return " Finalized";
@@ -1510,9 +1510,14 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 String online_holder = data.online_holder;
                 String online_date = data.online_date;
                 double online_amount = data.online_amount;
-
+                double actual_amount = data.actual_tendered;
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
-                        to.id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
+                        to.id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied,
+                         paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no,
+                         soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id,
+                         location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
+                         credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
+                         online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount);
                 S1_accounts_receivable_payments.update_accounts_receivable_payments3(to1);
                 data_cols_payments();
                 Alert.set(2, type);
@@ -1537,6 +1542,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 datas2.add(t);
             }
         }
+        
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1547,9 +1553,12 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
                 S1_accounts_receivable_payments.finalize_accounts_receivable_payments(datas2);
-                int row = tbl_accounts_receivable.getSelectedRow();
+
                 data_cols();
-                tbl_accounts_receivable.setRowSelectionInterval(row, row);
+                int row = tbl_accounts_receivable.getSelectedRow();
+                if (row > -1) {
+                    tbl_accounts_receivable.setRowSelectionInterval(row, row);
+                }
                 data_cols_payments();
                 Alert.set(0, "Payment Finalized!");
             }

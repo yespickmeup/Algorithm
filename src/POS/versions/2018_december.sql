@@ -62,7 +62,7 @@ update settings set cloud_host='128.199.80.53';
 update settings set cloud_port='3306';
 update settings set cloud_user='smis2';
 update settings set cloud_password='nopassword101';
-update settings set cloud_db='db_algorithm';
+update settings set cloud_db='db_smis_dumaguete_angel_buns';
 update settings set ar_footer='Should you have any inquiries concerning this statement, please contact the Accounting Department';
 
 

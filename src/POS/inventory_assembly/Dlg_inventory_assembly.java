@@ -268,6 +268,7 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
         jLabel2.setText("Selling Price:");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setFocusable(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -391,7 +392,6 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(tf_search)
                         .addGap(2, 2, 2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -538,8 +538,8 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
             public void run() {
                 String search = tf_search.getText();
                 String where = " "
-                        + "where main_barcode like '%" + search + "%' "
-                        + "and location_id='" + locations_ids + "' "
+                        + " where main_barcode like '%" + search + "%' "
+                        + " and location_id='" + locations_ids + "' "
                         + " or barcode='" + search + "' and location_id='" + locations_ids + "'"
                         + " or description like  '%" + search + "%' and location_id='" + locations_ids + "'"
                         + " ";
@@ -591,7 +591,6 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
         Dlg_inventory_assembly_qty nd = Dlg_inventory_assembly_qty.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_inventory_assembly_qty.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_inventory_assembly_qty.OutputData data) {
                 closeDialog.ok();

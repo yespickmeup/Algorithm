@@ -87,8 +87,9 @@ public class S1_accounts_receivable_payments {
         public final String online_holder;
         public final String online_date;
         public final double online_amount;
+        public final double actual_amount;
 
-        public to_accounts_receivable_payments(int id, String customer_id, String customer_name, String ar_no, String date_added, String user_name, double amount, double discount_amount, double discount_rate, String discount, int status, double term, String date_applied, double paid, String date_paid, String remarks, String type, String or_no, double prev_balance, double check_amount, String check_holder, String check_bank, String check_no, String ci_no, String trust_receipt, String or_payment_no, String soa_id, String soa_type, String soa_type_id, String reference_no, boolean selected, String check_date, String user_id, String user_screen_name, double tax_rate, double tax_amount, String branch, String branch_id, String location, String location_id, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount) {
+        public to_accounts_receivable_payments(int id, String customer_id, String customer_name, String ar_no, String date_added, String user_name, double amount, double discount_amount, double discount_rate, String discount, int status, double term, String date_applied, double paid, String date_paid, String remarks, String type, String or_no, double prev_balance, double check_amount, String check_holder, String check_bank, String check_no, String ci_no, String trust_receipt, String or_payment_no, String soa_id, String soa_type, String soa_type_id, String reference_no, boolean selected, String check_date, String user_id, String user_screen_name, double tax_rate, double tax_amount, String branch, String branch_id, String location, String location_id, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount, double actual_amount) {
             this.id = id;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -146,6 +147,7 @@ public class S1_accounts_receivable_payments {
             this.online_holder = online_holder;
             this.online_date = online_date;
             this.online_amount = online_amount;
+            this.actual_amount = actual_amount;
         }
 
         public boolean isSelected() {
@@ -274,6 +276,7 @@ public class S1_accounts_receivable_payments {
                     + ",:online_holder"
                     + ",:online_date"
                     + ",:online_amount"
+                    + ",:actual_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -332,6 +335,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_holder", to_accounts_receivable_payments.online_holder)
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -462,6 +466,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder"
                     + ",online_date"
                     + ",online_amount"
+                    + ",actual_amount"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -518,6 +523,7 @@ public class S1_accounts_receivable_payments {
                     + ",:online_holder"
                     + ",:online_date"
                     + ",:online_amount"
+                    + ",:actual_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -576,6 +582,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_holder", to_accounts_receivable_payments.online_holder)
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -660,6 +667,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder"
                     + ",online_date"
                     + ",online_amount"
+                    + ",actual_amount"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -716,6 +724,7 @@ public class S1_accounts_receivable_payments {
                     + ",:online_holder"
                     + ",:online_date"
                     + ",:online_amount"
+                    + ",:actual_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -774,6 +783,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_holder", to_accounts_receivable_payments.online_holder)
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -819,6 +829,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder= :online_holder "
                     + ",online_date= :online_date "
                     + ",online_amount= :online_amount "
+                    + ",actual_amount= :actual_amount"
                     + " where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
@@ -853,6 +864,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_holder", to_accounts_receivable_payments.online_holder)
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -1164,6 +1176,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder= :online_holder "
                     + ",online_date= :online_date "
                     + ",online_amount= :online_amount "
+                    + ",actual_amount= :actual_amount"
                     + " where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
@@ -1211,6 +1224,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_holder", to_accounts_receivable_payments.online_holder)
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                    .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -1473,6 +1487,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder"
                     + ",online_date"
                     + ",online_amount"
+                    + ",actual_amount"
                     + " from  accounts_receivable_payments where "
                     + " ar_no ='" + search + "' and customer_id='" + cust_id + "' order by Date(date_applied) asc"
                     + " ";
@@ -1535,7 +1550,8 @@ public class S1_accounts_receivable_payments {
                 String online_holder = rs.getString(54);
                 String online_date = rs.getString(55);
                 double online_amount = rs.getDouble(56);
-                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
+                double actual_amount = rs.getDouble(57);
+                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount);
                 datas.add(to);
             }
             return datas;
@@ -1608,6 +1624,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder"
                     + ",online_date"
                     + ",online_amount"
+                    + ",actual_amount"
                     + " from  accounts_receivable_payments  "
                     + " " + where;
             Statement stmt = conn.createStatement();
@@ -1669,13 +1686,14 @@ public class S1_accounts_receivable_payments {
                 String online_holder = rs.getString(54);
                 String online_date = rs.getString(55);
                 double online_amount = rs.getDouble(56);
+                double actual_amount = rs.getDouble(57);
                 to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount,
                                                                                          discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount,
                                                                                          check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date,
                                                                                          user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id,
                                                                                          prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from,
                                                                                          gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date,
-                                                                                         online_amount);
+                                                                                         online_amount, actual_amount);
                 datas.add(to);
             }
             return datas;
@@ -1708,21 +1726,21 @@ public class S1_accounts_receivable_payments {
                 Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
                 double tendered = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.prepaid_amount + to_accounts_receivable_payments.credit_card_amount + to_accounts_receivable_payments.gift_certificate_amount + to_accounts_receivable_payments.online_amount;
                 double new_balance = cus.balance - (tendered + to_accounts_receivable_payments.discount_amount);
-
+                double actual_amount = to_accounts_receivable_payments.actual_amount;
                 String s2 = "update  customers set "
                         + " balance= :balance"
                         + " where "
                         + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                         + " ";
                 s2 = SqlStringUtil.parse(s2).
-                        setNumber("balance", new_balance).
+                        setNumber("balance", actual_amount).
                         ok();
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
 
                 //update customers paid
                 to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
-                double new_paid = tar.paid + (tendered + to_accounts_receivable_payments.discount_amount);
+                double new_paid = tar.paid + (actual_amount + to_accounts_receivable_payments.discount_amount);
                 String s3 = "update  accounts_receivable set "
                         + "paid= :paid"
                         + " where "
@@ -1828,7 +1846,7 @@ public class S1_accounts_receivable_payments {
 
                     Customers.to_customers cus5 = S1_accounts_receivable_payments.ret_customer_balance2(to_accounts_receivable_payments.prepaid_customer_id);
                     double new_balance5 = cus5.prepaid - (to_accounts_receivable_payments.prepaid_amount);
-                   
+
                     String s5 = "update  customers set "
                             + " prepaid= :prepaid"
                             + " where "

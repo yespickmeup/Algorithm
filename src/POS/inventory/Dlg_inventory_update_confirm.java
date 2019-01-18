@@ -222,6 +222,7 @@ public class Dlg_inventory_update_confirm extends javax.swing.JDialog {
         });
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setSelected(true);
         jCheckBox2.setText("All");
         jCheckBox2.setFocusable(false);
 

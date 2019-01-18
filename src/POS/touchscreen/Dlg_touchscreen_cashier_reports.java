@@ -808,13 +808,10 @@ public class Dlg_touchscreen_cashier_reports extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_report_sales_summary nd = Dlg_report_sales_summary.create(p, true);
         nd.setTitle("");
-
         nd.setCallback(new Dlg_report_sales_summary.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_report_sales_summary.OutputData data) {
                 closeDialog.ok();
-
             }
         });
         nd.setSize(pnl_summary.getWidth(), pnl_summary.getHeight());
