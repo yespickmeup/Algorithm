@@ -1732,9 +1732,9 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                          gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_tendered));
         }
     }
-
+    
     List<S1_discounts.to_discounts> discount_list = new ArrayList();
-
+    
     private void init_discount() {
         String search = tf_discount_name.getText();
         discount_list.clear();

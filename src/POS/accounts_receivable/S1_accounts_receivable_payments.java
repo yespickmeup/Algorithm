@@ -220,6 +220,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_holder"
                     + ",online_date"
                     + ",online_amount"
+                    + ",actual_amount"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"

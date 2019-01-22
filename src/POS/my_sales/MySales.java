@@ -1338,6 +1338,102 @@ public class MySales {
         }
     }
 
+    public static void void_sale_2(String sales_no, int status, List<MySales_Items.items> to_receipt_items1, MySales.sales sale, int all_items, int selected) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            PreparedStatement stmt = conn.prepareStatement("");
+            if (all_items == selected) {
+                String s0 = "update sales set "
+                        + " status= :status"
+                        + " where "
+                        + " sales_no ='" + sales_no + "' "
+                        + " ";
+                s0 = SqlStringUtil.parse(s0)
+                        .setNumber("status", 1)
+                        .ok();
+
+                stmt.addBatch(s0);
+
+                String s2 = "update sale_items set "
+                        + " status= :status"
+                        + " where "
+                        + " sales_no ='" + sales_no + "' "
+                        + " ";
+                s2 = SqlStringUtil.parse(s2)
+                        .setNumber("status", 1)
+                        .ok();
+
+                stmt.addBatch(s2);
+
+                for (MySales_Items.items to_receipt_items : to_receipt_items1) {
+                    
+                    Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_receipt_items.item_code, to_receipt_items.barcode, to_receipt_items.location_id);
+                    double new_qty = 0;
+                    Dlg_inventory_uom.to_uom uomss = uom.default_uom(to_receipt_items.unit);
+
+                    new_qty = (tt.product_qty + (to_receipt_items.conversion * (to_receipt_items.product_qty / uomss.conversion)));
+                    System.out.println("tt.product_qty : "+tt.product_qty +", new_qty: "+new_qty);
+                    String s4 = "update inventory_barcodes set "
+                            + " product_qty='" + new_qty + "'"
+                            + " where main_barcode= '" + to_receipt_items.item_code + "' and location_id='" + to_receipt_items.location_id + "' "
+                            + "";
+                    stmt.addBatch(s4);
+                }
+
+            } else {
+                double total_cancelled_orders = 0;
+                for (MySales_Items.items order : to_receipt_items1) {
+                    if (order.selected == true) {
+                        total_cancelled_orders += ((order.product_qty * order.selling_price) + order.discount_amount + order.addtl_amount);
+                        String s2 = "update sale_items set "
+                                + " status= :status"
+                                + " where "
+                                + " id ='" + order.id + "' "
+                                + " ";
+                        s2 = SqlStringUtil.parse(s2)
+                                .setNumber("status", 1)
+                                .ok();
+                        stmt.addBatch(s2);
+
+                        Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(order.item_code, order.barcode, order.location_id);
+                        double new_qty = 0;
+
+                        Dlg_inventory_uom.to_uom uomss = uom.default_uom(order.unit);
+                        new_qty = (tt.product_qty + (order.conversion * (order.product_qty / uomss.conversion)));
+
+                        String s4 = "update inventory_barcodes set "
+                                + " product_qty='" + new_qty + "'"
+                                + " where main_barcode= '" + order.item_code + "' and location_id='" + order.location_id + "' "
+                                + "";
+
+                        stmt.addBatch(s4);
+                    }
+                }
+                double new_amount_due = sale.amount_due - total_cancelled_orders;
+//                System.out.println("sale.amount_due: " + sale.amount_due + "-" + total_cancelled_orders + "=" + new_amount_due);
+                String s0 = "update sales set "
+                        + " amount_due= :amount_due"
+                        + " where "
+                        + " sales_no ='" + sales_no + "' "
+                        + " ";
+                s0 = SqlStringUtil.parse(s0)
+                        .setNumber("amount_due", new_amount_due)
+                        .ok();
+
+                stmt.addBatch(s0);
+            }
+
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Inventory.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static List<Srpt_sales_summary.field> summary(String where, int is_all, String date_from, String date_to, String user_ids, String name, String location_id) {
         List<Srpt_sales_summary.field> datas = new ArrayList();
 

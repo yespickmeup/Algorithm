@@ -607,7 +607,6 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         }
-
     }
 
     private String cnull(String var) {

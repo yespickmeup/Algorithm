@@ -16,6 +16,7 @@ import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_assembly.Dlg_inventory_assembly;
+import POS.inventory_assembly.S1_inventory_assembly;
 import POS.my_sales.MySales_Items;
 import POS.my_services.My_services_customers;
 import POS.orders.S1_order_items;
@@ -2948,7 +2949,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-
 //                String businessname = System.getProperty("business_name", "Algorithm Computer Services");
                 jLabel1.setText("Point of Sale");
                 lbl_screen_name.setText("Welcome, " + MyUser.getUser_screen_name());
@@ -3961,6 +3961,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             tf_search.selectAll();
             tf_search.grabFocus();
         } else {
+            if (to.allow_negative_inventory == 0 && to.product_qty <= 0 && to.selling_type == 0) {
+                tbl_items.clearSelection();
+                tf_search.selectAll();
+                tf_search.grabFocus();
+                Alert.set(0, "Item Out of Stock!");
+                return;
+            }
             if (to.selling_type == 0) {
                 String detail = "Description: " + to.description + "\n";
                 detail = detail + "Category: " + to.category + "\n";
@@ -4001,25 +4008,41 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 jButton43.setText("Add Order");
 
                 String auto_order = System.getProperty("auto_order", "false");
-                if (auto_order.equals("true")) {
+                if (to.auto_order == 1) {
                     add_order();
                 }
             } else {
-                Window p = (Window) this;
-                Dlg_inventory_assembly nd = Dlg_inventory_assembly.create(p, true);
-                nd.setTitle("");
-                nd.do_pass(to);
-                nd.setCallback(new Dlg_inventory_assembly.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_inventory_assembly.OutputData data) {
-                        closeDialog.ok();
-                        tbl_orders_ALM.addAll(data.assemble);
-                        tbl_orders_M.fireTableDataChanged();
-                        compute_total();
-                    }
-                });
-                nd.setLocationRelativeTo(this);
-                nd.setVisible(true);
+               
+                if (to.auto_order == 1) {
+                    List<Inventory_barcodes.to_inventory_barcodes> order = new ArrayList();
+                    String where = " where main_item_code='" + to.main_barcode + "' ";
+                    Inventory_barcodes.to_inventory_barcodes to2=to;
+                    to2.setProduct_qty(1);
+                    List<S1_inventory_assembly.to_inventory_assembly> datas = S1_inventory_assembly.ret_data(where);
+                    order.add(to2);
+                    order.addAll(S1_inventory_assembly.convert_to_inventory_barcodes(datas));
+
+                    tbl_orders_ALM.addAll(order);
+                    tbl_orders_M.fireTableDataChanged();
+                    compute_total();
+                } else {
+                    Window p = (Window) this;
+                    Dlg_inventory_assembly nd = Dlg_inventory_assembly.create(p, true);
+                    nd.setTitle("");
+                    nd.do_pass(to);
+                    nd.setCallback(new Dlg_inventory_assembly.Callback() {
+                        @Override
+                        public void ok(CloseDialog closeDialog, Dlg_inventory_assembly.OutputData data) {
+                            closeDialog.ok();
+                            tbl_orders_ALM.addAll(data.assemble);
+                            tbl_orders_M.fireTableDataChanged();
+                            compute_total();
+                        }
+                    });
+                    nd.setLocationRelativeTo(this);
+                    nd.setVisible(true);
+                }
+
             }
 
         }

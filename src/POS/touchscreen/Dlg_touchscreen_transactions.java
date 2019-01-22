@@ -1074,7 +1074,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments");
         init_key();
         hover();
         init_table_bg();
@@ -1113,14 +1113,14 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -1325,7 +1325,10 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 selected = true;
             }
             for (MySales_Items.items to : datas) {
-                to.setSelected(selected);
+                if (to.status != 1) {
+                    to.setSelected(selected);
+                }
+
             }
             e.consume();
         }
@@ -1483,11 +1486,17 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         MySales_Items.items to = (MySales_Items.items) tbl_sale_items_ALM.get(row);
         int col = tbl_sale_items.getSelectedColumn();
         if (col == 5) {
-
+            if (to.status == 1) {
+                Alert.set(0, "Item Already cancelled!");
+                return;
+            }
             if (to.selected == true) {
                 to.setSelected(false);
             } else {
-                to.setSelected(true);
+                if (to.status != 1) {
+                    to.setSelected(true);
+                }
+
             }
             tbl_sale_items_M.fireTableDataChanged();
         }
@@ -1498,7 +1507,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         if (my_sale == null) {
             return;
         }
-        String pool_db = System.getProperty("pool_db", "db_smis");
+        final String pool_db = System.getProperty("pool_db", "db_smis");
         if (!pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
             try {
                 Date from = DateType.datetime.parse(my_sale.date_added);
@@ -1541,12 +1550,25 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                         Alert.set(0, "Privilege not added!");
                         return;
                     }
-                    
-                    
+
                     Label.Status or = (Label.Status) lbl_sales_no;
                     int status = or.getStatus();
                     List<MySales_Items.items> orders = tbl_sale_items_ALM;
-                    MySales.void_sale(or.getId(), status, orders, my_sale);
+                    int all_items = orders.size();
+                    int selected = 0;
+                    for (MySales_Items.items order : orders) {
+                        if (order.selected == true) {
+                            selected++;
+                        }
+                    }
+//                    System.out.println("all_items: " + all_items);
+//                    System.out.println("Selected: " + selected);
+                    if (pool_db.equalsIgnoreCase("db_smis_dumaguete_refreshments")) {
+                        MySales.void_sale_2(or.getId(), status, orders, my_sale, all_items, selected);
+                    } else {
+                        MySales.void_sale(or.getId(), status, orders, my_sale);
+                    }
+
                     Alert.set(0, "Transaction cancelled!");
                     clear_data();
                 }
@@ -1786,8 +1808,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                         + sale.prepaid_amount
                         + sale.check_amount
                         + sale.charge_amount
-                         + sale.online_amount
-                        );
+                        + sale.online_amount);
                 lbl_cash.setText(FitIn.fmt_wc_0(cash));
                 String where = "where sales_no='" + sale.sales_no + "' and location_id ='" + sale.location_id + "' ";
                 List<MySales_Items.items> datas = MySales_Items.ret_data(where);
@@ -1798,6 +1819,9 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
                 double gross = 0;
                 double qty = 0;
                 for (MySales_Items.items to : datas) {
+                    if (to.status == 1) {
+                        to.setSelected(false);
+                    }
                     line_discount += to.discount_amount;
                     gross += to.product_qty * to.selling_price;
                     qty += to.product_qty;
