@@ -221,6 +221,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -256,6 +257,8 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jTextField2 = new Field.Input();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
         jButton4 = new Button.Primary();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -486,6 +489,25 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup3.add(jCheckBox8);
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setText("Generic Name");
+        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox8ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setSelected(true);
+        jCheckBox9.setText("Description");
+        jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -536,7 +558,10 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                         .addComponent(jCheckBox2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox8))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -565,7 +590,9 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCheckBox1)
                         .addComponent(jCheckBox2)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox8)
+                        .addComponent(jCheckBox9))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -909,6 +936,14 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         select_add_all_item();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox8ActionPerformed
+
+    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -916,6 +951,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -931,6 +967,8 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -994,14 +1032,14 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         tf_search.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -1060,7 +1098,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                             }
                             String description = to.description;
                             double price = to.price;
-                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false, to.count);
+                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false, to.count,to.generic_name);
                             fields.add(field);
                         }
                     }
@@ -1395,9 +1433,15 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_print_barcode_qty.OutputData data) {
                     closeDialog.ok();
-                    String description=to.description.replace("  ", "");
-                    Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, description, to.price, true, data.qty);
-                    tbl_inventory_barcodes_ALM2.add(field);
+                    String description = to.description.replace("  ", "");
+                     if (jCheckBox9.isSelected()) {
+                        Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.description, to.price, true, data.qty, to.generic_name);
+                        tbl_inventory_barcodes_ALM2.add(field);
+                    } else {
+                        Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.generic_name, to.price, true, data.qty, to.generic_name);
+                        tbl_inventory_barcodes_ALM2.add(field);
+                        
+                    }
                     jLabel11.setText("" + tbl_inventory_barcodes_ALM2.size());
                     Alert.set(1, "");
                 }
@@ -1428,8 +1472,14 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_print_barcode_qty.OutputData data) {
                 closeDialog.ok();
                 for (Srpt_print_barcodes.field to : to_add) {
-                    Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.description, to.price, true, data.qty);
-                    tbl_inventory_barcodes_ALM2.add(field);
+                    if (jCheckBox9.isSelected()) {
+                        Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.description, to.price, true, data.qty, to.generic_name);
+                        tbl_inventory_barcodes_ALM2.add(field);
+                    } else {
+                        Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.generic_name, to.price, true, data.qty, to.generic_name);
+                        tbl_inventory_barcodes_ALM2.add(field);
+                    }
+
                 }
                 jLabel11.setText("" + tbl_inventory_barcodes_ALM2.size());
                 Alert.set(1, "");

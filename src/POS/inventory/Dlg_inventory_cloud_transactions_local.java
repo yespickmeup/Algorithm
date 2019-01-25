@@ -559,6 +559,7 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                                             || (cloud.conversion != to.conversion)
                                             || (cloud.allow_negative_inventory != to.allow_negative_inventory)
                                             || (cloud.auto_order != to.auto_order)
+                                            || !cnull(cloud.generic_name).equalsIgnoreCase(cnull(to.generic_name))
                                             ) {
                                         update = 1;
                                     }

@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
@@ -137,7 +138,7 @@ public class Srpt_adjust_errors {
 
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_algorithm");
 
@@ -179,6 +180,7 @@ public class Srpt_adjust_errors {
     public static List<field> ret_data(String where) {
         List<field> datas = new ArrayList();
         String year = "" + DateType.y.format(new Date());
+        int month = FitIn.toInt(DateType.m1.format(new Date()));
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -272,7 +274,7 @@ public class Srpt_adjust_errors {
                 double qty_ledger = 0;
 
                 String loc_id = location_id;
-                int month = 11;
+               
                 boolean is_month_selected = true;
                 Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,1,0);
                 System.out.println("Item Code: " + item_code);
@@ -295,6 +297,10 @@ public class Srpt_adjust_errors {
         }
     }
 
+    public static void main(String[] args) {
+         int month = FitIn.toInt(DateType.m1.format(new Date()));
+         System.out.println("month: "+month);
+    }
     public static void adjust_erros(List<Srpt_adjust_errors.field> fields) {
         try {
             Connection conn = MyConnection.connect();

@@ -55,18 +55,27 @@ public class Srpt_print_barcodes {
         double price;
         boolean selected;
         int count;
-
+        String generic_name;
         public field() {
         }
 
-        public field(String barcode, String description, double price, boolean selected, int count) {
+        public field(String barcode, String description, double price, boolean selected, int count,String generic_name) {
             this.barcode = barcode;
             this.description = description;
             this.price = price;
             this.selected = selected;
             this.count = count;
+            this.generic_name=generic_name;
         }
 
+        public String getGeneric_name() {
+            return generic_name;
+        }
+
+        public void setGeneric_name(String generic_name) {
+            this.generic_name = generic_name;
+        }
+        
         public int getCount() {
             return count;
         }
@@ -116,7 +125,7 @@ public class Srpt_print_barcodes {
             String barcode = "0000000" + i;
             String description = "Description";
             double price = 100;
-            Srpt_print_barcodes.field field = new field(barcode, description, price, true, 1);
+            Srpt_print_barcodes.field field = new field(barcode, description, price, true, 1,"");
             fields.add(field);
         }
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
@@ -246,7 +255,7 @@ public class Srpt_print_barcodes {
                 if (is_item_code == 0) {
                     code = barcode;
                 }
-                Srpt_print_barcodes.field field = new field(code, description, selling_price, false, 1);
+                Srpt_print_barcodes.field field = new field(code, description, selling_price, false, 1,generic_name);
                 datas.add(field);
             }
             return datas;

@@ -347,6 +347,8 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel38 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jLabel39 = new javax.swing.JLabel();
+        tf_description1 = new Field.Input();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -549,7 +551,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cb_location)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -703,7 +705,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tf_conversion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
 
@@ -868,7 +870,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_assembly_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1283,6 +1285,17 @@ public class Dlg_inventory extends javax.swing.JDialog {
         jCheckBox2.setSelected(true);
         jCheckBox2.setText("Yes/No");
 
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel39.setText("Generic Name:");
+
+        tf_description1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_description1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_description1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1401,7 +1414,11 @@ public class Dlg_inventory extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField10))))))))
+                                            .addComponent(jTextField10)))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tf_description1)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1427,7 +1444,11 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_description, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_description1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1767,6 +1788,10 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         user_price_change();
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void tf_description1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_description1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_description1ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1834,6 +1859,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1874,6 +1900,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
     private javax.swing.JTextField tf_conversion;
     private javax.swing.JTextField tf_cost;
     private javax.swing.JTextField tf_description;
+    private javax.swing.JTextField tf_description1;
     private javax.swing.JTextField tf_inventory_barcode;
     private javax.swing.JTextField tf_item_code;
     private javax.swing.JTextField tf_location;
@@ -2189,6 +2216,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         tf_barcode.setText(to.barcodes);
         my_old_barcode = to.barcodes;
         tf_description.setText(to.description);
+        tf_description1.setText(to.generic_name);
         tf_category.setText(to.category);
         cat.setId(to.category_id);
         tf_sub_classification.setText(to.sub_classification);
@@ -2253,7 +2281,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         int id = -1;
         String barcode = Inventory.increment_id();
         String description = tf_description.getText();
-        String generic_name = "";
+        String generic_name = tf_description1.getText();
         String category = tf_category.getText();
         String category_id = cat.getId();
         String classification = tf_classification.getText();
@@ -2480,21 +2508,17 @@ public class Dlg_inventory extends javax.swing.JDialog {
                 Field.Combo brands = (Field.Combo) tf_brand;
                 Field.Combo models = (Field.Combo) tf_model;
                 Field.Combo units = (Field.Combo) tf_unit;
-
                 Inventory.to_inventory to1 = inventory_list.get(selected_row);
                 int id = to1.id;
                 String barcode = to1.barcode;
                 String description = tf_description.getText();
-                String generic_name = "";
+                String generic_name = tf_description1.getText();
                 String category = tf_category.getText();
                 String category_id = cat.getId();
-
                 String classification = tf_classification.getText();
                 String classification_id = classi.getId();
-
                 String sub_classification = tf_sub_classification.getText();
                 String sub_classification_id = sub_class.getId();
-
                 double product_qty = 0;
                 double conversion = 1;
                 double selling_price = FitIn.toDouble(tf_selling_price.getText());

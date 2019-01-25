@@ -34,7 +34,6 @@ public class Adjustments_customers {
             }
             if (to.balance != total) {
                 System.out.println("Customer: " + to.customer_no + " | " + to.customer_name + " = Balance: " + to.balance + "/" + total);
-
                 try {
                     Connection conn = MyConnection.connect();
                     String s0 = " update customers set balance='" + total + "' where customer_no='" + to.customer_no + "' ";

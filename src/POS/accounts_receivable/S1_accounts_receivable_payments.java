@@ -344,21 +344,13 @@ public class S1_accounts_receivable_payments {
 
             //update customers balance
 //            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
-            String s10 = "select "
-                    + "balance"
-                    + " from  customers where "
-                    + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
-                    + " ";
-            double customer_balance = 0;
-            Statement stmt10 = conn.createStatement();
-            ResultSet rs10 = stmt10.executeQuery(s10);
-            if (rs10.next()) {
-                customer_balance = rs10.getDouble(1);
-            }
-            double new_balance = customer_balance - (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount);
-
+            Customers.to_customers cus = ret_customer_balance(to_accounts_receivable_payments.customer_id);
+            double tendered = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.prepaid_amount + to_accounts_receivable_payments.credit_card_amount + to_accounts_receivable_payments.gift_certificate_amount + to_accounts_receivable_payments.online_amount;
+            double new_balance = cus.balance - (tendered + to_accounts_receivable_payments.discount_amount);
+            double actual_amount = to_accounts_receivable_payments.actual_amount;
+            
             String s2 = "update  customers set "
-                    + "balance= :balance"
+                    + " balance= :balance"
                     + " where "
                     + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                     + " ";
@@ -1357,8 +1349,10 @@ public class S1_accounts_receivable_payments {
                     customer_balance = rs10.getDouble(1);
                 }
 
-                double new_balance = (customer_balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount));
-
+//                double new_balance = (customer_balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount));
+                double tendered = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.prepaid_amount + to_accounts_receivable_payments.credit_card_amount + to_accounts_receivable_payments.gift_certificate_amount + to_accounts_receivable_payments.online_amount;
+                double new_balance = customer_balance - (tendered + to_accounts_receivable_payments.discount_amount);
+                double actual_amount = to_accounts_receivable_payments.actual_amount;
                 String s2 = "update  customers set "
                         + " balance= :balance"
                         + " where "
@@ -1734,7 +1728,7 @@ public class S1_accounts_receivable_payments {
                         + " customer_no ='" + to_accounts_receivable_payments.customer_id + "' "
                         + " ";
                 s2 = SqlStringUtil.parse(s2).
-                        setNumber("balance", actual_amount).
+                        setNumber("balance", new_balance).
                         ok();
                 PreparedStatement stmt2 = conn.prepareStatement(s2);
                 stmt2.execute();
@@ -1743,7 +1737,7 @@ public class S1_accounts_receivable_payments {
                 to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
                 double new_paid = tar.paid + (actual_amount + to_accounts_receivable_payments.discount_amount);
                 String s3 = "update  accounts_receivable set "
-                        + "paid= :paid"
+                        + " paid= :paid"
                         + " where "
                         + " ar_no ='" + to_accounts_receivable_payments.ar_no + "' "
                         + " ";

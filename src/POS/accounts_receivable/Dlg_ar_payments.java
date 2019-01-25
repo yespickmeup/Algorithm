@@ -741,6 +741,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "db_algorithm");
         init_key();
         init_tbl_accounts_receivable();
         focus();
