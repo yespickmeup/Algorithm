@@ -1288,8 +1288,8 @@ public class Inventory {
                     + ",location=:location"
                     + ",location_id=:location_id"
                     + ",is_uploaded = 2"
-                    + ",:allow_negative_inventory"
-                    + ",:auto_order"
+                    + ",allow_negative_inventory=:allow_negative_inventory"
+                    + ",auto_order=:auto_order"
                     + " where "
                     + " barcode ='" + to_inventory.barcode + "' "
                     + " ";
