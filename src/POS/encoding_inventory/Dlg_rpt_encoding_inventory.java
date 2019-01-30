@@ -607,8 +607,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tf_qty_branch1)
-                    .addComponent(tf_location1))
+                    .addComponent(tf_qty_branch1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_location1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_search_branch_code1)
@@ -653,7 +653,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         pnl_sales_items1.setLayout(pnl_sales_items1Layout);
         pnl_sales_items1Layout.setHorizontalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnl_sales_items1Layout.setVerticalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -883,9 +883,9 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-               jPanel9.setLayout(new BorderLayout());
-               Dlg_rpt_encoding_inventory dtc = new Dlg_rpt_encoding_inventory();
-               jPanel9.add(dtc);
+                jPanel9.setLayout(new BorderLayout());
+                Dlg_rpt_encoding_inventory dtc = new Dlg_rpt_encoding_inventory();
+                jPanel9.add(dtc.getSurface());
             }
         });
     }
@@ -1204,58 +1204,58 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     }
 
     private void get_stocks2() {
+        Field.Combo br = (Field.Combo) tf_qty_branch1;
+        Field.Combo lo = (Field.Combo) tf_location1;
 
-        jProgressBar4.setString("Loading... Please wait...");
-        jProgressBar4.setIndeterminate(true);
-        Thread t = new Thread(new Runnable() {
+        String date_from = DateType.sf.format(jDateChooser1.getDate());
+        String date_to = DateType.sf.format(jDateChooser2.getDate());
 
-            @Override
-            public void run() {
-                Field.Combo br = (Field.Combo) tf_qty_branch1;
-                Field.Combo lo = (Field.Combo) tf_location1;
-
-                String date_from = DateType.sf.format(jDateChooser1.getDate());
-                String date_to = DateType.sf.format(jDateChooser2.getDate());
-
-                String where2 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' order by description asc ";
-                String where3 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' ";
+        String where2 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' order by description asc ";
+        String where3 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' ";
 //                System.out.println(where2);
 //                System.out.println(where3);
-                List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(where2);
+        List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(where2);
 //                System.out.println("size: " + replenishments.size());
-                List<Srpt_inventory_over_short.field> datas = Srpt_inventory_over_short.ret_data(where3, replenishments);
+        List<Srpt_inventory_over_short.field> datas = Srpt_inventory_over_short.ret_data(where3, replenishments);
 
-                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-                String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
-                String printed_by = "Administrator";
-                String sheet_no = "";
-                String branch = tf_qty_branch1.getText();
-                String location = tf_location1.getText();
-                String counted_by = "";
+        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+        String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+        String printed_by = "Administrator";
+        String sheet_no = "";
+        String branch = tf_qty_branch1.getText();
+        String location = tf_location1.getText();
+        String counted_by = "";
 
-                Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);
+        Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);
 
-                if (jCheckBox1.isSelected()) {
-                    List<Srpt_inventory_over_short.field> datas2 = new ArrayList();
-                    for (Srpt_inventory_over_short.field data : datas) {
-                        if (data.getOver_short() != 0) {
-                            datas2.add(data);
-                        }
-                    }
-                    rpt.fields.addAll(datas2);
-                } else {
-                    rpt.fields.addAll(datas);
+        if (jCheckBox1.isSelected()) {
+            List<Srpt_inventory_over_short.field> datas2 = new ArrayList();
+            for (Srpt_inventory_over_short.field data : datas) {
+                if (data.getOver_short() != 0) {
+                    datas2.add(data);
                 }
-
-                String jrxml = "rpt_inventory_over_or_short.jrxml";
-                report_sales_items2(rpt, jrxml);
-                jProgressBar4.setString("Finished...");
-                jProgressBar4.setIndeterminate(false);
-
             }
-        });
+            rpt.fields.addAll(datas2);
+        } else {
+            rpt.fields.addAll(datas);
+        }
 
-        t.start();
+        String jrxml = "rpt_inventory_over_or_short.jrxml";
+        report_sales_items2(rpt, jrxml);
+//        jProgressBar4.setString("Loading... Please wait...");
+//        jProgressBar4.setIndeterminate(true);
+//        Thread t = new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//               
+//                jProgressBar4.setString("Finished...");
+//                jProgressBar4.setIndeterminate(false);
+//
+//            }
+//        });
+//
+//        t.start();
     }
 
     private void report_sales_items2(final Srpt_inventory_over_short to, String jrxml_name) {
