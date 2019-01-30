@@ -20,8 +20,10 @@ import mijzcx.synapse.desk.utils.Lg;
 public class Adjustments_customers {
 
     public static void main(String[] args) {
+        
         System.setProperty("pool_host", "192.168.1.51");
         System.setProperty("pool_db", "db_algorithm");
+        
         List<Customers.to_customers> customers = Customers.ret_data2("order by id asc ");
         for (Customers.to_customers to : customers) {
 
