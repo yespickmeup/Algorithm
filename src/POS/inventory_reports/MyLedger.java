@@ -27,7 +27,7 @@ import mijzcx.synapse.desk.utils.FitIn;
  */
 public class MyLedger {
 
-    public static Srpt_item_ledger get(String my_item_code, String my_barcode, String my_description, String loc_id, String year, int month, String my_branch, String my_location, boolean is_month_selected,int show_cost,int hide_price) {
+    public static Srpt_item_ledger get(String my_item_code, String my_barcode, String my_description, String loc_id, String year, int month, String my_branch, String my_location, boolean is_month_selected, int show_cost, int hide_price, int all_year) {
 
         List<Srpt_item_ledger.field> field3 = new ArrayList();
         List<Srpt_item_ledger.field> fields = new ArrayList();
@@ -1493,7 +1493,7 @@ public class MyLedger {
                 String transaction_type = "Exc-Returned";
                 String in = FitIn.fmt_woc(product_qty);
                 String out = "";
-               
+
                 if (is_replacement == 1) {
                     transaction_type = "Exc-Replacement";
                     in = "";
@@ -1525,11 +1525,11 @@ public class MyLedger {
             List<Srpt_item_ledger.field> f_field = new ArrayList();
 
             Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {
-                @Override
-                public int compare(Srpt_item_ledger.field o1, Srpt_item_ledger.field o2) {
-                    return o1.getDate_added().compareTo(o2.getDate_added());
-                }
-            });
+                         @Override
+                         public int compare(Srpt_item_ledger.field o1, Srpt_item_ledger.field o2) {
+                             return o1.getDate_added().compareTo(o2.getDate_added());
+                         }
+                     });
 
             double running_balance = 0;
             double qty = 0;
@@ -1545,7 +1545,7 @@ public class MyLedger {
                 f.setFrom_branch(my_branch);
                 f.setFrom_location(my_location);
                 f.setBalance(FitIn.fmt_woc(qty));
-                if(show_cost==0){
+                if (show_cost == 0) {
                     f.setCost("");
                 }
                 field3.add(f);
@@ -1556,17 +1556,22 @@ public class MyLedger {
             for (Srpt_item_ledger.field to2 : field3) {
                 String m = DateType.m1.format(to2.date_added);
                 String y = DateType.y.format(to2.date_added);
-
-                if (year.equals(y) && is_month_selected == true) {
+                if (all_year == 1) {
                     fields2.add(to2);
                     running_balance = FitIn.toDouble(to2.getBalance());
-                }
-                if (year.equals(y) && is_month_selected == false) {
-                    if (month == FitIn.toInt(m)) {
+                } else {
+                    if (year.equals(y) && is_month_selected == true) {
                         fields2.add(to2);
                         running_balance = FitIn.toDouble(to2.getBalance());
                     }
+                    if (year.equals(y) && is_month_selected == false) {
+                        if (month == FitIn.toInt(m)) {
+                            fields2.add(to2);
+                            running_balance = FitIn.toDouble(to2.getBalance());
+                        }
+                    }
                 }
+
             }
 
             String business_name = System.getProperty("business_name", "Algorithm Computer Services");

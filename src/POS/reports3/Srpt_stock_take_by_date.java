@@ -285,7 +285,7 @@ public class Srpt_stock_take_by_date {
                 String branch_id = branch_code;
                 location = branch + " - " + location;
 
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected,1,0);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected,1,0,0);
 //                System.out.println("Item: " + item_code + " : " + description);
                 double balance = 0;
                 double cost1 = 0;
@@ -311,7 +311,7 @@ public class Srpt_stock_take_by_date {
                     balance=rpt.running_balance;
                 }
 //                System.out.println("balance: " + balance);
-                Srpt_stock_take_by_date.field field = new field(item_code, barcode, description, balance, selling_price, cost1, uom, code, location, location_id, branch, branch_id);
+                Srpt_stock_take_by_date.field field = new field(item_code, barcode, description, balance, selling_price, cost, uom, code, location, location_id, branch, branch_id);
                 datas.add(field);
             }
             return datas;

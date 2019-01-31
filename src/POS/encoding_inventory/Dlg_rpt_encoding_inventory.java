@@ -886,7 +886,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_kabankalan_algorithm");
+        System.setProperty("pool_db", "db_smis_bayawan_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
@@ -1085,7 +1085,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
     }
-    
+
     List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches2() {
@@ -1257,44 +1257,48 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     List<Srpt_inventory_over_short.field> datas3 = new ArrayList();
                     int removed = 0;
                     for (Srpt_inventory_over_short.field data : datas) {
-                        if (data.getOver_short() != 0) {
-//                            System.out.println("Item: " + data.getItem_code() + " - " + data.getDescription() + " [" + data.getSystem_qty() + " | " + data.getQty() + "]");
-                            Srpt_item_ledger rpt2 = MyLedger.get(data.getItem_code(), data.getBarcode(), data.getDescription(), lo.getId(), year, month,
-                                                                 branch, location, true, 0, 1);
-                            int row = -1;
-                            int row_rep = -1;
-                            double balance = 0;
-                            for (Srpt_item_ledger.field r : rpt2.fields) {
-                                row_rep++;
-                                if (r.getTransaction_type().equalsIgnoreCase("Replenishment")) {
-                                    row = row_rep;
-                                }
-//                                System.out.println("    " + r.getTransaction_type() + " " + r.getIn() + " | " + r.getOut() + " = " + r.getBalance());
+//                        if (data.getOver_short() != 0) {
 
+                        Srpt_item_ledger rpt2 = MyLedger.get(data.getItem_code(), data.getBarcode(), data.getDescription(), lo.getId(), year, month,
+                                                             branch, location, true, 0, 1, 1);
+                        int row = -1;
+                        int row_rep = -1;
+                        double balance = 0;
+                        for (Srpt_item_ledger.field r : rpt2.fields) {
+                            row_rep++;
+                            if (r.getTransaction_type().equalsIgnoreCase("Replenishment")) {
+                                row = row_rep;
                             }
-                            if (row - 1 >= 0) {
-                                Srpt_item_ledger.field r_final = rpt2.fields.get(row - 1);
-                                balance = FitIn.toDouble(r_final.getBalance());
-//                                System.out.println("    Balance: " + r_final.getBalance());
-                            } else {
-//                                System.out.println("    Balance: 0");
-                                balance = 0;
-
-                            }
-//                            System.out.println("---------------------------------------------------------------------------");
-                            if (data.getQty() != balance) {
-                                datas2.add(data);
-                            } else {
-                                datas3.add(data);
-                                removed++;
-                            }
+//                            System.out.println("    " + r.getTransaction_type() + " " + r.getIn() + " | " + r.getOut() + " = " + r.getBalance());
 
                         }
+                        if (row - 1 >= 0) {
+                            Srpt_item_ledger.field r_final = rpt2.fields.get(row - 1);
+                            balance = FitIn.toDouble(r_final.getBalance());
+                            data.setSystem_qty(FitIn.toDouble(r_final.getBalance()));
+//                            System.out.println("    Balance: " + r_final.getBalance());
+                        } else {
+//                            System.out.println("    Balance: 0");
+                            balance = 0;
+                            data.setSystem_qty(balance);
+                        }
+
+                        if (data.getQty() != data.getSystem_qty()) {
+                            datas2.add(data);
+                            System.out.println("---------------------------------------------------------------------------");
+                            System.out.println("Item: " + data.getItem_code() + " - " + data.getDescription() + " [" + data.getSystem_qty() + " | " + data.getQty() + "]");
+
+                        } else {
+                            datas3.add(data);
+                            removed++;
+                        }
+
+//                        }
                     }
 
-                    for (Srpt_inventory_over_short.field data : datas3) {
-                        System.out.println("Item: " + data.getItem_code() + " - " + data.getDescription() + " [" + data.getSystem_qty() + " | " + data.getQty() + "]");
-                    }
+//                    for (Srpt_inventory_over_short.field data : datas3) {
+//                        System.out.println("Item: " + data.getItem_code() + " - " + data.getDescription() + " [" + data.getSystem_qty() + " | " + data.getQty() + "]");
+//                    }
                     rpt.fields.addAll(datas2);
                     System.out.println("Total Added! = " + datas2.size());
                     System.out.println("Removed: " + removed);

@@ -301,11 +301,9 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             }
         });
 
-        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
-        jCheckBox1.setEnabled(false);
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setText("All");
@@ -1055,6 +1053,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
+//        System.setProperty("pool_db", "db_smis_bayawan_algorithm");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         set_default_branch();
@@ -1068,7 +1067,6 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 tf_search.grabFocus();
             }
         });
-
     }
 
     static int show_cost = 1;
@@ -1309,8 +1307,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 if (jCheckBox3.isSelected()) {
                     is_month_selected = true;
                 }
-
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,show_cost,hide_price);
+                int all_year=0;
+                if(jCheckBox1.isSelected()){
+                    all_year=1;
+                }
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,show_cost,hide_price,all_year);
 
                 String jrxml = "rpt_inventory_ledger.jrxml";
                 report_sales_items(rpt, jrxml);

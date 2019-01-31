@@ -403,7 +403,7 @@ public class Srpt_end_of_day_summary_chickaloka {
                 double over = 0;
 //                System.out.println("item_code: " + item_code);
 //                System.out.println("Description: " + description);
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected,1,0);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, location_id, year, month, branch, location, is_month_selected,1,0,0);
                 List<Srpt_item_ledger.field> ledger = rpt.fields;
                 String remarks = "";
                 for (Srpt_item_ledger.field field : ledger) {
