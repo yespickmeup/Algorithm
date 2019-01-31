@@ -9,6 +9,8 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
 import POS.inventory_replenishment.Inventory_replenishment_items;
+import POS.inventory_reports.MyLedger;
+import POS.inventory_reports.Srpt_item_ledger;
 import POS.reports.Srpt_encoding_inventory;
 import POS.reports.Srpt_inventory_over_short;
 import POS.util.DateType;
@@ -32,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
@@ -236,10 +239,11 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jButton3 = new Button.Default();
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox6 = new javax.swing.JCheckBox();
-        pnl_sales_items = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar3 = new javax.swing.JProgressBar();
+        jPanel10 = new javax.swing.JPanel();
+        pnl_sales_items = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jButton2 = new Button.Success();
@@ -361,6 +365,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
             }
         });
 
+        jCheckBox4.setSelected(true);
         jCheckBox4.setText("Exclude Cost");
 
         jCheckBox6.setSelected(true);
@@ -376,16 +381,16 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jCheckBox5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_sheet_no, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -395,8 +400,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_qty_branch, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_location, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_qty_branch)
+                    .addComponent(tf_location))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_search_branch_code)
@@ -405,7 +410,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(5, 5, 5)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -450,20 +455,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox6)))))
-                .addGap(37, 37, 37))
-        );
-
-        pnl_sales_items.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout pnl_sales_itemsLayout = new javax.swing.GroupLayout(pnl_sales_items);
-        pnl_sales_items.setLayout(pnl_sales_itemsLayout);
-        pnl_sales_itemsLayout.setHorizontalGroup(
-            pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnl_sales_itemsLayout.setVerticalGroup(
-            pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -483,8 +475,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,17 +486,45 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, Short.MAX_VALUE)))
         );
 
+        jPanel10.setOpaque(false);
+
+        pnl_sales_items.setBackground(new java.awt.Color(204, 204, 204));
+        pnl_sales_items.setOpaque(false);
+
+        javax.swing.GroupLayout pnl_sales_itemsLayout = new javax.swing.GroupLayout(pnl_sales_items);
+        pnl_sales_items.setLayout(pnl_sales_itemsLayout);
+        pnl_sales_itemsLayout.setHorizontalGroup(
+            pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnl_sales_itemsLayout.setVerticalGroup(
+            pnl_sales_itemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 397, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_sales_items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_sales_items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(pnl_sales_items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -513,9 +532,9 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(pnl_sales_items, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -607,8 +626,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tf_qty_branch1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_location1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_qty_branch1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                    .addComponent(tf_location1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_search_branch_code1)
@@ -657,7 +676,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         );
         pnl_sales_items1Layout.setVerticalGroup(
             pnl_sales_items1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -717,11 +736,11 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 869, Short.MAX_VALUE)
+            .addGap(0, 784, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 511, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Sheet", jPanel9);
@@ -840,6 +859,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -866,7 +886,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_kabankalan_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();
@@ -879,15 +899,8 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
         branch_location_list2 = S1_branch_locations.ret_location_where(where);
         tf_search_branch_code1.setVisible(false);
         tf_location_id1.setVisible(false);
+//
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jPanel9.setLayout(new BorderLayout());
-                Dlg_rpt_encoding_inventory dtc = new Dlg_rpt_encoding_inventory();
-                jPanel9.add(dtc.getSurface());
-            }
-        });
     }
 
     String location_ids = "";
@@ -923,14 +936,14 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -1072,6 +1085,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
     }
+    
     List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches2() {
@@ -1204,44 +1218,99 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     }
 
     private void get_stocks2() {
-        Field.Combo br = (Field.Combo) tf_qty_branch1;
-        Field.Combo lo = (Field.Combo) tf_location1;
+        jProgressBar4.setString("Loading...Please wait...");
+        jProgressBar4.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
 
-        String date_from = DateType.sf.format(jDateChooser1.getDate());
-        String date_to = DateType.sf.format(jDateChooser2.getDate());
+            @Override
+            public void run() {
+                Field.Combo br = (Field.Combo) tf_qty_branch1;
+                Field.Combo lo = (Field.Combo) tf_location1;
 
-        String where2 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' order by description asc ";
-        String where3 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' ";
+                String date_from = DateType.sf.format(jDateChooser1.getDate());
+                String date_to = DateType.sf.format(jDateChooser2.getDate());
+
+                String where2 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' order by description asc ";
+                String where3 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' ";
 //                System.out.println(where2);
 //                System.out.println(where3);
-        List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(where2);
+                List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(where2);
 //                System.out.println("size: " + replenishments.size());
-        List<Srpt_inventory_over_short.field> datas = Srpt_inventory_over_short.ret_data(where3, replenishments);
+                List<Srpt_inventory_over_short.field> datas = Srpt_inventory_over_short.ret_data(where3, replenishments);
 
-        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-        String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
-        String printed_by = "Administrator";
-        String sheet_no = "";
-        String branch = tf_qty_branch1.getText();
-        String location = tf_location1.getText();
-        String counted_by = "";
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+                String printed_by = "Administrator";
+                String sheet_no = "";
+                String branch = tf_qty_branch1.getText();
+                String location = tf_location1.getText();
+                String counted_by = "";
 
-        Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);
+                String year = "" + DateType.y.format(new Date());
+                int month = (new Date().getMonth() + 1);
+                System.out.println("month: " + month);
 
-        if (jCheckBox1.isSelected()) {
-            List<Srpt_inventory_over_short.field> datas2 = new ArrayList();
-            for (Srpt_inventory_over_short.field data : datas) {
-                if (data.getOver_short() != 0) {
-                    datas2.add(data);
+                Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);
+
+                if (jCheckBox1.isSelected()) {
+                    List<Srpt_inventory_over_short.field> datas2 = new ArrayList();
+                    List<Srpt_inventory_over_short.field> datas3 = new ArrayList();
+                    int removed = 0;
+                    for (Srpt_inventory_over_short.field data : datas) {
+                        if (data.getOver_short() != 0) {
+//                            System.out.println("Item: " + data.getItem_code() + " - " + data.getDescription() + " [" + data.getSystem_qty() + " | " + data.getQty() + "]");
+                            Srpt_item_ledger rpt2 = MyLedger.get(data.getItem_code(), data.getBarcode(), data.getDescription(), lo.getId(), year, month,
+                                                                 branch, location, true, 0, 1);
+                            int row = -1;
+                            int row_rep = -1;
+                            double balance = 0;
+                            for (Srpt_item_ledger.field r : rpt2.fields) {
+                                row_rep++;
+                                if (r.getTransaction_type().equalsIgnoreCase("Replenishment")) {
+                                    row = row_rep;
+                                }
+//                                System.out.println("    " + r.getTransaction_type() + " " + r.getIn() + " | " + r.getOut() + " = " + r.getBalance());
+
+                            }
+                            if (row - 1 >= 0) {
+                                Srpt_item_ledger.field r_final = rpt2.fields.get(row - 1);
+                                balance = FitIn.toDouble(r_final.getBalance());
+//                                System.out.println("    Balance: " + r_final.getBalance());
+                            } else {
+//                                System.out.println("    Balance: 0");
+                                balance = 0;
+
+                            }
+//                            System.out.println("---------------------------------------------------------------------------");
+                            if (data.getQty() != balance) {
+                                datas2.add(data);
+                            } else {
+                                datas3.add(data);
+                                removed++;
+                            }
+
+                        }
+                    }
+
+                    for (Srpt_inventory_over_short.field data : datas3) {
+                        System.out.println("Item: " + data.getItem_code() + " - " + data.getDescription() + " [" + data.getSystem_qty() + " | " + data.getQty() + "]");
+                    }
+                    rpt.fields.addAll(datas2);
+                    System.out.println("Total Added! = " + datas2.size());
+                    System.out.println("Removed: " + removed);
+                } else {
+                    rpt.fields.addAll(datas);
                 }
-            }
-            rpt.fields.addAll(datas2);
-        } else {
-            rpt.fields.addAll(datas);
-        }
 
-        String jrxml = "rpt_inventory_over_or_short.jrxml";
-        report_sales_items2(rpt, jrxml);
+                System.out.println("datas2: " + rpt.fields.size());
+                String jrxml = "rpt_inventory_over_or_short.jrxml";
+                report_sales_items2(rpt, jrxml);
+                jProgressBar4.setString("Finished...");
+                jProgressBar4.setIndeterminate(false);
+            }
+        });
+        t.start();
+
 //        jProgressBar4.setString("Loading... Please wait...");
 //        jProgressBar4.setIndeterminate(true);
 //        Thread t = new Thread(new Runnable() {

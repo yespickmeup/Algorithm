@@ -301,6 +301,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             }
         });
 
+        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setText("All");
         jCheckBox1.setEnabled(false);
