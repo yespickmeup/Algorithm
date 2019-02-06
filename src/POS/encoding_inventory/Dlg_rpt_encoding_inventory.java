@@ -886,7 +886,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 
     private void myInit() {
 
-        System.setProperty("pool_db", "db_smis_bayawan_algorithm");
+//        System.setProperty("pool_db", "db_smis_kabankalan_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
         init_key();

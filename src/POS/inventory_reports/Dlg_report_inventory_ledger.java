@@ -1060,7 +1060,6 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         init_tbl_ledger();
         String where = "  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
-
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -1073,9 +1072,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
-
         Field.Combo lo = (Field.Combo) tf_branch_location;
-
         lo.setText(to.branch + " - ( " + to.location + " )");
         lo.setId("" + to.id);
         my_branch = to.branch;
@@ -1083,7 +1080,6 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         my_location = to.location;
         my_location_id = "" + to.id;
         selected_branch = my_branch;
-
         String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Item Ledger - Show Cost - (Add)" + "' limit 1";
         List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
         if (datas.isEmpty()) {
