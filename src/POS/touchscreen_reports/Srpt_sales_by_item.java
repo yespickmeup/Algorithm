@@ -81,11 +81,11 @@ public class Srpt_sales_by_item {
         double addtl_amount;
         String date;
         String with_cost;
-
+        String serial_nos;
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date, String with_cost) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date, String with_cost,String serial_nos) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -108,6 +108,15 @@ public class Srpt_sales_by_item {
             this.addtl_amount = addtl_amount;
             this.date = date;
             this.with_cost = with_cost;
+            this.serial_nos=serial_nos;
+        }
+
+        public String getSerial_nos() {
+            return serial_nos;
+        }
+
+        public void setSerial_nos(String serial_nos) {
+            this.serial_nos = serial_nos;
         }
 
         public String getWith_cost() {
@@ -345,7 +354,7 @@ public class Srpt_sales_by_item {
                     + ",item_type"
                     + ",supplier_name"
                     + ",supplier_id"
-                    + ",serial_no"
+                    + ",GROUP_CONCAT(serial_no SEPARATOR ',')"
                     + ",sum(product_qty)"
                     + ",unit"
                     + ",conversion"
@@ -457,7 +466,7 @@ public class Srpt_sales_by_item {
                 if (cost <= 0) {
                     with_cost = "No Cost";
                 }
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost,serial_no);
                 fields.add(field);
             }
 
@@ -483,7 +492,7 @@ public class Srpt_sales_by_item {
                     + ",item_type"
                     + ",supplier_name"
                     + ",supplier_id"
-                    + ",serial_no"
+                    + ",GROUP_CONCAT(serial_no SEPARATOR ',')"
                     + ",sum(product_qty)"
                     + ",unit"
                     + ",conversion"
@@ -595,7 +604,7 @@ public class Srpt_sales_by_item {
                 if (cost <= 0) {
                     with_cost = "No Cost";
                 }
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost,serial_no);
                 fields.add(field);
             }
 
@@ -625,6 +634,7 @@ public class Srpt_sales_by_item {
                     + ",supplier_name"
                     + ",supplier_id"
                     + ",serial_no"
+//                    + ",GROUP_CONCAT(serial_no SEPARATOR ',')"
                     + ",sum(product_qty)"
                     + ",unit"
                     + ",conversion"
@@ -658,7 +668,7 @@ public class Srpt_sales_by_item {
                     + " from sale_items  "
                     + " " + where
                     + " group by sales_no,item_code,unit,selling_price,discount_amount,addtl_amount order by  description asc";
-
+            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -774,7 +784,7 @@ public class Srpt_sales_by_item {
                 if (cost <= 0) {
                     with_cost = "No Cost";
                 }
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost,serial_no);
                 if (cost <= 0) {
                     no_cost_list.add(field);
                 } else {
@@ -793,3 +803,4 @@ public class Srpt_sales_by_item {
         }
     }
 }
+

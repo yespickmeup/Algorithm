@@ -9,6 +9,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.users.User_price_change_request_logs;
 import POS.util.DateType;
 import POS.util.MyConnection;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Inventory {
 
-    public static class to_inventory {
+    public static class to_inventory implements Serializable{
 
         public final int id;
         public final String barcode;

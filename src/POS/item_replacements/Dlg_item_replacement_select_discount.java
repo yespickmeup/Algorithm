@@ -948,7 +948,7 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
     private javax.swing.JTextField tf_gc_no;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         jLabel12.setVisible(false);
         set_default_branch();

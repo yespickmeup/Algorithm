@@ -46,8 +46,13 @@ public class Srpt_sales_ledger {
     public final double collections_prepaid_cheque;
     public final double refund;
     public final double refund_cheque;
-
-    public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location, double return_exchange, double collections, double cash_on_hand, double collections_cheque, double collections_cheque_on_hand, double collections_prepaid, double collections_prepaid_cheque, double refund, double refund_cheque) {
+    public final double ar_collection_prepaid;
+    public final double ar_collection_credit_card;
+    public final double ar_collection_gc;
+    public final double ar_collection_online;
+    public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location, double return_exchange, double collections
+            , double cash_on_hand, double collections_cheque, double collections_cheque_on_hand, double collections_prepaid, double collections_prepaid_cheque, double refund
+            , double refund_cheque,double ar_collection_prepaid,double ar_collection_credit_card,double ar_collection_gc,double ar_collection_online) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -64,6 +69,11 @@ public class Srpt_sales_ledger {
         this.collections_prepaid_cheque = collections_prepaid_cheque;
         this.refund = refund;
         this.refund_cheque = refund_cheque;
+        this.ar_collection_prepaid=ar_collection_prepaid;
+        this.ar_collection_credit_card=ar_collection_credit_card;
+        this.ar_collection_gc=ar_collection_gc;
+        this.ar_collection_online=ar_collection_online;
+        
     }
 
     public static class field {
@@ -265,7 +275,12 @@ public class Srpt_sales_ledger {
         double collections_prepaid_cheque = 0;
         double refund = 0;
         double refund_cheque = 0;
-        Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque);
+        double ar_collection_prepaid=0;
+        double ar_collections_credit_card=0;
+        double ar_collections_gc=0;
+        double ar_collections_online=0;
+        Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque
+                , collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque,ar_collection_prepaid,ar_collections_credit_card,ar_collections_gc,ar_collections_online);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_sales_ledger.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

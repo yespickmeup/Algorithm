@@ -382,14 +382,14 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -549,7 +549,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                         String location_id = "" + to.id;
                         int id = 0;
                         String inventory_replenishment_no = Inventory_replenishments.increment_id(location_id);
-                        String date_added = DateType.datetime.format(jDateChooser1.getDate());
+                        String date_added = DateType.sf.format(jDateChooser1.getDate()) + " 23:00:00";
                         String user_id = MyUser.getUser_id();
                         String user_screen_name = MyUser.getUser_screen_name();
                         String remarks = "";

@@ -1351,7 +1351,7 @@ public class S1_accounts_receivable_payments {
 
 //                double new_balance = (customer_balance + (to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.discount_amount));
                 double tendered = to_accounts_receivable_payments.amount + to_accounts_receivable_payments.check_amount + to_accounts_receivable_payments.prepaid_amount + to_accounts_receivable_payments.credit_card_amount + to_accounts_receivable_payments.gift_certificate_amount + to_accounts_receivable_payments.online_amount;
-                double new_balance = customer_balance - (tendered + to_accounts_receivable_payments.discount_amount);
+                double new_balance = customer_balance + (tendered + to_accounts_receivable_payments.discount_amount);
                 double actual_amount = to_accounts_receivable_payments.actual_amount;
                 String s2 = "update  customers set "
                         + " balance= :balance"

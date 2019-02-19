@@ -50,6 +50,7 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import org.jfree.ui.Align;
+import synsoftech.util.ImageRenderer;
 
 /**
  *
@@ -802,7 +803,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable.setModel(tbl_accounts_receivable_M);
         tbl_accounts_receivable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable = {70, 70, 100, 100, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable = {70, 70, 100, 100, 70, 70, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -817,6 +818,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable.setFont(new java.awt.Font("Arial", 0, 11));
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable, 5);
+         tbl_accounts_receivable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
 
     private void loadData_accounts_receivable(List<to_accounts_receivable> acc) {
@@ -864,10 +866,10 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 case 5:
                     return FitIn.fmt_wc_0(tt.amount - tt.paid) + " ";
                 case 6:
-                    if (tt.status == 0) {
-                        return " Finalized";
+                    if (tt.status == 1) {
+                        return "/POS/icon_payment/remove11.png";
                     } else {
-                        return " Pending";
+                        return "/POS/icon_inventory/checked.png";
                     }
 
                 case 7:

@@ -1,414 +1,414 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69e015c3-fe31-43e0-8092-b17c48c1e3b4">
-    <property name="ireport.zoom" value="1.0"/>
-    <property name="ireport.x" value="0"/>
-    <property name="ireport.y" value="0"/>
-    <parameter name="business_name" class="java.lang.String"/>
-    <parameter name="address" class="java.lang.String"/>
-    <parameter name="contact_no" class="java.lang.String"/>
-    <parameter name="date" class="java.lang.String"/>
-    <parameter name="status" class="java.lang.String"/>
-    <parameter name="customer" class="java.lang.String"/>
-    <parameter name="branch" class="java.lang.String"/>
-    <parameter name="location" class="java.lang.String"/>
-    <field name="customer_no" class="java.lang.String"/>
-    <field name="customer_name" class="java.lang.String"/>
-    <field name="cash" class="java.lang.Double"/>
-    <field name="check_bank" class="java.lang.String"/>
-    <field name="check_no" class="java.lang.String"/>
-    <field name="check_date" class="java.lang.String"/>
-    <field name="check_amount" class="java.lang.Double"/>
-    <field name="date_added" class="java.lang.String"/>
-    <field name="added_by" class="java.lang.String"/>
-    <field name="branch" class="java.lang.String"/>
-    <field name="location" class="java.lang.String"/>
-    <field name="status" class="java.lang.String"/>
-    <field name="remarks" class="java.lang.String"/>
-    <variable name="cash_1" class="java.lang.Double" calculation="Sum">
-        <variableExpression><![CDATA[$F{cash}]]></variableExpression>
-    </variable>
-    <variable name="check_amount_1" class="java.lang.Double" calculation="Sum">
-        <variableExpression><![CDATA[$F{check_amount}]]></variableExpression>
-    </variable>
-    <background>
-        <band splitType="Stretch"/>
-    </background>
-    <title>
-        <band height="135" splitType="Stretch">
-            <textField isStretchWithOverflow="true">
-                <reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="92" y="79" width="264" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{customer}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="79" width="92" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Customer:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="39" width="209" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="true"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Prepaid Payments]]></text>
-            </staticText>
-            <textField>
-                <reportElement uuid="a5ca1096-8a6e-4990-b765-435a0990b900" x="0" y="0" width="555" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="true"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
-            </textField>
-            <textField isStretchWithOverflow="true">
-                <reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="414" y="49" width="141" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="63" width="92" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Date Printed:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="356" y="63" width="58" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <text><![CDATA[Location:]]></text>
-            </staticText>
-            <textField isStretchWithOverflow="true">
-                <reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="414" y="63" width="141" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{location}]]></textFieldExpression>
-            </textField>
-            <textField isStretchWithOverflow="true">
-                <reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="0" y="15" width="555" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
-            </textField>
-            <textField isStretchWithOverflow="true">
-                <reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="92" y="63" width="117" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="356" y="49" width="58" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <text><![CDATA[Branch:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="94" width="92" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Status:]]></text>
-            </staticText>
-            <textField isStretchWithOverflow="true">
-                <reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="92" y="94" width="264" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Tahoma" size="12" isBold="false"/>
-                    <paragraph leftIndent="5"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
-            </textField>
-        </band>
-    </title>
-    <pageHeader>
-        <band splitType="Stretch"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="20" splitType="Stretch">
-            <staticText>
-                <reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="0" y="0" width="55" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Date]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="3b2ded50-8f6a-4526-86df-4d25475e0329" x="55" y="0" width="100" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Customer]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="9854107e-c431-47d4-9f80-a3c727c261b7" x="492" y="0" width="63" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <paragraph leftIndent="2" rightIndent="2"/>
-                </textElement>
-                <text><![CDATA[Cash]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="7f3b50a1-c7a9-443f-a9ef-b8d58c37f669" x="416" y="0" width="76" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <paragraph leftIndent="2" rightIndent="2"/>
-                </textElement>
-                <text><![CDATA[Check]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="0ef7b68a-6da6-4d60-b90f-13ad6894dcb0" x="290" y="0" width="71" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Added By]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="361" y="0" width="55" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Status]]></text>
-            </staticText>
-            <staticText>
-                <reportElement uuid="3b2ded50-8f6a-4526-86df-4d25475e0329" x="155" y="0" width="135" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Remarks]]></text>
-            </staticText>
-        </band>
-    </columnHeader>
-    <detail>
-        <band height="15" splitType="Stretch">
-            <textField>
-                <reportElement uuid="7b802214-dc2a-4700-b92d-c33576c7b351" x="0" y="0" width="55" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{date_added}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement uuid="5227050b-d281-489e-9f6e-6d9039c61e55" x="55" y="0" width="100" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
-            </textField>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="62c59175-57b6-46df-a496-0db1934d7c67" x="492" y="0" width="63" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <paragraph leftIndent="2" rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{cash}]]></textFieldExpression>
-            </textField>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="b620cf9e-e172-49f5-8f9a-b5c84757068d" x="416" y="0" width="76" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <paragraph leftIndent="2" rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{check_amount}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement uuid="fdf494e2-cc6d-4f40-a4bb-707a0603255c" x="290" y="0" width="71" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{added_by}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement uuid="7b802214-dc2a-4700-b92d-c33576c7b351" x="361" y="0" width="55" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement uuid="5227050b-d281-489e-9f6e-6d9039c61e55" x="155" y="0" width="135" height="15"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
-            </textField>
-        </band>
-    </detail>
-    <columnFooter>
-        <band splitType="Stretch"/>
-    </columnFooter>
-    <pageFooter>
-        <band splitType="Stretch"/>
-    </pageFooter>
-    <summary>
-        <band height="80" splitType="Stretch">
-            <textField pattern="#,##0.00">
-                <reportElement uuid="73027ec9-5efc-433d-aeea-01ad5438608e" x="492" y="0" width="63" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$V{cash_1}]]></textFieldExpression>
-            </textField>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="491e5c0f-7f4c-4979-b984-71a51e73e046" x="416" y="0" width="76" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$V{check_amount_1}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="0" y="0" width="416" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Sub-total]]></text>
-            </staticText>
-            <textField pattern="#,##0.00">
-                <reportElement uuid="491e5c0f-7f4c-4979-b984-71a51e73e046" x="416" y="20" width="139" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font isBold="true"/>
-                    <paragraph rightIndent="2"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$V{check_amount_1}+$V{cash_1}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="0" y="20" width="416" height="20"/>
-                <box>
-                    <topPen lineWidth="0.2"/>
-                    <leftPen lineWidth="0.2"/>
-                    <bottomPen lineWidth="0.2"/>
-                    <rightPen lineWidth="0.2"/>
-                </box>
-                <textElement verticalAlignment="Middle">
-                    <font isBold="true"/>
-                    <paragraph leftIndent="2"/>
-                </textElement>
-                <text><![CDATA[Total]]></text>
-            </staticText>
-        </band>
-    </summary>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="contact_no" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="status" class="java.lang.String"/>
+	<parameter name="customer" class="java.lang.String"/>
+	<parameter name="branch" class="java.lang.String"/>
+	<parameter name="location" class="java.lang.String"/>
+	<field name="customer_no" class="java.lang.String"/>
+	<field name="customer_name" class="java.lang.String"/>
+	<field name="cash" class="java.lang.Double"/>
+	<field name="check_bank" class="java.lang.String"/>
+	<field name="check_no" class="java.lang.String"/>
+	<field name="check_date" class="java.lang.String"/>
+	<field name="check_amount" class="java.lang.Double"/>
+	<field name="date_added" class="java.lang.String"/>
+	<field name="added_by" class="java.lang.String"/>
+	<field name="branch" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="remarks" class="java.lang.String"/>
+	<variable name="cash_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{cash}]]></variableExpression>
+	</variable>
+	<variable name="check_amount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{check_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="135" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="92" y="79" width="264" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customer}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="79" width="92" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Customer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="39" width="209" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Prepaid Payments]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a5ca1096-8a6e-4990-b765-435a0990b900" x="0" y="0" width="555" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="414" y="49" width="141" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="63" width="92" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Date Printed:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="356" y="63" width="58" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Location:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="414" y="63" width="141" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{location}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="0" y="15" width="555" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="92" y="63" width="117" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="356" y="49" width="58" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Branch:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eabbbd64-faa1-4f6c-bbfb-6209bd89acd0" x="0" y="94" width="92" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Status:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8f400a16-090a-49e8-bcbb-6d33354b3622" x="92" y="94" width="264" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="0" y="0" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b2ded50-8f6a-4526-86df-4d25475e0329" x="55" y="0" width="100" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9854107e-c431-47d4-9f80-a3c727c261b7" x="492" y="0" width="63" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cash]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f3b50a1-c7a9-443f-a9ef-b8d58c37f669" x="416" y="0" width="76" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Check]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ef7b68a-6da6-4d60-b90f-13ad6894dcb0" x="290" y="0" width="71" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Added By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="361" y="0" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b2ded50-8f6a-4526-86df-4d25475e0329" x="155" y="0" width="135" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7b802214-dc2a-4700-b92d-c33576c7b351" x="0" y="0" width="55" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date_added}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5227050b-d281-489e-9f6e-6d9039c61e55" x="55" y="0" width="100" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="62c59175-57b6-46df-a496-0db1934d7c67" x="492" y="0" width="63" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cash}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="b620cf9e-e172-49f5-8f9a-b5c84757068d" x="416" y="0" width="76" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{check_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fdf494e2-cc6d-4f40-a4bb-707a0603255c" x="290" y="0" width="71" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{added_by}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7b802214-dc2a-4700-b92d-c33576c7b351" x="361" y="0" width="55" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5227050b-d281-489e-9f6e-6d9039c61e55" x="155" y="0" width="135" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="80" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="73027ec9-5efc-433d-aeea-01ad5438608e" x="492" y="0" width="63" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cash_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="491e5c0f-7f4c-4979-b984-71a51e73e046" x="416" y="0" width="76" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{check_amount_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="0" y="0" width="416" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Sub-total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="491e5c0f-7f4c-4979-b984-71a51e73e046" x="416" y="20" width="139" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{check_amount_1}+$V{cash_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2a83e304-7eb2-4808-a608-5ab0cb99584f" x="0" y="20" width="416" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

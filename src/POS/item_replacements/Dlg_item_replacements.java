@@ -1298,9 +1298,9 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-        System.setProperty("return_exchange_days", "2000");
+//        System.setProperty("return_exchange_days", "2000");
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);

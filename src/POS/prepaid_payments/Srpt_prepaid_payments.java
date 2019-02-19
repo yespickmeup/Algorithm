@@ -101,7 +101,7 @@ public class Srpt_prepaid_payments {
         public void setStatus(String status) {
             this.status = status;
         }
-        
+
         public String getCustomer_no() {
             return customer_no;
         }
@@ -292,9 +292,22 @@ public class Srpt_prepaid_payments {
                 if (status == 2) {
                     status1 = "Void";
                 }
-                Srpt_prepaid_payments.field to = new field(customer_id, customer_name, cash, check_bank, check_no, cheque_date, check_amount, date_added, added_by, branch, location, status1,remarks);
+                if (cash > 0) {
+                    if (remarks.contains("Prepaid Payment")) {
+                        cash = cash * -1;
+                    }
+                } else {
+                    if (remarks.contains("Prepaid Payment")) {
+                        check_amount = check_amount * -1;
+                    }
+                }
+                Srpt_prepaid_payments.field to = new field(customer_id, customer_name, cash, check_bank, check_no, cheque_date, check_amount,
+                                                           date_added, added_by, branch, location, status1, remarks);
 
-                datas.add(to);
+                if (status != 2) {
+                    datas.add(to);
+                }
+
             }
             return datas;
         } catch (SQLException e) {

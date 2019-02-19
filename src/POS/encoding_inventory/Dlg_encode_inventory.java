@@ -1764,7 +1764,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
 //        }
         String date_added = "";
         try {
-            date_added = DateType.sf.format(jDateChooser1.getDate()) + " 00:00:01";
+            date_added = DateType.sf.format(jDateChooser1.getDate()) + " 23:00:01";
         } catch (Exception e) {
             Alert.set(0, "Select Date!");
             choose_replenishment();

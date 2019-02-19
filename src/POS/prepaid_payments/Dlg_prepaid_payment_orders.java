@@ -777,7 +777,8 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
-
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         init_tbl_sales(jTable1);
         init_tbl_sale_items(jTable2);
@@ -810,14 +811,14 @@ public class Dlg_prepaid_payment_orders extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 

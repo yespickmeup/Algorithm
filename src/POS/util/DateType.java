@@ -45,7 +45,7 @@ public class DateType {
     public static SimpleDateFormat minute = new SimpleDateFormat("mm");
     public static SimpleDateFormat seconds = new SimpleDateFormat("ss");
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         System.out.println(sf1.format(new Date()));
     }
 
@@ -128,7 +128,8 @@ public class DateType {
         date = DateType.slash_w_time.format(d);
         return date;
     }
-     public static String convert_slash_datetime4(String datetime) {
+
+    public static String convert_slash_datetime4(String datetime) {
         String date = "";
         Date d = new Date();
         if (datetime.isEmpty()) {
@@ -143,6 +144,7 @@ public class DateType {
         date = DateType.slash_w_time.format(d);
         return date;
     }
+
     public static String convert_slash_datetime2(String datetime) {
         String date = "";
         Date d = new Date();
@@ -206,7 +208,8 @@ public class DateType {
         date = DateType.sf.format(d);
         return date;
     }
-      public static String convert_dash_date5(String datetime) {
+
+    public static String convert_dash_date5(String datetime) {
         String date = "";
         Date d = new Date();
         if (datetime.isEmpty()) {
@@ -214,7 +217,7 @@ public class DateType {
         }
         try {
             d = DateType.time4.parse(datetime);
-             
+
         } catch (ParseException ex) {
             Logger.getLogger(DateType.class.getName()).
                     log(Level.SEVERE, null, ex);
@@ -222,6 +225,7 @@ public class DateType {
         date = DateType.time4.format(d);
         return date;
     }
+
     public static String convert_monthDate_sf(String datetime) {
         String date = "";
         Date d = new Date();
@@ -354,5 +358,102 @@ public class DateType {
             day = "0" + day;
         }
         return day;
+    }
+
+    public static List<String> time() {
+        List<String> time_list = new ArrayList();
+        String[] list = {"12:00am",
+            "12:30am",
+            "1:00am",
+            "1:30am",
+            "2:00am",
+            "2:30am",
+            "3:00am",
+            "3:30am",
+            "4:00am",
+            "4:30am",
+            "5:00am",
+            "5:30am",
+            "6:00am",
+            "6:30am",
+            "7:00am",
+            "7:30am",
+            "8:00am",
+            "8:30am",
+            "9:00am",
+            "9:30am",
+            "10:00am",
+            "10:30am",
+            "11:00am",
+            "11:30am",
+            "12:00pm",
+            "12:30pm",
+            "1:00pm",
+            "1:30pm",
+            "2:00pm",
+            "2:30pm",
+            "3:00pm",
+            "3:30pm",
+            "4:00pm",
+            "4:30pm",
+            "5:00pm",
+            "5:30pm",
+            "6:00pm",
+            "6:30pm",
+            "7:00pm",
+            "7:30pm",
+            "8:00pm",
+            "8:30pm",
+            "9:00pm",
+            "9:30pm",
+            "10:00pm",
+            "10:30pm",
+            "11:00pm",
+            "11:30pm",
+            "11:59pm"
+        };
+        for (String s : list) {
+            time_list.add(s);
+        }
+        return time_list;
+    }
+
+    public static void main(String[] args) {
+        convert_am_pm_to_stamp("1:30pm", "from_to");
+    }
+
+    public static String convert_am_pm_to_stamp(String time, String from_to) {
+        String[] t = time.split(":");
+        String t1 = t[0];
+        String t2 = t[1];
+        String hours = t1;
+        if (hours.length() == 1) {
+            hours = "0" + hours;
+        }
+        String minutes = t2.substring(0, 2);
+        if (minutes.length() == 1) {
+            minutes = "0" + minutes;
+        }
+        String am_pm = t2.substring(2, 4);
+        if (am_pm.equals("pm")) {
+            int h = FitIn.toInt(hours);
+            if (h != 12) {
+                h = h + 12;
+                hours = "" + h;
+            }
+        } else {
+            int h = FitIn.toInt(hours);
+            if (h == 12) {
+                hours = "00";
+            }
+        }
+//        System.out.println("hours: " + hours);
+//        System.out.println("minutes: " + minutes);
+//        System.out.println("am_pm: " + am_pm);
+        time = hours + ":" + minutes + ":00";
+        if (from_to.equalsIgnoreCase("to")) {
+            time = hours + ":" + minutes + ":59";
+        }
+        return time;
     }
 }

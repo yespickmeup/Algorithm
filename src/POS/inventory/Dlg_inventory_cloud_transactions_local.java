@@ -568,11 +568,13 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                                     }
                                 }
                             }
+                            
                             System.out.println("Finished checking records...");
                             System.out.println("Items to add: " + to_add.size());
                             System.out.println("Adding items...");
                             jLabel11.setText("" + to_add.size());
                             jLabel12.setText("" + to_update.size());
+                            
                             for (Inventory.to_inventory to : to_add) {
                                 System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
                                 Inventory.add_inventory(to);

@@ -8,6 +8,7 @@ package POS.stock_transfer;
 import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.util.MyConnection;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Stock_transfers {
 
-    public static class to_stock_transfers {
+    public static class to_stock_transfers implements Serializable {
 
         public final int id;
         public final String transaction_no;
@@ -40,7 +41,7 @@ public class Stock_transfers {
         public final String from_branch_id;
         public final String from_location;
         public final String from_location_id;
-        public final int status;
+        public int status;
         public boolean selected;
         public final String at_branch;
         public final String at_branch_id;
@@ -73,6 +74,14 @@ public class Stock_transfers {
             this.is_uploaded = is_uploaded;
             this.finalized_by_id = finalized_by_id;
             this.finalized_by = finalized_by;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
         }
 
         public boolean isSelected() {
@@ -699,7 +708,7 @@ public class Stock_transfers {
         }
     }
 
-    public static List<String> finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas,String finalized_by_id,String finalized_by) {
+    public static List<String> finalize(to_stock_transfers to_stock_transfers, List<Stock_transfers_items.to_stock_transfers_items> datas, String finalized_by_id, String finalized_by) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
@@ -717,7 +726,7 @@ public class Stock_transfers {
 
             s0 = SqlStringUtil.parse(s0)
                     .setNumber("status", 1)
-                    .setString("finalized_by_id",finalized_by_id)
+                    .setString("finalized_by_id", finalized_by_id)
                     .setString("finalized_by", finalized_by)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
