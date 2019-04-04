@@ -47,8 +47,23 @@ public class Prepaid_payments {
         public final String location_id;
         public final String remarks;
         public final int refund;
+        public final String credit_card_type;
+        public final double credit_card_rate;
+        public final String credit_card_no;
+        public final String credit_card_holder;
+        public final double credit_card_amount;
+        public final String gift_certificate_from;
+        public final String gift_certificate_description;
+        public final String gift_certificate_no;
+        public final double gift_certificate_amount;
+        public final String online_bank;
+        public final String online_reference_no;
+        public final String online_holder;
+        public final String online_date;
+        public final double online_amount;
 
-        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, String remarks, int refund) {
+        public to_prepaid_payments(int id, double cash, String check_bank, String check_no, double check_amount, String added_by, String date_added, String customer_name, String customer_id, int status, boolean selected, String cheque_holder, String cheque_date, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id,
+                String remarks, int refund, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount) {
             this.id = id;
             this.cash = cash;
             this.check_bank = check_bank;
@@ -70,6 +85,20 @@ public class Prepaid_payments {
             this.location_id = location_id;
             this.remarks = remarks;
             this.refund = refund;
+            this.credit_card_type = credit_card_type;
+            this.credit_card_rate = credit_card_rate;
+            this.credit_card_no = credit_card_no;
+            this.credit_card_holder = credit_card_holder;
+            this.credit_card_amount = credit_card_amount;
+            this.gift_certificate_from = gift_certificate_from;
+            this.gift_certificate_description = gift_certificate_description;
+            this.gift_certificate_no = gift_certificate_no;
+            this.gift_certificate_amount = gift_certificate_amount;
+            this.online_bank = online_bank;
+            this.online_reference_no = online_reference_no;
+            this.online_holder = online_holder;
+            this.online_date = online_date;
+            this.online_amount = online_amount;
         }
 
         public boolean isSelected() {
@@ -86,7 +115,7 @@ public class Prepaid_payments {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "insert into prepaid_payments("
-                    + "cash"
+                    + " cash"
                     + ",check_bank"
                     + ",check_no"
                     + ",check_amount"
@@ -105,6 +134,20 @@ public class Prepaid_payments {
                     + ",location_id"
                     + ",remarks"
                     + ",refund"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + ")values("
                     + ":cash"
                     + ",:check_bank"
@@ -125,6 +168,20 @@ public class Prepaid_payments {
                     + ",:location_id"
                     + ",:remarks"
                     + ",:refund"
+                    + ",:credit_card_type"
+                    + ",:credit_card_rate"
+                    + ",:credit_card_no"
+                    + ",:credit_card_holder"
+                    + ",:credit_card_amount"
+                    + ",:gift_certificate_from"
+                    + ",:gift_certificate_description"
+                    + ",:gift_certificate_no"
+                    + ",:gift_certificate_amount"
+                    + ",:online_bank"
+                    + ",:online_reference_no"
+                    + ",:online_holder"
+                    + ",:online_date"
+                    + ",:online_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -147,6 +204,20 @@ public class Prepaid_payments {
                     .setString("location_id", to_prepaid_payments.location_id)
                     .setString("remarks", to_prepaid_payments.remarks)
                     .setNumber("refund", to_prepaid_payments.refund)
+                    .setString("credit_card_type", to_prepaid_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_prepaid_payments.credit_card_rate)
+                    .setString("credit_card_no", to_prepaid_payments.credit_card_no)
+                    .setString("credit_card_holder", to_prepaid_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_prepaid_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_prepaid_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_prepaid_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_prepaid_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_prepaid_payments.gift_certificate_amount)
+                    .setString("online_bank", to_prepaid_payments.online_bank)
+                    .setString("online_reference_no", to_prepaid_payments.online_reference_no)
+                    .setString("online_holder", to_prepaid_payments.online_holder)
+                    .setString("online_date", to_prepaid_payments.online_date)
+                    .setNumber("online_amount", to_prepaid_payments.online_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -186,6 +257,20 @@ public class Prepaid_payments {
                     + ",location_id"
                     + ",remarks"
                     + ",refund"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + ")values("
                     + ":cash"
                     + ",:check_bank"
@@ -206,6 +291,20 @@ public class Prepaid_payments {
                     + ",:location_id"
                     + ",:remarks"
                     + ",:refund"
+                    + ",:credit_card_type"
+                    + ",:credit_card_rate"
+                    + ",:credit_card_no"
+                    + ",:credit_card_holder"
+                    + ",:credit_card_amount"
+                    + ",:gift_certificate_from"
+                    + ",:gift_certificate_description"
+                    + ",:gift_certificate_no"
+                    + ",:gift_certificate_amount"
+                    + ",:online_bank"
+                    + ",:online_reference_no"
+                    + ",:online_holder"
+                    + ",:online_date"
+                    + ",:online_amount"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -228,6 +327,20 @@ public class Prepaid_payments {
                     .setString("location_id", to_prepaid_payments.location_id)
                     .setString("remarks", to_prepaid_payments.remarks)
                     .setNumber("refund", to_prepaid_payments.refund)
+                    .setString("credit_card_type", to_prepaid_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_prepaid_payments.credit_card_rate)
+                    .setString("credit_card_no", to_prepaid_payments.credit_card_no)
+                    .setString("credit_card_holder", to_prepaid_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_prepaid_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_prepaid_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_prepaid_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_prepaid_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_prepaid_payments.gift_certificate_amount)
+                    .setString("online_bank", to_prepaid_payments.online_bank)
+                    .setString("online_reference_no", to_prepaid_payments.online_reference_no)
+                    .setString("online_holder", to_prepaid_payments.online_holder)
+                    .setString("online_date", to_prepaid_payments.online_date)
+                    .setNumber("online_amount", to_prepaid_payments.online_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -270,6 +383,20 @@ public class Prepaid_payments {
                     + ",cheque_holder= :cheque_holder "
                     + ",cheque_date= :cheque_date "
                     + ",remarks= :remarks "
+                    + ",credit_card_type= :credit_card_type "
+                    + ",credit_card_rate= :credit_card_rate "
+                    + ",credit_card_no= :credit_card_no "
+                    + ",credit_card_holder= :credit_card_holder "
+                    + ",credit_card_amount= :credit_card_amount "
+                    + ",gift_certificate_from= :gift_certificate_from "
+                    + ",gift_certificate_description= :gift_certificate_description "
+                    + ",gift_certificate_no= :gift_certificate_no "
+                    + ",gift_certificate_amount= :gift_certificate_amount "
+                    + ",online_bank= :online_bank "
+                    + ",online_reference_no= :online_reference_no "
+                    + ",online_holder= :online_holder "
+                    + ",online_date= :online_date "
+                    + ",online_amount= :online_amount "
                     //                    + ",user_id= :user_id "
                     //                    + ",user_screen_name= :user_screen_name "
                     //                    + ",branch= :branch "
@@ -298,6 +425,20 @@ public class Prepaid_payments {
                     //                    .setString("branch_id", to_prepaid_payments.branch_id)
                     //                    .setString("location", to_prepaid_payments.location)
                     //                    .setString("location_id", to_prepaid_payments.location_id)
+                    .setString("credit_card_type", to_prepaid_payments.credit_card_type)
+                    .setNumber("credit_card_rate", to_prepaid_payments.credit_card_rate)
+                    .setString("credit_card_no", to_prepaid_payments.credit_card_no)
+                    .setString("credit_card_holder", to_prepaid_payments.credit_card_holder)
+                    .setNumber("credit_card_amount", to_prepaid_payments.credit_card_amount)
+                    .setString("gift_certificate_from", to_prepaid_payments.gift_certificate_from)
+                    .setString("gift_certificate_description", to_prepaid_payments.gift_certificate_description)
+                    .setString("gift_certificate_no", to_prepaid_payments.gift_certificate_no)
+                    .setNumber("gift_certificate_amount", to_prepaid_payments.gift_certificate_amount)
+                    .setString("online_bank", to_prepaid_payments.online_bank)
+                    .setString("online_reference_no", to_prepaid_payments.online_reference_no)
+                    .setString("online_holder", to_prepaid_payments.online_holder)
+                    .setString("online_date", to_prepaid_payments.online_date)
+                    .setNumber("online_amount", to_prepaid_payments.online_amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -327,7 +468,7 @@ public class Prepaid_payments {
                     Lg.s(Prepaid_payments.class, "Successfully Updated");
 
                     Customers.to_customers cus = S1_accounts_receivable_payments.ret_customer_balance2(to_prepaid_payments.customer_id);
-                    double new_balance = cus.prepaid + (to_prepaid_payments.cash + to_prepaid_payments.check_amount);
+                    double new_balance = cus.prepaid + (to_prepaid_payments.cash + to_prepaid_payments.check_amount+to_prepaid_payments.credit_card_amount+to_prepaid_payments.gift_certificate_amount+to_prepaid_payments.online_amount);
                     String s2 = "update  customers set "
                             + " prepaid= :prepaid"
                             + " where "
@@ -425,6 +566,20 @@ public class Prepaid_payments {
                     + ",location_id"
                     + ",remarks"
                     + ",refund"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + " from prepaid_payments"
                     + " " + where;
 
@@ -451,9 +606,24 @@ public class Prepaid_payments {
                 String location_id = rs.getString(18);
                 String remarks = rs.getString(19);
                 int refund = rs.getInt(20);
+                String credit_card_type = rs.getString(21);
+                double credit_card_rate = rs.getDouble(22);
+                String credit_card_no = rs.getString(23);
+                String credit_card_holder = rs.getString(24);
+                double credit_card_amount = rs.getDouble(25);
+                String gift_certificate_from = rs.getString(26);
+                String gift_certificate_description = rs.getString(27);
+                String gift_certificate_no = rs.getString(28);
+                double gift_certificate_amount = rs.getDouble(29);
+                String online_bank = rs.getString(30);
+                String online_reference_no = rs.getString(31);
+                String online_holder = rs.getString(32);
+                String online_date = rs.getString(32);
+                double online_amount = rs.getDouble(34);
                 to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added,
                                                                  customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id,
-                                                                 user_screen_name, branch, branch_id, location, location_id, remarks, refund);
+                                                                 user_screen_name, branch, branch_id, location, location_id, remarks
+                        , refund, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
                 datas.add(to);
             }
             return datas;

@@ -5,19 +5,28 @@
  */
 package POS.inventory;
 
+import POS.inventory_assembly.Inventory_assembly;
 import POS.util.Alert;
 import POS.util.Dlg_confirm_action;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
+import synsoftech.panels.Loading;
 
 /**
  *
@@ -386,18 +395,20 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 //
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
 //        System.setProperty("pool_host", "localhost");
 //        System.setProperty("main_branch", "false");
 //        System.setProperty("active_branches", "10");
 //        System.setProperty("cloud_host", "128.199.80.53");
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
-//        System.setProperty("cloud_db", "db_algorithm");
+//        System.setProperty("cloud_db", "db_smis_dumaguete_refreshments_development");
+//        System.setProperty("main_branch", "false");
+//        System.setProperty("receipt_printing_enabled2", "true");
 
         init_key();
 
-//        check_for_upload();
+        check_for_upload();
     }
 
     public void do_pass() {
@@ -424,29 +435,127 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
 
     List<Inventory.to_inventory> to_add = new ArrayList();
     List<Inventory.to_inventory> to_update = new ArrayList();
+    List<Inventory.to_inventory> to_delete = new ArrayList();
+    List<Inventory_assembly.to_inventory_assembly> assembly_cloud_to_add = new ArrayList();
+    List<Inventory_assembly.to_inventory_assembly> assembly_cloud_to_delete = new ArrayList();
 
     private void check_for_upload() {
         to_add.clear();
         to_update.clear();
+        to_delete.clear();
+        assembly_cloud_to_add.clear();
+        assembly_cloud_to_delete.clear();
         String cloud_host = System.getProperty("cloud_host", "");
         if (!cloud_host.isEmpty()) {
             System.out.println("Retrieving records...");
             String where = " where is_uploaded=0 or is_uploaded=2 ";
-            List<Inventory.to_inventory> inventory_cloud = Inventory.ret_data22_cloud(where);
+            List<Inventory.to_inventory> inventory_cloud = Inventory.ret_data22_cloud("");
             List<Inventory.to_inventory> inventory_local = Inventory.ret_data22("");
-            for (Inventory.to_inventory to : inventory_local) {
-                if (to.is_uploaded == 0) {
-                    to_add.add(to);
+            System.out.println("Cloud Items: " + inventory_cloud.size());
+            System.out.println("Local Items: " + inventory_local.size());
+
+            System.out.println("Checking records....");
+
+            List<Inventory_assembly.to_inventory_assembly> assembly_local = Inventory_assembly.ret_data("");
+            List<Inventory_assembly.to_inventory_assembly> assembly_cloud = Inventory_assembly.ret_data_cloud("");
+
+            for (Inventory_assembly.to_inventory_assembly assembly_c : assembly_cloud) {
+                int exists = 0;
+                for (Inventory_assembly.to_inventory_assembly assembly_l : assembly_local) {
+                    if ((assembly_c.main_item_code.equalsIgnoreCase(assembly_l.main_item_code)) && assembly_c.item_code.equalsIgnoreCase(assembly_l.item_code)) {
+                        exists = 1;
+                        break;
+                    }
                 }
-                if (to.is_uploaded == 2) {
-                    to_update.add(to);
+                if (exists == 0) {
+                    assembly_cloud_to_add.add(assembly_c);
+                    System.out.println("Main Item: " + assembly_c.main_item_code + "    New Item: " + assembly_c.item_code + " " + assembly_c.description);
                 }
             }
 
-            System.out.println("Cloud Size: " + inventory_cloud.size());
-            System.out.println("Local Size: " + inventory_local.size());
-            System.out.println("New Item/s: " + to_add.size());
-            System.out.println("Does not match: " + to_update.size());
+            for (Inventory_assembly.to_inventory_assembly assembly_l : assembly_local) {
+                int exists = 0;
+                for (Inventory_assembly.to_inventory_assembly assembly_c : assembly_cloud) {
+                    if ((assembly_l.main_item_code.equalsIgnoreCase(assembly_c.main_item_code)) && assembly_l.item_code.equalsIgnoreCase(assembly_c.item_code)) {
+                        exists = 1;
+                        break;
+                    }
+                }
+
+                if (exists == 0) {
+                    assembly_cloud_to_delete.add(assembly_l);
+                    System.out.println("Main Item: " + assembly_l.main_item_code);
+                    System.out.println("    New Item: " + assembly_l.item_code + " " + assembly_l.description);
+                }
+            }
+
+            for (Inventory.to_inventory cloud : inventory_cloud) {
+                int exists = 0;
+                Inventory.to_inventory to = null;
+                for (Inventory.to_inventory local : inventory_local) {
+                    if (cloud.barcode.equals(local.barcode)) {
+                        exists = 1;
+                        to = local;
+                        break;
+                    }
+                }
+
+                if (exists == 0) {
+                    to_add.add(cloud);
+                } else {
+                    int update = 0;
+                    if (!cnull(cloud.description).equalsIgnoreCase(cnull(to.description))
+                            || !cnull(cloud.category).equalsIgnoreCase(cnull(to.category))
+                            || !cnull(cloud.classification).equalsIgnoreCase(cnull(to.classification))
+                            || !cnull(cloud.sub_classification).equalsIgnoreCase(cnull(to.sub_classification))
+                            || !cnull(cloud.item_type).equalsIgnoreCase(cnull(to.item_type))
+                            || !cnull(cloud.brand).equalsIgnoreCase(cnull(to.brand))
+                            || !cnull(cloud.model).equalsIgnoreCase(cnull(to.model))
+                            || !cnull(cloud.barcodes).equalsIgnoreCase(cnull(to.barcodes))
+                            || !cnull(cloud.unit).equalsIgnoreCase(cnull(to.unit))
+                            || (cloud.selling_price != to.selling_price)
+                            || (cloud.conversion != to.conversion)
+                            || (cloud.allow_negative_inventory != to.allow_negative_inventory)
+                            || (cloud.auto_order != to.auto_order)
+                            || !cnull(cloud.generic_name).equalsIgnoreCase(cnull(to.generic_name))) {
+                        update = 1;
+                    }
+                    if (update == 1) {
+                        to_update.add(cloud);
+                    }
+                }
+            }
+
+            for (Inventory.to_inventory lo : inventory_local) {
+                int exists = 0;
+                for (Inventory.to_inventory cl : inventory_cloud) {
+                    if (lo.barcode.equalsIgnoreCase(cl.barcode)) {
+                        exists = 1;
+                        break;
+                    }
+                }
+                if (exists == 0) {
+                    to_delete.add(lo);
+
+                }
+            }
+
+            System.out.println("Finished checking records...");
+            System.out.println("----------------------------------------------");
+            System.out.println("Items to Add: " + to_add.size());
+            System.out.println("Items to Update: " + to_update.size());
+            System.out.println("Items to Delete: " + to_delete.size());
+
+            System.out.println("Saving items...");
+            jLabel11.setText("" + to_add.size());
+            jLabel12.setText("" + to_update.size());
+
+            System.out.println("----------------------------------------------");
+            System.out.println("Assembly Local: " + assembly_local.size());
+            System.out.println("Assembly Cloud: " + assembly_cloud.size());
+            System.out.println("New Item Assembly: " + assembly_cloud_to_add.size());
+            System.out.println("To Delete: " + assembly_cloud_to_delete.size());
+
             jLabel11.setText(FitIn.fmt_woc(to_add.size()));
             jLabel12.setText(FitIn.fmt_woc(to_update.size()));
 
@@ -515,96 +624,24 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                     closeDialog.ok();
-                    jProgressBar1.setString("Loading...Please wait...");
-                    jProgressBar1.setIndeterminate(true);
-//                    jButton1.setEnabled(false);
-                    jButton2.setEnabled(false);
-                    Thread t = new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            List<Inventory.to_inventory> inventory_cloud = Inventory.ret_data22_cloud("");
-                            List<Inventory.to_inventory> inventory_local = Inventory.ret_data22("");
-                            System.out.println("Cloud Items: " + inventory_cloud.size());
-                            System.out.println("Local Items: " + inventory_local.size());
-
-                            List<Inventory.to_inventory> to_add = new ArrayList();
-                            List<Inventory.to_inventory> to_update = new ArrayList();
-                            System.out.println("Checking records....");
-                            for (Inventory.to_inventory cloud : inventory_cloud) {
-                                int exists = 0;
-                                Inventory.to_inventory to = null;
-                                for (Inventory.to_inventory local : inventory_local) {
-                                    if (cloud.barcode.equals(local.barcode)) {
-                                        exists = 1;
-                                        to = local;
-                                        break;
-                                    }
-                                }
-
-                                if (exists == 0) {
-                                    to_add.add(cloud);
-                                } else {
-                                    int update = 0;
-                                    if (!cnull(cloud.description).equalsIgnoreCase(cnull(to.description))
-                                            || !cnull(cloud.category).equalsIgnoreCase(cnull(to.category))
-                                            || !cnull(cloud.classification).equalsIgnoreCase(cnull(to.classification))
-                                            || !cnull(cloud.sub_classification).equalsIgnoreCase(cnull(to.sub_classification))
-                                            || !cnull(cloud.item_type).equalsIgnoreCase(cnull(to.item_type))
-                                            || !cnull(cloud.brand).equalsIgnoreCase(cnull(to.brand))
-                                            || !cnull(cloud.model).equalsIgnoreCase(cnull(to.model))
-                                            || !cnull(cloud.barcodes).equalsIgnoreCase(cnull(to.barcodes))
-                                            || !cnull(cloud.unit).equalsIgnoreCase(cnull(to.unit))
-                                            || (cloud.selling_price != to.selling_price)
-                                            || (cloud.conversion != to.conversion)
-                                            || (cloud.allow_negative_inventory != to.allow_negative_inventory)
-                                            || (cloud.auto_order != to.auto_order)
-                                            || !cnull(cloud.generic_name).equalsIgnoreCase(cnull(to.generic_name))
-                                            ) {
-                                        update = 1;
-                                    }
-                                    if (update == 1) {
-                                        to_update.add(cloud);
-                                    }
-                                }
-                            }
-                            
-                            System.out.println("Finished checking records...");
-                            System.out.println("Items to add: " + to_add.size());
-                            System.out.println("Adding items...");
-                            jLabel11.setText("" + to_add.size());
-                            jLabel12.setText("" + to_update.size());
-                            
-                            for (Inventory.to_inventory to : to_add) {
-                                System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
-                                Inventory.add_inventory(to);
-                            }
-                            System.out.println("Items to update: " + to_update.size());
-                            System.out.println("Updating items...");
-                            String main_branch = System.getProperty("main_branch", "false");
-                            String receipt_printing_enabled2 = System.getProperty("receipt_printing_enabled2", "false");
-                            if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("false")) {
-                                for (Inventory.to_inventory to : to_update) {
-                                    System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
-                                    Inventory.edit_inventory_no_price(to, to, " where main_barcode='" + to.barcode + "' ");
-                                }
-                            }
-                            if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("true")) {
-                                for (Inventory.to_inventory to : to_update) {
-                                    System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
-                                    Inventory.edit_inventory_with_price(to, to, " where main_barcode='" + to.barcode + "' ");
-                                }
-                            }
-                            Alert.set(0, "Check and Download Successfull!");
-                            System.out.println("Finished updating items...");
-
-//                            jButton1.setEnabled(true);
-                            jButton2.setEnabled(true);
-                            jProgressBar1.setString("Finished...");
-                            jProgressBar1.setIndeterminate(false);
-                        }
-                    });
-                    t.start();
+                    download_local();
+//                    jProgressBar1.setString("Loading...Please wait...");
+//                    jProgressBar1.setIndeterminate(true);
+////                    jButton1.setEnabled(false);
+//                    jButton2.setEnabled(false);
+//                    Thread t = new Thread(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                           
+//
+////                            jButton1.setEnabled(true);
+//                            jButton2.setEnabled(true);
+//                            jProgressBar1.setString("Finished...");
+//                            jProgressBar1.setIndeterminate(false);
+//                        }
+//                    });
+//                    t.start();
                 }
             });
             nd.setLocationRelativeTo(this);
@@ -618,4 +655,105 @@ public class Dlg_inventory_cloud_transactions_local extends javax.swing.JDialog 
         }
         return var;
     }
+
+    private void download_local() {
+        Loader_download_local loader = new Loader_download_local(this);
+        loader.execute();
+    }
+
+    private void proceed_download_local() {
+
+        for (Inventory.to_inventory to : to_add) {
+            System.out.println("  To Add =  Barcode: " + to.barcode + " - Description: " + to.description);
+            List<Inventory.to_inventory> check_inv = Inventory.ret_data22(" where barcode='" + to.barcode + "' ");
+            if (check_inv.isEmpty()) {
+                Inventory.add_inventory(to);
+            }
+
+        }
+
+        for (Inventory.to_inventory to : to_delete) {
+            System.out.println("   To Delete = Barcode: " + to.barcode + " - Description: " + to.description);
+            Inventory.delete_inventory(to);
+        }
+
+        System.out.println("Updating items...");
+        String main_branch = System.getProperty("main_branch", "false");
+        String receipt_printing_enabled2 = System.getProperty("receipt_printing_enabled2", "false");
+        if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("false")) {
+            for (Inventory.to_inventory to : to_update) {
+                System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
+                Inventory.edit_inventory_no_price(to, to, " where main_barcode='" + to.barcode + "' ");
+            }
+        }
+        if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("true")) {
+            for (Inventory.to_inventory to : to_update) {
+                System.out.println("    Barcode: " + to.barcode + " - Description: " + to.description);
+                Inventory.edit_inventory_with_price(to, to, " where main_barcode='" + to.barcode + "' ");
+            }
+        }
+        if (main_branch.equalsIgnoreCase("false")) {
+
+        }
+        if (main_branch.equalsIgnoreCase("false") && receipt_printing_enabled2.equalsIgnoreCase("true")) {
+            Inventory_assembly.upload_assembly_to_local_from_cloud(assembly_cloud_to_add, assembly_cloud_to_delete);
+        }
+
+        check_for_upload();
+        System.out.println("Finished updating items...");
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" Loader Post And Finalize ">
+    public class Loader_download_local extends SwingWorker {
+
+        private Loading dialog;
+
+        public Loader_download_local(JDialog dlg) {
+
+            dialog = new Loading();
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            dialog.setSize(xSize, ySize);
+            dialog.setPreferredSize(new Dimension(xSize, ySize));
+            dialog.setAlwaysOnTop(true);
+            addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("state".equals(evt.getPropertyName())) {
+                        if (getState() == SwingWorker.StateValue.STARTED) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (getState() == SwingWorker.StateValue.STARTED) {
+                                        dialog.setVisible(true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            proceed_download_local();
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            dialog.dispose();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });
+        }
+    }
+
+    //</editor-fold>
 }

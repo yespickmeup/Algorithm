@@ -1967,7 +1967,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
             String screen_name = "";
             String time_in = "";
             String time_out = DateType.now();
-            double amount = 0;
+            double amount = FitIn.toDouble(tf_cashin.getText());
             double cash_out = 0;
             double coins = 0;
             double expenses = 0;
@@ -1984,7 +1984,7 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
             CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
                     time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
                     one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
-
+            System.out.println("id: "+id);
             String date = DateType.sf.format(new Date());
             CashDrawer.update_data(to, "" + id);
             ret_cashcounts();

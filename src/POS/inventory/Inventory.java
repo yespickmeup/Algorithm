@@ -28,7 +28,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Inventory {
 
-    public static class to_inventory implements Serializable{
+    public static class to_inventory implements Serializable {
 
         public final int id;
         public final String barcode;
@@ -1971,6 +1971,7 @@ public class Inventory {
                     .setNumber("is_uploaded", 1)
                     .ok();
             stmt2.addBatch(s4);
+//            System.out.println(s4);
             String s5 = "update inventory_barcodes set "
                     + " is_uploaded= :is_uploaded"
                     + " where "
@@ -1989,6 +1990,7 @@ public class Inventory {
 
             Lg.s(Inventory_barcodes.class, "Successfully Updated");
             MyConnection.close();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -2168,6 +2170,13 @@ public class Inventory {
                     + " ";
 
             stmt.addBatch(s2);
+
+            String s3 = "delete from inventory_assembly where "
+                    + " main_item_code ='" + to_inventory.barcode + "' "
+                    + " ";
+
+            stmt.addBatch(s3);
+
             query.add(s2);
             stmt.executeBatch();
             conn.commit();
@@ -2970,9 +2979,9 @@ public class Inventory {
             int is_uploaded = 0;
             int allow_negative_inventory = 0;
             int auto_order = 1;
-            to_inventory t1 = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, location, location_id, false, is_uploaded,allow_negative_inventory,auto_order);
+            to_inventory t1 = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
             add_inventory(t1);
-            Inventory_barcodes.to_inventory_barcodes codes = new Inventory_barcodes.to_inventory_barcodes(id, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, to.location, to.location_id, "", "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
+            Inventory_barcodes.to_inventory_barcodes codes = new Inventory_barcodes.to_inventory_barcodes(id, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, to.branch, to.branch_id, to.location, to.location_id, "", "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order);
 //          S1_inventory_barcodes.add_inventory_barcodes(codes);
         }
     }

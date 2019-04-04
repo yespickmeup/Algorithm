@@ -8,6 +8,7 @@ package POS.stock_transfer;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Inventory;
+import POS.receipts.Stock_transfers_items;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.Center;
@@ -768,15 +769,14 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_bodega");
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_bodega");
 //        MyUser.setUser_id("1");
-
         String where = " order by branch,location asc ";
         branch_location_list3 = S1_branch_locations.ret_location_where(where);
 //        String where3 = " where user_id='" + MyUser.getUser_id() + "' ";
 //        stock_transfer_privileges = Stock_transfer_privileges.ret_data(where3);
-
 //        set_default_branch();
         tf_to_branch_id.setVisible(false);
         tf_to_location_id.setVisible(false);
+
     }
 
     private void set_default_branch() {
@@ -839,8 +839,9 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
                 tf_to_location.setText("" + to.location);
                 tf_to_location_id.setText("" + to.id);
 
-                ret_items();
+//                ret_items();
                 ret_stock_transfers();
+
             }
         });
     }
@@ -853,6 +854,7 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
 
     List<Stock_transfers.to_stock_transfers> transfers = new ArrayList();
     List<Inventory.to_inventory> inventory_items = new ArrayList();
+    List<Stock_transfers_items.to_stock_transfers_items> transfer_items = new ArrayList();
 
     private void ret_stock_transfers() {
         if (tf_to_location_id.getText().isEmpty()) {
@@ -863,8 +865,24 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         String where = " where status=0 and to_location_id='" + tf_to_location_id.getText() + "' ";
         inventory_items.clear();
         inventory_items = Inventory.ret_data6("");
+        jLabel2.setText("" + inventory_items.size());
         transfers.clear();
         transfers = Stock_transfers.ret_data(where);
+        String where_on = "";
+        int i = 0;
+        for (Stock_transfers.to_stock_transfers trans : transfers) {
+            if (i == 0) {
+                where_on = "\"" + trans.transaction_no + "\"";
+            } else {
+                where_on = where_on + ",\"" + trans.transaction_no + "\"";
+            }
+            i++;
+        }
+        if (!transfers.isEmpty()) {
+            String where2 = " where stock_transfer_id IN(" + where_on + ") order by stock_transfer_id,id asc ";
+            transfer_items = Stock_transfers_items.ret_data(where2);
+        }
+
         jLabel3.setText("" + transfers.size());
         jLabel5.setText("" + inventory_items.size());
     }
@@ -895,14 +913,12 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
-
         }
     }
 
     List<Inventory.to_inventory> inventory_items_downloaded = new ArrayList();
 
     public static void save(File file, Object o) {
-
         try {
             // save the file here
             String filename = file.getAbsoluteFile() + ".smis";

@@ -11,7 +11,7 @@ import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
 import POS.inventory.uom;
-import POS.inventory_assembly.S1_inventory_assembly.to_inventory_assembly;
+import POS.inventory_assembly.Inventory_assembly.to_inventory_assembly;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -633,7 +633,7 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
                 String location = to.location;
                 String location_id = to.location_id;
                 to_inventory_assembly field = new to_inventory_assembly(id, main_item_code, main_barcode, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true);
-                S1_inventory_assembly.add_data(field);
+                Inventory_assembly.add_data(field);
                 ret_uoms();
             }
         });
@@ -644,7 +644,7 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
     private void ret_uoms() {
         String item_code = jTextField2.getText();
         String where = " where main_item_code='" + item_code + "' ";
-        List<to_inventory_assembly> datas = S1_inventory_assembly.ret_data(where);
+        List<to_inventory_assembly> datas = Inventory_assembly.ret_data(where);
         loadData_inventory_assembly(datas);
     }
     List<Inventory_barcodes.to_inventory_barcodes> inventory_barcoders_list2 = new ArrayList();
@@ -943,7 +943,7 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                     closeDialog.ok();
-                    S1_inventory_assembly.delete_data(field);
+                    Inventory_assembly.delete_data(field);
                     ret_uoms();
                 }
             });
@@ -963,7 +963,7 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
         }
         List<Inventory_barcodes.to_inventory_barcodes> order = new ArrayList();
         order.add(main_item);
-        order.addAll(S1_inventory_assembly.convert_to_inventory_barcodes(datas2));
+        order.addAll(Inventory_assembly.convert_to_inventory_barcodes2(datas2));
 
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(order));
@@ -987,7 +987,7 @@ public class Dlg_inventory_assembly extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_delete.OutputData data) {
                 closeDialog.ok();
-                S1_inventory_assembly.delete_assembly(datas2);
+                Inventory_assembly.delete_assembly(datas2);
                 Alert.set(3, "");
                 ret_uoms();
             }

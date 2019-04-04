@@ -7,6 +7,7 @@ package POS.stock_transfer;
 import POS.inventory.S1_items2;
 import POS.main.Main.MyDB;
 import POS.util.MyConnection;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Stock_transfer_items {
 
-    public static class to_receipt_items {
+    public static class to_receipt_items implements Serializable{
 
         public final int id;
         public final String receipt_no;

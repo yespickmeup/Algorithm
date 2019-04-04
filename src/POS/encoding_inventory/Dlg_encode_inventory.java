@@ -1342,7 +1342,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
 //        jButton6.setEnabled(true);
         init_key();
         focus();
@@ -1408,14 +1408,14 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         tf_item_code.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -1563,7 +1563,7 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
                             try {
                                 uom1 = s.substring(1, i);
                             } catch (Exception e) {
-                                uom1="";
+                                uom1 = "";
                             }
 
                             double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
@@ -1764,7 +1764,8 @@ public class Dlg_encode_inventory extends javax.swing.JDialog {
 //        }
         String date_added = "";
         try {
-            date_added = DateType.sf.format(jDateChooser1.getDate()) + " 23:00:01";
+            date_added = DateType.sf.format(jDateChooser1.getDate()) + " " + DateType.time4.format(new Date());
+//            date_added = DateType.sf.format(jDateChooser1.getDate()) + " 23:00:01";
         } catch (Exception e) {
             Alert.set(0, "Select Date!");
             choose_replenishment();

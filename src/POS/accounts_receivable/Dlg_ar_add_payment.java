@@ -94,8 +94,10 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         public final String online_date;
         public final double online_amount;
         public final double actual_tendered;
+        public final double retention;
+        public final double business_tax;
 
-        public OutputData(String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amount, String check_no, String check_date, double tax_rate, double tax_amount, String discount, double discount_rate, double discount_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount, double actual_tendered) {
+        public OutputData(String date_applied, double cash, String or_no, String check_bank, String check_holder, double check_amount, String check_no, String check_date, double tax_rate, double tax_amount, String discount, double discount_rate, double discount_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount, double actual_tendered, double retention, double business_tax) {
             this.date_applied = date_applied;
             this.cash = cash;
             this.or_no = or_no;
@@ -127,6 +129,8 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             this.online_date = online_date;
             this.online_amount = online_amount;
             this.actual_tendered = actual_tendered;
+            this.retention = retention;
+            this.business_tax = business_tax;
         }
 
     }
@@ -268,6 +272,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new Button.Success();
@@ -353,6 +358,12 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         jDateChooser5 = new com.toedter.calendar.JDateChooser();
         tf_ap_cash9 = new Field.Input();
         jLabel52 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel54 = new javax.swing.JLabel();
+        tf_ap_cash11 = new Field.Input();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel55 = new javax.swing.JLabel();
+        tf_ap_cash12 = new Field.Input();
         jPanel11 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
         tf_ap_cash10 = new javax.swing.JTextField();
@@ -1172,6 +1183,84 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Online", jPanel9);
 
+        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel54.setText("Retention Amount:");
+
+        tf_ap_cash11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_ap_cash11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_ap_cash11ActionPerformed(evt);
+            }
+        });
+        tf_ap_cash11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_ap_cash11KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabel54)
+                .addGap(4, 4, 4)
+                .addComponent(tf_ap_cash11, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_ap_cash11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Retention", jPanel12);
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel55.setText("Amount:");
+
+        tf_ap_cash12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_ap_cash12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_ap_cash12ActionPerformed(evt);
+            }
+        });
+        tf_ap_cash12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_ap_cash12KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(163, 163, 163)
+                .addComponent(jLabel55)
+                .addGap(4, 4, 4)
+                .addComponent(tf_ap_cash12, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(175, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_ap_cash12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Business Tax", jPanel13);
+
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel53.setText("Total Tendered:");
@@ -1348,7 +1437,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_ap_cash4ActionPerformed
 
     private void tf_ap_cash5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_cash5ActionPerformed
-          count_tender();
+        count_tender();
     }//GEN-LAST:event_tf_ap_cash5ActionPerformed
 
     private void tf_ap_cash5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_ap_cash5KeyReleased
@@ -1420,12 +1509,29 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         count_tender();
     }//GEN-LAST:event_tf_discount_amountKeyReleased
 
+    private void tf_ap_cash11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_cash11ActionPerformed
+        count_tender();
+    }//GEN-LAST:event_tf_ap_cash11ActionPerformed
+
+    private void tf_ap_cash11KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_ap_cash11KeyReleased
+        count_tender();
+    }//GEN-LAST:event_tf_ap_cash11KeyReleased
+
+    private void tf_ap_cash12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ap_cash12ActionPerformed
+        count_tender();
+    }//GEN-LAST:event_tf_ap_cash12ActionPerformed
+
+    private void tf_ap_cash12KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_ap_cash12KeyReleased
+        count_tender();
+    }//GEN-LAST:event_tf_ap_cash12KeyReleased
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1470,9 +1576,13 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1486,6 +1596,8 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
     private javax.swing.JTextField tf_ap_cash;
     private javax.swing.JTextField tf_ap_cash1;
     private javax.swing.JTextField tf_ap_cash10;
+    private javax.swing.JTextField tf_ap_cash11;
+    private javax.swing.JTextField tf_ap_cash12;
     private javax.swing.JTextField tf_ap_cash2;
     private javax.swing.JTextField tf_ap_cash3;
     private javax.swing.JTextField tf_ap_cash4;
@@ -1728,8 +1840,10 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         online_amount = FitIn.toDouble(tf_ap_cash9.getText());
 
         double total_tendered = FitIn.toDouble(tf_ap_cash10.getText());
-        double discount1=FitIn.toDouble(tf_discount_amount.getText());
+        double discount1 = FitIn.toDouble(tf_discount_amount.getText());
         double tendered = FitIn.toDouble(tf_ap_cash2.getText());
+        double retention = FitIn.toDouble(tf_ap_cash11.getText());
+        double business_tax = FitIn.toDouble(tf_ap_cash12.getText());
         if (total_tendered != tendered) {
             Alert.set(0, "Not enough amount entered!");
             return;
@@ -1737,14 +1851,15 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         double actual_tendered = FitIn.toDouble(tf_ap_cash.getText());
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(date_applied, cash, or_no, check_bank, check_holder, check_amount, check_no, check_date, tax_rate,
-                         tax_amount, discount, discount_rate, discount_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
-                         credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
-                         gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_tendered));
+                                                              tax_amount, discount, discount_rate, discount_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
+                                                              credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
+                                                              gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder,
+                         online_date, online_amount, actual_tendered, retention, business_tax));
         }
     }
-    
+
     List<S1_discounts.to_discounts> discount_list = new ArrayList();
-    
+
     private void init_discount() {
         String search = tf_discount_name.getText();
         discount_list.clear();
@@ -1902,32 +2017,36 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         double credit_card = FitIn.toDouble(tf_ap_cash7.getText());
         double gift_certificate = FitIn.toDouble(tf_ap_cash8.getText());
         double online = FitIn.toDouble(tf_ap_cash9.getText());
-        double discount=FitIn.toDouble(tf_discount_amount.getText());
+        double retention = FitIn.toDouble(tf_ap_cash11.getText());
+        double business_tax = FitIn.toDouble(tf_ap_cash12.getText());
+        double discount = FitIn.toDouble(tf_discount_amount.getText());
         double tendered = FitIn.toDouble(tf_ap_cash2.getText());
-        double total_tendered = cash + check + prepaid + credit_card + gift_certificate + online+discount;
+
+        double total_tendered = cash + check + prepaid + credit_card + gift_certificate + online + discount + retention + business_tax;
 
         tf_ap_cash10.setText(FitIn.fmt_wc_0(total_tendered));
 
         double remaining = tendered - total_tendered;
 
-        double total_for_cash = check + prepaid + credit_card + gift_certificate + online;
-        double total_for_check = cash + prepaid + credit_card + gift_certificate + online;
-        double total_for_prepaid = cash + check + credit_card + gift_certificate + online;
-        double total_for_credit_card = cash + check + prepaid + gift_certificate + online;
-        double total_for_gift_certificate = cash + check + prepaid + credit_card + online;
-        double total_for_online = cash + check + prepaid + credit_card + gift_certificate;
-
+        double total_for_cash = check + prepaid + credit_card + gift_certificate + online + retention + business_tax;
+        double total_for_check = cash + prepaid + credit_card + gift_certificate + online + retention + business_tax;
+        double total_for_prepaid = cash + check + credit_card + gift_certificate + online + retention + business_tax;
+        double total_for_credit_card = cash + check + prepaid + gift_certificate + online + retention + business_tax;
+        double total_for_gift_certificate = cash + check + prepaid + credit_card + online + retention + business_tax;
+        double total_for_online = cash + check + prepaid + credit_card + gift_certificate + retention + business_tax;
+        double total_for_retention = cash + check + prepaid + credit_card + gift_certificate + online + business_tax;
+        double total_for_business_tax = cash + check + prepaid + credit_card + gift_certificate + online + retention;
         if (remaining < 0 && tf_ap_cash4.hasFocus()) {
-            remaining = (tendered - total_for_cash)-discount;
+            remaining = (tendered - total_for_cash) - discount;
             tf_ap_cash4.setText(FitIn.fmt_wc_0(remaining));
         }
         if (remaining < 0 && tf_ap_cash5.hasFocus()) {
-            remaining = (tendered - total_for_check)-discount;
+            remaining = (tendered - total_for_check) - discount;
             tf_ap_cash5.setText(FitIn.fmt_wc_0(remaining));
         }
         if (remaining < 0 && tf_ap_cash6.hasFocus()) {
             double prepaid_balance = FitIn.toDouble(tf_prepaid_balance.getText());
-            remaining = (tendered - total_for_prepaid)-discount;
+            remaining = (tendered - total_for_prepaid) - discount;
             tf_ap_cash6.setText(FitIn.fmt_wc_0(remaining));
             if (prepaid_balance < remaining) {
                 tf_ap_cash6.setText(FitIn.fmt_wc_0(prepaid_balance));
@@ -1941,16 +2060,24 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
             }
         }
         if (remaining < 0 && tf_ap_cash7.hasFocus()) {
-            remaining = (tendered - total_for_credit_card)-discount;
+            remaining = (tendered - total_for_credit_card) - discount;
             tf_ap_cash7.setText(FitIn.fmt_wc_0(remaining));
         }
         if (remaining < 0 && tf_ap_cash8.hasFocus()) {
-            remaining = (tendered - total_for_gift_certificate)-discount;
+            remaining = (tendered - total_for_gift_certificate) - discount;
             tf_ap_cash8.setText(FitIn.fmt_wc_0(remaining));
         }
         if (remaining < 0 && tf_ap_cash9.hasFocus()) {
-            remaining = (tendered - total_for_online)-discount;
+            remaining = (tendered - total_for_online) - discount;
             tf_ap_cash9.setText(FitIn.fmt_wc_0(remaining));
+        }
+        if (remaining < 0 && tf_ap_cash11.hasFocus()) {
+            remaining = (tendered - total_for_retention) - discount;
+            tf_ap_cash11.setText(FitIn.fmt_wc_0(remaining));
+        }
+        if (remaining < 0 && tf_ap_cash12.hasFocus()) {
+            remaining = (tendered - total_for_business_tax) - discount;
+            tf_ap_cash12.setText(FitIn.fmt_wc_0(remaining));
         }
         check_total_tendered();
     }
@@ -1962,8 +2089,10 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
         double credit_card = FitIn.toDouble(tf_ap_cash7.getText());
         double gift_certificate = FitIn.toDouble(tf_ap_cash8.getText());
         double online = FitIn.toDouble(tf_ap_cash9.getText());
-          double discount=FitIn.toDouble(tf_discount_amount.getText());
-        double total_tendered = cash + check + prepaid + credit_card + gift_certificate + online+discount;
+        double discount = FitIn.toDouble(tf_discount_amount.getText());
+        double retention = FitIn.toDouble(tf_ap_cash11.getText());
+        double business_tax = FitIn.toDouble(tf_ap_cash12.getText());
+        double total_tendered = cash + check + prepaid + credit_card + gift_certificate + online + discount + retention + business_tax;
         tf_ap_cash10.setText(FitIn.fmt_wc_0(total_tendered));
     }
 }

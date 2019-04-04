@@ -1070,6 +1070,7 @@ public class Inventory_barcodes {
                 String sub_classification = rs.getString(9);
                 String sub_classification_id = rs.getString(10);
                 double product_qty = rs.getDouble(11);
+
                 String unit = rs.getString(12);
                 double conversion = rs.getDouble(13);
                 double selling_price = rs.getDouble(14);
@@ -1099,6 +1100,8 @@ public class Inventory_barcodes {
                 String serial_no = rs.getString(37);
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
+               
+                
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
@@ -1370,6 +1373,7 @@ public class Inventory_barcodes {
                     + " ";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
+//            System.out.println("s0: " + s0);
             if (rs.next()) {
                 int id = rs.getInt(1);
                 String barcode = rs.getString(2);
@@ -2562,7 +2566,7 @@ public class Inventory_barcodes {
                 String serial_no2 = rs22.getString(37);
                 int allow_negative_inventory = rs22.getInt(38);
                 int auto_order = rs22.getInt(39);
-                to_inventory_barcodes to = new to_inventory_barcodes(id2, barcode2, description2, generic_name2, category2, category_id2, classification2, classification_id2, sub_classification2, sub_classification_id2, product_qty2, unit2, conversion2, selling_price2, date_added2, user_name2, item_type2, status2, supplier2, fixed_price2, cost2, supplier_id2, multi_level_pricing2, vatable2, reorder_level2, markup2, main_barcode2, brand2, brand_id2, model2, model_id2, selling_type2, branch2, branch_code2, location2, location_id2, serial_no2, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
+                to_inventory_barcodes to = new to_inventory_barcodes(id2, barcode2, description2, generic_name2, category2, category_id2, classification2, classification_id2, sub_classification2, sub_classification_id2, product_qty2, unit2, conversion2, selling_price2, date_added2, user_name2, item_type2, status2, supplier2, fixed_price2, cost2, supplier_id2, multi_level_pricing2, vatable2, reorder_level2, markup2, main_barcode2, brand2, brand_id2, model2, model_id2, selling_type2, branch2, branch_code2, location2, location_id2, serial_no2, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order);
 
                 String year = "" + DateType.y.format(new Date());
                 List<Srpt_item_ledger.field> field3 = new ArrayList();
@@ -3734,10 +3738,10 @@ public class Inventory_barcodes {
 //                }
 //
 //                cost = cost / conversion;
-                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id
-                        , sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier
-                        , fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id
-                        , selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
+                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
+                         sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
+                         fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id,
+                         selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order);
                 datas.add(to);
             }
             return datas;

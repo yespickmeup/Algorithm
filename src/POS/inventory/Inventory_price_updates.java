@@ -49,9 +49,10 @@ public class Inventory_price_updates {
         public final String at_branch_id;
         public final String at_location;
         public final String at_location_id;
+        public final double main_price;
 
         public to_inventory_price_updates(int id, String item_code, String barcode, String description, String old_unit, String unit, double conversion, double old_selling_price, double selling_price, int update_all_branch, int status, String date_added, String user_id, String user_screen_name, String branch, String branch_id, String location, String location_id, int is_uploaded,
-                String ipu_no, String at_branch, String at_branch_id, String at_location, String at_location_id) {
+                String ipu_no, String at_branch, String at_branch_id, String at_location, String at_location_id, double main_price) {
             this.id = id;
             this.item_code = item_code;
             this.barcode = barcode;
@@ -76,6 +77,7 @@ public class Inventory_price_updates {
             this.at_branch_id = at_branch_id;
             this.at_location = at_location;
             this.at_location_id = at_location_id;
+            this.main_price = main_price;
         }
 
         public String getUnit() {
@@ -745,7 +747,9 @@ public class Inventory_price_updates {
                 String at_branch_id = rs.getString(22);
                 String at_location = rs.getString(23);
                 String at_location_id = rs.getString(24);
-                to_inventory_price_updates to = new to_inventory_price_updates(id, item_code, barcode, description, old_unit, unit, conversion, old_selling_price, selling_price, update_all_branch, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id, is_uploaded, ipu_no, at_branch, at_branch_id, at_location, at_location_id);
+                List<Inventory.to_inventory> inv = Inventory.ret_data22(" where barcode='" + item_code + "' ");
+                double price = 0;
+                to_inventory_price_updates to = new to_inventory_price_updates(id, item_code, barcode, description, old_unit, unit, conversion, old_selling_price, selling_price, update_all_branch, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id, is_uploaded, ipu_no, at_branch, at_branch_id, at_location, at_location_id, price);
                 datas.add(to);
             }
             return datas;
@@ -761,6 +765,7 @@ public class Inventory_price_updates {
 
         try {
             Connection conn = MyConnection.cloud_connect();
+            Connection conn2 = MyConnection.connect();
             String s0 = "select "
                     + "id"
                     + ",item_code"
@@ -816,7 +821,14 @@ public class Inventory_price_updates {
                 String at_branch_id = rs.getString(22);
                 String at_location = rs.getString(23);
                 String at_location_id = rs.getString(24);
-                to_inventory_price_updates to = new to_inventory_price_updates(id, item_code, barcode, description, old_unit, unit, conversion, old_selling_price, selling_price, update_all_branch, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id, is_uploaded, ipu_no, at_branch, at_branch_id, at_location, at_location_id);
+                String s2 = " select selling_price from inventory where barcode='" + item_code + "' ";
+                Statement stmt2 = conn2.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                double price = 0;
+                if (rs2.next()) {
+                    price = rs2.getDouble(1);
+                }
+                to_inventory_price_updates to = new to_inventory_price_updates(id, item_code, barcode, description, old_unit, unit, conversion, old_selling_price, selling_price, update_all_branch, status, date_added, user_id, user_screen_name, branch, branch_id, location, location_id, is_uploaded, ipu_no, at_branch, at_branch_id, at_location, at_location_id, price);
                 datas.add(to);
             }
 

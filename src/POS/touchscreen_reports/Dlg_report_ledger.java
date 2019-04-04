@@ -742,6 +742,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_host", "localhost");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 
@@ -897,6 +898,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String date_from_sales = DateType.sf.format(jDateChooser3.getDate());
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
                 String date_to_sales = DateType.sf.format(jDateChooser2.getDate());
+                String time = "All";
                 if (jCheckBox13.isSelected()) {
                     date_from_sales = date_from_sales + " 00:00:00";
                     date_to_sales = date_to_sales + " 23:59:59";
@@ -905,7 +907,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     String dts_time = DateType.convert_am_pm_to_stamp(tf_cashier4.getText(), "to");
                     date_from_sales = date_from_sales + " " + dfs_time;
                     date_to_sales = date_to_sales + " " + dts_time;
+                    time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
                 }
+
                 int status = 0;
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
@@ -982,6 +986,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double ar_collections_credit_card = 0;
                 double ar_collections_gc = 0;
                 double ar_collections_online = 0;
+                double retention=0;
+                double business_tax=0;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
 
                     collections_cheque += collection.check_amount;
@@ -990,6 +996,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     ar_collections_credit_card += collection.credit_card_amount;
                     ar_collections_gc += collection.gift_certificate_amount;
                     ar_collections_online += collection.online_amount;
+                    retention+=collection.retention;
+                    business_tax=collection.business_tax;
 //                    if (collection.check_amount > 0) {
 //
 //                    } else {
@@ -1065,7 +1073,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
                 Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                               collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
-                                                              refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online);
+                                                              refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online, time,retention,business_tax);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_sales_ledger.jrxml";
                 String pool_db = System.getProperty("pool_db", "db_smis");
@@ -1304,5 +1312,4 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             }
         }
     }
-
 }

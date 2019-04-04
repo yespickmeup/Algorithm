@@ -59,11 +59,17 @@ public class Srpt_ar_payment_ledger {
         String reference_no;
         String added_by;
         String status;
+        double prepaid;
+        double credit_card;
+        double gc;
+        double online;
+        double retention;
+        double business_tax;
 
         public field() {
         }
 
-        public field(String customer_id, String customer_name, String ar_no, String date_added, String date_applied, double amount, double discount_amount, double check_amount, String check_date, String soa_type, String reference_no, String added_by, String status) {
+        public field(String customer_id, String customer_name, String ar_no, String date_added, String date_applied, double amount, double discount_amount, double check_amount, String check_date, String soa_type, String reference_no, String added_by, String status, double prepaid, double credit_card, double gc, double online, double retention, double business_tax) {
             this.customer_id = customer_id;
             this.customer_name = customer_name;
             this.ar_no = ar_no;
@@ -77,6 +83,60 @@ public class Srpt_ar_payment_ledger {
             this.reference_no = reference_no;
             this.added_by = added_by;
             this.status = status;
+            this.prepaid = prepaid;
+            this.credit_card = credit_card;
+            this.gc = gc;
+            this.online = online;
+            this.retention = retention;
+            this.business_tax = business_tax;
+        }
+
+        public double getPrepaid() {
+            return prepaid;
+        }
+
+        public void setPrepaid(double prepaid) {
+            this.prepaid = prepaid;
+        }
+
+        public double getCredit_card() {
+            return credit_card;
+        }
+
+        public void setCredit_card(double credit_card) {
+            this.credit_card = credit_card;
+        }
+
+        public double getGc() {
+            return gc;
+        }
+
+        public void setGc(double gc) {
+            this.gc = gc;
+        }
+
+        public double getOnline() {
+            return online;
+        }
+
+        public void setOnline(double online) {
+            this.online = online;
+        }
+
+        public double getRetention() {
+            return retention;
+        }
+
+        public void setRetention(double retention) {
+            this.retention = retention;
+        }
+
+        public double getBusiness_tax() {
+            return business_tax;
+        }
+
+        public void setBusiness_tax(double business_tax) {
+            this.business_tax = business_tax;
         }
 
         public String getCustomer_id() {
@@ -188,7 +248,7 @@ public class Srpt_ar_payment_ledger {
     public static void main(String[] args) {
 
         System.setProperty("pool_db", "db_algorithm");
-        
+
         String business_name = System.getProperty("business_name", "Algorithm Computer Services");
         String address = System.getProperty("address", "Daro, Dumaguete City");
         String contact_no = System.getProperty("contact_no", "1234-567-8910");
@@ -274,6 +334,10 @@ public class Srpt_ar_payment_ledger {
                     + ",p.location"
                     + ",p.location_id"
                     + ",ar.term"
+                    + ",p.prepaid_amount"
+                    + ",p.credit_card_amount"
+                    + ",p.gift_certificate_amount"
+                    + ",p.online_amount"
                     + " from accounts_receivable_payments p "
                     + " join accounts_receivable ar "
                     + " on ar.ar_no=p.ar_no "
@@ -332,8 +396,15 @@ public class Srpt_ar_payment_ledger {
                 if (status == 0) {
                     status1 = "Finalized";
                 }
+                double prepaid = rs.getDouble(42);
+                double credit_card = rs.getDouble(43);
+                double gc = rs.getDouble(44);
+                double online = rs.getDouble(45);
+                double retention = 0;
+                double business_tax = 0;
 
-                Srpt_ar_payment_ledger.field field = new field(customer_id, customer_name, ar_no, date_added, date_applied, amount, discount_amount, check_amount, check_date, soa_type, reference_no, added_by, status1);
+                Srpt_ar_payment_ledger.field field = new field(customer_id, customer_name, ar_no, date_added, date_applied, amount, discount_amount, check_amount,
+                                                               check_date, soa_type, reference_no, added_by, status1, prepaid, credit_card, gc, online, retention, business_tax);
                 datas.add(field);
             }
             return datas;

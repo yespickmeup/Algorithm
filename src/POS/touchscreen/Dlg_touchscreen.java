@@ -16,7 +16,7 @@ import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_assembly.Dlg_inventory_assembly;
-import POS.inventory_assembly.S1_inventory_assembly;
+import POS.inventory_assembly.Inventory_assembly;
 import POS.my_sales.MySales_Items;
 import POS.my_services.My_services_customers;
 import POS.orders.S1_order_items;
@@ -3354,7 +3354,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         tbl_items.setFont(new java.awt.Font("Arial", 0, 14));
         TableWidthUtilities.setColumnRightRenderer(tbl_items, 3);
         tbl_items.getColumnModel().getColumn(1).setCellRenderer(new Html());
-
+        tbl_items.getColumnModel().getColumn(0).setCellRenderer(new Html());
         TableColumnModel tcm = tbl_items.getColumnModel();
         TableColumn tm = tcm.getColumn(2);
         tm.setCellRenderer(new Html());
@@ -3413,7 +3413,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             Inventory_barcodes.to_inventory_barcodes tt = (Inventory_barcodes.to_inventory_barcodes) getRow(row);
             switch (col) {
                 case 0:
-                    return "  " + FitIn.fmt_woc(tt.product_qty);
+                    String html2 = "<html><body>"
+                            + "&nbsp <font size=\"4\"> " + FitIn.fmt_woc(tt.product_qty) + "</font><br>"
+                            + "</body>"
+                            + "</html>";
+                    return html2;
+//                    return "  " + FitIn.fmt_woc(tt.product_qty);
                 case 1:
                     return " " + tt.barcode;
                 case 2:
@@ -3501,6 +3506,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 }
                 where = where + " order by description asc";
+
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
                 if (tbl_items_ALM.isEmpty()) {
@@ -3546,7 +3552,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 if (jCheckBox8.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 }
-                where = where + " order by description asc";
+
+                System.out.println("where2: " + where);
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
 
@@ -4012,19 +4019,75 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     add_order();
                 }
             } else {
-               
+
                 if (to.auto_order == 1) {
                     List<Inventory_barcodes.to_inventory_barcodes> order = new ArrayList();
                     String where = " where main_item_code='" + to.main_barcode + "' ";
-                    Inventory_barcodes.to_inventory_barcodes to2=to;
-                    to2.setProduct_qty(1);
-                    List<S1_inventory_assembly.to_inventory_assembly> datas = S1_inventory_assembly.ret_data(where);
-                    order.add(to2);
-                    order.addAll(S1_inventory_assembly.convert_to_inventory_barcodes(datas));
+                    Inventory_barcodes.to_inventory_barcodes to2 = to;
+                    double prod_qty = to.product_qty;
+//                    to2.setProduct_qty(1);
+                    List<Inventory_assembly.to_inventory_assembly> datas = Inventory_assembly.ret_data(where);
 
+                    //<editor-fold defaultstate="collapsed" desc=" to2 ">
+                    int id = to.id;
+                    String barcode = to.barcode;
+                    String description = to.description;
+                    String generic_name = to.generic_name;
+                    String category = to.category;
+                    String category_id = to.category_id;
+                    String classification = to.classification;
+                    String classification_id = to.classification_id;
+                    String sub_classification = to.sub_classification;
+                    String sub_classification_id = to.sub_classification_id;
+                    double product_qty = 1;
+                    String unit = to.unit;
+                    double conversion = to.conversion;
+                    double selling_price = to.selling_price;
+                    String date_added = DateType.now();
+                    String user_name = MyUser.getUser_id();
+                    String item_type = to.item_type;
+                    int status = to.status;
+                    String supplier = to.supplier;
+                    int fixed_price = to.fixed_price;
+                    double cost = to.cost;
+                    String supplier_id = to.supplier_id;
+                    int multi_level_pricing = to.multi_level_pricing;
+                    int vatable = to.vatable;
+                    double reorder_level = to.reorder_level;
+                    double markup = to.markup;
+                    String main_barcode = to.main_barcode;
+                    String brand = to.brand;
+                    String brand_id = to.brand_id;
+                    String model = to.model;
+                    String model_id = to.model_id;
+                    int selling_type = to.selling_type;
+                    String branch = to.branch;
+                    String branch_code = to.branch_code;
+                    String location = to.location;
+                    String location_id = to.location_id;
+                    String serial_no = "";
+                    String selected_serials = "";
+                    double discount = 0;
+                    double discount_amount = 0;
+                    String discount_name = "";
+                    String discount_customer_name = "";
+                    String discount_customer_id = "";
+                    double addtl_amount = 0;
+                    double wtax = 0;
+                    int allow_negative_inventory = to.allow_negative_inventory;
+                    int auto_order = to.auto_order;
+                    Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order);
+                    //</editor-fold>
+//                    to2.setProduct_qty(to.product_qty);
+
+                    order.addAll(Inventory_assembly.convert_to_inventory_barcodes(datas,to3));
+                    order.add(to3);
                     tbl_orders_ALM.addAll(order);
+
                     tbl_orders_M.fireTableDataChanged();
+
                     compute_total();
+
                 } else {
                     Window p = (Window) this;
                     Dlg_inventory_assembly nd = Dlg_inventory_assembly.create(p, true);
@@ -4412,8 +4475,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     String discount_name = to.discount_name;
                     String discount_customer_name = to.discount_customer_name;
                     String discount_customer_id = to.discount_customer_id;
-                    double addtl_cash = 0;
-                    double wtax = 0;
+                    double addtl_cash = to.addtl_amount;
+                    double wtax = to.wtax;
                     String sales_no = "";
                     String item_code = to.item_code;
                     String supplier_name = to.supplier_name;
@@ -4581,10 +4644,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String item_code = to.main_barcode;
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
+                        double addtl_amount1 = to.addtl_amount;
+                        double wtax1 = to.wtax;
                         S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price,
                                                                                               date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1,
                                                                                               discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification,
-                                                                                              classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                                                                                              classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount1, wtax1);
                         orders.add(ord);
                     }
                     System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
@@ -5276,10 +5341,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 System.out.println("NULL");
             } else {
                 System.out.println("NOT NULL");
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(Dlg_touchscreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Dlg_touchscreen.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -5571,6 +5638,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //        });
 //        nd.setLocationRelativeTo(this);
 //        nd.setVisible(true);
+
     }
 
     public class Loader extends SwingWorker {

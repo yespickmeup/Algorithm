@@ -1929,14 +1929,15 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //        System.setProperty("cloud_inventory_update", "true");
 //        System.setProperty("cloud_inventory_delete", "true");
 
-//        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_bodega");
+//        System.setProperty("pool_host", "localhost");
 //        System.setProperty("main_branch", "true");
 //        System.setProperty("active_branches", "10");
 //        System.setProperty("cloud_host", "128.199.80.53");
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
-//        System.setProperty("cloud_db", "db_algorithm");
+//        System.setProperty("cloud_db", "db_smis_dumaguete_refreshments_development");
+
         String environment = System.getProperty("environment", "development");
         if (environment.equalsIgnoreCase("development")) {
             jButton1.setVisible(true);
@@ -2266,12 +2267,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     int selected_row = -1;
 
     private void add_inventory() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Add)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Add)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
         Field.Combo cat = (Field.Combo) tf_category;
         Field.Combo classi = (Field.Combo) tf_classification;
         Field.Combo sub_class = (Field.Combo) tf_sub_classification;
@@ -2337,6 +2338,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
             auto_order = 1;
         }
         final to_inventory to = new to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
+       
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");

@@ -549,7 +549,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                         String location_id = "" + to.id;
                         int id = 0;
                         String inventory_replenishment_no = Inventory_replenishments.increment_id(location_id);
-                        String date_added = DateType.sf.format(jDateChooser1.getDate()) + " 23:00:00";
+                        String date_added = DateType.sf.format(jDateChooser1.getDate()) + " " + DateType.time4.format(new Date());
                         String user_id = MyUser.getUser_id();
                         String user_screen_name = MyUser.getUser_screen_name();
                         String remarks = "";

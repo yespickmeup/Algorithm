@@ -8,8 +8,8 @@ package POS.stock_transfer;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.receipts.Stock_transfers_items;
-import static POS.stock_transfer.Dlg_new_stock_transfer.show_cost;
 import POS.synch.Synch_stock_transfers;
+import POS.touchscreen.Dlg_touchscreen;
 import POS.users.MyUser;
 import POS.users.User_previlege_others;
 import POS.util.Alert;
@@ -19,21 +19,29 @@ import POS.util.MyConnection;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import static sun.misc.VM.getState;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.panels.Loading;
 import synsoftech.util.ImageRenderer;
 
 /**
@@ -527,11 +535,12 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
     }//GEN-LAST:event_tf_from_locationActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ret_cloud_stock_transfer_records();
+//        
+        download_transfers();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_stock_transfersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_stock_transfersMouseClicked
-        select_transaction();
+        check_items();
     }//GEN-LAST:event_tbl_stock_transfersMouseClicked
 
     private void tbl_stock_transfers_itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_stock_transfers_itemsMouseClicked
@@ -573,7 +582,13 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-//        System.setProperty("pool_db", "db_smis_kabankalan_with_encoding");
+//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_db", "db_algorithm");
+//
+//        System.setProperty("cloud_host", "128.199.80.53");
+//        System.setProperty("cloud_user", "smis2");
+//        System.setProperty("cloud_password", "nopassword101");
+//        System.setProperty("cloud_db", "db_algorithm");
         set_default_branch();
         init_tbl_stock_transfers();
         init_tbl_stock_transfers_items();
@@ -730,35 +745,36 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
 
     private void ret_cloud_stock_transfer_records() {
         tbl_stock_transfers_items_ALM.clear();
-        jProgressBar1.setString("Establishing connection...");
-        jProgressBar1.setIndeterminate(true);
-        Thread t = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                int connected = MyConnection.check_cloud_connection();
-                if (connected == 0) {
-                    jLabel6.setText("Failed to connect!");
-                } else {
-                    try {
-                        jLabel6.setText("Connected");
-                        Thread.sleep(1000);
-                        Field.Input br = (Field.Input) tf_from_branch;
-                        jProgressBar1.setString("Retrieving records...");
-                        String where = " where is_uploaded=0 and at_branch_id<>'" + br.getId() + "' and to_branch_id='" + br.getId() + "'";
-                        System.out.println(where);
-                        List<Stock_transfers.to_stock_transfers> datas = Stock_transfers.ret_data_cloud(where);
-                        loadData_stock_transfers(datas);
-                        jLabel2.setText("" + datas.size());
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Dlg_new_stock_transfer_cloud_transactions.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                jProgressBar1.setString("Finished...");
-                jProgressBar1.setIndeterminate(false);
+//        jProgressBar1.setString("Establishing connection...");
+//        jProgressBar1.setIndeterminate(true);
+//        Thread t = new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                
+//                jProgressBar1.setString("Finished...");
+//                jProgressBar1.setIndeterminate(false);
+//            }
+//        });
+//        t.start();
+        int connected = MyConnection.check_cloud_connection();
+        if (connected == 0) {
+            jLabel6.setText("Failed to connect!");
+        } else {
+            try {
+                jLabel6.setText("Connected");
+                Thread.sleep(1000);
+                Field.Input br = (Field.Input) tf_from_branch;
+                jProgressBar1.setString("Retrieving records...");
+                String where = " where is_uploaded=0 and at_branch_id<>'" + br.getId() + "' and to_branch_id='" + br.getId() + "'";
+                System.out.println(where);
+                List<Stock_transfers.to_stock_transfers> datas = Stock_transfers.ret_data_cloud(where);
+                loadData_stock_transfers(datas);
+                jLabel2.setText("" + datas.size());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Dlg_new_stock_transfer_cloud_transactions.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-        t.start();
+        }
     }
 
     private void select_transaction() {
@@ -770,22 +786,22 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
 
         int col = tbl_stock_transfers.getSelectedColumn();
         if (col == 5) {
-
-            jProgressBar1.setString("Loading...Please wait...");
-            jProgressBar1.setIndeterminate(true);
-            Thread t = new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    String where = " where stock_transfer_id='" + to.transaction_no + "' ";
-                    List<Stock_transfers_items.to_stock_transfers_items> items = Stock_transfers_items.ret_data_cloud(where);
-                    loadData_stock_transfers_items(items);
-                    jLabel8.setText("" + items.size());
-                    jProgressBar1.setString("Finished...");
-                    jProgressBar1.setIndeterminate(false);
-                }
-            });
-            t.start();
+            String where = " where stock_transfer_id='" + to.transaction_no + "' ";
+            List<Stock_transfers_items.to_stock_transfers_items> items = Stock_transfers_items.ret_data_cloud(where);
+            loadData_stock_transfers_items(items);
+            jLabel8.setText("" + items.size());
+//            jProgressBar1.setString("Finished...");
+//            jProgressBar1.setIndeterminate(false);
+//            jProgressBar1.setString("Loading...Please wait...");
+//            jProgressBar1.setIndeterminate(true);
+//            Thread t = new Thread(new Runnable() {
+//
+//                @Override
+//                public void run() {
+//
+//                }
+//            });
+//            t.start();
         }
         if (col == 6) {
             final Stock_transfers.to_stock_transfers stock_transfer = to;
@@ -977,7 +993,7 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
         if (row < 0) {
             return;
         }
-        final Stock_transfers.to_stock_transfers to = (Stock_transfers.to_stock_transfers) tbl_stock_transfers_ALM.get(row);
+//        final Stock_transfers.to_stock_transfers to = (Stock_transfers.to_stock_transfers) tbl_stock_transfers_ALM.get(row);
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -987,63 +1003,247 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                jProgressBar1.setString("Loading...Please wait...");
-                jProgressBar1.setIndeterminate(true);
-                jButton1.setEnabled(false);
-                jButton2.setEnabled(false);
-                Thread t = new Thread(new Runnable() {
+                st_post_and_finalize();
+//                proceed_post_and_finalize(to);
+//                jProgressBar1.setString("Loading...Please wait...");
+//                jProgressBar1.setIndeterminate(true);
+//                jButton1.setEnabled(false);
+//                jButton2.setEnabled(false);
+//                Thread t = new Thread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        jButton1.setEnabled(true);
+//                        jButton2.setEnabled(true);
+//                        jProgressBar1.setString("Finished...");
+//                        jProgressBar1.setIndeterminate(false);
+//                    }
+//                });
+//                t.start();
 
-                    @Override
-                    public void run() {
-                        int id = 0;
-                        final String transaction_no = to.transaction_no;
-                        String user_name = to.user_name;
-                        String date_added = to.date_added;
-                        String remarks = to.remarks;
-//                        System.out.println("Remarks: "+to.remarks);
-                        String to_branch = to.to_branch;
-                        String to_branch_id = to.to_branch_id;
-                        String to_location = to.to_location;
-                        String to_location_id = to.to_location_id;
-
-                        String from_branch = to.from_branch;
-                        String from_branch_id = to.from_branch_id;
-                        String from_location = to.from_location;
-                        String from_location_id = to.from_location_id;
-
-                        String at_branch = to.at_branch;
-                        String at_branch_id = to.at_branch_id;
-                        String at_location = to.at_location;
-                        String at_location_id = to.at_location_id;
-                        int is_uploaded = 1;
-                        String finalized_by_id = MyUser.getUser_id();
-                        String finalized_by = MyUser.getUser_screen_name();
-                        final Stock_transfers.to_stock_transfers rpt = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks,
-                                                                                                              to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false,
-                                                                                                              at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
-                        List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
-                        if (datas.isEmpty()) {
-                            Alert.set(0, "No Item Added!");
-                            return;
-                        }
-                        Stock_transfers.add_stock_transfers(rpt, datas);
-
-                        Stock_transfers.finalize(rpt, datas, finalized_by_id, finalized_by);
-                        Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
-                        Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
-                        Alert.set(0, "Stock Transfer Posted and Finalized");
-                        ret_cloud_stock_transfer_records();
-                        jButton1.setEnabled(true);
-                        jButton2.setEnabled(true);
-                        jProgressBar1.setString("Finished...");
-                        jProgressBar1.setIndeterminate(false);
-                    }
-                });
-                t.start();
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-}
 
+    private void proceed_post_and_finalize() {
+        int row = tbl_stock_transfers.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final Stock_transfers.to_stock_transfers to = (Stock_transfers.to_stock_transfers) tbl_stock_transfers_ALM.get(row);
+        int id = 0;
+        final String transaction_no = to.transaction_no;
+        String user_name = to.user_name;
+        String date_added = to.date_added;
+        String remarks = to.remarks;
+        String to_branch = to.to_branch;
+        String to_branch_id = to.to_branch_id;
+        String to_location = to.to_location;
+        String to_location_id = to.to_location_id;
+
+        String from_branch = to.from_branch;
+        String from_branch_id = to.from_branch_id;
+        String from_location = to.from_location;
+        String from_location_id = to.from_location_id;
+
+        String at_branch = to.at_branch;
+        String at_branch_id = to.at_branch_id;
+        String at_location = to.at_location;
+        String at_location_id = to.at_location_id;
+        int is_uploaded = 1;
+        String finalized_by_id = MyUser.getUser_id();
+        String finalized_by = MyUser.getUser_screen_name();
+        final Stock_transfers.to_stock_transfers rpt = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks,
+                                                                                              to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false,
+                                                                                              at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by);
+        List<Stock_transfers_items.to_stock_transfers_items> datas = tbl_stock_transfers_items_ALM;
+        if (datas.isEmpty()) {
+            Alert.set(0, "No Item Added!");
+            return;
+        }
+        Stock_transfers.add_stock_transfers(rpt, datas);
+
+        Stock_transfers.finalize(rpt, datas, finalized_by_id, finalized_by);
+        Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
+        Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
+        Alert.set(0, "Stock Transfer Posted and Finalized");
+        ret_cloud_stock_transfer_records();
+    }
+
+    private void download_transfers() {
+        Loader loader = new Loader(this);
+        loader.execute();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" Loader Download ">
+    public class Loader extends SwingWorker {
+
+        private Loading dialog;
+
+        public Loader(JDialog dlg) {
+
+            dialog = new Loading();
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            dialog.setSize(xSize, ySize);
+            dialog.setPreferredSize(new Dimension(xSize, ySize));
+            dialog.setAlwaysOnTop(true);
+            addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("state".equals(evt.getPropertyName())) {
+                        if (getState() == SwingWorker.StateValue.STARTED) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (getState() == SwingWorker.StateValue.STARTED) {
+                                        dialog.setVisible(true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            ret_cloud_stock_transfer_records();
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            dialog.dispose();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });
+        }
+    }
+
+    //</editor-fold>
+    private void check_items() {
+        Loader_items loader = new Loader_items(this);
+        loader.execute();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" Loader Check Items ">
+    public class Loader_items extends SwingWorker {
+
+        private Loading dialog;
+
+        public Loader_items(JDialog dlg) {
+
+            dialog = new Loading();
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            dialog.setSize(xSize, ySize);
+            dialog.setPreferredSize(new Dimension(xSize, ySize));
+            dialog.setAlwaysOnTop(true);
+            addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("state".equals(evt.getPropertyName())) {
+                        if (getState() == SwingWorker.StateValue.STARTED) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (getState() == SwingWorker.StateValue.STARTED) {
+                                        dialog.setVisible(true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            select_transaction();
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            dialog.dispose();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });
+        }
+    }
+
+    //</editor-fold>
+    private void st_post_and_finalize() {
+        Loader_finalize loader = new Loader_finalize(this);
+        loader.execute();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" Loader Post And Finalize ">
+    public class Loader_finalize extends SwingWorker {
+
+        private Loading dialog;
+
+        public Loader_finalize(JDialog dlg) {
+
+            dialog = new Loading();
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            dialog.setSize(xSize, ySize);
+            dialog.setPreferredSize(new Dimension(xSize, ySize));
+            dialog.setAlwaysOnTop(true);
+            addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("state".equals(evt.getPropertyName())) {
+                        if (getState() == SwingWorker.StateValue.STARTED) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (getState() == SwingWorker.StateValue.STARTED) {
+                                        dialog.setVisible(true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            proceed_post_and_finalize();
+            return null;
+        }
+        
+        @Override
+        protected void done() {
+            dialog.dispose();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });
+        }
+    }
+
+    //</editor-fold>
+}

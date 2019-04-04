@@ -454,8 +454,26 @@ public class Return_from_customer_items {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
 
-            Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_return_from_customer_items.main_barcode, to_return_from_customer_items.barcode, to_return_from_customer_items.location_id);
-            double new_qty = tt.product_qty + (to_return_from_customer_items.conversion * to_return_from_customer_items.qty);
+//            Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_return_from_customer_items.main_barcode, to_return_from_customer_items.barcode, to_return_from_customer_items.location_id);
+            String s10 = "select "
+                    + " product_qty"
+                    + ",conversion"
+                    + ",serial_no"
+                    + " from inventory_barcodes where "
+                    + " main_barcode='" + to_return_from_customer_items.main_barcode + "' and location_id='" + to_return_from_customer_items.location_id + "'"
+                    + " ";
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery(s10);
+            double product_qty = 0;
+            double conversion = 0;
+            String serial_no = "";
+            while (rs10.next()) {
+                product_qty = rs10.getDouble(1);
+                conversion = rs10.getDouble(2);
+                serial_no = rs10.getString(3);
+            }
+
+            double new_qty = product_qty + (to_return_from_customer_items.conversion * to_return_from_customer_items.qty);
 
             String s4 = "update inventory_barcodes set "
                     + " product_qty='" + new_qty + "'"

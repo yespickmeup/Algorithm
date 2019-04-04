@@ -27,6 +27,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -44,6 +46,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.panels.Loading;
 
 /**
  *
@@ -2279,29 +2282,29 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                disposed();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              disposed();
+                          }
+                      });
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_CONTROL, new KeyAction() {
+                              KeyEvent.VK_CONTROL, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton1.doClick();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              jButton1.doClick();
+                          }
+                      });
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_F5, new KeyAction() {
+                              KeyEvent.VK_F5, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton2.doClick();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              jButton2.doClick();
+                          }
+                      });
 
         tbl_receipt_items.addKeyListener(new KeyAdapter() {
 
@@ -2600,6 +2603,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         double n_qty = data.amount + to3.qty;
                         to3.setQty(n_qty);
                         to3.setCost(cost);
+                        String serials = to3.serial_nos;
+                        if (!to2.serial_nos.isEmpty()) {
+                            serials = to3.serial_nos + "\n" + to2.serial_nos;
+                        }
+                        to3.setSerial_nos(serials);
                         tbl_receipt_items_M.fireTableDataChanged();
                         break;
                     } else {
@@ -3881,58 +3889,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_confirm_finalize.OutputData data) {
                 closeDialog.ok();
 
-                List<to_receipt_items> datas = tbl_receipt_items_ALM;
-                List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
-                for (to_receipt_items to3 : datas) {
-                    String barcode = to3.barcode;
-                    String description = to3.description;
-                    double qty = to3.qty;
-                    double cost = to3.cost;
-                    String category = to3.category;
-                    String category_id = to3.category_id;
-                    String classification = to3.classification;
-                    String classification_id = to3.classification_id;
-                    String sub_class = to3.sub_class;
-                    String sub_class_id = to3.sub_class_id;
-                    String sup = to3.supplier;
-                    String sup_id = to3.supllier_id;
-                    String barcodes = to3.barcodes;
-                    String serial_no = to3.serial_nos;
-                    String main_barcode = to3.main_barcode;
-                    String brand = to3.brand;
-                    String brand_id = to3.brand_id;
-                    String model = to3.model;
-                    String model_id = to3.model_id;
-                    int status = 0;
-                    double previous_cost = to3.previous_cost;
-                    String receipt_type_id = "";
-                    String location = tf_branch.getText();
-                    String location_id = tf_branch_id.getText();
-                    S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(to3.id, to3.receipt_no, to3.user_name, to3.session_no, to3.date_added, sup, sup_id, to3.remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, "", "", barcodes, serial_no, to3.batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, to3.branch, to3.branch_id, to3.location, to3.location_id);
-                    acc.add(to4);
-                }
-                String branch = "";
-                String branch_id = "";
-                for (S1_branch_locations.to_branch_locations t : branch_locations) {
-                    if (to.branch_id.equalsIgnoreCase("" + t.id)) {
-                        branch = t.branch;
-                        branch_id = t.branch_id;
-                        break;
-                    }
-                }
-//                String ap_no = Accounts_payable.increment_id(branch_id);
-//                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
-//                if (!payables.isEmpty()) {
-//                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
-//                    Alert.set(0, "AP No. already added!");
-//                    return;
-//                }
-
-                Receipts.finalize(to, acc, branch, branch_id, data.is_invoice, data.is_payable, data.ap_date);
-                data_cols();
-                new_post();
-                Alert.set(2, "");
-                jButton6.setEnabled(false);
+                proceed_finalize_receipt(data);
             }
         });
         nd.setLocationRelativeTo(this);
@@ -4091,4 +4048,125 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.clearSelection();
         compute();
     }
+
+    private void proceed_finalize_receipt(Dlg_confirm_finalize.OutputData data) {
+        Loader loader = new Loader(this, data);
+        loader.execute();
+    }
+
+    private void loader_finalize_receipt(Dlg_confirm_finalize.OutputData data) {
+        final int row = tbl_receipts.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        final to_receipts to = (to_receipts) tbl_receipts_ALM.get(tbl_receipts.convertRowIndexToModel(row));
+        List<to_receipt_items> datas = tbl_receipt_items_ALM;
+        List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
+        for (to_receipt_items to3 : datas) {
+            String barcode = to3.barcode;
+            String description = to3.description;
+            double qty = to3.qty;
+            double cost = to3.cost;
+            String category = to3.category;
+            String category_id = to3.category_id;
+            String classification = to3.classification;
+            String classification_id = to3.classification_id;
+            String sub_class = to3.sub_class;
+            String sub_class_id = to3.sub_class_id;
+            String sup = to3.supplier;
+            String sup_id = to3.supllier_id;
+            String barcodes = to3.barcodes;
+            String serial_no = to3.serial_nos;
+            String main_barcode = to3.main_barcode;
+            String brand = to3.brand;
+            String brand_id = to3.brand_id;
+            String model = to3.model;
+            String model_id = to3.model_id;
+            int status = 0;
+            double previous_cost = to3.previous_cost;
+            String receipt_type_id = "";
+            String location = tf_branch.getText();
+            String location_id = tf_branch_id.getText();
+            S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(to3.id, to3.receipt_no, to3.user_name, to3.session_no, to3.date_added, sup, sup_id, to3.remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, to3.conversion, to3.unit, "", "", barcodes, serial_no, to3.batch_no, main_barcode, brand, brand_id, model, model_id, status, previous_cost, receipt_type_id, to3.branch, to3.branch_id, to3.location, to3.location_id);
+            acc.add(to4);
+        }
+        String branch = "";
+        String branch_id = "";
+        for (S1_branch_locations.to_branch_locations t : branch_locations) {
+            if (to.branch_id.equalsIgnoreCase("" + t.id)) {
+                branch = t.branch;
+                branch_id = t.branch_id;
+                break;
+            }
+        }
+//                String ap_no = Accounts_payable.increment_id(branch_id);
+//                List<Accounts_payable.to_accounts_payable> payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+//                if (!payables.isEmpty()) {
+//                    payables = Accounts_payable.ret_data(" where ap_no='" + ap_no + "' ");
+//                    Alert.set(0, "AP No. already added!");
+//                    return;
+//                }
+
+        Receipts.finalize(to, acc, branch, branch_id, data.is_invoice, data.is_payable, data.ap_date);
+        data_cols();
+        new_post();
+        Alert.set(2, "");
+        jButton6.setEnabled(false);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" Loader Finalize ">
+    public class Loader extends SwingWorker {
+
+        private Loading dialog;
+        private Dlg_confirm_finalize.OutputData data2;
+
+        public Loader(JDialog dlg, Dlg_confirm_finalize.OutputData data) {
+
+            dialog = new Loading();
+            data2 = data;
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            dialog.setSize(xSize, ySize);
+            dialog.setPreferredSize(new Dimension(xSize, ySize));
+            dialog.setAlwaysOnTop(true);
+            addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("state".equals(evt.getPropertyName())) {
+                        if (getState() == SwingWorker.StateValue.STARTED) {
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (getState() == SwingWorker.StateValue.STARTED) {
+                                        dialog.setVisible(true);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            loader_finalize_receipt(data2);
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            dialog.dispose();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });
+        }
+    }
+
+    //</editor-fold>
 }

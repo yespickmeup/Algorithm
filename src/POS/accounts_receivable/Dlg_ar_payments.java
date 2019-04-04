@@ -21,6 +21,7 @@ import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
@@ -50,6 +51,7 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import org.jfree.ui.Align;
+import synsoftech.fields.Field;
 import synsoftech.util.ImageRenderer;
 
 /**
@@ -178,6 +180,13 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         }
 
         Dlg_ar_payments dialog = Dlg_ar_payments.create(new javax.swing.JFrame(), true);
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().
+                getWidth());
+        int ySize = ((int) tk.getScreenSize().
+                getHeight());
+        dialog.setSize(xSize, ySize);
         dialog.setVisible(true);
 
     }
@@ -243,6 +252,12 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         jCheckBox4 = new javax.swing.JCheckBox();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jTextField5 = new Field.Combo();
+        jTextField4 = new Field.Combo();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_accounts_receivable_payments = new javax.swing.JTable();
@@ -405,6 +420,46 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Choose Branch:");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Choose Location:");
+
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setText("All");
+        jCheckBox7.setEnabled(false);
+
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setText("All");
+        jCheckBox6.setEnabled(false);
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField5.setFocusable(false);
+        jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField5MouseClicked(evt);
+            }
+        });
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.setFocusable(false);
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField4MouseClicked(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -430,7 +485,18 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox6)
+                                    .addComponent(jCheckBox7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jCheckBox4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -456,20 +522,34 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox6))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -547,22 +627,22 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jCheckBox5)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 470, Short.MAX_VALUE)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
                 .addGap(5, 5, 5))
         );
         jPanel3Layout.setVerticalGroup(
@@ -696,6 +776,22 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         finalize_payment();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
+//        init_branch_locations(jTextField4, jTextField5);
+    }//GEN-LAST:event_jTextField4MouseClicked
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+//        init_branch_locations(jTextField4, jTextField5);
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
+        //        init_branch_locations();
+    }//GEN-LAST:event_jTextField5MouseClicked
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        //        init_branch_locations();
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -707,6 +803,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -715,6 +813,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -737,12 +837,15 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tbl_accounts_receivable;
     private javax.swing.JTable tbl_accounts_receivable_payments;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
+
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "db_algorithm");
+//        System.setProperty("pool_host", "localhost");
         init_key();
         init_tbl_accounts_receivable();
         focus();
@@ -750,6 +853,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         init_tbl_accounts_receivable_payments();
         data_cols_payments();
         jTextField1.grabFocus();
+        String where = " order by branch,location asc  ";
+        branch_location_list = S1_branch_locations.ret_location_where(where);
     }
 
     String my_branch = "";
@@ -763,6 +868,14 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         my_branch_id = to.branch_id;
         my_location = to.location;
         my_location_id = "" + to.id;
+
+        Field.Combo lo2 = (Field.Combo) jTextField5;
+        Field.Combo br2 = (Field.Combo) jTextField4;
+        lo2.setText(to.location);
+        lo2.setId("" + to.id);
+        br2.setText(to.branch);
+        br2.setId("" + to.branch_id);
+
     }
 
     private void focus() {
@@ -818,7 +931,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable.setFont(new java.awt.Font("Arial", 0, 11));
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable, 5);
-         tbl_accounts_receivable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
+        tbl_accounts_receivable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
 
     private void loadData_accounts_receivable(List<to_accounts_receivable> acc) {
@@ -935,6 +1048,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 where = where + " and soa_type_id='" + jTextField3.getText() + "' ";
             }
         }
+        Field.Combo br = (Field.Combo) jTextField4;
+        where = where + " and branch_id='" + br.getId() + "' ";
         where = where + " order by Date(date_paid) desc";
         loadData_accounts_receivable(S1_accounts_receivable.ret_data5(where));
         jLabel2.setText("" + tbl_accounts_receivable_ALM.size());
@@ -1062,14 +1177,17 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 String online_date = data.online_date;
                 double online_amount = data.online_amount;
                 double actual_amount = data.actual_tendered;
+                double retention = data.retention;
+                double business_tax = data.business_tax;
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                         status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status,
                         term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no,
                         trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate,
                         data.tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
                         credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
-                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount);
-                S1_accounts_receivable_payments.add_accounts_receivable_payments2(to1);
+                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax);
+                S1_accounts_receivable_payments.add_accounts_receivable_payments2(to1, my_branch, my_branch_id, my_location, my_location_id);
+
                 data_cols_payments();
                 Alert.set(1, type);
             }
@@ -1088,7 +1206,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setModel(tbl_accounts_receivable_payments_M);
         tbl_accounts_receivable_payments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable_payments.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 70, 70, 70, 70, 70, 70, 60, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable_payments.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -1109,8 +1227,9 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 7);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 8);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 9);
-
-        TableColumn tc = tbl_accounts_receivable_payments.getColumnModel().getColumn(11);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 10);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 11);
+        TableColumn tc = tbl_accounts_receivable_payments.getColumnModel().getColumn(13);
         tc.setCellEditor(tbl_accounts_receivable_payments.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(tbl_accounts_receivable_payments.getDefaultRenderer(Boolean.class));
         tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
@@ -1229,7 +1348,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     public static class Tblaccounts_receivable_paymentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Ref #", "Cash", "Check", "Prepaid", "Credit Card", "GC", "Online", "Discount", "Amount", "", "", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "prev_balance", "check_amount", "check_holder", "check_bank", "check_no", "ci_no", "trust_receipt", "or_payment_no", "soa_id", "soa_type", "soa_type_id", "reference_no"
+            "Date", "Ref #", "Cash", "Check", "Prepaid", "Credit Card", "GC", "Online", "Retention", "Busi. Tax", "Discount", "Amount", "Status", "", "date_paid", "remarks", "type", "or_no", "prev_balance", "check_amount", "check_holder", "check_bank", "check_no", "ci_no", "trust_receipt", "or_payment_no", "soa_id", "soa_type", "soa_type_id", "reference_no"
         };
 
         public Tblaccounts_receivable_paymentsModel(ListModel listmodel) {
@@ -1244,7 +1363,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 11) {
+            if (col == 13) {
                 return Boolean.class;
             }
             return Object.class;
@@ -1271,21 +1390,22 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 case 7:
                     return FitIn.fmt_wc_0(tt.online_amount) + " ";
                 case 8:
-                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.retention) + " ";
                 case 9:
-                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount)) + " ";
+                    return FitIn.fmt_wc_0(tt.business_tax) + " ";
                 case 10:
+                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                case 11:
+                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount + tt.retention + tt.business_tax)) + " ";
+
+                case 12:
                     if (tt.status == 0) {
                         return " Finalized";
                     } else {
                         return " Posted";
                     }
-                case 11:
-                    return tt.selected;
-                case 12:
-
                 case 13:
-                    return tt.paid;
+                    return tt.selected;
                 case 14:
                     return tt.date_paid;
                 case 15:
@@ -1326,7 +1446,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
         String where = "";
         if (jCheckBox5.isSelected()) {
-            where = " where status=1 order by Date(date_applied) desc";
+            Field.Combo br = (Field.Combo) jTextField4;
+            where = " where status=1 and branch_id='" + br.getId() + "' order by Date(date_applied) desc";
             loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data2(where));
         } else {
             int row = tbl_accounts_receivable.getSelectedRow();
@@ -1362,7 +1483,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         }
 
         int col = tbl_accounts_receivable_payments.getSelectedColumn();
-        if (col == 11) {
+        if (col == 13) {
             to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
             if (to.status == 1) {
                 if (to.selected == true) {
@@ -1514,13 +1635,15 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 String online_date = data.online_date;
                 double online_amount = data.online_amount;
                 double actual_amount = data.actual_tendered;
+                double retention = data.retention;
+                double business_tax = data.business_tax;
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                         to.id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied,
-                         paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no,
-                         soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id,
-                         location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
-                         credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
-                         online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount);
+                        paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no,
+                        soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id,
+                        location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
+                        credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
+                        online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax);
                 S1_accounts_receivable_payments.update_accounts_receivable_payments3(to1);
                 data_cols_payments();
                 Alert.set(2, type);
@@ -1531,12 +1654,12 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     }
 
     private void finalize_payment() {
-        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Finalize)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Finalize)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
 
         List<to_accounts_receivable_payments> datas = tbl_accounts_receivable_payments_ALM;
         final List<to_accounts_receivable_payments> datas2 = new ArrayList();
@@ -1545,7 +1668,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 datas2.add(t);
             }
         }
-        
+
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1578,4 +1701,36 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 //        });
 //        t.start();
     }
+    List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
+
+    private void init_branch_locations(JTextField b, JTextField t) {
+        final Field.Combo br = (Field.Combo) b;
+        final Field.Combo lo = (Field.Combo) t;
+
+        Object[][] obj = new Object[branch_location_list.size()][2];
+        int i = 0;
+        for (S1_branch_locations.to_branch_locations to : branch_location_list) {
+            obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";
+
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {lo.getWidth()};
+        int width = 0;
+        String[] col_names = {"Code"};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(br, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_branch_locations.to_branch_locations to = branch_location_list.get(data.selected_row);
+                lo.setText("" + to.location);
+                lo.setId("" + to.id);
+
+                br.setText(to.branch);
+                br.setId("" + to.branch_id);
+            }
+        });
+    }
+
 }

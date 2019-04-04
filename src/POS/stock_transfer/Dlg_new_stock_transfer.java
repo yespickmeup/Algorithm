@@ -4195,11 +4195,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         Dlg_stock_transfer_usb nd = Dlg_stock_transfer_usb.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_stock_transfer_usb.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_stock_transfer_usb.OutputData data) {
+               
                 closeDialog.ok();
-
+                
             }
         });
         nd.setLocationRelativeTo(this);

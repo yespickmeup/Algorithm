@@ -1323,7 +1323,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_cebu_chickaloka");
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
+//        System.setProperty("pool_host", "localhost");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("main_branch", "true");
@@ -1555,6 +1556,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String date_from_sales = DateType.sf.format(jDateChooser1.getDate());
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
                 String date_to_sales = DateType.sf.format(jDateChooser2.getDate());
+                String time = "All";
                 if (jCheckBox13.isSelected()) {
                     date_from_sales = date_from_sales + " 00:00:00";
                     date_to_sales = date_to_sales + " 23:59:59";
@@ -1563,7 +1565,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     String dts_time = DateType.convert_am_pm_to_stamp(tf_cashier4.getText(), "to");
                     date_from_sales = date_from_sales + " " + dfs_time;
                     date_to_sales = date_to_sales + " " + dts_time;
+                    time = "" + tf_cashier3.getText() + " - " + tf_cashier4.getText();
                 }
+
                 String where_drawer = " where id<>0 ";
                 String where_sales = " where id<>0 ";
                 String where_sales_status = " where id<>0 and status=1 ";
@@ -1616,7 +1620,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                     where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
                 }
-                
+
                 List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales3);
@@ -1793,7 +1797,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 receipts_total = cash_sales + collections + prepayments;
                 receipts_sub_total = receipts_total - (receipts_line_discount + receipts_sale_discount);
                 receipt_net_total = receipts_sub_total + cashin_beg;
-
+                String pool_db = System.getProperty("pool_db", "db_smis");
+                if (pool_db.contains("db_smis_dumaguete_refreshments")) {
+                    receipt_net_total = receipts_sub_total;
+                }
                 bills_thousand = 1000 * count_bills_thousand;
                 bills_five_hundred = 500 * count_bills_five_hundred;
                 bills_two_hundred = 200 * count_bills_two_hundred;
@@ -1911,10 +1918,14 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                                                                           count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                                                                           my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
                                                                           total_check_payments, total_cc_payments, date, business_name, address,
-                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange, refund, refund_cheque);
+                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange, refund, refund_cheque,time);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
+
+                if (pool_db.contains("db_smis_dumaguete_refreshments")) {
+                    jrxml = "rpt_end_of_day_summary_refreshments.jrxml";
+                }
                 report_sales_items(rpt, jrxml);
-                InputStream is = Srpt_sales_summary.class.getResourceAsStream("rpt_end_of_day_summary.jrxml");
+                InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);
                 try {
                     JasperReport jasperReport = JasperCompileManager.compileReport(is);
                     jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.

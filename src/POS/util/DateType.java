@@ -419,7 +419,7 @@ public class DateType {
     }
 
     public static void main(String[] args) {
-        convert_am_pm_to_stamp("1:30pm", "from_to");
+        System.out.println(convert_am_pm_to_stamp("11:30pm", "from"));
     }
 
     public static String convert_am_pm_to_stamp(String time, String from_to) {

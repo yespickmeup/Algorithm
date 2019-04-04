@@ -7,6 +7,7 @@ package POS.receipts;
 
 import POS.stock_transfer.Stock_transfers;
 import POS.util.MyConnection;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Stock_transfers_items {
 
-    public static class to_stock_transfers_items {
+    public static class to_stock_transfers_items implements Serializable{
 
         public final int id;
         public final String barcode;
@@ -681,7 +682,7 @@ public class Stock_transfers_items {
                     + ",at_location_id"
                     + " from stock_transfers_items  "
                     + " " + where;
-
+//            System.out.println(s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {

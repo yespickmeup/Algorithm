@@ -793,6 +793,7 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                 double collections_prepaid_cheque = 0;
                 double refund = 0;
                 double refund_cheque = 0;
+                String time="";
                 Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales,
                                                                           collections, prepayments, receipts_total, receipts_line_discount,
                                                                           receipts_sale_discount, receipts_sub_total, receipt_net_total,
@@ -806,7 +807,7 @@ public class Dlg_cashcount extends javax.swing.JDialog {
                                                                           cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                                                                           fields, check_cash_sales, check_collections, check_prepayments,
                                                                           cc_cash_sales, cc_collections, cc_prepayments, total_check_payments,
-                         total_cc_payments, "", business_name, address, disburse, cashier, branch, location, "", 0, return_exchange,refund,refund_cheque);
+                         total_cc_payments, "", business_name, address, disburse, cashier, branch, location, "", 0, return_exchange,refund,refund_cheque,time);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
                 report_sales_items(rpt, jrxml);
 

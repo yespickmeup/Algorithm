@@ -343,14 +343,14 @@ public class Dlg_inventory_price_updates_review extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -364,7 +364,7 @@ public class Dlg_inventory_price_updates_review extends javax.swing.JDialog {
         tbl_inventory_price_updates.setModel(tbl_inventory_price_updates_M);
         tbl_inventory_price_updates.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_inventory_price_updates.setRowHeight(25);
-        int[] tbl_widths_inventory_price_updates = {90, 80, 100, 100, 100, 100, 70, 70, 30, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_inventory_price_updates = {90, 80, 100, 100, 80, 80, 80, 70, 70, 30, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_inventory_price_updates.length; i < n; i++) {
             if (i == 3) {
                 continue;
@@ -379,7 +379,8 @@ public class Dlg_inventory_price_updates_review extends javax.swing.JDialog {
         tbl_inventory_price_updates.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_inventory_price_updates, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_inventory_price_updates, 5);
-        tbl_inventory_price_updates.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
+        TableWidthUtilities.setColumnRightRenderer(tbl_inventory_price_updates, 6);
+        tbl_inventory_price_updates.getColumnModel().getColumn(9).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_inventory_price_updates(List<Inventory_price_updates.to_inventory_price_updates> acc) {
@@ -390,7 +391,7 @@ public class Dlg_inventory_price_updates_review extends javax.swing.JDialog {
     public static class Tblinventory_price_updatesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction #", "Item Code", "Barcode", "Description", "Old Price", "New Price", "User", "Status", "", "status", "date_added", "user_id", "user_screen_name", "branch", "branch_id", "location", "location_id"
+            "Transaction #", "Item Code", "Barcode", "Description", "Old Price", "Main Price", "New Price", "User", "Status", "", "date_added", "user_id", "user_screen_name", "branch", "branch_id", "location", "location_id"
         };
 
         public Tblinventory_price_updatesModel(ListModel listmodel) {
@@ -428,12 +429,15 @@ public class Dlg_inventory_price_updates_review extends javax.swing.JDialog {
                 case 4:
                     return FitIn.fmt_wc_0(tt.old_selling_price) + " ";
                 case 5:
-                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
+                    return FitIn.fmt_wc_0(tt.main_price) + " ";
+
                 case 6:
-                    return " " + tt.user_screen_name;
+                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
                 case 7:
-                    return " Checked";
+                    return " " + tt.user_screen_name;
                 case 8:
+                    return " Checked";
+                case 9:
                     if (tt.is_uploaded == 0) {
                         return "/POS/icons4/cloud-storage-uploading-option (3).png";
                     } else if (tt.is_uploaded == 2) {
@@ -445,8 +449,6 @@ public class Dlg_inventory_price_updates_review extends javax.swing.JDialog {
                     } else {
                         return "/POS/icons4/cloud-storage-uploading-option (2).png";
                     }
-                case 9:
-                    return tt.user_id;
                 case 10:
                     return tt.user_screen_name;
                 case 11:

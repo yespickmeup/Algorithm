@@ -14,6 +14,7 @@
 	<parameter name="sub_classification" class="java.lang.String"/>
 	<parameter name="brand" class="java.lang.String"/>
 	<parameter name="model" class="java.lang.String"/>
+	<parameter name="time" class="java.lang.String"/>
 	<field name="item_code" class="java.lang.String"/>
 	<field name="barcode" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
@@ -64,7 +65,7 @@
 				<text><![CDATA[Location:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="39" y="40" width="370" height="20"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="39" y="40" width="369" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 				</textElement>
@@ -83,7 +84,7 @@
 				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="39" y="60" width="369" height="14"/>
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="39" y="60" width="271" height="14"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
@@ -154,6 +155,18 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{brand}]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51d68719-3613-45ab-9a85-892ec54ddd57" x="342" y="60" width="180" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="309" y="60" width="34" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Time:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -401,8 +414,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement uuid="788cfe43-bddb-4db8-8710-2798b7135859" x="40" y="15" width="762" height="15" isRemoveLineWhenBlank="true"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="788cfe43-bddb-4db8-8710-2798b7135859" x="39" y="15" width="763" height="15" isRemoveLineWhenBlank="true"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>

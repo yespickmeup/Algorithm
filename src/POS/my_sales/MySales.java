@@ -771,12 +771,16 @@ public class MySales {
                 double tt_qty = 0;
                 try {
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to_conn(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id, conn);
+
                     tt_qty = tt.product_qty;
+//                    System.out.println("*** item code: " + to_sale_items.item_code + ", barcode: " + to_sale_items.barcode + " , location_id= " + to_sale_items.location_id+ ", tt_qty: "+tt_qty);
                 } catch (Exception e) {
                     tt_qty = 0;
                 }
-                double new_qty = tt_qty - (to_sale_items.conversion * to_sale_items.product_qty);
 
+                double new_qty = tt_qty - (to_sale_items.conversion * to_sale_items.product_qty);
+//                System.out.println("Item: " + to_sale_items.item_code + " = " + to_sale_items.description + " : " + tt_qty);
+//                System.out.println("    New Qty: " + tt_qty + " Conversion: " + to_sale_items.conversion + " , product_qty: " + to_sale_items.product_qty);
 //                String serial_no = Segregator.this_shit(tt.serial_no, to_sale_items.serial_no);
                 String s4 = " update inventory_barcodes set "
                         + " product_qty='" + new_qty + "'"
@@ -1352,9 +1356,7 @@ public class MySales {
                 s0 = SqlStringUtil.parse(s0)
                         .setNumber("status", 1)
                         .ok();
-
                 stmt.addBatch(s0);
-
                 String s2 = "update sale_items set "
                         + " status= :status"
                         + " where "
@@ -1365,15 +1367,14 @@ public class MySales {
                         .ok();
 
                 stmt.addBatch(s2);
-
                 for (MySales_Items.items to_receipt_items : to_receipt_items1) {
-                    
+
                     Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_receipt_items.item_code, to_receipt_items.barcode, to_receipt_items.location_id);
                     double new_qty = 0;
                     Dlg_inventory_uom.to_uom uomss = uom.default_uom(to_receipt_items.unit);
 
                     new_qty = (tt.product_qty + (to_receipt_items.conversion * (to_receipt_items.product_qty / uomss.conversion)));
-                    System.out.println("tt.product_qty : "+tt.product_qty +", new_qty: "+new_qty);
+                    System.out.println("tt.product_qty : " + tt.product_qty + ", new_qty: " + new_qty);
                     String s4 = "update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
                             + " where main_barcode= '" + to_receipt_items.item_code + "' and location_id='" + to_receipt_items.location_id + "' "
@@ -1414,11 +1415,13 @@ public class MySales {
 //                System.out.println("sale.amount_due: " + sale.amount_due + "-" + total_cancelled_orders + "=" + new_amount_due);
                 String s0 = "update sales set "
                         + " amount_due= :amount_due"
+                        + " ,gross_amount= :gross_amount"
                         + " where "
                         + " sales_no ='" + sales_no + "' "
                         + " ";
                 s0 = SqlStringUtil.parse(s0)
                         .setNumber("amount_due", new_amount_due)
+                        .setNumber("gross_amount", new_amount_due)
                         .ok();
 
                 stmt.addBatch(s0);
@@ -1708,6 +1711,20 @@ public class MySales {
                     + ",location_id"
                     + ",remarks"
                     + ",refund"
+                    + ",credit_card_type"
+                    + ",credit_card_rate"
+                    + ",credit_card_no"
+                    + ",credit_card_holder"
+                    + ",credit_card_amount"
+                    + ",gift_certificate_from"
+                    + ",gift_certificate_description"
+                    + ",gift_certificate_no"
+                    + ",gift_certificate_amount"
+                    + ",online_bank"
+                    + ",online_reference_no"
+                    + ",online_holder"
+                    + ",online_date"
+                    + ",online_amount"
                     + " from prepaid_payments"
                     + " " + where;
 
@@ -1734,7 +1751,23 @@ public class MySales {
                 String location_id = rs.getString(18);
                 String remarks = rs.getString(19);
                 int refund = rs.getInt(20);
-                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id, status, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks, refund);
+                String credit_card_type = rs.getString(21);
+                double credit_card_rate = rs.getDouble(22);
+                String credit_card_no = rs.getString(23);
+                String credit_card_holder = rs.getString(24);
+                double credit_card_amount = rs.getDouble(25);
+                String gift_certificate_from = rs.getString(26);
+                String gift_certificate_description = rs.getString(27);
+                String gift_certificate_no = rs.getString(28);
+                double gift_certificate_amount = rs.getDouble(29);
+                String online_bank = rs.getString(30);
+                String online_reference_no = rs.getString(31);
+                String online_holder = rs.getString(32);
+                String online_date = rs.getString(32);
+                double online_amount = rs.getDouble(34);
+                to_prepaid_payments to = new to_prepaid_payments(id, cash, check_bank, check_no, check_amount, added_by, date_added, customer_name, customer_id,
+                                                                 status, false, cheque_holder, cheque_date, user_id, user_screen_name, branch, branch_id, location, location_id, remarks,
+                                                                 refund, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount);
                 datas.add(to);
             }
             return datas;
@@ -1808,6 +1841,8 @@ public class MySales {
                     + ",online_date"
                     + ",online_amount"
                     + ",actual_amount"
+                    + ",retention"
+                    + ",business_tax"
                     + " from accounts_receivable_payments"
                     + " " + where;
 
@@ -1871,7 +1906,9 @@ public class MySales {
                 String online_date = rs.getString(55);
                 double online_amount = rs.getDouble(56);
                 double actual_amount = rs.getDouble(57);
-                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount);
+                double retention=rs.getDouble(58);
+                double business_tax=rs.getDouble(59);
+                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount,retention,business_tax);
                 datas.add(to);
             }
             return datas;
