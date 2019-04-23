@@ -220,6 +220,8 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         tf_to_branch_id = new javax.swing.JTextField();
         tf_to_location_id = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -322,6 +324,23 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("To:");
 
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_payment/eye (1).png"))); // NOI18N
+        jButton8.setToolTipText("");
+        jButton8.setFocusable(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icon_payment/eye (1).png"))); // NOI18N
+        jButton9.setFocusable(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -329,7 +348,7 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(94, Short.MAX_VALUE)
+                        .addContainerGap(101, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(222, 222, 222))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -341,21 +360,25 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
                                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_to_location)
-                                    .addComponent(tf_to_branch))
-                                .addGap(1, 1, 1)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_to_location_id, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                                    .addComponent(tf_to_branch_id)))
+                                    .addComponent(tf_to_location, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                                    .addComponent(tf_to_branch))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_to_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_to_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -367,28 +390,34 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_to_branch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_to_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_to_location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_to_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_to_branch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_to_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_to_location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_to_location_id, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton9))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton8))
                 .addGap(20, 20, 20))
         );
 
@@ -611,9 +640,9 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -720,6 +749,14 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         view_items(1);
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        view_items_upload(1);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        view_items_upload(0);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -732,6 +769,8 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -785,11 +824,15 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         tf_to_branch_id.setText(to.branch_id);
         tf_to_location.setText(to.location);
         tf_to_location_id.setText("" + to.id);
-
     }
 
     public void do_pass() {
-
+        String main_branch = System.getProperty("main_branch", "false");
+        if (main_branch.equalsIgnoreCase("true")) {
+            jTabbedPane1.remove(1);
+        } else {
+            jTabbedPane1.remove(0);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -865,9 +908,11 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         String where = " where status=0 and to_location_id='" + tf_to_location_id.getText() + "' ";
         inventory_items.clear();
         inventory_items = Inventory.ret_data6("");
+        items=inventory_items;
         jLabel2.setText("" + inventory_items.size());
         transfers.clear();
         transfers = Stock_transfers.ret_data(where);
+        stock_transfers=transfers;
         String where_on = "";
         int i = 0;
         for (Stock_transfers.to_stock_transfers trans : transfers) {
@@ -881,6 +926,7 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         if (!transfers.isEmpty()) {
             String where2 = " where stock_transfer_id IN(" + where_on + ") order by stock_transfer_id,id asc ";
             transfer_items = Stock_transfers_items.ret_data(where2);
+            stock_transfer_items=transfer_items;
         }
 
         jLabel3.setText("" + transfers.size());
@@ -904,12 +950,17 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
             File file = f.getSelectedFile();
             String fullPath_items = file.getAbsolutePath() + "\\items_" + datetime;
             String fullPath_transfers = file.getAbsolutePath() + "\\transfers_" + datetime;
+            String fullPath_to = file.getAbsolutePath() + "\\stock_transfer_" + datetime;
             System.out.println("fullPath_items: " + fullPath_items);
             File file_items = new File(fullPath_items);
             File file_transfers = new File(fullPath_transfers);
+            File file_to = new File(fullPath_to);
             try {
-                save(file_items, inventory_items);
-                save(file_transfers, transfers);
+                //save to usb
+                Stock_transfer_to_usb to = new Stock_transfer_to_usb(inventory_items, transfers, transfer_items);
+                save(file_to, to);
+//                save(file_items, inventory_items);
+//                save(file_transfers, transfers);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
@@ -935,6 +986,7 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
 
     List<Stock_transfers.to_stock_transfers> stock_transfers = new ArrayList();
     List<Inventory.to_inventory> items = new ArrayList();
+    List<Stock_transfers_items.to_stock_transfers_items> stock_transfer_items = new ArrayList();
 
     private void open() {
 
@@ -948,18 +1000,21 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         int action = f.showDialog(this, "Open");
         int no_of_items = 0;
         int no_of_transfers = 0;
+        int no_of_transfer_items = 0;
         if (action == JFileChooser.APPROVE_OPTION) {
             File[] files = f.getSelectedFiles();
             for (File file : files) {
                 String file_name = file.getName();
-                if (file_name.contains("transfers")) {
-                    stock_transfers = (List<Stock_transfers.to_stock_transfers>) get(file);
-                    no_of_transfers += stock_transfers.size();
-                }
-                if (file_name.contains("items")) {
-                    items = (List<Inventory.to_inventory>) get(file);
-                    no_of_items += items.size();
-                }
+                Stock_transfer_to_usb to = (Stock_transfer_to_usb) get(file);
+                stock_transfers = to.transfers;
+                no_of_transfers += stock_transfers.size();
+
+                items = to.inventory_items;
+                no_of_items += items.size();
+
+                stock_transfer_items = to.transfer_items;
+                no_of_transfer_items += stock_transfer_items.size();
+
             }
             jLabel8.setText("" + no_of_transfers);
             jLabel5.setText("" + no_of_items);
@@ -999,7 +1054,7 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_stock_transfer_usb_details nd = Dlg_stock_transfer_usb_details.create(p, true);
         nd.setTitle("");
-        nd.do_pass(stock_transfers, items, tab);
+        nd.do_pass(stock_transfers, items, tab, stock_transfer_items);
         nd.setCallback(new Dlg_stock_transfer_usb_details.Callback() {
 
             @Override
@@ -1012,4 +1067,18 @@ public class Dlg_stock_transfer_usb extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
+    private void view_items_upload(int tab) {
+        Window p = (Window) this;
+        Dlg_stock_transfer_usb_details nd = Dlg_stock_transfer_usb_details.create(p, true);
+        nd.setTitle("");
+        nd.do_pass2(stock_transfers, items, tab, stock_transfer_items);
+        nd.setCallback(new Dlg_stock_transfer_usb_details.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_stock_transfer_usb_details.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 }

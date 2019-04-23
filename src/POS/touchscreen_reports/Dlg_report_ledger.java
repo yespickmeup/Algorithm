@@ -1046,7 +1046,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
                             if (prepayment.check_amount > 0) {
                                 Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
-                                collections_prepaid_cheque += prepayment.check_amount;
+//                                collections_prepaid_cheque += prepayment.check_amount;
                                 if (prepayment.remarks.contains("Prepaid Payment")) {
                                     collections_prepaid_cheque += (prepayment.check_amount * -1);
                                 } else {

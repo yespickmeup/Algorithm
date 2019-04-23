@@ -43,10 +43,11 @@ public class MyConnection {
             String password = System.getProperty("pool_password", "password");
             String db_name = System.getProperty("pool_db", "db_smis");
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://" + host + "/" + db_name;
+            String url = "jdbc:mysql://" + host + "/" + db_name + "?connectTimeout=31536000&socketTimeout=31536000";
 
             try {
                 conn = DriverManager.getConnection(url, user, password);
+
             } catch (SQLException ex) {
                 Logger.getLogger(MyConnection.class.getName()).
                         log(Level.SEVERE, null, ex);
@@ -179,7 +180,7 @@ public class MyConnection {
     }
 
     public static int check_cloud_connection() {
-        
+
         int connected = 0;
         String host = System.getProperty("cloud_host", "128.199.80.53");
         String port = System.getProperty("cloud_port", "3306");
@@ -292,6 +293,5 @@ public class MyConnection {
             MyConnection.close();
         }
     }
-    
-    
+
 }

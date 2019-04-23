@@ -1459,7 +1459,7 @@ public class Dlg_users extends javax.swing.JDialog {
     private void myInit() {
 //        Main.MyDB.setNames("db_algorithm");
 //
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
 
         tf_search.grabFocus();
         jPanel7.setVisible(false);

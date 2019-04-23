@@ -5266,7 +5266,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Payments.online f_online = Payments.online;
         int id = 0;
         String sales_no = "";
-        String date_added = DateType.datetime.format(jDateChooser1.getDate());
+        
+        String date_added = DateType.sf.format(jDateChooser1.getDate()) + " "+DateType.time4.format(new Date());
+        
         String user_screen_name = Users.get_ScreenName();
         String user_id = Users.getPassword();
         String session_no = lbl_sales_no.getText();
