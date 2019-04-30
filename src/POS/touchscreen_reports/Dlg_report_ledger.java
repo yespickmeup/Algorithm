@@ -251,6 +251,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         tf_cashier3 = new Field.Combo();
         jLabel17 = new javax.swing.JLabel();
         tf_cashier4 = new Field.Combo();
+        jCheckBox11 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -434,6 +435,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             }
         });
 
+        jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox11.setText("With Items");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -484,16 +488,17 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2)
-                            .addComponent(jTextField1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                            .addComponent(jTextField1)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox10)
-                        .addContainerGap(136, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox11)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,7 +509,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         .addComponent(tf_cashier, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBox9)
-                        .addComponent(jCheckBox10))
+                        .addComponent(jCheckBox10)
+                        .addComponent(jCheckBox11))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBox1)))
@@ -706,6 +712,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -968,6 +975,10 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 //                System.out.println(where);
 
                 List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
+                List<Srpt_sales_ledger_with_items.field> fields_items = new ArrayList();
+                if (jCheckBox11.isSelected()) {
+                    fields_items = Srpt_sales_ledger_with_items.ret_data(where);
+                }
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String contact_no = System.getProperty("telephone_number", "");
                 String address = System.getProperty("address", "Dumaguete");
@@ -986,8 +997,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double ar_collections_credit_card = 0;
                 double ar_collections_gc = 0;
                 double ar_collections_online = 0;
-                double retention=0;
-                double business_tax=0;
+                double retention = 0;
+                double business_tax = 0;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
 
                     collections_cheque += collection.check_amount;
@@ -996,8 +1007,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     ar_collections_credit_card += collection.credit_card_amount;
                     ar_collections_gc += collection.gift_certificate_amount;
                     ar_collections_online += collection.online_amount;
-                    retention+=collection.retention;
-                    business_tax=collection.business_tax;
+                    retention += collection.retention;
+                    business_tax = collection.business_tax;
 //                    if (collection.check_amount > 0) {
 //
 //                    } else {
@@ -1071,34 +1082,63 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 cash_on_hand = cash_on_hand + collections_prepaid + refund;
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
 
-                Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
-                                                              collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
-                                                              refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online, time,retention,business_tax);
-                rpt.fields.addAll(fields);
-                String jrxml = "rpt_sales_ledger.jrxml";
-                String pool_db = System.getProperty("pool_db", "db_smis");
-                if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
-                    jrxml = "rpt_sales_ledger_chickaloka.jrxml";
-                }
-                report_sales_items(rpt, jrxml);
-                loadData_banks(rpt.fields);
-                double net = 0;
-                for (Srpt_sales_ledger.field field : rpt.fields) {
-                    net += field.balance_due;
-                }
-                jLabel9.setText(FitIn.fmt_wc_0(net));
-                InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);
-                try {
-                    JasperReport jasperReport = JasperCompileManager.compileReport(is);
-                    jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                                                               setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+                if (!jCheckBox11.isSelected()) {
+                    Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
+                                                                  collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
+                                                                  refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online, time, retention, business_tax);
+                    rpt.fields.addAll(fields);
+                    String jrxml = "rpt_sales_ledger.jrxml";
+                    String pool_db = System.getProperty("pool_db", "db_smis");
+                    if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+                        jrxml = "rpt_sales_ledger_chickaloka.jrxml";
+                    }
 
-                } catch (JRException ex) {
-                    Logger.getLogger(Dlg_report_items.class.getName()).
-                            log(Level.SEVERE, null, ex);
+                    report_sales_items(rpt, jrxml);
+                    loadData_banks(rpt.fields);
+                    double net = 0;
+                    for (Srpt_sales_ledger.field field : rpt.fields) {
+                        net += field.balance_due;
+                    }
+                    jLabel9.setText(FitIn.fmt_wc_0(net));
+                    InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);
+                    try {
+                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                        jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                                                   setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+                    } catch (JRException ex) {
+                        Logger.getLogger(Dlg_report_items.class.getName()).
+                                log(Level.SEVERE, null, ex);
+                    }
+                    Button.Search search = (Button.Search) jButton3;
+                    search.finish();
+                } else {
+                    Srpt_sales_ledger_with_items rpt = new Srpt_sales_ledger_with_items(business_name, address, contact_no, date, branch, location, time);
+                    rpt.fields.addAll(fields_items);
+                    String jrxml = "rpt_sales_ledger_with_items.jrxml";
+
+                    report_sales_with_items(rpt, jrxml);
+                    jTabbedPane1.setSelectedIndex(1);
+//                    loadData_banks(rpt.fields);
+                    double net = 0;
+                    for (Srpt_sales_ledger_with_items.field field : rpt.fields) {
+                        net += field.balance_due;
+                    }
+                    jLabel9.setText(FitIn.fmt_wc_0(net));
+                    InputStream is = Srpt_sales_ledger_with_items.class.getResourceAsStream(jrxml);
+                    try {
+                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                        jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                                                   setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+                    } catch (JRException ex) {
+                        Logger.getLogger(Dlg_report_items.class.getName()).
+                                log(Level.SEVERE, null, ex);
+                    }
+                    Button.Search search = (Button.Search) jButton3;
+                    search.finish();
+
                 }
-                Button.Search search = (Button.Search) jButton3;
-                search.finish();
             }
         });
         t.start();
@@ -1110,6 +1150,23 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         pnl_report.setLayout(new BorderLayout());
         try {
             JRViewer viewer = get_viewer_expenses(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            pnl_report.add(viewer);
+            pnl_report.updateUI();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void report_sales_with_items(final Srpt_sales_ledger_with_items to, String jrxml_name) {
+        pnl_report.removeAll();
+        pnl_report.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_with_items(to, jrxml_name);
             JPanel pnl = new JPanel();
             pnl.add(viewer);
             pnl.setVisible(true);
@@ -1134,10 +1191,33 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         }
     }
 
+    public static JRViewer get_viewer_with_items(Srpt_sales_ledger_with_items to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_with_items(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
     public static JasperReport compileJasper(String rpt_name) {
         try {
             String jrxml = rpt_name;
             InputStream is = Srpt_sales_ledger.class.getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JasperReport compileJasper_with_items(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_sales_ledger_with_items.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
             return jasper;
         } catch (JRException e) {
