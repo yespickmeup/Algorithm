@@ -70,10 +70,11 @@ public class Srpt_sales_ledger_with_items {
         double wtax;
         double amount;
         double online_amount;
+
         public field() {
         }
 
-        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location, double online_payment, String item_code, String description, String unit, double qty, double price, double discount, double addtl_amount, double wtax, double amount,double online_amount) {
+        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location, double online_payment, String item_code, String description, String unit, double qty, double price, double discount, double addtl_amount, double wtax, double amount, double online_amount) {
             this.sales_no = sales_no;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -100,7 +101,7 @@ public class Srpt_sales_ledger_with_items {
             this.addtl_amount = addtl_amount;
             this.wtax = wtax;
             this.amount = amount;
-            this.online_amount=online_amount;
+            this.online_amount = online_amount;
         }
 
         public double getOnline_amount() {
@@ -446,7 +447,7 @@ public class Srpt_sales_ledger_with_items {
                 double balance_due = amount_due;
                 String date = DateType.convert_slash_datetime3(date_added);
                 String location1 = branch + " - " + location;
-
+//                System.out.println("sales_no: " + sales_no);
                 String s2 = "select "
                         + "id"
                         + ",sales_no"
@@ -457,7 +458,7 @@ public class Srpt_sales_ledger_with_items {
                         + ",item_type"
                         + ",supplier_name"
                         + ",supplier_id"
-                        + ",GROUP_CONCAT(serial_no SEPARATOR ',')"
+                        + ",serial_no"
                         + ",product_qty"
                         + ",unit"
                         + ",conversion"
@@ -501,6 +502,7 @@ public class Srpt_sales_ledger_with_items {
                     String item_code = rs2.getString(3);
                     String barcode = rs2.getString(4);
                     String description = rs2.getString(5);
+//                    System.out.println("     description: " + description);
                     String generic_name = rs2.getString(6);
                     String item_type = rs2.getString(7);
                     String supplier_name = rs2.getString(8);
@@ -573,7 +575,7 @@ public class Srpt_sales_ledger_with_items {
                     }
                     double online_payment = online_amount;
                     double qty = product_qty;
-                    Srpt_sales_ledger_with_items.field f = new field(sales_no, customer_id, customer_name, amount_due, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location, online_payment, item_code, description, unit, qty, price, discount_amount2, addtl_amount2, wtax2, amount,online_payment);
+                    Srpt_sales_ledger_with_items.field f = new field(sales_no, customer_id, customer_name, amount_due, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location, online_payment, item_code, description, unit, qty, price, discount_amount2, addtl_amount2, wtax2, amount, online_payment);
                     fields.add(f);
                 }
             }

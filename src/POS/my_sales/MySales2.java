@@ -18,7 +18,8 @@ import java.util.List;
  * @author Maytopacka
  */
 public class MySales2 {
-     public static class sales {
+
+    public static class sales {
 
         public final int id;
         public String sales_no;
@@ -72,7 +73,7 @@ public class MySales2 {
         public final List<MySales_Items.items> items;
         public boolean is_selected;
 
-        public sales(int id, String sales_no, String date_added, String user_screen_name, String user_id, String session_no, String remarks, double gross_amount, double amount_due, int status, int sales_type, double line_discount, String customer_id, String customer_name, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String charge_type, String charge_type_id, String charge_reference_no, String charge_customer_name, String charge_customer_id, double charge_amount, String check_bank, String check_no, double check_amount, String check_holder, String check_date, String credit_card_type, double credit_card_rate, double credit_card_amount, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, double addtl_amount, double wtax, String branch, String branch_id, String location, String location_id, List<MySales_Items.items> items,boolean is_selected) {
+        public sales(int id, String sales_no, String date_added, String user_screen_name, String user_id, String session_no, String remarks, double gross_amount, double amount_due, int status, int sales_type, double line_discount, String customer_id, String customer_name, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String charge_type, String charge_type_id, String charge_reference_no, String charge_customer_name, String charge_customer_id, double charge_amount, String check_bank, String check_no, double check_amount, String check_holder, String check_date, String credit_card_type, double credit_card_rate, double credit_card_amount, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, double addtl_amount, double wtax, String branch, String branch_id, String location, String location_id, List<MySales_Items.items> items, boolean is_selected) {
             this.id = id;
             this.sales_no = sales_no;
             this.date_added = date_added;
@@ -123,7 +124,7 @@ public class MySales2 {
             this.location = location;
             this.location_id = location_id;
             this.items = items;
-            this.is_selected=is_selected;
+            this.is_selected = is_selected;
         }
 
         public boolean isIs_selected() {
@@ -133,7 +134,7 @@ public class MySales2 {
         public void setIs_selected(boolean is_selected) {
             this.is_selected = is_selected;
         }
-        
+
         public String getSales_no() {
             return sales_no;
         }
@@ -167,7 +168,8 @@ public class MySales2 {
         }
 
     }
- public static List<MySales2.sales> ret_data(String where) {
+
+    public static List<MySales2.sales> ret_data(String where) {
         List<MySales2.sales> datas = new ArrayList();
         List<MySales_Items.items> items = new ArrayList();
         try {
@@ -277,7 +279,7 @@ public class MySales2 {
                 String branch_id = rs.getString(47);
                 String location = rs.getString(48);
                 String location_id = rs.getString(49);
-                MySales2.sales to = new MySales2.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,true);
+                MySales2.sales to = new MySales2.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items, true);
                 datas.add(to);
             }
             return datas;

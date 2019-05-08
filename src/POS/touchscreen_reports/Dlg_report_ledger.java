@@ -752,7 +752,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 //        System.setProperty("pool_host", "localhost");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-
+//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
         init_key();
         set_default_branch();
         init_tbl_ledger();

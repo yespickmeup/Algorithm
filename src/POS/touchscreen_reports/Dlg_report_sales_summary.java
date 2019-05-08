@@ -1606,7 +1606,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String time = "All";
                 int count_days = DateUtils1.count_days(jDateChooser1.getDate(), jDateChooser2.getDate());
 
-                
                 if (jCheckBox13.isSelected()) {
 
                     if (!jCheckBox14.isSelected()) {
@@ -1658,8 +1657,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                             + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
                 }
                 if (!jCheckBox4.isSelected()) {
-                    where_drawer = where_drawer + "  and Date(time_in) between '" + date_from_sales + "' and '" + date_to_sales + "' ";
-                    where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_drawer = where_drawer + "  and time_in between '" + date_from_sales + "' and '" + date_to_sales + "' ";
+                    where_sales = where_sales + " and date_added between '" + date_from + "' and '" + date_to + "' ";
                     where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_disbursements = where_disbursements + " and Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales2 = where_sales2 + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
@@ -1673,7 +1672,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                     where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
                 }
-                
+
                 if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and branch_id='" + br.getId() + "' ";
                     where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
@@ -1682,8 +1681,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                     where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
                 }
-
+//                System.out.println("where_drawer: " + where_drawer);
                 List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
+                System.out.println("my_drawer: "+my_drawer.size());
+//                System.out.println("my_drawer: "+my_drawer.size());
 //                System.out.println("where_sales2: "+where_sales2);
 //                System.out.println("where_drawer: " + where_drawer);
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);

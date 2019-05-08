@@ -25,6 +25,7 @@ public class DateType {
     public static SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss aa");
     public static SimpleDateFormat time2 = new SimpleDateFormat("HH:mm aa");
     public static SimpleDateFormat time4 = new SimpleDateFormat("HH:mm:ss");
+    public static SimpleDateFormat time5 = new SimpleDateFormat("hh:mm aa");
     public static SimpleDateFormat sf1 = new SimpleDateFormat("EEE, MMM dd,yyyy");
     public static SimpleDateFormat d = new SimpleDateFormat("dd");
     public static SimpleDateFormat m = new SimpleDateFormat("MMMMMMMMMMM");
@@ -455,5 +456,15 @@ public class DateType {
             time = hours + ":" + minutes + ":59";
         }
         return time;
+    }
+
+    public static String ampm_to_timestamp(String time) {
+        String[] ret_time = new String[2];
+
+        time = time.replace("am", "");
+        time = time.replace("pm", "");
+        
+        ret_time[0] = time+":00";
+        return "";
     }
 }

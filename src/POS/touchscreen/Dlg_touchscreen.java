@@ -5342,8 +5342,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             if (my_sales == null) {
                 System.out.println("NULL");
             } else {
+                
                 System.out.println("NOT NULL");
-
+                
             }
 
         } catch (SQLException ex) {
