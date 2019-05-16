@@ -237,7 +237,7 @@ public class MySales {
             }
 
             String s0 = "insert into sales("
-                    + "sales_no"
+                    + " sales_no"
                     + ",date_added"
                     + ",user_screen_name"
                     + ",user_id"

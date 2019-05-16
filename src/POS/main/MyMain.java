@@ -71,7 +71,8 @@ public class MyMain {
             System.setProperty("delete_stock_transfers_finalized", prop.getProperty("delete_stock_transfers_finalized", "false"));
             System.setProperty("delete_other_adjustments_finalized", prop.getProperty("delete_other_adjustments_finalized", "false"));
             System.setProperty("delete_prepaid_payment_finalized", prop.getProperty("delete_prepaid_payment_finalized", "false"));
-            
+            System.setProperty("sales_date", prop.getProperty("sales_date", "os"));
+            System.setProperty("multi_cashin",prop.getProperty("multi_cashin","true"));
             System.out.println("OS: " + os);
 //            System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
@@ -86,9 +87,7 @@ public class MyMain {
             if (setting.receipt_printing_enabled == 1) {
                 System.setProperty("receipt_printing_enabled", "true");
                 System.setProperty("print_to_receipts", "true");
-                
-                
-                
+
             } else {
                 System.setProperty("print_to_receipts", "false");
                 System.setProperty("receipt_printing_enabled", "false");
@@ -110,7 +109,7 @@ public class MyMain {
             } else {
                 System.setProperty("allow_negative_inventory", "false");
             }
-            
+
             if (setting.receipt_printer_show_dialog == 1) {
                 System.setProperty("receipt_printer_show_dialog", "true");
             } else {

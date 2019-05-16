@@ -4080,7 +4080,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     //</editor-fold>
 //                    to2.setProduct_qty(to.product_qty);
 
-                    order.addAll(Inventory_assembly.convert_to_inventory_barcodes(datas,to3));
+                    order.addAll(Inventory_assembly.convert_to_inventory_barcodes(datas, to3));
                     order.add(to3);
                     tbl_orders_ALM.addAll(order);
 
@@ -5266,9 +5266,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Payments.online f_online = Payments.online;
         int id = 0;
         String sales_no = "";
-        
-        String date_added = DateType.sf.format(jDateChooser1.getDate()) + " "+DateType.time4.format(new Date());
-        
+
+        String date_added = DateType.sf.format(jDateChooser1.getDate()) + " " + DateType.time4.format(new Date());
+        String sales_date = System.getProperty("sales_date", "os");
+//        System.out.println("sales_date: "+sales_date);
+        if (sales_date.equalsIgnoreCase("os")) {
+            date_added = DateType.datetime.format(new Date());
+        }
         String user_screen_name = Users.get_ScreenName();
         String user_id = Users.getPassword();
         String session_no = lbl_sales_no.getText();
@@ -5342,9 +5346,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             if (my_sales == null) {
                 System.out.println("NULL");
             } else {
-                
+
                 System.out.println("NOT NULL");
-                
+
             }
 
         } catch (SQLException ex) {

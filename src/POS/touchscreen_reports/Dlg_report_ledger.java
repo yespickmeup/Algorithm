@@ -815,6 +815,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         int i = 0;
         for (Branches.to_branches to : branches_list) {
             obj[i][0] = to.id;
+            
             obj[i][1] = to.branch;
             i++;
         }
@@ -833,6 +834,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 br.setText(to.branch);
                 br.setId("" + to.id);
 
+               
             }
         });
     }
@@ -927,7 +929,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     status = 1;
                 }
                 String where = " where remarks like '%" + "" + "%' ";
-
                 if (!jCheckBox1.isSelected()) {
                     List<S1_users.to_users> users = S1_users.ret_where(" where id='" + f.getId() + "' ");
                     String user_name = "";
@@ -944,7 +945,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                             + "  and user_name='" + user_name + "' and status=1 ";
                     where_sales3 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status=1 ";
-
                 }
                 if (!jCheckBox2.isSelected()) {
                     where = where + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
@@ -1045,7 +1045,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double refund_cheque = 0;
 
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
-
                     if (prepayment.status == 1) {
                         if (prepayment.refund == 1) {
                             if (prepayment.check_amount > 0) {
@@ -1074,6 +1073,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         }
                     }
                 }
+                
+                
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
                     if (rfc.status == 1) {
                         refund -= (rfc.qty * rfc.cost);

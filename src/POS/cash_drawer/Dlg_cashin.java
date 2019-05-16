@@ -32,24 +32,26 @@ public class Dlg_cashin extends javax.swing.JDialog {
     public void setCallback(Callback callback) {
         this.callback = callback;
 
-
     }
 
     public static interface Callback {
 
         void ok(CloseDialog closeDialog, OutputData data);
+
+        void close(CloseDialog closeDialog, OutputData data);
     }
 
     public static class InputData {
     }
 
     public static class OutputData {
+
         public final double amount;
 
         public OutputData(double amount) {
             this.amount = amount;
         }
-        
+
     }
 //</editor-fold>
 
@@ -152,7 +154,6 @@ public class Dlg_cashin extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-
         Dlg_cashin dialog = Dlg_cashin.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
@@ -170,7 +171,6 @@ public class Dlg_cashin extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
 
     }
 
@@ -229,6 +229,11 @@ public class Dlg_cashin extends javax.swing.JDialog {
         });
 
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -243,9 +248,8 @@ public class Dlg_cashin extends javax.swing.JDialog {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                        .addComponent(tf_amount)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(tf_amount, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -280,12 +284,16 @@ public class Dlg_cashin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_amountActionPerformed
-       ok1();
+        ok1();
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ok1();
+        ok1();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        disposed();
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -300,43 +308,50 @@ public class Dlg_cashin extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-       
+
     }
 
     private void focus() {
         JTextField[] tf = {tf_amount};
         Focus_Fire.onFocus_lostFocus(tf);
         Focus_Fire.select_all(tf);
-    }    
+    }
+
     public void do_pass() {
     }
     // <editor-fold defaultstate="collapsed" desc="Key">
 
     private void disposed() {
-        this.dispose();
+        closed();
     }
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-    //                btn_0.doClick();
-                    disposed();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              //                btn_0.doClick();
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
-    
+
     private void ok1() {
-      double amount=FitIn.toDouble(tf_amount.getText());
-      if(amount<0){
-          Alert.set(0, "ENTER AMOUNT");
-          return;
-      }
+        double amount = FitIn.toDouble(tf_amount.getText());
+        if (amount < 0) {
+            Alert.set(0, "ENTER AMOUNT");
+            return;
+        }
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(amount));
+        }
+    }
+
+    private void closed() {
+        if (callback != null) {
+            callback.close(new CloseDialog(this), new OutputData(0));
         }
     }
 }

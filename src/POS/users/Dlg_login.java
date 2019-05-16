@@ -4,7 +4,6 @@
  */
 package POS.users;
 
-
 import POS.cash_drawer.Dlg_cashin;
 import POS.cash_drawer.S1_cash_drawer;
 import POS.util.Alert;
@@ -381,13 +380,13 @@ public class Dlg_login extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
 //                disposed();
-                System.exit(1);
-            }
-        });
+                              System.exit(1);
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -447,8 +446,8 @@ public class Dlg_login extends javax.swing.JDialog {
                             String time_in = DateType.datetime.format(new Date());
                             String time_out = null;
                             double amount = data.amount;
-                            S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in
-                                    , time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0,0,0,0,0,0,0,0,"","","","","","");
+                            S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in,
+                                     time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", "", "", "");
                             S1_cash_drawer.add_cash_drawer(to2);
                             Users.setSession_no(session_no);
                             Users.setScreen_name(screen_name1);
@@ -458,6 +457,12 @@ public class Dlg_login extends javax.swing.JDialog {
 
                             Users.setTime_in(time_in);
                             ok2();
+                        }
+
+                        @Override
+                        public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+                            closeDialog.ok();
+                            
                         }
                     });
                     nd.setLocationRelativeTo(this);
