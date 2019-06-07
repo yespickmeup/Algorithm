@@ -4,10 +4,16 @@
  */
 package POS.cash_drawer;
 
+import POS.users.MyUser;
 import POS.util.Alert;
+import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import POS.util.Focus_Fire;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JTextField;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -199,6 +205,7 @@ public class Dlg_cashin extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new Button.Success();
         jButton2 = new Button.Default();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -221,59 +228,65 @@ public class Dlg_cashin extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("CASH IN");
 
-        jButton1.setText("SAVE");
+        jButton1.setText("New Cashin");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("CANCEL");
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Date:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(105, 105, 105)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                    .addComponent(tf_amount, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_amount, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel14)
+                .addGap(85, 85, 85)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, 0)
-                        .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,11 +301,17 @@ public class Dlg_cashin extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ok1();
+        ok2();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        disposed();
+        if (jButton2.getText().equals("Cancel")) {
+            disposed();
+        } else {
+            ok1();
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
@@ -302,14 +321,22 @@ public class Dlg_cashin extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField tf_amount;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        init_key();
 
+//        System.setProperty("pool_db", "db_algorithm");
+//        MyUser.setUser_id("1");
+        init_key();
+//        do_pass();
+
+        jLabel2.setText("Date: " + DateType.slash_w_time.format(new Date()));
     }
+
+    int cash_drawer_id = 0;
 
     private void focus() {
         JTextField[] tf = {tf_amount};
@@ -318,6 +345,21 @@ public class Dlg_cashin extends javax.swing.JDialog {
     }
 
     public void do_pass() {
+        String where = " where Date(time_in) = '" + DateType.sf.format(new Date()) + "' ";
+        List<CashDrawer.to_cash_drawer> drawer = CashDrawer.ret_where(where);
+        if (drawer.isEmpty()) {
+            jButton2.setText("Cancel");
+            cash_drawer_id = 0;
+        } else {
+            jButton2.setText("Update");
+            double amount = 0;
+            for (CashDrawer.to_cash_drawer d : drawer) {
+                amount = d.amount;
+                cash_drawer_id = d.id;
+            }
+            tf_amount.setText(FitIn.fmt_wc_0(amount));
+        }
+
     }
     // <editor-fold defaultstate="collapsed" desc="Key">
 
@@ -339,11 +381,138 @@ public class Dlg_cashin extends javax.swing.JDialog {
     // </editor-fold>
 
     private void ok1() {
+        final double amount = FitIn.toDouble(tf_amount.getText());
+        if (amount < 0) {
+            Alert.set(0, "ENTER AMOUNT");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                if (jButton2.getText().equalsIgnoreCase("Cancel")) {
+
+                    int id = 0;
+                    String session_no = "";
+                    String user_name = MyUser.getUser_name();
+                    String screen_name = MyUser.getUser_screen_name();
+                    String time_in = DateType.now();
+                    String time_out = null;
+
+                    double cash_out = 0;
+                    double thousand = 0;
+                    double five_hundred = 0;
+                    double two_hundred = 0;
+                    double fifty = 0;
+                    double twenty = 0;
+                    double coins = 0;
+                    double one_hundred = 0;
+                    double expenses = 0;
+                    double ten = 0;
+                    double five = 0;
+                    double one = 0;
+                    double point_five = 0;
+                    double point_two_five = 0;
+                    double point_ten = 0;
+                    double point_zero_five = 0;
+                    String branch = MyUser.getBranch();
+                    String branch_id = MyUser.getBranch_id();
+                    String location = MyUser.getLocation();
+                    String location_id = MyUser.getLocation_id();
+                    String user_id = MyUser.getUser_id();
+                    String user_screen_name = MyUser.getUser_screen_name();
+                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                    CashDrawer.insert_data(cd);
+                }
+                if (jButton2.getText().equalsIgnoreCase("Update")) {
+                    int id = 0;
+                    String session_no = "";
+                    String user_name = MyUser.getUser_name();
+                    String screen_name = MyUser.getUser_screen_name();
+                    String time_in = DateType.now();
+                    String time_out = null;
+
+                    double cash_out = 0;
+                    double thousand = 0;
+                    double five_hundred = 0;
+                    double two_hundred = 0;
+                    double fifty = 0;
+                    double twenty = 0;
+                    double coins = 0;
+                    double one_hundred = 0;
+                    double expenses = 0;
+                    double ten = 0;
+                    double five = 0;
+                    double one = 0;
+                    double point_five = 0;
+                    double point_two_five = 0;
+                    double point_ten = 0;
+                    double point_zero_five = 0;
+                    String branch = MyUser.getBranch();
+                    String branch_id = MyUser.getBranch_id();
+                    String location = MyUser.getLocation();
+                    String location_id = MyUser.getLocation_id();
+                    String user_id = MyUser.getUser_id();
+                    String user_screen_name = MyUser.getUser_screen_name();
+                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                    CashDrawer.update_drawer2(cd, "" + cash_drawer_id);
+                }
+                okay(amount);
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+
+    }
+
+    private void okay(double amount) {
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData(amount));
+        }
+    }
+
+    private void ok2() {
         double amount = FitIn.toDouble(tf_amount.getText());
         if (amount < 0) {
             Alert.set(0, "ENTER AMOUNT");
             return;
         }
+
+        int id = 0;
+        String session_no = "";
+        String user_name = MyUser.getUser_name();
+        String screen_name = MyUser.getUser_screen_name();
+        String time_in = DateType.now();
+        String time_out = null;
+
+        double cash_out = 0;
+        double thousand = 0;
+        double five_hundred = 0;
+        double two_hundred = 0;
+        double fifty = 0;
+        double twenty = 0;
+        double coins = 0;
+        double one_hundred = 0;
+        double expenses = 0;
+        double ten = 0;
+        double five = 0;
+        double one = 0;
+        double point_five = 0;
+        double point_two_five = 0;
+        double point_ten = 0;
+        double point_zero_five = 0;
+        String branch = MyUser.getBranch();
+        String branch_id = MyUser.getBranch_id();
+        String location = MyUser.getLocation();
+        String location_id = MyUser.getLocation_id();
+        String user_id = MyUser.getUser_id();
+        String user_screen_name = MyUser.getUser_screen_name();
+        CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+        CashDrawer.insert_data(cd);
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(amount));
         }

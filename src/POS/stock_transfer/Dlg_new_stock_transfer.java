@@ -3404,7 +3404,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 }
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String date = DateType.convert_slash_datetime2(to.date_added);
-                System.out.println(date);
+//                System.out.println(date);
                 String printed_by = "Administrator";
                 String transaction_no = to.transaction_no;
                 String from_branch = to.from_branch;
@@ -4130,7 +4130,6 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         waiting_finalization++;
                     }
                 }
-
                 if (to.status == 0 && to.is_uploaded != 1 || to.status == 1 && to.is_uploaded == 0) {
                     for_upload++;
                 }
@@ -4148,6 +4147,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                         closeDialog.ok();
                     }
                 });
+
                 nd.setLocationRelativeTo(this);
                 nd.setVisible(true);
             }

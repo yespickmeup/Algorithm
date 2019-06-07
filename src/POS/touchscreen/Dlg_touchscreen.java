@@ -2934,6 +2934,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
 //        jPanel2.setVisible(false);
+
         init_key();
         set_cardlayout();
         init_invisible();
@@ -5273,6 +5274,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         if (sales_date.equalsIgnoreCase("os")) {
             date_added = DateType.datetime.format(new Date());
         }
+
         String user_screen_name = Users.get_ScreenName();
         String user_id = Users.getPassword();
         String session_no = lbl_sales_no.getText();

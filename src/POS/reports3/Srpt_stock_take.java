@@ -65,11 +65,11 @@ public class Srpt_stock_take {
         String uom;
         String code;
         String location;
-
+        String serial_no;
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, double qty, double selling_price, double cost, String uom, String code, String location) {
+        public field(String item_code, String barcode, String description, double qty, double selling_price, double cost, String uom, String code, String location,String serial_no) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -79,8 +79,18 @@ public class Srpt_stock_take {
             this.uom = uom;
             this.code = code;
             this.location = location;
+            this.serial_no=serial_no;
         }
 
+        public String getSerial_no() {
+            return serial_no;
+        }
+
+        public void setSerial_no(String serial_no) {
+            this.serial_no = serial_no;
+        }
+
+       
         public String getLocation() {
             return location;
         }
@@ -320,7 +330,7 @@ public class Srpt_stock_take {
                 String location_id = rs.getString(36);
                 String serial_no = rs.getString(37);
                 String loc = branch + " - " + location;
-                Srpt_stock_take.field field = new field("" + main_barcode, barcode, description, product_qty, selling_price, cost, unit, "" + main_barcode, loc);
+                Srpt_stock_take.field field = new field("" + main_barcode, barcode, description, product_qty, selling_price, cost, unit, "" + main_barcode, loc,serial_no);
                 datas.add(field);
             }
             return datas;

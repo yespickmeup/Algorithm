@@ -439,11 +439,11 @@ public class CashDrawer {
 
             conn.close();
             conn2.close();
-            Lg.s(CashDrawer.class, "Successfully Added: "+to_cash_drawer.id);
+            Lg.s(CashDrawer.class, "Successfully Added: " + to_cash_drawer.id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-           
+
         }
     }
 
@@ -487,6 +487,28 @@ public class CashDrawer {
                     .setNumber("point_two_five", to_cash_drawer.point_two_five)
                     .setNumber("point_ten", to_cash_drawer.point_ten)
                     .setNumber("point_zero_five", to_cash_drawer.point_zero_five)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(CashDrawer.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_drawer2(to_cash_drawer to_cash_drawer, String id) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update cash_drawer set "
+                    + "amount= :amount "
+                    + " where id='" + id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("amount", to_cash_drawer.amount)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);

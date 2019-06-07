@@ -20,6 +20,10 @@ import POS.category.Dlg_update_model;
 import POS.category.Dlg_update_sub_classification;
 import POS.inventory.Inventory;
 import POS.inventory.Inventory.to_inventory;
+import POS.inventory.Inventory_barcodes;
+import POS.my_sales.MySales_Items;
+import POS.stock_transfer.Stock_transfer_items;
+import POS.test2.Serial;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
@@ -45,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 import javax.swing.AbstractButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -279,6 +284,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox14 = new javax.swing.JCheckBox();
+        jCheckBox15 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -577,6 +583,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox14.setText("Long");
 
+        jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox15.setText("Include Serial");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -636,8 +645,10 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox15)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,7 +684,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox7)
-                            .addComponent(jCheckBox14))
+                            .addComponent(jCheckBox14)
+                            .addComponent(jCheckBox15))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1274,6 +1286,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox15;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -1342,6 +1355,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_bodega");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
+
 
         init_key();
 
@@ -2480,7 +2494,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             String uom = to.unit;
             String code = to.barcode;
             String loc = to.branch + " - " + to.location;
-            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code, loc);
+            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code, loc, "");
             datas.add(field);
         }
 
@@ -2715,7 +2729,34 @@ public class Dlg_report_item extends javax.swing.JDialog {
             String uom = to.unit;
             String code = to.barcode;
             String loc = to.branch + " - " + to.location;
-            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code, loc);
+            String serial = "";
+            String serial_ib = "";
+            String serial_s = "";
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+            if (jCheckBox15.isSelected()) {
+                if (to.product_qty > 0) {
+                    String where = " where location_id='" + to.location_id + "' and  main_barcode='" + to.barcodes + "' ";
+                    String where2 = " where location_id='" + to.location_id + "' and  item_code='" + to.barcodes + "' and serial_no !='' ";
+                    String where3 = " where at_location_id='" + to.location_id + "' and  barcode='" + to.barcodes + "' and serial_no !='' ";
+                    List<Inventory_barcodes.to_inventory_barcodes> barcodes = Inventory_barcodes.ret_where(where);
+                    List<MySales_Items.items> sales = MySales_Items.ret_data(where2);
+                    List<Stock_transfer_items.to_stock_transfers_items> stock_transfers = Stock_transfer_items.ret_data2(where3);
+                    for (Inventory_barcodes.to_inventory_barcodes b : barcodes) {
+                        sb.append(b.serial_no);
+                    }
+                    for (MySales_Items.items s : sales) {
+                        sb2.append(s.serial_no);
+                    }
+
+                    for (Stock_transfer_items.to_stock_transfers_items s : stock_transfers) {
+                        sb2.append(s.serial_no);
+                    }
+                }
+
+            }
+            serial_ib = Serial.remove_duplicates(sb.toString(), sb2.toString());
+            Srpt_stock_take.field field = new Srpt_stock_take.field(item_code, barcode, description, qty, selling_price, cost, uom, code, loc, serial_ib);
             datas.add(field);
         }
 
@@ -2776,6 +2817,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         jrxml = "rpt_stock_take_cost_long.jrxml";
                     }
                 }
+//                System.out.println("jrxml: "+jrxml);
                 report_preview(rpt, jrxml);
                 jTabbedPane1.setSelectedIndex(2);
                 jProgressBar2.setString("Finished...");
@@ -2841,6 +2883,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             }
         });
         nd.setLocationRelativeTo(jScrollPane1);
+
         nd.setVisible(true);
     }
 

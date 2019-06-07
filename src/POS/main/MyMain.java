@@ -72,7 +72,7 @@ public class MyMain {
             System.setProperty("delete_other_adjustments_finalized", prop.getProperty("delete_other_adjustments_finalized", "false"));
             System.setProperty("delete_prepaid_payment_finalized", prop.getProperty("delete_prepaid_payment_finalized", "false"));
             System.setProperty("sales_date", prop.getProperty("sales_date", "os"));
-            System.setProperty("multi_cashin",prop.getProperty("multi_cashin","true"));
+            System.setProperty("multi_cashin",prop.getProperty("multi_cashin","false"));
             System.out.println("OS: " + os);
 //            System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));

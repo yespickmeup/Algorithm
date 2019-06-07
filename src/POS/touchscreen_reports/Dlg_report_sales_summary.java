@@ -1402,6 +1402,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         if (!cloud_host.isEmpty()) {
             ret_transactions();
         }
+        
 //        jCheckBox14.setVisible(false);
 //        jLabel18.setVisible(false);
     }
@@ -1681,7 +1682,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                     where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
                 }
-//                System.out.println("where_drawer: " + where_drawer);
+                System.out.println("where_drawer: " + where_drawer);
                 List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
                 System.out.println("my_drawer: "+my_drawer.size());
 //                System.out.println("my_drawer: "+my_drawer.size());

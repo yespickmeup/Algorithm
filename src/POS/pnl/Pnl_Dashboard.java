@@ -2808,25 +2808,26 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             Window p = (Window) this;
             Dlg_cashin nd = Dlg_cashin.create(p, true);
             nd.setTitle("");
+            nd.do_pass();
             nd.setCallback(new Dlg_cashin.Callback() {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
                     closeDialog.ok();
-                    int id = 1;
-                    String session_no = MyUser.getUser_id();
-                    String user_name1 = MyUser.getUser_name();
-                    String screen_name1 = MyUser.getUser_screen_name();
-                    String time_in = DateType.datetime.format(new Date());
-                    String time_out = null;
-                    double amount = data.amount;
-                    String branch = my_branch;
-                    String branch_id = my_branch_id;
-                    String location = my_location;
-                    String location_id = my_location_id;
-                    String user_id = MyUser.getUser_id();
-                    String user_screen_name = MyUser.getUser_screen_name();
-                    S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
-                    S1_cash_drawer.add_cash_drawer(to2);
+//                    int id = 1;
+//                    String session_no = MyUser.getUser_id();
+//                    String user_name1 = MyUser.getUser_name();
+//                    String screen_name1 = MyUser.getUser_screen_name();
+//                    String time_in = DateType.datetime.format(new Date());
+//                    String time_out = null;
+//                    double amount = data.amount;
+//                    String branch = my_branch;
+//                    String branch_id = my_branch_id;
+//                    String location = my_location;
+//                    String location_id = my_location_id;
+//                    String user_id = MyUser.getUser_id();
+//                    String user_screen_name = MyUser.getUser_screen_name();
+//                    S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
+//                    S1_cash_drawer.add_cash_drawer(to2);
                     t_tavern();
                 }
 
@@ -2845,25 +2846,26 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 Window p = (Window) this;
                 Dlg_cashin nd = Dlg_cashin.create(p, true);
                 nd.setTitle("");
+                nd.do_pass();
                 nd.setCallback(new Dlg_cashin.Callback() {
                     @Override
                     public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
                         closeDialog.ok();
-                        int id = 1;
-                        String session_no = MyUser.getUser_id();
-                        String user_name1 = MyUser.getUser_name();
-                        String screen_name1 = MyUser.getUser_screen_name();
-                        String time_in = DateType.datetime.format(new Date());
-                        String time_out = null;
-                        double amount = data.amount;
-                        String branch = my_branch;
-                        String branch_id = my_branch_id;
-                        String location = my_location;
-                        String location_id = my_location_id;
-                        String user_id = MyUser.getUser_id();
-                        String user_screen_name = MyUser.getUser_screen_name();
-                        S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
-                        S1_cash_drawer.add_cash_drawer(to2);
+//                        int id = 1;
+//                        String session_no = MyUser.getUser_id();
+//                        String user_name1 = MyUser.getUser_name();
+//                        String screen_name1 = MyUser.getUser_screen_name();
+//                        String time_in = DateType.datetime.format(new Date());
+//                        String time_out = null;
+//                        double amount = data.amount;
+//                        String branch = my_branch;
+//                        String branch_id = my_branch_id;
+//                        String location = my_location;
+//                        String location_id = my_location_id;
+//                        String user_id = MyUser.getUser_id();
+//                        String user_screen_name = MyUser.getUser_screen_name();
+//                        S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
+//                        S1_cash_drawer.add_cash_drawer(to2);
                         t_tavern();
                     }
 

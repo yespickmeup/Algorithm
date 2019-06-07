@@ -21,6 +21,7 @@
 	<field name="uom" class="java.lang.String"/>
 	<field name="code" class="java.lang.String"/>
 	<field name="location" class="java.lang.String"/>
+	<field name="serial_no" class="java.lang.String"/>
 	<variable name="item_code_1" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{item_code}]]></variableExpression>
 	</variable>
@@ -254,7 +255,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
 				<reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="94" y="0" width="197" height="15"/>
 				<box>
@@ -315,6 +316,16 @@
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="0" y="15" width="555" height="15" isRemoveLineWhenBlank="true"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serial_no}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

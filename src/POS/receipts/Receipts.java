@@ -1018,14 +1018,12 @@ public class Receipts {
                         conversion = rs10.getDouble(2);
                         serial_no = rs10.getString(3);
                     }
-
                     double cost = to_receipt_items.cost / to_receipt_items.conversion;
                     double new_qty = product_qty + (to_receipt_items.conversion * to_receipt_items.qty);
                     String new_serial = serial_no + "\n" + to_receipt_items.serial_no;
                     if (serial_no.isEmpty()) {
                         new_serial = to_receipt_items.serial_no;
                     }
-
                     String s4 = "update inventory_barcodes set "
                             + " product_qty='" + new_qty + "'"
                             + ",cost='" + cost + "' "
@@ -1202,6 +1200,7 @@ public class Receipts {
             }
 
             stmt.executeBatch();
+
             conn.commit();
 
             Lg.s(Inventory.class, "Successfully Updated");

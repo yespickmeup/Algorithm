@@ -4150,13 +4150,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 }
             });
         }
-
         @Override
         protected Object doInBackground() throws Exception {
             loader_finalize_receipt(data2);
             return null;
         }
-
         @Override
         protected void done() {
             dialog.dispose();
@@ -4167,6 +4165,5 @@ public class Dlg_receipts extends javax.swing.JDialog {
             });
         }
     }
-
     //</editor-fold>
 }
