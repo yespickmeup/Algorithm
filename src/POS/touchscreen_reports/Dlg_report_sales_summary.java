@@ -1661,7 +1661,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_drawer = where_drawer + "  and time_in between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales = where_sales + " and date_added between '" + date_from + "' and '" + date_to + "' ";
                     where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                    where_disbursements = where_disbursements + " and Date(disbursement_date) between '" + date_from + "' and '" + date_to + "' ";
+                    where_disbursements = where_disbursements + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales2 = where_sales2 + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }

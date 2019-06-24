@@ -1301,6 +1301,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("return_exchange_days", "2000");
+        MyUser.setUser_id("1");
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);
@@ -1349,14 +1350,14 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -1619,12 +1620,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     }
 
     private void replace_items() {
-//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Add)" + "' limit 1";
-//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-//        if (privileges.isEmpty()) {
-//            Alert.set(0, "Privilege not added!");
-//            return;
-//        }
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return Exchange - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         final List<MySales_Items.items> selected = new ArrayList();
         final List<MySales_Items.items> others = new ArrayList();
         List<MySales_Items.items> items = tbl_sale_items_ALM;
@@ -1734,8 +1735,46 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 String branch_id = br.getId();
                 String location = lo.getText();
                 String location_id = lo.getId();
+                double cash_amount = data.cash_amount;
 
-                to_item_replacements replacement = new to_item_replacements(id, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, user_id, reason, amount_due, replacement_amount, discount, status, branch, branch_id, location, location_id);
+                String check_holder = data.check_holder;
+                String check_bank = data.check_bank;
+                String check_no = data.check_no;
+                String check_date = data.check_date;
+                double check_amount = data.check_amount;
+
+                String card_type = data.card_type;
+                double credit_card_rate = data.credit_card_rate;
+                double credit_card_amount = data.credit_card_amount;
+                double credit_card_amount_to_pay = data.credit_card_amount;
+                String credit_card_no = data.credit_card_no;
+                String credit_card_holder = data.credit_card_holder;
+                String credit_card_approval_code = data.credit_card_approval_code;
+
+                String prepaid_customer_name = data.credit_card_approval_code;
+                String prepaid_customer_id = data.prepaid_customer_id;
+                double prepaid_amount = data.prepaid_amount;
+
+                String charge_reference_no = data.charge_reference_no;
+                String charge_ar_no = data.charge_ar_no;
+                String charge_type = data.charge_type;
+                String charge_customer_name = data.charge_customer_name;
+                String charge_customer_id = data.charge_customer_id;
+                double charge_amount = data.charge_amount;
+                int charge_dayes = data.charge_dayes;
+
+                String gc_from = data.gc_from;
+                String gc_description = data.gc_description;
+                String gc_no = data.gc_no;
+                double gc_amount = data.gc_amount;
+
+                String online_holder = data.online_holder;
+                String online_bank = data.online_bank;
+                String online_reference_no = data.online_reference_no;
+                String online_date = data.online_date;
+                double online_amount = data.online_amount;
+
+                to_item_replacements replacement = new to_item_replacements(id, item_replacement_no, sales_no, customer_name, customer_id, date_added, user_screen_name, user_id, reason, amount_due, replacement_amount, discount, status, branch, branch_id, location, location_id, cash_amount, check_holder, check_bank, check_no, check_date, check_amount, card_type, credit_card_rate, credit_card_amount, credit_card_amount_to_pay, credit_card_no, credit_card_holder, credit_card_approval_code, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_dayes, gc_from, gc_description, gc_no, gc_amount, online_holder, online_bank, online_reference_no, online_date, online_amount);
                 Item_replacements.add_data(replacement, selected, data.replacements);
                 Alert.set(1, "");
                 ret_item_replacements();

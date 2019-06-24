@@ -10,6 +10,7 @@ import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,13 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
     }
 
     public static class OutputData {
+
+        public final String serial;
+
+        public OutputData(String serial) {
+            this.serial = serial;
+        }
+
     }
 //</editor-fold>
 
@@ -198,6 +206,8 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_posts2 = new javax.swing.JTable();
         tf_amount = new Field.Input();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jButton1 = new Button.Success();
         jButton2 = new Button.Default();
 
@@ -220,6 +230,7 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
 
             }
         ));
+        tbl_posts.setFocusable(false);
         tbl_posts.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_postsMouseClicked(evt);
@@ -273,6 +284,12 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
 
             }
         ));
+        tbl_posts2.setFocusable(false);
+        tbl_posts2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_posts2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_posts2);
 
         tf_amount.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -282,6 +299,10 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
                 tf_amountActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Serials Added:");
+
+        jLabel4.setText("0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -293,7 +314,11 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tf_amount))
+                    .addComponent(tf_amount)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -303,6 +328,10 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
                 .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addContainerGap())
         );
 
@@ -366,7 +395,7 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//      ok1();
+        ok();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -375,12 +404,16 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tf_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_amountActionPerformed
-//        ok1();
+        enter_serial();
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void tbl_postsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_postsMouseClicked
         select_serial();
     }//GEN-LAST:event_tbl_postsMouseClicked
+
+    private void tbl_posts2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_posts2MouseClicked
+        select_item();
+    }//GEN-LAST:event_tbl_posts2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -391,6 +424,8 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -405,7 +440,7 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
         init_key();
         init_tbl_posts(tbl_posts);
         init_tbl_posts2(tbl_posts2);
-        dummy_serial();
+//        dummy_serial();
         tf_amount.grabFocus();
     }
 
@@ -512,7 +547,53 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
                 + "9QG8Z34D\n"
                 + "9QGA99LZ";
 
+    }
+
+    public void do_pass2_edit(String added_serials, String list_of_serials2) {
+
+        String[] ser = added_serials.split(", ");
+        String[] ser2 = list_of_serials2.split("\n");
+        List<serial> acc = new ArrayList();
+        for (String s : ser) {
+            serial seri = new serial(s, false);
+            acc.add(seri);
+        }
+
+        //list_of_serials2
+        List<serial> acc2 = new ArrayList();
+        for (String s : ser2) {
+            serial seri = new serial(s, false);
+            acc2.add(seri);
+        }
+        //recheck added serials
+
+        for (serial add : acc) {
+            int exists = 0;
+            for (serial list : acc2) {
+                if (list.serial.equalsIgnoreCase(add.serial)) {
+                    exists = 1;
+                    list.setSelected(true);
+                    tbl_posts_M.fireTableDataChanged();
+                    break;
+                }
+            }
+        }
+
+        if (!added_serials.isEmpty()) {
+            loadData_posts2(acc);
+            jLabel2.setText("" + acc.size());
+        }
+        if (!list_of_serials2.isEmpty()) {
+            loadData_posts(acc2);
+            jLabel4.setText("" + acc2.size());
+        }
+
+        tf_amount.grabFocus();
+    }
+
+    public void do_pass(String serials) {
         String[] ser = serials.split("\n");
+
         List<serial> acc = new ArrayList();
         for (String s : ser) {
             serial seri = new serial(s, false);
@@ -520,10 +601,7 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
         }
         loadData_posts(acc);
         jLabel2.setText("" + acc.size());
-    }
-
-    public void do_pass() {
-
+        tf_amount.grabFocus();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -541,6 +619,33 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
                               disposed();
                           }
                       });
+        tf_amount.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    if (!tbl_posts_ALM2.isEmpty()) {
+                        tbl_posts2.setRowSelectionInterval(0, 0);
+                        tbl_posts2.setFocusable(true);
+                        tbl_posts2.grabFocus();
+                    }
+                }
+
+            }
+        });
+
+        tbl_posts2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    tf_amount.grabFocus();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    select_item();
+                    tf_amount.grabFocus();
+                    tbl_posts2.setFocusable(false);
+                }
+            }
+        });
     }
     // </editor-fold>
 
@@ -665,6 +770,7 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
             tbl_posts_ALM2.add(to);
             tbl_posts_M.fireTableDataChanged();
         }
+        count_serials_added();
 
     }
 //</editor-fold> 
@@ -746,9 +852,80 @@ public class Dlg_touchscreen_serial_numbers extends javax.swing.JDialog {
     }
 
 //</editor-fold> 
-    
-    private void enter_serial(){
-        String serial_no=tf_amount.getText();
-        
+    private void enter_serial() {
+        String serial_no = tf_amount.getText();
+        List<serial> added = tbl_posts_ALM2;
+        int exists = 0;
+        for (serial s : added) {
+            if (s.serial.equalsIgnoreCase(serial_no)) {
+                exists = 1;
+                break;
+            }
+        }
+        if (exists == 1) {
+            Alert.set(0, "Serial Already Added!");
+            return;
+        }
+        List<serial> list = tbl_posts_ALM;
+        int serial_exists = 0;
+        for (serial s : list) {
+            if (s.serial.equalsIgnoreCase(serial_no)) {
+                s.setSelected(false);
+                tbl_posts_M.fireTableDataChanged();
+                tbl_posts_ALM2.add(s);
+                serial_exists = 1;
+                count_serials_added();
+                break;
+            }
+        }
+        if (serial_exists == 0) {
+            Alert.set(0, "Serial does not exists!");
+        }
+    }
+
+    private void select_item() {
+        int row = tbl_posts2.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        serial se = (serial) tbl_posts_ALM2.get(row);
+        tbl_posts_ALM2.remove(row);
+        List<serial> list = tbl_posts_ALM;
+        for (serial s : list) {
+            if (s.serial.equalsIgnoreCase(se.serial)) {
+                s.setSelected(false);
+                tbl_posts_M.fireTableDataChanged();
+                count_serials_added();
+                break;
+            }
+        }
+    }
+
+    private void count_serials_added() {
+        List<serial> serials = tbl_posts_ALM2;
+        jLabel4.setText("" + serials.size());
+    }
+
+    private void ok() {
+        List<serial> serials = tbl_posts_ALM2;
+        if (serials.isEmpty()) {
+            Alert.set(0, "No serial/s selected!");
+            return;
+        }
+        String added = "";
+        int i = 0;
+        for (serial s : serials) {
+
+            if (i == 0) {
+                added = s.serial;
+            } else {
+                added = added + ", " + s.serial;
+            }
+            i++;
+        }
+//        System.out.println("serial: " + added);
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData(added));
+        }
     }
 }

@@ -23,10 +23,18 @@ public class tax {
 
     }
 
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         String or = "14|0000000000001212";
         int index = or.indexOf("|");
         or = or.substring(index + 1, or.length());
         System.out.println("or: " + or);
     }
+
+    public static void main(String[] args) {
+        double am = -500;
+        double balance = 1000;
+        double new_amount = balance + am;
+        System.out.println("new_amount: " + new_amount);
+    }
+
 }

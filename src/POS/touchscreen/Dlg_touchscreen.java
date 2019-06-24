@@ -31,6 +31,7 @@ import POS.users.User_previlege_others;
 import POS.users.User_price_change_request_logs;
 import POS.users.User_price_change_requests;
 import POS.util.Alert;
+import POS.util.Center;
 import POS.util.DateType;
 import POS.util.KeyCodes;
 import POS.util.LostHeaderRenderer;
@@ -4797,24 +4798,62 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void serial_no() {
 
-        Label.Item_discount lbl1 = (Label.Item_discount) jLabel47;
-
-        Window p = (Window) this;
-        Dlg_touchscreen_serial_number nd = Dlg_touchscreen_serial_number.create(p, true);
-        nd.setTitle("");
-        nd.do_pass(lbl1.getDiscount_customer_id());
-        nd.setCallback(new Dlg_touchscreen_serial_number.Callback() {
-
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_touchscreen_serial_number.OutputData data) {
-                closeDialog.ok();
-                Label.Item_discount lbl = (Label.Item_discount) jLabel47;
-                lbl.setDiscount_customer_id(data.serial_no);
+//     
+        if (jButton43.getText().equalsIgnoreCase("Add Order")) {
+            int row = tbl_items.getSelectedRow();
+            if (row < 0) {
+                return;
             }
-        });
-        Point loc = jLabel47.getLocationOnScreen();
-        nd.setLocation(loc.x, loc.y - 380);
-        nd.setVisible(true);
+            Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_items_ALM.get(row);
+            Window p = (Window) this;
+            Dlg_touchscreen_serial_number nd = Dlg_touchscreen_serial_number.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.serial_no);
+            nd.setCallback(new Dlg_touchscreen_serial_number.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_serial_number.OutputData data) {
+                    closeDialog.ok();
+                    Label.Item_discount lbl = (Label.Item_discount) jLabel47;
+                    lbl.setDiscount_customer_id(data.serial_no);
+                }
+            });
+
+            Center.setCenter(nd);
+            nd.setVisible(true);
+        } else {
+            int row = tbl_orders.getSelectedRow();
+            if (row < 0) {
+                return;
+            }
+            int col = tbl_orders.getSelectedColumn();
+            if (col == 3) {
+                delete_item();
+            }
+
+            Inventory_barcodes.to_inventory_barcodes to = (Inventory_barcodes.to_inventory_barcodes) tbl_orders_ALM.get(row);
+//            List<Inventory_barcodes.to_inventory_barcodes> ib = Inventory_barcodes.ret_where(" where main_barcode='" + to.main_barcode + "' and location_id='" + to.location_id + "' ");
+//            if (!ib.isEmpty()) {
+//                Inventory_barcodes.to_inventory_barcodes to2 = (Inventory_barcodes.to_inventory_barcodes) ib.get(0);
+                Label.Item_discount lbl1 = (Label.Item_discount) jLabel47;
+                Window p = (Window) this;
+                Dlg_touchscreen_serial_number nd = Dlg_touchscreen_serial_number.create(p, true);
+                nd.setTitle("");
+                nd.do_pass( to.serial_no);
+                nd.setCallback(new Dlg_touchscreen_serial_number.Callback() {
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_touchscreen_serial_number.OutputData data) {
+                        closeDialog.ok();
+                        Label.Item_discount lbl = (Label.Item_discount) jLabel47;
+                        lbl.setDiscount_customer_id(data.serial_no);
+                    }
+                });
+
+                Center.setCenter(nd);
+                nd.setVisible(true);
+//            }
+
+        }
+
     }
 
     private void due_discount() {

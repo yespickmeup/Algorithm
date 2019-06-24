@@ -53,9 +53,10 @@ public class Srpt_ar_aging {
     public final double days_61_90;
     public final double days_91_10;
     public final double days_above;
-    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address
-            , String telephone_number, String customer_address,String department,String ar_footer,String img_path
-            ,String prepared_by, double days_1_30,double days_31_60,double days_61_90,double days_91_10,double days_above) {
+
+    public Srpt_ar_aging(String business_name, String date, String printed_by, double one, double two, double three, double four, double five, double six, String address,
+            String telephone_number, String customer_address, String department, String ar_footer, String img_path,
+            String prepared_by, double days_1_30, double days_31_60, double days_61_90, double days_91_10, double days_above) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.date = date;
@@ -69,15 +70,15 @@ public class Srpt_ar_aging {
         this.address = address;
         this.telephone_number = telephone_number;
         this.customer_address = customer_address;
-        this.department=department;
-        this.ar_footer=ar_footer;
-        this.img_path=img_path;
-        this.prepared_by=prepared_by;
-        this.days_1_30=days_1_30;
-        this.days_31_60=days_31_60;
-        this.days_61_90=days_61_90;
-        this.days_91_10=days_91_10;
-        this.days_above=days_above;
+        this.department = department;
+        this.ar_footer = ar_footer;
+        this.img_path = img_path;
+        this.prepared_by = prepared_by;
+        this.days_1_30 = days_1_30;
+        this.days_31_60 = days_31_60;
+        this.days_61_90 = days_61_90;
+        this.days_91_10 = days_91_10;
+        this.days_above = days_above;
     }
 
     public static class field {
@@ -94,11 +95,12 @@ public class Srpt_ar_aging {
         String four;
         String above;
         String applied;
+        String contact_no;
 
         public field() {
         }
 
-        public field(String ci_no, String transaction_no, String customer, String term, String amount, String days, String one, String two, String three, String four, String above, String applied) {
+        public field(String ci_no, String transaction_no, String customer, String term, String amount, String days, String one, String two, String three, String four, String above, String applied, String contact_no) {
             this.ci_no = ci_no;
             this.transaction_no = transaction_no;
             this.customer = customer;
@@ -111,6 +113,15 @@ public class Srpt_ar_aging {
             this.four = four;
             this.above = above;
             this.applied = applied;
+            this.contact_no = contact_no;
+        }
+
+        public String getContact_no() {
+            return contact_no;
+        }
+
+        public void setContact_no(String contact_no) {
+            this.contact_no = contact_no;
         }
 
         public String getCi_no() {
@@ -235,17 +246,17 @@ public class Srpt_ar_aging {
         String address = "";
         String telephone_number = "";
         String customer_address = "";
-        String department="All";
-        String ar_footer=System.getProperty("ar_footer","Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
-        String img_path=System.getProperty("img_path","C:\\Users\\Guinness\\smis\\logo.png");
-        String prepared_by="";
-        double days_1_30=0;
-        double days_31_60=0;
-        double  days_61_90=0;
-        double days_91_10=0;
-        double days_above=0;
-        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address,department
-                ,ar_footer,img_path,prepared_by,days_1_30,days_31_60,days_61_90,days_91_10,days_above);
+        String department = "All";
+        String ar_footer = System.getProperty("ar_footer", "Should you have any enquiries concerning this statement, please contact Napoleon Dy Jr. on 0917-314-3854");
+        String img_path = System.getProperty("img_path", "C:\\Users\\Guinness\\smis\\logo.png");
+        String prepared_by = "";
+        double days_1_30 = 0;
+        double days_31_60 = 0;
+        double days_61_90 = 0;
+        double days_91_10 = 0;
+        double days_above = 0;
+        Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, printed_by, date, one, two, three, four, five, six, address, telephone_number, customer_address, department,
+                                              ar_footer, img_path, prepared_by, days_1_30, days_31_60, days_61_90, days_91_10, days_above);
         rpt.fields.addAll(fields);
 
         JRViewer viewer = get_viewer(rpt);
@@ -307,6 +318,7 @@ public class Srpt_ar_aging {
                     + ",ar.or_no"
                     + ",ar.ci_no"
                     + ",ar.trust_receipt"
+                    + ",c.contact_no"
                     + " from  accounts_receivable ar "
                     + " join customers c on "
                     + " c.customer_no = ar.customer_id"
@@ -334,9 +346,10 @@ public class Srpt_ar_aging {
                 String or_no = rs.getString(18);
                 String ci_no = rs.getString(19);
                 String trust_receipt = rs.getString(20);
+                String contact_no = rs.getString(21);
                 ci_no = ci_no + "" + trust_receipt;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
-               
+
                 String t_amount = FitIn.fmt_wc_0(amount - paid);
                 String one = "";
                 if (day > 0 && day <= 30) {
@@ -361,7 +374,7 @@ public class Srpt_ar_aging {
                     above = t_amount;
                 }
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + FitIn.fmt_wc_0(t_amount), "" + day, one, two, three, four, above, applied);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + FitIn.fmt_wc_0(t_amount), "" + day, one, two, three, four, above, applied, contact_no);
                 datas.add(to);
             }
             return datas;
@@ -422,6 +435,7 @@ public class Srpt_ar_aging {
                 String or_no = rs.getString(18);
                 String ci_no = rs.getString(19);
                 String trust_receipt = rs.getString(20);
+                String contact_no = "";
                 ci_no = ci_no + "" + trust_receipt;
                 trust_receipt = remarks;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
@@ -430,12 +444,10 @@ public class Srpt_ar_aging {
                 if (day >= 0 && day <= 30) {
                     one = t_amount;
                 }
-
                 String two = "";
                 if (day >= 31 && day <= 60) {
                     two = t_amount;
                 }
-
                 String three = "";
                 if (day >= 61 && day <= 90) {
                     three = t_amount;
@@ -449,7 +461,7 @@ public class Srpt_ar_aging {
                     above = t_amount;
                 }
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, one, two, three, four, above, applied);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, one, two, three, four, above, applied, contact_no);
                 datas.add(to);
             }
             return datas;
@@ -485,6 +497,7 @@ public class Srpt_ar_aging {
                     + ",ar.or_no"
                     + ",ar.ci_no"
                     + ",ar.trust_receipt"
+                    + ",c.contact_no"
                     + " from  accounts_receivable ar "
                     + " join customers c on "
                     + " c.customer_no = ar.customer_id "
@@ -512,13 +525,14 @@ public class Srpt_ar_aging {
                 String or_no = rs.getString(18);
                 String ci_no = rs.getString(19);
                 String trust_receipt = rs.getString(20);
+                String contact_no = rs.getString(21);
                 ci_no = ci_no + "" + trust_receipt;
                 trust_receipt = remarks;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
                 String t_amount = FitIn.fmt_wc_0(amount);
 
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, t_amount, t_amount, t_amount, t_amount, t_amount, applied);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, t_amount, t_amount, t_amount, t_amount, t_amount, applied, contact_no);
                 datas.add(to);
             }
             return datas;

@@ -285,6 +285,7 @@ public class Srpt_prepaid_payments {
                 String location = rs.getString(17);
                 String location_id = rs.getString(18);
                 String remarks = rs.getString(19);
+                System.out.println("remarks: " + remarks);
                 String status1 = "Posted";
                 if (status == 1) {
                     status1 = "Finalized";
@@ -297,9 +298,12 @@ public class Srpt_prepaid_payments {
                         cash = cash * -1;
                     }
                 } else {
-                    if (remarks.contains("Prepaid Payment")) {
-                        check_amount = check_amount * -1;
+                    if (remarks != null) {
+                        if (remarks.contains("Prepaid Payment") || remarks.contains("Replacement")) {
+                            check_amount = check_amount * -1;
+                        }
                     }
+
                 }
                 Srpt_prepaid_payments.field to = new field(customer_id, customer_name, cash, check_bank, check_no, cheque_date, check_amount,
                                                            date_added, added_by, branch, location, status1, remarks);

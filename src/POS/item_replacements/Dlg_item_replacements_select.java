@@ -68,12 +68,83 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         public final double amount_due;
         public final double replacement_amount;
 
-        public OutputData(List<MySales_Items.items> replacements, double discount, String reason, double amount_due, double replacement_amount) {
+        public final double cash_amount;
+
+        public final String check_holder;
+        public final String check_bank;
+        public final String check_no;
+        public final String check_date;
+        public final double check_amount;
+
+        public final String card_type;
+        public final double credit_card_rate;
+        public final double credit_card_amount;
+        public final double credit_card_amount_to_pay;
+        public final String credit_card_no;
+        public final String credit_card_holder;
+        public final String credit_card_approval_code;
+
+        public final String prepaid_customer_name;
+        public final String prepaid_customer_id;
+        public final double prepaid_amount;
+
+        public final String charge_reference_no;
+        public final String charge_ar_no;
+        public final String charge_type;
+        public final String charge_customer_name;
+        public final String charge_customer_id;
+        public final double charge_amount;
+        public final int charge_dayes;
+
+        public final String gc_from;
+        public final String gc_description;
+        public final String gc_no;
+        public final double gc_amount;
+
+        public final String online_holder;
+        public final String online_bank;
+        public final String online_reference_no;
+        public final String online_date;
+        public final double online_amount;
+
+        public OutputData(List<MySales_Items.items> replacements, double discount, String reason, double amount_due, double replacement_amount, double cash_amount, String check_holder, String check_bank, String check_no, String check_date, double check_amount, String card_type, double credit_card_rate, double credit_card_amount, double credit_card_amount_to_pay, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no, String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_dayes, String gc_from, String gc_description, String gc_no, double gc_amount, String online_holder, String online_bank, String online_reference_no, String online_date, double online_amount) {
             this.replacements = replacements;
             this.discount = discount;
             this.reason = reason;
             this.amount_due = amount_due;
             this.replacement_amount = replacement_amount;
+            this.cash_amount = cash_amount;
+            this.check_holder = check_holder;
+            this.check_bank = check_bank;
+            this.check_no = check_no;
+            this.check_date = check_date;
+            this.check_amount = check_amount;
+            this.card_type = card_type;
+            this.credit_card_rate = credit_card_rate;
+            this.credit_card_amount = credit_card_amount;
+            this.credit_card_amount_to_pay = credit_card_amount_to_pay;
+            this.credit_card_no = credit_card_no;
+            this.credit_card_holder = credit_card_holder;
+            this.credit_card_approval_code = credit_card_approval_code;
+            this.prepaid_customer_name = prepaid_customer_name;
+            this.prepaid_customer_id = prepaid_customer_id;
+            this.prepaid_amount = prepaid_amount;
+            this.charge_reference_no = charge_reference_no;
+            this.charge_ar_no = charge_ar_no;
+            this.charge_type = charge_type;
+            this.charge_customer_name = charge_customer_name;
+            this.charge_customer_id = charge_customer_id;
+            this.charge_amount = charge_amount;
+            this.charge_dayes = charge_dayes;
+            this.gc_from = gc_from;
+            this.gc_description = gc_description;
+            this.gc_no = gc_no;
+            this.gc_amount = gc_amount;
+            this.online_holder = online_holder;
+            this.online_bank = online_bank;
+            this.online_reference_no = online_reference_no;
+            this.online_date = online_date;
+            this.online_amount = online_amount;
         }
 
     }
@@ -1321,11 +1392,52 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_item_replacement_select_discount nd = Dlg_item_replacement_select_discount.create(p, true);
         nd.setTitle("");
+        double amount = FitIn.toDouble(jLabel18.getText());
+        nd.do_pass(amount);
         nd.setCallback(new Dlg_item_replacement_select_discount.Callback() {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_item_replacement_select_discount.OutputData data) {
                 closeDialog.ok();
-                ok2(data.discount);
+                double discount = data.discount;
+                double cash_amount = data.cash_amount;
+
+                String check_holder = data.check_holder;
+                String check_bank = data.check_bank;
+                String check_no = data.check_no;
+                String check_date = data.check_date;
+                double check_amount = data.check_amount;
+
+                String card_type = data.card_type;
+                double credit_card_rate = data.credit_card_rate;
+                double credit_card_amount = data.credit_card_amount;
+                double credit_card_amount_to_pay = data.credit_card_amount;
+                String credit_card_no = data.credit_card_no;
+                String credit_card_holder = data.credit_card_holder;
+                String credit_card_approval_code = data.credit_card_approval_code;
+
+                String prepaid_customer_name = data.credit_card_approval_code;
+                String prepaid_customer_id = data.prepaid_customer_id;
+                double prepaid_amount = data.prepaid_amount;
+
+                String charge_reference_no = data.charge_reference_no;
+                String charge_ar_no = data.charge_ar_no;
+                String charge_type = data.charge_type;
+                String charge_customer_name = data.charge_customer_name;
+                String charge_customer_id = data.charge_customer_id;
+                double charge_amount = data.charge_amount;
+                int charge_dayes = data.charge_dayes;
+
+                String gc_from = data.gc_from;
+                String gc_description = data.gc_description;
+                String gc_no = data.gc_no;
+                double gc_amount = data.gc_amount;
+
+                String online_holder = data.online_holder;
+                String online_bank = data.online_bank;
+                String online_reference_no = data.online_reference_no;
+                String online_date = data.online_date;
+                double online_amount = data.online_amount;
+                ok2(data.discount, cash_amount, check_holder, check_bank, check_no, check_date, check_amount, card_type, credit_card_rate, credit_card_amount, credit_card_amount_to_pay, credit_card_no, credit_card_holder, credit_card_approval_code, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_dayes, gc_from, gc_description, gc_no, gc_amount, online_holder, online_bank, online_reference_no, online_date, online_amount);
             }
         });
         nd.setLocationRelativeTo(this);
@@ -1333,14 +1445,14 @@ public class Dlg_item_replacements_select extends javax.swing.JDialog {
 
     }
 
-    private void ok2(double discount) {
+    private void ok2(double discount, double cash_amount, String check_holder, String check_bank, String check_no, String check_date, double check_amount, String card_type, double credit_card_rate, double credit_card_amount, double credit_card_amount_to_pay, String credit_card_no, String credit_card_holder, String credit_card_approval_code, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no, String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_dayes, String gc_from, String gc_description, String gc_no, double gc_amount, String online_holder, String online_bank, String online_reference_no, String online_date, double online_amount) {
         List<MySales_Items.items> replacements = tbl_sale_items_ALM2;
         String reason = jTextArea1.getText();
         double amount_due = FitIn.toDouble(jLabel6.getText());
         double replacement_amount = FitIn.toDouble(jLabel7.getText());
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(replacements, discount, reason, amount_due, replacement_amount));
+            callback.ok(new CloseDialog(this), new OutputData(replacements, discount, reason, amount_due, replacement_amount, cash_amount, check_holder, check_bank, check_no, check_date, check_amount, card_type, credit_card_rate, credit_card_amount, credit_card_amount_to_pay, credit_card_no, credit_card_holder, credit_card_approval_code, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_dayes, gc_from, gc_description, gc_no, gc_amount, online_holder, online_bank, online_reference_no, online_date, online_amount));
         }
     }
-    
+
 }

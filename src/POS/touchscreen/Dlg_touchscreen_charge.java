@@ -564,6 +564,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
             }
         });
     }
+    
     List<Customers.to_customers> customer_list = new ArrayList();
 
     private void init_customers() {

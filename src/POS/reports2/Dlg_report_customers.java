@@ -211,6 +211,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -258,6 +259,13 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jCheckBox11 = new javax.swing.JCheckBox();
         tf_customer_name3 = new Field.Combo();
         jLabel24 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jCheckBox30 = new javax.swing.JCheckBox();
+        jCheckBox31 = new javax.swing.JCheckBox();
+        jCheckBox32 = new javax.swing.JCheckBox();
+        jCheckBox33 = new javax.swing.JCheckBox();
+        jCheckBox34 = new javax.swing.JCheckBox();
+        jCheckBox35 = new javax.swing.JCheckBox();
         pnl_sales_items2 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -742,6 +750,35 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("Department:");
 
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel46.setText("Term:");
+
+        buttonGroup4.add(jCheckBox30);
+        jCheckBox30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox30.setSelected(true);
+        jCheckBox30.setText("All");
+
+        buttonGroup4.add(jCheckBox31);
+        jCheckBox31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox31.setText("1-30");
+
+        buttonGroup4.add(jCheckBox32);
+        jCheckBox32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox32.setText("31-60");
+
+        buttonGroup4.add(jCheckBox33);
+        jCheckBox33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox33.setText("61-90");
+
+        buttonGroup4.add(jCheckBox34);
+        jCheckBox34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox34.setText("91-120");
+
+        buttonGroup4.add(jCheckBox35);
+        jCheckBox35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox35.setText(">120");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -776,11 +813,30 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                         .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jCheckBox31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox32))
+                            .addComponent(jCheckBox34))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCheckBox35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(196, Short.MAX_VALUE))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -794,12 +850,20 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                             .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jDateChooser4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_customer_name3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -957,10 +1021,9 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCheckBox20)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
+                        .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8))
+                    .addComponent(jCheckBox20)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2210,6 +2273,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -2242,6 +2306,12 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox28;
     private javax.swing.JCheckBox jCheckBox29;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox30;
+    private javax.swing.JCheckBox jCheckBox31;
+    private javax.swing.JCheckBox jCheckBox32;
+    private javax.swing.JCheckBox jCheckBox33;
+    private javax.swing.JCheckBox jCheckBox34;
+    private javax.swing.JCheckBox jCheckBox35;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
@@ -2304,6 +2374,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2908,6 +2979,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 }
 
                 List<Srpt_ar_aging.field> fields = Srpt_ar_aging.ret_aging(where);
+                List<Srpt_ar_aging.field> fields2 = new ArrayList();
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String printed_by = jTextField5.getText();
                 if (jCheckBox2.isSelected()) {
@@ -2924,13 +2996,50 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 double four = 0;
                 double five = 0;
                 double six = 0;
+                if (jCheckBox30.isSelected()) {
+                    fields2.addAll(fields);
+                }
                 for (Srpt_ar_aging.field to : fields) {
                     int day = DateUtils1.ar_aging(DateType.convert_slash_datetime_sf(to.applied), FitIn.toInt("" + to.term));
-                    one += FitIn.toDouble(to.one);
-                    two += FitIn.toDouble(to.two);
-                    three += FitIn.toDouble(to.three);
-                    four += FitIn.toDouble(to.four);
-                    five += FitIn.toDouble(to.above);
+                    if (jCheckBox30.isSelected()) {
+                        one += FitIn.toDouble(to.one);
+                        two += FitIn.toDouble(to.two);
+                        three += FitIn.toDouble(to.three);
+                        four += FitIn.toDouble(to.four);
+                        five += FitIn.toDouble(to.above);
+
+                    }
+
+                    if (jCheckBox31.isSelected()) {
+                        if (day <= 30) {
+                            one += FitIn.toDouble(to.one);
+                            fields2.add(to);
+                        }
+                    }
+                    if (jCheckBox32.isSelected()) {
+                        if (day > 30 && day < 61) {
+                            two += FitIn.toDouble(to.two);
+                            fields2.add(to);
+                        }
+                    }
+                    if (jCheckBox33.isSelected()) {
+                        if (day > 60 && day < 91) {
+                            three += FitIn.toDouble(to.three);
+                            fields2.add(to);
+                        }
+                    }
+                    if (jCheckBox34.isSelected()) {
+                        if (day > 90 && day < 121) {
+                            four += FitIn.toDouble(to.four);
+                            fields2.add(to);
+                        }
+                    }
+                    if (jCheckBox35.isSelected()) {
+                        if (day > 121) {
+                            five += FitIn.toDouble(to.above);
+                            fields2.add(to);
+                        }
+                    }
                 }
                 six = one + two + three + four + five;
                 String address = System.getProperty("address", "Daro, Dumaguete City");
@@ -2952,7 +3061,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 double days_above = 0;
                 Srpt_ar_aging rpt = new Srpt_ar_aging(business_name, date, printed_by, one, two, three, four, five, six, address, telephone_number, customer_address,
                                                       department, ar_footer, img_path, prepared_by, days_1_30, days_31_60, days_61_90, days_91_10, days_above);
-                rpt.fields.addAll(fields);
+                rpt.fields.addAll(fields2);
 
                 report_customers_aging(rpt, jrxml);
                 jProgressBar5.setString("Finished...");

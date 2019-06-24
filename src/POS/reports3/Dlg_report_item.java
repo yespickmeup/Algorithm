@@ -1352,11 +1352,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_bodega");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-
-
         init_key();
 
         set_default_branch();
@@ -1841,7 +1839,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             if (column == 5 || column == 6) {
                 JLabel lbl = (JLabel) cellComponent;
                 lbl.setHorizontalAlignment(RIGHT);
-                if (view_only == 0) {
+                if (view_only == 1) {
                     table.getColumnModel().getColumn(5).setPreferredWidth(0);
                     table.getColumnModel().getColumn(5).setMaxWidth(0);
                     table.getColumnModel().getColumn(5).setMinWidth(0);
@@ -2817,6 +2815,11 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         jrxml = "rpt_stock_take_cost_long.jrxml";
                     }
                 }
+                String pool_db = System.getProperty("pool_db", "db_smis");
+                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                    jrxml = "rpt_stock_take_cost_amount.jrxml";
+                }
+
 //                System.out.println("jrxml: "+jrxml);
                 report_preview(rpt, jrxml);
                 jTabbedPane1.setSelectedIndex(2);
