@@ -223,6 +223,60 @@ public class CashDrawer {
         }
     }
 
+    public static void update_data_timeout(to_cash_drawer to_cash_drawer, String id) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update cash_drawer  set "
+                    + " time_out= :time_out "
+                    + ",thousand= :thousand "
+                    + ",five_hundred= :five_hundred "
+                    + ",two_hundred= :two_hundred "
+                    + ",fifty= :fifty "
+                    + ",twenty= :twenty "
+                    + ",coins= :coins "
+                    + ",one_hundred= :one_hundred "
+                    + ",expenses= :expenses "
+                    + ",ten= :ten "
+                    + ",five= :five "
+                    + ",one= :one "
+                    + ",point_five= :point_five "
+                    + ",point_two_five= :point_two_five "
+                    + ",point_ten= :point_ten "
+                    + ",point_zero_five= :point_zero_five "
+                    + ",amount = :amount"
+                    + " where id='" + id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("time_out", to_cash_drawer.time_out)
+                    .setNumber("thousand", to_cash_drawer.thousand)
+                    .setNumber("five_hundred", to_cash_drawer.five_hundred)
+                    .setNumber("two_hundred", to_cash_drawer.two_hundred)
+                    .setNumber("fifty", to_cash_drawer.fifty)
+                    .setNumber("twenty", to_cash_drawer.twenty)
+                    .setNumber("coins", to_cash_drawer.coins)
+                    .setNumber("one_hundred", to_cash_drawer.one_hundred)
+                    .setNumber("expenses", to_cash_drawer.expenses)
+                    .setNumber("ten", to_cash_drawer.ten)
+                    .setNumber("five", to_cash_drawer.five)
+                    .setNumber("one", to_cash_drawer.one)
+                    .setNumber("point_five", to_cash_drawer.point_five)
+                    .setNumber("point_two_five", to_cash_drawer.point_two_five)
+                    .setNumber("point_ten", to_cash_drawer.point_ten)
+                    .setNumber("point_zero_five", to_cash_drawer.point_zero_five)
+                    .setNumber("amount", to_cash_drawer.amount)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(CashDrawer.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+    
     public static void insert_data(to_cash_drawer to_cash_drawer) {
         try {
             Connection conn = MyConnection.connect();

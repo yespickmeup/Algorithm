@@ -12,6 +12,7 @@ import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Dlg_confirm_action;
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -372,11 +373,11 @@ public class Dlg_menu extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        ok1("standby");
+        standby("standby");
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        ok1("logout");
+        ok5("logout");
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -520,82 +521,113 @@ public class Dlg_menu extends javax.swing.JDialog {
         nd.setVisible(true);
     }
 
-    private void ok1(final String stmt) {
+    private void ok5(final String stmt) {
 
         String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '%" + "Sales" + "%' "
                 + " or user_id='" + MyUser.getUser_id() + "' and previledge  like '%" + "Sales (Choose Location)" + "%'"
                 + " order by previledge asc";
         String where2 = " where user_id='" + MyUser.getUser_id() + "' order by id desc limit 1 ";
-        List<S1_cash_drawer.to_cash_drawer> drawers = S1_cash_drawer.ret_where(where);
-        final S1_cash_drawer.to_cash_drawer drawer = drawers.get(0);
-        List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-        if (!datas.isEmpty()) {
+        List<S1_cash_drawer.to_cash_drawer> drawers = S1_cash_drawer.ret_where(where2);
+        if (drawers.isEmpty()) {
             Window p = (Window) this;
-            Dlg_logout_cashin nd = Dlg_logout_cashin.create(p, true);
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
-
-            nd.do_pass(drawer);
-            nd.setCallback(new Dlg_logout_cashin.Callback() {
+//            nd.do_pass(services);
+            nd.setCallback(new Dlg_confirm_action.Callback() {
 
                 @Override
-                public void ok(CloseDialog closeDialog, Dlg_logout_cashin.OutputData data) {
-                    closeDialog.ok();
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    System.exit(1);
 
-                    double cashin = data.cashin;
-                    double thousand = data.thousand;
-                    double five_hundred = data.five_hundred;
-                    double two_hundred = data.two_hundred;
-                    double one_hundred = data.one_hundred;
-                    double fifty = data.fifty;
-                    double twenty = data.twenty;
-                    double ten = data.ten;
-                    double five = data.five;
-                    double one = data.one;
-                    double point_fifty = data.point_fifty;
-                    double point_twenty_five = data.point_twenty_five;
-                    double point_ten = data.point_ten;
-                    double point_five = data.point_five;
-                    int id = data.cashdrawer_id;
-                    String session_no = drawer.session_no;
-
-                    String user_name = drawer.user_name;
-                    String screen_name = drawer.user_screen_name;
-                    String time_in = drawer.time_in;
-                    String time_out = DateType.now();
-                    double amount = data.cashin;
-                    double cash_out = 0;
-                    double coins = 0;
-                    double expenses = 0;
-                    double point_two_five = point_twenty_five;
-                    double point_zero_five = point_five;
-
-                    String branch = drawer.branch;
-                    String branch_id = drawer.branch_id;
-                    String location = drawer.location;
-                    String location_id = drawer.location_id;
-                    String user_id = drawer.user_id;
-                    String user_screen_name = drawer.user_screen_name;
-                    CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
-                                                                                 time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
-                                                                                 one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
-
-                    String date = DateType.sf.format(new Date());
-                    CashDrawer.update_data(to, "" + id);
-
-                    Alert.set(2, "");
-
-                    ok3(stmt);
                 }
             });
             Center.setCenter(nd);
             nd.setVisible(true);
         } else {
-            ok3("");
+            final S1_cash_drawer.to_cash_drawer drawer = drawers.get(0);
+            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+            if (!datas.isEmpty()) {
+                Window p = (Window) this;
+                Dlg_logout_cashin nd = Dlg_logout_cashin.create(p, true);
+                nd.setTitle("");
+                nd.do_pass(drawer);
+
+                nd.setCallback(new Dlg_logout_cashin.Callback() {
+
+                    @Override
+                    public void ok(CloseDialog closeDialog, Dlg_logout_cashin.OutputData data) {
+                        closeDialog.ok();
+
+                        double cashin = data.cashin;
+                        double thousand = data.thousand;
+                        double five_hundred = data.five_hundred;
+                        double two_hundred = data.two_hundred;
+                        double one_hundred = data.one_hundred;
+                        double fifty = data.fifty;
+                        double twenty = data.twenty;
+                        double ten = data.ten;
+                        double five = data.five;
+                        double one = data.one;
+                        double point_fifty = data.point_fifty;
+                        double point_twenty_five = data.point_twenty_five;
+                        double point_ten = data.point_ten;
+                        double point_five = data.point_five;
+                        int id = data.cashdrawer_id;
+                        String session_no = drawer.session_no;
+
+                        String user_name = drawer.user_name;
+                        String screen_name = drawer.user_screen_name;
+                        String time_in = drawer.time_in;
+                        String time_out = DateType.now();
+                        double amount = data.cashin;
+                        double cash_out = 0;
+                        double coins = 0;
+                        double expenses = 0;
+                        double point_two_five = point_twenty_five;
+                        double point_zero_five = point_five;
+
+                        String branch = drawer.branch;
+                        String branch_id = drawer.branch_id;
+                        String location = drawer.location;
+                        String location_id = drawer.location_id;
+                        String user_id = drawer.user_id;
+                        String user_screen_name = drawer.user_screen_name;
+                        CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
+                                                                                     time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
+                                                                                     one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+
+                        String date = DateType.sf.format(new Date());
+                        CashDrawer.update_data(to, "" + id);
+
+                        Alert.set(2, "");
+
+                        ok3(stmt);
+                    }
+                });
+                Center.setCenter(nd);
+                nd.setVisible(true);
+            } else {
+                ok3("");
+            }
+
         }
 
     }
 
     private void ok3(String stmt) {
+
+        if (callback != null) {
+            callback.ok1(new CloseDialog(this), new OutputData(stmt));
+        }
+    }
+
+     private void ok1(String stmt) {
+
+        if (callback != null) {
+            callback.ok1(new CloseDialog(this), new OutputData(stmt));
+        }
+    }
+    private void standby(String stmt) {
         if (callback != null) {
             callback.ok1(new CloseDialog(this), new OutputData(stmt));
         }

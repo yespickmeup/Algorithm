@@ -2350,7 +2350,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                                 add_cash_drawer_checks(data.drawer.checks);
                         S1_cash_drawer_expenses.
                                 add_cash_drawer_checks(data.drawer.exp);
-                        
+
                         Alert.set(0, "THANK YOU, HAVE A NICE DAY");
                         System.exit(1);
                     }
@@ -3412,7 +3412,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             @Override
             public void logout(CloseDialog closeDialog, Dlg_menu.OutputData data) {
                 closeDialog.ok();
-                
+
             }
         });
         Point point = jLabel51.getLocationOnScreen();
@@ -3423,18 +3423,19 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     int stock_take_view_only = 1;
 
     private void logout1() {
-        Window p = (Window) this;
-        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
-        nd.setTitle("");
-
-        nd.setCallback(new Dlg_confirm_action.Callback() {
-
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
-                System.exit(0);
-            }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+        System.exit(0);
+//        Window p = (Window) this;
+//        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+//        nd.setTitle("");
+//
+//        nd.setCallback(new Dlg_confirm_action.Callback() {
+//
+//            @Override
+//            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+//                System.exit(0);
+//            }
+//        });
+//        nd.setLocationRelativeTo(this);
+//        nd.setVisible(true);
     }
 }

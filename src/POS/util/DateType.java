@@ -178,6 +178,22 @@ public class DateType {
         return date;
     }
 
+    public static String convert_slash_datetime_sf2(String datetime) {
+        String date = "";
+        Date d = new Date();
+        if (datetime.isEmpty()) {
+            datetime = DateType.slash_w_time.format(new Date());
+        }
+        try {
+            d = DateType.slash_w_time.parse(datetime);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateType.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        date = DateType.datetime.format(d);
+        return date;
+    }
+    
     public static String convert_dash_date(String datetime) {
         String date = "";
         Date d = new Date();

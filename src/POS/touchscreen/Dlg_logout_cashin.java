@@ -6,6 +6,7 @@
 package POS.touchscreen;
 
 import POS.cash_drawer.S1_cash_drawer;
+import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -1397,9 +1398,36 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
 
     int cashdrawer_id = 0;
 
-    public void do_pass(S1_cash_drawer.to_cash_drawer drawer) {
-        jTextField4.setText(FitIn.fmt_woc(drawer.thousand));
-        cashdrawer_id = drawer.id;
+    public void do_pass(S1_cash_drawer.to_cash_drawer to) {
+//        jTextField4.setText(FitIn.fmt_woc(to.thousand));
+        cashdrawer_id = to.id;
+        jLabel25.setText(to.user_screen_name);
+        jLabel29.setText(DateType.convert_slash_datetime3(to.time_in));
+        if(to.time_out!=null){
+            jLabel32.setText(DateType.convert_slash_datetime3(to.time_out));
+        }
+        tf_cashin.setText(FitIn.fmt_wc_0(to.amount));
+        jTextField4.setText(FitIn.fmt_woc(to.thousand));
+        jTextField1.setText(FitIn.fmt_woc(to.five_hundred));
+        jTextField6.setText(FitIn.fmt_woc(to.two_hundred));
+        jTextField5.setText(FitIn.fmt_woc(to.one_hundred));
+        jTextField10.setText(FitIn.fmt_woc(to.fifty));
+        jTextField16.setText(FitIn.fmt_woc(to.twenty));
+
+        jTextField9.setText(FitIn.fmt_woc(to.ten));
+        jTextField8.setText(FitIn.fmt_woc(to.five));
+        jTextField7.setText(FitIn.fmt_woc(to.one));
+        jTextField14.setText(FitIn.fmt_woc(to.point_five));
+        jTextField13.setText(FitIn.fmt_woc(to.point_two_five));
+        jTextField12.setText(FitIn.fmt_woc(to.point_ten));
+        jTextField11.setText(FitIn.fmt_woc(to.point_zero_five));
+
+        count_total();
+
+        jTextField37.setText("" + to.id);
+        jLabel16.setVisible(false);
+        jTextField37.setVisible(false);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
