@@ -2455,6 +2455,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 ////
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
+        
         init_key();
         jTextField2.enable(false);
         jTextField4.enable(false);
@@ -2472,11 +2473,10 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         ret_customer_departments();
         jTextField21.setText(MyUser.getUser_screen_name());
         jTextField22.setText(MyUser.getUser_screen_name());
-
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
-
         set_default_branch();
+        
     }
 
     String my_branch = "";

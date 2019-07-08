@@ -59,11 +59,12 @@ public class Srpt_sales_ledger {
     public final double re_charge;
     public final double re_gc;
     public final double re_online;
-
+    public final double salary_deduction;
     public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location, double return_exchange, double collections,
             double cash_on_hand, double collections_cheque, double collections_cheque_on_hand, double collections_prepaid, double collections_prepaid_cheque, double refund,
             double refund_cheque, double ar_collection_prepaid, double ar_collection_credit_card, double ar_collection_gc, double ar_collection_online,
-             String time, double retention, double business_tax, double re_check, double re_credit_card, double re_prepaid, double re_charge, double re_gc, double re_online) {
+             String time, double retention, double business_tax, double re_check, double re_credit_card, double re_prepaid, double re_charge, double re_gc
+            , double re_online,double salary_deduction) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -93,6 +94,7 @@ public class Srpt_sales_ledger {
         this.re_charge = re_charge;
         this.re_gc = re_gc;
         this.re_online = re_online;
+        this.salary_deduction=salary_deduction;
     }
 
     public static class field {
@@ -307,10 +309,11 @@ public class Srpt_sales_ledger {
         double re_charge=0;
         double re_gc=0;
         double re_online=0;
+        double salary_deduction=0;
         Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque,
                                                       collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque
                 , ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online, time, retention
-                , business_tax,re_check,re_credit_card,re_prepaid,re_charge,re_gc,re_online);
+                , business_tax,re_check,re_credit_card,re_prepaid,re_charge,re_gc,re_online,salary_deduction);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_sales_ledger.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

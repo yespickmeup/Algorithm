@@ -131,7 +131,6 @@ public class S1_user_previleges {
                         + ",:user_id"
                         + ",:user_name"
                         + ")";
-
                 s0 = SqlStringUtil.parse(s0)
                         .setString("account", to_user_previleges.account)
                         .setString("account_name", to_user_previleges.account_name)
@@ -144,7 +143,6 @@ public class S1_user_previleges {
                 stmt.execute();
                 Lg.s(S1_user_previleges.class, "Successfully Added");
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -189,7 +187,6 @@ public class S1_user_previleges {
             String s0 = "delete from user_previleges where "
                     + " id ='" + to_user_previleges.id + "' "
                     + " ";
-
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_user_previleges.class, "Successfully Deleted");
@@ -199,7 +196,6 @@ public class S1_user_previleges {
             MyConnection.close();
         }
     }
-
     public static void delete_user_previleges_where(String where) {
         try {
             Connection conn = MyConnection.connect();

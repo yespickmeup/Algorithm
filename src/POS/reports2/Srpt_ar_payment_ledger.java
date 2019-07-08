@@ -65,11 +65,11 @@ public class Srpt_ar_payment_ledger {
         double online;
         double retention;
         double business_tax;
-
+        double salary_deduction;
         public field() {
         }
 
-        public field(String customer_id, String customer_name, String ar_no, String date_added, String date_applied, double amount, double discount_amount, double check_amount, String check_date, String soa_type, String reference_no, String added_by, String status, double prepaid, double credit_card, double gc, double online, double retention, double business_tax) {
+        public field(String customer_id, String customer_name, String ar_no, String date_added, String date_applied, double amount, double discount_amount, double check_amount, String check_date, String soa_type, String reference_no, String added_by, String status, double prepaid, double credit_card, double gc, double online, double retention, double business_tax,double salary_deduction) {
             this.customer_id = customer_id;
             this.customer_name = customer_name;
             this.ar_no = ar_no;
@@ -89,8 +89,17 @@ public class Srpt_ar_payment_ledger {
             this.online = online;
             this.retention = retention;
             this.business_tax = business_tax;
+            this.salary_deduction=salary_deduction;
         }
 
+        public double getSalary_deduction() {
+            return salary_deduction;
+        }
+
+        public void setSalary_deduction(double salary_deduction) {
+            this.salary_deduction = salary_deduction;
+        }
+        
         public double getPrepaid() {
             return prepaid;
         }
@@ -338,6 +347,7 @@ public class Srpt_ar_payment_ledger {
                     + ",p.credit_card_amount"
                     + ",p.gift_certificate_amount"
                     + ",p.online_amount"
+                    + ",p.salary_deduction"
                     + " from accounts_receivable_payments p "
                     + " join accounts_receivable ar "
                     + " on ar.ar_no=p.ar_no "
@@ -400,11 +410,12 @@ public class Srpt_ar_payment_ledger {
                 double credit_card = rs.getDouble(43);
                 double gc = rs.getDouble(44);
                 double online = rs.getDouble(45);
+                double salary_deduction=rs.getDouble(46);
                 double retention = 0;
                 double business_tax = 0;
 
                 Srpt_ar_payment_ledger.field field = new field(customer_id, customer_name, ar_no, date_added, date_applied, amount, discount_amount, check_amount,
-                                                               check_date, soa_type, reference_no, added_by, status1, prepaid, credit_card, gc, online, retention, business_tax);
+                                                               check_date, soa_type, reference_no, added_by, status1, prepaid, credit_card, gc, online, retention, business_tax,salary_deduction);
                 datas.add(field);
             }
             return datas;

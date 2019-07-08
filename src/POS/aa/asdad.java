@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package POS.aa;
 
 /**
@@ -11,11 +10,9 @@ package POS.aa;
  * @author Guinness
  */
 public class asdad {
-    
-    
+
     public static void main(String[] args) {
         System.out.println("asdad");
     }
-    
     
 }

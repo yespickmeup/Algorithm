@@ -2350,6 +2350,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                                 add_cash_drawer_checks(data.drawer.checks);
                         S1_cash_drawer_expenses.
                                 add_cash_drawer_checks(data.drawer.exp);
+                        
                         Alert.set(0, "THANK YOU, HAVE A NICE DAY");
                         System.exit(1);
                     }
@@ -3162,7 +3163,6 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             @Override
             public void ok1(CloseDialog closeDialog, Dlg_menu.OutputData data) {
                 closeDialog.ok();
-
                 if (data.stmt.equals("standby")) {
                     JLabel[] lbl = {jLabel10, jLabel16, jLabel11, jLabel17, jLabel18, jLabel15, jLabel19, jLabel9, jLabel20, jLabel21, jLabel22, jLabel23, jLabel24, jLabel25, jLabel26, jLabel27, jLabel28, jLabel29};
                     for (final JLabel l : lbl) {
@@ -3172,10 +3172,8 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                     cardLayout.show(pnl_main_holder, "1");
                     MyUser.setUser_id("");
                 }
-
                 if (data.stmt.equals("logout")) {
                     logout1();
-
                 }
                 if (data.stmt.equals("minimize")) {
                     Pnl_Dashboard.this.setState(Frame.ICONIFIED);
@@ -3414,6 +3412,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             @Override
             public void logout(CloseDialog closeDialog, Dlg_menu.OutputData data) {
                 closeDialog.ok();
+                
             }
         });
         Point point = jLabel51.getLocationOnScreen();

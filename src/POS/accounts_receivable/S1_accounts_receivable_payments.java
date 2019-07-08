@@ -92,9 +92,9 @@ public class S1_accounts_receivable_payments {
         public final double actual_amount;
         public final double retention;
         public final double business_tax;
-
+        public final double salary_deduction;
         public to_accounts_receivable_payments(int id, String customer_id, String customer_name, String ar_no, String date_added, String user_name, double amount, double discount_amount, double discount_rate, String discount, int status, double term, String date_applied, double paid, String date_paid, String remarks, String type, String or_no, double prev_balance, double check_amount, String check_holder, String check_bank, String check_no, String ci_no, String trust_receipt, String or_payment_no, String soa_id, String soa_type, String soa_type_id, String reference_no, boolean selected, String check_date, String user_id, String user_screen_name, double tax_rate, double tax_amount, String branch, String branch_id, String location, String location_id, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String credit_card_type, double credit_card_rate, String credit_card_no, String credit_card_holder, double credit_card_amount, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount, String online_bank, String online_reference_no, String online_holder, String online_date, double online_amount,
-                double actual_amount, double retention, double business_tax) {
+                double actual_amount, double retention, double business_tax,double salary_deduction) {
             this.id = id;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -155,8 +155,9 @@ public class S1_accounts_receivable_payments {
             this.actual_amount = actual_amount;
             this.retention = retention;
             this.business_tax = business_tax;
+            this.salary_deduction=salary_deduction;
         }
-
+        
         public boolean isSelected() {
             return selected;
         }
@@ -228,6 +229,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_date"
                     + ",online_amount"
                     + ",actual_amount"
+                    + ",salary_deduction"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -285,6 +287,7 @@ public class S1_accounts_receivable_payments {
                     + ",:online_date"
                     + ",:online_amount"
                     + ",:actual_amount"
+                    + ",:salary_deduction"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -344,6 +347,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
                     .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
+                    .setNumber("salary_deduction",to_accounts_receivable_payments.salary_deduction)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -467,6 +471,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_date"
                     + ",online_amount"
                     + ",actual_amount"
+                    + ",salary_deduction"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -524,6 +529,7 @@ public class S1_accounts_receivable_payments {
                     + ",:online_date"
                     + ",:online_amount"
                     + ",:actual_amount"
+                    + ",:salary_deduction"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -583,6 +589,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
                     .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
+                    .setNumber("salary_deduction",to_accounts_receivable_payments.salary_deduction)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -671,6 +678,7 @@ public class S1_accounts_receivable_payments {
                     + ",actual_amount"
                     + ",retention"
                     + ",business_tax"
+                    + ",salary_deduction"
                     + ")values("
                     + ":customer_id"
                     + ",:customer_name"
@@ -730,6 +738,7 @@ public class S1_accounts_receivable_payments {
                     + ",:actual_amount"
                     + ",:retention"
                     + ",:business_tax"
+                    + ",:salary_deduction"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0).
@@ -791,6 +800,7 @@ public class S1_accounts_receivable_payments {
                     .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
                     .setNumber("retention", to_accounts_receivable_payments.retention)
                     .setNumber("business_tax", to_accounts_receivable_payments.business_tax)
+                    .setNumber("salary_deduction",to_accounts_receivable_payments.salary_deduction)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -971,6 +981,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_date= :online_date "
                     + ",online_amount= :online_amount "
                     + ",actual_amount= :actual_amount"
+                    + ",salary_deduction= :salary_deduction"
                     + " where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
@@ -1006,6 +1017,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
                     .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
+                    .setNumber("salary_deduction",to_accounts_receivable_payments.salary_deduction)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -1318,6 +1330,7 @@ public class S1_accounts_receivable_payments {
                     + ",online_date= :online_date "
                     + ",online_amount= :online_amount "
                     + ",actual_amount= :actual_amount"
+                    + ",salary_deduction= :salary_deduction"
                     + " where "
                     + " id ='" + to_accounts_receivable_payments.id + "' "
                     + " ";
@@ -1366,6 +1379,7 @@ public class S1_accounts_receivable_payments {
                     .setString("online_date", to_accounts_receivable_payments.online_date)
                     .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
                     .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
+                    .setNumber("salary_deduction",to_accounts_receivable_payments.salary_deduction)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -1633,6 +1647,7 @@ public class S1_accounts_receivable_payments {
                     + ",actual_amount"
                     + ",retention"
                     + ",business_tax"
+                    + ",salary_deduction"
                     + " from  accounts_receivable_payments where "
                     + " ar_no ='" + search + "' and customer_id='" + cust_id + "' order by Date(date_applied) asc"
                     + " ";
@@ -1698,13 +1713,14 @@ public class S1_accounts_receivable_payments {
                 double actual_amount = rs.getDouble(57);
                 double retention = rs.getDouble(58);
                 double business_tax = rs.getDouble(59);
+                double salary_deduction=rs.getDouble(60);
                 to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount,
                                                                                          discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance,
                                                                                          check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no,
                                                                                          false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name,
                                                                                          prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount,
                                                                                          gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no,
-                                                                                         online_holder, online_date, online_amount, actual_amount, retention, business_tax);
+                                                                                         online_holder, online_date, online_amount, actual_amount, retention, business_tax,salary_deduction);
                 datas.add(to);
             }
             return datas;
@@ -1780,6 +1796,7 @@ public class S1_accounts_receivable_payments {
                     + ",actual_amount"
                     + ",retention"
                     + ",business_tax"
+                    + ",salary_deduction"
                     + " from  accounts_receivable_payments  "
                     + " " + where;
             Statement stmt = conn.createStatement();
@@ -1844,14 +1861,14 @@ public class S1_accounts_receivable_payments {
                 double actual_amount = rs.getDouble(57);
                 double retention = rs.getDouble(58);
                 double business_tax = rs.getDouble(59);
-
+                double salary_deduction=rs.getDouble(60);
                 to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount,
                                                                                          discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount,
                                                                                          check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date,
                                                                                          user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id,
                                                                                          prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from,
                                                                                          gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date,
-                                                                                         online_amount, actual_amount, retention, business_tax);
+                                                                                         online_amount, actual_amount, retention, business_tax,salary_deduction);
                 datas.add(to);
             }
             return datas;

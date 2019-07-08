@@ -1212,13 +1212,14 @@ public class Item_replacements {
                 double actual_amount = (amount + check_amount) - discount_amount;
                 double retention = 0;
                 double business_tax = 0;
+                double salary_deduction=0;
                 final S1_accounts_receivable_payments.to_accounts_receivable_payments to_accounts_receivable_payments = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                         status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid,
                         date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id,
                         soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location,
                         location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
                         credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
-                        online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax);
+                        online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax,salary_deduction);
 
                 //<editor-fold defaultstate="collapsed" desc=" Add AR Payment ">
                 String s13 = "insert into  accounts_receivable_payments("

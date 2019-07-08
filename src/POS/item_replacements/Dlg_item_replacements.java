@@ -1301,7 +1301,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("return_exchange_days", "2000");
-        MyUser.setUser_id("1");
+//        MyUser.setUser_id("1");
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);

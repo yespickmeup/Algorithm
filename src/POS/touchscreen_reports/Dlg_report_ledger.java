@@ -764,7 +764,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
         time_list = DateType.time();
-
+        
     }
     List<String> time_list = new ArrayList();
 
@@ -799,10 +799,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         Field.Combo br = (Field.Combo) jTextField2;
         lo.setText(to.location);
         lo.setId("" + to.id);
-
         br.setText(to.branch);
         br.setId("" + to.branch_id);
-
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
     }
@@ -838,16 +836,13 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         });
     }
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
-
     private void init_branch_locations() {
         final Field.Combo br = (Field.Combo) jTextField2;
         final Field.Combo lo = (Field.Combo) jTextField1;
-
         Object[][] obj = new Object[branch_location_list.size()][1];
         int i = 0;
         for (S1_branch_locations.to_branch_locations to : branch_location_list) {
             obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";
-
             i++;
         }
         JLabel[] labels = {};
@@ -862,7 +857,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 S1_branch_locations.to_branch_locations to = branch_location_list.get(data.selected_row);
                 lo.setText("" + to.location);
                 lo.setId("" + to.id);
-
                 Field.Combo branch = (Field.Combo) jTextField2;
                 branch.setText(to.branch);
                 branch.setId("" + to.branch_id);
@@ -896,7 +890,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         Button.Search search = (Button.Search) jButton3;
         search.load();
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 Field.Combo br = (Field.Combo) jTextField2;
@@ -917,7 +910,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     date_to_sales = date_to_sales + " " + dts_time;
                     time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
                 }
-
                 int status = 0;
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
@@ -972,7 +964,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 }
                 where = where + " order by id asc ";
 //                System.out.println(where);
-
                 List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
                 List<Srpt_sales_ledger_with_items.field> fields_items = new ArrayList();
                 if (jCheckBox11.isSelected()) {
@@ -1004,8 +995,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double re_charge = 0;
                 double re_gc = 0;
                 double re_online = 0;
+                double salary_deduction=0;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
-
                     collections_cheque += collection.check_amount;
                     collections += collection.amount;
                     ar_collection_prepaid += collection.prepaid_amount;
@@ -1014,11 +1005,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     ar_collections_online += collection.online_amount;
                     retention += collection.retention;
                     business_tax = collection.business_tax;
-//                    if (collection.check_amount > 0) {
-//
-//                    } else {
-//
-//                    }
+                    salary_deduction+=collection.salary_deduction;
                 }
                 double na_short = 0;
                 double over = 0;
@@ -1097,7 +1084,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                                   collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
                                                                   refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
-                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online);
+                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online,salary_deduction);
                     rpt.fields.addAll(fields);
                     String jrxml = "rpt_sales_ledger.jrxml";
                     String pool_db = System.getProperty("pool_db", "db_smis");

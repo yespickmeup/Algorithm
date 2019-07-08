@@ -318,7 +318,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -573,7 +573,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                             .addComponent(jCheckBox3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(jTextField1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -811,7 +811,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         );
         pnl_report1Layout.setVerticalGroup(
             pnl_report1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -833,7 +833,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(742, Short.MAX_VALUE)
+                .addContainerGap(709, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1050,11 +1050,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         pnl_report2.setLayout(pnl_report2Layout);
         pnl_report2Layout.setHorizontalGroup(
             pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 909, Short.MAX_VALUE)
+            .addGap(0, 876, Short.MAX_VALUE)
         );
         pnl_report2Layout.setVerticalGroup(
             pnl_report2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 342, Short.MAX_VALUE)
+            .addGap(0, 265, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Print Preview", pnl_report2);
@@ -1080,14 +1080,14 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1099,14 +1099,14 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane2)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jTabbedPane2)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1124,7 +1124,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 886, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1133,7 +1133,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1377,7 +1377,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 //        System.setProperty("cloud_user", "smis2");
 //        System.setProperty("cloud_password", "nopassword101");
 //        System.setProperty("cloud_db", "db_algorithm_development");
-
         init_key();
         set_default_branch();
         init_tbl_chickaloka_items();
@@ -1402,7 +1401,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         if (!cloud_host.isEmpty()) {
             ret_transactions();
         }
-        
+
 //        jCheckBox14.setVisible(false);
 //        jLabel18.setVisible(false);
     }
@@ -1684,10 +1683,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 }
                 System.out.println("where_drawer: " + where_drawer);
                 List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
-                System.out.println("my_drawer: "+my_drawer.size());
+//                System.out.println("my_drawer: "+my_drawer.size());
 //                System.out.println("my_drawer: "+my_drawer.size());
 //                System.out.println("where_sales2: "+where_sales2);
 //                System.out.println("where_drawer: " + where_drawer);
+                System.out.println("where_disbursements: " + where_disbursements);
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales3);
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
@@ -1927,6 +1927,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     Srpt_end_of_day_summary_details.field disbursement = new Srpt_end_of_day_summary_details.field("Disbursement", disburse.category_name + " : " + disburse.purpose, "", FitIn.fmt_wc_0(disburse.amount));
                     my_disbursements.add(disbursement);
                     disburs += disburse.amount;
+                    System.out.println("disburs: "+disburse.amount);
                 }
                 my_details.addAll(my_disbursements);
                 receipt_net_total = receipt_net_total - disburs;

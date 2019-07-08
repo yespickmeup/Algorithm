@@ -845,7 +845,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private void myInit() {
 
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "localhost");
+//        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         init_tbl_accounts_receivable();
         focus();
@@ -1179,13 +1179,15 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 double actual_amount = data.actual_tendered;
                 double retention = data.retention;
                 double business_tax = data.business_tax;
+                double salary_deduction = data.salary_deduction;
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                         status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status,
                         term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no,
                         trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate,
                         data.tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type,
                         credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description,
-                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax);
+                        gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount,
+                        retention, business_tax, salary_deduction);
                 S1_accounts_receivable_payments.add_accounts_receivable_payments2(to1, my_branch, my_branch_id, my_location, my_location_id);
 
                 data_cols_payments();
@@ -1206,7 +1208,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setModel(tbl_accounts_receivable_payments_M);
         tbl_accounts_receivable_payments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable_payments.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 70, 60, 60, 70, 70, 70, 70, 45, 70, 50, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable_payments.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -1229,7 +1231,8 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 9);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 10);
         TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 11);
-        TableColumn tc = tbl_accounts_receivable_payments.getColumnModel().getColumn(13);
+        TableWidthUtilities.setColumnRightRenderer(tbl_accounts_receivable_payments, 12);
+        TableColumn tc = tbl_accounts_receivable_payments.getColumnModel().getColumn(14);
         tc.setCellEditor(tbl_accounts_receivable_payments.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(tbl_accounts_receivable_payments.getDefaultRenderer(Boolean.class));
         tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
@@ -1348,7 +1351,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     public static class Tblaccounts_receivable_paymentsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Ref #", "Cash", "Check", "Prepaid", "Credit Card", "GC", "Online", "Retention", "Busi. Tax", "Discount", "Amount", "Status", "", "date_paid", "remarks", "type", "or_no", "prev_balance", "check_amount", "check_holder", "check_bank", "check_no", "ci_no", "trust_receipt", "or_payment_no", "soa_id", "soa_type", "soa_type_id", "reference_no"
+            "Date", "Ref #", "Cash", "Check", "Prepaid", "Credit Card", "GC", "Online", "Retention", "Busi. Tax", "Salary Dedc.", "Discount", "Amount", "Status", "", "remarks", "type", "or_no", "prev_balance", "check_amount", "check_holder", "check_bank", "check_no", "ci_no", "trust_receipt", "or_payment_no", "soa_id", "soa_type", "soa_type_id", "reference_no"
         };
 
         public Tblaccounts_receivable_paymentsModel(ListModel listmodel) {
@@ -1363,7 +1366,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 13) {
+            if (col == 14) {
                 return Boolean.class;
             }
             return Object.class;
@@ -1394,20 +1397,20 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 case 9:
                     return FitIn.fmt_wc_0(tt.business_tax) + " ";
                 case 10:
-                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.salary_deduction) + " ";
                 case 11:
-                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount + tt.retention + tt.business_tax)) + " ";
-
+                    return FitIn.fmt_wc_0(tt.discount_amount) + " ";
                 case 12:
+                    return FitIn.fmt_wc_0((tt.amount + tt.check_amount + tt.prepaid_amount + tt.credit_card_amount + tt.gift_certificate_amount + tt.online_amount + tt.retention + tt.business_tax + tt.salary_deduction)) + " ";
+
+                case 13:
                     if (tt.status == 0) {
                         return " Finalized";
                     } else {
                         return " Posted";
                     }
-                case 13:
-                    return tt.selected;
                 case 14:
-                    return tt.date_paid;
+                    return tt.selected;
                 case 15:
                     return tt.remarks;
                 case 16:
@@ -1483,7 +1486,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         }
 
         int col = tbl_accounts_receivable_payments.getSelectedColumn();
-        if (col == 13) {
+        if (col == 14) {
             to_accounts_receivable_payments to = (to_accounts_receivable_payments) tbl_accounts_receivable_payments_ALM.get(tbl_accounts_receivable_payments.convertRowIndexToModel(row));
             if (to.status == 1) {
                 if (to.selected == true) {
@@ -1637,13 +1640,14 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 double actual_amount = data.actual_tendered;
                 double retention = data.retention;
                 double business_tax = data.business_tax;
+                double salary_deduction = data.salary_deduction;
                 S1_accounts_receivable_payments.to_accounts_receivable_payments to1 = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
                         to.id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied,
                         paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no,
                         soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, data.tax_rate, data.tax_amount, branch, branch_id,
                         location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
                         credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
-                        online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax);
+                        online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax, salary_deduction);
                 S1_accounts_receivable_payments.update_accounts_receivable_payments3(to1);
                 data_cols_payments();
                 Alert.set(2, type);
