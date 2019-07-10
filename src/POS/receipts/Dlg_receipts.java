@@ -9,7 +9,14 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Dlg_inventory_update_barcode;
+import POS.inventory.Dlg_print_barcode;
+import static POS.inventory.Dlg_print_barcode.tbl_inventory_barcodes_ALM;
+import static POS.inventory.Dlg_print_barcode.tbl_inventory_barcodes_ALM2;
+import static POS.inventory.Dlg_print_barcode.tbl_inventory_barcodes_M;
+import static POS.inventory.Dlg_print_barcode.tbl_inventory_barcodes_M2;
+import POS.inventory.Dlg_print_barcode_qty;
 import POS.inventory.Inventory_barcodes;
+import POS.inventory.Srpt_print_barcodes;
 import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.purchase_order.Purchase_order;
@@ -23,6 +30,7 @@ import POS.util.*;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -38,12 +46,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import mijzcx.synapse.desk.utils.*;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import org.jfree.ui.Align;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.panels.Loading;
@@ -230,6 +243,8 @@ public class Dlg_receipts extends javax.swing.JDialog {
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
         buttonGroup6 = new javax.swing.ButtonGroup();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -364,6 +379,20 @@ public class Dlg_receipts extends javax.swing.JDialog {
         jPanel9 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel18 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton4 = new Button.Warning();
+        jButton8 = new Button.Success();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jProgressBar4 = new javax.swing.JProgressBar();
+        jLabel45 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/transactions.png"))); // NOI18N
         jMenuItem1.setText("Finalize Receipt");
@@ -373,6 +402,15 @@ public class Dlg_receipts extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/bd_new_new.png"))); // NOI18N
+        jMenuItem2.setText("Add All to Queue");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -715,6 +753,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_receipt_itemsMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_receipt_itemsMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbl_receipt_itemsMouseReleased(evt);
             }
         });
         jScrollPane3.setViewportView(tbl_receipt_items);
@@ -1124,8 +1168,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                                         .addGap(574, 574, 574)
                                         .addComponent(jCheckBox28, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1659,6 +1702,167 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Item Ledger", jPanel11);
 
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jButton4.setText("Delete All");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("Preview");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel43.setText("No. of Items :");
+
+        jLabel44.setText("0");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(2, 2, 2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43)
+                    .addComponent(jLabel44))
+                .addContainerGap())
+        );
+
+        jTabbedPane2.addTab("Queue", jPanel18);
+
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
+
+        jProgressBar4.setString("");
+        jProgressBar4.setStringPainted(true);
+
+        jLabel45.setText("Status:");
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap(748, Short.MAX_VALUE)
+                .addComponent(jLabel45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel45)
+                    .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11))
+        );
+
+        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 498, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Printe Preview", jPanel19);
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Print Barcode", jPanel17);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1835,6 +2039,30 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private void tf_branch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_branch3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_branch3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        select_item2();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        delete_all();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        get_stocks();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void tbl_receipt_itemsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_receipt_itemsMousePressed
+        popup_queue(evt);
+    }//GEN-LAST:event_tbl_receipt_itemsMousePressed
+
+    private void tbl_receipt_itemsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_receipt_itemsMouseReleased
+        popup_queue(evt);
+    }//GEN-LAST:event_tbl_receipt_itemsMouseReleased
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        select_add_all_item();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1848,9 +2076,11 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
@@ -1922,12 +2152,16 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1936,7 +2170,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -1945,12 +2184,17 @@ public class Dlg_receipts extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JProgressBar jProgressBar3;
+    private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -1999,6 +2243,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         init_receipt_no();
         init_tbl_receipt_items();
         init_tbl_receipts();
+        init_tbl_inventory_barcodes2(jTable1);
         select_type();
 
         set_date();
@@ -2189,8 +2434,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String location = to.location;
             String location_id = to.location_id;
             int status = 0;
-            to_receipt_items t = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
-
+            to_receipt_items t = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status, false);
             acc.add(t);
         }
 
@@ -2357,7 +2601,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         tbl_receipt_items.
                 setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_receipt_items.setRowHeight(25);
-        int[] tbl_widths_receipt_items = {70, 70, 100, 70, 80, 100, 100, 50, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_receipt_items = {70, 70, 100, 70, 80, 100, 100, 50, 50, 50, 30, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_receipt_items.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -2387,7 +2631,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
     public static class Tblreceipt_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Qty", "Item Code", "Description", "Unit", "Conversion", "Cost", "Total", "", "", "", "id", "Cost", "category", "category_id", "classification", "classification_id", "sub_class", "Total"
+            "Qty", "Item Code", "Description", "Unit", "Conversion", "Cost", "Total", "", "", "", "", "Cost", "category", "category_id", "classification", "classification_id", "sub_class", "Total"
         };
 
         public Tblreceipt_itemsModel(ListModel listmodel) {
@@ -2402,7 +2646,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 1000) {
+            if (col == 10) {
                 return Boolean.class;
             }
             return Object.class;
@@ -2467,7 +2711,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                         return " Deleted";
                     }
                 case 10:
-                    return tt.qty;
+                    return tt.selected;
                 case 11:
                     return FitIn.fmt_wc_0(tt.cost) + " ";
                 case 12:
@@ -2532,7 +2776,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String location = rec.location;
             String location_id = rec.location_id;
             int status = rec.status;
-            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
+            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status, false);
             datas2.add(d);
         }
         loadData_receipt_items(datas2);
@@ -2593,7 +2837,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 String unit = data.unit;
 //                System.out.println("unit: " + unit);
                 int status = 0;
-                to_receipt_items to2 = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
+                to_receipt_items to2 = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status, false);
                 int naa = 0;
                 for (to_receipt_items to3 : datas) {
                     if (to3.barcode.equals(to2.barcode) && to3.unit.
@@ -3260,9 +3504,10 @@ public class Dlg_receipts extends javax.swing.JDialog {
             String location = rec.location;
             String location_id = rec.location_id;
             int status = rec.status;
-            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status);
+            to_receipt_items d = new to_receipt_items(id, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, barcode, description, qty, cost, category, category_id, classification, classification_id, sub_class, sub_class_id, total, conversion, unit, barcodes, serial_nos, batch_no, main_barcode, brand, brand_id, model, model_id, previous_cost, branch, branch_id, location, location_id, status, false);
             datas2.add(d);
         }
+
         loadData_receipt_items(datas2);
         tf_receipt_no.setEnabled(true);
     }
@@ -3735,6 +3980,22 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 nd.setVisible(true);
             }
         }
+        if (col == 10) {
+            if (to.selected == false) {
+                to.setSelected(true);
+            } else {
+                to.setSelected(false);
+            }
+            tbl_receipt_items_M.fireTableDataChanged();
+        }
+
+    }
+
+    private void popup_queue(MouseEvent evt) {
+
+        if (evt.isPopupTrigger()) {
+            jPopupMenu2.show(tbl_receipt_items, evt.getX(), evt.getY());
+        }
     }
 
     private void set_report() {
@@ -4150,11 +4411,13 @@ public class Dlg_receipts extends javax.swing.JDialog {
                 }
             });
         }
+
         @Override
         protected Object doInBackground() throws Exception {
             loader_finalize_receipt(data2);
             return null;
         }
+
         @Override
         protected void done() {
             dialog.dispose();
@@ -4166,4 +4429,365 @@ public class Dlg_receipts extends javax.swing.JDialog {
         }
     }
     //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" inventory_barcodes "> 
+    public static ArrayListModel tbl_inventory_barcodes_ALM2;
+    public static Tblinventory_barcodesModel2 tbl_inventory_barcodes_M2;
+
+    public static void init_tbl_inventory_barcodes2(JTable jTable1) {
+        tbl_inventory_barcodes_ALM2 = new ArrayListModel();
+        tbl_inventory_barcodes_M2 = new Tblinventory_barcodesModel2(tbl_inventory_barcodes_ALM2);
+        jTable1.setModel(tbl_inventory_barcodes_M2);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable1.setRowHeight(25);
+        int[] tbl_widths_inventory_barcodes = {100, 100, 100, 100, 40};
+        for (int i = 0, n = tbl_widths_inventory_barcodes.length; i < n; i++) {
+            if (i == 1) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(jTable1, i, tbl_widths_inventory_barcodes[i]);
+        }
+        Dimension d = jTable1.getTableHeader().getPreferredSize();
+        d.height = 25;
+        jTable1.getTableHeader().setPreferredSize(d);
+        jTable1.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        jTable1.setRowHeight(25);
+        jTable1.setFont(new java.awt.Font("Arial", 0, 12));
+        TableColumn tc = jTable1.getColumnModel().getColumn(4);
+        tc.setCellEditor(jTable1.getDefaultEditor(Boolean.class));
+        tc.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
+
+//        tc.setHeaderRenderer(new CheckBoxHeader(new MyItemListener()));
+        tc.setHeaderRenderer(new Dlg_print_barcode.CheckBoxHeader(new Dlg_print_barcode.MyItemListener()));
+    }
+
+    public static class MyItemListener2 implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            Object source = e.getSource();
+//            if (source instanceof AbstractButton == false) {
+//                return;
+//            }
+//            boolean checked = e.getStateChange() == ItemEvent.SELECTED;
+//            for (int x = 0, y = new Dlg_print_barcode().tbl_inventory_barcodes.getRowCount(); x < y; x++) {
+//                new Dlg_print_barcode().tbl_inventory_barcodes.setValueAt(checked, x, 0);
+//            }
+        }
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" Print Barcode ">
+    public static class CheckBoxHeader2 extends JCheckBox
+            implements TableCellRenderer, MouseListener {
+
+        protected CheckBoxHeader2 rendererComponent;
+        protected int column;
+        protected boolean mousePressed = false;
+
+        public CheckBoxHeader2(ItemListener itemListener) {
+            rendererComponent = this;
+            rendererComponent.addItemListener(itemListener);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            if (table != null) {
+                JTableHeader header = table.getTableHeader();
+                if (header != null) {
+                    rendererComponent.setForeground(header.getForeground());
+                    rendererComponent.setOpaque(true);
+                    rendererComponent.setBackground(new java.awt.Color(255, 255, 255));
+                    rendererComponent.setHorizontalAlignment(Align.CENTER);
+                    header.addMouseListener(rendererComponent);
+                }
+            }
+            setColumn(column);
+            rendererComponent.setText("");
+            setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+            return rendererComponent;
+        }
+
+        protected void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        protected void handleClickEvent(MouseEvent e) {
+            if (mousePressed) {
+                mousePressed = false;
+                JTableHeader header = (JTableHeader) (e.getSource());
+                JTable tableView = header.getTable();
+                TableColumnModel columnModel = tableView.getColumnModel();
+                int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+                int column1 = tableView.convertColumnIndexToModel(viewColumn);
+                if (viewColumn == this.column && e.getClickCount() == 1 && column1 != -1) {
+                    doClick();
+                }
+            }
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            handleClickEvent(e);
+            ((JTableHeader) e.getSource()).repaint();
+            List<Srpt_print_barcodes.field> datas = tbl_inventory_barcodes_ALM2;
+            boolean selected = false;
+            if (this.isSelected()) {
+                selected = true;
+            }
+            for (Srpt_print_barcodes.field to : datas) {
+                to.setSelected(selected);
+            }
+            e.consume();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            mousePressed = true;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+    }
+
+    public static void loadData_inventory_barcodes2(List<Srpt_print_barcodes.field> acc) {
+        tbl_inventory_barcodes_ALM2.clear();
+        tbl_inventory_barcodes_ALM2.addAll(acc);
+    }
+
+    public static class Tblinventory_barcodesModel2 extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Code", "Description", "Price", "Count", ""
+        };
+
+        public Tblinventory_barcodesModel2(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 4) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            Srpt_print_barcodes.field tt = (Srpt_print_barcodes.field) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.getBarcode();
+                case 1:
+                    return " " + tt.getDescription();
+                case 2:
+                    return " " + FitIn.fmt_wc_0(tt.getPrice());
+                case 3:
+                    return " " + FitIn.fmt_woc(tt.getCount());
+                default:
+                    return tt.isSelected();
+            }
+        }
+    }
+
+    private void select_item2() {
+        int row = jTable1.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+
+        int col = jTable1.getSelectedColumn();
+        final Srpt_print_barcodes.field to = (Srpt_print_barcodes.field) tbl_inventory_barcodes_ALM2.get(row);
+        if (col == 4) {
+
+            if (!to.isSelected()) {
+                to.setSelected(true);
+            } else {
+                to.setSelected(false);
+            }
+            tbl_inventory_barcodes_M2.fireTableDataChanged();
+        }
+        if (col == 3) {
+
+            Window p = (Window) this;
+            Dlg_print_barcode_qty nd = Dlg_print_barcode_qty.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.getCount());
+            nd.setCallback(new Dlg_print_barcode_qty.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_print_barcode_qty.OutputData data) {
+                    closeDialog.ok();
+                    to.setCount(data.qty);
+                    tbl_inventory_barcodes_M2.fireTableDataChanged();
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+
+    }
+
+    private void delete_all() {
+        Window p = (Window) this;
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_confirm_action.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                closeDialog.ok();
+                tbl_inventory_barcodes_ALM2.clear();
+                tbl_inventory_barcodes_M2.fireTableDataChanged();
+                jLabel44.setText("" + tbl_inventory_barcodes_ALM2.size());
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void get_stocks() {
+
+        jTabbedPane2.setSelectedIndex(1);
+        jProgressBar4.setString("Loading... Please wait...");
+        jProgressBar4.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Srpt_print_barcodes.field> fields = new ArrayList();
+                List<Srpt_print_barcodes.field> datas = tbl_inventory_barcodes_ALM2;
+
+                for (Srpt_print_barcodes.field to : datas) {
+                    if (to.isSelected()) {
+                        int count = FitIn.toInt("" + to.getCount());
+                        for (int i = 0; i < count; i++) {
+                            String barcode = to.getBarcode();
+                            if (barcode.equals("")) {
+                                barcode = " ";
+                            }
+                            String description = to.getDescription();
+                            double price = to.getPrice();
+                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false, to.getCount(), to.getGeneric_name());
+                            fields.add(field);
+                        }
+                    }
+                }
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String address = System.getProperty("address", "Daro, Dumaguete City");
+                String category = "All";
+                if (!jCheckBox3.isSelected()) {
+                    category = "";
+                }
+                String classification = "All";
+                if (!jCheckBox4.isSelected()) {
+                    classification = "";
+                }
+                String sub_classification = "All";
+                if (!jCheckBox5.isSelected()) {
+                    sub_classification = "";
+                }
+                String brand = "All";
+                if (!jCheckBox6.isSelected()) {
+                    brand = "";
+                }
+                String model = "All";
+                if (!jCheckBox7.isSelected()) {
+                    model = "";
+                }
+                Srpt_print_barcodes rpt = new Srpt_print_barcodes(business_name, address, category, classification, sub_classification, brand, model);
+                rpt.fields.addAll(fields);
+                String jrxml = "rpt_print_barcodes.jrxml";
+                String pool_db = System.getProperty("pool_db", "db_algorithm");
+                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                    jrxml = "rpt_print_barcodes_angel_buns.jrxml";
+                }
+                report_customers_aging(rpt, jrxml);
+
+                jProgressBar4.setString("Finished...");
+                jProgressBar4.setIndeterminate(false);
+
+            }
+        });
+
+        t.start();
+    }
+
+    private void report_customers_aging(final Srpt_print_barcodes to, String jrxml_name) {
+        jPanel21.removeAll();
+        jPanel21.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_customers_aging(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            jPanel21.add(viewer);
+            jPanel21.updateUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_customers_aging(Srpt_print_barcodes to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_aging2(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_aging2(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_print_barcodes.class.
+                    getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void select_add_all_item() {
+
+        List<to_receipt_items> items = tbl_receipt_items_ALM;
+        final List<Srpt_print_barcodes.field> to_add = new ArrayList();
+        for (to_receipt_items field : items) {
+            if (field.isSelected()) {
+                Srpt_print_barcodes.field field1 = new Srpt_print_barcodes.field(field.main_barcode, field.description, field.cost, true, FitIn.toInt("" + field.qty), field.description);
+                tbl_inventory_barcodes_ALM2.add(field1);
+            }
+        }
+
+        jLabel44.setText("" + tbl_inventory_barcodes_ALM2.size());
+        Alert.set(1, "");
+    }
+    //</editor-fold>
+
 }
