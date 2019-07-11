@@ -45,6 +45,124 @@ import synsoftech.util.DateType;
  */
 public class MySales {
 
+    public static class tip {
+
+        public double tip;
+        public String prepaid_customer_name;
+        public String prepaid_customer_id;
+        public double prepaid_amount;
+        public String charge_reference_no;
+        public String charge_ar_no;
+        public String charge_type;
+        public String charge_customer_name;
+        public String charge_customer_id;
+        public double charge_amount;
+        public int charge_days;
+
+        public tip(double tip, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no, String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days) {
+            this.tip = tip;
+            this.prepaid_customer_name = prepaid_customer_name;
+            this.prepaid_customer_id = prepaid_customer_id;
+            this.prepaid_amount = prepaid_amount;
+            this.charge_reference_no = charge_reference_no;
+            this.charge_ar_no = charge_ar_no;
+            this.charge_type = charge_type;
+            this.charge_customer_name = charge_customer_name;
+            this.charge_customer_id = charge_customer_id;
+            this.charge_amount = charge_amount;
+            this.charge_days = charge_days;
+        }
+
+        public double getTip() {
+            return tip;
+        }
+
+        public void setTip(double tip) {
+            this.tip = tip;
+        }
+
+        public String getPrepaid_customer_name() {
+            return prepaid_customer_name;
+        }
+
+        public void setPrepaid_customer_name(String prepaid_customer_name) {
+            this.prepaid_customer_name = prepaid_customer_name;
+        }
+
+        public String getPrepaid_customer_id() {
+            return prepaid_customer_id;
+        }
+
+        public void setPrepaid_customer_id(String prepaid_customer_id) {
+            this.prepaid_customer_id = prepaid_customer_id;
+        }
+
+        public double getPrepaid_amount() {
+            return prepaid_amount;
+        }
+
+        public void setPrepaid_amount(double prepaid_amount) {
+            this.prepaid_amount = prepaid_amount;
+        }
+
+        public String getCharge_reference_no() {
+            return charge_reference_no;
+        }
+
+        public void setCharge_reference_no(String charge_reference_no) {
+            this.charge_reference_no = charge_reference_no;
+        }
+
+        public String getCharge_ar_no() {
+            return charge_ar_no;
+        }
+
+        public void setCharge_ar_no(String charge_ar_no) {
+            this.charge_ar_no = charge_ar_no;
+        }
+
+        public String getCharge_type() {
+            return charge_type;
+        }
+
+        public void setCharge_type(String charge_type) {
+            this.charge_type = charge_type;
+        }
+
+        public String getCharge_customer_name() {
+            return charge_customer_name;
+        }
+
+        public void setCharge_customer_name(String charge_customer_name) {
+            this.charge_customer_name = charge_customer_name;
+        }
+
+        public String getCharge_customer_id() {
+            return charge_customer_id;
+        }
+
+        public void setCharge_customer_id(String charge_customer_id) {
+            this.charge_customer_id = charge_customer_id;
+        }
+
+        public double getCharge_amount() {
+            return charge_amount;
+        }
+
+        public void setCharge_amount(double charge_amount) {
+            this.charge_amount = charge_amount;
+        }
+
+        public int getCharge_days() {
+            return charge_days;
+        }
+
+        public void setCharge_days(int charge_days) {
+            this.charge_days = charge_days;
+        }
+
+    }
+
     public static class sales {
 
         public final int id;
@@ -1907,10 +2025,10 @@ public class MySales {
                 String online_date = rs.getString(55);
                 double online_amount = rs.getDouble(56);
                 double actual_amount = rs.getDouble(57);
-                double retention=rs.getDouble(58);
-                double business_tax=rs.getDouble(59);
-                double salary_deduction=rs.getDouble(60);
-                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount,retention,business_tax,salary_deduction);
+                double retention = rs.getDouble(58);
+                double business_tax = rs.getDouble(59);
+                double salary_deduction = rs.getDouble(60);
+                to_accounts_receivable_payments to = new to_accounts_receivable_payments(id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id, soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location, location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no, credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax, salary_deduction);
                 datas.add(to);
             }
             return datas;

@@ -1009,7 +1009,7 @@ public class Item_replacements {
                 double discount_amount = 0;// FitIn.toDouble(tf_discount_amount.getText();
                 double discount_rate = 0;//FitIn.toDouble(tf_discount_rate.getText();
                 String discount = "";//tf_discount.getText();
-                int status = 1;// FitIn.toInt(tf_status.getText());
+                int status = 0;// FitIn.toInt(tf_status.getText());
                 double term = to_item_replacements.charge_days;
                 String date_applied = DateType.sf.format(new Date());
 

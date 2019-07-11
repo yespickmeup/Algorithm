@@ -1431,7 +1431,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
         for (S1_user_previleges.to_user_previleges to : datas) {
+           
             if (to.previledge.equalsIgnoreCase("Stock Take Report")) {
+               
                 view_only = 1;
 
             }
@@ -1443,6 +1445,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             jButton4.setVisible(false);
         }
         init_tbl_inventory_barcodes();
+        
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
         SwingUtilities.invokeLater(new Runnable() {
@@ -1457,6 +1460,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         view_only = 0;
         jButton4.setVisible(false);
         init_tbl_inventory_barcodes();
+        
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
         SwingUtilities.invokeLater(new Runnable() {
@@ -1839,7 +1843,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
             if (column == 5 || column == 6) {
                 JLabel lbl = (JLabel) cellComponent;
                 lbl.setHorizontalAlignment(RIGHT);
-                if (view_only == 1) {
+                if (view_only == 0) {
                     table.getColumnModel().getColumn(5).setPreferredWidth(0);
                     table.getColumnModel().getColumn(5).setMaxWidth(0);
                     table.getColumnModel().getColumn(5).setMinWidth(0);

@@ -233,7 +233,7 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         jLabel69 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         tf_amount = new Field.Input();
-        jButton35 = new Button.Primary();
+        jButton35 = new Button.Success();
         jTextField2 = new Field.Combo();
         jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();

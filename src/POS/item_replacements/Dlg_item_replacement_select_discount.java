@@ -1711,11 +1711,13 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
                 tf_amount2.grabFocus();
                 return;
             }
-            if (tf_charge_type1.getText().isEmpty()) {
-                Alert.set(0, "Search AR Transaction");
-                search_ar();
-                return;
-            }
+            
+//            if (tf_charge_type1.getText().isEmpty()) {
+//                Alert.set(0, "Search AR Transaction");
+//                search_ar();
+//                return;
+//            }
+            
             cash_amount = 0;
             check_amount = 0;
             credit_card_amount = 0;

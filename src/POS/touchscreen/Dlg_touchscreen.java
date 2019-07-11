@@ -5382,16 +5382,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         try {
             sales_no = MySales.add_sales(sales, items, location_id);
             sales.setSales_no(sales_no);
-
             my_sales = sales;
             if (my_sales == null) {
                 System.out.println("NULL");
             } else {
-
                 System.out.println("NOT NULL");
-
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(Dlg_touchscreen.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -5407,12 +5403,12 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Window p = (Window) Dlg_touchscreen.this;
         Dlg_touchscreen_change nd = Dlg_touchscreen_change.create(p, true);
         nd.setTitle("");
-        System.out.println("Orders: " + orders);
-        System.out.println("Customer: " + f_customer.getCustomer_id());
-        System.out.println("Discount:" + f_discount.getDiscount_customer_id());
-        System.out.println("Gross: " + my_sales.gross_amount);
-        System.out.println("Line Discount: " + my_sales.line_discount);
-        System.out.println("Sales: " + my_sales);
+//        System.out.println("Orders: " + orders);
+//        System.out.println("Customer: " + f_customer.getCustomer_id());
+//        System.out.println("Discount:" + f_discount.getDiscount_customer_id());
+//        System.out.println("Gross: " + my_sales.gross_amount);
+//        System.out.println("Line Discount: " + my_sales.line_discount);
+//        System.out.println("Sales: " + my_sales);
 
         nd.do_pass(orders, f_customer, f_discount, my_sales.gross_amount, my_sales.line_discount, my_sales);
         nd.setCallback(new Dlg_touchscreen_change.Callback() {

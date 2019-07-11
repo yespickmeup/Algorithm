@@ -427,7 +427,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         });
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -484,7 +483,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         jLabel16.setText("Time from:");
 
         jCheckBox13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox13.setSelected(true);
         jCheckBox13.setText("All");
         jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1452,7 +1450,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         init_key();
         set_default_branch();
         init_tbl_chickaloka_items();
-
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data2(where);
         Field.Combo user = (Field.Combo) tf_cashier;
@@ -1473,11 +1470,10 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         if (!cloud_host.isEmpty()) {
             ret_transactions();
         }
-
         jCheckBox14.setVisible(false);
         jLabel18.setVisible(false);
+        jPanel2.setVisible(false);
     }
-
     String my_branch = "";
     String my_branch_id = "";
     String my_location = "";
@@ -1583,7 +1579,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }
 
     public void do_pass() {
-
+        jLabel8.setVisible(false);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -1702,6 +1698,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 } else {
                     if (tf_cashier5.getText().isEmpty() && !jCheckBox13.isSelected()) {
                         Alert.set(0, "Please select time!");
+                        Button.Search search = (Button.Search) jButton1;
+                        search.finish();
                         return;
                     }
                     if (!jCheckBox13.isSelected()) {
@@ -1715,7 +1713,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 //                            date_from_sales = DateType.datetime.format(d1.getDate());
                             date_from_sales = DateType.convert_slash_datetime_sf2(dates[0]);
                             date_to_sales = DateType.convert_slash_datetime_sf2(dates[1]);
-                            
+
                         } catch (ParseException ex) {
                             Logger.getLogger(Dlg_report_sales_summary.class.getName()).log(Level.SEVERE, null, ex);
                         }

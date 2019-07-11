@@ -9,12 +9,14 @@ import POS.accounts_receivable.S1_accounts_receivable_payments;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Branches;
+import POS.cash_drawer.S1_cash_drawer;
 import POS.item_replacements.Item_replacements;
 import POS.prepaid_payments.Prepaid_payments;
 import POS.reports.Dlg_report_items;
 import POS.returns.Return_from_customer_items;
 import POS.users.MyUser;
 import POS.users.S1_users;
+import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -24,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -252,6 +255,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         jLabel17 = new javax.swing.JLabel();
         tf_cashier4 = new Field.Combo();
         jCheckBox11 = new javax.swing.JCheckBox();
+        jCheckBox15 = new javax.swing.JCheckBox();
+        tf_cashier5 = new Field.Combo();
         jLabel8 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -406,6 +411,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         tf_cashier3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_cashier3.setText("12:00am");
+        tf_cashier3.setEnabled(false);
         tf_cashier3.setFocusable(false);
         tf_cashier3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -423,6 +429,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         tf_cashier4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_cashier4.setText("11:59pm");
+        tf_cashier4.setEnabled(false);
         tf_cashier4.setFocusable(false);
         tf_cashier4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -438,42 +445,68 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox11.setText("With Items");
 
+        jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox15.setText("Manual/Auto");
+        jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox15ActionPerformed(evt);
+            }
+        });
+
+        tf_cashier5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_cashier5.setFocusable(false);
+        tf_cashier5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_cashier5MouseClicked(evt);
+            }
+        });
+        tf_cashier5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_cashier5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_cashier, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_cashier3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_cashier4)))))
+                        .addComponent(jCheckBox15)
+                        .addGap(1, 1, 1)
+                        .addComponent(tf_cashier5, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jCheckBox1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_cashier, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_cashier3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jCheckBox2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jLabel17)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_cashier4))))))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -539,7 +572,11 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBox2)))
-                .addContainerGap())
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tf_cashier5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -687,20 +724,48 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void tf_cashier3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier3MouseClicked
-        init_time(tf_cashier3);
+        if (tf_cashier3.isEnabled()) {
+            init_time(tf_cashier3);
+        }
+
     }//GEN-LAST:event_tf_cashier3MouseClicked
 
     private void tf_cashier3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier3ActionPerformed
-        init_time(tf_cashier3);
+        if (tf_cashier3.isEnabled()) {
+            init_time(tf_cashier3);
+        }
+
     }//GEN-LAST:event_tf_cashier3ActionPerformed
 
     private void tf_cashier4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier4MouseClicked
-        init_time(tf_cashier4);
+        if (tf_cashier4.isEnabled()) {
+            init_time(tf_cashier4);
+        }
+
     }//GEN-LAST:event_tf_cashier4MouseClicked
 
     private void tf_cashier4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier4ActionPerformed
-        init_time(tf_cashier4);
+        if (tf_cashier4.isEnabled()) {
+            init_time(tf_cashier4);
+        }
+
     }//GEN-LAST:event_tf_cashier4ActionPerformed
+
+    private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox15ActionPerformed
+        select_time_type();
+    }//GEN-LAST:event_jCheckBox15ActionPerformed
+
+    private void tf_cashier5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier5MouseClicked
+        if (tf_cashier5.isEnabled()) {
+            init_cashdrawer(tf_cashier5);
+        }
+    }//GEN-LAST:event_tf_cashier5MouseClicked
+
+    private void tf_cashier5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier5ActionPerformed
+        if (tf_cashier5.isEnabled()) {
+            init_cashdrawer(tf_cashier5);
+        }
+    }//GEN-LAST:event_tf_cashier5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -714,6 +779,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox13;
+    private javax.swing.JCheckBox jCheckBox15;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -746,6 +812,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JTextField tf_cashier;
     private javax.swing.JTextField tf_cashier3;
     private javax.swing.JTextField tf_cashier4;
+    private javax.swing.JTextField tf_cashier5;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
@@ -764,7 +831,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
         time_list = DateType.time();
-        
+
     }
     List<String> time_list = new ArrayList();
 
@@ -836,6 +903,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         });
     }
     List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
+
     private void init_branch_locations() {
         final Field.Combo br = (Field.Combo) jTextField2;
         final Field.Combo lo = (Field.Combo) jTextField1;
@@ -900,16 +968,40 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 String date_to = DateType.sf.format(jDateChooser2.getDate());
                 String date_to_sales = DateType.sf.format(jDateChooser2.getDate());
                 String time = "All";
-                if (jCheckBox13.isSelected()) {
-                    date_from_sales = date_from_sales + " 00:00:00";
-                    date_to_sales = date_to_sales + " 23:59:59";
+                if (jCheckBox15.isSelected()) {
+                    if (jCheckBox13.isSelected()) {
+                        date_from_sales = date_from_sales + " 00:00:00";
+                        date_to_sales = date_to_sales + " 23:59:59";
+                    } else {
+                        String dfs_time = DateType.convert_am_pm_to_stamp(tf_cashier3.getText(), "from");
+                        String dts_time = DateType.convert_am_pm_to_stamp(tf_cashier4.getText(), "to");
+                        date_from_sales = date_from_sales + " " + dfs_time;
+                        date_to_sales = date_to_sales + " " + dts_time;
+                        time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
+                    }
                 } else {
-                    String dfs_time = DateType.convert_am_pm_to_stamp(tf_cashier3.getText(), "from");
-                    String dts_time = DateType.convert_am_pm_to_stamp(tf_cashier4.getText(), "to");
-                    date_from_sales = date_from_sales + " " + dfs_time;
-                    date_to_sales = date_to_sales + " " + dts_time;
-                    time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
+                    if (tf_cashier5.getText().isEmpty() && !jCheckBox13.isSelected()) {
+                        Alert.set(0, "Please select time!");
+                        return;
+                    }
+                    if (!jCheckBox13.isSelected()) {
+                        try {
+                            String[] dates = tf_cashier5.getText().split("- ");
+                            Date d1 = DateType.slash_w_time.parse(dates[0]);
+                            Date d2 = DateType.slash_w_time.parse(dates[1]);
+                            date_from_sales = DateType.convert_slash_datetime_sf2(dates[0]);
+                            date_to_sales = DateType.convert_slash_datetime_sf2(dates[1]);
+
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Dlg_report_sales_summary.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        date_from_sales = date_from_sales + " 00:00:00";
+                        date_to_sales = date_to_sales + " 23:59:59";
+                    }
+
                 }
+
                 int status = 0;
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
@@ -937,6 +1029,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where_sales3 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status=1 ";
                 }
+
                 if (!jCheckBox2.isSelected()) {
                     where = where + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
@@ -995,7 +1088,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double re_charge = 0;
                 double re_gc = 0;
                 double re_online = 0;
-                double salary_deduction=0;
+                double salary_deduction = 0;
                 for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
                     collections_cheque += collection.check_amount;
                     collections += collection.amount;
@@ -1005,7 +1098,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     ar_collections_online += collection.online_amount;
                     retention += collection.retention;
                     business_tax = collection.business_tax;
-                    salary_deduction+=collection.salary_deduction;
+                    salary_deduction += collection.salary_deduction;
                 }
                 double na_short = 0;
                 double over = 0;
@@ -1084,7 +1177,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                                   collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
                                                                   refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
-                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online,salary_deduction);
+                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction);
                     rpt.fields.addAll(fields);
                     String jrxml = "rpt_sales_ledger.jrxml";
                     String pool_db = System.getProperty("pool_db", "db_smis");
@@ -1389,6 +1482,75 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 default:
                     return FitIn.fmt_wc_0(tt.amount_due) + " ";
             }
+        }
+    }
+
+    private void init_cashdrawer(final JTextField tf) {
+        String where = " where id<>0 ";
+        if (!jCheckBox1.isSelected()) {
+            Field.Combo f = (Field.Combo) tf_cashier;
+            where = where + " and user_id='" + f.getId() + "' ";
+        }
+        if (!jCheckBox4.isSelected()) {
+            String date_from = DateType.sf.format(jDateChooser3.getDate());
+            String date_to = DateType.sf.format(jDateChooser2.getDate());
+            where = where + " and Date(time_in) between '" + date_from + "' and '" + date_to + " '";
+        }
+
+        final List<S1_cash_drawer.to_cash_drawer> drawers = S1_cash_drawer.ret_where(where);
+
+        Object[][] obj = new Object[drawers.size()][4];
+        int i = 0;
+        for (S1_cash_drawer.to_cash_drawer to : drawers) {
+
+            obj[i][0] = " " + to.user_screen_name;
+            obj[i][1] = " " + DateType.convert_slash_datetime3(to.time_in);
+            String time_out = "";
+            obj[i][2] = " ";
+            if (to.time_out != null) {
+                obj[i][2] = " " + DateType.convert_slash_datetime3(to.time_out);
+            }
+
+            obj[i][3] = " " + FitIn.fmt_wc_0(to.amount);
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {80, 100, 120, 80,};
+        int width = 0;
+        String[] col_names = {"", "", "", ""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup2(tf, obj, labels, tbl_widths_customers, col_names, 450);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Field.Combo f = (Field.Combo) tf_cashier5;
+                S1_cash_drawer.to_cash_drawer to = (S1_cash_drawer.to_cash_drawer) drawers.get(data.selected_row);
+                String cashin = DateType.convert_slash_datetime3(to.time_in);
+                String cashout = "";
+                if (to.time_out != null) {
+                    cashout = DateType.convert_slash_datetime3(to.time_out);
+                } else {
+                    Alert.set(0, "Choose another record!");
+                    return;
+                }
+                f.setText(cashin + " - " + cashout);
+//
+//                f.setId("" + to.id);
+//                f.setText(to.screen_name);
+            }
+        });
+    }
+
+    private void select_time_type() {
+        if (jCheckBox15.isSelected()) {
+            tf_cashier5.setEnabled(false);
+            tf_cashier3.setEnabled(true);
+            tf_cashier4.setEnabled(true);
+        } else {
+            tf_cashier5.setEnabled(true);
+            tf_cashier3.setEnabled(false);
+            tf_cashier4.setEnabled(false);
+
         }
     }
 }

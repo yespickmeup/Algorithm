@@ -13,6 +13,8 @@ import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.util.DateType;
 import POS.batch_file.Drawer;
+import POS.my_sales.MySale_tips;
+import POS.util.Alert;
 import POS.util.LostHeaderRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -72,9 +74,11 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     }
 
     public static class InputData {
+
     }
 
     public static class OutputData {
+
     }
 //</editor-fold>
 
@@ -317,6 +321,16 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         jButton3.setContentAreaFilled(false);
         jButton3.setFocusable(false);
         jButton3.setOpaque(true);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -343,7 +357,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         lbl_change.setBackground(new java.awt.Color(4, 176, 217));
         lbl_change.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lbl_change.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_change.setText("P 1,000.00 ");
+        lbl_change.setText("P 1,200.00 ");
         lbl_change.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -874,6 +888,14 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         receipt_type();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        tip();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        tip();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -951,11 +973,14 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
         init_key();
         hover();
         init_table_bg();
         init_tbl_order();
     }
+
+    MySales.tip my_tip = new MySales.tip(0, "", "", 0, "", "", "", "", "", 0, 0);
 
     private void init_table_bg() {
         Color ivory = new Color(255, 255, 255);
@@ -1226,8 +1251,8 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
         vatable_sales = my_sales.amount_due / 1.12;
         vat_percent1 = vatable_sales * .12;
         vat = vat_percent1;
-      
-        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items,online_amount);
+
+        Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items, online_amount);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_official_receipt.jrxml";
         InputStream is = Official_receipt.class.getResourceAsStream(jrxml);
@@ -1438,6 +1463,33 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
     }
 
     private void ok() {
+        double total_tip = my_tip.tip + my_tip.prepaid_amount + my_tip.charge_amount;
+//        System.out.println("total_tip: " + total_tip);
+        if (total_tip > 0) {
+            int id = 0;
+            String sales_no = my_sales.sales_no;
+            String date_added = DateType.now();
+            String user_screen_name = MyUser.getUser_screen_name();
+            String user_id = MyUser.getUser_id();
+            double tip = my_tip.tip;
+            String prepaid_customer_name = my_tip.prepaid_customer_name;
+            String prepaid_customer_id = my_tip.prepaid_customer_id;
+            double prepaid_amount = my_tip.prepaid_amount;
+            String charge_reference_no = my_tip.charge_reference_no;
+            String charge_ar_no = my_tip.charge_ar_no;
+            String charge_type = my_tip.charge_type;
+            String charge_customer_name = my_tip.charge_customer_name;
+            String charge_customer_id = my_tip.charge_customer_id;
+            double charge_amount = my_tip.charge_amount;
+            int charge_days = my_tip.charge_days;
+            String branch = MyUser.getBranch();
+            String branch_id = MyUser.getBranch_id();
+            String location = MyUser.getLocation();
+            String location_id = MyUser.getLocation_id();
+            MySale_tips.to_sale_tips to = new MySale_tips.to_sale_tips(id, sales_no, date_added, user_screen_name, user_id, tip, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days, branch, branch_id, location, location_id);
+            MySale_tips.add_tip(to);
+            Alert.set(1, "");
+        }
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData());
         }
@@ -1489,5 +1541,33 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
     private void view_or() {
 
+    }
+
+    private void tip() {
+        Window p = (Window) this;
+        Dlg_touchscreen_change_tip nd = Dlg_touchscreen_change_tip.create(p, true);
+        nd.setTitle("");
+        double change = Payments.countChange2();
+        nd.do_pass(change);
+        nd.setCallback(new Dlg_touchscreen_change_tip.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_change_tip.OutputData data) {
+                closeDialog.ok();
+                my_tip.setCharge_amount(data.charge_amount);
+                my_tip.setCharge_ar_no(data.charge_ar_no);
+                my_tip.setCharge_customer_id(data.charge_customer_id);
+                my_tip.setCharge_customer_name(data.charge_customer_name);
+                my_tip.setCharge_days(data.charge_days);
+                my_tip.setCharge_reference_no(data.charge_reference_no);
+                my_tip.setCharge_type(data.charge_type);
+                my_tip.setPrepaid_amount(data.prepaid_amount);
+                my_tip.setPrepaid_customer_id(data.prepaid_customer_id);
+                my_tip.setPrepaid_customer_name(data.prepaid_customer_name);
+                my_tip.setTip(data.tip);
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
 }
