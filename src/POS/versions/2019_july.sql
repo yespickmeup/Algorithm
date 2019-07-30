@@ -31,3 +31,8 @@ id int auto_increment primary key
 ,location varchar(255)
 ,location_id varchar(255)
 );
+
+update inventory i set i.category_id=(select ic.id from inventory_category ic where i.category = ic.name  limit 1); 
+
+update inventory_barcodes i set i.category_id=(select ic.id from inventory_category ic where i.category = ic.name limit 1); 
+
