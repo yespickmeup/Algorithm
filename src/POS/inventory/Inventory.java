@@ -403,6 +403,280 @@ public class Inventory {
         }
     }
 
+    public static List<String> add_inventory_list(List<to_inventory> to_inventory1) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            List<String> query = new ArrayList();
+
+            System.out.println("Preparing to add item......");
+            PreparedStatement stmt = conn.prepareStatement("");
+            List<S1_branch_locations.to_branch_locations> datas = Branch_locations.ret_all_locations();
+            for (to_inventory to_inventory : to_inventory1) {
+                String s0 = "insert into inventory("
+                        + "barcode"
+                        + ",description"
+                        + ",generic_name"
+                        + ",category"
+                        + ",category_id"
+                        + ",classification"
+                        + ",classification_id"
+                        + ",sub_classification"
+                        + ",sub_classification_id"
+                        + ",product_qty"
+                        + ",unit"
+                        + ",conversion"
+                        + ",selling_price"
+                        + ",date_added"
+                        + ",user_name"
+                        + ",item_type"
+                        + ",status"
+                        + ",supplier"
+                        + ",fixed_price"
+                        + ",cost"
+                        + ",supplier_id"
+                        + ",multi_level_pricing"
+                        + ",vatable"
+                        + ",reorder_level"
+                        + ",markup"
+                        + ",barcodes"
+                        + ",brand"
+                        + ",brand_id"
+                        + ",model"
+                        + ",model_id"
+                        + ",selling_type"
+                        + ",location"
+                        + ",location_id"
+                        + ",updated_at"
+                        + ",allow_negative_inventory"
+                        + ",auto_order"
+                        + ")values("
+                        + ":barcode"
+                        + ",:description"
+                        + ",:generic_name"
+                        + ",:category"
+                        + ",:category_id"
+                        + ",:classification"
+                        + ",:classification_id"
+                        + ",:sub_classification"
+                        + ",:sub_classification_id"
+                        + ",:product_qty"
+                        + ",:unit"
+                        + ",:conversion"
+                        + ",:selling_price"
+                        + ",:date_added"
+                        + ",:user_name"
+                        + ",:item_type"
+                        + ",:status"
+                        + ",:supplier"
+                        + ",:fixed_price"
+                        + ",:cost"
+                        + ",:supplier_id"
+                        + ",:multi_level_pricing"
+                        + ",:vatable"
+                        + ",:reorder_level"
+                        + ",:markup"
+                        + ",:barcodes"
+                        + ",:brand"
+                        + ",:brand_id"
+                        + ",:model"
+                        + ",:model_id"
+                        + ",:selling_type"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:updated_at"
+                        + ",:allow_negative_inventory"
+                        + ",:auto_order"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0).
+                        setString("barcode", to_inventory.barcode).
+                        setString("description", to_inventory.description).
+                        setString("generic_name", to_inventory.generic_name).
+                        setString("category", to_inventory.category).
+                        setString("category_id", to_inventory.category_id).
+                        setString("classification", to_inventory.classification).
+                        setString("classification_id", to_inventory.classification_id).
+                        setString("sub_classification", to_inventory.sub_classification).
+                        setString("sub_classification_id", to_inventory.sub_classification_id).
+                        setNumber("product_qty", to_inventory.product_qty).
+                        setString("unit", to_inventory.unit).
+                        setNumber("conversion", to_inventory.conversion).
+                        setNumber("selling_price", to_inventory.selling_price).
+                        setString("date_added", to_inventory.date_added).
+                        setString("user_name", to_inventory.user_name).
+                        setString("item_type", to_inventory.item_type).
+                        setNumber("status", 1).
+                        setString("supplier", to_inventory.supplier).
+                        setNumber("fixed_price", to_inventory.fixed_price).
+                        setNumber("cost", to_inventory.cost).
+                        setString("supplier_id", to_inventory.supplier_id).
+                        setNumber("multi_level_pricing", to_inventory.multi_level_pricing).
+                        setNumber("vatable", to_inventory.vatable).
+                        setNumber("reorder_level", to_inventory.reorder_level).
+                        setNumber("markup", to_inventory.markup).
+                        setString("barcodes", to_inventory.barcodes).
+                        setString("brand", to_inventory.brand).
+                        setString("brand_id", to_inventory.brand_id).
+                        setString("model", to_inventory.model).
+                        setString("model_id", to_inventory.model_id).
+                        setNumber("selling_type", to_inventory.selling_type).
+                        setString("location", to_inventory.location).
+                        setString("location_id", to_inventory.location_id).
+                        setString("updated_at", to_inventory.date_added).
+                        setNumber("allow_negative_inventory", to_inventory.allow_negative_inventory).
+                        setNumber("auto_order", to_inventory.auto_order).
+                        ok();
+
+                stmt.addBatch(s0);
+                Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, to_inventory.barcodes, to_inventory.description,
+                                                                                                                              to_inventory.generic_name, to_inventory.category, to_inventory.category_id, to_inventory.classification, to_inventory.classification_id,
+                                                                                                                              to_inventory.sub_classification, to_inventory.sub_classification_id, to_inventory.product_qty, to_inventory.unit, to_inventory.conversion,
+                                                                                                                              to_inventory.selling_price, to_inventory.date_added, to_inventory.user_name, to_inventory.item_type, to_inventory.status, to_inventory.supplier,
+                                                                                                                              to_inventory.fixed_price, to_inventory.cost, to_inventory.supplier_id, to_inventory.multi_level_pricing, to_inventory.vatable,
+                                                                                                                              to_inventory.reorder_level, to_inventory.markup, to_inventory.barcode, to_inventory.brand, to_inventory.brand_id, to_inventory.model,
+                                                                                                                              to_inventory.model_id, to_inventory.selling_type, to_inventory.branch, to_inventory.branch_code, to_inventory.location,
+                                                                                                                              to_inventory.location_id, "", "", 0, 0, "", "", "", 0, 0, to_inventory.allow_negative_inventory, to_inventory.auto_order);
+                for (S1_branch_locations.to_branch_locations to : datas) {
+                    String s2 = "insert into inventory_barcodes("
+                            + "barcode"
+                            + ",description"
+                            + ",generic_name"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_classification"
+                            + ",sub_classification_id"
+                            + ",product_qty"
+                            + ",unit"
+                            + ",conversion"
+                            + ",selling_price"
+                            + ",date_added"
+                            + ",user_name"
+                            + ",item_type"
+                            + ",status"
+                            + ",supplier"
+                            + ",fixed_price"
+                            + ",cost"
+                            + ",supplier_id"
+                            + ",multi_level_pricing"
+                            + ",vatable"
+                            + ",reorder_level"
+                            + ",markup"
+                            + ",main_barcode"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",selling_type"
+                            + ",branch"
+                            + ",branch_code"
+                            + ",location"
+                            + ",location_id"
+                            + ",serial_no"
+                            + ",updated_at"
+                            + ",allow_negative_inventory"
+                            + ",auto_order"
+                            + ")values("
+                            + ":barcode"
+                            + ",:description"
+                            + ",:generic_name"
+                            + ",:category"
+                            + ",:category_id"
+                            + ",:classification"
+                            + ",:classification_id"
+                            + ",:sub_classification"
+                            + ",:sub_classification_id"
+                            + ",:product_qty"
+                            + ",:unit"
+                            + ",:conversion"
+                            + ",:selling_price"
+                            + ",:date_added"
+                            + ",:user_name"
+                            + ",:item_type"
+                            + ",:status"
+                            + ",:supplier"
+                            + ",:fixed_price"
+                            + ",:cost"
+                            + ",:supplier_id"
+                            + ",:multi_level_pricing"
+                            + ",:vatable"
+                            + ",:reorder_level"
+                            + ",:markup"
+                            + ",:main_barcode"
+                            + ",:brand"
+                            + ",:brand_id"
+                            + ",:model"
+                            + ",:model_id"
+                            + ",:selling_type"
+                            + ",:branch"
+                            + ",:branch_code"
+                            + ",:location"
+                            + ",:location_id"
+                            + ",:serial_no"
+                            + ",:updated_at"
+                            + ",:allow_negative_inventory"
+                            + ",:auto_order"
+                            + ")";
+
+                    s2 = SqlStringUtil.parse(s2).
+                            setString("barcode", to_inventory_barcodes.barcode).
+                            setString("description", to_inventory_barcodes.description).
+                            setString("generic_name", to_inventory_barcodes.generic_name).
+                            setString("category", to_inventory_barcodes.category).
+                            setString("category_id", to_inventory_barcodes.category_id).
+                            setString("classification", to_inventory_barcodes.classification).
+                            setString("classification_id", to_inventory_barcodes.classification_id).
+                            setString("sub_classification", to_inventory_barcodes.sub_classification).
+                            setString("sub_classification_id", to_inventory_barcodes.sub_classification_id).
+                            setNumber("product_qty", to_inventory_barcodes.product_qty).
+                            setString("unit", to_inventory_barcodes.unit).
+                            setNumber("conversion", to_inventory_barcodes.conversion).
+                            setNumber("selling_price", to_inventory_barcodes.selling_price).
+                            setString("date_added", to_inventory_barcodes.date_added).
+                            setString("user_name", to_inventory_barcodes.user_name).
+                            setString("item_type", to_inventory_barcodes.item_type).
+                            setNumber("status", 1).
+                            setString("supplier", to_inventory_barcodes.supplier).
+                            setNumber("fixed_price", to_inventory_barcodes.fixed_price).
+                            setNumber("cost", to_inventory_barcodes.cost).
+                            setString("supplier_id", to_inventory_barcodes.supplier_id).
+                            setNumber("multi_level_pricing", to_inventory_barcodes.multi_level_pricing).
+                            setNumber("vatable", to_inventory_barcodes.vatable).
+                            setNumber("reorder_level", to_inventory_barcodes.reorder_level).
+                            setNumber("markup", to_inventory_barcodes.markup).
+                            setString("main_barcode", to_inventory_barcodes.main_barcode).
+                            setString("brand", to_inventory_barcodes.brand).
+                            setString("brand_id", to_inventory_barcodes.brand_id).
+                            setString("model", to_inventory_barcodes.model).
+                            setString("model_id", to_inventory_barcodes.model_id).
+                            setNumber("selling_type", to_inventory_barcodes.selling_type).
+                            setString("branch", to.branch).
+                            setString("branch_code", to.branch_id).
+                            setString("location", to.location).
+                            setString("location_id", "" + to.id).
+                            setString("serial_no", to_inventory_barcodes.serial_no).
+                            setString("updated_at", to_inventory_barcodes.date_added).
+                            setNumber("allow_negative_inventory", to_inventory_barcodes.allow_negative_inventory).
+                            setNumber("auto_order", to_inventory_barcodes.auto_order).
+                            ok();
+                    stmt.addBatch(s2);
+
+                    Lg.s(Inventory.class, "Successfully Added" + " Barcode:" + to_inventory_barcodes.main_barcode + " = " + to.location);
+                }
+            }
+
+            stmt.executeBatch();
+            conn.commit();
+            return query;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static List<String> add_inventory_cloud(to_inventory to_inventory) {
         try {
             Connection conn = MyConnection.cloud_connect();

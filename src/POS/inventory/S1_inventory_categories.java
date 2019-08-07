@@ -61,12 +61,65 @@ public class S1_inventory_categories {
         }
     }
 
+    public static void add_inventory_category2(List<to_inventory_category> to_inventory_category1) {
+        try {
+            Connection conn = MyConnection.connect();
+            for (to_inventory_category to_inventory_category : to_inventory_category1) {
+                String s0 = "insert into inventory_category("
+                        + "name"
+                        + ",code"
+                        + ")values("
+                        + ":name"
+                        + ",:code"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0).
+                        setString("name", to_inventory_category.name).
+                        setString("code", to_inventory_category.code).
+                        ok();
+
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+                Lg.s(S1_inventory_categories.class, "Successfully Added");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void edit_inventory_category(to_inventory_category to_inventory_category) {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update inventory_category set "
                     + "name= :name"
                     + ",code= :code"
+                    + " where "
+                    + " id ='" + to_inventory_category.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0).
+                    setString("name", to_inventory_category.name).
+                    setString("code", to_inventory_category.code).
+                    ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(S1_inventory_categories.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void edit_inventory_category2(to_inventory_category to_inventory_category) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update inventory set "
+                    + " category_id= :category_id"
                     + " where "
                     + " id ='" + to_inventory_category.id + "' "
                     + " ";

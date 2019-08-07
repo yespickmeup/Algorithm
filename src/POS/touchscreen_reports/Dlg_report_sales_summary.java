@@ -1713,7 +1713,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 //                            date_from_sales = DateType.datetime.format(d1.getDate());
                             date_from_sales = DateType.convert_slash_datetime_sf2(dates[0]);
                             date_to_sales = DateType.convert_slash_datetime_sf2(dates[1]);
-
+                            time = tf_cashier5.getText();
                         } catch (ParseException ex) {
                             Logger.getLogger(Dlg_report_sales_summary.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1781,9 +1781,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<CashDrawer.to_cash_drawer> my_drawer = CashDrawer.ret_data(where_drawer);
 //                System.out.println("my_drawer: "+my_drawer.size());
 //                System.out.println("my_drawer: "+my_drawer.size());
-                System.out.println("where_sales2: " + where_sales2);
-                System.out.println("where_drawer: " + where_drawer);
-                System.out.println("where_disbursements: " + where_disbursements);
+//                System.out.println("where_sales2: " + where_sales2);
+//                System.out.println("where_drawer: " + where_drawer);
+//                System.out.println("where_disbursements: " + where_disbursements);
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales3);
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
@@ -2052,7 +2052,13 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 double return_exchange = 0;
                 double na_short = 0;
                 double over = 0;
-
+                double re_check = 0;
+                double re_credit_card = 0;
+                double re_prepaid = 0;
+                double re_charge = 0;
+                double re_gc = 0;
+                double re_online = 0;
+                double salary_deduction = 0;
                 for (Item_replacements.to_item_replacements rep : replacements) {
                     double amount = rep.replacement_amount + rep.discount;
                     double due = rep.amount_due;
@@ -2064,7 +2070,16 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         over += amount - rep.amount_due;
                     }
                     return_exchange += total;
+                    re_check += rep.check_amount;
+                    re_credit_card += rep.credit_card_amount;
+                    re_prepaid += rep.prepaid_amount;
+                    re_charge += rep.charge_amount;
+                    re_gc += rep.gc_amount;
+                    re_online += rep.online_amount;
                 }
+
+                return_exchange = return_exchange - (re_check + re_credit_card + re_prepaid + re_charge + re_gc + re_online);
+
                 receipts_total = receipts_total + return_exchange;
                 receipts_total = receipts_total + refund;
 

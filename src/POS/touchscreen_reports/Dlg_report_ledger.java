@@ -1121,6 +1121,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     re_gc += rep.gc_amount;
                     re_online += rep.online_amount;
                 }
+                return_exchange = return_exchange - (re_check + re_credit_card + re_prepaid + re_charge + re_gc + re_online);
                 for (Srpt_sales_ledger.field field : fields) {
                     cash_on_hand += field.cash;
                     collections_cheque_on_hand += field.cheque_amount;

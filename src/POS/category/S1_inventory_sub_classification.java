@@ -167,6 +167,50 @@ public class S1_inventory_sub_classification {
         }
     }
 
+    public static void add_inventory_sub_classification2(List<to_inventory_sub_classification> to_inventory_sub_classification1) {
+        try {
+            Connection conn = MyConnection.connect();
+            for (to_inventory_sub_classification to_inventory_sub_classification : to_inventory_sub_classification1) {
+                String s0 = "insert into inventory_sub_classification("
+                        + "category_code"
+                        + ",category"
+                        + ",classification_code"
+                        + ",classification"
+                        + ",code"
+                        + ",name"
+                        + ",markup"
+                        + ")values("
+                        + ":category_code"
+                        + ",:category"
+                        + ",:classification_code"
+                        + ",:classification"
+                        + ",:code"
+                        + ",:name"
+                        + ",:markup"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0)
+                        .setString("category_code", to_inventory_sub_classification.category_code)
+                        .setString("category", to_inventory_sub_classification.category)
+                        .setString("classification_code", to_inventory_sub_classification.classification_code)
+                        .setString("classification", to_inventory_sub_classification.classification)
+                        .setString("code", to_inventory_sub_classification.code)
+                        .setString("name", to_inventory_sub_classification.name)
+                        .setNumber("markup", to_inventory_sub_classification.markup)
+                        .ok();
+
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+                Lg.s(S1_inventory_sub_classification.class, "Successfully Added");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void delete_inventory_sub_classification(String id) {
         try {
             Connection conn = MyConnection.connect();

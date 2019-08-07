@@ -142,18 +142,18 @@
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="tf_search_customer" max="32767" attributes="0"/>
+                                  <Component id="tf_search_customer" min="-2" pref="224" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="jButton11" min="-2" pref="26" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="tf_customer_id" max="32767" attributes="0"/>
+                                  <Component id="tf_customer_id" min="-2" pref="98" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_credit_limit" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbl_credit_limit" min="-2" pref="99" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="tf_customer_name" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tf_customer_name" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -410,40 +410,42 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="tf_soa_type" max="32767" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                              <Component id="tf_soa_type_id" min="-2" pref="32" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="tf_term" max="32767" attributes="0"/>
-                                                  <Component id="tf_amount" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jLabel27" max="32767" attributes="0"/>
-                                                  <Component id="jLabel18" min="-2" pref="51" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="tf_paid" max="32767" attributes="0"/>
-                                                  <Component id="jLabel19" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="tf_reference_no" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="tf_remarks" max="32767" attributes="0"/>
+                                          <Component id="tf_reference_no" alignment="1" min="-2" pref="243" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <Component id="tf_ar_no" max="32767" attributes="0"/>
-                                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                              <Component id="tf_ar_no" min="-2" pref="101" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="jLabel25" min="-2" pref="29" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="tf_trust_receipt" min="-2" pref="58" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jDateChooser1" min="-2" pref="128" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="tf_remarks" min="-2" pref="243" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="tf_amount" pref="91" max="32767" attributes="0"/>
+                                                          <Component id="tf_term" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="jLabel27" max="32767" attributes="0"/>
+                                                          <Component id="jLabel18" min="-2" pref="51" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="jLabel19" pref="58" max="32767" attributes="0"/>
+                                                          <Component id="tf_paid" max="32767" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="tf_soa_type" min="-2" pref="211" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                      <Component id="tf_soa_type_id" min="-2" pref="32" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="jDateChooser1" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -747,7 +749,7 @@
                                       <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="jCheckBox4" min="-2" pref="117" max="-2" attributes="0"/>
-                                      <EmptySpace pref="44" max="32767" attributes="0"/>
+                                      <EmptySpace pref="32" max="32767" attributes="0"/>
                                       <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jCheckBox5" min="-2" max="-2" attributes="0"/>

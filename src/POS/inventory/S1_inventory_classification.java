@@ -69,7 +69,45 @@ public class S1_inventory_classification {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_inventory_classification.class, "Successfully Added");
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void add_inventory_classification2(List<to_inventory_classification> to_inventory_classification1) {
+        try {
+            Connection conn = MyConnection.connect();
+            for (to_inventory_classification to_inventory_classification : to_inventory_classification1) {
+                String s0 = "insert into inventory_classification("
+                        + "category_code"
+                        + ",category"
+                        + ",code"
+                        + ",name"
+                        + ",markup_percent"
+                        + ")values("
+                        + ":category_code"
+                        + ",:category"
+                        + ",:code"
+                        + ",:name"
+                        + ",:markup_percent"
+                        + ")";
+
+                s0 = SqlStringUtil.parse(s0).
+                        setString("category_code", to_inventory_classification.category_code).
+                        setString("category", to_inventory_classification.category).
+                        setString("code", to_inventory_classification.code).
+                        setString("name", to_inventory_classification.name).
+                        setNumber("markup_percent", to_inventory_classification.markup_percent).
+                        ok();
+
+                PreparedStatement stmt = conn.prepareStatement(s0);
+                stmt.execute();
+                Lg.s(S1_inventory_classification.class, "Successfully Added");
+            }
+
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             MyConnection.close();

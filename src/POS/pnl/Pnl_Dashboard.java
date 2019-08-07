@@ -2013,15 +2013,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         } else {
             jButton1.setVisible(false);
         }
-
+        jPanel9.setVisible(false);
         key();
-//        Main.MyDB.setNames("db_algorithm");
         String business_name = System.getProperty("business_name", "Synapse Software Technologies");
         jLabel7.setText(business_name);
         String version = System.getProperty("version", "");
         String license_code = System.getProperty("license_code", "");
         license_code = DeEncrypter.decrypt(license_code);
-//        jLabel1.setText("" + version + "( Full Version )");
         if (license_code.equalsIgnoreCase("trial version")) {
             jLabel1.setText("Trial Version");
             String where1 = "order by id asc limit 1";
@@ -3438,4 +3436,5 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 //        nd.setLocationRelativeTo(this);
 //        nd.setVisible(true);
     }
+    
 }
