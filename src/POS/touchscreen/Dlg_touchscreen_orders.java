@@ -629,10 +629,10 @@ public class Dlg_touchscreen_orders extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_host", "192.168.1.51");
         init_key();
-        
+
         init_table_bg();
         init_tbl_order();
     }
