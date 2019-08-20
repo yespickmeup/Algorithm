@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="633272d5-b0b3-456b-9fef-25aacda9ae4d">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="129"/>
+	<property name="ireport.y" value="118"/>
 	<parameter name="business_name" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="contact_no" class="java.lang.String"/>
@@ -439,7 +439,7 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="254" splitType="Stretch">
+		<band height="269" splitType="Stretch">
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement uuid="1df34e09-c805-481b-929c-166cb7fba987" mode="Transparent" x="701" y="55" width="100" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
@@ -481,7 +481,7 @@
 				<text><![CDATA[Cash:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="81" width="84" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="157" width="84" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -489,15 +489,15 @@
 				<text><![CDATA[Charge:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="95" width="84" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="82" width="84" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[Cheque:]]></text>
+				<text><![CDATA[Check:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="141" width="84" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="128" width="84" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -505,7 +505,7 @@
 				<text><![CDATA[Gift Certificate:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="155" width="84" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="142" width="84" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -521,7 +521,7 @@
 				<text><![CDATA[Net Due:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="e91ebb00-865c-4a74-90e8-afd7fbb528c5" mode="Transparent" x="81" y="81" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="e91ebb00-865c-4a74-90e8-afd7fbb528c5" mode="Transparent" x="81" y="157" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -532,7 +532,7 @@
 				<textFieldExpression><![CDATA[$V{charge_amount_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="84b3788a-6f3c-48c3-9f86-64bead9b4ec2" mode="Transparent" x="81" y="95" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="84b3788a-6f3c-48c3-9f86-64bead9b4ec2" mode="Transparent" x="81" y="82" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -543,7 +543,7 @@
 				<textFieldExpression><![CDATA[$V{cheque_amount_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="adcd76a8-f87a-4e7d-9b43-9fcf90111648" mode="Transparent" x="81" y="125" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="adcd76a8-f87a-4e7d-9b43-9fcf90111648" mode="Transparent" x="81" y="112" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -554,7 +554,7 @@
 				<textFieldExpression><![CDATA[$V{credit_card_amount_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="e1bc1d3f-831d-4547-bea7-30c32ec401d3" mode="Transparent" x="81" y="140" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="e1bc1d3f-831d-4547-bea7-30c32ec401d3" mode="Transparent" x="81" y="127" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -565,7 +565,7 @@
 				<textFieldExpression><![CDATA[$V{gc_amount_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="be1399d9-a5c6-4f59-b0be-ee75b498f7ed" mode="Transparent" x="81" y="154" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="be1399d9-a5c6-4f59-b0be-ee75b498f7ed" mode="Transparent" x="81" y="141" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -576,7 +576,7 @@
 				<textFieldExpression><![CDATA[$V{prepaid_amount_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="124" width="84" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="111" width="84" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -715,15 +715,15 @@
 				<textFieldExpression><![CDATA[$P{cash_on_hand}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="110" width="82" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="97" width="82" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
+					<font size="10" isBold="true"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[Total Cheques:]]></text>
+				<text><![CDATA[Total Checks:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="95" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="82" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -734,7 +734,7 @@
 				<textFieldExpression><![CDATA[$P{collections_cheque}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="81" y="110" width="439" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="81" y="97" width="439" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -812,7 +812,7 @@
 				<textFieldExpression><![CDATA[$P{collections_prepaid}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="334" y="95" width="104" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="334" y="82" width="104" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -845,7 +845,7 @@
 				<textFieldExpression><![CDATA[$P{refund}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="438" y="95" width="82" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="438" y="82" width="82" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -856,7 +856,7 @@
 				<textFieldExpression><![CDATA[$P{refund_cheque}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="170" width="84" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="190" width="84" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -864,7 +864,7 @@
 				<text><![CDATA[Online:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="be1399d9-a5c6-4f59-b0be-ee75b498f7ed" mode="Transparent" x="81" y="169" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="be1399d9-a5c6-4f59-b0be-ee75b498f7ed" mode="Transparent" x="81" y="189" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -891,7 +891,7 @@
 				<text><![CDATA[Other Income (Interest/Penalty)]]></text>
 			</staticText>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="154" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="141" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -902,7 +902,7 @@
 				<textFieldExpression><![CDATA[$P{ar_collection_prepaid}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="169" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="189" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -913,7 +913,7 @@
 				<textFieldExpression><![CDATA[$P{ar_collection_online}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="140" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="127" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -924,7 +924,7 @@
 				<textFieldExpression><![CDATA[$P{ar_collection_gc}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="125" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="160" y="112" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -935,7 +935,7 @@
 				<textFieldExpression><![CDATA[$P{ar_collection_credit_card}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="185" width="82" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="205" width="82" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -943,7 +943,7 @@
 				<text><![CDATA[Retention:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="200" width="82" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="220" width="82" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -951,7 +951,7 @@
 				<text><![CDATA[Business Tax:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="82" y="185" width="152" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="82" y="205" width="152" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -962,7 +962,7 @@
 				<textFieldExpression><![CDATA[$P{retention}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="82" y="200" width="152" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="82" y="220" width="152" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -973,7 +973,7 @@
 				<textFieldExpression><![CDATA[$P{business_tax}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="80" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="156" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -984,7 +984,7 @@
 				<textFieldExpression><![CDATA[$P{re_charge}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="95" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="82" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -995,7 +995,7 @@
 				<textFieldExpression><![CDATA[$P{re_check}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="125" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="112" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -1006,7 +1006,7 @@
 				<textFieldExpression><![CDATA[$P{re_credit_card}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="139" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="126" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -1017,7 +1017,7 @@
 				<textFieldExpression><![CDATA[$P{re_gc}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="154" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="141" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -1028,7 +1028,7 @@
 				<textFieldExpression><![CDATA[$P{re_prepaid}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="169" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="234" y="189" width="102" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -1039,7 +1039,7 @@
 				<textFieldExpression><![CDATA[$P{re_online}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="81" y="215" width="154" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="80" y="235" width="154" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -1050,13 +1050,32 @@
 				<textFieldExpression><![CDATA[$P{salary_deduction}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="1" y="215" width="82" height="15"/>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="1" y="235" width="82" height="15"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<text><![CDATA[Salary Deduction:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="0" y="172" width="82" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total Charges:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="a2e06172-056a-40db-8eee-51f8fa0f2178" mode="Transparent" x="82" y="171" width="439" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{charge_amount_1} + $P{re_charge}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
