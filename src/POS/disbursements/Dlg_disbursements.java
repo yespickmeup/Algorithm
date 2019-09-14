@@ -320,7 +320,6 @@ public class Dlg_disbursements extends javax.swing.JDialog {
         });
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Yes/No");
         jCheckBox1.setFocusable(false);
 

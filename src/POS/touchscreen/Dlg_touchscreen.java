@@ -3500,13 +3500,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 String where = " where ";
 
                 if (jCheckBox6.isSelected()) {
-                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' "
-                            + " or barcode='" + search + "' and location_id='" + my_location_id + "' ";
+                    where = where + " main_barcode='" + search + "' and location_id='" + my_location_id + "' and show_to_sales=1 "
+                            + " or barcode='" + search + "' and location_id='" + my_location_id + "' and show_to_sales=1 ";
                 }
 
                 if (jCheckBox8.isSelected()) {
-                    where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
+                    where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' and show_to_sales=1 ";
                 }
+
                 where = where + " order by description asc";
 
                 loadData_items(Inventory_barcodes.ret_where(where));
@@ -4078,7 +4079,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     double wtax = 0;
                     int allow_negative_inventory = to.allow_negative_inventory;
                     int auto_order = to.auto_order;
-                    Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order);
+                    Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, to.show_to_sales);
                     //</editor-fold>
 //                    to2.setProduct_qty(to.product_qty);
 
@@ -4244,7 +4245,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             double wtax = FitIn.toDouble(tf_wtax.getText());
             int allow_negative_inventory1 = to.allow_negative_inventory;
             int auto_order = to.auto_order;
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax, allow_negative_inventory1, auto_order);
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax, allow_negative_inventory1, auto_order, to.show_to_sales);
             List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
             int order_exists = 0;
             int order_row = 0;
@@ -4490,12 +4491,13 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
                     int allow_negative_inventory1 = 0;
                     int auto_order = 1;
+                    int show_to_sales = 1;
                     Inventory_barcodes.to_inventory_barcodes t = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name,
                                                                                                               category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty,
                                                                                                               unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id,
                                                                                                               multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
                                                                                                               branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name,
-                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory1, auto_order);
+                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory1, auto_order, show_to_sales);
                     datas.add(t);
                 }
 
@@ -4736,13 +4738,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         t.start();
     }
 
-    private void item_discount() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Discount-Item - (View)" + "' limit 1";
-        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
-        if (datas.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+    private void authenticate_discount_item() {
+
         int row2 = tbl_uom.getSelectedRow();
         if (row2 < 0) {
             return;
@@ -4774,6 +4771,81 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         nd.setLocation(loc.x + 130, loc.y);
 
         nd.setVisible(true);
+    }
+
+    private void item_discount() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Discount-Item - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            Window p = (Window) this;
+            Authenticate nd = Authenticate.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Authenticate.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Authenticate.OutputData data) {
+                    closeDialog.ok();
+                    String username = data.username;
+                    String password = data.password;
+                    final S1_users.to_users to = S1_users.ret_data_autho(username, password);
+                    if (to == null) {
+                        warning("Input correct credentials!");
+                    } else {
+                        String wheree = " where user_id='" + to.id + "' and name like '" + "Discount-Item - (Add)" + "' limit 1";
+                        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+                        if (datas.isEmpty()) {
+                            Alert.set(0, "Privilege not added!");
+                            return;
+                        }
+
+                        authenticate_discount_item();
+                    }
+
+                }
+            });
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            nd.setSize(xSize, ySize);
+            nd.setVisible(true);
+
+        } else {
+            int row2 = tbl_uom.getSelectedRow();
+            if (row2 < 0) {
+                return;
+            }
+            to_uom uom = (to_uom) tbl_uom_ALM.get(row2);
+            double price = uom.price;
+            double qty = FitIn.toDouble(lbl_qty.getText());
+            price = price * qty;
+            Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
+            Window p = (Window) this;
+            Dlg_touchscreen_item_discount nd = Dlg_touchscreen_item_discount.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(lbl, price);
+            nd.setCallback(new Dlg_touchscreen_item_discount.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_item_discount.OutputData data) {
+                    closeDialog.ok();
+                    Payments.discount discount = data.discount;
+                    Label.Item_discount lbl = (Label.Item_discount) lbl_item_discount;
+                    lbl.setDiscount_amount(discount.amount);
+                    lbl.setDiscount_customer_id(discount.customer_id);
+                    lbl.setDiscount_customer_name(discount.customer_name);
+                    lbl.setDiscount_name(discount.discount_name);
+                    lbl.setDiscount_rate(discount.rate);
+                    lbl_item_discount.setText(FitIn.fmt_wc_0(discount.amount));
+                }
+            });
+            Point loc = jButton27.getLocationOnScreen();
+            nd.setLocation(loc.x + 130, loc.y);
+
+            nd.setVisible(true);
+        }
+
     }
 
     private void item_qty() {
@@ -4834,40 +4906,33 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //            List<Inventory_barcodes.to_inventory_barcodes> ib = Inventory_barcodes.ret_where(" where main_barcode='" + to.main_barcode + "' and location_id='" + to.location_id + "' ");
 //            if (!ib.isEmpty()) {
 //                Inventory_barcodes.to_inventory_barcodes to2 = (Inventory_barcodes.to_inventory_barcodes) ib.get(0);
-                Label.Item_discount lbl1 = (Label.Item_discount) jLabel47;
-                Window p = (Window) this;
-                Dlg_touchscreen_serial_number nd = Dlg_touchscreen_serial_number.create(p, true);
-                nd.setTitle("");
-                nd.do_pass( to.serial_no);
-                nd.setCallback(new Dlg_touchscreen_serial_number.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_touchscreen_serial_number.OutputData data) {
-                        closeDialog.ok();
-                        Label.Item_discount lbl = (Label.Item_discount) jLabel47;
-                        lbl.setDiscount_customer_id(data.serial_no);
-                    }
-                });
+            Label.Item_discount lbl1 = (Label.Item_discount) jLabel47;
+            Window p = (Window) this;
+            Dlg_touchscreen_serial_number nd = Dlg_touchscreen_serial_number.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to.serial_no);
+            nd.setCallback(new Dlg_touchscreen_serial_number.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_serial_number.OutputData data) {
+                    closeDialog.ok();
+                    Label.Item_discount lbl = (Label.Item_discount) jLabel47;
+                    lbl.setDiscount_customer_id(data.serial_no);
+                }
+            });
 
-                Center.setCenter(nd);
-                nd.setVisible(true);
+            Center.setCenter(nd);
+            nd.setVisible(true);
 //            }
 
         }
 
     }
 
-    private void due_discount() {
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Discount-Amount - (View)" + "' limit 1";
-        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
-        if (datas.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
-            return;
-        }
+    private void authenticate_discount() {
         Label.Item_discount lbl = (Label.Item_discount) lbl_due_discount;
-
         double total = FitIn.toDouble(lbl_total.getText());
-        Window p = (Window) this;
-        Dlg_touchscreen_item_discount nd = Dlg_touchscreen_item_discount.create(p, true);
+        Window p2 = (Window) this;
+        Dlg_touchscreen_item_discount nd = Dlg_touchscreen_item_discount.create(p2, true);
         nd.setTitle("");
         nd.do_pass(lbl, total);
         nd.setCallback(new Dlg_touchscreen_item_discount.Callback() {
@@ -4889,6 +4954,73 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         Point loc = jButton37.getLocationOnScreen();
         nd.setLocation(loc.x + 55, loc.y - 300);
         nd.setVisible(true);
+    }
+
+    private void due_discount() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Discount-Amount - (View)" + "' limit 1";
+        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+        if (datas.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            Window p = (Window) this;
+            Authenticate nd = Authenticate.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Authenticate.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Authenticate.OutputData data) {
+                    closeDialog.ok();
+                    String username = data.username;
+                    String password = data.password;
+                    final S1_users.to_users to = S1_users.ret_data_autho(username, password);
+                    if (to == null) {
+                        warning("Input correct credentials!");
+                    } else {
+                        String wheree = " where user_id='" + to.id + "' and name like '" + "Discount-Amount - (Add)" + "' limit 1";
+                        List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
+                        if (datas.isEmpty()) {
+                            Alert.set(0, "Privilege not added!");
+                            return;
+                        }
+                        authenticate_discount();
+                    }
+
+                }
+            });
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            int xSize = ((int) tk.getScreenSize().
+                    getWidth());
+            int ySize = ((int) tk.getScreenSize().
+                    getHeight());
+            nd.setSize(xSize, ySize);
+            nd.setVisible(true);
+        } else {
+            Label.Item_discount lbl = (Label.Item_discount) lbl_due_discount;
+            double total = FitIn.toDouble(lbl_total.getText());
+            Window p = (Window) this;
+            Dlg_touchscreen_item_discount nd = Dlg_touchscreen_item_discount.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(lbl, total);
+            nd.setCallback(new Dlg_touchscreen_item_discount.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_item_discount.OutputData data) {
+                    closeDialog.ok();
+                    Payments.discount discount = data.discount;
+                    Label.Item_discount lbl = (Label.Item_discount) lbl_due_discount;
+                    lbl.setDiscount_amount(discount.amount);
+                    lbl.setDiscount_customer_id(discount.customer_id);
+                    lbl.setDiscount_customer_name(discount.customer_name);
+                    lbl.setDiscount_name(discount.discount_name);
+                    lbl.setDiscount_rate(discount.rate);
+                    lbl_due_discount.setText(FitIn.fmt_wc_0(discount.amount));
+                    compute_total();
+
+                }
+            });
+            Point loc = jButton37.getLocationOnScreen();
+            nd.setLocation(loc.x + 55, loc.y - 300);
+            nd.setVisible(true);
+        }
+
     }
 
     private void menu() {

@@ -5,11 +5,12 @@
  */
 package POS.migrate;
 
-import POS.encoding_inventory.Encoding_inventory;
 import POS.inventory.Inventory;
-import POS.users.MyUser;
+import POS.receipts.Receipts;
+import POS.receipts.S1_receipt_items;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.Users;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,8 +50,9 @@ public class Excel_to_db_inventory_items {
     public final String unit;
     public final String wholesale;
     public final String reorder_level;
+    public final String show_to_sales;
 
-    public Excel_to_db_inventory_items(String qty, String item_code, String barcode, String description, String cost, String selling_price, String category, String classification, String sub_classification, String brand, String model, String unit, String wholesale, String reorder_level) {
+    public Excel_to_db_inventory_items(String qty, String item_code, String barcode, String description, String cost, String selling_price, String category, String classification, String sub_classification, String brand, String model, String unit, String wholesale, String reorder_level, String show_to_sales) {
         this.qty = qty;
         this.item_code = item_code;
         this.barcode = barcode;
@@ -65,6 +67,7 @@ public class Excel_to_db_inventory_items {
         this.unit = unit;
         this.wholesale = wholesale;
         this.reorder_level = reorder_level;
+        this.show_to_sales = show_to_sales;
     }
 
     public static void main2(String[] args) {
@@ -177,7 +180,8 @@ public class Excel_to_db_inventory_items {
 
             int allow_negative_inventory = 0;
             int auto_order = 1;
-            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
+            int show_to_sales = FitIn.toInt(encoded.show_to_sales);
+            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order, show_to_sales);
             tos.add(to);
 
 //            //encoding
@@ -206,7 +210,7 @@ public class Excel_to_db_inventory_items {
     public static void main(String[] args) {
         //wholesale
         System.setProperty("pool_db", "db_smis_dumaguete_laarns");
-        String file = "C:\\Users\\Ronescape\\Documents\\Excel Files\\Laarns\\encode.xls";
+        String file = "C:\\Users\\Ronescape\\Documents\\Excel Files\\Laarns\\excel.xls";
 
         if (file == null || file.isEmpty()) {
             return;
@@ -244,7 +248,36 @@ public class Excel_to_db_inventory_items {
 
         List<Excel_to_db_inventory_items> datas = Excel_to_db_inventory_items.showExcelData2(sheetData, file);
         List<Inventory.to_inventory> tos = new ArrayList();
+        List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
+
         int with_qty = 0;
+
+        int id2 = 0;
+        String aw = Receipts.increment_id("1");
+        String receipt_no = aw;
+        String where = " where receipt_no='" + receipt_no + "' ";
+
+        String user_name = "admin";
+        String session_no = "";
+        String date_added = DateType.now();
+        String supplier = "";
+        String supllier_id = "";
+
+        String remarks = "";
+        String date_delivered = DateType.sf.format(new Date());
+        String date_received = DateType.sf.format(new Date());
+
+        String receipt_type = "";
+        String reference_no = "000001";
+        String branch = "Siquijor";
+        String branch_id = "1";
+        double gross_total = 0;
+        double net_total = 0;
+        String batch_no = "0";
+        double discount = 0;
+        String receipt_type_id = "0";
+        final Receipts.to_receipts to1 = new Receipts.to_receipts(id2, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, 0);
+
         for (Excel_to_db_inventory_items encoded : datas) {
             if (FitIn.toDouble(encoded.qty) > 0) {
                 with_qty++;
@@ -271,15 +304,14 @@ public class Excel_to_db_inventory_items {
                 sub_classification = "";
             }
             String sub_classification_id = "";
-            double product_qty = 0;
+            double product_qty = FitIn.toDouble(encoded.qty);
+
             double conversion = 1;
             double selling_price = FitIn.toDouble(encoded.selling_price);
-            String date_added = DateType.now();
-            String user_name = "";
+
             String item_type = "Regular";
             int status = 1;
 
-            String supplier = "";
             int fixed_price = 0;
             double cost = FitIn.toDouble(encoded.cost);
             String supplier_id = "";
@@ -301,9 +333,9 @@ public class Excel_to_db_inventory_items {
                 model = "";
             }
             String model_id = "";
-            int selling_type = 1;
+            int selling_type = 0;
 
-            String branch = "Dumaguete City";
+         
             String branch_code = "1";
             String location = "Selling Area";
             String location_id = "1";
@@ -316,33 +348,45 @@ public class Excel_to_db_inventory_items {
             if (sp == 0 && ws > 0) {
                 unit = "[Rent:" + encoded.wholesale + "/1.0^1]";
             }
-//            System.out.println("Unit: "+unit);
+
             int is_uploaded = 0;
 
             int allow_negative_inventory = 0;
             int auto_order = 1;
-            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order);
+            int show_to_sales = FitIn.toInt(encoded.show_to_sales);
+
+            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order, show_to_sales);
             tos.add(to);
 
-//            //encoding
-//            String item_code = "" + FitIn.toInt(encoded.item_code);
-//
-//            String branch_id = "1";
-//
-//            double qty = FitIn.toDouble(encoded.qty);
-//
-//            String screen_name = "administrator";
-//            String sheet_no = "1";
-//            String counted_by = "admin";
-//            String checked_by = "admin";
-//
-//            String user_id = MyUser.getUser_id();
-//            String user_screen_name = MyUser.getUser_screen_name();
-//            String remarks = "";
-//            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
-//            Encoding_inventory.add_encoding_inventory(en);
+            //<editor-fold defaultstate="collapsed" desc=" callback ">
+            if (product_qty > 0) {
+
+                double qty = product_qty;
+
+                String sub_class = encoded.sub_classification;
+                String sub_class_id = "";
+                String sup = "";
+                String sup_id = "";
+
+                String serial_no = "";
+                String main_barcode = encoded.item_code;
+
+                double previous_cost = 0;
+
+                S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id
+                        , remarks, barcode, description, qty, cost, category, category_id
+                        , classification, classification_id, sub_class, sub_class_id, 1, unit, date_delivered, date_received, barcodes
+                        , serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, 1, previous_cost, receipt_type_id, branch
+                        , branch_id, location, location_id);
+                acc.add(to4);
+            }
+            //</editor-fold>
+
         }
+
         List<String> query = Inventory.add_inventory_list(tos);
+        Receipts.add_receipts(to1, acc);
+        
         System.out.println("Count: " + tos.size());
         Alert.set(1, "");
     }
@@ -359,7 +403,7 @@ public class Excel_to_db_inventory_items {
             for (int i = 0; i < sheetData.size(); i++) {
                 List list = (List) sheetData.get(i);
                 int size = list.size();
-                String[] record = new String[12];
+                String[] record = new String[13];
                 int record_size = 0;
                 for (int j = 0; j < list.size(); j++) {
 
@@ -367,7 +411,7 @@ public class Excel_to_db_inventory_items {
                     HSSFCell cell = (HSSFCell) list.get(j);
                     HSSFDataFormatter hdf = new HSSFDataFormatter();
                     String data = "";
-                    if (j >= 12) {
+                    if (j >= 13) {
                         break;
                     }
                     if (j == 1 || j == 4 || j == 5) {
@@ -404,9 +448,10 @@ public class Excel_to_db_inventory_items {
                 String unit = record[11];
                 String wholesale = "";
                 String reorder_level = "";
+                String show_to_sales = record[12];
 //                System.out.println("model:" + model);
 //                System.out.println("unit:" + unit);
-                Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit, wholesale, reorder_level);
+                Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit, wholesale, reorder_level, show_to_sales);
                 if (record[0] != null) {
                     datas.add(encoded);
                     System.out.println("");
@@ -432,7 +477,7 @@ public class Excel_to_db_inventory_items {
             for (int i = 0; i < sheetData.size(); i++) {
                 List list = (List) sheetData.get(i);
                 int size = list.size();
-                String[] record = new String[14];
+                String[] record = new String[15];
                 int record_size = 0;
                 for (int j = 0; j < list.size(); j++) {
 
@@ -440,7 +485,7 @@ public class Excel_to_db_inventory_items {
                     HSSFCell cell = (HSSFCell) list.get(j);
                     HSSFDataFormatter hdf = new HSSFDataFormatter();
                     String data = "";
-                    if (j >= 14) {
+                    if (j >= 15) {
                         break;
                     }
                     if (j == 1 || j == 4 || j == 5) {
@@ -477,9 +522,10 @@ public class Excel_to_db_inventory_items {
                 String unit = record[11];
                 String wholesale = record[12];
                 String reorder_level = record[13];
+                String show_to_sales = record[14];
 //                System.out.println("wholesale:" + wholesale);
 //                System.out.println("Reorder:" + reorder_level);
-                Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit, wholesale, reorder_level);
+                Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit, wholesale, reorder_level, show_to_sales);
                 if (record[0] != null) {
                     datas.add(encoded);
                     System.out.println("");

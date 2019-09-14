@@ -7,7 +7,11 @@ package POS.main;
 
 import POS.pnl.Pnl_Dashboard;
 import POS.settings.Settings;
+import POS.users.User_logs;
+import POS.util.Alert;
 import POS.util.Center;
+import POS.util.DateType;
+import POS.util.DateUtils1;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -18,8 +22,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -72,7 +80,7 @@ public class MyMain {
             System.setProperty("delete_other_adjustments_finalized", prop.getProperty("delete_other_adjustments_finalized", "false"));
             System.setProperty("delete_prepaid_payment_finalized", prop.getProperty("delete_prepaid_payment_finalized", "false"));
             System.setProperty("sales_date", prop.getProperty("sales_date", "os"));
-            System.setProperty("multi_cashin",prop.getProperty("multi_cashin","false"));
+            System.setProperty("multi_cashin", prop.getProperty("multi_cashin", "false"));
             System.out.println("OS: " + os);
 //            System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
@@ -84,6 +92,33 @@ public class MyMain {
             List<Settings.to_settings> datas = Settings.ret_data(where);
             Settings.to_settings setting = datas.get(0);
 
+            String where2 = "order by id desc limit 1";
+            List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
+            User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
+            if (!last.isEmpty()) {
+                Date d = new Date();
+                Date date_to = new Date();
+                try {
+
+                    date_to = DateType.datetime.parse(l.created_at);
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                int count2 = DateUtils1.count_days(d, date_to);
+                if (count2 < 0) {
+                    Alert.set(0, "Check system Date!");
+                    try {
+                        Thread.sleep(5);
+
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MyMain.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.exit(1);
+                }
+
+            }
             if (setting.receipt_printing_enabled == 1) {
                 System.setProperty("receipt_printing_enabled", "true");
                 System.setProperty("print_to_receipts", "true");

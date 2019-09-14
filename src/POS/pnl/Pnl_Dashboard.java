@@ -2029,11 +2029,13 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             if (!first.isEmpty()) {
                 User_logs.to_user_logs f = (User_logs.to_user_logs) first.get(0);
                 User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
+
                 Date date_from = new Date();
                 Date date_to = new Date();
                 try {
                     date_from = DateType.datetime.parse(f.created_at);
                     date_to = DateType.datetime.parse(l.created_at);
+
                 } catch (ParseException ex) {
                     Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -2670,6 +2672,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         if (!os.equalsIgnoreCase("Linux")) {
             String license_code = System.getProperty("license_code", "");
             String hdd_license = DeEncrypter.encrypt(getSerialNumber());
+            String environment = System.getProperty("environment", "production");
+            if (environment.equalsIgnoreCase("development")) {
+                System.out.println("hdd_license: " + hdd_license);
+            }
+
             if (!license_code.equals(hdd_license) && is_trial_version == 0) {
                 Alert.set(0, "Invalid license key, please register!");
                 return;
@@ -3436,5 +3443,5 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 //        nd.setLocationRelativeTo(this);
 //        nd.setVisible(true);
     }
-    
+
 }

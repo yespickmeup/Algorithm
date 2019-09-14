@@ -452,6 +452,7 @@ public class Dlg_touchscreen_item_discount extends javax.swing.JDialog {
                 tf_discount_name.setText(lbl.getDiscount_name());
                 tf_discount_rate.setText(FitIn.fmt_wc_0(lbl.getDiscount_rate()));
                 tf_cc_topay.setText(FitIn.fmt_wc_0(selling_price - lbl.getDiscount_amount()));
+                tf_discount_name.grabFocus();
             }
         });
 

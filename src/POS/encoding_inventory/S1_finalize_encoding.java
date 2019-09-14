@@ -363,6 +363,7 @@ public class S1_finalize_encoding {
                     + ",serial_no"
                     + ",allow_negative_inventory"
                     + ",auto_order"
+                    + ",show_to_sales"
                     + " from inventory_barcodes where "
                     + " barcode ='" + barcodes + "' "
                     + " and main_barcode ='" + item_codes + "' "
@@ -411,7 +412,8 @@ public class S1_finalize_encoding {
                 String serial_no = rs.getString(37);
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
-                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
+                int show_to_sales=rs.getInt(40);
+                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order,show_to_sales);
             }
             return to1;
         } catch (SQLException e) {

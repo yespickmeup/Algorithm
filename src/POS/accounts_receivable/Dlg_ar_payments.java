@@ -227,6 +227,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -277,6 +278,15 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/b_search.png"))); // NOI18N
+        jMenuItem5.setText("View Orders");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem5);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/img/transactions.png"))); // NOI18N
         jMenuItem4.setText("Finalize");
@@ -792,6 +802,10 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         //        init_branch_locations();
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        view_orders();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -827,6 +841,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -843,7 +858,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     private javax.swing.JTable tbl_accounts_receivable_payments;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-
+//
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
@@ -1737,4 +1752,23 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         });
     }
 
+    private void view_orders() {
+        int row = tbl_accounts_receivable.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
+        Window p = (Window) this;
+        Dlg_ar_payments_items nd = Dlg_ar_payments_items.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(to);
+        nd.setCallback(new Dlg_ar_payments_items.Callback() {
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_ar_payments_items.OutputData data) {
+                closeDialog.ok();
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
 }

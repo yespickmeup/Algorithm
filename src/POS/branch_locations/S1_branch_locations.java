@@ -151,6 +151,7 @@ public class S1_branch_locations {
                     + ",location_id"
                     + ",allow_negative_inventory"
                     + ",auto_order"
+                    + ",show_to_sales"
                     + " from inventory"
                     + " ";
 
@@ -195,7 +196,8 @@ public class S1_branch_locations {
                 String location_id = location_ids;
                 int allow_negative_inventory = rs2.getInt(37);
                 int auto_order = rs2.getInt(38);
-                Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, "", "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order);
+                int show_to_sales=rs2.getInt(39);
+                Inventory_barcodes.to_inventory_barcodes to_inventory_barcodes = new Inventory_barcodes.to_inventory_barcodes(0, "", description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, "", "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order,show_to_sales);
 
                 String s5 = "insert into inventory_barcodes("
                         + "barcode"
@@ -761,7 +763,7 @@ public class S1_branch_locations {
                     String serial_no = "";
                     int allow_negative_inventory = to.allow_negative_inventory;
                     int auto_order = to.auto_order;
-                    Inventory_barcodes.to_inventory_barcodes ti = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order);
+                    Inventory_barcodes.to_inventory_barcodes ti = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order,to.show_to_sales);
                     Inventory_barcodes.add_inventory_barcodes(ti);
                 }
 
