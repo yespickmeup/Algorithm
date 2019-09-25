@@ -1942,13 +1942,14 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //         System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
 //        System.setProperty("pool_db", "db_algorithm");
+//        MyUser.setUser_id("1");
+//        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("inventory_item_delete", "true");
 //        System.setProperty("cloud_inventory_insert", "true");
 //        System.setProperty("cloud_inventory_update", "true");
 //        System.setProperty("cloud_inventory_delete", "true");
 
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_bodega");
-//        System.setProperty("pool_host", "localhost");
 //        System.setProperty("main_branch", "true");
 //        System.setProperty("active_branches", "10");
 //        System.setProperty("cloud_host", "128.199.80.53");
@@ -2162,16 +2163,16 @@ public class Dlg_inventory extends javax.swing.JDialog {
         String where = " where ";
 
         if (jCheckBox6.isSelected()) {
-            where = where + " barcode like '" + search + "' "
-                    + " or barcodes like '" + search + "' "
-                    + " or description like '%" + search + "%' ";
+            where = where + " barcode like '" + search + "' and location_id like '' "
+                    + " or barcodes like '" + search + "' and location_id like '' "
+                    + " or description like '%" + search + "%' and location_id like '' ";
         }
         if (jCheckBox7.isSelected()) {
-            where = where + " barcode like '" + search + "' "
-                    + " or barcodes like '" + search + "' ";
+            where = where + " barcode like '" + search + "' and location_id like '' "
+                    + " or barcodes like '" + search + "' and location_id like '' ";
         }
         if (jCheckBox8.isSelected()) {
-            where = where + "  description like '%" + search + "%' ";
+            where = where + "  description like '%" + search + "%' and location_id like '' ";
         }
         where = where + " order by description asc ";
 
@@ -2291,12 +2292,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     int selected_row = -1;
 
     private void add_inventory() {
-//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Add)" + "' limit 1";
-//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-//        if (privileges.isEmpty()) {
-//            Alert.set(0, "Privilege not added!");
-//            return;
-//        }
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Field.Combo cat = (Field.Combo) tf_category;
         Field.Combo classi = (Field.Combo) tf_classification;
         Field.Combo sub_class = (Field.Combo) tf_sub_classification;
@@ -2519,12 +2520,12 @@ public class Dlg_inventory extends javax.swing.JDialog {
     String my_old_barcode = "";
 
     private void edit_inventory() {
-//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Edit)" + "' limit 1";
-//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-//        if (privileges.isEmpty()) {
-//            Alert.set(0, "Privilege not added!");
-//            return;
-//        }
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance - (Edit)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_inventory_update_confirm nd = Dlg_inventory_update_confirm.create(p, true);
         nd.setTitle("");

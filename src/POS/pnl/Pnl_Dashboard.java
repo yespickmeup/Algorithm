@@ -36,6 +36,7 @@ import POS.encoding_inventory.Dlg_finalize_encoding;
 import POS.encoding_inventory.Dlg_rpt_encoding_inventory;
 import POS.expenses.Dlg_expenses;
 import POS.inventory.Dlg_inventory;
+import POS.inventory.Dlg_inventory_brand;
 import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Dlg_price_inquire;
 import POS.inventory.Dlg_print_barcode;
@@ -89,7 +90,6 @@ import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.DeEncrypter;
-import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_get_hdd_serial;
 import POS.util.Focus_Fire;
 import POS.util.MyFrame;
@@ -106,7 +106,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -116,7 +115,6 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import mijzcx.synapse.desk.utils.Application;
-import static mijzcx.synapse.desk.utils.CashDrawer.setCallback;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
@@ -2666,6 +2664,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(rpt.getSurface(), jPanel1, "Item Maintenance");
     }
 
+    private void m_items_location() {
+        Dlg_inventory_brand rpt = new Dlg_inventory_brand();
+        MyFrame.set(rpt.getSurface(), jPanel1, "Item Maintenance per Location");
+    }
+
     private void check_credentials() {
         String os = System.getProperty("os.name");
         System.out.println(os);
@@ -3303,6 +3306,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Item Maintenance")) {
                     m_items();
                 }
+                if (data.stmt.equals("Item Maintenance per Location")) {
+                    m_items_location();
+                }
+
                 if (data.stmt.equals("Item Barcodes") || data.stmt.equals("Update Barcode")) {
                     m_barcode();
                 }
@@ -3353,6 +3360,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Terminals")) {
                     m_terminals();
                 }
+
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" Reports ">
                 if (data.stmt.equals("Disbursements Report")) {

@@ -99,15 +99,14 @@ public class MyMain {
                 Date d = new Date();
                 Date date_to = new Date();
                 try {
-
                     date_to = DateType.datetime.parse(l.created_at);
 
                 } catch (ParseException ex) {
                     Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
                 int count2 = DateUtils1.count_days(d, date_to);
-                if (count2 < 0) {
+                
+                if (count2 > 0) {
                     Alert.set(0, "Check system Date!");
                     try {
                         Thread.sleep(5);

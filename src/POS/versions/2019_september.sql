@@ -70,4 +70,53 @@ id int auto_increment primary key
 );
 
 
+
+
 insert into user_default_previlege_others(account,account_name,name)values('Reports','Cashier Report','Logout - Show Report');
+
+
+
+drop table if exists inventory_category_user_privileges;
+create table inventory_category_user_privileges(
+id int auto_increment primary key
+,created_by varchar(255)
+,created_at varchar(255)
+,category varchar(255)
+,category_id varchar(255)
+,category_all int
+,classification varchar(255)
+,classification_id varchar(255)
+,classification_all int
+,sub_classification varchar(255)
+,sub_classification_id varchar(255)
+,sub_classification_all int
+,brand varchar(255)
+,brand_id varchar(255)
+,brand_all int
+,model varchar(255)
+,model_id varchar(255)
+,model_all int
+,user_id varchar(255)
+,user_name varchar(255)
+);
+
+
+insert into user_default_previleges(account,name)values('Maintenance','Item Maintenance per Location');
+update inventory set location_id ='';
+
+
+drop table if exists inventory_location_privileges;
+create table inventory_location_privileges(
+id int auto_increment primary key
+,user_id varchar(255)
+,user_name varchar(255)
+,created_at datetime
+,created_by varchar(255)
+,updated_at datetime
+,updated_by varchar(255)
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+,status int
+);

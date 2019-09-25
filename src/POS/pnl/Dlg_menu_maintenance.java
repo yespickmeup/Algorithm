@@ -215,6 +215,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         jLabel28 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -607,6 +608,20 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
             }
         });
 
+        jLabel31.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/shopping73.png"))); // NOI18N
+        jLabel31.setOpaque(true);
+        jLabel31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel31MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel31MouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -652,12 +667,15 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                         .addGap(2, 2, 2)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -690,11 +708,11 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289))
@@ -920,6 +938,14 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
         label("Stock Transfer Privileges", jLabel23);
     }//GEN-LAST:event_jLabel23MouseEntered
 
+    private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
+        ok("Item Maintenance per Location", jLabel31);
+    }//GEN-LAST:event_jLabel31MouseClicked
+
+    private void jLabel31MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseEntered
+        label("Item Maintenance per Location", jLabel31);
+    }//GEN-LAST:event_jLabel31MouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -946,6 +972,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -974,7 +1001,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }
 
     private void hover() {
-        JLabel[] lbl = {jLabel23, jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel28, jLabel29};
+        JLabel[] lbl = {jLabel23, jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel28, jLabel29, jLabel31};
         for (final JLabel l : lbl) {
             l.addMouseListener(new MouseAdapter() {
                 @Override
@@ -998,7 +1025,7 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
     }
 
     private void hide2() {
-        JLabel[] lbl = {jLabel23, jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel27, jLabel26, jLabel28, jLabel29};
+        JLabel[] lbl = {jLabel23, jLabel30, jLabel7, jLabel8, jLabel9, jLabel10, jLabel14, jLabel13, jLabel12, jLabel11, jLabel18, jLabel17, jLabel16, jLabel15, jLabel22, jLabel21, jLabel20, jLabel19, jLabel25, jLabel24, jLabel27, jLabel26, jLabel28, jLabel29, jLabel31};
         for (JLabel l : lbl) {
             l.setEnabled(false);
         }
@@ -1148,6 +1175,10 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 //                jLabel30.setBackground(new java.awt.Color(96, 188, 219));
 //            }
 
+            if (to.previledge.equalsIgnoreCase("Item Maintenance per Location - (View)")) {
+                jLabel31.setEnabled(true);
+                jLabel31.setBackground(new java.awt.Color(96, 188, 219));
+            }
         }
     }
 
@@ -1162,14 +1193,14 @@ public class Dlg_menu_maintenance extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
