@@ -1356,6 +1356,37 @@ public class MySales {
         }
     }
 
+    public static String increment_id_reference_no(String location_id, String charge_type) {
+        String id = "000000";
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from sales where location_id ='" + location_id + "' and charge_type like '%" + charge_type + "%' ";
+            Statement stmt = conn.createStatement();
+            System.out.println(s0);
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select charge_reference_no from sales where id='" + id + "' ";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void void_sale(String sales_no, int status, List<MySales_Items.items> to_receipt_items1, MySales.sales sale) {
         try {
             Connection conn = MyConnection.connect();

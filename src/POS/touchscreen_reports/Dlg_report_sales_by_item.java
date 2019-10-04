@@ -1177,9 +1177,7 @@ public class Dlg_report_sales_by_item extends javax.swing.JDialog {
         Field.Combo user = (Field.Combo) tf_cashier;
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
-
         init_tbl_sale_items(tbl_sale_items);
-
         time_list = POS.util.DateType.time();
     }
 
