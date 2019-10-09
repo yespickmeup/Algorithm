@@ -120,3 +120,5 @@ id int auto_increment primary key
 ,location_id varchar(255)
 ,status int
 );
+
+

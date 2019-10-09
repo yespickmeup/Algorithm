@@ -536,6 +536,9 @@ public class Srpt_sales_ledger {
                     + ",online_amount"
                     + ",online_holder"
                     + ",online_date"
+                    + ",ref_or_no"
+                    + ",ref_si_no"
+                    + ",ref_cr_no"
                     + " from sales  "
                     + " " + where;
 
@@ -595,6 +598,9 @@ public class Srpt_sales_ledger {
                 double online_amount = rs.getDouble(50);
                 String online_holder = rs.getString(51);
                 String online_date = rs.getString(52);
+                String ref_or_no=rs.getString(53);
+                String ref_si_no=rs.getString(54);
+                String ref_cr_no=rs.getString(55);
 
                 double sales_discount = discount_amount;
                 double cash = (amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount));
@@ -699,7 +705,7 @@ public class Srpt_sales_ledger {
 
                 //</editor-fold>
                 MySales.sales sale = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_no, check_bank, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, gc_amount, cash, remarks, user_id, check_no, session_no, items,
-                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date);
+                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date,ref_or_no,ref_si_no,ref_cr_no);
 
                 fields.add(sale);
             }

@@ -221,6 +221,9 @@ public class MySales {
         public final double online_amount;
         public final String online_holder;
         public final String online_date;
+        public final String ref_or_no;
+        public final String ref_si_no;
+        public final String ref_cr_no;
 
         public sales(int id, String sales_no, String date_added, String user_screen_name, String user_id, String session_no, String remarks, double gross_amount,
                 double amount_due, int status, int sales_type, double line_discount, String customer_id, String customer_name, String discount_name, double discount_rate,
@@ -230,7 +233,7 @@ public class MySales {
                 String credit_card_approval_code, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount,
                 String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, double addtl_amount, double wtax, String branch, String branch_id,
                 String location, String location_id, List<MySales_Items.items> items, int charge_days,
-                String online_bank, String online_reference_no, double online_amount, String online_holder, String online_date) {
+                String online_bank, String online_reference_no, double online_amount, String online_holder, String online_date, String ref_or_no, String ref_si_no, String ref_cr_no) {
             this.id = id;
             this.sales_no = sales_no;
             this.date_added = date_added;
@@ -287,6 +290,9 @@ public class MySales {
             this.online_amount = online_amount;
             this.online_holder = online_holder;
             this.online_date = online_date;
+            this.ref_or_no = ref_or_no;
+            this.ref_si_no = ref_si_no;
+            this.ref_cr_no = ref_cr_no;
         }
 
         public String getSales_no() {
@@ -408,6 +414,9 @@ public class MySales {
                     + ",online_amount"
                     + ",online_holder"
                     + ",online_date"
+                    + ",ref_or_no"
+                    + ",ref_si_no"
+                    + ",ref_cr_no"
                     + ")values("
                     + ":sales_no"
                     + ",:date_added"
@@ -462,6 +471,9 @@ public class MySales {
                     + ",:online_amount"
                     + ",:online_holder"
                     + ",:online_date"
+                    + ",:ref_or_no"
+                    + ",:ref_si_no"
+                    + ",:ref_cr_no"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -518,6 +530,9 @@ public class MySales {
                     .setNumber("online_amount", to_sales.online_amount)
                     .setString("online_holder", to_sales.online_holder)
                     .setString("online_date", to_sales.online_date)
+                    .setString("ref_or_no", to_sales.ref_or_no)
+                    .setString("ref_si_no", to_sales.ref_si_no)
+                    .setString("ref_cr_no", to_sales.ref_cr_no)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
@@ -1115,6 +1130,9 @@ public class MySales {
                     + ",online_amount"
                     + ",online_holder"
                     + ",online_date"
+                    + ",ref_or_no"
+                    + ",ref_si_no"
+                    + ",ref_cr_no"
                     + " from sales"
                     + " " + where;
 
@@ -1176,8 +1194,11 @@ public class MySales {
                 double online_amount = rs.getDouble(52);
                 String online_holder = rs.getString(53);
                 String online_date = rs.getString(54);
+                String ref_or_no = rs.getString(55);
+                String ref_si_no = rs.getString(56);
+                String ref_cr_no = rs.getString(57);
                 MySales.sales to = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,
-                                                     charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date);
+                                                     charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
                 datas.add(to);
             }
             return datas;
@@ -1248,6 +1269,9 @@ public class MySales {
                     + ",online_amount"
                     + ",online_holder"
                     + ",online_date"
+                    + ",ref_or_no"
+                    + ",ref_si_no"
+                    + ",ref_cr_no"
                     + " from sales"
                     + " " + where;
 
@@ -1309,8 +1333,11 @@ public class MySales {
                 double online_amount = rs.getDouble(52);
                 String online_holder = rs.getString(53);
                 String online_date = rs.getString(54);
+                String ref_or_no = rs.getString(55);
+                String ref_si_no = rs.getString(56);
+                String ref_cr_no = rs.getString(57);
                 MySales.sales to = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,
-                                                     charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date);
+                                                     charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
                 datas.add(to);
             }
             conn.close();
@@ -1363,11 +1390,104 @@ public class MySales {
             Connection conn = MyConnection.connect();
             String s0 = "select max(id) from sales where location_id ='" + location_id + "' and charge_type like '%" + charge_type + "%' ";
             Statement stmt = conn.createStatement();
-            System.out.println(s0);
+//            System.out.println(s0);
             ResultSet rs = stmt.executeQuery(s0);
             if (rs.next()) {
                 id = rs.getString(1);
                 String s2 = "select charge_reference_no from sales where id='" + id + "' ";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static String increment_id_ref_or_no(String location_id) {
+        String id = "000000";
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from sales where location_id ='" + location_id + "' and ref_or_no !='' ";
+            Statement stmt = conn.createStatement();
+//            System.out.println(s0);
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select ref_or_no from sales where id='" + id + "' ";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static String increment_id_ref_si_no(String location_id) {
+        String id = "000000";
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from sales where location_id ='" + location_id + "' and ref_si_no !='' ";
+            Statement stmt = conn.createStatement();
+//            System.out.println(s0);
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select ref_si_no from sales where id='" + id + "' ";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                if (rs2.next()) {
+                    id = rs2.getString(1);
+                }
+            }
+            if (id == null) {
+                id = "000000";
+            }
+            id = ReceiptIncrementor.increment(id);
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static String increment_id_ref_cr_no(String location_id) {
+        String id = "000000";
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select max(id) from sales where location_id ='" + location_id + "' and ref_cr_no !='' ";
+            Statement stmt = conn.createStatement();
+//            System.out.println(s0);
+            ResultSet rs = stmt.executeQuery(s0);
+            if (rs.next()) {
+                id = rs.getString(1);
+                String s2 = "select ref_cr_no from sales where id='" + id + "' ";
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 if (rs2.next()) {

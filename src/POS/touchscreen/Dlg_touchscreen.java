@@ -76,7 +76,9 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import org.hibernate.id.IncrementGenerator;
 import synsoftech.fields.Field;
 import synsoftech.fields.Label;
 import synsoftech.panels.Authenticate;
@@ -324,6 +326,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        tf_reference_no1 = new Field.Input_w_clear();
+        tf_reference_no2 = new Field.Input_w_clear();
         btn_cash1 = new javax.swing.JButton();
         lbl_p_amount_due = new javax.swing.JButton();
         lbl_separator1 = new Label.Separator2();
@@ -1120,15 +1125,49 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jLabel16.setText("Amount:");
 
         buttonGroup2.add(jCheckBox1);
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCheckBox1.setSelected(true);
-        jCheckBox1.setText("F8 - Official Receipt");
+        jCheckBox1.setText("F8-Official Receipt");
         jCheckBox1.setFocusable(false);
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jCheckBox2);
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox2.setText("F9 - Sales Invoice");
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox2.setText("F9-Sales Invoice");
         jCheckBox2.setFocusable(false);
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jCheckBox3);
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox3.setText("F10 - Chrg Receipt");
+        jCheckBox3.setFocusable(false);
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
+
+        tf_reference_no1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tf_reference_no1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_reference_no1ActionPerformed(evt);
+            }
+        });
+
+        tf_reference_no2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tf_reference_no2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_reference_no2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1139,48 +1178,57 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tf_amount_tendered, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_reference_no, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(btn_charge20, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge21, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge22, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(btn_charge17, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge19, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge18, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(btn_charge12, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge15, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(btn_charge11, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge13, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_charge14, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_charge23, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_charge26, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_charge25, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_charge24, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jCheckBox3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                            .addComponent(tf_reference_no, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(1, 1, 1)
+                            .addComponent(tf_reference_no1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(1, 1, 1)
+                            .addComponent(tf_reference_no2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                            .addComponent(btn_charge20, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge21, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge22, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                            .addComponent(btn_charge17, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge19, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge18, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                            .addComponent(btn_charge12, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge15, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                            .addComponent(btn_charge11, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge13, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_charge14, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btn_charge23, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_charge26, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_charge25, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_charge24, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                    .addComponent(jCheckBox1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jCheckBox2)))
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -1195,11 +1243,15 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_reference_no, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_reference_no, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_reference_no1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_reference_no2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -2842,6 +2894,30 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         tf_amount_tendered.grabFocus();
     }//GEN-LAST:event_tf_reference_noActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        ret_or_no();
+
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+
+        ret_si_no();
+
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+
+        ret_cr_no();
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
+
+    private void tf_reference_no1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_reference_no1ActionPerformed
+        tf_amount_tendered.grabFocus();
+    }//GEN-LAST:event_tf_reference_no1ActionPerformed
+
+    private void tf_reference_no2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_reference_no2ActionPerformed
+        tf_amount_tendered.grabFocus();
+    }//GEN-LAST:event_tf_reference_no2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2902,6 +2978,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton jButton45;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox8;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -3000,12 +3077,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JTextField tf_addtl_cash;
     private javax.swing.JTextField tf_amount_tendered;
     private javax.swing.JTextField tf_reference_no;
+    private javax.swing.JTextField tf_reference_no1;
+    private javax.swing.JTextField tf_reference_no2;
     private javax.swing.JTextField tf_search;
     private javax.swing.JTextField tf_wtax;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        jPanel2.setVisible(false);
 
         init_key();
@@ -3020,12 +3099,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         input_amount();
         init_payment_types();
         hover();
-        ret_reference_no();
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
 //                String businessname = System.getProperty("business_name", "Algorithm Computer Services");
 
+                jCheckBox1.setSelected(true);
+                ret_or_no();
+//                ret_si_no();
+//                ret_cr_no();
                 jLabel1.setText("Point of Sale");
                 lbl_screen_name.setText("Welcome, " + MyUser.getUser_screen_name());
                 tf_search.grabFocus();
@@ -3332,12 +3415,20 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_F8) {
-                    ret_reference_no();
+                    ret_or_no();
+                    tf_reference_no.grabFocus();
                     jCheckBox1.setSelected(true);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F9) {
-                    ret_reference_no();
+
+                    ret_si_no();
+                    tf_reference_no1.grabFocus();
                     jCheckBox2.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F10) {
+                    ret_cr_no();
+                    tf_reference_no2.grabFocus();
+                    jCheckBox3.setSelected(true);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     tf_amount_tendered.grabFocus();
@@ -3347,9 +3438,78 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     cardLayout.show(jPanel13, "2");
                     tf_search.grabFocus();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    ret_si_no();
+                    tf_reference_no1.grabFocus();
+                    jCheckBox2.setSelected(true);
+                }
             }
         });
 
+        tf_reference_no1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F8) {
+                    ret_or_no();
+                    tf_reference_no.grabFocus();
+                    jCheckBox1.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F9) {
+
+                    ret_si_no();
+                    tf_reference_no1.grabFocus();
+                    jCheckBox2.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F10) {
+                    ret_cr_no();
+                    tf_reference_no2.grabFocus();
+                    jCheckBox3.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    tf_amount_tendered.grabFocus();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    ret_or_no();
+                    tf_reference_no.grabFocus();
+                    jCheckBox1.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    ret_cr_no();
+                    tf_reference_no2.grabFocus();
+                    jCheckBox3.setSelected(true);
+                }
+            }
+        });
+        tf_reference_no2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_F8) {
+                    ret_cr_no();
+                    tf_reference_no.grabFocus();
+                    jCheckBox1.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F9) {
+
+                    ret_si_no();
+                    tf_reference_no1.grabFocus();
+                    jCheckBox2.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F10) {
+                    ret_si_no();
+                    tf_reference_no2.grabFocus();
+                    jCheckBox3.setSelected(true);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    tf_amount_tendered.grabFocus();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    ret_si_no();
+                    
+                    tf_reference_no1.grabFocus();
+                    jCheckBox2.setSelected(true);
+                }
+            }
+        });
         tf_amount_tendered.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -3435,15 +3595,60 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     }
 
+    private void ret_or_no() {
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                final String ref_no = MySales.increment_id_ref_or_no(my_location_id);
+                tf_reference_no.setText(ref_no);
+            }
+        });
+
+    }
+
+    private void ret_si_no() {
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                final String ref_no = MySales.increment_id_ref_si_no(my_location_id);
+                tf_reference_no1.setText(ref_no);
+            }
+        });
+
+    }
+
+    private void ret_cr_no() {
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                final String ref_no = MySales.increment_id_ref_cr_no(my_location_id);
+                tf_reference_no2.setText(ref_no);
+            }
+        });
+
+    }
+
     private void ret_reference_no() {
         String charge_type = "OFFICIAL RECEIPT";
         if (jCheckBox1.isSelected()) {
-            charge_type = "OFFICIAL RECEIPT";
-        } else {
             charge_type = "SALES INVOICE";
+        } else {
+            charge_type = "OFFICIAL RECEIPT";
         }
-        String ref_no = MySales.increment_id_reference_no(my_location_id, charge_type);
-        tf_reference_no.setText(ref_no);
+        final String ref_no = MySales.increment_id_reference_no(my_location_id, charge_type);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                tf_reference_no.setText(ref_no);
+            }
+        });
+
     }
     // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" init table items ">
@@ -5588,12 +5793,22 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         String discount_customer_name = f_discount.getDiscount_customer_name();
         String discount_customer_id = f_discount.getDiscount_customer_id();
 
+//        String transaction_type = "OFFICIAL RECEIPT";
+//        if (jCheckBox2.isSelected()) {
+//            transaction_type = "SALES INVOICE";
+//        }
+//        String reference_no = tf_reference_no.getText();
         String charge_type = f_charge.charge_type;
         String charge_type_id = f_charge.charge_type_id;
         String charge_reference_no = f_charge.reference_no;
         String charge_customer_name = f_charge.customer_name;
         String charge_customer_id = f_charge.customer_id;
         double charge_amount = f_charge.amount;
+//
+//        if (charge_amount == 0) {
+//            charge_type = transaction_type;
+//            charge_reference_no = reference_no;
+//        }
         int charge_days = f_charge.days;
         String check_bank = f_cheque.bank;
         String check_no = f_cheque.check_no;
@@ -5630,11 +5845,25 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         double online_amount = f_online.amount;
         String online_holder = f_online.check_holder;
         String online_date = f_online.check_date;
+
         if (online_date == null || online_date.isEmpty()) {
             online_date = "2000-01-01";
         }
+        String ref_or_no = tf_reference_no.getText();
+        if (!ref_or_no.isEmpty()) {
+            ref_or_no = ReceiptIncrementor.increment(ref_or_no);
+        }
+        String ref_si_no = tf_reference_no1.getText();
+        if (!ref_si_no.isEmpty()) {
+            ref_si_no = ReceiptIncrementor.increment(ref_si_no);
+        }
+        String ref_cr_no = tf_reference_no2.getText();
+        if (!ref_cr_no.isEmpty()) {
+            ref_cr_no = ReceiptIncrementor.increment(ref_cr_no);
+        }
+
         final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
-                                                      charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date);
+                                                      charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
         try {
             sales_no = MySales.add_sales(sales, items, location_id);
             sales.setSales_no(sales_no);
@@ -5709,6 +5938,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
                 compute_total();
                 data_cols2();
+                jCheckBox1.setSelected(true);
+
                 cardLayout.show(jPanel13, "2");
                 tf_search.selectAll();
                 tf_search.grabFocus();
