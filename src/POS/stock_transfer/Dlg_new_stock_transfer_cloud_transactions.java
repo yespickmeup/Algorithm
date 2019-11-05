@@ -1063,6 +1063,7 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
             Alert.set(0, "No Item Added!");
             return;
         }
+        
         Stock_transfers.add_stock_transfers(rpt, datas);
 
         Stock_transfers.finalize(rpt, datas, finalized_by_id, finalized_by);

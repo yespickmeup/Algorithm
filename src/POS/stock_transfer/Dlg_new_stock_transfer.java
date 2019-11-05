@@ -3411,7 +3411,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 String from_location = to.from_location;
                 String to_branch = to.to_branch;
                 String to_location = to.to_location;
-
+                String remarks=to.remarks;
                 String address = System.getProperty("address", "");
                 String contact_no = System.getProperty("contact_no", "");
                 String status = "Posted";
@@ -3421,7 +3421,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 if (to.status == 2) {
                     status = "Deleted";
                 }
-                Srpt_stock_transfer rpt = new Srpt_stock_transfer(transaction_no, from_branch, from_location, to_branch, to_location, business_name, address, contact_no, date, status);
+                Srpt_stock_transfer rpt = new Srpt_stock_transfer(transaction_no, from_branch, from_location, to_branch, to_location, business_name, address, contact_no, date, status,remarks);
                 rpt.fields.addAll(datas);
                 String jrxml = "rpt_stock_transfer.jrxml";
                 report_customers_aging(rpt, jrxml);

@@ -1085,24 +1085,28 @@ public class Synch_stock_transfers {
 
             String s4 = "update stock_transfers set "
                     + " is_uploaded= :is_uploaded"
+//                    + " ,status= :status"
                     + " where "
                     + " transaction_no ='" + transaction_no + "' "
                     + " ";
 
             s4 = SqlStringUtil.parse(s4)
                     .setNumber("is_uploaded", status)
+//                    .setNumber("status", 1)
                     .ok();
 
             stmt4.addBatch(s4);
 
             String s5 = "update stock_transfers_items set "
                     + " is_uploaded= :is_uploaded"
+//                    + " ,status= :status"
                     + " where "
                     + " stock_transfer_id ='" + transaction_no + "' "
                     + " ";
 
             s5 = SqlStringUtil.parse(s5)
                     .setNumber("is_uploaded", status)
+//                    .setNumber("status", 1)
                     .ok();
 
             stmt4.addBatch(s5);

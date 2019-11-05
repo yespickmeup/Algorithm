@@ -263,12 +263,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         pnl_report = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
+        pnl_cashins = new javax.swing.JPanel();
+        pnl_remittances = new javax.swing.JPanel();
+        pnl_ar_collections = new javax.swing.JPanel();
+        pnl_return_exchange = new javax.swing.JPanel();
+        pnl_prepaid_collections = new javax.swing.JPanel();
+        pnl_refund = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -623,95 +623,95 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         jTabbedPane2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_cashins.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_cashinsLayout = new javax.swing.GroupLayout(pnl_cashins);
+        pnl_cashins.setLayout(pnl_cashinsLayout);
+        pnl_cashinsLayout.setHorizontalGroup(
+            pnl_cashinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 821, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_cashinsLayout.setVerticalGroup(
+            pnl_cashinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Cashins", jPanel7);
+        jTabbedPane2.addTab("Cashins", pnl_cashins);
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_remittances.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_remittancesLayout = new javax.swing.GroupLayout(pnl_remittances);
+        pnl_remittances.setLayout(pnl_remittancesLayout);
+        pnl_remittancesLayout.setHorizontalGroup(
+            pnl_remittancesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 821, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_remittancesLayout.setVerticalGroup(
+            pnl_remittancesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Remittances", jPanel6);
+        jTabbedPane2.addTab("Remittances", pnl_remittances);
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_ar_collections.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_ar_collectionsLayout = new javax.swing.GroupLayout(pnl_ar_collections);
+        pnl_ar_collections.setLayout(pnl_ar_collectionsLayout);
+        pnl_ar_collectionsLayout.setHorizontalGroup(
+            pnl_ar_collectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 821, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_ar_collectionsLayout.setVerticalGroup(
+            pnl_ar_collectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("AR Collections", jPanel8);
+        jTabbedPane2.addTab("AR Collections", pnl_ar_collections);
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_return_exchange.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_return_exchangeLayout = new javax.swing.GroupLayout(pnl_return_exchange);
+        pnl_return_exchange.setLayout(pnl_return_exchangeLayout);
+        pnl_return_exchangeLayout.setHorizontalGroup(
+            pnl_return_exchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 821, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_return_exchangeLayout.setVerticalGroup(
+            pnl_return_exchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Return Exchange", jPanel9);
+        jTabbedPane2.addTab("Return Exchange", pnl_return_exchange);
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_prepaid_collections.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_prepaid_collectionsLayout = new javax.swing.GroupLayout(pnl_prepaid_collections);
+        pnl_prepaid_collections.setLayout(pnl_prepaid_collectionsLayout);
+        pnl_prepaid_collectionsLayout.setHorizontalGroup(
+            pnl_prepaid_collectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 821, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_prepaid_collectionsLayout.setVerticalGroup(
+            pnl_prepaid_collectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Prepaid Collections", jPanel10);
+        jTabbedPane2.addTab("Prepaid Collections", pnl_prepaid_collections);
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_refund.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_refundLayout = new javax.swing.GroupLayout(pnl_refund);
+        pnl_refund.setLayout(pnl_refundLayout);
+        pnl_refundLayout.setHorizontalGroup(
+            pnl_refundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 821, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_refundLayout.setVerticalGroup(
+            pnl_refundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Refund", jPanel11);
+        jTabbedPane2.addTab("Refund", pnl_refund);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -752,7 +752,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -873,21 +873,21 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel pnl_ar_collections;
+    private javax.swing.JPanel pnl_cashins;
+    private javax.swing.JPanel pnl_prepaid_collections;
+    private javax.swing.JPanel pnl_refund;
+    private javax.swing.JPanel pnl_remittances;
     private javax.swing.JPanel pnl_report;
+    private javax.swing.JPanel pnl_return_exchange;
     private javax.swing.JTable tbl_ledger;
     private javax.swing.JTextField tf_cashier;
     private javax.swing.JTextField tf_cashier3;
@@ -1087,6 +1087,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         + "  and status='" + "0" + "' ";
                 String where_sales = " where id<>0 ";
                 String where_sales_status = " where id<>0 and status=1 ";
+
+                String where_return_from_customer = " where id<>0 and status=1 ";
                 String where_sales3 = " where id<>0 and status=1 ";
                 if (jCheckBox10.isSelected()) {
                     status = 1;
@@ -1095,17 +1097,21 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 if (!jCheckBox1.isSelected()) {
                     List<S1_users.to_users> users = S1_users.ret_where(" where id='" + f.getId() + "' ");
                     String user_name = "";
+                    String user_id = "";
                     if (!users.isEmpty()) {
                         S1_users.to_users user = (S1_users.to_users) users.get(0);
                         user_name = user.user_name;
+                        user_id = "" + user.id;
                     }
-                    where = where + " and user_id='" + f.getId() + "' ";
+                    where = where + " and user_id='" + f.getId() + "' and status='" + status + "' ";
                     where_sales2 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
                     where_sales = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales_status = " where id<>0 "
                             + "  and user_name='" + user_name + "' and status=1 ";
+                    where_return_from_customer = " where id<>0 "
+                            + "  and session_no='" + user_id + "' and status=1 ";
                     where_sales3 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status=1 ";
                 }
@@ -1115,6 +1121,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    where_return_from_customer = where_return_from_customer + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
                 if (jCheckBox1.isSelected()) {
@@ -1126,12 +1133,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                     where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
                     where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
+                    where_return_from_customer = where_return_from_customer + " and location_id='" + lo.getId() + "' ";
                     where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
                 }
                 if (jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
                     where = where + " and branch_id='" + br.getId() + "' ";
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
                     where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+                    where_return_from_customer = where_return_from_customer + " and branch_id='" + br.getId() + "' ";
                     where_sales_status = where_sales_status + " and branch_id='" + br.getId() + "' ";
                     where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
                 }
@@ -1209,7 +1218,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
                 cash_on_hand = cash_on_hand + collections + return_exchange;
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
-                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_status);
+                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_return_from_customer);
 
                 double collections_prepaid = 0;
                 double collections_prepaid_cheque = 0;
@@ -1634,10 +1643,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         }
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc=" cashins ">
-    
-    
-    
     //</editor-fold>
 }

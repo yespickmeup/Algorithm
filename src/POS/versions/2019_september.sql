@@ -21,6 +21,8 @@ id int auto_increment primary key
 ,ar_customer_id varchar(255)
 ,ar_customer_name varchar(255)
 ,created_at datetime
+
+
 ,updated_at datetime
 ,created_by varchar(255)
 ,updated_by varchar(255)

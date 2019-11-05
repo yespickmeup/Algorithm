@@ -255,6 +255,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -285,6 +286,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox14 = new javax.swing.JCheckBox();
         jCheckBox15 = new javax.swing.JCheckBox();
+        jCheckBox16 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -586,6 +588,10 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox15.setText("Include Serial");
 
+        jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox16.setSelected(true);
+        jCheckBox16.setText("Price & Amount");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -645,9 +651,11 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox15)))
+                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCheckBox15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -704,7 +712,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
                                 .addGap(1, 1, 1)
                                 .addComponent(jCheckBox9)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox6)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox6)
+                            .addComponent(jCheckBox16))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -1275,6 +1285,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1287,6 +1298,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox14;
     private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -1423,6 +1435,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox3.setVisible(false);
         jCheckBox4.setVisible(false);
         jCheckBox5.setVisible(false);
+         jCheckBox16.setVisible(false);
 
     }
 
@@ -1431,9 +1444,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
         for (S1_user_previleges.to_user_previleges to : datas) {
-           
+
             if (to.previledge.equalsIgnoreCase("Stock Take Report")) {
-               
+
                 view_only = 1;
 
             }
@@ -1441,11 +1454,16 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
         if (view_only == 1) {
             jButton4.setVisible(true);
+            String pool_db = System.getProperty("pool_db", "db_smis");
+            if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                jCheckBox16.setVisible(true);
+            }
+
         } else {
             jButton4.setVisible(false);
         }
         init_tbl_inventory_barcodes();
-        
+
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
         SwingUtilities.invokeLater(new Runnable() {
@@ -1460,7 +1478,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         view_only = 0;
         jButton4.setVisible(false);
         init_tbl_inventory_barcodes();
-        
+
         tbl_inventory.updateUI();
         jScrollPane1.updateUI();
         SwingUtilities.invokeLater(new Runnable() {
@@ -2808,7 +2826,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
                 Srpt_stock_take rpt = new Srpt_stock_take(category, classification1, sub_classification1, brand1, model1, business_name, date, branch1, location1);
                 rpt.fields.addAll(datas);
-
+                String pool_db = System.getProperty("pool_db", "db_smis");
                 String jrxml = "rpt_stock_take.jrxml";
                 if (!jCheckBox7.isSelected()) {
                     jrxml = "rpt_stock_take_long.jrxml";
@@ -2818,10 +2836,19 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     if (!jCheckBox7.isSelected()) {
                         jrxml = "rpt_stock_take_cost_long.jrxml";
                     }
-                }
-                String pool_db = System.getProperty("pool_db", "db_smis");
-                if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
-                    jrxml = "rpt_stock_take_cost_amount.jrxml";
+
+                    if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                        if (jCheckBox16.isSelected()) {
+                            jrxml = "rpt_stock_take_date_price.jrxml";
+                        } else {
+                            jrxml = "rpt_stock_take_cost_amount.jrxml";
+                        }
+
+                    }
+                } else {
+                    if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+                        jrxml = "rpt_stock_take_date_price.jrxml";
+                    }
                 }
 
 //                System.out.println("jrxml: "+jrxml);

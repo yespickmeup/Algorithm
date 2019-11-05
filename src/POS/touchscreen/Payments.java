@@ -144,7 +144,7 @@ public class Payments {
     }
 
     public static void clearCharge() {
-        charge ch = new charge("", "", "", "", "", 0, 0);
+        charge ch = new charge("", "", "", "", "", 0, 0,"");
         Payments.charge = ch;
     }
 
@@ -267,8 +267,8 @@ public class Payments {
         public final String customer_id;
         public final double amount;
         public final int days;
-
-        public charge(String charge_type, String charge_type_id, String reference_no, String customer_name, String customer_id, double amount, int days) {
+        public final String date_applied;
+        public charge(String charge_type, String charge_type_id, String reference_no, String customer_name, String customer_id, double amount, int days,String date_applied) {
             this.charge_type = charge_type;
             this.charge_type_id = charge_type_id;
             this.reference_no = reference_no;
@@ -276,6 +276,7 @@ public class Payments {
             this.customer_id = customer_id;
             this.amount = amount;
             this.days = days;
+            this.date_applied=date_applied;
         }
     }
 

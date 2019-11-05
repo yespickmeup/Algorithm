@@ -36,7 +36,8 @@ public class Srpt_stock_transfer {
     public final String contact_no;
     public final String date;
     public final String status;
-    public Srpt_stock_transfer(String transaction_no, String from_branch, String from_location, String to_branch, String to_location, String business_name, String address, String contact_no, String date,String status) {
+    public final String remarks;
+    public Srpt_stock_transfer(String transaction_no, String from_branch, String from_location, String to_branch, String to_location, String business_name, String address, String contact_no, String date,String status,String remarks) {
         this.fields = new ArrayList();
         this.transaction_no = transaction_no;
         this.from_branch = from_branch;
@@ -48,6 +49,7 @@ public class Srpt_stock_transfer {
         this.contact_no = contact_no;
         this.date = date;
         this.status=status;
+        this.remarks=remarks;
     }
 
     public static class field {
@@ -165,8 +167,8 @@ public class Srpt_stock_transfer {
         String from_location = "SEL-ALGO Selling Area";
         String to_branch = "DGT-Algorithm Computer Services";
         String to_location = "ZKA-ALGO Selling Area";
-
-        Srpt_stock_transfer rpt = new Srpt_stock_transfer(transaction_no, from_branch, from_location, to_branch, to_location, business_name, address, contact_no, date,"");
+        String remarks="";
+        Srpt_stock_transfer rpt = new Srpt_stock_transfer(transaction_no, from_branch, from_location, to_branch, to_location, business_name, address, contact_no, date,"",remarks);
         rpt.fields.addAll(datas);
         String jrxml = "rpt_stock_transfer.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

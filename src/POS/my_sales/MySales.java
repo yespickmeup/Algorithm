@@ -190,6 +190,7 @@ public class MySales {
         public final String charge_customer_name;
         public final String charge_customer_id;
         public final double charge_amount;
+        public final String charge_date_applied;
         public final String check_bank;
         public final String check_no;
         public final double check_amount;
@@ -228,7 +229,7 @@ public class MySales {
         public sales(int id, String sales_no, String date_added, String user_screen_name, String user_id, String session_no, String remarks, double gross_amount,
                 double amount_due, int status, int sales_type, double line_discount, String customer_id, String customer_name, String discount_name, double discount_rate,
                 double discount_amount, String discount_customer_name, String discount_customer_id, String charge_type, String charge_type_id, String charge_reference_no,
-                String charge_customer_name, String charge_customer_id, double charge_amount, String check_bank, String check_no, double check_amount, String check_holder,
+                String charge_customer_name, String charge_customer_id, double charge_amount,String charge_date_applied, String check_bank, String check_no, double check_amount, String check_holder,
                 String check_date, String credit_card_type, double credit_card_rate, double credit_card_amount, String credit_card_no, String credit_card_holder,
                 String credit_card_approval_code, String gift_certificate_from, String gift_certificate_description, String gift_certificate_no, double gift_certificate_amount,
                 String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, double addtl_amount, double wtax, String branch, String branch_id,
@@ -259,6 +260,7 @@ public class MySales {
             this.charge_customer_name = charge_customer_name;
             this.charge_customer_id = charge_customer_id;
             this.charge_amount = charge_amount;
+            this.charge_date_applied=charge_date_applied;
             this.check_bank = check_bank;
             this.check_no = check_no;
             this.check_amount = check_amount;
@@ -639,7 +641,7 @@ public class MySales {
                 String discount = "";
                 int status = 0;
                 double term = to_sales.charge_days;
-                String date_applied = to_sales.date_added;
+                String date_applied = to_sales.charge_date_applied;
                 double paid = 0;
                 String date_paid = date_applied;
                 String remarks = "";
@@ -1197,7 +1199,7 @@ public class MySales {
                 String ref_or_no = rs.getString(55);
                 String ref_si_no = rs.getString(56);
                 String ref_cr_no = rs.getString(57);
-                MySales.sales to = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,
+                MySales.sales to = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount,"", check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,
                                                      charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
                 datas.add(to);
             }
@@ -1336,7 +1338,7 @@ public class MySales {
                 String ref_or_no = rs.getString(55);
                 String ref_si_no = rs.getString(56);
                 String ref_cr_no = rs.getString(57);
-                MySales.sales to = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,
+                MySales.sales to = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount,"", check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items,
                                                      charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
                 datas.add(to);
             }
