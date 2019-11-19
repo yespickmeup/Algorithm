@@ -1858,7 +1858,8 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                 String location_id = my_location_id;
                 String user_id = MyUser.getUser_id();
                 String user_screen_name = MyUser.getUser_screen_name();
-                CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                int lock_session=0;
+                CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
                 CashDrawer.insert_data(to);
                 Alert.set(1, "");
                 get_cc_time();
@@ -2206,9 +2207,10 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
             String location_id = lo.getId();
             String user_id = MyUser.getUser_id();
             String user_screen_name = MyUser.getUser_screen_name();
+            int lock_session=0;
             CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
                                                                          time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
-                                                                         one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                                                                         one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
             System.out.println("id: " + id);
             String date = DateType.sf.format(new Date());
             CashDrawer.update_data(to, "" + id);
@@ -2247,7 +2249,8 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
             String location_id = lo.getId();
             String user_id = MyUser.getUser_id();
             String user_screen_name = MyUser.getUser_screen_name();
-            CashDrawer.to_cash_drawer drawer = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+            int lock_session=0;
+            CashDrawer.to_cash_drawer drawer = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
             CashDrawer.insert_data(drawer);
             Alert.set(1, "");
             ret_cashcounts();
@@ -2493,9 +2496,10 @@ public class Dlg_touchscreen_report_cashcount extends javax.swing.JDialog {
                     String location_id = drawer.location_id;
                     String user_id = drawer.user_id;
                     String user_screen_name = drawer.user_screen_name;
+                    int lock_session=0;
                     CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
                                                                                  time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
-                                                                                 one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                                                                                 one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
 
                     String date = DateType.sf.format(new Date());
                     CashDrawer.update_data(to, "" + id);

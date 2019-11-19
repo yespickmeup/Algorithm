@@ -225,6 +225,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -253,6 +254,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox15 = new javax.swing.JCheckBox();
         tf_cashier5 = new Field.Combo();
+        jLabel18 = new javax.swing.JLabel();
+        jCheckBox12 = new javax.swing.JCheckBox();
+        jButton1 = new Button.Warning();
         jLabel8 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -352,7 +356,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
         buttonGroup1.add(jCheckBox9);
         jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox9.setSelected(true);
         jCheckBox9.setText("Counted");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -435,6 +438,15 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setText("Reference no.:");
+
+        buttonGroup2.add(jCheckBox12);
+        jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox12.setText("Show/Hide");
+
+        jButton1.setText("Lock Sessions");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -480,8 +492,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -541,11 +559,15 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBox2)))
-                .addGap(1, 1, 1)
+                .addGap(3, 3, 3)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tf_cashier5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tf_cashier5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox12)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCheckBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
+                .addGap(9, 9, 9))
         );
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -594,7 +616,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -614,7 +636,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Print Preview", pnl_report);
@@ -633,7 +655,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_cashinsLayout.setVerticalGroup(
             pnl_cashinsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Cashins", pnl_cashins);
@@ -648,7 +670,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_remittancesLayout.setVerticalGroup(
             pnl_remittancesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Remittances", pnl_remittances);
@@ -663,7 +685,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_ar_collectionsLayout.setVerticalGroup(
             pnl_ar_collectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("AR Collections", pnl_ar_collections);
@@ -678,7 +700,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_return_exchangeLayout.setVerticalGroup(
             pnl_return_exchangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Return Exchange", pnl_return_exchange);
@@ -693,7 +715,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_prepaid_collectionsLayout.setVerticalGroup(
             pnl_prepaid_collectionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Prepaid Collections", pnl_prepaid_collections);
@@ -708,7 +730,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         );
         pnl_refundLayout.setVerticalGroup(
             pnl_refundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Refund", pnl_refund);
@@ -849,10 +871,13 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox15;
     private javax.swing.JCheckBox jCheckBox2;
@@ -866,6 +891,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -897,8 +923,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     private void myInit() {
 //        System.setProperty("pool_host", "localhost");
-//        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
         init_key();
         set_default_branch();
@@ -1274,7 +1300,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
                         jrxml = "rpt_sales_ledger_chickaloka.jrxml";
                     }
-
+                    if(jCheckBox12.isSelected()){
+                        jrxml = "rpt_sales_ledger_ref_no.jrxml";
+                    }
                     report_sales_items(rpt, jrxml);
                     loadData_banks(rpt.fields);
                     double net = 0;

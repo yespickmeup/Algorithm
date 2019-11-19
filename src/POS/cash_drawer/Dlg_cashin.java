@@ -460,7 +460,8 @@ public class Dlg_cashin extends javax.swing.JDialog {
                     String location_id = MyUser.getLocation_id();
                     String user_id = MyUser.getUser_id();
                     String user_screen_name = MyUser.getUser_screen_name();
-                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                    int lock_session=0;
+                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
                     CashDrawer.insert_data(cd);
                 }
                 if (jButton2.getText().equalsIgnoreCase("Update")) {
@@ -493,7 +494,8 @@ public class Dlg_cashin extends javax.swing.JDialog {
                     String location_id = MyUser.getLocation_id();
                     String user_id = MyUser.getUser_id();
                     String user_screen_name = MyUser.getUser_screen_name();
-                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                    int lock_session=0;
+                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
                     CashDrawer.update_drawer2(cd, "" + cash_drawer_id);
                 }
                 okay(amount);
@@ -546,7 +548,8 @@ public class Dlg_cashin extends javax.swing.JDialog {
         String location_id = MyUser.getLocation_id();
         String user_id = MyUser.getUser_id();
         String user_screen_name = MyUser.getUser_screen_name();
-        CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+        int lock_session=0;
+        CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
         CashDrawer.insert_data(cd);
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(amount));

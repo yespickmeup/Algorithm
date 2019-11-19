@@ -60,11 +60,12 @@ public class Srpt_sales_ledger {
     public final double re_gc;
     public final double re_online;
     public final double salary_deduction;
+
     public Srpt_sales_ledger(String business_name, String address, String contact_no, String date, String branch, String location, double return_exchange, double collections,
             double cash_on_hand, double collections_cheque, double collections_cheque_on_hand, double collections_prepaid, double collections_prepaid_cheque, double refund,
             double refund_cheque, double ar_collection_prepaid, double ar_collection_credit_card, double ar_collection_gc, double ar_collection_online,
-             String time, double retention, double business_tax, double re_check, double re_credit_card, double re_prepaid, double re_charge, double re_gc
-            , double re_online,double salary_deduction) {
+            String time, double retention, double business_tax, double re_check, double re_credit_card, double re_prepaid, double re_charge, double re_gc,
+             double re_online, double salary_deduction) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -94,7 +95,7 @@ public class Srpt_sales_ledger {
         this.re_charge = re_charge;
         this.re_gc = re_gc;
         this.re_online = re_online;
-        this.salary_deduction=salary_deduction;
+        this.salary_deduction = salary_deduction;
     }
 
     public static class field {
@@ -116,11 +117,14 @@ public class Srpt_sales_ledger {
         String date;
         String location;
         double online_payment;
+        String or_no;
+        String si_no;
+        String cr_no;
 
         public field() {
         }
 
-        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location, double online_payment) {
+        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location, double online_payment, String or_no, String si_no, String cr_no) {
             this.sales_no = sales_no;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -138,6 +142,34 @@ public class Srpt_sales_ledger {
             this.date = date;
             this.location = location;
             this.online_payment = online_payment;
+            this.or_no = or_no;
+            this.si_no = si_no;
+            this.cr_no = cr_no;
+
+        }
+
+        public String getOr_no() {
+            return or_no;
+        }
+
+        public void setOr_no(String or_no) {
+            this.or_no = or_no;
+        }
+
+        public String getSi_no() {
+            return si_no;
+        }
+
+        public void setSi_no(String si_no) {
+            this.si_no = si_no;
+        }
+
+        public String getCr_no() {
+            return cr_no;
+        }
+
+        public void setCr_no(String cr_no) {
+            this.cr_no = cr_no;
         }
 
         public double getOnline_payment() {
@@ -303,17 +335,17 @@ public class Srpt_sales_ledger {
         String time = "";
         double retention = 0;
         double business_tax = 0;
-        double re_check=0;
-        double re_credit_card=0;
-        double re_prepaid=0;
-        double re_charge=0;
-        double re_gc=0;
-        double re_online=0;
-        double salary_deduction=0;
+        double re_check = 0;
+        double re_credit_card = 0;
+        double re_prepaid = 0;
+        double re_charge = 0;
+        double re_gc = 0;
+        double re_online = 0;
+        double salary_deduction = 0;
         Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand, collections_cheque,
-                                                      collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque
-                , ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online, time, retention
-                , business_tax,re_check,re_credit_card,re_prepaid,re_charge,re_gc,re_online,salary_deduction);
+                                                      collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund, refund_cheque,
+                 ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online, time, retention,
+                 business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction);
         rpt.fields.addAll(fields);
         String jrxml = "rpt_sales_ledger.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);
@@ -401,6 +433,9 @@ public class Srpt_sales_ledger {
                     + ",online_amount"
                     + ",online_holder"
                     + ",online_date"
+                    + ",ref_or_no"
+                    + ",ref_si_no"
+                    + ",ref_cr_no"
                     + " from sales  "
                     + " " + where;
 
@@ -458,7 +493,7 @@ public class Srpt_sales_ledger {
                 String online_reference_no = rs.getString(49);
                 double online_amount = rs.getDouble(50);
                 String online_holder = rs.getString(51);
-                String online_date = rs.getString(51);
+                String online_date = rs.getString(52);
 
                 double sales_discount = discount_amount;
                 double cash = amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount + online_amount);
@@ -467,7 +502,10 @@ public class Srpt_sales_ledger {
                 double balance_due = amount_due;
                 String date = DateType.convert_slash_datetime3(date_added);
                 String location1 = branch + " - " + location;
-                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location1, online_amount);
+                String or_no=rs.getString(53);
+                String si_no=rs.getString(54);
+                String cr_no=rs.getString(55);
+                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location1, online_amount,or_no,si_no,cr_no);
                 fields.add(field);
             }
             return fields;
@@ -598,9 +636,9 @@ public class Srpt_sales_ledger {
                 double online_amount = rs.getDouble(50);
                 String online_holder = rs.getString(51);
                 String online_date = rs.getString(52);
-                String ref_or_no=rs.getString(53);
-                String ref_si_no=rs.getString(54);
-                String ref_cr_no=rs.getString(55);
+                String ref_or_no = rs.getString(53);
+                String ref_si_no = rs.getString(54);
+                String ref_cr_no = rs.getString(55);
 
                 double sales_discount = discount_amount;
                 double cash = (amount_due - (charge_amount + check_amount + credit_card_amount + gift_certificate_amount + prepaid_amount));
@@ -704,8 +742,8 @@ public class Srpt_sales_ledger {
                 }
 
                 //</editor-fold>
-                MySales.sales sale = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount,"", check_bank, check_no, check_amount, check_no, check_bank, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, gc_amount, cash, remarks, user_id, check_no, session_no, items,
-                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date,ref_or_no,ref_si_no,ref_cr_no);
+                MySales.sales sale = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, "", check_bank, check_no, check_amount, check_no, check_bank, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, gc_amount, cash, remarks, user_id, check_no, session_no, items,
+                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
 
                 fields.add(sale);
             }

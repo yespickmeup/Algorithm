@@ -53,8 +53,8 @@ public class CashDrawer {
         public final String location_id;
         public final String user_id;
         public final String user_screen_name;
-
-        public to_cash_drawer(int id, String session_no, String user_name, String screen_name, String time_in, String time_out, double amount, double cash_out, double thousand, double five_hundred, double two_hundred, double fifty, double twenty, double coins, double one_hundred, double expenses, double ten, double five, double one, double point_five, double point_two_five, double point_ten, double point_zero_five, String branch, String branch_id, String location, String location_id, String user_id, String user_screen_name) {
+        public final int lock_session;
+        public to_cash_drawer(int id, String session_no, String user_name, String screen_name, String time_in, String time_out, double amount, double cash_out, double thousand, double five_hundred, double two_hundred, double fifty, double twenty, double coins, double one_hundred, double expenses, double ten, double five, double one, double point_five, double point_two_five, double point_ten, double point_zero_five, String branch, String branch_id, String location, String location_id, String user_id, String user_screen_name,int lock_session) {
             this.id = id;
             this.session_no = session_no;
             this.user_name = user_name;
@@ -84,6 +84,7 @@ public class CashDrawer {
             this.location_id = location_id;
             this.user_id = user_id;
             this.user_screen_name = user_screen_name;
+            this.lock_session=lock_session;
         }
     }
 
@@ -122,6 +123,7 @@ public class CashDrawer {
                     + ",location_id"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",lock_session"
                     + " from cash_drawer"
                     + " " + where;
 
@@ -158,7 +160,8 @@ public class CashDrawer {
                 String location_id = rs.getString(27);
                 String user_id = rs.getString(28);
                 String user_screen_name = rs.getString(29);
-                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                int lock_session=rs.getInt(30);
+                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
                 datas.add(to);
             }
             return datas;
@@ -610,6 +613,7 @@ public class CashDrawer {
                     + ",location_id"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",lock_session"
                     + " from cash_drawer "
                     + " " + where;
 
@@ -645,7 +649,8 @@ public class CashDrawer {
                 String location_id = rs.getString(27);
                 String user_id = rs.getString(28);
                 String user_screen_name = rs.getString(29);
-                to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                int lock_session=rs.getInt(30);
+                to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
 
             }
             return to;
@@ -691,6 +696,7 @@ public class CashDrawer {
                     + ",location_id"
                     + ",user_id"
                     + ",user_screen_name"
+                    + ",lock_session"
                     + " from cash_drawer"
                     + " " + where;
 
@@ -726,8 +732,8 @@ public class CashDrawer {
                 String location_id = rs.getString(27);
                 String user_id = rs.getString(28);
                 String user_screen_name = rs.getString(29);
-
-                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name);
+                int lock_session=rs.getInt(30);
+                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
                 datas.add(to);
             }
             return datas;
