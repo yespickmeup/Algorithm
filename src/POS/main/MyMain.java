@@ -82,7 +82,7 @@ public class MyMain {
             System.setProperty("sales_date", prop.getProperty("sales_date", "os"));
             System.setProperty("multi_cashin", prop.getProperty("multi_cashin", "false"));
             System.out.println("OS: " + os);
-            System.setProperty("direct_pay",prop.getProperty("direct_pay","false"));
+            System.setProperty("direct_pay", prop.getProperty("direct_pay", "false"));
 //            System.out.println("Home: " + home);
             System.out.println("Local Ip: " + System.getProperty("local_ip"));
             System.out.println("Host: " + System.getProperty("pool_host"));
@@ -97,7 +97,7 @@ public class MyMain {
             List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
             User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
             if (!last.isEmpty()) {
-                
+
                 Date d = new Date();
                 Date date_to = new Date();
                 try {
@@ -106,9 +106,7 @@ public class MyMain {
                     Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int count2 = DateUtils1.count_days(d, date_to);
-        
-                
-                
+
                 if (count2 > 0) {
                     Alert.set(0, "Check system Date!");
                     try {

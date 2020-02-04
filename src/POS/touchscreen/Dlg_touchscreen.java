@@ -5588,7 +5588,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_touchscreen_charge nd = Dlg_touchscreen_charge.create(p, true);
             nd.setTitle("");
-            nd.do_pass();
+            nd.do_pass(jDateChooser1.getDate());
             nd.setCallback(new Dlg_touchscreen_charge.Callback() {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_touchscreen_charge.OutputData data) {

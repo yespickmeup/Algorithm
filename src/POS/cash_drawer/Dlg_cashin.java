@@ -4,6 +4,7 @@
  */
 package POS.cash_drawer;
 
+import POS.cash_drawer.CashDrawer.to_cash_drawer;
 import POS.users.MyUser;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -12,8 +13,6 @@ import POS.util.Focus_Fire;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JTextField;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -200,36 +199,52 @@ public class Dlg_cashin extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        tf_amount = new Field.Input();
-        jLabel14 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new Button.Success();
-        jButton2 = new Button.Default();
+        jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        tf_amount = new Field.Input();
+        jButton1 = new Button.Warning();
+        jButton2 = new Button.Success();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tf_amount.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cashin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Name:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Cashier Name");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Log-in:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("January 29, 2020 5:02 PM");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Log-out:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setText("January 29, 2020 8:02 PM");
+
+        tf_amount.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         tf_amount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_amount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_amountActionPerformed(evt);
             }
         });
-
-        jLabel14.setBackground(new java.awt.Color(104, 95, 84));
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/cash_drawer/piggy12.png"))); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("CASH IN");
 
         jButton1.setText("New Cashin");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -245,65 +260,79 @@ public class Dlg_cashin extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Time-in:");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Amount:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Time-out:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_amount, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(1, 1, 1)
-                .addComponent(tf_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -344,11 +373,13 @@ public class Dlg_cashin extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField tf_amount;
     // End of variables declaration//GEN-END:variables
@@ -371,33 +402,41 @@ public class Dlg_cashin extends javax.swing.JDialog {
         Focus_Fire.select_all(tf);
     }
 
-    public void do_pass() {
-        String where = " where Date(time_in) = '" + DateType.sf.format(new Date()) + "' and user_id='" + MyUser.getUser_id() + "' ";
-        List<CashDrawer.to_cash_drawer> drawer = CashDrawer.ret_where(where);
-        if (drawer.isEmpty()) {
-            jButton2.setText("Cancel");
-            cash_drawer_id = 0;
+    to_cash_drawer cd = null;
+
+    public void do_pass(to_cash_drawer d) {
+
+        jLabel6.setText(MyUser.getUser_screen_name());
+        jButton2.setText("Continue");
+        jButton1.setText("Logout");
+        double amount = 0;
+        String timein = "";
+        String timeout = "";
+        cd = d;
+        amount = d.amount;
+        cash_drawer_id = d.id;
+        timein = DateType.convert_slash_datetime3(d.time_in);
+        if (d.time_out != null) {
+            timeout = DateType.convert_slash_datetime3(d.time_out);
         } else {
-            jButton2.setText("Update");
-            double amount = 0;
-            String timein = "";
-            String timeout = "";
-            for (CashDrawer.to_cash_drawer d : drawer) {
-                amount = d.amount;
-                cash_drawer_id = d.id;
-                timein = DateType.convert_slash_datetime3(d.time_in);
-                if (d.time_out != null) {
-                    timeout = DateType.convert_slash_datetime3(d.time_out);
-                }
-            }
-            jLabel5.setText(timein);
-            jLabel4.setText(timeout);
-            tf_amount.setText(FitIn.fmt_wc_0(amount));
+            jLabel4.setText("Not yet logged out");
+            jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         }
+        jLabel5.setText(timein);
+        jLabel4.setText(timeout);
+        tf_amount.setText(FitIn.fmt_wc_0(amount));
 
     }
-    // <editor-fold defaultstate="collapsed" desc="Key">
 
+    public void do_pass_new_login() {
+
+        jLabel6.setText(MyUser.getUser_screen_name());
+        jButton2.setText("Cancel");
+        cash_drawer_id = 0;
+
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         closed();
     }
@@ -460,11 +499,12 @@ public class Dlg_cashin extends javax.swing.JDialog {
                     String location_id = MyUser.getLocation_id();
                     String user_id = MyUser.getUser_id();
                     String user_screen_name = MyUser.getUser_screen_name();
-                    int lock_session=0;
-                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
+                    int lock_session = 0;
+                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
                     CashDrawer.insert_data(cd);
+
                 }
-                if (jButton2.getText().equalsIgnoreCase("Update")) {
+                if (jButton2.getText().equalsIgnoreCase("Continue")) {
                     int id = 0;
                     String session_no = "";
                     String user_name = MyUser.getUser_name();
@@ -494,19 +534,20 @@ public class Dlg_cashin extends javax.swing.JDialog {
                     String location_id = MyUser.getLocation_id();
                     String user_id = MyUser.getUser_id();
                     String user_screen_name = MyUser.getUser_screen_name();
-                    int lock_session=0;
-                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
+                    int lock_session = 0;
+                    CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
                     CashDrawer.update_drawer2(cd, "" + cash_drawer_id);
                 }
                 okay(amount);
             }
         });
+        
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
-
     }
 
     private void okay(double amount) {
+
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(amount));
         }
@@ -519,40 +560,44 @@ public class Dlg_cashin extends javax.swing.JDialog {
             return;
         }
 
-        int id = 0;
-        String session_no = "";
-        String user_name = MyUser.getUser_name();
-        String screen_name = MyUser.getUser_screen_name();
-        String time_in = DateType.now();
-        String time_out = null;
+        if (jButton1.getText().equalsIgnoreCase("Logout")) {
+            
+        } else {
+            int id = 0;
+            String session_no = "";
+            String user_name = MyUser.getUser_name();
+            String screen_name = MyUser.getUser_screen_name();
+            String time_in = DateType.now();
+            String time_out = null;
 
-        double cash_out = 0;
-        double thousand = 0;
-        double five_hundred = 0;
-        double two_hundred = 0;
-        double fifty = 0;
-        double twenty = 0;
-        double coins = 0;
-        double one_hundred = 0;
-        double expenses = 0;
-        double ten = 0;
-        double five = 0;
-        double one = 0;
-        double point_five = 0;
-        double point_two_five = 0;
-        double point_ten = 0;
-        double point_zero_five = 0;
-        String branch = MyUser.getBranch();
-        String branch_id = MyUser.getBranch_id();
-        String location = MyUser.getLocation();
-        String location_id = MyUser.getLocation_id();
-        String user_id = MyUser.getUser_id();
-        String user_screen_name = MyUser.getUser_screen_name();
-        int lock_session=0;
-        CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
-        CashDrawer.insert_data(cd);
-        if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(amount));
+            double cash_out = 0;
+            double thousand = 0;
+            double five_hundred = 0;
+            double two_hundred = 0;
+            double fifty = 0;
+            double twenty = 0;
+            double coins = 0;
+            double one_hundred = 0;
+            double expenses = 0;
+            double ten = 0;
+            double five = 0;
+            double one = 0;
+            double point_five = 0;
+            double point_two_five = 0;
+            double point_ten = 0;
+            double point_zero_five = 0;
+            String branch = MyUser.getBranch();
+            String branch_id = MyUser.getBranch_id();
+            String location = MyUser.getLocation();
+            String location_id = MyUser.getLocation_id();
+            String user_id = MyUser.getUser_id();
+            String user_screen_name = MyUser.getUser_screen_name();
+            int lock_session = 0;
+            CashDrawer.to_cash_drawer cd = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
+            CashDrawer.insert_data(cd);
+            if (callback != null) {
+                callback.ok(new CloseDialog(this), new OutputData(amount));
+            }
         }
     }
 
@@ -560,5 +605,6 @@ public class Dlg_cashin extends javax.swing.JDialog {
         if (callback != null) {
             callback.close(new CloseDialog(this), new OutputData(0));
         }
+
     }
 }

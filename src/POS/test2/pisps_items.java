@@ -211,15 +211,15 @@ public class pisps_items {
                     HSSFDataFormatter hdf = new HSSFDataFormatter();
                     String data = "";
 
-                    if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING) {
+//                    if (cell.getCellType() == HSSFCell) {
                         String mydata = cell.getStringCellValue();
                         data = data + "" + mydata + "";
                         record.add(data);
-                    } else {
+//                    } else {
                         data = data + cell.getNumericCellValue() + "";
                         record.add(data);
 
-                    }
+//                    }
 
                 }
                 String[] aw = new String[size];
@@ -305,15 +305,15 @@ public class pisps_items {
                     HSSFDataFormatter hdf = new HSSFDataFormatter();
                     String data = "";
 
-                    if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING) {
+//                    if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING) {
                         String mydata = cell.getStringCellValue();
                         data = data + "" + mydata + "";
                         record.add(data);
-                    } else {
+//                    } else {
                         data = data + cell.getNumericCellValue() + "";
                         record.add(data);
 
-                    }
+//                    }
 
                 }
                 String[] aw = new String[size];

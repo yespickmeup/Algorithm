@@ -366,7 +366,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(50, 50, 50)
                 .addComponent(tf_charge_type, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel1)
@@ -516,7 +516,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
         my_location_id = "" + to.id;
     }
 
-    public void do_pass() {
+    public void do_pass(Date d) {
         Payments.charge charg = Payments.charge;
         Field.Combo cm = (Field.Combo) tf_charge_type;
         tf_charge_type.setText(charg.charge_type);
@@ -536,7 +536,7 @@ public class Dlg_touchscreen_charge extends javax.swing.JDialog {
 //            Logger.getLogger(Dlg_touchscreen_charge.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        jDateChooser1.setDate(d);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">

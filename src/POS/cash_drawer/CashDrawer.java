@@ -54,7 +54,8 @@ public class CashDrawer {
         public final String user_id;
         public final String user_screen_name;
         public final int lock_session;
-        public to_cash_drawer(int id, String session_no, String user_name, String screen_name, String time_in, String time_out, double amount, double cash_out, double thousand, double five_hundred, double two_hundred, double fifty, double twenty, double coins, double one_hundred, double expenses, double ten, double five, double one, double point_five, double point_two_five, double point_ten, double point_zero_five, String branch, String branch_id, String location, String location_id, String user_id, String user_screen_name,int lock_session) {
+
+        public to_cash_drawer(int id, String session_no, String user_name, String screen_name, String time_in, String time_out, double amount, double cash_out, double thousand, double five_hundred, double two_hundred, double fifty, double twenty, double coins, double one_hundred, double expenses, double ten, double five, double one, double point_five, double point_two_five, double point_ten, double point_zero_five, String branch, String branch_id, String location, String location_id, String user_id, String user_screen_name, int lock_session) {
             this.id = id;
             this.session_no = session_no;
             this.user_name = user_name;
@@ -84,7 +85,7 @@ public class CashDrawer {
             this.location_id = location_id;
             this.user_id = user_id;
             this.user_screen_name = user_screen_name;
-            this.lock_session=lock_session;
+            this.lock_session = lock_session;
         }
     }
 
@@ -160,8 +161,8 @@ public class CashDrawer {
                 String location_id = rs.getString(27);
                 String user_id = rs.getString(28);
                 String user_screen_name = rs.getString(29);
-                int lock_session=rs.getInt(30);
-                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
+                int lock_session = rs.getInt(30);
+                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
                 datas.add(to);
             }
             return datas;
@@ -214,6 +215,48 @@ public class CashDrawer {
                     .setNumber("point_ten", to_cash_drawer.point_ten)
                     .setNumber("point_zero_five", to_cash_drawer.point_zero_five)
                     .setNumber("amount", to_cash_drawer.amount)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(CashDrawer.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_cashin_logout(to_cash_drawer to_cash_drawer, String id) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update cash_drawer  set "
+                    + " time_out= :time_out "
+                    + " where id='" + id + "' "
+                    + " ";
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("time_out", to_cash_drawer.time_out)
+                    .ok();
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(CashDrawer.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void lock_session(int id, int lock_status) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update cash_drawer  set "
+                    + " lock_session = :lock_session"
+                    + " where id='" + id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setNumber("lock_session", lock_status)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -279,7 +322,7 @@ public class CashDrawer {
             MyConnection.close();
         }
     }
-    
+
     public static void insert_data(to_cash_drawer to_cash_drawer) {
         try {
             Connection conn = MyConnection.connect();
@@ -649,8 +692,8 @@ public class CashDrawer {
                 String location_id = rs.getString(27);
                 String user_id = rs.getString(28);
                 String user_screen_name = rs.getString(29);
-                int lock_session=rs.getInt(30);
-                to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
+                int lock_session = rs.getInt(30);
+                to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
 
             }
             return to;
@@ -732,8 +775,8 @@ public class CashDrawer {
                 String location_id = rs.getString(27);
                 String user_id = rs.getString(28);
                 String user_screen_name = rs.getString(29);
-                int lock_session=rs.getInt(30);
-                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
+                int lock_session = rs.getInt(30);
+                to_cash_drawer to = new to_cash_drawer(id, session_no, user_name, screen_name, time_in, time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins, one_hundred, expenses, ten, five, one, point_five, point_two_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
                 datas.add(to);
             }
             return datas;

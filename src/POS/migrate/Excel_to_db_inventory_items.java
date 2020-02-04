@@ -551,7 +551,7 @@ public class Excel_to_db_inventory_items {
         int millisecondsInDay = (int) Math.round(SECONDS_PER_DAY * ms) * 1000;
 
         Calendar calendar = new GregorianCalendar(); // using default time-zone
-        org.apache.poi.ss.usermodel.DateUtil.setCalendar(calendar, wholeDays, millisecondsInDay, false);
+//        org.apache.poi.ss.usermodel.DateUtil.setCalendar(calendar, wholeDays, millisecondsInDay, false);
 
         return calendar.getTime();
     }

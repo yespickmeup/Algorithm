@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e56e12c5-bf40-48d4-aae5-0e1825322c9b">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="105"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="business_name" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="contact_no" class="java.lang.String"/>
@@ -62,41 +62,41 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="162" splitType="Stretch">
+		<band height="144" splitType="Stretch">
 			<textField>
-				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="40" y="37" width="463" height="17"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="0" y="20" width="463" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="40" y="54" width="463" height="17"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="0" y="37" width="463" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="40" y="80" width="463" height="17"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="0" y="63" width="463" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{contact_no}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="40" y="97" width="463" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="80" width="463" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<text><![CDATA[Accounts Receivable Payments Ledger]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="96" y="117" width="228" height="17"/>
+				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="56" y="100" width="228" height="17"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -104,7 +104,7 @@
 				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="40" y="117" width="56" height="17"/>
+				<reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="100" width="56" height="17"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -112,7 +112,7 @@
 				<text><![CDATA[Date:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="40" y="134" width="56" height="17"/>
+				<reportElement uuid="1e063238-feac-4fec-81aa-2ea207d04a03" x="0" y="117" width="56" height="17"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -120,7 +120,7 @@
 				<text><![CDATA[Status:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="96" y="134" width="228" height="17"/>
+				<reportElement uuid="436449fd-9f6e-4de6-bf83-e03656a84923" x="56" y="117" width="228" height="17"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
@@ -149,7 +149,7 @@
 				<text><![CDATA[Transaction No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="7634a034-835e-493c-bb02-8694ca090166" x="70" y="0" width="46" height="35"/>
+				<reportElement uuid="7634a034-835e-493c-bb02-8694ca090166" x="70" y="0" width="70" height="35"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -163,7 +163,7 @@
 				<text><![CDATA[Ref. No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eaf11a8a-5804-4d3f-9afd-10a279c9da46" x="116" y="0" width="142" height="35"/>
+				<reportElement uuid="eaf11a8a-5804-4d3f-9afd-10a279c9da46" x="140" y="0" width="118" height="35"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -355,7 +355,7 @@
 				<textFieldExpression><![CDATA[$F{ar_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="4026e71d-4689-4266-a1cf-810203e04cd2" x="70" y="0" width="46" height="15"/>
+				<reportElement uuid="4026e71d-4689-4266-a1cf-810203e04cd2" x="70" y="0" width="70" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -369,7 +369,7 @@
 				<textFieldExpression><![CDATA[$F{reference_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="060f94e8-1ae0-453a-99c6-33f358f627d2" x="116" y="0" width="142" height="15"/>
+				<reportElement uuid="060f94e8-1ae0-453a-99c6-33f358f627d2" x="140" y="0" width="118" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>

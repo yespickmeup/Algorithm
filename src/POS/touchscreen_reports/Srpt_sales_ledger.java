@@ -120,11 +120,13 @@ public class Srpt_sales_ledger {
         String or_no;
         String si_no;
         String cr_no;
-
+        double addtl_amount;
+        double wtax;
+        String charge_reference_no;
         public field() {
         }
 
-        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location, double online_payment, String or_no, String si_no, String cr_no) {
+        public field(String sales_no, String customer_id, String customer_name, double amount_due, double line_discount, double sales_discount, double cash, double charge_amount, double cheque_amount, double credit_card_amount, double gc_amount, double prepaid_amount, double balance_due, String user_screen_name, String date, String location, double online_payment, String or_no, String si_no, String cr_no,double addtl_amount,double wtax,String charge_reference_no) {
             this.sales_no = sales_no;
             this.customer_id = customer_id;
             this.customer_name = customer_name;
@@ -145,6 +147,9 @@ public class Srpt_sales_ledger {
             this.or_no = or_no;
             this.si_no = si_no;
             this.cr_no = cr_no;
+            this.addtl_amount=addtl_amount;
+            this.wtax=wtax;
+            this.charge_reference_no=charge_reference_no;
 
         }
 
@@ -436,6 +441,7 @@ public class Srpt_sales_ledger {
                     + ",ref_or_no"
                     + ",ref_si_no"
                     + ",ref_cr_no"
+
                     + " from sales  "
                     + " " + where;
 
@@ -505,7 +511,7 @@ public class Srpt_sales_ledger {
                 String or_no=rs.getString(53);
                 String si_no=rs.getString(54);
                 String cr_no=rs.getString(55);
-                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location1, online_amount,or_no,si_no,cr_no);
+                Srpt_sales_ledger.field field = new field(sales_no, customer_id, customer_name, gross_amount, line_discount, sales_discount, cash, charge_amount, cheque_amount, credit_card_amount, gc_amount, prepaid_amount, balance_due, user_screen_name, date, location1, online_amount,or_no,si_no,cr_no,addtl_amount,wtax,charge_reference_no);
                 fields.add(field);
             }
             return fields;

@@ -1726,6 +1726,7 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
         if (to.time_out != null) {
             jLabel32.setText(DateType.convert_slash_datetime3(to.time_out));
         }
+        
         tf_cashin.setText(FitIn.fmt_wc_0(to.amount));
         jTextField4.setText(FitIn.fmt_woc(to.thousand));
         jTextField1.setText(FitIn.fmt_woc(to.five_hundred));

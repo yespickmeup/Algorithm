@@ -656,6 +656,7 @@ public class MySales {
                 String branch_id = to_sales.branch_id;
                 String location = to_sales.location;
                 String location_id = to_sales.location_id;
+                
                 S1_accounts_receivable.to_accounts_receivable to2 = new S1_accounts_receivable.to_accounts_receivable(true, -1, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
 
                 String s11 = "insert into  accounts_receivable("

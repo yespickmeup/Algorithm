@@ -2472,6 +2472,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         focus();
         ret_customer_departments();
         jTextField21.setText(MyUser.getUser_screen_name());
+        
         jTextField22.setText(MyUser.getUser_screen_name());
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);

@@ -10,7 +10,6 @@ import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
 import POS.adjuster.Dlg_other_adjustments;
-import POS.adjustments.Dlg_match_branch_prices;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -21,6 +20,7 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.branches.Dlg_branches;
 import POS.cash_drawer.*;
+import POS.cash_drawer.CashDrawer.to_cash_drawer;
 import POS.category.Dlg_categories;
 import POS.category.Dlg_category;
 import POS.charge_in_advance.Dlg_charge_in_advance;
@@ -896,7 +896,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(16, 88, 197));
         jLabel8.setText("Username:");
 
-        tf_username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_username.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tf_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_usernameActionPerformed(evt);
@@ -908,7 +908,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(16, 88, 197));
         jLabel12.setText("Password:");
 
-        tf_password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_password.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tf_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_passwordActionPerformed(evt);
@@ -1742,7 +1742,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseEntered
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        t_tavern();
+        t_tavern(0);
     }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jLabel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseEntered
@@ -2491,28 +2491,33 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(dtc.getSurface(), jPanel1, "Purchase Order");
     }
 
-    private void t_tavern() {
+    private void t_tavern(int lock_session) {
         String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-        int is_salesman = 0;
-        int is_cashier = 0;
-        int can_choose_location = 0;
-        for (S1_user_previleges.to_user_previleges to : datas) {
-            if (to.previledge.equalsIgnoreCase("Sales")) {
-                is_cashier = 1;
+        if (lock_session == 1) {
+            Alert.set(0, "Session locked! Contact administrator");
+        } else {
+            int is_salesman = 0;
+            int is_cashier = 0;
+            int can_choose_location = 0;
+            for (S1_user_previleges.to_user_previleges to : datas) {
+                if (to.previledge.equalsIgnoreCase("Sales")) {
+                    is_cashier = 1;
+                }
+                if (to.previledge.equalsIgnoreCase("Salesman")) {
+                    is_salesman = 1;
+                }
+                if (to.previledge.equalsIgnoreCase("Sales (Choose Location)")) {
+                    can_choose_location = 1;
+                }
             }
-            if (to.previledge.equalsIgnoreCase("Salesman")) {
-                is_salesman = 1;
-            }
-            if (to.previledge.equalsIgnoreCase("Sales (Choose Location)")) {
-                can_choose_location = 1;
-            }
+            Window p = (Window) this;
+            Dlg_touchscreen nd = Dlg_touchscreen.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(is_salesman, is_cashier, can_choose_location);
+            MyFrame.set(nd.getSurface(), jPanel1, "");
         }
-        Window p = (Window) this;
-        Dlg_touchscreen nd = Dlg_touchscreen.create(p, true);
-        nd.setTitle("");
-        nd.do_pass(is_salesman, is_cashier, can_choose_location);
-        MyFrame.set(nd.getSurface(), jPanel1, "");
+
     }
 
     private void m_services() {
@@ -2813,82 +2818,98 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         final String user_name = Users.get_UserName();
         String date = DateType.sf.format(new Date());
         S1_cash_drawer.to_cash_drawer to1 = S1_cash_drawer.ret_data2(user_name, date);
-        if (to1 == null) {
+        String where = " where user_id='" + MyUser.getUser_id() + "' and time_out IS NULL order by id desc limit 1";
+        List<to_cash_drawer> drawers = CashDrawer.ret_where(where);
+        final to_cash_drawer to = (to_cash_drawer) drawers.get(0);
+        if (!drawers.isEmpty()) {
+
             Window p = (Window) this;
             Dlg_cashin nd = Dlg_cashin.create(p, true);
             nd.setTitle("");
-            nd.do_pass();
+            nd.do_pass(to);
             nd.setCallback(new Dlg_cashin.Callback() {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
                     closeDialog.ok();
-//                    int id = 1;
-//                    String session_no = MyUser.getUser_id();
-//                    String user_name1 = MyUser.getUser_name();
-//                    String screen_name1 = MyUser.getUser_screen_name();
-//                    String time_in = DateType.datetime.format(new Date());
-//                    String time_out = null;
-//                    double amount = data.amount;
-//                    String branch = my_branch;
-//                    String branch_id = my_branch_id;
-//                    String location = my_location;
-//                    String location_id = my_location_id;
-//                    String user_id = MyUser.getUser_id();
-//                    String user_screen_name = MyUser.getUser_screen_name();
-//                    S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
-//                    S1_cash_drawer.add_cash_drawer(to2);
-                    t_tavern();
+
+                    t_tavern(to.lock_session);
                 }
 
                 @Override
                 public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
                     closeDialog.ok();
-                    t_tavern();
+                    t_tavern(to.lock_session);
                 }
 
             });
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         } else {
-            String multi_cashin = System.getProperty("multi_cashin", "false");
-            if (multi_cashin.equalsIgnoreCase("true")) {
-                Window p = (Window) this;
-                Dlg_cashin nd = Dlg_cashin.create(p, true);
-                nd.setTitle("");
-                nd.do_pass();
-                nd.setCallback(new Dlg_cashin.Callback() {
-                    @Override
-                    public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
-                        closeDialog.ok();
-//                        int id = 1;
-//                        String session_no = MyUser.getUser_id();
-//                        String user_name1 = MyUser.getUser_name();
-//                        String screen_name1 = MyUser.getUser_screen_name();
-//                        String time_in = DateType.datetime.format(new Date());
-//                        String time_out = null;
-//                        double amount = data.amount;
-//                        String branch = my_branch;
-//                        String branch_id = my_branch_id;
-//                        String location = my_location;
-//                        String location_id = my_location_id;
-//                        String user_id = MyUser.getUser_id();
-//                        String user_screen_name = MyUser.getUser_screen_name();
-//                        S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
-//                        S1_cash_drawer.add_cash_drawer(to2);
-                        t_tavern();
-                    }
+            Window p = (Window) this;
+            Dlg_cashin nd = Dlg_cashin.create(p, true);
+            nd.setTitle("");
+            nd.do_pass_new_login();
+            nd.setCallback(new Dlg_cashin.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+                    closeDialog.ok();
 
-                    @Override
-                    public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
-                        closeDialog.ok();
-                        t_tavern();
-                    }
-                });
-                nd.setLocationRelativeTo(this);
-                nd.setVisible(true);
-            } else {
-                t_tavern();
-            }
+                    t_tavern(to.lock_session);
+                }
+
+                @Override
+                public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+                    closeDialog.ok();
+                    t_tavern(to.lock_session);
+                }
+
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+        if (to1 == null) {
+
+        } else {
+            t_tavern(to.lock_session);
+//            String multi_cashin = System.getProperty("multi_cashin", "false");
+//            if (multi_cashin.equalsIgnoreCase("true")) {
+//                Window p = (Window) this;
+//                Dlg_cashin nd = Dlg_cashin.create(p, true);
+//                nd.setTitle("");
+//                nd.do_pass();
+//                nd.setCallback(new Dlg_cashin.Callback() {
+//                    @Override
+//                    public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+//                        closeDialog.ok();
+////                        int id = 1;
+////                        String session_no = MyUser.getUser_id();
+////                        String user_name1 = MyUser.getUser_name();
+////                        String screen_name1 = MyUser.getUser_screen_name();
+////                        String time_in = DateType.datetime.format(new Date());
+////                        String time_out = null;
+////                        double amount = data.amount;
+////                        String branch = my_branch;
+////                        String branch_id = my_branch_id;
+////                        String location = my_location;
+////                        String location_id = my_location_id;
+////                        String user_id = MyUser.getUser_id();
+////                        String user_screen_name = MyUser.getUser_screen_name();
+////                        S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
+////                        S1_cash_drawer.add_cash_drawer(to2);
+//                        t_tavern();
+//                    }
+//
+//                    @Override
+//                    public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+//                        closeDialog.ok();
+//                        t_tavern();
+//                    }
+//                });
+//                nd.setLocationRelativeTo(this);
+//                nd.setVisible(true);
+//            } else {
+//             
+//            }
 
         }
 
@@ -3115,20 +3136,20 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void run_script() {
 
-        Window p = (Window) this;
-        Dlg_match_branch_prices nd = Dlg_match_branch_prices.create(p, true);
-        nd.setTitle("");
-
-        nd.setCallback(new Dlg_match_branch_prices.Callback() {
-
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_match_branch_prices.OutputData data) {
-                closeDialog.ok();
-
-            }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+//        Window p = (Window) this;
+//        Dlg_match_branch_prices nd = Dlg_match_branch_prices.create(p, true);
+//        nd.setTitle("");
+//
+//        nd.setCallback(new Dlg_match_branch_prices.Callback() {
+//
+//            @Override
+//            public void ok(CloseDialog closeDialog, Dlg_match_branch_prices.OutputData data) {
+//                closeDialog.ok();
+//
+//            }
+//        });
+//        nd.setLocationRelativeTo(this);
+//        nd.setVisible(true);
 //        Window p = (Window) this;
 //        Dlg_adjust_price nd = Dlg_adjust_price.create(p, true);
 //        nd.setTitle("");
@@ -3225,8 +3246,9 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Receipts")) {
                     receipts();
                 }
+
                 if (data.stmt.equals("Sales")) {
-                    t_tavern();
+                    t_tavern(0);
                 }
                 if (data.stmt.equals("Services")) {
                     t_services();

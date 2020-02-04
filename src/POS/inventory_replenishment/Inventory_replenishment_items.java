@@ -5,6 +5,7 @@
  */
 package POS.inventory_replenishment;
 
+import POS.reports.Srpt_inventory_over_short;
 import POS.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -333,7 +334,104 @@ public class Inventory_replenishment_items {
 
                 to_inventory_replenishment_items to = new to_inventory_replenishment_items(id, inventory_replenishment_no, item_code, barcode, description, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, branch, branch_id, location, location_id);
                 datas.add(to);
+
             }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static List<Srpt_inventory_over_short.field> ret_data2(String where, String where2) {
+        List<Srpt_inventory_over_short.field> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",inventory_replenishment_no"
+                    + ",item_code"
+                    + ",barcode"
+                    + ",description"
+                    + ",product_qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",selling_price"
+                    + ",date_added"
+                    + ",user_id"
+                    + ",user_screen_name"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from inventory_replenishment_items"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String inventory_replenishment_no = rs.getString(2);
+                String item_code = rs.getString(3);
+                String barcode = rs.getString(4);
+                String description = rs.getString(5);
+                double product_qty = rs.getDouble(6);
+                String unit = rs.getString(7);
+                double conversion = rs.getDouble(8);
+                double selling_price = rs.getDouble(9);
+                String date_added = rs.getString(10);
+                String user_id = rs.getString(11);
+                String user_screen_name = rs.getString(12);
+                int status = rs.getInt(13);
+                String branch = rs.getString(14);
+                String branch_id = rs.getString(15);
+                String location = rs.getString(16);
+                String location_id = rs.getString(17);
+
+                String s2 = "select "
+                        + " sum(qty)"
+                        + ",selling_price"
+                        + " from encoding_inventory "
+                        + " " + where2 + " and item_code='" + item_code + "'"
+                        + " ";
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                double qty = 0;
+                double price = 0;
+                if (rs2.next()) {
+                    qty = rs2.getDouble(1);
+
+                }
+                
+                String s3 = "select "
+                        + " selling_price"
+                        + " from inventory "
+                        + " where  barcode='" + item_code + "'"
+                        + " ";
+                Statement stmt3 = conn.createStatement();
+                
+                ResultSet rs3 = stmt3.executeQuery(s3);
+
+                if (rs3.next()) {
+
+                    price = rs3.getDouble(1);
+                }
+
+                double system_qty = product_qty;
+                double over_short = qty - system_qty;
+
+                if (system_qty != qty) {
+                    Srpt_inventory_over_short.field field = new Srpt_inventory_over_short.field(date_added, qty, item_code, barcode, description, "", "", system_qty, over_short, price);
+                    datas.add(field);
+                    System.out.println("---------------------------------------------------------------------------");
+                    System.out.println("Item: " + item_code + " - " + description + " [" + system_qty + " | " + qty + "]");
+                }
+
+            }
+            System.out.println("Total Added! = " + datas.size());
             return datas;
         } catch (SQLException e) {
             throw new RuntimeException(e);

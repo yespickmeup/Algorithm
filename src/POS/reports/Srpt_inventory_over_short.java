@@ -59,11 +59,12 @@ public class Srpt_inventory_over_short {
         String counted_by;
         double system_qty;
         double over_short;
+        double selling_price;
 
         public field() {
         }
 
-        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no, String counted_by, double system_qty, double over_short) {
+        public field(String date_added, double qty, String item_code, String barcode, String description, String sheet_no, String counted_by, double system_qty, double over_short, double selling_price) {
             this.date_added = date_added;
             this.qty = qty;
             this.item_code = item_code;
@@ -73,6 +74,15 @@ public class Srpt_inventory_over_short {
             this.counted_by = counted_by;
             this.system_qty = system_qty;
             this.over_short = over_short;
+            this.selling_price = selling_price;
+        }
+
+        public double getSelling_price() {
+            return selling_price;
+        }
+
+        public void setSelling_price(double selling_price) {
+            this.selling_price = selling_price;
         }
 
         public double getSystem_qty() {
@@ -190,7 +200,7 @@ public class Srpt_inventory_over_short {
 
     public static List<Srpt_inventory_over_short.field> ret_data(String where, List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments) {
         List<Srpt_inventory_over_short.field> datas = new ArrayList();
-       
+
         try {
             Connection conn = MyConnection.connect();
 
@@ -198,18 +208,21 @@ public class Srpt_inventory_over_short {
 
                 String s0 = "select "
                         + " sum(qty)"
+                        + ",selling_price"
                         + " from encoding_inventory "
                         + " " + where + " and item_code='" + rep.item_code + "'"
                         + " ";
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(s0);
                 double qty = 0;
+                double price = 0;
                 if (rs.next()) {
                     qty = rs.getDouble(1);
+                    price = rs.getDouble(2);
                 }
                 double system_qty = rep.product_qty;
                 double over_short = qty - system_qty;
-                Srpt_inventory_over_short.field field = new field(rep.date_added, qty, rep.item_code, rep.barcode, rep.description, "", "", system_qty, over_short);
+                Srpt_inventory_over_short.field field = new field(rep.date_added, qty, rep.item_code, rep.barcode, rep.description, "", "", system_qty, over_short, price);
                 datas.add(field);
             }
 

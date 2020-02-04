@@ -808,7 +808,7 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_locationActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        get_stocks2();
+        get_stocks3();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tf_qty_branch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_qty_branch1ActionPerformed
@@ -1329,6 +1329,47 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
 //        });
 //
 //        t.start();
+    }
+
+    private void get_stocks3() {
+        jProgressBar4.setString("Loading...Please wait...");
+        jProgressBar4.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Field.Combo br = (Field.Combo) tf_qty_branch1;
+                Field.Combo lo = (Field.Combo) tf_location1;
+
+                String date_from = DateType.sf.format(jDateChooser1.getDate());
+                String date_to = DateType.sf.format(jDateChooser2.getDate());
+
+                String where1 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' order by description asc ";
+                String where2 = "where Date(date_added) between '" + date_from + "' and '" + date_to + "' and location_id='" + lo.getId() + "' ";
+                List<Srpt_inventory_over_short.field> replenishments = Inventory_replenishment_items.ret_data2(where1, where2);
+
+                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+                String date = DateType.slash.format(jDateChooser1.getDate()) + " - " + DateType.slash.format(jDateChooser2.getDate());
+                String printed_by = "Administrator";
+                String sheet_no = "";
+                String branch = tf_qty_branch1.getText();
+                String location = tf_location1.getText();
+                String counted_by = "";
+
+                String year = "" + DateType.y.format(new Date());
+                int month = (new Date().getMonth() + 1);
+                System.out.println("month: " + month);
+
+                Srpt_inventory_over_short rpt = new Srpt_inventory_over_short(business_name, date, printed_by, branch, location, counted_by);
+                rpt.fields.addAll(replenishments);
+                String jrxml = "rpt_inventory_over_or_short.jrxml";
+                report_sales_items2(rpt, jrxml);
+                jProgressBar4.setString("Finished...");
+                jProgressBar4.setIndeterminate(false);
+            }
+        });
+        t.start();
+
     }
 
     private void report_sales_items2(final Srpt_inventory_over_short to, String jrxml_name) {

@@ -23,6 +23,7 @@ import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.InputStream;
@@ -267,6 +268,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         pnl_report = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         pnl_cashins = new javax.swing.JPanel();
         pnl_remittances = new javax.swing.JPanel();
         pnl_ar_collections = new javax.swing.JPanel();
@@ -446,6 +448,11 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         jCheckBox12.setText("Show/Hide");
 
         jButton1.setText("Lock Sessions");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -561,11 +568,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         .addComponent(jCheckBox2)))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tf_cashier5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox12)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_cashier5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox12)))
                     .addComponent(jCheckBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9))
         );
@@ -644,6 +652,21 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 821, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 331, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("WTax", jPanel2);
 
         pnl_cashins.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -865,6 +888,10 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tf_cashier5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        lock_session();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -899,6 +926,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -923,8 +951,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     private void myInit() {
 //        System.setProperty("pool_host", "localhost");
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
         init_key();
         set_default_branch();
@@ -937,7 +965,6 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
         time_list = DateType.time();
-
     }
     List<String> time_list = new ArrayList();
 
@@ -964,10 +991,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             }
         });
     }
-
+    
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
-
         Field.Combo lo = (Field.Combo) jTextField1;
         Field.Combo br = (Field.Combo) jTextField2;
         lo.setText(to.location);
@@ -977,11 +1003,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
     }
+    
     List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         final Field.Combo br = (Field.Combo) jTextField2;
-
+        
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
         for (Branches.to_branches to : branches_list) {
@@ -1086,10 +1113,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
                     }
                 } else {
+                    
                     if (tf_cashier5.getText().isEmpty() && !jCheckBox13.isSelected()) {
                         Alert.set(0, "Please select time!");
                         return;
                     }
+                    
                     if (!jCheckBox13.isSelected()) {
                         try {
                             String[] dates = tf_cashier5.getText().split("- ");
@@ -1150,6 +1179,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where_return_from_customer = where_return_from_customer + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
+                
                 if (jCheckBox1.isSelected()) {
                     where = where + "  "
                             + " and status='" + status + "' ";
@@ -1174,6 +1204,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 //                System.out.println(where);
                 List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
                 List<Srpt_sales_ledger_with_items.field> fields_items = new ArrayList();
+                
                 if (jCheckBox11.isSelected()) {
                     fields_items = Srpt_sales_ledger_with_items.ret_data(where);
                 }
@@ -1289,6 +1320,31 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 cash_on_hand = cash_on_hand + collections_prepaid + refund;
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
 
+                //<editor-fold defaultstate="collapsed" desc=" wtax ">
+                List<Srpt_sales_ledger_wtax.field> field_wtax = new ArrayList();
+                for (Srpt_sales_ledger.field wt : fields) {
+                    if (wt.wtax > 0) {
+                        String sales_no = wt.sales_no;
+                        String or_no = wt.or_no;
+                        String si_no = wt.si_no;
+                        String cr_no = wt.or_no;
+                        String date2 = wt.date;
+                        String user = wt.user_screen_name;
+                        String customer_name = wt.customer_name;
+                        String charge_reference_no = wt.charge_reference_no;
+                        double gross_amount = wt.balance_due;
+                        double amount_due = wt.amount_due;
+                        double wtax = wt.wtax;
+                        double charge_amount = wt.charge_amount;
+                        double check_amount = wt.cheque_amount;
+                        Srpt_sales_ledger_wtax.field f_wtax = new Srpt_sales_ledger_wtax.field(sales_no, or_no, si_no, cr_no, date, user, customer_name, charge_reference_no, gross_amount, amount_due, wtax, charge_amount, check_amount);
+                        field_wtax.add(f_wtax);
+                    }
+                }
+
+                Srpt_sales_ledger_wtax tax = new Srpt_sales_ledger_wtax(business_name, address, contact_no, date, branch, location);
+                tax.fields.addAll(field_wtax);
+                //</editor-fold>
                 if (!jCheckBox11.isSelected()) {
                     Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                                   collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
@@ -1300,10 +1356,11 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
                         jrxml = "rpt_sales_ledger_chickaloka.jrxml";
                     }
-                    if(jCheckBox12.isSelected()){
+                    if (jCheckBox12.isSelected()) {
                         jrxml = "rpt_sales_ledger_ref_no.jrxml";
                     }
                     report_sales_items(rpt, jrxml);
+                    report_wtax(tax, "rpt_sales_ledger_wtax.jrxml");
                     loadData_banks(rpt.fields);
                     double net = 0;
                     for (Srpt_sales_ledger.field field : rpt.fields) {
@@ -1673,5 +1730,63 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     }
 
     //<editor-fold defaultstate="collapsed" desc=" cashins ">
+    //</editor-fold>
+    private void lock_session() {
+        Window p = (Window) this;
+        Dlg_report_ledger_lock_sessions nd = Dlg_report_ledger_lock_sessions.create(p, true);
+        nd.setTitle("");
+//        nd.do_pass(services);
+        nd.setCallback(new Dlg_report_ledger_lock_sessions.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_report_ledger_lock_sessions.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" wtax ">
+    private void report_wtax(final Srpt_sales_ledger_wtax to, String jrxml_name) {
+        jPanel2.removeAll();
+        jPanel2.setLayout(new BorderLayout());
+        try {
+            JRViewer viewer = get_viewer_wtax(to, jrxml_name);
+            JPanel pnl = new JPanel();
+            pnl.add(viewer);
+            pnl.setVisible(true);
+            pnl.setVisible(true);
+            jPanel2.add(viewer);
+            jPanel2.updateUI();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JRViewer get_viewer_wtax(Srpt_sales_ledger_wtax to, String rpt_name) {
+        try {
+            return JasperUtil.getJasperViewer(
+                    compileJasper_wtax(rpt_name),
+                    JasperUtil.setParameter(to),
+                    JasperUtil.makeDatasource(to.fields));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+        }
+    }
+
+    public static JasperReport compileJasper_wtax(String rpt_name) {
+        try {
+            String jrxml = rpt_name;
+            InputStream is = Srpt_sales_ledger_wtax.class.getResourceAsStream(jrxml);
+            JasperReport jasper = JasperCompileManager.compileReport(is);
+            return jasper;
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+    }
     //</editor-fold>
 }
