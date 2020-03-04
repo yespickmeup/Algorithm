@@ -10,6 +10,7 @@ import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
 import POS.adjuster.Dlg_other_adjustments;
+import POS.adjustments.Adjust_null_logout;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -2733,7 +2734,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc=" privileges ">
     private void set_previleges() {
-        String where = " where user_id='" + MyUser.getUser_id() + "' order by previledge asc";
+        String where = " where user_id='" + MyUser.getUser_id() + "' group by previledge order by previledge asc";
         List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
         for (S1_user_previleges.to_user_previleges to : datas) {
 
@@ -2820,9 +2821,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         S1_cash_drawer.to_cash_drawer to1 = S1_cash_drawer.ret_data2(user_name, date);
         String where = " where user_id='" + MyUser.getUser_id() + "' and time_out IS NULL order by id desc limit 1";
         List<to_cash_drawer> drawers = CashDrawer.ret_where(where);
-        final to_cash_drawer to = (to_cash_drawer) drawers.get(0);
-        if (!drawers.isEmpty()) {
 
+        if (!drawers.isEmpty()) {
+//            System.out.println("asdad");
+            final to_cash_drawer to = (to_cash_drawer) drawers.get(0);
             Window p = (Window) this;
             Dlg_cashin nd = Dlg_cashin.create(p, true);
             nd.setTitle("");
@@ -2845,6 +2847,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         } else {
+
             Window p = (Window) this;
             Dlg_cashin nd = Dlg_cashin.create(p, true);
             nd.setTitle("");
@@ -2854,64 +2857,64 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
                     closeDialog.ok();
 
-                    t_tavern(to.lock_session);
+                    t_tavern(0);
                 }
 
                 @Override
                 public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
                     closeDialog.ok();
-                    t_tavern(to.lock_session);
+                    t_tavern(0);
                 }
 
             });
             nd.setLocationRelativeTo(this);
             nd.setVisible(true);
         }
-        if (to1 == null) {
-
-        } else {
-            t_tavern(to.lock_session);
-//            String multi_cashin = System.getProperty("multi_cashin", "false");
-//            if (multi_cashin.equalsIgnoreCase("true")) {
-//                Window p = (Window) this;
-//                Dlg_cashin nd = Dlg_cashin.create(p, true);
-//                nd.setTitle("");
-//                nd.do_pass();
-//                nd.setCallback(new Dlg_cashin.Callback() {
-//                    @Override
-//                    public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
-//                        closeDialog.ok();
-////                        int id = 1;
-////                        String session_no = MyUser.getUser_id();
-////                        String user_name1 = MyUser.getUser_name();
-////                        String screen_name1 = MyUser.getUser_screen_name();
-////                        String time_in = DateType.datetime.format(new Date());
-////                        String time_out = null;
-////                        double amount = data.amount;
-////                        String branch = my_branch;
-////                        String branch_id = my_branch_id;
-////                        String location = my_location;
-////                        String location_id = my_location_id;
-////                        String user_id = MyUser.getUser_id();
-////                        String user_screen_name = MyUser.getUser_screen_name();
-////                        S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
-////                        S1_cash_drawer.add_cash_drawer(to2);
-//                        t_tavern();
-//                    }
+//        if (to1 == null) {
 //
-//                    @Override
-//                    public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
-//                        closeDialog.ok();
-//                        t_tavern();
-//                    }
-//                });
-//                nd.setLocationRelativeTo(this);
-//                nd.setVisible(true);
-//            } else {
-//             
-//            }
-
-        }
+//        } else {
+//            t_tavern(to.lock_session);
+////            String multi_cashin = System.getProperty("multi_cashin", "false");
+////            if (multi_cashin.equalsIgnoreCase("true")) {
+////                Window p = (Window) this;
+////                Dlg_cashin nd = Dlg_cashin.create(p, true);
+////                nd.setTitle("");
+////                nd.do_pass();
+////                nd.setCallback(new Dlg_cashin.Callback() {
+////                    @Override
+////                    public void ok(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+////                        closeDialog.ok();
+//////                        int id = 1;
+//////                        String session_no = MyUser.getUser_id();
+//////                        String user_name1 = MyUser.getUser_name();
+//////                        String screen_name1 = MyUser.getUser_screen_name();
+//////                        String time_in = DateType.datetime.format(new Date());
+//////                        String time_out = null;
+//////                        double amount = data.amount;
+//////                        String branch = my_branch;
+//////                        String branch_id = my_branch_id;
+//////                        String location = my_location;
+//////                        String location_id = my_location_id;
+//////                        String user_id = MyUser.getUser_id();
+//////                        String user_screen_name = MyUser.getUser_screen_name();
+//////                        S1_cash_drawer.to_cash_drawer to2 = new S1_cash_drawer.to_cash_drawer(id, session_no, user_name1, screen_name1, time_in, time_out, amount, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList(), 0, 0, 0, 0, 0, 0, 0, 0, branch, branch_id, location, location_id, user_id, user_screen_name);
+//////                        S1_cash_drawer.add_cash_drawer(to2);
+////                        t_tavern();
+////                    }
+////
+////                    @Override
+////                    public void close(CloseDialog closeDialog, Dlg_cashin.OutputData data) {
+////                        closeDialog.ok();
+////                        t_tavern();
+////                    }
+////                });
+////                nd.setLocationRelativeTo(this);
+////                nd.setVisible(true);
+////            } else {
+////             
+////            }
+//
+//        }
 
     }
 
@@ -3163,17 +3166,18 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 //        nd.setVisible(true);
 //        
 //        
-//        jButton1.setEnabled(false);
-//        jButton1.setText("Script is running....");
-//        Thread t = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Srpt_stock_take_captured.ret_data_adjust("");
-//                jButton1.setEnabled(true);
-//                jButton1.setText("Finished....");
-//            }
-//        });
-//        t.start();
+        jButton1.setEnabled(false);
+        jButton1.setText("Script is running....");
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Adjust_null_logout.adjust();
+                jButton1.setEnabled(true);
+                jButton1.setText("Finished....");
+            }
+        });
+        t.start();
+
     }
 
     private void menu() {

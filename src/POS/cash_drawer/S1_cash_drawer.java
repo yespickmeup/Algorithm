@@ -64,8 +64,6 @@ public class S1_cash_drawer {
             this.amount = amount;
         }
 
-        
-        
         public String getTime_in() {
             return time_in;
         }
@@ -128,7 +126,6 @@ public class S1_cash_drawer {
             this.cash_out = cash_out;
         }
 
-      
     }
 
     public static void add_cash_drawer(to_cash_drawer to_cash_drawer) {
@@ -209,6 +206,23 @@ public class S1_cash_drawer {
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_cash_drawer.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_cash_drawer(int id, String date) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update  cash_drawer set "
+                    + " time_out ='" + date + "' "
+                    + " where id='" + id + "'";
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(S1_cash_drawer.class, "Successfully update");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

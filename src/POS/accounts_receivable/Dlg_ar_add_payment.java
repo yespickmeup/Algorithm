@@ -2058,7 +2058,7 @@ public class Dlg_ar_add_payment extends javax.swing.JDialog {
                     rate = rate / 100;
                     rate = rate * amount;
                     rate = amount + rate;
-                    System.out.println("rate: " + rate);
+//                    System.out.println("rate: " + rate);
                     tf_credit_card_amount.setText(FitIn.fmt_wc_0(rate));
                 }
 

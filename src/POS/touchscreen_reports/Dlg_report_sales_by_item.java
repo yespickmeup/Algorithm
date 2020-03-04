@@ -1173,7 +1173,7 @@ public class Dlg_report_sales_by_item extends javax.swing.JDialog {
         set_default_branch();
 
         String where = "  order by screen_name asc";
-        user_list = MyUser.ret_data(where);
+        user_list = MyUser.ret_data2(where);
         Field.Combo user = (Field.Combo) tf_cashier;
         user.setText(MyUser.getUser_screen_name());
         user.setId(MyUser.getUser_id());
