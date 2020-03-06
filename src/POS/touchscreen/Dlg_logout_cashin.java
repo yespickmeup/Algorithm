@@ -1726,7 +1726,7 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
         if (to.time_out != null) {
             jLabel32.setText(DateType.convert_slash_datetime3(to.time_out));
         }
-        
+
         tf_cashin.setText(FitIn.fmt_wc_0(to.amount));
         jTextField4.setText(FitIn.fmt_woc(to.thousand));
         jTextField1.setText(FitIn.fmt_woc(to.five_hundred));
@@ -1754,7 +1754,7 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
         if (datas.isEmpty()) {
             jTabbedPane1.remove(3);
             jButton6.setText("Logout");
-        } 
+        }
 
     }
 
@@ -1937,15 +1937,20 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
                 String location_id = drawer.location_id;
                 String user_id = drawer.user_id;
                 String user_screen_name = drawer.user_screen_name;
-                int lock_session=0;
+                int lock_session = 0;
                 CashDrawer.to_cash_drawer to = new CashDrawer.to_cash_drawer(id, session_no, user_name, screen_name, time_in,
                                                                              time_out, amount, cash_out, thousand, five_hundred, two_hundred, fifty, twenty, coins,
-                                                                             one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name,lock_session);
+                                                                             one_hundred, expenses, ten, five, one, point_fifty, point_twenty_five, point_ten, point_zero_five, branch, branch_id, location, location_id, user_id, user_screen_name, lock_session);
 
                 String date = DateType.sf.format(new Date());
                 CashDrawer.update_data(to, "" + id);
                 Alert.set(2, "");
-                jTabbedPane1.setSelectedIndex(3);
+                if (jTabbedPane1.getTabCount() == 4) {
+                    jTabbedPane1.setSelectedIndex(3);
+                } else {
+                    System.exit(1);
+                }
+
             } else {
                 System.exit(1);
             }

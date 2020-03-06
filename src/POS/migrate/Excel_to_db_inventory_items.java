@@ -70,10 +70,10 @@ public class Excel_to_db_inventory_items {
         this.show_to_sales = show_to_sales;
     }
 
-    public static void main2(String[] args) {
+    public static void main3(String[] args) {
         //retail
-        System.setProperty("pool_db", "db_smis_dumaguete_hnh_autoparts");
-        String file = "C:\\Users\\Ronescape\\Documents\\Excel Files\\Ray Buenavista\\encode.xls";
+        System.setProperty("pool_db", "db_smis_sibulan_abiera");
+        String file = "C:\\Users\\Ronescape\\Documents\\Database\\Abiera\\abiera.xls";
 
         if (file == null || file.isEmpty()) {
             return;
@@ -170,7 +170,7 @@ public class Excel_to_db_inventory_items {
             String model_id = "";
             int selling_type = 1;
 
-            String branch = "Dumaguete City";
+            String branch = "Sibulan City";
             String branch_code = "1";
             String location = "Selling Area";
             String location_id = "1";
@@ -202,12 +202,12 @@ public class Excel_to_db_inventory_items {
 //            Encoding_inventory.to_encoding_inventory en = new Encoding_inventory.to_encoding_inventory(id, item_code, barcodes, description, branch, branch_id, location, location_id, qty, date_added, user_name, screen_name, sheet_no, 0, counted_by, checked_by, cost, selling_price, user_id, user_screen_name, remarks);
 //            Encoding_inventory.add_encoding_inventory(en);
         }
-//        List<String> query = Inventory.add_inventory_list(tos);
+        List<String> query = Inventory.add_inventory_list(tos);
         System.out.println("Count: " + tos.size());
         Alert.set(1, "");
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         //wholesale
         System.setProperty("pool_db", "db_smis_dumaguete_laarns");
         String file = "C:\\Users\\Ronescape\\Documents\\Excel Files\\Laarns\\excel.xls";
@@ -454,7 +454,7 @@ public class Excel_to_db_inventory_items {
                 Excel_to_db_inventory_items encoded = new Excel_to_db_inventory_items(qty, item_code, barcode, description, cost, selling_price, category, classification, sub_classification, brand, model, unit, wholesale, reorder_level, show_to_sales);
                 if (record[0] != null) {
                     datas.add(encoded);
-                    System.out.println("");
+                    System.out.println("description: "+description);
                 }
 
             }

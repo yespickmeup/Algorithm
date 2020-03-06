@@ -13,11 +13,10 @@
 /*  update refreshment items */
 
 
-update cash_drawer  set time_out = (select time_out from cash_drawer  where id>c.id limit 1) 
-where cd.time_out is null;
 
+mysqldump -u user -h localhost --no-data -p database > database.sql
 
-update cash_drawer as  cd1, cash_drawer as cd2 
-    set cd1.time_out = (select cd2.time_out from cash_drawer as cd2 where cd2.id>cc1.id limit 1) 
-where cd1.time_out is null;
+/* Abiera */
+update inventory set allow_negative_inventory=1,auto_order=0,show_to_sales=1;
+update inventory_barcodes set allow_negative_inventory=1,auto_order=0,show_to_sales=1;
 

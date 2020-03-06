@@ -81,11 +81,11 @@ public class MyMain {
             System.setProperty("delete_prepaid_payment_finalized", prop.getProperty("delete_prepaid_payment_finalized", "false"));
             System.setProperty("sales_date", prop.getProperty("sales_date", "os"));
             System.setProperty("multi_cashin", prop.getProperty("multi_cashin", "false"));
-            System.out.println("OS: " + os);
+//            System.out.println("OS: " + os);
             System.setProperty("direct_pay", prop.getProperty("direct_pay", "false"));
-//            System.out.println("Home: " + home);
-            System.out.println("Local Ip: " + System.getProperty("local_ip"));
-            System.out.println("Host: " + System.getProperty("pool_host"));
+//            System.out.println("pool_db: " + pool_db);
+//            System.out.println("pool_db: " + System.getProperty("pool_db"));
+//            System.out.println("Host: " + System.getProperty("pool_host"));
 //            System.out.println("Environment: " + System.getProperty("environment"));
 //            System.out.println("inventory_item_delete: " + System.getProperty("inventory_item_delete"));
 
@@ -95,9 +95,9 @@ public class MyMain {
 
             String where2 = "order by id desc limit 1";
             List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
-            User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
+            
             if (!last.isEmpty()) {
-
+                User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
                 Date d = new Date();
                 Date date_to = new Date();
                 try {
@@ -112,6 +112,7 @@ public class MyMain {
                     try {
                         Thread.sleep(5);
 
+                        
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MyMain.class.getName()).log(Level.SEVERE, null, ex);
                     }
