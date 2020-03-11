@@ -92,7 +92,7 @@ public class MyMain {
             String where = "";
             List<Settings.to_settings> datas = Settings.ret_data(where);
             Settings.to_settings setting = datas.get(0);
-
+            
             String where2 = "order by id desc limit 1";
             List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
             
@@ -100,8 +100,9 @@ public class MyMain {
                 User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
                 Date d = new Date();
                 Date date_to = new Date();
-                try {
+                try {                    
                     date_to = DateType.datetime.parse(l.created_at);
+                    
                 } catch (ParseException ex) {
                     Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }

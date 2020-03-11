@@ -1098,6 +1098,7 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 //                double total_due = sales.amount_due;
 //                double cash = FitIn.toDouble(lbl_cash.getText());
 //                double change_due = Payments.countChange2();
+
 //                String receipt_infos = System.getProperty("receipt_infos", "");
 //                String receipt_footer = System.getProperty("receipt_footer", "This is an Official receipt");
 //                double discount = FitIn.toDouble(lbl_sale_discount.getText());

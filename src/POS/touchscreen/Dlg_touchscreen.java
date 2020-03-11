@@ -5,7 +5,6 @@
  * and open the template in the editor.
  */
 package POS.touchscreen;
-
 import POS.accounts_receivable.S1_sales_on_account;
 import POS.my_sales.MySales;
 import POS.branch_locations.S1_branch_locations;
