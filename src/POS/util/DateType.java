@@ -38,6 +38,7 @@ public class DateType {
     public static SimpleDateFormat month_date = new SimpleDateFormat("MMMMMMMMMM dd, yyyy");
     public static SimpleDateFormat day_and_time = new SimpleDateFormat("MMMMMMMMMM dd, yyyy HH:mm aa");
     public static SimpleDateFormat slash = new SimpleDateFormat("MM/dd/yyyy");
+    public static SimpleDateFormat slash2 = new SimpleDateFormat("MM/dd/yy");
     public static SimpleDateFormat slash_w_time = new SimpleDateFormat("MM/dd/yyyy HH:mm aa");
     public static SimpleDateFormat time3 = new SimpleDateFormat("HH:mm:ss aa");
     public static SimpleDateFormat backup = new SimpleDateFormat("MM_dd_yyyy_HH_mm_ss");
@@ -178,6 +179,22 @@ public class DateType {
         return date;
     }
 
+    public static String convert_slash_datetime_sf3(String datetime) {
+        String date = "";
+        Date d = new Date();
+        if (datetime.isEmpty()) {
+            datetime = DateType.slash2.format(new Date());
+        }
+        try {
+            d = DateType.slash2.parse(datetime);
+        } catch (ParseException ex) {
+            Logger.getLogger(DateType.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        date = DateType.sf.format(d);
+        return date;
+    }
+
     public static String convert_slash_datetime_sf2(String datetime) {
         String date = "";
         Date d = new Date();
@@ -193,7 +210,7 @@ public class DateType {
         date = DateType.datetime.format(d);
         return date;
     }
-    
+
     public static String convert_dash_date(String datetime) {
         String date = "";
         Date d = new Date();
@@ -479,8 +496,8 @@ public class DateType {
 
         time = time.replace("am", "");
         time = time.replace("pm", "");
-        
-        ret_time[0] = time+":00";
+
+        ret_time[0] = time + ":00";
         return "";
     }
 }

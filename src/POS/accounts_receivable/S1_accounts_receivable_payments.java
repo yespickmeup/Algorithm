@@ -368,6 +368,7 @@ public class S1_accounts_receivable_payments {
             s2 = SqlStringUtil.parse(s2).
                     setNumber("balance", new_balance).
                     ok();
+
             stmt.addBatch(s2);
 
             //update customers paid

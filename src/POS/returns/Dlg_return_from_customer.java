@@ -437,6 +437,16 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
 
         jLabel9.setText("No. of Items:");
@@ -693,6 +703,14 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         select_returned_item();
     }//GEN-LAST:event_jTable2MouseClicked
 
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -745,7 +763,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.JTable tbl_sales;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db","db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host","192.168.1.51");
         init_key();
         init_tbl_sales(tbl_sales);
@@ -771,14 +789,14 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -946,21 +964,33 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     }
 
     private void ret_sales() {
-        String where = " where remarks like '%" + "" + "%' ";
-        if (jCheckBox1.isSelected()) {
-            where = where + " and sales_no like '%" + jTextField1.getText() + "%'";
+        if (!jTextField1.getText().isEmpty()) {
+            String where = " where remarks like '%" + "" + "%' ";
+            if (jCheckBox1.isSelected()) {
+                where = where + " and sales_no like '%" + jTextField1.getText() + "%'";
+            } else {
+                where = where + " and customer_name like '%" + jTextField1.getText() + "%'";
+            }
+            if (!jCheckBox3.isSelected()) {
+                String date_from = DateType.sf.format(jDateChooser1.getDate());
+                String date_to = DateType.sf.format(jDateChooser2.getDate());
+                where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+            }
+            where = where + " and status=0 order by id asc";
+            List<MySales.sales> sales = MySales.ret_data(where);
+            loadData_sales(sales);
+            jLabel5.setText("" + sales.size());
         } else {
-            where = where + " and customer_name like '%" + jTextField1.getText() + "%'";
+            tbl_sales_ALM.clear();
+            jLabel5.setText("0");
+
+            tbl_sale_items_ALM.clear();
+            jLabel7.setText("0");
+
+            tbl_return_from_customer_items_ALM.clear();
+            jLabel7.setText("0");
         }
-        if (!jCheckBox3.isSelected()) {
-            String date_from = DateType.sf.format(jDateChooser1.getDate());
-            String date_to = DateType.sf.format(jDateChooser2.getDate());
-            where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-        }
-        where = where + " and status=0 order by id asc";
-        List<MySales.sales> sales = MySales.ret_data(where);
-        loadData_sales(sales);
-        jLabel5.setText("" + sales.size());
+
     }
 
     private void select_sale() {
@@ -1162,21 +1192,36 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_return_from_customer_qty nd = Dlg_return_from_customer_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass(item_code, description, ordered, total_returned, reason, qty);
+        nd.do_pass(item_code, description, ordered, total_returned, reason, qty, item.selling_price);
         nd.setCallback(new Dlg_return_from_customer_qty.Callback() {
 
             @Override
             public void ok(CloseDialog closeDialog, Dlg_return_from_customer_qty.OutputData data) {
                 closeDialog.ok();
-                post_return(item, data.qty, data.remarks);
+                double cash = data.cash_amount;
+                String prepaid_customer_name = data.prepaid_customer_name;
+                String prepaid_customer_id = data.prepaid_customer_id;
+                double prepaid_amount = data.prepaid_amount;
+                String charge_reference_no = data.charge_reference_no;
+                String charge_ar_no = data.charge_ar_no;
+                String charge_type = data.charge_type;
+                String charge_customer_name = data.charge_customer_name;
+                String charge_customer_id = data.charge_customer_id;
+                double charge_amount = data.charge_amount;
+                int charge_days = data.charge_days;
+
+                post_return(item, data.qty, data.remarks, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no,
+                         charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
+                ret_sale_returned_items();
             }
         });
-        nd.setLocationRelativeTo(jScrollPane2);
+        nd.setLocationRelativeTo(null);
         nd.setVisible(true);
 
     }
 
-    private void post_return(MySales_Items.items item, double to_return, String reason) {
+    private void post_return(MySales_Items.items item, double to_return, String reason, double cash, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no,
+             String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days) {
         int id = 0;
         String return_to_supplier_no = "";
         String user_name = MyUser.getUser_screen_name();
@@ -1211,7 +1256,8 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         String branch_id = item.branch_code;
         String location = item.location;
         String location_id = item.location_id;
-        Return_from_customer_items.to_return_from_customer_items ret = new to_return_from_customer_items(id, return_to_supplier_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id);
+
+        Return_from_customer_items.to_return_from_customer_items ret = new to_return_from_customer_items(id, return_to_supplier_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
         Return_from_customer_items.add_data(ret);
 
         int row = tbl_sales.getSelectedRow();
@@ -1584,6 +1630,8 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                     closeDialog.ok();
                     Return_from_customer_items.finalize(item);
                     Alert.set(2, "");
+                    tbl_sale_items_ALM.clear();
+                    tbl_return_from_customer_items_ALM.clear();
                     ret_sale_returned_items();
                 }
             });

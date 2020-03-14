@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class IB_categories {
 
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
 
         System.setProperty("pool_db", "db_smis_sibulan_abiera");
         String where = " group by category order by category asc ";
@@ -34,7 +34,7 @@ public class IB_categories {
 
     }
 
-    public static void main1(String[] args) {
+    public static void mai1(String[] args) {
 
         System.setProperty("pool_db", "db_smis_sibulan_abiera");
         String where = " group by classification order by classification asc ";
@@ -50,7 +50,7 @@ public class IB_categories {
 
     }
 
-    public static void main(String[] args) {
+    public static void mai2(String[] args) {
 
         System.setProperty("pool_db", "db_smis_sibulan_abiera");
         String where = " group by sub_classification order by sub_classification asc ";

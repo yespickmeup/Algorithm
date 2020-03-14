@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package POS.touchscreen;
+
 import POS.accounts_receivable.S1_sales_on_account;
 import POS.my_sales.MySales;
 import POS.branch_locations.S1_branch_locations;
@@ -3503,7 +3504,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     ret_si_no();
-                    
+
                     tf_reference_no1.grabFocus();
                     jCheckBox2.setSelected(true);
                 }
@@ -4319,10 +4320,17 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 for (String s : list) {
                     int i = s.indexOf(":");
                     int ii = s.indexOf("/");
+
                     int iii = s.indexOf("^");
                     String uom1 = s.substring(1, i);
                     double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                    double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+
+                    int p_i = i + 1;
+                    String s_price = s.substring(p_i, (s.length() - 1));
+                    int iiii = s_price.indexOf("/");
+                    String new_price=s_price.substring(0,iiii);
+                    
+                    double selling_price = FitIn.toDouble(new_price);
                     int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
                     to_uom to1 = new to_uom(uom1, selling_price, conversion, is_default);
                     uoms.add(to1);
@@ -5803,7 +5811,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         String charge_customer_name = f_charge.customer_name;
         String charge_customer_id = f_charge.customer_id;
         double charge_amount = f_charge.amount;
-        String charge_date_applied=f_charge.date_applied;
+        String charge_date_applied = f_charge.date_applied;
 //        if (charge_amount == 0) {
 //            charge_type = transaction_type;
 //            charge_reference_no = reference_no;
@@ -5861,7 +5869,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             ref_cr_no = ReceiptIncrementor.increment(ref_cr_no);
         }
 
-        final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount,charge_date_applied, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
+        final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, charge_date_applied, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
         try {
             sales_no = MySales.add_sales(sales, items, location_id);

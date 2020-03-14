@@ -545,19 +545,22 @@ public class Srpt_sales_ledger_with_items {
                     String uom = unit;
                     String[] list = uom.split(",");
 
-                    int o = 0;
-                    for (String s : list) {
-                        int i = s.indexOf(":");
-                        int ii = s.indexOf("/");
-                        int iii = s.indexOf("^");
-                        String uom1 = s.substring(1, i);
-                        double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                        product_qty = product_qty / conversion1;
-                        double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
-                        int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-                        uom1 = uom1.replaceAll("#", "/");
-                        unit = uom1;
-                        o++;
+                    try {
+                        int o = 0;
+                        for (String s : list) {
+                            int i = s.indexOf(":");
+                            int ii = s.indexOf("/");
+                            int iii = s.indexOf("^");
+                            String uom1 = s.substring(1, i);
+                            double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                            product_qty = product_qty / conversion1;
+                            double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
+                            int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+                            uom1 = uom1.replaceAll("#", "/");
+                            unit = uom1;
+                            o++;
+                        }
+                    } catch (Exception e) {
                     }
 
                     double amount = (price * product_qty) - discount;

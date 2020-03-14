@@ -15,6 +15,7 @@ import POS.discounts.S1_discounts;
 import POS.terms.S1_terms;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
+import POS.users.User_default_privelege_others;
 import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
@@ -2037,12 +2038,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void delete_accounts_receivable() {
-//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Delete)" + "' limit 1";
-//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
-//        if (privileges.isEmpty()) {
-//            Alert.set(0, "Privilege not added!");
-//            return;
-//        }
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable - (Delete)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
 
         int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
@@ -2228,12 +2229,12 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }
 
     private void add_ar_payment() {
-//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
-//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
-//        if (privileges.isEmpty()) {
-//            Alert.set(0, "Privilege not added!");
-//            return;
-//        }
+        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         int row = tbl_accounts_receivable.getSelectedRow();
         if (row < 0) {
             return;
@@ -2317,6 +2318,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
                 credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
                 online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax, salary_deduction);
+
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");

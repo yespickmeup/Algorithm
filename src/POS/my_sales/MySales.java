@@ -816,6 +816,7 @@ public class MySales {
                         + ",model_id"
                         + ",addtl_amount"
                         + ",wtax"
+                        + ",cost"
                         + ")values("
                         + ":sales_no"
                         + ",:item_code"
@@ -857,6 +858,7 @@ public class MySales {
                         + ",:model_id"
                         + ",:addtl_amount"
                         + ",:wtax"
+                        + ",:cost"
                         + ")";
 
                 s2 = SqlStringUtil.parse(s2)
@@ -900,6 +902,7 @@ public class MySales {
                         .setString("model_id", to_sale_items.model_id)
                         .setNumber("addtl_amount", to_sale_items.addtl_amount)
                         .setNumber("wtax", to_sale_items.wtax)
+                        .setNumber("cost",to_sale_items.cost)
                         .ok();
 
                 stmt.addBatch(s2);

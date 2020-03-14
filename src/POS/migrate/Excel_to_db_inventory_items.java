@@ -70,10 +70,10 @@ public class Excel_to_db_inventory_items {
         this.show_to_sales = show_to_sales;
     }
 
-    public static void main3(String[] args) {
+    public static void main(String[] args) {
         //retail
         System.setProperty("pool_db", "db_smis_sibulan_abiera");
-        String file = "C:\\Users\\Ronescape\\Documents\\Database\\Abiera\\abiera.xls";
+        String file = "C:\\Users\\User\\Documents\\Excel Files\\abiera.xls";
 
         if (file == null || file.isEmpty()) {
             return;

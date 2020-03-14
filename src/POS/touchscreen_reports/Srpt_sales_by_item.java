@@ -85,10 +85,11 @@ public class Srpt_sales_by_item {
         String with_cost;
         String serial_nos;
         String added_by;
+
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date, String with_cost, String serial_nos,String added_by) {
+        public field(String item_code, String barcode, String description, String unit, String category, String classification, String sub_classification, String brand, String model, String supplier, double product_qty, double price, double discount, double amount, String sales_no, String status, double cost, double margin, double total_margin, double addtl_amount, String date, String with_cost, String serial_nos, String added_by) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -112,7 +113,7 @@ public class Srpt_sales_by_item {
             this.date = date;
             this.with_cost = with_cost;
             this.serial_nos = serial_nos;
-            this.added_by=added_by;
+            this.added_by = added_by;
         }
 
         public String getAdded_by() {
@@ -397,6 +398,7 @@ public class Srpt_sales_by_item {
                     + ",brand_id"
                     + ",model"
                     + ",model_id"
+                    + ",cost"
                     + " from sale_items  "
                     + " " + where
                     + " group by sales_no,item_code,unit,selling_price,discount_amount order by sales_no,id asc";
@@ -449,7 +451,7 @@ public class Srpt_sales_by_item {
 
                 String uom = unit;
                 String[] list = uom.split(",");
-
+                double cost = rs.getDouble(36);
                 int o = 0;
                 for (String s : list) {
                     int i = s.indexOf(":");
@@ -470,7 +472,7 @@ public class Srpt_sales_by_item {
                 if (status == 1) {
                     status1 = "Void";
                 }
-                double cost = 0;
+
                 double margin = 0;
                 double total_margin = 0;
                 double addtl_amount = 0;
@@ -481,7 +483,7 @@ public class Srpt_sales_by_item {
                 }
 
 //                System.out.println("serial_no: "+serial_no);
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost, serial_no,user_screen_name);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost, serial_no, user_screen_name);
                 fields.add(field);
             }
 
@@ -537,6 +539,7 @@ public class Srpt_sales_by_item {
                     + ",brand_id"
                     + ",model"
                     + ",model_id"
+                    + ",cost"
                     + " from sale_items  "
                     + " " + where
                     + " group by item_code,unit,selling_price,discount_amount order by description asc";
@@ -583,6 +586,7 @@ public class Srpt_sales_by_item {
                 String brand_id = rs.getString(37);
                 String model = rs.getString(38);
                 String model_id = rs.getString(39);
+                double cost = rs.getDouble(40);
                 String supplier = supplier_name;
                 double price = selling_price;
                 double discount = discount_amount;
@@ -590,19 +594,22 @@ public class Srpt_sales_by_item {
                 String uom = unit;
                 String[] list = uom.split(",");
 
-                int o = 0;
-                for (String s : list) {
-                    int i = s.indexOf(":");
-                    int ii = s.indexOf("/");
-                    int iii = s.indexOf("^");
-                    String uom1 = s.substring(1, i);
-                    double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                    product_qty = product_qty / conversion1;
-                    double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
-                    int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-                    uom1 = uom1.replaceAll("#", "/");
-                    unit = uom1;
-                    o++;
+                try {
+                    int o = 0;
+                    for (String s : list) {
+                        int i = s.indexOf(":");
+                        int ii = s.indexOf("/");
+                        int iii = s.indexOf("^");
+                        String uom1 = s.substring(1, i);
+                        double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                        product_qty = product_qty / conversion1;
+                        double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
+                        int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+                        uom1 = uom1.replaceAll("#", "/");
+                        unit = uom1;
+                        o++;
+                    }
+                } catch (Exception e) {
                 }
 
                 double amount = (price * product_qty) - discount;
@@ -610,7 +617,7 @@ public class Srpt_sales_by_item {
                 if (status == 1) {
                     status1 = "Void";
                 }
-                double cost = 0;
+
                 double margin = 0;
                 double total_margin = 0;
                 double addtl_amount = 0;
@@ -627,7 +634,7 @@ public class Srpt_sales_by_item {
                 }
 
 //                System.out.println("serial_no: "+serial_no);
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost, serial_no,user_screen_name);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost, serial_no, user_screen_name);
                 fields.add(field);
             }
 
@@ -688,6 +695,7 @@ public class Srpt_sales_by_item {
                     + ",model"
                     + ",model_id"
                     + ",addtl_amount"
+                    + ",cost"
                     + " from sale_items  "
                     + " " + where
                     + " group by sales_no,item_code,unit,selling_price,discount_amount,addtl_amount order by  description asc";
@@ -735,6 +743,7 @@ public class Srpt_sales_by_item {
                 String model = rs.getString(38);
                 String model_id = rs.getString(39);
                 double addtl_amount = rs.getDouble(40);
+                double cost = rs.getDouble(41);
                 String supplier = supplier_name;
                 double price = selling_price;
                 double discount = discount_amount;
@@ -742,19 +751,22 @@ public class Srpt_sales_by_item {
                 String uom = unit;
                 String[] list = uom.split(",");
 
-                int o = 0;
-                for (String s : list) {
-                    int i = s.indexOf(":");
-                    int ii = s.indexOf("/");
-                    int iii = s.indexOf("^");
-                    String uom1 = s.substring(1, i);
-                    double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
-                    product_qty = product_qty / conversion1;
-                    double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
-                    int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
-                    uom1 = uom1.replaceAll("#", "/");
-                    unit = uom1;
-                    o++;
+                try {
+                    int o = 0;
+                    for (String s : list) {
+                        int i = s.indexOf(":");
+                        int ii = s.indexOf("/");
+                        int iii = s.indexOf("^");
+                        String uom1 = s.substring(1, i);
+                        double conversion1 = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+                        product_qty = product_qty / conversion1;
+                        double selling_price1 = FitIn.toDouble(s.substring(i + 1, ii));
+                        int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+                        uom1 = uom1.replaceAll("#", "/");
+                        unit = uom1;
+                        o++;
+                    }
+                } catch (Exception e) {
                 }
 
                 double amount = ((price * product_qty) - discount) + addtl_amount;
@@ -765,36 +777,39 @@ public class Srpt_sales_by_item {
 
                 String sf = DateType.convert_dash_date4(date_added);
 
-                double cost = 0;
                 double margin = 0;
                 double total_margin = 0;
-                String s2 = "select "
-                        + " supplier"
-                        + ",supllier_id"
-                        + ",cost"
-                        + ",unit"
-                        + " from  receipt_items  "
-                        + " where Date(date_delivered) < '" + sf + "' and main_barcode = '" + item_code + "' order by id desc limit 1";
+                if (cost <= 0) {
+                    String s2 = "select "
+                            + " supplier"
+                            + ",supllier_id"
+                            + ",cost"
+                            + ",unit"
+                            + " from  receipt_items  "
+                            + " where Date(date_delivered) < '" + sf + "' and main_barcode = '" + item_code + "' order by id desc limit 1";
 
-                Statement stmt2 = conn.createStatement();
-                ResultSet rs2 = stmt2.executeQuery(s2);
-                if (rs2.next()) {
-                    supplier = rs2.getString(1);
-                    String supllier_id = rs2.getString(2);
-                    cost = rs2.getDouble(3);
-                    String unit1 = rs2.getString(4);
-                } else {
-                    String s3 = "select "
-                            + " cost"
-                            + " from  inventory_barcodes  "
-                            + " where  main_barcode = '" + item_code + "' and location_id='" + location_id + "' limit 1";
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery(s2);
+                    if (rs2.next()) {
+                        supplier = rs2.getString(1);
+                        String supllier_id = rs2.getString(2);
+                        cost = rs2.getDouble(3);
+                        String unit1 = rs2.getString(4);
+                    } else {
+                        String s3 = "select "
+                                + " cost"
+                                + " from  inventory_barcodes  "
+                                + " where  main_barcode = '" + item_code + "' and location_id='" + location_id + "' limit 1";
 
-                    Statement stmt3 = conn.createStatement();
-                    ResultSet rs3 = stmt3.executeQuery(s3);
-                    if (rs3.next()) {
-                        cost = rs3.getDouble(1);
+                        Statement stmt3 = conn.createStatement();
+                        ResultSet rs3 = stmt3.executeQuery(s3);
+                        if (rs3.next()) {
+                            cost = rs3.getDouble(1);
+                        }
+
                     }
                 }
+
                 double amount2 = ((selling_price * product_qty) + addtl_amount) - discount_amount;
                 double total_cost = (cost * product_qty);
                 double total_amount = (amount2 * product_qty);
@@ -807,7 +822,7 @@ public class Srpt_sales_by_item {
                 if (cost <= 0) {
                     with_cost = "No Cost";
                 }
-                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost, serial_no,user_screen_name);
+                Srpt_sales_by_item.field field = new field(item_code, barcode, description, unit, category, classification, sub_classification, brand, model, supplier, product_qty, price, discount, amount2, sales_no, status1, cost, margin, total_margin, addtl_amount, date, with_cost, serial_no, user_screen_name);
                 if (cost <= 0) {
                     no_cost_list.add(field);
                 } else {

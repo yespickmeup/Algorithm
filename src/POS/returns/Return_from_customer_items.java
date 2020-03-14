@@ -5,15 +5,22 @@
  */
 package POS.returns;
 
-import POS.inventory.Inventory_barcodes;
+import POS.accounts_receivable.S1_accounts_receivable_payments;
+import static POS.stock_transfer.Stock_transfers.to;
+import POS.users.MyUser;
+import POS.util.Alert;
+import POS.util.DateType;
 import POS.util.MyConnection;
+import POS.util.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
@@ -59,8 +66,19 @@ public class Return_from_customer_items {
         public final String branch_id;
         public final String location;
         public final String location_id;
+        public final double cash;
+        public final String prepaid_customer_name;
+        public final String prepaid_customer_id;
+        public final double prepaid_amount;
+        public final String charge_reference_no;
+        public final String charge_ar_no;
+        public final String charge_type;
+        public final String charge_customer_name;
+        public final String charge_customer_id;
+        public final double charge_amount;
+        public final int charge_days;
 
-        public to_return_from_customer_items(int id, String return_from_customer_no, String user_name, String session_no, String date_added, String supplier, String supplier_id, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String branch, String branch_id, String location, String location_id) {
+        public to_return_from_customer_items(int id, String return_from_customer_no, String user_name, String session_no, String date_added, String supplier, String supplier_id, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String branch, String branch_id, String location, String location_id, double cash, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no, String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days) {
             this.id = id;
             this.return_from_customer_no = return_from_customer_no;
             this.user_name = user_name;
@@ -95,6 +113,17 @@ public class Return_from_customer_items {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.cash = cash;
+            this.prepaid_customer_name = prepaid_customer_name;
+            this.prepaid_customer_id = prepaid_customer_id;
+            this.prepaid_amount = prepaid_amount;
+            this.charge_reference_no = charge_reference_no;
+            this.charge_ar_no = charge_ar_no;
+            this.charge_type = charge_type;
+            this.charge_customer_name = charge_customer_name;
+            this.charge_customer_id = charge_customer_id;
+            this.charge_amount = charge_amount;
+            this.charge_days = charge_days;
         }
     }
 
@@ -102,7 +131,7 @@ public class Return_from_customer_items {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "insert into return_from_customer_items("
-                    + " return_from_customer_no"
+                    + "return_from_customer_no"
                     + ",user_name"
                     + ",session_no"
                     + ",date_added"
@@ -135,6 +164,17 @@ public class Return_from_customer_items {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",cash"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",charge_reference_no"
+                    + ",charge_ar_no"
+                    + ",charge_type"
+                    + ",charge_customer_name"
+                    + ",charge_customer_id"
+                    + ",charge_amount"
+                    + ",charge_days"
                     + ")values("
                     + ":return_from_customer_no"
                     + ",:user_name"
@@ -169,6 +209,17 @@ public class Return_from_customer_items {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:cash"
+                    + ",:prepaid_customer_name"
+                    + ",:prepaid_customer_id"
+                    + ",:prepaid_amount"
+                    + ",:charge_reference_no"
+                    + ",:charge_ar_no"
+                    + ",:charge_type"
+                    + ",:charge_customer_name"
+                    + ",:charge_customer_id"
+                    + ",:charge_amount"
+                    + ",:charge_days"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -205,6 +256,17 @@ public class Return_from_customer_items {
                     .setString("branch_id", to_return_from_customer_items.branch_id)
                     .setString("location", to_return_from_customer_items.location)
                     .setString("location_id", to_return_from_customer_items.location_id)
+                    .setNumber("cash", to_return_from_customer_items.cash)
+                    .setString("prepaid_customer_name", to_return_from_customer_items.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_return_from_customer_items.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_return_from_customer_items.prepaid_amount)
+                    .setString("charge_reference_no", to_return_from_customer_items.charge_reference_no)
+                    .setString("charge_ar_no", to_return_from_customer_items.charge_ar_no)
+                    .setString("charge_type", to_return_from_customer_items.charge_type)
+                    .setString("charge_customer_name", to_return_from_customer_items.charge_customer_name)
+                    .setString("charge_customer_id", to_return_from_customer_items.charge_customer_id)
+                    .setNumber("charge_amount", to_return_from_customer_items.charge_amount)
+                    .setNumber("charge_days", to_return_from_customer_items.charge_days)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -224,7 +286,7 @@ public class Return_from_customer_items {
             conn.setAutoCommit(false);
             conn2.setAutoCommit(false);
             String s0 = "insert into return_from_customer_items("
-                    + " return_from_customer_no"
+                    + "return_from_customer_no"
                     + ",user_name"
                     + ",session_no"
                     + ",date_added"
@@ -257,6 +319,17 @@ public class Return_from_customer_items {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",cash"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",charge_reference_no"
+                    + ",charge_ar_no"
+                    + ",charge_type"
+                    + ",charge_customer_name"
+                    + ",charge_customer_id"
+                    + ",charge_amount"
+                    + ",charge_days"
                     + ")values("
                     + ":return_from_customer_no"
                     + ",:user_name"
@@ -291,6 +364,17 @@ public class Return_from_customer_items {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:cash"
+                    + ",:prepaid_customer_name"
+                    + ",:prepaid_customer_id"
+                    + ",:prepaid_amount"
+                    + ",:charge_reference_no"
+                    + ",:charge_ar_no"
+                    + ",:charge_type"
+                    + ",:charge_customer_name"
+                    + ",:charge_customer_id"
+                    + ",:charge_amount"
+                    + ",:charge_days"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -327,6 +411,17 @@ public class Return_from_customer_items {
                     .setString("branch_id", to_return_from_customer_items.branch_id)
                     .setString("location", to_return_from_customer_items.location)
                     .setString("location_id", to_return_from_customer_items.location_id)
+                    .setNumber("cash", to_return_from_customer_items.cash)
+                    .setString("prepaid_customer_name", to_return_from_customer_items.prepaid_customer_name)
+                    .setString("prepaid_customer_id", to_return_from_customer_items.prepaid_customer_id)
+                    .setNumber("prepaid_amount", to_return_from_customer_items.prepaid_amount)
+                    .setString("charge_reference_no", to_return_from_customer_items.charge_reference_no)
+                    .setString("charge_ar_no", to_return_from_customer_items.charge_ar_no)
+                    .setString("charge_type", to_return_from_customer_items.charge_type)
+                    .setString("charge_customer_name", to_return_from_customer_items.charge_customer_name)
+                    .setString("charge_customer_id", to_return_from_customer_items.charge_customer_id)
+                    .setNumber("charge_amount", to_return_from_customer_items.charge_amount)
+                    .setNumber("charge_days", to_return_from_customer_items.charge_days)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement("");
@@ -481,6 +576,344 @@ public class Return_from_customer_items {
                     + "";
             stmt.addBatch(s4);
 
+            if (to_return_from_customer_items.prepaid_amount > 0) {
+                String prep = "select "
+                        + "id"
+                        + ",customer_name"
+                        + ",customer_no"
+                        + ",contact_no"
+                        + ",credit_limit"
+                        + ",address"
+                        + ",term"
+                        + ",location"
+                        + ",balance"
+                        + ",discount"
+                        + ",prepaid"
+                        + " from customers "
+                        + " where id='" + to_return_from_customer_items.prepaid_customer_id + "' ";
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs = stmt2.executeQuery(prep);
+                double prepaid = 0;
+                if (rs.next()) {
+                    prepaid = rs.getDouble(11);
+                }
+                prepaid = prepaid + to_return_from_customer_items.prepaid_amount;
+                String s3 = " update customers set prepaid='" + prepaid + "' "
+                        + " where id='" + to_return_from_customer_items.prepaid_customer_id + "' "
+                        + " ";
+
+                s3 = SqlStringUtil.parse(s3)
+                        .ok();
+                stmt.addBatch(s3);
+            }
+
+            if (to_return_from_customer_items.charge_amount > 0) {
+                String customer_id = to_return_from_customer_items.charge_customer_id;
+                String customer_name = to_return_from_customer_items.charge_customer_name;
+                String ar_no = to_return_from_customer_items.charge_ar_no;
+                String date_added = DateType.datetime.format(new Date());
+                String user_name = MyUser.getUser_id();
+                double amount = to_return_from_customer_items.cash;
+                double discount_amount = 0;
+                double discount_rate = 0;
+                String discount = "";
+                int status = 1;
+                double term = to_return_from_customer_items.charge_days;
+                String date_applied = DateType.datetime.format(new Date());
+                double paid = 0;
+                String date_paid = DateType.sf.format(new Date());
+                String remarks = to_return_from_customer_items.remarks;
+                String type = "";
+                String or_no = "";
+                double prev_balance = 0;
+                double check_amount = 0;
+                String check_holder = "";
+                String check_bank = "";
+                String check_no = "";
+                String ci_no = "";
+                String trust_receipt = "";
+                String or_payment_no = "";
+                String soa_id = "";
+                String soa_type = to_return_from_customer_items.charge_type;
+                String soa_type_id = "";
+                String reference_no = to_return_from_customer_items.charge_reference_no;
+                String check_date = date_paid;
+                String user_id = MyUser.getUser_id();
+                String user_screen_name = MyUser.getUser_screen_name();
+                double tax_rate = 0;
+                double tax_amount = 0;
+
+                String branch = to_return_from_customer_items.branch;
+                String branch_id = to_return_from_customer_items.branch_id;
+                String location = to_return_from_customer_items.location;
+                String location_id = to_return_from_customer_items.location_id;
+
+                double total_amount = to_return_from_customer_items.qty * to_return_from_customer_items.cost;
+
+                String prepaid_customer_name = to_return_from_customer_items.prepaid_customer_name;
+                String prepaid_customer_id = to_return_from_customer_items.prepaid_customer_id;
+                double prepaid_amount = to_return_from_customer_items.prepaid_amount;
+                String credit_card_type = "";
+                double credit_card_rate = 0;
+                String credit_card_no = "";
+                String credit_card_holder = "";
+                double credit_card_amount = 0;
+                String gift_certificate_from = "";
+                String gift_certificate_description = "";
+                String gift_certificate_no = "";
+                double gift_certificate_amount = 0;
+                String online_bank = "";
+                String online_reference_no = "";
+                String online_holder = "";
+                String online_date = DateType.now();
+                double online_amount = 0;
+                double actual_amount = (amount + check_amount) - discount_amount;
+                double retention = 0;
+                double business_tax = 0;
+                double salary_deduction = 0;
+                S1_accounts_receivable_payments.to_accounts_receivable_payments to_accounts_receivable_payments = new S1_accounts_receivable_payments.to_accounts_receivable_payments(
+                        status, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid,
+                        date_paid, remarks, type, or_no, prev_balance, check_amount, check_holder, check_bank, check_no, ci_no, trust_receipt, or_payment_no, soa_id,
+                        soa_type, soa_type_id, reference_no, false, check_date, user_id, user_screen_name, tax_rate, tax_amount, branch, branch_id, location,
+                        location_id, prepaid_customer_name, prepaid_customer_id, prepaid_amount, credit_card_type, credit_card_rate, credit_card_no,
+                        credit_card_holder, credit_card_amount, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount,
+                        online_bank, online_reference_no, online_holder, online_date, online_amount, actual_amount, retention, business_tax, salary_deduction);
+                //<editor-fold defaultstate="collapsed" desc=" insert ar payment ">
+                String s5 = "insert into  accounts_receivable_payments("
+                        + "customer_id"
+                        + ",customer_name"
+                        + ",ar_no"
+                        + ",date_added"
+                        + ",user_name"
+                        + ",amount"
+                        + ",discount_amount"
+                        + ",discount_rate"
+                        + ",discount"
+                        + ",status"
+                        + ",term"
+                        + ",date_applied"
+                        + ",paid"
+                        + ",date_paid"
+                        + ",remarks"
+                        + ",type"
+                        + ",or_no"
+                        + ",prev_balance"
+                        + ",check_amount"
+                        + ",check_holder"
+                        + ",check_bank"
+                        + ",check_no"
+                        + ",ci_no"
+                        + ",trust_receipt"
+                        + ",or_payment_no"
+                        + ",soa_id"
+                        + ",soa_type"
+                        + ",soa_type_id"
+                        + ",reference_no"
+                        + ",check_date"
+                        + ",user_id"
+                        + ",user_screen_name"
+                        + ",tax_rate"
+                        + ",tax_amount"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",location"
+                        + ",location_id"
+                        + ",prepaid_customer_name"
+                        + ",prepaid_customer_id"
+                        + ",prepaid_amount"
+                        + ",credit_card_type"
+                        + ",credit_card_rate"
+                        + ",credit_card_no"
+                        + ",credit_card_holder"
+                        + ",credit_card_amount"
+                        + ",gift_certificate_from"
+                        + ",gift_certificate_description"
+                        + ",gift_certificate_no"
+                        + ",gift_certificate_amount"
+                        + ",online_bank"
+                        + ",online_reference_no"
+                        + ",online_holder"
+                        + ",online_date"
+                        + ",online_amount"
+                        + ",actual_amount"
+                        + ",salary_deduction"
+                        + ")values("
+                        + ":customer_id"
+                        + ",:customer_name"
+                        + ",:ar_no"
+                        + ",:date_added"
+                        + ",:user_name"
+                        + ",:amount"
+                        + ",:discount_amount"
+                        + ",:discount_rate"
+                        + ",:discount"
+                        + ",:status"
+                        + ",:term"
+                        + ",:date_applied"
+                        + ",:paid"
+                        + ",:date_paid"
+                        + ",:remarks"
+                        + ",:type"
+                        + ",:or_no"
+                        + ",:prev_balance"
+                        + ",:check_amount"
+                        + ",:check_holder"
+                        + ",:check_bank"
+                        + ",:check_no"
+                        + ",:ci_no"
+                        + ",:trust_receipt"
+                        + ",:or_payment_no"
+                        + ",:soa_id"
+                        + ",:soa_type"
+                        + ",:soa_type_id"
+                        + ",:reference_no"
+                        + ",:check_date"
+                        + ",:user_id"
+                        + ",:user_screen_name"
+                        + ",:tax_rate"
+                        + ",:tax_amount"
+                        + ",:branch"
+                        + ",:branch_id"
+                        + ",:location"
+                        + ",:location_id"
+                        + ",:prepaid_customer_name"
+                        + ",:prepaid_customer_id"
+                        + ",:prepaid_amount"
+                        + ",:credit_card_type"
+                        + ",:credit_card_rate"
+                        + ",:credit_card_no"
+                        + ",:credit_card_holder"
+                        + ",:credit_card_amount"
+                        + ",:gift_certificate_from"
+                        + ",:gift_certificate_description"
+                        + ",:gift_certificate_no"
+                        + ",:gift_certificate_amount"
+                        + ",:online_bank"
+                        + ",:online_reference_no"
+                        + ",:online_holder"
+                        + ",:online_date"
+                        + ",:online_amount"
+                        + ",:actual_amount"
+                        + ",:salary_deduction"
+                        + ")";
+
+                s5 = SqlStringUtil.parse(s5).
+                        setString("customer_id", to_accounts_receivable_payments.customer_id).
+                        setString("customer_name", to_accounts_receivable_payments.customer_name).
+                        setString("ar_no", to_accounts_receivable_payments.ar_no).
+                        setString("date_added", to_accounts_receivable_payments.date_added).
+                        setString("user_name", to_accounts_receivable_payments.user_name).
+                        setNumber("amount", to_accounts_receivable_payments.amount).
+                        setNumber("discount_amount", to_accounts_receivable_payments.discount_amount).
+                        setNumber("discount_rate", to_accounts_receivable_payments.discount_rate).
+                        setString("discount", to_accounts_receivable_payments.discount).
+                        setNumber("status", to_accounts_receivable_payments.status).
+                        setNumber("term", to_accounts_receivable_payments.term).
+                        setString("date_applied", to_accounts_receivable_payments.date_applied).
+                        setNumber("paid", to_accounts_receivable_payments.paid).
+                        setString("date_paid", to_accounts_receivable_payments.date_paid).
+                        setString("remarks", to_accounts_receivable_payments.remarks).
+                        setString("type", to_accounts_receivable_payments.type).
+                        setString("or_no", to_accounts_receivable_payments.or_no).
+                        setNumber("prev_balance", to_accounts_receivable_payments.prev_balance).
+                        setNumber("check_amount", to_accounts_receivable_payments.check_amount).
+                        setString("check_holder", to_accounts_receivable_payments.check_holder).
+                        setString("check_bank", to_accounts_receivable_payments.check_bank).
+                        setString("check_no", to_accounts_receivable_payments.check_no).
+                        setString("ci_no", to_accounts_receivable_payments.ci_no).
+                        setString("trust_receipt", to_accounts_receivable_payments.trust_receipt).
+                        setString("or_payment_no", to_accounts_receivable_payments.or_payment_no).
+                        setString("soa_id", to_accounts_receivable_payments.soa_id).
+                        setString("soa_type", to_accounts_receivable_payments.soa_type).
+                        setString("soa_type_id", to_accounts_receivable_payments.soa_type_id).
+                        setString("reference_no", to_accounts_receivable_payments.reference_no).
+                        setString("check_date", to_accounts_receivable_payments.check_date).
+                        setString("user_id", to_accounts_receivable_payments.user_id).
+                        setString("user_screen_name", to_accounts_receivable_payments.user_screen_name).
+                        setNumber("tax_rate", to_accounts_receivable_payments.tax_rate).
+                        setNumber("tax_amount", to_accounts_receivable_payments.tax_amount).
+                        setString("branch", to_accounts_receivable_payments.branch).
+                        setString("branch_id", to_accounts_receivable_payments.branch_id).
+                        setString("location", to_accounts_receivable_payments.location).
+                        setString("location_id", to_accounts_receivable_payments.location_id)
+                        .setString("prepaid_customer_name", to_accounts_receivable_payments.prepaid_customer_name)
+                        .setString("prepaid_customer_id", to_accounts_receivable_payments.prepaid_customer_id)
+                        .setNumber("prepaid_amount", to_accounts_receivable_payments.prepaid_amount)
+                        .setString("credit_card_type", to_accounts_receivable_payments.credit_card_type)
+                        .setNumber("credit_card_rate", to_accounts_receivable_payments.credit_card_rate)
+                        .setString("credit_card_no", to_accounts_receivable_payments.credit_card_no)
+                        .setString("credit_card_holder", to_accounts_receivable_payments.credit_card_holder)
+                        .setNumber("credit_card_amount", to_accounts_receivable_payments.credit_card_amount)
+                        .setString("gift_certificate_from", to_accounts_receivable_payments.gift_certificate_from)
+                        .setString("gift_certificate_description", to_accounts_receivable_payments.gift_certificate_description)
+                        .setString("gift_certificate_no", to_accounts_receivable_payments.gift_certificate_no)
+                        .setNumber("gift_certificate_amount", to_accounts_receivable_payments.gift_certificate_amount)
+                        .setString("online_bank", to_accounts_receivable_payments.online_bank)
+                        .setString("online_reference_no", to_accounts_receivable_payments.online_reference_no)
+                        .setString("online_holder", to_accounts_receivable_payments.online_holder)
+                        .setString("online_date", to_accounts_receivable_payments.online_date)
+                        .setNumber("online_amount", to_accounts_receivable_payments.online_amount)
+                        .setNumber("actual_amount", to_accounts_receivable_payments.actual_amount)
+                        .setNumber("salary_deduction", to_accounts_receivable_payments.salary_deduction)
+                        .ok();
+                stmt.addBatch(s5);
+
+                String s6 = "select "
+                        + " balance"
+                        + " from  customers where "
+                        + " customer_no ='" + to_return_from_customer_items.charge_customer_id + "' "
+                        + " ";
+
+                Statement stmt6 = conn.createStatement();
+                ResultSet rs6 = stmt6.executeQuery(s6);
+                double balance = 0;
+                if (rs6.next()) {
+                    balance = rs6.getDouble(1);
+                }
+                double tendered = to_return_from_customer_items.charge_amount;
+                double new_balance = balance - (tendered);
+                double actual_amount2 = to_accounts_receivable_payments.actual_amount;
+                String s2 = "update  customers set "
+                        + " balance= :balance"
+                        + " where "
+                        + " customer_no ='" + to_return_from_customer_items.charge_customer_id + "' "
+                        + " ";
+                s2 = SqlStringUtil.parse(s2).
+                        setNumber("balance", new_balance).
+                        ok();
+
+                stmt.addBatch(s2);
+
+                //update customers paid
+//            to_accounts_receivable tar = ret_ar_details(to_accounts_receivable_payments.ar_no);
+                String s11 = "select "
+                        + " paid"
+                        + " from  accounts_receivable where "
+                        + " ar_no ='" + to_return_from_customer_items.charge_ar_no + "' "
+                        + " ";
+                double paid2 = 0;
+                Statement stmt11 = conn.createStatement();
+                ResultSet rs11 = stmt11.executeQuery(s11);
+                while (rs11.next()) {
+                    paid2 = rs11.getDouble(1);
+                }
+
+                double new_paid = paid2 + tendered;
+                String s3 = "update  accounts_receivable set "
+                        + " paid= :paid"
+                        + " where "
+                        + " ar_no ='" + to_return_from_customer_items.charge_ar_no + "' "
+                        + " ";
+
+                s3 = SqlStringUtil.parse(s3).
+                        setNumber("paid", new_paid).
+                        ok();
+                System.out.println("s3: " + s3);
+                stmt.addBatch(s3);
+
+                //</editor-fold>
+            }
             stmt.executeBatch();
             conn.commit();
             Lg.s(Return_from_customer_items.class, "Successfully Updated");
@@ -549,6 +982,17 @@ public class Return_from_customer_items {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",cash"
+                    + ",prepaid_customer_name"
+                    + ",prepaid_customer_id"
+                    + ",prepaid_amount"
+                    + ",charge_reference_no"
+                    + ",charge_ar_no"
+                    + ",charge_type"
+                    + ",charge_customer_name"
+                    + ",charge_customer_id"
+                    + ",charge_amount"
+                    + ",charge_days"
                     + " from return_from_customer_items"
                     + " " + where;
 
@@ -556,7 +1000,7 @@ public class Return_from_customer_items {
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
                 int id = rs.getInt(1);
-                String return_to_supplier_no = rs.getString(2);
+                String return_from_customer_no = rs.getString(2);
                 String user_name = rs.getString(3);
                 String session_no = rs.getString(4);
                 String date_added = rs.getString(5);
@@ -589,8 +1033,19 @@ public class Return_from_customer_items {
                 String branch_id = rs.getString(32);
                 String location = rs.getString(33);
                 String location_id = rs.getString(34);
+                double cash = rs.getDouble(35);
+                String prepaid_customer_name = rs.getString(36);
+                String prepaid_customer_id = rs.getString(37);
+                double prepaid_amount = rs.getDouble(38);
+                String charge_reference_no = rs.getString(39);
+                String charge_ar_no = rs.getString(40);
+                String charge_type = rs.getString(41);
+                String charge_customer_name = rs.getString(42);
+                String charge_customer_id = rs.getString(43);
+                double charge_amount = rs.getDouble(44);
+                int charge_days = rs.getInt(45);
 
-                to_return_from_customer_items to = new to_return_from_customer_items(id, return_to_supplier_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id);
+                to_return_from_customer_items to = new to_return_from_customer_items(id, return_from_customer_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
                 datas.add(to);
             }
             return datas;

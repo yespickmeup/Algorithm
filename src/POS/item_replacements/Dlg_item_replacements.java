@@ -1695,7 +1695,8 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                     boolean selected1 = true;
                     double addtl_amount = 0;
                     double wtax = 0;
-                    MySales_Items.items other = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected1, addtl_amount, wtax);
+                    double cost=0;
+                    MySales_Items.items other = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected1, addtl_amount, wtax,cost);
                     others.add(other);
                     //</editor-fold>
                     break;
@@ -1963,12 +1964,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 return;
             }
 
-//            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange - (Finalize)' ";
-//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-//            if (datas.isEmpty()) {
-//                Alert.set(0, "Previlege not added!");
-//                return;
-//            }
+            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange - (Finalize)' ";
+            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+            if (datas.isEmpty()) {
+                Alert.set(0, "Previlege not added!");
+                return;
+            }
             ret_item_replacement_details_for_replacement();
             ret_item_replacement_details_replacement();
 

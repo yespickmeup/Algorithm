@@ -696,6 +696,7 @@ public class Srpt_sales_ledger {
                         + ",model_id"
                         + ",addtl_amount"
                         + ",wtax"
+                        + ",cost"
                         + " from sale_items"
                         + " where sales_no='" + sales_no + "' ";
 
@@ -743,7 +744,8 @@ public class Srpt_sales_ledger {
                     String model_id = rs2.getString(39);
                     double addtl_amount = rs2.getDouble(40);
                     double wtax = rs2.getDouble(41);
-                    MySales_Items.items item = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax);
+                    double cost=rs2.getDouble(42);
+                    MySales_Items.items item = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax,cost);
                     items.add(item);
                 }
 

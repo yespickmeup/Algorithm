@@ -838,6 +838,7 @@ public class Item_replacements {
                         .ok();
                 stmt.addBatch(s3);
             }
+            
             if (to_item_replacements.prepaid_amount < 0) {
                 int id = -1;
                 double cash = to_item_replacements.prepaid_amount * -1;
