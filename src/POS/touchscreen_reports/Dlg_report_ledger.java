@@ -910,7 +910,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       disposed();
+        disposed();
     }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
@@ -1013,7 +1013,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
             }
         });
     }
-    
+
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         Field.Combo lo = (Field.Combo) jTextField1;
@@ -1025,12 +1025,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
     }
-    
+
     List<Branches.to_branches> branches_list = new ArrayList();
 
     private void init_branches() {
         final Field.Combo br = (Field.Combo) jTextField2;
-        
+
         Object[][] obj = new Object[branches_list.size()][2];
         int i = 0;
         for (Branches.to_branches to : branches_list) {
@@ -1135,12 +1135,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
                     }
                 } else {
-                    
+
                     if (tf_cashier5.getText().isEmpty() && !jCheckBox13.isSelected()) {
                         Alert.set(0, "Please select time!");
                         return;
                     }
-                    
+
                     if (!jCheckBox13.isSelected()) {
                         try {
                             String[] dates = tf_cashier5.getText().split("- ");
@@ -1201,7 +1201,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where_return_from_customer = where_return_from_customer + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
                 }
-                
+
                 if (jCheckBox1.isSelected()) {
                     where = where + "  "
                             + " and status='" + status + "' ";
@@ -1226,7 +1226,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 //                System.out.println(where);
                 List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
                 List<Srpt_sales_ledger_with_items.field> fields_items = new ArrayList();
-                
+
                 if (jCheckBox11.isSelected()) {
                     fields_items = Srpt_sales_ledger_with_items.ret_data(where);
                 }
@@ -1290,10 +1290,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     re_online += rep.online_amount;
                 }
                 return_exchange = return_exchange - (re_check + re_credit_card + re_prepaid + re_charge + re_gc + re_online);
+
                 for (Srpt_sales_ledger.field field : fields) {
                     cash_on_hand += field.cash;
                     collections_cheque_on_hand += field.cheque_amount;
                 }
+
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
                 cash_on_hand = cash_on_hand + collections + return_exchange;
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
@@ -1333,12 +1335,16 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         }
                     }
                 }
-
+                double refund_prepaid = 0;
+                double refund_charge = 0;
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
                     if (rfc.status == 1) {
-                        refund -= (rfc.qty * rfc.cost);
+                        refund -= (rfc.cash);
+                        refund_prepaid-=rfc.prepaid_amount;
+                        refund_charge-=rfc.charge_amount;
                     }
                 }
+
                 cash_on_hand = cash_on_hand + collections_prepaid + refund;
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
 
@@ -1371,7 +1377,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                                   collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
                                                                   refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
-                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction);
+                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction,refund_prepaid,refund_charge);
                     rpt.fields.addAll(fields);
                     String jrxml = "rpt_sales_ledger.jrxml";
                     String pool_db = System.getProperty("pool_db", "db_smis");

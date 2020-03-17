@@ -1952,7 +1952,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
                     if (rfc.status == 1) {
-                        refund -= (rfc.qty * rfc.cost);
+                        refund -= (rfc.cash);
                     }
                 }
                 double total_remittance = 0;

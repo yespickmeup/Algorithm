@@ -37,6 +37,7 @@ import POS.util.Alert;
 import synsoftech.fields.Button;
 import synsoftech.util.ImageRenderer;
 import POS.util.Dlg_confirm_delete;
+import java.util.ArrayList;
 
 /**
  *
@@ -49,20 +50,20 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
      */
     //<editor-fold defaultstate="collapsed" desc=" callback ">
     private Callback callback;
-
+    
     public void setCallback(Callback callback) {
         this.callback = callback;
-
+        
     }
-
+    
     public static interface Callback {
-
+        
         void ok(CloseDialog closeDialog, OutputData data);
     }
-
+    
     public static class InputData {
     }
-
+    
     public static class OutputData {
     }
 //</editor-fold>
@@ -74,50 +75,50 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         initComponents();
         myInit();
     }
-
+    
     private Dlg_return_from_customer(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
-
+    
     public Dlg_return_from_customer() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
-
+        
     }
     private Dlg_return_from_customer myRef;
-
+    
     private void setThisRef(Dlg_return_from_customer myRef) {
         this.myRef = myRef;
     }
     private static java.util.Map<Object, Dlg_return_from_customer> dialogContainer = new java.util.HashMap();
-
+    
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
             dialogContainer.remove(parent);
         }
     }
-
+    
     public static Dlg_return_from_customer create(java.awt.Window parent, boolean modal) {
-
+        
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
         }
-
+        
         return create(parent, ModalityType.MODELESS);
-
+        
     }
-
+    
     public static Dlg_return_from_customer create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
-
+        
         if (parent instanceof java.awt.Frame) {
-
+            
             Dlg_return_from_customer dialog = dialogContainer.get(parent);
-
+            
             if (dialog == null) {
                 dialog = new Dlg_return_from_customer((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
@@ -129,12 +130,12 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 dialog.setModalityType(modalType);
                 return dialog;
             }
-
+            
         }
-
+        
         if (parent instanceof java.awt.Dialog) {
             Dlg_return_from_customer dialog = dialogContainer.get(parent);
-
+            
             if (dialog == null) {
                 dialog = new Dlg_return_from_customer((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
@@ -146,26 +147,26 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 dialog.setModalityType(modalType);
                 return dialog;
             }
-
+            
         }
-
+        
         return null;
-
+        
     }
     //</editor-fold>    
 
     //<editor-fold defaultstate="collapsed" desc=" main ">
     public static void main(String args[]) {
-
+        
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        
         Dlg_return_from_customer dialog = Dlg_return_from_customer.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
-
+        
     }
     //</editor-fold>
 
@@ -179,13 +180,13 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             myInit();
             repaint();
         }
-
+        
     }
-
+    
     public javax.swing.JPanel getSurface() {
         return (javax.swing.JPanel) getContentPane();
     }
-
+    
     public void nullify() {
         myRef.setVisible(false);
         myRef = null;
@@ -225,6 +226,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_sale_items = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton2 = new Button.Primary();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -303,6 +305,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         jCheckBox3.setText("All");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.setText("6600");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -365,7 +368,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -397,6 +400,13 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
 
         jLabel7.setText("0");
 
+        jButton2.setText("Return selected items");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -409,14 +419,18 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -472,7 +486,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -711,6 +725,10 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        return_selected_items();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -719,6 +737,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -763,7 +782,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.JTable tbl_sales;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host","192.168.1.51");
         init_key();
         init_tbl_sales(tbl_sales);
@@ -777,20 +796,20 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         });
     }
-
+    
     public void do_pass() {
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();
     }
-
+    
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
-
+                          
                           @Override
                           public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
@@ -803,7 +822,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     //<editor-fold defaultstate="collapsed" desc=" sales "> 
     public static ArrayListModel tbl_sales_ALM;
     public static TblsalesModel tbl_sales_M;
-
+    
     public static void init_tbl_sales(JTable tbl_sales) {
         tbl_sales_ALM = new ArrayListModel();
         tbl_sales_M = new TblsalesModel(tbl_sales_ALM);
@@ -825,22 +844,22 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_sales.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_sales, 3);
     }
-
+    
     public static void loadData_sales(List<MySales.sales> acc) {
         tbl_sales_ALM.clear();
         tbl_sales_ALM.addAll(acc);
     }
-
+    
     public static class TblsalesModel extends AbstractTableAdapter {
-
+        
         public static String[] COLUMNS = {
             "Transaction No", "Date", "Customer", "Amount", "user_id", "session_no", "remarks", "gross_amount", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax", "branch", "branch_id", "location", "location_id"
         };
-
+        
         public TblsalesModel(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
-
+        
         @Override
         public boolean isCellEditable(int row, int column) {
             if (column == 100) {
@@ -848,7 +867,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return false;
         }
-
+        
         @Override
         public Class getColumnClass(int col) {
             if (col == 1000) {
@@ -856,7 +875,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return Object.class;
         }
-
+        
         @Override
         public Object getValueAt(int row, int col) {
             MySales.sales tt = (MySales.sales) getRow(row);
@@ -962,7 +981,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         }
     }
-
+    
     private void ret_sales() {
         if (!jTextField1.getText().isEmpty()) {
             String where = " where remarks like '%" + "" + "%' ";
@@ -983,16 +1002,16 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         } else {
             tbl_sales_ALM.clear();
             jLabel5.setText("0");
-
+            
             tbl_sale_items_ALM.clear();
             jLabel7.setText("0");
-
+            
             tbl_return_from_customer_items_ALM.clear();
             jLabel7.setText("0");
         }
-
+        
     }
-
+    
     private void select_sale() {
         int row = tbl_sales.getSelectedRow();
         if (row < 0) {
@@ -1003,23 +1022,23 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         List<MySales_Items.items> items = MySales_Items.ret_data2(where);
         loadData_sale_items(items);
         jLabel7.setText("" + items.size());
-
+        
         ret_sale_returned_items(sale.sales_no);
-
+        
     }
 //</editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc=" sale_items "> 
     public static ArrayListModel tbl_sale_items_ALM;
     public static Tblsale_itemsModel tbl_sale_items_M;
-
+    
     public static void init_tbl_sale_items(JTable tbl_sale_items) {
         tbl_sale_items_ALM = new ArrayListModel();
         tbl_sale_items_M = new Tblsale_itemsModel(tbl_sale_items_ALM);
         tbl_sale_items.setModel(tbl_sale_items_M);
         tbl_sale_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_sale_items.setRowHeight(25);
-        int[] tbl_widths_sale_items = {40, 70, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_sale_items = {40, 70, 100, 100, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_sale_items.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -1034,22 +1053,22 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_sale_items.setFont(new java.awt.Font("Arial", 0, 12));
         TableWidthUtilities.setColumnRightRenderer(tbl_sale_items, 3);
     }
-
+    
     public static void loadData_sale_items(List<MySales_Items.items> acc) {
         tbl_sale_items_ALM.clear();
         tbl_sale_items_ALM.addAll(acc);
     }
-
+    
     public static class Tblsale_itemsModel extends AbstractTableAdapter {
-
+        
         public static String[] COLUMNS = {
             "Qty", "Item Code", "Description", "Price", "", "generic_name", "item_type", "supplier_name", "supplier_id", "serial_no", "product_qty", "unit", "conversion", "selling_price", "date_added", "user_id", "user_screen_name", "status", "is_vatable", "selling_type", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "branch", "branch_code", "location", "location_id", "category", "category_id", "classification", "classification_id", "sub_classification", "sub_classification_id", "brand", "brand_id", "model", "model_id", "addtl_amount", "wtax"
         };
-
+        
         public Tblsale_itemsModel(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
-
+        
         @Override
         public boolean isCellEditable(int row, int column) {
             if (column == 100) {
@@ -1057,7 +1076,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return false;
         }
-
+        
         @Override
         public Class getColumnClass(int col) {
             if (col == 4) {
@@ -1065,7 +1084,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return Object.class;
         }
-
+        
         @Override
         public Object getValueAt(int row, int col) {
             MySales_Items.items tt = (MySales_Items.items) getRow(row);
@@ -1155,73 +1174,137 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         }
     }
-
+    
     private void select_sale_item() {
-
+        
         int row = tbl_sale_items.getSelectedRow();
         if (row < 0) {
             return;
         }
+        int col = tbl_sale_items.getSelectedColumn();
         final MySales_Items.items item = (MySales_Items.items) tbl_sale_items_ALM.get(row);
+        if (col == 4) {
+            if (item.isSelected()) {
+                item.setSelected(false);
+            } else {
+                List<Return_from_customer_items.to_return_from_customer_items> returns = tbl_return_from_customer_items_ALM;
+                int qty = 0;
+                for (Return_from_customer_items.to_return_from_customer_items ret : returns) {
+                    if (ret.main_barcode.equalsIgnoreCase(item.item_code)) {
+                        qty += ret.qty;
+                    }
+                }
+                if (qty < item.product_qty) {
+                    item.setSelected(true);
+                } else {
+                    Alert.set(0, "Already returned!");
+                }
+                
+            }
+            tbl_sale_items_M.fireTableDataChanged();
+        } else {
+            
+            List<MySales_Items.items> orders = tbl_sale_items_ALM;
+            String item_code = item.item_code;
+            String description = item.description;
+            double ordered = 0;
+            double total_returned = 0;
+            String reason = "";
+            double qty = 1;
+            
+            for (MySales_Items.items order : orders) {
+                if (order.item_code.equals(item_code)) {
+                    ordered += order.product_qty;
+                }
+            }
+            
+            List<to_return_from_customer_items> returns = tbl_return_from_customer_items_ALM;
+            for (to_return_from_customer_items ret : returns) {
+                if (ret.main_barcode.equals(item_code)) {
+                    total_returned += ret.qty;
+                }
+            }
+//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return from Customer - (Add)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
+            Window p = (Window) this;
+            Dlg_return_from_customer_qty nd = Dlg_return_from_customer_qty.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(item_code, description, ordered, total_returned, reason, qty, item.selling_price);
+            nd.setCallback(new Dlg_return_from_customer_qty.Callback() {
+                
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_return_from_customer_qty.OutputData data) {
+                    closeDialog.ok();
+                    double cash = data.cash_amount;
+                    String prepaid_customer_name = data.prepaid_customer_name;
+                    String prepaid_customer_id = data.prepaid_customer_id;
+                    double prepaid_amount = data.prepaid_amount;
+                    String charge_reference_no = data.charge_reference_no;
+                    String charge_ar_no = data.charge_ar_no;
+                    String charge_type = data.charge_type;
+                    String charge_customer_name = data.charge_customer_name;
+                    String charge_customer_id = data.charge_customer_id;
+                    double charge_amount = data.charge_amount;
+                    int charge_days = data.charge_days;
+                    
+                    post_return(item, data.qty, data.remarks, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no,
+                                charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
+                    ret_sale_returned_items();
+                }
+            });
+            nd.setLocationRelativeTo(null);
+            nd.setVisible(true);
+        }
+        
+    }
+    
+    private void return_selected_items() {
         List<MySales_Items.items> orders = tbl_sale_items_ALM;
-        String item_code = item.item_code;
-        String description = item.description;
-        double ordered = 0;
-        double total_returned = 0;
-        String reason = "";
-        double qty = 1;
-
-        for (MySales_Items.items order : orders) {
-            if (order.item_code.equals(item_code)) {
-                ordered += order.product_qty;
+        List<MySales_Items.items> selected_items = new ArrayList();
+        List<MySales_Items.items> to_add = new ArrayList();
+        for (MySales_Items.items sel : orders) {
+            if (sel.isSelected()) {
+                selected_items.add(sel);
             }
         }
-
-        List<to_return_from_customer_items> returns = tbl_return_from_customer_items_ALM;
-        for (to_return_from_customer_items ret : returns) {
-            if (ret.main_barcode.equals(item_code)) {
-                total_returned += ret.qty;
-            }
-        }
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return from Customer - (Add)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-        if (privileges.isEmpty()) {
-            Alert.set(0, "Privilege not added!");
+        if (selected_items.isEmpty()) {
+            Alert.set(0, "Please select items");
             return;
         }
+        List<Return_from_customer_items.to_return_from_customer_items> returns = tbl_return_from_customer_items_ALM;
+        for (MySales_Items.items sel : selected_items) {
+            
+            double qty = sel.product_qty;
+            for (Return_from_customer_items.to_return_from_customer_items ret : returns) {
+                if (ret.main_barcode.equalsIgnoreCase(sel.item_code)) {
+                    qty -= ret.qty;
+                }
+            }
+            sel.setProduct_qty(qty);
+            sel.setUser_screen_name("" + qty);
+        }
         Window p = (Window) this;
-        Dlg_return_from_customer_qty nd = Dlg_return_from_customer_qty.create(p, true);
+        Dlg_return_from_customer_selected_items nd = Dlg_return_from_customer_selected_items.create(p, true);
         nd.setTitle("");
-        nd.do_pass(item_code, description, ordered, total_returned, reason, qty, item.selling_price);
-        nd.setCallback(new Dlg_return_from_customer_qty.Callback() {
-
+        nd.do_pass2(selected_items);
+        nd.setCallback(new Dlg_return_from_customer_selected_items.Callback() {
+            
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_return_from_customer_qty.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_return_from_customer_selected_items.OutputData data) {
                 closeDialog.ok();
-                double cash = data.cash_amount;
-                String prepaid_customer_name = data.prepaid_customer_name;
-                String prepaid_customer_id = data.prepaid_customer_id;
-                double prepaid_amount = data.prepaid_amount;
-                String charge_reference_no = data.charge_reference_no;
-                String charge_ar_no = data.charge_ar_no;
-                String charge_type = data.charge_type;
-                String charge_customer_name = data.charge_customer_name;
-                String charge_customer_id = data.charge_customer_id;
-                double charge_amount = data.charge_amount;
-                int charge_days = data.charge_days;
-
-                post_return(item, data.qty, data.remarks, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no,
-                         charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
-                ret_sale_returned_items();
+                
             }
         });
-        nd.setLocationRelativeTo(null);
+        nd.setLocationRelativeTo(this);
         nd.setVisible(true);
-
     }
-
+    
     private void post_return(MySales_Items.items item, double to_return, String reason, double cash, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no,
-             String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days) {
+            String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days) {
         int id = 0;
         String return_to_supplier_no = "";
         String user_name = MyUser.getUser_screen_name();
@@ -1256,15 +1339,15 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         String branch_id = item.branch_code;
         String location = item.location;
         String location_id = item.location_id;
-
+        
         Return_from_customer_items.to_return_from_customer_items ret = new to_return_from_customer_items(id, return_to_supplier_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
         Return_from_customer_items.add_data(ret);
-
+        
         int row = tbl_sales.getSelectedRow();
         if (row < 0) {
             return;
         }
-
+        
         String where2 = " where reference_no='" + item.sales_no + "' and status=0 ";
         List<Return_from_customer_items.to_return_from_customer_items> returned = Return_from_customer_items.ret_data(where2);
         loadData_return_from_customer_items(returned);
@@ -1275,7 +1358,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     //<editor-fold defaultstate="collapsed" desc=" return_from_customer_items "> 
     public static ArrayListModel tbl_return_from_customer_items_ALM;
     public static Tblreturn_from_customer_itemsModel tbl_return_from_customer_items_M;
-
+    
     public static void init_tbl_return_from_customer_items(JTable tbl_return_from_customer_items) {
         tbl_return_from_customer_items_ALM = new ArrayListModel();
         tbl_return_from_customer_items_M = new Tblreturn_from_customer_itemsModel(tbl_return_from_customer_items_ALM);
@@ -1298,22 +1381,22 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customer_items, 3);
         tbl_return_from_customer_items.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
     }
-
+    
     public static void loadData_return_from_customer_items(List<to_return_from_customer_items> acc) {
         tbl_return_from_customer_items_ALM.clear();
         tbl_return_from_customer_items_ALM.addAll(acc);
     }
-
+    
     public static class Tblreturn_from_customer_itemsModel extends AbstractTableAdapter {
-
+        
         public static String[] COLUMNS = {
             "Qty", "Item Code", "Description", "Price", "", "supplier", "supplier_id", "reference_no", "remarks", "barcode", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "branch", "branch_id", "location", "location_id"
         };
-
+        
         public Tblreturn_from_customer_itemsModel(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
-
+        
         @Override
         public boolean isCellEditable(int row, int column) {
             if (column == 100) {
@@ -1321,7 +1404,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return false;
         }
-
+        
         @Override
         public Class getColumnClass(int col) {
             if (col == 1000) {
@@ -1329,7 +1412,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return Object.class;
         }
-
+        
         @Override
         public Object getValueAt(int row, int col) {
             to_return_from_customer_items tt = (to_return_from_customer_items) getRow(row);
@@ -1349,7 +1432,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                     if (tt.status == 1) {
                         return "/POS/icon_inventory/checked.png";
                     }
-
+                
                 case 6:
                     return tt.supplier_id;
                 case 7:
@@ -1409,7 +1492,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         }
     }
-
+    
     private void ret_sale_returned_items(String sales_no) {
         String where2 = " where reference_no='" + sales_no + "'  ";
         List<Return_from_customer_items.to_return_from_customer_items> returned = Return_from_customer_items.ret_data(where2);
@@ -1420,7 +1503,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
 //</editor-fold> 
     public static ArrayListModel tbl_return_from_customer_items_ALM2;
     public static Tblreturn_from_customer_itemsModel2 tbl_return_from_customer_items_M2;
-
+    
     public static void init_tbl_return_from_customer_items2(JTable tbl_return_from_customer_items) {
         tbl_return_from_customer_items_ALM2 = new ArrayListModel();
         tbl_return_from_customer_items_M2 = new Tblreturn_from_customer_itemsModel2(tbl_return_from_customer_items_ALM2);
@@ -1445,22 +1528,22 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_return_from_customer_items.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
         tbl_return_from_customer_items.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer());
     }
-
+    
     public static void loadData_return_from_customer_items2(List<to_return_from_customer_items> acc) {
         tbl_return_from_customer_items_ALM2.clear();
         tbl_return_from_customer_items_ALM2.addAll(acc);
     }
-
+    
     public static class Tblreturn_from_customer_itemsModel2 extends AbstractTableAdapter {
-
+        
         public static String[] COLUMNS = {
             "Qty", "Item Code", "Description", "Reason", "Unit", "Price", "Amount", "", "", "", "description", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "brand", "brand_id", "model", "model_id", "conversion", "unit", "barcodes", "batch_no", "serial_no", "main_barcode", "qty", "cost", "status", "branch", "branch_id", "location", "location_id"
         };
-
+        
         public Tblreturn_from_customer_itemsModel2(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
-
+        
         @Override
         public boolean isCellEditable(int row, int column) {
             if (column == 100) {
@@ -1468,7 +1551,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return false;
         }
-
+        
         @Override
         public Class getColumnClass(int col) {
             if (col == 1000) {
@@ -1476,7 +1559,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
             return Object.class;
         }
-
+        
         @Override
         public Object getValueAt(int row, int col) {
             to_return_from_customer_items tt = (to_return_from_customer_items) getRow(row);
@@ -1560,7 +1643,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         }
     }
-
+    
     private void ret_sale_returned_items() {
         String where2 = " where supplier like '%" + "" + "%' ";
         if (!jCheckBox7.isSelected()) {
@@ -1579,7 +1662,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         loadData_return_from_customer_items2(returned);
         jLabel11.setText("" + returned.size());
     }
-
+    
     private void select_returned_item() {
         int row = jTable2.getSelectedRow();
         if (row < 0) {
