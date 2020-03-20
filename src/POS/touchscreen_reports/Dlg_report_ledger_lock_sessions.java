@@ -278,7 +278,7 @@ public class Dlg_report_ledger_lock_sessions extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_cash_drawer;
     // End of variables declaration//GEN-END:variables
-    
+
     private void myInit() {
         init_key();
 //        System.setProperty("pool_db", "db_algorithm");
@@ -449,6 +449,7 @@ public class Dlg_report_ledger_lock_sessions extends javax.swing.JDialog {
     private void ret_sessions() {
         String date = DateType.sf.format(new Date());
         String where = " where Date(time_in)='" + date + "' ";
+//        System.out.println(where);
         List<CashDrawer.to_cash_drawer> drawers = CashDrawer.ret_where(where);
         loadData_cash_drawer(drawers);
     }

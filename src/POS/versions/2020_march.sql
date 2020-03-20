@@ -39,3 +39,24 @@ alter table return_from_customer_items add charge_customer_id varchar(255);
 alter table return_from_customer_items add charge_amount double ;
 alter table return_from_customer_items add charge_days int;
 
+
+alter table return_from_customers add cash double;
+alter table return_from_customers add prepaid_customer_name varchar(255);
+alter table return_from_customers add prepaid_customer_id varchar(255);
+alter table return_from_customers add prepaid_amount double;
+alter table return_from_customers add charge_reference_no varchar(255);
+alter table return_from_customers add charge_ar_no varchar(255);
+alter table return_from_customers add charge_type varchar(255);
+alter table return_from_customers add charge_customer_name varchar(255);
+alter table return_from_customers add charge_customer_id varchar(255);
+alter table return_from_customers add charge_amount double ;
+alter table return_from_customers add charge_days int;
+
+
+alter table return_from_customer_items add selling_price double default 0;
+update return_from_customer_items set selling_price=cost;
+
+
+
+
+

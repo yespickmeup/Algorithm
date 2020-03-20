@@ -6,12 +6,9 @@
 package POS.returns;
 
 import POS.accounts_receivable.S1_accounts_receivable_payments;
-import static POS.stock_transfer.Stock_transfers.to;
 import POS.users.MyUser;
-import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.MyConnection;
-import POS.util.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +17,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 
@@ -77,8 +73,8 @@ public class Return_from_customer_items {
         public final String charge_customer_id;
         public final double charge_amount;
         public final int charge_days;
-
-        public to_return_from_customer_items(int id, String return_from_customer_no, String user_name, String session_no, String date_added, String supplier, String supplier_id, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String branch, String branch_id, String location, String location_id, double cash, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no, String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days) {
+        public final double selling_price;
+        public to_return_from_customer_items(int id, String return_from_customer_no, String user_name, String session_no, String date_added, String supplier, String supplier_id, String reference_no, String remarks, String barcode, String description, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, String brand, String brand_id, String model, String model_id, double conversion, String unit, String barcodes, String batch_no, String serial_no, String main_barcode, double qty, double cost, int status, String branch, String branch_id, String location, String location_id, double cash, String prepaid_customer_name, String prepaid_customer_id, double prepaid_amount, String charge_reference_no, String charge_ar_no, String charge_type, String charge_customer_name, String charge_customer_id, double charge_amount, int charge_days,double selling_price) {
             this.id = id;
             this.return_from_customer_no = return_from_customer_no;
             this.user_name = user_name;
@@ -124,6 +120,7 @@ public class Return_from_customer_items {
             this.charge_customer_id = charge_customer_id;
             this.charge_amount = charge_amount;
             this.charge_days = charge_days;
+            this.selling_price=selling_price;
         }
     }
 
@@ -175,6 +172,7 @@ public class Return_from_customer_items {
                     + ",charge_customer_id"
                     + ",charge_amount"
                     + ",charge_days"
+                    + ",selling_price"
                     + ")values("
                     + ":return_from_customer_no"
                     + ",:user_name"
@@ -220,6 +218,7 @@ public class Return_from_customer_items {
                     + ",:charge_customer_id"
                     + ",:charge_amount"
                     + ",:charge_days"
+                    + ",:selling_price"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -267,6 +266,7 @@ public class Return_from_customer_items {
                     .setString("charge_customer_id", to_return_from_customer_items.charge_customer_id)
                     .setNumber("charge_amount", to_return_from_customer_items.charge_amount)
                     .setNumber("charge_days", to_return_from_customer_items.charge_days)
+                    .setNumber("selling_price",to_return_from_customer_items.selling_price)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -484,6 +484,7 @@ public class Return_from_customer_items {
                     + ",branch_id= :branch_id "
                     + ",location= :location "
                     + ",location_id= :location_id "
+                    + ",selling_price= :selling_price"
                     + " where id='" + to_return_from_customer_items.id + "' "
                     + " ";
 
@@ -521,6 +522,7 @@ public class Return_from_customer_items {
                     .setString("branch_id", to_return_from_customer_items.branch_id)
                     .setString("location", to_return_from_customer_items.location)
                     .setString("location_id", to_return_from_customer_items.location_id)
+                    .setNumber("selling_price",to_return_from_customer_items.selling_price)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -993,6 +995,7 @@ public class Return_from_customer_items {
                     + ",charge_customer_id"
                     + ",charge_amount"
                     + ",charge_days"
+                    + ",selling_price"
                     + " from return_from_customer_items"
                     + " " + where;
 
@@ -1044,8 +1047,8 @@ public class Return_from_customer_items {
                 String charge_customer_id = rs.getString(43);
                 double charge_amount = rs.getDouble(44);
                 int charge_days = rs.getInt(45);
-
-                to_return_from_customer_items to = new to_return_from_customer_items(id, return_from_customer_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days);
+                double selling_price=rs.getDouble(46);
+                to_return_from_customer_items to = new to_return_from_customer_items(id, return_from_customer_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days,selling_price);
                 datas.add(to);
             }
             return datas;

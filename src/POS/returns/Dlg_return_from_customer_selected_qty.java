@@ -6,6 +6,7 @@
 package POS.returns;
 
 import POS.my_sales.MySales_Items;
+import POS.util.Alert;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
@@ -42,6 +43,13 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
     }
 
     public static class OutputData {
+
+        public final double to_return;
+
+        public OutputData(double to_return) {
+            this.to_return = to_return;
+        }
+
     }
 //</editor-fold>
 
@@ -251,11 +259,16 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Return:");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField3.setText("2");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
+            }
+        });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
             }
         });
 
@@ -285,7 +298,7 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -302,14 +315,14 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
                                 .addGap(163, 163, 163)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
                             .addComponent(jScrollPane1))))
-                .addGap(30, 30, 30))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -333,7 +346,7 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -371,8 +384,12 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        ok();
+        to_return();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        input_qty();
+    }//GEN-LAST:event_jTextField3KeyReleased
 
     /**
      * @param args the command line arguments
@@ -406,13 +423,8 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
         jTextField2.setText(FitIn.fmt_woc(item.product_qty));
         jTextField3.setText(FitIn.fmt_woc(item.user_screen_name));
         double to_return = FitIn.toDouble(item.user_screen_name);
-        System.out.println("to_return: "+to_return);
-        if (to_return == 1) {
-            jTextField3.setFocusable(false);
-        } else {
-            jTextField3.setFocusable(true);
-        }
-
+       
+        jTextField3.grabFocus();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -433,4 +445,24 @@ public class Dlg_return_from_customer_selected_qty extends javax.swing.JDialog {
     }
     // </editor-fold>
 
+    private void input_qty() {
+        double qty = FitIn.toDouble(jTextField2.getText());
+        double ret = FitIn.toDouble(jTextField3.getText());
+        if (ret > qty || ret < 0) {
+            jTextField3.setText(FitIn.fmt_woc(qty));
+        }
+
+    }
+
+    private void to_return() {
+        double to_return = FitIn.toDouble(jTextField3.getText());
+        if (to_return == 0) {
+            jTextField3.grabFocus();
+            Alert.set(0, "Input quantity!");
+            return;
+        }
+        if (callback != null) {
+            callback.ok(new CloseDialog(this), new OutputData(to_return));
+        }
+    }
 }
