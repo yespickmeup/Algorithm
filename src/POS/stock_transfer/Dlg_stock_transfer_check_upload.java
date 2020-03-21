@@ -734,6 +734,7 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
     }
     // </editor-fold>
 
+    
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         Field.Combo br = (Field.Combo) tf_from_branch;
@@ -895,14 +896,11 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
         jProgressBar1.setIndeterminate(true);
         jButton1.setEnabled(false);
         Thread t = new Thread(new Runnable() {
-
             @Override
             public void run() {
-
                 List<Synch_stock_transfers.synch_stock_transfers> synch_stock_transfers_insert = new ArrayList();
                 List<Stock_transfers.to_stock_transfers> stock_transfers_insert = new ArrayList();
                 List<Stock_transfers_items.to_stock_transfers_items> st_items_insert = new ArrayList();
-
                 List<Synch_stock_transfers.synch_stock_transfers> synch_stock_transfers = ret_synch_stock_transfers2(" where status=0 ");
                 List<Stock_transfers.to_stock_transfers> stock_transfers = Stock_transfers.ret_data(" where status=0 and is_uploaded<> 1 or status=1 and is_uploaded=0 or status=0 and is_uploaded=1 ");
                 for (Stock_transfers.to_stock_transfers to : stock_transfers) {
@@ -935,15 +933,12 @@ public class Dlg_stock_transfer_check_upload extends javax.swing.JDialog {
                     String to_branch_id = to.to_branch_id;
                     String to_location = to.to_location;
                     String to_location_id = to.to_location_id;
-
                     int status = 0;
                     int is_uploaded = 0;
-
                     if (my_branch_id.equalsIgnoreCase(to_branch_id)) {
                         status = 1;
                         is_uploaded = 1;
                     }
-
                     String remarks = to.remarks;
                     String date_added = to.date_added;
                     Synch_stock_transfers.synch_stock_transfers syn = new Synch_stock_transfers.synch_stock_transfers(id, stock_transfer_no, created_at, updated_at, created_by, updated_by, at_branch, at_branch_id, at_location, at_location_id, from_branch, from_branch_id, from_location, from_location_id, to_branch, to_branch_id, to_location, to_location_id, status, is_uploaded, remarks, date_added);

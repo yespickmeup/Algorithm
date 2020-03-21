@@ -252,7 +252,6 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField2 = new Field.Search();
-        jButton1 = new Button.Default();
         jLabel12 = new javax.swing.JLabel();
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
@@ -262,6 +261,9 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jLabel14 = new javax.swing.JLabel();
         jDateChooser4 = new com.toedter.calendar.JDateChooser();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jButton1 = new Button.Default();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -320,7 +322,6 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         jCheckBox3.setText("All");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setText("7000");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -617,34 +618,41 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Status:");
 
         buttonGroup2.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox4.setText("All");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jCheckBox5);
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox5.setSelected(true);
         jCheckBox5.setText("Posted");
+        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox5ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jCheckBox6);
         jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox6.setText("Finalized");
+        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox6ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Date from:");
 
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox7.setSelected(true);
         jCheckBox7.setText("All");
 
         jDateChooser3.setDate(new Date());
@@ -653,6 +661,31 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         jLabel14.setText("to:");
 
         jDateChooser4.setDate(new Date());
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setText("Search:");
+
+        jPanel8.setOpaque(false);
+
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -663,66 +696,69 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCheckBox4)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jCheckBox7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel14)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox6)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(539, 539, 539))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCheckBox7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser4, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                .addGap(660, 660, 660)))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jCheckBox4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jCheckBox5)
+                        .addComponent(jCheckBox6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox7)
+                                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -776,15 +812,15 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_sale_itemsMouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        ret_return_from_customers2();
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ret_sale_returned_items();
+        ret_return_from_customers2();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        select_returned_item();
+        select_rfc();
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
@@ -802,6 +838,18 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         finalize_return();
     }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+        ret_return_from_customers2();
+    }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+        ret_return_from_customers2();
+    }//GEN-LAST:event_jCheckBox5ActionPerformed
+
+    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+        ret_return_from_customers2();
+    }//GEN-LAST:event_jCheckBox6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -831,6 +879,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -846,6 +895,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -861,14 +911,15 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     private javax.swing.JTable tbl_sales;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host","192.168.1.51");
         init_key();
         init_tbl_sales(tbl_sales);
         init_tbl_sale_items(tbl_sale_items);
         init_tbl_return_from_customer_items(jTable1);
-        init_tbl_return_from_customer_items2(jTable2);
+//        init_tbl_return_from_customer_items2(jTable2);
         init_tbl_return_from_customers(jTable3);
+        init_tbl_return_from_customers2(jTable2);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -933,7 +984,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     public static class TblsalesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction No", "Date", "Customer", "Amount", "user_id", "session_no", "remarks", "gross_amount", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax", "branch", "branch_id", "location", "location_id"
+            "Sales No", "Date", "Customer", "Amount", "user_id", "session_no", "remarks", "gross_amount", "amount_due", "status", "sales_type", "line_discount", "customer_id", "customer_name", "discount_name", "discount_rate", "discount_amount", "discount_customer_name", "discount_customer_id", "charge_type", "charge_type_id", "charge_reference_no", "charge_customer_name", "charge_customer_id", "charge_amount", "check_bank", "check_no", "check_amount", "check_holder", "check_date", "credit_card_type", "credit_card_rate", "credit_card_amount", "credit_card_no", "credit_card_holder", "credit_card_approval_code", "gift_certificate_from", "gift_certificate_description", "gift_certificate_no", "gift_certificate_amount", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "addtl_amount", "wtax", "branch", "branch_id", "location", "location_id"
         };
 
         public TblsalesModel(ListModel listmodel) {
@@ -1079,6 +1130,9 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
             List<MySales.sales> sales = MySales.ret_data(where);
             loadData_sales(sales);
             jLabel5.setText("" + sales.size());
+            tbl_return_from_customers_ALM.clear();
+            tbl_sale_items_ALM.clear();
+            tbl_return_from_customer_items_ALM.clear();
         } else {
             tbl_sales_ALM.clear();
             jLabel5.setText("0");
@@ -1901,8 +1955,8 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         }
 
         MySales.sales sale = (MySales.sales) tbl_sales_ALM.get(row);
-        String where = " where reference_no ='" + sale.sales_no + "' ";
-//        System.out.println(where);
+        String where = " where reference_no='" + sale.sales_no + "' ";
+
         List<Return_from_customers.to_return_from_customers> datas = Return_from_customers.ret_data(where);
         loadData_return_from_customers(datas);
 //        System.out.println("datas: "+datas.size());
@@ -1916,8 +1970,14 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         }
         int col = jTable3.getSelectedColumn();
         final Return_from_customers.to_return_from_customers to = (Return_from_customers.to_return_from_customers) tbl_return_from_customers_ALM.get(row);
+       
         final List<Return_from_customer_items.to_return_from_customer_items> items = Return_from_customer_items.ret_data(" where return_from_customer_no='" + to.return_from_customer_no + "' ");
+       
         if (col == 6) {
+            if(to.status==1){
+                Alert.set(0, "Cannot proceed, transaction finalized");
+                return;
+            }
             Window p = (Window) this;
             Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
             nd.setTitle("");
@@ -1930,11 +1990,190 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                     ret_return_from_customers();
                     ret_sale_returned_items(to.reference_no);
                     Alert.set(0, "Successfully Finalized");
+                    ret_return_from_customers2();
                 }
             });
             nd.setLocationRelativeTo(jScrollPane5);
             nd.setVisible(true);
         }
+    }
+
+    //<editor-fold defaultstate="collapsed" desc=" return_from_customers "> 
+    public static ArrayListModel tbl_return_from_customers_ALM2;
+    public static Tblreturn_from_customersModel2 tbl_return_from_customers_M2;
+
+    public static void init_tbl_return_from_customers2(JTable tbl_return_from_customers) {
+        tbl_return_from_customers_ALM2 = new ArrayListModel();
+        tbl_return_from_customers_M2 = new Tblreturn_from_customersModel2(tbl_return_from_customers_ALM2);
+        tbl_return_from_customers.setModel(tbl_return_from_customers_M2);
+        tbl_return_from_customers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_return_from_customers.setRowHeight(25);
+        int[] tbl_widths_return_from_customers = {100, 100, 80, 80, 80, 80, 80, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_return_from_customers.length; i < n; i++) {
+            if (i == 0 | i == 1) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_return_from_customers, i, tbl_widths_return_from_customers[i]);
+        }
+        Dimension d = tbl_return_from_customers.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_return_from_customers.getTableHeader().setPreferredSize(d);
+        tbl_return_from_customers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_return_from_customers.setRowHeight(25);
+        tbl_return_from_customers.setFont(new java.awt.Font("Arial", 0, 12));
+        TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customers, 3);
+        TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customers, 4);
+        TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customers, 5);
+        TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customers, 6);
+        tbl_return_from_customers.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
+    }
+
+    public static void loadData_return_from_customers2(List<to_return_from_customers> acc) {
+        tbl_return_from_customers_ALM2.clear();
+        tbl_return_from_customers_ALM2.addAll(acc);
+    }
+
+    public static class Tblreturn_from_customersModel2 extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Transaction #", "Sales No", "Date", "Amount", "Cash", "Prepaid", "Charge", "", "remarks", "status", "branch", "branch_id", "location", "location_id", "gross_total", "discount", "discount_amount", "discount_rate", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "charge_reference_no", "charge_ar_no", "charge_type", "charge_customer_name", "charge_customer_id", "charge_amount", "charge_days"
+        };
+
+        public Tblreturn_from_customersModel2(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_return_from_customers tt = (to_return_from_customers) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + tt.return_from_customer_no;
+                case 1:
+                    return " " + tt.reference_no;
+                case 2:
+                    return " " + DateType.convert_slash_datetime(tt.date_added);
+                case 3:
+                    return " " + FitIn.fmt_wc_0(tt.gross_total) + " ";
+                case 4:
+                    return " " + FitIn.fmt_wc_0(tt.cash) + " ";
+                case 5:
+                    return " " + FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
+                case 6:
+                    return " " + FitIn.fmt_wc_0(tt.charge_amount) + " ";
+                case 7:
+                    if (tt.status == 0) {
+                        return "/POS/icon_inventory/question.png";
+                    }
+                    if (tt.status == 1) {
+                        return "/POS/icon_inventory/checked.png";
+                    }
+                case 8:
+                    return tt.remarks;
+                case 9:
+                    return tt.status;
+                case 10:
+                    return tt.branch;
+                case 11:
+                    return tt.branch_id;
+                case 12:
+                    return tt.location;
+                case 13:
+                    return tt.location_id;
+                case 14:
+                    return tt.gross_total;
+                case 15:
+                    return tt.discount;
+                case 16:
+                    return tt.discount_amount;
+                case 17:
+                    return tt.discount_rate;
+                case 18:
+                    return tt.prepaid_customer_name;
+                case 19:
+                    return tt.prepaid_customer_id;
+                case 20:
+                    return tt.prepaid_amount;
+                case 21:
+                    return tt.charge_reference_no;
+                case 22:
+                    return tt.charge_ar_no;
+                case 23:
+                    return tt.charge_type;
+                case 24:
+                    return tt.charge_customer_name;
+                case 25:
+                    return tt.charge_customer_id;
+                case 26:
+                    return tt.charge_amount;
+                default:
+                    return tt.charge_days;
+            }
+        }
+    }
+
+    private void ret_return_from_customers2() {
+
+        String where = " where id<>0 ";
+        String date_from = DateType.sf.format(jDateChooser3.getDate());
+        String date_to = DateType.sf.format(jDateChooser4.getDate());
+        if (!jCheckBox7.isSelected()) {
+            where = where + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+        }
+        if (jCheckBox5.isSelected()) {
+            where = where + " and status=0 ";
+        }
+        if (jCheckBox6.isSelected()) {
+            where = where + " and status=1 ";
+        }
+        String search = jTextField2.getText();
+        where = where + " and reference_no like '%" + search + "%' ";
+        List<Return_from_customers.to_return_from_customers> datas = Return_from_customers.ret_data(where);
+        loadData_return_from_customers2(datas);
 
     }
+
+    private void select_rfc() {    
+        int row = jTable2.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        Return_from_customers.to_return_from_customers to = (Return_from_customers.to_return_from_customers) tbl_return_from_customers_ALM2.get(row);
+        jTabbedPane1.setSelectedIndex(0);
+        List<MySales.sales> sales = MySales.ret_data(" where sales_no='" + to.reference_no + "' ");
+        loadData_sales(sales);
+        tbl_sales.setRowSelectionInterval(0, 0);
+        String where = " where sales_no='" + to.reference_no + "' and status=0 ";
+        List<MySales_Items.items> items = MySales_Items.ret_data2(where);
+        loadData_sale_items(items);
+        double amount = 0;
+        for (MySales_Items.items item : items) {
+            amount += ((item.product_qty * item.selling_price) + item.addtl_amount - item.discount_amount);
+        }
+        jLabel15.setText(FitIn.fmt_wc_0(amount));
+        jLabel7.setText("" + items.size());
+        String where2 = " where reference_no='" + to.reference_no + "' ";
+        List<Return_from_customers.to_return_from_customers> datas = Return_from_customers.ret_data(where2);
+        loadData_return_from_customers(datas);
+        ret_sale_returned_items(to.reference_no);
+    }
+    
+    
+    //</editor-fold> 
 }
