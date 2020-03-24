@@ -51,6 +51,7 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import org.jfree.ui.Align;
+import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.ImageRenderer;
 
@@ -259,6 +260,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         jCheckBox6 = new javax.swing.JCheckBox();
         jTextField5 = new Field.Combo();
         jTextField4 = new Field.Combo();
+        jButton12 = new Button.Primary();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_accounts_receivable_payments = new javax.swing.JTable();
@@ -470,6 +472,13 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
             }
         });
 
+        jButton12.setText("Batch Payment");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -513,7 +522,10 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                                 .addComponent(jTextField2)
                                 .addGap(0, 0, 0)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextField1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -568,9 +580,10 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -661,7 +674,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                 .addGap(1, 1, 1)
                 .addComponent(jCheckBox5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -806,12 +819,17 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         view_orders();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        batch_payment();
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton12;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -931,7 +949,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         tbl_accounts_receivable.setModel(tbl_accounts_receivable_M);
         tbl_accounts_receivable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable = {70, 70, 100, 100, 70, 70, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable = {70, 70, 100, 100, 70, 70, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -957,7 +975,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
     public static class Tblaccounts_receivableModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Date", "Reference", "Customer", "TYPE", "Amount", "Balance", "", "discount_amount", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "ci_no", "trust_receipt", "soa_id", "soa_type", "soa_type_id", "reference_no"
+            "Date", "Reference", "Customer", "TYPE", "Amount", "Balance", "", "", "discount_rate", "discount", "status", "term", "date_applied", "paid", "date_paid", "remarks", "type", "or_no", "ci_no", "trust_receipt", "soa_id", "soa_type", "soa_type_id", "reference_no"
         };
 
         public Tblaccounts_receivableModel(ListModel listmodel) {
@@ -971,7 +989,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 1000) {
+            if (col == 7) {
                 return Boolean.class;
             }
             return Object.class;
@@ -1001,7 +1019,7 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
                     }
 
                 case 7:
-                    return tt.discount_amount;
+                    return tt.selected;
                 case 8:
                     return tt.discount_rate;
                 case 9:
@@ -1462,35 +1480,60 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
 
     private void data_cols_payments() {
 
+        int row = tbl_accounts_receivable.getSelectedRow();
         String where = "";
-        if (jCheckBox5.isSelected()) {
-            Field.Combo br = (Field.Combo) jTextField4;
-            where = " where status=1 and branch_id='" + br.getId() + "' order by Date(date_applied) desc";
-            loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data2(where));
+        int col = tbl_accounts_receivable.getSelectedColumn();
+        if (col == 7) {
+            to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
+
+            if (to.isSelected()) {
+                to.setSelected(false);
+            } else {
+
+                if (to.status == 1) {
+                    Alert.set(0, "Transaction already cancelled!");
+                    return;
+                }
+                double balance = to.amount - to.paid;
+                if (balance <= 0) {
+                    Alert.set(0, "Transaction already paid!");
+                    return;
+                }
+                to.setSelected(true);
+            }
+            tbl_accounts_receivable_M.fireTableDataChanged();
         } else {
-            int row = tbl_accounts_receivable.getSelectedRow();
-            if (row < 0) {
-                tbl_accounts_receivable_payments_ALM.clear();
-                tbl_accounts_receivable_payments_M.fireTableDataChanged();
-            } else {
-                to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
-                where = " where ar_no='" + to.ar_no + "' order by Date(date_applied) desc ";
+            if (jCheckBox5.isSelected()) {
+                Field.Combo br = (Field.Combo) jTextField4;
+                where = " where status=1 and branch_id='" + br.getId() + "' order by Date(date_applied) desc";
                 loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data2(where));
-            }
-        }
-        double posted = 0;
-        double finalized = 0;
-        List<to_accounts_receivable_payments> datas = tbl_accounts_receivable_payments_ALM;
-        for (to_accounts_receivable_payments t : datas) {
-            if (t.status == 0) {
-                finalized += t.amount + t.check_amount;
             } else {
-                posted += t.amount + t.check_amount;
+
+                if (row < 0) {
+                    tbl_accounts_receivable_payments_ALM.clear();
+                    tbl_accounts_receivable_payments_M.fireTableDataChanged();
+                } else {
+                    to_accounts_receivable to = (to_accounts_receivable) tbl_accounts_receivable_ALM.get(tbl_accounts_receivable.convertRowIndexToModel(row));
+
+                    where = " where ar_no='" + to.ar_no + "' order by Date(date_applied) desc ";
+                    loadData_accounts_receivable_payments(S1_accounts_receivable_payments.ret_data2(where));
+                }
             }
+            double posted = 0;
+            double finalized = 0;
+            List<to_accounts_receivable_payments> datas = tbl_accounts_receivable_payments_ALM;
+            for (to_accounts_receivable_payments t : datas) {
+                if (t.status == 0) {
+                    finalized += t.amount + t.check_amount;
+                } else {
+                    posted += t.amount + t.check_amount;
+                }
+            }
+            jLabel12.setText(FitIn.fmt_wc_0(posted));
+            jLabel13.setText(FitIn.fmt_wc_0(finalized));
+            jLabel9.setText("" + tbl_accounts_receivable_payments_ALM.size());
         }
-        jLabel12.setText(FitIn.fmt_wc_0(posted));
-        jLabel13.setText(FitIn.fmt_wc_0(finalized));
-        jLabel9.setText("" + tbl_accounts_receivable_payments_ALM.size());
+
     }
 
     private void select_payment() {
@@ -1771,4 +1814,57 @@ public class Dlg_ar_payments extends javax.swing.JDialog {
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
+
+    private void batch_payment() {
+//        String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Accounts Receivable Payments - (Add)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(where);
+//        if (privileges.isEmpty()) {
+//            Alert.set(0, "Privilege not added!");
+//            return;
+//        }
+        String name = "";
+        String id = "";
+        String balance = "0";
+        List<to_accounts_receivable> datas = tbl_accounts_receivable_ALM;
+        List<to_accounts_receivable> selected = new ArrayList();
+        int i = 0;
+        for (to_accounts_receivable to : datas) {
+            if (to.isSelected()) {
+                selected.add(to);
+                if (i == 0) {
+                    name = to.customer_name;
+                    id = to.customer_id;
+                } else {
+                    name = name + ", " + to.customer_name;
+                    id = id + ", " + to.customer_id;
+                }
+                i++;
+            }
+        }
+        if (selected.isEmpty()) {
+            Alert.set(0, "No transaction selected!");
+            return;
+        }
+        Window p = (Window) this;
+        Dlg_ar_payment_batch nd = Dlg_ar_payment_batch.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(selected, name, id, balance);
+        nd.setCallback(new Dlg_ar_payment_batch.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_ar_payment_batch.OutputData data) {
+                closeDialog.ok();
+
+                List<S1_accounts_receivable_payments.to_accounts_receivable_payments> added = data.data;
+                for (S1_accounts_receivable_payments.to_accounts_receivable_payments to1 : added) {
+                    S1_accounts_receivable_payments.add_accounts_receivable_payments2(to1, my_branch, my_branch_id, my_location, my_location_id);
+                }
+                data_cols_payments();
+                Alert.set(1, "");
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
 }

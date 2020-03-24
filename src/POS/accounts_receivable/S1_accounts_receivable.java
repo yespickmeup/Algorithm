@@ -41,9 +41,9 @@ public class S1_accounts_receivable {
         public final int status;
         public final double term;
         public final String date_applied;
-        public final double paid;
+        public double paid;
         public final String date_paid;
-        public final String remarks;
+        public String remarks;
         public final String type;
         public final String or_no;
         public final int row;
@@ -56,7 +56,7 @@ public class S1_accounts_receivable {
         public final String soa_type_id;
         public final String reference_no;
         public final String user_id;
-        public final String user_screen_name;
+        public String user_screen_name;
         public final String branch;
         public final String branch_id;
         public final String location;
@@ -99,6 +99,22 @@ public class S1_accounts_receivable {
             this.location_id = location_id;
         }
 
+        public String getUser_screen_name() {
+            return user_screen_name;
+        }
+
+        public void setUser_screen_name(String user_screen_name) {
+            this.user_screen_name = user_screen_name;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
         public boolean isSelected() {
             return selected;
         }
@@ -106,6 +122,15 @@ public class S1_accounts_receivable {
         public void setSelected(boolean selected) {
             this.selected = selected;
         }
+
+        public double getPaid() {
+            return paid;
+        }
+
+        public void setPaid(double paid) {
+            this.paid = paid;
+        }
+
     }
 
     public static void add_accounts_receivable(to_accounts_receivable to_accounts_receivable) {
@@ -1093,7 +1118,7 @@ public class S1_accounts_receivable {
                 String branch_id = rs.getString(28);
                 String location = rs.getString(29);
                 String location_id = rs.getString(30);
-                to_accounts_receivable to = new to_accounts_receivable(true, id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
+                to_accounts_receivable to = new to_accounts_receivable(false, id, customer_id, customer_name, ar_no, date_added, user_name, amount, discount_amount, discount_rate, discount, status, term, date_applied, paid, date_paid, remarks, type, or_no, 0, 0, 0, ci_no, trust_receipt, soa_id, soa_type, soa_type_id, reference_no, user_id, user_screen_name, branch, branch_id, location, location_id);
                 datas.add(to);
             }
             return datas;
