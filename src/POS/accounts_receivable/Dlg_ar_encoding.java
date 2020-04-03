@@ -1524,7 +1524,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
     private void myInit() {
 //        Main.MyDB.setNames("db_algorithm");
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         set_default_branch();
@@ -1537,7 +1537,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jButton10.setEnabled(false);
         init_focus();
         init_tbl_accounts_receivable_payments();
-
+        
         jLabel25.setVisible(false);
         tf_trust_receipt.setVisible(false);
 //        jButton1.setVisible(false);
