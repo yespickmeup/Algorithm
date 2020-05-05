@@ -1524,7 +1524,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
     private void myInit() {
 //        Main.MyDB.setNames("db_algorithm");
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         set_default_branch();

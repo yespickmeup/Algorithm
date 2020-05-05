@@ -2173,34 +2173,73 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
     private void input_discount() {
         int index = tp_payments.getSelectedIndex();
         double discount = FitIn.toDouble(jTextField8.getText());
+        if(discount<0){
+            return;
+        }
         if (index == 0) {
 
             double amount = replacement_amount - discount;
+            if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_cash.setText(FitIn.fmt_wc_0(amount));
         }
         if (index == 1) { //check
 
             double amount = replacement_amount - discount;
+              if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_check_amount.setText(FitIn.fmt_wc_0(amount));
         }
         if (index == 2) { // credit card
+            
             double amount = replacement_amount - discount;
+              if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_credit_card_amount.setText(FitIn.fmt_wc_0(amount));
         }
         if (index == 3) { // prepaid
             double amount = replacement_amount - discount;
+              if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_amount1.setText(FitIn.fmt_wc_0(amount));
         }
         if (index == 4) {// charge
             double amount = replacement_amount - discount;
+              if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_amount2.setText(FitIn.fmt_wc_0(amount));
         }
         if (index == 5) { // gc
             double amount = replacement_amount - discount;
+              if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_amount.setText(FitIn.fmt_wc_0(amount));
         }
         if (index == 6) { // online
             double amount = replacement_amount - discount;
+              if(replacement_amount<0){
+                amount = replacement_amount + discount;
+            }else{
+                amount = replacement_amount - discount;
+            }
             tf_amount4.setText(FitIn.fmt_wc_0(amount));
         }
     }
