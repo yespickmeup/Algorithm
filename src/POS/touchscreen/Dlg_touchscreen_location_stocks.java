@@ -11,6 +11,7 @@ import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -342,7 +343,7 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
     }
 
     public void do_pass(String barcode) {
-
+        System.out.println("aw");
         String where = " where main_barcode= '" + barcode + "' order by branch,location,barcode asc";
         List<Inventory_barcodes.to_inventory_barcodes> locations = Inventory_barcodes.ret_where_list(where, "");
         loadData_inventory_barcodes(locations);
@@ -386,13 +387,27 @@ public class Dlg_touchscreen_location_stocks extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              ok();
+                          }
+                      });
+        tbl_inventory_barcodes.addKeyListener(new KeyAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                ok();
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    ok();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    ok();
+                }
+
             }
         });
+
     }
     // </editor-fold>
 

@@ -55,6 +55,7 @@ import POS.my_services.Dlg_my_services_departments;
 import POS.my_services.Dlg_my_services_view;
 import POS.prepaid_payments.Dlg_prepaid_payments;
 import POS.purchase_order.Dlg_po2;
+import POS.receipt_endorsements.Dlg_receipt_endorsements;
 import POS.receipts.Dlg_finalize_receipt;
 import POS.receipts.Dlg_receipts;
 import POS.reports.*;
@@ -2593,6 +2594,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(dtc.getSurface(), jPanel1, "Other Adjustments");
     }
 
+    private void t_receipt_endorsement() {
+        Dlg_receipt_endorsements dtc = new Dlg_receipt_endorsements();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Receipt Endorsement");
+    }
+
     private void r_stock_status() {
         Dlg_stock_status dtc = new Dlg_stock_status();
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status");
@@ -3304,6 +3310,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
                 if (data.stmt.equals("Other Adjustments")) {
 
                     t_other_adjustments();
+
+                }
+                if (data.stmt.equals("Receipt Endorsement")) {
+
+                    t_receipt_endorsement();
 
                 }
                 //</editor-fold>

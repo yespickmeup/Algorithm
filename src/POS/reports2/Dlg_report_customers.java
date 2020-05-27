@@ -956,7 +956,6 @@ public class Dlg_report_customers extends javax.swing.JDialog {
         jLabel10.setText("To:");
 
         jCheckBox20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox20.setSelected(true);
         jCheckBox20.setText("New Layout");
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -3090,7 +3089,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 where = where + " order by date_applied asc";
                 String pool_db = System.getProperty("pool_db", "db_smis_dumaguete_angel_buns");
 
-                String jrxml = "rpt_balance_per_transaction.jrxml";
+                String jrxml = "rpt_balance_per_transaction_jeric_autoparts.jrxml";
                 if (jCheckBox20.isSelected()) {
                     jrxml = "rpt_balance_per_transaction_new.jrxml";
                 }

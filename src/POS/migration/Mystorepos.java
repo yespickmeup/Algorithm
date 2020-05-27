@@ -26,7 +26,7 @@ public class Mystorepos {
     public static void main(String[] args) {
         System.setProperty("pool_db", "mystorepos");
         List<to_mystorepos_products> products = Mystorepos.ret_products(" order by gen_name asc ");
-
+        
         System.setProperty("pool_db", "db_smis_santillan");
         List<Inventory.to_inventory> tos = new ArrayList();
         int with_qty = 0;

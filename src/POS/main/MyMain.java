@@ -158,7 +158,7 @@ public class MyMain {
             System.setProperty("address", setting.company_address);
             System.setProperty("operated_by", setting.company_operated_by);
             System.setProperty("slogan", setting.company_slogan);
-            System.setProperty("contact_number", setting.company_contact_no);
+            System.setProperty("contact_no", setting.company_contact_no);
             System.setProperty("fax_number", setting.company_fax_no);
             System.setProperty("email_address", setting.company_email_address);
             System.setProperty("receipt_footer", setting.bir_receipt_footer);

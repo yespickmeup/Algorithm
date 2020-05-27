@@ -36,7 +36,11 @@ import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import static java.awt.SystemColor.text;
+import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -49,7 +53,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 import javax.swing.AbstractButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -1435,7 +1438,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox3.setVisible(false);
         jCheckBox4.setVisible(false);
         jCheckBox5.setVisible(false);
-         jCheckBox16.setVisible(false);
+        jCheckBox16.setVisible(false);
 
     }
 
@@ -2246,11 +2249,19 @@ public class Dlg_report_item extends javax.swing.JDialog {
                 tbl_inventory_ALM.add(to);
                 Alert.set(0, "Added to Queue");
                 jLabel13.setText("" + tbl_inventory_ALM.size());
+            } else {
+                Clipboard clipboard = getSystemClipboard();
+                clipboard.setContents(new StringSelection(to.description), null);
             }
         }
         if (col == 4) {
             select_qty(to);
         }
+    }
+
+    private static Clipboard getSystemClipboard() {
+        Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+        return defaultToolkit.getSystemClipboard();
     }
 
     private void select_qty(to_inventory to) {

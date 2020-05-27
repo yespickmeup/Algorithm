@@ -1272,14 +1272,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double over = 0;
                 List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales3);
                 for (Item_replacements.to_item_replacements rep : replacements) {
-                    double amount = rep.replacement_amount - rep.discount;
+                    double amount =(rep.amount_due - rep.replacement_amount) - rep.discount;
                     double due = rep.amount_due;
-                    double total = amount - due;
+                    double total = (rep.amount_due - rep.replacement_amount) - rep.discount;
                     if (amount < rep.amount_due) {
-                        na_short += amount - rep.amount_due;
+                        na_short += amount ;
                     }
                     if (amount > rep.amount_due) {
-                        over += amount - rep.amount_due;
+                        over += amount ;
                     }
                     return_exchange += total;
                     re_check += rep.check_amount;
@@ -1381,7 +1381,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                                   collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
                                                                   refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
-                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction, refund_prepaid, refund_charge,collections_prepaid_credit_card);
+                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction, refund_prepaid, refund_charge, collections_prepaid_credit_card);
                     rpt.fields.addAll(fields);
                     String jrxml = "rpt_sales_ledger.jrxml";
                     String pool_db = System.getProperty("pool_db", "db_smis");
@@ -1821,7 +1821,5 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
         }
     }
     //</editor-fold>
-    
-    
-}
 
+}
