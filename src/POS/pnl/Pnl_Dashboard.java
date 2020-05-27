@@ -10,7 +10,7 @@ import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
 import POS.adjuster.Dlg_other_adjustments;
-import POS.adjustments.Adjust_null_logout;
+import POS.adjustments.Dlg_adjust_receipt_endorsements;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -3172,17 +3172,31 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 //        nd.setVisible(true);
 //        
 //        
-        jButton1.setEnabled(false);
-        jButton1.setText("Script is running....");
-        Thread t = new Thread(new Runnable() {
+//        jButton1.setEnabled(false);
+//        jButton1.setText("Script is running....");
+//        Thread t = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Adjust_null_logout.adjust();
+//                jButton1.setEnabled(true);
+//                jButton1.setText("Finished....");
+//            }
+//        });
+//        t.start();
+        Window p = (Window) this;
+        Dlg_adjust_receipt_endorsements nd = Dlg_adjust_receipt_endorsements.create(p, true);
+        nd.setTitle("");
+//        nd.do_pass(services);
+        nd.setCallback(new Dlg_adjust_receipt_endorsements.Callback() {
+
             @Override
-            public void run() {
-                Adjust_null_logout.adjust();
-                jButton1.setEnabled(true);
-                jButton1.setText("Finished....");
+            public void ok(CloseDialog closeDialog, Dlg_adjust_receipt_endorsements.OutputData data) {
+                closeDialog.ok();
+
             }
         });
-        t.start();
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
 
     }
 

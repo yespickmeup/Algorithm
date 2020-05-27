@@ -4328,8 +4328,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     int p_i = i + 1;
                     String s_price = s.substring(p_i, (s.length() - 1));
                     int iiii = s_price.indexOf("/");
-                    String new_price=s_price.substring(0,iiii);
-                    
+                    String new_price = s_price.substring(0, iiii);
+
                     double selling_price = FitIn.toDouble(new_price);
                     int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
                     to_uom to1 = new to_uom(uom1, selling_price, conversion, is_default);
@@ -5857,17 +5857,17 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             online_date = "2000-01-01";
         }
         String ref_or_no = tf_reference_no.getText();
-        if (!ref_or_no.isEmpty()) {
-            ref_or_no = ReceiptIncrementor.increment(ref_or_no);
-        }
+//        if (!ref_or_no.isEmpty()) {
+//            ref_or_no = ReceiptIncrementor.increment(ref_or_no);
+//        }
         String ref_si_no = tf_reference_no1.getText();
-        if (!ref_si_no.isEmpty()) {
-            ref_si_no = ReceiptIncrementor.increment(ref_si_no);
-        }
+//        if (!ref_si_no.isEmpty()) {
+//            ref_si_no = ReceiptIncrementor.increment(ref_si_no);
+//        }
         String ref_cr_no = tf_reference_no2.getText();
-        if (!ref_cr_no.isEmpty()) {
-            ref_cr_no = ReceiptIncrementor.increment(ref_cr_no);
-        }
+//        if (!ref_cr_no.isEmpty()) {
+//            ref_cr_no = ReceiptIncrementor.increment(ref_cr_no);
+//        }
 
         final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, charge_date_applied, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);

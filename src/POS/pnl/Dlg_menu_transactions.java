@@ -1094,7 +1094,6 @@ public class Dlg_menu_transactions extends javax.swing.JDialog {
             if (to.previledge.equalsIgnoreCase("Other Adjustments - (View)")) {
                 jLabel32.setEnabled(true);
                 jLabel32.setBackground(new java.awt.Color(96, 188, 219));
-
             }
             if (to.previledge.equalsIgnoreCase("Conversion - (View)")) {
                 jLabel31.setEnabled(true);
