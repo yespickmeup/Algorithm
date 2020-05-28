@@ -27,7 +27,8 @@ public class Srpt_return_to_supplier {
     public final String location;
     public final List<field> fields;
     public final String contact_no;
-    public Srpt_return_to_supplier(String business_name, String address, String return_to_supplier_no, String date_returned, String date, String supplier, String supplier_id, String reference_no, String remarks, String branch, String location,String contact_no) {
+
+    public Srpt_return_to_supplier(String business_name, String address, String return_to_supplier_no, String date_returned, String date, String supplier, String supplier_id, String reference_no, String remarks, String branch, String location, String contact_no) {
         this.fields = new ArrayList();
         this.business_name = business_name;
         this.address = address;
@@ -40,7 +41,7 @@ public class Srpt_return_to_supplier {
         this.remarks = remarks;
         this.branch = branch;
         this.location = location;
-        this.contact_no=contact_no;
+        this.contact_no = contact_no;
     }
 
     public static class field {
@@ -53,11 +54,13 @@ public class Srpt_return_to_supplier {
         double conversion;
         double cost;
         double amount;
+        String remarks;
+        String serials;
 
         public field() {
         }
 
-        public field(String item_code, String barcode, String description, String unit, double qty, double conversion, double cost, double amount) {
+        public field(String item_code, String barcode, String description, String unit, double qty, double conversion, double cost, double amount, String remarks, String serials) {
             this.item_code = item_code;
             this.barcode = barcode;
             this.description = description;
@@ -66,6 +69,24 @@ public class Srpt_return_to_supplier {
             this.conversion = conversion;
             this.cost = cost;
             this.amount = amount;
+            this.remarks = remarks;
+            this.serials = serials;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        public String getSerials() {
+            return serials;
+        }
+
+        public void setSerials(String serials) {
+            this.serials = serials;
         }
 
         public String getItem_code() {

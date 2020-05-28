@@ -32,7 +32,7 @@ public class Return_to_supplier_items {
         public final String supplier;
         public final String supplier_id;
         public final String reference_no;
-        public final String remarks;
+        public  String remarks;
         public final String barcode;
         public final String description;
         public final String category;
@@ -49,7 +49,7 @@ public class Return_to_supplier_items {
         public String unit;
         public final String barcodes;
         public final String batch_no;
-        public final String serial_no;
+        public  String serial_no;
         public final String main_barcode;
         public double qty;
         public double cost;
@@ -96,6 +96,23 @@ public class Return_to_supplier_items {
             this.location_id = location_id;
         }
 
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        public String getSerial_no() {
+            return serial_no;
+        }
+
+        public void setSerial_no(String serial_no) {
+            this.serial_no = serial_no;
+        }
+
+        
         public double getConversion() {
             return conversion;
         }
@@ -494,6 +511,8 @@ public class Return_to_supplier_items {
                     + ",unit= :unit "
                     + ",qty= :qty "
                     + ",cost= :cost "
+                    + ",serial_no= :serial_no"
+                    + ",remarks= :remarks"
                     + " where id='" + to_return_to_supplier_items.id + "' "
                     + " ";
 
@@ -502,6 +521,8 @@ public class Return_to_supplier_items {
                     .setString("unit", to_return_to_supplier_items.unit)
                     .setNumber("qty", to_return_to_supplier_items.qty)
                     .setNumber("cost", to_return_to_supplier_items.cost)
+                    .setString("serial_no", to_return_to_supplier_items.serial_no)
+                    .setString("remarks", to_return_to_supplier_items.remarks)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);

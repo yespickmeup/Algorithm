@@ -56,11 +56,11 @@ public class Srpt_Receipt_endorsements {
         String receipt_type;
         String receipt_endorsed_to;
         double sales_amount;
-
+        String customer_name;
         public field() {
         }
 
-        public field(String reference_no, String sales_no, String sales_date, String sales_user, String receipt_type, String receipt_endorsed_to, double sales_amount) {
+        public field(String reference_no, String sales_no, String sales_date, String sales_user, String receipt_type, String receipt_endorsed_to, double sales_amount,String customer_name) {
             this.reference_no = reference_no;
             this.sales_no = sales_no;
             this.sales_date = sales_date;
@@ -68,8 +68,18 @@ public class Srpt_Receipt_endorsements {
             this.receipt_type = receipt_type;
             this.receipt_endorsed_to = receipt_endorsed_to;
             this.sales_amount = sales_amount;
+            this.customer_name=customer_name;
         }
 
+        public String getCustomer_name() {
+            return customer_name;
+        }
+
+        public void setCustomer_name(String customer_name) {
+            this.customer_name = customer_name;
+        }
+
+        
         public String getReference_no() {
             return reference_no;
         }
@@ -206,7 +216,7 @@ public class Srpt_Receipt_endorsements {
                 String receipt_type = endorsement_type;
                 String receipt_endorsed_to = "";
                 double sales_amount = 0;
-
+                String customer_name="";
                 String where2 = " where ref_or_no like '" + reference_no + "' ";
                 if (receipt_type.equalsIgnoreCase("Sales Invoice")) {
                     where2 = " where ref_si_no like '" + reference_no + "' ";
@@ -220,6 +230,7 @@ public class Srpt_Receipt_endorsements {
                         + ",date_added"
                         + ",user_screen_name"
                         + ",amount_due"
+                        + ",customer_name"
                         + " from sales"
                         + " " + where2;
 
@@ -232,10 +243,11 @@ public class Srpt_Receipt_endorsements {
                     sales_user = rs2.getString(4);
 
                     sales_amount = rs2.getDouble(5);
+                    customer_name = rs2.getString(6);
 
                 }
 
-                Srpt_Receipt_endorsements.field field = new field(reference_no, sales_no, sales_date, sales_user, receipt_type, receipt_endorsed_to, sales_amount);
+                Srpt_Receipt_endorsements.field field = new field(reference_no, sales_no, sales_date, sales_user, receipt_type, receipt_endorsed_to, sales_amount,customer_name);
                 datas.add(field);
             }
             return datas;

@@ -582,6 +582,7 @@ public class Dlg_receipt_endorsements extends javax.swing.JDialog {
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
+//        MyUser.setUser_id("1");
         init_key();
         String where = "  order by screen_name asc";
         user_list = MyUser.ret_data2(where);

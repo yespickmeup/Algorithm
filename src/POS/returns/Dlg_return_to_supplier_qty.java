@@ -5,11 +5,14 @@
 package POS.returns;
 
 import POS.inventory.S1_items2;
+import POS.my_services.S1_my_services_problems;
 import POS.receipts.S1_receipt_barcodes.to_receipt_barcodes;
 import POS.receipts.S1_serial_nos.to_receipt_serial_nos;
+import POS.suppliers.Suppliers;
 import POS.unit_of_measure.S1_unit_of_measure;
 import POS.util.Alert;
 import POS.util.Focus_Fire;
+import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.lowagie.text.Font;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
@@ -32,6 +36,7 @@ import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
+import synsoftech.fields.Field;
 
 /**
  *
@@ -66,14 +71,16 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         public final String serial_nos;
         public final String unit;
         public final double conversion;
+        public final String remarks;
 
-        public OutputData(double amount, double cost, String barcodes, String serial_nos, String unit, double conversion) {
+        public OutputData(double amount, double cost, String barcodes, String serial_nos, String unit, double conversion, String remarks) {
             this.amount = amount;
             this.cost = cost;
             this.barcodes = barcodes;
             this.serial_nos = serial_nos;
             this.unit = unit;
             this.conversion = conversion;
+            this.remarks = remarks;
         }
     }
 
@@ -249,6 +256,8 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         lbl_desc = new org.jdesktop.swingx.JXLabel();
         lbl_item_code1 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lbl_item_code2 = new Field.Combo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -448,6 +457,21 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Barcode:");
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Remarks:");
+
+        lbl_item_code2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_item_code2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_item_code2MouseClicked(evt);
+            }
+        });
+        lbl_item_code2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lbl_item_code2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -455,6 +479,10 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_item_code2))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -467,7 +495,8 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_item_code1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lbl_item_code1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -533,21 +562,25 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(lbl_item_code2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(23, 23, 23))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -607,8 +640,16 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void tf_costActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_costActionPerformed
-       ok1();
+        ok1();
     }//GEN-LAST:event_tf_costActionPerformed
+
+    private void lbl_item_code2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbl_item_code2ActionPerformed
+        init_remarks(lbl_item_code2);
+    }//GEN-LAST:event_lbl_item_code2ActionPerformed
+
+    private void lbl_item_code2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_item_code2MouseClicked
+//        init_remarks(lbl_item_code2);
+    }//GEN-LAST:event_lbl_item_code2MouseClicked
     /**
      * @param args the command line arguments
      */
@@ -621,6 +662,7 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -638,6 +680,7 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
     private org.jdesktop.swingx.JXLabel lbl_desc;
     private javax.swing.JTextField lbl_item_code;
     private javax.swing.JTextField lbl_item_code1;
+    private javax.swing.JTextField lbl_item_code2;
     private javax.swing.JTextField lbl_qty;
     private javax.swing.JTable tbl_receipt_barcodes;
     private javax.swing.JTable tbl_receipt_serial_nos;
@@ -667,7 +710,7 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
 
         Border border = BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204));
         lbl_desc.setBorder(BorderFactory.createCompoundBorder(border,
-                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+                                                              BorderFactory.createEmptyBorder(2, 2, 2, 2)));
     }
 
     private void focus() {
@@ -735,7 +778,7 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
 //        loadData_receipt_serial_nos(data);
     }
 
-    public void do_pass2(double qty, double cost, String desc, String unit, String barcode1, String barcodes, double product_qty, String my_barcode) {
+    public void do_pass2(double qty, double cost, String desc, String unit, String barcode1, String barcodes, double product_qty, String my_barcode,String remarks,String serials) {
         lbl_qty.setText(FitIn.fmt_woc(product_qty));
         lbl_item_code.setText(my_barcode);
         lbl_item_code1.setText(barcode1);
@@ -751,6 +794,8 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         }
         tf_cost.setText(FitIn.fmt_wc_0(cost));
         lbl_desc.setText(desc);
+        lbl_item_code2.setText(remarks);
+         jTextArea1.setText(serials);
 //        lbl_unit.setText(unit);
         tf_amount.grabFocus();
         tf_amount.selectAll();
@@ -791,22 +836,22 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_CONTROL, new KeyAction() {
+                              KeyEvent.VK_CONTROL, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ok1();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              ok1();
+                          }
+                      });
         tf_barcode.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -973,8 +1018,7 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
             }
         }
     }
-    
-    
+
     private void update_barcode() {
         List<to_receipt_barcodes> acc = tbl_receipt_barcodes_ALM;
         String barcodes = "";
@@ -1142,9 +1186,15 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
             return;
         }
         double conversion = uom.conversion;
+        String remarks = lbl_item_code2.getText();
         String unit = "[" + uom.unit + ":" + uom.price + "/" + uom.conversion + "^" + "1" + "]";
+        if (remarks.isEmpty()) {
+            Alert.set(0, "Input remarks");
+            lbl_item_code2.grabFocus();
+            return;
+        }
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(amount, cost, barcodes, serial_no, unit, conversion));
+            callback.ok(new CloseDialog(this), new OutputData(amount, cost, barcodes, serial_no, unit, conversion, remarks));
         }
     }
 
@@ -1215,8 +1265,8 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
             S1_unit_of_measure.to_uom tt = (S1_unit_of_measure.to_uom) getRow(row);
             switch (col) {
                 case 0:
-                    String unit=tt.unit;
-                    unit=unit.replaceAll("#", "/");
+                    String unit = tt.unit;
+                    unit = unit.replaceAll("#", "/");
                     return " " + unit;
                 case 1:
                     return " " + FitIn.fmt_wc_0(tt.conversion);
@@ -1226,4 +1276,43 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         }
     }
     //</editor-fold>
+
+    List<S1_my_services_problems.to_my_services_problems> service_remarks = new ArrayList();
+
+    private void init_remarks(final JTextField tf) {
+        String search = tf.getText();
+        if (search.isEmpty()) {
+            tf.grabFocus();
+            return;
+        }
+        String where = " where problem like '%" + tf.getText() + "%' order by problem asc  ";
+        service_remarks = S1_my_services_problems.ret_data(where);
+        if (service_remarks.isEmpty()) {
+            S1_my_services_problems.to_my_services_problems to = new S1_my_services_problems.to_my_services_problems(0, search, 0);
+            S1_my_services_problems.add_my_services_problems(to);
+            return;
+        }
+        Object[][] obj = new Object[service_remarks.size()][1];
+        int i = 0;
+        for (S1_my_services_problems.to_my_services_problems to : service_remarks) {
+            obj[i][0] = " " + to.problem;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf.getWidth()};
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.
+                setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                S1_my_services_problems.to_my_services_problems to = service_remarks.get(data.selected_row);
+                tf.setText(to.problem);
+
+            }
+        });
+    }
+
 }

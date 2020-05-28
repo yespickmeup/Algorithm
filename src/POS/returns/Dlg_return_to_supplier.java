@@ -1229,17 +1229,29 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
+        MyUser.setUser_id("1");
+
         init_key();
 
         set_default_branch();
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
 
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (!privileges.isEmpty()) {
+            show_cost = 1;
+        }
+
         init_tbl_return_to_suppliers(tbl_return_to_suppliers);
         init_tbl_return_to_supplier_items(tbl_return_to_supplier_items);
         init_trans_no();
         item_ledger();
+
     }
+
+    int show_cost = 0;
 
     private void item_ledger() {
         SwingUtilities.invokeLater(new Runnable() {
@@ -1293,14 +1305,14 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         tf_search1.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -1478,7 +1490,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_return_to_supplier_qty nd = Dlg_return_to_supplier_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass2(1, item.cost, item.description, item.unit, item.barcode, item.barcode, item.product_qty, item.main_barcode);
+        nd.do_pass2(1, item.cost, item.description, item.unit, item.barcode, item.barcode, item.product_qty, item.main_barcode, "", "");
         nd.setCallback(new Dlg_return_to_supplier_qty.Callback() {
 
             @Override
@@ -1492,7 +1504,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                 String supplier = "";
                 String supplier_id = "";
                 String reference_no = "";
-                String remarks = "";
+                String remarks = data.remarks;
                 String barcode = item.barcode;
                 String description = item.description;
                 String category = item.category;
@@ -1587,13 +1599,18 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     public static ArrayListModel tbl_return_to_supplier_items_ALM;
     public static Tblreturn_to_supplier_itemsModel tbl_return_to_supplier_items_M;
 
-    public static void init_tbl_return_to_supplier_items(JTable tbl_return_to_supplier_items) {
+    public void init_tbl_return_to_supplier_items(JTable tbl_return_to_supplier_items) {
+
+        int cost = 0;
+        if (show_cost == 1) {
+            cost = 100;
+        }
         tbl_return_to_supplier_items_ALM = new ArrayListModel();
         tbl_return_to_supplier_items_M = new Tblreturn_to_supplier_itemsModel(tbl_return_to_supplier_items_ALM);
         tbl_return_to_supplier_items.setModel(tbl_return_to_supplier_items_M);
         tbl_return_to_supplier_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_return_to_supplier_items.setRowHeight(25);
-        int[] tbl_widths_return_to_supplier_items = {80, 80, 100, 100, 40, 80, 80, 80, 40, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_return_to_supplier_items = {80, 80, 100, 100, 40, 80, cost, cost, 40, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_return_to_supplier_items.length; i < n; i++) {
             if (i == 3) {
                 continue;
@@ -1756,7 +1773,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_return_to_supplier_qty nd = Dlg_return_to_supplier_qty.create(p, true);
             nd.setTitle("");
-            nd.do_pass2(to.qty, to.cost, to.description, to.unit, to.barcode, to.barcode, 0, to.main_barcode);
+            nd.do_pass2(to.qty, to.cost, to.description, to.unit, to.barcode, to.barcode, 0, to.main_barcode, to.remarks, to.serial_no);
             nd.setCallback(new Dlg_return_to_supplier_qty.Callback() {
 
                 @Override
@@ -1768,6 +1785,8 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                         to.setCost(data.cost);
                         to.setQty(data.amount);
                         to.setUnit(data.unit);
+                        to.setRemarks(data.remarks);
+                        to.setSerial_no(data.serial_nos);
                         tbl_return_to_supplier_items_M.fireTableDataChanged();
 
                         double gross = 0;
@@ -1930,13 +1949,17 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     public static ArrayListModel tbl_return_to_suppliers_ALM;
     public static Tblreturn_to_suppliersModel tbl_return_to_suppliers_M;
 
-    public static void init_tbl_return_to_suppliers(JTable tbl_return_to_suppliers) {
+    public void init_tbl_return_to_suppliers(JTable tbl_return_to_suppliers) {
+        int cost = 0;
+        if (show_cost == 1) {
+            cost = 40;
+        }
         tbl_return_to_suppliers_ALM = new ArrayListModel();
         tbl_return_to_suppliers_M = new Tblreturn_to_suppliersModel(tbl_return_to_suppliers_ALM);
         tbl_return_to_suppliers.setModel(tbl_return_to_suppliers_M);
         tbl_return_to_suppliers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_return_to_suppliers.setRowHeight(25);
-        int[] tbl_widths_return_to_suppliers = {130, 80, 100, 100, 190, 80, 60, 40, 50, 40, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_return_to_suppliers = {130, 80, 100, 100, 190, 80, 60, 40, 50, cost, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_return_to_suppliers.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -2191,8 +2214,10 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                     double conversion = item.conversion;
                     double cost = item.cost;
                     double amount = item.qty * item.cost;
-
-                    Srpt_return_to_supplier.field field = new Srpt_return_to_supplier.field(item_code, barcode, description, unit, qty, conversion, cost, amount);
+                    String remark = item.remarks;
+                    String serials = item.serial_no;
+                    serials = serials.replaceAll("\n", ", ");
+                    Srpt_return_to_supplier.field field = new Srpt_return_to_supplier.field(item_code, barcode, description, unit, qty, conversion, cost, amount, remark, serials);
                     fields.add(field);
                 }
                 Srpt_return_to_supplier rpt = new Srpt_return_to_supplier(business_name, address, return_to_supplier_no, date_returned, date, supplier, supplier_id, reference_no, remarks, branch, location, contact_no);

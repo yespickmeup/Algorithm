@@ -210,7 +210,7 @@ public class Return_to_supplier {
                         .setString("supplier", to_return_to_suppliers.supplier)
                         .setString("supplier_id", to_return_to_suppliers.supplier_id)
                         .setString("reference_no", to_return_to_suppliers.reference_no)
-                        .setString("remarks", to_return_to_suppliers.remarks)
+                        .setString("remarks", to_return_to_supplier_items.remarks)
                         .setString("barcode", to_return_to_supplier_items.barcode)
                         .setString("description", to_return_to_supplier_items.description)
                         .setString("category", to_return_to_supplier_items.category)

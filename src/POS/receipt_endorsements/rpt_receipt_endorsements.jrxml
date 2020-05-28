@@ -15,6 +15,7 @@
 	<field name="receipt_type" class="java.lang.String"/>
 	<field name="receipt_endorsed_to" class="java.lang.String"/>
 	<field name="sales_amount" class="java.lang.Double"/>
+	<field name="customer_name" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -67,7 +68,7 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="a628bea3-a804-4961-b966-9d6aeb13d8e3" x="0" y="0" width="84" height="20"/>
+				<reportElement uuid="a628bea3-a804-4961-b966-9d6aeb13d8e3" x="0" y="0" width="59" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -75,12 +76,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
-				<text><![CDATA[Reference No]]></text>
+				<text><![CDATA[Reference #]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="c8e85997-2c2e-4dea-aa4d-8eedddfcf84e" x="84" y="0" width="118" height="20"/>
+				<reportElement uuid="c8e85997-2c2e-4dea-aa4d-8eedddfcf84e" x="59" y="0" width="106" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -88,12 +90,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="9"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<text><![CDATA[Sales No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="321700da-2fd5-40e1-ae86-0125ec183e99" x="202" y="0" width="70" height="20"/>
+				<reportElement uuid="321700da-2fd5-40e1-ae86-0125ec183e99" x="165" y="0" width="70" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -101,12 +104,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="9"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="578da28e-451b-49ed-8462-0d70c9c26211" x="272" y="0" width="86" height="20"/>
+				<reportElement uuid="578da28e-451b-49ed-8462-0d70c9c26211" x="356" y="0" width="60" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -114,12 +118,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<text><![CDATA[Cashier]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="12da23c1-c96d-40bc-8b8d-91ff9f0060fc" x="358" y="0" width="97" height="20"/>
+				<reportElement uuid="12da23c1-c96d-40bc-8b8d-91ff9f0060fc" x="416" y="0" width="64" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -127,12 +132,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<text><![CDATA[Trans Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e887d8ec-daf0-403c-9d4c-10632b4302cb" x="455" y="0" width="100" height="20"/>
+				<reportElement uuid="e887d8ec-daf0-403c-9d4c-10632b4302cb" x="480" y="0" width="75" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -144,12 +150,26 @@
 				</textElement>
 				<text><![CDATA[Amount]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="321700da-2fd5-40e1-ae86-0125ec183e99" x="235" y="0" width="121" height="20"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Customer Name]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement uuid="e0a3a899-1034-4b57-8c35-4b1d2400a6c1" x="0" y="0" width="84" height="15"/>
+				<reportElement uuid="e0a3a899-1034-4b57-8c35-4b1d2400a6c1" x="0" y="0" width="59" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -157,12 +177,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="9"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reference_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="17ce697e-e5ca-4db1-ade7-1829010adcb2" x="84" y="0" width="118" height="15"/>
+				<reportElement uuid="17ce697e-e5ca-4db1-ade7-1829010adcb2" x="59" y="0" width="106" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -170,12 +191,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="9"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="4e0dc7e4-a8df-4a90-a090-742433dda7af" x="202" y="0" width="70" height="15"/>
+				<reportElement uuid="4e0dc7e4-a8df-4a90-a090-742433dda7af" x="165" y="0" width="70" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -183,12 +205,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="9"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="8a182f88-855d-41e9-8963-7916f6471789" x="272" y="0" width="86" height="15"/>
+				<reportElement uuid="8a182f88-855d-41e9-8963-7916f6471789" x="356" y="0" width="60" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -196,12 +219,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_user}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="79b36fd3-db5e-4fdc-baad-ca32673d926c" x="358" y="0" width="97" height="15"/>
+				<reportElement uuid="79b36fd3-db5e-4fdc-baad-ca32673d926c" x="416" y="0" width="64" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -209,12 +233,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{receipt_type}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="c0db43c8-705a-4b6a-aaf2-415d23276030" x="455" y="0" width="100" height="15"/>
+				<reportElement uuid="c0db43c8-705a-4b6a-aaf2-415d23276030" x="480" y="0" width="75" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -225,6 +250,20 @@
 					<paragraph leftIndent="5" rightIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sales_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4e0dc7e4-a8df-4a90-a090-742433dda7af" x="235" y="0" width="121" height="15"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<leftPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.2"/>
+					<rightPen lineWidth="0.2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
