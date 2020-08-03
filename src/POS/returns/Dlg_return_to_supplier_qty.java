@@ -778,7 +778,10 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
 //        loadData_receipt_serial_nos(data);
     }
 
-    public void do_pass2(double qty, double cost, String desc, String unit, String barcode1, String barcodes, double product_qty, String my_barcode,String remarks,String serials) {
+    int is_admin = 0;
+
+    public void do_pass2(double qty, double cost, String desc, String unit, String barcode1, String barcodes, double product_qty, String my_barcode, String remarks, String serials, int admin) {
+        is_admin = admin;
         lbl_qty.setText(FitIn.fmt_woc(product_qty));
         lbl_item_code.setText(my_barcode);
         lbl_item_code1.setText(barcode1);
@@ -795,7 +798,7 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         tf_cost.setText(FitIn.fmt_wc_0(cost));
         lbl_desc.setText(desc);
         lbl_item_code2.setText(remarks);
-         jTextArea1.setText(serials);
+        jTextArea1.setText(serials);
 //        lbl_unit.setText(unit);
         tf_amount.grabFocus();
         tf_amount.selectAll();
@@ -1188,11 +1191,14 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         double conversion = uom.conversion;
         String remarks = lbl_item_code2.getText();
         String unit = "[" + uom.unit + ":" + uom.price + "/" + uom.conversion + "^" + "1" + "]";
-        if (remarks.isEmpty()) {
-            Alert.set(0, "Input remarks");
-            lbl_item_code2.grabFocus();
-            return;
+        if (is_admin == 0) {
+            if (remarks.isEmpty()) {
+                Alert.set(0, "Input remarks");
+                lbl_item_code2.grabFocus();
+                return;
+            }
         }
+
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(amount, cost, barcodes, serial_no, unit, conversion, remarks));
         }

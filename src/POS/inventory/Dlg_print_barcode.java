@@ -222,6 +222,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -260,6 +261,10 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         jCheckBox8 = new javax.swing.JCheckBox();
         jCheckBox9 = new javax.swing.JCheckBox();
         jButton4 = new Button.Primary();
+        jLabel12 = new javax.swing.JLabel();
+        jCheckBox14 = new javax.swing.JCheckBox();
+        jCheckBox15 = new javax.swing.JCheckBox();
+        jCheckBox16 = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -646,6 +651,22 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Print Size:");
+
+        buttonGroup4.add(jCheckBox14);
+        jCheckBox14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox14.setText("Short Bondpaper");
+
+        buttonGroup4.add(jCheckBox15);
+        jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox15.setText("30x25mm");
+
+        buttonGroup4.add(jCheckBox16);
+        jCheckBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox16.setSelected(true);
+        jCheckBox16.setText("30x15mm");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -661,8 +682,18 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 68, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jCheckBox14)
+                                    .addComponent(jCheckBox15)
+                                    .addComponent(jCheckBox16))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -671,7 +702,16 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -952,6 +992,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -961,6 +1002,9 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
+    private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -972,6 +1016,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -1016,10 +1061,10 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     }
 
     public void do_pass() {
-
+        
     }
     String location_ids = "";
-
+    
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
         location_ids = "" + to.id;
@@ -1078,7 +1123,6 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     // </editor-fold>
 
     private void get_stocks() {
-
         jTabbedPane1.setSelectedIndex(2);
         jProgressBar1.setString("Loading... Please wait...");
         jProgressBar1.setIndeterminate(true);
@@ -1087,7 +1131,6 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
             public void run() {
                 List<Srpt_print_barcodes.field> fields = new ArrayList();
                 List<Srpt_print_barcodes.field> datas = tbl_inventory_barcodes_ALM2;
-
                 for (Srpt_print_barcodes.field to : datas) {
                     if (to.selected == true) {
                         int count = FitIn.toInt("" + to.count);
@@ -1098,7 +1141,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                             }
                             String description = to.description;
                             double price = to.price;
-                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false, to.count,to.generic_name);
+                            Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(barcode, description, price, false, to.count, to.generic_name);
                             fields.add(field);
                         }
                     }
@@ -1109,6 +1152,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 if (!jCheckBox3.isSelected()) {
                     category = tf_category.getText();
                 }
+                
                 String classification = "All";
                 if (!jCheckBox4.isSelected()) {
                     classification = tf_classification.getText();
@@ -1132,14 +1176,20 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
                     jrxml = "rpt_print_barcodes_angel_buns.jrxml";
                 }
+                if (pool_db.equalsIgnoreCase("db_smis_santillan")) {
+                    jrxml = "rpt_print_barcodes_santillan.jrxml";
+                }
+                if (jCheckBox15.isSelected()) {
+                    jrxml = "rpt_print_barcodes_30x25.jrxml";
+                }
+                if (jCheckBox16.isSelected()) {
+                    jrxml = "rpt_print_barcodes_30x15.jrxml";
+                }
                 report_customers_aging(rpt, jrxml);
-
                 jProgressBar1.setString("Finished...");
                 jProgressBar1.setIndeterminate(false);
-
             }
         });
-
         t.start();
     }
 
@@ -1434,13 +1484,13 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 public void ok(CloseDialog closeDialog, Dlg_print_barcode_qty.OutputData data) {
                     closeDialog.ok();
                     String description = to.description.replace("  ", "");
-                     if (jCheckBox9.isSelected()) {
+                    if (jCheckBox9.isSelected()) {
                         Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.description, to.price, true, data.qty, to.generic_name);
                         tbl_inventory_barcodes_ALM2.add(field);
                     } else {
                         Srpt_print_barcodes.field field = new Srpt_print_barcodes.field(to.barcode, to.generic_name, to.price, true, data.qty, to.generic_name);
                         tbl_inventory_barcodes_ALM2.add(field);
-                        
+
                     }
                     jLabel11.setText("" + tbl_inventory_barcodes_ALM2.size());
                     Alert.set(1, "");

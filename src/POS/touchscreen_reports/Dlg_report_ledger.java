@@ -1272,9 +1272,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double over = 0;
                 List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales3);
                 for (Item_replacements.to_item_replacements rep : replacements) {
-                    double amount =(rep.amount_due - rep.replacement_amount) - rep.discount;
+                    double amount =(rep.replacement_amount - rep.amount_due) - rep.discount;
                     double due = rep.amount_due;
-                    double total = (rep.amount_due - rep.replacement_amount) - rep.discount;
+                    double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
                     if (amount < rep.amount_due) {
                         na_short += amount ;
                     }

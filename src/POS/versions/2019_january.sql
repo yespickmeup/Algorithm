@@ -52,10 +52,10 @@ alter table accounts_receivable_payments add actual_amount double default 0;
 update accounts_receivable_payments set actual_amount=(amount+check_amount+prepaid_amount+credit_card_amount+gift_certificate_amount+online_amount-discount_amount);
 
 
-alter table inventory add allow_negative_inventory int default 0;
-alter table inventory add auto_order int default 1;
+alter table inventory add allow_negative_inventory int default 1;
+alter table inventory add auto_order int default 0;
 
-alter table inventory_barcodes add allow_negative_inventory int default 0;
-alter table inventory_barcodes add auto_order int default 1;
+alter table inventory_barcodes add allow_negative_inventory int default 1;
+alter table inventory_barcodes add auto_order int default 0;
 
           

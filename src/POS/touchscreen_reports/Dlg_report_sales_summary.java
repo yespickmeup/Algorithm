@@ -2081,9 +2081,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 double re_online = 0;
                 double salary_deduction = 0;
                 for (Item_replacements.to_item_replacements rep : replacements) {
-                    double amount = rep.replacement_amount + rep.discount;
+                    double amount =(rep.replacement_amount - rep.amount_due) - rep.discount;
                     double due = rep.amount_due;
-                    double total = amount - due;
+                     double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
                     if (amount < rep.amount_due) {
                         na_short += amount - rep.amount_due;
                     }

@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -410,7 +411,7 @@ public class Dlg_rma extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_receiptsMouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        data_cols();
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -456,6 +457,8 @@ public class Dlg_rma extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.1.51");
         init_key();
         init_tbl_receipts(tbl_receipts);
 
@@ -474,14 +477,14 @@ public class Dlg_rma extends javax.swing.JDialog {
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -619,8 +622,15 @@ public class Dlg_rma extends javax.swing.JDialog {
                 where = where + " and receipt_no = '" + receipt_no + "' ";
             }
         }
+        List<Receipts.to_receipts> datas = new ArrayList();
+        if (jCheckBox5.isSelected()) {
+            where = " where main_barcode like '" + jTextField2.getText() + "'";
+            datas = Receipts.ret_data5(where);
+            System.out.println("size: " + datas.size());
+        } else {
+            datas = Receipts.ret_data3(where);
+        }
 
-        List<Receipts.to_receipts> datas = Receipts.ret_data3(where);
         loadData_receipts(datas);
         jLabel2.setText("" + datas.size());
         if (datas.size() == 1 && !item_code.equals("n/a")) {
@@ -662,9 +672,9 @@ public class Dlg_rma extends javax.swing.JDialog {
                 @Override
                 public void ok(CloseDialog closeDialog, Dlg_rma_details.OutputData data) {
                     closeDialog.ok();
-                    
+
                     System.out.println("" + data.stmt);
-                    
+
                 }
             });
             nd.setLocationRelativeTo(this);

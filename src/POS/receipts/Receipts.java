@@ -790,6 +790,118 @@ public class Receipts {
         }
     }
 
+    public static List<to_receipts> ret_data5(String where) {
+        List<to_receipts> datas = new ArrayList();
+        try {
+            Connection conn = MyConnection.connect();
+
+            String s2 = "select "
+                    + "id"
+                    + ",receipt_no"
+                    + ",user_name"
+                    + ",session_no"
+                    + ",date_added"
+                    + ",supplier"
+                    + ",supllier_id"
+                    + ",remarks"
+                    + ",barcode"
+                    + ",description"
+                    + ",qty"
+                    + ",cost"
+                    + ",category"
+                    + ",category_id"
+                    + ",classification"
+                    + ",classification_id"
+                    + ",sub_class"
+                    + ",sub_class_id"
+                    + ",conversion"
+                    + ",unit"
+                    + ",date_delivered"
+                    + ",date_received"
+                    + ",barcodes"
+                    + ",batch_no"
+                    + ",serial_no"
+                    + ",main_barcode"
+                    + ",brand"
+                    + ",brand_id"
+                    + ",model"
+                    + ",model_id"
+                    + ",status"
+                    + ",previous_cost"
+                    + ",receipt_type_id"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from receipt_items"
+                    + " " + where;
+
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs2 = stmt2.executeQuery(s2);
+            while (rs2.next()) {
+                int id = rs2.getInt(1);
+                String receipt_no = rs2.getString(2);
+
+                String s0 = "select "
+                        + "id"
+                        + ",receipt_no"
+                        + ",user_name"
+                        + ",session_no"
+                        + ",date_added"
+                        + ",supplier"
+                        + ",supllier_id"
+                        + ",remarks"
+                        + ",date_delivered"
+                        + ",date_received"
+                        + ",receipt_type"
+                        + ",reference_no"
+                        + ",branch"
+                        + ",branch_id"
+                        + ",gross_total"
+                        + ",net_total"
+                        + ",batch_no"
+                        + ",discount"
+                        + ",receipt_type_id"
+                        + ",status"
+                        + " from receipts  "
+                        + " where receipt_no like '" + receipt_no + "' group by receipt_no ";
+
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(s0);
+                while (rs.next()) {
+                    int id2 = rs.getInt(1);
+                    String receipt_no2 = rs.getString(2);
+                    String user_name = rs.getString(3);
+                    String session_no = rs.getString(4);
+                    String date_added = rs.getString(5);
+                    String supplier = rs.getString(6);
+                    String supllier_id = rs.getString(7);
+                    String remarks = rs.getString(8);
+                    String date_delivered = rs.getString(9);
+                    String date_received = rs.getString(10);
+                    String receipt_type = rs.getString(11);
+                    String reference_no = rs.getString(12);
+                    String branch = rs.getString(13);
+                    String branch_id = rs.getString(14);
+                    double gross_total = rs.getDouble(15);
+                    double net_total = rs.getDouble(16);
+                    String batch_no = rs.getString(17);
+                    double discount = rs.getDouble(18);
+                    String receipt_type_id = rs.getString(19);
+                    int status = rs.getInt(20);
+                    to_receipts to = new to_receipts(id2, receipt_no2, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, status);
+                    datas.add(to);
+                }
+            }
+
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static List<to_receipts> ret_data4(String where) {
         List<to_receipts> datas = new ArrayList();
         List<S1_branch_locations.to_branch_locations> locations = S1_branch_locations.ret_where("");

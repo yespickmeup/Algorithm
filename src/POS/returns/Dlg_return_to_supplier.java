@@ -1230,7 +1230,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
-        MyUser.setUser_id("1");
+//        MyUser.setUser_id("1");
 
         init_key();
 
@@ -1490,7 +1490,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_return_to_supplier_qty nd = Dlg_return_to_supplier_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass2(1, item.cost, item.description, item.unit, item.barcode, item.barcode, item.product_qty, item.main_barcode, "", "");
+        nd.do_pass2(1, item.cost, item.description, item.unit, item.barcode, item.barcode, item.product_qty, item.main_barcode, "", "",show_cost);
         nd.setCallback(new Dlg_return_to_supplier_qty.Callback() {
 
             @Override
@@ -1773,7 +1773,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_return_to_supplier_qty nd = Dlg_return_to_supplier_qty.create(p, true);
             nd.setTitle("");
-            nd.do_pass2(to.qty, to.cost, to.description, to.unit, to.barcode, to.barcode, 0, to.main_barcode, to.remarks, to.serial_no);
+            nd.do_pass2(to.qty, to.cost, to.description, to.unit, to.barcode, to.barcode, 0, to.main_barcode, to.remarks, to.serial_no,show_cost);
             nd.setCallback(new Dlg_return_to_supplier_qty.Callback() {
 
                 @Override

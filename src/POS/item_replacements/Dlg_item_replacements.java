@@ -2502,7 +2502,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 case 7:
                      
                   
-                   double total = (tt.amount_due - tt.replacement_amount) - (tt.discount);
+                   double total = (tt.replacement_amount - tt.amount_due) - (tt.discount);
                     if (total < 0) {
                         return " Over";
                     } else if (total == 0) {
@@ -2511,7 +2511,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                         return " Short";
                     }
                 case 8:
-                      double total2 = (tt.amount_due - tt.replacement_amount) - (tt.discount);
+                      double total2 = (tt.replacement_amount - tt.amount_due) - (tt.discount);
                     return FitIn.fmt_wc_0(total2) + " ";
                 case 9:
                     if (tt.status == 0) {
