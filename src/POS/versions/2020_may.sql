@@ -36,8 +36,7 @@ id int auto_increment primary key
 ,status int
 );
 
-
 insert into user_default_previleges(account,name)
-values
-('Transactions','Receipt Endorsement')
-;
+values('Transactions','Receipt Endorsement');
+
+

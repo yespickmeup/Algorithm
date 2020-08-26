@@ -4351,6 +4351,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 String auto_order = System.getProperty("auto_order", "false");
                 if (to.auto_order == 1) {
                     add_order();
+                    tf_search.selectAll();
+                    tf_search.grabFocus();
                 }
             } else {
 
@@ -4421,6 +4423,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     tbl_orders_M.fireTableDataChanged();
 
                     compute_total();
+                    tf_search.selectAll();
+                    tf_search.grabFocus();
 
                 } else {
                     Window p = (Window) this;
@@ -4434,6 +4438,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                             tbl_orders_ALM.addAll(data.assemble);
                             tbl_orders_M.fireTableDataChanged();
                             compute_total();
+                            tf_search.selectAll();
+                            tf_search.grabFocus();
                         }
                     });
                     nd.setLocationRelativeTo(this);
@@ -4607,6 +4613,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             tf_addtl_cash.setText("");
             tf_wtax.setText("");
             serial.setDiscount_customer_id("");
+            tf_search.selectAll();
             tf_search.grabFocus();
         } else {
             int row = tbl_orders.getSelectedRow();
@@ -4648,6 +4655,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             lbl_item_discount.setText("");
             tf_addtl_cash.setText("");
             tf_wtax.setText("");
+            tf_search.selectAll();
             tf_search.grabFocus();
         }
     }

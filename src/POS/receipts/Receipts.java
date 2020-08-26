@@ -1142,7 +1142,9 @@ public class Receipts {
                             + ",serial_no='" + new_serial + "' "
                             + " where  main_barcode= '" + to_receipt_items.main_barcode + "' and location_id='" + to_receipt_items.branch_id + "' "
                             + "";
-                    stmt.addBatch(s4);
+                    PreparedStatement stmt4 = conn.prepareStatement(s4);
+                    stmt4.execute();
+                    
                     String s5 = "update inventory set "
                             + " cost= :cost"
                             + " where "

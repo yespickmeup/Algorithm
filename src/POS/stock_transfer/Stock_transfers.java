@@ -777,7 +777,8 @@ public class Stock_transfers {
                         + " where main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "' "
                         + "";
                 if (to_stock_transfers.status == 0) {
-                    stmt.addBatch(s4);
+                    PreparedStatement stmt4 = conn.prepareStatement(s4);
+                    stmt4.execute();
                 }
 
                 String s5 = "update inventory set "
@@ -815,8 +816,9 @@ public class Stock_transfers {
                         + " product_qty='" + new_qty1 + "' "
                         + " where  main_barcode= '" + to.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "' "
                         + "";
-                stmt.addBatch(s41);
 
+                PreparedStatement stmt41 = conn.prepareStatement(s41);
+                stmt41.execute();
             }
 
             stmt.executeBatch();
