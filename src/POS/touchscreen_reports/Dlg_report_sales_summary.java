@@ -1489,7 +1489,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         time_list = DateType.time();
         String cloud_host = System.getProperty("cloud_host", "");
         if (!cloud_host.isEmpty()) {
-            ret_transactions();
+//            ret_transactions();
         }
         jCheckBox14.setVisible(false);
         jLabel18.setVisible(false);

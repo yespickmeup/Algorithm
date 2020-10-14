@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -1680,9 +1681,26 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_algorithm");
         init_key();
         key_count();
-        pnl_disbursements();
-        pnl_sales_summary();
-        pnl_remittances();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                pnl_disbursements();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        pnl_remittances();
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                pnl_sales_summary();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
         jLabel16.setVisible(false);
         jTextField37.setVisible(false);
         jTextField4.grabFocus();
@@ -1693,6 +1711,7 @@ public class Dlg_logout_cashin extends javax.swing.JDialog {
     }
 
     private void pnl_disbursements() {
+
         jPanel20.setLayout(new BorderLayout());
 
         Window p = (Window) this;

@@ -172,6 +172,7 @@ public class MyMain {
             System.setProperty("business_type", setting.bir_business_type);
             System.setProperty("vat_percent", setting.bir_vat_percent);
             System.setProperty("permit_no", setting.bir_permit_no);
+          
 
             //
             //
@@ -203,6 +204,9 @@ public class MyMain {
 
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
+            
+            System.setProperty("barcode_printer", prop.getProperty("barcode_printer", "label"));
+            
 
             System.setProperty("return_exchange_days", prop.getProperty("return_exchange_days", "0"));
 

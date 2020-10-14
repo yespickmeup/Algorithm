@@ -1875,11 +1875,9 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         nd.setTitle("");
         nd.do_pass(orders, sale_discount, net_total, my_sale, cash_amount, change_amount, sales_date);
         nd.setCallback(new Dlg_touchscreen_choose_receipt_type.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_touchscreen_choose_receipt_type.OutputData data) {
                 closeDialog.ok();
-
             }
         });
         nd.setLocationRelativeTo(this);

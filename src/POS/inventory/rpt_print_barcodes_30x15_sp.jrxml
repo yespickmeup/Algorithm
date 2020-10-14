@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="180" pageHeight="72" columnWidth="180" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6f387595-4319-47fa-9c6a-adf61206aa9a">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="category" class="java.lang.String"/>
+	<parameter name="classification" class="java.lang.String"/>
+	<parameter name="sub_classification" class="java.lang.String"/>
+	<parameter name="brand" class="java.lang.String"/>
+	<parameter name="model" class="java.lang.String"/>
+	<field name="barcode" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="price" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="59" splitType="Stretch">
+			<textField>
+				<reportElement uuid="be346b1f-ad07-4c15-9987-f935241a56ec" x="13" y="22" width="81" height="18" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode} + " - " +$F{description}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="53fba91c-22be-4917-8d9f-036fca578050" x="13" y="5" width="81" height="17"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128C" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="be346b1f-ad07-4c15-9987-f935241a56ec" x="13" y="40" width="81" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

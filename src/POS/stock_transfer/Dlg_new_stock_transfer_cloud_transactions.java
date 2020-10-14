@@ -767,10 +767,18 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
                 Field.Input br = (Field.Input) tf_from_branch;
                 jProgressBar1.setString("Retrieving records...");
                 String where = " where is_uploaded=0 and at_branch_id<>'" + br.getId() + "' and to_branch_id='" + br.getId() + "'";
-                System.out.println(where);
+//                System.out.println(where);
                 List<Stock_transfers.to_stock_transfers> datas = Stock_transfers.ret_data_cloud(where);
-                loadData_stock_transfers(datas);
-                jLabel2.setText("" + datas.size());
+                for (Stock_transfers.to_stock_transfers trans : datas) {
+                    List<Stock_transfers.to_stock_transfers> local_to = Stock_transfers.ret_data(" where transaction_no like '" + trans.transaction_no + "' limit 1 ");
+                    if (!local_to.isEmpty()) {
+                        Synch_stock_transfers.update_status_stock_transfer_cloud(trans.transaction_no, 1, trans.at_location_id);
+                    }
+                }
+                
+                List<Stock_transfers.to_stock_transfers> datas2 = Stock_transfers.ret_data_cloud(where);
+                loadData_stock_transfers(datas2);
+                jLabel2.setText("" + datas2.size());
             } catch (InterruptedException ex) {
                 Logger.getLogger(Dlg_new_stock_transfer_cloud_transactions.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -993,7 +1001,12 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
         if (row < 0) {
             return;
         }
-//        final Stock_transfers.to_stock_transfers to = (Stock_transfers.to_stock_transfers) tbl_stock_transfers_ALM.get(row);
+        final Stock_transfers.to_stock_transfers to = (Stock_transfers.to_stock_transfers) tbl_stock_transfers_ALM.get(row);
+        List<Stock_transfers.to_stock_transfers> local_to = Stock_transfers.ret_data(" where transaction_no like '" + to.transaction_no + "' ");
+        if (!local_to.isEmpty()) {
+            Alert.set(0, "Transaction already finalized!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
@@ -1063,12 +1076,13 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
             Alert.set(0, "No Item Added!");
             return;
         }
-        
+
         Stock_transfers.add_stock_transfers(rpt, datas);
 
         Stock_transfers.finalize(rpt, datas, finalized_by_id, finalized_by);
         Synch_stock_transfers.update_status_stock_transfer(rpt.transaction_no, 1);
         Synch_stock_transfers.update_status_stock_transfer_cloud(rpt.transaction_no, 1, rpt.at_location_id);
+
         Alert.set(0, "Stock Transfer Posted and Finalized");
         ret_cloud_stock_transfer_records();
     }
@@ -1234,7 +1248,7 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
             proceed_post_and_finalize();
             return null;
         }
-        
+
         @Override
         protected void done() {
             dialog.dispose();

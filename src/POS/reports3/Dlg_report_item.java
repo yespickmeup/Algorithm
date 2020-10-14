@@ -290,6 +290,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox14 = new javax.swing.JCheckBox();
         jCheckBox15 = new javax.swing.JCheckBox();
         jCheckBox16 = new javax.swing.JCheckBox();
+        jCheckBox17 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -595,6 +596,10 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox16.setSelected(true);
         jCheckBox16.setText("Price & Amount");
 
+        jCheckBox17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox17.setSelected(true);
+        jCheckBox17.setText("Include Hidden Items");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -654,8 +659,10 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox17)))
+                        .addGap(2, 2, 2)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCheckBox15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCheckBox16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -696,7 +703,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox7)
                             .addComponent(jCheckBox14)
-                            .addComponent(jCheckBox15))
+                            .addComponent(jCheckBox15)
+                            .addComponent(jCheckBox17))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1302,6 +1310,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox14;
     private javax.swing.JCheckBox jCheckBox15;
     private javax.swing.JCheckBox jCheckBox16;
+    private javax.swing.JCheckBox jCheckBox17;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -2202,9 +2211,14 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     }
 
                 }
-
+                if (!jCheckBox17.isSelected()) {
+                    where = where + " and show_to_sales=1 ";
+                }
                 if (jCheckBox10.isSelected()) {
                     String where2 = where.replaceAll("", "") + " and  main_barcode='" + jTextField1.getText() + "'  ";
+                    if (!jCheckBox17.isSelected()) {
+                        where2 = where2 + " and show_to_sales=1 ";
+                    }
 //                    System.out.println("where2: " + where2);
                     String where3 = " or " + where.replaceAll("where", " ") + " and  barcode like '" + jTextField1.getText() + "'  ";
 //                    System.out.println("where3: " + where3);
