@@ -60,6 +60,7 @@ public class zInventory {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            
             MyConnection.close();
         }
     }

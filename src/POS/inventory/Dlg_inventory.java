@@ -2259,7 +2259,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         if (inventory_item_delete.equalsIgnoreCase("true")) {
             btn_delete.setEnabled(true);
         }
-
+        
         if (to.selling_type == 0) {
             tf_selling_type.setText("Regular");
         } else {
@@ -2270,6 +2270,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         data_cols_inventory_barcodes();
 //                data_cols_assembly();
         data_cols();
+        
 
         if (to.allow_negative_inventory == 0) {
             jCheckBox1.setSelected(false);
