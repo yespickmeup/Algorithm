@@ -8,7 +8,7 @@
  * Created: 05 19, 20
  */
 
-/**/
+/* ... */
 drop table if exists receipt_endorsements;
 create table receipt_endorsements(
 id int auto_increment primary key
