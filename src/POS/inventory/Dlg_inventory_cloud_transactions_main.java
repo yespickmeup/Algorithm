@@ -454,7 +454,7 @@ public class Dlg_inventory_cloud_transactions_main extends javax.swing.JDialog {
                         break;
                     }
                 }
-
+                
                 if (exists == 0) {
                     assembly_cloud_to_add.add(assembly_l);
                     System.out.println("Main Item: " + assembly_l.main_item_code);

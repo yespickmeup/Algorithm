@@ -9,7 +9,6 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.receipts.Stock_transfers_items;
 import POS.synch.Synch_stock_transfers;
-import POS.touchscreen.Dlg_touchscreen;
 import POS.users.MyUser;
 import POS.users.User_previlege_others;
 import POS.util.Alert;
@@ -38,7 +37,6 @@ import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
-import static sun.misc.VM.getState;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.panels.Loading;
@@ -595,17 +593,14 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
     }
 
     static int show_cost = 1;
-
     private void set_default_branch() {
         S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
-
         Field.Input f_br = (Field.Input) tf_from_branch;
         Field.Input f_lo = (Field.Input) tf_from_location;
         f_br.setText(to.branch);
         f_br.setId(to.branch_id);
         f_lo.setText(to.location);
         f_lo.setId("" + to.id);
-
         String wheree = " where user_id='" + MyUser.getUser_id() + "' and name like '" + "Stock Transfer - Show Cost - (Add)" + "' limit 1";
         List<User_previlege_others.to_user_previlege_others> datas = User_previlege_others.ret_data(wheree);
         if (datas.isEmpty()) {
@@ -674,11 +669,11 @@ public class Dlg_new_stock_transfer_cloud_transactions extends javax.swing.JDial
         public static String[] COLUMNS = {
             "Trans #", "Date", "From", "To", "Status", "", "", "", "", "", "", "from_location", "from_location_id"
         };
-
+        
         public Tblstock_transfersModel(ListModel listmodel) {
             super(listmodel, COLUMNS);
         }
-
+        
         @Override
         public boolean isCellEditable(int row, int column) {
 
