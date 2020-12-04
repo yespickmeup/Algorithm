@@ -2565,7 +2565,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
     private void t_returns_to_supplier() {
         Dlg_return_to_supplier dtc = new Dlg_return_to_supplier();
-        MyFrame.set(dtc.getSurface(), jPanel1, "Accounts Payable");
+        MyFrame.set(dtc.getSurface(), jPanel1, "Return to supplier");
     }
 
     private void t_conversions() {

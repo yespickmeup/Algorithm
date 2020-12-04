@@ -785,6 +785,10 @@ public class Dlg_return_to_supplier_qty extends javax.swing.JDialog {
         lbl_qty.setText(FitIn.fmt_woc(product_qty));
         lbl_item_code.setText(my_barcode);
         lbl_item_code1.setText(barcode1);
+        if(is_admin==0){
+            jLabel11.setVisible(false);
+            tf_cost.setVisible(false);
+        }
 //        List<to_receipt_barcodes> datas = new ArrayList();
 //        List<String> codes = SplitString.split(barcodes);
 //        for (String s : codes) {

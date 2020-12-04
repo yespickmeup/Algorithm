@@ -3105,6 +3105,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                 double two = 0;
                 double three = 0;
                 double four = 0;
+                
                 double five = 0;
                 double six = 0;
                 for (Srpt_ar_aging.field to : fields) {
@@ -3115,6 +3116,7 @@ public class Dlg_report_customers extends javax.swing.JDialog {
                     four += FitIn.toDouble(to.four);
                     five += FitIn.toDouble(to.above);
                 }
+                
                 six = one + two + three + four + five;
                 String address = System.getProperty("address", "Daro, Dumaguete City");
                 String telephone_number = System.getProperty("contact_no", "Tel. no. 225-6928 / 422-9026 / fax:422-1953");

@@ -1098,7 +1098,6 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 //                double total_due = sales.amount_due;
 //                double cash = FitIn.toDouble(lbl_cash.getText());
 //                double change_due = Payments.countChange2();
-
 //                String receipt_infos = System.getProperty("receipt_infos", "");
 //                String receipt_footer = System.getProperty("receipt_footer", "This is an Official receipt");
 //                double discount = FitIn.toDouble(lbl_sale_discount.getText());
@@ -1255,7 +1254,13 @@ public class Dlg_touchscreen_change extends javax.swing.JDialog {
 
         Official_receipt rpt = new Official_receipt(business_name, operated_by, address, tin_no, machine_no, min_no, serial_no, permit_no, pos_no, accreditation_no, business_type, vat_percent, sales_date, terminal_no, cashier, customer_name, customer_address, customer_id_no, sub_total, line_discount, sale_discount, amount_due, cash, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, cheque_holder, cheque_bank, cheque_no, cheque_date, cheque_amount, charge_type, charge_reference_no, charge_customer_name, charge_customer_no, charge_amount, vatable_sales, vatable_exempt_sales, zero_rated_sales, vat, change, or_no, receipt_footer, supplier_name, supplier_address, supplier_tin_no, supplier_accreditation_no, supplier_accreditation_date, bir_permit_to_use_no, total_items, online_amount);
         rpt.fields.addAll(fields);
+
+        String print_order_list = System.getProperty("print_order_list", "false");
+
         String jrxml = "rpt_official_receipt.jrxml";
+        if (print_order_list.equalsIgnoreCase("true")) {
+            jrxml = "rpt_order_list.jrxml";
+        }
         InputStream is = Official_receipt.class.getResourceAsStream(jrxml);
         try {
             JasperReport jasperReport = JasperCompileManager.compileReport(is);

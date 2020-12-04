@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="216" pageHeight="7200" columnWidth="216" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c76ea834-f0f6-4ad7-90e0-25b3a8baa5b2">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="556"/>
+	<parameter name="business_name" class="java.lang.String"/>
+	<parameter name="operated_by" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="tin_no" class="java.lang.String"/>
+	<parameter name="machine_no" class="java.lang.String"/>
+	<parameter name="min_no" class="java.lang.String"/>
+	<parameter name="serial_no" class="java.lang.String"/>
+	<parameter name="permit_no" class="java.lang.String"/>
+	<parameter name="pos_no" class="java.lang.String"/>
+	<parameter name="accreditation_no" class="java.lang.String"/>
+	<parameter name="business_type" class="java.lang.String"/>
+	<parameter name="vat_percent" class="java.lang.String"/>
+	<parameter name="sales_date" class="java.lang.String"/>
+	<parameter name="terminal_no" class="java.lang.String"/>
+	<parameter name="cashier" class="java.lang.String"/>
+	<parameter name="customer_name" class="java.lang.String"/>
+	<parameter name="customer_address" class="java.lang.String"/>
+	<parameter name="customer_id_no" class="java.lang.String"/>
+	<parameter name="sub_total" class="java.lang.Double"/>
+	<parameter name="line_discount" class="java.lang.Double"/>
+	<parameter name="sale_discount" class="java.lang.Double"/>
+	<parameter name="amount_due" class="java.lang.Double"/>
+	<parameter name="cash" class="java.lang.Double"/>
+	<parameter name="credit_card_type" class="java.lang.String"/>
+	<parameter name="credit_card_rate" class="java.lang.Double"/>
+	<parameter name="credit_card_amount" class="java.lang.Double"/>
+	<parameter name="credit_card_no" class="java.lang.String"/>
+	<parameter name="credit_card_holder" class="java.lang.String"/>
+	<parameter name="credit_card_approval_code" class="java.lang.String"/>
+	<parameter name="gift_certificate_from" class="java.lang.String"/>
+	<parameter name="gift_certificate_description" class="java.lang.String"/>
+	<parameter name="gift_certificate_no" class="java.lang.String"/>
+	<parameter name="gift_certificate_amount" class="java.lang.Double"/>
+	<parameter name="prepaid_customer_name" class="java.lang.String"/>
+	<parameter name="prepaid_customer_id" class="java.lang.String"/>
+	<parameter name="prepaid_amount" class="java.lang.Double"/>
+	<parameter name="cheque_holder" class="java.lang.String"/>
+	<parameter name="cheque_bank" class="java.lang.String"/>
+	<parameter name="cheque_no" class="java.lang.String"/>
+	<parameter name="cheque_date" class="java.lang.String"/>
+	<parameter name="cheque_amount" class="java.lang.Double"/>
+	<parameter name="charge_type" class="java.lang.String"/>
+	<parameter name="charge_reference_no" class="java.lang.String"/>
+	<parameter name="charge_customer_name" class="java.lang.String"/>
+	<parameter name="charge_customer_no" class="java.lang.String"/>
+	<parameter name="charge_amount" class="java.lang.Double"/>
+	<parameter name="vatable_sales" class="java.lang.Double"/>
+	<parameter name="vatable_exempt_sales" class="java.lang.Double"/>
+	<parameter name="zero_rated_sales" class="java.lang.Double"/>
+	<parameter name="vat" class="java.lang.Double"/>
+	<parameter name="change" class="java.lang.Double"/>
+	<parameter name="or_no" class="java.lang.String"/>
+	<parameter name="receipt_footer" class="java.lang.String"/>
+	<parameter name="supplier_name" class="java.lang.String"/>
+	<parameter name="supplier_address" class="java.lang.String"/>
+	<parameter name="supplier_tin_no" class="java.lang.String"/>
+	<parameter name="supplier_accreditation_no" class="java.lang.String"/>
+	<parameter name="supplier_accreditation_date" class="java.lang.String"/>
+	<parameter name="bir_permit_to_use_no" class="java.lang.String"/>
+	<parameter name="total_items" class="java.lang.Double"/>
+	<parameter name="online_amount" class="java.lang.Double"/>
+	<field name="item_code" class="java.lang.String"/>
+	<field name="barcode" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="unit" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="selling_price" class="java.lang.Double"/>
+	<field name="line_discount" class="java.lang.Double"/>
+	<field name="amount" class="java.lang.Double"/>
+	<field name="vatable" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="141" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="24" width="130" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{business_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="33" width="129" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{operated_by}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="43" width="129" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="75" width="129" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sales_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="84" width="129" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{terminal_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="93" width="129" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{or_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="4" y="102" width="130" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cashier}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cac26143-18ff-4fd9-9c9b-ae901118e6f3" x="47" y="111" width="86" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customer_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="04ac2d74-7538-4d81-8dc0-be45d3a5acb9" x="5" y="134" width="129" height="7"/>
+				<box>
+					<topPen lineWidth="0.2"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="4" y="111" width="44" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Customer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="4" y="59" width="129" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Order List]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="4" y="0" width="129" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="13" y="9" width="23" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="512dd274-70fb-477e-aa1d-b20a3101ad2d" x="37" y="9" width="11" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[x]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="48" y="9" width="43" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{selling_price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="5c0b45bd-c173-4788-b575-97dba87f2e7d" x="91" y="9" width="43" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{selling_price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="04ac2d74-7538-4d81-8dc0-be45d3a5acb9" x="4" y="0" width="129" height="7"/>
+				<box>
+					<bottomPen lineWidth="0.2"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="4" y="23" width="64" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[SubTotal]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="79" y="24" width="55" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sub_total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="79" y="33" width="55" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{line_discount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="13" y="33" width="55" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Line Discount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="13" y="41" width="55" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Sale Discount]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="79" y="42" width="55" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sale_discount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="79" y="51" width="54" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{amount_due}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="4" y="51" width="64" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Amount Due]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="15" y="64" width="53" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cash]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="80" y="64" width="54" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cash}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="79" y="79" width="55" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{change}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="4" y="79" width="64" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Change]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3e29ee4-8de0-4992-a489-176bece95364" x="4" y="7" width="64" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Total Items:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement uuid="d681d0af-b968-4280-83e3-35d4f5598f60" x="80" y="7" width="54" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph leftIndent="2" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_items}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

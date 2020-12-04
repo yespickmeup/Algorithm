@@ -16,6 +16,7 @@ import POS.returns.Return_to_supplier_items.to_return_to_supplier_items;
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
+import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.Dlg_confirm_action;
@@ -285,6 +286,8 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         tf_branch3 = new Field.Combo();
         jCheckBox11 = new javax.swing.JCheckBox();
         jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jCheckBox12 = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -818,6 +821,13 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel32.setText("Location:");
 
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel33.setText("Print:");
+
+        jCheckBox12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox12.setText("Cost");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -830,18 +840,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jCheckBox1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -854,8 +853,25 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                         .addGap(16, 16, 16)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jCheckBox1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jCheckBox11)
@@ -866,7 +882,8 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tf_branch2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -885,7 +902,9 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1163,6 +1182,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -1193,6 +1213,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
@@ -1228,20 +1249,26 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     private javax.swing.JTextField tf_supplier;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        MyUser.setUser_id("1");
-
+        
         init_key();
 
         set_default_branch();
         String where = " order by branch,location asc  ";
         branch_location_list = S1_branch_locations.ret_location_where(where);
-
+        jCheckBox12.setVisible(false);
+        jLabel33.setVisible(false);
+        jLabel18.setVisible(false);
+        lbl_gross1.setVisible(false);
         String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Finalize)" + "' limit 1";
         List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
         if (!privileges.isEmpty()) {
             show_cost = 1;
+            jLabel33.setVisible(true);
+            jCheckBox12.setVisible(true);
+
         }
 
         init_tbl_return_to_suppliers(tbl_return_to_suppliers);
@@ -1490,7 +1517,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_return_to_supplier_qty nd = Dlg_return_to_supplier_qty.create(p, true);
         nd.setTitle("");
-        nd.do_pass2(1, item.cost, item.description, item.unit, item.barcode, item.barcode, item.product_qty, item.main_barcode, "", "",show_cost);
+        nd.do_pass2(1, item.cost, item.description, item.unit, item.barcode, item.barcode, item.product_qty, item.main_barcode, "", "", show_cost);
         nd.setCallback(new Dlg_return_to_supplier_qty.Callback() {
 
             @Override
@@ -1773,7 +1800,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_return_to_supplier_qty nd = Dlg_return_to_supplier_qty.create(p, true);
             nd.setTitle("");
-            nd.do_pass2(to.qty, to.cost, to.description, to.unit, to.barcode, to.barcode, 0, to.main_barcode, to.remarks, to.serial_no,show_cost);
+            nd.do_pass2(to.qty, to.cost, to.description, to.unit, to.barcode, to.barcode, 0, to.main_barcode, to.remarks, to.serial_no, show_cost);
             nd.setCallback(new Dlg_return_to_supplier_qty.Callback() {
 
                 @Override
@@ -2213,6 +2240,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                     double qty = item.qty;
                     double conversion = item.conversion;
                     double cost = item.cost;
+
                     double amount = item.qty * item.cost;
                     String remark = item.remarks;
                     String serials = item.serial_no;
@@ -2223,6 +2251,9 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
                 Srpt_return_to_supplier rpt = new Srpt_return_to_supplier(business_name, address, return_to_supplier_no, date_returned, date, supplier, supplier_id, reference_no, remarks, branch, location, contact_no);
                 rpt.fields.addAll(fields);
                 String jrxml = "rpt_return_to_supplier.jrxml";
+                if (!jCheckBox12.isSelected()) {
+                    jrxml = "rpt_return_to_supplier_no_cost.jrxml";
+                }
                 report_customers_aging(rpt, jrxml);
                 jProgressBar3.setString("Finished...");
                 jProgressBar3.setIndeterminate(false);
