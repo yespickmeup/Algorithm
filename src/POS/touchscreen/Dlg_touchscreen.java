@@ -3833,7 +3833,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 }
 
                 where = where + " order by description asc";
-
+                System.out.println(where);
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
                 if (tbl_items_ALM.isEmpty()) {
@@ -4758,6 +4758,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 f_discount.setDiscount_rate(order.discount_rate);
                 cust.setCustomer_name(order.customer_name);
                 cust.setCustomer_id(order.session_no);
+                
                 lbl_sales_no.setText(order.sales_no);
                 lbl_customer_name.setText(order.customer_name);
                 jLabel36.setText(order.session_no);
@@ -4884,7 +4885,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 double gross_amount = FitIn.toDouble(lbl_sub_total2.getText());
                 double amount_paid = FitIn.toDouble(lbl_balance_due.getText());
                 double amount_due = FitIn.toDouble(lbl_balance_due.getText());
-
+                
                 String discount_name = f_discount.getDiscount_name();
                 double discount = f_discount.getDiscount_rate();
                 double discount_amount = f_discount.getDiscount_amount();
@@ -4999,6 +5000,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     S1_orders.add_data(order);
                     S1_order_items.add_data(orders);
                 } else {
+                    
                     sales_no = lbl_sales_no.getText();
                     or_no = sales_no;
                     System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
@@ -5419,9 +5421,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Confirm.OutputData data) {
                 closeDialog.ok();
+
+                Label.Normal cust = (Label.Normal) lbl_customer_name;
+                cust.setCustomer_id("");
+                cust.setCustomer_name("");
+                cust.setCustomer_no("");
+                lbl_sales_no.setText("000000000000");
                 tbl_orders_ALM.clear();
                 tbl_orders_M.fireTableDataChanged();
                 tf_search.grabFocus();
+
                 compute_total();
             }
         });

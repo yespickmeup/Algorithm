@@ -96,11 +96,11 @@ public class Srpt_ar_aging {
         String above;
         String applied;
         String contact_no;
-
+        double total_amount;
         public field() {
         }
 
-        public field(String ci_no, String transaction_no, String customer, String term, String amount, String days, String one, String two, String three, String four, String above, String applied, String contact_no) {
+        public field(String ci_no, String transaction_no, String customer, String term, String amount, String days, String one, String two, String three, String four, String above, String applied, String contact_no,double total_amount) {
             this.ci_no = ci_no;
             this.transaction_no = transaction_no;
             this.customer = customer;
@@ -114,8 +114,20 @@ public class Srpt_ar_aging {
             this.above = above;
             this.applied = applied;
             this.contact_no = contact_no;
+            this.total_amount=total_amount;
         }
 
+        public double getTotal_amount() {
+            return total_amount;
+        }
+
+        public void setTotal_amount(double total_amount) {
+            this.total_amount = total_amount;
+        }
+
+       
+
+        
         public String getContact_no() {
             return contact_no;
         }
@@ -351,6 +363,7 @@ public class Srpt_ar_aging {
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
 
                 String t_amount = FitIn.fmt_wc_0(amount - paid);
+                double total_amount=amount - paid;
                 String one = "";
                 if (day > 0 && day <= 30) {
                     one = t_amount;
@@ -374,7 +387,8 @@ public class Srpt_ar_aging {
                     above = t_amount;
                 }
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + FitIn.fmt_wc_0(t_amount), "" + day, one, two, three, four, above, applied, contact_no);
+                
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + FitIn.fmt_wc_0(t_amount), "" + day, one, two, three, four, above, applied, contact_no,total_amount);
                 datas.add(to);
             }
             return datas;
@@ -440,6 +454,7 @@ public class Srpt_ar_aging {
                 trust_receipt = remarks;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
                 String t_amount = FitIn.fmt_wc_0(amount - paid);
+                double total_amount=amount-paid;
                 String one = "";
                 if (day >= 0 && day <= 30) {
                     one = t_amount;
@@ -460,8 +475,9 @@ public class Srpt_ar_aging {
                 if (day > 120) {
                     above = t_amount;
                 }
+//                System.out.println("t_amount: "+t_amount);
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, one, two, three, four, above, applied, contact_no);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, one, two, three, four, above, applied, contact_no,total_amount);
                 datas.add(to);
             }
             return datas;
@@ -530,9 +546,9 @@ public class Srpt_ar_aging {
                 trust_receipt = remarks;
                 int day = DateUtils1.ar_aging(date_applied, FitIn.toInt("" + term));
                 String t_amount = FitIn.fmt_wc_0(amount);
-
+                double total_amount=amount-paid;
                 String applied = DateType.convert_dash_date2(date_applied);
-                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, t_amount, t_amount, t_amount, t_amount, t_amount, applied, contact_no);
+                Srpt_ar_aging.field to = new field(ci_no, trust_receipt, customer_name, "" + FitIn.fmt_woc(term), "" + t_amount, "" + day, t_amount, t_amount, t_amount, t_amount, t_amount, applied, contact_no,total_amount);
                 datas.add(to);
             }
             return datas;

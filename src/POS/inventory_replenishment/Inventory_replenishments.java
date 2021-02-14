@@ -53,7 +53,7 @@ public class Inventory_replenishments {
         }
     }
 
-    public static void add_data(to_inventory_replenishments to_inventory_replenishments, List<Inventory_barcodes.to_inventory_barcodes> datas) {
+    public static void add_data(to_inventory_replenishments to_inventory_replenishments, List<Inventory_barcodes.to_inventory_barcodes> datas,String location_id) {
         try {
             Connection conn = MyConnection.connect();
             conn.setAutoCommit(false);
@@ -164,14 +164,13 @@ public class Inventory_replenishments {
 
                 stmt.addBatch(s2);
 
-                String s4 = "update inventory_barcodes set "
-                        + " product_qty='" + 0 + "'"
-                        + " where  main_barcode= '" + to_inventory_replenishment_items.main_barcode + "' and location_id='" + to_inventory_replenishment_items.location_id + "' "
-                        + "";
-
-                stmt.addBatch(s4);
-
             }
+            String s4 = "update inventory_barcodes set "
+                    + " product_qty='" + 0 + "'"
+                    + " where   location_id='" + location_id + "' "
+                    + "";
+
+            stmt.addBatch(s4);
             stmt.executeBatch();
             conn.commit();
         } catch (SQLException e) {

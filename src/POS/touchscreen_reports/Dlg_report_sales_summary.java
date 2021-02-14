@@ -1748,6 +1748,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String where_drawer = " where id<>0 ";
                 String where_sales = " where id<>0 ";
                 String where_sales_status = " where id<>0 and status=1 ";
+                String where_sales_status2 = " where id<>0 and status=1 ";
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
                 String where_sales3 = " where id<>0 "
@@ -1766,6 +1767,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                             + "  and user_id='" + f.getId() + "'";
                     where_sales_status = " where id<>0 "
                             + "  and user_name='" + user_name + "' and status=1 ";
+                     where_sales_status2 = " where id<>0 "
+                            + "  and user_name='" + f.getId() + "' and status=1 ";
                     where_disbursements = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
                     where_sales2 = " where id<>0 "
@@ -1777,6 +1780,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_drawer = where_drawer + "  and time_in between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales = where_sales + " and date_added between '" + date_from + "' and '" + date_to + "' ";
                     where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                     where_sales_status2 = where_sales_status2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+                    
                     where_disbursements = where_disbursements + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales2 = where_sales2 + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
@@ -1785,6 +1790,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                     where_drawer = where_drawer + " and location_id='" + lo.getId() + "' ";
                     where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
                     where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
+                    where_sales_status2 = where_sales_status2 + " and location_id='" + lo.getId() + "' ";
+                   
                     where_disbursements = where_disbursements + " and location_id='" + lo.getId() + "' ";
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                     where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
@@ -1808,7 +1815,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales3);
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
-                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_status);
+                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_status2);
+//                System.out.println(where_sales_status);
                 List<Srpt_end_of_day_summary_details.field> my_details = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_checks = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_credit_cards = new ArrayList();

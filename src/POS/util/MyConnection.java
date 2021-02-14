@@ -40,7 +40,7 @@ public class MyConnection {
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
-            String password = System.getProperty("pool_password", "password");
+            String password = System.getProperty("pool_password", "synapse246");
             String db_name = System.getProperty("pool_db", "db_smis");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name + "?connectTimeout=31536000&socketTimeout=31536000";
@@ -67,7 +67,7 @@ public class MyConnection {
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
-            String password = System.getProperty("pool_password", "password");
+            String password = System.getProperty("pool_password", "synapse246");
             String db_name = System.getProperty("pool_db", "db_smis");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
@@ -94,11 +94,11 @@ public class MyConnection {
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
-            String password = System.getProperty("pool_password", "password");
+            String password = System.getProperty("pool_password", "synapse246");
             String db_name = System.getProperty("pool_db", "db_smis");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/";
-
+            
             try {
                 conn = DriverManager.getConnection(url, user, password);
                 //DriverManager.getConnection("proxool.pool_connection");
@@ -226,7 +226,7 @@ public class MyConnection {
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
-            String password = System.getProperty("pool_password", "password");
+            String password = System.getProperty("pool_password", "synapse246");
             String db_name = System.getProperty("pool_db", "db_smis");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;
@@ -253,7 +253,7 @@ public class MyConnection {
             String port = System.getProperty("pool_port", "3306");
             host = host + ":" + port;
             String user = System.getProperty("pool_user", "root");
-            String password = System.getProperty("pool_password", "password");
+            String password = System.getProperty("pool_password", "synapse246");
             String db_name = System.getProperty("pool_db", "db_smis");
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://" + host + "/" + db_name;

@@ -9,11 +9,14 @@ import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.S2_inventory_barcodes;
+import POS.inventory_replenishment.Inventory_replenishment_items;
+import POS.inventory_replenishment.Inventory_replenishments;
 import POS.reports.Dlg_report_items;
 import POS.users.MyUser;
 import POS.users.User_previlege_others;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.DateUtils1;
 import POS.util.MyConnection;
 import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -243,6 +246,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         tf_search = new Field.Search();
         jButton1 = new Button.Search();
         jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -323,11 +327,11 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 
         buttonGroup1.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox4.setSelected(true);
         jCheckBox4.setText("[F1]-All");
 
         buttonGroup1.add(jCheckBox5);
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setSelected(true);
         jCheckBox5.setText("[F2]-Item Code");
 
         buttonGroup1.add(jCheckBox6);
@@ -363,6 +367,10 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox7.setText("[F4]-Description");
 
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setSelected(true);
+        jCheckBox8.setText("Latest Replenishment");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -390,7 +398,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                                 .addComponent(jCheckBox3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox8))
                             .addComponent(tf_branch_location)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,19 +421,19 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox1))
-                            .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCheckBox3))
-                            .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox1))
+                    .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox3))
+                    .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_branch_location, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,7 +448,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                         .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5))
         );
 
@@ -673,7 +683,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
         );
         pnl_reportLayout.setVerticalGroup(
             pnl_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Print Preview", pnl_report);
@@ -822,7 +832,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -1014,6 +1024,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1056,6 +1067,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
 //        System.setProperty("pool_db", "db_smis_bayawan_algorithm");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_password", "password");
         set_default_branch();
         init_tbl_ledger();
         String where = "  ";
@@ -1095,7 +1107,8 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
             hide_price = 1;
         }
     }
-    int hide_price=0;
+    int hide_price = 0;
+
     public void do_pass() {
 
     }
@@ -1303,11 +1316,27 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 if (jCheckBox3.isSelected()) {
                     is_month_selected = true;
                 }
-                int all_year=0;
-                if(jCheckBox1.isSelected()){
-                    all_year=1;
+                int all_year = 0;
+                if (jCheckBox1.isSelected()) {
+                    all_year = 1;
                 }
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,show_cost,hide_price,all_year);
+
+                String date_from = "";
+                String date_to = "";
+                if (jCheckBox8.isSelected()) {
+                    List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(" where location_id='" + loc_id + "' and item_code='" + item_code + "' order by id desc limit 1 ");
+                    Inventory_replenishment_items.to_inventory_replenishment_items to = null;
+
+                    if (!replenishments.isEmpty()) {
+                        to = replenishments.get(0);
+                        date_from = DateType.convert_dash_date4(to.date_added);
+                        Date t = new Date();
+                        t = DateUtils1.add_day(new Date(), 2);
+                        date_to = DateType.sf.format(t);
+                    }
+                }
+
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected, show_cost, hide_price, all_year, date_from, date_to);
 
                 String jrxml = "rpt_inventory_ledger.jrxml";
                 report_sales_items(rpt, jrxml);

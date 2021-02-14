@@ -2452,7 +2452,8 @@ public class Dlg_report_customers extends javax.swing.JDialog {
 
     private void myInit() {
 ////
-//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
+//        System.setProperty("pool_password", "password");
 //        System.setProperty("pool_host", "192.168.1.51");
         
         init_key();

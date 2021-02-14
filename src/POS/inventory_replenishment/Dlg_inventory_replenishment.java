@@ -1121,7 +1121,7 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-                Field.Combo lo = (Field.Combo) jTextField3;
+               final Field.Combo lo = (Field.Combo) jTextField3;
                 Field.Combo br = (Field.Combo) jTextField2;
                 String branch = br.getText();
                 String branch_id = br.getId();
@@ -1161,7 +1161,7 @@ public class Dlg_inventory_replenishment extends javax.swing.JDialog {
                     @Override
                     public void run() {
 
-                        Inventory_replenishments.add_data(replenisment, datas);
+                        Inventory_replenishments.add_data(replenisment, datas,""+lo.getId());
                         data_cols_replenishment();
                         Alert.set(1, "Please select item/s");
                         jProgressBar1.setString("Finished...");

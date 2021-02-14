@@ -27,13 +27,14 @@ import mijzcx.synapse.desk.utils.FitIn;
  */
 public class MyLedger {
 
-    public static Srpt_item_ledger get(String my_item_code, String my_barcode, String my_description, String loc_id, String year, int month, String my_branch, String my_location, boolean is_month_selected, int show_cost, int hide_price, int all_year) {
+    public static Srpt_item_ledger get(String my_item_code, String my_barcode, String my_description, String loc_id, String year, int month, String my_branch, String my_location, boolean is_month_selected, int show_cost, int hide_price, int all_year, String date_from, String date_to) {
 
         List<Srpt_item_ledger.field> field3 = new ArrayList();
         List<Srpt_item_ledger.field> fields = new ArrayList();
 
         String where = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' "
                 + "   ";
+
         String where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 "
                 + "  ";
         String where4 = " where main_barcode ='" + my_item_code + "'  and branch_id = '" + loc_id + "' "
@@ -44,6 +45,23 @@ public class MyLedger {
                 + "   ";
         String where5 = " where main_barcode ='" + my_item_code + "'  and from_location_id = '" + loc_id + "' and status=1 "
                 + "  or main_barcode ='" + my_item_code + "'  and to_location_id = '" + loc_id + "' and status=1";
+        if (!date_from.isEmpty()) {
+            where = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "   ";
+            where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "  ";
+            where3 = " where barcode ='" + my_item_code + "'  and Date(date_added) between '" + date_from + "' and '" + date_to + "'  "
+                    + "  ";
+            where4 = " where main_barcode ='" + my_item_code + "'  and branch_id = '" + loc_id + "' and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "  ";
+
+            wheree = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1  and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "   ";
+
+            where5 = " where main_barcode ='" + my_item_code + "'  and from_location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "  or main_barcode ='" + my_item_code + "'  and to_location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "'";
+        }
+//        System.out.println(where);
         List<Srpt_item_ledger.field> sales = new ArrayList();//Srpt_item_ledger.sales(where);
         List<Srpt_item_ledger.field> inventory_count = new ArrayList();// Srpt_item_ledger.inventory_encoding(where);
         List<Srpt_item_ledger.field> receipts = new ArrayList(); //Srpt_item_ledger.receipts(where2);
@@ -1601,4 +1619,5 @@ public class MyLedger {
 
 //                
     }
+
 }

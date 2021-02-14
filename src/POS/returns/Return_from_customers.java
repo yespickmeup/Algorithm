@@ -1029,6 +1029,31 @@ public class Return_from_customers {
         }
     }
 
+    public static void delete_data2(to_return_from_customers to_return_from_customers) {
+        try {
+            Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
+            String s0 = "delete from return_from_customers  "
+                    + " where id='" + to_return_from_customers.id + "' "
+                    + " ";
+
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s2 = "delete from return_from_customer_items  "
+                    + " where return_from_customer_no='" + to_return_from_customers.return_from_customer_no + "' "
+                    + " ";
+            stmt.addBatch(s2);
+            stmt.executeBatch();
+            conn.commit();
+            Lg.s(Return_from_customers.class, "Successfully Deleted");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
     public static void update_trans_no(int id, String trans) {
         try {
             Connection conn = MyConnection.connect();

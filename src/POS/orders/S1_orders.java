@@ -296,8 +296,8 @@ public class S1_orders {
         try {
             Connection conn = MyConnection.connect();
             String s0 = "update orders set "
-                    + "sales_no= :sales_no "
-                    + ",date_added= :date_added "
+//                    + "sales_no= :sales_no "
+                    + " date_added= :date_added "
                     + ",user_screen_name= :user_screen_name "
                     + ",user_id= :user_id "
                     + ",session_no= :session_no "
@@ -344,11 +344,11 @@ public class S1_orders {
                     + ",branch_id= :branch_id "
                     + ",location= :location "
                     + ",location_id= :location_id "
-                    + " where id='" + to_orders.id + "' "
+                    + " where sales_no='" + to_orders.sales_no + "' "
                     + " ";
-
+         
             s0 = SqlStringUtil.parse(s0)
-                    .setString("sales_no", to_orders.sales_no)
+//                    .setString("sales_no", to_orders.sales_no)
                     .setString("date_added", to_orders.date_added)
                     .setString("user_screen_name", to_orders.user_screen_name)
                     .setString("user_id", to_orders.user_id)
@@ -397,7 +397,7 @@ public class S1_orders {
                     .setString("location", to_orders.location)
                     .setString("location_id", to_orders.location_id)
                     .ok();
-
+//            System.out.println(s0);
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
             Lg.s(S1_orders.class, "Successfully Updated");

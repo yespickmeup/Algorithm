@@ -1829,7 +1829,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         tbl_return_from_customers.setModel(tbl_return_from_customers_M);
         tbl_return_from_customers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_return_from_customers.setRowHeight(25);
-        int[] tbl_widths_return_from_customers = {100, 80, 80, 80, 80, 80, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_return_from_customers = {100, 80, 80, 80, 80, 80, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_return_from_customers.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -1847,6 +1847,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customers, 4);
         TableWidthUtilities.setColumnRightRenderer(tbl_return_from_customers, 5);
         tbl_return_from_customers.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
+        tbl_return_from_customers.getColumnModel().getColumn(7).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_return_from_customers(List<to_return_from_customers> acc) {
@@ -1857,7 +1858,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
     public static class Tblreturn_from_customersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction #", "Date", "Amount", "Cash", "Prepaid", "Charge", "", "reference_no", "remarks", "status", "branch", "branch_id", "location", "location_id", "gross_total", "discount", "discount_amount", "discount_rate", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "charge_reference_no", "charge_ar_no", "charge_type", "charge_customer_name", "charge_customer_id", "charge_amount", "charge_days"
+            "Transaction #", "Date", "Amount", "Cash", "Prepaid", "Charge", "", "", "remarks", "status", "branch", "branch_id", "location", "location_id", "gross_total", "discount", "discount_amount", "discount_rate", "prepaid_customer_name", "prepaid_customer_id", "prepaid_amount", "charge_reference_no", "charge_ar_no", "charge_type", "charge_customer_name", "charge_customer_id", "charge_amount", "charge_days"
         };
 
         public Tblreturn_from_customersModel(ListModel listmodel) {
@@ -1904,7 +1905,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                         return "/POS/icon_inventory/checked.png";
                     }
                 case 7:
-                    return tt.reference_no;
+                    return "/POS/icon_inventory/remove11.png";
                 case 8:
                     return tt.remarks;
                 case 9:
@@ -1971,11 +1972,11 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         }
         int col = jTable3.getSelectedColumn();
         final Return_from_customers.to_return_from_customers to = (Return_from_customers.to_return_from_customers) tbl_return_from_customers_ALM.get(row);
-       
+
         final List<Return_from_customer_items.to_return_from_customer_items> items = Return_from_customer_items.ret_data(" where return_from_customer_no='" + to.return_from_customer_no + "' ");
-       
+
         if (col == 6) {
-            if(to.status==1){
+            if (to.status == 1) {
                 Alert.set(0, "Cannot proceed, transaction finalized");
                 return;
             }
@@ -1991,6 +1992,29 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                     ret_return_from_customers();
                     ret_sale_returned_items(to.reference_no);
                     Alert.set(0, "Successfully Finalized");
+                    ret_return_from_customers2();
+                }
+            });
+            nd.setLocationRelativeTo(jScrollPane5);
+            nd.setVisible(true);
+        }
+        if (col == 7) {
+            if (to.status == 1) {
+                Alert.set(0, "Cannot proceed, transaction finalized");
+                return;
+            }
+            Window p = (Window) this;
+            Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
+            nd.setTitle("");
+            nd.do_pass("Continue deleting this transaction?");
+            nd.setCallback(new Dlg_confirm_action.Callback() {
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
+                    closeDialog.ok();
+                    Return_from_customers.delete_data2(to);
+                    ret_return_from_customers();
+                    ret_sale_returned_items(to.reference_no);
+                    Alert.set(0, "Successfully Deleted");
                     ret_return_from_customers2();
                 }
             });
@@ -2150,7 +2174,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
 
     }
 
-    private void select_rfc() {    
+    private void select_rfc() {
         int row = jTable2.getSelectedRow();
         if (row < 0) {
             return;
@@ -2174,7 +2198,6 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
         loadData_return_from_customers(datas);
         ret_sale_returned_items(to.reference_no);
     }
-    
-    
+
     //</editor-fold> 
 }

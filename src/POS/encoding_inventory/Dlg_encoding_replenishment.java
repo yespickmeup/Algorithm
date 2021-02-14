@@ -564,7 +564,7 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                         Thread t = new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                Inventory_replenishments.add_data(replenisment, datas);
+                                Inventory_replenishments.add_data(replenisment, datas,""+to.id);
                                 ret_locations();
                                 Alert.set(1, "Please select item/s");
                                 ready = 1;

@@ -1258,9 +1258,17 @@ public class Dlg_rpt_encoding_inventory extends javax.swing.JDialog {
                     int removed = 0;
                     for (Srpt_inventory_over_short.field data : datas) {
 //                        if (data.getOver_short() != 0) {
-
+                        List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments1 = Inventory_replenishment_items.ret_data(" where location_id='" + lo.getId() + "' and item_code='" + data.getItem_code() + "' order by id desc limit 1 ");
+                        Inventory_replenishment_items.to_inventory_replenishment_items to = null;
+                        String date_from1 = "";
+                        String date_to1 = "";
+                        if (!replenishments.isEmpty()) {
+                            to = replenishments1.get(0);
+                            date_from1 = DateType.convert_dash_date(to.date_added);
+                            date_to1 = DateType.sf.format(new Date());
+                        }
                         Srpt_item_ledger rpt2 = MyLedger.get(data.getItem_code(), data.getBarcode(), data.getDescription(), lo.getId(), year, month,
-                                                             branch, location, true, 0, 1, 1);
+                                                             branch, location, true, 0, 1, 1, date_from, date_to);
                         int row = -1;
                         int row_rep = -1;
                         double balance = 0;

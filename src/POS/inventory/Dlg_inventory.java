@@ -2033,6 +2033,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
         }
     }
 
+    
     public void do_pass() {
     }
     // <editor-fold defaultstate="collapsed" desc="Key">

@@ -67,7 +67,6 @@ public class MyMain {
                 }
             }
 
-            
             System.setProperty("pool_host", prop.getProperty("pool_host", "localhost"));
             System.setProperty("pool_port", prop.getProperty("pool_port", "3306"));
             System.setProperty("pool_user", prop.getProperty("pool_user", "root"));
@@ -93,29 +92,30 @@ public class MyMain {
 
             String where = "";
             List<Settings.to_settings> datas = Settings.ret_data(where);
+//            System.out.println("size: "+datas.size());
             Settings.to_settings setting = datas.get(0);
-            
+
             String where2 = "order by id desc limit 1";
             List<User_logs.to_user_logs> last = User_logs.ret_data(where2);
-            
+
             if (!last.isEmpty()) {
                 User_logs.to_user_logs l = (User_logs.to_user_logs) last.get(0);
                 Date d = new Date();
                 Date date_to = new Date();
-                try {                    
+                try {
                     date_to = DateType.datetime.parse(l.created_at);
-                    
+//                    System.out.println("date_from: " + d);
+//                    System.out.println("date_to: " + date_to);
                 } catch (ParseException ex) {
                     Logger.getLogger(Pnl_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int count2 = DateUtils1.count_days(d, date_to);
-
-                if (count2 > 0) {
+//                System.out.println("count: " + count2);
+                if (count2 > 3) {
                     Alert.set(0, "Check system Date!");
                     try {
                         Thread.sleep(5);
 
-                        
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MyMain.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -157,6 +157,7 @@ public class MyMain {
 
             //
             System.setProperty("business_name", setting.company_name);
+
             System.setProperty("address", setting.company_address);
             System.setProperty("operated_by", setting.company_operated_by);
             System.setProperty("slogan", setting.company_slogan);
@@ -174,7 +175,6 @@ public class MyMain {
             System.setProperty("business_type", setting.bir_business_type);
             System.setProperty("vat_percent", setting.bir_vat_percent);
             System.setProperty("permit_no", setting.bir_permit_no);
-          
 
             //
             //
@@ -206,9 +206,8 @@ public class MyMain {
 
             System.setProperty("is_server", prop.getProperty("is_server", "false"));
             System.setProperty("location", prop.getProperty("location", "main_branch"));
-            
+
             System.setProperty("barcode_printer", prop.getProperty("barcode_printer", "label"));
-            
 
             System.setProperty("return_exchange_days", prop.getProperty("return_exchange_days", "0"));
 

@@ -5,9 +5,11 @@
  */
 package POS.adjuster;
 
+import POS.inventory_replenishment.Inventory_replenishment_items;
 import POS.inventory_reports.MyLedger;
 import POS.inventory_reports.Srpt_item_ledger;
 import POS.util.DateType;
+import POS.util.DateUtils1;
 import POS.util.MyConnection;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -181,6 +183,9 @@ public class Srpt_adjust_errors {
         List<field> datas = new ArrayList();
         String year = "" + DateType.y.format(new Date());
         int month = FitIn.toInt(DateType.m1.format(new Date()));
+
+        String date_from = "";
+        String date_to = "";
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
@@ -274,9 +279,27 @@ public class Srpt_adjust_errors {
                 double qty_ledger = 0;
 
                 String loc_id = location_id;
-               
+
                 boolean is_month_selected = true;
-                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected,1,0,1);
+
+                if (date_from.isEmpty()) {
+
+                    List<Inventory_replenishment_items.to_inventory_replenishment_items> replenishments = Inventory_replenishment_items.ret_data(" where location_id='" + loc_id + "' and item_code='" + item_code + "' order by id desc limit 1 ");
+                    Inventory_replenishment_items.to_inventory_replenishment_items to = null;
+
+                    if (!replenishments.isEmpty()) {
+                        to = replenishments.get(0);
+                        date_from = DateType.convert_dash_date4(to.date_added);
+
+                        Date t = new Date();
+                        t = DateUtils1.add_day(new Date(), 2);
+                        date_to = DateType.sf.format(t);
+                    }
+                }
+
+//                System.out.println("date_from: " + date_from);
+//                System.out.println("date_to: " + date_to);
+                Srpt_item_ledger rpt = MyLedger.get(item_code, barcode, description, loc_id, year, month, branch, location, is_month_selected, 1, 0, 1, date_from, date_to);
                 System.out.println("Item Code: " + item_code);
                 System.out.println("Description: " + description);
                 System.out.println("Searching Ledger......");
@@ -298,9 +321,10 @@ public class Srpt_adjust_errors {
     }
 
     public static void main(String[] args) {
-         int month = FitIn.toInt(DateType.m1.format(new Date()));
-         System.out.println("month: "+month);
+        int month = FitIn.toInt(DateType.m1.format(new Date()));
+        System.out.println("month: " + month);
     }
+
     public static void adjust_erros(List<Srpt_adjust_errors.field> fields) {
         try {
             Connection conn = MyConnection.connect();

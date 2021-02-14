@@ -57,8 +57,10 @@ public class Receipts_date_delivered {
                 String where2 = " where receipt_no='" + tran + "' ";
                 List<S1_receipt_items.to_receipt_items> items = S1_receipt_items.ret_data5(where2);
                 System.out.println("    Size: " + items.size());
+                String date_from = "";
+                String date_to = "";
                 for (S1_receipt_items.to_receipt_items item : items) {
-                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected,1,0,0);
+                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected, 1, 0, 0, date_from, date_to);
                     String s4 = " update inventory_barcodes set "
                             + " product_qty='" + rpt.running_balance + "'"
                             + " where  main_barcode= '" + item.main_barcode + "' and location_id='" + loc_id + "' "
@@ -110,8 +112,10 @@ public class Receipts_date_delivered {
                 String where2 = " where receipt_no='" + tran + "' ";
                 List<S1_receipt_items.to_receipt_items> items = S1_receipt_items.ret_data5(where2);
                 System.out.println("    Size: " + items.size());
+                String date_from = "";
+                String date_to = "";
                 for (S1_receipt_items.to_receipt_items item : items) {
-                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected,1,0,0);
+                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected, 1, 0, 0, date_from, date_to);
                     String s4 = " update inventory_barcodes set "
                             + " product_qty='" + rpt.running_balance + "'"
                             + " where  main_barcode= '" + item.main_barcode + "' and location_id='" + loc_id + "' "
@@ -163,8 +167,10 @@ public class Receipts_date_delivered {
                 String where2 = " where receipt_no='" + tran + "' ";
                 List<S1_receipt_items.to_receipt_items> items = S1_receipt_items.ret_data5(where2);
                 System.out.println("    Size: " + items.size());
+                String date_from = "";
+                String date_to = "";
                 for (S1_receipt_items.to_receipt_items item : items) {
-                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected,1,0,0);
+                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected, 1, 0, 0, date_from, date_to);
                     String s4 = " update inventory_barcodes set "
                             + " product_qty='" + rpt.running_balance + "'"
                             + " where  main_barcode= '" + item.main_barcode + "' and location_id='" + loc_id + "' "
@@ -187,7 +193,7 @@ public class Receipts_date_delivered {
         System.setProperty("pool_host", "192.168.1.51");
         System.setProperty("pool_db", "db_algorithm");
 
-        String[] trans = {"23|0000001494","23|0000001505","23|0000001506","23|0000001507","23|0000001508","23|0000001509","23|0000001510"};
+        String[] trans = {"23|0000001494", "23|0000001505", "23|0000001506", "23|0000001507", "23|0000001508", "23|0000001509", "23|0000001510"};
 
         String loc_id = "23";
         String year = "2017";
@@ -216,8 +222,10 @@ public class Receipts_date_delivered {
                 String where2 = " where receipt_no='" + tran + "' ";
                 List<S1_receipt_items.to_receipt_items> items = S1_receipt_items.ret_data5(where2);
                 System.out.println("    Size: " + items.size());
+                String date_from = "";
+                String date_to = "";
                 for (S1_receipt_items.to_receipt_items item : items) {
-                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected,1,0,0);
+                    Srpt_item_ledger rpt = MyLedger.get(item.main_barcode, item.barcode, item.description, loc_id, year, month, branch, location, is_month_selected, 1, 0, 0,date_from,date_to);
                     String s4 = " update inventory_barcodes set "
                             + " product_qty='" + rpt.running_balance + "'"
                             + " where  main_barcode= '" + item.main_barcode + "' and location_id='" + loc_id + "' "
