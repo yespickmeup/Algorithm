@@ -1078,6 +1078,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 tf_search.grabFocus();
             }
         });
+        
     }
 
     static int show_cost = 1;

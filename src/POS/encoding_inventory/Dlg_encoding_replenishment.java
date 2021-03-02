@@ -570,7 +570,6 @@ public class Dlg_encoding_replenishment extends javax.swing.JDialog {
                                 ready = 1;
                                 jProgressBar1.setString("Finished...");
                                 jProgressBar1.setIndeterminate(false);
-
                             }
                         });
                         t.start();
