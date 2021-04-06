@@ -1188,7 +1188,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     where_sales_status = " where id<>0 "
                             + "  and user_name='" + user_name + "' and status=1 ";
                     where_return_from_customer = " where id<>0 "
-                            + "  and session_no='" + user_id + "' and status=1 ";
+                            + "  and user_name='" + user_id + "' and status=1 ";
                     where_sales3 = " where id<>0 "
                             + "  and user_id='" + f.getId() + "' and status=1 ";
                 }
@@ -1299,6 +1299,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
                 cash_on_hand = cash_on_hand + collections + return_exchange;
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
+                System.out.println(where_sales);
                 List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_return_from_customer);
 
                 double collections_prepaid = 0;
@@ -1309,13 +1310,16 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
                     if (prepayment.status == 1) {
                         if (prepayment.refund == 1) {
+                           
                             if (prepayment.check_amount > 0) {
                                 refund_cheque += prepayment.check_amount;
-                            } else if (prepayment.credit_card_amount >= 0) {
+                            } else if (prepayment.credit_card_amount > 0) {
                                 collections_prepaid_credit_card += prepayment.credit_card_amount;
                             } else {
                                 refund += prepayment.cash;
                             }
+                            
+//                            System.out.println("refund: "+refund);
                         } else {
 
                             if (prepayment.check_amount > 0) {
@@ -1339,6 +1343,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         }
                     }
                 }
+                 
                 double refund_prepaid = 0;
                 double refund_charge = 0;
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {

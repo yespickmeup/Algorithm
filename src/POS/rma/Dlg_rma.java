@@ -1010,7 +1010,7 @@ public class Dlg_rma extends javax.swing.JDialog {
 
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_host", "192.168.0.51");
 //        System.setProperty("pool_password", "password");
         init_key();
         init_tbl_receipts(tbl_receipts);

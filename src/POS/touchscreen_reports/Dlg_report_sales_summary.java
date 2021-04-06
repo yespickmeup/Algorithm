@@ -545,6 +545,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         });
 
         jCheckBox15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox15.setSelected(true);
         jCheckBox15.setText("Manual/Auto");
         jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1368,7 +1369,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBox15ActionPerformed
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-       disposed();
+        disposed();
     }//GEN-LAST:event_jLabel23MouseClicked
 
     /**
@@ -1749,6 +1750,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 String where_sales = " where id<>0 ";
                 String where_sales_status = " where id<>0 and status=1 ";
                 String where_sales_status2 = " where id<>0 and status=1 ";
+                String where_sales_return_from_customer = " where id<>0 ";
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
                 String where_sales3 = " where id<>0 "
@@ -1765,9 +1767,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                             + "  and user_id='" + f.getId() + "'";
                     where_sales = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
+                    where_sales_return_from_customer = " where id<>0 "
+                            + "  and user_name='" + f.getId() + "'";
                     where_sales_status = " where id<>0 "
                             + "  and user_name='" + user_name + "' and status=1 ";
-                     where_sales_status2 = " where id<>0 "
+                    where_sales_status2 = " where id<>0 "
                             + "  and user_name='" + f.getId() + "' and status=1 ";
                     where_disbursements = " where id<>0 "
                             + "  and user_id='" + f.getId() + "'";
@@ -1779,9 +1783,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 if (!jCheckBox4.isSelected()) {
                     where_drawer = where_drawer + "  and time_in between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales = where_sales + " and date_added between '" + date_from + "' and '" + date_to + "' ";
+                    where_sales_return_from_customer = where_sales_return_from_customer + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+
                     where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                     where_sales_status2 = where_sales_status2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                    
+                    where_sales_status2 = where_sales_status2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+
                     where_disbursements = where_disbursements + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales2 = where_sales2 + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
                     where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
@@ -1789,9 +1795,11 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 if (!jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and location_id='" + lo.getId() + "' ";
                     where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
+                    where_sales_return_from_customer = where_sales_return_from_customer + " and location_id='" + lo.getId() + "' ";
+
                     where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
                     where_sales_status2 = where_sales_status2 + " and location_id='" + lo.getId() + "' ";
-                   
+
                     where_disbursements = where_disbursements + " and location_id='" + lo.getId() + "' ";
                     where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
                     where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
@@ -1800,6 +1808,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 if (jCheckBox3.isSelected() && !jCheckBox2.isSelected()) {
                     where_drawer = where_drawer + " and branch_id='" + br.getId() + "' ";
                     where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+                    where_sales_return_from_customer = where_sales_return_from_customer + " and branch_id='" + br.getId() + "' ";
+
                     where_sales_status = where_sales_status + " and branch_id='" + br.getId() + "' ";
                     where_disbursements = where_disbursements + " and branch_id='" + br.getId() + "' ";
                     where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
@@ -1815,7 +1825,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<MySales.sales> my_sale = MySales.ret_data(where_sales2);
                 List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales3);
                 List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
-                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_status2);
+                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_sales_return_from_customer);
 //                System.out.println(where_sales_status);
                 List<Srpt_end_of_day_summary_details.field> my_details = new ArrayList();
                 List<Srpt_end_of_day_summary_details.field> my_checks = new ArrayList();
@@ -1826,7 +1836,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 List<S1_disbursements.to_disbursements> disbursements = S1_disbursements.ret_data(where_disbursements);
                 List<Srpt_end_of_day_summary_details.field> my_disbursements = new ArrayList();
                 List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales);
-//                System.out.println("where_sales: "+where_sales);
+
                 double cashin_beg = 0;
                 double cash_sales = 0;
                 double collections = 0;
@@ -1957,12 +1967,13 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                         }
                     }
                 }
-
+//                System.out.println("where: "+where_sales_return_from_customer);
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
                     if (rfc.status == 1) {
                         refund -= (rfc.cash);
                     }
                 }
+//                System.out.println("refund: "+refund);
                 double total_remittance = 0;
                 for (CashDrawer_remittances.to_cash_drawer_remittances remittance : remittances) {
                     double am = remittance.cash_amount;
@@ -2089,9 +2100,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 double re_online = 0;
                 double salary_deduction = 0;
                 for (Item_replacements.to_item_replacements rep : replacements) {
-                    double amount =(rep.replacement_amount - rep.amount_due) - rep.discount;
+                    double amount = (rep.replacement_amount - rep.amount_due) - rep.discount;
                     double due = rep.amount_due;
-                     double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
+                    double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
                     if (amount < rep.amount_due) {
                         na_short += amount - rep.amount_due;
                     }
