@@ -18,9 +18,10 @@ import java.util.List;
  */
 public class IB_categories {
 
-    public static void main(String[] args) {
+    public static void main4(String[] args) {
 
-        System.setProperty("pool_db", "db_smis_sibulan_abiera");
+        System.setProperty("pool_db", "db_smis_bayawan_store");
+        System.setProperty("pool_password", "password");
         String where = " group by category order by category asc ";
         List<Inventory.to_inventory> items = Inventory.ret_data22(where);
         List<S1_inventory_categories.to_inventory_category> categories = new ArrayList();
@@ -34,9 +35,10 @@ public class IB_categories {
 
     }
 
-    public static void mai1(String[] args) {
+    public static void main2(String[] args) {
 
-        System.setProperty("pool_db", "db_smis_sibulan_abiera");
+        System.setProperty("pool_db", "db_smis_bayawan_store");
+        System.setProperty("pool_password", "password");
         String where = " group by classification order by classification asc ";
         List<Inventory.to_inventory> items = Inventory.ret_data22(where);
         List<S1_inventory_classification.to_inventory_classification> categories = new ArrayList();
@@ -50,9 +52,10 @@ public class IB_categories {
 
     }
 
-    public static void mai2(String[] args) {
+    public static void main(String[] args) {
 
-        System.setProperty("pool_db", "db_smis_sibulan_abiera");
+        System.setProperty("pool_db", "db_smis_bayawan_store");
+        System.setProperty("pool_password", "password");
         String where = " group by sub_classification order by sub_classification asc ";
         List<Inventory.to_inventory> items = Inventory.ret_data22(where);
         List<S1_inventory_sub_classification.to_inventory_sub_classification> categories = new ArrayList();

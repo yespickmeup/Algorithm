@@ -37,7 +37,7 @@ import POS.encoding_inventory.Dlg_finalize_encoding;
 import POS.encoding_inventory.Dlg_rpt_encoding_inventory;
 import POS.expenses.Dlg_expenses;
 import POS.inventory.Dlg_inventory;
-import POS.inventory.Dlg_inventory_brand;
+import POS.inventory.Dlg_inventory_branch;
 import POS.inventory.Dlg_inventory_update_barcode;
 import POS.inventory.Dlg_price_inquire;
 import POS.inventory.Dlg_print_barcode;
@@ -58,6 +58,7 @@ import POS.purchase_order.Dlg_po2;
 import POS.receipt_endorsements.Dlg_receipt_endorsements;
 import POS.receipts.Dlg_finalize_receipt;
 import POS.receipts.Dlg_receipts;
+import POS.receipts.Dlg_warranty_service;
 import POS.reports.*;
 import POS.reports2.Dlg_report_customers;
 import POS.reports2.Dlg_suppliers_report;
@@ -2599,6 +2600,11 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         MyFrame.set(dtc.getSurface(), jPanel1, "Receipt Endorsement");
     }
 
+    private void t_warranty_service() {
+        Dlg_warranty_service dtc = new Dlg_warranty_service();
+        MyFrame.set(dtc.getSurface(), jPanel1, "Warranty Service");
+    }
+
     private void r_stock_status() {
         Dlg_stock_status dtc = new Dlg_stock_status();
         MyFrame.set(dtc.getSurface(), jPanel1, "Stock Status");
@@ -2677,7 +2683,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
     }
 
     private void m_items_location() {
-        Dlg_inventory_brand rpt = new Dlg_inventory_brand();
+        Dlg_inventory_branch rpt = new Dlg_inventory_branch();
         MyFrame.set(rpt.getSurface(), jPanel1, "Item Maintenance per Location");
     }
 
@@ -3327,9 +3333,10 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 
                 }
                 if (data.stmt.equals("Receipt Endorsement")) {
-
                     t_receipt_endorsement();
-
+                }
+                if (data.stmt.equals("Warranty Service")) {
+                    t_warranty_service();
                 }
                 //</editor-fold>
                 //<editor-fold defaultstate="collapsed" desc=" maintenance ">

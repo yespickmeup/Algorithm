@@ -229,7 +229,7 @@
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Customer]]></text>
+				<text><![CDATA[Name]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -316,7 +316,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement uuid="30dbe82f-db3c-4283-b27e-6a087763fe4d" x="79" y="0" width="98" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>

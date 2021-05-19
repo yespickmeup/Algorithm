@@ -242,6 +242,7 @@ public class S1_order_items {
                         .setNumber("wtax", to_order_items.wtax)
                         .ok();
 
+//                 System.out.println("to.addtl_amount: "+to_order_items.addtl_amount);
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
                 Lg.s(S1_order_items.class, "Successfully Added");

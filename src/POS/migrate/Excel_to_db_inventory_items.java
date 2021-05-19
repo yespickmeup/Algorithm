@@ -211,8 +211,9 @@ public class Excel_to_db_inventory_items {
 
     public static void main(String[] args) {
         //wholesale
-        System.setProperty("pool_db", "db_smis_dumaguete_arbas");
-        String file = "C:\\Users\\User\\Documents\\Excel Files\\atty arbas2.xls";
+        System.setProperty("pool_db", "db_smis_bayawan_store");
+        System.setProperty("pool_password","password");
+        String file = "C:\\Users\\User\\Documents\\Sqls\\Glass\\encoding.xls";
 
         if (file == null || file.isEmpty()) {
             return;
@@ -248,7 +249,7 @@ public class Excel_to_db_inventory_items {
             }
         }
 
-        List<Excel_to_db_inventory_items> datas = Excel_to_db_inventory_items.showExcelData2(sheetData, file);
+        List<Excel_to_db_inventory_items> datas = Excel_to_db_inventory_items.showExcelData(sheetData, file);
 //         System.out.println("Count: " + datas.size());
 //        if (!datas.isEmpty()) {
 //            return;
@@ -363,7 +364,7 @@ public class Excel_to_db_inventory_items {
             Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, encoded.supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order, show_to_sales);
             tos.add(to);
 
-            //<editor-fold defaultstate="collapsed" desc=" callback ">
+            //<editor-fold defaultstate="collapsed" desc=" insert to db ">
             if (product_qty > 0) {
 
                 double qty = product_qty;
@@ -441,6 +442,7 @@ public class Excel_to_db_inventory_items {
                 String item_code = record[1];
                 String barcode = record[2];
                 String description = record[3];
+                System.out.println("description: "+description);
                 String cost = record[4];
                 String selling_price = record[5];
                 String category = record[6];

@@ -31,10 +31,10 @@ public class Backup {
             String jarDir = path;
 
             /*NOTE: Creating Database Constraints*/
-            String dbName = System.getProperty("mydb", "test");
+            String dbName = System.getProperty("pool_db", "db_algorithm");
 
-            String dbUser = "root";
-            String dbPass = "password";
+            String dbUser = System.getProperty("pool_user", "root");
+            String dbPass= System.getProperty("pool_password", "password");
             String host = System.getProperty("pool_host", "localhost");
             host = host.replaceAll(":3306", "");
             String date = DateType.backup.format(new Date());

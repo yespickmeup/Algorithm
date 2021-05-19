@@ -39,10 +39,10 @@ import synsoftech.fields.Field;
  *
  * @author Ronescape
  */
-public class Dlg_inventory_brand extends javax.swing.JDialog {
+public class Dlg_inventory_branch extends javax.swing.JDialog {
 
     /**
-     * Creates new form Dlg_inventory_brand
+     * Creates new form Dlg_inventory_branch
      */
     //<editor-fold defaultstate="collapsed" desc=" callback ">
     private Callback callback;
@@ -65,33 +65,33 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_inventory_brand(java.awt.Frame parent, boolean modal) {
+    private Dlg_inventory_branch(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_inventory_brand(java.awt.Dialog parent, boolean modal) {
+    private Dlg_inventory_branch(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_inventory_brand() {
+    public Dlg_inventory_branch() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_inventory_brand myRef;
+    private Dlg_inventory_branch myRef;
 
-    private void setThisRef(Dlg_inventory_brand myRef) {
+    private void setThisRef(Dlg_inventory_branch myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_inventory_brand> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_inventory_branch> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -99,7 +99,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_inventory_brand create(java.awt.Window parent, boolean modal) {
+    public static Dlg_inventory_branch create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -109,14 +109,14 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_inventory_brand create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_inventory_branch create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_inventory_brand dialog = dialogContainer.get(parent);
+            Dlg_inventory_branch dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_inventory_brand((java.awt.Frame) parent, false);
+                dialog = new Dlg_inventory_branch((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -130,10 +130,10 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_inventory_brand dialog = dialogContainer.get(parent);
+            Dlg_inventory_branch dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_inventory_brand((java.awt.Dialog) parent, false);
+                dialog = new Dlg_inventory_branch((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -160,7 +160,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_inventory_brand dialog = Dlg_inventory_brand.create(new javax.swing.JFrame(), true);
+        Dlg_inventory_branch dialog = Dlg_inventory_branch.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -266,6 +266,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -653,9 +654,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
                                     .addComponent(jTextField2))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel33)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addGap(0, 0, 0)
-                                        .addComponent(jLabel35))))))
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
@@ -686,7 +685,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(tf_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tf_selling_price, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(40, 40, 40))
@@ -732,7 +731,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
                                             .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                            .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                             .addComponent(jTextField10)))))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -883,7 +882,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1131,6 +1130,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
         init_key();
 //
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_password", "password");
 //        MyUser.setUser_id("1");
 
         String environment = System.getProperty("environment", "development");
@@ -1143,6 +1143,24 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
         List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
         if (!privileges.isEmpty()) {
             jLabel35.setVisible(true);
+        }
+        set_location();
+        tf_item_code.grabFocus();
+    }
+
+    private void set_location() {
+        List<Inventory_location_privileges.to_inventory_location_privileges> datas = Inventory_location_privileges.ret_data(" where user_id='" + MyUser.getUser_id() + "'");
+
+        if (!datas.isEmpty()) {
+            Inventory_location_privileges.to_inventory_location_privileges to = (Inventory_location_privileges.to_inventory_location_privileges) datas.get(0);
+            Field.Combo loc = (Field.Combo) jTextField2;
+            sel_branch = to.branch;
+            sel_branch_id = to.branch_id;
+            sel_location = to.location;
+            sel_location_id = "" + to.location_id;
+
+            loc.setText("" + to.branch + " - " + to.location);
+            loc.setId("" + to.location_id);
         }
     }
 
@@ -1198,7 +1216,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
 
         where = where + " order by description asc ";
 
-        System.out.println(where);
+//        System.out.println(where);
         inventory_list.clear();
         inventory_list = Inventory.ret_data22(where);
 
@@ -1890,7 +1908,9 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
     }
 
     private void init_item_code() {
-        tf_item_code.setText(Inventory.increment_id());
+        Field.Combo tf = (Field.Combo) jTextField2;
+
+        tf_item_code.setText(Inventory.increment_id_special(tf.getId()));
     }
 
     private void uom() {
@@ -1946,7 +1966,6 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
 
                 S1_branch_locations.to_branch_locations to = branch_location_list.get(data.selected_row);
 
-                Field.Combo loc = (Field.Combo) jTextField2;
                 String where = " where user_id='" + MyUser.getUser_id() + "' and location_id='" + to.id + "' ";
 //                System.out.println(where);
                 List<Inventory_location_privileges.to_inventory_location_privileges> datas = Inventory_location_privileges.ret_data(where);
@@ -1955,6 +1974,7 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
                     jTextField2.grabFocus();
                     return;
                 }
+                Field.Combo loc = (Field.Combo) jTextField2;
                 sel_branch = to.branch;
                 sel_branch_id = to.branch_id;
                 sel_location = to.location;
@@ -2119,15 +2139,19 @@ public class Dlg_inventory_brand extends javax.swing.JDialog {
 
 //</editor-fold>
     private void privileges() {
+        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Item Maintenance per Location - (Finalize)" + "' limit 1";
+        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+        if (privileges.isEmpty()) {
+            Alert.set(0, "Privilege not added!");
+            return;
+        }
         Window p = (Window) this;
         Dlg_inventory_brand_privileges nd = Dlg_inventory_brand_privileges.create(p, true);
         nd.setTitle("");
         nd.setCallback(new Dlg_inventory_brand_privileges.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_inventory_brand_privileges.OutputData data) {
                 closeDialog.ok();
-
             }
         });
         nd.setLocationRelativeTo(this);

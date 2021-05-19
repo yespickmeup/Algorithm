@@ -1942,6 +1942,7 @@ public class Dlg_inventory extends javax.swing.JDialog {
 //         System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
         init_key();
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
 //        MyUser.setUser_id("1");
 //        System.setProperty("pool_host", "192.168.1.51");
 //        System.setProperty("inventory_item_delete", "true");

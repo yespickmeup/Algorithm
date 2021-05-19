@@ -1482,44 +1482,65 @@ public class Dlg_rma extends javax.swing.JDialog {
             public void run() {
 
                 String where = " where si.id<>0 ";
-
+                String where_receipt = " where id<>0 ";
                 if (!jCheckBox14.isSelected()) {
                     if (!tf_category.getText().equalsIgnoreCase("All")) {
                         where = where + " and si.category_id='" + tf_category_code.getText() + "'";
+                        where_receipt = where_receipt + " and category_id='" + tf_category_code.getText() + "'";
                     }
 
                     if (!jTextField3.getText().equalsIgnoreCase("All")) {
                         where = where + " and si.classification_id='" + jTextField8.getText() + "'";
+                        where_receipt = where_receipt + " and classification_id='" + jTextField8.getText() + "'";
                     }
                     if (!jTextField4.getText().equalsIgnoreCase("All")) {
                         where = where + " and si.sub_classification_id='" + jTextField9.getText() + "'";
+                        where_receipt = where_receipt + " and sub_classification_id='" + jTextField9.getText() + "'";
                     }
                     if (!jTextField5.getText().equalsIgnoreCase("All")) {
                         where = where + " and si.brand_id='" + jTextField10.getText() + "'";
+                        where_receipt = where_receipt + " and brand_id='" + jTextField10.getText() + "'";
                     }
 
                     if (!jTextField6.getText().equalsIgnoreCase("All")) {
                         where = where + " and si.model_id='" + jTextField11.getText() + "'";
+                        where_receipt = where_receipt + " and model_id='" + jTextField11.getText() + "'";
                     }
 
                     if (!jCheckBox10.isSelected()) {
                         Field.Search tf = (Field.Search) tf_search;
                         where = " where si.id<>0 and si.item_code='" + tf.getId() + "' ";
+                        where_receipt = " where id<>0 and main_barcode='" + tf.getId() + "' ";
                     }
                     if (!jCheckBox6.isSelected()) {
                         String date_from = DateType.sf.format(jDateChooser3.getDate());
                         String date_to = DateType.sf.format(jDateChooser4.getDate());
                         where = where + " and Date(si.date_added) between '" + date_from + "' and '" + date_to + "' ";
+                        where_receipt = where_receipt + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+
                     }
                     where = where + " and si.serial_no !='' ";
+                    where_receipt = where_receipt + " and serial_no !='' ";
                 } else {
                     where = where + " and si.serial_no like '%" + tf_search.getText() + "%' ";
+                    where_receipt = where_receipt + " and serial_no like '%" + tf_search.getText() + "%' ";
                 }
 
-                List<MySales_Items.items> items = MySales_Items.ret_data3(where);
+                List<MySales_Items.items> items = new ArrayList();
+                if (jCheckBox7.isSelected()) {
+                    items = MySales_Items.ret_data3(where);
+                }
+
+                List<S1_receipt_items.to_receipt_items> receipts = new ArrayList();
+
+                if (jCheckBox9.isSelected()) {
+//                    System.out.println("where_receipt: "+where_receipt);
+                    receipts = S1_receipt_items.ret_data5(where_receipt);
+                }
+//                System.out.println(where_receipt);
                 List<Srpt_rma_serials.field> fields = new ArrayList();
                 for (MySales_Items.items item : items) {
-                    String trans = item.sales_no; 
+                    String trans = item.sales_no;
                     String type = "Sales";
                     String item_code = item.item_code;
                     String description = item.description;
@@ -1531,6 +1552,18 @@ public class Dlg_rma extends javax.swing.JDialog {
                     fields.add(field);
                 }
 
+                for (S1_receipt_items.to_receipt_items item : receipts) {
+                    String trans = item.receipt_no;
+                    String type = "Receipts";
+                    String item_code = item.main_barcode;
+                    String description = item.description;
+                    double qty = item.qty;
+                    String serials = item.serial_no;
+                    serials = serials.replaceAll("\n", ", ");
+                    String customer_name = item.supplier + " - "+item.remarks;
+                    Srpt_rma_serials.field field = new Srpt_rma_serials.field(trans, type, item_code, description, qty, serials, customer_name);
+                    fields.add(field);
+                }
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");
                 String address = System.getProperty("address", "Dumaguete City");
                 String category = "All";
@@ -1622,7 +1655,7 @@ public class Dlg_rma extends javax.swing.JDialog {
                     where = where + "  "
                             + "  barcode='" + search + "' and location_id='" + my_location_id + "' ";
                 }
-                if (jCheckBox13.isSelected()) {
+                if (jCheckBox13.isSelected() || jCheckBox14.isSelected()) {
                     where = where + "  description like '%" + search + "%' and location_id='" + my_location_id + "' ";
                 }
                 where = where + " order by description asc ";

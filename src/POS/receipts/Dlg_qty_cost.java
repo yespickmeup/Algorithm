@@ -4,6 +4,7 @@
  */
 package POS.receipts;
 
+import POS.inventory.Inventory_barcodes;
 import POS.inventory.S1_items2;
 import POS.receipts.S1_receipt_barcodes.to_receipt_barcodes;
 import POS.receipts.S1_serial_nos.to_receipt_serial_nos;
@@ -667,7 +668,7 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
 
         Border border = BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204));
         lbl_desc.setBorder(BorderFactory.createCompoundBorder(border,
-                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+                                                              BorderFactory.createEmptyBorder(2, 2, 2, 2)));
     }
 
     private void focus() {
@@ -744,6 +745,7 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
     }
 
     public void do_pass2(double qty, double cost, String desc, String unit, String barcode1, String barcodes, double product_qty, String my_barcode) {
+
         lbl_qty.setText(FitIn.fmt_woc(product_qty));
         lbl_item_code.setText(my_barcode);
         lbl_item_code1.setText(barcode1);
@@ -797,30 +799,91 @@ public class Dlg_qty_cost extends javax.swing.JDialog {
             tbl_uom.setRowSelectionInterval(def, def);
         }
     }
-    // <editor-fold defaultstate="collapsed" desc="Key">
 
+    public void do_pass3(double qty, double cost, String desc, String unit, String barcode1, String barcodes, double product_qty, String my_barcode, String location_id) {
+
+        List<Inventory_barcodes.to_inventory_barcodes> items = Inventory_barcodes.ret_where(" where main_barcode='" + my_barcode + "' and location_id='" + location_id + "' ");
+        if (!items.isEmpty()) {
+            Inventory_barcodes.to_inventory_barcodes item = (Inventory_barcodes.to_inventory_barcodes) items.get(0);
+            lbl_qty.setText(FitIn.fmt_woc(item.product_qty));
+        }
+
+        lbl_item_code.setText(my_barcode);
+        lbl_item_code1.setText(barcode1);
+//        List<to_receipt_barcodes> datas = new ArrayList();
+//        List<String> codes = SplitString.split(barcodes);
+//        for (String s : codes) {
+//            to_receipt_barcodes to = new to_receipt_barcodes(0, barcode1, s);
+//            datas.add(to);
+//        }
+//        loadData_receipt_barcodes(datas);
+        if (qty != 0) {
+            tf_amount.setText(FitIn.fmt_wc_0(qty));
+        }
+        DecimalFormat df1 = new DecimalFormat("#,###,##0.000000000");
+        String pool_db = System.getProperty("pool_db", "db_algorithm");
+        if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
+            tf_cost.setText(df1.format(cost));
+        } else {
+            tf_cost.setText(FitIn.fmt_wc_0(cost));
+        }
+        lbl_desc.setText(desc);
+//        lbl_unit.setText(unit);
+        tf_amount.grabFocus();
+        tf_amount.selectAll();
+        barcode = barcode1;
+        barcodes1 = barcodes;
+
+        List<S1_unit_of_measure.to_uom> uoms = new ArrayList();
+        String uom = unit;
+        String[] list = uom.split(",");
+        int def = 0;
+        int o = 0;
+        for (String s : list) {
+            int i = s.indexOf(":");
+            int ii = s.indexOf("/");
+            int iii = s.indexOf("^");
+            String uom1 = s.substring(1, i);
+            double conversion = FitIn.toDouble(s.substring(ii + 1, s.length() - 1));
+            double selling_price = FitIn.toDouble(s.substring(i + 1, ii));
+            int is_default = FitIn.toInt(s.substring(iii + 1, s.length() - 1));
+            S1_unit_of_measure.to_uom to1 = new S1_unit_of_measure.to_uom(uom1, selling_price, conversion, is_default);
+            uoms.add(to1);
+            if (to1.is_default == 1) {
+                def = o;
+            }
+            o++;
+        }
+
+        loadData_uom(uoms);
+        if (!uoms.isEmpty()) {
+            tbl_uom.setRowSelectionInterval(def, def);
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
         this.dispose();
     }
 
     private void init_key() {
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_ESCAPE, new KeyAction() {
+                              KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
         KeyMapping.mapKeyWIFW(getSurface(),
-                KeyEvent.VK_CONTROL, new KeyAction() {
+                              KeyEvent.VK_CONTROL, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ok1();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              ok1();
+                          }
+                      });
         tf_barcode.addKeyListener(new KeyAdapter() {
 
             @Override

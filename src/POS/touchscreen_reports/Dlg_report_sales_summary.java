@@ -1459,7 +1459,8 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
+//        System.setProperty("pool_db", "db_smis_bayawan_store");
+//        System.setProperty("pool_password", "password");
 //        System.setProperty("pool_host", "localhost");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.1.51");

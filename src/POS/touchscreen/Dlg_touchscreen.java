@@ -4996,14 +4996,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                                                                                               classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount1, wtax1);
                         orders.add(ord);
                     }
-                    System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
+//                    System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
                     S1_orders.add_data(order);
                     S1_order_items.add_data(orders);
                 } else {
                     
                     sales_no = lbl_sales_no.getText();
                     or_no = sales_no;
-                    System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
+//                    System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
                     S1_orders.to_orders order = new S1_orders.to_orders(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate1, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch1, branch_id1, location1, location_id1);
                     for (Inventory_barcodes.to_inventory_barcodes to : datas) {
                         String barcode = to.barcode;
@@ -5048,11 +5048,14 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String item_code = to.main_barcode;
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
+                        double addtl_amount1 = to.addtl_amount;
+                       
+                        double wtax1 = to.wtax;
                         S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name,
                                                                                               item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id,
                                                                                               user_screen_name, status, is_vatable, selling_type, discount_name1, discount_rate, discount_amount1, discount_customer_name1,
                                                                                               discount_customer_id1, branch, branch_code, location, location_id, category, category_id,
-                                                                                              classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount, wtax);
+                                                                                              classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, addtl_amount1, wtax1);
                         orders.add(ord);
                     }
                     S1_orders.update_data(order);
@@ -6245,7 +6248,6 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     set_change();
                 }
             });
-
         }
 
     }
