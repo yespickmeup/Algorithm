@@ -822,7 +822,7 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                     double width = tf_search.getWidth();
                     width = width * .60;
                     int w = FitIn.toInt("" + width);
-                    int[] tbl_widths_customers = {100, w, 30, 50};
+                    int[] tbl_widths_customers = {120, w, 30, 50};
                     String[] col_names = {"ItemCode", "Description", "Unit", "Price"};
                     TableRenderer tr = new TableRenderer();
                     TableRenderer.setPopup(tf_search, obj, labels, tbl_widths_customers, col_names);

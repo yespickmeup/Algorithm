@@ -72,6 +72,40 @@ public class Excel_to_db_inventory_items {
         this.supplier = supplier;
     }
 
+    public static class asus {
+
+        public final String part_no;
+        public final String part_name;
+        public final String part_description;
+        public final String prod_code;
+        public final String warehouse;
+        public final String location;
+        public final String lot;
+        public final String real_loc;
+        public final double available;
+        public final double on_hand;
+        public final double on_hand_qty;
+        public final String part_group;
+        public final double idel_days;
+
+        public asus(String part_no, String part_name, String part_description, String prod_code, String warehouse, String location, String lot, String real_loc, double available, double on_hand, double on_hand_qty, String part_group, double idel_days) {
+            this.part_no = part_no;
+            this.part_name = part_name;
+            this.part_description = part_description;
+            this.prod_code = prod_code;
+            this.warehouse = warehouse;
+            this.location = location;
+            this.lot = lot;
+            this.real_loc = real_loc;
+            this.available = available;
+            this.on_hand = on_hand;
+            this.on_hand_qty = on_hand_qty;
+            this.part_group = part_group;
+            this.idel_days = idel_days;
+        }
+
+    }
+
     public static void main3(String[] args) {
         //retail
         System.setProperty("pool_db", "db_smis_sibulan_abiera");
@@ -209,10 +243,10 @@ public class Excel_to_db_inventory_items {
         Alert.set(1, "");
     }
 
-    public static void main(String[] args) {
+    public static void main4(String[] args) {
         //wholesale
         System.setProperty("pool_db", "db_smis_bayawan_store");
-        System.setProperty("pool_password","password");
+        System.setProperty("pool_password", "password");
         String file = "C:\\Users\\User\\Documents\\Sqls\\Glass\\encoding.xls";
 
         if (file == null || file.isEmpty()) {
@@ -345,16 +379,16 @@ public class Excel_to_db_inventory_items {
             String branch_code = "1";
             String location = "Main";
             String location_id = "1";
-            String unit = "[Re-" + encoded.unit + ":" + encoded.selling_price + "/1.0^1],[Ws-"+ encoded.unit + ":" + encoded.wholesale + "/1.0^0]";
+            String unit = "[Re-" + encoded.unit + ":" + encoded.selling_price + "/1.0^1],[Ws-" + encoded.unit + ":" + encoded.wholesale + "/1.0^0]";
             double sp = FitIn.toDouble(encoded.selling_price);
             double ws = FitIn.toDouble(encoded.wholesale);
             if (sp > 0 && ws == 0) {
                 unit = "[Re-" + encoded.unit + ":" + encoded.selling_price + "/1.0^1]";
             }
             if (sp == 0 && ws > 0) {
-                unit = "[Ws-"+ encoded.unit + ":" + encoded.wholesale + "/1.0^1]";
+                unit = "[Ws-" + encoded.unit + ":" + encoded.wholesale + "/1.0^1]";
             }
-            
+
             int is_uploaded = 0;
 
             int allow_negative_inventory = 0;
@@ -380,10 +414,10 @@ public class Excel_to_db_inventory_items {
                 double previous_cost = 0;
 
                 S1_receipt_items.to_receipt_items to4 = new S1_receipt_items.to_receipt_items(id, receipt_no, user_name, session_no, date_added, sup, sup_id,
-                         remarks, barcode, description, qty, cost, category, category_id,
-                         classification, classification_id, sub_class, sub_class_id, 1, unit, date_delivered, date_received, barcodes,
-                         serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, 1, previous_cost, receipt_type_id, branch,
-                         branch_id, location, location_id);
+                                                                                              remarks, barcode, description, qty, cost, category, category_id,
+                                                                                              classification, classification_id, sub_class, sub_class_id, 1, unit, date_delivered, date_received, barcodes,
+                                                                                              serial_no, batch_no, main_barcode, brand, brand_id, model, model_id, 1, previous_cost, receipt_type_id, branch,
+                                                                                              branch_id, location, location_id);
                 acc.add(to4);
             }
             //</editor-fold>
@@ -394,6 +428,233 @@ public class Excel_to_db_inventory_items {
         Receipts.add_receipts(to1, acc);
         System.out.println("Count: " + tos.size());
         Alert.set(1, "");
+    }
+
+    public static void main(String[] args) {
+        //wholesale
+        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_password", "password");
+        String file = "C:\\Users\\User\\Documents\\Excel Files\\asus.xls";
+
+        if (file == null || file.isEmpty()) {
+            return;
+        }
+        FileInputStream fis = null;
+        final List sheetData = new ArrayList();
+        try {
+            fis = new FileInputStream(file);
+            HSSFWorkbook workbook = new HSSFWorkbook(fis);
+            HSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator rows = sheet.rowIterator();
+            while (rows.hasNext()) {
+                HSSFRow row = (HSSFRow) rows.next();
+                Iterator cells = row.cellIterator();
+
+                List data = new ArrayList();
+                while (cells.hasNext()) {
+                    HSSFCell cell = (HSSFCell) cells.next();
+                    data.add(cell);
+                }
+                sheetData.add(data);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Excel_to_db_inventory_items.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        List<asus> datas = Excel_to_db_inventory_items.showExcelData_asus(sheetData, file);
+        System.out.println("datas: " + datas.size());
+
+        List<Inventory.to_inventory> tos = new ArrayList();
+        //<editor-fold defaultstate="collapsed" desc=" Receipts ">
+        //        List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
+//
+//        int with_qty = 0;
+//        int id2 = 0;
+//        String aw = Receipts.increment_id("1");
+//        String receipt_no = aw;
+//        String where = " where receipt_no='" + receipt_no + "' ";
+//        String user_name = "admin";
+//        String session_no = "";
+//        String date_added = DateType.now();
+//        String supplier = "";
+//        String supllier_id = "";
+//
+//        String remarks = "";
+//        String date_delivered = DateType.sf.format(new Date());
+//        String date_received = DateType.sf.format(new Date());
+//
+//        String receipt_type = "";
+//        String reference_no = "000001";
+//        String branch = "Tinago";
+//        String branch_id = "1";
+//        double gross_total = 0;
+//        double net_total = 0;
+//        String batch_no = "0";
+//        double discount = 0;
+//        String receipt_type_id = "0";
+//        final Receipts.to_receipts to1 = new Receipts.to_receipts(id2, receipt_no, user_name, session_no, date_added, supplier, supllier_id, remarks, date_delivered, date_received, receipt_type, reference_no, branch, branch_id, gross_total, net_total, batch_no, discount, receipt_type_id, 0);
+//
+        //</editor-fold>
+
+        for (asus encoded : datas) {
+
+            int id = -1;
+            String barcode =  encoded.part_no;
+            if (barcode.equalsIgnoreCase("n/a")) {
+                barcode = "";
+            }
+            String description = encoded.part_description + " - " + encoded.part_name;
+            String generic_name = "";
+            String category = encoded.location;
+            if (category.equalsIgnoreCase("n/a")) {
+                category = "";
+            }
+            String category_id = "";
+            String classification = encoded.lot;
+            if (classification.equalsIgnoreCase("n/a")) {
+                classification = "";
+            }
+            String classification_id = "";
+            String sub_classification = encoded.part_group;
+            if (sub_classification == null || sub_classification.equalsIgnoreCase("n/a")) {
+                sub_classification = "";
+            }
+            String sub_classification_id = "";
+            double product_qty = 0;
+
+            double conversion = 1;
+            double selling_price = 0;
+
+            String item_type = "Regular";
+            int status = 1;
+
+            int fixed_price = 0;
+            double cost = 0;
+            String supplier_id = "";
+            int multi_level_pricing = 0;
+            int vatable = 0;
+            double reorder_level = 0;
+            double markup = 0;
+            String barcodes = "";
+            if (barcodes.equalsIgnoreCase("n/a")) {
+                barcodes = "";
+            }
+            String brand = encoded.prod_code;
+            if (brand.equalsIgnoreCase("n/a")) {
+                brand = "";
+            }
+            String brand_id = "";
+            String model = encoded.warehouse;
+            if (brand.equalsIgnoreCase("n/a")) {
+                model = "";
+            }
+            String model_id = "";
+            int selling_type = 0;
+            String branch = "Algorithm - Dgte";
+            String branch_code = "1";
+            String location = "ASUS";
+            String location_id = "32";
+            String unit = "[pc" + ":" + "0" + "/1.0^1]";
+            double sp = 0;
+            double ws = 0;
+
+            int is_uploaded = 0;
+
+            int allow_negative_inventory = 0;
+            int auto_order = 1;
+            int show_to_sales = 1;
+
+            Inventory.to_inventory to = new Inventory.to_inventory(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, DateType.now(), "admin", item_type, status, "asus", fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, false, is_uploaded, allow_negative_inventory, auto_order, show_to_sales);
+            tos.add(to);
+        }
+//
+        List<String> query = Inventory.add_inventory_list(tos);
+//        Receipts.add_receipts(to1, acc);
+        System.out.println("Count: " + tos.size());
+        Alert.set(1, "");
+    }
+
+    public static List<asus> showExcelData_asus(List sheetData, String path) {
+
+        FileInputStream fis;
+        List<asus> datas = new ArrayList();
+        try {
+            fis = new FileInputStream(path);
+            int r = 0;
+            int r_set = 1;
+            int id = 0;
+            for (int i = 0; i < sheetData.size(); i++) {
+                List list = (List) sheetData.get(i);
+                int size = list.size();
+                String[] record = new String[13];
+                int record_size = 0;
+                for (int j = 0; j < list.size(); j++) {
+
+                    CellReference cellReference = new CellReference("B3");
+                    HSSFCell cell = (HSSFCell) list.get(j);
+                    HSSFDataFormatter hdf = new HSSFDataFormatter();
+                    String data = "";
+                    if (j >= 11) {
+                        break;
+                    }
+                    if (j == 8 || j == 9 || j == 10) {
+                        try {
+                            data = "" + cell.getNumericCellValue();
+                        } catch (Exception e) {
+                            data = "" + cell.getStringCellValue();
+                        }
+                    } else {
+
+                        try {
+                            data = "" + cell.getStringCellValue();
+                        } catch (Exception e) {
+                            data = "" + cell.getNumericCellValue();
+                        }
+                    }
+
+                    record[record_size] = data;
+                    record_size++;
+                }
+
+                String part_no = record[0];
+
+                String part_name = record[1];
+                String part_description = record[2];
+                String prod_code = record[3];
+                
+                String warehouse = record[4];
+               
+                String location = record[5];
+                
+                String lot = record[6];
+//                 System.out.println("lot: "+lot);
+                String real_loc = record[7];
+                double available = FitIn.toDouble(record[8]);
+                double on_hand = FitIn.toDouble(record[9]);
+                double on_hand_qty = FitIn.toDouble(record[10]);
+                String part_group = record[11];
+                double idel_days = FitIn.toDouble(record[12]);
+
+                asus asus = new asus(part_no, part_name, part_description, prod_code, warehouse, location, lot, real_loc, available, on_hand, on_hand_qty, part_group, idel_days);
+                if (record[0] != null) {
+                    datas.add(asus);
+                }
+
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Excel_to_db_inventory_items.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return datas;
     }
 
     public static List<Excel_to_db_inventory_items> showExcelData(List sheetData, String path) {
@@ -442,7 +703,7 @@ public class Excel_to_db_inventory_items {
                 String item_code = record[1];
                 String barcode = record[2];
                 String description = record[3];
-                System.out.println("description: "+description);
+                System.out.println("description: " + description);
                 String cost = record[4];
                 String selling_price = record[5];
                 String category = record[6];

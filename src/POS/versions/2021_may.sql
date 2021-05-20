@@ -118,3 +118,5 @@ id int auto_increment primary key
 ,location_id varchar(255)
 );
 
+delete from inventory where location_id='32';
+delete from inventory_barcodes where location_id='32';

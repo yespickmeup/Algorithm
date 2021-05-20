@@ -299,6 +299,7 @@ public class Warranty_items {
     public static void update_status(to_warranty_items to_warranty_items) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "update warranty_items set "
                     + " status= :status "
                     + " where id='" + to_warranty_items.id + "' "
@@ -308,8 +309,35 @@ public class Warranty_items {
                     .setNumber("status", 1)
                     .ok();
 
-            PreparedStatement stmt = conn.prepareStatement(s0);
-            stmt.execute();
+            PreparedStatement stmt = conn.prepareStatement("");
+            stmt.addBatch(s0);
+
+            String s10 = "select "
+                    + " product_qty"
+                    + " from inventory_barcodes where "
+                    + " main_barcode='" + to_warranty_items.main_barcode + "' and location_id='" + to_warranty_items.location_id + "'"
+                    + " ";
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery(s10);
+            double product_qty = 0;
+
+            while (rs10.next()) {
+                product_qty = rs10.getDouble(1);
+
+            }
+
+            double new_qty = product_qty - (to_warranty_items.conversion * to_warranty_items.qty);
+
+            String s4 = "update inventory_barcodes set "
+                    + " product_qty='" + new_qty + "'"
+                    + " where  main_barcode= '" + to_warranty_items.main_barcode + "' and location_id='" + to_warranty_items.location_id + "' "
+                    + "";
+            
+            stmt.addBatch(s4);
+
+            stmt.executeBatch();
+            conn.commit();
+
             Lg.s(Warranty_items.class, "Successfully Updated");
         } catch (SQLException e) {
             throw new RuntimeException(e);

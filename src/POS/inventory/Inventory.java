@@ -453,6 +453,8 @@ public class Inventory {
                         + ",model"
                         + ",model_id"
                         + ",selling_type"
+                        + ",branch"
+                        + ",branch_code"
                         + ",location"
                         + ",location_id"
                         + ",updated_at"
@@ -491,6 +493,8 @@ public class Inventory {
                         + ",:model"
                         + ",:model_id"
                         + ",:selling_type"
+                        + ",:branch"
+                        + ",:branch_code"
                         + ",:location"
                         + ",:location_id"
                         + ",:updated_at"
@@ -531,6 +535,8 @@ public class Inventory {
                         setString("model", to_inventory.model).
                         setString("model_id", to_inventory.model_id).
                         setNumber("selling_type", to_inventory.selling_type).
+                        setString("branch", to_inventory.branch).
+                        setString("branch_code", to_inventory.branch_code).
                         setString("location", to_inventory.location).
                         setString("location_id", to_inventory.location_id).
                         setString("updated_at", to_inventory.date_added).
@@ -2670,7 +2676,6 @@ public class Inventory {
                     + " from inventory  "
                     + " " + where;
 
-            
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {

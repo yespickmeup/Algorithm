@@ -1145,6 +1145,7 @@ public class Dlg_inventory_branch extends javax.swing.JDialog {
             jLabel35.setVisible(true);
         }
         set_location();
+        init_item_code();
         tf_item_code.grabFocus();
     }
 
@@ -1799,7 +1800,12 @@ public class Dlg_inventory_branch extends javax.swing.JDialog {
         Field.Combo units = (Field.Combo) tf_unit;
         Field.Combo loc = (Field.Combo) jTextField2;
         int id = -1;
-        String barcode = Inventory.increment_id_special(loc.getId());
+        String barcode = tf_item_code.getText();
+        List<Inventory.to_inventory> codes = Inventory.ret_data22(" where barcode like '" + barcode + "' limit 1");
+        if (!codes.isEmpty()) {
+            Alert.set(0, "Item code already exists!");
+            return;
+        }
         String description = tf_description.getText();
         String generic_name = tf_description1.getText();
         String category = tf_category.getText();

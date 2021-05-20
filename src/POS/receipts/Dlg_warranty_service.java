@@ -1240,6 +1240,7 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
         jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setSelected(true);
         jCheckBox7.setText("[F2]-Item Code");
         jCheckBox7.setFocusable(false);
 
@@ -2849,7 +2850,7 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
         tbl_receipt_items.
                 setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_receipt_items.setRowHeight(25);
-        int[] tbl_widths_receipt_items = {70, 70, 100, 70, 80, 100, 100, 50, 50, 50, 30, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_receipt_items = {70, 120, 100, 70, 80, 100, 100, 50, 50, 50, 30, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_receipt_items.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -4122,7 +4123,7 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
                 Alert.set(0, "Privilege not added!");
                 return;
             }
-            jTabbedPane1.setSelectedIndex(0);
+            jTabbedPane1.setSelectedIndex(1);
             jButton1.setEnabled(false);
             jButton3.setEnabled(true);
             tf_branch_location.setEnabled(false);
@@ -5190,7 +5191,7 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
         tbl_warranty_items.setModel(tbl_warranty_items_M);
         tbl_warranty_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_warranty_items.setRowHeight(25);
-        int[] tbl_widths_warranty_items = {80, 60, 80, 100, 80, 80, 60, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_warranty_items = {80, 60, 120, 100, 80, 80, 60, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_warranty_items.length; i < n; i++) {
             if (i == 3) {
                 continue;
@@ -5254,9 +5255,9 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
                     return " " + tt.trans_type;
                 case 6:
                     if (tt.status == 0) {
-                        return " Open";
+                        return " Posted";
                     } else {
-                        return " Closed";
+                        return " Finalized";
                     }
                 case 7:
                     return " Edit";
