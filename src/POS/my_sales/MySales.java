@@ -13,6 +13,7 @@ import POS.inventory.Inventory;
 import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.prepaid_payments.Prepaid_payments.to_prepaid_payments;
+import POS.receipts.Warranties;
 import POS.sales.Sales;
 
 import POS.touchscreen_reports.Srpt_sales_summary;
@@ -331,7 +332,7 @@ public class MySales {
 
     }
 
-    public static String add_sales(sales to_sales, List<MySales_Items.items> items, String location_ids) throws SQLException {
+    public static String add_sales(sales to_sales, List<MySales_Items.items> items, String location_ids, List<Warranties.to_warranties> slip_nos) throws SQLException {
         try {
             Connection conn = MyConnection.connect();
             String c_date = DateType.sf.format(new Date());
@@ -939,6 +940,125 @@ public class MySales {
                 stmt4.execute();
 //                stmt.addBatch(s4);
 //                Lg.s(Inventory.class, "Successfully Updated");
+
+            }
+
+            if (!slip_nos.isEmpty()) {
+                for (Warranties.to_warranties to_sale_slip_nos : slip_nos) {
+
+//                    Insert to Sale Slip Nos
+                    String s13 = "insert into sale_slip_nos("
+                            + "sales_no"
+                            + ",transaction_no"
+                            + ",slip_no"
+                            + ",no_of_items"
+                            + ",created_at"
+                            + ",created_by"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + ")values("
+                            + ":sales_no"
+                            + ",:transaction_no"
+                            + ",:slip_no"
+                            + ",:no_of_items"
+                            + ",:created_at"
+                            + ",:created_by"
+                            + ",:branch"
+                            + ",:branch_id"
+                            + ",:location"
+                            + ",:location_id"
+                            + ")";
+
+                    s13 = SqlStringUtil.parse(s13)
+                            .setString("sales_no", to_sales.sales_no)
+                            .setString("transaction_no", to_sale_slip_nos.transaction_no)
+                            .setString("slip_no", to_sale_slip_nos.slip_no)
+                            .setString("no_of_items", to_sale_slip_nos.created_by)
+                            .setString("created_at", to_sale_slip_nos.created_at)
+                            .setString("created_by", to_sales.user_id)
+                            .setString("branch", to_sale_slip_nos.branch)
+                            .setString("branch_id", to_sale_slip_nos.branch_id)
+                            .setString("location", to_sale_slip_nos.location)
+                            .setString("location_id", to_sale_slip_nos.location_id)
+                            .ok();
+                    stmt.addBatch(s13);
+
+//                    Update warranty to zero
+                    String s14 = "update warranties set "
+                            + " status= :status "
+                            + " where id='" + to_sale_slip_nos.id + "' "
+                            + " ";
+
+                    s14 = SqlStringUtil.parse(s14)
+                            .setNumber("status", 1)
+                            .ok();
+
+                    stmt.addBatch(s14);
+
+//                  Select warranty items
+                    String s20 = "select "
+                            + "id"
+                            + ",qty"
+                            + ",main_barcode"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + " from warranty_items"
+                            + " where transaction_no='" + to_sale_slip_nos.transaction_no + "'";
+
+                    Statement stmt20 = conn.createStatement();
+                    ResultSet rs20 = stmt20.executeQuery(s20);
+                    while (rs20.next()) {
+                        int ids = rs20.getInt(1);
+                        double qty = rs20.getDouble(2);
+                        String main_barcode = rs20.getString(3);
+                        String branch = rs20.getString(4);
+                        String branch_id = rs20.getString(5);
+                        String location = rs20.getString(6);
+                        String location_id = rs20.getString(7);
+
+//                    Update warranty items                        
+                        String s15 = "update warranty_items set "
+                                + " status= :status "
+                                + " where id='" + ids + "' "
+                                + " ";
+
+                        s15 = SqlStringUtil.parse(s15)
+                                .setNumber("status", 1)
+                                .ok();
+                        stmt.addBatch(s15);
+
+//                        Search qty items
+                        String s10 = "select "
+                                + " product_qty"
+                                + ",conversion"
+                                + " from inventory_barcodes where "
+                                + " main_barcode='" + main_barcode + "' and location_id='" + location_id + "'"
+                                + " ";
+                        Statement stmt10 = conn.createStatement();
+                        ResultSet rs10 = stmt10.executeQuery(s10);
+                        double product_qty = 0;
+                        double conversion = 0;
+                        while (rs10.next()) {
+                            product_qty = rs10.getDouble(1);
+                            conversion = rs10.getDouble(2);
+                        }
+
+                        double new_qty = product_qty - (conversion * qty);
+
+                        String s4 = "update inventory_barcodes set "
+                                + " product_qty='" + new_qty + "'"
+                                + " where  main_barcode= '" + main_barcode + "' and location_id='" + location_id + "' "
+                                + "";
+
+                        PreparedStatement stmt2 = conn.prepareStatement(s4);
+                        stmt2.execute();
+
+                    }
+                }
 
             }
 

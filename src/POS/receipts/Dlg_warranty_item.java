@@ -7,6 +7,7 @@ package POS.receipts;
 
 import POS.inventory.Dlg_inventory_uom;
 import POS.inventory.Inventory;
+import POS.inventory.Inventory_barcodes;
 import POS.inventory.uom;
 import POS.suppliers.Suppliers;
 import POS.users.MyUser;
@@ -253,6 +254,8 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
         jButton4 = new Button.Primary();
         jLabel17 = new javax.swing.JLabel();
         tf_remarks4 = new Field.Input();
+        jLabel18 = new javax.swing.JLabel();
+        tf_remarks5 = new Field.Input();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_warranty_items = new javax.swing.JTable();
@@ -445,6 +448,17 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel18.setText("Quantity on Hand:");
+
+        tf_remarks5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tf_remarks5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_remarks5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -474,7 +488,7 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                                 .addGap(48, 48, 48))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tf_barcodes, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -492,8 +506,12 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(tf_remarks3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(217, 217, 217)
-                                        .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(tf_remarks5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(242, 242, 242)
+                                        .addComponent(jLabel43)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jDateChooser7, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(tf_description)
@@ -554,7 +572,10 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tf_remarks3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_remarks3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_remarks5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jDateChooser7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -565,10 +586,9 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                        .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -576,14 +596,13 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jCheckBox10))
-                            .addComponent(jCheckBox11))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jCheckBox11)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5))))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -750,6 +769,10 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
         select_item();
     }//GEN-LAST:event_tbl_warranty_itemsMouseClicked
 
+    private void tf_remarks5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_remarks5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_remarks5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -774,6 +797,7 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel43;
@@ -797,12 +821,14 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
     private javax.swing.JTextField tf_item_code;
     private javax.swing.JTextField tf_remarks3;
     private javax.swing.JTextField tf_remarks4;
+    private javax.swing.JTextField tf_remarks5;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_password", "password");
+//        System.setProperty("pool_host", "192.168.0.51");
 
         init_key();
         init_tbl_warranty_items(tbl_warranty_items);
@@ -816,6 +842,10 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
     Warranties.to_warranties warranty = null;
 
     public void do_pass2(Warranties.to_warranties warr, int branch_location) {
+        if(warr.status==1){
+            tf_search.setEnabled(false);
+            jButton4.setEnabled(false);
+        }
         location_id = branch_location;
         tf_remarks4.setEnabled(false);
         warranty = warr;
@@ -890,9 +920,16 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                 if (inventory_barcoders_list.size() == 1) {
                     selected_row = 0;
                     Inventory.to_inventory to = (Inventory.to_inventory) inventory_barcoders_list.get(0);
+                    List<Inventory_barcodes.to_inventory_barcodes> barcodes = Inventory_barcodes.ret_where(" where main_barcode='" + to.barcode + "' and location_id='" + location_id + "' limit 1 ");
+
+                    if (!barcodes.isEmpty()) {
+                        Inventory_barcodes.to_inventory_barcodes barcode = (Inventory_barcodes.to_inventory_barcodes) barcodes.get(0);
+                        tf_remarks5.setText("" + barcode.product_qty);
+                    }
                     tf_item_code.setText(to.barcode);
                     tf_barcodes.setText(to.barcodes);
                     tf_description.setText(to.description);
+
                     tf_search.setEnabled(true);
                     tf_remarks3.grabFocus();
                 }
@@ -928,6 +965,12 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
                         public void ok(TableRenderer.OutputData data) {
                             selected_row = data.selected_row;
                             Inventory.to_inventory to = (Inventory.to_inventory) inventory_barcoders_list.get(selected_row);
+                            List<Inventory_barcodes.to_inventory_barcodes> barcodes = Inventory_barcodes.ret_where(" where main_barcode='" + to.barcode + "' and location_id='" + location_id + "' limit 1 ");
+
+                            if (!barcodes.isEmpty()) {
+                                Inventory_barcodes.to_inventory_barcodes barcode = (Inventory_barcodes.to_inventory_barcodes) barcodes.get(0);
+                                tf_remarks5.setText("" + barcode.product_qty);
+                            }
                             tf_item_code.setText(to.barcode);
                             tf_barcodes.setText(to.barcodes);
                             tf_description.setText(to.description);
@@ -1129,7 +1172,7 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
 
     private void ret_items() {
         String where = " where transaction_no='" + warranty.transaction_no + "' ";
-    
+
         List<Warranty_items.to_warranty_items> items = Warranty_items.ret_data(where);
         loadData_warranty_items(items);
         jLabel2.setText("" + items.size());
@@ -1316,6 +1359,7 @@ public class Dlg_warranty_item extends javax.swing.JDialog {
         jButton4.setText("Add Item");
         jTextArea1.setText("");
         jTextArea2.setText("");
+        tf_remarks5.setText("0");
         tf_search.setFocusable(true);
         if (!tbl_warranty_items_ALM.isEmpty()) {
             tbl_warranty_items.clearSelection();

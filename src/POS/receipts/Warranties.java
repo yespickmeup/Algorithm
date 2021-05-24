@@ -406,6 +406,70 @@ public class Warranties {
         } finally {
             MyConnection.close();
         }
+
+    }
+
+    public static List<to_warranties> ret_data_with_items(String where) {
+        List<to_warranties> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",transaction_no"
+                    + ",slip_no"
+                    + ",remarks"
+                    + ",supplier"
+                    + ",supplier_id"
+                    + ",status"
+                    + ",created_at"
+                    + ",created_by"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + " from warranties"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String transaction_no = rs.getString(2);
+                String slip_no = rs.getString(3);
+                String remarks = rs.getString(4);
+                String supplier = rs.getString(5);
+                String supplier_id = rs.getString(6);
+                int status = rs.getInt(7);
+                String created_at = rs.getString(8);
+                String created_by2 = rs.getString(9);
+                String branch = rs.getString(10);
+                String branch_id = rs.getString(11);
+                String location = rs.getString(12);
+                String location_id = rs.getString(13);
+
+                String s2 = "select "
+                        + "count(id)"
+                        + " from warranty_items"
+                        + " where transaction_no like '" + transaction_no + "' ";
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+                int count = 0;
+                while (rs2.next()) {
+                    count = rs2.getInt(1);
+
+                }
+                created_by2 = "" + count;
+                to_warranties to = new to_warranties(id, transaction_no, slip_no, remarks, supplier, supplier_id, status, created_at, created_by2, branch, branch_id, location, location_id);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
     }
 
     public static String increment_id() {

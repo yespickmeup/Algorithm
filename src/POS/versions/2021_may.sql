@@ -143,3 +143,20 @@ delete from inventory_barcodes where location_id='32';
 update inventory_barcodes ib set ib.main_barcode=(select i.barcode from inventory i where i.description=ib.description) where ib.main_barcode like '90';
 
 alter table warranty_items add slip_no varchar(255);
+
+
+drop table if exists sale_slip_nos;
+create table sale_slip_nos(
+id int auto_increment primary key
+,sales_no varchar(255)
+,transaction_no varchar(255)
+,slip_no varchar(255)
+,no_of_items int
+,created_at datetime
+,created_by varchar(255)
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
+

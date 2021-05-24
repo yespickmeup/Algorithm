@@ -2013,6 +2013,11 @@
                                                   <Component id="jLabel4" max="32767" attributes="0"/>
                                                   <Component id="jButton31" min="-2" pref="85" max="-2" attributes="0"/>
                                               </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabel22" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jButton33" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
@@ -2046,6 +2051,11 @@
                                               <Component id="jButton31" min="-2" pref="46" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jButton33" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2147,6 +2157,38 @@
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Label.Separator()"/>
                               </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="jButton33">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="24" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="c7" green="96" red="0" type="rgb"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/POS/icons_menu_maintenance/exchange (1).png"/>
+                                </Property>
+                                <Property name="borderPainted" type="boolean" value="false"/>
+                                <Property name="contentAreaFilled" type="boolean" value="false"/>
+                                <Property name="focusable" type="boolean" value="false"/>
+                                <Property name="horizontalTextPosition" type="int" value="0"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton33MouseClicked"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel22">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="c7" green="96" red="0" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="0"/>
+                                <Property name="text" type="java.lang.String" value="Service Slip"/>
+                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>

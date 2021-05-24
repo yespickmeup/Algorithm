@@ -6,7 +6,6 @@
  */
 package POS.touchscreen;
 
-import POS.accounts_receivable.S1_sales_on_account;
 import POS.my_sales.MySales;
 import POS.branch_locations.S1_branch_locations;
 import POS.branch_locations.S4_branch_locations;
@@ -22,6 +21,7 @@ import POS.my_sales.MySales_Items;
 import POS.my_services.My_services_customers;
 import POS.orders.S1_order_items;
 import POS.orders.S1_orders;
+import POS.receipts.Warranties;
 import POS.reports3.Dlg_report_item;
 import POS.unit_of_measure.S1_unit_of_measure;
 import POS.unit_of_measure.S1_unit_of_measure.to_uom;
@@ -76,9 +76,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
-import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
-import org.hibernate.id.IncrementGenerator;
 import synsoftech.fields.Field;
 import synsoftech.fields.Label;
 import synsoftech.panels.Authenticate;
@@ -344,6 +342,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jButton31 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lbl_separator2 = new Label.Separator();
+        jButton33 = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
         jButton34 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         btn_online = new javax.swing.JButton();
@@ -1182,53 +1182,52 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jCheckBox3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                            .addComponent(tf_reference_no, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(1, 1, 1)
-                            .addComponent(tf_reference_no1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(1, 1, 1)
-                            .addComponent(tf_reference_no2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                            .addComponent(btn_charge20, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge21, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge22, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                            .addComponent(btn_charge17, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge19, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge18, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                            .addComponent(btn_charge12, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge15, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                            .addComponent(btn_charge11, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge13, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_charge14, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btn_charge23, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn_charge26, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn_charge25, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn_charge24, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                                    .addComponent(jCheckBox1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jCheckBox2)))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(tf_reference_no, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(tf_reference_no1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(tf_reference_no2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(btn_charge20, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge21, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge22, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(btn_charge17, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge19, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge18, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(btn_charge12, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge15, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(btn_charge11, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge13, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_charge14, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_charge23, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_charge26, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_charge25, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_charge24, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox2)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -1403,6 +1402,24 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Void Payment");
 
+        jButton33.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton33.setForeground(new java.awt.Color(0, 150, 199));
+        jButton33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/exchange (1).png"))); // NOI18N
+        jButton33.setBorderPainted(false);
+        jButton33.setContentAreaFilled(false);
+        jButton33.setFocusable(false);
+        jButton33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton33.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton33MouseClicked(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 150, 199));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Service Slip");
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -1420,7 +1437,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(lbl_separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1445,7 +1466,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                         .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jLabel4))))
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel22))))
         );
 
         jButton34.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -2918,6 +2943,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         tf_amount_tendered.grabFocus();
     }//GEN-LAST:event_tf_reference_no2ActionPerformed
 
+    private void jButton33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton33MouseClicked
+        slip_no();
+    }//GEN-LAST:event_jButton33MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2965,6 +2994,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton36;
     private javax.swing.JButton jButton37;
@@ -2996,6 +3026,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -3085,6 +3116,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_password", "password");
 //        jPanel2.setVisible(false);
 
         init_key();
@@ -3833,7 +3865,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 }
 
                 where = where + " order by description asc";
-                System.out.println(where);
+//                System.out.println(where);
                 loadData_items(Inventory_barcodes.ret_where(where));
                 jLabel8.setText("" + tbl_items_ALM.size());
                 if (tbl_items_ALM.isEmpty()) {
@@ -4758,7 +4790,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 f_discount.setDiscount_rate(order.discount_rate);
                 cust.setCustomer_name(order.customer_name);
                 cust.setCustomer_id(order.session_no);
-                
+
                 lbl_sales_no.setText(order.sales_no);
                 lbl_customer_name.setText(order.customer_name);
                 jLabel36.setText(order.session_no);
@@ -4885,7 +4917,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 double gross_amount = FitIn.toDouble(lbl_sub_total2.getText());
                 double amount_paid = FitIn.toDouble(lbl_balance_due.getText());
                 double amount_due = FitIn.toDouble(lbl_balance_due.getText());
-                
+
                 String discount_name = f_discount.getDiscount_name();
                 double discount = f_discount.getDiscount_rate();
                 double discount_amount = f_discount.getDiscount_amount();
@@ -5000,7 +5032,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     S1_orders.add_data(order);
                     S1_order_items.add_data(orders);
                 } else {
-                    
+
                     sales_no = lbl_sales_no.getText();
                     or_no = sales_no;
 //                    System.out.println("Discount: " + sales_no + " = " + f_discount.getDiscount_amount());
@@ -5049,7 +5081,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         String supplier_name = to.supplier;
                         int is_vatable = to.vatable;
                         double addtl_amount1 = to.addtl_amount;
-                       
+
                         double wtax1 = to.wtax;
                         S1_order_items.to_order_items ord = new S1_order_items.to_order_items(id, sales_no, item_code, barcode, description, generic_name,
                                                                                               item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id,
@@ -5892,7 +5924,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, charge_date_applied, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
         try {
-            sales_no = MySales.add_sales(sales, items, location_id);
+            sales_no = MySales.add_sales(sales, items, location_id,slip_nos);
             sales.setSales_no(sales_no);
             my_sales = sales;
             if (my_sales == null) {
@@ -5966,7 +5998,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 compute_total();
                 data_cols2();
                 jCheckBox1.setSelected(true);
-
+                clear_slip_nos();
                 cardLayout.show(jPanel13, "2");
                 tf_search.selectAll();
                 tf_search.grabFocus();
@@ -6288,5 +6320,32 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //            tf_reference_no.setText(ref_no);
 //            tf_reference_no.grabFocus();
 //        }
+    }
+
+    List<Warranties.to_warranties> slip_nos = new ArrayList();
+
+    private void slip_no() {
+        Window p = (Window) this;
+        Dlg_touchscreen_slip_no nd = Dlg_touchscreen_slip_no.create(p, true);
+        nd.setTitle("");
+        nd.do_pass(slip_nos);
+        nd.setCallback(new Dlg_touchscreen_slip_no.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_touchscreen_slip_no.OutputData data) {
+                closeDialog.ok();
+                slip_nos = data.to;
+                if (!slip_nos.isEmpty()) {
+                    jButton33.setContentAreaFilled(true);
+                }
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+    
+    private void clear_slip_nos() {
+        slip_nos.clear();
+        jButton33.setContentAreaFilled(false);
     }
 }
