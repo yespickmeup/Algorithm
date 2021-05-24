@@ -81,6 +81,25 @@ values('Transactions','Receipts Service');
 insert into user_default_previleges(account,name)
 values('Transactions','Warranty Service');
 
+
+drop table if exists warranties;
+create table warranties(
+id int auto_increment primary key
+,transaction_no varchar(255)
+,slip_no  varchar(255)
+,remarks  varchar(255)
+,supplier varchar(255)
+,supplier_id varchar(255)
+,status int
+,created_at datetime
+,created_by varchar(255)
+,branch varchar(255)
+,branch_id varchar(255)
+,location varchar(255)
+,location_id varchar(255)
+);
+
+
 drop table if exists warranty_items;
 create table warranty_items(
 id int auto_increment primary key
@@ -120,3 +139,7 @@ id int auto_increment primary key
 
 delete from inventory where location_id='32';
 delete from inventory_barcodes where location_id='32';
+
+update inventory_barcodes ib set ib.main_barcode=(select i.barcode from inventory i where i.description=ib.description) where ib.main_barcode like '90';
+
+alter table warranty_items add slip_no varchar(255);

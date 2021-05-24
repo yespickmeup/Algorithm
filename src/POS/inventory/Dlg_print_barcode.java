@@ -1456,7 +1456,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
         if (!jCheckBox7.isSelected()) {
             where = where + " and model_id='" + model.getId() + "' ";
         }
-        where = where + " and location_id='" + location_ids + "' order by description asc";
+        where = where + " and location_id='" + location_ids + "' and length(main_barcode)< 8 order by description asc";
         List<Srpt_print_barcodes.field> datas = Srpt_print_barcodes.ret_data(where, is_item_code);
         loadData_inventory_barcodes(datas);
         count();

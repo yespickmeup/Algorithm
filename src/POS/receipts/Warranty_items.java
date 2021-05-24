@@ -27,13 +27,13 @@ public class Warranty_items {
 
         public final int id;
         public final String transaction_no;
-        public final String remarks;
-        public final String trans_type;
-        public final String supplier;
-        public final String supplier_id;
+        public String remarks;
+        public String trans_type;
+        public String supplier;
+        public String supplier_id;
         public final String barcode;
         public final String description;
-        public final double qty;
+        public double qty;
         public final double cost;
         public final double selling_price;
         public final String category;
@@ -44,7 +44,7 @@ public class Warranty_items {
         public final String sub_class_id;
         public final double conversion;
         public final String unit;
-        public final String warranty_date;
+        public String warranty_date;
         public final String serial_no;
         public final String main_barcode;
         public final String brand;
@@ -58,8 +58,9 @@ public class Warranty_items {
         public final String branch_id;
         public final String location;
         public final String location_id;
+        public final String slip_no;
 
-        public to_warranty_items(int id, String transaction_no, String remarks, String trans_type, String supplier, String supplier_id, String barcode, String description, double qty, double cost, double selling_price, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, double conversion, String unit, String warranty_date, String serial_no, String main_barcode, String brand, String brand_id, String model, String model_id, int status, String created_at, String created_by, String branch, String branch_id, String location, String location_id) {
+        public to_warranty_items(int id, String transaction_no, String remarks, String trans_type, String supplier, String supplier_id, String barcode, String description, double qty, double cost, double selling_price, String category, String category_id, String classification, String classification_id, String sub_class, String sub_class_id, double conversion, String unit, String warranty_date, String serial_no, String main_barcode, String brand, String brand_id, String model, String model_id, int status, String created_at, String created_by, String branch, String branch_id, String location, String location_id, String slip_no) {
             this.id = id;
             this.transaction_no = transaction_no;
             this.remarks = remarks;
@@ -93,7 +94,57 @@ public class Warranty_items {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.slip_no = slip_no;
         }
+
+        public String getWarranty_date() {
+            return warranty_date;
+        }
+
+        public void setWarranty_date(String warranty_date) {
+            this.warranty_date = warranty_date;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        public String getTrans_type() {
+            return trans_type;
+        }
+
+        public void setTrans_type(String trans_type) {
+            this.trans_type = trans_type;
+        }
+
+        public String getSupplier() {
+            return supplier;
+        }
+
+        public void setSupplier(String supplier) {
+            this.supplier = supplier;
+        }
+
+        public String getSupplier_id() {
+            return supplier_id;
+        }
+
+        public void setSupplier_id(String supplier_id) {
+            this.supplier_id = supplier_id;
+        }
+
+        public double getQty() {
+            return qty;
+        }
+
+        public void setQty(double qty) {
+            this.qty = qty;
+        }
+
     }
 
     public static void add_data(to_warranty_items to_warranty_items) {
@@ -132,6 +183,7 @@ public class Warranty_items {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",slip_no"
                     + ")values("
                     + ":transaction_no"
                     + ",:remarks"
@@ -165,6 +217,7 @@ public class Warranty_items {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:slip_no"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -200,6 +253,7 @@ public class Warranty_items {
                     .setString("branch_id", to_warranty_items.branch_id)
                     .setString("location", to_warranty_items.location)
                     .setString("location_id", to_warranty_items.location_id)
+                    .setString("slip_no", to_warranty_items.slip_no)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -248,6 +302,7 @@ public class Warranty_items {
                     + ",branch_id= :branch_id "
                     + ",location= :location "
                     + ",location_id= :location_id "
+                    + ",slip_no= :slip_no"
                     + " where id='" + to_warranty_items.id + "' "
                     + " ";
 
@@ -284,6 +339,41 @@ public class Warranty_items {
                     .setString("branch_id", to_warranty_items.branch_id)
                     .setString("location", to_warranty_items.location)
                     .setString("location_id", to_warranty_items.location_id)
+                    .setString("slip_no", to_warranty_items.slip_no)
+                    .ok();
+
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Warranty_items.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_data2(to_warranty_items to_warranty_items) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update warranty_items set "
+                    + " remarks= :remarks "
+                    + ",trans_type= :trans_type "
+                    + ",supplier= :supplier "
+                    + ",supplier_id= :supplier_id "
+                    + ",qty= :qty "
+                    + ",warranty_date= :warranty_date "
+                    + ",serial_no= :serial_no "
+                    + " where id='" + to_warranty_items.id + "' "
+                    + " ";
+
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("remarks", to_warranty_items.remarks)
+                    .setString("trans_type", to_warranty_items.trans_type)
+                    .setString("supplier", to_warranty_items.supplier)
+                    .setString("supplier_id", to_warranty_items.supplier_id)
+                    .setNumber("qty", to_warranty_items.qty)
+                    .setString("warranty_date", to_warranty_items.warranty_date)
+                    .setString("serial_no", to_warranty_items.serial_no)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -332,7 +422,7 @@ public class Warranty_items {
                     + " product_qty='" + new_qty + "'"
                     + " where  main_barcode= '" + to_warranty_items.main_barcode + "' and location_id='" + to_warranty_items.location_id + "' "
                     + "";
-            
+
             stmt.addBatch(s4);
 
             stmt.executeBatch();
@@ -402,6 +492,7 @@ public class Warranty_items {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",slip_no"
                     + " from warranty_items"
                     + " " + where;
 
@@ -441,8 +532,8 @@ public class Warranty_items {
                 String branch_id = rs.getString(31);
                 String location = rs.getString(32);
                 String location_id = rs.getString(33);
-
-                to_warranty_items to = new to_warranty_items(id, transaction_no, remarks, trans_type, supplier, supplier_id, barcode, description, qty, cost, selling_price, category, category_id, classification, classification_id, sub_class, sub_class_id, conversion, unit, warranty_date, serial_no, main_barcode, brand, brand_id, model, model_id, status, created_at, created_by, branch, branch_id, location, location_id);
+                String slip_no = rs.getString(34);
+                to_warranty_items to = new to_warranty_items(id, transaction_no, remarks, trans_type, supplier, supplier_id, barcode, description, qty, cost, selling_price, category, category_id, classification, classification_id, sub_class, sub_class_id, conversion, unit, warranty_date, serial_no, main_barcode, brand, brand_id, model, model_id, status, created_at, created_by, branch, branch_id, location, location_id, slip_no);
                 datas.add(to);
             }
             return datas;

@@ -433,7 +433,8 @@ public class Excel_to_db_inventory_items {
     public static void main(String[] args) {
         //wholesale
         System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("pool_password", "password");
+//        System.setProperty("pool_password", "password");
+//        System.setProperty("pool_host", "192.168.0.51");
         String file = "C:\\Users\\User\\Documents\\Excel Files\\asus.xls";
 
         if (file == null || file.isEmpty()) {
@@ -508,7 +509,7 @@ public class Excel_to_db_inventory_items {
         for (asus encoded : datas) {
 
             int id = -1;
-            String barcode =  encoded.part_no;
+            String barcode = encoded.part_no;
             if (barcode.equalsIgnoreCase("n/a")) {
                 barcode = "";
             }
@@ -630,11 +631,11 @@ public class Excel_to_db_inventory_items {
                 String part_name = record[1];
                 String part_description = record[2];
                 String prod_code = record[3];
-                
+
                 String warehouse = record[4];
-               
+
                 String location = record[5];
-                
+
                 String lot = record[6];
 //                 System.out.println("lot: "+lot);
                 String real_loc = record[7];
