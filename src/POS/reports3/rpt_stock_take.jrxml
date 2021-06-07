@@ -192,7 +192,7 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="34" y="0" width="35" height="20"/>
+				<reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="34" y="0" width="130" height="20"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -212,7 +212,7 @@
 				<text><![CDATA[Qty]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="149" y="0" width="221" height="20"/>
+				<reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="164" y="0" width="220" height="20"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -232,7 +232,7 @@
 				<text><![CDATA[Selling Price]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="370" y="0" width="135" height="20"/>
+				<reportElement uuid="2edc0ec2-5dc9-490e-9c7e-230a43034630" x="384" y="0" width="121" height="20"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -242,32 +242,23 @@
 				</textElement>
 				<text><![CDATA[Location]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="2f807810-3c71-4359-aff5-3895ea7a6a89" x="69" y="0" width="80" height="20"/>
-				<box>
-					<bottomPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<paragraph leftIndent="2" rightIndent="2"/>
-				</textElement>
-				<text><![CDATA[Barcode]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="149" y="0" width="221" height="15"/>
+				<reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="164" y="0" width="220" height="15"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
+					<font size="9"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="34" y="0" width="35" height="15"/>
+				<reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="34" y="0" width="130" height="15"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -297,7 +288,7 @@
 				<textFieldExpression><![CDATA[$F{selling_price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="370" y="0" width="135" height="15"/>
+				<reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="384" y="0" width="121" height="15"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
@@ -306,16 +297,6 @@
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="69" y="0" width="80" height="15"/>
-				<box>
-					<bottomPen lineWidth="0.2"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<paragraph leftIndent="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="1de7b08f-48e6-4639-aae7-4465c90f6eb3" x="0" y="15" width="572" height="15" isRemoveLineWhenBlank="true"/>

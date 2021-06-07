@@ -160,3 +160,12 @@ id int auto_increment primary key
 ,location_id varchar(255)
 );
 
+update inventory i set i.category_id=(select ic.id from inventory_category ic where ic.name like i.category limit 1);
+update inventory_barcodes i set i.category_id=(select ic.id from inventory_category ic where ic.name like i.category limit 1);
+
+update inventory i set i.classification_id=(select ic.id from inventory_classification ic where ic.name like i.classification limit 1);
+update inventory_barcodes i set i.classification_id=(select ic.id from inventory_classification ic where ic.name like i.classification limit 1);
+
+update inventory i set i.sub_classification_id=(select ic.id from inventory_sub_classification ic where ic.name like i.sub_classification limit 1);
+
+update inventory_barcodes i set i.sub_classification_id=(select ic.id from inventory_sub_classification ic where ic.name like i.sub_classification limit 1);

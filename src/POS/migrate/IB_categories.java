@@ -18,6 +18,23 @@ import java.util.List;
  */
 public class IB_categories {
 
+    public static void set() {
+        System.setProperty("pool_db", "db_smis_bayawan_store");
+        System.setProperty("pool_password", "password");
+
+        String where = " group by category order by category asc ";
+        List<Inventory.to_inventory> items = Inventory.ret_data22(where);
+        List<S1_inventory_categories.to_inventory_category> categories = new ArrayList();
+        for (Inventory.to_inventory to : items) {
+            System.out.println("" + to.category);
+            S1_inventory_categories.to_inventory_category ca = new S1_inventory_categories.to_inventory_category(0, to.category, "");
+            categories.add(ca);
+        }
+
+        S1_inventory_categories.add_inventory_category2(categories);
+
+    }
+
     public static void main4(String[] args) {
 
         System.setProperty("pool_db", "db_smis_bayawan_store");

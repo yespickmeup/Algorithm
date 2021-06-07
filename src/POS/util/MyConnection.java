@@ -155,7 +155,7 @@ public class MyConnection {
                 Class.forName("com.mysql.jdbc.Driver");
                 String url = "jdbc:mysql://" + host + "/" + db_name + "?autoReconnect=true&zeroDateTimeBehavior=convertToNull&connectTimeout=100000&socketTimeout=300000";
 //                String url = "jdbc:mysql://" + host + "/" + db_name + ""; &connectTimeout=10000&socketTimeout=30000
-
+            
                 conn3 = DriverManager.getConnection(url, user, password);
                 System.out.println("Connection established!");
 //                conn2.setNetworkTimeout(Executors.newFixedThreadPool(1), 1000);

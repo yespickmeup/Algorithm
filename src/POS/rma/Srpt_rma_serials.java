@@ -55,10 +55,11 @@ public class Srpt_rma_serials {
         double qty;
         String serials;
         String customer_name;
+        String date;
         public field() {
         }
 
-        public field(String transaction_no, String type, String item_code, String description, double qty, String serials,String customer_name) {
+        public field(String transaction_no, String type, String item_code, String description, double qty, String serials,String customer_name,String date) {
             this.transaction_no = transaction_no;
             this.type = type;
             this.item_code = item_code;
@@ -66,6 +67,15 @@ public class Srpt_rma_serials {
             this.qty = qty;
             this.serials = serials;
             this.customer_name=customer_name;
+            this.date=date;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
         }
 
         public String getCustomer_name() {
@@ -137,7 +147,7 @@ public class Srpt_rma_serials {
             double qty = 100;
             String serials = "11232398829323,23230121213223,2323230";
             String customer_name="";
-            Srpt_rma_serials.field field = new field("000001", "Sales", item_code, description, qty, serials,customer_name);
+            Srpt_rma_serials.field field = new field("000001", "Sales", item_code, description, qty, serials,customer_name,"");
             fields.add(field);
 
         }

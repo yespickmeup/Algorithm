@@ -1009,9 +1009,9 @@ public class Dlg_rma extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.0.51");
-//        System.setProperty("pool_password", "password");
+        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_host", "192.168.0.51");
+        System.setProperty("pool_password", "password");
         init_key();
         init_tbl_receipts(tbl_receipts);
 
@@ -1511,6 +1511,8 @@ public class Dlg_rma extends javax.swing.JDialog {
                         Field.Search tf = (Field.Search) tf_search;
                         where = " where si.id<>0 and si.item_code='" + tf.getId() + "' ";
                         where_receipt = " where id<>0 and main_barcode='" + tf.getId() + "' ";
+                    } else {
+                        where = where + " and si.description like '%" + tf_search.getText() + "%' ";
                     }
                     if (!jCheckBox6.isSelected()) {
                         String date_from = DateType.sf.format(jDateChooser3.getDate());
@@ -1519,13 +1521,13 @@ public class Dlg_rma extends javax.swing.JDialog {
                         where_receipt = where_receipt + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
 
                     }
-                    where = where + " and si.serial_no !='' ";
+
                     where_receipt = where_receipt + " and serial_no !='' ";
                 } else {
                     where = where + " and si.serial_no like '%" + tf_search.getText() + "%' ";
                     where_receipt = where_receipt + " and serial_no like '%" + tf_search.getText() + "%' ";
                 }
-
+//                System.out.println(where);
                 List<MySales_Items.items> items = new ArrayList();
                 if (jCheckBox7.isSelected()) {
                     items = MySales_Items.ret_data3(where);
@@ -1548,7 +1550,8 @@ public class Dlg_rma extends javax.swing.JDialog {
                     String serials = item.serial_no;
                     serials = serials.replaceAll("\n", ", ");
                     String customer_name = item.discount_customer_name;
-                    Srpt_rma_serials.field field = new Srpt_rma_serials.field(trans, type, item_code, description, qty, serials, customer_name);
+                    String date = DateType.convert_slash_datetime(item.date_added);
+                    Srpt_rma_serials.field field = new Srpt_rma_serials.field(trans, type, item_code, description, qty, serials, customer_name, date);
                     fields.add(field);
                 }
 
@@ -1560,8 +1563,9 @@ public class Dlg_rma extends javax.swing.JDialog {
                     double qty = item.qty;
                     String serials = item.serial_no;
                     serials = serials.replaceAll("\n", ", ");
-                    String customer_name = item.supplier + " - "+item.remarks;
-                    Srpt_rma_serials.field field = new Srpt_rma_serials.field(trans, type, item_code, description, qty, serials, customer_name);
+                    String customer_name = item.supplier + " - " + item.remarks;
+                    String date = DateType.convert_slash_datetime(item.date_added);
+                    Srpt_rma_serials.field field = new Srpt_rma_serials.field(trans, type, item_code, description, qty, serials, customer_name, date);
                     fields.add(field);
                 }
                 String business_name = System.getProperty("business_name", "Algorithm Computer Services");

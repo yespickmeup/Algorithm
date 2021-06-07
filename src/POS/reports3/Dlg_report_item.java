@@ -291,6 +291,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox15 = new javax.swing.JCheckBox();
         jCheckBox16 = new javax.swing.JCheckBox();
         jCheckBox17 = new javax.swing.JCheckBox();
+        jCheckBox18 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -600,6 +601,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox17.setSelected(true);
         jCheckBox17.setText("Include Hidden Items");
 
+        jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox18.setText("Sort by Item Code");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -655,7 +659,11 @@ public class Dlg_report_item extends javax.swing.JDialog {
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox6)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jCheckBox6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBox18)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -724,7 +732,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
                                 .addComponent(jCheckBox9)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox6)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jCheckBox6)
+                                .addComponent(jCheckBox18))
                             .addComponent(jCheckBox16))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -1311,6 +1321,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox15;
     private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox17;
+    private javax.swing.JCheckBox jCheckBox18;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -1378,7 +1389,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
 //        System.setProperty("pool_db", "db_smis_dumaguete_angel_buns");
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_host", "192.168.0.51");
+//        System.setProperty("pool_password", "password");
         init_key();
 
         set_default_branch();
@@ -2152,9 +2164,22 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     where = where + " and location_id='" + lo.getId() + "' ";
                 }
                 if (!jCheckBox8.isSelected() && jCheckBox9.isSelected()) {
-                    where = where + " and branch_code='" + br.getId() + "' ";
-                }
 
+//                     where = where + " and branch_code='" + br.getId() + "' ";
+                    if (lo.getId().equalsIgnoreCase("32")) {
+                        where = where + " and branch_code='" + br.getId() + "' ";
+                    } else {
+                        String db = System.getProperty("pool_db", "db_algorithm");
+                        if (db.equalsIgnoreCase("db_algorithm")) {
+                            where = where + " and branch_code='" + br.getId() + "' and location_id<>32 ";
+                        } else {
+                            where = where + " and branch_code='" + br.getId() + "' ";
+                        }
+
+                    }
+
+                }
+//                System.out.println(where);
                 if (!tf_category.getText().equalsIgnoreCase("All")) {
                     where = where + " and category_id='" + tf_category_code.getText() + "'";
                 }
@@ -2223,10 +2248,18 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     String where3 = " or " + where.replaceAll("where", " ") + " and  barcode like '" + jTextField1.getText() + "'  ";
 //                    System.out.println("where3: " + where3);
                     String where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,description asc";
-//                    System.out.println("where4: " + where4);
+
+                    if (jCheckBox18.isSelected()) {
+                        where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,main_barcode asc";
+
+                    }
                     where = where2 + where3 + where4;
                 } else {
-                    where = where + " order by branch,location,description asc ";
+                    if (jCheckBox18.isSelected()) {
+                        where = where + " order by branch,locatoin,main_barcode asc ";
+                    } else {
+                        where = where + " order by branch,location,description asc ";
+                    }
                 }
 
 //                all_where = where;
