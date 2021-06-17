@@ -2264,11 +2264,13 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-//        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_password", "password");
+        System.setProperty("pool_db", "db_algorithm");
+        System.setProperty("pool_password", "password");
 //        System.setProperty("module_accounts_payable","1");
 //        System.setProperty("delete_receipts_finalized", "true");
-//        System.setProperty("pool_host", "192.168.1.51");
+        System.setProperty("pool_host", "192.168.0.51");
+        MyUser.setUser_id("1");
+        
         tf_search.grabFocus();
         set_default_branch();
         focus();
@@ -4359,6 +4361,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
         final to_receipts to = (to_receipts) tbl_receipts_ALM.get(tbl_receipts.convertRowIndexToModel(row));
         List<to_receipt_items> datas = tbl_receipt_items_ALM;
         List<S1_receipt_items.to_receipt_items> acc = new ArrayList();
+       
         for (to_receipt_items to3 : datas) {
             String barcode = to3.barcode;
             String description = to3.description;
@@ -4403,7 +4406,7 @@ public class Dlg_receipts extends javax.swing.JDialog {
 //                    Alert.set(0, "AP No. already added!");
 //                    return;
 //                }
-
+//         System.out.println("acc: "+acc.size());
         Receipts.finalize(to, acc, branch, branch_id, data.is_invoice, data.is_payable, data.ap_date);
         data_cols();
         new_post();

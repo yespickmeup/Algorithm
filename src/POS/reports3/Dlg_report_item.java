@@ -36,7 +36,6 @@ import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import static java.awt.SystemColor.text;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.Clipboard;
@@ -208,6 +207,12 @@ public class Dlg_report_item extends javax.swing.JDialog {
         }
 
         Dlg_report_item dialog = Dlg_report_item.create(new javax.swing.JFrame(), true);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().
+                getWidth());
+        int ySize = ((int) tk.getScreenSize().
+                getHeight());
+        dialog.setSize(xSize, ySize);
         dialog.setVisible(true);
 
     }
@@ -2161,7 +2166,12 @@ public class Dlg_report_item extends javax.swing.JDialog {
 
                 String where = " where status='" + "1" + "' ";
                 if (!jCheckBox8.isSelected() && !jCheckBox9.isSelected()) {
-                    where = where + " and location_id='" + lo.getId() + "' ";
+
+                    if (lo.getId().equalsIgnoreCase("32")) {
+                        where = where + " and location_id='" + lo.getId() + "' ";
+                    } else {
+                        where = where + " and location_id='" + lo.getId() + "' and length(main_barcode) < 7 ";
+                    }
                 }
                 if (!jCheckBox8.isSelected() && jCheckBox9.isSelected()) {
 
@@ -2983,9 +2993,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-
         nd.setCallback(new Dlg_confirm_action.Callback() {
-
             @Override
             public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();

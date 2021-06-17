@@ -10,7 +10,6 @@ import POS.accounts_receivable.Dlg_ar_items;
 import POS.accounts_receivable.Dlg_ar_payments;
 import POS.adjuster.Dlg_adjuster_inventory;
 import POS.adjuster.Dlg_other_adjustments;
-import POS.adjustments.Dlg_adjust_receipt_endorsements;
 import POS.backup.Dlg_backup;
 import POS.banks.Dlg_banks;
 import POS.barcodes.Dlg_barcodes;
@@ -48,6 +47,7 @@ import POS.inventory_reports.Dlg_reorder_level;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.item_replacements.Dlg_item_replacements;
 import static POS.main.MyMain.getSerialNumber;
+import POS.migrate.Migrate_asus_prices;
 import POS.my_services.Dlg_my_service_type;
 import POS.my_services.Dlg_my_services;
 import POS.my_services.Dlg_my_services_crews;
@@ -93,6 +93,7 @@ import POS.util.Alert;
 import POS.util.DateType;
 import POS.util.DateUtils1;
 import POS.util.DeEncrypter;
+import POS.util.Dlg_confirm_action;
 import POS.util.Dlg_get_hdd_serial;
 import POS.util.Focus_Fire;
 import POS.util.MyFrame;
@@ -3189,16 +3190,33 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
 //            }
 //        });
 //        t.start();
+//        Window p = (Window) this;
+//        Dlg_adjust_receipt_endorsements nd = Dlg_adjust_receipt_endorsements.create(p, true);
+//        nd.setTitle("");
+////        nd.do_pass(services);
+//        nd.setCallback(new Dlg_adjust_receipt_endorsements.Callback() {
+//
+//            @Override
+//            public void ok(CloseDialog closeDialog, Dlg_adjust_receipt_endorsements.OutputData data) {
+//                closeDialog.ok();
+//
+//            }
+//        });
+//        nd.setLocationRelativeTo(this);
+//        nd.setVisible(true);
+        jButton1.setEnabled(false);
+        jButton1.setText("Script is running....");
         Window p = (Window) this;
-        Dlg_adjust_receipt_endorsements nd = Dlg_adjust_receipt_endorsements.create(p, true);
+        Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
-//        nd.do_pass(services);
-        nd.setCallback(new Dlg_adjust_receipt_endorsements.Callback() {
-
+        nd.do_pass("");
+        nd.setCallback(new Dlg_confirm_action.Callback() {
             @Override
-            public void ok(CloseDialog closeDialog, Dlg_adjust_receipt_endorsements.OutputData data) {
+            public void ok(CloseDialog closeDialog, Dlg_confirm_action.OutputData data) {
                 closeDialog.ok();
-
+                Migrate_asus_prices.update_asus();
+                jButton1.setEnabled(true);
+                jButton1.setText("Finished....");
             }
         });
         nd.setLocationRelativeTo(this);

@@ -1098,7 +1098,7 @@ public class Receipts {
 
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.addBatch(s0);
-
+//            System.out.println("s0: "+s0);
             String s2 = "update receipt_items set "
                     + " status= :status"
                     + " ,batch_no= :batch_no"
@@ -1110,7 +1110,10 @@ public class Receipts {
                     .ok();
 
             stmt.addBatch(s2);
+//            System.out.println("s2: "+s2);
+
             for (S1_receipt_items.to_receipt_items to_receipt_items : to_receipt_items1) {
+
                 if (to_receipt_items.status == 0) {
 //                    Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to(to_receipt_items.main_barcode, to_receipt_items.barcode, to_receipt_items.location_id);
                     String s10 = "select "
@@ -1142,9 +1145,10 @@ public class Receipts {
                             + ",serial_no='" + new_serial + "' "
                             + " where  main_barcode= '" + to_receipt_items.main_barcode + "' and location_id='" + to_receipt_items.branch_id + "' "
                             + "";
+//                    System.out.println("s4: "+s4);
                     PreparedStatement stmt4 = conn.prepareStatement(s4);
                     stmt4.execute();
-                    
+
                     String s5 = "update inventory set "
                             + " cost= :cost"
                             + " where "
@@ -1157,8 +1161,9 @@ public class Receipts {
                     stmt.addBatch(s5);
 
                 }
-            }
 
+            }
+           
             if (is_payable == 1) {
                 String customer_id = to_receipts.supllier_id;
                 String customer_name = to_receipts.supplier;
@@ -1312,7 +1317,7 @@ public class Receipts {
                 stmt.addBatch(s6);
 
             }
-
+            
             stmt.executeBatch();
 
             conn.commit();
