@@ -769,9 +769,9 @@ public class Dlg_inventory_asus extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("pool_password", "password");
-        MyUser.setUser_id("1");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_password", "password");
+//        MyUser.setUser_id("1");
 
         locations = Inventory_location_privileges.ret_data(" where user_id='" + MyUser.getUser_id() + "'");
 

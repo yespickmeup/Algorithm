@@ -791,7 +791,6 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
         buttonGroup2.add(jCheckBox5);
         jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox5.setSelected(true);
         jCheckBox5.setText("All");
         jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -810,6 +809,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
 
         buttonGroup2.add(jCheckBox7);
         jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setSelected(true);
         jCheckBox7.setText("Unpaid");
         jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1435,11 +1435,11 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-      if(jToggleButton1.isSelected()){
-          jPanel7.setVisible(false);
-      }else{
-          jPanel7.setVisible(true);
-      }
+        if (jToggleButton1.isSelected()) {
+            jPanel7.setVisible(false);
+        } else {
+            jPanel7.setVisible(true);
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
     /**
      * @param args the command line arguments
@@ -1561,7 +1561,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         jButton10.setEnabled(false);
         init_focus();
         init_tbl_accounts_receivable_payments();
-        
+
         jLabel25.setVisible(false);
         tf_trust_receipt.setVisible(false);
 //        jButton1.setVisible(false);
@@ -1870,7 +1870,27 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
             where = where + " and (amount-paid)>0 ";
         }
         where = where + "  order by  id desc";
-        loadData_accounts_receivable(S1_accounts_receivable.ret_data5(where));
+//       
+        List<to_accounts_receivable> datas = S1_accounts_receivable.ret_data5(where);
+
+        List<to_accounts_receivable> new_data = new ArrayList();
+        if (jCheckBox7.isSelected()) {
+            for (to_accounts_receivable to : datas) {
+
+                double am = FitIn.toDouble(FitIn.fmt_wc_0(to.amount));
+                double pa = FitIn.toDouble(FitIn.fmt_wc_0(to.paid));
+                double new_bal = am - pa;
+                if (new_bal > 0) {
+                    new_data.add(to);
+                } else {
+
+                }
+            }
+            loadData_accounts_receivable(new_data);
+        } else {
+            loadData_accounts_receivable(datas);
+        }
+
         compute_ar_balance();
     }
 
@@ -2173,7 +2193,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
         tbl_accounts_receivable_payments.setModel(tbl_accounts_receivable_payments_M);
         tbl_accounts_receivable_payments.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_accounts_receivable_payments.setRowHeight(25);
-        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 60, 60, 60, 80, 0, 80,80, 80, 60, 30, 0, 0, 0, 0, 0};
+        int[] tbl_widths_accounts_receivable_payments = {70, 100, 70, 70, 60, 60, 60, 80, 0, 80, 80, 80, 60, 30, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_accounts_receivable_payments.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -2250,7 +2270,7 @@ public class Dlg_ar_encoding extends javax.swing.JDialog {
                 case 6:
                     return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
                 case 7:
-                    return FitIn.fmt_wc_0(tt.gift_certificate_amount+tt.online_amount) + " ";
+                    return FitIn.fmt_wc_0(tt.gift_certificate_amount + tt.online_amount) + " ";
                 case 8:
                     return FitIn.fmt_wc_0(tt.online_amount) + " ";
                 case 9:

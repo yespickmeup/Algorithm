@@ -1685,7 +1685,6 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 Field.Combo br = (Field.Combo) jTextField2;
                 Field.Combo lo = (Field.Combo) jTextField1;
 
@@ -1747,6 +1746,9 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
 
                 }
 
+                if(jCheckBox15.isSelected()){
+                     time = tf_cashier5.getText();
+                }
                 String where_drawer = " where id<>0 ";
                 String where_sales = " where id<>0 ";
                 String where_sales_status = " where id<>0 and status=1 ";
@@ -1903,6 +1905,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                 }
                 double prepaid_sales = 0;
                 double online_sales = 0;
+                
                 for (MySales.sales sale : my_sale) {
 
                     cash_sales += sale.gross_amount;
@@ -2137,7 +2140,7 @@ public class Dlg_report_sales_summary extends javax.swing.JDialog {
                                                                           count_coins_point_ten, count_coins_point_zero_five, cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR,
                                                                           my_details, check_cash_sales, check_collections, check_prepayments, cc_cash_sales, cc_collections, cc_prepayments,
                                                                           total_check_payments, total_cc_payments, date, business_name, address,
-                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange, refund, refund_cheque, time);
+                                                                          disburs, cashier, branch, location, status, status_amount, return_exchange, refund, refund_cheque, time,online_sales);
                 String jrxml = "rpt_end_of_day_summary.jrxml";
 
                 if (pool_db.contains("db_smis_dumaguete_refreshments")) {

@@ -2264,12 +2264,12 @@ public class Dlg_receipts extends javax.swing.JDialog {
 
     private void myInit() {
 
-        System.setProperty("pool_db", "db_algorithm");
-        System.setProperty("pool_password", "password");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_password", "password");
 //        System.setProperty("module_accounts_payable","1");
 //        System.setProperty("delete_receipts_finalized", "true");
-        System.setProperty("pool_host", "192.168.0.51");
-        MyUser.setUser_id("1");
+//        System.setProperty("pool_host", "192.168.0.51");
+//        MyUser.setUser_id("1");
         
         tf_search.grabFocus();
         set_default_branch();

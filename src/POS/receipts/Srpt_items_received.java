@@ -295,7 +295,7 @@ public class Srpt_items_received {
                     + ",session_no"
                     + ",date_added"
                     + ",supplier"
-                    + ",supplier_id"
+                    + ",supllier_id"
                     + ",remarks"
                     + ",barcode"
                     + ",description"

@@ -1964,12 +1964,12 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                 return;
             }
 
-            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange - (Finalize)' ";
-            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
-            if (datas.isEmpty()) {
-                Alert.set(0, "Previlege not added!");
-                return;
-            }
+//            String where = " where user_id='" + MyUser.getUser_id() + "' and previledge like 'Return/Exchange - (Finalize)' ";
+//            List<S1_user_previleges.to_user_previleges> datas = S1_user_previleges.ret_data(where);
+//            if (datas.isEmpty()) {
+//                Alert.set(0, "Previlege not added!");
+//                return;
+//            }
             ret_item_replacement_details_for_replacement();
             ret_item_replacement_details_replacement();
 

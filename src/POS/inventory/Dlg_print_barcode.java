@@ -1050,8 +1050,10 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//         System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_host", "192.168.0.51");
 //        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_password", "password");
+
         jTextField2.setVisible(false);
         init_key();
         set_default_branch();
@@ -1157,7 +1159,7 @@ public class Dlg_print_barcode extends javax.swing.JDialog {
                 if (!jCheckBox4.isSelected()) {
                     classification = tf_classification.getText();
                 }
-                
+
                 String sub_classification = "All";
                 if (!jCheckBox5.isSelected()) {
                     sub_classification = tf_sub_classification.getText();

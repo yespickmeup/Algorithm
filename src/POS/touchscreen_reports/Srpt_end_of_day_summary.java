@@ -83,6 +83,7 @@ public class Srpt_end_of_day_summary {
     public final double refund;
     public final double refund_cheque;
     public final String time;
+    public final double online;
     public Srpt_end_of_day_summary(double cashin_beg, double cash_sales, double collections
             , double prepayments, double receipts_total, double receipts_line_discount
             , double receipts_sale_discount, double receipts_sub_total, double receipt_net_total
@@ -102,7 +103,8 @@ public class Srpt_end_of_day_summary {
             ,double total_check_payments,double total_cc_payments
             ,String date,String business_name,String address
             ,double disbursement,String cashier,String branch,String location
-            ,String status,double status_amount,double return_exchange,double refund,double refund_cheque,String time
+            ,String status,double status_amount,double return_exchange,double refund,double refund_cheque
+            ,String time,double online
     ) {
         this.cashin_beg = cashin_beg;
         this.cash_sales = cash_sales;
@@ -165,6 +167,7 @@ public class Srpt_end_of_day_summary {
         this.refund=refund;
         this.refund_cheque=refund_cheque;
         this.time=time;
+        this.online=online;
     }
 
     public static void main(String[] args) {
@@ -239,6 +242,7 @@ public class Srpt_end_of_day_summary {
         double refund=0;
         double refund_cheque=0;
         String time="";
+        double online=0;
         Srpt_end_of_day_summary rpt = new Srpt_end_of_day_summary(cashin_beg, cash_sales, collections
                 , prepayments, receipts_total, receipts_line_discount, receipts_sale_discount
                 , receipts_sub_total, receipt_net_total, bills_thousand, bills_five_hundred
@@ -250,7 +254,8 @@ public class Srpt_end_of_day_summary {
                 , count_coins_point_twenty_five, count_coins_point_ten, count_coins_point_zero_five
                 , cc_total, cc_last_remittance, cc_cashin_end, SUBREPORT_DIR, fields
                 ,check_cash_sales,check_collections,check_prepayments,cc_cash_sales,cc_collections,cc_prepayments
-                ,total_check_payments,total_cc_payments,"","","",disbursement,cashier,branch,location,"",0,return_exchange,refund,refund_cheque,time);
+                ,total_check_payments,total_cc_payments,"","","",disbursement,cashier,branch,location,"",0
+                ,return_exchange,refund,refund_cheque,time,online);
         
         
         

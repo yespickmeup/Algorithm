@@ -678,7 +678,7 @@ public class Dlg_inventory_brand_settings extends javax.swing.JDialog {
 
     private void myInit() {
 
-        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_db", "db_algorithm");
         init_tbl_inventory_category_user_privileges(tbl_inventory_category_user_privileges);
 
         init_key();

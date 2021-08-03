@@ -972,9 +972,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void myInit() {
-//        System.setProperty("pool_host", "localhost");
+//        System.setProperty("pool_password", "password");
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_host", "192.168.0.51");
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
         init_key();
         set_default_branch();
@@ -1158,7 +1158,9 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     }
 
                 }
-
+                if (jCheckBox15.isSelected()) {
+                    time = tf_cashier5.getText();
+                }
                 int status = 0;
                 String where_sales2 = " where id<>0 "
                         + "  and status='" + "0" + "' ";
@@ -1272,14 +1274,14 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double over = 0;
                 List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales3);
                 for (Item_replacements.to_item_replacements rep : replacements) {
-                    double amount =(rep.replacement_amount - rep.amount_due) - rep.discount;
+                    double amount = (rep.replacement_amount - rep.amount_due) - rep.discount;
                     double due = rep.amount_due;
                     double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
                     if (amount < rep.amount_due) {
-                        na_short += amount ;
+                        na_short += amount;
                     }
                     if (amount > rep.amount_due) {
-                        over += amount ;
+                        over += amount;
                     }
                     return_exchange += total;
                     re_check += rep.check_amount;
@@ -1307,18 +1309,21 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                 double refund = 0;
                 double refund_cheque = 0;
                 double collections_prepaid_credit_card = 0;
+                double prepaid_online = 0;
                 for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
                     if (prepayment.status == 1) {
                         if (prepayment.refund == 1) {
-                           
+
                             if (prepayment.check_amount > 0) {
                                 refund_cheque += prepayment.check_amount;
                             } else if (prepayment.credit_card_amount > 0) {
                                 collections_prepaid_credit_card += prepayment.credit_card_amount;
+                            } else if (prepayment.online_amount > 0) {
+                                prepaid_online += prepayment.online_amount;
                             } else {
                                 refund += prepayment.cash;
                             }
-                            
+
 //                            System.out.println("refund: "+refund);
                         } else {
 
@@ -1343,12 +1348,12 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                         }
                     }
                 }
-                 
+
                 double refund_prepaid = 0;
                 double refund_charge = 0;
                 for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
                     if (rfc.status == 1) {
-                        refund -= (rfc.cash);
+                        refund -= (rfc.qty * rfc.selling_price);
                         refund_prepaid -= rfc.prepaid_amount;
                         refund_charge -= rfc.charge_amount;
                     }
@@ -1386,7 +1391,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                     Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
                                                                   collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
                                                                   refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
-                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction, refund_prepaid, refund_charge, collections_prepaid_credit_card);
+                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction, refund_prepaid, refund_charge, collections_prepaid_credit_card, prepaid_online);
                     rpt.fields.addAll(fields);
                     String jrxml = "rpt_sales_ledger.jrxml";
                     String pool_db = System.getProperty("pool_db", "db_smis");
@@ -1444,7 +1449,8 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
                 }
             }
-        });
+        }
+        );
         t.start();
 
     }
