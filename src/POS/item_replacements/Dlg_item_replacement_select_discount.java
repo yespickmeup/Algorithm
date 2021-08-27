@@ -1638,7 +1638,7 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
 
         int index = tp_payments.getSelectedIndex();
         if (index == 0) { //cash
-            cash_amount = replacement_amount + discount;
+            cash_amount = replacement_amount - discount;
 
             check_amount = 0;
             credit_card_amount = 0;
@@ -1657,14 +1657,14 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
         }
 
         if (index == 1) { //check
-            double amount = check_amount + discount;
+            double amount = check_amount - discount;
             if (amount < replacement_amount) {
                 Alert.set(0, "Enter Amount!");
                 tf_check_amount.grabFocus();
                 return;
             }
             cash_amount = 0;
-            check_amount = replacement_amount + discount;
+            check_amount = replacement_amount - discount;
             credit_card_amount = 0;
             prepaid_amount = 0;
             charge_amount = 0;
@@ -1673,7 +1673,7 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
         }
 
         if (index == 2) { //credit card
-            double amount = credit_card_amount + discount;
+            double amount = credit_card_amount - discount;
             if (amount < replacement_amount) {
                 Alert.set(0, "Enter Amount!");
                 tf_credit_card_amount.grabFocus();
@@ -1681,7 +1681,7 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
             }
             cash_amount = 0;
             check_amount = 0;
-            credit_card_amount = replacement_amount + discount;
+            credit_card_amount = replacement_amount - discount;
             prepaid_amount = 0;
             charge_amount = 0;
             gc_amount = 0;
@@ -1689,7 +1689,7 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
         }
 
         if (index == 3) { //prepaid
-            double amount = prepaid_amount + discount;
+            double amount = prepaid_amount - discount;
             if (amount < replacement_amount) {
                 Alert.set(0, "Enter Amount!");
                 tf_amount1.grabFocus();
@@ -1698,14 +1698,14 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
             cash_amount = 0;
             check_amount = 0;
             credit_card_amount = 0;
-            prepaid_amount = replacement_amount + discount;
+            prepaid_amount = replacement_amount - discount;
             charge_amount = 0;
             gc_amount = 0;
             online_amount = 0;
         }
 
         if (index == 4) { //charge
-            double amount = charge_amount + discount;
+            double amount = charge_amount +- discount;
             if (amount < replacement_amount) {
                 Alert.set(0, "Enter Amount!");
                 tf_amount2.grabFocus();
@@ -1722,14 +1722,14 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
             check_amount = 0;
             credit_card_amount = 0;
             prepaid_amount = 0;
-            charge_amount = replacement_amount + discount;
+            charge_amount = replacement_amount - discount;
             gc_amount = 0;
             online_amount = 0;
 
         }
 
         if (index == 5) { //gc
-            double amount = gc_amount + discount;
+            double amount = gc_amount - discount;
             if (amount < replacement_amount) {
                 Alert.set(0, "Enter Amount!");
                 tf_amount2.grabFocus();
@@ -1740,12 +1740,12 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
             credit_card_amount = 0;
             prepaid_amount = 0;
             charge_amount = 0;
-            gc_amount = replacement_amount + discount;
+            gc_amount = replacement_amount - discount;
             online_amount = 0;
         }
 
         if (index == 6) { //online
-            double amount = online_amount + discount;
+            double amount = online_amount - discount;
             if (amount < replacement_amount) {
                 Alert.set(0, "Enter Amount!");
                 tf_amount4.grabFocus();
@@ -1757,7 +1757,7 @@ public class Dlg_item_replacement_select_discount extends javax.swing.JDialog {
             prepaid_amount = 0;
             charge_amount = 0;
             gc_amount = 0;
-            online_amount = replacement_amount + discount;
+            online_amount = replacement_amount - discount;
         }
 
         if (callback != null) {

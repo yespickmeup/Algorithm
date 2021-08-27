@@ -1520,7 +1520,7 @@ public class Dlg_return_from_customer extends javax.swing.JDialog {
                 case 2:
                     return " " + tt.description;
                 case 3:
-                    return FitIn.fmt_wc_0(tt.selling_price) + " ";
+                    return FitIn.fmt_wc_0(tt.selling_price + tt.cash) + " ";
                 case 4:
                     if (tt.status == 0) {
                         return "/POS/icon_inventory/question.png";

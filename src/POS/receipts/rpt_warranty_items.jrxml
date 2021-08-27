@@ -175,7 +175,7 @@
 				<text><![CDATA[Qty]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ed277e95-7914-4b93-8f5b-f08fcebd6d80" x="34" y="0" width="88" height="20"/>
+				<reportElement uuid="ed277e95-7914-4b93-8f5b-f08fcebd6d80" x="34" y="0" width="109" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -188,7 +188,7 @@
 				<text><![CDATA[Item Code]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="084edb78-d079-4f2a-a3ee-088878c900af" x="122" y="0" width="239" height="20"/>
+				<reportElement uuid="084edb78-d079-4f2a-a3ee-088878c900af" x="143" y="0" width="218" height="20"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -270,7 +270,7 @@
 				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="67718d38-0475-460a-bd31-40ff9bd4d542" x="34" y="0" width="88" height="15"/>
+				<reportElement uuid="67718d38-0475-460a-bd31-40ff9bd4d542" x="34" y="0" width="109" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -278,13 +278,13 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{item_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="838777f7-62ba-47af-9640-da2cea9fcbb8" x="122" y="0" width="239" height="15"/>
+				<reportElement uuid="838777f7-62ba-47af-9640-da2cea9fcbb8" x="143" y="0" width="218" height="15"/>
 				<box>
 					<topPen lineWidth="0.2"/>
 					<leftPen lineWidth="0.2"/>
@@ -292,7 +292,7 @@
 					<rightPen lineWidth="0.2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="8"/>
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>

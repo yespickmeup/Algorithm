@@ -1337,12 +1337,15 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
                                 }
                             } else if (prepayment.credit_card_amount > 0) {
                                 collections_prepaid_credit_card += prepayment.credit_card_amount;
+                            } else if (prepayment.online_amount > 0) {
+                                prepaid_online += prepayment.online_amount;
                             } else {
 
                                 if (prepayment.remarks.contains("Prepaid Payment")) {
 //                                    collections_prepaid += (prepayment.cash * -1);
                                 } else {
                                     collections_prepaid += prepayment.cash;
+
                                 }
                             }
                         }

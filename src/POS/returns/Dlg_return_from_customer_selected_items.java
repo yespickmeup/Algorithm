@@ -1257,7 +1257,7 @@ public class Dlg_return_from_customer_selected_items extends javax.swing.JDialog
 
         double total_amount = 0;
         for (MySales_Items.items item : selected_items) {
-            total_amount += (item.selling_price * FitIn.toDouble(item.user_screen_name));
+            total_amount += ((item.selling_price * FitIn.toDouble(item.user_screen_name)) + item.addtl_amount);
         }
         count_due();
         tf_cash.grabFocus();
@@ -1285,7 +1285,7 @@ public class Dlg_return_from_customer_selected_items extends javax.swing.JDialog
         double total_amount = 0;
         List<MySales_Items.items> items = tbl_sale_items_ALM;
         for (MySales_Items.items item : items) {
-            total_amount += (item.selling_price * FitIn.toDouble(item.user_screen_name));
+            total_amount += ((item.selling_price * FitIn.toDouble(item.user_screen_name)) + item.addtl_amount);
         }
         jTextField8.setText(FitIn.fmt_wc_0(total_amount));
     }
@@ -1359,8 +1359,8 @@ public class Dlg_return_from_customer_selected_items extends javax.swing.JDialog
             String main_barcode = item.item_code;
             double qty = FitIn.toDouble(item.user_screen_name);
             double cost = item.cost;
-            double selling_price=item.selling_price;
-            Return_from_customer_items.to_return_from_customer_items rfci = new Return_from_customer_items.to_return_from_customer_items(id, return_from_customer_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days,selling_price);
+            double selling_price = item.selling_price;
+            Return_from_customer_items.to_return_from_customer_items rfci = new Return_from_customer_items.to_return_from_customer_items(id, return_from_customer_no, user_name, session_no, date_added, supplier, supplier_id, reference_no, remarks, barcode, description, category, category_id, classification, classification_id, sub_class, sub_class_id, brand, brand_id, model, model_id, conversion, unit, barcodes, batch_no, serial_no, main_barcode, qty, cost, status, branch, branch_id, location, location_id, cash, prepaid_customer_name, prepaid_customer_id, prepaid_amount, charge_reference_no, charge_ar_no, charge_type, charge_customer_name, charge_customer_id, charge_amount, charge_days, selling_price);
             sel_items.add(rfci);
         }
         if (callback != null) {
