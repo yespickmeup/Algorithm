@@ -85,8 +85,8 @@ public class Inventory_barcodes {
         public final int allow_negative_inventory;
         public final int auto_order;
         public final int show_to_sales;
-
-        public to_inventory_barcodes(int id, String barcode, String description, String generic_name, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost, String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String main_barcode, String brand, String brand_id, String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, String serial_no, String selected_serials, double discount, double discount_amount, String discount_name, String discount_customer_name, String discount_customer_id, double addtl_amount, double wtax, int allow_negative_inventory, int auto_order, int show_to_sales) {
+        public final int is_slip;
+        public to_inventory_barcodes(int id, String barcode, String description, String generic_name, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost, String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String main_barcode, String brand, String brand_id, String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, String serial_no, String selected_serials, double discount, double discount_amount, String discount_name, String discount_customer_name, String discount_customer_id, double addtl_amount, double wtax, int allow_negative_inventory, int auto_order, int show_to_sales,int is_slip) {
             this.id = id;
             this.barcode = barcode;
             this.description = description;
@@ -135,6 +135,7 @@ public class Inventory_barcodes {
             this.allow_negative_inventory = allow_negative_inventory;
             this.auto_order = auto_order;
             this.show_to_sales = show_to_sales;
+            this.is_slip=is_slip;
         }
 
         public String getSerial_no() {
@@ -736,7 +737,7 @@ public class Inventory_barcodes {
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
                 int show_to_sales = rs.getInt(40);
-                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;
@@ -843,7 +844,7 @@ public class Inventory_barcodes {
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
-                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;
@@ -956,7 +957,7 @@ public class Inventory_barcodes {
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
-                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;
@@ -1066,7 +1067,7 @@ public class Inventory_barcodes {
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id,
-                                                                     selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                                                     selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;
@@ -1174,7 +1175,7 @@ public class Inventory_barcodes {
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
-                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;
@@ -1280,7 +1281,7 @@ public class Inventory_barcodes {
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
-                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                                                     branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;
@@ -1385,7 +1386,7 @@ public class Inventory_barcodes {
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
                 int show_to_sales = rs.getInt(40);
-                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
 
             }
             return to1;
@@ -1490,7 +1491,7 @@ public class Inventory_barcodes {
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
                 int show_to_sales = rs.getInt(40);
-                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                to1 = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
 
             }
             return to1;
@@ -1606,7 +1607,7 @@ public class Inventory_barcodes {
                 to = new to_inventory_barcodes(id2, barcode2, description2, generic_name2, category2, category_id2, classification2, classification_id2,
                                                sub_classification2, sub_classification_id2, product_qty2, unit2, conversion2, selling_price2, date_added2, user_name2, item_type2,
                                                status2, supplier2, fixed_price2, cost2, supplier_id2, multi_level_pricing2, vatable2, reorder_level2, markup2, main_barcode2,
-                                               brand2, brand_id2, model2, model_id2, selling_type2, branch2, branch_code2, location2, location_id2, serial_no2, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                               brand2, brand_id2, model2, model_id2, selling_type2, branch2, branch_code2, location2, location_id2, serial_no2, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 String year = "" + DateType.y.format(new Date());
                 List<Srpt_item_ledger.field> field3 = new ArrayList();
                 List<Srpt_item_ledger.field> fields = new ArrayList();
@@ -2645,7 +2646,7 @@ public class Inventory_barcodes {
                 int allow_negative_inventory = rs22.getInt(38);
                 int auto_order = rs22.getInt(39);
                 int show_to_sales = rs22.getInt(40);
-                to_inventory_barcodes to = new to_inventory_barcodes(id2, barcode2, description2, generic_name2, category2, category_id2, classification2, classification_id2, sub_classification2, sub_classification_id2, product_qty2, unit2, conversion2, selling_price2, date_added2, user_name2, item_type2, status2, supplier2, fixed_price2, cost2, supplier_id2, multi_level_pricing2, vatable2, reorder_level2, markup2, main_barcode2, brand2, brand_id2, model2, model_id2, selling_type2, branch2, branch_code2, location2, location_id2, serial_no2, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                to_inventory_barcodes to = new to_inventory_barcodes(id2, barcode2, description2, generic_name2, category2, category_id2, classification2, classification_id2, sub_classification2, sub_classification_id2, product_qty2, unit2, conversion2, selling_price2, date_added2, user_name2, item_type2, status2, supplier2, fixed_price2, cost2, supplier_id2, multi_level_pricing2, vatable2, reorder_level2, markup2, main_barcode2, brand2, brand_id2, model2, model_id2, selling_type2, branch2, branch_code2, location2, location_id2, serial_no2, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
 
                 String year = "" + DateType.y.format(new Date());
                 List<Srpt_item_ledger.field> field3 = new ArrayList();
@@ -3822,7 +3823,7 @@ public class Inventory_barcodes {
                 to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id,
                                                                      sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier,
                                                                      fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id,
-                                                                     selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales);
+                                                                     selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales,0);
                 datas.add(to);
             }
             return datas;

@@ -5,28 +5,39 @@
  */
 package POS.touchscreen;
 
+import POS.my_services.My_services;
+import POS.my_services.My_services_departments;
+import POS.my_services.S1_my_services_item_replacements_customers;
 import POS.receipts.Warranties;
 import POS.receipts.Warranty_items;
 import POS.util.Alert;
 import POS.util.DateType;
+import POS.util.DateUtils1;
 import POS.util.Dlg_confirm_action;
+import POS.util.TableRenderer;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.util.ImageRenderer1;
 
 /**
  *
@@ -55,9 +66,9 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
 
     public static class OutputData {
 
-        public final List<Warranties.to_warranties> to;
+        public final List< My_services.to_my_services> to;
 
-        public OutputData(List<Warranties.to_warranties> to) {
+        public OutputData(List< My_services.to_my_services> to) {
             this.to = to;
         }
 
@@ -205,6 +216,9 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new Field.Search();
+        jLabel7 = new javax.swing.JLabel();
+        tf_department1 = new Field.Combo();
+        jCheckBox11 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_warranties2 = new javax.swing.JTable();
@@ -255,28 +269,64 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Department:");
+
+        tf_department1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_department1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_department1MouseClicked(evt);
+            }
+        });
+        tf_department1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_department1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox11.setSelected(true);
+        jCheckBox11.setText("All");
+        jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_department1)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_department1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -316,7 +366,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -394,7 +444,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -466,6 +516,18 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         disposed();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void tf_department1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_department1ActionPerformed
+        init_departments();
+    }//GEN-LAST:event_tf_department1ActionPerformed
+
+    private void tf_department1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_department1MouseClicked
+        init_departments();
+    }//GEN-LAST:event_tf_department1MouseClicked
+
+    private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
+      
+    }//GEN-LAST:event_jCheckBox11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -473,12 +535,14 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -490,6 +554,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
     private javax.swing.JTable tbl_warranties;
     private javax.swing.JTable tbl_warranties2;
     private javax.swing.JTable tbl_warranty_items;
+    private javax.swing.JTextField tf_department1;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
 //        System.setProperty("pool_db", "db_algorithm");
@@ -499,9 +564,18 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         init_tbl_warranties(tbl_warranties);
         init_tbl_warranties2(tbl_warranties2);
         init_tbl_warranty_items(tbl_warranty_items);
+        String where = " order by department asc ";
+        department_list = My_services_departments.ret_data(where);
+        if (!department_list.isEmpty()) {
+            My_services_departments.to_my_services_departments to = (My_services_departments.to_my_services_departments) department_list.get(0);
+            Field.Combo dep = (Field.Combo) tf_department1;
+            dep.setId("6");
+            dep.setText("TSG1");
+        }
+        jTextField1.grabFocus();
     }
 
-    public void do_pass(List<Warranties.to_warranties> slip_nos) {
+    public void do_pass(List< My_services.to_my_services> slip_nos) {
 
         loadData_warranties2(slip_nos);
         jLabel4.setText("" + slip_nos.size());
@@ -535,7 +609,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         tbl_warranties.setModel(tbl_warranties_M);
         tbl_warranties.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_warranties.setRowHeight(25);
-        int[] tbl_widths_warranties = {100, 80, 50, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_warranties = {100, 140, 80, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_warranties.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -548,9 +622,10 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         tbl_warranties.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_warranties.setRowHeight(25);
         tbl_warranties.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_warranties.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer1());
     }
 
-    public static void loadData_warranties(List<Warranties.to_warranties> acc) {
+    public static void loadData_warranties(List<My_services.to_my_services> acc) {
         tbl_warranties_ALM.clear();
         tbl_warranties_ALM.addAll(acc);
     }
@@ -558,7 +633,8 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
     public static class TblwarrantiesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Slip No", "Created", "Item/s", "", "Status", "", "", "created_at", "created_by", "branch", "branch_id", "location", "location_id"
+            "Transaction No", "Slip No", "Created", "", "", "Status", "", "created_at", "created_by", "branch", "branch_id", "location", "location_id"
+
         };
 
         public TblwarrantiesModel(ListModel listmodel) {
@@ -583,30 +659,47 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            Warranties.to_warranties tt = (Warranties.to_warranties) getRow(row);
+            My_services.to_my_services tt = (My_services.to_my_services) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + tt.slip_no;
+                    return " " + tt.transaction_no;
                 case 1:
-                    return " " + DateType.convert_slash_datetime2(tt.created_at);
+                    return " " + tt.service_slip_no;
                 case 2:
-                    return "      " + tt.created_by;
+                    return " " + DateType.convert_slash_datetime2(tt.date_assigned);
                 case 3:
-                    return "  Add";
-                case 4:
                     if (tt.status == 0) {
-                        return " Posted";
-                    } else {
-                        return " Finalized";
+                        try {
+                            Date d = DateType.sf.parse(tt.date_assigned);
+                            int days = DateUtils1.count_days(d, new Date());
+                            if (days > 10) {
+                                return "/POS/icons/check-mark (3).png";
+                            } else {
+                                return "/POS/icons/check-mark (2).png";
+                            }
+                        } catch (ParseException ex) {
+                            System.out.println(ex);
+                        }
                     }
+                    if (tt.status == 1) {
+                        return "/POS/icons/check-mark (1).png";
+                    }
+                    if (tt.status == 2) {
+                        return "/POS/icons/check-mark.png";
+                    }
+                    if (tt.status == 3) {
+                        return "/POS/icons/check-mark (4).png";
+                    }
+                case 4:
+                    return "  Add";
                 case 5:
                     return " Edit";
                 case 6:
                     return " Delete";
                 case 7:
-                    return tt.created_at;
+                    return tt.date_assigned;
                 case 8:
-                    return tt.created_by;
+                    return tt.date_assigned;
                 case 9:
                     return tt.branch;
                 case 10:
@@ -620,8 +713,16 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
     }
 
     private void ret_warranties() {
+        Field.Combo dep = (Field.Combo) tf_department1;
+
         String search = jTextField1.getText();
-        List<Warranties.to_warranties> datas = Warranties.ret_data_with_items(" where slip_no like '%" + search + "%' and status=0 ");
+        String where = " where service_slip_no like '%" + search + "%' and status<2  order by service_slip_no asc";
+
+        if (!jCheckBox11.isSelected()) {
+            where = " where service_slip_no like '%" + search + "%' and status<2 and department_id='" + dep.getId() + "' order by service_slip_no asc";
+
+        }
+        List<My_services.to_my_services> datas = My_services.ret_data(where);
         loadData_warranties(datas);
         jLabel2.setText("" + datas.size());
     }
@@ -631,13 +732,13 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        Warranties.to_warranties to = (Warranties.to_warranties) tbl_warranties_ALM.get(row);
+        My_services.to_my_services to = (My_services.to_my_services) tbl_warranties_ALM.get(row);
 
         int col = tbl_warranties.getSelectedColumn();
-        if (col == 3) {
-            List<Warranties.to_warranties> added = tbl_warranties_ALM2;
+        if (col == 4) {
+            List< My_services.to_my_services> added = tbl_warranties_ALM2;
             int exist = 0;
-            for (Warranties.to_warranties warranty : added) {
+            for (My_services.to_my_services warranty : added) {
                 if (warranty.transaction_no.equalsIgnoreCase(to.transaction_no)) {
                     exist = 1;
                     return;
@@ -663,7 +764,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         tbl_warranties2.setModel(tbl_warranties_M2);
         tbl_warranties2.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_warranties2.setRowHeight(25);
-        int[] tbl_widths_warranties = {100, 80, 50, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_warranties = {100, 140, 80, 40, 60, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_warranties.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -676,9 +777,10 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         tbl_warranties2.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_warranties2.setRowHeight(25);
         tbl_warranties2.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_warranties2.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer1());
     }
 
-    public static void loadData_warranties2(List<Warranties.to_warranties> acc) {
+    public static void loadData_warranties2(List< My_services.to_my_services> acc) {
         tbl_warranties_ALM2.clear();
         tbl_warranties_ALM2.addAll(acc);
     }
@@ -686,7 +788,8 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
     public static class TblwarrantiesModel2 extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Slip No", "Created", "Item/s", "", "Status", "", "", "created_at", "created_by", "branch", "branch_id", "location", "location_id"
+            "Transaction No", "Slip No", "Created", "", "", "Status", "", "created_at", "created_by", "branch", "branch_id", "location", "location_id"
+
         };
 
         public TblwarrantiesModel2(ListModel listmodel) {
@@ -711,30 +814,48 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            Warranties.to_warranties tt = (Warranties.to_warranties) getRow(row);
+            My_services.to_my_services tt = (My_services.to_my_services) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + tt.slip_no;
+                    return " " + tt.transaction_no;
                 case 1:
-                    return " " + DateType.convert_slash_datetime2(tt.created_at);
+                    return " " + tt.service_slip_no;
                 case 2:
-                    return "      " + tt.created_by;
+                    return " " + DateType.convert_slash_datetime2(tt.date_assigned);
                 case 3:
-                    return "  Remove";
-                case 4:
                     if (tt.status == 0) {
-                        return " Posted";
-                    } else {
-                        return " Finalized";
+                        try {
+                            Date d = DateType.sf.parse(tt.date_assigned);
+                            int days = DateUtils1.count_days(d, new Date());
+                            if (days > 10) {
+                                return "/POS/icons/check-mark (3).png";
+                            } else {
+                                return "/POS/icons/check-mark (2).png";
+                            }
+                        } catch (ParseException ex) {
+                            System.out.println(ex);
+                        }
                     }
+                    if (tt.status == 1) {
+                        return "/POS/icons/check-mark (1).png";
+                    }
+                    if (tt.status == 2) {
+                        return "/POS/icons/check-mark.png";
+                    }
+                    if (tt.status == 3) {
+                        return "/POS/icons/check-mark (4).png";
+                    }
+
+                case 4:
+                    return "  Remove";
                 case 5:
                     return " Edit";
                 case 6:
                     return " Delete";
                 case 7:
-                    return tt.created_at;
+                    return tt.date_assigned;
                 case 8:
-                    return tt.created_by;
+                    return tt.date_assigned;
                 case 9:
                     return tt.branch;
                 case 10:
@@ -753,7 +874,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
             return;
         }
         int col = tbl_warranties2.getSelectedColumn();
-        if (col == 3) {
+        if (col == 4) {
             tbl_warranties_ALM2.remove(row);
             tbl_warranty_items_ALM.clear();
             jLabel6.setText("0");
@@ -774,7 +895,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         tbl_warranty_items.setModel(tbl_warranty_items_M);
         tbl_warranty_items.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_warranty_items.setRowHeight(25);
-        int[] tbl_widths_warranty_items = {0, 40, 120, 100, 80, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_warranty_items = {0, 40, 120, 100, 80, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_warranty_items.length; i < n; i++) {
             if (i == 3) {
                 continue;
@@ -789,7 +910,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         tbl_warranty_items.setFont(new java.awt.Font("Arial", 0, 12));
     }
 
-    public static void loadData_warranty_items(List<Warranty_items.to_warranty_items> acc) {
+    public static void loadData_warranty_items(List<S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers> acc) {
         tbl_warranty_items_ALM.clear();
         tbl_warranty_items_ALM.addAll(acc);
     }
@@ -797,7 +918,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
     public static class Tblwarranty_itemsModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Trans #", "Qty", "Item Code", "Description", "Warranty", "Type", "Status", "", "", "cost", "selling_price", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "conversion", "unit", "warranty_date", "serial_no", "main_barcode", "brand", "brand_id", "model", "model_id", "status", "created_at", "created_by", "branch", "branch_id", "location", "location_id"
+            "Trans #", "Qty", "Item Code", "Description", "Price", "Amount", "Status", "", "", "cost", "selling_price", "category", "category_id", "classification", "classification_id", "sub_class", "sub_class_id", "conversion", "unit", "warranty_date", "serial_no", "main_barcode", "brand", "brand_id", "model", "model_id", "status", "created_at", "created_by", "branch", "branch_id", "location", "location_id"
         };
 
         public Tblwarranty_itemsModel(ListModel listmodel) {
@@ -822,20 +943,20 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
 
         @Override
         public Object getValueAt(int row, int col) {
-            Warranty_items.to_warranty_items tt = (Warranty_items.to_warranty_items) getRow(row);
+            S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers tt = (S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers) getRow(row);
             switch (col) {
                 case 0:
                     return " " + tt.transaction_no;
                 case 1:
                     return " " + tt.qty;
                 case 2:
-                    return " " + tt.main_barcode;
+                    return " " + tt.item_code;
                 case 3:
                     return " " + tt.description;
                 case 4:
-                    return " " + POS.util.DateType.convert_slash_datetime2(tt.warranty_date);
+                    return " " + FitIn.fmt_wc_0(tt.selling_price);
                 case 5:
-                    return "    " + tt.trans_type;
+                    return "    " + FitIn.fmt_wc_0(tt.selling_price * tt.qty);
                 case 6:
                     if (tt.status == 0) {
                         return " Posted";
@@ -847,7 +968,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
                 case 8:
                     return " Delete";
                 case 9:
-                    return tt.cost;
+                    return tt.selling_price;
                 case 10:
                     return tt.selling_price;
                 case 11:
@@ -859,19 +980,19 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
                 case 14:
                     return tt.classification_id;
                 case 15:
-                    return tt.sub_class;
+                    return tt.classification_id;
                 case 16:
-                    return tt.sub_class_id;
+                    return tt.classification_id;
                 case 17:
                     return tt.conversion;
                 case 18:
                     return tt.unit;
                 case 19:
-                    return tt.warranty_date;
+                    return tt.classification_id;
                 case 20:
                     return tt.serial_no;
                 case 21:
-                    return tt.main_barcode;
+                    return tt.classification_id;
                 case 22:
                     return tt.brand;
                 case 23:
@@ -883,13 +1004,13 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
                 case 26:
                     return tt.status;
                 case 27:
-                    return tt.created_at;
+                    return tt.classification_id;
                 case 28:
-                    return tt.created_by;
+                    return tt.classification_id;
                 case 29:
                     return tt.branch;
                 case 30:
-                    return tt.branch_id;
+                    return tt.classification_id;
                 case 31:
                     return tt.location;
                 default:
@@ -903,10 +1024,11 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        Warranties.to_warranties to = (Warranties.to_warranties) tbl_warranties_ALM2.get(row);
+        My_services.to_my_services to = (My_services.to_my_services) tbl_warranties_ALM2.get(row);
         String where = " where transaction_no='" + to.transaction_no + "' ";
 
-        List<Warranty_items.to_warranty_items> items = Warranty_items.ret_data(where);
+        List<S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers> items = S1_my_services_item_replacements_customers.ret_data(where);
+
         loadData_warranty_items(items);
         jLabel2.setText("" + items.size());
     }
@@ -931,7 +1053,7 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
 
     private void ok2() {
 
-        List<Warranties.to_warranties> datas = tbl_warranties_ALM2;
+        List< My_services.to_my_services> datas = tbl_warranties_ALM2;
         if (datas.isEmpty()) {
             Alert.set(0, "No transaction added!");
             return;
@@ -940,4 +1062,32 @@ public class Dlg_touchscreen_slip_no extends javax.swing.JDialog {
             callback.ok(new CloseDialog(this), new OutputData(datas));
         }
     }
+
+    List<My_services_departments.to_my_services_departments> department_list = new ArrayList();
+
+    private void init_departments() {
+
+        Object[][] obj = new Object[department_list.size()][1];
+        int i = 0;
+        for (My_services_departments.to_my_services_departments to : department_list) {
+            obj[i][0] = " " + to.department;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_department1.getWidth()};
+        int width = 0;
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf_department1, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                My_services_departments.to_my_services_departments to = department_list.get(data.selected_row);
+                Field.Combo dep = (Field.Combo) tf_department1;
+                dep.setId("" + to.id);
+                dep.setText(to.department);
+            }
+        });
+    }
+
 }

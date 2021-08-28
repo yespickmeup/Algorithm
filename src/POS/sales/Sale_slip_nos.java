@@ -35,8 +35,10 @@ public class Sale_slip_nos {
         public final String branch_id;
         public final String location;
         public final String location_id;
+        public final String department;
+        public final int department_id;
 
-        public to_sale_slip_nos(int id, String sales_no, String transaction_no, String slip_no, int no_of_items, String created_at, String created_by, String branch, String branch_id, String location, String location_id) {
+        public to_sale_slip_nos(int id, String sales_no, String transaction_no, String slip_no, int no_of_items, String created_at, String created_by, String branch, String branch_id, String location, String location_id, String department, int department_id) {
             this.id = id;
             this.sales_no = sales_no;
             this.transaction_no = transaction_no;
@@ -48,6 +50,8 @@ public class Sale_slip_nos {
             this.branch_id = branch_id;
             this.location = location;
             this.location_id = location_id;
+            this.department = department;
+            this.department_id = department_id;
         }
     }
 
@@ -65,6 +69,8 @@ public class Sale_slip_nos {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + ")values("
                     + ":sales_no"
                     + ",:transaction_no"
@@ -76,6 +82,8 @@ public class Sale_slip_nos {
                     + ",:branch_id"
                     + ",:location"
                     + ",:location_id"
+                    + ",:department"
+                    + ",:department_id"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -89,6 +97,8 @@ public class Sale_slip_nos {
                     .setString("branch_id", to_sale_slip_nos.branch_id)
                     .setString("location", to_sale_slip_nos.location)
                     .setString("location_id", to_sale_slip_nos.location_id)
+                    .setString("department", to_sale_slip_nos.department)
+                    .setNumber("department_id", to_sale_slip_nos.department_id)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -115,6 +125,8 @@ public class Sale_slip_nos {
                     + ",branch_id= :branch_id "
                     + ",location= :location "
                     + ",location_id= :location_id "
+                    + ",department= :department "
+                    + ",department_id= :department_id "
                     + " where id='" + to_sale_slip_nos.id + "' "
                     + " ";
 
@@ -129,6 +141,8 @@ public class Sale_slip_nos {
                     .setString("branch_id", to_sale_slip_nos.branch_id)
                     .setString("location", to_sale_slip_nos.location)
                     .setString("location_id", to_sale_slip_nos.location_id)
+                    .setString("department", to_sale_slip_nos.department)
+                    .setNumber("department_id", to_sale_slip_nos.department_id)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -175,6 +189,8 @@ public class Sale_slip_nos {
                     + ",branch_id"
                     + ",location"
                     + ",location_id"
+                    + ",department"
+                    + ",department_id"
                     + " from sale_slip_nos"
                     + " " + where;
 
@@ -192,8 +208,9 @@ public class Sale_slip_nos {
                 String branch_id = rs.getString(9);
                 String location = rs.getString(10);
                 String location_id = rs.getString(11);
-
-                to_sale_slip_nos to = new to_sale_slip_nos(id, sales_no, transaction_no, slip_no, no_of_items, created_at, created_by, branch, branch_id, location, location_id);
+                String department = rs.getString(12);
+                int department_id = rs.getInt(13);
+                to_sale_slip_nos to = new to_sale_slip_nos(id, sales_no, transaction_no, slip_no, no_of_items, created_at, created_by, branch, branch_id, location, location_id, department, department_id);
                 datas.add(to);
             }
             return datas;

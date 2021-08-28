@@ -18,7 +18,9 @@ import POS.inventory.uom;
 import POS.inventory_assembly.Dlg_inventory_assembly;
 import POS.inventory_assembly.Inventory_assembly;
 import POS.my_sales.MySales_Items;
+import POS.my_services.My_services;
 import POS.my_services.My_services_customers;
+import POS.my_services.S1_my_services_item_replacements_customers;
 import POS.orders.S1_order_items;
 import POS.orders.S1_orders;
 import POS.receipts.Warranties;
@@ -391,6 +393,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         jButton42 = new javax.swing.JButton();
         jButton44 = new javax.swing.JButton();
         jButton45 = new javax.swing.JButton();
+        jButton46 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_orders = new javax.swing.JTable();
@@ -2087,7 +2090,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2262,6 +2265,26 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             }
         });
 
+        jButton46.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton46.setForeground(new java.awt.Color(0, 150, 199));
+        jButton46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/POS/icons_menu_maintenance/exchange (1).png"))); // NOI18N
+        jButton46.setToolTipText("Slip Nos (F12)");
+        jButton46.setBorderPainted(false);
+        jButton46.setContentAreaFilled(false);
+        jButton46.setFocusable(false);
+        jButton46.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton46.setOpaque(true);
+        jButton46.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton46MouseClicked(evt);
+            }
+        });
+        jButton46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton46ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -2280,6 +2303,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -2296,7 +2321,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                             .addComponent(jButton42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(jButton45, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jButton46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(jButton38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -2944,8 +2970,16 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_reference_no2ActionPerformed
 
     private void jButton33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton33MouseClicked
-        slip_no();
+
     }//GEN-LAST:event_jButton33MouseClicked
+
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+        slip_no();
+    }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void jButton46MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton46MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton46MouseClicked
 
     /**
      * @param args the command line arguments
@@ -3006,6 +3040,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -3372,6 +3407,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 if (e.getKeyCode() == KeyEvent.VK_F11) {
                     order_list();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_F11) {
+                    slip_no();
+                }
+
             }
         });
 
@@ -4123,7 +4162,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc=" hover">
     private void hover() {
-        JButton[] btns = {jButton36, jButton37, jButton38, jButton39, jButton42, jButton40, jButton44, jButton45};
+        JButton[] btns = {jButton36, jButton37, jButton38, jButton39, jButton42, jButton40, jButton44, jButton45, jButton46};
 
         for (final JButton btn : btns) {
 
@@ -4444,10 +4483,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                     double wtax = 0;
                     int allow_negative_inventory = to.allow_negative_inventory;
                     int auto_order = to.auto_order;
-                    Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, to.show_to_sales);
+                    Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, to.show_to_sales, 0);
+
                     //</editor-fold>
 //                    to2.setProduct_qty(to.product_qty);
-
                     order.addAll(Inventory_assembly.convert_to_inventory_barcodes(datas, to3));
                     order.add(to3);
                     tbl_orders_ALM.addAll(order);
@@ -4614,7 +4653,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             double wtax = FitIn.toDouble(tf_wtax.getText());
             int allow_negative_inventory1 = to.allow_negative_inventory;
             int auto_order = to.auto_order;
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax, allow_negative_inventory1, auto_order, to.show_to_sales);
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_cash, wtax, allow_negative_inventory1, auto_order, to.show_to_sales, 0);
             List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
             int order_exists = 0;
             int order_row = 0;
@@ -4869,7 +4908,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                                                                                                               unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id,
                                                                                                               multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type,
                                                                                                               branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name,
-                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory1, auto_order, show_to_sales);
+                                                                                                              discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory1, auto_order, show_to_sales, 0);
                     datas.add(t);
                 }
 
@@ -5924,8 +5963,9 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, charge_date_applied, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
         try {
-            sales_no = MySales.add_sales(sales, items, location_id,slip_nos);
+            sales_no = MySales.add_sales(sales, items, location_id, slip_nos);
             sales.setSales_no(sales_no);
+            slip_nos.clear();
             my_sales = sales;
             if (my_sales == null) {
                 System.out.println("NULL");
@@ -5994,7 +6034,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 lbl_charge.setText("");
                 my_sales = null;
                 tf_amount_tendered.setEnabled(true);
-
+                jButton46.setContentAreaFilled(false);
                 compute_total();
                 data_cols2();
                 jCheckBox1.setSelected(true);
@@ -6003,6 +6043,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                 tf_search.selectAll();
                 tf_search.grabFocus();
                 tf_search.setEnabled(true);
+
             }
         });
         nd.setLocationRelativeTo(null);
@@ -6322,7 +6363,7 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //        }
     }
 
-    List<Warranties.to_warranties> slip_nos = new ArrayList();
+    List< My_services.to_my_services> slip_nos = new ArrayList();
 
     private void slip_no() {
         Window p = (Window) this;
@@ -6335,15 +6376,92 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             public void ok(CloseDialog closeDialog, Dlg_touchscreen_slip_no.OutputData data) {
                 closeDialog.ok();
                 slip_nos = data.to;
+
                 if (!slip_nos.isEmpty()) {
-                    jButton33.setContentAreaFilled(true);
+                    jButton46.setContentAreaFilled(true);
+                    List< My_services.to_my_services> services = data.to;
+                    List<Inventory_barcodes.to_inventory_barcodes> order = new ArrayList();
+                    for (My_services.to_my_services service : services) {
+                        String where = " where transaction_no='" + service.transaction_no + "' ";
+
+                        List<S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers> items = S1_my_services_item_replacements_customers.ret_data(where);
+                        for (S1_my_services_item_replacements_customers.to_my_services_item_replacements_customers to : items) {
+                            int id = 0;
+                            String barcode = to.barcode;
+                            String description = to.description;
+                            String generic_name = "";
+                            String category = to.category;
+                            String category_id = to.category_id;
+                            String classification = to.classification;
+                            String classification_id = to.classification_id;
+                            String sub_classification = to.sub_classification;
+                            String sub_classification_id = to.sub_classification_id;
+                            double product_qty = to.qty;
+                            String unit = to.unit;
+                            double conversion = to.conversion;
+                            double selling_price = to.selling_price;
+                            String date_added = DateType.now();
+                            String user_name = MyUser.getUser_id();
+                            String item_type = to.item_type;
+                            int status = to.status;
+                            String supplier = to.supplier;
+                            int fixed_price = to.fixed_price;
+                            double cost = to.selling_price;
+                            String supplier_id = to.supplier_id;
+                            int multi_level_pricing = to.multi_level_pricing;
+                            int vatable = to.vatable;
+                            double reorder_level = to.reorder_level;
+                            double markup = to.markup;
+                            String main_barcode = to.item_code;
+                            String brand = to.brand;
+                            String brand_id = to.brand_id;
+                            String model = to.model;
+                            String model_id = to.model_id;
+                            int selling_type = FitIn.toInt(to.selling_type);
+
+                            String branch = my_branch;
+                            String branch_code = my_branch_id;
+                            String location = my_location;
+                            String location_id = my_location_id;
+                            String serial_no = "";
+                            String selected_serials = "";
+                            double discount = 0;
+                            double discount_amount = 0;
+                            String discount_name = "";
+                            String discount_customer_name = "";
+                            String discount_customer_id = "";
+                            double addtl_amount = 0;
+                            double wtax = 0;
+                            int allow_negative_inventory = 1;
+                            int auto_order = 0;
+                            Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, 1, 1);
+                            order.add(to3);
+                        }
+                    }
+
+                    List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
+                    List<Inventory_barcodes.to_inventory_barcodes> order1 = new ArrayList();
+                    for (Inventory_barcodes.to_inventory_barcodes ord : orders) {
+
+                        if (ord.is_slip == 0) {
+                            order1.add(ord);
+                        }
+                    }
+                    tbl_orders_ALM.clear();
+                    tbl_orders_ALM.addAll(order1);
+
+                    tbl_orders_ALM.addAll(order);
+                    tbl_orders_M.fireTableDataChanged();
+                    compute_total();
+                    tf_search.selectAll();
+                    tf_search.grabFocus();
                 }
             }
         });
         nd.setLocationRelativeTo(this);
         nd.setVisible(true);
     }
-    
+
     private void clear_slip_nos() {
         slip_nos.clear();
         jButton33.setContentAreaFilled(false);

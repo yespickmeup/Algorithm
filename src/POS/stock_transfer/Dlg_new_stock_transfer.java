@@ -2717,6 +2717,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
                                                                               to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
                                                                               is_uploaded, finalized_by_id, finalized_by);
+        
         Window p = (Window) this;
         Dlg_confirm_action nd = Dlg_confirm_action.create(p, true);
         nd.setTitle("");
