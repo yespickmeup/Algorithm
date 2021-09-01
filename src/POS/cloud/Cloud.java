@@ -210,8 +210,8 @@ public class Cloud {
 
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
-                int show_to_sales=rs.getInt(40);
-                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true, is_uploaded,allow_negative_inventory,auto_order,show_to_sales);
+                int show_to_sales = rs.getInt(40);
+                to_inventory to = new to_inventory(id, "" + barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, true, is_uploaded, allow_negative_inventory, auto_order, show_to_sales);
                 datas.add(to);
             }
             return datas;
@@ -250,6 +250,11 @@ public class Cloud {
                     + ",at_location_id"
                     + ",finalized_by_id"
                     + ",finalized_by"
+                    + ",service_id"
+                    + ",service_trans_no"
+                    + ",service_slip_no"
+                    + ",service_by_id"
+                    + ",service_by_name"
                     + " from stock_transfers"
                     + " " + where;
 
@@ -276,7 +281,13 @@ public class Cloud {
                 String at_location_id = rs.getString(18);
                 String finalized_by_id = rs.getString(19);
                 String finalized_by = rs.getString(20);
-                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, 0, finalized_by_id, finalized_by);
+                int service_id = rs.getInt(21);
+                String service_trans_no = rs.getString(22);
+                String service_slip_no = rs.getString(23);
+                int service_by_id = rs.getInt(24);
+                String service_by_name = rs.getString(25);
+
+                to_stock_transfers to = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location, to_location_id, from_branch, from_branch_id, from_location, from_location_id, status, false, at_branch, at_branch_id, at_location, at_location_id, 0, finalized_by_id, finalized_by, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                 datas.add(to);
             }
             return datas;
@@ -339,6 +350,11 @@ public class Cloud {
                     + ",at_branch_id"
                     + ",at_location"
                     + ",at_location_id"
+                    + ",service_id"
+                    + ",service_trans_no"
+                    + ",service_slip_no"
+                    + ",service_by_id"
+                    + ",service_by_name"
                     + " from stock_transfers_items"
                     + " " + where;
 
@@ -391,8 +407,12 @@ public class Cloud {
                 String at_branch_id = rs.getString(44);
                 String at_location = rs.getString(45);
                 String at_location_id = rs.getString(46);
-
-                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                int service_id = rs.getInt(47);
+                String service_trans_no = rs.getString(48);
+                String service_slip_no = rs.getString(49);
+                int service_by_id = rs.getInt(50);
+                String service_by_name = rs.getString(51);
+                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                 datas.add(to);
             }
             return datas;

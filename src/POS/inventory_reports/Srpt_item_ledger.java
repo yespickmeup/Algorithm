@@ -1270,8 +1270,8 @@ public class Srpt_item_ledger {
 
                 int allow_negative_inventory = rs.getInt(38);
                 int auto_order = rs.getInt(39);
-                int show_to_sales=rs.getInt(40);
-                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, "" + main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0,allow_negative_inventory,auto_order,show_to_sales,0);
+                int show_to_sales = rs.getInt(40);
+                to_inventory_barcodes to = new to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, "" + main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, "", 0, 0, "", "", "", 0, 0, allow_negative_inventory, auto_order, show_to_sales, 0);
                 datas.add(to);
             }
             return datas;
@@ -1540,8 +1540,8 @@ public class Srpt_item_ledger {
                 String model_id = rs.getString(39);
                 double addtl_amount = rs.getDouble(40);
                 double wtax = rs.getDouble(41);
-                double cost=rs.getDouble(42);
-                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax,cost);
+                double cost = rs.getDouble(42);
+                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax, cost);
                 datas.add(to);
             }
             return datas;
@@ -1604,6 +1604,11 @@ public class Srpt_item_ledger {
                     + ",at_branch_id"
                     + ",at_location"
                     + ",at_location_id"
+                    + ",service_id"
+                    + ",service_trans_no"
+                    + ",service_slip_no"
+                    + ",service_by_id"
+                    + ",service_by_name"
                     + " from stock_transfers_items"
                     + " " + where;
 
@@ -1656,8 +1661,13 @@ public class Srpt_item_ledger {
                 String at_branch_id = rs.getString(44);
                 String at_location = rs.getString(45);
                 String at_location_id = rs.getString(46);
+                int service_id = rs.getInt(47);
+                String service_trans_no = rs.getString(48);
+                String service_slip_no = rs.getString(49);
+                int service_by_id = rs.getInt(50);
+                String service_by_name = rs.getString(51);
 
-                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                 datas.add(to);
             }
             return datas;

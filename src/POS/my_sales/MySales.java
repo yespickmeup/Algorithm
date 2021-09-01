@@ -1033,11 +1033,16 @@ public class MySales {
                     int is_uploaded = 0;
                     String finalized_by_id = MyUser.getUser_id();
                     String finalized_by = MyUser.getUser_screen_name();
+                    int service_id = 0;
+                    String service_trans_no = "";
+                    String service_slip_no = "";
+                    int service_by_id = 0;
+                    String service_by_name = "";
 
                     PreparedStatement stmt16 = conn.prepareStatement("");
                     final Stock_transfers.to_stock_transfers to_stock_transfers = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
                                                                                                                          to_location_id, from_branch, from_branch_id, from_location, from_location_id, 1, false, at_branch, at_branch_id, at_location, at_location_id,
-                                                                                                                         is_uploaded, finalized_by_id, finalized_by);
+                                                                                                                         is_uploaded, finalized_by_id, finalized_by, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                     String s16 = "insert into stock_transfers("
                             + "transaction_no"
                             + ",user_name"
@@ -1199,7 +1204,9 @@ public class MySales {
                         double cost = selling_price;
                         String barcodes = "";
                         String stock_transfer_id = to_stock_transfers.transaction_no;
-                        Stock_transfers_items.to_stock_transfers_items st_item = new Stock_transfers_items.to_stock_transfers_items(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, status, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                        
+
+                        Stock_transfers_items.to_stock_transfers_items st_item = new Stock_transfers_items.to_stock_transfers_items(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, status, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                         st_items.add(st_item);
                     }
                     for (Stock_transfers_items.to_stock_transfers_items to_stock_transfers_items : st_items) {

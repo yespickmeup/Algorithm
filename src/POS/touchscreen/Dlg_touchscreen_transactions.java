@@ -13,6 +13,8 @@ import POS.my_sales.MySales;
 import POS.my_sales.MySales_Items;
 import POS.sale_item_replacements.Dlg_sale_item_replacements;
 import POS.sale_item_replacements.S1_sale_item_replacements;
+import POS.sales.Sales;
+import POS.touchscreen_reports.Dlg_touchscreen_transactions_serial_no;
 import POS.users.MyUser;
 import POS.users.S1_user_previleges;
 import POS.users.S1_users;
@@ -999,7 +1001,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
-       disposed();
+        disposed();
     }//GEN-LAST:event_jLabel29MouseClicked
 
     /**
@@ -1502,7 +1504,7 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         if (row < 0) {
             return;
         }
-        MySales_Items.items to = (MySales_Items.items) tbl_sale_items_ALM.get(row);
+        final MySales_Items.items to = (MySales_Items.items) tbl_sale_items_ALM.get(row);
         int col = tbl_sale_items.getSelectedColumn();
         if (col == 5) {
             if (to.status == 1) {
@@ -1518,6 +1520,23 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
 
             }
             tbl_sale_items_M.fireTableDataChanged();
+        }
+        if (col == 1) {
+            Window p = (Window) this;
+            Dlg_touchscreen_transactions_serial_no nd = Dlg_touchscreen_transactions_serial_no.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(to);
+            nd.setCallback(new Dlg_touchscreen_transactions_serial_no.Callback() {
+
+                @Override
+                public void ok(CloseDialog closeDialog, Dlg_touchscreen_transactions_serial_no.OutputData data) {
+                    closeDialog.ok();
+                    Sales.update_serial("" + to.id, data.serial_no);
+                    Alert.set(2, "Item Already cancelled!");
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
         }
     }
 

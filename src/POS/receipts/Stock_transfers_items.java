@@ -24,7 +24,7 @@ import mijzcx.synapse.desk.utils.SqlStringUtil;
  */
 public class Stock_transfers_items {
 
-    public static class to_stock_transfers_items implements Serializable{
+    public static class to_stock_transfers_items implements Serializable {
 
         public final int id;
         public final String barcode;
@@ -72,8 +72,13 @@ public class Stock_transfers_items {
         public final String at_branch_id;
         public final String at_location;
         public final String at_location_id;
+        public final int service_id;
+        public final String service_trans_no;
+        public final String service_slip_no;
+        public final int service_by_id;
+        public final String service_by_name;    
 
-        public to_stock_transfers_items(int id, String barcode, String description, String generic_name, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost, String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String barcodes, String brand, String brand_id, String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, String stock_transfer_id, String serial_no, String to_branch, String to_branch_id, String to_location, String to_location_id, String at_branch, String at_branch_id, String at_location, String at_location_id) {
+        public to_stock_transfers_items(int id, String barcode, String description, String generic_name, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost, String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String barcodes, String brand, String brand_id, String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, String stock_transfer_id, String serial_no, String to_branch, String to_branch_id, String to_location, String to_location_id, String at_branch, String at_branch_id, String at_location, String at_location_id, int service_id, String service_trans_no, String service_slip_no, int service_by_id, String service_by_name) {
             this.id = id;
             this.barcode = barcode;
             this.description = description;
@@ -120,7 +125,11 @@ public class Stock_transfers_items {
             this.at_branch_id = at_branch_id;
             this.at_location = at_location;
             this.at_location_id = at_location_id;
-
+            this.service_id = service_id;
+            this.service_trans_no = service_trans_no;
+            this.service_slip_no = service_slip_no;
+            this.service_by_id = service_by_id;
+            this.service_by_name = service_by_name;
         }
 
         public double getProduct_qty() {
@@ -191,6 +200,11 @@ public class Stock_transfers_items {
                         + ",at_branch_id"
                         + ",at_location"
                         + ",at_location_id"
+                        + ",service_id"
+                        + ",service_trans_no"
+                        + ",service_slip_no"
+                        + ",service_by_id"
+                        + ",service_by_name"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -237,6 +251,11 @@ public class Stock_transfers_items {
                         + ",:at_branch_id"
                         + ",:at_location"
                         + ",:at_location_id"
+                        + ",:service_id"
+                        + ",:service_trans_no"
+                        + ",:service_slip_no"
+                        + ",:service_by_id"
+                        + ",:service_by_name"
                         + ")";
 
                 s0 = SqlStringUtil.parse(s0)
@@ -285,6 +304,11 @@ public class Stock_transfers_items {
                         .setString("at_branch_id", to_stock_transfers_items.at_branch_id)
                         .setString("at_location", to_stock_transfers_items.at_location)
                         .setString("at_location_id", to_stock_transfers_items.at_location_id)
+                        .setNumber("service_id", to_stock_transfers_items.service_id)
+                        .setString("service_trans_no", to_stock_transfers_items.service_trans_no)
+                        .setString("service_slip_no", to_stock_transfers_items.service_slip_no)
+                        .setNumber("service_by_id", to_stock_transfers_items.service_by_id)
+                        .setString("service_by_name", to_stock_transfers_items.service_by_name)
                         .ok();
                 PreparedStatement stmt = conn.prepareStatement(s0);
                 stmt.execute();
@@ -359,6 +383,11 @@ public class Stock_transfers_items {
                         + ",at_branch_id"
                         + ",at_location"
                         + ",at_location_id"
+                        + ",service_id"
+                        + ",service_trans_no"
+                        + ",service_slip_no"
+                        + ",service_by_id"
+                        + ",service_by_name"
                         + ")values("
                         + ":barcode"
                         + ",:description"
@@ -405,6 +434,11 @@ public class Stock_transfers_items {
                         + ",:at_branch_id"
                         + ",:at_location"
                         + ",:at_location_id"
+                        + ",:service_id"
+                        + ",:service_trans_no"
+                        + ",:service_slip_no"
+                        + ",:service_by_id"
+                        + ",:service_by_name"
                         + ")";
 
                 s0 = SqlStringUtil.parse(s0)
@@ -453,6 +487,11 @@ public class Stock_transfers_items {
                         .setString("at_branch_id", to_stock_transfers_items.at_branch_id)
                         .setString("at_location", to_stock_transfers_items.at_location)
                         .setString("at_location_id", to_stock_transfers_items.at_location_id)
+                        .setNumber("service_id", to_stock_transfers_items.service_id)
+                        .setString("service_trans_no", to_stock_transfers_items.service_trans_no)
+                        .setString("service_slip_no", to_stock_transfers_items.service_slip_no)
+                        .setNumber("service_by_id", to_stock_transfers_items.service_by_id)
+                        .setString("service_by_name", to_stock_transfers_items.service_by_name)
                         .ok();
 
                 stmt.addBatch(s0);
@@ -517,6 +556,11 @@ public class Stock_transfers_items {
                     + ",at_branch_id= :at_branch_id "
                     + ",at_location= :at_location "
                     + ",at_location_id= :at_location_id "
+                    + ",service_id= :service_id "
+                    + ",service_trans_no= :service_trans_no "
+                    + ",service_slip_no= :service_slip_no "
+                    + ",service_by_id= :service_by_id "
+                    + ",service_by_name= :service_by_name "
                     + " where "
                     + " id ='" + to_stock_transfers_items.id + "' "
                     + " ";
@@ -567,6 +611,11 @@ public class Stock_transfers_items {
                     .setString("at_branch_id", to_stock_transfers_items.at_branch_id)
                     .setString("at_location", to_stock_transfers_items.at_location)
                     .setString("at_location_id", to_stock_transfers_items.at_location_id)
+                    .setNumber("service_id", to_stock_transfers_items.service_id)
+                    .setString("service_trans_no", to_stock_transfers_items.service_trans_no)
+                    .setString("service_slip_no", to_stock_transfers_items.service_slip_no)
+                    .setNumber("service_by_id", to_stock_transfers_items.service_by_id)
+                    .setString("service_by_name", to_stock_transfers_items.service_by_name)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -680,6 +729,11 @@ public class Stock_transfers_items {
                     + ",at_branch_id"
                     + ",at_location"
                     + ",at_location_id"
+                    + ",service_id"
+                    + ",service_trans_no"
+                    + ",service_slip_no"
+                    + ",service_by_id"
+                    + ",service_by_name"
                     + " from stock_transfers_items  "
                     + " " + where;
 //            System.out.println(s0);
@@ -732,12 +786,16 @@ public class Stock_transfers_items {
                 String at_branch_id = rs.getString(44);
                 String at_location = rs.getString(45);
                 String at_location_id = rs.getString(46);
-
+                int service_id = rs.getInt(47);
+                String service_trans_no = rs.getString(48);
+                String service_slip_no = rs.getString(49);
+                int service_by_id = rs.getInt(50);
+                String service_by_name = rs.getString(51);
                 to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification,
-                        classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name,
-                        item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes,
-                        brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no,
-                        to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                                                                           classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name,
+                                                                           item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes,
+                                                                           brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no,
+                                                                           to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                 datas.add(to);
             }
             return datas;
@@ -799,6 +857,11 @@ public class Stock_transfers_items {
                     + ",at_branch_id"
                     + ",at_location"
                     + ",at_location_id"
+                    + ",service_id"
+                    + ",service_trans_no"
+                    + ",service_slip_no"
+                    + ",service_by_id"
+                    + ",service_by_name"
                     + " from stock_transfers_items  "
                     + " " + where;
 
@@ -851,12 +914,17 @@ public class Stock_transfers_items {
                 String at_branch_id = rs.getString(44);
                 String at_location = rs.getString(45);
                 String at_location_id = rs.getString(46);
+                int service_id = rs.getInt(47);
+                String service_trans_no = rs.getString(48);
+                String service_slip_no = rs.getString(49);
+                int service_by_id = rs.getInt(50);
+                String service_by_name = rs.getString(51);
 
                 to_stock_transfers_items to = new to_stock_transfers_items(id, barcode, description, generic_name, category, category_id, classification,
-                        classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name,
-                        item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes,
-                        brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no,
-                        to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id);
+                                                                           classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name,
+                                                                           item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes,
+                                                                           brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, stock_transfer_id, serial_no,
+                                                                           to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                 datas.add(to);
             }
             conn.close();

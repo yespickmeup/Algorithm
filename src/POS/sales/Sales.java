@@ -286,9 +286,9 @@ public class Sales {
                 String branch = rs.getString(12);
                 String branch_id = rs.getString(13);
                 String location_id = rs.getString(14);
-                String department=rs.getString(15);
-                String department_id=rs.getString(16);
-                to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id,department,department_id);
+                String department = rs.getString(15);
+                String department_id = rs.getString(16);
+                to1 = new to_customers(id, customer_name, customer_no, contact_no, credit_limit, address, term, location, balance, discount, prepaid, branch, branch_id, location_id, department, department_id);
 
             }
             return to1;
@@ -416,6 +416,25 @@ public class Sales {
                     + " ";
             s0 = SqlStringUtil.parse(s0)
                     .setString("customer_name", new_customer_name)
+                    .ok();
+            PreparedStatement stmt = conn.prepareStatement(s0);
+            stmt.execute();
+            Lg.s(Sales.class, "Successfully Updated");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static void update_serial(String sales_item_id, String serial_no) {
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "update sale_items set serial_no= :serial_no where "
+                    + " id ='" + sales_item_id + "' "
+                    + " ";
+            s0 = SqlStringUtil.parse(s0)
+                    .setString("serial_no", serial_no)
                     .ok();
             PreparedStatement stmt = conn.prepareStatement(s0);
             stmt.execute();
