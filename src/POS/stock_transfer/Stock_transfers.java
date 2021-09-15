@@ -341,11 +341,11 @@ public class Stock_transfers {
                         .setString("at_location", to_stock_transfers_items.at_location)
                         .setString("at_location_id", to_stock_transfers_items.at_location_id)
                         .setNumber("is_uploaded", to_stock_transfers.is_uploaded)
-                        .setNumber("service_id", to_stock_transfers_items.service_id)
-                        .setString("service_trans_no", to_stock_transfers_items.service_trans_no)
-                        .setString("service_slip_no", to_stock_transfers_items.service_slip_no)
-                        .setNumber("service_by_id", to_stock_transfers_items.service_by_id)
-                        .setString("service_by_name", to_stock_transfers_items.service_by_name)
+                        .setNumber("service_id", to_stock_transfers.service_id)
+                        .setString("service_trans_no", to_stock_transfers.service_trans_no)
+                        .setString("service_slip_no", to_stock_transfers.service_slip_no)
+                        .setNumber("service_by_id", to_stock_transfers.service_by_id)
+                        .setString("service_by_name", to_stock_transfers.service_by_name)
                         .ok();
                 stmt.addBatch(s2);
             }

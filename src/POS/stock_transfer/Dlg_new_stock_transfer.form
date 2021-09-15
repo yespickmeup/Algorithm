@@ -225,7 +225,7 @@
                                       <Component id="jDateChooser5" min="-2" pref="156" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="tf_from_location6" max="32767" attributes="0"/>
+                                  <Component id="tf_service_by" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -299,7 +299,7 @@
                                                   </Group>
                                                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                                                       <Component id="jLabel8" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                                      <Component id="tf_from_location6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="tf_service_by" alignment="3" min="-2" max="-2" attributes="0"/>
                                                       <Component id="tf_service_by_id" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
@@ -873,15 +873,15 @@
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Field.Combo()"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="tf_from_location6">
+                    <Component class="javax.swing.JTextField" name="tf_service_by">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
                         </Property>
-                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_from_location6ActionPerformed"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tf_service_byMouseClicked"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_service_byActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Field.Combo()"/>

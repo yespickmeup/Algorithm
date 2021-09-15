@@ -17,6 +17,7 @@ import POS.inventory.S2_inventory_barcodes;
 import POS.inventory.uom;
 import POS.inventory_reports.Dlg_report_inventory_ledger;
 import POS.my_services.My_services;
+import POS.my_services.My_services_crews;
 import POS.receipts.Stock_transfers_items;
 import POS.receipts.Stock_transfers_items.to_stock_transfers_items;
 import POS.stock_transfer.Stock_transfers.to_stock_transfers;
@@ -297,7 +298,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         jButton10 = new javax.swing.JButton();
         jButton7 = new Button.Success();
         tf_slip_no = new Field.Combo();
-        tf_from_location6 = new Field.Combo();
+        tf_service_by = new Field.Combo();
         tf_service_by_id = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -737,11 +738,15 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
         });
 
-        tf_from_location6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tf_from_location6.setFocusable(false);
-        tf_from_location6.addActionListener(new java.awt.event.ActionListener() {
+        tf_service_by.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_service_by.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_service_byMouseClicked(evt);
+            }
+        });
+        tf_service_by.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_from_location6ActionPerformed(evt);
+                tf_service_byActionPerformed(evt);
             }
         });
 
@@ -809,7 +814,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jDateChooser5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(tf_from_location6))
+                    .addComponent(tf_service_by))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -865,7 +870,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                                         .addComponent(tf_slip_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tf_from_location6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tf_service_by, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(tf_service_by_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1938,13 +1943,17 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         init_slip_no();
     }//GEN-LAST:event_tf_slip_noActionPerformed
 
-    private void tf_from_location6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_from_location6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_from_location6ActionPerformed
+    private void tf_service_byActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_service_byActionPerformed
+        init_service_by();
+    }//GEN-LAST:event_tf_service_byActionPerformed
 
     private void tf_slip_noMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_slip_noMouseClicked
         init_slip_no();
     }//GEN-LAST:event_tf_slip_noMouseClicked
+
+    private void tf_service_byMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_service_byMouseClicked
+        init_service_by();
+    }//GEN-LAST:event_tf_service_byMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2084,11 +2093,11 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
     private javax.swing.JTextField tf_from_location2;
     private javax.swing.JTextField tf_from_location3;
     private javax.swing.JTextField tf_from_location4;
-    private javax.swing.JTextField tf_from_location6;
     private javax.swing.JTextField tf_from_location_id;
     private javax.swing.JTextArea tf_remarks;
     private javax.swing.JTextField tf_search;
     private javax.swing.JTextField tf_search1;
+    private javax.swing.JTextField tf_service_by;
     private javax.swing.JTextField tf_service_by_id;
     private javax.swing.JTextField tf_slip_no;
     private javax.swing.JTextField tf_to_branch;
@@ -2782,7 +2791,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String finalized_by = MyUser.getUser_screen_name();
 
         Field.Combo slip = (Field.Combo) tf_slip_no;
-        Field.Combo serv = (Field.Combo) tf_from_location6;
+        Field.Combo serv = (Field.Combo) tf_service_by;
 
         int service_id = FitIn.toInt(tf_service_by_id.getText());
         String service_trans_no = slip.getId();
@@ -2790,14 +2799,13 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         int service_by_id = FitIn.toInt(serv.getId());
         String service_by_name = serv.getText();
 
-        if (tf_service_by_id.getText().isEmpty() || tf_slip_no.getText().isEmpty()) {
-            service_id = 0;
-            service_trans_no = "";
-            service_slip_no = "";
-            service_by_id = 0;
-            service_by_name = "";
-        }
-
+//        if (tf_service_by_id.getText().isEmpty() || tf_slip_no.getText().isEmpty()) {
+//            service_id = 0;
+//            service_trans_no = "";
+//            service_slip_no = "";
+//            service_by_id = 0;
+//            service_by_name = "";
+//        }
         final Stock_transfers.to_stock_transfers rpt = new to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
                                                                               to_location_id, from_branch, from_branch_id, from_location, from_location_id, 0, false, at_branch, at_branch_id, at_location, at_location_id,
                                                                               is_uploaded, finalized_by_id, finalized_by, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
@@ -2962,7 +2970,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         String finalized_by = MyUser.getUser_screen_name();
 
         Field.Combo slip = (Field.Combo) tf_slip_no;
-        Field.Combo serv = (Field.Combo) tf_from_location6;
+        Field.Combo serv = (Field.Combo) tf_service_by;
 
         int service_id = FitIn.toInt(tf_service_by_id.getText());
         String service_trans_no = slip.getId();
@@ -3770,7 +3778,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_to_location_id.setText(to.to_location_id);
 
         Field.Combo slip = (Field.Combo) tf_slip_no;
-        Field.Combo serv = (Field.Combo) tf_from_location6;
+        Field.Combo serv = (Field.Combo) tf_service_by;
         tf_service_by_id.setText("" + to.service_id);
         slip.setId(to.service_trans_no);
         slip.setText(to.service_slip_no);
@@ -3970,7 +3978,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                     String finalized_by_id = MyUser.getUser_id();
                     String finalized_by = MyUser.getUser_screen_name();
                     Field.Combo slip = (Field.Combo) tf_slip_no;
-                    Field.Combo serv = (Field.Combo) tf_from_location6;
+                    Field.Combo serv = (Field.Combo) tf_service_by;
 
                     int service_id = FitIn.toInt(tf_service_by_id.getText());
                     String service_trans_no = slip.getId();
@@ -4395,8 +4403,14 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
         tf_to_location_id.setText("");
 
         tf_service_by_id.setText("");
-        tf_slip_no.setText("");
-        tf_from_location6.setText("");
+
+        Field.Combo slip = (Field.Combo) tf_slip_no;
+        Field.Combo serv = (Field.Combo) tf_service_by;
+        slip.setText("");
+        slip.setId("");
+
+        serv.setText("");
+        serv.setId("");
 
         tbl_stock_transfers_items_ALM.clear();
         tbl_stock_transfers_items_M.fireTableDataChanged();
@@ -4529,7 +4543,7 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
                 My_services.to_my_services to = services.get(data.selected_row);
 
                 Field.Combo slip = (Field.Combo) tf_slip_no;
-                Field.Combo serv = (Field.Combo) tf_from_location6;
+                Field.Combo serv = (Field.Combo) tf_service_by;
                 tf_service_by_id.setText("" + to.id);
                 slip.setText(to.service_slip_no);
                 slip.setId(to.transaction_no);
@@ -4540,6 +4554,44 @@ public class Dlg_new_stock_transfer extends javax.swing.JDialog {
             }
         });
 
+    }
+
+    List<My_services_crews.to_my_services_crews> service_by_list = new ArrayList();
+
+    private void init_service_by() {
+        String search = tf_service_by.getText();
+        if (search.isEmpty()) {
+            return;
+        }
+        service_by_list.clear();
+        String where = " where "
+                + " lname like '%" + search + "%'  "
+                + " or fname like '%" + search + "%'   "
+                + " order by lname asc";
+
+        service_by_list = My_services_crews.ret_data(where);
+        Object[][] obj = new Object[service_by_list.size()][1];
+        int i = 0;
+        for (My_services_crews.to_my_services_crews to : service_by_list) {
+            obj[i][0] = " " + to.fname + " " + to.mi + " " + to.lname;
+            i++;
+        }
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf_service_by.getWidth()};
+        int width = 0;
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf_service_by, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                My_services_crews.to_my_services_crews to = service_by_list.get(data.selected_row);
+                Field.Combo serv = (Field.Combo) tf_service_by;
+
+                serv.setText("" + to.fname + " " + to.mi + " " + to.lname);
+                serv.setId("" + to.id);
+            }
+        });
     }
 
 }
