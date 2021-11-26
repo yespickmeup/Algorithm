@@ -575,6 +575,7 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
 
         buttonGroup8.add(jCheckBox37);
         jCheckBox37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox37.setSelected(true);
         jCheckBox37.setText("Posted");
 
         buttonGroup8.add(jCheckBox38);
@@ -817,7 +818,6 @@ public class Dlg_warranty_service extends javax.swing.JDialog {
 
         buttonGroup8.add(jCheckBox39);
         jCheckBox39.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox39.setSelected(true);
         jCheckBox39.setText("All");
 
         buttonGroup8.add(jCheckBox40);

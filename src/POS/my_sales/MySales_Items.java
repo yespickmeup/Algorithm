@@ -65,8 +65,9 @@ public class MySales_Items {
         public double addtl_amount;
         public double wtax;
         public final double cost;
+        public final int is_slip;
 
-        public items(int id, String sales_no, String item_code, String barcode, String description, String generic_name, String item_type, String supplier_name, String supplier_id, String serial_no, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_id, String user_screen_name, int status, int is_vatable, int selling_type, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_code, String location, String location_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, boolean selected, double addtl_amount, double wtax, double cost) {
+        public items(int id, String sales_no, String item_code, String barcode, String description, String generic_name, String item_type, String supplier_name, String supplier_id, String serial_no, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_id, String user_screen_name, int status, int is_vatable, int selling_type, String discount_name, double discount_rate, double discount_amount, String discount_customer_name, String discount_customer_id, String branch, String branch_code, String location, String location_id, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, String brand, String brand_id, String model, String model_id, boolean selected, double addtl_amount, double wtax, double cost,int is_slip) {
             this.id = id;
             this.sales_no = sales_no;
             this.item_code = item_code;
@@ -110,6 +111,7 @@ public class MySales_Items {
             this.addtl_amount = addtl_amount;
             this.wtax = wtax;
             this.cost = cost;
+            this.is_slip=is_slip;
         }
 
         public String getUser_screen_name() {
@@ -215,7 +217,7 @@ public class MySales_Items {
             double addtl_amount = to.addtl_amount;
             double wtax = to.wtax;
             double cost = to.cost;
-            MySales_Items.items order = new items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax, cost);
+            MySales_Items.items order = new items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax, cost,to.is_slip);
             datas.add(order);
         }
 
@@ -268,7 +270,7 @@ public class MySales_Items {
             double wtax = to.wtax;
             int allow_negative_inventory = 0;
             int auto_order = 1;
-            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_id, item_type, status, supplier_id, is_vatable, wtax, supplier_id, selling_type, is_vatable, conversion, wtax, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, serial_no, discount_rate, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, 1,0);
+            Inventory_barcodes.to_inventory_barcodes order = new Inventory_barcodes.to_inventory_barcodes(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_id, item_type, status, supplier_id, is_vatable, wtax, supplier_id, selling_type, is_vatable, conversion, wtax, barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, serial_no, discount_rate, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, 1, 0);
             datas.add(order);
         }
 
@@ -371,7 +373,7 @@ public class MySales_Items {
                 double addtl_amount = rs.getDouble(40);
                 double wtax = rs.getDouble(41);
                 double cost = rs.getDouble(42);
-                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax, cost);
+                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax, cost,0);
                 datas.add(to);
             }
             return datas;
@@ -480,7 +482,7 @@ public class MySales_Items {
                 double wtax = rs.getDouble(41);
                 double cost = rs.getDouble(42);
                 discount_customer_name = rs.getString(43);
-                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax, cost);
+                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, true, addtl_amount, wtax, cost,0);
                 datas.add(to);
             }
             return datas;
@@ -491,7 +493,6 @@ public class MySales_Items {
         }
     }
 
-    
     public static List<MySales_Items.items> ret_data2(String where) {
         List<MySales_Items.items> datas = new ArrayList();
 
@@ -588,7 +589,7 @@ public class MySales_Items {
                 double addtl_amount = rs.getDouble(40);
                 double wtax = rs.getDouble(41);
                 double cost = rs.getDouble(42);
-                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax, cost);
+                MySales_Items.items to = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, false, addtl_amount, wtax, cost,0);
                 datas.add(to);
             }
             return datas;

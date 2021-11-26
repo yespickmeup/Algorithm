@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b513559-0f4f-4d59-b94b-4d3cfa9ea2b9">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="320"/>
+	<property name="ireport.y" value="96"/>
 	<parameter name="business_name" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="contact_no" class="java.lang.String"/>
@@ -109,7 +109,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<paragraph leftIndent="2" rightIndent="2"/>
 					</textElement>
-					<text><![CDATA[Gift Cert.:]]></text>
+					<text><![CDATA[GC:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement uuid="938287b7-853f-4a94-b013-59f3c6584145" x="0" y="0" width="77" height="20"/>

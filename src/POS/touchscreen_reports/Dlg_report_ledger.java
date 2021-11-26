@@ -1647,7 +1647,7 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     public static class TblledgerModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "Gift Cert", "Prepaid", "Online", "Net Due"
+            "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "GC", "Prepaid", "Online", "Net Due"
         };
 
         public TblledgerModel(ListModel listmodel) {

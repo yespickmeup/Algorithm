@@ -337,7 +337,7 @@ public class MySales {
 
     }
 
-    public static String add_sales(sales to_sales, List<MySales_Items.items> items, String location_ids, List<My_services.to_my_services> slip_nos) throws SQLException {
+    public static String add_sales(sales to_sales, List<MySales_Items.items> items, String location_ids, List<My_services.to_my_services> slip_nos, List<Warranties.to_warranties> warranties) throws SQLException {
         try {
             Connection conn = MyConnection.connect();
             String c_date = DateType.sf.format(new Date());
@@ -916,13 +916,13 @@ public class MySales {
 
                 double tt_qty = 0;
                 try {
-//                    Inventory_barcodes.to_inventory_barcodes tt = Inventory_barcodes.ret_to_conn(to_sale_items.item_code, to_sale_items.barcode, to_sale_items.location_id, conn);
+
                     String s20 = "select "
                             + " product_qty"
                             + " from inventory_barcodes where "
                             + " main_barcode='" + to_sale_items.item_code + "' and location_id='" + to_sale_items.location_id + "'"
                             + " ";
-//                    System.out.println(s20);
+
                     Statement stmt20 = conn.createStatement();
                     ResultSet rs20 = stmt20.executeQuery(s20);
                     while (rs20.next()) {
@@ -934,24 +934,20 @@ public class MySales {
                 }
 
                 double new_qty = tt_qty - (to_sale_items.conversion * to_sale_items.product_qty);
-//                System.out.println("Item: " + to_sale_items.item_code + " = " + to_sale_items.description + " : " + tt_qty);
-//                System.out.println("    New Qty: " + tt_qty + " Conversion: " + to_sale_items.conversion + " , product_qty: " + to_sale_items.product_qty);
-//                String serial_no = Segregator.this_shit(tt.serial_no, to_sale_items.serial_no);
+
                 String s4 = " update inventory_barcodes set "
                         + " product_qty='" + new_qty + "'"
                         + " where  main_barcode= '" + to_sale_items.item_code + "' and location_id='" + to_sale_items.location_id + "' "
                         + "";
+
                 PreparedStatement stmt4 = conn.prepareStatement(s4);
                 stmt4.execute();
-//                stmt.addBatch(s4);
-//                Lg.s(Inventory.class, "Successfully Updated");
 
             }
 
             //<editor-fold defaultstate="collapsed" desc=" slip nos ">
             if (!slip_nos.isEmpty()) {
                 for (My_services.to_my_services to_sale_slip_nos : slip_nos) {
-
 //                    Insert to Sale Slip Nos
                     String s13 = "insert into sale_slip_nos("
                             + "sales_no"
@@ -982,7 +978,7 @@ public class MySales {
                             + ")";
 
                     s13 = SqlStringUtil.parse(s13)
-                            .setString("sales_no", to_sales.sales_no)
+                            .setString("sales_no", sales_no)
                             .setString("transaction_no", to_sale_slip_nos.transaction_no)
                             .setString("slip_no", to_sale_slip_nos.service_slip_no)
                             .setString("no_of_items", MyUser.getUser_id())
@@ -1204,7 +1200,6 @@ public class MySales {
                         double cost = selling_price;
                         String barcodes = "";
                         String stock_transfer_id = to_stock_transfers.transaction_no;
-                        
 
                         Stock_transfers_items.to_stock_transfers_items st_item = new Stock_transfers_items.to_stock_transfers_items(id, item_code, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, barcodes, brand, brand_id, model, model_id, status, branch, branch_code, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
                         st_items.add(st_item);
@@ -1360,6 +1355,7 @@ public class MySales {
                                 + " from inventory_barcodes where "
                                 + " main_barcode='" + to_stock_transfers_items.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "'"
                                 + " ";
+
                         Statement stmt10 = conn.createStatement();
                         ResultSet rs10 = stmt10.executeQuery(s10);
                         double product_qty = 0;
@@ -1446,6 +1442,522 @@ public class MySales {
                             .ok();
 
                     stmt.addBatch(s15);
+
+                }
+
+            }
+            //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc=" Warranties ">
+            if (!warranties.isEmpty()) {
+                for (Warranties.to_warranties to_sale_slip_nos : warranties) {
+//                    Insert to Sale Slip Nos
+                    String s13 = "insert into sale_slip_nos("
+                            + "sales_no"
+                            + ",transaction_no"
+                            + ",slip_no"
+                            + ",no_of_items"
+                            + ",created_at"
+                            + ",created_by"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + ",department"
+                            + ",department_id"
+                            + ")values("
+                            + ":sales_no"
+                            + ",:transaction_no"
+                            + ",:slip_no"
+                            + ",:no_of_items"
+                            + ",:created_at"
+                            + ",:created_by"
+                            + ",:branch"
+                            + ",:branch_id"
+                            + ",:location"
+                            + ",:location_id"
+                            + ",:department"
+                            + ",:department_id"
+                            + ")";
+
+                    s13 = SqlStringUtil.parse(s13)
+                            .setString("sales_no", sales_no)
+                            .setString("transaction_no", to_sale_slip_nos.transaction_no)
+                            .setString("slip_no", to_sale_slip_nos.slip_no)
+                            .setString("no_of_items", MyUser.getUser_id())
+                            .setString("created_at", DateType.now())
+                            .setString("created_by", to_sales.user_id)
+                            .setString("branch", to_sale_slip_nos.branch)
+                            .setString("branch_id", to_sale_slip_nos.branch_id)
+                            .setString("location", to_sale_slip_nos.location)
+                            .setString("location_id", to_sale_slip_nos.location_id)
+                            .setString("department", "ASUS Service Center Only")
+                            .setNumber("department_id", 13)
+                            .ok();
+//                    System.out.println(s13);
+                    stmt.addBatch(s13);
+
+                    // Add stock Transfer
+                    //<editor-fold defaultstate="collapsed" desc=" stock transfer ">
+                    int id = 0;
+                    final String transaction_no = Stock_transfers.increment_id(to_sales.branch_id);
+                    String user_name = Users.user_name;
+
+                    String date_added = DateType.now();
+
+                    String remarks = "";
+                    String to_branch = to_sales.branch;
+                    String to_branch_id = to_sales.branch_id;
+                    String to_location = to_sales.location;
+                    String to_location_id = to_sales.location_id;
+
+                    String from_branch = to_sales.branch;
+                    String from_branch_id = to_sales.branch_id;
+                    String from_location = "ASUS";
+                    String from_location_id = "32";
+
+                    String at_branch = to_sales.branch;
+                    String at_branch_id = to_sales.branch_id;
+                    String at_location = to_sales.location;
+                    String at_location_id = to_sales.location_id;
+                    int is_uploaded = 0;
+                    String finalized_by_id = MyUser.getUser_id();
+                    String finalized_by = MyUser.getUser_screen_name();
+                    int service_id = 0;
+                    String service_trans_no = "";
+                    String service_slip_no = "";
+                    int service_by_id = 0;
+                    String service_by_name = "";
+
+                    PreparedStatement stmt16 = conn.prepareStatement("");
+                    final Stock_transfers.to_stock_transfers to_stock_transfers = new Stock_transfers.to_stock_transfers(id, transaction_no, user_name, date_added, remarks, to_branch, to_branch_id, to_location,
+                                                                                                                         to_location_id, from_branch, from_branch_id, from_location, from_location_id, 1, false, at_branch, at_branch_id, at_location, at_location_id, is_uploaded, finalized_by_id, finalized_by, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
+                    String s16 = "insert into stock_transfers("
+                            + "transaction_no"
+                            + ",user_name"
+                            + ",date_added"
+                            + ",remarks"
+                            + ",to_branch"
+                            + ",to_branch_id"
+                            + ",to_location"
+                            + ",to_location_id"
+                            + ",from_branch"
+                            + ",from_branch_id"
+                            + ",from_location"
+                            + ",from_location_id"
+                            + ",status"
+                            + ",at_branch"
+                            + ",at_branch_id"
+                            + ",at_location"
+                            + ",at_location_id"
+                            + ",finalized_by_id"
+                            + ",finalized_by"
+                            + ")values("
+                            + ":transaction_no"
+                            + ",:user_name"
+                            + ",:date_added"
+                            + ",:remarks"
+                            + ",:to_branch"
+                            + ",:to_branch_id"
+                            + ",:to_location"
+                            + ",:to_location_id"
+                            + ",:from_branch"
+                            + ",:from_branch_id"
+                            + ",:from_location"
+                            + ",:from_location_id"
+                            + ",:status"
+                            + ",:at_branch"
+                            + ",:at_branch_id"
+                            + ",:at_location"
+                            + ",:at_location_id"
+                            + ",:finalized_by_id"
+                            + ",:finalized_by"
+                            + ")";
+
+                    s16 = SqlStringUtil.parse(s16)
+                            .setString("transaction_no", to_stock_transfers.transaction_no)
+                            .setString("user_name", to_stock_transfers.user_name)
+                            .setString("date_added", DateType.now())
+                            .setString("remarks", to_stock_transfers.remarks)
+                            .setString("to_branch", to_stock_transfers.to_branch)
+                            .setString("to_branch_id", to_stock_transfers.to_branch_id)
+                            .setString("to_location", to_stock_transfers.to_location)
+                            .setString("to_location_id", to_stock_transfers.to_location_id)
+                            .setString("from_branch", to_stock_transfers.from_branch)
+                            .setString("from_branch_id", to_stock_transfers.from_branch_id)
+                            .setString("from_location", to_stock_transfers.from_location)
+                            .setString("from_location_id", to_stock_transfers.from_location_id)
+                            .setNumber("status", to_stock_transfers.status)
+                            .setString("at_branch", to_stock_transfers.at_branch)
+                            .setString("at_branch_id", to_stock_transfers.at_branch_id)
+                            .setString("at_location", to_stock_transfers.at_location)
+                            .setString("at_location_id", to_stock_transfers.at_location_id)
+                            .setString("finalized_by_id", to_stock_transfers.finalized_by_id)
+                            .setString("finalized_by", to_stock_transfers.finalized_by)
+                            .ok();
+                    stmt16.addBatch(s16);
+                    stmt16.executeBatch();
+
+                    //Search My Warranty Items
+                    String where2 = " where transaction_no='" + to_sale_slip_nos.transaction_no + "' ";
+                    String s17 = "select "
+                            + "id"
+                            + ",transaction_no"
+                            + ",remarks"
+                            + ",trans_type"
+                            + ",supplier"
+                            + ",supplier_id"
+                            + ",barcode"
+                            + ",description"
+                            + ",qty"
+                            + ",cost"
+                            + ",selling_price"
+                            + ",category"
+                            + ",category_id"
+                            + ",classification"
+                            + ",classification_id"
+                            + ",sub_class"
+                            + ",sub_class_id"
+                            + ",conversion"
+                            + ",unit"
+                            + ",warranty_date"
+                            + ",serial_no"
+                            + ",main_barcode"
+                            + ",brand"
+                            + ",brand_id"
+                            + ",model"
+                            + ",model_id"
+                            + ",status"
+                            + ",created_at"
+                            + ",created_by"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + ",slip_no"
+                            + " from warranty_items"
+                            + " " + where2;
+                    Statement stmt17 = conn.createStatement();
+                    ResultSet rs17 = stmt.executeQuery(s17);
+                    List<Stock_transfers_items.to_stock_transfers_items> st_items = new ArrayList();
+                    while (rs17.next()) {
+                        int id1 = rs17.getInt(1);
+                        String transaction_no1 = rs17.getString(2);
+                        String remarks1 = rs17.getString(3);
+                        String trans_type = rs17.getString(4);
+                        String supplier = rs17.getString(5);
+                        String supplier_id = rs17.getString(6);
+                        String barcode = rs17.getString(7);
+                        String description = rs17.getString(8);
+                        double qty = rs17.getDouble(9);
+                        double cost = rs17.getDouble(10);
+                        double selling_price = rs17.getDouble(11);
+                        String category = rs17.getString(12);
+                        String category_id = rs17.getString(13);
+                        String classification = rs17.getString(14);
+                        String classification_id = rs17.getString(15);
+                        String sub_class = rs17.getString(16);
+                        String sub_class_id = rs17.getString(17);
+                        double conversion = rs17.getDouble(18);
+                        String unit = rs17.getString(19);
+                        String warranty_date = rs17.getString(20);
+                        String serial_no = rs17.getString(21);
+                        String main_barcode = rs17.getString(22);
+                        String brand = rs17.getString(23);
+                        String brand_id = rs17.getString(24);
+                        String model = rs17.getString(25);
+                        String model_id = rs17.getString(26);
+                        int status = rs17.getInt(27);
+                        String created_at = rs17.getString(28);
+                        String created_by = rs17.getString(29);
+                        String branch = rs17.getString(30);
+                        String branch_id = rs17.getString(31);
+                        String location = rs17.getString(32);
+                        String location_id = rs17.getString(33);
+                        String slip_no = rs17.getString(34);
+
+                        String generic_name = "";
+                        double product_qty = qty;
+                        String barcodes = "";
+                        String stock_transfer_id = to_stock_transfers.transaction_no;
+
+                        Stock_transfers_items.to_stock_transfers_items st_item = new Stock_transfers_items.to_stock_transfers_items(id, main_barcode, description, generic_name, category, category_id, classification, classification_id, sub_class, sub_class_id, product_qty, unit, conversion, selling_price, date_added, user_name, "Regular", status, supplier, 0, cost, supplier_id, 0, 0, 0, 0, barcodes, brand, brand_id, model, model_id, status, branch, branch_id, location, location_id, stock_transfer_id, serial_no, to_branch, to_branch_id, to_location, to_location_id, at_branch, at_branch_id, at_location, at_location_id, service_id, service_trans_no, service_slip_no, service_by_id, service_by_name);
+                        st_items.add(st_item);
+                    }
+                    for (Stock_transfers_items.to_stock_transfers_items to_stock_transfers_items : st_items) {
+                        String s18 = "insert into stock_transfers_items("
+                                + "barcode"
+                                + ",description"
+                                + ",generic_name"
+                                + ",category"
+                                + ",category_id"
+                                + ",classification"
+                                + ",classification_id"
+                                + ",sub_classification"
+                                + ",sub_classification_id"
+                                + ",product_qty"
+                                + ",unit"
+                                + ",conversion"
+                                + ",selling_price"
+                                + ",date_added"
+                                + ",user_name"
+                                + ",item_type"
+                                + ",status"
+                                + ",supplier"
+                                + ",fixed_price"
+                                + ",cost"
+                                + ",supplier_id"
+                                + ",multi_level_pricing"
+                                + ",vatable"
+                                + ",reorder_level"
+                                + ",markup"
+                                + ",barcodes"
+                                + ",brand"
+                                + ",brand_id"
+                                + ",model"
+                                + ",model_id"
+                                + ",selling_type"
+                                + ",branch"
+                                + ",branch_code"
+                                + ",location"
+                                + ",location_id"
+                                + ",stock_transfer_id"
+                                + ",serial_no"
+                                + ",to_branch"
+                                + ",to_branch_id"
+                                + ",to_location"
+                                + ",to_location_id"
+                                + ",at_branch"
+                                + ",at_branch_id"
+                                + ",at_location"
+                                + ",at_location_id"
+                                + ")values("
+                                + ":barcode"
+                                + ",:description"
+                                + ",:generic_name"
+                                + ",:category"
+                                + ",:category_id"
+                                + ",:classification"
+                                + ",:classification_id"
+                                + ",:sub_classification"
+                                + ",:sub_classification_id"
+                                + ",:product_qty"
+                                + ",:unit"
+                                + ",:conversion"
+                                + ",:selling_price"
+                                + ",:date_added"
+                                + ",:user_name"
+                                + ",:item_type"
+                                + ",:status"
+                                + ",:supplier"
+                                + ",:fixed_price"
+                                + ",:cost"
+                                + ",:supplier_id"
+                                + ",:multi_level_pricing"
+                                + ",:vatable"
+                                + ",:reorder_level"
+                                + ",:markup"
+                                + ",:barcodes"
+                                + ",:brand"
+                                + ",:brand_id"
+                                + ",:model"
+                                + ",:model_id"
+                                + ",:selling_type"
+                                + ",:branch"
+                                + ",:branch_code"
+                                + ",:location"
+                                + ",:location_id"
+                                + ",:stock_transfer_id"
+                                + ",:serial_no"
+                                + ",:to_branch"
+                                + ",:to_branch_id"
+                                + ",:to_location"
+                                + ",:to_location_id"
+                                + ",:at_branch"
+                                + ",:at_branch_id"
+                                + ",:at_location"
+                                + ",:at_location_id"
+                                + ")";
+
+                        s18 = SqlStringUtil.parse(s18)
+                                .setString("barcode", to_stock_transfers_items.barcode)
+                                .setString("description", to_stock_transfers_items.description)
+                                .setString("generic_name", to_stock_transfers_items.generic_name)
+                                .setString("category", to_stock_transfers_items.category)
+                                .setString("category_id", to_stock_transfers_items.category_id)
+                                .setString("classification", to_stock_transfers_items.classification)
+                                .setString("classification_id", to_stock_transfers_items.classification_id)
+                                .setString("sub_classification", to_stock_transfers_items.sub_classification)
+                                .setString("sub_classification_id", to_stock_transfers_items.sub_classification_id)
+                                .setNumber("product_qty", to_stock_transfers_items.product_qty)
+                                .setString("unit", to_stock_transfers_items.unit)
+                                .setNumber("conversion", to_stock_transfers_items.conversion)
+                                .setNumber("selling_price", to_stock_transfers_items.selling_price)
+                                .setString("date_added", DateType.now())
+                                .setString("user_name", to_stock_transfers_items.user_name)
+                                .setString("item_type", to_stock_transfers_items.item_type)
+                                .setNumber("status", 1)
+                                .setString("supplier", to_stock_transfers_items.supplier)
+                                .setNumber("fixed_price", to_stock_transfers_items.fixed_price)
+                                .setNumber("cost", to_stock_transfers_items.cost)
+                                .setString("supplier_id", to_stock_transfers_items.supplier_id)
+                                .setNumber("multi_level_pricing", to_stock_transfers_items.multi_level_pricing)
+                                .setNumber("vatable", to_stock_transfers_items.vatable)
+                                .setNumber("reorder_level", to_stock_transfers_items.reorder_level)
+                                .setNumber("markup", to_stock_transfers_items.markup)
+                                .setString("barcodes", to_stock_transfers_items.barcodes)
+                                .setString("brand", to_stock_transfers_items.brand)
+                                .setString("brand_id", to_stock_transfers_items.brand_id)
+                                .setString("model", to_stock_transfers_items.model)
+                                .setString("model_id", to_stock_transfers_items.model_id)
+                                .setNumber("selling_type", to_stock_transfers_items.selling_type)
+                                .setString("branch", to_stock_transfers.from_branch)
+                                .setString("branch_code", to_stock_transfers.from_branch_id)
+                                .setString("location", to_stock_transfers.from_location)
+                                .setString("location_id", to_stock_transfers.from_location_id)
+                                .setString("stock_transfer_id", to_stock_transfers_items.stock_transfer_id)
+                                .setString("serial_no", to_stock_transfers_items.serial_no)
+                                .setString("to_branch", to_stock_transfers.to_branch)
+                                .setString("to_branch_id", to_stock_transfers_items.to_branch_id)
+                                .setString("to_location", to_stock_transfers_items.to_location)
+                                .setString("to_location_id", to_stock_transfers_items.to_location_id)
+                                .setString("at_branch", to_stock_transfers.at_branch)
+                                .setString("at_branch_id", to_stock_transfers.at_branch_id)
+                                .setString("at_location", to_stock_transfers.at_location)
+                                .setString("at_location_id", to_stock_transfers.at_location_id)
+                                .ok();
+                        stmt.addBatch(s18);
+
+                        //update items
+                        String s10 = "select "
+                                + " product_qty"
+                                + ",conversion"
+                                + " from inventory_barcodes where "
+                                + " main_barcode='" + to_stock_transfers_items.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "'"
+                                + " ";
+
+                        Statement stmt10 = conn.createStatement();
+                        ResultSet rs10 = stmt10.executeQuery(s10);
+                        double product_qty = 0;
+                        double conversion = 0;
+                        while (rs10.next()) {
+                            product_qty = rs10.getDouble(1);
+                            conversion = rs10.getDouble(2);
+                        }
+
+                        double new_qty = product_qty - (conversion * to_stock_transfers_items.product_qty);
+
+                        String s4 = "update inventory_barcodes set "
+                                + " product_qty='" + new_qty + "'"
+                                + " where  main_barcode= '" + to_stock_transfers_items.barcode + "' and location_id='" + to_stock_transfers.from_location_id + "' "
+                                + "";
+
+                        PreparedStatement stmt2 = conn.prepareStatement(s4);
+                        stmt2.execute();
+
+                        //to location +
+                        String s11 = "select "
+                                + " product_qty"
+                                + ",conversion"
+                                + " from inventory_barcodes where "
+                                + " main_barcode='" + to_stock_transfers_items.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "'"
+                                + " ";
+                        Statement stmt11 = conn.createStatement();
+                        ResultSet rs11 = stmt11.executeQuery(s11);
+
+                        double conversion1 = 0;
+                        double product_qty11 = 0;
+                        double conversion11 = 0;
+                        while (rs11.next()) {
+                            product_qty11 = rs11.getDouble(1);
+                            conversion11 = rs11.getDouble(2);
+                        }
+
+                        double new_qty1 = product_qty11 + (conversion11 * to_stock_transfers_items.product_qty);
+
+                        String s5 = "update inventory_barcodes set "
+                                + " product_qty='" + new_qty1 + "'"
+                                + " where  main_barcode= '" + to_stock_transfers_items.barcode + "' and location_id='" + to_stock_transfers.to_location_id + "' "
+                                + "";
+
+                        PreparedStatement stmt21 = conn.prepareStatement(s5);
+                        stmt21.execute();
+
+                    }
+
+                    //</editor-fold>
+//                    Update warranty to zero sales_no
+                    String s14 = "update warranties set "
+                            + " status= :status "
+                            + " where transaction_no='" + to_sale_slip_nos.transaction_no + "' "
+                            + " ";
+
+                    s14 = SqlStringUtil.parse(s14)
+                            .setNumber("status", 1)
+                            .ok();
+                    stmt.addBatch(s14);
+
+                    // Select warranty items
+                    String s20 = "select "
+                            + "id"
+                            + ",qty"
+                            + ",main_barcode"
+                            + ",branch"
+                            + ",branch_id"
+                            + ",location"
+                            + ",location_id"
+                            + " from warranty_items"
+                            + " where transaction_no='" + to_sale_slip_nos.transaction_no + "'";
+
+                    Statement stmt20 = conn.createStatement();
+                    ResultSet rs20 = stmt20.executeQuery(s20);
+                    while (rs20.next()) {
+                        int ids = rs20.getInt(1);
+                        double qty = rs20.getDouble(2);
+                        String main_barcode = rs20.getString(3);
+                        String branch = rs20.getString(4);
+                        String branch_id = rs20.getString(5);
+                        String location = rs20.getString(6);
+                        String location_id = rs20.getString(7);
+
+//                    Update warranty items                        
+                        String s15 = "update warranty_items set "
+                                + " status= :status "
+                                + " where id='" + ids + "' "
+                                + " ";
+
+                        s15 = SqlStringUtil.parse(s15)
+                                .setNumber("status", 1)
+                                .ok();
+                        stmt.addBatch(s15);
+
+//                        Search qty items
+//                        String s10 = "select "
+//                                + " product_qty"
+//                                + ",conversion"
+//                                + " from inventory_barcodes where "
+//                                + " main_barcode='" + main_barcode + "' and location_id='" + location_id + "'"
+//                                + " ";
+//                        Statement stmt10 = conn.createStatement();
+//                        ResultSet rs10 = stmt10.executeQuery(s10);
+//                        double product_qty = 0;
+//                        double conversion = 0;
+//                        while (rs10.next()) {
+//                            product_qty = rs10.getDouble(1);
+//                            conversion = rs10.getDouble(2);
+//                        }
+//
+//                        double new_qty = product_qty - (conversion * qty);
+//
+//                        String s4 = "update inventory_barcodes set "
+//                                + " product_qty='" + new_qty + "'"
+//                                + " where  main_barcode= '" + main_barcode + "' and location_id='" + location_id + "' "
+//                                + "";
+//
+//                        PreparedStatement stmt2 = conn.prepareStatement(s4);
+//                        stmt2.execute();
+
+                    }
 
                 }
 

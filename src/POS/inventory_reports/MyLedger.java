@@ -32,34 +32,41 @@ public class MyLedger {
         List<Srpt_item_ledger.field> field3 = new ArrayList();
         List<Srpt_item_ledger.field> fields = new ArrayList();
 
-        String where = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' "
+        String where = " where item_code like '" + my_item_code + "'  and location_id = '" + loc_id + "' "
                 + "   ";
 
-        String where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 "
+        String where2 = " where main_barcode like '" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 "
                 + "  ";
-        String where4 = " where main_barcode ='" + my_item_code + "'  and branch_id = '" + loc_id + "' "
+        String where4 = " where main_barcode like '" + my_item_code + "'  and branch_id = '" + loc_id + "' "
                 + "  ";
-        String where3 = " where barcode ='" + my_item_code + "'    "
+        String where3 = " where barcode like '" + my_item_code + "'    "
                 + "  ";
-        String wheree = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 "
+        String wheree = " where item_code like '" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 "
                 + "   ";
-        String where5 = " where main_barcode ='" + my_item_code + "'  and from_location_id = '" + loc_id + "' and status=1 "
-                + "  or main_barcode ='" + my_item_code + "'  and to_location_id = '" + loc_id + "' and status=1";
+        String where5 = " where main_barcode like '" + my_item_code + "'  and from_location_id = '" + loc_id + "' and status=1 "
+                + "  or main_barcode like '" + my_item_code + "'  and to_location_id = '" + loc_id + "' and status=1";
+
+        String where6 = " where main_barcode like '" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 "
+                + "  ";
         if (!date_from.isEmpty()) {
-            where = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+            where = " where item_code like '" + my_item_code + "'  and location_id = '" + loc_id + "' and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                     + "   ";
-            where2 = " where main_barcode ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                    + "  ";
-            where3 = " where barcode ='" + my_item_code + "'  and Date(date_added) between '" + date_from + "' and '" + date_to + "'  "
-                    + "  ";
-            where4 = " where main_barcode ='" + my_item_code + "'  and branch_id = '" + loc_id + "' and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+            where2 = " where main_barcode like '" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                     + "  ";
 
-            wheree = " where item_code ='" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1  and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+            where3 = " where barcode like '" + my_item_code + "'  and Date(date_added) between '" + date_from + "' and '" + date_to + "'  "
+                    + "  ";
+            where4 = " where main_barcode like '" + my_item_code + "'  and branch_id = '" + loc_id + "' and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "  ";
+
+            wheree = " where item_code like '" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1  and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
                     + "   ";
 
-            where5 = " where main_barcode ='" + my_item_code + "'  and from_location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
-                    + "  or main_barcode ='" + my_item_code + "'  and to_location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "'";
+            where5 = " where main_barcode like '" + my_item_code + "'  and from_location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "' "
+                    + "  or main_barcode  like '" + my_item_code + "'  and to_location_id = '" + loc_id + "' and status=1 and Date(date_added) between '" + date_from + "' and '" + date_to + "'";
+            where6 = " where main_barcode like '" + my_item_code + "'  and location_id = '" + loc_id + "' and status=1 and Date(created_at) between '" + date_from + "' and '" + date_to + "' "
+                    + "  ";
+
         }
 //        System.out.println(where);
         List<Srpt_item_ledger.field> sales = new ArrayList();//Srpt_item_ledger.sales(where);
@@ -77,6 +84,7 @@ public class MyLedger {
         List<Srpt_item_ledger.field> other_adjustments = new ArrayList();
         List<Srpt_item_ledger.field> return_to_supplier = new ArrayList(); // Srpt_item_ledger.charge_in_advance_cancelled(where);
         List<Srpt_item_ledger.field> returns_exchange2 = new ArrayList();
+        List<Srpt_item_ledger.field> warranty_items = new ArrayList();
 //                    System.out.println(where);
         try {
             Connection conn = MyConnection.connect();
@@ -457,7 +465,7 @@ public class MyLedger {
                     + ",to_location_id"
                     + " from stock_transfers_items"
                     + " " + where3;
-
+//            System.out.println("s4: "+s4);
             Statement stmt4 = conn.createStatement();
             ResultSet rs4 = stmt4.executeQuery(s4);
             while (rs4.next()) {
@@ -1395,7 +1403,6 @@ public class MyLedger {
                 return_to_supplier.add(field2);
             }
             //</editor-fold>
-
             //<editor-fold defaultstate="collapsed" desc=" Return Exchange2 ">
             String s20 = "select "
                     + "id"
@@ -1525,6 +1532,81 @@ public class MyLedger {
 
             }
             //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc=" Transfers ">
+            List<Srpt_item_ledger.field> warranty_in = new ArrayList();
+            List<Srpt_item_ledger.field> warranty_out = new ArrayList();
+            String s8 = "select "
+                    + " id"
+                    + ",transaction_no"
+                    + ",barcode"
+                    + ",description"
+                    + ",qty"
+                    + ",unit"
+                    + ",conversion"
+                    + ",cost"
+                    + ",created_at"
+                    + ",trans_type"
+                    + ",status"
+                    + ",branch"
+                    + ",branch_id"
+                    + ",location"
+                    + ",location_id"
+                    + ",created_by"
+                    + " from warranty_items"
+                    + " " + where6;
+            Statement stmt8 = conn.createStatement();
+            ResultSet rs8 = stmt8.executeQuery(s8);
+            while (rs8.next()) {
+                int id = rs8.getInt(1);
+                String transaction_no = rs8.getString(2);
+                String barcode = rs8.getString(3);
+                String description = rs8.getString(4);
+                double product_qty = rs8.getDouble(5);
+                String unit = rs8.getString(6);
+                double conversion = rs8.getDouble(7);
+                double cost = rs8.getDouble(8);
+                String created_at = rs8.getString(9);
+                String trans_type = rs8.getString(10);
+                int status = rs8.getInt(11);
+                String branch = rs8.getString(12);
+                String branch_id = rs8.getString(13);
+                String location = rs8.getString(14);
+                String location_id = rs8.getString(15);
+                String created_by = rs8.getString(16);
+                Date created = new Date();
+                try {
+                    created = POS.util.DateType.datetime.parse(created_at);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Srpt_item_ledger.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                String date = POS.util.DateType.convert_slash_datetime3(created_at);
+
+                String cost1 = FitIn.fmt_wc_0(cost);
+                String price1 = "";
+                String months = DateType.convert_datetime_to_month(created_at);
+                String remarks1 = "To: " + branch + " - " + branch_id;
+                String remarks2 = "Fr: " + location + " - " + location_id;
+                String balance = "";
+//                Srpt_item_ledger.field field_out = new Srpt_item_ledger.field("Warranty-Out", date, "", FitIn.fmt_woc(product_qty), balance, "Algorithm - Dgte", "9", "ASUS", "32", "Algorithm - Dgte", "9", "Selling Area", "14", created_by, "", created, transaction_no, cost1, price1, months, remarks1);
+
+                Srpt_item_ledger.field field_in = new Srpt_item_ledger.field("Warranty-In", date, FitIn.fmt_woc(product_qty), "", balance, "Algorithm - Dgte", "9", "", "", "Algorithm - Dgte", "9", "ASUS", "32", created_by, "", created, transaction_no, cost1, price1, months, remarks2);
+
+                if (trans_type.equalsIgnoreCase("Out")) {
+                    if (loc_id.equalsIgnoreCase("32")) {
+                        warranty_in.add(field_in);
+                    }
+//                    if (loc_id.equalsIgnoreCase(location_id)) {
+//                        warranty_out.add(field_out);
+//                    }
+
+                }
+            }
+
+            warranty_items.addAll(warranty_in);
+            warranty_items.addAll(warranty_out);
+
+            //</editor-fold>
             fields.addAll(inventory_count);
             fields.addAll(sales);
             fields.addAll(receipts);
@@ -1540,6 +1622,7 @@ public class MyLedger {
             fields.addAll(other_adjustments);
             fields.addAll(return_to_supplier);
             fields.addAll(returns_exchange2);
+            fields.addAll(warranty_items);
             List<Srpt_item_ledger.field> f_field = new ArrayList();
 
             Collections.sort(fields, new Comparator<Srpt_item_ledger.field>() {

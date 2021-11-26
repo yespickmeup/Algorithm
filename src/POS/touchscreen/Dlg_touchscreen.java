@@ -24,6 +24,7 @@ import POS.my_services.S1_my_services_item_replacements_customers;
 import POS.orders.S1_order_items;
 import POS.orders.S1_orders;
 import POS.receipts.Warranties;
+import POS.receipts.Warranty_items;
 import POS.reports3.Dlg_report_item;
 import POS.unit_of_measure.S1_unit_of_measure;
 import POS.unit_of_measure.S1_unit_of_measure.to_uom;
@@ -3182,6 +3183,10 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
             }
         });
 
+        String pool_db=System.getProperty("pool_db","");
+        if(pool_db.equalsIgnoreCase("db_algorithm") || pool_db.equalsIgnoreCase("db_smis_bayawan_algorithm")){
+            btn_gift.setText("F2 - GCash");
+        }
     }
 
     Window parent = (Window) this;
@@ -5963,9 +5968,11 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
         final MySales.sales sales = new MySales.sales(id, sales_no, date_added, user_screen_name, user_id, session_no, remarks, gross_amount, amount_due, status, sales_type, line_discount, customer_id, customer_name, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, charge_type, charge_type_id, charge_reference_no, charge_customer_name, charge_customer_id, charge_amount, charge_date_applied, check_bank, check_no, check_amount, check_holder, check_date, credit_card_type, credit_card_rate, credit_card_amount, credit_card_no, credit_card_holder, credit_card_approval_code, gift_certificate_from, gift_certificate_description, gift_certificate_no, gift_certificate_amount, prepaid_customer_name, prepaid_customer_id, prepaid_amount, addtl_amount, wtax, branch, branch_id, location, location_id, items1,
                                                       charge_days, online_bank, online_reference_no, online_amount, online_holder, online_date, ref_or_no, ref_si_no, ref_cr_no);
         try {
-            sales_no = MySales.add_sales(sales, items, location_id, slip_nos);
+            System.out.println("warranties: " + warranties.size());
+            sales_no = MySales.add_sales(sales, items, location_id, slip_nos, warranties);
             sales.setSales_no(sales_no);
             slip_nos.clear();
+            warranties.clear();
             my_sales = sales;
             if (my_sales == null) {
                 System.out.println("NULL");
@@ -5992,6 +5999,8 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
 //        System.out.println("Discount:" + f_discount.getDiscount_customer_id());
 //        System.out.println("Gross: " + my_sales.gross_amount);
 //        System.out.println("Line Discount: " + my_sales.line_discount);
+//        System.out.println("Sales: " + my_sales);
+//        System.out.println("Sales: " + my_sales);
 //        System.out.println("Sales: " + my_sales);
 
         nd.do_pass(orders, f_customer, f_discount, my_sales.gross_amount, my_sales.line_discount, my_sales);
@@ -6364,23 +6373,26 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
     }
 
     List< My_services.to_my_services> slip_nos = new ArrayList();
+    List< Warranties.to_warranties> warranties = new ArrayList();
 
     private void slip_no() {
         Window p = (Window) this;
         Dlg_touchscreen_slip_no nd = Dlg_touchscreen_slip_no.create(p, true);
         nd.setTitle("");
-        nd.do_pass(slip_nos);
+        nd.do_pass(slip_nos, warranties);
         nd.setCallback(new Dlg_touchscreen_slip_no.Callback() {
 
             @Override
             public void ok(CloseDialog closeDialog, Dlg_touchscreen_slip_no.OutputData data) {
                 closeDialog.ok();
                 slip_nos = data.to;
+                warranties = data.asus;
 
+                List<Inventory_barcodes.to_inventory_barcodes> order = new ArrayList();
                 if (!slip_nos.isEmpty()) {
                     jButton46.setContentAreaFilled(true);
                     List< My_services.to_my_services> services = data.to;
-                    List<Inventory_barcodes.to_inventory_barcodes> order = new ArrayList();
+
                     for (My_services.to_my_services service : services) {
                         String where = " where transaction_no='" + service.transaction_no + "' ";
 
@@ -6439,31 +6451,99 @@ public class Dlg_touchscreen extends javax.swing.JDialog {
                         }
                     }
 
-                    List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
-                    List<Inventory_barcodes.to_inventory_barcodes> order1 = new ArrayList();
-                    for (Inventory_barcodes.to_inventory_barcodes ord : orders) {
+                }
+                if (!warranties.isEmpty()) {
+                    jButton46.setContentAreaFilled(true);
+                    List< Warranties.to_warranties> warr = data.asus;
+                    List<Inventory_barcodes.to_inventory_barcodes> order2 = new ArrayList();
+                    for (Warranties.to_warranties war : warr) {
+                        String where = " where transaction_no='" + war.transaction_no + "' ";
 
-                        if (ord.is_slip == 0) {
-                            order1.add(ord);
+                        List<Warranty_items.to_warranty_items> items = Warranty_items.ret_data(where);
+                        for (Warranty_items.to_warranty_items to : items) {
+                            int id = 0;
+                            String barcode = to.barcode;
+                            String description = to.description;
+                            String generic_name = "";
+                            String category = to.category;
+                            String category_id = to.category_id;
+                            String classification = to.classification;
+                            String classification_id = to.classification_id;
+                            String sub_classification = to.sub_class;
+                            String sub_classification_id = to.sub_class_id;
+                            double product_qty = to.qty;
+                            String unit = to.unit;
+                            double conversion = to.conversion;
+                            double selling_price = to.selling_price;
+                            String date_added = DateType.now();
+                            String user_name = MyUser.getUser_id();
+                            String item_type = "Regular";
+                            int status = to.status;
+                            String supplier = to.supplier;
+                            int fixed_price = 0;
+                            double cost = to.selling_price;
+                            String supplier_id = to.supplier_id;
+                            int multi_level_pricing = 0;
+                            int vatable = 0;
+                            double reorder_level = 0;
+                            double markup = 0;
+                            String main_barcode = to.main_barcode;
+                            String brand = to.brand;
+                            String brand_id = to.brand_id;
+                            String model = to.model;
+                            String model_id = to.model_id;
+                            int selling_type = 0;
+
+                            String branch = my_branch;
+                            String branch_code = my_branch_id;
+                            String location = my_location;
+                            String location_id = my_location_id;
+                            String serial_no = "";
+                            String selected_serials = "";
+                            double discount = 0;
+                            double discount_amount = 0;
+                            String discount_name = "";
+                            String discount_customer_name = "";
+                            String discount_customer_id = "";
+                            double addtl_amount = 0;
+                            double wtax = 0;
+                            int allow_negative_inventory = 1;
+                            int auto_order = 0;
+                            Inventory_barcodes.to_inventory_barcodes to3 = new Inventory_barcodes.to_inventory_barcodes(id, barcode, description, generic_name, category, category_id, classification, classification_id, sub_classification, sub_classification_id, product_qty, unit, conversion, selling_price, date_added, user_name, item_type, status, supplier, fixed_price, cost, supplier_id, multi_level_pricing, vatable, reorder_level, markup, main_barcode, brand, brand_id, model, model_id, selling_type, branch, branch_code, location, location_id, serial_no, selected_serials, discount, discount_amount, discount_name, discount_customer_name, discount_customer_id, addtl_amount, wtax, allow_negative_inventory, auto_order, 1, 2);
+                            order.add(to3);
                         }
                     }
-                    tbl_orders_ALM.clear();
-                    tbl_orders_ALM.addAll(order1);
-
-                    tbl_orders_ALM.addAll(order);
-                    tbl_orders_M.fireTableDataChanged();
-                    compute_total();
-                    tf_search.selectAll();
-                    tf_search.grabFocus();
                 }
+                List<Inventory_barcodes.to_inventory_barcodes> orders = tbl_orders_ALM;
+                List<Inventory_barcodes.to_inventory_barcodes> order1 = new ArrayList();
+                List<Inventory_barcodes.to_inventory_barcodes> order_asus = new ArrayList();
+                for (Inventory_barcodes.to_inventory_barcodes ord : orders) {
+                    if (ord.is_slip == 0) {
+                        order1.add(ord);
+                    }
+
+                }
+                tbl_orders_ALM.clear();
+                tbl_orders_ALM.addAll(order1);
+
+                tbl_orders_ALM.addAll(order);
+                tbl_orders_M.fireTableDataChanged();
+                compute_total();
+                tf_search.selectAll();
+                tf_search.grabFocus();
+
             }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+        }
+        );
+        nd.setLocationRelativeTo(
+                this);
+        nd.setVisible(
+                true);
     }
 
     private void clear_slip_nos() {
         slip_nos.clear();
+        warranties.clear();
         jButton33.setContentAreaFilled(false);
     }
 }

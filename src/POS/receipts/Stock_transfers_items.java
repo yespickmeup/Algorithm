@@ -76,7 +76,7 @@ public class Stock_transfers_items {
         public final String service_trans_no;
         public final String service_slip_no;
         public final int service_by_id;
-        public final String service_by_name;    
+        public final String service_by_name;
 
         public to_stock_transfers_items(int id, String barcode, String description, String generic_name, String category, String category_id, String classification, String classification_id, String sub_classification, String sub_classification_id, double product_qty, String unit, double conversion, double selling_price, String date_added, String user_name, String item_type, int status, String supplier, int fixed_price, double cost, String supplier_id, int multi_level_pricing, int vatable, double reorder_level, double markup, String barcodes, String brand, String brand_id, String model, String model_id, int selling_type, String branch, String branch_code, String location, String location_id, String stock_transfer_id, String serial_no, String to_branch, String to_branch_id, String to_location, String to_location_id, String at_branch, String at_branch_id, String at_location, String at_location_id, int service_id, String service_trans_no, String service_slip_no, int service_by_id, String service_by_name) {
             this.id = id;
@@ -864,12 +864,13 @@ public class Stock_transfers_items {
                     + ",service_by_name"
                     + " from stock_transfers_items  "
                     + " " + where;
-
+//            System.out.println("s0: " + s0);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String barcode = rs.getString(2);
+
                 String description = rs.getString(3);
                 String generic_name = rs.getString(4);
                 String category = rs.getString(5);

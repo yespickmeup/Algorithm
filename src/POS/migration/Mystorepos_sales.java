@@ -159,7 +159,7 @@ public class Mystorepos_sales {
                     Mystorepos.to_mystorepos_products prod = (Mystorepos.to_mystorepos_products) products.get(0);
                     cost = prod.o_price;
                 }
-                MySales_Items.items it = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected, addtl_amount, wtax, cost);
+                MySales_Items.items it = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected, addtl_amount, wtax, cost,0);
                 items.add(it);
             }
 

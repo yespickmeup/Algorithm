@@ -1078,7 +1078,7 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                 tf_search.grabFocus();
             }
         });
-        
+
     }
 
     static int show_cost = 1;
@@ -1246,20 +1246,19 @@ public class Dlg_report_inventory_ledger extends javax.swing.JDialog {
                     init_report();
                 }
                 if (inventory_barcoders_list.size() > 1) {
-                    Object[][] obj = new Object[inventory_barcoders_list.size()][6];
+                    Object[][] obj = new Object[inventory_barcoders_list.size()][2];
                     int i = 0;
                     for (Inventory_barcodes.to_inventory_barcodes to : inventory_barcoders_list) {
                         obj[i][0] = " " + to.main_barcode;
-                        obj[i][1] = " " + to.barcode;
-                        obj[i][2] = " " + to.description;
+                        obj[i][1] = " " + to.description;
                         i++;
                     }
                     JLabel[] labels = {};
                     double width = tf_search.getWidth();
                     width = width * .60;
                     int w = FitIn.toInt("" + width);
-                    int[] tbl_widths_customers = {60, 100, tf_search.getWidth() - 200};
-                    String[] col_names = {"Item Code", "Barcode", "Description"};
+                    int[] tbl_widths_customers = {300, tf_search.getWidth() - 300};
+                    String[] col_names = {"Item Code", "Description"};
                     TableRenderer tr = new TableRenderer();
                     TableRenderer.setPopup(tf_search, obj, labels, tbl_widths_customers, col_names);
 

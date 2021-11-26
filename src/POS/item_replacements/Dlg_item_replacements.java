@@ -1299,9 +1299,11 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
     private void myInit() {
 
 //        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
-//        System.setProperty("return_exchange_days", "2000");
+//        System.setProperty("pool_host","192.168.0.51");
+//        System.setProperty("pool_password","password");
 //        MyUser.setUser_id("1");
+
+
         init_key();
         init_tbl_sale_items(jTable1);
         init_tbl_item_replacements(tbl_item_replacements);
@@ -1696,7 +1698,7 @@ public class Dlg_item_replacements extends javax.swing.JDialog {
                     double addtl_amount = 0;
                     double wtax = 0;
                     double cost=0;
-                    MySales_Items.items other = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected1, addtl_amount, wtax,cost);
+                    MySales_Items.items other = new MySales_Items.items(id, sales_no, item_code, barcode, description, generic_name, item_type, supplier_name, supplier_id, serial_no, product_qty, unit, conversion, selling_price, date_added, user_id, user_screen_name, status, is_vatable, selling_type, discount_name, discount_rate, discount_amount, discount_customer_name, discount_customer_id, branch, branch_code, location, location_id, category, category_id, classification, classification_id, sub_classification, sub_classification_id, brand, brand_id, model, model_id, selected1, addtl_amount, wtax,cost,0);
                     others.add(other);
                     //</editor-fold>
                     break;

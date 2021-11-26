@@ -317,15 +317,15 @@ public class Dlg_touchscreen_gift_certificate extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tf_descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_descriptionActionPerformed
-       tf_gc_no.grabFocus();
+        tf_gc_no.grabFocus();
     }//GEN-LAST:event_tf_descriptionActionPerformed
 
     private void tf_gc_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_gc_noActionPerformed
-       tf_amount.grabFocus();
+        tf_amount.grabFocus();
     }//GEN-LAST:event_tf_gc_noActionPerformed
 
     private void tf_amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_amountActionPerformed
-         ok();
+        ok();
     }//GEN-LAST:event_tf_amountActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -333,7 +333,7 @@ public class Dlg_touchscreen_gift_certificate extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tf_fromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_fromActionPerformed
-       tf_description.grabFocus();
+        tf_description.grabFocus();
     }//GEN-LAST:event_tf_fromActionPerformed
 
     /**
@@ -356,6 +356,11 @@ public class Dlg_touchscreen_gift_certificate extends javax.swing.JDialog {
 
     private void myInit() {
         init_key();
+        String pool_db = System.getProperty("pool_db", "");
+        if (pool_db.equalsIgnoreCase("db_algorithm") || pool_db.equalsIgnoreCase("db_smis_bayawan_algorithm")) {
+            jLabel3.setText("Trans No.:");
+          
+        }
     }
 
     public void do_pass() {
@@ -379,12 +384,12 @@ public class Dlg_touchscreen_gift_certificate extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 

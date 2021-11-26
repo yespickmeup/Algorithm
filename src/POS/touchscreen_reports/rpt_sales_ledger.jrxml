@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="633272d5-b0b3-456b-9fef-25aacda9ae4d">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="213"/>
+	<property name="ireport.y" value="370"/>
 	<parameter name="business_name" class="java.lang.String"/>
 	<parameter name="address" class="java.lang.String"/>
 	<parameter name="contact_no" class="java.lang.String"/>
@@ -240,14 +240,14 @@
 				<text><![CDATA[Credit Card]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="35e6f5f6-23e7-4054-950d-14ccb78e2a04" x="604" y="0" width="37" height="36"/>
+				<reportElement uuid="35e6f5f6-23e7-4054-950d-14ccb78e2a04" x="604" y="16" width="37" height="20"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<paragraph leftIndent="2" rightIndent="2"/>
 				</textElement>
-				<text><![CDATA[Gift Cert]]></text>
+				<text><![CDATA[GC]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="48320d09-c900-4c3e-b5d9-6c42ef42b746" x="641" y="16" width="45" height="20"/>
@@ -506,7 +506,7 @@
 					<font size="11" isBold="false"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[Gift Certificate:]]></text>
+				<text><![CDATA[GC:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="14fd9a98-9cce-4fcf-b11c-632a99b8927f" x="-1" y="142" width="84" height="15"/>

@@ -1249,8 +1249,9 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
     private javax.swing.JTextField tf_supplier;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
-        System.setProperty("pool_db", "db_algorithm");
-//        System.setProperty("pool_host", "192.168.1.51");
+//        System.setProperty("pool_db", "db_algorithm");
+//        System.setProperty("pool_host", "192.168.0.51");
+//        System.setProperty("pool_password", "password");
 //        MyUser.setUser_id("1");
         
         init_key();
