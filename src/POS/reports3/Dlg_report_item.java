@@ -2274,7 +2274,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     where = where2 + where3 + where4;
                 } else {
                     if (jCheckBox18.isSelected()) {
-                        where = where + " order by branch,locatoin,main_barcode asc ";
+                        where = where + " order by branch,locatoin,cast(main_barcode as int) asc ";
                     } else {
                         where = where + " order by branch,location,description asc ";
                     }
