@@ -2268,13 +2268,13 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     String where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,description asc";
 
                     if (jCheckBox18.isSelected()) {
-                        where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,cast(main_barcode as int) asc";
+                        where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,CAST(main_barcode as unsigned) asc";
 
                     }
                     where = where2 + where3 + where4;
                 } else {
                     if (jCheckBox18.isSelected()) {
-                        where = where + " order by branch,locatoin,cast(main_barcode as int) asc ";
+                        where = where + " order by branch,location,CAST(main_barcode as unsigned) asc ";
                     } else {
                         where = where + " order by branch,location,description asc ";
                     }

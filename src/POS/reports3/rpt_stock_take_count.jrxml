@@ -287,7 +287,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{selling_price}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="89efdbed-041c-49ae-9d70-677407ed50b1" x="384" y="0" width="107" height="15"/>
 				<box>
 					<bottomPen lineWidth="0.2"/>
