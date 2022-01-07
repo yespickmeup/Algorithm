@@ -258,7 +258,7 @@ public class Srpt_adjust_errors {
                 int vatable = rs.getInt(24);
                 double reorder_level = rs.getDouble(25);
                 double markup = rs.getDouble(26);
-                int main_barcode = rs.getInt(27);
+                String main_barcode = rs.getString(27);
                 String brand = rs.getString(28);
                 String brand_id = rs.getString(29);
                 String model = rs.getString(30);
