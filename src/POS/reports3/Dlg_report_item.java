@@ -2268,7 +2268,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
                     String where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,description asc";
 
                     if (jCheckBox18.isSelected()) {
-                        where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,main_barcode asc";
+                        where4 = " or " + where.replaceAll("where", " ") + " and description like '%" + jTextField1.getText() + "%' order by branch,location,cast(main_barcode as int) asc";
 
                     }
                     where = where2 + where3 + where4;
