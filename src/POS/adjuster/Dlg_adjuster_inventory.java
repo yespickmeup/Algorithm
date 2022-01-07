@@ -2250,7 +2250,7 @@ public class Dlg_adjuster_inventory extends javax.swing.JDialog {
                 String date = DateType.month_date.format(new Date());
                 Field.Combo lo = (Field.Combo) jTextField7;
 
-                String where = " where location_id='" + lo.getId() + "'  order by description asc  ";
+                String where = " where location_id='" + lo.getId() + "'  order by CAST(main_barcode as unsigned) asc  ";
                 List<Srpt_adjust_errors.field> fields = Srpt_adjust_errors.ret_data(where);
                 errors = fields;
                 System.out.println("size: " + fields.size());
