@@ -1263,14 +1263,14 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
         jLabel33.setVisible(false);
         jLabel18.setVisible(false);
         lbl_gross1.setVisible(false);
-        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Finalize)" + "' limit 1";
-        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
-        if (!privileges.isEmpty()) {
-            show_cost = 1;
-            jLabel33.setVisible(true);
-            jCheckBox12.setVisible(true);
-
-        }
+//        String wheree = " where user_id='" + MyUser.getUser_id() + "' and previledge like '" + "Return to Supplier - (Finalize)" + "' limit 1";
+//        List<S1_user_previleges.to_user_previleges> privileges = S1_user_previleges.ret_data(wheree);
+//        if (!privileges.isEmpty()) {
+//            show_cost = 1;
+//            jLabel33.setVisible(true);
+//            jCheckBox12.setVisible(true);
+//
+//        }
 
         init_tbl_return_to_suppliers(tbl_return_to_suppliers);
         init_tbl_return_to_supplier_items(tbl_return_to_supplier_items);
@@ -1279,7 +1279,7 @@ public class Dlg_return_to_supplier extends javax.swing.JDialog {
 
     }
 
-    int show_cost = 0;
+    int show_cost = 1;
 
     private void item_ledger() {
         SwingUtilities.invokeLater(new Runnable() {
