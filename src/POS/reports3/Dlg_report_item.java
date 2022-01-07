@@ -297,6 +297,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox16 = new javax.swing.JCheckBox();
         jCheckBox17 = new javax.swing.JCheckBox();
         jCheckBox18 = new javax.swing.JCheckBox();
+        jCheckBox19 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -609,6 +610,9 @@ public class Dlg_report_item extends javax.swing.JDialog {
         jCheckBox18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox18.setText("Sort by Item Code");
 
+        jCheckBox19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox19.setText("Count");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -662,23 +666,25 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addComponent(tf_branch_id, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox6)
                                 .addGap(18, 18, 18)
                                 .addComponent(jCheckBox18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox16)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox17)))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCheckBox15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBox16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jCheckBox19, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox17)
+                                .addGap(2, 2, 2)
+                                .addComponent(jCheckBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -717,7 +723,8 @@ public class Dlg_report_item extends javax.swing.JDialog {
                             .addComponent(jCheckBox7)
                             .addComponent(jCheckBox14)
                             .addComponent(jCheckBox15)
-                            .addComponent(jCheckBox17))
+                            .addComponent(jCheckBox17)
+                            .addComponent(jCheckBox19))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1327,6 +1334,7 @@ public class Dlg_report_item extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox16;
     private javax.swing.JCheckBox jCheckBox17;
     private javax.swing.JCheckBox jCheckBox18;
+    private javax.swing.JCheckBox jCheckBox19;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
@@ -2896,13 +2904,25 @@ public class Dlg_report_item extends javax.swing.JDialog {
                 rpt.fields.addAll(datas);
                 String pool_db = System.getProperty("pool_db", "db_smis");
                 String jrxml = "rpt_stock_take.jrxml";
+                if (jCheckBox19.isSelected()) {
+                    jrxml = "rpt_stock_take_count.jrxml";
+                }
                 if (!jCheckBox7.isSelected()) {
                     jrxml = "rpt_stock_take_long.jrxml";
+                    if (jCheckBox19.isSelected()) {
+                        jrxml = "rpt_stock_take_long_count.jrxml";
+                    }
                 }
                 if (view_only == 1) {
                     jrxml = "rpt_stock_take_cost.jrxml";
+                    if (jCheckBox19.isSelected()) {
+                        jrxml = "rpt_stock_take_cost_count.jrxml";
+                    }
                     if (!jCheckBox7.isSelected()) {
                         jrxml = "rpt_stock_take_cost_long.jrxml";
+                        if (jCheckBox19.isSelected()) {
+                            jrxml = "rpt_stock_take_cost_long_count.jrxml";
+                        }
                     }
 
                     if (pool_db.equalsIgnoreCase("db_smis_dumaguete_angel_buns")) {
