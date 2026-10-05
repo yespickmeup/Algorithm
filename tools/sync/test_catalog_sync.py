@@ -9,6 +9,14 @@ import catalog_sync as s
 
 
 class SyncTests(unittest.TestCase):
+    def test_inventory_only_delete_preserves_all_assembly_rows(self):
+        row = {'barcode': 'A', 'description': 'old'}
+        with patch.object(s, 'query', side_effect=[[], [row]]), patch.object(s, 'execute') as execute:
+            dst = Mock()
+            self.assertTrue(s.apply_change(Mock(), dst, 'inventory', 'delete', None, row, ['description'], True, True, False))
+            self.assertEqual(len(execute.call_args_list), 2)
+            self.assertFalse(any('inventory_assembly' in call.args[1] for call in execute.call_args_list))
+
     def test_java_properties_password_characters_and_escapes(self):
         with tempfile.TemporaryDirectory() as directory:
             p=Path(directory)/"my_config.conf"
@@ -59,7 +67,7 @@ class SyncTests(unittest.TestCase):
         row={'barcode':'A','description':'old'}
         with patch.object(s,'query',side_effect=[[],[row]]),patch.object(s,'execute') as execute:
             dst=Mock()
-            self.assertTrue(s.apply_change(Mock(),dst,'inventory','delete',None,row,['description'],True,True))
+            self.assertTrue(s.apply_change(Mock(),dst,'inventory','delete',None,row,['description'],True,True,True))
             statements=[call.args[1] for call in execute.call_args_list]
             self.assertEqual(len(statements),3)
             self.assertIn('inventory_barcodes',statements[0])

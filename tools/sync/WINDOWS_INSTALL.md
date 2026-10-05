@@ -10,7 +10,29 @@
 
 Cloud credentials/database name are read from the local database's existing settings row. The installer does not create a MySQL database/server or restore any data: the configured local server and its settings table must already exist and be accessible.
 
-## What setup does
+## Hourly unattended sync
+
+After the read-only check, run `Install-Hourly-Sync.cmd` to register **Algorithm Inventory Hourly Sync**. This explicitly enables writes: main pushes to cloud; other branches pull only verified publications. The first run is about two minutes after installation, then every hour indefinitely, every day. Python exits between runs. The task uses `pythonw.exe` to avoid console windows and ignores overlapping starts.
+
+The default installer asks for the current Windows account password so the task can run while signed out. Use the real password, not Windows Hello PIN or MySQL credentials. Windows Task Scheduler manages that credential; the package does not store it. Account/server policies may require an administrator or batch-logon rights. A registration failure is reported; it is not treated as success. Do not run under an unrelated account whose Python/configuration paths differ.
+
+If you intentionally only need runs while the current user is signed in, use:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install-Hourly-Sync.ps1 -LoggedOnOnly
+```
+
+To validate configuration and the task definition without scheduling or database connections:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Install-Hourly-Sync.ps1 -CheckOnly
+```
+
+`Test-Sync-ReadOnly.cmd` runs the new runner in check mode. Scheduled apply results go to `.sync-state/hourly-status.json` and `hourly-sync.log`; check results use a separate JSON file. Blocked/incomplete/failed runs return code 2 and Windows retries up to three times at five-minute intervals. Each run catches up in up to 30 batches, stops starting batches after 45 minutes, and has a 55-minute Task Scheduler execution limit. Per-item transactions and the pending publication flag support recovery after interruption. The next run compares actual data again. `sync_hourly_max_batches` and `sync_hourly_max_seconds` may be overridden in existing options; the hourly schedule is controlled by Task Scheduler, independently of `sync_interval` used by legacy `--watch`.
+
+Re-run the hourly installer after moving the package, changing the account password or changing the selected config path. Disable/delete the named task in Task Scheduler to stop automatic runs. Update all branches and stop legacy catalog writers; missing/blocked cloud publication still prevents branch writes. Keep `sync_assemblies=false` on every machine for the verified inventory-only publication. All assembly rows remain untouched until their parent codes can be repaired. Protocol-v1 packages must be updated to accept protocol-v2 publication scope. The server must be powered on and online; missed starts run when Windows can, not while the server is off.
+
+## Python environment installation
 
 - Reuses a working Python 3.10+ installation when found, or downloads the latest stable Python 3.13 Windows installer listed on python.org for x64, x86 or ARM64.
 - Requires a valid Authenticode signature issued to Python Software Foundation before executing the downloaded installer.
@@ -50,5 +72,7 @@ If this PC has no Python and downloads are blocked, install an approved Python 3
 Run the installer again after updating the tools to reuse the environment and check/install the pinned dependency. Do not copy `.sync-state` (reports/backups), `.venv-sync`, `sync.local.conf`, or real `my_config.conf` into a distribution ZIP. Transfer credentials separately through your normal private process.
 
 ## Validation performed
+
+Hourly package: 51 tests passed from the packaged directory; the new read-only runner checked the configured databases with zero writes. The hourly task definition passed `Install-Hourly-Sync.ps1 -CheckOnly` using Windows ScheduledTasks. No task was registered here, and Windows credential registration/signed-out execution still needs the server test. `tools/build_sync_package.py` refreshes both `dist/Database-Tools-Windows` and its ZIP and checks that every packaged file matches; SHA256SUMS.txt is included.
 
 Tested with Windows PowerShell 5.1: syntax and check-only mode; a clean project-folder setup using an existing interpreter created a new venv, installed PyMySQL and passed dependency/import checks. 24 Python tests passed. A truly Python-free Windows VM and the downloaded Python install/signature path have not been executed in this session. Setup/testing did not connect to or change database records.

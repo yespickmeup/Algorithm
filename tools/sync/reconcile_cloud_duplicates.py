@@ -22,7 +22,7 @@ def eligible(source, rows):
     return ''
 
 
-def reconcile(local, cloud, code, journal, delete_absent=False, expected_count=None):
+def reconcile(local, cloud, code, journal, delete_absent=False, expected_count=None, sync_assemblies=False):
     source = s.query(local, 'SELECT * FROM inventory WHERE barcode <=> %s ORDER BY id LIMIT 2', (code,))
     cloud.begin()
     try:
@@ -41,7 +41,8 @@ def reconcile(local, cloud, code, journal, delete_absent=False, expected_count=N
             journal.flush()
             os.fsync(journal.fileno())
             s.execute(cloud, 'DELETE FROM inventory_barcodes WHERE main_barcode=%s', (code,))
-            s.execute(cloud, 'DELETE FROM inventory_assembly WHERE main_item_code=%s', (code,))
+            if sync_assemblies:
+                s.execute(cloud, 'DELETE FROM inventory_assembly WHERE main_item_code=%s', (code,))
             for row in rows:
                 if s.execute(cloud, 'DELETE FROM inventory WHERE id=%s', (row['id'],)) != 1:
                     raise s.SyncError('Cloud-only duplicate changed during deletion')
@@ -81,7 +82,7 @@ def run(config, state, apply, delete_absent_only=False):
     backup = str(menu.backup_database(s, runtime, 'cloud_', state)) if apply else None
     result = {'apply': apply, 'delete_absent_only': delete_absent_only, 'cloud_backup': backup, 'deleted_master_rows': 0, 'reconciled_groups': 0, 'skipped': []}
     stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    with s.connection(runtime, 'pool_') as local, s.connection(runtime, 'cloud_') as cloud, s.bridge_guard.publication_session(s, cloud, True, apply):
+    with s.connection(runtime, 'pool_') as local, s.connection(runtime, 'cloud_') as cloud, s.bridge_guard.publication_session(s, cloud, True, apply, config):
         for table in ('inventory', 'inventory_barcodes'):
             engine = s.query(cloud, 'SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=%s', (table,))
             if not engine or engine[0]['ENGINE'] != 'InnoDB':
@@ -114,7 +115,7 @@ def run(config, state, apply, delete_absent_only=False):
             for i, group in enumerate(groups, 1):
                 code = group['barcode']
                 if apply:
-                    count, reason = reconcile(local, cloud, code, journal, delete_absent_only, group.get('expected_count'))
+                    count, reason = reconcile(local, cloud, code, journal, delete_absent_only, group.get('expected_count'), s.boolean(config, 'sync_assemblies', False))
                 else:
                     source = s.query(local, 'SELECT * FROM inventory WHERE barcode <=> %s LIMIT 2', (code,))
                     rows = s.query(cloud, 'SELECT * FROM inventory WHERE barcode <=> %s', (code,))

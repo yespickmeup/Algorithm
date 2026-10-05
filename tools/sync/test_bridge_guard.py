@@ -7,6 +7,32 @@ import bridge_guard as guard
 
 
 class GuardTests(unittest.TestCase):
+    def test_inventory_only_default_and_explicit_full_scope(self):
+        self.assertEqual(list(guard.policies(s, {})), ['inventory'])
+        self.assertIn('inventory_assembly', guard.policies(s, {'sync_assemblies': 'true'}))
+
+    def test_scope_mismatch_refuses_branch_before_fingerprint(self):
+        with patch.object(s, 'query', side_effect=[[{}], [{'protocol_version': guard.VERSION, 'status': 'ready', 'scope': 'inventory+assembly', 'catalog_hash': 'x'}]]), patch.object(guard, 'fingerprint') as fingerprint:
+            with self.assertRaises(s.SyncError):
+                guard.require_ready(s, Mock(), {'sync_assemblies': 'false'})
+            fingerprint.assert_not_called()
+
+    def test_disabled_assembly_does_not_block_verified_inventory_scope(self):
+        with sqlite3.connect(':memory:') as disk:
+            disk.execute('CREATE TABLE disabled(tbl)')
+            disk.execute('CREATE TABLE blocked(tbl,k)')
+            disk.execute('CREATE TABLE snapshot(side,tbl,k,id,data)')
+            disk.execute("INSERT INTO disabled VALUES ('inventory_assembly')")
+            for side in ('source', 'destination'):
+                disk.execute("INSERT INTO snapshot VALUES (?,'inventory','A',1,'{}')", (side,))
+            self.assertEqual(guard.publication_problem(s, disk, ['inventory']), '')
+            self.assertIn('Invalid', guard.publication_problem(s, disk))
+
+    def test_existing_publication_table_gets_scope_column(self):
+        with patch.object(s, 'execute') as execute, patch.object(s, 'fields', return_value={'id', 'status'}):
+            guard.ensure_table(s, Mock())
+            self.assertIn('ADD COLUMN scope', execute.call_args.args[1])
+
     def test_role_override_cannot_turn_branch_into_publisher(self):
         with self.assertRaises(s.SyncError):
             guard.role(s, {'main_branch': 'true'}, {'is_main_branch': 0})
@@ -24,7 +50,7 @@ class GuardTests(unittest.TestCase):
 
     def test_cloud_changes_after_ready_are_rejected(self):
         for actual, accepted in [('original', True), ('modified', False)]:
-            with patch.object(s, 'query', side_effect=[[{}], [{'protocol_version': 1, 'status': 'ready', 'catalog_hash': 'original'}]]), patch.object(guard, 'fingerprint', return_value=actual):
+            with patch.object(s, 'query', side_effect=[[{}], [{'protocol_version': guard.VERSION, 'scope': 'inventory', 'status': 'ready', 'catalog_hash': 'original'}]]), patch.object(guard, 'fingerprint', return_value=actual):
                 if accepted:
                     guard.require_ready(s, Mock())
                 else:

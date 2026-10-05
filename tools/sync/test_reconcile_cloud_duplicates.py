@@ -11,7 +11,7 @@ class CloudDuplicateTests(unittest.TestCase):
         rows = [{'id': 1, 'product_qty': 0}, {'id': 2, 'product_qty': 0}]
         with tempfile.TemporaryFile(mode='w+', encoding='utf-8') as journal, patch.object(s, 'query', side_effect=[[], rows, [{'n': 10}]]), patch.object(s, 'execute', return_value=1) as execute:
             cloud = Mock()
-            self.assertEqual(repair.reconcile(Mock(), cloud, 'A', journal, True, 2), (2, ''))
+            self.assertEqual(repair.reconcile(Mock(), cloud, 'A', journal, True, 2, True), (2, ''))
             statements = [c.args[1] for c in execute.call_args_list]
             self.assertEqual(len(statements), 4)
             self.assertIn('WHERE main_item_code=%s', statements[1])

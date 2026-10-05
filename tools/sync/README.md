@@ -80,7 +80,7 @@ The script resolves files relative to its location except explicitly supplied pa
 
 | Option | Default | Behavior |
 | --- | --- | --- |
-| sync_interval | 300 | Seconds between completed cycles |
+| sync_interval | 3600 | Seconds between completed legacy --watch cycles; Task Scheduler controls hourly runs separately |
 | sync_page_size | 200 | Maximum catalog records read per page |
 | sync_max_changes | 100 | Maximum committed item/assembly operations per cycle |
 | sync_prices | false | Preserve existing branch prices; main-to-cloud always copies main prices |
@@ -88,6 +88,7 @@ The script resolves files relative to its location except explicitly supplied pa
 | sync_max_deletes | 10 | Maximum planned deletions per table before blocking the write cycle |
 | sync_delete_percent | 5 | Maximum fraction of destination rows removed per table, as a percent |
 | sync_duplicates | skip | Skip duplicate identities on either side; `stop` instead aborts the cycle |
+| sync_assemblies | false | Inventory-only publication; preserve every assembly row. Enable on main and branches only after assembly identities are repaired. |
 | sync_connect_timeout | 10 | Connection timeout in seconds |
 | sync_read_timeout / sync_write_timeout | 30 | Socket timeouts in seconds |
 
@@ -97,7 +98,7 @@ Updates preserve existing inventory and location stock quantities, IDs, location
 
 Catalog fields include names, categories and IDs, units/conversion, prices under the selected policy, costs, supplier information, markup, brand/model, flags and barcodes. Assembly component quantity is a recipe value and is synchronized; it is not the branch's on-hand stock quantity. The worker does not transfer sales, receipts, stock transfers, or account transactions.
 
-Inventory deletion also removes its destination inventory_barcodes and parent assembly rows, atomically for that item, matching Inventory.delete_inventory. Assembly membership additions, updates and removals follow the same source authority. Invalid/empty identity keys exclude the whole affected table from writes; invalid inventory also excludes assemblies. Duplicate barcodes are skipped, including assembly operations whose exact parent/component key is blocked. No duplicate cleanup is performed automatically.
+Inventory deletion removes its destination inventory_barcodes atomically with the master item. With the default `sync_assemblies=false`, all assembly rows are preserved, even for deleted inventory parents, until the clerk repairs their identities. If assembly syncing is explicitly enabled, membership changes and parent-row deletions follow the same source authority. Invalid/empty identity keys exclude the whole affected enabled table from writes; invalid inventory also excludes assemblies. Duplicate barcodes are skipped, including enabled assembly operations whose exact parent/component key is blocked. No duplicate cleanup is performed automatically by the hourly worker.
 
 ## Memory, retries and consistency
 
@@ -146,14 +147,20 @@ Tests use fake connections/in-memory SQLite to cover comparison, transaction rol
 
 See ../../docs/INVENTORY_STRUCTURE.md for the CRUD contract and remaining differences. Branch price preservation retains unit and conversion too, because the serialized unit field embeds prices. Master status is replicated; existing child update fields match Java's catalog edit. Always refresh comparison counts before applying.
 
+## Hourly Windows runs
+
+Use `Install-Hourly-Sync.cmd` after installing Python and testing with `Test-Sync-ReadOnly.cmd`. The installer registers a Windows task that runs `hourly_sync.py --apply` hourly every day, catching up in bounded batches then exiting. It selects the config beside the package first, with the user-profile config as fallback; task registration stores the resolved absolute path. Main pushes to cloud; branches pull verified cloud data. Status, retries, signed-out execution and removal instructions are in [WINDOWS_INSTALL.md](WINDOWS_INSTALL.md). The default menu remains read-only. Extracting the ZIP or running Install-Windows does not install an automatic writer.
+
 ## Main → cloud → branches publication gate
 
-Main apply obtains a cloud-wide advisory lock and marks the publication `pending` before reconciling. After each bounded batch it takes fresh source/cloud snapshots. It marks the publication `ready` only when both catalog tables have valid unique identities, main inventory is nonempty, and every compared field matches with no remaining additions, updates or deletions. Otherwise it remains `blocked`; an interrupted run leaves `pending`. Main may continue its next batch while blocked.
+Main apply obtains a cloud-wide advisory lock and marks the publication `pending` before reconciling. After each bounded batch it takes fresh source/cloud snapshots. It marks the publication `ready` only when every enabled catalog table has valid unique identities, main inventory is nonempty, and every compared field matches with no remaining additions, updates or deletions. Protocol v2 adds an explicit scope to the cloud control table: `inventory` by default, or `inventory+assembly` only with `sync_assemblies=true`. Disabled assembly rows are not changed, hashed or presented as verified. Otherwise publication remains `blocked`; an interrupted run leaves `pending`. Main may continue its next batch while blocked.
 
-A branch apply takes the same cloud lock, checks the publication protocol/status, and verifies a SHA-256 fingerprint of the cloud inventory/assembly master rows before writing locally. Missing, pending, blocked or changed publications stop branch writes. The lock covers the entire branch cycle, serializing cooperating branch pulls with main publication. MySQL 5.5 supports only one named lock per connection; the branch destination lock is on its separate local connection, and main does not acquire a second cloud lock. Read-only reports remain available while publication is blocked.
+A branch apply takes the same cloud lock, checks the publication protocol/status/scope, and verifies a SHA-256 fingerprint of the enabled cloud master rows before writing locally. Missing, pending, blocked, differently scoped or changed publications stop branch writes. Main and branches must agree on `sync_assemblies`. The lock covers the entire branch cycle, serializing cooperating branch pulls with main publication. MySQL 5.5 supports only one named lock per connection; the branch destination lock is on its separate local connection, and main does not acquire a second cloud lock. Read-only reports remain available while publication is blocked.
 
 This verifies the published master catalog and assembly policy, not every cloud location row or arbitrary table. Existing quantity and branch-price policies still apply. Legacy Java sync and older Python packages do not honor the new protocol: stop those writers and update every branch package before using the bridge. Independent edits made by such writers during a branch cycle are not prevented by advisory locks. A valid publication can become older than main until the next poll; branches receive a completed version rather than a guarantee of instantaneous freshness.
 
 `audit_bridge.py --config PATH` creates private read-only `bridge-identity-audit.html` and JSON reports. `reconcile_cloud_duplicates.py --config PATH` previews cloud duplicate cleanup; add `--apply` to back up cloud, keep one cloud master per unique main identity, copy main catalog fields, and remove extra zero-stock cloud master rows. It skips ambiguous/missing main identities and nonzero cloud master stock, preserves location rows/quantities, journals before-images, and leaves publication blocked pending a full main verification. It does not edit local main or invalid assemblies. Do not treat repeated `inventory_barcodes.main_barcode` values as duplicates: those rows belong to different locations.
 
-Use `--delete-absent-only` on that cleanup tool for the separate cloud-only duplicate deletion plan. With `--apply`, it backs up cloud, enforces the total deletion budget and nonempty main, rechecks identities/row counts, and removes the absent master rows plus their barcode and parent-assembly dependents, matching catalog deletion semantics. Blank-parent assemblies remain untouched. A recreated main item or changed duplicate count is skipped. Results are saved separately in `cloud-absent-duplicate-result.json`.
+Use `--delete-absent-only` on that cleanup tool for the separate cloud-only duplicate deletion plan. With `--apply`, it backs up cloud, enforces the total deletion budget and nonempty main, rechecks identities/row counts, and removes the absent master rows plus barcode dependents. Parent-assembly dependents are deleted only when assembly syncing is explicitly enabled. Blank-parent assemblies remain untouched. A recreated main item or changed duplicate count is skipped. Results are saved separately in `cloud-absent-duplicate-result.json`.
+
+`reconcile_latest_main.py --config PATH` previews an explicitly authorized latest-record cleanup. `--apply` backs up both databases, journals before-images and selects the maximum of updated_at/date_added, with updated_at, date_added and highest ID breaking ties. It refuses groups with nonzero master stock or no valid dates. It removes losing main master rows, refreshes existing main location catalog fields without altering stock, and reconciles cloud to those main winners. It never changes assembly rows. `--reuse-backups` is only for resuming the same repair session using its fresh `latest-selection-backups.json`. This one-time tool is not part of the hourly job. Refresh publication with the normal main worker after completion.

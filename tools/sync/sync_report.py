@@ -74,7 +74,7 @@ No database updates or deletions were executed by report generation. New/updated
 
 Synced means all compared master fields match. Stock quantities, IDs, location ownership, source metadata and upload flags are excluded. This does not verify every inventory_barcodes location row or tier-pricing table. Counts below total rows reflect excluded duplicate identities; ambiguous codes are shown for review, not declared synchronized.
 
-Excluded tables: {', '.join(disabled) or 'none'}. An excluded table has not been verified as synchronized.
+Excluded tables: {', '.join(disabled) or 'none'}. Tables can be excluded by configuration or invalid identities. An excluded table has not been verified as synchronized.
 
 Compared fields: {', '.join(columns)}.
 

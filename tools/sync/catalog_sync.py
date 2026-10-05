@@ -250,7 +250,7 @@ def barcode_rows(conn, item, columns, main, sync_prices):
         insert(conn, "inventory_barcodes", row)
 
 
-def apply_change(source, dest, table, operation, desired, before, columns, main, prices):
+def apply_change(source, dest, table, operation, desired, before, columns, main, prices, sync_assemblies=False):
     keyrow = desired or before
     predicate, args = where_key(table, keyrow)
     # Recheck source immediately before the write; polling is eventually consistent.
@@ -275,7 +275,8 @@ def apply_change(source, dest, table, operation, desired, before, columns, main,
         if operation == "delete":
             if table == "inventory":
                 execute(dest, "DELETE FROM inventory_barcodes WHERE main_barcode=%s", args)
-                execute(dest, "DELETE FROM inventory_assembly WHERE main_item_code=%s", args)
+                if sync_assemblies:
+                    execute(dest, "DELETE FROM inventory_assembly WHERE main_item_code=%s", args)
             execute(dest, f"DELETE FROM {qi(table)} WHERE {predicate}", args)
         else:
             values = {k: desired[k] for k in columns}
@@ -313,7 +314,7 @@ def cycle(config, apply, state_dir):
         deletes = boolean(config, "sync_deletes", True)
         if not all(runtime.get("cloud_"+k) for k in ("host", "user", "db")):
             raise SyncError("Cloud settings incomplete")
-        with connection(runtime, "cloud_") as cloud, bridge_guard.publication_session(sys.modules[__name__], cloud, main, apply):
+        with connection(runtime, "cloud_") as cloud, bridge_guard.publication_session(sys.modules[__name__], cloud, main, apply, config):
             source, dest = (local, cloud) if main else (cloud, local)
             LOG.info("direction=%s mode=%s prices=%s deletes=%s", "main-to-cloud" if main else "cloud-to-branch", "apply" if apply else "dry-run", prices, deletes)
             # One writer per destination among instances of this script, even on different machines.
@@ -332,7 +333,10 @@ def cycle(config, apply, state_dir):
                         duplicate_policy=config.get("sync_duplicates","skip")
                         if duplicate_policy not in ("skip","stop"):
                             raise SyncError("sync_duplicates must be skip or stop")
-                        policies = {"inventory": sync_columns(CATALOG,prices), "inventory_assembly": sync_columns(ASSEMBLY,prices)}
+                        policies = bridge_guard.policies(sys.modules[__name__], config, prices)
+                        if 'inventory_assembly' not in policies:
+                            disk.execute("INSERT INTO disabled VALUES ('inventory_assembly')")
+                            LOG.info('assembly syncing disabled; all assembly records preserved')
                         for conn in (source, dest):
                             for table, cols in policies.items():
                                 if not set(["id"]+KEYS[table]+cols) <= fields(conn, table):
@@ -366,10 +370,12 @@ def cycle(config, apply, state_dir):
                                     changes=[k for k in row if op != "delete" and row[k] != old.get(k)]
                                     report.write(encode({"table":table,"operation":op,"key":payload(row,KEYS[table]),"changed_fields":changes})+"\n")
                         LOG.info("proposed plan saved to last-plan.jsonl (private state directory)")
+                        planned_items = 0
                         for table in policies:
                             counts = {"upsert":0,"delete":0}
                             for op, _, _ in plan(disk, table):
                                 counts[op] += 1
+                            planned_items += counts['upsert'] + counts['delete']
                             LOG.info("plan table=%s upserts=%s deletion_candidates=%s",table,counts["upsert"],counts["delete"])
                             if deletes and counts["delete"]:
                                 total = disk.execute("SELECT COUNT(*) FROM snapshot WHERE side='destination' AND tbl=?",(table,)).fetchone()[0]
@@ -391,7 +397,7 @@ def cycle(config, apply, state_dir):
                                         break
                                     if op == "delete" and not deletes:
                                         continue
-                                    committed=apply_change(source,dest,table,op,json.loads(desired) if desired else None,json.loads(before) if before else None,cols,main,prices)
+                                    committed=apply_change(source,dest,table,op,json.loads(desired) if desired else None,json.loads(before) if before else None,cols,main,prices,'inventory_assembly' in policies)
                                     changed += committed
                                     if committed:
                                         item=json.loads(desired or before)
@@ -403,7 +409,7 @@ def cycle(config, apply, state_dir):
                         if apply and main:
                             publication = bridge_guard.finish_publication(sys.modules[__name__], source, cloud, disk, config)
                         LOG.info("cycle complete committed_items=%s",changed)
-                        return {'committed':changed,'before':summary,'publication':publication}
+                        return {'committed':changed,'before':summary,'publication':publication,'planned_items':planned_items}
             finally:
                 if apply and not main:
                     with suppress(Exception):
@@ -441,7 +447,7 @@ def main():
         config={}
         try:
             config=load_config(args.config,args.options)
-            interval=number(config,"sync_interval",300,10,86400)
+            interval=number(config,"sync_interval",3600,10,86400)
             cycle(config,args.apply,args.state_dir)
             failures=0
         except Exception as exc:
