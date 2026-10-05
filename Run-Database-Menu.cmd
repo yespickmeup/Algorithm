@@ -5,8 +5,8 @@ if not exist ".venv-sync\Scripts\python.exe" (
   pause
   exit /b 1
 )
-set "SYNC_CONFIG=%USERPROFILE%\my_config.conf"
-if not exist "%SYNC_CONFIG%" set "SYNC_CONFIG=%~dp0my_config.conf"
+set "SYNC_CONFIG=%~dp0my_config.conf"
+if not exist "%SYNC_CONFIG%" set "SYNC_CONFIG=%USERPROFILE%\my_config.conf"
 if not exist "%SYNC_CONFIG%" (
   echo Database configuration is missing. Run Install-Windows.cmd first.
   pause

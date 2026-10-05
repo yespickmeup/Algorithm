@@ -1,5 +1,7 @@
 # Lightweight SMIS catalog synchronization
 
+Fresh Windows machine: run `Install-Windows.cmd` from the extracted tool folder. See [Windows installation](WINDOWS_INSTALL.md) for connection setup and optional backup-client requirements. No Java build is required.
+
 ## Interactive menu (added 2026-10-05)
 
 Double-click `Run-Database-Menu.cmd` in the project root, or run:
@@ -44,7 +46,7 @@ This session already created `.venv-sync` and installed PyMySQL on this machine.
 
 Connection properties are read from the existing `my_config.conf`. When running inside this repository, missing pool credentials are resolved from MyMain's startup defaults in memory. For standalone deployment, put explicit `pool_host`, `pool_port`, `pool_db`, `pool_user`, and `pool_password` in the existing private configuration. Cloud connection details come from its local `settings` row, matching Java startup. Exactly one settings row is required.
 
-Set `main_branch=true` on the main server and `main_branch=false` on both real branches in `sync.local.conf`. If omitted, the worker uses `main_branch` from my_config.conf, then `settings.is_main_branch`. It cannot read a running JVM's System properties directly. In this session the current local settings reported main branch = 1, even though the schema name is db_algorithm_kabankalan. Confirm each machine's role when deploying.
+The local database's `settings.is_main_branch` determines the role (1 = main, 0 = branch). An explicit `main_branch` in `sync.local.conf` or `my_config.conf` must agree with that role, otherwise the worker stops before connecting to cloud. This prevents a copied main configuration from turning a branch into a publisher. The worker cannot read a running JVM's System properties. The current local main database is `db_algorithm`.
 
 ## Run
 
@@ -99,7 +101,7 @@ Inventory deletion also removes its destination inventory_barcodes and parent as
 
 ## Memory, retries and consistency
 
-The cloud inventory table has no dependable updated_at column, and the existing is_uploaded flags do not capture hard deletions or all write paths. Consequently each cycle reads catalog snapshots in primary-key pages, compares them in a temporary disk-backed SQLite file, and writes only differences. This reduces Python memory use, but it is still a full catalog poll over the network, not change-data capture. No triggers, new MySQL tables, or indexes are installed.
+The existing is_uploaded flags do not capture hard deletions or all write paths. Consequently each cycle reads catalog snapshots in primary-key pages, compares them in a temporary disk-backed SQLite file, and writes only differences. This reduces Python memory use, but it is still a full catalog poll over the network, not change-data capture. Main apply creates the small cloud `smis_catalog_publication` control table; no triggers or catalog indexes are installed.
 
 SQLite's page cache is limited to approximately 2 MiB; payload memory is proportional to page size. This is not a hard cap on total process RAM. Temporary snapshots contain catalog data, never connection settings, and are removed on normal exit. An OS crash may leave a snapshot directory under .sync-state; keep that directory private. Logs rotate at 1 MB with three backups and contain counts/error codes rather than passwords, SQL values, or product details.
 
@@ -122,12 +124,36 @@ Existing barcode records are refreshed when their parent inventory record change
 
 PyMySQL connection/timeout behavior was checked against its [official implementation](https://github.com/PyMySQL/PyMySQL/blob/main/pymysql/connections.py).
 
-## Tests
+## One-time main-to-cloud repair
+
+`repair_main_cloud.py` performs a bounded reconciliation using the local main branch as source. It backs up both databases first, applies one item as a canary, then up to 100 items per batch, and refreshes the read-only comparison after each batch. It stops on errors, lack of progress, or after 31 batches. Duplicate identities and invalid-key tables remain excluded; completion means no unambiguous master-catalog differences remain, not identical physical row counts.
+
+```powershell
+.\.venv-sync\Scripts\python.exe tools/sync/repair_main_cloud.py --config "$env:USERPROFILE\my_config.conf" --options sync.local.conf --apply
+```
+
+This command writes to the cloud. Do not run Java inventory sync or another destination catalog writer concurrently. Use the configuration for the authoritative main database. Full SQL backups are saved under `.sync-state/backups`; `pre-repair-backups.json` records their paths. `--reuse-backups` is for resuming the same repair session with those completed backups, not routine future runs. Backups have not been restore-tested.
+
+Committed item keys and operations are recorded in `.sync-state/applied-changes.jsonl`; the post-check is in `inventory-report.html`, and successful completion writes `repair-result.json`. A lost commit response or journal-write failure may leave a committed change absent from the journal; the fresh database comparison determines remaining work. Existing stock quantities are preserved, and newly created destination rows start at zero stock. Menu option 3 remains read-only.
+
+## Automated verification
 
 ```powershell
 .\.venv-sync\Scripts\python.exe -m unittest discover -s tools/sync -p "test_*.py" -v
 ```
 
-Tests use fake connections/in-memory SQLite to cover comparison, transaction rollback, lost-response retries, deletions, branch price/quantity preservation and resource cleanup. Live verification is read-only; end-to-end writes must be validated on isolated database copies before deployment.
+Tests use fake connections/in-memory SQLite to cover comparison, transaction rollback, lost-response retries, deletions, branch price/quantity preservation, role checks, publication gating and resource cleanup. Authorized main-to-cloud writes and blocked-publication behavior have also been checked against the configured databases; a full successful branch rollout has not been tested.
 
-18 tests pass after the POS.inventory review. See ../../docs/INVENTORY_STRUCTURE.md for the CRUD contract and remaining differences. Branch price preservation now retains unit and conversion too, because the serialized unit field embeds prices. Master status is replicated; existing child update fields match Java's catalog edit. Prior live comparison counts predate these changes and need refreshing before apply.
+See ../../docs/INVENTORY_STRUCTURE.md for the CRUD contract and remaining differences. Branch price preservation retains unit and conversion too, because the serialized unit field embeds prices. Master status is replicated; existing child update fields match Java's catalog edit. Always refresh comparison counts before applying.
+
+## Main → cloud → branches publication gate
+
+Main apply obtains a cloud-wide advisory lock and marks the publication `pending` before reconciling. After each bounded batch it takes fresh source/cloud snapshots. It marks the publication `ready` only when both catalog tables have valid unique identities, main inventory is nonempty, and every compared field matches with no remaining additions, updates or deletions. Otherwise it remains `blocked`; an interrupted run leaves `pending`. Main may continue its next batch while blocked.
+
+A branch apply takes the same cloud lock, checks the publication protocol/status, and verifies a SHA-256 fingerprint of the cloud inventory/assembly master rows before writing locally. Missing, pending, blocked or changed publications stop branch writes. The lock covers the entire branch cycle, serializing cooperating branch pulls with main publication. MySQL 5.5 supports only one named lock per connection; the branch destination lock is on its separate local connection, and main does not acquire a second cloud lock. Read-only reports remain available while publication is blocked.
+
+This verifies the published master catalog and assembly policy, not every cloud location row or arbitrary table. Existing quantity and branch-price policies still apply. Legacy Java sync and older Python packages do not honor the new protocol: stop those writers and update every branch package before using the bridge. Independent edits made by such writers during a branch cycle are not prevented by advisory locks. A valid publication can become older than main until the next poll; branches receive a completed version rather than a guarantee of instantaneous freshness.
+
+`audit_bridge.py --config PATH` creates private read-only `bridge-identity-audit.html` and JSON reports. `reconcile_cloud_duplicates.py --config PATH` previews cloud duplicate cleanup; add `--apply` to back up cloud, keep one cloud master per unique main identity, copy main catalog fields, and remove extra zero-stock cloud master rows. It skips ambiguous/missing main identities and nonzero cloud master stock, preserves location rows/quantities, journals before-images, and leaves publication blocked pending a full main verification. It does not edit local main or invalid assemblies. Do not treat repeated `inventory_barcodes.main_barcode` values as duplicates: those rows belong to different locations.
+
+Use `--delete-absent-only` on that cleanup tool for the separate cloud-only duplicate deletion plan. With `--apply`, it backs up cloud, enforces the total deletion budget and nonempty main, rechecks identities/row counts, and removes the absent master rows plus their barcode and parent-assembly dependents, matching catalog deletion semantics. Blank-parent assemblies remain untouched. A recreated main item or changed duplicate count is skipped. Results are saved separately in `cloud-absent-duplicate-result.json`.

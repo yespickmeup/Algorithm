@@ -19,6 +19,7 @@ import sys
 
 import pymysql
 from sync_report import write_report
+import bridge_guard
 
 ROOT = Path(__file__).resolve().parents[2]
 LOG = logging.getLogger("catalog_sync")
@@ -237,8 +238,9 @@ def barcode_rows(conn, item, columns, main, sync_prices):
     locations = query(conn, "SELECT id,branch,branch_id,location FROM branch_locations")
     if not locations:
         raise SyncError("Destination has no branch locations")
+    existing_locations={str(r['location_id']) for r in query(conn,'SELECT location_id FROM inventory_barcodes WHERE main_barcode=%s',(item['barcode'],))}
     for loc in locations:
-        if query(conn, "SELECT id FROM inventory_barcodes WHERE main_barcode=%s AND location_id=%s LIMIT 1", (item["barcode"], str(loc["id"]))):
+        if str(loc['id']) in existing_locations:
             continue
         row = dict(shared, main_barcode=item["barcode"], product_qty=0, status=1, is_uploaded=1,
                    selling_price=item.get("selling_price", 0), unit=item.get("unit"), conversion=item.get("conversion"), branch=loc["branch"], branch_code=loc["branch_id"], location=loc["location"], location_id=str(loc["id"]), serial_no="")
@@ -306,17 +308,17 @@ def cycle(config, apply, state_dir):
             raise SyncError("Expected exactly one local settings row")
         runtime = dict(config)
         runtime.update({k: v for k, v in settings[0].items() if k.startswith("cloud_")})
-        main = boolean(config, "main_branch", settings[0]["is_main_branch"] == 1)
+        main = bridge_guard.role(sys.modules[__name__], config, settings[0])
         prices = main or boolean(config, "sync_prices")
         deletes = boolean(config, "sync_deletes", True)
         if not all(runtime.get("cloud_"+k) for k in ("host", "user", "db")):
             raise SyncError("Cloud settings incomplete")
-        with connection(runtime, "cloud_") as cloud:
+        with connection(runtime, "cloud_") as cloud, bridge_guard.publication_session(sys.modules[__name__], cloud, main, apply):
             source, dest = (local, cloud) if main else (cloud, local)
             LOG.info("direction=%s mode=%s prices=%s deletes=%s", "main-to-cloud" if main else "cloud-to-branch", "apply" if apply else "dry-run", prices, deletes)
             # One writer per destination among instances of this script, even on different machines.
             lock = "smis_catalog_" + hashlib.sha256(str(dest.db).encode()).hexdigest()[:32]
-            if apply and query(dest, "SELECT GET_LOCK(%s,0) AS acquired", (lock,))[0]["acquired"] != 1:
+            if apply and not main and query(dest, "SELECT GET_LOCK(%s,0) AS acquired", (lock,))[0]["acquired"] != 1:
                 raise SyncError("Another sync worker owns the destination lock")
             try:
                 with tempfile.TemporaryDirectory(prefix="snapshot-", dir=state_dir) as tmp:
@@ -389,10 +391,21 @@ def cycle(config, apply, state_dir):
                                         break
                                     if op == "delete" and not deletes:
                                         continue
-                                    changed += apply_change(source,dest,table,op,json.loads(desired) if desired else None,json.loads(before) if before else None,cols,main,prices)
+                                    committed=apply_change(source,dest,table,op,json.loads(desired) if desired else None,json.loads(before) if before else None,cols,main,prices)
+                                    changed += committed
+                                    if committed:
+                                        item=json.loads(desired or before)
+                                        with (state_dir/'applied-changes.jsonl').open('a',encoding='utf-8') as journal:
+                                            journal.write(encode({'committed_at':int(time.time()),'direction':'main-to-cloud' if main else 'cloud-to-branch','table':table,'operation':op,'key':payload(item,KEYS[table])})+'\n')
+                                        if changed % 10 == 0:
+                                            LOG.info('batch progress committed_items=%s',changed)
+                        publication = None
+                        if apply and main:
+                            publication = bridge_guard.finish_publication(sys.modules[__name__], source, cloud, disk, config)
                         LOG.info("cycle complete committed_items=%s",changed)
+                        return {'committed':changed,'before':summary,'publication':publication}
             finally:
-                if apply:
+                if apply and not main:
                     with suppress(Exception):
                         query(dest,"SELECT RELEASE_LOCK(%s)",(lock,))
 

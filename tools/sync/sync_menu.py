@@ -16,7 +16,7 @@ def resolve_runtime(api, config):
         raise api.SyncError('Expected exactly one settings row to determine cloud connection and branch role')
     runtime=dict(config)
     runtime.update({k:v for k,v in rows[0].items() if k.startswith('cloud_')})
-    return runtime,api.boolean(config,'main_branch',rows[0]['is_main_branch']==1)
+    return runtime,api.bridge_guard.role(api,config,rows[0])
 
 
 def dump_executable(config):
@@ -130,8 +130,13 @@ def run_menu(api,args):
             config=api.load_config(args.config,args.options)
             runtime,main=resolve_runtime(api,config)
         except Exception as exc:
-            print('Configuration/connection unavailable: '+type(exc).__name__+'. Check configuration and local MySQL.')
+            if isinstance(exc,api.SyncError):
+                print('Configuration/connection unavailable: '+str(exc))
+            else:
+                code=exc.args[0] if exc.args and isinstance(exc.args[0],int) else 'n/a'
+                print('Configuration/connection unavailable: '+type(exc).__name__+f' (code {code}). Check configuration and local MySQL.')
         print('\n========== Database Tools ==========')
+        print('Connection config: '+str(args.config.resolve()))
         local_name=config.get('pool_db','unavailable') if config else 'unavailable'
         cloud_name=runtime.get('cloud_db','unavailable') if runtime else 'unavailable'
         role='unknown' if main is None else str(main).lower()

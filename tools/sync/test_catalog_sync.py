@@ -134,7 +134,7 @@ class SyncTests(unittest.TestCase):
     def test_existing_branch_prices_are_not_written(self):
         source={name:1 for name in s.CATALOG}
         source.update(barcode='A',barcodes='alt')
-        with patch.object(s,'update') as update,patch.object(s,'query',side_effect=[[{'id':1,'branch':'B','branch_id':'B','location':'L'}],[{'id':2}]]):
+        with patch.object(s,'update') as update,patch.object(s,'query',side_effect=[[{'id':1,'branch':'B','branch_id':'B','location':'L'}],[{'location_id':'1'}]]):
             s.barcode_rows(Mock(),source,s.CATALOG,False,False)
             self.assertNotIn('selling_price',update.call_args.args[2])
             self.assertNotIn('product_qty',update.call_args.args[2])
