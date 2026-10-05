@@ -1,3 +1,8 @@
 /nbproject/private/
 /build/
 /dist/
+/.venv-sync/
+/.sync-state/
+**/__pycache__/
+/sync.local.conf
+/my_config.conf

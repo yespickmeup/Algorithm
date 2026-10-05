@@ -84,6 +84,7 @@ public class MyMain {
             System.setProperty("multi_cashin", prop.getProperty("multi_cashin", "false"));
 //            System.out.println("OS: " + os);
             System.setProperty("direct_pay", prop.getProperty("direct_pay", "false"));
+            System.setProperty("override_void_sales",prop.getProperty("override_void_sales","false"));
 //            System.out.println("pool_db: " + pool_db);
 //            System.out.println("pool_db: " + System.getProperty("pool_db"));
 //            System.out.println("Host: " + System.getProperty("pool_host"));

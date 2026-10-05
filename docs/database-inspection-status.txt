@@ -1,0 +1,15 @@
+Inspected: Tue Sep 29 22:26:48 SGT 2026
+Config: C:\Users\USER\my_config.conf
+local database: db_algorithm_kabankalan
+local server: 5.5.15
+local tables: 150 metadata rows
+local columns: 2670 metadata rows
+local indexes: 153 metadata rows
+local foreign-keys: 0 metadata rows
+cloud endpoint: 128.199.80.53:3306
+cloud database: db_algorithm
+cloud server: 5.5.59-0ubuntu0.14.04.1
+cloud tables: 140 metadata rows
+cloud columns: 2497 metadata rows
+cloud indexes: 147 metadata rows
+cloud foreign-keys: 0 metadata rows

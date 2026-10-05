@@ -1547,7 +1547,9 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
         }
         final String pool_db = System.getProperty("pool_db", "db_smis");
         if (!pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
-            try {
+            String override_void_sales=System.getProperty("override_void_sales","false");
+            if(override_void_sales.equalsIgnoreCase("false")){
+                   try {
                 Date from = DateType.datetime.parse(my_sale.date_added);
                 Date now = new Date();
                 int count_days = Counter.getDayCount(from, now);
@@ -1559,6 +1561,8 @@ public class Dlg_touchscreen_transactions extends javax.swing.JDialog {
             } catch (ParseException ex) {
                 Logger.getLogger(Dlg_touchscreen_transactions.class.getName()).log(Level.SEVERE, null, ex);
             }
+            }
+         
         }
         if (my_sale.status == 1) {
             Alert.set(0, "Cannot Proceed, Transaction already cancelled!");

@@ -61,127 +61,127 @@ import synsoftech.fields.Field;
  */
 public class Dlg_report_ledger extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Dlg_report_sales_summary
-     */
-    //<editor-fold defaultstate="collapsed" desc=" callback ">
-    private Callback callback;
+  /**
+   * Creates new form Dlg_report_sales_summary
+   */
+  //<editor-fold defaultstate="collapsed" desc=" callback ">
+  private Callback callback;
 
-    public void setCallback(Callback callback) {
-        this.callback = callback;
+  public void setCallback(Callback callback) {
+    this.callback = callback;
 
-    }
+  }
 
-    public static interface Callback {
+  public static interface Callback {
 
-        void ok(CloseDialog closeDialog, OutputData data);
-    }
+    void ok(CloseDialog closeDialog, OutputData data);
+  }
 
-    public static class InputData {
-    }
+  public static class InputData {
+  }
 
-    public static class OutputData {
-    }
+  public static class OutputData {
+  }
 //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_report_ledger(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        setUndecorated(true);
-        initComponents();
-        myInit();
+  //<editor-fold defaultstate="collapsed" desc=" Constructors ">
+  private Dlg_report_ledger(java.awt.Frame parent, boolean modal) {
+    super(parent, modal);
+    setUndecorated(true);
+    initComponents();
+    myInit();
+  }
+
+  private Dlg_report_ledger(java.awt.Dialog parent, boolean modal) {
+    super(parent, modal);
+    setUndecorated(true);
+    initComponents();
+    myInit();
+  }
+
+  public Dlg_report_ledger() {
+    super();
+    setUndecorated(true);
+    initComponents();
+    myInit();
+
+  }
+  private Dlg_report_ledger myRef;
+
+  private void setThisRef(Dlg_report_ledger myRef) {
+    this.myRef = myRef;
+  }
+  private static java.util.Map<Object, Dlg_report_ledger> dialogContainer = new java.util.HashMap();
+
+  public static void clearUpFirst(java.awt.Window parent) {
+    if (dialogContainer.containsKey(parent)) {
+      dialogContainer.remove(parent);
+    }
+  }
+
+  public static Dlg_report_ledger create(java.awt.Window parent, boolean modal) {
+
+    if (modal) {
+      return create(parent, ModalityType.APPLICATION_MODAL);
     }
 
-    private Dlg_report_ledger(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
-        setUndecorated(true);
-        initComponents();
-        myInit();
-    }
+    return create(parent, ModalityType.MODELESS);
 
-    public Dlg_report_ledger() {
-        super();
-        setUndecorated(true);
-        initComponents();
-        myInit();
+  }
 
-    }
-    private Dlg_report_ledger myRef;
+  public static Dlg_report_ledger create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
-    private void setThisRef(Dlg_report_ledger myRef) {
-        this.myRef = myRef;
-    }
-    private static java.util.Map<Object, Dlg_report_ledger> dialogContainer = new java.util.HashMap();
+    if (parent instanceof java.awt.Frame) {
 
-    public static void clearUpFirst(java.awt.Window parent) {
-        if (dialogContainer.containsKey(parent)) {
-            dialogContainer.remove(parent);
-        }
-    }
+      Dlg_report_ledger dialog = dialogContainer.get(parent);
 
-    public static Dlg_report_ledger create(java.awt.Window parent, boolean modal) {
-
-        if (modal) {
-            return create(parent, ModalityType.APPLICATION_MODAL);
-        }
-
-        return create(parent, ModalityType.MODELESS);
+      if (dialog == null) {
+        dialog = new Dlg_report_ledger((java.awt.Frame) parent, false);
+        dialog.setModalityType(modalType);
+        dialogContainer.put(parent, dialog);
+        java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+        dialog.setThisRef(dialog);
+        return dialog;
+      } else {
+        dialog.setModalityType(modalType);
+        return dialog;
+      }
 
     }
 
-    public static Dlg_report_ledger create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    if (parent instanceof java.awt.Dialog) {
+      Dlg_report_ledger dialog = dialogContainer.get(parent);
 
-        if (parent instanceof java.awt.Frame) {
-
-            Dlg_report_ledger dialog = dialogContainer.get(parent);
-
-            if (dialog == null) {
-                dialog = new Dlg_report_ledger((java.awt.Frame) parent, false);
-                dialog.setModalityType(modalType);
-                dialogContainer.put(parent, dialog);
-                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
-                dialog.setThisRef(dialog);
-                return dialog;
-            } else {
-                dialog.setModalityType(modalType);
-                return dialog;
-            }
-
-        }
-
-        if (parent instanceof java.awt.Dialog) {
-            Dlg_report_ledger dialog = dialogContainer.get(parent);
-
-            if (dialog == null) {
-                dialog = new Dlg_report_ledger((java.awt.Dialog) parent, false);
-                dialog.setModalityType(modalType);
-                dialogContainer.put(parent, dialog);
-                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
-                dialog.setThisRef(dialog);
-                return dialog;
-            } else {
-                dialog.setModalityType(modalType);
-                return dialog;
-            }
-
-        }
-
-        return null;
+      if (dialog == null) {
+        dialog = new Dlg_report_ledger((java.awt.Dialog) parent, false);
+        dialog.setModalityType(modalType);
+        dialogContainer.put(parent, dialog);
+        java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+        dialog.setThisRef(dialog);
+        return dialog;
+      } else {
+        dialog.setModalityType(modalType);
+        return dialog;
+      }
 
     }
-    //</editor-fold>    
 
-    //<editor-fold defaultstate="collapsed" desc=" main ">
-    public static void main(String args[]) {
+    return null;
 
-        try {
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+  }
+  //</editor-fold>    
 
-        Dlg_report_ledger dialog = Dlg_report_ledger.create(new javax.swing.JFrame(), true);
-        dialog.setVisible(true);
+  //<editor-fold defaultstate="collapsed" desc=" main ">
+  public static void main(String args[]) {
+
+    try {
+      javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
+    Dlg_report_ledger dialog = Dlg_report_ledger.create(new javax.swing.JFrame(), true);
+    dialog.setVisible(true);
 //        Toolkit tk = Toolkit.getDefaultToolkit();
 //        int xSize = ((int) tk.getScreenSize().
 //                getWidth());
@@ -190,38 +190,38 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 //        dialog.setSize(xSize, ySize);
 //        dialog.setVisible(true);
 
-    }
-    //</editor-fold>
+  }
+  //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc=" added ">
-    @Override
-    public void setVisible(boolean visible) {
-        super.setVisible(visible);
-        if (visible == true) {
-            getContentPane().removeAll();
-            initComponents();
-            myInit();
-            repaint();
-        }
-
+  //<editor-fold defaultstate="collapsed" desc=" added ">
+  @Override
+  public void setVisible(boolean visible) {
+    super.setVisible(visible);
+    if (visible == true) {
+      getContentPane().removeAll();
+      initComponents();
+      myInit();
+      repaint();
     }
 
-    public javax.swing.JPanel getSurface() {
-        return (javax.swing.JPanel) getContentPane();
-    }
+  }
 
-    public void nullify() {
-        myRef.setVisible(false);
-        myRef = null;
-    }
-    //</editor-fold>
+  public javax.swing.JPanel getSurface() {
+    return (javax.swing.JPanel) getContentPane();
+  }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+  public void nullify() {
+    myRef.setVisible(false);
+    myRef = null;
+  }
+  //</editor-fold>
+
+  /**
+   * This method is called from within the constructor to initialize the form.
+   * WARNING: Do NOT modify this code. The content of this method is always
+   * regenerated by the Form Editor.
+   */
+  @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -834,23 +834,23 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        init_report();
+      init_report();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tf_cashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashierActionPerformed
-        init_cashier();
+      init_cashier();
     }//GEN-LAST:event_tf_cashierActionPerformed
 
     private void tf_cashierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashierMouseClicked
-        init_cashier();
+      init_cashier();
     }//GEN-LAST:event_tf_cashierMouseClicked
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-        init_branch_locations();
+      init_branch_locations();
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        init_branch_locations();
+      init_branch_locations();
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -862,60 +862,60 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void tf_cashier3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier3MouseClicked
-        if (tf_cashier3.isEnabled()) {
-            init_time(tf_cashier3);
-        }
+      if (tf_cashier3.isEnabled()) {
+        init_time(tf_cashier3);
+      }
 
     }//GEN-LAST:event_tf_cashier3MouseClicked
 
     private void tf_cashier3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier3ActionPerformed
-        if (tf_cashier3.isEnabled()) {
-            init_time(tf_cashier3);
-        }
+      if (tf_cashier3.isEnabled()) {
+        init_time(tf_cashier3);
+      }
 
     }//GEN-LAST:event_tf_cashier3ActionPerformed
 
     private void tf_cashier4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier4MouseClicked
-        if (tf_cashier4.isEnabled()) {
-            init_time(tf_cashier4);
-        }
+      if (tf_cashier4.isEnabled()) {
+        init_time(tf_cashier4);
+      }
 
     }//GEN-LAST:event_tf_cashier4MouseClicked
 
     private void tf_cashier4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier4ActionPerformed
-        if (tf_cashier4.isEnabled()) {
-            init_time(tf_cashier4);
-        }
+      if (tf_cashier4.isEnabled()) {
+        init_time(tf_cashier4);
+      }
 
     }//GEN-LAST:event_tf_cashier4ActionPerformed
 
     private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox15ActionPerformed
-        select_time_type();
+      select_time_type();
     }//GEN-LAST:event_jCheckBox15ActionPerformed
 
     private void tf_cashier5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_cashier5MouseClicked
-        if (tf_cashier5.isEnabled()) {
-            init_cashdrawer(tf_cashier5);
-        }
+      if (tf_cashier5.isEnabled()) {
+        init_cashdrawer(tf_cashier5);
+      }
     }//GEN-LAST:event_tf_cashier5MouseClicked
 
     private void tf_cashier5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cashier5ActionPerformed
-        if (tf_cashier5.isEnabled()) {
-            init_cashdrawer(tf_cashier5);
-        }
+      if (tf_cashier5.isEnabled()) {
+        init_cashdrawer(tf_cashier5);
+      }
     }//GEN-LAST:event_tf_cashier5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        lock_session();
+      lock_session();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        disposed();
+      disposed();
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+  /**
+   * @param args the command line arguments
+   */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -971,869 +971,874 @@ public class Dlg_report_ledger extends javax.swing.JDialog {
     private javax.swing.JTextField tf_cashier5;
     // End of variables declaration//GEN-END:variables
 
-    private void myInit() {
+  private void myInit() {
 //        System.setProperty("pool_password", "password");
 //        System.setProperty("pool_db", "db_algorithm");
 //        System.setProperty("pool_host", "192.168.0.51");
 //        System.setProperty("pool_db", "db_smis_dumaguete_refreshments_store");
-        init_key();
-        set_default_branch();
-        init_tbl_ledger();
-        String where = "  order by screen_name asc";
-        user_list = MyUser.ret_data2(where);
-        branches_list = Branches.ret_where("");
+    init_key();
+    set_default_branch();
+    init_tbl_ledger();
+    String where = "  order by screen_name asc";
+    user_list = MyUser.ret_data2(where);
+    branches_list = Branches.ret_where("");
 
-        Field.Combo user = (Field.Combo) tf_cashier;
-        user.setText(MyUser.getUser_screen_name());
-        user.setId(MyUser.getUser_id());
-        time_list = DateType.time();
+    Field.Combo user = (Field.Combo) tf_cashier;
+    user.setText(MyUser.getUser_screen_name());
+    user.setId(MyUser.getUser_id());
+    time_list = DateType.time();
+  }
+  List<String> time_list = new ArrayList();
+
+  private void init_time(final JTextField tf) {
+
+    Object[][] obj = new Object[time_list.size()][1];
+    int i = 0;
+    for (String to : time_list) {
+      obj[i][0] = " " + to;
+      i++;
     }
-    List<String> time_list = new ArrayList();
+    JLabel[] labels = {};
+    int[] tbl_widths_customers = {tf.getWidth()};
+    int width = 0;
+    String[] col_names = {""};
+    TableRenderer tr = new TableRenderer();
+    TableRenderer.setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+    tr.setCallback(new TableRenderer.Callback() {
+      @Override
+      public void ok(TableRenderer.OutputData data) {
+        Field.Combo f = (Field.Combo) tf;
+        String to = (String) time_list.get(data.selected_row);
+        f.setText(to);
+      }
+    });
+  }
 
-    private void init_time(final JTextField tf) {
+  private void set_default_branch() {
+    S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
+    Field.Combo lo = (Field.Combo) jTextField1;
+    Field.Combo br = (Field.Combo) jTextField2;
+    lo.setText(to.location);
+    lo.setId("" + to.id);
+    br.setText(to.branch);
+    br.setId("" + to.branch_id);
+    String where = " order by branch,location asc  ";
+    branch_location_list = S1_branch_locations.ret_location_where(where);
+  }
 
-        Object[][] obj = new Object[time_list.size()][1];
-        int i = 0;
-        for (String to : time_list) {
-            obj[i][0] = " " + to;
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf.getWidth()};
-        int width = 0;
-        String[] col_names = {""};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(tf, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                Field.Combo f = (Field.Combo) tf;
-                String to = (String) time_list.get(data.selected_row);
-                f.setText(to);
-            }
-        });
+  List<Branches.to_branches> branches_list = new ArrayList();
+
+  private void init_branches() {
+    final Field.Combo br = (Field.Combo) jTextField2;
+
+    Object[][] obj = new Object[branches_list.size()][2];
+    int i = 0;
+    for (Branches.to_branches to : branches_list) {
+      obj[i][0] = to.id;
+
+      obj[i][1] = to.branch;
+      i++;
     }
-
-    private void set_default_branch() {
-        S1_branch_locations.to_branch_locations to = S4_branch_locations.ret_data();
-        Field.Combo lo = (Field.Combo) jTextField1;
-        Field.Combo br = (Field.Combo) jTextField2;
-        lo.setText(to.location);
-        lo.setId("" + to.id);
+    JLabel[] labels = {};
+    int[] tbl_widths_customers = {0, 200};
+    int width = 0;
+    String[] col_names = {"Code", "Branch"};
+    TableRenderer tr = new TableRenderer();
+    TableRenderer.
+            setPopup(br, obj, labels, tbl_widths_customers, col_names);
+    tr.setCallback(new TableRenderer.Callback() {
+      @Override
+      public void ok(TableRenderer.OutputData data) {
+        Branches.to_branches to = branches_list.
+                get(data.selected_row);
         br.setText(to.branch);
-        br.setId("" + to.branch_id);
-        String where = " order by branch,location asc  ";
-        branch_location_list = S1_branch_locations.ret_location_where(where);
+        br.setId("" + to.id);
+
+      }
+    });
+  }
+  List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
+
+  private void init_branch_locations() {
+    final Field.Combo br = (Field.Combo) jTextField2;
+    final Field.Combo lo = (Field.Combo) jTextField1;
+    Object[][] obj = new Object[branch_location_list.size()][1];
+    int i = 0;
+    for (S1_branch_locations.to_branch_locations to : branch_location_list) {
+      obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";
+      i++;
     }
+    JLabel[] labels = {};
+    int[] tbl_widths_customers = {lo.getWidth()};
+    int width = 0;
+    String[] col_names = {"Code"};
+    TableRenderer tr = new TableRenderer();
+    TableRenderer.setPopup(lo, obj, labels, tbl_widths_customers, col_names);
+    tr.setCallback(new TableRenderer.Callback() {
+      @Override
+      public void ok(TableRenderer.OutputData data) {
+        S1_branch_locations.to_branch_locations to = branch_location_list.get(data.selected_row);
+        lo.setText("" + to.location);
+        lo.setId("" + to.id);
+        Field.Combo branch = (Field.Combo) jTextField2;
+        branch.setText(to.branch);
+        branch.setId("" + to.branch_id);
+      }
+    });
+  }
 
-    List<Branches.to_branches> branches_list = new ArrayList();
+  public void do_pass() {
 
-    private void init_branches() {
-        final Field.Combo br = (Field.Combo) jTextField2;
+  }
 
-        Object[][] obj = new Object[branches_list.size()][2];
-        int i = 0;
-        for (Branches.to_branches to : branches_list) {
-            obj[i][0] = to.id;
+  // <editor-fold defaultstate="collapsed" desc="Key">
+  private void disposed() {
+    this.dispose();
+  }
 
-            obj[i][1] = to.branch;
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {0, 200};
-        int width = 0;
-        String[] col_names = {"Code", "Branch"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.
-                setPopup(br, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                Branches.to_branches to = branches_list.
-                        get(data.selected_row);
-                br.setText(to.branch);
-                br.setId("" + to.id);
+  private void init_key() {
+    KeyMapping.mapKeyWIFW(getSurface(),
+                          KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            }
-        });
-    }
-    List<S1_branch_locations.to_branch_locations> branch_location_list = new ArrayList();
-
-    private void init_branch_locations() {
-        final Field.Combo br = (Field.Combo) jTextField2;
-        final Field.Combo lo = (Field.Combo) jTextField1;
-        Object[][] obj = new Object[branch_location_list.size()][1];
-        int i = 0;
-        for (S1_branch_locations.to_branch_locations to : branch_location_list) {
-            obj[i][0] = " " + to.branch + " - [ " + to.location + " ]";
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {lo.getWidth()};
-        int width = 0;
-        String[] col_names = {"Code"};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(lo, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                S1_branch_locations.to_branch_locations to = branch_location_list.get(data.selected_row);
-                lo.setText("" + to.location);
-                lo.setId("" + to.id);
-                Field.Combo branch = (Field.Combo) jTextField2;
-                branch.setText(to.branch);
-                branch.setId("" + to.branch_id);
-            }
-        });
-    }
-
-    public void do_pass() {
-
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="Key">
-    private void disposed() {
-        this.dispose();
-    }
-
-    private void init_key() {
-        KeyMapping.mapKeyWIFW(getSurface(),
-                              KeyEvent.VK_ESCAPE, new KeyAction() {
-
-                          @Override
-                          public void actionPerformed(ActionEvent e) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                              disposed();
-                          }
-                      });
-    }
-    // </editor-fold>
-
-    private void init_report() {
-        Button.Search search = (Button.Search) jButton3;
-        search.load();
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Field.Combo br = (Field.Combo) jTextField2;
-                Field.Combo lo = (Field.Combo) jTextField1;
-                Field.Combo f = (Field.Combo) tf_cashier;
-                String date_from = DateType.sf.format(jDateChooser3.getDate());
-                String date_from_sales = DateType.sf.format(jDateChooser3.getDate());
-                String date_to = DateType.sf.format(jDateChooser2.getDate());
-                String date_to_sales = DateType.sf.format(jDateChooser2.getDate());
-                String time = "All";
-                if (jCheckBox15.isSelected()) {
-                    if (jCheckBox13.isSelected()) {
-                        date_from_sales = date_from_sales + " 00:00:00";
-                        date_to_sales = date_to_sales + " 23:59:59";
-                    } else {
-                        String dfs_time = DateType.convert_am_pm_to_stamp(tf_cashier3.getText(), "from");
-                        String dts_time = DateType.convert_am_pm_to_stamp(tf_cashier4.getText(), "to");
-                        date_from_sales = date_from_sales + " " + dfs_time;
-                        date_to_sales = date_to_sales + " " + dts_time;
-                        time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
+                      disposed();
                     }
-                } else {
+                  });
+  }
+  // </editor-fold>
 
-                    if (tf_cashier5.getText().isEmpty() && !jCheckBox13.isSelected()) {
-                        Alert.set(0, "Please select time!");
-                        return;
-                    }
+  private void init_report() {
+    Button.Search search = (Button.Search) jButton3;
+    search.load();
+    Thread t = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        Field.Combo br = (Field.Combo) jTextField2;
+        Field.Combo lo = (Field.Combo) jTextField1;
+        Field.Combo f = (Field.Combo) tf_cashier;
+        String date_from = DateType.sf.format(jDateChooser3.getDate());
+        String date_from_sales = DateType.sf.format(jDateChooser3.getDate());
+        String date_to = DateType.sf.format(jDateChooser2.getDate());
+        String date_to_sales = DateType.sf.format(jDateChooser2.getDate());
+        String time = "All";
+        if (jCheckBox15.isSelected()) {
+          if (jCheckBox13.isSelected()) {
+            date_from_sales = date_from_sales + " 00:00:00";
+            date_to_sales = date_to_sales + " 23:59:59";
+          } else {
+            String dfs_time = DateType.convert_am_pm_to_stamp(tf_cashier3.getText(), "from");
+            String dts_time = DateType.convert_am_pm_to_stamp(tf_cashier4.getText(), "to");
+            date_from_sales = date_from_sales + " " + dfs_time;
+            date_to_sales = date_to_sales + " " + dts_time;
+            time = tf_cashier3.getText() + " - " + tf_cashier4.getText();
+          }
+        } else {
 
-                    if (!jCheckBox13.isSelected()) {
-                        try {
-                            String[] dates = tf_cashier5.getText().split("- ");
-                            Date d1 = DateType.slash_w_time.parse(dates[0]);
-                            Date d2 = DateType.slash_w_time.parse(dates[1]);
-                            date_from_sales = DateType.convert_slash_datetime_sf2(dates[0]);
-                            date_to_sales = DateType.convert_slash_datetime_sf2(dates[1]);
+          if (tf_cashier5.getText().isEmpty() && !jCheckBox13.isSelected()) {
+            Alert.set(0, "Please select time!");
+            return;
+          }
 
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Dlg_report_sales_summary.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        date_from_sales = date_from_sales + " 00:00:00";
-                        date_to_sales = date_to_sales + " 23:59:59";
-                    }
+          if (!jCheckBox13.isSelected()) {
+            try {
+              String[] dates = tf_cashier5.getText().split("- ");
+              Date d1 = DateType.slash_w_time.parse(dates[0]);
+              Date d2 = DateType.slash_w_time.parse(dates[1]);
+              date_from_sales = DateType.convert_slash_datetime_sf2(dates[0]);
+              date_to_sales = DateType.convert_slash_datetime_sf2(dates[1]);
 
-                }
-                if (jCheckBox15.isSelected()) {
-                    time = tf_cashier5.getText();
-                }
-                int status = 0;
-                String where_sales2 = " where id<>0 "
-                        + "  and status='" + "0" + "' ";
-                String where_sales = " where id<>0 ";
-                String where_sales_status = " where id<>0 and status=1 ";
+            } catch (ParseException ex) {
+              Logger.getLogger(Dlg_report_sales_summary.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          } else {
+            date_from_sales = date_from_sales + " 00:00:00";
+            date_to_sales = date_to_sales + " 23:59:59";
+          }
 
-                String where_return_from_customer = " where id<>0 and status=1 ";
-                String where_sales3 = " where id<>0 and status=1 ";
-                if (jCheckBox10.isSelected()) {
-                    status = 1;
-                }
-                String where = " where remarks like '%" + "" + "%' ";
-                if (!jCheckBox1.isSelected()) {
-                    List<S1_users.to_users> users = S1_users.ret_where(" where id='" + f.getId() + "' ");
-                    String user_name = "";
-                    String user_id = "";
-                    if (!users.isEmpty()) {
-                        S1_users.to_users user = (S1_users.to_users) users.get(0);
-                        user_name = user.user_name;
-                        user_id = "" + user.id;
-                    }
-                    where = where + " and user_id='" + f.getId() + "' and status='" + status + "' ";
-                    where_sales2 = " where id<>0 "
-                            + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
-                    where_sales = " where id<>0 "
-                            + "  and user_id='" + f.getId() + "'";
-                    where_sales_status = " where id<>0 "
-                            + "  and user_name='" + user_name + "' and status=1 ";
-                    where_return_from_customer = " where id<>0 "
-                            + "  and user_name='" + user_id + "' and status=1 ";
-                    where_sales3 = " where id<>0 "
-                            + "  and user_id='" + f.getId() + "' and status=1 ";
-                }
+        }
+        if (jCheckBox15.isSelected()) {
+          time = tf_cashier5.getText();
+        }
+        int status = 0;
+        String where_sales2 = " where id<>0 "
+                + "  and status='" + "0" + "' ";
+        String where_sales = " where id<>0 ";
+        String where_sales_status = " where id<>0 and status=1 ";
 
-                if (!jCheckBox2.isSelected()) {
-                    where = where + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
-                    where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                    where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                    where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                    where_return_from_customer = where_return_from_customer + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                    where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
-                }
+        String where_return_from_customer = " where id<>0 and status=1 ";
+        String where_sales3 = " where id<>0 and status=1 ";
+        if (jCheckBox10.isSelected()) {
+          status = 1;
+        }
+        String where = " where remarks like '%" + "" + "%' ";
+        if (!jCheckBox1.isSelected()) {
+          List<S1_users.to_users> users = S1_users.ret_where(" where id='" + f.getId() + "' ");
+          String user_name = "";
+          String user_id = "";
+          if (!users.isEmpty()) {
+            S1_users.to_users user = (S1_users.to_users) users.get(0);
+            user_name = user.user_name;
+            user_id = "" + user.id;
+          }
+          where = where + " and user_id='" + f.getId() + "' and status='" + status + "' ";
+          where_sales2 = " where id<>0 "
+                  + "  and user_id='" + f.getId() + "' and status='" + "0" + "' ";
+          where_sales = " where id<>0 "
+                  + "  and user_id='" + f.getId() + "'";
+          where_sales_status = " where id<>0 "
+                  + "  and user_name='" + user_name + "' and status=1 ";
+          where_return_from_customer = " where id<>0 "
+                  + "  and user_name='" + user_id + "' and status=1 ";
+          where_sales3 = " where id<>0 "
+                  + "  and user_id='" + f.getId() + "' and status=1 ";
+        }
 
-                if (jCheckBox1.isSelected()) {
-                    where = where + "  "
-                            + " and status='" + status + "' ";
-                }
-                if (!jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
-                    where = where + " and location_id='" + lo.getId() + "' ";
-                    where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
-                    where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
-                    where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
-                    where_return_from_customer = where_return_from_customer + " and location_id='" + lo.getId() + "' ";
-                    where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
-                }
-                if (jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
-                    where = where + " and branch_id='" + br.getId() + "' ";
-                    where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
-                    where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
-                    where_return_from_customer = where_return_from_customer + " and branch_id='" + br.getId() + "' ";
-                    where_sales_status = where_sales_status + " and branch_id='" + br.getId() + "' ";
-                    where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
-                }
-                where = where + " order by id asc ";
+        if (!jCheckBox2.isSelected()) {
+          where = where + " and date_added between '" + date_from_sales + "' and '" + date_to_sales + "' ";
+          where_sales2 = where_sales2 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+          where_sales = where_sales + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+          where_sales_status = where_sales_status + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+          where_return_from_customer = where_return_from_customer + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+          where_sales3 = where_sales3 + " and Date(date_added) between '" + date_from + "' and '" + date_to + "' ";
+        }
+
+        if (jCheckBox1.isSelected()) {
+          where = where + "  "
+                  + " and status='" + status + "' ";
+        }
+        if (!jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
+          where = where + " and location_id='" + lo.getId() + "' ";
+          where_sales2 = where_sales2 + " and location_id='" + lo.getId() + "' ";
+          where_sales = where_sales + " and location_id='" + lo.getId() + "' ";
+          where_sales_status = where_sales_status + " and location_id='" + lo.getId() + "' ";
+          where_return_from_customer = where_return_from_customer + " and location_id='" + lo.getId() + "' ";
+          where_sales3 = where_sales3 + " and location_id='" + lo.getId() + "' ";
+        }
+        if (jCheckBox4.isSelected() && !jCheckBox3.isSelected()) {
+          where = where + " and branch_id='" + br.getId() + "' ";
+          where_sales2 = where_sales2 + " and branch_id='" + br.getId() + "' ";
+          where_sales = where_sales + " and branch_id='" + br.getId() + "' ";
+          where_return_from_customer = where_return_from_customer + " and branch_id='" + br.getId() + "' ";
+          where_sales_status = where_sales_status + " and branch_id='" + br.getId() + "' ";
+          where_sales3 = where_sales3 + " and branch_id='" + br.getId() + "' ";
+        }
+        where = where + " order by id asc ";
 //                System.out.println(where);
-                List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
-                List<Srpt_sales_ledger_with_items.field> fields_items = new ArrayList();
+        List<Srpt_sales_ledger.field> fields = Srpt_sales_ledger.ret_data(where);
+        List<Srpt_sales_ledger_with_items.field> fields_items = new ArrayList();
 
-                if (jCheckBox11.isSelected()) {
-                    fields_items = Srpt_sales_ledger_with_items.ret_data(where);
-                }
-                String business_name = System.getProperty("business_name", "Algorithm Computer Services");
-                String contact_no = System.getProperty("telephone_number", "");
-                String address = System.getProperty("address", "Dumaguete");
-                address = address + "\n" + contact_no;
-                String date = "Date as of " + DateType.convert_slash_datetime2(date_from) + " - " + DateType.convert_slash_datetime2(date_to);
-                String branch = br.getText();
-                String location = lo.getText();
-                double return_exchange = 0;
-                double collections = 0;
-                double cash_on_hand = 0;
+        if (jCheckBox11.isSelected()) {
+          fields_items = Srpt_sales_ledger_with_items.ret_data(where);
+        }
+        String business_name = System.getProperty("business_name", "Algorithm Computer Services");
+        String contact_no = System.getProperty("telephone_number", "");
+        String address = System.getProperty("address", "Dumaguete");
+        address = address + "\n" + contact_no;
+        String date = "Date as of " + DateType.convert_slash_datetime2(date_from) + " - " + DateType.convert_slash_datetime2(date_to);
+        String branch = br.getText();
+        String location = lo.getText();
+        double return_exchange = 0;
+        double collections = 0;
+        double cash_on_hand = 0;
 //                System.out.println("where_sales2: " + where_sales2);
-                List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales2);
-                double collections_cheque = 0;
-                double collections_cheque_on_hand = 0;
-                double ar_collection_prepaid = 0;
-                double ar_collections_credit_card = 0;
-                double ar_collections_gc = 0;
-                double ar_collections_online = 0;
-                double retention = 0;
-                double business_tax = 0;
-                double re_check = 0;
-                double re_credit_card = 0;
-                double re_prepaid = 0;
-                double re_charge = 0;
-                double re_gc = 0;
-                double re_online = 0;
-                double salary_deduction = 0;
-                for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
-                    collections_cheque += collection.check_amount;
-                    collections += collection.amount;
-                    ar_collection_prepaid += collection.prepaid_amount;
-                    ar_collections_credit_card += collection.credit_card_amount;
-                    ar_collections_gc += collection.gift_certificate_amount;
-                    ar_collections_online += collection.online_amount;
-                    retention += collection.retention;
-                    business_tax = collection.business_tax;
-                    salary_deduction += collection.salary_deduction;
-                }
-                double na_short = 0;
-                double over = 0;
-                List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales3);
-                for (Item_replacements.to_item_replacements rep : replacements) {
-                    double amount = (rep.replacement_amount - rep.amount_due) - rep.discount;
-                    double due = rep.amount_due;
-                    double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
-                    if (amount < rep.amount_due) {
-                        na_short += amount;
-                    }
-                    if (amount > rep.amount_due) {
-                        over += amount;
-                    }
-                    return_exchange += total;
-                    re_check += rep.check_amount;
-                    re_credit_card += rep.credit_card_amount;
-                    re_prepaid += rep.prepaid_amount;
-                    re_charge += rep.charge_amount;
-                    re_gc += rep.gc_amount;
-                    re_online += rep.online_amount;
-                }
-                return_exchange = return_exchange - (re_check + re_credit_card + re_prepaid + re_charge + re_gc + re_online);
+        List<S1_accounts_receivable_payments.to_accounts_receivable_payments> my_collections = S1_accounts_receivable_payments.ret_data2(where_sales2);
+        double collections_cheque = 0;
+        double collections_cheque_on_hand = 0;
+        double ar_collection_prepaid = 0;
+        double ar_collections_credit_card = 0;
+        double ar_collections_gc = 0;
+        double ar_collections_online = 0;
+        double retention = 0;
+        double business_tax = 0;
+        double re_check = 0;
+        double re_credit_card = 0;
+        double re_prepaid = 0;
+        double re_charge = 0;
+        double re_gc = 0;
+        double re_online = 0;
+        double salary_deduction = 0;
+        for (S1_accounts_receivable_payments.to_accounts_receivable_payments collection : my_collections) {
+          collections_cheque += collection.check_amount;
+          collections += collection.amount;
+          ar_collection_prepaid += collection.prepaid_amount;
+          ar_collections_credit_card += collection.credit_card_amount;
+          ar_collections_gc += collection.gift_certificate_amount;
+          ar_collections_online += collection.online_amount;
+          retention += collection.retention;
+          business_tax = collection.business_tax;
+          salary_deduction += collection.salary_deduction;
+        }
+        double na_short = 0;
+        double over = 0;
+        List<Item_replacements.to_item_replacements> replacements = Item_replacements.ret_data(where_sales3);
+        for (Item_replacements.to_item_replacements rep : replacements) {
+          double amount = (rep.replacement_amount - rep.amount_due) - rep.discount;
+          double due = rep.amount_due;
+          double total = (rep.replacement_amount - rep.amount_due) - rep.discount;
+          if (amount < rep.amount_due) {
+            na_short += amount;
+          }
+          if (amount > rep.amount_due) {
+            over += amount;
+          }
+          return_exchange += total;
+          re_check += rep.check_amount;
+          re_credit_card += rep.credit_card_amount;
+          re_prepaid += rep.prepaid_amount;
+          re_charge += rep.charge_amount;
+          re_gc += rep.gc_amount;
+          re_online += rep.online_amount;
+        }
+        return_exchange = return_exchange - (re_check + re_credit_card + re_prepaid + re_charge + re_gc + re_online);
 
-                for (Srpt_sales_ledger.field field : fields) {
-                    cash_on_hand += field.cash;
-                    collections_cheque_on_hand += field.cheque_amount;
-                }
+        for (Srpt_sales_ledger.field field : fields) {
+          cash_on_hand += field.cash;
+          collections_cheque_on_hand += field.cheque_amount;
+        }
 
-                collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
-                cash_on_hand = cash_on_hand + collections + return_exchange;
-                List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
-                System.out.println(where_sales);
-                List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_return_from_customer);
+        collections_cheque_on_hand = collections_cheque_on_hand + collections_cheque;
+        cash_on_hand = cash_on_hand + collections + return_exchange;
+        List<Prepaid_payments.to_prepaid_payments> my_prepayment = Prepaid_payments.ret_data(where_sales);
+        System.out.println(where_sales);
+        System.out.println("where_return_from_customer: " + where_return_from_customer);
+        List<Return_from_customer_items.to_return_from_customer_items> return_from_customer = Return_from_customer_items.ret_data(where_return_from_customer);
 
-                double collections_prepaid = 0;
-                double collections_prepaid_cheque = 0;
-                double refund = 0;
-                double refund_cheque = 0;
-                double collections_prepaid_credit_card = 0;
-                double prepaid_online = 0;
-                for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
-                    if (prepayment.status == 1) {
-                        if (prepayment.refund == 1) {
+        double collections_prepaid = 0;
+        double collections_prepaid_cheque = 0;
+        double refund = 0;
+        double refund_cheque = 0;
+        double collections_prepaid_credit_card = 0;
+        double prepaid_online = 0;
+        for (Prepaid_payments.to_prepaid_payments prepayment : my_prepayment) {
+          if (prepayment.status == 1) {
+            if (prepayment.refund == 1) {
 
-                            if (prepayment.check_amount > 0) {
-                                refund_cheque += prepayment.check_amount;
-                            } else if (prepayment.credit_card_amount > 0) {
-                                collections_prepaid_credit_card += prepayment.credit_card_amount;
-                            } else if (prepayment.online_amount > 0) {
-                                prepaid_online += prepayment.online_amount;
-                            } else {
-                                refund += prepayment.cash;
-                            }
+              if (prepayment.check_amount > 0) {
+                refund_cheque += prepayment.check_amount;
+              } else if (prepayment.credit_card_amount > 0) {
+                collections_prepaid_credit_card += prepayment.credit_card_amount;
+              } else if (prepayment.online_amount > 0) {
+                prepaid_online += prepayment.online_amount;
+              } else {
+                refund += prepayment.cash;
+              }
 
 //                            System.out.println("refund: "+refund);
-                        } else {
+            } else {
 
-                            if (prepayment.check_amount > 0) {
-                                Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
+              if (prepayment.check_amount > 0) {
+                Srpt_end_of_day_summary_details.field check = new Srpt_end_of_day_summary_details.field("Checks", prepayment.check_bank, "", FitIn.fmt_wc_0(prepayment.check_amount));
 //                                collections_prepaid_cheque += prepayment.check_amount;
-                                if (prepayment.remarks.contains("Prepaid Payment")) {
-                                    collections_prepaid_cheque += (prepayment.check_amount * -1);
-                                } else {
-                                    collections_prepaid_cheque += prepayment.check_amount;
-                                }
-                            } else if (prepayment.credit_card_amount > 0) {
-                                collections_prepaid_credit_card += prepayment.credit_card_amount;
-                            } else if (prepayment.online_amount > 0) {
-                                prepaid_online += prepayment.online_amount;
-                            } else {
-
-                                if (prepayment.remarks.contains("Prepaid Payment")) {
-//                                    collections_prepaid += (prepayment.cash * -1);
-                                } else {
-                                    collections_prepaid += prepayment.cash;
-
-                                }
-                            }
-                        }
-                    }
-                }
-
-                double refund_prepaid = 0;
-                double refund_charge = 0;
-                for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
-                    if (rfc.status == 1) {
-                        refund -= (rfc.qty * rfc.selling_price);
-                        refund_prepaid -= rfc.prepaid_amount;
-                        refund_charge -= rfc.charge_amount;
-                    }
-                }
-
-                cash_on_hand = cash_on_hand + collections_prepaid + refund;
-                collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
-
-                //<editor-fold defaultstate="collapsed" desc=" wtax ">
-                List<Srpt_sales_ledger_wtax.field> field_wtax = new ArrayList();
-                for (Srpt_sales_ledger.field wt : fields) {
-                    if (wt.wtax > 0) {
-                        String sales_no = wt.sales_no;
-                        String or_no = wt.or_no;
-                        String si_no = wt.si_no;
-                        String cr_no = wt.or_no;
-                        String date2 = wt.date;
-                        String user = wt.user_screen_name;
-                        String customer_name = wt.customer_name;
-                        String charge_reference_no = wt.charge_reference_no;
-                        double gross_amount = wt.balance_due;
-                        double amount_due = wt.amount_due;
-                        double wtax = wt.wtax;
-                        double charge_amount = wt.charge_amount;
-                        double check_amount = wt.cheque_amount;
-                        Srpt_sales_ledger_wtax.field f_wtax = new Srpt_sales_ledger_wtax.field(sales_no, or_no, si_no, cr_no, date, user, customer_name, charge_reference_no, gross_amount, amount_due, wtax, charge_amount, check_amount);
-                        field_wtax.add(f_wtax);
-                    }
-                }
-
-                Srpt_sales_ledger_wtax tax = new Srpt_sales_ledger_wtax(business_name, address, contact_no, date, branch, location);
-                tax.fields.addAll(field_wtax);
-                //</editor-fold>
-                if (!jCheckBox11.isSelected()) {
-                    Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
-                                                                  collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
-                                                                  refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
-                                                                  time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction, refund_prepaid, refund_charge, collections_prepaid_credit_card, prepaid_online);
-                    rpt.fields.addAll(fields);
-                    String jrxml = "rpt_sales_ledger.jrxml";
-                    String pool_db = System.getProperty("pool_db", "db_smis");
-                    if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
-                        jrxml = "rpt_sales_ledger_chickaloka.jrxml";
-                    }
-                    if (jCheckBox12.isSelected()) {
-                        jrxml = "rpt_sales_ledger_ref_no.jrxml";
-                    }
-                    report_sales_items(rpt, jrxml);
-                    report_wtax(tax, "rpt_sales_ledger_wtax.jrxml");
-                    loadData_banks(rpt.fields);
-                    double net = 0;
-                    for (Srpt_sales_ledger.field field : rpt.fields) {
-                        net += field.balance_due;
-                    }
-                    jLabel9.setText(FitIn.fmt_wc_0(net));
-                    InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);
-                    try {
-                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
-                        jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                                                                   setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
-
-                    } catch (JRException ex) {
-                        Logger.getLogger(Dlg_report_items.class.getName()).
-                                log(Level.SEVERE, null, ex);
-                    }
-                    Button.Search search = (Button.Search) jButton3;
-                    search.finish();
+                if (prepayment.remarks.contains("Prepaid Payment")) {
+                  collections_prepaid_cheque += (prepayment.check_amount * -1);
                 } else {
-                    Srpt_sales_ledger_with_items rpt = new Srpt_sales_ledger_with_items(business_name, address, contact_no, date, branch, location, time);
-                    rpt.fields.addAll(fields_items);
-                    String jrxml = "rpt_sales_ledger_with_items.jrxml";
+                  collections_prepaid_cheque += prepayment.check_amount;
+                }
+              } else if (prepayment.credit_card_amount > 0) {
+                collections_prepaid_credit_card += prepayment.credit_card_amount;
+              } else if (prepayment.online_amount > 0) {
+                prepaid_online += prepayment.online_amount;
+              } else {
 
-                    report_sales_with_items(rpt, jrxml);
-                    jTabbedPane1.setSelectedIndex(1);
-//                    loadData_banks(rpt.fields);
-                    double net = 0;
-                    for (Srpt_sales_ledger_with_items.field field : rpt.fields) {
-                        net += field.balance_due;
-                    }
-                    jLabel9.setText(FitIn.fmt_wc_0(net));
-                    InputStream is = Srpt_sales_ledger_with_items.class.getResourceAsStream(jrxml);
-                    try {
-                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
-                        jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                                                                   setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
-
-                    } catch (JRException ex) {
-                        Logger.getLogger(Dlg_report_items.class.getName()).
-                                log(Level.SEVERE, null, ex);
-                    }
-                    Button.Search search = (Button.Search) jButton3;
-                    search.finish();
+                if (prepayment.remarks.contains("Prepaid Payment")) {
+//                                    collections_prepaid += (prepayment.cash * -1);
+                } else {
+                  collections_prepaid += prepayment.cash;
 
                 }
+              }
             }
+          }
         }
-        );
-        t.start();
 
-    }
-
-    private void report_sales_items(final Srpt_sales_ledger to, String jrxml_name) {
-        pnl_report.removeAll();
-        pnl_report.setLayout(new BorderLayout());
-        try {
-            JRViewer viewer = get_viewer_expenses(to, jrxml_name);
-            JPanel pnl = new JPanel();
-            pnl.add(viewer);
-            pnl.setVisible(true);
-            pnl.setVisible(true);
-            pnl_report.add(viewer);
-            pnl_report.updateUI();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void report_sales_with_items(final Srpt_sales_ledger_with_items to, String jrxml_name) {
-        pnl_report.removeAll();
-        pnl_report.setLayout(new BorderLayout());
-        try {
-            JRViewer viewer = get_viewer_with_items(to, jrxml_name);
-            JPanel pnl = new JPanel();
-            pnl.add(viewer);
-            pnl.setVisible(true);
-            pnl.setVisible(true);
-            pnl_report.add(viewer);
-            pnl_report.updateUI();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static JRViewer get_viewer_expenses(Srpt_sales_ledger to, String rpt_name) {
-        try {
-            return JasperUtil.getJasperViewer(
-                    compileJasper(rpt_name),
-                    JasperUtil.setParameter(to),
-                    JasperUtil.makeDatasource(to.fields));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-        }
-    }
-
-    public static JRViewer get_viewer_with_items(Srpt_sales_ledger_with_items to, String rpt_name) {
-        try {
-            return JasperUtil.getJasperViewer(
-                    compileJasper_with_items(rpt_name),
-                    JasperUtil.setParameter(to),
-                    JasperUtil.makeDatasource(to.fields));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-        }
-    }
-
-    public static JasperReport compileJasper(String rpt_name) {
-        try {
-            String jrxml = rpt_name;
-            InputStream is = Srpt_sales_ledger.class.getResourceAsStream(jrxml);
-            JasperReport jasper = JasperCompileManager.compileReport(is);
-            return jasper;
-        } catch (JRException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static JasperReport compileJasper_with_items(String rpt_name) {
-        try {
-            String jrxml = rpt_name;
-            InputStream is = Srpt_sales_ledger_with_items.class.getResourceAsStream(jrxml);
-            JasperReport jasper = JasperCompileManager.compileReport(is);
-            return jasper;
-        } catch (JRException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    JasperPrint jasperPrint = null;
-
-    private void print() {
-        try {
-            if (jasperPrint != null) {
-                JasperPrintManager.printReport(jasperPrint, false);
+        double refund_prepaid = 0;
+        double refund_charge = 0;
+        for (Return_from_customer_items.to_return_from_customer_items rfc : return_from_customer) {
+          if (rfc.status == 1) {
+            if (!rfc.charge_reference_no.isEmpty() & !rfc.prepaid_customer_id.isEmpty()) {
+              refund -= (rfc.qty * rfc.selling_price);
             }
-
-        } catch (JRException e) {
-            JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
-            throw new RuntimeException(e);
+            refund_prepaid -= rfc.prepaid_amount;
+            refund_charge -= rfc.charge_amount;
+            System.out.println("refund: " + refund);
+            System.out.println("refund_charge: " + refund_charge);
+          }
         }
+
+        cash_on_hand = cash_on_hand + collections_prepaid + refund;
+        collections_cheque_on_hand = collections_cheque_on_hand + collections_prepaid_cheque - refund_cheque;
+
+        //<editor-fold defaultstate="collapsed" desc=" wtax ">
+        List<Srpt_sales_ledger_wtax.field> field_wtax = new ArrayList();
+        for (Srpt_sales_ledger.field wt : fields) {
+          if (wt.wtax > 0) {
+            String sales_no = wt.sales_no;
+            String or_no = wt.or_no;
+            String si_no = wt.si_no;
+            String cr_no = wt.or_no;
+            String date2 = wt.date;
+            String user = wt.user_screen_name;
+            String customer_name = wt.customer_name;
+            String charge_reference_no = wt.charge_reference_no;
+            double gross_amount = wt.balance_due;
+            double amount_due = wt.amount_due;
+            double wtax = wt.wtax;
+            double charge_amount = wt.charge_amount;
+            double check_amount = wt.cheque_amount;
+            Srpt_sales_ledger_wtax.field f_wtax = new Srpt_sales_ledger_wtax.field(sales_no, or_no, si_no, cr_no, date, user, customer_name, charge_reference_no, gross_amount, amount_due, wtax, charge_amount, check_amount);
+            field_wtax.add(f_wtax);
+          }
+        }
+
+        Srpt_sales_ledger_wtax tax = new Srpt_sales_ledger_wtax(business_name, address, contact_no, date, branch, location);
+        tax.fields.addAll(field_wtax);
+        //</editor-fold>
+        if (!jCheckBox11.isSelected()) {
+          Srpt_sales_ledger rpt = new Srpt_sales_ledger(business_name, address, contact_no, date, branch, location, return_exchange, collections, cash_on_hand,
+                                                        collections_cheque, collections_cheque_on_hand, collections_prepaid, collections_prepaid_cheque, refund,
+                                                        refund_cheque, ar_collection_prepaid, ar_collections_credit_card, ar_collections_gc, ar_collections_online,
+                                                        time, retention, business_tax, re_check, re_credit_card, re_prepaid, re_charge, re_gc, re_online, salary_deduction, refund_prepaid, refund_charge, collections_prepaid_credit_card, prepaid_online);
+          rpt.fields.addAll(fields);
+          String jrxml = "rpt_sales_ledger.jrxml";
+          String pool_db = System.getProperty("pool_db", "db_smis");
+          if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+            jrxml = "rpt_sales_ledger_chickaloka.jrxml";
+          }
+          if (jCheckBox12.isSelected()) {
+            jrxml = "rpt_sales_ledger_ref_no.jrxml";
+          }
+          report_sales_items(rpt, jrxml);
+          report_wtax(tax, "rpt_sales_ledger_wtax.jrxml");
+          loadData_banks(rpt.fields);
+          double net = 0;
+          for (Srpt_sales_ledger.field field : rpt.fields) {
+            net += field.balance_due;
+          }
+          jLabel9.setText(FitIn.fmt_wc_0(net));
+          InputStream is = Srpt_sales_summary.class.getResourceAsStream(jrxml);
+          try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(is);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                                       setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+          } catch (JRException ex) {
+            Logger.getLogger(Dlg_report_items.class.getName()).
+                    log(Level.SEVERE, null, ex);
+          }
+          Button.Search search = (Button.Search) jButton3;
+          search.finish();
+        } else {
+          Srpt_sales_ledger_with_items rpt = new Srpt_sales_ledger_with_items(business_name, address, contact_no, date, branch, location, time);
+          rpt.fields.addAll(fields_items);
+          String jrxml = "rpt_sales_ledger_with_items.jrxml";
+
+          report_sales_with_items(rpt, jrxml);
+          jTabbedPane1.setSelectedIndex(1);
+//                    loadData_banks(rpt.fields);
+          double net = 0;
+          for (Srpt_sales_ledger_with_items.field field : rpt.fields) {
+            net += field.balance_due;
+          }
+          jLabel9.setText(FitIn.fmt_wc_0(net));
+          InputStream is = Srpt_sales_ledger_with_items.class.getResourceAsStream(jrxml);
+          try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(is);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                                       setParameter(rpt), JasperUtil.makeDatasource(rpt.fields));
+
+          } catch (JRException ex) {
+            Logger.getLogger(Dlg_report_items.class.getName()).
+                    log(Level.SEVERE, null, ex);
+          }
+          Button.Search search = (Button.Search) jButton3;
+          search.finish();
+
+        }
+      }
     }
+    );
+    t.start();
 
-    List<S1_users.to_users> user_list = new ArrayList();
+  }
 
-    private void init_cashier() {
-        String search = tf_cashier.getText();
+  private void report_sales_items(final Srpt_sales_ledger to, String jrxml_name) {
+    pnl_report.removeAll();
+    pnl_report.setLayout(new BorderLayout());
+    try {
+      JRViewer viewer = get_viewer_expenses(to, jrxml_name);
+      JPanel pnl = new JPanel();
+      pnl.add(viewer);
+      pnl.setVisible(true);
+      pnl.setVisible(true);
+      pnl_report.add(viewer);
+      pnl_report.updateUI();
 
-        Object[][] obj = new Object[user_list.size()][1];
-        int i = 0;
-        for (S1_users.to_users to : user_list) {
-            obj[i][0] = " " + to.screen_name;
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {tf_cashier.getWidth()};
-        int width = 0;
-        String[] col_names = {""};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup(tf_cashier, obj, labels, tbl_widths_customers, col_names);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                Field.Combo f = (Field.Combo) tf_cashier;
-                S1_users.to_users to = (S1_users.to_users) user_list.get(data.selected_row);
-                tf_cashier.setText(to.screen_name);
-                f.setId("" + to.id);
-            }
-        });
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    private ArrayListModel tbl_ledger_ALM;
-    private TblledgerModel tbl_ledger_M;
+  private void report_sales_with_items(final Srpt_sales_ledger_with_items to, String jrxml_name) {
+    pnl_report.removeAll();
+    pnl_report.setLayout(new BorderLayout());
+    try {
+      JRViewer viewer = get_viewer_with_items(to, jrxml_name);
+      JPanel pnl = new JPanel();
+      pnl.add(viewer);
+      pnl.setVisible(true);
+      pnl.setVisible(true);
+      pnl_report.add(viewer);
+      pnl_report.updateUI();
 
-    private void init_tbl_ledger() {
-        tbl_ledger_ALM = new ArrayListModel();
-        tbl_ledger_M = new TblledgerModel(tbl_ledger_ALM);
-        tbl_ledger.getTableHeader().
-                setPreferredSize(new Dimension(100, 40));
-        tbl_ledger.setModel(tbl_ledger_M);
-        tbl_ledger.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        tbl_ledger.setRowHeight(25);
-        int due = 70;
-        int user = 80;
-        int charge = 60;
-        int credit_card = 60;
-        int gc = 60;
-        int prepaid = 60;
-        int online = 60;
-        int amount = 60;
-        int cash = 60;
-        String pool_db = System.getProperty("pool_db", "db_smis");
-        if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 
-            user = 0;
-            charge = 0;
-            credit_card = 0;
-            gc = 0;
-            prepaid = 0;
-            cash = 0;
-        }
-        int[] tbl_widths_banks = {100, 70, 100, 180, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, online, amount};
-        for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
-            if (i == 2) {
-                continue;
-            }
-            TableWidthUtilities.setColumnWidth(tbl_ledger, i, tbl_widths_banks[i]);
-        }
-        Dimension d = tbl_ledger.getTableHeader().
-                getPreferredSize();
-        d.height = 25;
-        tbl_ledger.getTableHeader().
-                setPreferredSize(d);
-        tbl_ledger.getTableHeader().
-                setFont(new java.awt.Font("Arial", 0, 11));
-        tbl_ledger.setRowHeight(25);
-        tbl_ledger.setFont(new java.awt.Font("Arial", 0, 11));
+  public static JRViewer get_viewer_expenses(Srpt_sales_ledger to, String rpt_name) {
+    try {
+      return JasperUtil.getJasperViewer(
+              compileJasper(rpt_name),
+              JasperUtil.setParameter(to),
+              JasperUtil.makeDatasource(to.fields));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    } finally {
+    }
+  }
+
+  public static JRViewer get_viewer_with_items(Srpt_sales_ledger_with_items to, String rpt_name) {
+    try {
+      return JasperUtil.getJasperViewer(
+              compileJasper_with_items(rpt_name),
+              JasperUtil.setParameter(to),
+              JasperUtil.makeDatasource(to.fields));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    } finally {
+    }
+  }
+
+  public static JasperReport compileJasper(String rpt_name) {
+    try {
+      String jrxml = rpt_name;
+      InputStream is = Srpt_sales_ledger.class.getResourceAsStream(jrxml);
+      JasperReport jasper = JasperCompileManager.compileReport(is);
+      return jasper;
+    } catch (JRException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public static JasperReport compileJasper_with_items(String rpt_name) {
+    try {
+      String jrxml = rpt_name;
+      InputStream is = Srpt_sales_ledger_with_items.class.getResourceAsStream(jrxml);
+      JasperReport jasper = JasperCompileManager.compileReport(is);
+      return jasper;
+    } catch (JRException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  JasperPrint jasperPrint = null;
+
+  private void print() {
+    try {
+      if (jasperPrint != null) {
+        JasperPrintManager.printReport(jasperPrint, false);
+      }
+
+    } catch (JRException e) {
+      JOptionPane.showMessageDialog(null, "Failed To Print, Please Check the Printer");
+      throw new RuntimeException(e);
+    }
+  }
+
+  List<S1_users.to_users> user_list = new ArrayList();
+
+  private void init_cashier() {
+    String search = tf_cashier.getText();
+
+    Object[][] obj = new Object[user_list.size()][1];
+    int i = 0;
+    for (S1_users.to_users to : user_list) {
+      obj[i][0] = " " + to.screen_name;
+      i++;
+    }
+    JLabel[] labels = {};
+    int[] tbl_widths_customers = {tf_cashier.getWidth()};
+    int width = 0;
+    String[] col_names = {""};
+    TableRenderer tr = new TableRenderer();
+    TableRenderer.setPopup(tf_cashier, obj, labels, tbl_widths_customers, col_names);
+    tr.setCallback(new TableRenderer.Callback() {
+      @Override
+      public void ok(TableRenderer.OutputData data) {
+        Field.Combo f = (Field.Combo) tf_cashier;
+        S1_users.to_users to = (S1_users.to_users) user_list.get(data.selected_row);
+        tf_cashier.setText(to.screen_name);
+        f.setId("" + to.id);
+      }
+    });
+  }
+
+  private ArrayListModel tbl_ledger_ALM;
+  private TblledgerModel tbl_ledger_M;
+
+  private void init_tbl_ledger() {
+    tbl_ledger_ALM = new ArrayListModel();
+    tbl_ledger_M = new TblledgerModel(tbl_ledger_ALM);
+    tbl_ledger.getTableHeader().
+            setPreferredSize(new Dimension(100, 40));
+    tbl_ledger.setModel(tbl_ledger_M);
+    tbl_ledger.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    tbl_ledger.setRowHeight(25);
+    int due = 70;
+    int user = 80;
+    int charge = 60;
+    int credit_card = 60;
+    int gc = 60;
+    int prepaid = 60;
+    int online = 60;
+    int amount = 60;
+    int cash = 60;
+    String pool_db = System.getProperty("pool_db", "db_smis");
+    if (pool_db.equalsIgnoreCase("db_smis_cebu_chickaloka")) {
+
+      user = 0;
+      charge = 0;
+      credit_card = 0;
+      gc = 0;
+      prepaid = 0;
+      cash = 0;
+    }
+    int[] tbl_widths_banks = {100, 70, 100, 180, user, due, 60, 60, cash, charge, credit_card, gc, prepaid, online, amount};
+    for (int i = 0, n = tbl_widths_banks.length; i < n; i++) {
+      if (i == 2) {
+        continue;
+      }
+      TableWidthUtilities.setColumnWidth(tbl_ledger, i, tbl_widths_banks[i]);
+    }
+    Dimension d = tbl_ledger.getTableHeader().
+            getPreferredSize();
+    d.height = 25;
+    tbl_ledger.getTableHeader().
+            setPreferredSize(d);
+    tbl_ledger.getTableHeader().
+            setFont(new java.awt.Font("Arial", 0, 11));
+    tbl_ledger.setRowHeight(25);
+    tbl_ledger.setFont(new java.awt.Font("Arial", 0, 11));
 //        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 3);
 //        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 4);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 5);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 6);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 7);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 8);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 9);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 10);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 11);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 12);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 13);
-        TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 14);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 5);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 6);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 7);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 8);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 9);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 10);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 11);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 12);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 13);
+    TableWidthUtilities.setColumnRightRenderer(tbl_ledger, 14);
+  }
+
+  private void loadData_banks(List<Srpt_sales_ledger.field> acc) {
+    tbl_ledger_ALM.clear();
+    tbl_ledger_ALM.addAll(acc);
+  }
+
+  public static class TblledgerModel extends AbstractTableAdapter {
+
+    public static String[] COLUMNS = {
+      "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "GC", "Prepaid", "Online", "Net Due"
+    };
+
+    public TblledgerModel(ListModel listmodel) {
+      super(listmodel, COLUMNS);
     }
 
-    private void loadData_banks(List<Srpt_sales_ledger.field> acc) {
-        tbl_ledger_ALM.clear();
-        tbl_ledger_ALM.addAll(acc);
+    @Override
+    public boolean isCellEditable(int row, int column) {
+
+      return false;
     }
 
-    public static class TblledgerModel extends AbstractTableAdapter {
-
-        public static String[] COLUMNS = {
-            "Transaction No", "Date", "Customer", "Location", "User", "Amount Due", "Line Disc.", "Sale Disc.", "Cash", "Charge", "Credit Card", "GC", "Prepaid", "Online", "Net Due"
-        };
-
-        public TblledgerModel(ListModel listmodel) {
-            super(listmodel, COLUMNS);
-        }
-
-        @Override
-        public boolean isCellEditable(int row, int column) {
-
-            return false;
-        }
-
-        @Override
-        public Class getColumnClass(int col) {
-            if (col == 1000) {
-                return Boolean.class;
-            }
-            return Object.class;
-        }
-
-        @Override
-        public Object getValueAt(int row, int col) {
-            Srpt_sales_ledger.field tt = (Srpt_sales_ledger.field) getRow(row);
-            switch (col) {
-                case 0:
-                    return " " + tt.sales_no;
-                case 1:
-                    return " " + tt.date;
-                case 2:
-                    return " " + tt.customer_name;
-                case 3:
-                    return " " + tt.location;
-                case 4:
-                    return " " + tt.user_screen_name;
-                case 5:
-                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
-                case 6:
-                    return FitIn.fmt_wc_0(tt.line_discount) + " ";
-                case 7:
-                    return FitIn.fmt_wc_0(tt.sales_discount) + " ";
-                case 8:
-                    return FitIn.fmt_wc_0(tt.cash) + " ";
-                case 9:
-                    return FitIn.fmt_wc_0(tt.charge_amount) + " ";
-                case 10:
-                    return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
-                case 11:
-                    return FitIn.fmt_wc_0(tt.gc_amount) + " ";
-                case 12:
-                    return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
-                case 13:
-                    return FitIn.fmt_wc_0(tt.online_payment) + " ";
-                default:
-                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
-            }
-        }
+    @Override
+    public Class getColumnClass(int col) {
+      if (col == 1000) {
+        return Boolean.class;
+      }
+      return Object.class;
     }
 
-    private void init_cashdrawer(final JTextField tf) {
-        String where = " where id<>0 ";
-        if (!jCheckBox1.isSelected()) {
-            Field.Combo f = (Field.Combo) tf_cashier;
-            where = where + " and user_id='" + f.getId() + "' ";
+    @Override
+    public Object getValueAt(int row, int col) {
+      Srpt_sales_ledger.field tt = (Srpt_sales_ledger.field) getRow(row);
+      switch (col) {
+        case 0:
+          return " " + tt.sales_no;
+        case 1:
+          return " " + tt.date;
+        case 2:
+          return " " + tt.customer_name;
+        case 3:
+          return " " + tt.location;
+        case 4:
+          return " " + tt.user_screen_name;
+        case 5:
+          return FitIn.fmt_wc_0(tt.amount_due) + " ";
+        case 6:
+          return FitIn.fmt_wc_0(tt.line_discount) + " ";
+        case 7:
+          return FitIn.fmt_wc_0(tt.sales_discount) + " ";
+        case 8:
+          return FitIn.fmt_wc_0(tt.cash) + " ";
+        case 9:
+          return FitIn.fmt_wc_0(tt.charge_amount) + " ";
+        case 10:
+          return FitIn.fmt_wc_0(tt.credit_card_amount) + " ";
+        case 11:
+          return FitIn.fmt_wc_0(tt.gc_amount) + " ";
+        case 12:
+          return FitIn.fmt_wc_0(tt.prepaid_amount) + " ";
+        case 13:
+          return FitIn.fmt_wc_0(tt.online_payment) + " ";
+        default:
+          return FitIn.fmt_wc_0(tt.amount_due) + " ";
+      }
+    }
+  }
+
+  private void init_cashdrawer(final JTextField tf) {
+    String where = " where id<>0 ";
+    if (!jCheckBox1.isSelected()) {
+      Field.Combo f = (Field.Combo) tf_cashier;
+      where = where + " and user_id='" + f.getId() + "' ";
+    }
+    if (!jCheckBox4.isSelected()) {
+      String date_from = DateType.sf.format(jDateChooser3.getDate());
+      String date_to = DateType.sf.format(jDateChooser2.getDate());
+      where = where + " and Date(time_in) between '" + date_from + "' and '" + date_to + " '";
+    }
+
+    final List<S1_cash_drawer.to_cash_drawer> drawers = S1_cash_drawer.ret_where(where);
+
+    Object[][] obj = new Object[drawers.size()][4];
+    int i = 0;
+    for (S1_cash_drawer.to_cash_drawer to : drawers) {
+
+      obj[i][0] = " " + to.user_screen_name;
+      obj[i][1] = " " + DateType.convert_slash_datetime3(to.time_in);
+      String time_out = "";
+      obj[i][2] = " ";
+      if (to.time_out != null) {
+        obj[i][2] = " " + DateType.convert_slash_datetime3(to.time_out);
+      }
+
+      obj[i][3] = " " + FitIn.fmt_wc_0(to.amount);
+      i++;
+    }
+    JLabel[] labels = {};
+    int[] tbl_widths_customers = {80, 100, 120, 80,};
+    int width = 0;
+    String[] col_names = {"", "", "", ""};
+    TableRenderer tr = new TableRenderer();
+    TableRenderer.setPopup2(tf, obj, labels, tbl_widths_customers, col_names, 450);
+    tr.setCallback(new TableRenderer.Callback() {
+      @Override
+      public void ok(TableRenderer.OutputData data) {
+        Field.Combo f = (Field.Combo) tf_cashier5;
+        S1_cash_drawer.to_cash_drawer to = (S1_cash_drawer.to_cash_drawer) drawers.get(data.selected_row);
+        String cashin = DateType.convert_slash_datetime3(to.time_in);
+        String cashout = "";
+        if (to.time_out != null) {
+          cashout = DateType.convert_slash_datetime3(to.time_out);
+        } else {
+          Alert.set(0, "Choose another record!");
+          return;
         }
-        if (!jCheckBox4.isSelected()) {
-            String date_from = DateType.sf.format(jDateChooser3.getDate());
-            String date_to = DateType.sf.format(jDateChooser2.getDate());
-            where = where + " and Date(time_in) between '" + date_from + "' and '" + date_to + " '";
-        }
-
-        final List<S1_cash_drawer.to_cash_drawer> drawers = S1_cash_drawer.ret_where(where);
-
-        Object[][] obj = new Object[drawers.size()][4];
-        int i = 0;
-        for (S1_cash_drawer.to_cash_drawer to : drawers) {
-
-            obj[i][0] = " " + to.user_screen_name;
-            obj[i][1] = " " + DateType.convert_slash_datetime3(to.time_in);
-            String time_out = "";
-            obj[i][2] = " ";
-            if (to.time_out != null) {
-                obj[i][2] = " " + DateType.convert_slash_datetime3(to.time_out);
-            }
-
-            obj[i][3] = " " + FitIn.fmt_wc_0(to.amount);
-            i++;
-        }
-        JLabel[] labels = {};
-        int[] tbl_widths_customers = {80, 100, 120, 80,};
-        int width = 0;
-        String[] col_names = {"", "", "", ""};
-        TableRenderer tr = new TableRenderer();
-        TableRenderer.setPopup2(tf, obj, labels, tbl_widths_customers, col_names, 450);
-        tr.setCallback(new TableRenderer.Callback() {
-            @Override
-            public void ok(TableRenderer.OutputData data) {
-                Field.Combo f = (Field.Combo) tf_cashier5;
-                S1_cash_drawer.to_cash_drawer to = (S1_cash_drawer.to_cash_drawer) drawers.get(data.selected_row);
-                String cashin = DateType.convert_slash_datetime3(to.time_in);
-                String cashout = "";
-                if (to.time_out != null) {
-                    cashout = DateType.convert_slash_datetime3(to.time_out);
-                } else {
-                    Alert.set(0, "Choose another record!");
-                    return;
-                }
-                f.setText(cashin + " - " + cashout);
+        f.setText(cashin + " - " + cashout);
 //
 //                f.setId("" + to.id);
 //                f.setText(to.screen_name);
-            }
-        });
+      }
+    });
+  }
+
+  private void select_time_type() {
+    if (jCheckBox15.isSelected()) {
+      tf_cashier5.setEnabled(false);
+      tf_cashier3.setEnabled(true);
+      tf_cashier4.setEnabled(true);
+    } else {
+      tf_cashier5.setEnabled(true);
+      tf_cashier3.setEnabled(false);
+      tf_cashier4.setEnabled(false);
+
     }
+  }
 
-    private void select_time_type() {
-        if (jCheckBox15.isSelected()) {
-            tf_cashier5.setEnabled(false);
-            tf_cashier3.setEnabled(true);
-            tf_cashier4.setEnabled(true);
-        } else {
-            tf_cashier5.setEnabled(true);
-            tf_cashier3.setEnabled(false);
-            tf_cashier4.setEnabled(false);
-
-        }
-    }
-
-    //<editor-fold defaultstate="collapsed" desc=" cashins ">
-    //</editor-fold>
-    private void lock_session() {
-        Window p = (Window) this;
-        Dlg_report_ledger_lock_sessions nd = Dlg_report_ledger_lock_sessions.create(p, true);
-        nd.setTitle("");
+  //<editor-fold defaultstate="collapsed" desc=" cashins ">
+  //</editor-fold>
+  private void lock_session() {
+    Window p = (Window) this;
+    Dlg_report_ledger_lock_sessions nd = Dlg_report_ledger_lock_sessions.create(p, true);
+    nd.setTitle("");
 //        nd.do_pass(services);
-        nd.setCallback(new Dlg_report_ledger_lock_sessions.Callback() {
+    nd.setCallback(new Dlg_report_ledger_lock_sessions.Callback() {
 
-            @Override
-            public void ok(CloseDialog closeDialog, Dlg_report_ledger_lock_sessions.OutputData data) {
-                closeDialog.ok();
+      @Override
+      public void ok(CloseDialog closeDialog, Dlg_report_ledger_lock_sessions.OutputData data) {
+        closeDialog.ok();
 
-            }
-        });
-        nd.setLocationRelativeTo(this);
-        nd.setVisible(true);
+      }
+    });
+    nd.setLocationRelativeTo(this);
+    nd.setVisible(true);
+  }
+
+  //<editor-fold defaultstate="collapsed" desc=" wtax ">
+  private void report_wtax(final Srpt_sales_ledger_wtax to, String jrxml_name) {
+    jPanel2.removeAll();
+    jPanel2.setLayout(new BorderLayout());
+    try {
+      JRViewer viewer = get_viewer_wtax(to, jrxml_name);
+      JPanel pnl = new JPanel();
+      pnl.add(viewer);
+      pnl.setVisible(true);
+      pnl.setVisible(true);
+      jPanel2.add(viewer);
+      jPanel2.updateUI();
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    //<editor-fold defaultstate="collapsed" desc=" wtax ">
-    private void report_wtax(final Srpt_sales_ledger_wtax to, String jrxml_name) {
-        jPanel2.removeAll();
-        jPanel2.setLayout(new BorderLayout());
-        try {
-            JRViewer viewer = get_viewer_wtax(to, jrxml_name);
-            JPanel pnl = new JPanel();
-            pnl.add(viewer);
-            pnl.setVisible(true);
-            pnl.setVisible(true);
-            jPanel2.add(viewer);
-            jPanel2.updateUI();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+  public static JRViewer get_viewer_wtax(Srpt_sales_ledger_wtax to, String rpt_name) {
+    try {
+      return JasperUtil.getJasperViewer(
+              compileJasper_wtax(rpt_name),
+              JasperUtil.setParameter(to),
+              JasperUtil.makeDatasource(to.fields));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    } finally {
     }
+  }
 
-    public static JRViewer get_viewer_wtax(Srpt_sales_ledger_wtax to, String rpt_name) {
-        try {
-            return JasperUtil.getJasperViewer(
-                    compileJasper_wtax(rpt_name),
-                    JasperUtil.setParameter(to),
-                    JasperUtil.makeDatasource(to.fields));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-        }
+  public static JasperReport compileJasper_wtax(String rpt_name) {
+    try {
+      String jrxml = rpt_name;
+      InputStream is = Srpt_sales_ledger_wtax.class.getResourceAsStream(jrxml);
+      JasperReport jasper = JasperCompileManager.compileReport(is);
+      return jasper;
+    } catch (JRException e) {
+      throw new RuntimeException(e);
     }
-
-    public static JasperReport compileJasper_wtax(String rpt_name) {
-        try {
-            String jrxml = rpt_name;
-            InputStream is = Srpt_sales_ledger_wtax.class.getResourceAsStream(jrxml);
-            JasperReport jasper = JasperCompileManager.compileReport(is);
-            return jasper;
-        } catch (JRException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    //</editor-fold>
+  }
+  //</editor-fold>
 
 }
